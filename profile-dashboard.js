@@ -53,8 +53,8 @@
     }
 
     function getAuthUser() {
-        const auth = window.authClient && window.authClient.getAuth();
-        return auth && auth.token ? auth.user : null;
+        const authState = window.authClient && window.authClient.getAuthState();
+        return authState?.isAuthenticated ? authState.user : null;
     }
 
     function initials(name) {
@@ -81,7 +81,7 @@
         if (test?.practiceUrl) return test.practiceUrl;
         if (test?.skill === "listening") return "listening.html";
         if (test?.skill === "reading") return "reading.html";
-        return "Ieltsmock.html";
+        return "ieltsmock.html";
     }
 
     function Card({ children, className, id }) {

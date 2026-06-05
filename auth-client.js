@@ -42,6 +42,54 @@
         } catch {}
     }
 
+    function decodeTokenPayload(token) {
+        if (!token || typeof token !== "string") {
+            return null;
+        }
+
+        const [payload] = token.split(".");
+
+        if (!payload) {
+            return null;
+        }
+
+        try {
+            const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+            const padded = base64.padEnd(base64.length + ((4 - base64.length % 4) % 4), "=");
+            return JSON.parse(atob(padded));
+        } catch {
+            return null;
+        }
+    }
+
+    function normalizeStoredAuth(auth) {
+        const token = typeof auth?.token === "string" ? auth.token.trim() : "";
+        const user = auth?.user && typeof auth.user === "object" ? auth.user : null;
+
+        if (!token || !user) {
+            return null;
+        }
+
+        const payload = decodeTokenPayload(token);
+
+        if (!payload?.exp || Number(payload.exp) <= Date.now()) {
+            return null;
+        }
+
+        const payloadUserId = String(payload.id || "");
+        const storedUserId = String(user.id || user._id || "");
+
+        if (payloadUserId && storedUserId && payloadUserId !== storedUserId) {
+            return null;
+        }
+
+        return {
+            token,
+            user,
+            savedAt: auth.savedAt
+        };
+    }
+
     function setAuthCookie(token) {
         const maxAge = TOKEN_DAYS * 24 * 60 * 60;
         document.cookie = `${AUTH_COOKIE}=${encodeURIComponent(token)}; path=/; max-age=${maxAge}; samesite=lax`;
@@ -51,24 +99,41 @@
         document.cookie = `${AUTH_COOKIE}=; path=/; max-age=0; samesite=lax`;
     }
 
-    function getAuth() {
-        const auth = readStorage();
-        if (!auth?.token || !auth?.user) {
-            return null;
+    function getAuthState() {
+        const auth = normalizeStoredAuth(readStorage());
+
+        if (!auth) {
+            removeStorage();
+            clearAuthCookie();
+            return {
+                isAuthenticated: false,
+                auth: null,
+                user: null
+            };
         }
-        return auth;
+
+        return {
+            isAuthenticated: true,
+            auth,
+            user: auth.user
+        };
+    }
+
+    function getAuth() {
+        return getAuthState().auth;
     }
 
     function saveAuth(auth) {
-        if (!auth?.token || !auth?.user) {
+        const saved = normalizeStoredAuth({
+            token: auth?.token,
+            user: auth?.user,
+            savedAt: new Date().toISOString()
+        });
+
+        if (!saved) {
+            clearAuth();
             return null;
         }
-
-        const saved = {
-            token: auth.token,
-            user: auth.user,
-            savedAt: new Date().toISOString()
-        };
 
         writeStorage(saved);
         setAuthCookie(saved.token);
@@ -370,6 +435,10 @@
         }
 
         .ielts-navbar__auth {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
             justify-self: end;
             min-width: 0;
         }
@@ -644,6 +713,13 @@
 
             .ielts-navbar__auth {
                 grid-column: 3;
+                gap: 6px;
+            }
+
+            .ielts-navbar__button {
+                min-height: 38px;
+                padding-inline: 11px;
+                font-size: 13px;
             }
 
             .ielts-navbar__links {
@@ -711,7 +787,10 @@
     }
 
     function renderLoggedOutAuth() {
-        return "";
+        return `
+            <a class="ielts-navbar__button ielts-navbar__button--login" href="login.html">Login</a>
+            <a class="ielts-navbar__button ielts-navbar__button--signup" href="signup.html">Sign Up</a>
+        `;
     }
 
     const MENU_ICONS = {
@@ -776,7 +855,7 @@
                     await apiFetch("/api/auth/logout", { method: "POST" });
                 } catch {}
                 clearAuth();
-                window.location.href = "Ieltsmock.html";
+                window.location.href = "ieltsmock.html";
             });
         }
     }
@@ -846,23 +925,23 @@
         replaceLegacyNavbarHost();
 
         const host = ensureNavbarHost();
-        const auth = getAuth();
+        const authState = getAuthState();
         const active = currentPageName();
 
         host.innerHTML = `
-            <a class="ielts-navbar__brand" href="Ieltsmock.html" aria-label="IELTS Prep home">
+            <a class="ielts-navbar__brand" href="ieltsmock.html" aria-label="IELTS Prep home">
                 <img class="ielts-navbar__logo" src="Rasm-logo.png" alt="IELTSX.org">
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
                 <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
             </button>
             <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
-                <a class="${active === "home" ? "is-active" : ""}" href="Ieltsmock.html">Home</a>
+                <a class="${active === "home" ? "is-active" : ""}" href="ieltsmock.html">Home</a>
                 <a class="${active === "listening" ? "is-active" : ""}" href="listening.html">Listening</a>
                 <a class="${active === "reading" ? "is-active" : ""}" href="reading.html">Reading</a>
             </nav>
             <div class="ielts-navbar__auth">
-                ${auth?.token ? renderLoggedInAuth(auth) : renderLoggedOutAuth()}
+                ${authState.isAuthenticated ? renderLoggedInAuth(authState.auth) : renderLoggedOutAuth()}
             </div>
         `;
 
@@ -874,6 +953,7 @@
 
     window.authClient = {
         getAuth,
+        getAuthState,
         saveAuth,
         clearAuth,
         redirectIfAuthenticated,
