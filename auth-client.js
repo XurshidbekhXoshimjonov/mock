@@ -715,11 +715,11 @@
     }
 
     const MENU_ICONS = {
-        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"></rect></svg>`,
-        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.7"></circle><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"></path></svg>`,
-        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17"></path><path d="M5.5 17.5v-5"></path><path d="M10.5 17.5v-9"></path><path d="M15.5 17.5v-4"></path><path d="M19.5 17.5V6.5"></path></svg>`,
-        settings: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21v-6.5"></path><path d="M4.5 10.5V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M19.5 21v-5.5"></path><path d="M19.5 11.5V3"></path><path d="M2.5 14.5h4"></path><path d="M10 8h4"></path><path d="M17.5 15.5h4"></path></svg>`,
-        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 20.5h-4a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h4"></path><path d="M16 16.5 20.5 12 16 7.5"></path><path d="M20.5 12h-11"></path></svg>`
+        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="[...]
+        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12"[...]
+        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2[...]
+        settings: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 [...]
+        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 20[...]
     };
 
     function renderLoggedInAuth(auth) {
@@ -744,9 +744,9 @@
                 </button>
                 <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
-                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>My Profile</a>
-                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>My Results</a>
-                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.settings}</span>Settings</a>
+                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</sp[...]
+                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.resu[...]
+                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.s[...]
                     <button class="ielts-account__logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
             </div>
@@ -776,7 +776,7 @@
                     await apiFetch("/api/auth/logout", { method: "POST" });
                 } catch {}
                 clearAuth();
-                window.location.href = "Ieltsmock.html";
+                window.location.href = "/";
             });
         }
     }
@@ -850,14 +850,14 @@
         const active = currentPageName();
 
         host.innerHTML = `
-            <a class="ielts-navbar__brand" href="Ieltsmock.html" aria-label="IELTS Prep home">
+            <a class="ielts-navbar__brand" href="/" aria-label="IELTS Prep home">
                 <img class="ielts-navbar__logo" src="Rasm-logo.png" alt="IELTSX.org">
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
                 <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
             </button>
             <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
-                <a class="${active === "home" ? "is-active" : ""}" href="Ieltsmock.html">Home</a>
+                <a class="${active === "home" ? "is-active" : ""}" href="/">Home</a>
                 <a class="${active === "listening" ? "is-active" : ""}" href="listening.html">Listening</a>
                 <a class="${active === "reading" ? "is-active" : ""}" href="reading.html">Reading</a>
             </nav>
