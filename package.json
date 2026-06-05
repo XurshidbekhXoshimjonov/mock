@@ -1,5 +1,6 @@
 {
   "scripts": {
+     "start": "node server.js",
     "build:reading-css": "tailwindcss -i ./reading-tailwind.input.css -o ./reading-tailwind.generated.css --minify"
   },
   "dependencies": {
