@@ -539,8 +539,7 @@
             align-items: center;
             justify-content: center;
             flex: 0 0 32px;
-            border: 1px solid transparent;
-            border-radius: 11px;
+            border-radius: 10px;
             font-size: 14px;
             color: currentColor;
             text-align: center;
@@ -548,10 +547,10 @@
         }
 
         .ielts-account__icon svg {
-            width: 17px;
-            height: 17px;
+            width: 18px;
+            height: 18px;
             display: block;
-            flex: 0 0 17px;
+            flex: 0 0 18px;
         }
 
         .ielts-account__link:hover .ielts-account__icon,
@@ -561,31 +560,26 @@
         }
 
         .ielts-account__icon--admin {
-            border-color: #bfdbfe;
             background: #eff6ff;
             color: #2563eb;
         }
 
         .ielts-account__icon--profile {
-            border-color: #ddd6fe;
             background: #f3efff;
-            color: #4f46e5;
+            color: #7c3aed;
         }
 
         .ielts-account__icon--results {
-            border-color: #bbf7d0;
             background: #dcfce7;
             color: #16a34a;
         }
 
         .ielts-account__icon--settings {
-            border-color: #fed7aa;
             background: #fff7ed;
             color: #ea580c;
         }
 
         .ielts-account__icon--logout {
-            border-color: #fecdd3;
             background: #fff1f2;
             color: #dc1431;
         }
@@ -722,11 +716,11 @@
     }
 
     const MENU_ICONS = {
-        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="2.5" width="17" height="19" rx="2"/><path d="M16.5 2.5v4"/><path d="M7.5 2.5v4"/><path d="M3.5 9.5h17"/></svg>`,
-        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-4.4183 2.6863-8 6-8s6 3.5817 6 8"/></svg>`,
-        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2.5h17v19h-17z"/><path d="M7 10l3 3 6-6"/></svg>`,
-        settings: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v4m10.5-8.5h-6m-6 0h-6M19.07 4.93l-4.24 4.24m-5.66 5.66l-4.24 4.24M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24"/></svg>`,
-        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 0h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4m-7-4l6-6m-6 6l6-6" transform="translate(-3, 0)"/></svg>`
+        admin: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
+        profile: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+        results: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17v-4"/><path d="M8 17v-1"/></svg>`,
+        settings: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.5a2 2 0 0 1-1 1.73v0a2 2 0 0 1-2 0 2 2 0 0 0-2.83.83l-.22.39a2 2 0 0 0 .33 2.83 2 2 0 0 1 1 1.73v0a2 2 0 0 1-1 1.73 2 2 0 0 0-.33 2.83l.22.39a2 2 0 0 0 2.83.83 2 2 0 0 1 2 0v0a2 2 0 0 1 1-1.73h0a2 2 0 0 1 2 0 2 2 0 0 0 2.83-.83l.22-.39a2 2 0 0 0-.33-2.83 2 2 0 0 1-1-1.73v0a2 2 0 0 1 1-1.73 2 2 0 0 0 .33-2.83l-.22-.39a2 2 0 0 0-2.83-.83 2 2 0 0 1-2 0v0a2 2 0 0 1-1 1.73"/><circle cx="12" cy="12" r="3"/></svg>`,
+        logout: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`
     };
 
     function renderLoggedInAuth(auth) {
@@ -739,7 +733,7 @@
         const resultsActive = path.includes("profile.html") && hash === "#results";
         const settingsActive = path.includes("profile-settings");
         const adminLink = user.role === "admin"
-            ? `<a class="ielts-account__link ielts-account__admin" href="/admin"><span class="ielts-account__icon ielts-account__icon--admin">${MENU_ICONS.admin}</span>Admin Panel</a>`
+            ? `<a class="ielts-account__link" href="/admin"><span class="ielts-account__icon ielts-account__icon--admin">${MENU_ICONS.admin}</span>Admin Panel</a>`
             : "";
 
         return `
@@ -751,8 +745,8 @@
                 </button>
                 <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
-                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
-                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Results</a>
+                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>My Profile</a>
+                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>My Results</a>
                     <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="/profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.settings}</span>Settings</a>
                     <button class="ielts-account__logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
