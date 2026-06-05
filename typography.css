@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+    --ieltsx-font: "Plus Jakarta Sans", sans-serif;
+}
+
+html,
+body {
+    font-family: var(--ieltsx-font);
+    font-weight: 400;
+}
+
+body,
+body *:not(svg):not(svg *) {
+    font-family: var(--ieltsx-font) !important;
+}
+
+h1,
+.hero-modern h1,
+.test-list-page-header h1,
+.tests-title,
+.dashboard-title,
+.page-title {
+    font-weight: 700 !important;
+}
+
+h2,
+h3,
+.section-title,
+.section-heading {
+    font-weight: 700 !important;
+}
+
+.practice-card h1,
+.practice-card h2,
+.card h1,
+.card h2,
+.test-card h1,
+.test-card h2,
+.test-list-card h2,
+.reading-test-card h2,
+.reading-test-list-card h2,
+.listening-test-list-card h2,
+.stat-card h3 {
+    font-weight: 600 !important;
+}
+
+.ielts-navbar__links a,
+.r-center a,
+nav a {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+button,
+.button,
+.btn,
+[class*="-btn"],
+.test-card-button,
+.practice-card__footer,
+.ielts-navbar__button,
+.ielts-account__link,
+.ielts-account__logout {
+    font-weight: 600 !important;
+}
+
+p,
+label,
+input,
+textarea,
+select,
+.secondary-text,
+.muted,
+.text-muted {
+    font-weight: 400;
+}
+
+.font-black,
+.font-extrabold,
+.font-bold,
+strong,
+b {
+    font-weight: 700 !important;
+}

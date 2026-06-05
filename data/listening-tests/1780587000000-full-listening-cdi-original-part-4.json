@@ -1,0 +1,139 @@
+{
+  "id": "1780587000000-full-listening-cdi-original-part-4",
+  "title": "Full Listening CDI - Part 4",
+  "part": 4,
+  "audio": "/uploads/audio/1780586494492-p4.mp3",
+  "duration": 30,
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/1780586494492-p4.mp3",
+      "audioFileName": "p4.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "answerText": "31: personal\n32: bridges\n33: wind\n34: weight\n35: sweetener\n36: tank\n37: trial\n38: safety\n39: pressure\n40: license | licence",
+      "blocks": [
+        {
+          "id": "part4-notes",
+          "type": "note_completion",
+          "title": "Ethics In Engineering",
+          "questionRange": "Questions 31-40",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Ethics - principles relating to right and wrong conduct",
+            "- At first, engineers saw ethics as a {{31}} issue",
+            "- Attitudes changed because of three disasters involving the collapse of {{32}}",
+            "- 1876 - USA (metal fatigue)",
+            "- 1879 - Scotland (the impact of {{33}} on the structure was miscalculated)",
+            "- 1907 - Canada (the structure could not support its own {{34}})",
+            "Boston Molasses Disaster",
+            "- At the time, molasses was the main {{35}} used in the USA",
+            "- Boston company: collapse of a {{36}} released 8 million liters of molasses",
+            "- The wave of molasses destroyed buildings and the railway",
+            "- Local residents insisted on a {{37}} of the molasses company",
+            "- The company had to pay compensation",
+            "- Probable causes of the accident:",
+            "- Insufficient {{38}} checks",
+            "- Fermentation raised the {{39}} to a dangerous level",
+            "- It is now obligatory for engineers to have a {{40}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "- At first, engineers saw ethics as a _____ issue",
+      "options": [],
+      "answer": "personal"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "- Attitudes changed because of three disasters involving the collapse of _____",
+      "options": [],
+      "answer": "bridges"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "- 1879 - Scotland (the impact of _____ on the structure was miscalculated)",
+      "options": [],
+      "answer": "wind"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "- 1907 - Canada (the structure could not support its own _____)",
+      "options": [],
+      "answer": "weight"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "- At the time, molasses was the main _____ used in the USA",
+      "options": [],
+      "answer": "sweetener"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "- Boston company: collapse of a _____ released 8 million liters of molasses",
+      "options": [],
+      "answer": "tank"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "- Local residents insisted on a _____ of the molasses company",
+      "options": [],
+      "answer": "trial"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "- Insufficient _____ checks",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "- Fermentation raised the _____ to a dangerous level",
+      "options": [],
+      "answer": "pressure"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "- It is now obligatory for engineers to have a _____",
+      "options": [],
+      "answer": "license | licence"
+    }
+  ],
+  "sourceFullTestId": "1780587000000-full-listening-cdi-original",
+  "createdAt": "2026-06-04T15:30:00.000Z",
+  "updatedAt": "2026-06-05T00:53:18.228Z"
+}

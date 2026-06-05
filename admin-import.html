@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Full IELTS Tests</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin-import.css">
+</head>
+
+<body class="admin-page" data-skip-global-navbar>
+    <header class="admin-topbar">
+        <div class="admin-topbar__brand">
+            <span class="admin-kicker">IELTS Mock</span>
+            <strong>Separate Full Tests</strong>
+        </div>
+        <nav class="admin-nav" aria-label="Admin navigation">
+            <a href="/admin">Dashboard</a>
+            <a href="admin-reading.html">Reading</a>
+            <a href="admin-listening.html">Listening</a>
+            <a href="full-tests.html">Published tests</a>
+        </nav>
+    </header>
+
+    <main class="admin-shell import-shell">
+        <section class="admin-hero">
+            <span class="admin-kicker">Full test support</span>
+            <h1>Create Reading or Listening Full Test</h1>
+            <p class="admin-help">Reading and Listening are created independently. Select only the parts for the skill you are building; questions, answers, and scoring data are inherited automatically.</p>
+        </section>
+
+        <div class="import-layout">
+            <div class="import-main">
+                <section class="admin-card import-tabs" aria-label="Full test type">
+                    <button type="button" class="import-tab is-active" data-skill-tab="reading">Reading Full Test</button>
+                    <button type="button" class="import-tab" data-skill-tab="listening">Listening Full Test</button>
+                </section>
+
+                <form id="combineForm" class="import-form">
+                    <section class="admin-card import-section">
+                        <span class="import-step">1</span>
+                        <div class="import-section__content">
+                            <h2>Full Test Information</h2>
+                            <label class="import-field">
+                                <span>Full Test Title</span>
+                                <input type="text" id="fullTestTitle" name="title" placeholder="Example: Cambridge 19 Test 2 Reading" required>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section class="admin-card import-section">
+                        <span class="import-step">2</span>
+                        <div class="import-section__content">
+                            <h2 id="partsHeading">Select Reading Parts</h2>
+                            <div id="readingParts" class="part-select-list">
+                                <label class="part-select-row"><span><strong>Reading Part 1</strong><small>Choose one Part 1 test</small></span><select data-part-select="reading" data-part="1" required></select></label>
+                                <label class="part-select-row"><span><strong>Reading Part 2</strong><small>Choose one Part 2 test</small></span><select data-part-select="reading" data-part="2" required></select></label>
+                                <label class="part-select-row"><span><strong>Reading Part 3</strong><small>Choose one Part 3 test</small></span><select data-part-select="reading" data-part="3" required></select></label>
+                            </div>
+                            <div id="listeningParts" class="part-select-list hidden">
+                                <label class="part-select-row"><span><strong>Listening Part 1</strong><small>Choose one Part 1 test</small></span><select data-part-select="listening" data-part="1"></select></label>
+                                <label class="part-select-row"><span><strong>Listening Part 2</strong><small>Choose one Part 2 test</small></span><select data-part-select="listening" data-part="2"></select></label>
+                                <label class="part-select-row"><span><strong>Listening Part 3</strong><small>Choose one Part 3 test</small></span><select data-part-select="listening" data-part="3"></select></label>
+                                <label class="part-select-row"><span><strong>Listening Part 4</strong><small>Choose one Part 4 test</small></span><select data-part-select="listening" data-part="4"></select></label>
+                            </div>
+                            <p class="import-inherit-note">Questions, answers, and scores are inherited from the selected parts. No answer entry is required here.</p>
+                        </div>
+                    </section>
+
+                    <div class="import-actions import-actions--footer">
+                        <a class="btn-secondary" href="/admin">Cancel</a>
+                        <button type="submit" class="btn-primary" id="combineBtn">Create Full Reading Test</button>
+                    </div>
+                    <p id="importStatus" class="import-status" role="status" aria-live="polite"></p>
+                </form>
+
+                <section id="resultPanel" class="admin-card hidden">
+                    <h2>Full test created</h2>
+                    <p id="resultMeta" class="admin-help admin-help--tight"></p>
+                    <div class="import-actions">
+                        <a id="openPlayerLink" class="btn-primary" href="#">Open in player</a>
+                        <a class="btn-secondary" href="full-tests.html">All full tests</a>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="admin-card import-guide">
+                <h2>How it works</h2>
+                <ol class="import-workflow">
+                    <li><strong>Create parts</strong><span>Build each Reading or Listening part separately.</span></li>
+                    <li><strong>Select parts</strong><span>Choose the parts in the correct IELTS order.</span></li>
+                    <li><strong>Create full test</strong><span>The CBT-ready test is assembled automatically.</span></li>
+                </ol>
+                <div class="import-result-note">
+                    <strong>Result</strong>
+                    <p id="guideResult">One complete Reading test with 3 parts.</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="auth-client.js"></script>
+    <script src="admin-import.js"></script>
+</body>
+
+</html>

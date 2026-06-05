@@ -1,0 +1,259 @@
+@import url("typography.css");
+
+/* Shared IELTS CBT layout for manual tests */
+.ielts-reading-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(100vh - 140px);
+}
+
+.ielts-passage-panel,
+.ielts-questions-panel {
+    padding: 24px 28px;
+    overflow-y: auto;
+    max-height: calc(100vh - 140px);
+}
+
+.ielts-passage-panel {
+    border-right: 1px solid #e5e7eb;
+    background: #fff;
+    line-height: 1.7;
+}
+
+.ielts-questions-panel {
+    background: #f8fafc;
+}
+
+.ielts-instruction-block {
+    margin-bottom: 16px;
+}
+
+.ielts-group-title {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.ielts-instruction-body {
+    margin: 0 0 6px;
+    color: #374151;
+    line-height: 1.55;
+}
+
+.ielts-instruction-rule {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.ielts-instruction-rule span {
+    font-weight: 700;
+}
+
+.ielts-choice-instruction-lead {
+    margin: 14px 0 12px;
+    color: #111827;
+    font-style: italic;
+    line-height: 1.55;
+}
+
+.ielts-choice-definition-list {
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid #e1e5ea;
+}
+
+.ielts-choice-definition-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 24%) minmax(0, 1fr);
+    gap: 18px;
+    padding: 11px 14px;
+    color: #111827;
+    line-height: 1.45;
+}
+
+.ielts-choice-definition-row:nth-child(odd) {
+    background: #eef0f3;
+}
+
+.ielts-choice-definition-row strong {
+    font-weight: 700;
+}
+
+.ielts-question-group {
+    margin-bottom: 28px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    padding: 18px;
+}
+
+.ielts-group-options-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #e1e5ea;
+    border-radius: 8px;
+    background: #f8fafc;
+    padding: 10px;
+}
+
+.ielts-group-option-chip {
+    min-width: 32px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    padding: 5px 9px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.ielts-multi-select-task {
+    display: grid;
+    gap: 14px;
+}
+
+.ielts-multi-select-options,
+.ielts-multi-select-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+    gap: 8px;
+}
+
+.ielts-multi-select-option,
+.ielts-multi-select-slot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #fff;
+    padding: 9px 10px;
+}
+
+.ielts-multi-select-slot {
+    background: #f8fafc;
+    color: #4b5563;
+}
+
+.ielts-question {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.ielts-question-stem {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.ielts-q-num {
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.ielts-option-list {
+    display: grid;
+    gap: 8px;
+}
+
+.ielts-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.45;
+}
+
+.ielts-option input {
+    margin-top: 3px;
+}
+
+.ielts-select {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.ielts-blank-input {
+    min-width: 120px;
+    max-width: 220px;
+    padding: 4px 8px;
+    border: none;
+    border-bottom: 2px solid #2563eb;
+    background: #eff6ff;
+    font: inherit;
+}
+
+.ielts-completion-line {
+    margin: 0 0 10px;
+    line-height: 1.7;
+}
+
+.ielts-completion-table {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+
+.ielts-completion-row {
+    margin-bottom: 8px;
+}
+
+.ielts-correct {
+    border-color: #86efac !important;
+    background: #f0fdf4 !important;
+}
+
+.ielts-wrong {
+    border-color: #fca5a5 !important;
+    background: #fef2f2 !important;
+}
+
+.admin-preview-panel {
+    margin-top: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    max-height: 520px;
+    overflow: auto;
+}
+
+.admin-preview-panel .ielts-reading-layout {
+    min-height: 400px;
+    max-height: 500px;
+}
+
+.admin-preview-panel .ielts-passage-panel,
+.admin-preview-panel .ielts-questions-panel {
+    max-height: 480px;
+    padding: 16px;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .ielts-reading-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ielts-passage-panel {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        max-height: 40vh;
+    }
+
+    .ielts-choice-definition-row {
+        grid-template-columns: minmax(105px, 32%) minmax(0, 1fr);
+        gap: 12px;
+    }
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "1779126631738-785144f4",
+    "username": "Admin",
+    "email": "admin@ieltsx.org",
+    "password": "$2b$10$DcpG2V6QY5XSCwlQTVEGXuh0dCxceZEHKX1UFrVBejUqYHoc0Y7Iq",
+    "role": "student",
+    "createdAt": "2026-05-18T17:50:31.827Z"
+  },
+  {
+    "id": "1779126747331-8f56c856",
+    "username": "hoshimjonov08@gmail.com",
+    "email": "hoshimjonov08@gmail.com",
+    "createdAt": "2026-05-18T17:52:27.331Z",
+    "role": "admin",
+    "password": "$2b$10$nvPK/bapfm/CLZpugjjmJeqnf6ZwZQlPkio0ZnvUw5cQMWIx1rCJu"
+  },
+  {
+    "id": "1779127063840-ac1aaa79",
+    "username": "xurshidbek_77@icloud.com",
+    "email": "xurshidbek_77@icloud.com",
+    "createdAt": "2026-05-18T17:57:43.840Z"
+  },
+  {
+    "id": "1779158419988-302c65f4",
+    "username": "xoshimov_0510",
+    "email": "xoshimjonovxurshidbek5@gmail.com",
+    "password": "$2b$10$9DcHW8/B3boIKrAG5mGOSu9qyiFyKVVd3fMKkcLU0.GFz0NHSa9mG",
+    "role": "student",
+    "createdAt": "2026-05-19T02:40:19.988Z"
+  },
+  {
+    "id": "1780623623639-d70d5924",
+    "username": "xoshimjonovxurshidbek5@gmail.com",
+    "email": "dizayner008@gmail.com",
+    "password": "$2b$10$Ui1k3B4fI/0EKPgEGWjvsOnplSNAhMnF5doCs2NPc9InjexAizy3O",
+    "role": "student",
+    "createdAt": "2026-06-05T01:40:23.640Z"
+  }
+]

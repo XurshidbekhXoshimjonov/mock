@@ -1,0 +1,934 @@
+[
+  {
+    "passageTitle": "Dirty river but clean water",
+    "passageText": "Floods can occur in rivers when the flow rate exceeds the capacity of the river channel, particularly at bends or meanders in the waterway. Floods often cause damage to homes and businesses if they are in the natural flood plains of rivers. While riverine flood damage can be eliminated by moving away from rivers and other bodies of water, people have traditionally lived and worked by rivers because the land is usually flat and fertile and because rivers provide easy travel and access to commerce and industry.\n\nA FIRE and flood are two of humanity's worst nightmares. People have, therefore, always sought to control them. Forest fires are snuffed out quickly. The flow of rivers is regulated by weirs and dams. At least, that is how it used to be. But foresters have learned that forests need fires to clear out the brush and even to get seeds to germinate. And a similar revelation is now dawning on hydrologists. Rivers – and the ecosystems they support – need floods. That is why a man-made torrent has been surging down the Grand Canyon. By Thursday, March 6th it was running at full throttle, which was expected to be sustained for 60 hours.\n\nB Floods once raged through the canyon every year. Spring Snow from as far away as Wyoming would melt and swell the Colorado river to a flow that averaged around 1,500 cubic metres (50,000 cubic feet) a second. Every eight years or so, that figure rose to almost 3,000 cubic metres. These floods infused the river with sediment, carved its beaches and built its sandbars.\n\nC However, in the four decades since the building of the Glen Canyon dam, just upstream of the Grand Canyon, the only sediment that it has collected has come from tiny, undammed tributaries. Even that has not been much use as those tributaries are not powerful enough to distribute the sediment in an ecologically valuable way.\n\nD This lack of flooding has harmed local wildlife. The humpback chub, for example, thrived in the rust-red waters of Colorado. Recently, though, its population has crashed. At first sight, it looked as if the reason was that the chub were being eaten by trout introduced for sport fishing in the mid-20th century. But trout and chub co-existed until the Glen Canyon dam was built, so something else is going on. Steve Gloss, of the United States Geological Survey (USGS), reckons that the chub's decline is the result of their losing their most valuable natural defense, Colorado's rusty sediment. The chub were well adapted to the poor visibility created by the chick, red water which gave the river its name and depended on it to hide from predators. Without the cloudy water, the chub became vulnerable.\n\nE And the chub are not alone. In the years since the Glen Canyon dam was built, several species have vanished altogether. These include the Colorado pike-minnow, the razorback sucker and the roundtail chub. Meanwhile, aliens including fathead minnows, channel catfish and common carp, which would have been hard, put to survive in the savage waters of the undammed canyon, have moved in.\n\nF So flooding is the obvious answer. Unfortunately, it is easier said than done. Floods were sent down the Grand Canyon in 1996 and 2004 and the results were mixed. In 1996 the flood was allowed to go on too long. To start with, all seemed well. The floodwaters built up sandbanks and infused the river with sediment. Eventually, however, the continued flow washed most of the sediment out of the canyon. This problem was avoided in 2004, but unfortunately, on that occasion, the volume of sand available behind the dam was too low to rebuild the sandbanks. This time, the USGS is convinced that things will be better. The amount of sediment available is three times greater than it was in 2004. So if a flood is going to do some good, this is the time to unleash one.\n\nG Even so, it may turn out to be an empty gesture. At less than 1,200 cubic metres a second, this flood is smaller than even an average spring flood, let alone one of the mightier deluges of the past. Those glorious inundations moved massive quantities of sediment through the Grand Canyon, wiping the slate dirty, and making a muddy mess of silt and muck that would make modern river rafters cringe.",
+    "questions": [
+      {
+        "sectionTitle": "Questions 1-7",
+        "startQuestion": 1,
+        "endQuestion": 7,
+        "instruction": "Questions 1-7\n\nDo the following statements agree with the information given in Reading Passage 1?\n\nIn boxes 1-7 on your answer sheet, write\n\nTRUE if the statement is true\n\nFALSE if the statement is false\n\nNOT GIVEN if the information is not given in the passage",
+        "items": [
+          {
+            "number": 1,
+            "type": "true_false_not_given",
+            "text": "Damage caused by a fire is worse than that caused by the flood.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "NOT GIVEN"
+            ]
+          },
+          {
+            "number": 2,
+            "type": "true_false_not_given",
+            "text": "The flood peaks at almost 1500 cubic meters every eight years.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "FALSE"
+            ]
+          },
+          {
+            "number": 3,
+            "type": "true_false_not_given",
+            "text": "Contribution of sediments delivered by tributaries has little impact.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "NOT GIVEN"
+            ]
+          },
+          {
+            "number": 4,
+            "type": "true_false_not_given",
+            "text": "The decreasing number of chubs is always caused by introducing of trout since the mid 20th century.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "FALSE"
+            ]
+          },
+          {
+            "number": 5,
+            "type": "true_false_not_given",
+            "text": "It seemed that the artificial flood in 1996 had achieved success partly at the very beginning.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "TRUE"
+            ]
+          },
+          {
+            "number": 6,
+            "type": "true_false_not_given",
+            "text": "In fact, the yield of artificial flood water is smaller than an average natural flood at present.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "TRUE"
+            ]
+          },
+          {
+            "number": 7,
+            "type": "true_false_not_given",
+            "text": "Mighty floods drove fast-moving flows with clean and high-quality water.",
+            "options": [
+              "TRUE",
+              "FALSE",
+              "NOT GIVEN"
+            ],
+            "answer": [
+              "NOT GIVEN"
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Questions 8-13",
+        "startQuestion": 8,
+        "endQuestion": 13,
+        "instruction": "Questions 8-13\n\nComplete the summary below.\n\nChoose NO MORE THAN TWO WORDS from the passage for each answer.\n\nWrite your answers in boxes 8-13 on your answer sheet.",
+        "items": [
+          {
+            "number": 8,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "spring"
+            ]
+          },
+          {
+            "number": 9,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "sediment"
+            ]
+          },
+          {
+            "number": 10,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "razorback sucker"
+            ]
+          },
+          {
+            "number": 11,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "common carp"
+            ]
+          },
+          {
+            "number": 12,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "visibility"
+            ]
+          },
+          {
+            "number": 13,
+            "type": "summary_completion",
+            "text": "The eco-impact of the Canyon Dam\n\nFloods are people's nightmare. In the past, the canyon was raged by flood every year. The snow from far Wyoming would melt in the season of [[q8]] and caused a flood flow peak in Colorado river. In the four decades after people built the Glen Canyon Dam, it only could gather [[q9]] together from tiny, undammed tributaries.\n\nhumpback chub population reduced, why?\n\nThen several species disappeared including Colorado pike-minnow, [[q10]] and the round-tail chub. Meanwhile, some moved in such as fathead minnows, channel catfish and [[q11]] . The non-stopped flow led to the washing away of the sediment out of the canyon, which poses a great threat to the chubs because it has poor [[q12]] away from predators. In addition, the volume of [[q13]] available behind the dam was too low to rebuild the bars and flooding became more serious.",
+            "answer": [
+              "sand"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "passageTitle": "Memory and Age",
+    "passageText": "A Aging, it is now clear, is part of an ongoing maturation process that all our organs go through. \"In a sense, aging is keyed to the level of the vigor of the body and the continuous interaction between levels of body activity and levels of mental activity,\" reports Arnold B. Scheibel, M.D., whose very academic title reflects how once far-flung domains now converge on the mind and the brain. Scheibel is a professor of anatomy, cell biology, psychiatry, and behavioral sciences at the University of California at Los Angeles, and director of university's Brain Research Institute. Experimental evidence has backed up popular assumptions that the aging mind undergoes decay analogous to that of the aging body. Younger monkeys, chimps, and lower animals consistently outperform their older colleagues on memory tests. In humans, psychologists concluded, memory and other mental functions deteriorate over time because of inevitable organic changes in the brain as neurons die off. The mental decline after young adulthood appeared inevitable.\n\nB Equipped with imaging techniques that capture the brain in action, Stanley Rapoport, Ph.D., at the National Institutes of Health, measured the flow of blood in the brains of old and young people as they went through the task of matching photos of faces. Since blood flow reflects neuronal activity, Rapoport could compare with networks of neurons were being used by different subjects. \"Even when the reaction times of older and younger subjects were the same, the neural networks they used were significantly different. The older subjects were using different internal strategies to accomplish the same result in the same time,\" Rapoport says. Either the task required greater effort on the part of the older subjects or the work of neurons originally involved in tasks of that type had been taken over by other neurons, creating different networks.\n\nC At the Georgia Institute of Technology, psychologist Timothy Salthouse, Ph.D., compared a group of very fast and accurate typists of college-age with another group in their 60s. since reaction time is faster in younger people and most people's fingers grow less nimble with age, younger typists might be expected to tap right along while the older one's fumble. But both typed 60 words a minute. The older typists, it turned out, achieved their speed with cunning little strategies that made them far more efficient than their younger counterparts: They made fewer finger movements, saving a fraction of a second here and there. They also read ahead in the text. The neural networks involved in typing appear to have been reshaped to compensate for losses in motor skills or other age changes.\n\nD \"When a rat is kept in isolation without playmates or objects to interact with, the animal's brain shrinks, but if we put that rat with 11 other rats in a large cage and give them an assortment of wheels, ladders, and other toys, we can show—after four days—significant differences in its brain,\" says Diamond, professor of integrative biology. Proliferating dendrites first appear in the visual association areas. After a month in the enriched environment, the whole cerebral cortex has expanded, a has its blood supply. Even in the enriched environment, rats get bored unless the toys are varied. \"Animals are just like we are. They need stimulation,\" says Diamond.\n\nOne of the most profoundly important mental functions is memory-notorious for its failure with age. So important is a memory that the Charles A. Dana foundation recently spent $8.4 million to set up a consortium of leading medical centers to measure memory loss and aging through brain-imaging technology, neurochemical experiment, and cognitive and psychological tests. One thing, however, is already fairly clear—many aspects of memory are not a function of age at all but of education. Memory exists in more than one form. What we call knowledge—facts—is what psychologists such as Harry P. Bahrick, Ph.D., of Ohio Wesleyan University call semantic memory. Events, conversations, and occurrences in time and space, on the other hand, make up episodic or event memory, which is triggered by cues from the context. If you were around in 1963 you don't need to be reminded of the circumstances surrounding the moment you heard that JFK had been assassinated. That event is etched into your episodic memory.\n\nE When you forget a less vivid item, like buying a roll of paper towels at the supermarket, you may blame it on your aging memory. It's true that episodic memory begins to decline when most people are in their 50s, but it's never perfect at any age. \"Every memory begins as an event,\" says Bahrick. \"Through repetition, certain events leave behind a residue of knowledge or semantic memory. On a specific day in the past, somebody taught you that two and two are four, but you've been over that information so often you don't remember where you learned it. What started as an episodic memory has become a permanent part of your knowledge base.\" You remember the content, not the context. Our language knowledge, our knowledge of the world and of people, is largely that permanent or semi-permanent residue.\n\nF Probing the longevity of knowledge, Bahrick tested 1,000 high school graduates to see how well they recalled their algebra. Some had completed the course as recently as a month before, others as long as 50 years earlier. He also determined how long each person had studied algebra, the grade received, and how much the skill was used over the course of adulthood. Surprisingly, a person's grasp of algebra at the time of testing did not depend on how long ago he'd taken the course—the determining factor was the duration of instruction. Those who had spent only a few months learning algebra forgot most of it within two or three years.\n\nG In another study, Bahrick discovered that people who had taken several courses in Spanish, spread out over a couple of years, could recall, decades later, 60 per cent or more of the vocabulary they learned. Those who took just one course retained only a trace after three years. \"This long-term residue of knowledge remains stable over the decades, independent of the age of the person and the age of the memory. No serious deficit appears until people get to their 50s and 60s, probably due to the degenerative processes of aging rather than a cognitive loss.\"\n\nH \"You could say metamemory is a byproduct of going to school,\" says psychologist Robert Kail, Ph.D., of Purdue University, who studies children from birth to 20 years, the time of life when mental development is most rapid. \"The question-and-answer process, especially exam-taking, helps children learn—and also teaches them how their memory works. This may be one reason why, according to a broad range of studies in people over 60, the better educated a person is, the more likely they are to perform better in life and on psychological tests. A group of adult novice chess players were compared with a group of child experts at the game. In tests of their ability to remember a random series of numbers, the adults, as expected, outscored the children. But when asked to remember the patterns of chess pieces arranged on a board, the children won. \"Because they'd played a lot of chess, their knowledge of chess was better organized than that of the adults, and their existing knowledge of chess served as a framework for new memory,\" explains Kail.\n\nI Specialized knowledge is a mental resource that only improve with time. Crystallized intelligence about one's occupation apparently does not decline at all until at least age 75, and if there is no disease or dementia, may remain even longer. Special knowledge is often organized by a process called \"chunking.\" If procedure A and procedure B are always done together, for example, the mind may merge them into a single command. When you apply yourself to a specific interest—say, cooking—you build increasingly elaborate knowledge structures that let you do more and do it better. This ability, which is tied to experience, is the essence of expertise. Vocabulary is one such specialized form of accrued knowledge. Research clearly shows that vocabulary improves with time. Retired professionals, especially teachers and journalists, consistently score higher on tests of vocabulary and general information than college students, who are supposed to be in their mental prime.",
+    "questions": [
+      {
+        "sectionTitle": "Questions 14-17",
+        "startQuestion": 14,
+        "endQuestion": 17,
+        "instruction": "Questions 14-17\nChoose the correct answer.\n\nWrite your answers in boxes 14-17 on your answer sheet.",
+        "items": [
+          {
+            "number": 14,
+            "type": "multiple_choice",
+            "text": "14 What does the experiment of typist show in the passage?",
+            "options": [
+              {
+                "value": "A",
+                "text": "Old people reading ability is superior"
+              },
+              {
+                "value": "B",
+                "text": "Losses of age is irreversible"
+              },
+              {
+                "value": "C",
+                "text": "Seasoned tactics made elders more efficient"
+              },
+              {
+                "value": "D",
+                "text": "Old people performed poorly in the driving test"
+              }
+            ],
+            "answer": [
+              "C"
+            ]
+          },
+          {
+            "number": 15,
+            "type": "multiple_choice",
+            "text": "15 Which is correct about rat experiment?",
+            "options": [
+              {
+                "value": "A",
+                "text": "Different toys have a different effect on rats"
+              },
+              {
+                "value": "B",
+                "text": "Rat's brain weight increased in both cages"
+              },
+              {
+                "value": "C",
+                "text": "Isolated rat's brain grows new connections"
+              },
+              {
+                "value": "D",
+                "text": "Boring and complicated surroundings affect brain development"
+              }
+            ],
+            "answer": [
+              "D"
+            ]
+          },
+          {
+            "number": 16,
+            "type": "multiple_choice",
+            "text": "16 What can be concluded in a chess game of children group?",
+            "options": [
+              {
+                "value": "A",
+                "text": "They won a game with adults"
+              },
+              {
+                "value": "B",
+                "text": "Their organization of chess knowledge is better"
+              },
+              {
+                "value": "C",
+                "text": "Their image memory is better than adults"
+              },
+              {
+                "value": "D",
+                "text": "They used a different part of the brain when playing chess"
+              }
+            ],
+            "answer": [
+              "B"
+            ]
+          },
+          {
+            "number": 17,
+            "type": "multiple_choice",
+            "text": "17 What is the author's purpose of using \"vocabulary study\" at the end of the passage?",
+            "options": [
+              {
+                "value": "A",
+                "text": "Certain people are sensitive to vocabularies while others aren't"
+              },
+              {
+                "value": "B",
+                "text": "Teachers and professionals won by their experience"
+              },
+              {
+                "value": "C",
+                "text": "Vocabulary memory as a crystallized intelligence is hard to decline"
+              },
+              {
+                "value": "D",
+                "text": "Old people use their special zone of the brain when the study"
+              }
+            ],
+            "answer": [
+              "C"
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Question 18-23",
+        "startQuestion": 18,
+        "endQuestion": 23,
+        "instruction": "Question 18-23\n\nComplete the following summary of the paragraphs of Reading Passage\n\nUsing NO MORE THAN TWO WORDS from the Reading Passage for each answer.\n\nWrite your answers in boxes 18-23 on your answer sheet.",
+        "items": [
+          {
+            "number": 18,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "Memory"
+            ]
+          },
+          {
+            "number": 19,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "psychological"
+            ]
+          },
+          {
+            "number": 20,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "semantic memory"
+            ]
+          },
+          {
+            "number": 21,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "episodic memory",
+              "event memory"
+            ]
+          },
+          {
+            "number": 22,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "algebra"
+            ]
+          },
+          {
+            "number": 23,
+            "type": "summary_completion",
+            "text": "It's long been known that as one significant mental function, [[q18]] deteriorates with age. Charles A. Dana foundation invested millions of dollars to test memory decline. They used advanced technology, neurochemical experiments and ran several cognitive and [[q19]] experiments. Bahrick called one form \" [[q20]] \", which describes factual knowledge. Another one called \" [[q21]] \" contains events in time and space format. He conducted two experiments toward to knowledge memory's longevity, he asked 1000 candidates some knowledge of [[q22]] , some could even remember it decades ago. Second research of Spanish course found that multiple courses participants could remember more than half of [[q23]] they learned after decades, whereas single course taker only remembered as short as 3 years.",
+            "answer": [
+              "vocabulary"
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Questions 24-26",
+        "startQuestion": 24,
+        "endQuestion": 26,
+        "instruction": "Questions 24-26\nUse the information in the passage to match the people (listed A-F) with opinions or deeds below.\n\nWrite the appropriate letters A-F in boxes 24-26 on your answer sheet.\n\nA Harry P. Bahrick\n\nB Arnold B. Scheibel\n\nC Marion Diamond\n\nD Timothy Salthouse\n\nE Stanley Rapport\n\nF Robert Kail",
+        "items": [
+          {
+            "number": 24,
+            "type": "matching",
+            "text": "Examined both young and old's blood circulation of the brain while testing",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "E"
+            ]
+          },
+          {
+            "number": 25,
+            "type": "matching",
+            "text": "Aging is a significant link between physical and mental activity",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "B"
+            ]
+          },
+          {
+            "number": 26,
+            "type": "matching",
+            "text": "Some semantic memory of an event would not fade away after repetition",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "A"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "passageTitle": "Save Endangered Language",
+    "passageText": "\"Obviously we must do some serious rethinking of our priorities, lest linguistics go down in history as the only science that presided obviously over the disappearance of 90 percent of the very field to which it is dedicated.\" – Michael Krauss, \"The World's Languages in Crisis\".\n\nTen years ago Michael Krauss sent a shudder through the discipline of linguistics with his prediction that half the 6,000 or so languages spoken in the world would cease to be uttered within a century. Unless scientists and community leaders directed a worldwide effort to stabilize the decline of local languages, he warned, nine-tenths of the linguistic diversity of humankind would probably be doomed to extinction. Krauss's prediction was little more than an educated guess, but other respected linguists had been clanging out similar alarms. Keneth L. Hale of the Massachusetts Institute of Technology noted in the same journal issue that eight languages on which he had done fieldwork had since passed into extinction. A 1990 survey in Australia found that 70 of the 90 surviving Aboriginal languages were no longer used regularly by all age groups. The same was true for all but 20 of the 175 Native American languages spoken or remembered in the US., Krauss told a congressional panel in 1992.\n\nMany experts in the field mourn the loss of rare languages, for several reasons. To start, there is scientific self-interest: some of the most basic questions in linguistics have to do with the limits of human speech, which are far from fully explored. Many researchers would like to know which structural elements of grammar and vocabulary – if any – are truly universal and probably, therefore, hardwired into the human brain. Other scientists try to reconstruct ancient migration patterns by comparing borrowed words that appear in otherwise unrelated languages. In each of these cases, the wider the portfolio of languages you study, the more likely you are to get the right answers.\n\nDespite the near-constant buzz in linguistics about endangered languages over the past 10 years, the field has accomplished depressingly little. \"You would think that there would be some organized response to this dire situation,\" some attempt to determine which language can be saved and which should be documented before they disappear, says Sarah G. Thomason, a linguist at the University of Michigan at Ann Arbor. \"But there isn't any such effort organized in the profession. It is only recently that it has become fashionable enough to work on endangered languages.\" Six years ago, recalls Douglas H. Whalen of Yale University, \"when I asked linguists who were raising money to deal with these problems, I mostly got blank stares.\" So Whalen and a few other linguists founded the Endangered Languages Fund. In the five years to 2001, they were able to collect only $80,000 for research grants. A similar foundation in England, directed by Nicholas Ostler, has raised just $8,000 since 1995.\n\nBut there are encouraging signs that the field has turned a corner. The Volkswagen Foundation, a German charity, just issued its second round of grants totaling more than $2 million. It has created a multimedia archive at the Max Planck Institute for Psycholinguistics in the Netherlands that can house recordings, grammars, dictionaries and other data on endangered languages. To fill the archive, the foundation has dispatched field linguists to document Aweti (100 or so speakers in Brazil), Ega (about 300 speakers in Ivory Coast), Waima'a (a few hundred speakers in East Timor), and a dozen or so other languages unlikely to survive the century. The Ford Foundation has also edged into the arena. Its contributions helped to reinvigorate a master-apprentice program created in 1992 by Leanne Hinton of Berkeley and Native Americans worried about the imminent demise of about 50 indigenous languages in California. Fluent speakers receive $3,000 to teach a younger relative (who is also paid) their native tongue through 360 hours of shared activities, spread over six months. So far about 5 teams have completed the program, Hinton says, transmitting a least some knowledge of 25 languages. \"It's too early to call this language revitalization,\" Hinton admits. \"In California, the death rate of elderly speakers will always be greater than the recruitment rate of young speakers. But at least we prolong the survival of the language.\" That will give linguists more time to record these tongues before they vanish.\n\nBut the master-apprentice approach hasn't caught on outside the U.S., and Hinton's effort is a drop in the sea. At least 440 languages have been reduced to a mere handful of elders, according to the Ethnologue, a catalogue of languages produced by the Dallas-based group SIL International that comes closest to global coverage. For the vast majority of these languages, there is little or no record of their grammar, vocabulary, pronunciation or use in daily life. Even if a language has been fully documented, all that remains once it vanishes from active use is a fossil skeleton, a scattering of features that the scientist was lucky and astute enough to capture. Linguists may be able to sketch an outline of the forgotten language and fix its place on the evolutionary tree, but little more. \"How did people start conversations and talk to babies? How dis husbands and wives converse?\" Hinton asks. \"Those are the first things you want to learn when you want to revitalize the language.\"\n\nBut there is as yet no discipline of \"conservation linguistics,\" as there is for biology. Almost every strategy tried so far has succeeded in some places but failed in others, and there seems to be no way to predict with certainty what will work where. Twenty years ago in New Zealand, Maori speakers set up \"language nests,\" in which preschoolers were immersed in the native language. Additional Maori-only classes were added as the children progressed through elementary and secondary school. A similar approach was tried in Hawaii, with some success – the number of native speakers has stabilized at 1,000 or so, reports Joseph E. Grimes of SIL International, who is working on Oahu. Students can now get instruction in Hawaiian all the way through university.\n\nOne factor that always seems to occur in the demise of a language is that the speakers begin to have collective doubts about the usefulness of language loyalty. Once they start regarding their own language as inferior to the majority language, people stop using it in all situations. Kids pick up on the attitude and prefer the dominant language. In many cases, people don't notice until they suddenly realize that their kids never speak the language, even at home. This is how Cornish and some dialects of Scottish Gaelic is still only rarely used for daily home life in Ireland, 80 years after the republic was founded with Irish as its first official language.\n\nLinguists agree that ultimately, the answer to the problem of language extinction is multilingualism. Even uneducated people can learn several languages, as long as they start as children. Indeed, most people in the world speak more than one tongue, and in places such as Cameroon (279 languages), Papua New Guinea (823) and India (387) it is common to speak three of four distinct languages and a dialect or two as well. Most Americans and Canadians, to the west of Quebec, have a gut reaction that anyone speaking another language in front of them is committing an immoral act. You get the same reaction in Australia and Russia. It is no coincidence that these are the areas where languages are disappearing the fastest. The first step in saving dying languages is to persuade the world's majorities to allow the minorities among them to speak with their own voices.",
+    "questions": [
+      {
+        "sectionTitle": "Questions 27-33",
+        "startQuestion": 27,
+        "endQuestion": 33,
+        "instruction": "Questions 27-33\nThe reading passage has eight paragraphs.\n\nChoose the correct heading for paragraphs from the list below.",
+        "items": [
+          {
+            "number": 27,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 27.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "v"
+            ]
+          },
+          {
+            "number": 28,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 28.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "v"
+            ]
+          },
+          {
+            "number": 29,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 29.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "x"
+            ]
+          },
+          {
+            "number": 30,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 30.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "iii"
+            ]
+          },
+          {
+            "number": 31,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 31.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "i"
+            ]
+          },
+          {
+            "number": 32,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 32.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "vii"
+            ]
+          },
+          {
+            "number": 33,
+            "type": "heading_matching",
+            "text": "Choose the correct heading for paragraph 33.",
+            "options": [
+              {
+                "value": "i",
+                "text": "data consistency needed for language"
+              },
+              {
+                "value": "ii",
+                "text": "consensuses on an initial recommendation for saving dying out languages"
+              },
+              {
+                "value": "iii",
+                "text": "positive gains for protection"
+              },
+              {
+                "value": "iv",
+                "text": "minimum requirement for saving a language"
+              },
+              {
+                "value": "v",
+                "text": "Potential threat to minority language"
+              },
+              {
+                "value": "vi",
+                "text": "a period when there was absent of real effort made"
+              },
+              {
+                "value": "vii",
+                "text": "native language programs launched"
+              },
+              {
+                "value": "viii",
+                "text": "Lack of confidence in young speakers as a negative factor"
+              },
+              {
+                "value": "ix",
+                "text": "Practise in several developing countries"
+              },
+              {
+                "value": "x",
+                "text": "Value of minority language to linguists"
+              },
+              {
+                "value": "xi",
+                "text": "government participation in the language field"
+              }
+            ],
+            "answer": [
+              "viii"
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Questions 34-38",
+        "startQuestion": 34,
+        "endQuestion": 38,
+        "instruction": "Questions 34-38\nUse the information in the passage to match the people (listed A-F) with opinions or deeds below.\n\nWrite the appropriate letters A-F in boxes 34-38 on your answer sheet.\n\nA Nicholas Ostler\n\nB Michael Krauss\n\nC Joseph E. Grimes\n\nD Sarah G. Thomason\n\nE Keneth L. Hale\n\nF Douglas H. Whalen",
+        "items": [
+          {
+            "number": 34,
+            "type": "matching",
+            "text": "Reported language conservation practice in Hawaii",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "C"
+            ]
+          },
+          {
+            "number": 35,
+            "type": "matching",
+            "text": "Predicted that many languages would disappear soon",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "B"
+            ]
+          },
+          {
+            "number": 36,
+            "type": "matching",
+            "text": "The experienced process that languages die out personally",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "E"
+            ]
+          },
+          {
+            "number": 37,
+            "type": "matching",
+            "text": "Raised language fund in England",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "A"
+            ]
+          },
+          {
+            "number": 38,
+            "type": "matching",
+            "text": "Not enough effort on saving until recent work",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "answer": [
+              "D"
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Questions 39-40",
+        "startQuestion": 39,
+        "endQuestion": 40,
+        "instruction": "Questions 39-40\nChoose the correct answer.\n\nWrite your answers in boxes 39-40 on your answer sheet.",
+        "items": [
+          {
+            "number": 39,
+            "type": "multiple_choice",
+            "text": "39 What is the real result of a master-apprentice program sponsored by The Ford Foundation?",
+            "options": [
+              {
+                "value": "A",
+                "text": "Teach children how to speak"
+              },
+              {
+                "value": "B",
+                "text": "Revive some endangered languages in California"
+              },
+              {
+                "value": "C",
+                "text": "Postpone the dying date for some endangered languages"
+              },
+              {
+                "value": "D",
+                "text": "Increase communication between students"
+              }
+            ],
+            "answer": [
+              "C"
+            ]
+          },
+          {
+            "number": 40,
+            "type": "multiple_choice",
+            "text": "40 What should the majority language speakers do according to the last paragraph?",
+            "options": [
+              {
+                "value": "A",
+                "text": "They should teach their children endangered language in free lessons"
+              },
+              {
+                "value": "B",
+                "text": "They should learn at least four languages"
+              },
+              {
+                "value": "C",
+                "text": "They should now their loyalty to a dying language"
+              },
+              {
+                "value": "D",
+                "text": "They should be more tolerant of minority language speaker"
+              }
+            ],
+            "answer": [
+              "D"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

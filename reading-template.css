@@ -1,0 +1,356 @@
+@import url("typography.css");
+
+body {
+    margin: 0;
+    background: #f8fafc;
+    color: #111827;
+    font-family: var(--ieltsx-font);
+    overflow-x: hidden;
+}
+
+.reading-template-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 86px;
+    padding: 12px 30px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #ffffff;
+}
+
+.left-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dashboard-link {
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    color: #000000;
+    font-size: 17px;
+    padding: 12px 22px;
+    text-decoration: none;
+}
+
+.reading-template-header h1 {
+    margin: 0;
+    color: #000000;
+    font-size: 29px;
+}
+
+.reading-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 64px;
+    padding: 14px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #ffffff;
+}
+
+.reading-list-header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.reading-list-header p,
+.reading-test-list-card p {
+    margin: 0 0 4px;
+    color: #475467;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reading-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.reading-list-header a,
+.reading-test-list-card a {
+    color: #1d4ed8;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.modern-timer {
+    border-radius: 12px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 23px;
+    font-weight: 700;
+    padding: 13px 22px;
+}
+
+.submit-test-btn {
+    border: none;
+    border-radius: 12px;
+    background: #ef4444;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 14px 26px;
+}
+
+.progress-line {
+    height: 4px;
+    background: #e5e7eb;
+}
+
+.reading-template-titlebar {
+    display: none;
+}
+
+.reading-split-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+    height: calc(100vh - 119px);
+}
+
+.reading-passage-panel,
+.reading-questions-panel {
+    overflow: auto;
+    padding: 26px;
+    background: #ffffff;
+}
+
+.reading-questions-panel {
+    border-left: 1px solid #e5e7eb;
+    background: #fbfdff;
+}
+
+.reading-passage-panel article {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.reading-passage-panel h2 {
+    margin: 0 0 22px;
+    text-align: center;
+}
+
+.reading-passage-panel p {
+    margin: 0 0 18px;
+    line-height: 1.65;
+}
+
+.question-card {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.question-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.question-number-inline {
+    color: #111827;
+    font-weight: 700;
+}
+
+.option-list {
+    display: grid;
+    gap: 10px;
+    margin-left: 24px;
+}
+
+.option-list label {
+    display: flex;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.completion-input,
+.heading-select {
+    width: min(100%, 320px);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 9px 10px;
+    font: inherit;
+}
+
+.question-card.correct {
+    border-color: #16a34a;
+}
+
+.question-card.wrong {
+    border-color: #dc2626;
+}
+
+.question-card.correct .question-number-inline {
+    color: #15803d;
+}
+
+.question-card.wrong .question-number-inline {
+    color: #b91c1c;
+}
+
+.score-text {
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.result-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 24, 39, 0.55);
+}
+
+.result-box {
+    width: min(90vw, 430px);
+    border-radius: 18px;
+    background: #ffffff;
+    padding: 48px 36px 44px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.24);
+}
+
+.result-box h2 {
+    margin: 0 0 22px;
+    font-size: 34px;
+}
+
+.result-box p {
+    margin: 0 0 30px;
+    font-size: 24px;
+}
+
+.result-box button {
+    border: none;
+    border-radius: 12px;
+    background: #ef4444;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 13px 34px;
+}
+
+.reading-tests-list {
+    display: grid;
+    gap: 14px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+.reading-test-list-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 18px;
+}
+
+.reading-test-list-card h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+}
+
+.reading-test-list-card span {
+    color: #667085;
+}
+
+@media (max-width: 850px) {
+    .reading-template-header,
+    .reading-list-header,
+    .reading-test-list-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .reading-split-layout {
+        display: block;
+        height: auto;
+    }
+
+    .reading-questions-panel {
+        border-left: none;
+        border-top: 1px solid #e5e7eb;
+    }
+}
+
+@media (max-width: 767px) {
+    .reading-template-header,
+    .reading-list-header {
+        padding: 12px 14px;
+    }
+
+    .left-top,
+    .reading-header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .dashboard-link,
+    .submit-test-btn {
+        width: 100%;
+        padding: 11px 14px;
+        text-align: center;
+    }
+
+    .modern-timer {
+        width: 100%;
+        padding: 11px 14px;
+        text-align: center;
+        font-size: 19px;
+    }
+
+    .reading-template-header h1,
+    .reading-list-header h1 {
+        font-size: clamp(21px, 7vw, 26px);
+        line-height: 1.14;
+    }
+
+    .reading-passage-panel,
+    .reading-questions-panel {
+        padding: 18px 14px;
+    }
+
+    .question-line,
+    .option-list label {
+        align-items: flex-start;
+    }
+
+    .option-list,
+    .option-list--vertical {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .completion-input,
+    .heading-select,
+    .ielts-select,
+    .ielts-blank-input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .result-box {
+        width: min(92vw, 430px);
+        padding: 36px 24px 32px;
+    }
+
+    .reading-tests-list {
+        padding: 18px 14px;
+    }
+}

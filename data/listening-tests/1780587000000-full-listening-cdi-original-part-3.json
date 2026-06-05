@@ -1,0 +1,329 @@
+{
+  "id": "1780587000000-full-listening-cdi-original-part-3",
+  "title": "Full Listening CDI - Part 3",
+  "part": 3,
+  "audio": "/uploads/audio/1780586489511-p3.mp3",
+  "duration": 30,
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/1780586489511-p3.mp3",
+      "audioFileName": "p3.mp3",
+      "instruction": "Listen and answer questions 21-30.",
+      "answerText": "21: A\n22: B\n23: F\n24: G\n25: E\n26: B\n27: C\n28: F\n29: C\n30: A",
+      "blocks": [
+        {
+          "id": "part3-q21",
+          "type": "multiple_choice",
+          "questionRange": "Question 21",
+          "questionNumber": 21,
+          "question": "What is the problem that the students are having with the project?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the project is taking too long"
+            },
+            {
+              "letter": "B",
+              "text": "the readings are too difficult"
+            },
+            {
+              "letter": "C",
+              "text": "the readings are not interesting"
+            }
+          ]
+        },
+        {
+          "id": "part3-q22",
+          "type": "multiple_choice",
+          "questionRange": "Question 22",
+          "questionNumber": 22,
+          "question": "When can extensions be granted?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "scheduling issues"
+            },
+            {
+              "letter": "B",
+              "text": "illness or accidents"
+            },
+            {
+              "letter": "C",
+              "text": "problems with planning"
+            }
+          ]
+        },
+        {
+          "id": "part3-q23-27",
+          "type": "matching",
+          "questionRange": "Questions 23-27",
+          "instruction": "What main problem do the students suggest each company has? Choose FIVE answers from A-G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "much money spending on marketing"
+            },
+            {
+              "letter": "B",
+              "text": "external factor"
+            },
+            {
+              "letter": "C",
+              "text": "competition"
+            },
+            {
+              "letter": "D",
+              "text": "employees"
+            },
+            {
+              "letter": "E",
+              "text": "customer satisfaction"
+            },
+            {
+              "letter": "F",
+              "text": "long-term gain"
+            },
+            {
+              "letter": "G",
+              "text": "knowledge about their customers"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 23,
+              "text": "Princeton Windows"
+            },
+            {
+              "questionNumber": 24,
+              "text": "MK Cars"
+            },
+            {
+              "questionNumber": 25,
+              "text": "Lakeside Golf"
+            },
+            {
+              "questionNumber": 26,
+              "text": "Bryson's Meats"
+            },
+            {
+              "questionNumber": 27,
+              "text": "Mojo's Music Shop"
+            }
+          ]
+        },
+        {
+          "id": "part3-q28-30",
+          "type": "matching",
+          "questionRange": "Questions 28-30",
+          "instruction": "Which opinion does each person express about Mojo's Music? Choose THREE answers from A-F.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "It needs more innovative marketing"
+            },
+            {
+              "letter": "B",
+              "text": "It has been operating for too long"
+            },
+            {
+              "letter": "C",
+              "text": "It will close down in the end"
+            },
+            {
+              "letter": "D",
+              "text": "It has good managers"
+            },
+            {
+              "letter": "E",
+              "text": "There are not enough music shops"
+            },
+            {
+              "letter": "F",
+              "text": "It has a good long-term future"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 28,
+              "text": "Sarah"
+            },
+            {
+              "questionNumber": 29,
+              "text": "John"
+            },
+            {
+              "questionNumber": 30,
+              "text": "Neil"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 21-30",
+      "instruction": "Listen and answer questions 21-30.",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What is the problem that the students are having with the project?",
+      "options": [
+        "the project is taking too long",
+        "the readings are too difficult",
+        "the readings are not interesting"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "When can extensions be granted?",
+      "options": [
+        "scheduling issues",
+        "illness or accidents",
+        "problems with planning"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Listening question 23",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Listening question 24",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Listening question 25",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Listening question 26",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "Listening question 27",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Listening question 28",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Listening question 29",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Listening question 30",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "A"
+    }
+  ],
+  "sourceFullTestId": "1780587000000-full-listening-cdi-original",
+  "createdAt": "2026-06-04T15:30:00.000Z",
+  "updatedAt": "2026-06-05T00:53:18.227Z"
+}

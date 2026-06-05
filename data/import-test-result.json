@@ -1,0 +1,15 @@
+{
+  "title": "cambridge-sample",
+  "passages": 1,
+  "readingQuestions": 6,
+  "listeningSections": 1,
+  "answers": 6,
+  "report": {
+    "hasReading": true,
+    "hasListening": true,
+    "passageCount": 1,
+    "listeningSectionCount": 1,
+    "imageCount": 0,
+    "answerKeyCount": 6
+  }
+}

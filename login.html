@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="login-box">
+        <h1>Login</h1>
+        <p class="auth-subtitle">Sign in to continue to IELTS Mock</p>
+
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" autocomplete="email" required>
+            <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+            <button type="submit" id="loginBtn">Login</button>
+        </form>
+
+        <p id="authMessage" class="auth-message" hidden></p>
+        <p class="auth-switch">No account? <a href="signup.html">Create one</a></p>
+        <p class="auth-switch"><a href="Ieltsmock.html">Back to home</a></p>
+    </div>
+
+    <script src="auth-client.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

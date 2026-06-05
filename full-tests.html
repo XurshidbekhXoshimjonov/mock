@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Full Tests</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reading-template.css">
+    <link rel="stylesheet" href="full-test-player.css">
+</head>
+
+<body>
+    <header id="globalNavbar" data-global-navbar="true"></header>
+
+    <main class="reading-list-shell">
+        <section class="full-test-list-section">
+            <div class="full-test-list-heading">
+                <p>Academic Reading</p>
+                <h2>Full Reading Tests</h2>
+            </div>
+            <div class="tests-grid" id="readingFullTestsGrid" aria-live="polite"></div>
+        </section>
+        <section class="full-test-list-section">
+            <div class="full-test-list-heading">
+                <p>Academic Listening</p>
+                <h2>Full Listening Tests</h2>
+            </div>
+            <div class="tests-grid" id="listeningFullTestsGrid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script src="auth-client.js"></script>
+    <script src="full-tests.js"></script>
+</body>
+
+</html>

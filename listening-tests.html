@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Listening Tests</title>
+    <link rel="stylesheet" href="site-modern.css">
+</head>
+
+<body class="public-page test-list-page" data-practice-skill="listening">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+
+    <main class="test-list-shell">
+        <section class="test-list-page-header" aria-labelledby="listeningTestsTitle">
+            <div>
+                <span class="test-list-eyebrow">Academic Listening</span>
+                <h1 id="listeningTestsTitle">Manual Listening Tests</h1>
+                <p>All published listening tests from the platform test bank. Open a section or full test when you are ready.</p>
+            </div>
+            <div class="test-list-meta" aria-label="Listening test bank metadata">
+                <span><strong id="listeningTestCount">0</strong> Tests</span>
+                <span><strong id="listeningQuestionCount">0</strong> Questions</span>
+                <span><strong>Live</strong> Test bank</span>
+            </div>
+        </section>
+
+        <section id="listeningTestsList" class="test-list-grid test-list-grid--manual" aria-live="polite">
+            <div class="test-list-empty">Loading listening tests...</div>
+        </section>
+    </main>
+
+    <footer class="home-footer">© 2026 IELTSX.org All rights reserved</footer>
+    <script src="auth-client.js"></script>
+    <script src="listening-tests.js"></script>
+</body>
+
+</html>

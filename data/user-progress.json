@@ -1,0 +1,229 @@
+{
+  "users": {
+    "1779126747331-8f56c856": {
+      "preferences": {
+        "targetBand": 7.5
+      },
+      "results": [
+        {
+          "id": "1780621746676-4c39a421",
+          "testId": "1780589113846-full-cdi-reading-test",
+          "title": "Full CDI Reading Test",
+          "type": "Reading",
+          "skill": "reading",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/reading-template.html?id=1780589113846-full-cdi-reading-test",
+          "completedAt": "2026-06-05T01:09:06.675Z"
+        },
+        {
+          "id": "1780621735543-6b3baf0c",
+          "testId": "1780587000000-full-listening-cdi-original-part-3",
+          "title": "Full Listening CDI - Part 3",
+          "type": "Listening",
+          "skill": "listening",
+          "part": 3,
+          "correct": 1,
+          "total": 10,
+          "accuracy": 10,
+          "band": 0,
+          "practiceUrl": "/listening-template.html?id=1780587000000-full-listening-cdi-original-part-3",
+          "completedAt": "2026-06-05T01:08:55.540Z"
+        },
+        {
+          "id": "1780621727679-e3937f8f",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 3,
+          "total": 40,
+          "accuracy": 8,
+          "band": 0,
+          "practiceUrl": "/listening-template.html?id=1780587000000-full-listening-cdi-original",
+          "completedAt": "2026-06-05T01:08:47.672Z"
+        },
+        {
+          "id": "1780619973612-a1d78026",
+          "testId": "1780619933115-reading-full-test-3",
+          "title": "Test 3",
+          "type": "Reading",
+          "skill": "reading",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-test-player.html?id=1780619933115-reading-full-test-3&skill=reading",
+          "completedAt": "2026-06-05T00:39:33.611Z"
+        },
+        {
+          "id": "1780619846464-9aec6346",
+          "testId": "1780619822393-spot-the-difference",
+          "title": "Spot the Difference",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 1,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/reading-template.html?id=1780619822393-spot-the-difference",
+          "completedAt": "2026-06-05T00:37:26.443Z"
+        },
+        {
+          "id": "1780588699424-59328b21",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-listening-cdi.html",
+          "completedAt": "2026-06-04T15:58:19.422Z"
+        },
+        {
+          "id": "1780588427025-39adb536",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-listening-cdi.html",
+          "completedAt": "2026-06-04T15:53:47.022Z"
+        },
+        {
+          "id": "1780588357352-b6d1d9e3",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-listening-cdi.html",
+          "completedAt": "2026-06-04T15:52:37.351Z"
+        },
+        {
+          "id": "1780588278650-ca2fc79e",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-listening-cdi.html",
+          "completedAt": "2026-06-04T15:51:18.645Z"
+        },
+        {
+          "id": "1780588182126-61cb4ad8",
+          "testId": "1780574872408-low-cost-lamps-light-rural-india",
+          "title": "Low-Cost Lamps Light Rural India",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 3,
+          "correct": 0,
+          "total": 14,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/reading-template.html?id=1780574872408-low-cost-lamps-light-rural-india",
+          "completedAt": "2026-06-04T15:49:42.124Z"
+        },
+        {
+          "id": "1780588162118-762c1b96",
+          "testId": "1780587000000-full-listening-cdi-original",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/full-listening-cdi.html",
+          "completedAt": "2026-06-04T15:49:22.102Z"
+        },
+        {
+          "id": "1780587114732-552a37b8",
+          "testId": "1780587000000-full-listening-cdi-part-1",
+          "title": "Full Listening CDI - Part 1",
+          "type": "Listening",
+          "skill": "listening",
+          "part": 1,
+          "correct": 0,
+          "total": 10,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/listening-template.html?id=1780587000000-full-listening-cdi-part-1",
+          "completedAt": "2026-06-04T15:31:54.715Z"
+        },
+        {
+          "id": "1780587077392-54baebbb",
+          "testId": "1780587000000-full-listening-cdi",
+          "title": "Full Listening CDI",
+          "type": "Listening",
+          "skill": "listening",
+          "part": "full",
+          "correct": 3,
+          "total": 40,
+          "accuracy": 8,
+          "band": 0,
+          "practiceUrl": "/listening-template.html?id=1780587000000-full-listening-cdi",
+          "completedAt": "2026-06-04T15:31:17.389Z"
+        },
+        {
+          "id": "1780586860923-0d1aaa38",
+          "testId": "1780587000000-full-listening-cdi-part-1",
+          "title": "Full Listening CDI - Part 1",
+          "type": "Listening",
+          "skill": "listening",
+          "part": 1,
+          "correct": 0,
+          "total": 10,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "/listening-template.html?id=1780587000000-full-listening-cdi-part-1",
+          "completedAt": "2026-06-04T15:27:40.908Z"
+        }
+      ],
+      "accountActivities": [
+        {
+          "id": "1780623746417-9d0029",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-05T01:42:26.417Z"
+        }
+      ]
+    },
+    "1780623623639-d70d5924": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1780623623644-5cd817",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-05T01:40:23.642Z"
+        }
+      ]
+    }
+  }
+}

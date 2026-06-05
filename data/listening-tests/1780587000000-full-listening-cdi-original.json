@@ -1,0 +1,588 @@
+{
+  "id": "1780587000000-full-listening-cdi-original",
+  "title": "Full Listening CDI",
+  "duration": 30,
+  "part": "full",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/1780586439693-p1_2_.mp3",
+      "audioFileName": "p1 (2).mp3",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "answerText": "1: 463 Beacon\n2: June 27\n3: Sailing\n4: Surfing\n5: Confidence\n6: Gold\n7: Drama\n8: Cookery\n9: Wet suit\n10: 7.00",
+      "blocks": [
+        {
+          "id": "part1-notes",
+          "type": "form_completion",
+          "title": "Sunshine Activity Holidays",
+          "questionRange": "Questions 1-10",
+          "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "rows": [
+            {
+              "label": "Name(s)",
+              "value": {
+                "type": "text",
+                "text": "David William Smith; Maria Fiona Smith"
+              }
+            },
+            {
+              "label": "Contact address",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "1 "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": " Street, Boston, MA 02116"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Home phone number",
+              "value": {
+                "type": "text",
+                "text": "617 742 9835"
+              }
+            },
+            {
+              "label": "Start date",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Saturday, "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 2
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration",
+              "value": {
+                "type": "text",
+                "text": "one week"
+              }
+            },
+            {
+              "label": "Activities selected",
+              "value": {
+                "type": "text",
+                "text": ""
+              }
+            },
+            {
+              "label": "Sports",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "input",
+                    "questionNumber": 3
+                  },
+                  {
+                    "type": "text",
+                    "text": " (both have some experience)\n"
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 4
+                  },
+                  {
+                    "type": "text",
+                    "text": " (Maria only)\nRock climbing (David only)\nHorse-riding (Maria is experienced, David needs to develop his "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 5
+                  },
+                  {
+                    "type": "text",
+                    "text": ")\nSwimming (David would like to try for the "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 6
+                  },
+                  {
+                    "type": "text",
+                    "text": " swimming certificate)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Indoor activities",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "input",
+                    "questionNumber": 7
+                  },
+                  {
+                    "type": "text",
+                    "text": " (David and Maria)\n"
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 8
+                  },
+                  {
+                    "type": "text",
+                    "text": " (David and Maria)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Extra requests",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Equipment to be hired: a "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 9
+                  },
+                  {
+                    "type": "text",
+                    "text": "\nMeet children in arrival hall at "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 10
+                  },
+                  {
+                    "type": "text",
+                    "text": " a.m"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/1780586481840-p2.mp3",
+      "audioFileName": "p2.mp3",
+      "instruction": "Listen and answer questions 11-20.",
+      "answerText": "11: A\n12: C\n13: B\n14: B\n15: C\n16: A\n17: C\n18: E\n19: A\n20: C",
+      "blocks": [
+        {
+          "id": "part2-q11",
+          "type": "multiple_choice",
+          "questionRange": "Question 11",
+          "questionNumber": 11,
+          "question": "What was Jill surprised about?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the work on the house will start soon"
+            },
+            {
+              "letter": "B",
+              "text": "the house was poorly insulated"
+            },
+            {
+              "letter": "C",
+              "text": "she could get financial help"
+            }
+          ]
+        },
+        {
+          "id": "part2-q12",
+          "type": "multiple_choice",
+          "questionRange": "Question 12",
+          "questionNumber": 12,
+          "question": "What does Jill say every family can do straight away?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "use energy-saving bulbs"
+            },
+            {
+              "letter": "B",
+              "text": "turn thermostats down"
+            },
+            {
+              "letter": "C",
+              "text": "turn down the thermostat"
+            }
+          ]
+        },
+        {
+          "id": "part2-q13",
+          "type": "multiple_choice",
+          "questionRange": "Question 13",
+          "questionNumber": 13,
+          "question": "What is Jill pleased about the energy provider?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "reduce the price with prompt payment"
+            },
+            {
+              "letter": "B",
+              "text": "allow online payment by customers"
+            },
+            {
+              "letter": "C",
+              "text": "have a reduction of price of the energy-saving sources"
+            }
+          ]
+        },
+        {
+          "id": "part2-q14",
+          "type": "multiple_choice",
+          "questionRange": "Question 14",
+          "questionNumber": 14,
+          "question": "What difficulty did Jill have with the energy meters?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "they are difficult to access"
+            },
+            {
+              "letter": "B",
+              "text": "the figures are hard to be read accurately"
+            },
+            {
+              "letter": "C",
+              "text": "she can't tell whether it's for electricity or for gas"
+            }
+          ]
+        },
+        {
+          "id": "part2-q15",
+          "type": "multiple_choice",
+          "questionRange": "Question 15",
+          "questionNumber": 15,
+          "question": "What energy-saving method does Jill going to take next?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "install double-glazed window"
+            },
+            {
+              "letter": "B",
+              "text": "use energy-saving boiler"
+            },
+            {
+              "letter": "C",
+              "text": "have the walls checked with insulation level"
+            }
+          ]
+        },
+        {
+          "id": "part2-q16",
+          "type": "multiple_choice",
+          "questionRange": "Question 16",
+          "questionNumber": 16,
+          "question": "Why is Jill doubtful about the renewable energy?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "she thinks it's unsuitable for her house"
+            },
+            {
+              "letter": "B",
+              "text": "she doesn't understand the technical details"
+            },
+            {
+              "letter": "C",
+              "text": "she believes it's too expensive"
+            }
+          ]
+        },
+        {
+          "id": "part2-q17-18",
+          "type": "multiple_select",
+          "questionNumber": 17,
+          "answerQuestions": [
+            {
+              "questionNumber": 18
+            }
+          ],
+          "questionRange": "Questions 17-18",
+          "instruction": "Which TWO water-saving tips does Jill recommend? Write TWO letters, A-E.",
+          "maxSelections": 2,
+          "question": "Which TWO water-saving tips does Jill recommend?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "use more showers than baths"
+            },
+            {
+              "letter": "B",
+              "text": "keep the washing machine full before using it"
+            },
+            {
+              "letter": "C",
+              "text": "boil as much water as you need"
+            },
+            {
+              "letter": "D",
+              "text": "turn off the taps while you are brushing your teeth"
+            },
+            {
+              "letter": "E",
+              "text": "repair leaking tap"
+            }
+          ]
+        },
+        {
+          "id": "part2-q19-20",
+          "type": "multiple_select",
+          "questionNumber": 19,
+          "answerQuestions": [
+            {
+              "questionNumber": 20
+            }
+          ],
+          "questionRange": "Questions 19-20",
+          "instruction": "What TWO topics do people most frequently ask? Write TWO letters, A-E.",
+          "maxSelections": 2,
+          "question": "What TWO topics do people most frequently ask?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the ideal temperature of the thermostat"
+            },
+            {
+              "letter": "B",
+              "text": "whether to leave the light on or not"
+            },
+            {
+              "letter": "C",
+              "text": "the type of computer that uses less energy"
+            },
+            {
+              "letter": "D",
+              "text": "how to work out the running cost of the appliances"
+            },
+            {
+              "letter": "E",
+              "text": "if the solar panels only work on sunny days"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/1780586489511-p3.mp3",
+      "audioFileName": "p3.mp3",
+      "instruction": "Listen and answer questions 21-30.",
+      "answerText": "21: A\n22: B\n23: F\n24: G\n25: E\n26: B\n27: C\n28: F\n29: C\n30: A",
+      "blocks": [
+        {
+          "id": "part3-q21",
+          "type": "multiple_choice",
+          "questionRange": "Question 21",
+          "questionNumber": 21,
+          "question": "What is the problem that the students are having with the project?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the project is taking too long"
+            },
+            {
+              "letter": "B",
+              "text": "the readings are too difficult"
+            },
+            {
+              "letter": "C",
+              "text": "the readings are not interesting"
+            }
+          ]
+        },
+        {
+          "id": "part3-q22",
+          "type": "multiple_choice",
+          "questionRange": "Question 22",
+          "questionNumber": 22,
+          "question": "When can extensions be granted?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "scheduling issues"
+            },
+            {
+              "letter": "B",
+              "text": "illness or accidents"
+            },
+            {
+              "letter": "C",
+              "text": "problems with planning"
+            }
+          ]
+        },
+        {
+          "id": "part3-q23-27",
+          "type": "matching",
+          "questionRange": "Questions 23-27",
+          "instruction": "What main problem do the students suggest each company has? Choose FIVE answers from A-G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "much money spending on marketing"
+            },
+            {
+              "letter": "B",
+              "text": "external factor"
+            },
+            {
+              "letter": "C",
+              "text": "competition"
+            },
+            {
+              "letter": "D",
+              "text": "employees"
+            },
+            {
+              "letter": "E",
+              "text": "customer satisfaction"
+            },
+            {
+              "letter": "F",
+              "text": "long-term gain"
+            },
+            {
+              "letter": "G",
+              "text": "knowledge about their customers"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 23,
+              "text": "Princeton Windows"
+            },
+            {
+              "questionNumber": 24,
+              "text": "MK Cars"
+            },
+            {
+              "questionNumber": 25,
+              "text": "Lakeside Golf"
+            },
+            {
+              "questionNumber": 26,
+              "text": "Bryson's Meats"
+            },
+            {
+              "questionNumber": 27,
+              "text": "Mojo's Music Shop"
+            }
+          ]
+        },
+        {
+          "id": "part3-q28-30",
+          "type": "matching",
+          "questionRange": "Questions 28-30",
+          "instruction": "Which opinion does each person express about Mojo's Music? Choose THREE answers from A-F.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "It needs more innovative marketing"
+            },
+            {
+              "letter": "B",
+              "text": "It has been operating for too long"
+            },
+            {
+              "letter": "C",
+              "text": "It will close down in the end"
+            },
+            {
+              "letter": "D",
+              "text": "It has good managers"
+            },
+            {
+              "letter": "E",
+              "text": "There are not enough music shops"
+            },
+            {
+              "letter": "F",
+              "text": "It has a good long-term future"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 28,
+              "text": "Sarah"
+            },
+            {
+              "questionNumber": 29,
+              "text": "John"
+            },
+            {
+              "questionNumber": 30,
+              "text": "Neil"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/1780586494492-p4.mp3",
+      "audioFileName": "p4.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "answerText": "31: personal\n32: bridges\n33: wind\n34: weight\n35: sweetener\n36: tank\n37: trial\n38: safety\n39: pressure\n40: license | licence",
+      "blocks": [
+        {
+          "id": "part4-notes",
+          "type": "note_completion",
+          "title": "Ethics In Engineering",
+          "questionRange": "Questions 31-40",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Ethics - principles relating to right and wrong conduct",
+            "- At first, engineers saw ethics as a {{31}} issue",
+            "- Attitudes changed because of three disasters involving the collapse of {{32}}",
+            "- 1876 - USA (metal fatigue)",
+            "- 1879 - Scotland (the impact of {{33}} on the structure was miscalculated)",
+            "- 1907 - Canada (the structure could not support its own {{34}})",
+            "Boston Molasses Disaster",
+            "- At the time, molasses was the main {{35}} used in the USA",
+            "- Boston company: collapse of a {{36}} released 8 million liters of molasses",
+            "- The wave of molasses destroyed buildings and the railway",
+            "- Local residents insisted on a {{37}} of the molasses company",
+            "- The company had to pay compensation",
+            "- Probable causes of the accident:",
+            "- Insufficient {{38}} checks",
+            "- Fermentation raised the {{39}} to a dangerous level",
+            "- It is now obligatory for engineers to have a {{40}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-06-04T15:30:00.000Z",
+  "updatedAt": "2026-06-05T00:53:18.217Z"
+}

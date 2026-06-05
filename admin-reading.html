@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Reading Test</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-reading.css">
+    <link rel="stylesheet" href="ielts-cbt.css">
+</head>
+
+<body>
+    <main class="manual-admin">
+        <header class="manual-admin-header">
+            <div>
+                <p class="small-label">IELTS Reading</p>
+                <h1>Reading Test Builder</h1>
+                <p class="header-note">Enter structured text — the frontend renders official CBT-style questions.</p>
+            </div>
+            <nav class="manual-admin-links">
+                <a href="/admin">Admin</a>
+                <a href="admin-listening.html">Listening</a>
+                <a href="admin-import.html">Full Test Builder</a>
+                <a href="reading-tests.html">All Tests</a>
+            </nav>
+        </header>
+
+        <section class="manual-grid">
+            <form id="readingTestForm" class="manual-card">
+                <h2>Test details</h2>
+
+                <label>
+                    Test title
+                    <input id="testTitle" type="text" placeholder="Cambridge IELTS 19 — Reading" required>
+                </label>
+
+                <label>
+                    Part
+                    <select id="testPart" required>
+                        <option value="1">Part 1</option>
+                        <option value="2">Part 2</option>
+                        <option value="3">Part 3</option>
+                        <option value="full">Full test (3 passages)</option>
+                    </select>
+                </label>
+
+                <label>
+                    Passage text
+                    <textarea id="passageText" rows="12" placeholder="Paste the reading passage. Separate paragraphs with a blank line." required></textarea>
+                </label>
+
+                <label>
+                    Instructions &amp; question groups
+                    <textarea id="instructionText" rows="6" placeholder="group | Questions 14-17 | Choose the correct answer. | Write your answers in boxes 14-17.&#10;&#10;Or free text:&#10;Questions 14-17&#10;Choose the correct answer."></textarea>
+                </label>
+
+                <label>
+                    Questions (one per line)
+                    <textarea id="questionText" rows="14" required placeholder="1 | true_false_not_given | Damage caused by fire is worse than flood. | NOT GIVEN&#10;14 | multiple_choice | What does the experiment show? | A. Option 1; B. Option 2; C. Option 3; D. Option 4 | C&#10;18 | summary_completion | It's long been known that ______ deteriorates with age. | Memory"></textarea>
+                </label>
+
+                <label>
+                    Answers (optional if inline above)
+                    <textarea id="answerText" rows="5" placeholder="1 | NOT GIVEN&#10;14 | C&#10;18 | Memory"></textarea>
+                </label>
+
+                <div class="manual-actions">
+                    <button type="submit">Save reading test</button>
+                    <button type="button" id="previewBtn" class="light-button">Preview</button>
+                    <button type="button" id="fillExample" class="light-button">Example</button>
+                </div>
+
+                <p id="saveStatus" class="save-status"></p>
+
+                <section id="previewPanel" class="admin-preview-panel hidden" aria-label="Live preview"></section>
+            </form>
+
+            <aside class="manual-card manual-help-card">
+                <h2>Question format</h2>
+                <pre>number | type | question text | options | answer</pre>
+                <p>Options use semicolons. Answer can be the 5th field or in the answers box.</p>
+
+                <h3>Instruction block</h3>
+                <pre>group | Questions 14-17 | Instruction | Rule | matching_headings</pre>
+                <p>TRUE / FALSE / NOT GIVEN groups automatically display the standard IELTS instruction box.</p>
+
+                <h3>Supported types</h3>
+                <ul class="type-list">
+                    <li>true_false_not_given</li>
+                    <li>yes_no_not_given</li>
+                    <li>multiple_choice</li>
+                    <li>multi_select</li>
+                    <li>summary_completion</li>
+                    <li>sentence_completion</li>
+                    <li>matching_headings</li>
+                    <li>matching_information</li>
+                    <li>diagram_labeling</li>
+                </ul>
+
+                <h2>Saved tests</h2>
+                <div id="manualTestsList" class="manual-tests-list">Loading…</div>
+            </aside>
+        </section>
+    </main>
+
+    <script src="lib/manual-test-parser.js"></script>
+    <script src="ielts-renderer.js"></script>
+    <script src="admin-reading.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Test Builder</title>
+    <link rel="stylesheet" href="listening-template.css">
+    <link rel="stylesheet" href="admin-listening.css">
+</head>
+
+<body class="listening-builder-page" data-skip-global-navbar>
+    <header class="builder-topbar">
+        <div>
+            <p>IELTS Listening Admin</p>
+            <h1>Listening Test Builder</h1>
+        </div>
+        <nav class="builder-nav">
+            <a href="/admin">Dashboard</a>
+            <button id="loadTestsBtn" class="builder-button builder-button--light" type="button">Saved Tests</button>
+            <button id="previewBtn" class="builder-button builder-button--light" type="button">Preview Student View</button>
+            <button id="saveTestBtn" class="builder-button builder-button--primary" type="button">Save Test</button>
+        </nav>
+    </header>
+
+    <main class="builder-layout">
+        <aside class="builder-sidebar">
+            <div class="builder-sidebar-heading">
+                <span>Test parts</span>
+                <strong>4</strong>
+            </div>
+            <div id="partSidebar"></div>
+        </aside>
+
+        <section class="builder-workspace">
+            <div id="testScope"></div>
+
+            <div class="builder-test-details">
+                <label>
+                    Test title
+                    <input id="testTitle" type="text">
+                </label>
+                <label>
+                    Duration (minutes)
+                    <input id="testDuration" type="number" min="1" max="180">
+                </label>
+            </div>
+
+            <div id="partEditor"></div>
+            <p id="builderStatus" class="builder-status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <dialog id="addBlockModal" class="builder-dialog builder-dialog--small">
+        <div class="builder-dialog-head">
+            <div>
+                <p>New question block</p>
+                <h2>Choose block type</h2>
+            </div>
+            <button class="dialog-close" data-close-dialog="addBlockModal" type="button">Close</button>
+        </div>
+        <div id="addBlockMenu" class="block-type-grid"></div>
+    </dialog>
+
+    <dialog id="blockEditorModal" class="builder-dialog">
+        <form id="blockEditorForm" method="dialog">
+            <div class="builder-dialog-head">
+                <div>
+                    <p>Question block editor</p>
+                    <h2 id="blockEditorTitle">Edit block</h2>
+                </div>
+                <button class="dialog-close" data-close-dialog="blockEditorModal" type="button">Close</button>
+            </div>
+            <div id="blockEditorContent"></div>
+            <div class="builder-dialog-actions">
+                <button class="builder-button builder-button--light" data-close-dialog="blockEditorModal" type="button">Cancel</button>
+                <button class="builder-button builder-button--primary" type="submit">Save Block</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="studentPreviewModal" class="builder-dialog builder-dialog--preview">
+        <div class="builder-dialog-head">
+            <div>
+                <p>Student preview</p>
+                <h2>Exact Listening page preview</h2>
+            </div>
+            <button class="dialog-close" data-close-dialog="studentPreviewModal" type="button">Close</button>
+        </div>
+        <div id="studentPreviewContent" class="student-preview-frame"></div>
+    </dialog>
+
+    <dialog id="savedTestsModal" class="builder-dialog builder-dialog--small">
+        <div class="builder-dialog-head">
+            <div>
+                <p>Listening tests</p>
+                <h2>Saved tests</h2>
+            </div>
+            <button class="dialog-close" data-close-dialog="savedTestsModal" type="button">Close</button>
+        </div>
+        <div id="savedTestsList" class="saved-tests-list">Loading...</div>
+    </dialog>
+
+    <script src="listening-test-components.js"></script>
+    <script src="admin-listening.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Reading Tests</title>
+    <link rel="stylesheet" href="site-modern.css">
+</head>
+
+<body class="public-page test-list-page" data-practice-skill="reading">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+
+    <main class="test-list-shell">
+        <section class="test-list-page-header" aria-labelledby="readingTestsTitle">
+            <div>
+                <span class="test-list-eyebrow">Academic Reading</span>
+                <h1 id="readingTestsTitle">Manual Reading Tests</h1>
+                <p>All published reading tests from the platform test bank. Start any test directly from this list.</p>
+            </div>
+            <div class="test-list-meta" aria-label="Reading test bank metadata">
+                <span><strong id="readingTestCount">0</strong> Tests</span>
+                <span><strong id="readingQuestionCount">0</strong> Questions</span>
+                <span><strong>Live</strong> Test bank</span>
+            </div>
+        </section>
+
+        <section id="readingTestsList" class="test-list-grid test-list-grid--manual" aria-live="polite">
+            <div class="test-list-empty">Loading reading tests...</div>
+        </section>
+    </main>
+
+    <footer class="home-footer">© 2026 IELTSX.org All rights reserved</footer>
+    <script src="auth-client.js"></script>
+    <script src="reading-tests.js"></script>
+</body>
+
+</html>
