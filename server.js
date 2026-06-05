@@ -2080,7 +2080,7 @@ app.use([
 
 app.use(express.static(ROOT_DIR));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 30004;
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
