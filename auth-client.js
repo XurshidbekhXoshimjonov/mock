@@ -2,6 +2,7 @@
     const AUTH_STORAGE_KEY = "ieltsmock.auth";
     const AUTH_COOKIE = "ieltsmockAuthToken";
     const TOKEN_DAYS = 7;
+    const SESSION_VERIFY_TIMEOUT = 3000; // 3 second timeout for session verification
 
     function escapeHtml(value) {
         return String(value ?? "")
@@ -113,7 +114,12 @@
         }
 
         try {
-            const data = await apiFetch("/api/auth/me");
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), SESSION_VERIFY_TIMEOUT);
+
+            const data = await apiFetch("/api/auth/me", { signal: controller.signal });
+            clearTimeout(timeoutId);
+
             const nextAuth = {
                 ...auth,
                 user: data.user
@@ -124,6 +130,7 @@
             renderGlobalNavbar();
             return data.user;
         } catch (error) {
+            // Session verification failed or timed out - treat as logged out
             clearAuth();
             renderGlobalNavbar();
             return null;
@@ -715,11 +722,11 @@
     }
 
     const MENU_ICONS = {
-        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="[...]
-        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12"[...]
-        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2[...]
-        settings: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 [...]
-        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 20[...]
+        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="2.5" width="17" height="19" rx="2"/><path d="M16.5 2.5v4"/><path d="M7.5 2.5v4"/><path d="M3.5 9.5h17"/></svg>`,
+        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-4.4183 2.6863-8 6-8s6 3.5817 6 8"/></svg>`,
+        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2.5h17v19h-17z"/><path d="M7 10l3 3 6-6"/></svg>`,
+        settings: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v4m10.5-8.5h-6m-6 0h-6M19.07 4.93l-4.24 4.24m-5.66 5.66l-4.24 4.24M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24"/></svg>`,
+        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 0h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4m-7-4l6-6m-6 6l6-6" transform="translate(-3, 0)"/></svg>`
     };
 
     function renderLoggedInAuth(auth) {
@@ -744,9 +751,9 @@
                 </button>
                 <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
-                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</sp[...]
-                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.resu[...]
-                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.s[...]
+                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
+                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Results</a>
+                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="/profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.settings}</span>Settings</a>
                     <button class="ielts-account__logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
             </div>
@@ -851,15 +858,15 @@
 
         host.innerHTML = `
             <a class="ielts-navbar__brand" href="/" aria-label="IELTS Prep home">
-                <img class="ielts-navbar__logo" src="Rasm-logo.png" alt="IELTSX.org">
+                <span class="ielts-navbar__logo" alt="IELTSX.org">IELTSX</span>
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
                 <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
             </button>
             <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
                 <a class="${active === "home" ? "is-active" : ""}" href="/">Home</a>
-                <a class="${active === "listening" ? "is-active" : ""}" href="listening.html">Listening</a>
-                <a class="${active === "reading" ? "is-active" : ""}" href="reading.html">Reading</a>
+                <a class="${active === "listening" ? "is-active" : ""}" href="/listening.html">Listening</a>
+                <a class="${active === "reading" ? "is-active" : ""}" href="/reading.html">Reading</a>
             </nav>
             <div class="ielts-navbar__auth">
                 ${auth?.token ? renderLoggedInAuth(auth) : renderLoggedOutAuth()}
@@ -898,8 +905,18 @@
     });
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", renderGlobalNavbar);
+        document.addEventListener("DOMContentLoaded", () => {
+            renderGlobalNavbar();
+            // Verify session, but don't block showing content if it fails
+            verifyStoredSession().catch(() => {
+                // Silently fail - user is already logged out
+            });
+        });
     } else {
         renderGlobalNavbar();
+        // Verify session, but don't block showing content if it fails
+        verifyStoredSession().catch(() => {
+            // Silently fail - user is already logged out
+        });
     }
 }());
