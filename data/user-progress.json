@@ -224,6 +224,20 @@
           "occurredAt": "2026-06-05T01:40:23.642Z"
         }
       ]
+    },
+    "6a22ff78f2a736006bbaf1f8": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1780678520352-5ac938",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-05T16:55:20.351Z"
+        }
+      ]
     }
   }
 }
