@@ -440,7 +440,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 12px;
+            gap: 10px;
             justify-self: end;
             min-width: 0;
         }
@@ -451,64 +451,40 @@
             align-items: center;
             justify-content: center;
             min-height: 42px;
-            border-radius: 999px;
-            padding: 0 20px;
+            border: 1px solid #0b5fff;
+            border-radius: 10px;
+            padding: 0 18px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             outline: none;
             transition:
                 background 180ms ease,
+                border-color 180ms ease,
                 box-shadow 220ms ease,
-                color 180ms ease,
-                transform 220ms ease;
+                color 180ms ease;
         }
 
         .ielts-navbar__button--login {
-            color: #172554;
-            overflow: hidden;
-            padding-inline: 16px;
-        }
-
-        .ielts-navbar__button--login::after {
-            position: absolute;
-            right: 16px;
-            bottom: 7px;
-            left: 16px;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #0057ff, #7c3aed);
-            content: "";
-            opacity: 0;
-            transform: scaleX(0.45);
-            transform-origin: center;
-            transition: opacity 180ms ease, transform 220ms ease;
+            background: transparent;
+            color: #0b5fff;
         }
 
         .ielts-navbar__button--login:hover {
-            background: #eef2ff;
-            color: #0057ff;
-        }
-
-        .ielts-navbar__button--login:hover::after,
-        .ielts-navbar__button--login:focus-visible::after {
-            opacity: 1;
-            transform: scaleX(1);
+            background: #0b5fff;
+            color: #ffffff;
         }
 
         .ielts-navbar__button--signup {
-            background: linear-gradient(135deg, #0057ff 0%, #252c8f 100%);
-            color: #fff;
-            box-shadow:
-                0 12px 28px rgba(0, 87, 255, 0.24),
-                inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            background: #0b5fff;
+            color: #ffffff;
+            box-shadow: 0 10px 22px rgba(11, 95, 255, 0.22);
         }
 
         .ielts-navbar__button--signup:hover {
-            box-shadow:
-                0 16px 34px rgba(0, 87, 255, 0.34),
-                inset 0 1px 0 rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
+            background: #0046d8;
+            border-color: #0046d8;
+            box-shadow: 0 12px 26px rgba(11, 95, 255, 0.28);
         }
 
         .ielts-navbar__button--login:focus-visible,
@@ -518,18 +494,10 @@
                 0 0 0 5px rgba(0, 87, 255, 0.48);
         }
 
-        .ielts-navbar__button--signup:focus-visible {
-            transform: translateY(-1px);
-        }
-
-        .ielts-navbar__button:active {
-            transform: translateY(0);
-        }
-
         .ielts-navbar__button--signup:active {
-            box-shadow:
-                0 8px 18px rgba(0, 87, 255, 0.24),
-                inset 0 2px 5px rgba(15, 23, 42, 0.24);
+            background: #003bb8;
+            border-color: #003bb8;
+            box-shadow: 0 8px 18px rgba(11, 95, 255, 0.24);
         }
 
         .ielts-account {
@@ -787,16 +755,6 @@
                 min-height: 38px;
                 padding-inline: 12px;
                 font-size: 13px;
-            }
-
-            .ielts-navbar__button--login {
-                padding-inline: 10px;
-            }
-
-            .ielts-navbar__button--login::after {
-                right: 10px;
-                bottom: 6px;
-                left: 10px;
             }
 
             .ielts-navbar__links {

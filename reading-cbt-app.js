@@ -513,22 +513,22 @@ function VocabularyPopover({ item, onClose }) {
             onClick: onClose,
             "aria-label": "Close vocabulary popup"
         }, "×"),
-        h("span", { className: "cbt-vocab-eyebrow" }, item.isLoading ? "Looking up" : "Vocabulary"),
+        h("span", { className: "cbt-vocab-eyebrow" }, item.isLoading ? "Translating" : "Selected word"),
         h("h2", null, item.word),
         meta ? h("p", { className: "cbt-vocab-meta" }, meta) : null,
         item.isLoading
-            ? h("p", { className: "cbt-vocab-loading" }, "Looking up definition and translation...")
+            ? h("p", { className: "cbt-vocab-loading" }, "Translating selected word...")
             : null,
         !item.isLoading && (hasDefinition || hasTranslation)
             ? h(Fragment, null,
                 h("dl", { className: "cbt-vocab-definition-list" },
                     h("div", null,
-                        h("dt", null, "English definition"),
-                        h("dd", null, item.definition || "Definition is not available yet.")
-                    ),
-                    h("div", null,
                         h("dt", null, "Uzbek translation"),
                         h("dd", null, item.uzbekTranslation || "Uzbek translation is not available yet.")
+                    ),
+                    h("div", null,
+                        h("dt", null, "English definition"),
+                        h("dd", null, item.definition || "Definition is not available yet.")
                     )
                 ),
                 item.example

@@ -44,8 +44,28 @@ const AUDIO_UPLOAD_DIR = path.join(UPLOAD_DIR, "audio");
 const LISTENING_IMAGE_UPLOAD_DIR = path.join(UPLOAD_DIR, "listening-images");
 const VOCABULARY_DEFINITION_FALLBACK = "Definition is not available yet.";
 const VOCABULARY_TRANSLATION_FALLBACK = "Uzbek translation is not available yet.";
+const GOOGLE_TRANSLATE_API_KEY = String(
+    process.env.GOOGLE_TRANSLATE_API_KEY ||
+    process.env.GOOGLE_CLOUD_TRANSLATE_API_KEY ||
+    ""
+).trim();
+const GOOGLE_TRANSLATE_PROJECT_ID = String(
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_PROJECT_ID ||
+    ""
+).trim();
+const GOOGLE_TRANSLATE_CLIENT_ENABLED = Boolean(
+    process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_PROJECT_ID ||
+    process.env.K_SERVICE ||
+    process.env.GAE_SERVICE
+);
 
 let translateClient = null;
+let translateConfigWarningShown = false;
 const vocabularyLookupRequests = new Map();
 
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -409,24 +429,153 @@ async function fetchDictionaryVocabulary(candidate, requestedWord) {
     }
 }
 
+function decodeHtmlEntities(value) {
+    return String(value || "")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#39;|&apos;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&amp;/g, "&");
+}
+
+async function translateToUzbekWithApiKey(value) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    try {
+        const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${encodeURIComponent(GOOGLE_TRANSLATE_API_KEY)}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                q: value,
+                target: "uz",
+                format: "text"
+            }),
+            signal: controller.signal
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data?.error?.message || `Google Translate API returned ${response.status}`);
+        }
+
+        const translation = data?.data?.translations?.[0]?.translatedText;
+        return decodeHtmlEntities(translation).trim();
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+async function translateToUzbekSimple(value) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const params = new URLSearchParams({
+        client: "gtx",
+        sl: "en",
+        tl: "uz",
+        dt: "t",
+        q: value
+    });
+
+    try {
+        const response = await fetch(`https://translate.googleapis.com/translate_a/single?${params.toString()}`, {
+            signal: controller.signal
+        });
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+            throw new Error(`Simple translate returned ${response.status}`);
+        }
+
+        const translation = Array.isArray(data?.[0])
+            ? data[0].map((part) => Array.isArray(part) ? part[0] : "").join("")
+            : "";
+
+        return decodeHtmlEntities(translation).trim();
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+function getTranslateClient() {
+    if (!TranslateClient || !GOOGLE_TRANSLATE_CLIENT_ENABLED) {
+        return null;
+    }
+
+    if (!translateClient) {
+        translateClient = new TranslateClient(
+            GOOGLE_TRANSLATE_PROJECT_ID ? { projectId: GOOGLE_TRANSLATE_PROJECT_ID } : undefined
+        );
+    }
+
+    return translateClient;
+}
+
 async function translateToUzbek(text) {
     const value = String(text || "").trim();
 
-    if (!value || !TranslateClient) {
+    if (!value) {
         return VOCABULARY_TRANSLATION_FALLBACK;
+    }
+
+    const errors = [];
+
+    if (GOOGLE_TRANSLATE_API_KEY) {
+        try {
+            return await translateToUzbekWithApiKey(value) || VOCABULARY_TRANSLATION_FALLBACK;
+        } catch (error) {
+            errors.push(`API key: ${error.message}`);
+        }
     }
 
     try {
-        if (!translateClient) {
-            translateClient = new TranslateClient();
-        }
+        const client = getTranslateClient();
 
-        const [translation] = await translateClient.translate(value, "uz");
-        return String(translation || "").trim() || VOCABULARY_TRANSLATION_FALLBACK;
+        if (client) {
+            const [translation] = await client.translate(value, "uz");
+            return decodeHtmlEntities(translation).trim() || VOCABULARY_TRANSLATION_FALLBACK;
+        }
     } catch (error) {
-        console.log("Google Translate lookup failed:", error.message);
-        return VOCABULARY_TRANSLATION_FALLBACK;
+        errors.push(`client: ${error.message}`);
     }
+
+    try {
+        return await translateToUzbekSimple(value) || VOCABULARY_TRANSLATION_FALLBACK;
+    } catch (error) {
+        errors.push(`simple: ${error.message}`);
+    }
+
+    if (errors.length) {
+        console.log("Google Translate lookup failed:", errors.join(" | "));
+    } else if (!translateConfigWarningShown) {
+        console.log("Google Translate lookup skipped: set GOOGLE_TRANSLATE_API_KEY or Google Cloud credentials.");
+        translateConfigWarningShown = true;
+    }
+
+    return VOCABULARY_TRANSLATION_FALLBACK;
+}
+
+async function refreshFallbackTranslation(record, requestedWord) {
+    const normalized = normalizeVocabularyRecord(record);
+
+    if (!normalized || normalized.uzbek_translation !== VOCABULARY_TRANSLATION_FALLBACK) {
+        return record;
+    }
+
+    const translation = await translateToUzbek(requestedWord || normalized.word || normalized.normalized_word);
+
+    if (!translation || translation === VOCABULARY_TRANSLATION_FALLBACK) {
+        return record;
+    }
+
+    return upsertVocabularyCache({
+        ...normalized,
+        uzbek_translation: translation,
+        updated_at: new Date().toISOString()
+    });
 }
 
 async function generateVocabularyRecord(normalized, requestedWord, passageId) {
@@ -2074,6 +2223,8 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
 
             record = await pending;
         }
+
+        record = await refreshFallbackTranslation(record, requestedWord);
 
         saveClickedVocabulary({
             attemptId,
