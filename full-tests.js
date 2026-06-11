@@ -19,12 +19,16 @@ async function loadSkillFullTests(skill, grid) {
         return;
     }
 
-    grid.innerHTML = tests.map((test) => `
+    grid.innerHTML = tests.map((test) => {
+        const duration = Number(test.duration) || 40;
+
+        return `
         <a class="reading-test-card" href="full-test-player.html?id=${encodeURIComponent(test.id)}&skill=${encodeURIComponent(skill)}">
             <h2>${escapeHtml(test.title)}</h2>
-            <p>${test.questionCount} questions · ${skill === "reading" ? `${test.passageCount} passages` : `${test.listeningSectionCount} listening parts`}</p>
+            <p>${test.questionCount} questions · ${duration} min · ${skill === "reading" ? `${test.passageCount} passages` : `${test.listeningSectionCount} listening parts`}</p>
         </a>
-    `).join("");
+    `;
+    }).join("");
 }
 
 document.addEventListener("DOMContentLoaded", () => {

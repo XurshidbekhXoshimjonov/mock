@@ -5,7 +5,7 @@ let fullTest = null;
 let activeSkill = "reading";
 let activePassage = 0;
 let activeSection = 0;
-let timerSeconds = 60 * 60;
+let timerSeconds = 40 * 60;
 
 const els = {
     title: document.getElementById("testTitle"),

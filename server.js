@@ -16,6 +16,13 @@ const { registerFullTestRoutes } = require("./lib/full-test-routes");
 const { createUserProgressStore } = require("./lib/user-progress-store");
 const ManualTestParser = require("./lib/manual-test-parser");
 
+let TranslateClient = null;
+try {
+    TranslateClient = require("@google-cloud/translate").v2.Translate;
+} catch (error) {
+    console.log("Google Translate package is unavailable:", error.message);
+}
+
 const app = express();
 
 const ROOT_DIR = __dirname;
@@ -26,6 +33,8 @@ const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
 const userProgressStore = createUserProgressStore(USER_PROGRESS_FILE);
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
+const VOCABULARY_CACHE_FILE = path.join(DATA_DIR, "vocabulary-cache.json");
+const READING_VOCABULARY_CLICKS_FILE = path.join(DATA_DIR, "reading-vocabulary-clicks.json");
 const OUTPUT_FILE = path.join(ROOT_DIR, "output.txt");
 const READING_JSON_FILE = path.join(ROOT_DIR, "reading.json");
 const READING_TESTS_DIR = path.join(DATA_DIR, "reading-tests");
@@ -33,6 +42,11 @@ const LISTENING_TESTS_DIR = path.join(DATA_DIR, "listening-tests");
 const FULL_TESTS_DIR = path.join(DATA_DIR, "full-tests");
 const AUDIO_UPLOAD_DIR = path.join(UPLOAD_DIR, "audio");
 const LISTENING_IMAGE_UPLOAD_DIR = path.join(UPLOAD_DIR, "listening-images");
+const VOCABULARY_DEFINITION_FALLBACK = "Definition is not available yet.";
+const VOCABULARY_TRANSLATION_FALLBACK = "Uzbek translation is not available yet.";
+
+let translateClient = null;
+const vocabularyLookupRequests = new Map();
 
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -116,6 +130,24 @@ function writeTests(tests) {
     fs.writeFileSync(TESTS_FILE, JSON.stringify(tests, null, 2));
 }
 
+function readJsonArray(filePath) {
+    if (!fs.existsSync(filePath)) {
+        return [];
+    }
+
+    try {
+        const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.log(`Could not read ${path.basename(filePath)}:`, error.message);
+        return [];
+    }
+}
+
+function writeJsonArray(filePath, items) {
+    fs.writeFileSync(filePath, JSON.stringify(items, null, 2), "utf8");
+}
+
 function makeId(title) {
     const slug = String(title || "reading-test")
         .toLowerCase()
@@ -142,6 +174,342 @@ function normalizePart(part) {
     }
 
     return 1;
+}
+
+function normalizeVocabularyWord(value) {
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[’]/g, "'")
+        .replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "")
+        .replace(/'s$/i, "")
+        .replace(/[^a-z0-9'-]/g, "");
+}
+
+function normalizeVocabularyList(vocabulary) {
+    if (!Array.isArray(vocabulary)) {
+        return [];
+    }
+
+    const seen = new Set();
+
+    return vocabulary
+        .map((entry) => {
+            const word = String(entry?.word || "").trim();
+            const normalized = normalizeVocabularyWord(word);
+
+            if (!word || !normalized || seen.has(normalized)) {
+                return null;
+            }
+
+            seen.add(normalized);
+
+            return {
+                id: entry.id || `${Date.now()}-${normalized}`,
+                word,
+                normalized,
+                phonetic: String(entry.phonetic || "").trim(),
+                partOfSpeech: String(entry.partOfSpeech || entry.part_of_speech || "").trim(),
+                definition: String(entry.definition || entry.englishDefinition || "").trim(),
+                uzbekTranslation: String(entry.uzbekTranslation || entry.translation || "").trim(),
+                example: String(entry.example || entry.exampleSentence || "").trim(),
+                source: "manual"
+            };
+        })
+        .filter(Boolean);
+}
+
+function vocabularyCandidates(value) {
+    const normalized = normalizeVocabularyWord(value);
+    const candidates = [normalized];
+
+    if (normalized.endsWith("ies") && normalized.length > 3) {
+        candidates.push(`${normalized.slice(0, -3)}y`);
+    }
+
+    if (normalized.endsWith("ves") && normalized.length > 3) {
+        candidates.push(`${normalized.slice(0, -3)}f`, `${normalized.slice(0, -3)}fe`);
+    }
+
+    if (normalized.endsWith("es") && normalized.length > 2) {
+        candidates.push(normalized.slice(0, -2));
+    }
+
+    if (normalized.endsWith("s") && normalized.length > 1) {
+        candidates.push(normalized.slice(0, -1));
+    }
+
+    return [...new Set(candidates.filter(Boolean))];
+}
+
+function normalizeVocabularyRecord(record) {
+    const word = String(record?.word || "").trim();
+    const normalized = normalizeVocabularyWord(record?.normalized_word || record?.normalized || word);
+
+    if (!word || !normalized) {
+        return null;
+    }
+
+    return {
+        id: record.id || `${Date.now()}-${normalized}`,
+        word,
+        normalized_word: normalized,
+        phonetic: String(record.phonetic || "").trim(),
+        part_of_speech: String(record.part_of_speech || record.partOfSpeech || "").trim(),
+        english_definition: String(record.english_definition || record.definition || record.englishDefinition || "").trim() || VOCABULARY_DEFINITION_FALLBACK,
+        uzbek_translation: String(record.uzbek_translation || record.uzbekTranslation || record.translation || "").trim() || VOCABULARY_TRANSLATION_FALLBACK,
+        example_sentence: String(record.example_sentence || record.example || record.exampleSentence || "").trim(),
+        source: String(record.source || "api_generated").trim(),
+        passage_id: record.passage_id || record.passageId || null,
+        created_at: record.created_at || record.createdAt || new Date().toISOString(),
+        updated_at: record.updated_at || record.updatedAt || new Date().toISOString()
+    };
+}
+
+function readVocabularyCache() {
+    return readJsonArray(VOCABULARY_CACHE_FILE)
+        .map(normalizeVocabularyRecord)
+        .filter(Boolean);
+}
+
+function writeVocabularyCache(records) {
+    writeJsonArray(VOCABULARY_CACHE_FILE, records.map(normalizeVocabularyRecord).filter(Boolean));
+}
+
+function vocabularyResponse(record, requestedWord) {
+    const normalized = normalizeVocabularyRecord({
+        ...record,
+        word: record?.word || requestedWord
+    });
+
+    return {
+        id: normalized.id,
+        word: normalized.word,
+        normalized: normalized.normalized_word,
+        normalized_word: normalized.normalized_word,
+        phonetic: normalized.phonetic,
+        partOfSpeech: normalized.part_of_speech,
+        part_of_speech: normalized.part_of_speech,
+        definition: normalized.english_definition,
+        english_definition: normalized.english_definition,
+        uzbekTranslation: normalized.uzbek_translation,
+        uzbek_translation: normalized.uzbek_translation,
+        example: normalized.example_sentence,
+        example_sentence: normalized.example_sentence,
+        source: normalized.source,
+        passageId: normalized.passage_id,
+        passage_id: normalized.passage_id
+    };
+}
+
+function manualVocabularyRecord(entry, test, passageId) {
+    return normalizeVocabularyRecord({
+        id: entry.id,
+        word: entry.word,
+        normalized_word: entry.normalized,
+        phonetic: entry.phonetic,
+        part_of_speech: entry.partOfSpeech,
+        english_definition: entry.definition || VOCABULARY_DEFINITION_FALLBACK,
+        uzbek_translation: entry.uzbekTranslation || VOCABULARY_TRANSLATION_FALLBACK,
+        example_sentence: entry.example,
+        source: "manual",
+        passage_id: passageId || `${test.id}-passage-${test.part || 1}`,
+        created_at: test.createdAt,
+        updated_at: new Date().toISOString()
+    });
+}
+
+function findManualVocabulary(test, candidates, passageId) {
+    const entries = normalizeVocabularyList(test?.vocabulary || []);
+
+    for (const candidate of candidates) {
+        const entry = entries.find((item) => item.normalized === candidate);
+        if (entry) {
+            return manualVocabularyRecord(entry, test, passageId);
+        }
+    }
+
+    return null;
+}
+
+function findCachedVocabulary(candidates) {
+    const records = readVocabularyCache();
+
+    for (const candidate of candidates) {
+        const record = records.find((item) => item.normalized_word === candidate);
+        if (record) {
+            return record;
+        }
+    }
+
+    return null;
+}
+
+function upsertVocabularyCache(record) {
+    const normalized = normalizeVocabularyRecord(record);
+    if (!normalized) {
+        return null;
+    }
+
+    const records = readVocabularyCache();
+    const index = records.findIndex((item) => item.normalized_word === normalized.normalized_word);
+
+    if (index === -1) {
+        records.push(normalized);
+    } else if (records[index].source !== "manual") {
+        records[index] = {
+            ...records[index],
+            ...normalized,
+            created_at: records[index].created_at,
+            updated_at: new Date().toISOString()
+        };
+    }
+
+    writeVocabularyCache(records);
+    return index === -1 ? normalized : records[Math.max(index, 0)];
+}
+
+function dictionaryDefinitionFromEntries(entries, requestedWord) {
+    const entry = Array.isArray(entries) ? entries[0] : null;
+    const meanings = Array.isArray(entry?.meanings) ? entry.meanings : [];
+    const bestMeaning = meanings.find((meaning) => meaning?.definitions?.length) || meanings[0] || {};
+    const definitions = Array.isArray(bestMeaning.definitions) ? bestMeaning.definitions : [];
+    const bestDefinition = definitions.find((item) => item?.definition) || {};
+    const phonetic = entry?.phonetic || (entry?.phonetics || []).find((item) => item?.text)?.text || "";
+
+    return {
+        word: entry?.word || requestedWord,
+        phonetic,
+        part_of_speech: bestMeaning.partOfSpeech || "",
+        english_definition: bestDefinition.definition || VOCABULARY_DEFINITION_FALLBACK,
+        example_sentence: bestDefinition.example || ""
+    };
+}
+
+async function fetchDictionaryVocabulary(candidate, requestedWord) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    try {
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(candidate)}`, {
+            signal: controller.signal
+        });
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const data = await response.json();
+        return dictionaryDefinitionFromEntries(data, requestedWord);
+    } catch (error) {
+        console.log("Free Dictionary lookup failed:", error.message);
+        return null;
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+async function translateToUzbek(text) {
+    const value = String(text || "").trim();
+
+    if (!value || !TranslateClient) {
+        return VOCABULARY_TRANSLATION_FALLBACK;
+    }
+
+    try {
+        if (!translateClient) {
+            translateClient = new TranslateClient();
+        }
+
+        const [translation] = await translateClient.translate(value, "uz");
+        return String(translation || "").trim() || VOCABULARY_TRANSLATION_FALLBACK;
+    } catch (error) {
+        console.log("Google Translate lookup failed:", error.message);
+        return VOCABULARY_TRANSLATION_FALLBACK;
+    }
+}
+
+async function generateVocabularyRecord(normalized, requestedWord, passageId) {
+    const candidates = vocabularyCandidates(normalized);
+    let dictionary = null;
+    let dictionaryCandidate = normalized;
+
+    for (const candidate of candidates) {
+        dictionary = await fetchDictionaryVocabulary(candidate, requestedWord);
+        if (dictionary?.english_definition && dictionary.english_definition !== VOCABULARY_DEFINITION_FALLBACK) {
+            dictionaryCandidate = candidate;
+            break;
+        }
+    }
+
+    const now = new Date().toISOString();
+    const translation = await translateToUzbek(requestedWord || dictionary?.word || normalized);
+
+    return normalizeVocabularyRecord({
+        id: `${Date.now()}-${dictionaryCandidate}-${Math.random().toString(16).slice(2, 8)}`,
+        word: dictionary?.word || requestedWord || normalized,
+        normalized_word: dictionaryCandidate,
+        phonetic: dictionary?.phonetic || "",
+        part_of_speech: dictionary?.part_of_speech || "",
+        english_definition: dictionary?.english_definition || VOCABULARY_DEFINITION_FALLBACK,
+        uzbek_translation: translation,
+        example_sentence: dictionary?.example_sentence || "",
+        source: "api_generated",
+        passage_id: passageId || null,
+        created_at: now,
+        updated_at: now
+    });
+}
+
+function findStandaloneReadingTestForVocabulary(testId, passageId) {
+    let test = testId ? getReadingTestById(testId) : null;
+
+    if (!test && passageId) {
+        test = readManualReadingTests().find((item) =>
+            passageId === item.id || String(passageId).startsWith(`${item.id}-passage-`)
+        );
+    }
+
+    if (!test || test.part === "full") {
+        return null;
+    }
+
+    return test;
+}
+
+function saveClickedVocabulary({ attemptId, passageId, record, requestedWord }) {
+    const normalized = normalizeVocabularyRecord(record);
+    const attempt = String(attemptId || "").trim();
+
+    if (!attempt || !normalized) {
+        return false;
+    }
+
+    const clicks = readJsonArray(READING_VOCABULARY_CLICKS_FILE);
+    const alreadySaved = clicks.some((item) => (
+        item.attempt_id === attempt &&
+        item.passage_id === passageId &&
+        item.normalized_word === normalized.normalized_word
+    ));
+
+    if (alreadySaved) {
+        return false;
+    }
+
+    clicks.push({
+        id: `${Date.now()}-${normalized.normalized_word}-${Math.random().toString(16).slice(2, 8)}`,
+        attempt_id: attempt,
+        passage_id: passageId,
+        word: requestedWord || normalized.word,
+        normalized_word: normalized.normalized_word,
+        english_definition: normalized.english_definition,
+        uzbek_translation: normalized.uzbek_translation,
+        example_sentence: normalized.example_sentence,
+        clicked_at: new Date().toISOString()
+    });
+
+    writeJsonArray(READING_VOCABULARY_CLICKS_FILE, clicks);
+    return true;
 }
 
 function parseAnswerLines(answerText) {
@@ -288,13 +656,16 @@ function buildManualReadingTest(body) {
         questions
     );
 
+    const part = normalizePart(body.part);
+
     return {
         id: body.id || makeId(title),
         title,
-        part: normalizePart(body.part),
+        part,
         passage,
         questionGroups,
         questions,
+        vocabulary: part === "full" ? [] : normalizeVocabularyList(body.vocabulary),
         createdAt: body.createdAt || new Date().toISOString()
     };
 }
@@ -328,6 +699,7 @@ function summarizeManualReadingTest(test) {
         title: test.title,
         part: test.part,
         questionCount: test.questions.length,
+        vocabularyCount: Array.isArray(test.vocabulary) ? test.vocabulary.length : 0,
         createdAt: test.createdAt
     };
 }
@@ -348,6 +720,10 @@ function normalizeListeningPart(part) {
     }
 
     return 1;
+}
+
+function listeningDurationForPart(part) {
+    return normalizeListeningPart(part) === "full" ? 40 : 10;
 }
 
 function listeningQuestionCount(test) {
@@ -406,10 +782,10 @@ function normalizeListeningBlock(block, blockIndex) {
 function buildStructuredListeningTest(body) {
     const source = typeof body.data === "string" ? JSON.parse(body.data) : body;
     const title = String(source.title || "").trim();
-    const duration = Number(source.duration) || 30;
     const requestedPart = source.part !== undefined
         ? normalizeListeningPart(source.part)
         : "full";
+    const duration = listeningDurationForPart(requestedPart);
 
     if (!title) {
         const error = new Error("Test title is required");
@@ -828,7 +1204,7 @@ function buildStructuredListeningPart(fullTest, part) {
         title: `${fullTest.title} - ${part.title || `Part ${part.partNumber}`}`,
         part: Number(part.partNumber),
         audio: part.audioUrl || "",
-        duration: fullTest.duration,
+        duration: 10,
         parts: [part],
         sections: [{
             title: part.questionRange || `Questions ${questions[0].number}-${questions[questions.length - 1].number}`,
@@ -885,11 +1261,14 @@ function readManualListeningTests() {
 }
 
 function summarizeManualListeningTest(test) {
+    const part = test.part === "full" ? "full" : normalizeListeningPart(test.part);
+
     return {
         id: test.id,
         title: test.title,
-        part: test.part,
+        part,
         audio: test.audio || test.parts?.[0]?.audioUrl || "",
+        duration: listeningDurationForPart(part),
         questionCount: Number(test.questionCount) || listeningQuestionCount(test),
         createdAt: test.createdAt,
         openUrl: String(test.openUrl || ""),
@@ -1493,6 +1872,14 @@ app.get("/full-tests", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "full-tests.html"));
 });
 
+app.get("/speaking", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/writing", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "writing.html"));
+});
+
 app.get("/full-test-player", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
 });
@@ -1621,6 +2008,7 @@ app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
         const test = buildManualReadingTest({
             ...req.body,
             id: existing.id,
+            vocabulary: req.body.vocabulary === undefined ? existing.vocabulary : req.body.vocabulary,
             createdAt: existing.createdAt
         });
 
@@ -1647,6 +2035,76 @@ app.delete("/api/reading-tests/:id", requireAdmin, (req, res) => {
     fs.unlinkSync(filePath);
 
     res.json({ message: "Reading test deleted" });
+});
+
+app.get("/api/vocabulary/lookup", async (req, res) => {
+    try {
+        const requestedWord = String(req.query.word || "").trim();
+        const normalized = normalizeVocabularyWord(requestedWord);
+        const testId = String(req.query.testId || "").trim();
+        const passageIdFromQuery = String(req.query.passageId || "").trim();
+        const attemptId = String(req.query.attemptId || "").trim();
+
+        if (!requestedWord || !normalized) {
+            return res.status(400).json({ error: "A valid word is required" });
+        }
+
+        const test = findStandaloneReadingTestForVocabulary(testId, passageIdFromQuery);
+
+        if (!test) {
+            return res.status(403).json({
+                error: "Vocabulary lookup is available only for standalone Reading practice passages"
+            });
+        }
+
+        const passageId = passageIdFromQuery || `${test.id}-passage-${test.part || 1}`;
+        const candidates = vocabularyCandidates(normalized);
+        let record = findManualVocabulary(test, candidates, passageId) || findCachedVocabulary(candidates);
+
+        if (!record) {
+            const requestKey = candidates[0];
+            let pending = vocabularyLookupRequests.get(requestKey);
+
+            if (!pending) {
+                pending = generateVocabularyRecord(normalized, requestedWord, passageId)
+                    .then((generated) => upsertVocabularyCache(generated))
+                    .finally(() => vocabularyLookupRequests.delete(requestKey));
+                vocabularyLookupRequests.set(requestKey, pending);
+            }
+
+            record = await pending;
+        }
+
+        saveClickedVocabulary({
+            attemptId,
+            passageId,
+            record,
+            requestedWord
+        });
+
+        res.json(vocabularyResponse(record, requestedWord));
+    } catch (error) {
+        console.log("Vocabulary lookup error:", error.message);
+        res.status(500).json({
+            error: "Could not look up vocabulary",
+            definition: VOCABULARY_DEFINITION_FALLBACK,
+            uzbekTranslation: VOCABULARY_TRANSLATION_FALLBACK
+        });
+    }
+});
+
+app.get("/api/vocabulary/clicked", (req, res) => {
+    const attemptId = String(req.query.attemptId || "").trim();
+
+    if (!attemptId) {
+        return res.status(400).json({ error: "attemptId is required" });
+    }
+
+    const words = readJsonArray(READING_VOCABULARY_CLICKS_FILE)
+        .filter((item) => item.attempt_id === attemptId)
+        .sort((a, b) => new Date(a.clicked_at) - new Date(b.clicked_at));
+
+    res.json(words);
 });
 
 app.post("/api/listening-assets/audio", requireAdmin, audioUpload.single("audio"), (req, res) => {
@@ -1717,6 +2175,7 @@ app.get("/api/listening-tests", (req, res) => {
                     title: `${test.title} - ${selectedPart.title || `Part ${partNumber}`}`,
                     part: partNumber,
                     audio: selectedPart.audioUrl || "",
+                    duration: 10,
                     questionCount: listeningQuestionCount({ parts: [selectedPart] }),
                     createdAt: test.createdAt,
                     openUrl: `listening-template.html?id=${encodeURIComponent(test.id)}&part=${partNumber}`

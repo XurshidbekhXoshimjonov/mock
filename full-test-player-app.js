@@ -12,7 +12,7 @@ function TestProvider({ children }) {
     const [skill, setSkill] = React.useState(params.get("skill") === "listening" ? "listening" : "reading");
     const [passageIndex, setPassageIndex] = React.useState(0);
     const [sectionIndex, setSectionIndex] = React.useState(0);
-    const [timerSeconds, setTimerSeconds] = React.useState(60 * 60);
+    const [timerSeconds, setTimerSeconds] = React.useState(40 * 60);
 
     React.useEffect(() => {
         if (!testId) return;

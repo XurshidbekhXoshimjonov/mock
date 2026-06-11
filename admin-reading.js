@@ -11,8 +11,20 @@ const previewBtn = document.getElementById("previewBtn");
 const previewPanel = document.getElementById("previewPanel");
 const manualTestsList = document.getElementById("manualTestsList");
 const submitButton = form.querySelector('button[type="submit"]');
+const vocabularyEditor = document.getElementById("vocabularyEditor");
+const vocabularyDisabledNotice = document.getElementById("vocabularyDisabledNotice");
+const vocabularyCount = document.getElementById("vocabularyCount");
+const vocabWord = document.getElementById("vocabWord");
+const vocabDefinition = document.getElementById("vocabDefinition");
+const vocabTranslation = document.getElementById("vocabTranslation");
+const vocabExample = document.getElementById("vocabExample");
+const saveVocabEntry = document.getElementById("saveVocabEntry");
+const cancelVocabEdit = document.getElementById("cancelVocabEdit");
+const vocabularyList = document.getElementById("vocabularyList");
 
 let editingTestId = null;
+let vocabularyEntries = [];
+let editingVocabularyIndex = null;
 
 function escapeHtml(value) {
     return String(value || "")
@@ -31,6 +43,136 @@ function showStatus(message, type) {
 function resetEditMode() {
     editingTestId = null;
     submitButton.textContent = "Save reading test";
+}
+
+function normalizeVocabularyWord(value) {
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[’]/g, "'")
+        .replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "")
+        .replace(/'s$/i, "")
+        .replace(/[^a-z0-9'-]/g, "");
+}
+
+function normalizeVocabularyEntries(entries) {
+    if (!Array.isArray(entries)) {
+        return [];
+    }
+
+    const seen = new Set();
+
+    return entries
+        .map((entry) => {
+            const word = String(entry?.word || "").trim();
+            const normalized = normalizeVocabularyWord(word);
+
+            if (!word || !normalized || seen.has(normalized)) {
+                return null;
+            }
+
+            seen.add(normalized);
+
+            return {
+                id: entry.id || `${Date.now()}-${normalized}`,
+                word,
+                normalized,
+                definition: String(entry.definition || entry.englishDefinition || "").trim(),
+                uzbekTranslation: String(entry.uzbekTranslation || entry.translation || "").trim(),
+                example: String(entry.example || entry.exampleSentence || "").trim(),
+                source: String(entry.source || "manual").trim()
+            };
+        })
+        .filter(Boolean);
+}
+
+function clearVocabularyForm() {
+    editingVocabularyIndex = null;
+    vocabWord.value = "";
+    vocabDefinition.value = "";
+    vocabTranslation.value = "";
+    vocabExample.value = "";
+    saveVocabEntry.textContent = "Add word";
+    cancelVocabEdit.classList.add("hidden");
+}
+
+function renderVocabularyList() {
+    const isFullMode = testPart.value === "full";
+    vocabularyEditor.classList.toggle("is-disabled", isFullMode);
+    vocabularyDisabledNotice.classList.toggle("hidden", !isFullMode);
+    [vocabWord, vocabDefinition, vocabTranslation, vocabExample, saveVocabEntry].forEach((element) => {
+        element.disabled = isFullMode;
+    });
+
+    vocabularyCount.textContent = `${vocabularyEntries.length} word${vocabularyEntries.length === 1 ? "" : "s"}`;
+
+    if (!vocabularyEntries.length) {
+        vocabularyList.innerHTML = `<p class="vocabulary-empty">No vocabulary entries yet.</p>`;
+        return;
+    }
+
+    vocabularyList.innerHTML = vocabularyEntries.map((entry, index) => `
+        <article class="vocabulary-row">
+            <div>
+                <h3>${escapeHtml(entry.word)}</h3>
+                <span class="vocabulary-source">${escapeHtml(entry.source || "manual")}</span>
+                <p><strong>Definition:</strong> ${escapeHtml(entry.definition || "Definition is not available yet.")}</p>
+                <p><strong>Uzbek:</strong> ${escapeHtml(entry.uzbekTranslation || "Translation is not available yet.")}</p>
+                ${entry.example ? `<p><strong>Example:</strong> ${escapeHtml(entry.example)}</p>` : ""}
+            </div>
+            <div class="vocabulary-row-actions">
+                <button type="button" data-vocab-action="edit" data-index="${index}">Edit</button>
+                <button type="button" class="danger-button" data-vocab-action="delete" data-index="${index}">Delete</button>
+            </div>
+        </article>
+    `).join("");
+}
+
+function saveVocabularyEntryFromForm() {
+    if (testPart.value === "full") {
+        showStatus("Vocabulary is disabled for Full Test mode.", "error");
+        return;
+    }
+
+    const word = vocabWord.value.trim();
+    const normalized = normalizeVocabularyWord(word);
+
+    if (!word || !normalized) {
+        showStatus("Add a vocabulary word first.", "error");
+        return;
+    }
+
+    const duplicateIndex = vocabularyEntries.findIndex((entry, index) =>
+        index !== editingVocabularyIndex && entry.normalized === normalized
+    );
+
+    if (duplicateIndex !== -1) {
+        showStatus("This vocabulary word already exists for the passage.", "error");
+        return;
+    }
+
+    const entry = {
+        id: editingVocabularyIndex !== null
+            ? vocabularyEntries[editingVocabularyIndex].id
+            : `${Date.now()}-${normalized}`,
+        word,
+        normalized,
+        definition: vocabDefinition.value.trim(),
+        uzbekTranslation: vocabTranslation.value.trim(),
+        example: vocabExample.value.trim(),
+        source: "manual"
+    };
+
+    if (editingVocabularyIndex !== null) {
+        vocabularyEntries[editingVocabularyIndex] = entry;
+        showStatus("Vocabulary word updated.", "success");
+    } else {
+        vocabularyEntries.push(entry);
+        showStatus("Vocabulary word added.", "success");
+    }
+
+    clearVocabularyForm();
+    renderVocabularyList();
 }
 
 function buildQuestionTextForEdit(test) {
@@ -138,7 +280,7 @@ async function loadManualTests() {
     manualTestsList.innerHTML = tests.map((test) => `
         <article class="manual-test-row">
             <h3>${escapeHtml(test.title)}</h3>
-            <p>Part ${escapeHtml(test.part)} · ${test.questionCount} questions</p>
+            <p>Part ${escapeHtml(test.part)} · ${test.questionCount} questions · ${test.vocabularyCount || 0} vocabulary words</p>
             <div class="manual-test-actions">
                 <a href="reading-template.html?id=${encodeURIComponent(test.id)}">Open</a>
                 <button type="button" data-action="edit" data-id="${escapeHtml(test.id)}">Edit</button>
@@ -167,6 +309,9 @@ async function loadTestForEdit(id) {
     answerText.value = (test.questions || [])
         .map((q) => `${q.number} | ${q.answer}`)
         .join("\n");
+    vocabularyEntries = normalizeVocabularyEntries(test.vocabulary);
+    clearVocabularyForm();
+    renderVocabularyList();
     submitButton.textContent = "Update reading test";
     showStatus("Editing saved test.", "success");
     form.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -211,7 +356,8 @@ form.addEventListener("submit", async (event) => {
                 part: testPart.value,
                 passage: passageText.value,
                 questionText: getCombinedQuestionText(),
-                answerText: answerText.value
+                answerText: answerText.value,
+                vocabulary: testPart.value === "full" ? [] : vocabularyEntries
             })
         });
         const data = await response.json();
@@ -223,6 +369,9 @@ form.addEventListener("submit", async (event) => {
         showStatus(editingTestId ? "Updated." : "Saved.", "success");
         resetEditMode();
         form.reset();
+        vocabularyEntries = [];
+        clearVocabularyForm();
+        renderVocabularyList();
         previewPanel.classList.add("hidden");
         await loadManualTests();
     } catch (error) {
@@ -250,6 +399,50 @@ manualTestsList.addEventListener("click", async (event) => {
     }
 });
 
+saveVocabEntry.addEventListener("click", saveVocabularyEntryFromForm);
+
+cancelVocabEdit.addEventListener("click", () => {
+    clearVocabularyForm();
+    showStatus("Vocabulary edit cancelled.", "");
+});
+
+vocabularyList.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-vocab-action]");
+
+    if (!button) {
+        return;
+    }
+
+    const index = Number(button.dataset.index);
+    const entry = vocabularyEntries[index];
+
+    if (!entry) {
+        return;
+    }
+
+    if (button.dataset.vocabAction === "edit") {
+        editingVocabularyIndex = index;
+        vocabWord.value = entry.word;
+        vocabDefinition.value = entry.definition || "";
+        vocabTranslation.value = entry.uzbekTranslation || "";
+        vocabExample.value = entry.example || "";
+        saveVocabEntry.textContent = "Update word";
+        cancelVocabEdit.classList.remove("hidden");
+        vocabWord.focus();
+        return;
+    }
+
+    vocabularyEntries.splice(index, 1);
+    clearVocabularyForm();
+    renderVocabularyList();
+    showStatus("Vocabulary word deleted.", "success");
+});
+
+testPart.addEventListener("change", () => {
+    clearVocabularyForm();
+    renderVocabularyList();
+});
+
 previewBtn.addEventListener("click", renderPreview);
 
 fillExample.addEventListener("click", () => {
@@ -270,8 +463,32 @@ group | Questions 3-5 | Complete the sentences below. | Choose NO MORE THAN TWO 
 4 | multiple_choice | Why do scientists use controlled floods? | A. To rebuild the ecosystem; B. To stop all fishing; C. To remove the river | A
 5 | matching_headings | Paragraph 1 | i. A natural river process; ii. A modern city problem; iii. A tourist attraction | i`;
     answerText.value = "";
+    vocabularyEntries = normalizeVocabularyEntries([
+        {
+            word: "sediment",
+            definition: "Small pieces of sand, soil, or rock carried by water.",
+            uzbekTranslation: "cho'kindi",
+            example: "Spring snow carried sediment through the Grand Canyon."
+        },
+        {
+            word: "predators",
+            definition: "Animals that hunt and eat other animals.",
+            uzbekTranslation: "yirtqichlar",
+            example: "Cloudy water helped fish hide from predators."
+        },
+        {
+            word: "ecosystem",
+            definition: "All the living things in an area and the environment they depend on.",
+            uzbekTranslation: "ekotizim",
+            example: "Controlled floods can help rebuild the canyon ecosystem."
+        }
+    ]);
+    clearVocabularyForm();
+    renderVocabularyList();
     renderPreview();
 });
+
+renderVocabularyList();
 
 loadManualTests().catch((error) => {
     manualTestsList.textContent = error.message;

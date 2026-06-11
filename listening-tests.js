@@ -18,16 +18,21 @@ async function loadListeningTests() {
         return;
     }
 
-    listeningTestsList.innerHTML = tests.map((test) => `
+    listeningTestsList.innerHTML = tests.map((test) => {
+        const duration = Number(test.duration) || (test.part === "full" ? 40 : 10);
+
+        return `
         <article class="listening-test-list-card">
             <div>
                 <p>Part ${test.part}</p>
                 <h2>${escapeHtml(test.title)}</h2>
                 <span>${test.questionCount} questions</span>
+                <span>${duration} min</span>
             </div>
             <a href="listening-template.html?id=${encodeURIComponent(test.id)}">Start</a>
         </article>
-    `).join("");
+    `;
+    }).join("");
 }
 
 loadListeningTests().catch((error) => {

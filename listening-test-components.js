@@ -278,18 +278,27 @@ const ListeningComponents = (() => {
             : blockCard(block, `<p>Unsupported block type: ${escapeHtml(block.type)}</p>`);
     }
 
+    function isFullListeningTest(test) {
+        return test.part === "full" || (test.parts || []).length > 1;
+    }
+
+    function listeningDuration(test) {
+        return isFullListeningTest(test) ? 40 : 10;
+    }
+
     function ListeningHeader(test) {
-        const duration = Math.max(1, Number(test.duration) || 30);
-        const dashboardHref = test.part === "full" || (test.parts || []).length > 1
+        const duration = listeningDuration(test);
+        const isFull = isFullListeningTest(test);
+        const dashboardHref = isFull
             ? "listeningfulltest.html"
             : `listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`;
         return `<header class="lc-header">
             <div class="lc-brand-group">
-                <div class="lc-logo">IELTS<sup>TM</sup></div>
+                <img class="lc-logo" src="IELTS-logo.png" alt="IELTS">
                 <span class="lc-brand-divider"></span>
                 <strong>Academic Listening</strong>
             </div>
-            <div class="lc-timer" data-duration="${duration * 60}">
+            <div class="lc-timer" data-duration="${duration * 60}" data-reset-on-part-change="${isFull ? "false" : "true"}">
                 <span class="lc-clock-icon"></span>
                 <span><strong>${String(duration).padStart(2, "0")}:00</strong><small>TIME LEFT</small></span>
             </div>
@@ -574,6 +583,8 @@ const ListeningComponents = (() => {
         const partTabs = [...root.querySelectorAll("[data-listening-part-select]")];
         const previousButton = root.querySelector("[data-listening-part-prev]");
         const nextButton = root.querySelector("[data-listening-part-next]");
+        let resetListeningTimer = () => {};
+        let shouldResetListeningTimer = false;
 
         function activePartIndex() {
             return Math.max(0, sections.findIndex((section) => !section.classList.contains("hidden")));
@@ -599,6 +610,9 @@ const ListeningComponents = (() => {
             if (nextButton) nextButton.disabled = nextIndex === sections.length - 1;
             root.querySelector(".lc-listening-stage")?.setAttribute("data-active-part", String(partNumber));
             root.querySelector(".lc-main")?.scrollTo({ top: 0, behavior: "smooth" });
+            if (shouldResetListeningTimer) {
+                resetListeningTimer();
+            }
         }
 
         partTabs.forEach((button) => {
@@ -634,8 +648,15 @@ const ListeningComponents = (() => {
 
         const timer = root.querySelector(".lc-timer");
         if (timer) {
-            let remaining = Number(timer.dataset.duration) || 1800;
+            shouldResetListeningTimer = timer.dataset.resetOnPartChange === "true";
+            let remaining = Number(timer.dataset.duration) || 600;
             const output = timer.querySelector("strong");
+            const resetTimer = () => {
+                remaining = Number(timer.dataset.duration) || 600;
+                output.textContent = formatTime(remaining);
+            };
+            resetListeningTimer = resetTimer;
+            resetTimer();
             clearInterval(root._listeningTimer);
             root._listeningTimer = setInterval(() => {
                 if (remaining > 0) remaining -= 1;
@@ -664,7 +685,7 @@ const ListeningComponents = (() => {
     function sampleListeningTest() {
         return clone({
             title: "IELTS Listening Test 1",
-            duration: 30,
+            duration: 40,
             parts: [
                 {
                     partNumber: 1,

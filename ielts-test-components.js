@@ -601,7 +601,88 @@ function QuestionsPanel({ groups, images = [], answers = {}, onAnswer }) {
     );
 }
 
-function PassageRenderer({ passage }) {
+function normalizeVocabularyToken(value) {
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[’]/g, "'")
+        .replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "")
+        .replace(/'s$/i, "")
+        .replace(/[^a-z0-9'-]/g, "");
+}
+
+function renderVocabularyText(text, keyPrefix, enableVocabulary, activeVocabularyKey) {
+    if (!enableVocabulary) {
+        return text;
+    }
+
+    const parts = String(text || "").split(/([A-Za-z0-9]+(?:[’'\-][A-Za-z0-9]+)*)/g);
+
+    return parts.map((part, index) => {
+        const normalized = normalizeVocabularyToken(part);
+
+        if (!normalized) {
+            return part;
+        }
+
+        return h("span", {
+            key: `${keyPrefix}-word-${index}`,
+            className: `cbt-vocab-word${activeVocabularyKey === normalized ? " is-selected" : ""}`,
+            role: "button",
+            tabIndex: 0,
+            "data-vocab-word": part,
+            "data-vocab-normalized": normalized,
+            "aria-label": `Check vocabulary for ${part}`
+        }, part);
+    });
+}
+
+function renderVocabularyHtml(html, keyPrefix, enableVocabulary, activeVocabularyKey) {
+    if (!enableVocabulary || typeof DOMParser === "undefined") {
+        return null;
+    }
+
+    const parser = new DOMParser();
+    const documentFragment = parser.parseFromString(`<body>${html}</body>`, "text/html");
+    const allowedTags = new Set(["p", "strong", "em", "b", "i", "span", "br", "sup", "sub", "ul", "ol", "li"]);
+
+    function renderNode(node, key) {
+        if (node.nodeType === 3) {
+            return renderVocabularyText(node.textContent || "", key, enableVocabulary, activeVocabularyKey);
+        }
+
+        if (node.nodeType !== 1) {
+            return null;
+        }
+
+        const tag = node.tagName.toLowerCase();
+
+        if (!allowedTags.has(tag)) {
+            return renderVocabularyText(node.textContent || "", key, enableVocabulary, activeVocabularyKey);
+        }
+
+        if (tag === "br") {
+            return h("br", { key });
+        }
+
+        const props = { key };
+        const className = node.getAttribute("class");
+
+        if (className) {
+            props.className = className;
+        }
+
+        return h(tag, props, [...node.childNodes].map((child, index) =>
+            renderNode(child, `${key}-${index}`)
+        ));
+    }
+
+    return [...documentFragment.body.childNodes].map((node, index) =>
+        renderNode(node, `${keyPrefix}-html-${index}`)
+    );
+}
+
+function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKey = "", onVocabularyWord }) {
     if (!passage) return null;
 
     const paragraphs = passage.paragraphs?.length
@@ -611,7 +692,52 @@ function PassageRenderer({ passage }) {
             .map((text) => ({ text, html: "" }))
             .filter((paragraph) => paragraph.text.trim());
 
-    return h("article", { className: "cbt-passage" },
+    function handleVocabularyClick(event) {
+        if (!enableVocabulary || !onVocabularyWord || !event.target?.closest) {
+            return;
+        }
+
+        const target = event.target.closest("[data-vocab-word]");
+
+        if (!target || !event.currentTarget.contains(target)) {
+            return;
+        }
+
+        onVocabularyWord({
+            word: target.dataset.vocabWord,
+            normalized: target.dataset.vocabNormalized,
+            target
+        });
+    }
+
+    function handleVocabularyKeyDown(event) {
+        if (event.key !== "Enter" && event.key !== " ") {
+            return;
+        }
+
+        if (!enableVocabulary || !onVocabularyWord || !event.target?.closest) {
+            return;
+        }
+
+        const target = event.target.closest("[data-vocab-word]");
+
+        if (!target || !event.currentTarget.contains(target)) {
+            return;
+        }
+
+        event.preventDefault();
+        onVocabularyWord({
+            word: target.dataset.vocabWord,
+            normalized: target.dataset.vocabNormalized,
+            target
+        });
+    }
+
+    return h("article", {
+        className: `cbt-passage${enableVocabulary ? " has-vocabulary" : ""}`,
+        onClick: handleVocabularyClick,
+        onKeyDown: handleVocabularyKeyDown
+    },
         h("div", { className: "cbt-passage-kicker" },
             h("span", { className: "cbt-book-icon", "aria-hidden": "true" }, "▢"),
             h("span", null, passage.displayLabel || `Reading Passage ${passage.number || 1}`)
@@ -632,13 +758,29 @@ function PassageRenderer({ passage }) {
                         ? h("strong", { className: "cbt-paragraph-letter" }, paragraph.letter)
                         : null,
                     paragraph.html
-                        ? h(SafeHtml, {
-                            html: paragraph.letter
-                                ? paragraph.html.replace(new RegExp(`^\\s*<strong[^>]*>\\s*${paragraph.letter}[\\).]?\\s*</strong>\\s*`, "i"), "")
-                                : paragraph.html,
-                            className: "cbt-paragraph-html"
-                        })
-                        : h("p", null, paragraph.text || "")
+                        ? (enableVocabulary
+                            ? h("div", { className: "cbt-paragraph-html" },
+                            renderVocabularyHtml(
+                                paragraph.letter
+                                    ? paragraph.html.replace(new RegExp(`^\\s*<strong[^>]*>\\s*${paragraph.letter}[\\).]?\\s*</strong>\\s*`, "i"), "")
+                                    : paragraph.html,
+                                `${paragraph.letter || "p"}-${index}`,
+                                enableVocabulary,
+                                activeVocabularyKey
+                            )
+                        )
+                            : h(SafeHtml, {
+                                html: paragraph.letter
+                                    ? paragraph.html.replace(new RegExp(`^\\s*<strong[^>]*>\\s*${paragraph.letter}[\\).]?\\s*</strong>\\s*`, "i"), "")
+                                    : paragraph.html,
+                                className: "cbt-paragraph-html"
+                            }))
+                        : h("p", null, renderVocabularyText(
+                            paragraph.text || "",
+                            `${paragraph.letter || "p"}-${index}`,
+                            enableVocabulary,
+                            activeVocabularyKey
+                        ))
                 )
             )
         )

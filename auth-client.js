@@ -234,6 +234,8 @@
         const testType = String(params.get("type") || "").toLowerCase();
         if (testType === "listening") return "listening";
         if (testType === "reading") return "reading";
+        if (path.includes("speaking")) return "speaking";
+        if (path.includes("writing")) return "writing";
         if (path.includes("listening")) return "listening";
         if (path.includes("reading") || path.includes("part") || path.endsWith("/fulltest.html") || path.endsWith("fulltest.html")) return "reading";
         if (path.includes("profile")) return "profile";
@@ -328,7 +330,7 @@
         .ielts-navbar__wordmark {
             display: inline-flex;
             align-items: baseline;
-            color: #dc1431;
+            color: #0057ff;
             font-size: 27px;
             font-weight: 700;
             letter-spacing: -1.7px;
@@ -438,31 +440,96 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 10px;
+            gap: 12px;
             justify-self: end;
             min-width: 0;
         }
 
         .ielts-navbar__button {
+            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             min-height: 42px;
             border-radius: 999px;
-            padding: 0 18px;
+            padding: 0 20px;
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
+            outline: none;
+            transition:
+                background 180ms ease,
+                box-shadow 220ms ease,
+                color 180ms ease,
+                transform 220ms ease;
         }
 
         .ielts-navbar__button--login {
-            color: #071547;
+            color: #172554;
+            overflow: hidden;
+            padding-inline: 16px;
+        }
+
+        .ielts-navbar__button--login::after {
+            position: absolute;
+            right: 16px;
+            bottom: 7px;
+            left: 16px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #0057ff, #7c3aed);
+            content: "";
+            opacity: 0;
+            transform: scaleX(0.45);
+            transform-origin: center;
+            transition: opacity 180ms ease, transform 220ms ease;
+        }
+
+        .ielts-navbar__button--login:hover {
+            background: #eef2ff;
+            color: #0057ff;
+        }
+
+        .ielts-navbar__button--login:hover::after,
+        .ielts-navbar__button--login:focus-visible::after {
+            opacity: 1;
+            transform: scaleX(1);
         }
 
         .ielts-navbar__button--signup {
-            background: #dc1431;
+            background: linear-gradient(135deg, #0057ff 0%, #252c8f 100%);
             color: #fff;
-            box-shadow: 0 10px 24px rgba(220, 20, 49, 0.22);
+            box-shadow:
+                0 12px 28px rgba(0, 87, 255, 0.24),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        }
+
+        .ielts-navbar__button--signup:hover {
+            box-shadow:
+                0 16px 34px rgba(0, 87, 255, 0.34),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+        }
+
+        .ielts-navbar__button--login:focus-visible,
+        .ielts-navbar__button--signup:focus-visible {
+            box-shadow:
+                0 0 0 3px rgba(255, 255, 255, 0.95),
+                0 0 0 5px rgba(0, 87, 255, 0.48);
+        }
+
+        .ielts-navbar__button--signup:focus-visible {
+            transform: translateY(-1px);
+        }
+
+        .ielts-navbar__button:active {
+            transform: translateY(0);
+        }
+
+        .ielts-navbar__button--signup:active {
+            box-shadow:
+                0 8px 18px rgba(0, 87, 255, 0.24),
+                inset 0 2px 5px rgba(15, 23, 42, 0.24);
         }
 
         .ielts-account {
@@ -591,7 +658,7 @@
 
         .ielts-account__logout {
             margin-top: 6px;
-            color: #dc1431;
+            color: #252c8f;
         }
 
         .ielts-account__icon {
@@ -647,9 +714,9 @@
         }
 
         .ielts-account__icon--logout {
-            border-color: #fecdd3;
-            background: #fff1f2;
-            color: #dc1431;
+            border-color: #dde3f5;
+            background: #eef2ff;
+            color: #252c8f;
         }
 
         body.has-global-navbar > #profileRoot,
@@ -713,13 +780,23 @@
 
             .ielts-navbar__auth {
                 grid-column: 3;
-                gap: 6px;
+                gap: 8px;
             }
 
             .ielts-navbar__button {
                 min-height: 38px;
-                padding-inline: 11px;
+                padding-inline: 12px;
                 font-size: 13px;
+            }
+
+            .ielts-navbar__button--login {
+                padding-inline: 10px;
+            }
+
+            .ielts-navbar__button--login::after {
+                right: 10px;
+                bottom: 6px;
+                left: 10px;
             }
 
             .ielts-navbar__links {
@@ -939,6 +1016,8 @@
                 <a class="${active === "home" ? "is-active" : ""}" href="ieltsmock.html">Home</a>
                 <a class="${active === "listening" ? "is-active" : ""}" href="listening.html">Listening</a>
                 <a class="${active === "reading" ? "is-active" : ""}" href="reading.html">Reading</a>
+                <a class="${active === "speaking" ? "is-active" : ""}" href="speaking.html">Speaking</a>
+                <a class="${active === "writing" ? "is-active" : ""}" href="writing.html">Writing</a>
             </nav>
             <div class="ielts-navbar__auth">
                 ${authState.isAuthenticated ? renderLoggedInAuth(authState.auth) : renderLoggedOutAuth()}

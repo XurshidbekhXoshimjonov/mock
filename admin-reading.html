@@ -65,6 +65,46 @@
                     <textarea id="answerText" rows="5" placeholder="1 | NOT GIVEN&#10;14 | C&#10;18 | Memory"></textarea>
                 </label>
 
+                <section id="vocabularyEditor" class="vocabulary-editor" aria-labelledby="vocabularyEditorTitle">
+                    <div class="vocabulary-editor-header">
+                        <div>
+                            <h2 id="vocabularyEditorTitle">Passage vocabulary</h2>
+                            <p>Add definitions and Uzbek translations for clickable words in standalone Reading practice.</p>
+                        </div>
+                        <span id="vocabularyCount" class="vocabulary-count">0 words</span>
+                    </div>
+
+                    <p id="vocabularyDisabledNotice" class="vocabulary-disabled hidden">
+                        Vocabulary is disabled for Full Test mode.
+                    </p>
+
+                    <div class="vocabulary-fields">
+                        <label>
+                            Word
+                            <input id="vocabWord" type="text" placeholder="sediment">
+                        </label>
+                        <label>
+                            English definition
+                            <textarea id="vocabDefinition" rows="3" placeholder="Small pieces of sand, soil, or rock carried by water."></textarea>
+                        </label>
+                        <label>
+                            Uzbek translation
+                            <input id="vocabTranslation" type="text" placeholder="cho'kindi">
+                        </label>
+                        <label>
+                            Example sentence
+                            <textarea id="vocabExample" rows="2" placeholder="The river carried sediment through the canyon."></textarea>
+                        </label>
+                    </div>
+
+                    <div class="vocabulary-actions">
+                        <button type="button" id="saveVocabEntry" class="light-button">Add word</button>
+                        <button type="button" id="cancelVocabEdit" class="light-button hidden">Cancel edit</button>
+                    </div>
+
+                    <div id="vocabularyList" class="vocabulary-list" aria-live="polite"></div>
+                </section>
+
                 <div class="manual-actions">
                     <button type="submit">Save reading test</button>
                     <button type="button" id="previewBtn" class="light-button">Preview</button>

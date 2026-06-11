@@ -36,13 +36,18 @@ function defaultQuestionCount(config) {
     return config.part === "3" ? 14 : 13;
 }
 
-function estimatedTime(config) {
+function estimatedTime(config, test) {
+    const duration = Number(test?.duration);
+    if (Number.isFinite(duration) && duration > 0) {
+        return `${duration} min`;
+    }
+
     if (config.part === "full") {
-        return config.type === "listening" ? "30 min" : "60 min";
+        return config.type === "listening" ? "40 min" : "60 min";
     }
 
     if (config.type === "listening") {
-        return config.part === "4" ? "10 min" : "8 min";
+        return "10 min";
     }
 
     return "20 min";
@@ -99,7 +104,7 @@ function iconSvg(config) {
     `;
 }
 
-function renderCardContent({ title, description, questionCount, config }) {
+function renderCardContent({ title, description, questionCount, config, test }) {
     return `
         <div class="test-card-top">
             <span class="test-card-icon">${iconSvg(config)}</span>
@@ -111,17 +116,17 @@ function renderCardContent({ title, description, questionCount, config }) {
         </div>
         <div class="test-card-stats">
             <span><strong>${escapeHtml(questionCount)}</strong> Questions</span>
-            <span><strong>${escapeHtml(estimatedTime(config))}</strong> Estimated time</span>
+            <span><strong>${escapeHtml(estimatedTime(config, test))}</strong> Estimated time</span>
         </div>
         <span class="test-card-button">Start Test <span>-></span></span>
     `;
 }
 
-function makeCard({ href, title, description, questionCount, config }) {
+function makeCard({ href, title, description, questionCount, config, test }) {
     const card = document.createElement("a");
     card.className = "reading-test-card";
     card.href = href;
-    card.innerHTML = renderCardContent({ title, description, questionCount, config });
+    card.innerHTML = renderCardContent({ title, description, questionCount, config, test });
     return card;
 }
 
@@ -131,7 +136,8 @@ function makeUploadedCard(test, part, config, number) {
         title: test.title || `Test ${number}`,
         description: cardMetaText(config),
         questionCount: questionCountForTest(test, config),
-        config
+        config,
+        test
     });
 }
 
@@ -144,7 +150,8 @@ function setManualCardContent(card, test, config, number) {
         title: test.title || `Test ${number}`,
         description: cardMetaText(config),
         questionCount: questionCountForTest(test, config),
-        config
+        config,
+        test
     });
 }
 
@@ -172,7 +179,8 @@ async function loadFullTestCards(config, grid) {
             title: test.title || partLabel(config),
             description: "Full imported test",
             questionCount: questionCountForTest(test, config),
-            config
+            config,
+            test
         }));
     });
 }

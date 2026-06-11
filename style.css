@@ -136,7 +136,7 @@ main{
 }
 
 .title{
-    color:#ef4444;
+    color:#0057ff;
 
     font-size:42px;
     font-weight: 700;
@@ -144,7 +144,7 @@ main{
     margin-bottom:12px;
 }
 .title{
-    color:red;
+    color:#0057ff;
     font-size:48px;
     font-weight: 700;
 
@@ -452,7 +452,7 @@ nav a:hover{
 
 .account-logout {
     margin-top: 8px;
-    color: #dc1431;
+    color: #252c8f;
 }
 
 @media (max-width: 760px) {
@@ -524,7 +524,7 @@ nav a:hover{
 }
 
 .test-card h1{
-    color:#ef4444;
+    color:#0057ff;
 
     font-size:42px;
 
@@ -708,7 +708,7 @@ nav a:hover{
 
     margin-bottom:15px;
 
-    color:#ef4444;
+    color:#0057ff;
 }
 
 .reading-test-card p{
@@ -789,7 +789,7 @@ nav a:hover{
 
     margin:0;
 
-    color:#ef4444;
+    color:#0057ff;
     line-height:1.1;
 }
 

@@ -19,7 +19,7 @@
     const timerDisplay = document.querySelector(".timer-display");
     let started = false;
     let timerStarted = false;
-    let remainingSeconds = 30 * 60;
+    let remainingSeconds = 40 * 60;
     let timerId = null;
 
     function formatTime(value) {
