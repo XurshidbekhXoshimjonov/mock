@@ -6,7 +6,6 @@ const instructionText = document.getElementById("instructionText");
 const questionText = document.getElementById("questionText");
 const answerText = document.getElementById("answerText");
 const saveStatus = document.getElementById("saveStatus");
-const fillExample = document.getElementById("fillExample");
 const previewBtn = document.getElementById("previewBtn");
 const previewPanel = document.getElementById("previewPanel");
 const manualTestsList = document.getElementById("manualTestsList");
@@ -252,6 +251,33 @@ function buildPreviewTest() {
     };
 }
 
+function validateReadingForm() {
+    const title = testTitle.value.trim();
+    const passage = passageText.value.trim();
+    const parsed = window.IeltsManualParser.parseStructuredContent(
+        getCombinedQuestionText(),
+        answerText.value,
+        "reading"
+    );
+
+    if (!title) {
+        throw new Error("Test title is required.");
+    }
+
+    if (!passage) {
+        throw new Error("Reading passage text is required.");
+    }
+
+    if (!parsed.questions.length) {
+        throw new Error("Add at least one Reading question.");
+    }
+
+    const incomplete = parsed.questions.filter((question) => !question.answer);
+    if (incomplete.length) {
+        throw new Error(`Each Reading question must have a correct answer. Missing: ${incomplete.map((question) => question.number).join(", ")}`);
+    }
+}
+
 function renderPreview() {
     try {
         const test = buildPreviewTest();
@@ -282,7 +308,7 @@ async function loadManualTests() {
             <h3>${escapeHtml(test.title)}</h3>
             <p>Part ${escapeHtml(test.part)} · ${test.questionCount} questions · ${test.vocabularyCount || 0} vocabulary words</p>
             <div class="manual-test-actions">
-                <a href="reading-template.html?id=${encodeURIComponent(test.id)}">Open</a>
+                <a href="${escapeHtml(test.openUrl || `/reading/${encodeURIComponent(test.slug || test.title || "test")}`)}">Open</a>
                 <button type="button" data-action="edit" data-id="${escapeHtml(test.id)}">Edit</button>
                 <button type="button" class="danger-button" data-action="delete" data-id="${escapeHtml(test.id)}">Delete</button>
             </div>
@@ -303,7 +329,7 @@ async function loadTestForEdit(id) {
     editingTestId = test.id;
     testTitle.value = test.title;
     testPart.value = test.part;
-    passageText.value = test.passage;
+    passageText.value = test.passage || test.passageText || "";
     instructionText.value = "";
     questionText.value = buildQuestionTextForEdit(test);
     answerText.value = (test.questions || [])
@@ -345,16 +371,20 @@ form.addEventListener("submit", async (event) => {
     showStatus("Saving…", "");
 
     try {
+        validateReadingForm();
+
         const url = editingTestId
             ? `/api/reading-tests/${encodeURIComponent(editingTestId)}`
             : "/api/reading-tests";
+        const passage = passageText.value.trim();
         const response = await fetch(url, {
             method: editingTestId ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 title: testTitle.value,
                 part: testPart.value,
-                passage: passageText.value,
+                passage,
+                passageText: passage,
                 questionText: getCombinedQuestionText(),
                 answerText: answerText.value,
                 vocabulary: testPart.value === "full" ? [] : vocabularyEntries
@@ -445,51 +475,499 @@ testPart.addEventListener("change", () => {
 
 previewBtn.addEventListener("click", renderPreview);
 
-fillExample.addEventListener("click", () => {
-    resetEditMode();
-    testTitle.value = "River Floods Practice";
-    testPart.value = "1";
-    passageText.value = `Dirty river but clean water
-
-Floods once raged through the canyon every year. Spring snow melted and swelled the river, carrying sediment through the Grand Canyon. These floods carved beaches and built sandbars.
-
-After the Glen Canyon dam was built, the river stopped receiving enough sediment. Some fish lost the cloudy water that helped them hide from predators. Scientists now believe controlled floods can help rebuild the canyon ecosystem.`;
-    instructionText.value = `group | Questions 1-2 | Do the following statements agree with the information in the passage?
-
-group | Questions 3-5 | Complete the sentences below. | Choose NO MORE THAN TWO WORDS from the passage.`;
-    questionText.value = `1 | true_false_not_given | Floods can help build sandbars. | NOT GIVEN
-2 | true_false_not_given | The dam increased sediment in the river. | FALSE
-3 | sentence_completion | The cloudy water helped fish hide from ____. | predators
-4 | multiple_choice | Why do scientists use controlled floods? | A. To rebuild the ecosystem; B. To stop all fishing; C. To remove the river | A
-5 | matching_headings | Paragraph 1 | i. A natural river process; ii. A modern city problem; iii. A tourist attraction | i`;
-    answerText.value = "";
-    vocabularyEntries = normalizeVocabularyEntries([
-        {
-            word: "sediment",
-            definition: "Small pieces of sand, soil, or rock carried by water.",
-            uzbekTranslation: "cho'kindi",
-            example: "Spring snow carried sediment through the Grand Canyon."
-        },
-        {
-            word: "predators",
-            definition: "Animals that hunt and eat other animals.",
-            uzbekTranslation: "yirtqichlar",
-            example: "Cloudy water helped fish hide from predators."
-        },
-        {
-            word: "ecosystem",
-            definition: "All the living things in an area and the environment they depend on.",
-            uzbekTranslation: "ekotizim",
-            example: "Controlled floods can help rebuild the canyon ecosystem."
-        }
-    ]);
-    clearVocabularyForm();
-    renderVocabularyList();
-    renderPreview();
-});
-
 renderVocabularyList();
 
 loadManualTests().catch((error) => {
     manualTestsList.textContent = error.message;
 });
+
+// --- VISUAL BUILDER STATE AND FUNCTIONS ---
+let isVisualMode = false;
+let visualState = { groups: [] };
+
+const toggleVisualBuilderBtn = document.getElementById("toggleVisualBuilderBtn");
+const visualQuestionBuilder = document.getElementById("visualQuestionBuilder");
+const rawQuestionFields = document.getElementById("rawQuestionFields");
+const visualGroupsContainer = document.getElementById("visualGroupsContainer");
+const addVisualGroupBtn = document.getElementById("addVisualGroupBtn");
+
+function toggleVisualBuilder() {
+    isVisualMode = !isVisualMode;
+    if (isVisualMode) {
+        loadVisualStateFromRaw();
+        renderVisualBuilder();
+        visualQuestionBuilder.classList.remove("hidden");
+        rawQuestionFields.classList.add("hidden");
+        toggleVisualBuilderBtn.textContent = "Switch to Raw Text Editor";
+    } else {
+        serializeVisualStateToRaw();
+        visualQuestionBuilder.classList.add("hidden");
+        rawQuestionFields.classList.remove("hidden");
+        toggleVisualBuilderBtn.textContent = "Switch to Visual Question Builder";
+    }
+}
+
+function loadVisualStateFromRaw() {
+    const combinedText = getCombinedQuestionText();
+    let parsed;
+    try {
+        parsed = window.IeltsManualParser.parseStructuredContent(
+            combinedText,
+            answerText.value,
+            "reading"
+        );
+    } catch (e) {
+        parsed = { groups: [], questions: [] };
+    }
+
+    const questionsByNum = new Map((parsed.questions || []).map(q => [Number(q.number), q]));
+
+    visualState.groups = (parsed.groups || []).map((g, gIdx) => {
+        const questionsInGroup = (g.questionNumbers || []).map(num => {
+            const q = questionsByNum.get(Number(num));
+            return {
+                number: num,
+                question: q ? q.question : "",
+                options: q && Array.isArray(q.options) ? q.options.join("; ") : (q && typeof q.options === 'string' ? q.options : ""),
+                answer: q ? q.answer : ""
+            };
+        });
+
+        return {
+            id: `group-${Date.now()}-${gIdx}-${Math.random().toString(36).substr(2, 4)}`,
+            title: g.title || "",
+            instruction: g.instruction || "",
+            rule: g.rule || "",
+            type: g.type || g.questionType || "true_false_not_given",
+            questions: questionsInGroup
+        };
+    });
+
+    if (visualState.groups.length === 0) {
+        visualState.groups.push({
+            id: `group-${Date.now()}-0-${Math.random().toString(36).substr(2, 4)}`,
+            title: "Questions 1-5",
+            instruction: "Do the following statements agree with the information given in Reading Passage 1?",
+            rule: "",
+            type: "true_false_not_given",
+            questions: [
+                { number: 1, question: "Write your first question text here.", options: "", answer: "TRUE" }
+            ]
+        });
+    }
+}
+
+function serializeVisualStateToRaw() {
+    const rawInstructionLines = [];
+    const rawQuestionLines = [];
+    const rawAnswerLines = [];
+
+    visualState.groups.forEach(group => {
+        if (group.title || group.instruction || group.rule || group.type) {
+            rawInstructionLines.push([
+                "group",
+                group.title || "",
+                group.instruction || "",
+                group.rule || "",
+                group.type || ""
+            ].join(" | ").replace(/\s+\|\s*$/g, ""));
+            rawInstructionLines.push("");
+        }
+
+        group.questions.forEach(q => {
+            if (!q.number) return;
+            const normalizedType = window.IeltsManualParser.normalizeType(group.type, "reading");
+            const needsOpt = [
+                "multiple_choice",
+                "multi_select",
+                "matching_headings",
+                "matching_information",
+                "matching",
+                "map_labeling",
+                "map_labelling",
+                "diagram_labeling",
+                "diagram_labelling"
+            ].includes(normalizedType);
+
+            if (needsOpt) {
+                rawQuestionLines.push([
+                    q.number,
+                    group.type,
+                    q.question || "",
+                    q.options || ""
+                ].join(" | "));
+            } else {
+                rawQuestionLines.push([
+                    q.number,
+                    group.type,
+                    q.question || ""
+                ].join(" | "));
+            }
+
+            if (q.answer) {
+                rawAnswerLines.push(`${q.number} | ${q.answer}`);
+            }
+        });
+
+        rawInstructionLines.push("");
+    });
+
+    instructionText.value = rawInstructionLines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+    questionText.value = rawQuestionLines.join("\n").trim();
+    answerText.value = rawAnswerLines.join("\n").trim();
+}
+
+function renderVisualBuilder() {
+    visualGroupsContainer.innerHTML = visualState.groups.map((group, groupIndex) => {
+        const questionsHtml = group.questions.map((q, qIdx) => {
+            const normalizedType = window.IeltsManualParser.normalizeType(group.type, "reading");
+            const needsOptions = [
+                "multiple_choice",
+                "multi_select",
+                "matching_headings",
+                "matching_information",
+                "matching",
+                "map_labeling",
+                "map_labelling",
+                "diagram_labeling",
+                "diagram_labelling"
+            ].includes(normalizedType);
+
+            return `
+                <div class="visual-question-row" data-group-index="${groupIndex}" data-q-index="${qIdx}">
+                    <input type="number" data-q-field="number" value="${escapeHtml(q.number)}" placeholder="No." required>
+                    <input type="text" data-q-field="question" value="${escapeHtml(q.question)}" placeholder="Question text/stem" required>
+                    <input type="text" data-q-field="options" value="${escapeHtml(q.options)}" placeholder="Option A; Option B..." ${needsOptions ? "" : "disabled"}>
+                    <input type="text" data-q-field="answer" value="${escapeHtml(q.answer)}" placeholder="Answer" required>
+                    <button type="button" class="delete-question-btn" data-action="delete-question" data-group-index="${groupIndex}" data-q-index="${qIdx}">&times;</button>
+                </div>
+            `;
+        }).join("");
+
+        return `
+            <div class="visual-group-card" data-group-index="${groupIndex}">
+                <div class="visual-group-card-header">
+                    <span class="visual-group-card-title">Question Group ${groupIndex + 1}</span>
+                    <button type="button" class="delete-group-btn" data-action="delete-group" data-group-index="${groupIndex}">Delete Group</button>
+                </div>
+                <div class="visual-group-inputs">
+                    <label>
+                        Group Title (e.g. Questions 1-5)
+                        <input type="text" data-group-field="title" value="${escapeHtml(group.title)}" placeholder="Questions 1-5" required>
+                    </label>
+                    <label>
+                        Instructions Text
+                        <input type="text" data-group-field="instruction" value="${escapeHtml(group.instruction)}" placeholder="Choose the correct letters...">
+                    </label>
+                    <label>
+                        Rule (e.g. NO MORE THAN TWO WORDS)
+                        <input type="text" data-group-field="rule" value="${escapeHtml(group.rule)}" placeholder="NO MORE THAN TWO WORDS">
+                    </label>
+                    <label>
+                        Question Type
+                        <select data-group-field="type">
+                            <option value="true_false_not_given" ${group.type === "true_false_not_given" ? "selected" : ""}>TRUE / FALSE / NOT GIVEN</option>
+                            <option value="yes_no_not_given" ${group.type === "yes_no_not_given" ? "selected" : ""}>YES / NO / NOT GIVEN</option>
+                            <option value="multiple_choice" ${group.type === "multiple_choice" ? "selected" : ""}>Multiple Choice</option>
+                            <option value="matching_headings" ${group.type === "matching_headings" ? "selected" : ""}>Matching Headings</option>
+                            <option value="matching_information" ${group.type === "matching_information" ? "selected" : ""}>Matching Information (Paragraphs)</option>
+                            <option value="sentence_completion" ${group.type === "sentence_completion" ? "selected" : ""}>Sentence Completion</option>
+                            <option value="summary_completion" ${group.type === "summary_completion" ? "selected" : ""}>Summary Completion</option>
+                            <option value="short_answer" ${group.type === "short_answer" ? "selected" : ""}>Short Answer</option>
+                            <option value="table_completion" ${group.type === "table_completion" ? "selected" : ""}>Table Completion</option>
+                            <option value="notes_completion" ${group.type === "notes_completion" ? "selected" : ""}>Notes Completion</option>
+                            <option value="diagram_labeling" ${group.type === "diagram_labeling" ? "selected" : ""}>Diagram Labeling</option>
+                        </select>
+                    </label>
+                </div>
+                
+                <div class="visual-questions-list">
+                    <div class="visual-question-row header-row">
+                        <span>Q#</span>
+                        <span>Question / Stem</span>
+                        <span>Options (Semicolon-separated)</span>
+                        <span>Answer</span>
+                        <span></span>
+                    </div>
+                    ${questionsHtml}
+                </div>
+                <div class="visual-builder-actions" style="margin-top: 12px;">
+                    <button type="button" class="light-button add-question-btn" data-action="add-question" data-group-index="${groupIndex}">+ Add Question</button>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+// Event Listeners for Visual Builder input changes
+visualGroupsContainer.addEventListener("input", (event) => {
+    const groupCard = event.target.closest(".visual-group-card");
+    const qRow = event.target.closest(".visual-question-row");
+    if (!groupCard) return;
+
+    const groupIndex = Number(groupCard.dataset.groupIndex);
+    const group = visualState.groups[groupIndex];
+    if (!group) return;
+
+    const groupField = event.target.dataset.groupField;
+    if (groupField) {
+        group[groupField] = event.target.value;
+        if (groupField === "type") {
+            renderVisualBuilder();
+        }
+    }
+
+    if (qRow) {
+        const qIndex = Number(qRow.dataset.qIndex);
+        const qField = event.target.dataset.qField;
+        const question = group.questions[qIndex];
+        if (question && qField) {
+            if (qField === "number") {
+                question.number = event.target.value ? Number(event.target.value) : "";
+            } else {
+                question[qField] = event.target.value;
+            }
+        }
+    }
+
+    serializeVisualStateToRaw();
+});
+
+visualGroupsContainer.addEventListener("change", (event) => {
+    const groupCard = event.target.closest(".visual-group-card");
+    if (!groupCard) return;
+
+    const groupIndex = Number(groupCard.dataset.groupIndex);
+    const group = visualState.groups[groupIndex];
+    if (!group) return;
+
+    const groupField = event.target.dataset.groupField;
+    if (groupField === "type") {
+        group[groupField] = event.target.value;
+        renderVisualBuilder();
+        serializeVisualStateToRaw();
+    }
+});
+
+visualGroupsContainer.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const groupIndex = Number(button.dataset.groupIndex);
+    const group = visualState.groups[groupIndex];
+    if (!group) return;
+
+    if (button.dataset.action === "add-question") {
+        let lastNumber = 0;
+        visualState.groups.forEach(g => {
+            g.questions.forEach(q => {
+                if (q.number > lastNumber) lastNumber = q.number;
+            });
+        });
+        group.questions.push({
+            number: lastNumber + 1,
+            question: "",
+            options: "",
+            answer: ""
+        });
+        renderVisualBuilder();
+        serializeVisualStateToRaw();
+        return;
+    }
+
+    if (button.dataset.action === "delete-question") {
+        const qIndex = Number(button.dataset.qIndex);
+        group.questions.splice(qIndex, 1);
+        renderVisualBuilder();
+        serializeVisualStateToRaw();
+        return;
+    }
+
+    if (button.dataset.action === "delete-group") {
+        if (confirm("Are you sure you want to delete this question group?")) {
+            visualState.groups.splice(groupIndex, 1);
+            renderVisualBuilder();
+            serializeVisualStateToRaw();
+        }
+        return;
+    }
+});
+
+addVisualGroupBtn.addEventListener("click", () => {
+    let lastNumber = 0;
+    visualState.groups.forEach(g => {
+        g.questions.forEach(q => {
+            if (q.number > lastNumber) lastNumber = q.number;
+        });
+    });
+
+    visualState.groups.push({
+        id: `group-${Date.now()}-${visualState.groups.length}-${Math.random().toString(36).substr(2, 4)}`,
+        title: `Questions ${lastNumber + 1}-${lastNumber + 5}`,
+        instruction: "Choose the correct letters...",
+        rule: "",
+        type: "multiple_choice",
+        questions: [
+            { number: lastNumber + 1, question: "", options: "A. Option A; B. Option B", answer: "A" }
+        ]
+    });
+    renderVisualBuilder();
+    serializeVisualStateToRaw();
+});
+
+toggleVisualBuilderBtn.addEventListener("click", toggleVisualBuilder);
+
+// Hook into edit mode to load visual mode from raw text
+const originalLoadTestForEdit = loadTestForEdit;
+loadTestForEdit = async function(id) {
+    await originalLoadTestForEdit(id);
+    if (isVisualMode) {
+        loadVisualStateFromRaw();
+        renderVisualBuilder();
+    }
+};
+
+// Hook into form reset to clear visual builder state
+form.addEventListener("reset", () => {
+    visualState = { groups: [] };
+    if (isVisualMode) {
+        setTimeout(() => {
+            loadVisualStateFromRaw();
+            renderVisualBuilder();
+        }, 50);
+    }
+});
+
+// HTML File Drag & Drop Importer Integration
+(function initHtmlImporter() {
+    const zone = document.getElementById("importHtmlZone");
+    const input = document.getElementById("importHtmlFile");
+    if (!zone || !input) return;
+
+    zone.addEventListener("click", () => input.click());
+
+    zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("drag-over");
+    });
+
+    ["dragleave", "dragend"].forEach((type) => {
+        zone.addEventListener(type, () => {
+            zone.classList.remove("drag-over");
+        });
+    });
+
+    zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drag-over");
+        if (e.dataTransfer.files.length) {
+            input.files = e.dataTransfer.files;
+            handleFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    input.addEventListener("change", () => {
+        if (input.files.length) {
+            handleFile(input.files[0]);
+        }
+    });
+
+    async function handleFile(file) {
+        showStatus("Importing and parsing HTML file...", "success");
+        try {
+            const formData = new FormData();
+            formData.append("html", file);
+            formData.append("skill", "reading");
+
+            const token = window.authClient?.getAuth()?.token;
+            const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+            const response = await fetch("/api/full-tests/import", {
+                method: "POST",
+                headers,
+                body: formData
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to parse HTML file");
+            }
+
+            const parsed = data.test;
+            if (!parsed || !parsed.reading || !parsed.reading.passages) {
+                throw new Error("No reading passages found in the imported file");
+            }
+
+            // Fill Form Details
+            testTitle.value = parsed.title || "";
+            
+            const passages = parsed.reading.passages;
+            if (passages.length > 1) {
+                testPart.value = "full";
+                passageText.value = passages.map((p, idx) => `READING PASSAGE ${idx + 1}: ${p.title || `Passage ${idx + 1}`}\n\n${p.passageText || ""}`).join("\n\n---\n\n");
+            } else if (passages.length === 1) {
+                testPart.value = String(passages[0].number || 1);
+                passageText.value = passages[0].passageText || "";
+            } else {
+                passageText.value = "";
+            }
+
+            const rawInstructionLines = [];
+            const rawQuestionLines = [];
+            const rawAnswerLines = [];
+
+            passages.forEach((passage) => {
+                (passage.questionGroups || []).forEach((group) => {
+                    const questions = group.questions || [];
+                    if (!questions.length) return;
+                    
+                    const numbers = questions.map(q => Number(q.number)).filter(Number.isFinite);
+                    const first = Math.min(...numbers);
+                    const last = Math.max(...numbers);
+                    const rangeStr = first === last ? `Question ${first}` : `Questions ${first}-${last}`;
+                    
+                    rawInstructionLines.push([
+                        "group",
+                        group.instructionTitle || rangeStr,
+                        group.instructionText || "",
+                        group.rule || "",
+                        group.type || ""
+                    ].join(" | ").replace(/\s+\|\s*$/g, ""));
+                    
+                    questions.forEach((q) => {
+                        const optionsStr = Array.isArray(q.options) ? q.options.join("; ") : (q.options || "");
+                        rawQuestionLines.push(`${q.number} | ${group.type} | ${q.question || ""} | ${optionsStr} | ${q.answer || ""}`);
+                        rawAnswerLines.push(`${q.number} | ${q.answer || ""}`);
+                    });
+                });
+            });
+
+            instructionText.value = rawInstructionLines.join("\n\n");
+            questionText.value = rawQuestionLines.join("\n");
+            answerText.value = rawAnswerLines.join("\n");
+
+            // Sync visual builder if in visual mode
+            if (typeof isVisualMode !== "undefined" && isVisualMode) {
+                loadVisualStateFromRaw();
+                renderVisualBuilder();
+            }
+
+            // Sync vocabulary list if any is present
+            if (Array.isArray(parsed.vocabulary)) {
+                vocabularyEntries = normalizeVocabularyEntries(parsed.vocabulary);
+                renderVocabularyList();
+            }
+
+            showStatus("HTML file imported and form auto-filled successfully!", "success");
+
+            // Delete the draft full test from the backend to clean up
+            fetch(`/api/full-tests/${parsed.id}`, {
+                method: "DELETE",
+                headers
+            }).catch(() => {});
+
+        } catch (error) {
+            showStatus(error.message, "error");
+        }
+    }
+})();

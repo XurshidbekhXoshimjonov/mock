@@ -1,13 +1,4 @@
 const ListeningComponents = (() => {
-    const IMPORTANT_PHRASES = [
-        "NO MORE THAN THREE WORDS AND/OR A NUMBER",
-        "NO MORE THAN THREE WORDS",
-        "NO MORE THAN TWO WORDS AND/OR A NUMBER",
-        "NO MORE THAN TWO WORDS",
-        "TWO",
-        "ONCE"
-    ];
-
     function escapeHtml(value) {
         return String(value ?? "")
             .replace(/&/g, "&amp;")
@@ -25,14 +16,10 @@ const ListeningComponents = (() => {
         return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
     }
 
-    function emphasizeInstruction(value) {
-        let html = escapeHtml(value);
-
-        IMPORTANT_PHRASES.forEach((phrase) => {
-            html = html.replaceAll(phrase, `<span class="lc-important">${phrase}</span>`);
-        });
-
-        return html;
+    function highlightInstruction(value) {
+        return window.IeltsInstructionHighlighter
+            ? window.IeltsInstructionHighlighter.highlightText(value, { preserveLineBreaks: true })
+            : escapeHtml(value).replace(/\n/g, "<br>");
     }
 
     function answerInput(questionNumber, className = "") {
@@ -91,7 +78,7 @@ const ListeningComponents = (() => {
     function blockHeading(block) {
         return `<div class="lc-block-heading">
             <h3>${escapeHtml(block.questionRange || block.title || "Questions")}</h3>
-            ${block.instruction ? `<p class="lc-instruction">${emphasizeInstruction(block.instruction)}</p>` : ""}
+            ${block.instruction ? `<p class="lc-instruction">${highlightInstruction(block.instruction)}</p>` : ""}
         </div>`;
     }
 
@@ -289,14 +276,15 @@ const ListeningComponents = (() => {
     function ListeningHeader(test) {
         const duration = listeningDuration(test);
         const isFull = isFullListeningTest(test);
-        const dashboardHref = isFull
+        const dashboardHref = test.dashboardHref || (isFull
             ? "listeningfulltest.html"
-            : `listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`;
+            : `listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`);
+        const headerTitle = test.headerTitle || "Academic Listening";
         return `<header class="lc-header">
             <div class="lc-brand-group">
                 <img class="lc-logo" src="IELTS-logo.png" alt="IELTS">
                 <span class="lc-brand-divider"></span>
-                <strong>Academic Listening</strong>
+                <strong>${escapeHtml(headerTitle)}</strong>
             </div>
             <div class="lc-timer" data-duration="${duration * 60}" data-reset-on-part-change="${isFull ? "false" : "true"}">
                 <span class="lc-clock-icon"></span>
@@ -307,6 +295,16 @@ const ListeningComponents = (() => {
                 <button class="lc-submit-button" type="button">Submit</button>
             </div>
         </header>`;
+    }
+
+    function ListeningTestTitle(test) {
+        const isFull = isFullListeningTest(test);
+        const partNumber = Number(test.part || test.parts?.[0]?.partNumber) || 1;
+
+        return `<section class="lc-test-title">
+            <h1>${escapeHtml(test.title || "Test")}</h1>
+            <p>${isFull ? "Listening full test" : `Listening Part ${partNumber}`}</p>
+        </section>`;
     }
 
     function AudioPlayerCard(part) {
@@ -341,7 +339,7 @@ const ListeningComponents = (() => {
             <div class="lc-part-heading">
                 <h2>${escapeHtml(part.title || `Part ${part.partNumber}`)}</h2>
                 <p>${escapeHtml(part.questionRange || "")}</p>
-                ${part.instruction ? `<p class="lc-part-instruction">${emphasizeInstruction(part.instruction)}</p>` : ""}
+                ${part.instruction ? `<p class="lc-part-instruction">${highlightInstruction(part.instruction)}</p>` : ""}
             </div>
             <div class="lc-question-stack">${(part.blocks || []).map(renderBlock).join("")}</div>
         </section>`;
@@ -360,10 +358,38 @@ const ListeningComponents = (() => {
                     questionRange: `Question ${question.number}`,
                     questionNumber: question.number,
                     question: question.question,
-                    options: (question.options || []).map((text, optionIndex) => ({
-                        letter: String.fromCharCode(65 + optionIndex),
-                        text
-                    }))
+                    options: (question.options || []).map((item, optionIndex) => {
+                        if (item && typeof item === "object") {
+                            const letter = item.letter || item.value || String.fromCharCode(65 + optionIndex);
+                            const text = item.text || item.html || item.label || "";
+                            return { letter, text };
+                        }
+                        return {
+                            letter: String.fromCharCode(65 + optionIndex),
+                            text: String(item)
+                        };
+                    })
+                };
+            }
+
+            if (question.type === "multiple_select" || question.type === "multi_select") {
+                return {
+                    id: `legacy-${index}`,
+                    type: "multiple_select",
+                    questionRange: `Question ${question.number}`,
+                    questionNumber: question.number,
+                    question: question.question,
+                    options: (question.options || []).map((item, optionIndex) => {
+                        if (item && typeof item === "object") {
+                            const letter = item.letter || item.value || String.fromCharCode(65 + optionIndex);
+                            const text = item.text || item.html || item.label || "";
+                            return { letter, text };
+                        }
+                        return {
+                            letter: String.fromCharCode(65 + optionIndex),
+                            text: String(item)
+                        };
+                    })
                 };
             }
 
@@ -405,7 +431,7 @@ const ListeningComponents = (() => {
         }).join("");
 
         return `<footer class="lc-bottom-bar">
-            <button class="lc-button lc-button--outline" type="button" data-listening-part-prev ${activeIndex === 0 ? "disabled" : ""}>‹ Previous</button>
+            <button class="lc-button lc-button--outline ${activeIndex === 0 ? "lc-button--placeholder" : ""}" type="button" data-listening-part-prev ${activeIndex === 0 ? "disabled aria-hidden=\"true\" tabindex=\"-1\"" : ""}>‹ Previous</button>
             <nav class="lc-part-tabs" aria-label="Listening parts">${tabs}</nav>
             <button class="lc-button lc-button--primary" type="button" data-listening-part-next ${activeIndex === parts.length - 1 ? "disabled" : ""}>Next ›</button>
         </footer>`;
@@ -419,6 +445,7 @@ const ListeningComponents = (() => {
         return `<div class="lc-page">
             ${ListeningHeader(test)}
             <main class="lc-main">
+                ${ListeningTestTitle(test)}
                 <div class="lc-listening-stage" data-active-part="${activePartNumber}">
                     ${parts.map((part, index) => {
                         const partNumber = Number(part.partNumber) || index + 1;
@@ -437,8 +464,15 @@ const ListeningComponents = (() => {
                     <span class="lc-result-eyebrow">IELTS Listening result</span>
                     <h2 data-listening-result-score>0 / 40</h2>
                     <p class="lc-band" data-listening-result-band>Estimated band: 0</p>
-                    <p data-listening-result-unanswered>40 unanswered questions.</p>
-                    <button class="lc-start-button" type="button" data-listening-result-close>Review answers</button>
+                    <div class="lc-result-stats">
+                        <span data-listening-result-correct>0 correct answers</span>
+                        <span data-listening-result-incorrect>0 incorrect answers</span>
+                        <span data-listening-result-unanswered>40 unanswered questions.</span>
+                    </div>
+                    <div class="lc-result-actions">
+                        <button class="lc-start-button" type="button" data-listening-review>Review answers</button>
+                        <button class="lc-secondary-button" type="button" data-listening-result-close>Close</button>
+                    </div>
                 </section>
             </div>
         </div>`;
@@ -607,6 +641,15 @@ const ListeningComponents = (() => {
             });
 
             if (previousButton) previousButton.disabled = nextIndex === 0;
+            if (previousButton) {
+                previousButton.classList.toggle("lc-button--placeholder", nextIndex === 0);
+                previousButton.setAttribute("aria-hidden", nextIndex === 0 ? "true" : "false");
+                if (nextIndex === 0) {
+                    previousButton.setAttribute("tabindex", "-1");
+                } else {
+                    previousButton.removeAttribute("tabindex");
+                }
+            }
             if (nextButton) nextButton.disabled = nextIndex === sections.length - 1;
             root.querySelector(".lc-listening-stage")?.setAttribute("data-active-part", String(partNumber));
             root.querySelector(".lc-main")?.scrollTo({ top: 0, behavior: "smooth" });
@@ -679,6 +722,10 @@ const ListeningComponents = (() => {
             button.addEventListener("click", () => {
                 root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
             });
+        });
+        root.querySelector("[data-listening-review]")?.addEventListener("click", () => {
+            root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
+            root.dispatchEvent(new CustomEvent("listening-review", { bubbles: true }));
         });
     }
 

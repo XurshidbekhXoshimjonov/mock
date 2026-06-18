@@ -421,3 +421,50 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Drag and Drop Zone */
+.drop-zone {
+    border: 2px dashed #bfdbfe;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.drop-zone__prompt {
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.drop-zone__prompt .browse-link {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.status-text {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.status-text.error {
+    color: #dc2626;
+}
+
+.status-text.success {
+    color: #16a34a;
+}

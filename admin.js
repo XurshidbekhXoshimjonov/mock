@@ -128,7 +128,7 @@ async function loadRecent() {
             part: test.part,
             questionCount: test.questionCount,
             createdAt: test.createdAt,
-            openUrl: `reading-template.html?id=${encodeURIComponent(test.id)}`,
+            openUrl: test.openUrl || `/reading/${encodeURIComponent(test.slug || test.title || "test")}`,
             editUrl: "admin-reading.html"
         })),
         ...listeningData.map((test) => ({
@@ -138,7 +138,7 @@ async function loadRecent() {
             part: test.part,
             questionCount: test.questionCount,
             createdAt: test.createdAt,
-            openUrl: `listening-template.html?id=${encodeURIComponent(test.id)}`,
+            openUrl: test.openUrl || `/listening/${encodeURIComponent(test.slug || test.title || "test")}`,
             editUrl: `admin-listening.html?id=${encodeURIComponent(test.id)}`
         }))
     ]

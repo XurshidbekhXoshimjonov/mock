@@ -1,0 +1,295 @@
+{
+  "id": "1781714484712-Full_Listening_CDI._2_-listening-s3",
+  "title": "Test 3 — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/1781714501154-IELTS_Listening_Test_26.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-26",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "type": "multiple_choice"
+    },
+    {
+      "title": "Questions 27 and 28",
+      "instruction": "Choose TWO letters A–E.\nWhich TWO strategies does the tutor suggest for the next seminar?",
+      "questionNumbers": [
+        27,
+        28
+      ],
+      "type": "multiple_select"
+    },
+    {
+      "title": "Questions 29 and 30",
+      "instruction": "Choose TWO letters A–E.\nWhich TWO suggestions does the tutor make about taking notes?",
+      "questionNumbers": [
+        29,
+        30
+      ],
+      "type": "multiple_select"
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "He wasn't able to get there on time.",
+          "html": "He wasn't able to get there on time."
+        },
+        {
+          "value": "B",
+          "label": "He didn't know all the students.",
+          "html": "He didn't know all the students."
+        },
+        {
+          "value": "C",
+          "label": "He couldn't understand everything.",
+          "html": "He couldn't understand everything."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "He was better prepared than some students.",
+          "html": "He was better prepared than some students."
+        },
+        {
+          "value": "B",
+          "label": "He completed some useful work.",
+          "html": "He completed some useful work."
+        },
+        {
+          "value": "C",
+          "label": "He read some useful articles.",
+          "html": "He read some useful articles."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "He tended to speak to his neighbour only.",
+          "html": "He tended to speak to his neighbour only."
+        },
+        {
+          "value": "B",
+          "label": "He spoke when other students were talking.",
+          "html": "He spoke when other students were talking."
+        },
+        {
+          "value": "C",
+          "label": "He felt embarrassed when students looked at him.",
+          "html": "He felt embarrassed when students looked at him."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "speaking at the right time",
+          "html": "speaking at the right time"
+        },
+        {
+          "value": "B",
+          "label": "taking enough notes",
+          "html": "taking enough notes"
+        },
+        {
+          "value": "C",
+          "label": "staying focused",
+          "html": "staying focused"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "He hasn't thought about it.",
+          "html": "He hasn't thought about it."
+        },
+        {
+          "value": "B",
+          "label": "He'd like to change it.",
+          "html": "He'd like to change it."
+        },
+        {
+          "value": "C",
+          "label": "He feels he is acting a part.",
+          "html": "He feels he is acting a part."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "give other students more help with their work.",
+          "html": "give other students more help with their work."
+        },
+        {
+          "value": "B",
+          "label": "observe the behaviour of other students.",
+          "html": "observe the behaviour of other students."
+        },
+        {
+          "value": "C",
+          "label": "ask other students for their views.",
+          "html": "ask other students for their views."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "multiple_select",
+      "question": "Which TWO strategies does the tutor suggest for the next seminar?",
+      "options": [
+        {
+          "value": "A",
+          "label": "speak more frequently"
+        },
+        {
+          "value": "B",
+          "label": "behave in a confident manner"
+        },
+        {
+          "value": "C",
+          "label": "sit next to someone helpful"
+        },
+        {
+          "value": "D",
+          "label": "listen to what other people say"
+        },
+        {
+          "value": "E",
+          "label": "think of questions to ask"
+        }
+      ],
+      "answer": "D | E"
+    },
+    {
+      "number": 28,
+      "type": "multiple_select",
+      "question": "Which TWO strategies does the tutor suggest for the next seminar?",
+      "options": [
+        {
+          "value": "A",
+          "label": "speak more frequently"
+        },
+        {
+          "value": "B",
+          "label": "behave in a confident manner"
+        },
+        {
+          "value": "C",
+          "label": "sit next to someone helpful"
+        },
+        {
+          "value": "D",
+          "label": "listen to what other people say"
+        },
+        {
+          "value": "E",
+          "label": "think of questions to ask"
+        }
+      ],
+      "answer": "D | E"
+    },
+    {
+      "number": 29,
+      "type": "multiple_select",
+      "question": "Which TWO suggestions does the tutor make about taking notes?",
+      "options": [
+        {
+          "value": "A",
+          "label": "plan them before the seminar"
+        },
+        {
+          "value": "B",
+          "label": "note down key words that people say"
+        },
+        {
+          "value": "C",
+          "label": "note points to say later"
+        },
+        {
+          "value": "D",
+          "label": "include self-analysis"
+        },
+        {
+          "value": "E",
+          "label": "rewrite them after the seminar"
+        }
+      ],
+      "answer": "A | C"
+    },
+    {
+      "number": 30,
+      "type": "multiple_select",
+      "question": "Which TWO suggestions does the tutor make about taking notes?",
+      "options": [
+        {
+          "value": "A",
+          "label": "plan them before the seminar"
+        },
+        {
+          "value": "B",
+          "label": "note down key words that people say"
+        },
+        {
+          "value": "C",
+          "label": "note points to say later"
+        },
+        {
+          "value": "D",
+          "label": "include self-analysis"
+        },
+        {
+          "value": "E",
+          "label": "rewrite them after the seminar"
+        }
+      ],
+      "answer": "A | C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1781714484712-Full_Listening_CDI._2_",
+  "createdAt": "2026-06-17T16:41:25.079Z"
+}

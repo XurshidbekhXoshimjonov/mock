@@ -24,10 +24,37 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
+function slugify(value) {
+    return String(value || "test")
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .replace(/-{2,}/g, "-") || "test";
+}
+
+function cleanTestUrl(config, test) {
+    const skill = config.type === "listening" ? "listening" : "reading";
+    return `/${skill}/${slugify(test.slug || test.title)}`;
+}
+
 function cardMetaText(config) {
+    if (config.part === "full") {
+        return config.type === "listening"
+            ? "Listening full test"
+            : "Reading full test";
+    }
+
     return config.type === "listening"
-        ? "IELTS Listening Practice"
+        ? `Listening Part ${config.part}`
         : "Academic Reading Practice";
+}
+
+function displayTitle(config, number, fallbackTitle = "") {
+    return config.part === "full"
+        ? `Test ${number}`
+        : (fallbackTitle || `Test ${number}`);
 }
 
 function defaultQuestionCount(config) {
@@ -133,7 +160,7 @@ function makeCard({ href, title, description, questionCount, config, test }) {
 function makeUploadedCard(test, part, config, number) {
     return makeCard({
         href: `test-viewer.html?id=${encodeURIComponent(test.id)}&part=${encodeURIComponent(part)}&type=${encodeURIComponent(config.type)}`,
-        title: test.title || `Test ${number}`,
+        title: displayTitle(config, number, test.title),
         description: cardMetaText(config),
         questionCount: questionCountForTest(test, config),
         config,
@@ -142,12 +169,10 @@ function makeUploadedCard(test, part, config, number) {
 }
 
 function setManualCardContent(card, test, config, number) {
-    card.href = test.openUrl || (config.type === "listening"
-        ? `listening-template.html?id=${encodeURIComponent(test.id)}`
-        : `reading-template.html?id=${encodeURIComponent(test.id)}`);
+    card.href = test.openUrl || cleanTestUrl(config, test);
 
     card.innerHTML = renderCardContent({
-        title: test.title || `Test ${number}`,
+        title: displayTitle(config, number, test.title),
         description: cardMetaText(config),
         questionCount: questionCountForTest(test, config),
         config,
@@ -157,35 +182,51 @@ function setManualCardContent(card, test, config, number) {
 
 function addManualCard(grid, test, config) {
     const card = document.createElement("a");
+    const number = nextCardNumber(grid);
     card.className = "reading-test-card";
     grid.appendChild(card);
-    setManualCardContent(card, test, config, grid.querySelectorAll(".reading-test-card").length);
+    setManualCardContent(card, test, config, number);
+}
+
+function nextCardNumber(grid) {
+    return grid.querySelectorAll(".reading-test-card").length + 1;
 }
 
 async function loadFullTestCards(config, grid) {
     if (config.part !== "full") {
-        return;
+        return new Set();
     }
 
     const response = await fetch(`/api/full-tests?status=published&skill=${encodeURIComponent(config.type)}`);
     if (!response.ok) {
-        return;
+        return new Set();
     }
 
     const tests = await response.json();
+    const linkedManualListeningIds = new Set();
+
     tests.forEach((test) => {
+        const href = test.openUrl || cleanTestUrl(config, test);
+        const number = nextCardNumber(grid);
+
+        if (config.type === "listening" && test.manualListeningTestId) {
+            linkedManualListeningIds.add(test.manualListeningTestId);
+        }
+
         grid.appendChild(makeCard({
-            href: `full-test-player.html?id=${encodeURIComponent(test.id)}&skill=${encodeURIComponent(config.type)}`,
-            title: test.title || partLabel(config),
-            description: "Full imported test",
+            href,
+            title: displayTitle(config, number, test.title || partLabel(config)),
+            description: cardMetaText(config),
             questionCount: questionCountForTest(test, config),
             config,
             test
         }));
     });
+
+    return linkedManualListeningIds;
 }
 
-async function loadManualTests(config, grid) {
+async function loadManualTests(config, grid, skipIds = new Set()) {
     const endpoint = config.type === "listening" ? "/api/listening-tests" : "/api/reading-tests";
     const response = await fetch(`${endpoint}?part=${encodeURIComponent(config.part)}`);
 
@@ -197,6 +238,7 @@ async function loadManualTests(config, grid) {
 
     tests
         .slice()
+        .filter((test) => !skipIds.has(test.id))
         .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .forEach((test) => {
             addManualCard(grid, test, config);
@@ -235,8 +277,8 @@ async function loadDynamicTests() {
     }
 
     grid.innerHTML = "";
-    await loadFullTestCards(config, grid);
-    await loadManualTests(config, grid);
+    const skipManualIds = await loadFullTestCards(config, grid);
+    await loadManualTests(config, grid, skipManualIds);
 
     const response = await fetch(`/api/tests?type=${config.type}&part=${config.part}`);
 
@@ -248,7 +290,7 @@ async function loadDynamicTests() {
         ));
 
         uploaded.forEach((test) => {
-            const number = grid.querySelectorAll(".reading-test-card").length + 1;
+            const number = nextCardNumber(grid);
             grid.appendChild(makeUploadedCard(test, config.part, config, number));
         });
     }

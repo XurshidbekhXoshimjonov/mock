@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Reading — Test 3</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#1a1a1a;background:#fff;
+    display:flex;flex-direction:column;height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ===== HEADER ===== */
+  .header{
+    height:52px;flex:0 0 52px;
+    border-bottom:1px solid #ddd;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;
+    position:relative;z-index:10;
+  }
+  .h-left{display:flex;align-items:center;gap:12px}
+  .ielts-badge{
+    background:#c41230;color:#fff;font-weight:700;
+    padding:6px 12px;border-radius:4px;
+    font-size:14px;letter-spacing:1px;
+  }
+  .tg-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#f4f4f4;border-radius:999px;
+    padding:3px 14px 3px 3px;
+    font-size:13px;font-weight:500;color:#1a1a1a;
+    transition:background .15s;
+  }
+  .tg-pill:hover{background:#ececec}
+  .tg-icon{
+    width:28px;height:28px;border-radius:50%;
+    background:linear-gradient(135deg,#37AEE2 0%,#1E96C8 100%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 -1px 0 rgba(0,0,0,.08);
+  }
+  .h-right{position:relative}
+  .hamburger{
+    width:36px;height:36px;border:none;background:transparent;
+    cursor:pointer;border-radius:6px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
+  }
+  .hamburger:hover{background:#f0f0f0}
+  .hamburger span{display:block;width:18px;height:2px;background:#333;border-radius:1px}
+  .menu-panel{
+    position:absolute;top:46px;right:0;
+    background:#fff;border:1px solid #ddd;border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,.1);
+    padding:14px;min-width:240px;display:none;z-index:200;
+  }
+  .menu-panel.open{display:block}
+  .menu-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:6px 0}
+  .menu-row + .menu-row{border-top:1px solid #f0f0f0;margin-top:2px}
+  .menu-ctrls{display:flex;align-items:center;gap:6px}
+  .size-btn{
+    width:28px;height:28px;border:1px solid #ccc;background:#fff;border-radius:4px;
+    cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;
+  }
+  .size-btn:hover{background:#f5f5f5}
+  .size-val{min-width:42px;text-align:center;font-size:12px;color:#666}
+
+  /* ===== PROGRESS ===== */
+  .progress{height:3px;background:#eee;flex:0 0 3px}
+  .progress-fill{height:100%;background:#c41230;width:0;transition:width .25s}
+
+  /* ===== MAIN ===== */
+  .main{flex:1 1 auto;display:flex;overflow:hidden;min-height:0}
+  .pane{overflow-y:auto;padding:24px 28px 40px;min-width:200px}
+  .pane-left{background:#fafafa;width:50%;flex:0 0 50%}
+  .pane-right{background:#fff;flex:1 1 auto}
+  .pane::-webkit-scrollbar{width:10px}
+  .pane::-webkit-scrollbar-thumb{background:#ccc;border-radius:5px}
+  .pane::-webkit-scrollbar-thumb:hover{background:#aaa}
+  .divider{
+    width:6px;background:#e0e0e0;cursor:col-resize;
+    flex:0 0 6px;position:relative;transition:background .15s;
+  }
+  .divider:hover,.divider.dragging{background:#c41230}
+  .divider::after{
+    content:'';position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:2px;height:34px;background:#999;border-radius:1px;
+  }
+  .divider:hover::after,.divider.dragging::after{background:#fff}
+
+  /* ===== PASSAGE ===== */
+  #passagePane{font-size:14px;line-height:1.65}
+  .pass-title{
+    font-size:1.55em;font-weight:700;color:#1a1a1a;
+    margin-bottom:6px;
+  }
+  .pass-sub{
+    font-size:0.95em;color:#666;font-style:italic;
+    margin-bottom:14px;padding-bottom:10px;
+    border-bottom:2px solid #c41230;
+  }
+  .pass-body p{margin-bottom:14px;text-align:justify;hyphens:auto}
+  .para-letter{
+    font-weight:700;display:inline-block;margin-right:8px;color:#c41230;
+  }
+  .highlight{
+    background:#fff59d;cursor:pointer;
+    padding:1px 2px;border-radius:2px;
+    transition:background .15s;
+  }
+  .highlight:hover{background:#ffeb3b}
+  .hl-pill{
+    position:fixed;background:#1a1a1a;color:#fff;
+    padding:7px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;
+    cursor:pointer;z-index:1500;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    display:none;user-select:none;
+  }
+  .hl-pill:hover{background:#000}
+
+  /* ===== QUESTIONS ===== */
+  #questionPane{font-size:13px;line-height:1.55}
+  .q-instr{
+    background:#f5f5f5;border-left:3px solid #c41230;
+    padding:10px 14px;margin-bottom:18px;
+    font-size:0.95em;line-height:1.55;
+    border-radius:0 4px 4px 0;
+  }
+  .q-instr strong{color:#c41230}
+  .q-item{margin-bottom:16px;padding:6px 0;scroll-margin-top:30px}
+  .q-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:26px;height:22px;
+    background:#1a1a1a;color:#fff;
+    padding:0 6px;border-radius:3px;
+    font-weight:700;font-size:11px;
+    margin-right:8px;flex-shrink:0;
+  }
+  .q-text{margin-bottom:8px;line-height:1.55;display:flex;align-items:flex-start}
+  .q-text-body{flex:1}
+  .q-options{display:flex;flex-direction:column;gap:6px;margin-left:34px}
+  .q-options.radio-row{flex-direction:row;gap:0;flex-wrap:wrap}
+  .q-options.mcq-vert{flex-direction:column;gap:6px}
+  .opt-label{
+    display:inline-flex;align-items:center;gap:6px;
+    cursor:pointer;padding:5px 10px;
+    border:1px solid #ccc;background:#fff;
+    font-size:0.92em;transition:all .12s;
+    user-select:none;border-radius:4px;
+  }
+  .opt-label:hover{background:#f5f5f5}
+  .opt-label input{cursor:pointer;margin:0}
+  .opt-label.selected{background:#c41230;color:#fff;border-color:#c41230}
+  .opt-label.selected input{accent-color:#fff}
+  .radio-row .opt-label{border-radius:0;border-right:none}
+  .radio-row .opt-label:first-of-type{border-radius:4px 0 0 4px}
+  .radio-row .opt-label:last-of-type{border-radius:0 4px 4px 0;border-right:1px solid #ccc}
+  .radio-row .opt-label.selected + .opt-label{border-left-color:#c41230}
+
+  .q-input{
+    border:none;border-bottom:2px solid #888;
+    background:transparent;
+    font-family:inherit;font-size:inherit;color:inherit;
+    padding:2px 4px;min-width:120px;
+    outline:none;transition:border-color .15s,background .15s;
+    scroll-margin-top:30px;
+  }
+  .q-input:focus{border-bottom-color:#c41230;background:#fffbe5}
+  .q-input.has-value{background:#fff3cd;border-bottom-color:#f9a825}
+
+  /* Blank wrapper with Q# prefix */
+  .q-blank{display:inline-block;white-space:nowrap;margin:0 2px}
+  .q-blank-num{
+    display:inline-block;vertical-align:middle;
+    min-width:20px;height:18px;
+    background:#1a1a1a;color:#fff;
+    border-radius:3px;
+    font-weight:700;font-size:10px;
+    padding:0 5px;line-height:18px;
+    margin-right:4px;text-align:center;
+  }
+  .q-blank input{vertical-align:middle;min-width:110px;max-width:180px}
+
+  /* Notes box */
+  .notes-box{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:16px 22px 18px;
+    background:#fcfcfa;margin-bottom:20px;
+  }
+  .notes-title{
+    font-weight:700;text-align:center;font-size:1.15em;
+    margin-bottom:14px;padding-bottom:10px;
+    border-bottom:1px solid #ddd;color:#1a1a1a;
+  }
+  .notes-section{margin-bottom:14px}
+  .notes-section:last-child{margin-bottom:0}
+  .notes-heading{
+    font-weight:600;margin-bottom:8px;
+    font-size:1.02em;color:#1a1a1a;
+  }
+  .notes-section ul{list-style:none;margin-left:8px;padding:0}
+  .notes-section li{
+    margin-bottom:6px;padding-left:18px;
+    position:relative;line-height:2;
+  }
+  .notes-section li::before{
+    content:'–';position:absolute;left:0;
+    color:#999;font-weight:700;
+  }
+  .notes-section .plain-line{
+    margin:8px 0 8px 0;line-height:1.7;
+  }
+
+  /* Summary block */
+  .summary-block{margin-bottom:20px}
+  .summary-title{
+    font-weight:700;font-size:1.1em;
+    margin-bottom:12px;text-align:center;
+  }
+  .summary-block p{
+    line-height:2.1;margin-bottom:10px;
+    text-align:justify;
+  }
+
+  /* Matching list */
+  .matching-list{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:14px 20px;background:#fcfcfa;
+    margin-bottom:18px;
+  }
+  .matching-list-title{
+    font-weight:700;text-align:center;
+    margin-bottom:10px;padding-bottom:8px;
+    border-bottom:1px solid #ddd;font-size:1.05em;
+  }
+  .matching-list ol{list-style:none;padding:0;margin:0}
+  .matching-list li{
+    padding:5px 0;display:flex;gap:10px;line-height:1.5;
+  }
+  .matching-list .letter{
+    font-weight:700;flex-shrink:0;min-width:22px;color:#c41230;
+  }
+  .matching-list .desc{flex:1}
+
+  /* Example row (for heading matching example) */
+  .example-box{
+    background:#fff8e1;border:1px dashed #f9a825;
+    border-radius:6px;padding:10px 16px;
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:14px;
+    font-size:0.95em;
+  }
+  .example-label{
+    font-weight:700;color:#8b6914;
+    background:#fff;padding:3px 10px;
+    border-radius:4px;border:1px solid #f9a825;
+    flex-shrink:0;
+  }
+  .example-q{flex:1;font-weight:500}
+  .example-answer{
+    background:#f9a825;color:#fff;
+    padding:4px 14px;border-radius:4px;
+    font-weight:700;font-family:Georgia,serif;
+    font-style:italic;
+  }
+
+  /* Select dropdown */
+  .q-select{
+    font-family:inherit;font-size:0.92em;
+    padding:5px 8px;border:1px solid #888;border-radius:4px;
+    background:#fff;cursor:pointer;color:inherit;
+    outline:none;transition:border-color .15s,background .15s;
+  }
+  .q-select:focus{border-color:#c41230}
+  .q-select.has-value{background:#fff3cd;border-color:#f9a825}
+  .q-select.narrow{min-width:80px;max-width:110px}
+  .q-select.wide{min-width:200px;max-width:280px}
+  .select-q-row{
+    display:flex;align-items:flex-start;gap:10px;
+    margin-bottom:14px;padding:6px 0;
+    flex-wrap:wrap;scroll-margin-top:30px;
+  }
+  .select-q-row .q-num{flex-shrink:0;margin-top:1px}
+  .select-q-text{flex:1;min-width:0;line-height:1.7}
+  .select-q-text input.q-input{min-width:100px;max-width:160px}
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav{
+    height:44px;flex:0 0 44px;
+    background:#f0f0f0;border-top:1px solid #ddd;
+    display:flex;align-items:center;
+    padding:0 12px;gap:8px;
+    overflow-x:auto;overflow-y:hidden;
+  }
+  .bottom-nav::-webkit-scrollbar{height:4px}
+  .bottom-nav::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+  .nav-pass{
+    font-weight:700;font-size:13px;
+    cursor:pointer;padding:5px 10px;border-radius:4px;
+    white-space:nowrap;transition:background .15s;flex-shrink:0;
+  }
+  .nav-pass:hover{background:#e0e0e0}
+  .nav-pass.active{color:#c41230}
+  .nav-pass small{font-weight:500;color:#666;font-size:0.85em}
+  .q-pill{
+    width:26px;height:26px;
+    border:1px solid #bbb;background:#fff;
+    border-radius:4px;font-size:11px;
+    cursor:pointer;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:inherit;color:#333;transition:all .12s;
+  }
+  .q-pill:hover{background:#ebebeb;border-color:#999}
+  .q-pill.answered{
+    font-weight:700;background:#ffd54f;border-color:#f9a825;color:#5d4037;
+  }
+  .nav-sep{width:1px;height:26px;background:#ccc;flex-shrink:0;margin:0 4px}
+  .nav-spacer{flex:1}
+  .submit-btn{
+    height:30px;padding:0 16px;
+    background:#28a745;color:#fff;border:none;border-radius:4px;
+    cursor:pointer;font-weight:600;font-size:13px;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px;
+    flex-shrink:0;transition:background .15s;
+  }
+  .submit-btn:hover{background:#218838}
+
+  /* ===== MODAL ===== */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:3000;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:#fff;border-radius:10px;
+    max-width:820px;width:100%;max-height:90vh;
+    overflow-y:auto;padding:28px;position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    background:transparent;border:none;
+    font-size:28px;line-height:1;
+    cursor:pointer;color:#888;width:34px;height:34px;
+    border-radius:50%;transition:background .15s;
+  }
+  .modal-close:hover{background:#f0f0f0;color:#000}
+  .modal h2{margin-bottom:20px;font-size:24px;color:#1a1a1a}
+  .result-pass{
+    margin-bottom:20px;border:1px solid #e0e0e0;
+    border-radius:8px;overflow:hidden;
+  }
+  .result-pass-header{
+    background:#fafafa;padding:14px 18px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border-bottom:1px solid #e0e0e0;
+  }
+  .result-pass-info{flex:1;min-width:0}
+  .result-pass-title{font-weight:700;font-size:14px;color:#1a1a1a}
+  .result-pass-sub{font-size:12px;color:#666;margin-top:3px}
+  .score-badge{
+    padding:5px 14px;border-radius:999px;
+    color:#fff;font-weight:700;font-size:13px;flex-shrink:0;
+  }
+  .badge-green{background:#28a745}
+  .badge-orange{background:#fd7e14}
+  .badge-red{background:#dc3545}
+  .result-table{width:100%;border-collapse:collapse;font-size:13px}
+  .result-table th,.result-table td{
+    padding:8px 14px;text-align:left;border-bottom:1px solid #f0f0f0;
+  }
+  .result-table th{
+    background:#f9f9f9;font-weight:600;font-size:12px;
+    color:#555;text-transform:uppercase;letter-spacing:.4px;
+  }
+  .result-table td{vertical-align:middle}
+  .row-correct{background:#e8f5e9}
+  .row-wrong{background:#ffebee}
+  .mark{font-weight:700;font-size:15px}
+  .mark-ok{color:#28a745}
+  .mark-x{color:#dc3545}
+  .total-strip{
+    margin-top:24px;padding:22px 24px;
+    background:linear-gradient(135deg,#c41230 0%,#8b0d23 100%);
+    color:#fff;border-radius:10px;
+    display:flex;justify-content:space-around;align-items:center;
+    text-align:center;flex-wrap:wrap;gap:16px;
+  }
+  .total-block{flex:1;min-width:140px}
+  .total-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+  .total-value{font-size:32px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+  .total-band-value{font-size:36px}
+
+  body.dragging{user-select:none;cursor:col-resize}
+  body.dragging *{cursor:col-resize!important}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="h-left">
+    <div class="ielts-badge">IELTS</div>
+    <a class="tg-pill" href="https://t.me/Abdurazzoq_Khanov" target="_blank" rel="noopener">
+      <span class="tg-icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.27 1.4.18 1.12 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#fff"/>
+        </svg>
+      </span>
+      <span>Abdurazzoq Khanov</span>
+    </a>
+  </div>
+  <div class="h-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-row">
+        <span>Passage text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="passage" data-dir="-1">A−</button>
+          <span class="size-val" id="passSizeVal">14px</span>
+          <button class="size-btn" data-target="passage" data-dir="1">A+</button>
+        </div>
+      </div>
+      <div class="menu-row">
+        <span>Question text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="question" data-dir="-1">A−</button>
+          <span class="size-val" id="qSizeVal">13px</span>
+          <button class="size-btn" data-target="question" data-dir="1">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<main class="main">
+  <section class="pane pane-left" id="passagePane"></section>
+  <div class="divider" id="divider"></div>
+  <section class="pane pane-right" id="questionPane"></section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+
+<div class="hl-pill" id="hlPill">✏ Highlight</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h2>Your Results</h2>
+    <div id="resultsBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function blank(n){
+  return `<span class="q-blank"><span class="q-blank-num">${n}</span><input class="q-input" data-q="${n}" autocomplete="off" spellcheck="false"></span>`;
+}
+function displayAnswer(v){
+  if (v === undefined || v === null || v === '') return '—';
+  if (v === 'T') return 'TRUE';
+  if (v === 'F') return 'FALSE';
+  if (v === 'Y') return 'YES';
+  if (v === 'N') return 'NO';
+  if (v === 'NGV') return 'NOT GIVEN';
+  return v;
+}
+function normalize(s){
+  return String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function checkAnswer(user, correct){
+  if (!user || user === '—') return false;
+  const userN = normalize(user);
+  const correctList = Array.isArray(correct) ? correct : [correct];
+  return correctList.some(c => normalize(c) === userN);
+}
+function displayCorrect(c){
+  const v = Array.isArray(c) ? c[0] : c;
+  return displayAnswer(v);
+}
+
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+  1: `
+    <h1 class="pass-title">sorry — who are you?</h1>
+    <div class="pass-sub">Prosopagnosia is a medical condition that stops people from recognising people's faces. But how common is it and why does it happen?</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>It was Jacob Hodes's first day at college. He can still recall spending an enjoyable afternoon being shown around campus by a second-year student named Daniel Byrne, who happened to be from his home town. Jacob then spent the rest of the year ignoring him. "I never saw him again," he says. "Well, I'm sure I walked past him plenty of times, but I just didn't see him." This behaviour wasn't intentional. Jacob just couldn't recollect what his fellow student looked like. He had had the same trouble all his life. Friends and relatives would greet him and he would have no idea who they were.</p>
+      <p><span class="para-letter">B</span>It wasn't until five years ago that it all made sense. That was when Hodes was diagnosed with prosopagnosia, a condition that means he is unable to recognise faces. According to researchers, he is far from alone. In fact the condition is not that uncommon, but until a few years ago only a few dozen cases had ever been described, and all of these had been caused by brain injury. Recently, though, researchers identified a second form of face blindness — developmental prosopagnosia, which is either present from birth or develops very early in life.</p>
+      <p><span class="para-letter">C</span>In May, a team from Harvard University in the US and University College London (UCL) announced the results of a web survey of 1,600 people, suggesting that up to 2 per cent of people have some degree of face blindness. Then in August, Martina Gruter and colleagues at the Institute for Human Genetics in Munster, Germany, similarly reported that 2.5 per cent of 700 secondary school pupils they had tested had trouble recognising faces. The results of the survey took everyone by surprise.</p>
+      <p><span class="para-letter">D</span>It seems that if you have never known what it is to recognise a face, you don't necessarily know that you are supposed to be able to. Prosopagnosics almost always know that they have trouble recognising people, but they often don't realise that other people have better recognition skills than they do, says Brad Duchaine, a researcher at UCL.</p>
+      <p><span class="para-letter">E</span>Despite these issues, the majority of developmental prosopagnosics possess strategies that allow them to get around their difficulty, for instance, by recognising hair, clothing or a person's way of speaking. So, unless they see a familiar person out of context, with a new hairstyle or in different clothes, they can recognise people just fine. Even so, the discovery of developmental prosopagnosia has attracted attention from neuroscientists keen to discover what is different about the brain of face-blind people. This difference, they believe, could help solve the problem of how the brain deals with information in general: not just visual data. In other words, it may show whether the brain has specialised parts for specific tasks or is more of a general-purpose information processor.</p>
+      <p><span class="para-letter">F</span>One issue, however, that will present challenges for researchers is that no two prosopagnosics are the same. Some have problems only with faces, while others have trouble with ordinary everyday objects and, so it turns out, animals which would normally be familiar as well. Some prosopagnosics can train themselves to recognise specific faces; others can't even recognise their own in a mirror. When some have been tested they could identify the emotion which was conveyed on another's face, even though the face itself seemed unfamiliar, while for other subjects this was an impossibility. Some cannot recognise the faces of old friends or fellow students but have no trouble telling whether a particular face from such groups would be attractive to most people. Because of this diversity, working out the cause of prosopagnosia will not be easy.</p>
+      <p><span class="para-letter">G</span>In Martina Gruter's study, the prosopagnosics who agreed to have their parents and relatives tested reported at least one with the condition. Having looked at 38 cases in seven families, the German team believe they have good evidence that a single gene could be responsible. Duchaine also has some evidence that face blindness could be inherited, but thinks other factors might be more significant. He refers to studies of babies born with a condition which means the eye's lens is not clear, and when it's the left one, being unable to see through this eye during the first two months of life is a major risk factor for prosopagnosia.</p>
+      <p><span class="para-letter">H</span>Whatever the cause, what most prosopagnosics want to know is whether they can do anything to improve their face recognition skills. Joseph Degutis, a graduate student at the University of California, recently reported successfully training a severe developmental prosopagnosic to recognise faces during tests carried out in the laboratory. The subject also reported that recognising faces in everyday life became easier due to the training. Duchaine now plans to attempt to train sufferers to recognise the five people that they most need to know, maybe their immediate family, for example, and essential colleagues. Thomas Gruter, Martina Gruter's husband, who also works on her team, however, is not convinced it will work. "I don't know how you can have more training than you have already had," he says. "Humans already spend all day looking at faces." He also points out that cheating is a possibility during tests and provides an example. "One person we studied said that when she was doing the face-recognition test, she memorised the distance between nose and upper lip. She wasn't the only one. So you can perform well in the test and not do so well in real life."</p>
+    </div>
+  `,
+  2: `
+    <h1 class="pass-title">MAMMOTH KILL</h1>
+    <div class="pass-sub">What led to the disappearance of the giant mammals? Kate Wong examines the theories.</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>Although it's hard to imagine in this age of urban sprawl and automobiles, North America once belonged to huge, elephant-like mammoths, camels, bear-sized beavers and other giant beasts, collectively known as 'megafauna'. Some 11,000 years ago, however, these large-bodied mammals — about 70 species in all — disappeared. Their demise coincided roughly with the arrival of humans in this region and dramatic climate change — factors that have inspired several theories about the die-off. Yet despite decades of scientific investigation, the exact cause remains a mystery. Now new findings offer support to one of these controversial hypotheses: that human hunting drove these huge megafauna species to extinction.</p>
+      <p><span class="para-letter">B</span>This belief resulted in the overkill model which emerged in the 1960s, when it was put forth by Paul S Martin of the University of Arizona. Since then, critics have charged that no archaeological remains exist to support the idea that the first Americans hunted to the extent necessary to cause these extinctions. But at the annual meeting of the Society of Vertebrate Paleontology in Mexico City in October 1999, specialist John Alroy of the University of California at Santa Barbara argued that in fact, hunting-driven extinction is not only plausible, it was unavoidable. He has determined, using a computer simulation, that even a very modest amount of hunting would have wiped out these animals.</p>
+      <p><span class="para-letter">C</span>Assuming an initial human population of 100 people that grew no more than two per cent annually, Alroy determined that, if each band of, say, 50 people killed 15 to 20 large animals a year, humans could have eliminated the animal populations within 1,000 years. Large mammals in particular would have been vulnerable to the pressure because they have longer gestation periods than smaller mammals and their young require extended care.</p>
+      <p><span class="para-letter">D</span>However, not everyone agrees with Alroy's assessment. For one thing, the results depend on population size estimates for the extinct animals — estimates that are not necessarily reliable. But a more specific criticism comes from mammal expert Ross DE Macphee of the American Museum of Natural History in New York City, who points out that the relevant archaeological record contains barely a dozen examples of stone points embedded in mammoth bones (and none, it should be noted, are known from other megafaunal remains) — hardly what one might expect if hunting drove these animals to extinction. Furthermore, some of these species had a vast range, covering the whole continent — the Jefferson's Ground Sloth, for example, lived as far north as the Yukon and as far south as Mexico — which would have made hunting them in numbers sufficient to cause their extinction rather unlikely, he says.</p>
+      <p><span class="para-letter">E</span>Macphee agrees that humans most likely brought about these extinctions (as well as others around the world that coincided with human arrival), but not directly. Rather than through hunting, he suggests that people may have introduced a deadly disease, perhaps through their dogs or accompanying vermin, which then spread wildly among the native species because of their low resistance to the new introductions. Repeated outbreaks of a deadly disease could thus quickly drive them to the point of no return. So far, Macphee does not have empirical evidence for this theory, and it will not be easy to come by: such disease would kill far too quickly to leave its signature on the bones themselves. But he hopes that analyses of tissue and DNA from the most recent animal remains will eventually reveal the microbes responsible.</p>
+      <p><span class="para-letter">F</span>The third explanation for what brought on this North American extinction does not involve human beings. Instead, its proponents blame the loss on the climate. The Pleistocene epoch in question witnessed considerable climate instability, explains Russell W Graham of the Denver Museum of Nature and Science. As a result, their regular habitats disappeared, and species that had once formed communities split apart. For some animals, this brought opportunity. For much of the megafauna, however, the increasingly uniform terrain left them with shrinking geographical ranges — a death sentence for large animals, which need correspondingly large ranges. Although these creatures managed to maintain viable populations through most of the Pleistocene period, the final major climate fluctuation pushed them over the edge, Graham says.</p>
+      <p><span class="para-letter">G</span>For his part, Alroy is still convinced that human hunters were the destroyers of the giant animals. The overkill model explains everything the disease and climate scenarios explain, he asserts, and in addition makes accurate predictions about which species would eventually become extinct.</p>
+    </div>
+  `,
+  3: `
+    <h1 class="pass-title">Keeping the fun in funfairs</h1>
+    <div class="pass-sub">&nbsp;</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>Fun is becoming a tricky issue for ride designers. In order to increase excitement, they have been ramping up the accelerations to create the most dizzying forces possible. But getting it right is far from easy. Err on the side of caution and people won't bother with a second ride. Go too far, however, and they may not be able to. Experts realise we are now at the limit of how much acceleration a human body can take, and designers are finding it hard to think up ways of keeping the public coming back for more. The problem is that true innovation has been lacking for a while, and fairground rides have become more about survival than actual enjoyment. So if our thrill-seeking bodies can really take no more, what's going to keep dragging us back to amusement parks? Creating something new and exciting, yet safe, is going to take some careful thought.</p>
+      <p><span class="para-letter">B</span>When the Disney Corporation asked German designer Walter Stengel to design a giant loop ride for them in the 1970s, he went to NASA, the aeronautics and space foundation, to discover the effects of sustained acceleration on the pilots. NASA's research suggests that the maximum level we can endure is 9 g, g being the standard unit of acceleration due to gravity. Go much beyond that and pilots pass out. Go further still and they suffer serious internal damage. So Stengel decided that the maximum vertical acceleration for the public should be 6, and then only for a second or so. What's more, he put firm restrictions on the rate at which acceleration can increase — you'll never go down a 45 degree ramp into a tight circular loop, for instance.</p>
+      <p><span class="para-letter">C</span>But stricter safety limits only intensify the need to search for novel ways to thrill customers. Part of the problem is that no matter how exciting an attraction is, after a few goes the passengers will have some idea of what to expect. The next stage in designing rides, however, could throw predictability out of the window. This step has already been taken in the most recent waltzers, or tea-cup rides. Ride a waltzer and you sit in a car that spins on its own axis. The car is on a huge platform that also rotates. In the past you could take comfort from the fact that the spin was tightly controlled by gears that turned your car at a rate determined by the rotation speed of the whole ride. But the latest generation of waltzer cars spin freely, at a rate determined by the weight and position of the people in them. So you never have the same experience twice. "People seem to like these 'chaotic rides'," says Stengel.</p>
+      <p><span class="para-letter">D</span>Although seemingly a passport to endless thrills, chaos does have one rather obvious drawback: it's unpredictable. Despite complex calculations, designers can never be completely sure that something odd won't happen, especially since freely turning systems occasionally hit a resonance frequency. For example, if pushed at a particular frequency, a child on a swing would go over the top of the swing's frame. Similarly, if you drive a revolving waltzer car at its resonance frequency it could speed up uncontrollably. This could be very hazardous, according to Stengel. If a ride is subjected to unforeseen stresses, no one can guarantee that it will be able to cope.</p>
+      <p><span class="para-letter">E</span>No one even knows what the safe limits of rotational force are, let alone its effect on the human body. Stengel has worked with the German Air Force, rotating volunteers head over heels while also making them cartwheel or pirouette like a ballet dancer. It emerged that if the pilots were turned on all three axes simultaneously, they became so nauseous they almost blacked out, and when they got off they couldn't walk. But what Stengel found particularly puzzling was that they also developed headaches and other problems about two days later. Since these effects aren't understood, he tries to limit how people on his rides are rotated. "We want to provide fun, not pain."</p>
+      <p><span class="para-letter">F</span>With that goal in mind, Stengel feels that flinging people around in ever more chaotic machines is no longer the way forward. He believes that the sequence of accelerations, not their size, is what counts and that the way to make rides more fun is to put people through a carefully designed succession of relatively small accelerations. Other experts in this field agree, and it seems likely that designers could formulate profiles even for existing attractions that would lead to higher amusement value. Recent experiments testing the tolerances of Dutch military pilots to a range of accelerations have shown that tumbling around in machines doesn't have to be unpleasant. When the force is kept low, the subjects actually enjoy the experience.</p>
+      <p><span class="para-letter">G</span>The fun seems to come from the unforeseen, particularly when an effect called the Coriolis Illusion comes into play. This is an agreeable tumbling feeling which occurs, for example, when the head is suddenly tilted while the subject is spinning with eyes closed. It appears that a roll which includes, for instance, an unexpected change of acceleration from a small negative g — a feeling of weightlessness — to a small positive — a slight crushing sensation — has an extraordinary effect on people. If the theories of Stengel and other experts really do work, fairground fun might one day be measured in smiles, not screams.</p>
+    </div>
+  `
+};
+
+const PASSAGE_TITLES = {
+  1: "sorry — who are you?",
+  2: "MAMMOTH KILL",
+  3: "Keeping the fun in funfairs"
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  // Passage 1
+  1: 'F', 2: 'T', 3: 'NGV', 4: 'T', 5: 'F', 6: 'T', 7: 'NGV',
+  8: 'animals', 9: 'emotion', 10: 'gene', 11: 'left', 12: 'laboratory', 13: 'cheating',
+  // Passage 2
+  14: 'North America', 15: 'overkill model', 16: 'hunting',
+  17: 'deadly disease', 18: 'empirical evidence', 19: 'climate instability',
+  20: 'communities',
+  21: 'B', 22: 'C', 23: 'B', 24: 'A', 25: 'B', 26: 'C',
+  // Passage 3
+  27: 'iv', 28: 'viii', 29: 'ii', 30: 'iii', 31: 'i', 32: 'vi',
+  33: 'weight and position', // displayed; checked via compound logic
+  34: 'resonance frequency', 35: 'three axes', 36: 'headaches', 37: 'Coriolis illusion',
+  38: 'N', 39: 'NGV', 40: 'Y'
+};
+
+const pRanges = { 1: [1, 13], 2: [14, 26], 3: [27, 40] };
+const TOTAL_Q = 40;
+
+/* Compound question: Q33 has two linked blanks; correct if both 'weight'
+   and 'position' appear (in either order). */
+const COMPOUND_QS = {
+  33: { parts: ['33a', '33b'], validSet: ['weight', 'position'] }
+};
+
+/* ============================================================
+   SHARED OPTION SETS
+============================================================ */
+const PEOPLE_ABC = [
+  ['A', 'A — John Alroy'],
+  ['B', 'B — Ross D E Macphee'],
+  ['C', 'C — Russell W Graham']
+];
+
+const HEADINGS_I_VIII = [
+  ['i','i'], ['ii','ii'], ['iii','iii'], ['iv','iv'],
+  ['v','v'], ['vi','vi'], ['vii','vii'], ['viii','viii']
+];
+
+/* ============================================================
+   QUESTIONS
+============================================================ */
+const QUESTIONS = {
+  1: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 1–7</strong><br>Do the following statements agree with the information given in Reading Passage 1?<br>Write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, <strong>NOT GIVEN</strong> if there is no information on this.</div>` },
+    { type:'tfng', n:1, text:'Before attending college Jacob was capable of recognising people he knew well.' },
+    { type:'tfng', n:2, text:'Researchers believe that prosopagnosia may be a growing problem.' },
+    { type:'tfng', n:3, text:'It is harder to identify developmental prosopagnosia in babies than in young children.' },
+    { type:'tfng', n:4, text:'A German study seems to support the Harvard and UCL research findings.' },
+    { type:'tfng', n:5, text:'In general, prosopagnosics are aware that other people can recognise faces more easily than they can.' },
+    { type:'tfng', n:6, text:'In most cases, prosopagnosics have developed ways to deal with their problem.' },
+    { type:'tfng', n:7, text:'The study of prosopagnosia may help neuroscientists to treat different kinds of brain injury.' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 8–13</strong><br>Complete the notes below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="notes-box">
+        <div class="notes-title">The challenges for prosopagnosia researchers</div>
+        <div class="notes-section">
+          <div class="notes-heading">Differences in prosopagnosics</div>
+          <div class="plain-line">As well as being unable to recognise facial features, prosopagnosics may also have problems recognising:</div>
+          <ul>
+            <li>commonly seen ${blank(8)} and objects.</li>
+            <li>the ${blank(9)} on someone else's face.</li>
+          </ul>
+          <div class="plain-line">Some prosopagnosics can recognise that people are regarded as attractive by others.</div>
+        </div>
+        <div class="notes-section">
+          <div class="notes-heading">Causes of prosopagnosia</div>
+          <div class="plain-line">Prosopagnosia may be caused by:</div>
+          <ul>
+            <li>just one ${blank(10)} according to Martina Gruter.</li>
+            <li>a defect in the ${blank(11)} eye according to Brad Duchaine.</li>
+          </ul>
+        </div>
+        <div class="notes-section">
+          <div class="notes-heading">Treatment for prosopagnosia</div>
+          <div class="plain-line">Joseph Degutis's patient proved he had been successfully trained to recognise faces inside the ${blank(12)} and in the outside world.</div>
+          <div class="plain-line">Duchaine's training may allow prosopagnosics to recognise faces belonging to family and workmates.</div>
+          <div class="plain-line">Thomas Gruter doubts that training will work and mentions that ${blank(13)} by some subjects can affect research results.</div>
+        </div>
+      </div>
+    `}
+  ],
+
+  2: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 14–20</strong><br>Complete the summary below.<br>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="summary-block">
+        <p>Three theories have been put forward to explain the disappearance of the different species of large mammals that inhabited ${blank(14)} 11,000 years ago. The ${blank(15)}, proposed around fifty years ago by Paul S Martin, blames ${blank(16)} by people for mass extinction. Computer calculations seem to support this explanation, but critics question the reliability of the figures they are based on.</p>
+        <p>The second theory suggests that humans introduced a ${blank(17)} which wiped out the large mammals. However, so far this theory also lacks any ${blank(18)}.</p>
+        <p>The final theory suggests that this period experienced significant ${blank(19)} which eventually led to the loss of habitat and to the division of the ${blank(20)} that some of the large mammals had organised.</p>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 21–26</strong><br>Look at the following statements (Questions 21–26) and the list of people below.<br>Match each statement with the correct person, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br><em>NB You may use any letter more than once.</em></div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of People</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">John Alroy</span></li>
+          <li><span class="letter">B</span><span class="desc">Ross D E Macphee</span></li>
+          <li><span class="letter">C</span><span class="desc">Russell W Graham</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:21, text:'Too little evidence exists to support the hunting theory.', options: PEOPLE_ABC, selectClass:'wide' },
+    { type:'select-q', n:22, text:'The bigger the animal, the bigger the territory it requires for survival.', options: PEOPLE_ABC, selectClass:'wide' },
+    { type:'select-q', n:23, text:'Globally, humans have been indirectly responsible for the elimination of many species.', options: PEOPLE_ABC, selectClass:'wide' },
+    { type:'select-q', n:24, text:'Population estimates can be used to understand how large mammals become extinct.', options: PEOPLE_ABC, selectClass:'wide' },
+    { type:'select-q', n:25, text:'Scientific examination of fossil remains may provide some proof for one of the theories.', options: PEOPLE_ABC, selectClass:'wide' },
+    { type:'select-q', n:26, text:'Environmental changes negatively affected the social groupings of some large species.', options: PEOPLE_ABC, selectClass:'wide' }
+  ],
+
+  3: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 27–32</strong><br>Reading Passage 3 has seven paragraphs, <strong>A–G</strong>.<br>Choose the correct heading for paragraphs <strong>B–G</strong> from the list of headings below.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Headings</div>
+        <ol>
+          <li><span class="letter">i</span><span class="desc">Less is more</span></li>
+          <li><span class="letter">ii</span><span class="desc">Research can't guarantee safety</span></li>
+          <li><span class="letter">iii</span><span class="desc">Unexplained symptoms</span></li>
+          <li><span class="letter">iv</span><span class="desc">Setting the limits of acceleration</span></li>
+          <li><span class="letter">v</span><span class="desc">The irresistible appeal of speed</span></li>
+          <li><span class="letter">vi</span><span class="desc">Gentle surprises</span></li>
+          <li><span class="letter">vii</span><span class="desc">A difficult task</span></li>
+          <li><span class="letter">viii</span><span class="desc">A different ride every time</span></li>
+        </ol>
+      </div>
+      <div class="example-box">
+        <span class="example-label">Example</span>
+        <span class="example-q">Paragraph A</span>
+        <span class="example-answer">vii</span>
+      </div>
+    `},
+    { type:'select-q', n:27, text:'Paragraph B', options: HEADINGS_I_VIII, selectClass:'narrow' },
+    { type:'select-q', n:28, text:'Paragraph C', options: HEADINGS_I_VIII, selectClass:'narrow' },
+    { type:'select-q', n:29, text:'Paragraph D', options: HEADINGS_I_VIII, selectClass:'narrow' },
+    { type:'select-q', n:30, text:'Paragraph E', options: HEADINGS_I_VIII, selectClass:'narrow' },
+    { type:'select-q', n:31, text:'Paragraph F', options: HEADINGS_I_VIII, selectClass:'narrow' },
+    { type:'select-q', n:32, text:'Paragraph G', options: HEADINGS_I_VIII, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 33–37</strong><br>Complete the sentences below.<br>Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="q-item select-q-row" id="q-33">
+        <span class="q-num">33</span>
+        <span class="select-q-text">
+          Some attractions such as the new type of waltzer depend on both the
+          <input class="q-input" data-q="33a" autocomplete="off" spellcheck="false">
+          and
+          <input class="q-input" data-q="33b" autocomplete="off" spellcheck="false">
+          of their passengers in order to create a variety of ride experiences.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-34">
+        <span class="q-num">34</span>
+        <span class="select-q-text">
+          Designers need to be aware that a 'chaotic' ride could accelerate at a violent rate if it reaches its
+          <input class="q-input" data-q="34" autocomplete="off" spellcheck="false">.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-35">
+        <span class="q-num">35</span>
+        <span class="select-q-text">
+          Research has shown that people will begin to feel ill if they are subjected to movement on all
+          <input class="q-input" data-q="35" autocomplete="off" spellcheck="false">
+          at the same time.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-36">
+        <span class="q-num">36</span>
+        <span class="select-q-text">
+          Volunteers in Stengel's rotation tests suffered delayed reactions such as
+          <input class="q-input" data-q="36" autocomplete="off" spellcheck="false">.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-37">
+        <span class="q-num">37</span>
+        <span class="select-q-text">
+          A phenomenon known as the
+          <input class="q-input" data-q="37" autocomplete="off" spellcheck="false">
+          produced a pleasurable sensation in test subjects.
+        </span>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 38–40</strong><br>Do the following statements agree with the claims of the writer of Reading Passage 3?<br>Write <strong>YES</strong> if the statement agrees with the claims of the writer, <strong>NO</strong> if the statement contradicts the claims of the writer, <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</div>` },
+    { type:'ynng', n:38, text:'There is still a lot to be learnt about the rates of acceleration which people can withstand.' },
+    { type:'ynng', n:39, text:'Children enjoy funfairs more than adults.' },
+    { type:'ynng', n:40, text:'Current rides could probably be adapted to become more enjoyable.' }
+  ]
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  activePassage: 1,
+  answers: {},
+  passageSize: 14,
+  questionSize: 13
+};
+
+/* ============================================================
+   DOM REFS
+============================================================ */
+const passagePane = document.getElementById('passagePane');
+const questionPane = document.getElementById('questionPane');
+const bottomNav = document.getElementById('bottomNav');
+const progressFill = document.getElementById('progressFill');
+const hlPill = document.getElementById('hlPill');
+
+/* ============================================================
+   COMPOUND-Q HELPERS
+============================================================ */
+function isQAnswered(q){
+  const compound = COMPOUND_QS[q];
+  if (compound) return compound.parts.every(p => state.answers[p]);
+  return !!state.answers[q];
+}
+
+function checkCompound(q){
+  const cfg = COMPOUND_QS[q];
+  if (!cfg) return false;
+  const values = cfg.parts.map(p => normalize(state.answers[p] || ''));
+  if (values.some(v => !v)) return false;
+  const set = new Set(values);
+  if (set.size !== cfg.validSet.length) return false; // must be distinct
+  return cfg.validSet.every(v => set.has(v));
+}
+
+/* ============================================================
+   RENDER
+============================================================ */
+function renderPassage(){
+  passagePane.innerHTML = PASSAGES[state.activePassage];
+  passagePane.style.fontSize = state.passageSize + 'px';
+}
+
+function renderRadioItem(n, text, optionPairs, current, layoutClass){
+  const opts = optionPairs.map(([v, label]) => `
+    <label class="opt-label ${current === v ? 'selected' : ''}">
+      <input type="radio" name="q${n}" value="${v}" ${current === v ? 'checked' : ''}> ${label}
+    </label>`).join('');
+  return `<div class="q-item" id="q-${n}">
+    <div class="q-text"><span class="q-num">${n}</span><span class="q-text-body">${text}</span></div>
+    <div class="q-options ${layoutClass}">${opts}</div>
+  </div>`;
+}
+
+function renderQuestions(){
+  const items = QUESTIONS[state.activePassage];
+  let html = '';
+  for (const item of items) {
+    if (item.type === 'group-header') {
+      html += item.content;
+    }
+    else if (item.type === 'tfng') {
+      html += renderRadioItem(item.n, item.text, [['T','TRUE'],['F','FALSE'],['NGV','NOT GIVEN']], state.answers[item.n] || '', 'radio-row');
+    }
+    else if (item.type === 'ynng') {
+      html += renderRadioItem(item.n, item.text, [['Y','YES'],['N','NO'],['NGV','NOT GIVEN']], state.answers[item.n] || '', 'radio-row');
+    }
+    else if (item.type === 'mcq') {
+      html += renderRadioItem(item.n, item.text, item.options, state.answers[item.n] || '', 'mcq-vert');
+    }
+    else if (item.type === 'select-q') {
+      const cur = state.answers[item.n] || '';
+      const sc = item.selectClass || '';
+      const opts = `<option value="">— select —</option>` +
+        item.options.map(([v, label]) =>
+          `<option value="${v}" ${cur === v ? 'selected' : ''}>${escapeAttr(label)}</option>`
+        ).join('');
+      html += `<div class="q-item select-q-row" id="q-${item.n}">
+        <span class="q-num">${item.n}</span>
+        <span class="select-q-text">${item.text}</span>
+        <select class="q-select ${sc} ${cur ? 'has-value' : ''}" data-q="${item.n}">${opts}</select>
+      </div>`;
+    }
+    else if (item.type === 'html') {
+      html += item.content;
+    }
+  }
+  questionPane.innerHTML = html;
+  questionPane.style.fontSize = state.questionSize + 'px';
+  hydrateInputs();
+  attachQuestionListeners();
+}
+
+function hydrateInputs(){
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    const key = inp.dataset.q;
+    const cur = state.answers[key];
+    if (cur && !inp.value) inp.value = cur;
+    if (inp.value) inp.classList.add('has-value');
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    const key = sel.dataset.q;
+    const cur = state.answers[key];
+    if (cur && !sel.value) {
+      sel.value = cur;
+      sel.classList.add('has-value');
+    }
+  });
+}
+
+function attachQuestionListeners(){
+  questionPane.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', e => {
+      const name = e.target.name;
+      const key = name.substring(1); // strip leading 'q'
+      state.answers[key] = e.target.value;
+      questionPane.querySelectorAll(`input[name="${name}"]`).forEach(rr => {
+        rr.closest('.opt-label').classList.toggle('selected', rr.checked);
+      });
+      updateNav();
+      updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value.trim();
+      if (v) state.answers[key] = e.target.value;
+      else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav();
+      updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    sel.addEventListener('change', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value;
+      if (v) state.answers[key] = v;
+      else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav();
+      updateProgress();
+    });
+  });
+}
+
+/* ============================================================
+   BOTTOM NAV
+============================================================ */
+function renderNav(){
+  const passes = Object.keys(pRanges).map(Number);
+  let html = '';
+  passes.forEach((p, i) => {
+    if (i > 0) html += `<div class="nav-sep"></div>`;
+    const [first, last] = pRanges[p];
+    if (p === state.activePassage) {
+      html += `<span class="nav-pass active" data-pass="${p}">Passage ${p}</span>`;
+      for (let q = first; q <= last; q++) {
+        const ans = isQAnswered(q);
+        html += `<button class="q-pill ${ans ? 'answered' : ''}" data-q="${q}">${q}</button>`;
+      }
+    } else {
+      const total = last - first + 1;
+      let answered = 0;
+      for (let q = first; q <= last; q++) if (isQAnswered(q)) answered++;
+      html += `<span class="nav-pass" data-pass="${p}">Passage ${p} <small>(${answered} of ${total} answered)</small></span>`;
+    }
+  });
+  html += `<div class="nav-spacer"></div>`;
+  html += `<button class="submit-btn" id="submitBtn">✓ Submit</button>`;
+  bottomNav.innerHTML = html;
+
+  bottomNav.querySelectorAll('.q-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      const q = p.dataset.q;
+      const el = document.getElementById('q-' + q) || questionPane.querySelector(`[data-q="${q}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (el.classList && el.tagName !== 'INPUT' && el.tagName !== 'SELECT') {
+          el.style.transition = 'background .3s';
+          el.style.background = '#fffbe5';
+          setTimeout(() => el.style.background = '', 700);
+        } else if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+          setTimeout(() => el.focus(), 320);
+        }
+      }
+    });
+  });
+  bottomNav.querySelectorAll('.nav-pass').forEach(l => {
+    l.addEventListener('click', () => {
+      const p = parseInt(l.dataset.pass, 10);
+      if (p !== state.activePassage) {
+        state.activePassage = p;
+        renderPassage();
+        renderQuestions();
+        renderNav();
+        passagePane.scrollTop = 0;
+        questionPane.scrollTop = 0;
+      }
+    });
+  });
+  document.getElementById('submitBtn').addEventListener('click', showResults);
+}
+
+function updateNav(){ renderNav(); }
+function updateProgress(){
+  let answered = 0;
+  for (let q = 1; q <= TOTAL_Q; q++) if (isQAnswered(q)) answered++;
+  progressFill.style.width = (answered / TOTAL_Q * 100) + '%';
+}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+passagePane.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) { hlPill.style.display = 'none'; return; }
+    const range = sel.getRangeAt(0);
+    if (!passagePane.contains(range.commonAncestorContainer)) { hlPill.style.display = 'none'; return; }
+    if (range.toString().trim() === '') { hlPill.style.display = 'none'; return; }
+    const rect = range.getBoundingClientRect();
+    hlPill.style.display = 'block';
+    const pillW = hlPill.offsetWidth;
+    const pillH = hlPill.offsetHeight;
+    let left = rect.left + rect.width / 2 - pillW / 2;
+    let top = rect.top - pillH - 8;
+    if (top < 8) top = rect.bottom + 8;
+    if (left < 8) left = 8;
+    if (left + pillW > window.innerWidth - 8) left = window.innerWidth - pillW - 8;
+    hlPill.style.left = left + 'px';
+    hlPill.style.top = top + 'px';
+  }, 0);
+});
+
+hlPill.addEventListener('mousedown', e => {
+  e.preventDefault();
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const range = sel.getRangeAt(0);
+  if (!passagePane.contains(range.commonAncestorContainer)) return;
+  try {
+    const span = document.createElement('span');
+    span.className = 'highlight';
+    span.appendChild(range.extractContents());
+    range.insertNode(span);
+    sel.removeAllRanges();
+  } catch (err) { /* selection spans boundaries */ }
+  hlPill.style.display = 'none';
+});
+
+passagePane.addEventListener('click', e => {
+  if (e.target.classList && e.target.classList.contains('highlight')) {
+    const span = e.target;
+    const parent = span.parentNode;
+    while (span.firstChild) parent.insertBefore(span.firstChild, span);
+    parent.removeChild(span);
+    parent.normalize();
+  }
+});
+
+document.addEventListener('mousedown', e => {
+  if (e.target !== hlPill && !passagePane.contains(e.target)) {
+    hlPill.style.display = 'none';
+  }
+});
+
+/* ============================================================
+   DIVIDER DRAG
+============================================================ */
+const divider = document.getElementById('divider');
+const mainEl = document.querySelector('.main');
+let dragging = false;
+divider.addEventListener('mousedown', e => {
+  dragging = true;
+  divider.classList.add('dragging');
+  document.body.classList.add('dragging');
+  e.preventDefault();
+});
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const rect = mainEl.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const pct = (x / rect.width) * 100;
+  if (pct >= 20 && pct <= 80) {
+    passagePane.style.flex = `0 0 ${pct}%`;
+    passagePane.style.width = `${pct}%`;
+  }
+});
+document.addEventListener('mouseup', () => {
+  if (dragging) {
+    dragging = false;
+    divider.classList.remove('dragging');
+    document.body.classList.remove('dragging');
+  }
+});
+
+/* ============================================================
+   MENU + FONT CONTROLS
+============================================================ */
+const hamburger = document.getElementById('hamburger');
+const menuPanel = document.getElementById('menuPanel');
+hamburger.addEventListener('click', e => {
+  e.stopPropagation();
+  menuPanel.classList.toggle('open');
+});
+document.addEventListener('click', e => {
+  if (!menuPanel.contains(e.target) && e.target !== hamburger && !hamburger.contains(e.target)) {
+    menuPanel.classList.remove('open');
+  }
+});
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    const dir = parseInt(btn.dataset.dir, 10);
+    if (target === 'passage') {
+      state.passageSize = Math.min(22, Math.max(10, state.passageSize + dir));
+      passagePane.style.fontSize = state.passageSize + 'px';
+      document.getElementById('passSizeVal').textContent = state.passageSize + 'px';
+    } else {
+      state.questionSize = Math.min(22, Math.max(10, state.questionSize + dir));
+      questionPane.style.fontSize = state.questionSize + 'px';
+      document.getElementById('qSizeVal').textContent = state.questionSize + 'px';
+    }
+  });
+});
+
+/* ============================================================
+   RESULTS / BAND
+============================================================ */
+function bandFromCorrect(correct){
+  if (correct >= 39) return 9.0;
+  if (correct >= 37) return 8.5;
+  if (correct >= 35) return 8.0;
+  if (correct >= 33) return 7.5;
+  if (correct >= 30) return 7.0;
+  if (correct >= 27) return 6.5;
+  if (correct >= 23) return 6.0;
+  if (correct >= 19) return 5.5;
+  if (correct >= 15) return 5.0;
+  if (correct >= 13) return 4.5;
+  return 4.0;
+}
+
+function userDisplayFor(q){
+  if (COMPOUND_QS[q]){
+    const parts = COMPOUND_QS[q].parts.map(p => state.answers[p] || '');
+    if (parts.every(v => !v)) return '<em style="color:#999">—</em>';
+    return parts.map(v => v || '—').join(' + ');
+  }
+  const u = state.answers[q];
+  return u !== undefined && u !== '' ? displayAnswer(u) : '<em style="color:#999">—</em>';
+}
+
+function showResults(){
+  const passes = Object.keys(pRanges).map(Number);
+  let totalCorrect = 0;
+  let html = '';
+  passes.forEach(p => {
+    const [first, last] = pRanges[p];
+    let correct = 0;
+    let rows = '';
+    for (let q = first; q <= last; q++) {
+      const c = AK[q];
+      let ok;
+      if (COMPOUND_QS[q]) {
+        ok = checkCompound(q);
+      } else {
+        const u = state.answers[q];
+        ok = checkAnswer(u, c);
+      }
+      if (ok) correct++;
+      rows += `<tr class="${ok?'row-correct':'row-wrong'}">
+        <td><strong>${q}</strong></td>
+        <td>${userDisplayFor(q)}</td>
+        <td>${displayCorrect(c)}</td>
+        <td class="mark ${ok?'mark-ok':'mark-x'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    totalCorrect += correct;
+    const total = last - first + 1;
+    const pct = (correct / total) * 100;
+    const badge = pct >= 70 ? 'badge-green' : pct >= 50 ? 'badge-orange' : 'badge-red';
+    html += `<div class="result-pass">
+      <div class="result-pass-header">
+        <div class="result-pass-info">
+          <div class="result-pass-title">Passage ${p}: ${PASSAGE_TITLES[p]}</div>
+          <div class="result-pass-sub">Questions ${first}–${last}</div>
+        </div>
+        <div class="score-badge ${badge}">${correct} / ${total}</div>
+      </div>
+      <table class="result-table">
+        <thead><tr><th>Q#</th><th>Your Answer</th><th>Correct Answer</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  });
+  const totalPct = (totalCorrect / TOTAL_Q) * 100;
+  const band = bandFromCorrect(totalCorrect);
+  html += `<div class="total-strip">
+    <div class="total-block">
+      <div class="total-label">Score</div>
+      <div class="total-value">${totalCorrect} / ${TOTAL_Q}</div>
+    </div>
+    <div class="total-block">
+      <div class="total-label">Accuracy</div>
+      <div class="total-value">${totalPct.toFixed(0)}%</div>
+    </div>
+    <div class="total-block">
+      <div class="total-label">Estimated Band</div>
+      <div class="total-value total-band-value">${band.toFixed(1)}</div>
+    </div>
+  </div>`;
+  document.getElementById('resultsBody').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('open');
+});
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modal').classList.remove('open');
+});
+
+/* ============================================================
+   INIT
+============================================================ */
+renderPassage();
+renderQuestions();
+renderNav();
+updateProgress();
+</script>
+</body>
+</html>

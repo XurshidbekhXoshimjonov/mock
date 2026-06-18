@@ -1,6 +1,6 @@
 {
-  "id": "1780619933115-reading-full-test-3",
-  "title": "Test 3",
+  "id": "reading-practice-test-4",
+  "title": "Reading Practice Test 4",
   "status": "published",
   "publishedAt": "2026-06-05T00:38:53.116Z",
   "source": "manual-parts-combine",
@@ -328,14 +328,38 @@
             "instructionText": "According to the text, FIVE of the following statements are true.",
             "rule": "Choose FIVE letters, A-H",
             "options": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "E",
-              "F",
-              "G",
-              "H"
+              {
+                "value": "A",
+                "label": "A  Some universities are joining with each other"
+              },
+              {
+                "value": "B",
+                "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+              },
+              {
+                "value": "C",
+                "label": "C  There are not enough graduates in developed countries"
+              },
+              {
+                "value": "D",
+                "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+              },
+              {
+                "value": "E",
+                "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+              },
+              {
+                "value": "F",
+                "label": "F  The__(world's largest university)__is located in Turkey."
+              },
+              {
+                "value": "G",
+                "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+              },
+              {
+                "value": "H",
+                "label": "H  Scandinavian governments provide enough money for their universities"
+              }
             ],
             "questions": [
               {
@@ -343,14 +367,38 @@
                 "type": "multiple_choice",
                 "question": "Some universities are joining with each other",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E",
-                  "F",
-                  "G",
-                  "H"
+                  {
+                    "value": "A",
+                    "label": "A  Some universities are joining with each other"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  There are not enough graduates in developed countries"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F  The__(world's largest university)__is located in Turkey."
+                  },
+                  {
+                    "value": "G",
+                    "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+                  },
+                  {
+                    "value": "H",
+                    "label": "H  Scandinavian governments provide enough money for their universities"
+                  }
                 ],
                 "answer": "A"
               },
@@ -359,14 +407,38 @@
                 "type": "multiple_choice",
                 "question": "There are not enough graduates in developed countries",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E",
-                  "F",
-                  "G",
-                  "H"
+                  {
+                    "value": "A",
+                    "label": "A  Some universities are joining with each other"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  There are not enough graduates in developed countries"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F  The__(world's largest university)__is located in Turkey."
+                  },
+                  {
+                    "value": "G",
+                    "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+                  },
+                  {
+                    "value": "H",
+                    "label": "H  Scandinavian governments provide enough money for their universities"
+                  }
                 ],
                 "answer": "C"
               },
@@ -375,14 +447,38 @@
                 "type": "multiple_choice",
                 "question": "Many top companies now spend one-third of their budget on research and marketing",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E",
-                  "F",
-                  "G",
-                  "H"
+                  {
+                    "value": "A",
+                    "label": "A  Some universities are joining with each other"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  There are not enough graduates in developed countries"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F  The__(world's largest university)__is located in Turkey."
+                  },
+                  {
+                    "value": "G",
+                    "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+                  },
+                  {
+                    "value": "H",
+                    "label": "H  Scandinavian governments provide enough money for their universities"
+                  }
                 ],
                 "answer": "D"
               },
@@ -391,14 +487,38 @@
                 "type": "multiple_choice",
                 "question": "The number of people from developed countries studying outside their home countries has doubled in the last two decades",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E",
-                  "F",
-                  "G",
-                  "H"
+                  {
+                    "value": "A",
+                    "label": "A  Some universities are joining with each other"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  There are not enough graduates in developed countries"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F  The__(world's largest university)__is located in Turkey."
+                  },
+                  {
+                    "value": "G",
+                    "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+                  },
+                  {
+                    "value": "H",
+                    "label": "H  Scandinavian governments provide enough money for their universities"
+                  }
                 ],
                 "answer": "E"
               },
@@ -407,14 +527,38 @@
                 "type": "multiple_choice",
                 "question": "Scandinavian governments provide enough money for their universities",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E",
-                  "F",
-                  "G",
-                  "H"
+                  {
+                    "value": "A",
+                    "label": "A  Some universities are joining with each other"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  China__(was the first developing country to__(adopt massification)__)__."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  There are not enough graduates in developed countries"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Many top companies now spend one-third of their budget on research and marketing"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  The number of people from developed countries studying outside their home countries has doubled in the last two decades"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F  The__(world's largest university)__is located in Turkey."
+                  },
+                  {
+                    "value": "G",
+                    "label": "G  Lighter management__(strategies)__can compensate for a lack of resources."
+                  },
+                  {
+                    "value": "H",
+                    "label": "H  Scandinavian governments provide enough money for their universities"
+                  }
                 ],
                 "answer": "H"
               }
@@ -426,11 +570,26 @@
             "instructionText": "What are TWO problems currently faced by universities, especially in Europe and globally?",
             "rule": "Choose TWO letters, A-E",
             "options": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "E"
+              {
+                "value": "A",
+                "label": "A  pressure to charge students higher tuition fees"
+              },
+              {
+                "value": "B",
+                "label": "B  conflicts between university administrators and government funders"
+              },
+              {
+                "value": "C",
+                "label": "C  shortage of qualified professors and lecturers"
+              },
+              {
+                "value": "D",
+                "label": "D  competition from private online education platforms"
+              },
+              {
+                "value": "E",
+                "label": "E  lack of international partnerships between universities"
+              }
             ],
             "questions": [
               {
@@ -438,11 +597,26 @@
                 "type": "multiple_choice",
                 "question": "pressure to charge students higher tuition fees",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E"
+                  {
+                    "value": "A",
+                    "label": "A  pressure to charge students higher tuition fees"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  conflicts between university administrators and government funders"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  shortage of qualified professors and lecturers"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  competition from private online education platforms"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  lack of international partnerships between universities"
+                  }
                 ],
                 "answer": "A"
               },
@@ -451,11 +625,26 @@
                 "type": "multiple_choice",
                 "question": "conflicts between university administrators and government funders",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E"
+                  {
+                    "value": "A",
+                    "label": "A  pressure to charge students higher tuition fees"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  conflicts between university administrators and government funders"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  shortage of qualified professors and lecturers"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  competition from private online education platforms"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  lack of international partnerships between universities"
+                  }
                 ],
                 "answer": "B"
               }
@@ -467,11 +656,26 @@
             "instructionText": "What are TWO possible solutions proposed by reformists or conservatives?",
             "rule": "Choose TWO letters, A-E",
             "options": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "E"
+              {
+                "value": "A",
+                "label": "A  Expanding the use of internet-based tuition and private universities"
+              },
+              {
+                "value": "B",
+                "label": "B  Increasing government funding for all universities equally"
+              },
+              {
+                "value": "C",
+                "label": "C  Replacing university professors with business professionals"
+              },
+              {
+                "value": "D",
+                "label": "D  Merging smaller universities into larger institutions"
+              },
+              {
+                "value": "E",
+                "label": "E  Reducing the number of available courses and programs"
+              }
             ],
             "questions": [
               {
@@ -479,11 +683,26 @@
                 "type": "multiple_choice",
                 "question": "Expanding the use of internet-based tuition and private universities",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E"
+                  {
+                    "value": "A",
+                    "label": "A  Expanding the use of internet-based tuition and private universities"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  Increasing government funding for all universities equally"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  Replacing university professors with business professionals"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Merging smaller universities into larger institutions"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  Reducing the number of available courses and programs"
+                  }
                 ],
                 "answer": "A"
               },
@@ -492,11 +711,26 @@
                 "type": "multiple_choice",
                 "question": "Replacing university professors with business professionals",
                 "options": [
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E"
+                  {
+                    "value": "A",
+                    "label": "A  Expanding the use of internet-based tuition and private universities"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B  Increasing government funding for all universities equally"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C  Replacing university professors with business professionals"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D  Merging smaller universities into larger institutions"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E  Reducing the number of available courses and programs"
+                  }
                 ],
                 "answer": "C"
               }
@@ -743,5 +977,6 @@
     "40": "TRUE"
   },
   "images": [],
-  "createdAt": "2026-06-05T00:38:53.116Z"
+  "createdAt": "2026-06-05T00:38:53.116Z",
+  "slug": "reading-practice-test-4"
 }

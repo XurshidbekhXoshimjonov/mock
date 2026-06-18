@@ -5,26 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ielts: {
-                            navy: "#071547",
-                            blue: "#0b3a82",
-                            red: "#dc1431",
-                            soft: "#f6f8fc"
-                        }
-                    },
-                    boxShadow: {
-                        card: "0 18px 45px rgba(7, 21, 71, 0.09)"
-                    }
-                }
-            }
-        };
-    </script>
+    <link rel="stylesheet" href="reading-tailwind.generated.css">
     <link rel="stylesheet" href="profile-dashboard.css">
 </head>
 
@@ -32,8 +13,8 @@
     <header id="globalNavbar" data-global-navbar="true"></header>
     <div id="profileRoot"></div>
 
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="vendor-react.production.min.js"></script>
+    <script src="vendor-react-dom.production.min.js"></script>
     <script src="auth-client.js"></script>
     <script src="profile-dashboard.js"></script>
 </body>

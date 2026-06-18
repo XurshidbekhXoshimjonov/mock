@@ -20,7 +20,7 @@ let TranslateClient = null;
 try {
     TranslateClient = require("@google-cloud/translate").v2.Translate;
 } catch (error) {
-    console.log("Google Translate package is unavailable:", error.message);
+    console.warn("Google Translate package is unavailable:", error.message);
 }
 
 const app = express();
@@ -141,7 +141,7 @@ function readTests() {
     try {
         return JSON.parse(fs.readFileSync(TESTS_FILE, "utf8"));
     } catch (error) {
-        console.log("Could not read tests.json:", error.message);
+        console.warn("Could not read tests.json:", error.message);
         return [];
     }
 }
@@ -159,7 +159,7 @@ function readJsonArray(filePath) {
         const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
         return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
-        console.log(`Could not read ${path.basename(filePath)}:`, error.message);
+        console.warn(`Could not read ${path.basename(filePath)}:`, error.message);
         return [];
     }
 }
@@ -176,6 +176,17 @@ function makeId(title) {
         .slice(0, 50) || "reading-test";
 
     return `${Date.now()}-${slug}`;
+}
+
+function slugify(value, fallback = "test") {
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .replace(/-{2,}/g, "-")
+        || fallback;
 }
 
 function getReadingTestPath(id) {
@@ -422,7 +433,7 @@ async function fetchDictionaryVocabulary(candidate, requestedWord) {
         const data = await response.json();
         return dictionaryDefinitionFromEntries(data, requestedWord);
     } catch (error) {
-        console.log("Free Dictionary lookup failed:", error.message);
+        console.warn("Free Dictionary lookup failed:", error.message);
         return null;
     } finally {
         clearTimeout(timeout);
@@ -549,9 +560,9 @@ async function translateToUzbek(text) {
     }
 
     if (errors.length) {
-        console.log("Google Translate lookup failed:", errors.join(" | "));
+        console.warn("Google Translate lookup failed:", errors.join(" | "));
     } else if (!translateConfigWarningShown) {
-        console.log("Google Translate lookup skipped: set GOOGLE_TRANSLATE_API_KEY or Google Cloud credentials.");
+        console.info("Google Translate lookup skipped: set GOOGLE_TRANSLATE_API_KEY or Google Cloud credentials.");
         translateConfigWarningShown = true;
     }
 
@@ -610,13 +621,73 @@ async function generateVocabularyRecord(normalized, requestedWord, passageId) {
     });
 }
 
-function findStandaloneReadingTestForVocabulary(testId, passageId) {
+function fullReadingPassageMatches(fullTest, passage, passageId) {
+    if (!fullTest || !passageId) {
+        return false;
+    }
+
+    const passageNumber = passage?.number || 1;
+    const candidates = [
+        passage?.id,
+        `${fullTest.id}-passage-${passageNumber}`,
+        `${fullTest.id}-reading-p${passageNumber}`,
+        `${fullTest.id}-p${passageNumber}`
+    ].filter(Boolean);
+
+    return candidates.includes(passageId);
+}
+
+function fullReadingTestVocabularyContext(fullTest, passageId) {
+    const passages = fullTest?.reading?.passages || [];
+    if (!passages.length) {
+        return null;
+    }
+
+    const passage = passageId
+        ? passages.find((item) => fullReadingPassageMatches(fullTest, item, passageId))
+        : passages[0];
+
+    if (!passage) {
+        return null;
+    }
+
+    return {
+        id: fullTest.id,
+        title: fullTest.title,
+        part: passage.number || 1,
+        vocabulary: [
+            ...(Array.isArray(fullTest.vocabulary) ? fullTest.vocabulary : []),
+            ...(Array.isArray(passage.vocabulary) ? passage.vocabulary : [])
+        ],
+        createdAt: fullTest.createdAt
+    };
+}
+
+function findReadingTestForVocabulary(testId, passageId) {
     let test = testId ? getReadingTestById(testId) : null;
 
     if (!test && passageId) {
         test = readManualReadingTests().find((item) =>
             passageId === item.id || String(passageId).startsWith(`${item.id}-passage-`)
         );
+    }
+
+    if (test && test.part !== "full") {
+        return test;
+    }
+
+    const fullTest = testId ? fullTestStore.read(testId) : null;
+    const fullContext = fullReadingTestVocabularyContext(fullTest, passageId);
+    if (fullContext) {
+        return fullContext;
+    }
+
+    if (passageId) {
+        const matchedFullTest = fullTestStore.readAll().find((item) =>
+            (item.reading?.passages || []).some((passage) => fullReadingPassageMatches(item, passage, passageId))
+        );
+
+        return fullReadingTestVocabularyContext(matchedFullTest, passageId);
     }
 
     if (!test || test.part === "full") {
@@ -688,6 +759,46 @@ function parseOptionText(optionText) {
         .filter(Boolean);
 }
 
+function answerValue(...values) {
+    for (const value of values) {
+        if (Array.isArray(value)) {
+            const joined = value.map(String).map((item) => item.trim()).filter(Boolean).join(" | ");
+            if (joined) return joined;
+            continue;
+        }
+
+        if (value !== undefined && value !== null) {
+            const normalized = String(value).trim();
+            if (normalized) return normalized;
+        }
+    }
+
+    return "";
+}
+
+function hasQuestionInput(rawQuestion) {
+    if (!rawQuestion || typeof rawQuestion !== "object") {
+        return false;
+    }
+
+    return [
+        rawQuestion.number,
+        rawQuestion.type,
+        rawQuestion.question,
+        rawQuestion.questionText,
+        rawQuestion.text,
+        rawQuestion.prompt,
+        rawQuestion.answer,
+        rawQuestion.correctAnswer,
+        rawQuestion.correct_answer,
+        rawQuestion.correct,
+        rawQuestion.answers
+    ].some((value) => {
+        if (Array.isArray(value)) return value.some((item) => String(item || "").trim());
+        return String(value || "").trim();
+    });
+}
+
 function optionsForType(type, options) {
     if (type === "true_false_not_given") {
         return ["TRUE", "FALSE", "NOT GIVEN"];
@@ -697,12 +808,15 @@ function optionsForType(type, options) {
         return ["YES", "NO", "NOT GIVEN"];
     }
 
-    if (["multiple_choice", "multi_select", "matching_headings", "matching_information", "diagram_labeling"].includes(type)) {
+    if (["multiple_choice", "multi_select", "matching_headings", "matching_information", "matching_features", "matching_sentence_endings", "diagram_labeling"].includes(type)) {
         return parseOptionText(options);
     }
 
     if (Array.isArray(options)) {
-        return options.map(String).map((item) => item.trim()).filter(Boolean);
+        return options.map((item) => {
+            if (item && typeof item === "object") return item;
+            return String(item).trim();
+        }).filter(Boolean);
     }
 
     return parseOptionText(options);
@@ -714,16 +828,23 @@ function normalizeQuestion(rawQuestion, answers) {
         .trim()
         .toLowerCase()
         .replace(/[\s-]+/g, "_");
-    const question = String(rawQuestion.question || rawQuestion.text || "").trim();
+    const question = String(rawQuestion.question || rawQuestion.questionText || rawQuestion.text || rawQuestion.prompt || "").trim();
     const answerFromMap = answers[String(number)];
-    const answer = rawQuestion.answer !== undefined ? rawQuestion.answer : answerFromMap;
+    const answer = answerValue(
+        rawQuestion.answer,
+        rawQuestion.correctAnswer,
+        rawQuestion.correct_answer,
+        rawQuestion.correct,
+        rawQuestion.answers,
+        answerFromMap
+    );
 
     return {
         number,
         type,
         question,
-        options: optionsForType(type, rawQuestion.options),
-        answer: Array.isArray(answer) ? answer.join(" | ") : String(answer || "").trim()
+        options: optionsForType(type, rawQuestion.options || rawQuestion.choices),
+        answer
     };
 }
 
@@ -744,37 +865,225 @@ function parseQuestionLines(questionText, answers) {
         });
 }
 
-function buildManualReadingTest(body) {
-    let questions = [];
-    let questionGroups = Array.isArray(body.questionGroups) ? body.questionGroups : [];
-
-    if (Array.isArray(body.questions)) {
-        const answers = parseAnswerLines(body.answerText || body.answersText || "");
-        questions = body.questions.map((question) => normalizeQuestion(question, answers));
-    } else {
-        const parsed = ManualTestParser.parseStructuredContent(
-            body.questionText || "",
-            body.answerText || body.answersText || "",
-            "reading"
-        );
-        questions = parsed.questions;
-        questionGroups = parsed.groups;
+function validateManualReadingText(questionText, answerText, part) {
+    if (!questionText || !questionText.trim()) {
+        throw new Error("Questions text is required.");
     }
 
-    questions = questions
-        .filter((question) => (
-            Number.isFinite(question.number) &&
-            question.question &&
-            question.type &&
-            question.answer
-        ))
-        .sort((a, b) => a.number - b.number);
+    const answers = ManualTestParser.parseAnswerLines(answerText);
+    const lines = questionText.split(/\n/);
+    const seenNumbers = new Set();
+    const partNumberStr = part === "full" ? "Full Test" : `Passage ${part}`;
 
-    const title = String(body.title || "").trim();
-    const passage = String(body.passage || "").trim();
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+
+        // Skip headers
+        if (/^(group|section)\b/i.test(line) || /^#\s*questions\b/i.test(line) || (/^questions\s+\d/i.test(line) && !/^\d+\s*\|/.test(line))) {
+            continue;
+        }
+
+        if (/^\d{1,2}\s*\|/.test(line)) {
+            const parts = line.split("|").map(item => item.trim());
+            const numStr = parts[0];
+            const number = Number(numStr);
+            
+            if (!Number.isFinite(number)) {
+                throw new Error(`[${partNumberStr}] Line ${i + 1}: Question number '${numStr}' is invalid.`);
+            }
+
+            if (seenNumbers.has(number)) {
+                throw new Error(`[${partNumberStr}] Question ${number} is duplicated.`);
+            }
+            seenNumbers.add(number);
+
+            const rawType = parts[1];
+            if (!rawType) {
+                throw new Error(`[${partNumberStr}] Question ${number} is missing a question type.`);
+            }
+
+            const allowedReadingTypes = [
+                "true_false_not_given",
+                "yes_no_not_given",
+                "multiple_choice",
+                "multi_select",
+                "summary_completion",
+                "sentence_completion",
+                "matching_headings",
+                "matching_information",
+                "diagram_labeling",
+                "diagram_labelling",
+                "short_answer",
+                "table_completion",
+                "notes_completion",
+                "note_completion",
+                "form_completion"
+            ];
+            const normalizedType = ManualTestParser.normalizeType(rawType, "reading");
+            if (!allowedReadingTypes.includes(normalizedType)) {
+                throw new Error(`[${partNumberStr}] Question ${number} has unsupported question type '${rawType}'.`);
+            }
+
+            const questionTextVal = parts[2];
+            if (!questionTextVal) {
+                throw new Error(`[${partNumberStr}] Question ${number} has empty question text.`);
+            }
+
+            const needsOptionsList = [
+                "multiple_choice",
+                "multi_select",
+                "matching_headings",
+                "matching_information",
+                "matching",
+                "map_labeling",
+                "map_labelling",
+                "diagram_labeling",
+                "diagram_labelling"
+            ];
+            const needsOpt = needsOptionsList.includes(normalizedType);
+            let answer = "";
+            if (parts.length >= 5) {
+                answer = parts[4];
+            } else if (parts.length === 4) {
+                if (!needsOpt) {
+                    answer = parts[3];
+                }
+            }
+
+            if (!answer) {
+                answer = answers[String(number)];
+            }
+
+            if (!answer || !answer.trim()) {
+                throw new Error(`[${partNumberStr}] Question ${number} must have a correct answer.`);
+            }
+        }
+    }
+
+    if (seenNumbers.size === 0) {
+        throw new Error(`[${partNumberStr}] Add at least one Reading question.`);
+    }
+}
+
+function validateManualListeningText(questionText, answerText, part) {
+    if (!questionText || !questionText.trim()) {
+        throw new Error("Questions text is required.");
+    }
+
+    const answers = ManualTestParser.parseAnswerLines(answerText);
+    const lines = questionText.split(/\n/);
+    const seenNumbers = new Set();
+    const partNumberStr = part === "full" ? "Full Test" : `Part ${part}`;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+
+        if (/^section\b/i.test(line) || /^#\s*questions\b/i.test(line) || /^questions\s+\d/i.test(line)) {
+            continue;
+        }
+
+        if (/^\d{1,2}\s*\|/.test(line)) {
+            const parts = line.split("|").map(item => item.trim());
+            const numStr = parts[0];
+            const number = Number(numStr);
+
+            if (!Number.isFinite(number)) {
+                throw new Error(`[${partNumberStr}] Line ${i + 1}: Question number '${numStr}' is invalid.`);
+            }
+
+            if (seenNumbers.has(number)) {
+                throw new Error(`[${partNumberStr}] Question ${number} is duplicated.`);
+            }
+            seenNumbers.add(number);
+
+            const rawType = parts[1];
+            if (!rawType) {
+                throw new Error(`[${partNumberStr}] Question ${number} is missing a question type.`);
+            }
+
+            const allowedListeningTypes = [
+                "form_completion",
+                "notes_completion",
+                "note_completion",
+                "multiple_choice",
+                "map_labeling",
+                "map_labelling",
+                "matching",
+                "sentence_completion",
+                "diagram_labeling",
+                "diagram_labelling",
+                "table_completion",
+                "short_answer",
+                "multiple_select",
+                "sentence_completion_inline"
+            ];
+            const normalizedType = ManualTestParser.normalizeType(rawType, "listening");
+            if (!allowedListeningTypes.includes(normalizedType)) {
+                throw new Error(`[${partNumberStr}] Question ${number} has unsupported question type '${rawType}'.`);
+            }
+
+            const questionTextVal = parts[2];
+            if (!questionTextVal) {
+                throw new Error(`[${partNumberStr}] Question ${number} has empty question text.`);
+            }
+
+            const needsOptionsList = [
+                "multiple_choice",
+                "multi_select",
+                "matching_headings",
+                "matching_information",
+                "matching",
+                "map_labeling",
+                "map_labelling",
+                "diagram_labeling",
+                "diagram_labelling"
+            ];
+            const needsOpt = needsOptionsList.includes(normalizedType);
+            let answer = "";
+            if (parts.length >= 5) {
+                answer = parts[4];
+            } else if (parts.length === 4) {
+                if (!needsOpt) {
+                    answer = parts[3];
+                }
+            }
+
+            if (!answer) {
+                answer = answers[String(number)];
+            }
+
+            if (!answer || !answer.trim()) {
+                throw new Error(`[${partNumberStr}] Question ${number} must have a correct answer.`);
+            }
+        }
+    }
+
+    if (seenNumbers.size === 0) {
+        throw new Error(`[${partNumberStr}] Add at least one Listening question.`);
+    }
+}
+
+function buildManualReadingTest(body) {
+    const part = normalizePart(body.part);
+    let title = String(body.title || "").trim();
+    if (part === "full") {
+        const existingCount = readManualReadingTests().filter(t => t.part === "full").length;
+        title = `Test ${existingCount + 1}`;
+    }
 
     if (!title) {
         const error = new Error("Test title is required");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const passage = String(body.passage || body.passageText || "").trim();
+    const passageTitle = String(body.passageTitle || body.passage_title || "").trim();
+
+    if (part !== "full" && ![1, 2, 3].includes(Number(part))) {
+        const error = new Error("Invalid part. Must be 1, 2, 3 or full.");
         error.statusCode = 400;
         throw error;
     }
@@ -785,11 +1094,120 @@ function buildManualReadingTest(body) {
         throw error;
     }
 
-    if (!questions.length) {
-        const error = new Error("At least one valid question with an answer is required");
+    // Run strong manual text validator!
+    try {
+        if (Array.isArray(body.questions)) {
+            const answers = parseAnswerLines(body.answerText || body.answersText || "");
+            const rawQuestions = body.questions.filter(hasQuestionInput);
+            const seenNumbers = new Set();
+            const partNumberStr = part === "full" ? "Full Test" : `Passage ${part}`;
+            
+            rawQuestions.forEach((q) => {
+                const number = Number(q.number);
+                if (!Number.isFinite(number)) {
+                    throw new Error(`[${partNumberStr}] Question number is invalid.`);
+                }
+                if (seenNumbers.has(number)) {
+                    throw new Error(`[${partNumberStr}] Question ${number} is duplicated.`);
+                }
+                seenNumbers.add(number);
+
+                const normalizedType = ManualTestParser.normalizeType(q.type, "reading");
+                const isCompletion = [
+                    "summary_completion",
+                    "notes_completion",
+                    "sentence_completion",
+                    "table_completion",
+                    "form_completion"
+                ].includes(normalizedType);
+
+                if (!q.question && !isCompletion) {
+                    throw new Error(`[${partNumberStr}] Question ${number} has empty question text.`);
+                }
+
+                const allowedReadingTypes = [
+                    "true_false_not_given",
+                    "yes_no_not_given",
+                    "multiple_choice",
+                    "multi_select",
+                    "summary_completion",
+                    "sentence_completion",
+                    "matching_headings",
+                    "matching_information",
+                    "diagram_labeling",
+                    "diagram_labelling",
+                    "short_answer",
+                    "table_completion",
+                    "notes_completion",
+                    "note_completion",
+                    "form_completion"
+                ];
+                if (!allowedReadingTypes.includes(ManualTestParser.normalizeType(q.type, "reading"))) {
+                    throw new Error(`[${partNumberStr}] Question ${number} has unsupported question type '${q.type}'.`);
+                }
+
+                const ans = q.answer || answers[String(number)];
+                if (!ans || !ans.trim()) {
+                    throw new Error(`[${partNumberStr}] Question ${number} must have a correct answer.`);
+                }
+            });
+            if (seenNumbers.size === 0) {
+                throw new Error(`[${partNumberStr}] Add at least one Reading question.`);
+            }
+        } else {
+            validateManualReadingText(
+                body.questionText || "",
+                body.answerText || body.answersText || "",
+                part
+            );
+        }
+    } catch (e) {
+        const error = new Error(e.message);
         error.statusCode = 400;
         throw error;
     }
+
+    let questions = [];
+    let questionGroups = Array.isArray(body.questionGroups) ? body.questionGroups : [];
+    let submittedQuestionCount = 0;
+
+    if (Array.isArray(body.questions)) {
+        const answers = parseAnswerLines(body.answerText || body.answersText || "");
+        const rawQuestions = body.questions.filter(hasQuestionInput);
+        submittedQuestionCount = rawQuestions.length;
+        questions = rawQuestions.map((question) => normalizeQuestion(question, answers));
+    } else {
+        const parsed = ManualTestParser.parseStructuredContent(
+            body.questionText || "",
+            body.answerText || body.answersText || "",
+            "reading"
+        );
+        submittedQuestionCount = parsed.questions.length;
+        questions = parsed.questions;
+        questionGroups = parsed.groups;
+    }
+
+    const validQuestions = questions
+        .filter((question) => {
+            const normalizedType = ManualTestParser.normalizeType(question.type, "reading");
+            const isCompletion = [
+                "summary_completion",
+                "notes_completion",
+                "sentence_completion",
+                "table_completion",
+                "form_completion"
+            ].includes(normalizedType);
+
+            return (
+                Number.isFinite(question.number) &&
+                (question.question || isCompletion) &&
+                question.type &&
+                question.answer
+            );
+        })
+        .sort((a, b) => a.number - b.number);
+
+    questions = validQuestions;
 
     if (!questionGroups.length && questions.length) {
         questionGroups = [{
@@ -805,13 +1223,13 @@ function buildManualReadingTest(body) {
         questions
     );
 
-    const part = normalizePart(body.part);
-
     return {
         id: body.id || makeId(title),
         title,
         part,
         passage,
+        passageText: passage,
+        passageTitle,
         questionGroups,
         questions,
         vocabulary: part === "full" ? [] : normalizeVocabularyList(body.vocabulary),
@@ -834,7 +1252,7 @@ function readManualReadingTests() {
             try {
                 return JSON.parse(fs.readFileSync(path.join(READING_TESTS_DIR, file), "utf8"));
             } catch (error) {
-                console.log(`Could not read ${file}:`, error.message);
+                console.warn(`Could not read ${file}:`, error.message);
                 return null;
             }
         })
@@ -846,10 +1264,13 @@ function summarizeManualReadingTest(test) {
     return {
         id: test.id,
         title: test.title,
+        subtitle: test.subtitle || (test.part === "full" ? "Reading full test" : "Academic Reading practice"),
         part: test.part,
         questionCount: test.questions.length,
         vocabularyCount: Array.isArray(test.vocabulary) ? test.vocabulary.length : 0,
-        createdAt: test.createdAt
+        createdAt: test.createdAt,
+        slug: publicSlugForTest("reading", "reading", test),
+        openUrl: publicTestUrl("reading", "reading", test)
     };
 }
 
@@ -880,32 +1301,42 @@ function listeningQuestionCount(test) {
         return test.questions.length;
     }
 
+    return collectStructuredListeningNumbers(test.parts || []).length;
+}
+
+function collectStructuredListeningNumbers(value) {
     const numbers = new Set();
 
-    function inspect(value, key) {
-        if (key === "questionNumber" && Number.isFinite(Number(value))) {
-            numbers.add(Number(value));
+    function inspect(item, key) {
+        if (key === "questionNumber" && Number.isFinite(Number(item))) {
+            const number = Number(item);
+            if (number >= 1 && number <= 40) {
+                numbers.add(number);
+            }
         }
 
-        if (typeof value === "string") {
-            for (const match of value.matchAll(/\{\{(\d{1,2})\}\}/g)) {
-                numbers.add(Number(match[1]));
+        if (typeof item === "string") {
+            for (const match of item.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+                const number = Number(match[1]);
+                if (number >= 1 && number <= 40) {
+                    numbers.add(number);
+                }
             }
             return;
         }
 
-        if (Array.isArray(value)) {
-            value.forEach((item) => inspect(item, ""));
+        if (Array.isArray(item)) {
+            item.forEach((child) => inspect(child, ""));
             return;
         }
 
-        if (value && typeof value === "object") {
-            Object.entries(value).forEach(([childKey, childValue]) => inspect(childValue, childKey));
+        if (item && typeof item === "object") {
+            Object.entries(item).forEach(([childKey, childValue]) => inspect(childValue, childKey));
         }
     }
 
-    inspect(test.parts || [], "parts");
-    return numbers.size;
+    inspect(value, "");
+    return [...numbers].sort((a, b) => a - b);
 }
 
 function normalizeListeningBlock(block, blockIndex) {
@@ -970,12 +1401,32 @@ function buildStructuredListeningTest(body) {
         throw error;
     }
 
+    if (requestedPart === "full" && savedParts.length !== 4) {
+        const error = new Error("Full Listening Test requires Part 1, Part 2, Part 3, and Part 4");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    savedParts.forEach(validateStructuredListeningPart);
+    const questions = savedParts.flatMap(structuredListeningQuestionsForPart);
+
     return {
         id: source.id || makeId(title),
         title,
         duration,
         part: requestedPart,
+        audio: savedParts[0]?.audioUrl || "",
+        assetFiles: savedParts
+            .map((part) => part.audioUrl)
+            .filter((audioUrl) => String(audioUrl || "").startsWith("/uploads/")),
         parts: savedParts,
+        questions,
+        sections: savedParts.map((part) => ({
+            title: part.questionRange || part.title || `Part ${part.partNumber}`,
+            instruction: part.instruction || "",
+            rule: "",
+            questionNumbers: structuredListeningQuestionsForPart(part).map((question) => question.number)
+        })),
         createdAt: source.createdAt || new Date().toISOString(),
         updatedAt: new Date().toISOString()
     };
@@ -988,6 +1439,13 @@ function normalizeListeningType(type) {
 }
 
 function optionsForListeningType(type, options) {
+    if (Array.isArray(options)) {
+        return options.map((item) => {
+            if (item && typeof item === "object") return item;
+            return String(item).trim();
+        }).filter(Boolean);
+    }
+
     if (["multiple_choice", "map_labeling", "matching", "diagram_labeling"].includes(type)) {
         return parseOptionText(options);
     }
@@ -1193,6 +1651,106 @@ function buildManualListeningTest(body, audioFile) {
         return buildStructuredListeningTest(body);
     }
 
+    const part = normalizeListeningPart(body.part);
+    let title = String(body.title || "").trim();
+    if (part === "full") {
+        const existingCount = readManualListeningTests().filter(t => t.part === "full").length;
+        title = `Test ${existingCount + 1}`;
+    }
+
+    if (!title) {
+        const error = new Error("Test title is required");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    if (!audioFile && !body.audio) {
+        const error = new Error("Audio file is required");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    if (part !== "full" && ![1, 2, 3, 4].includes(Number(part))) {
+        const error = new Error("Invalid part. Must be 1, 2, 3, 4 or full.");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // Run strong manual text validator!
+    try {
+        if (Array.isArray(body.questions)) {
+            const answers = parseAnswerLines(body.answerText || body.answersText || "");
+            const rawQuestions = body.questions.filter(hasQuestionInput);
+            const seenNumbers = new Set();
+            const partNumberStr = part === "full" ? "Full Test" : `Part ${part}`;
+            
+            rawQuestions.forEach((q) => {
+                const number = Number(q.number);
+                if (!Number.isFinite(number)) {
+                    throw new Error(`[${partNumberStr}] Question number is invalid.`);
+                }
+                if (seenNumbers.has(number)) {
+                    throw new Error(`[${partNumberStr}] Question ${number} is duplicated.`);
+                }
+                seenNumbers.add(number);
+
+                const normalizedType = ManualTestParser.normalizeType(q.type, "listening");
+                const isCompletion = [
+                    "form_completion",
+                    "notes_completion",
+                    "note_completion",
+                    "sentence_completion",
+                    "table_completion",
+                    "flowchart_completion",
+                    "flow_chart_completion",
+                    "sentence_completion_inline"
+                ].includes(normalizedType);
+
+                if (!q.question && !isCompletion) {
+                    throw new Error(`[${partNumberStr}] Question ${number} has empty question text.`);
+                }
+
+                const allowedListeningTypes = [
+                    "form_completion",
+                    "notes_completion",
+                    "note_completion",
+                    "multiple_choice",
+                    "map_labeling",
+                    "map_labelling",
+                    "matching",
+                    "sentence_completion",
+                    "diagram_labeling",
+                    "diagram_labelling",
+                    "table_completion",
+                    "short_answer",
+                    "multiple_select",
+                    "sentence_completion_inline"
+                ];
+                if (!allowedListeningTypes.includes(ManualTestParser.normalizeType(q.type, "listening"))) {
+                    throw new Error(`[${partNumberStr}] Question ${number} has unsupported question type '${q.type}'.`);
+                }
+
+                const ans = q.answer || answers[String(number)];
+                if (!ans || !ans.trim()) {
+                    throw new Error(`[${partNumberStr}] Question ${number} must have a correct answer.`);
+                }
+            });
+            if (seenNumbers.size === 0) {
+                throw new Error(`[${partNumberStr}] Add at least one Listening question.`);
+            }
+        } else {
+            validateManualListeningText(
+                body.questionText || "",
+                body.answerText || body.answersText || "",
+                part
+            );
+        }
+    } catch (e) {
+        const error = new Error(e.message);
+        error.statusCode = 400;
+        throw error;
+    }
+
     const answers = parseAnswerLines(body.answerText || body.answersText || "");
     let sections = Array.isArray(body.sections) ? body.sections : [];
     let questions = [];
@@ -1210,39 +1768,33 @@ function buildManualListeningTest(body, audioFile) {
     }
 
     questions = questions
-        .filter((question) => (
-            Number.isFinite(question.number) &&
-            question.question &&
-            question.type &&
-            question.answer
-        ))
+        .filter((question) => {
+            const normalizedType = ManualTestParser.normalizeType(question.type, "listening");
+            const isCompletion = [
+                "form_completion",
+                "notes_completion",
+                "note_completion",
+                "sentence_completion",
+                "table_completion",
+                "flowchart_completion",
+                "flow_chart_completion",
+                "sentence_completion_inline"
+            ].includes(normalizedType);
+
+            return (
+                Number.isFinite(question.number) &&
+                (question.question || isCompletion) &&
+                question.type &&
+                question.answer
+            );
+        })
         .sort((a, b) => a.number - b.number);
 
     sections = ManualTestParser.sortQuestionGroups(
         normalizeListeningSections(sections, questions)
     );
 
-    const title = String(body.title || "").trim();
     const transcript = String(body.transcript || "").trim();
-
-    if (!title) {
-        const error = new Error("Test title is required");
-        error.statusCode = 400;
-        throw error;
-    }
-
-    if (!audioFile && !body.audio) {
-        const error = new Error("Audio file is required");
-        error.statusCode = 400;
-        throw error;
-    }
-
-    if (!questions.length) {
-        const error = new Error("At least one valid question with an answer is required");
-        error.statusCode = 400;
-        throw error;
-    }
-
     const audio = audioFile
         ? `/uploads/audio/${path.basename(audioFile.path)}`
         : String(body.audio || "");
@@ -1250,8 +1802,9 @@ function buildManualListeningTest(body, audioFile) {
     return {
         id: body.id || makeId(title),
         title,
-        part: normalizeListeningPart(body.part),
+        part,
         audio,
+        assetFiles: audio.startsWith("/uploads/") ? [audio] : [],
         transcript,
         sections,
         questions,
@@ -1261,6 +1814,41 @@ function buildManualListeningTest(body, audioFile) {
 
 function saveManualListeningTest(test) {
     fs.writeFileSync(getListeningTestPath(test.id), JSON.stringify(test, null, 2), "utf8");
+}
+
+function resolveUploadedAssetPath(assetPath) {
+    const cleanPath = String(assetPath || "").split(/[?#]/)[0].replace(/^\/+/, "");
+
+    if (!cleanPath.startsWith("uploads/")) {
+        return "";
+    }
+
+    const resolvedPath = path.resolve(ROOT_DIR, cleanPath);
+    const resolvedUploadDir = path.resolve(UPLOAD_DIR);
+
+    if (resolvedPath !== resolvedUploadDir && !resolvedPath.startsWith(`${resolvedUploadDir}${path.sep}`)) {
+        return "";
+    }
+
+    return resolvedPath;
+}
+
+function listeningAssetFiles(test) {
+    const assets = new Set(Array.isArray(test.assetFiles) ? test.assetFiles : []);
+
+    if (test.audio) {
+        assets.add(test.audio);
+    }
+
+    (Array.isArray(test.parts) ? test.parts : []).forEach((part) => {
+        if (part.audioUrl) {
+            assets.add(part.audioUrl);
+        }
+    });
+
+    return [...assets]
+        .map(resolveUploadedAssetPath)
+        .filter((assetPath) => assetPath && fs.existsSync(assetPath));
 }
 
 function inspectStructuredQuestion(value, number, context = {}) {
@@ -1310,28 +1898,10 @@ function inspectStructuredQuestion(value, number, context = {}) {
     return null;
 }
 
-function buildStructuredListeningPart(fullTest, part) {
-    const answers = parseAnswerLines(part.answerText || "");
-    const numbers = new Set();
+function structuredListeningQuestionsForPart(part) {
+    const answers = parseAnswerLines(part.answerText || part.answersText || "");
 
-    function collect(value, key) {
-        if (key === "questionNumber" && Number.isFinite(Number(value))) {
-            numbers.add(Number(value));
-        }
-        if (typeof value === "string") {
-            for (const match of value.matchAll(/\{\{(\d{1,2})\}\}/g)) {
-                numbers.add(Number(match[1]));
-            }
-        } else if (Array.isArray(value)) {
-            value.forEach((item) => collect(item, ""));
-        } else if (value && typeof value === "object") {
-            Object.entries(value).forEach(([childKey, childValue]) => collect(childValue, childKey));
-        }
-    }
-
-    collect(part.blocks || [], "blocks");
-    const questions = [...numbers]
-        .sort((a, b) => a - b)
+    return collectStructuredListeningNumbers(part.blocks || [])
         .filter((number) => answers[String(number)])
         .map((number) => {
             const context = inspectStructuredQuestion(part.blocks || [], number) || {};
@@ -1343,6 +1913,106 @@ function buildStructuredListeningPart(fullTest, part) {
                 answer: answers[String(number)]
             };
         });
+}
+
+function validateStructuredListeningPart(part) {
+    const partNumber = Number(part.partNumber) || 1;
+    const answers = parseAnswerLines(part.answerText || part.answersText || "");
+
+    if (!String(part.audioUrl || "").trim()) {
+        const error = new Error(`[Part ${partNumber}] Audio is required.`);
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // 1. Check duplicate question numbers
+    const numberCounts = {};
+    function countNumbers(item, key) {
+        if (key === "questionNumber" && Number.isFinite(Number(item))) {
+            const num = Number(item);
+            numberCounts[num] = (numberCounts[num] || 0) + 1;
+        }
+        if (typeof item === "string") {
+            for (const match of item.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+                const num = Number(match[1]);
+                numberCounts[num] = (numberCounts[num] || 0) + 1;
+            }
+        }
+        if (Array.isArray(item)) {
+            item.forEach(child => countNumbers(child, ""));
+        } else if (item && typeof item === "object") {
+            Object.entries(item).forEach(([childKey, childValue]) => countNumbers(childValue, childKey));
+        }
+    }
+    countNumbers(part.blocks || [], "");
+    for (const [num, count] of Object.entries(numberCounts)) {
+        if (count > 1) {
+            const error = new Error(`[Part ${partNumber}] Question ${num} is duplicated.`);
+            error.statusCode = 400;
+            throw error;
+        }
+    }
+
+    const numbers = Object.keys(numberCounts).map(Number);
+    if (!numbers.length) {
+        const error = new Error(`[Part ${partNumber}] Add at least one question block.`);
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // 2. Check missing answers
+    const missingAnswers = numbers.filter((number) => !answers[String(number)]);
+    if (missingAnswers.length) {
+        const error = new Error(`[Part ${partNumber}] Question ${missingAnswers[0]} is missing a correct answer.`);
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // 3. Check unsupported question types and empty question text
+    const allowedListeningTypes = [
+        "form_completion",
+        "notes_completion",
+        "note_completion",
+        "multiple_choice",
+        "map_labeling",
+        "map_labelling",
+        "matching",
+        "sentence_completion",
+        "diagram_labeling",
+        "diagram_labelling",
+        "table_completion",
+        "short_answer",
+        "multiple_select",
+        "sentence_completion_inline"
+    ];
+    (part.blocks || []).forEach((block, idx) => {
+        if (!allowedListeningTypes.includes(block.type)) {
+            const error = new Error(`[Part ${partNumber}] Question block ${idx + 1} has unsupported type '${block.type}'.`);
+            error.statusCode = 400;
+            throw error;
+        }
+        if (block.type === "multiple_choice" || block.type === "multiple_select") {
+            if (!block.question || !block.question.trim()) {
+                const error = new Error(`[Part ${partNumber}] Question text in block ${idx + 1} cannot be empty.`);
+                error.statusCode = 400;
+                throw error;
+            }
+        }
+    });
+
+    const answeredNumbers = Object.keys(answers)
+        .map(Number)
+        .filter(Number.isFinite);
+    const unknownAnswers = answeredNumbers.filter((number) => !numbers.includes(number));
+    if (unknownAnswers.length) {
+        const error = new Error(`[Part ${partNumber}] Answer key contains question ${unknownAnswers[0]} which does not exist in any question block.`);
+        error.statusCode = 400;
+        throw error;
+    }
+}
+
+function buildStructuredListeningPart(fullTest, part) {
+    const questions = structuredListeningQuestionsForPart(part);
 
     if (!questions.length) {
         return null;
@@ -1401,7 +2071,7 @@ function readManualListeningTests() {
             try {
                 return JSON.parse(fs.readFileSync(path.join(LISTENING_TESTS_DIR, file), "utf8"));
             } catch (error) {
-                console.log(`Could not read ${file}:`, error.message);
+                console.warn(`Could not read ${file}:`, error.message);
                 return null;
             }
         })
@@ -1415,14 +2085,180 @@ function summarizeManualListeningTest(test) {
     return {
         id: test.id,
         title: test.title,
+        subtitle: test.subtitle || (part === "full" ? "Listening full test" : "Academic Listening practice"),
         part,
         audio: test.audio || test.parts?.[0]?.audioUrl || "",
         duration: listeningDurationForPart(part),
         questionCount: Number(test.questionCount) || listeningQuestionCount(test),
         createdAt: test.createdAt,
-        openUrl: String(test.openUrl || ""),
+        slug: publicSlugForTest("listening", "listening", test),
+        openUrl: publicTestUrl("listening", "listening", test),
         readOnly: Boolean(test.readOnly)
     };
+}
+
+function fullTestSkill(test) {
+    const readingQuestions = (test.reading?.passages || []).reduce((sum, passage) =>
+        sum + (passage.questionGroups || []).reduce((groupSum, group) => groupSum + (group.questions || []).length, 0), 0);
+    const listeningQuestions = (test.listening?.sections || []).reduce((sum, section) =>
+        sum + (section.questionGroups || []).reduce((groupSum, group) => groupSum + (group.questions || []).length, 0), 0);
+    const titleSignal = `${test.title || ""} ${test.sourceFile || ""}`.toLowerCase();
+
+    return test.skill
+        || (titleSignal.includes("reading") ? "reading" : null)
+        || (titleSignal.includes("listening") ? "listening" : null)
+        || (readingQuestions && !listeningQuestions ? "reading" : null)
+        || (listeningQuestions && !readingQuestions ? "listening" : "combined");
+}
+
+function routeBaseSlug(test, fallback = "test") {
+    const explicit = slugify(test.slug || test.publicSlug || test.routeSlug || "", "");
+    const generated = slugify(test.title || "", "");
+
+    return explicit || generated || slugify(test.id || "", fallback);
+}
+
+function uniqueRouteEntries(entries) {
+    const used = new Set();
+    const baseCounts = new Map();
+
+    return entries.map((entry) => {
+        const explicitSlug = slugify(entry.test.slug || entry.test.publicSlug || entry.test.routeSlug || "", "");
+        const generatedSlug = slugify(entry.test.title || "", "");
+        const baseSlug = explicitSlug || generatedSlug || slugify(entry.id || "", "test");
+        const nextCount = (baseCounts.get(baseSlug) || 0) + 1;
+        baseCounts.set(baseSlug, nextCount);
+
+        let publicSlug = nextCount === 1 ? baseSlug : `${baseSlug}-${nextCount}`;
+        let suffix = nextCount;
+
+        while (used.has(publicSlug)) {
+            suffix += 1;
+            publicSlug = `${baseSlug}-${suffix}`;
+        }
+
+        used.add(publicSlug);
+
+        return {
+            ...entry,
+            explicitSlug,
+            generatedSlug,
+            publicSlug
+        };
+    });
+}
+
+function buildPublicRouteEntries(skill) {
+    const entries = [];
+
+    fullTestStore.readAll().forEach((test) => {
+        const inferredSkill = fullTestSkill(test);
+
+        if (inferredSkill !== skill && inferredSkill !== "combined") {
+            return;
+        }
+
+        entries.push({
+            skill,
+            source: "full",
+            id: test.id,
+            test,
+            htmlFile: "full-test-player.html"
+        });
+    });
+
+    if (skill === "reading") {
+        readManualReadingTests().forEach((test) => {
+            entries.push({
+                skill: "reading",
+                source: "reading",
+                id: test.id,
+                test,
+                htmlFile: "reading-template.html"
+            });
+        });
+    }
+
+    if (skill === "listening") {
+        readManualListeningTests().forEach((test) => {
+            entries.push({
+                skill: "listening",
+                source: "listening",
+                id: test.id,
+                test,
+                htmlFile: "listening-template.html"
+            });
+        });
+    }
+
+    return uniqueRouteEntries(entries);
+}
+
+function publicEntryForTest(skill, source, id) {
+    return buildPublicRouteEntries(skill).find((entry) => (
+        entry.source === source &&
+        String(entry.id) === String(id)
+    ));
+}
+
+function publicSlugForTest(skill, source, test) {
+    const entry = publicEntryForTest(skill, source, test.id);
+    return entry?.publicSlug || routeBaseSlug(test);
+}
+
+function publicTestUrl(skill, source, test, options = {}) {
+    const slug = publicSlugForTest(skill, source, test);
+    const base = `/${skill}/${slug}`;
+    const part = Number(options.part);
+
+    if (skill === "listening" && Number.isFinite(part) && part > 0) {
+        return `${base}/part-${part}`;
+    }
+
+    return base;
+}
+
+function resolvePublicEntry(skill, locator, source = "") {
+    const raw = String(locator || "").trim();
+    const normalized = slugify(raw, "");
+    const entries = buildPublicRouteEntries(skill);
+    const scopedEntries = source ? entries.filter((entry) => entry.source === source) : entries;
+
+    return scopedEntries.find((entry) => entry.explicitSlug && entry.explicitSlug === normalized)
+        || scopedEntries.find((entry) => entry.publicSlug === normalized)
+        || scopedEntries.find((entry) => entry.generatedSlug && entry.generatedSlug === normalized)
+        || scopedEntries.find((entry) => String(entry.id) === raw)
+        || scopedEntries.find((entry) => slugify(entry.id || "", "") === normalized)
+        || null;
+}
+
+function resolveManualReadingTest(locator) {
+    return resolvePublicEntry("reading", locator, "reading")?.test || null;
+}
+
+function resolveManualListeningTest(locator) {
+    return resolvePublicEntry("listening", locator, "listening")?.test || null;
+}
+
+function resolveFullTest(locator, preferredSkill = "") {
+    const skills = preferredSkill === "listening" || preferredSkill === "reading"
+        ? [preferredSkill]
+        : ["reading", "listening"];
+
+    for (const skill of skills) {
+        const entry = resolvePublicEntry(skill, locator, "full");
+
+        if (entry) {
+            return entry.test;
+        }
+    }
+
+    return fullTestStore.read(locator);
+}
+
+function publicFullTestUrl(test, skill = "") {
+    const routeSkill = skill === "listening" ? "listening" : "reading";
+    return publicTestUrl(routeSkill, "full", test);
 }
 
 function cleanText(text) {
@@ -1798,7 +2634,7 @@ function parseAnswers(rawAnswers) {
                 .filter((item) => Number.isFinite(item.question) && item.answers.length > 0)
                 .sort((a, b) => a.question - b.question);
         } catch (error) {
-            console.log("Answer JSON parse failed, falling back to line parser:", error.message);
+            console.warn("Answer JSON parse failed, falling back to line parser:", error.message);
         }
     }
 
@@ -1862,7 +2698,7 @@ function getRecentManualTests(limit = 10) {
             part: test.part,
             questionCount: Array.isArray(test.questions) ? test.questions.length : 0,
             createdAt: test.createdAt,
-            openUrl: `reading-template.html?id=${encodeURIComponent(test.id)}`,
+            openUrl: publicTestUrl("reading", "reading", test),
             editUrl: "admin-reading.html"
         });
     });
@@ -1875,20 +2711,22 @@ function getRecentManualTests(limit = 10) {
             part: test.part,
             questionCount: Number(test.questionCount) || listeningQuestionCount(test),
             createdAt: test.createdAt,
-            openUrl: test.openUrl || `listening-template.html?id=${encodeURIComponent(test.id)}`,
+            openUrl: publicTestUrl("listening", "listening", test),
             editUrl: test.readOnly ? "" : `admin-listening.html?id=${encodeURIComponent(test.id)}`
         });
     });
 
     fullTestStore.readAll().forEach((test) => {
+        const summary = fullTestStore.summarize(test);
+
         items.push({
             id: test.id,
             title: test.title,
             type: "full",
             part: "full",
-            questionCount: fullTestStore.summarize(test).questionCount,
+            questionCount: summary.questionCount,
             createdAt: test.createdAt,
-            openUrl: `full-test-player.html?id=${encodeURIComponent(test.id)}`,
+            openUrl: publicFullTestUrl(test, summary.skill || "reading"),
             editUrl: "admin-import.html"
         });
     });
@@ -1966,7 +2804,7 @@ async function requireUser(req, res, next) {
         req.user = publicUser(account);
         next();
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ error: "Could not verify account" });
     }
 }
@@ -1992,7 +2830,7 @@ async function requireAdmin(req, res, next) {
             error: user ? "Admin access required" : "Not authenticated"
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ error: "Could not verify admin access" });
     }
 }
@@ -2017,20 +2855,107 @@ app.get("/admin-import", requireAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-import.html"));
 });
 
-app.get("/full-tests", (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "full-tests.html"));
+function redirectToCleanTestUrl(req, res, skill, source, locator, options = {}) {
+    const entry = resolvePublicEntry(skill, locator, source);
+
+    if (!entry) {
+        return false;
+    }
+
+    res.redirect(302, publicTestUrl(skill, source, entry.test, options));
+    return true;
+}
+
+app.get("/reading-template.html", (req, res) => {
+    if (req.query.id && redirectToCleanTestUrl(req, res, "reading", "reading", req.query.id)) {
+        return;
+    }
+
+    res.sendFile(path.join(ROOT_DIR, "reading-template.html"));
 });
 
-app.get("/speaking", (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
-});
+app.get("/listening-template.html", (req, res) => {
+    if (req.query.id && redirectToCleanTestUrl(req, res, "listening", "listening", req.query.id, { part: req.query.part })) {
+        return;
+    }
 
-app.get("/writing", (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "writing.html"));
+    res.sendFile(path.join(ROOT_DIR, "listening-template.html"));
 });
 
 app.get("/full-test-player", (req, res) => {
+    if (req.query.id) {
+        const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
+        const test = resolveFullTest(req.query.id, preferredSkill);
+
+        if (test) {
+            res.redirect(302, publicFullTestUrl(test, preferredSkill));
+            return;
+        }
+    }
+
     res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
+});
+
+app.get("/full-test-player.html", (req, res) => {
+    if (req.query.id) {
+        const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
+        const test = resolveFullTest(req.query.id, preferredSkill);
+
+        if (test) {
+            res.redirect(302, publicFullTestUrl(test, preferredSkill));
+            return;
+        }
+    }
+
+    res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
+});
+
+app.get("/reading/:slug", (req, res) => {
+    const entry = resolvePublicEntry("reading", req.params.slug);
+
+    if (!entry) {
+        res.status(404).send("Reading test not found");
+        return;
+    }
+
+    if (req.params.slug !== entry.publicSlug) {
+        res.redirect(302, publicTestUrl("reading", entry.source, entry.test));
+        return;
+    }
+
+    res.sendFile(path.join(ROOT_DIR, entry.htmlFile));
+});
+
+app.get("/listening/:slug/part-:part", (req, res) => {
+    const entry = resolvePublicEntry("listening", req.params.slug, "listening");
+
+    if (!entry) {
+        res.status(404).send("Listening test not found");
+        return;
+    }
+
+    if (req.params.slug !== entry.publicSlug) {
+        res.redirect(302, publicTestUrl("listening", "listening", entry.test, { part: req.params.part }));
+        return;
+    }
+
+    res.sendFile(path.join(ROOT_DIR, "listening-template.html"));
+});
+
+app.get("/listening/:slug", (req, res) => {
+    const entry = resolvePublicEntry("listening", req.params.slug);
+
+    if (!entry) {
+        res.status(404).send("Listening test not found");
+        return;
+    }
+
+    if (req.params.slug !== entry.publicSlug) {
+        res.redirect(302, publicTestUrl("listening", entry.source, entry.test));
+        return;
+    }
+
+    res.sendFile(path.join(ROOT_DIR, entry.htmlFile));
 });
 
 app.get("/api/profile/progress", requireUser, (req, res) => {
@@ -2097,7 +3022,9 @@ registerFullTestRoutes(app, {
     uploadsRoot: UPLOAD_DIR,
     safeFileName,
     getReadingTestById,
-    getListeningTestById
+    getListeningTestById,
+    resolveFullTestLocator: resolveFullTest,
+    publicUrlForFullTest: publicFullTestUrl
 });
 
 app.get("/login", (req, res) => {
@@ -2136,13 +3063,13 @@ app.get("/api/reading-tests", (req, res) => {
 });
 
 app.get("/api/reading-tests/:id", (req, res) => {
-    const filePath = getReadingTestPath(req.params.id);
+    const test = resolveManualReadingTest(req.params.id);
 
-    if (!fs.existsSync(filePath)) {
+    if (!test) {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
-    res.sendFile(filePath);
+    res.json(test);
 });
 
 app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
@@ -2198,11 +3125,17 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
             return res.status(400).json({ error: "A valid word is required" });
         }
 
-        const test = findStandaloneReadingTestForVocabulary(testId, passageIdFromQuery);
-
-        if (!test) {
+        if (String(testId).includes("-full")) {
             return res.status(403).json({
-                error: "Vocabulary lookup is available only for standalone Reading practice passages"
+                error: "Vocabulary lookup is not allowed in Full Tests"
+            });
+        }
+
+        const test = findReadingTestForVocabulary(testId, passageIdFromQuery);
+
+        if (!test || String(test.id).includes("-full")) {
+            return res.status(403).json({
+                error: "Vocabulary lookup is not allowed in Full Tests"
             });
         }
 
@@ -2235,7 +3168,7 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
 
         res.json(vocabularyResponse(record, requestedWord));
     } catch (error) {
-        console.log("Vocabulary lookup error:", error.message);
+        console.warn("Vocabulary lookup error:", error.message);
         res.status(500).json({
             error: "Could not look up vocabulary",
             definition: VOCABULARY_DEFINITION_FALLBACK,
@@ -2300,6 +3233,7 @@ app.post("/api/listening-tests", requireAdmin, audioUpload.single("audio"), (req
 
 app.get("/api/listening-tests", (req, res) => {
     const part = req.query.part ? normalizeListeningPart(req.query.part) : null;
+    const includeDerived = req.query.includeDerived === "1" || req.query.includeDerived === "true";
     let tests = readManualListeningTests();
 
     if (part && part !== "full") {
@@ -2329,7 +3263,7 @@ app.get("/api/listening-tests", (req, res) => {
                     duration: 10,
                     questionCount: listeningQuestionCount({ parts: [selectedPart] }),
                     createdAt: test.createdAt,
-                    openUrl: `listening-template.html?id=${encodeURIComponent(test.id)}&part=${partNumber}`
+                    openUrl: publicTestUrl("listening", "listening", test, { part: partNumber })
                 };
             })
             .filter(Boolean);
@@ -2341,19 +3275,21 @@ app.get("/api/listening-tests", (req, res) => {
 
     if (part === "full") {
         tests = tests.filter((test) => test.part === "full");
+    } else if (!part && !includeDerived) {
+        tests = tests.filter((test) => !test.sourceFullTestId || test.part === "full");
     }
 
     res.json(tests.map(summarizeManualListeningTest));
 });
 
 app.get("/api/listening-tests/:id", (req, res) => {
-    const filePath = getListeningTestPath(req.params.id);
+    const test = resolveManualListeningTest(req.params.id);
 
-    if (!fs.existsSync(filePath)) {
+    if (!test) {
         return res.status(404).json({ error: "Listening test not found" });
     }
 
-    res.sendFile(filePath);
+    res.json(test);
 });
 
 app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), (req, res) => {
@@ -2365,12 +3301,23 @@ app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), (
 
     try {
         const existing = JSON.parse(fs.readFileSync(filePath, "utf8"));
-        const test = buildManualListeningTest({
-            ...req.body,
-            id: existing.id,
-            audio: existing.audio,
-            createdAt: existing.createdAt
-        }, req.file);
+        const updateBody = { ...req.body };
+
+        if (typeof updateBody.data === "string") {
+            const parsedData = JSON.parse(updateBody.data);
+            updateBody.data = JSON.stringify({
+                ...parsedData,
+                id: existing.id,
+                createdAt: existing.createdAt,
+                audio: existing.audio
+            });
+        } else {
+            updateBody.id = existing.id;
+            updateBody.audio = existing.audio;
+            updateBody.createdAt = existing.createdAt;
+        }
+
+        const test = buildManualListeningTest(updateBody, req.file);
 
         saveManualListeningTest(test);
         const publishedParts = saveStructuredListeningParts(test);
@@ -2399,9 +3346,7 @@ app.delete("/api/listening-tests/:id", requireAdmin, (req, res) => {
         .filter((test) => test.sourceFullTestId === req.params.id)
         .map((test) => getListeningTestPath(test.id))
         .filter((derivedPath) => fs.existsSync(derivedPath));
-    const assetFiles = (Array.isArray(existing.assetFiles) ? existing.assetFiles : [])
-        .map((fileName) => path.join(ROOT_DIR, path.basename(fileName)))
-        .filter((assetPath) => fs.existsSync(assetPath));
+    const assetFiles = listeningAssetFiles(existing);
 
     fs.unlinkSync(filePath);
     derivedTests.forEach((derivedPath) => fs.unlinkSync(derivedPath));
@@ -2465,7 +3410,7 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
             fullTests: stats.fullTests
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ error: "Could not load admin stats" });
     }
 });
@@ -2475,7 +3420,7 @@ app.get("/api/admin/recent-tests", requireAdmin, (req, res) => {
         const limit = Math.min(Math.max(Number(req.query.limit) || 10, 1), 50);
         res.json({ tests: getRecentManualTests(limit) });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ error: "Could not load recent tests" });
     }
 });
@@ -2498,7 +3443,7 @@ app.post("/upload", requireAdmin, upload.single("pdf"), async (req, res) => {
             questionSections: result.structure.questionSections
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(error.statusCode || 500).json({ error: "Upload failed" });
     }
 });
@@ -2571,7 +3516,7 @@ app.post("/signup", async (req, res) => {
             `🆕 New signup\n<b>${username}</b>\n${email}\nStorage: ${userStore.getStorageMode()}`
         ).catch(() => {});
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(error.statusCode || 500).json({
             success: false,
             message: error.message || "Signup failed"
@@ -2619,7 +3564,7 @@ app.post("/login", async (req, res) => {
             token
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(error.statusCode || 500).json({
             success: false,
             message: error.message || "Login failed"
@@ -2670,15 +3615,15 @@ if (process.env.MONGO_URI) {
         serverSelectionTimeoutMS: 8000
     })
         .then(() => {
-            console.log("MongoDB connected — using Atlas for accounts");
+            console.info("MongoDB connected — using Atlas for accounts");
         })
         .catch((error) => {
-            console.log("MongoDB connection error:", error.message);
-            console.log("Using local file storage for accounts: data/users.json");
-            console.log("Atlas fix: Network Access → Add IP Address → Allow Access from Anywhere (0.0.0.0/0) for development");
+            console.warn("MongoDB connection error:", error.message);
+            console.info("Using local file storage for accounts: data/users.json");
+            console.info("Atlas fix: Network Access -> Add IP Address -> Allow Access from Anywhere (0.0.0.0/0) for development");
         });
 } else {
-    console.log("MONGO_URI is not set — using local file storage: data/users.json");
+    console.info("MONGO_URI is not set - using local file storage: data/users.json");
 }
 
 app.use([
@@ -2693,9 +3638,9 @@ app.use(express.static(ROOT_DIR));
 const PORT = process.env.PORT || 30004;
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.info(`Server running on http://localhost:${PORT}`);
 
     if (process.env.BOT_TOKEN && process.env.ADMIN_ID) {
-        sendTelegramMessage("✅ IELTS Mock server started").catch(() => {});
+        sendTelegramMessage("IELTSX server started").catch(() => {});
     }
 });

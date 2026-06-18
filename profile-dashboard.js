@@ -328,6 +328,25 @@
         );
     }
 
+    function AnswerReviewList({ title, items, tone }) {
+        if (!items?.length) return null;
+        const toneClass = tone === "correct"
+            ? "border-emerald-100 bg-emerald-50 text-emerald-900"
+            : "border-rose-100 bg-rose-50 text-rose-900";
+
+        return e("div", { className: `rounded-xl border p-3 ${toneClass}` },
+            e("p", { className: "text-xs font-black uppercase tracking-wide" }, title),
+            e("div", { className: "mt-2 max-h-48 space-y-2 overflow-auto pr-1" },
+                items.slice(0, 40).map((item) => e("p", { key: `${title}-${item.number}`, className: "text-xs leading-5" },
+                    e("strong", null, `Q${item.number}: `),
+                    tone === "correct"
+                        ? `${item.correctAnswer || item.userAnswer}`
+                        : `Your answer: ${item.userAnswer || "Unanswered"} | Correct answer: ${item.correctAnswer || "-"}`
+                ))
+            )
+        );
+    }
+
     function TestHistory({ stats }) {
         const tests = stats.testHistory || [];
 
@@ -362,7 +381,13 @@
                                 [["Correct", `${test.correct}/${test.total}`], ["Accuracy", `${test.accuracy}%`], ["Band", formatBand(test.band)], ["Part", test.part || "Practice"]].map(([label, value]) =>
                                     e("div", { key: label }, e("p", { className: "text-xs font-bold uppercase text-slate-400" }, label), e("p", { className: "mt-1 font-black text-slate-900" }, value))
                                 )
-                            )
+                            ),
+                            (test.correctAnswers?.length || test.wrongAnswers?.length)
+                                ? e("div", { className: "mt-3 grid gap-3 md:grid-cols-2" },
+                                    e(AnswerReviewList, { title: "Correct answers", items: test.correctAnswers || [], tone: "correct" }),
+                                    e(AnswerReviewList, { title: "Wrong or unanswered", items: test.wrongAnswers || [], tone: "wrong" })
+                                )
+                                : null
                         )
                     ))
                 )
@@ -465,6 +490,18 @@
         );
     }
 
+    function scrollToHashTarget() {
+        const hash = String(window.location.hash || "");
+
+        if (hash !== "#results") {
+            return;
+        }
+
+        window.requestAnimationFrame(() => {
+            document.getElementById("results")?.scrollIntoView({ block: "start" });
+        });
+    }
+
     async function boot() {
         let user = getAuthUser();
 
@@ -488,14 +525,14 @@
 
         try {
             stats = { ...emptyProgress, ...(await window.authClient.getUserProgress()) };
-        } catch (error) {
-            console.error(error);
-        }
+        } catch {}
 
         ReactDOM.createRoot(root).render(page === "settings"
             ? e(SettingsPage, { user, stats })
             : e(Dashboard, { user, stats }));
+        scrollToHashTarget();
     }
 
+    window.addEventListener("hashchange", scrollToHashTarget);
     boot();
 }());

@@ -13,7 +13,7 @@ async function run() {
         const altPath = path.resolve(__dirname, "..", sample.replace("../", ""));
         const target = fs.existsSync(filePath) ? filePath : altPath;
         if (!fs.existsSync(target)) {
-            console.log("Skip missing:", sample);
+            console.warn("Skip missing:", sample);
             continue;
         }
         const html = fs.readFileSync(target, "utf8");
@@ -24,8 +24,8 @@ async function run() {
         });
         const p = test.reading.passages[0];
         const g = p?.questionGroups?.[0];
-        console.log("\n===", path.basename(target), "===");
-        console.log({
+        console.info("\n===", path.basename(target), "===");
+        console.info({
             paragraphs: p?.paragraphs?.length,
             firstParaHtml: p?.paragraphs?.[0]?.html?.slice(0, 80),
             groups: p?.questionGroups?.length,

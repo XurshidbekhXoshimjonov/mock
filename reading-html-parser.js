@@ -132,7 +132,7 @@ function parseCorrectAnswers(html) {
     try {
         return vm.runInNewContext(`(${match[1]})`, Object.create(null), { timeout: 1000 });
     } catch (error) {
-        console.log("Could not parse correctAnswers:", error.message);
+        console.warn("Could not parse correctAnswers:", error.message);
         return {};
     }
 }
@@ -376,8 +376,8 @@ if (require.main === module) {
     }
 
     const parsed = parseFile(inputPath, outputPath);
-    console.log(`Parsed ${parsed.length} passages`);
-    console.log(`Saved ${outputPath}`);
+    console.info(`Parsed ${parsed.length} passages`);
+    console.info(`Saved ${outputPath}`);
 }
 
 module.exports = {

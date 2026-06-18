@@ -28,8 +28,16 @@ function renderPreviewPanel(test, skill, passageIndex, sectionIndex) {
     }
 
     if (skill === "listening" && section) {
+        const audioSrc = section.audio || test.listening?.audio || "";
         ReactDOM.createRoot(wrap).render(
-            React.createElement(QuestionsPanel, { groups, images: test.images || [] })
+            React.createElement(React.Fragment, null,
+                audioSrc ? React.createElement("audio", {
+                    src: audioSrc,
+                    controls: true,
+                    style: { width: "100%", marginBottom: "16px", borderRadius: "8px" }
+                }) : null,
+                React.createElement(QuestionsPanel, { groups, images: test.images || [] })
+            )
         );
     }
 }

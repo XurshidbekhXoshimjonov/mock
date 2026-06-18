@@ -1,108 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listening Test Builder</title>
+    <title>IELTS Listening - Admin Builder</title>
     <link rel="stylesheet" href="listening-template.css">
     <link rel="stylesheet" href="admin-listening.css">
 </head>
+<body class="listening-builder-app" data-skip-global-navbar>
 
-<body class="listening-builder-page" data-skip-global-navbar>
-    <header class="builder-topbar">
-        <div>
-            <p>IELTS Listening Admin</p>
-            <h1>Listening Test Builder</h1>
+    <!-- App Topbar -->
+    <header class="app-header">
+        <div class="brand-info">
+            <span class="brand-badge">IELTS Listening Admin</span>
+            <h1 class="brand-text">Listening Test Builder</h1>
         </div>
-        <nav class="builder-nav">
-            <a href="/admin">Dashboard</a>
-            <button id="loadTestsBtn" class="builder-button builder-button--light" type="button">Saved Tests</button>
-            <button id="previewBtn" class="builder-button builder-button--light" type="button">Preview Student View</button>
-            <button id="saveTestBtn" class="builder-button builder-button--primary" type="button">Save Test</button>
-        </nav>
+        <div class="action-nav">
+            <a href="/admin" class="btn btn-secondary">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+                Dashboard
+            </a>
+            <button id="btnNewTest" class="btn btn-secondary" type="button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                New Test
+            </button>
+            <button id="loadTestsBtn" class="btn btn-secondary" type="button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Saved Tests
+            </button>
+            <button id="previewBtn" class="btn btn-secondary" type="button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                Preview Student
+            </button>
+            <button id="saveTestBtn" class="btn btn-primary" type="button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Test
+            </button>
+        </div>
     </header>
 
-    <main class="builder-layout">
-        <aside class="builder-sidebar">
-            <div class="builder-sidebar-heading">
-                <span>Test parts</span>
-                <strong>4</strong>
+    <!-- App Main Layout -->
+    <main class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="section-title">
+                <span>Test Parts</span>
+                <span class="badge-pill">4 Parts</span>
             </div>
-            <div id="partSidebar"></div>
+            <div id="partSidebar" class="parts-nav-list"></div>
         </aside>
 
-        <section class="builder-workspace">
-            <div id="testScope"></div>
+        <!-- Workspace Section -->
+        <section class="app-workspace">
+            <!-- Scope Selector (Full vs Part Test) -->
+            <div id="testScope" class="scope-card-selector"></div>
 
-            <div class="builder-test-details">
-                <label>
-                    Test title
-                    <input id="testTitle" type="text">
-                </label>
-                <label>
-                    Duration (minutes)
-                    <input id="testDuration" type="number" min="1" max="180">
-                </label>
+            <!-- Global Metadata Card -->
+            <div class="card detail-card">
+                <div class="form-group">
+                    <label for="testTitle">Listening Test Title</label>
+                    <input id="testTitle" type="text" placeholder="e.g. Cambridge 17 Test 2 Listening">
+                </div>
+                <div class="duration-box">
+                    <div class="box-header">
+                        <svg class="icon text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span id="fixedDurationLabel">Full test: 40 minutes</span>
+                    </div>
+                    <p class="box-desc">Individual parts use 10 minutes limit when saved separately.</p>
+                </div>
             </div>
 
-            <div id="partEditor"></div>
-            <p id="builderStatus" class="builder-status" aria-live="polite"></p>
+            <!-- Active Part Editor Workspace -->
+            <div id="partEditor" class="editor-area"></div>
+
+            <!-- Global Toast Status Notification -->
+            <div id="builderStatus" class="app-toast" role="status" aria-live="polite"></div>
         </section>
     </main>
 
-    <dialog id="addBlockModal" class="builder-dialog builder-dialog--small">
-        <div class="builder-dialog-head">
+    <!-- Dialog Modal: Add Block Menu -->
+    <dialog id="addBlockModal" class="modal modal-small">
+        <div class="modal-header">
             <div>
-                <p>New question block</p>
-                <h2>Choose block type</h2>
+                <span class="modal-subtitle">New Element</span>
+                <h2 class="modal-title">Select block type</h2>
             </div>
-            <button class="dialog-close" data-close-dialog="addBlockModal" type="button">Close</button>
+            <button class="modal-close" data-close-dialog="addBlockModal" type="button">&times;</button>
         </div>
-        <div id="addBlockMenu" class="block-type-grid"></div>
+        <div id="addBlockMenu" class="block-select-grid"></div>
     </dialog>
 
-    <dialog id="blockEditorModal" class="builder-dialog">
+    <!-- Dialog Modal: Block Editor Form -->
+    <dialog id="blockEditorModal" class="modal">
         <form id="blockEditorForm" method="dialog">
-            <div class="builder-dialog-head">
+            <div class="modal-header">
                 <div>
-                    <p>Question block editor</p>
-                    <h2 id="blockEditorTitle">Edit block</h2>
+                    <span class="modal-subtitle">Question Block Configuration</span>
+                    <h2 id="blockEditorTitle" class="modal-title">Edit block</h2>
                 </div>
-                <button class="dialog-close" data-close-dialog="blockEditorModal" type="button">Close</button>
+                <button class="modal-close" data-close-dialog="blockEditorModal" type="button">&times;</button>
             </div>
-            <div id="blockEditorContent"></div>
-            <div class="builder-dialog-actions">
-                <button class="builder-button builder-button--light" data-close-dialog="blockEditorModal" type="button">Cancel</button>
-                <button class="builder-button builder-button--primary" type="submit">Save Block</button>
+            <div id="blockEditorContent" class="modal-scroll-content"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-dialog="blockEditorModal" type="button">Cancel</button>
+                <button class="btn btn-primary" type="submit">Save Block</button>
             </div>
         </form>
     </dialog>
 
-    <dialog id="studentPreviewModal" class="builder-dialog builder-dialog--preview">
-        <div class="builder-dialog-head">
+    <!-- Dialog Modal: Saved Tests Selection -->
+    <dialog id="savedTestsModal" class="modal modal-small">
+        <div class="modal-header">
             <div>
-                <p>Student preview</p>
-                <h2>Exact Listening page preview</h2>
+                <span class="modal-subtitle">Load Saved Data</span>
+                <h2 class="modal-title">Saved tests</h2>
             </div>
-            <button class="dialog-close" data-close-dialog="studentPreviewModal" type="button">Close</button>
+            <button class="modal-close" data-close-dialog="savedTestsModal" type="button">&times;</button>
         </div>
-        <div id="studentPreviewContent" class="student-preview-frame"></div>
+        <div id="savedTestsList" class="saved-tests-list scrollable-content">Loading...</div>
     </dialog>
 
-    <dialog id="savedTestsModal" class="builder-dialog builder-dialog--small">
-        <div class="builder-dialog-head">
+    <!-- Dialog Modal: Student Simulation Preview -->
+    <dialog id="studentPreviewModal" class="modal modal-full">
+        <div class="modal-header">
             <div>
-                <p>Listening tests</p>
-                <h2>Saved tests</h2>
+                <span class="modal-subtitle">Student Simulation</span>
+                <h2 class="modal-title">Exact Listening test preview</h2>
             </div>
-            <button class="dialog-close" data-close-dialog="savedTestsModal" type="button">Close</button>
+            <button class="modal-close" data-close-dialog="studentPreviewModal" type="button">&times;</button>
         </div>
-        <div id="savedTestsList" class="saved-tests-list">Loading...</div>
+        <div id="studentPreviewContent" class="student-preview-body"></div>
     </dialog>
 
+    <!-- Scripts -->
+    <script src="ielts-instruction-utils.js"></script>
     <script src="listening-test-components.js"></script>
     <script src="admin-listening.js"></script>
 </body>
-
 </html>

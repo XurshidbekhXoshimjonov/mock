@@ -52,10 +52,21 @@
     font-weight: 700;
 }
 
+.ielts-instruction-limit {
+    color: #e60000;
+    font-weight: 700;
+}
+
 .ielts-choice-instruction-lead {
     margin: 14px 0 12px;
     color: #111827;
     font-style: italic;
+    line-height: 1.55;
+}
+
+.ielts-choice-instruction-prompt {
+    margin: 14px 0 12px;
+    color: #111827;
     line-height: 1.55;
 }
 

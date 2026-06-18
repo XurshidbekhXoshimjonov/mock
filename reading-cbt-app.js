@@ -4,18 +4,26 @@ const { createElement: h, Fragment, useEffect, useMemo, useRef, useState } = Rea
 const { PassageRenderer, QuestionsPanel } = IeltsTestComponents;
 
 const params = new URLSearchParams(window.location.search);
-const testId = params.get("id");
+const pathParts = window.location.pathname.split("/").filter(Boolean);
+const routeSkill = ["reading", "listening"].includes(pathParts[0]) ? pathParts[0] : "";
+const routeTestSlug = routeSkill ? pathParts[1] || "" : "";
+const testId = params.get("id") || routeTestSlug;
 const rootElement = document.getElementById("readingAppRoot");
 const mode = document.body.dataset.testMode === "full" ? "full" : "individual";
-const skill = mode === "full" && params.get("skill") === "listening" ? "listening" : "reading";
-const duration = mode === "full" ? 40 * 60 : 20 * 60;
+const skill = mode === "full" && (params.get("skill") === "listening" || routeSkill === "listening") ? "listening" : "reading";
+const duration = mode === "full" ? (skill === "listening" ? 40 : 60) * 60 : 20 * 60;
+const ResultUtils = window.IeltsResultUtils || {};
 
 function normalizeAnswer(value) {
-    return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+    return ResultUtils.normalizeAnswer
+        ? ResultUtils.normalizeAnswer(value)
+        : String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 function acceptedAnswers(value) {
-    return String(value || "").split("|").map(normalizeAnswer).filter(Boolean);
+    return ResultUtils.acceptedAnswers
+        ? ResultUtils.acceptedAnswers(value)
+        : String(value || "").split("|").map((answer) => answer.trim()).filter(Boolean);
 }
 
 function questionTypeInstruction(type) {
@@ -100,7 +108,7 @@ function splitFullManualPassages(test, groups) {
         return null;
     }
 
-    const ranges = [[1, 13], [14, 27], [28, 40]];
+    const ranges = [[1, 13], [14, 26], [27, 40]];
 
     return markers.map((marker, index) => {
         const number = Number(marker[1]) || index + 1;
@@ -252,12 +260,589 @@ function countWords(passage) {
         .length;
 }
 
-function scoreBand(correct, total) {
+function scoreBand(correct, total, resultSkill = skill) {
+    if (ResultUtils.estimateBand) {
+        return ResultUtils.estimateBand(correct, total, resultSkill);
+    }
+
     const scaledCorrect = total ? Math.round((correct / total) * 40) : 0;
-    const table = skill === "listening"
-        ? [[39, 9], [37, 8.5], [35, 8], [32, 7.5], [30, 7], [26, 6.5], [23, 6], [18, 5.5], [16, 5], [13, 4.5], [10, 4], [0, 0]]
-        : [[39, 9], [37, 8.5], [35, 8], [33, 7.5], [30, 7], [27, 6.5], [23, 6], [19, 5.5], [15, 5], [13, 4.5], [10, 4], [0, 0]];
-    return table.find(([minimum]) => scaledCorrect >= minimum)?.[1] || 0;
+    const table = resultSkill === "listening"
+        ? [[39, 9], [37, 8.5], [35, 8], [32, 7.5], [30, 7], [26, 6.5], [23, 6], [18, 5.5], [16, 5], [13, 4.5], [10, 4], [6, 3.5], [4, 3], [0, 2.5]]
+        : [[39, 9], [37, 8.5], [35, 8], [33, 7.5], [30, 7], [27, 6.5], [23, 6], [19, 5.5], [15, 5], [13, 4.5], [10, 4], [8, 3.5], [6, 3], [4, 2.5], [0, "0-2"]];
+    return table.find(([minimum]) => scaledCorrect >= minimum)?.[1] || "0-2";
+}
+
+function evaluateQuestionResult(question, userAnswer, acceptedOverride) {
+    if (ResultUtils.evaluateAnswer) {
+        return ResultUtils.evaluateAnswer(question, userAnswer, acceptedOverride);
+    }
+
+    const accepted = acceptedAnswers(acceptedOverride || question.answer);
+    const isUnanswered = !normalizeAnswer(userAnswer);
+    const isCorrect = !isUnanswered && accepted.map(normalizeAnswer).includes(normalizeAnswer(userAnswer));
+
+    return {
+        number: Number(question.number || question.questionNumber),
+        userAnswer: String(userAnswer || "").trim(),
+        correctAnswers: accepted,
+        mainAnswer: accepted[0] || "",
+        alternatives: accepted.slice(1),
+        status: isUnanswered ? "unanswered" : (isCorrect ? "correct" : "incorrect"),
+        isCorrect,
+        isUnanswered
+    };
+}
+
+function summarizeQuestionResults(questionResults, resultSkill = skill) {
+    if (ResultUtils.summarizeResults) {
+        return ResultUtils.summarizeResults(questionResults, resultSkill);
+    }
+
+    const correct = questionResults.filter((item) => item.status === "correct").length;
+    const unanswered = questionResults.filter((item) => item.status === "unanswered").length;
+    const total = questionResults.length;
+
+    return {
+        correct,
+        incorrect: Math.max(0, total - correct - unanswered),
+        unanswered,
+        total,
+        normalizedScore: total ? Math.round((correct / total) * 40) : 0,
+        band: scoreBand(correct, total, resultSkill),
+        questionResults
+    };
+}
+
+function gradeReadingQuestions(questions, answers) {
+    const questionResults = (questions || []).map((question) =>
+        evaluateQuestionResult(question, answers[question.number])
+    );
+
+    return summarizeQuestionResults(questionResults, "reading");
+}
+
+function escapeListeningHtml(value) {
+    return window.ListeningComponents?.escapeHtml
+        ? window.ListeningComponents.escapeHtml(value)
+        : String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+}
+
+function ensureListeningStyles() {
+    if (document.querySelector('link[href="listening-template.css"]')) return;
+
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = "listening-template.css";
+    document.head.appendChild(stylesheet);
+}
+
+async function fetchJson(url, fallbackMessage) {
+    const response = await fetch(url);
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        throw new Error(data.error || fallbackMessage);
+    }
+
+    return data;
+}
+
+function questionRangeFromQuestions(questions, fallback = "Questions") {
+    const numbers = (questions || []).map((question) => Number(question.number || question.questionNumber)).filter(Boolean);
+    if (!numbers.length) return fallback;
+
+    const first = Math.min(...numbers);
+    const last = Math.max(...numbers);
+    return first === last ? `Question ${first}` : `Questions ${first}-${last}`;
+}
+
+function listeningQuestionText(question) {
+    const number = Number(question.number || question.questionNumber);
+    const raw = String(question.stemHtml || question.question || question.text || `Question ${number}`).trim();
+    const blankPattern = /_{3,}|<span[^>]*class=["'][^"']*ielts-blank[^"']*["'][^>]*>.*?<\/span>/i;
+
+    if (/\{\{\d{1,2}\}\}/.test(raw)) {
+        return raw;
+    }
+
+    if (blankPattern.test(raw)) {
+        return raw.replace(blankPattern, `{{${number}}}`);
+    }
+
+    return `${raw} {{${number}}}`;
+}
+
+function normalizeListeningOption(option) {
+    if (typeof option === "object" && option !== null) {
+        const label = String(option.text || option.label || option.value || "").trim();
+        const letter = String(option.letter || option.value || label.match(/^([A-Za-z0-9ivx]+)[\).:\s]/)?.[1] || "").trim();
+        const text = option.text || label.replace(new RegExp(`^${letter}[\\).:\\s-]*`, "i"), "").trim() || label;
+        return { letter, text };
+    }
+
+    const label = String(option || "").trim();
+    const letter = label.match(/^([A-Za-z0-9ivx]+)[\).:\s-]/)?.[1] || "";
+    const text = letter ? label.slice(letter.length).replace(/^[\).:\s-]+/, "").trim() : label;
+    return { letter, text: text || label };
+}
+
+function uniqueListeningOptions(options) {
+    const seen = new Set();
+    return (options || [])
+        .map(normalizeListeningOption)
+        .filter((option) => {
+            const key = option.letter || option.text;
+            if (!key || seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+}
+
+function listeningGroupImageUrl(group, images = []) {
+    if (group.imageUrl || group.image || group.imageSrc) {
+        return group.imageUrl || group.image || group.imageSrc;
+    }
+
+    const imageIds = group.imageIds || group.images || [];
+    const match = (images || []).find((image) => imageIds.includes(image.id || image.imageId || image.name));
+    return match?.url || match?.src || match?.path || "";
+}
+
+function listeningBlocksFromQuestionGroup(group, index, images = []) {
+    const type = String(group.type || "").toLowerCase().replace(/[\s-]+/g, "_");
+    const questions = group.questions || [];
+    const questionRange = group.instructionTitle || group.questionRange || questionRangeFromQuestions(questions);
+    const instruction = group.instructionText || group.instruction || group.rule || "";
+    const id = group.id || `listening-group-${index + 1}`;
+
+    if (type === "matching" || type === "map_labelling" || type === "map_labeling") {
+        const questionOptions = questions.find((question) => (question.options || []).length)?.options || [];
+        return [{
+            id,
+            type: "matching",
+            title: group.title || group.question || "",
+            questionRange,
+            instruction,
+            imageUrl: listeningGroupImageUrl(group, images),
+            options: uniqueListeningOptions(group.options || group.matchingOptions || questionOptions),
+            questions: questions.map((question) => ({
+                questionNumber: Number(question.number || question.questionNumber),
+                text: question.text || question.question || `Label ${question.number || question.questionNumber}`
+            }))
+        }];
+    }
+
+    if (type === "multiple_choice") {
+        return questions.map((question, questionIndex) => ({
+            id: `${id}-${question.number || questionIndex + 1}`,
+            type: "multiple_choice",
+            questionRange: `Question ${question.number || question.questionNumber}`,
+            instruction,
+            questionNumber: Number(question.number || question.questionNumber),
+            question: question.question || question.text || "",
+            options: uniqueListeningOptions(question.options || group.options)
+        }));
+    }
+
+    if (type === "multi_select" || type === "multiple_select") {
+        const questionOptions = questions.find((question) => (question.options || []).length)?.options || [];
+        return [{
+            id,
+            type: "multiple_select",
+            questionNumber: Number(questions[0]?.number || questions[0]?.questionNumber),
+            answerQuestions: questions.slice(1).map((question) => ({ questionNumber: Number(question.number || question.questionNumber) })),
+            questionRange,
+            instruction,
+            maxSelections: Number(group.maxSelections) || Math.max(2, questions.length),
+            question: group.question || questions[0]?.question || "",
+            options: uniqueListeningOptions(group.options || group.multiSelectOptions || questionOptions)
+        }];
+    }
+
+    if ((type === "form_completion" || type === "table_completion") && Array.isArray(group.rows)) {
+        return [{
+            ...group,
+            id,
+            type,
+            questionRange,
+            instruction
+        }];
+    }
+
+    return [{
+        id,
+        type: "sentence_completion_inline",
+        title: group.title || "",
+        questionRange,
+        instruction,
+        content: questions.map(listeningQuestionText)
+    }];
+}
+
+function answerTextFromQuestionGroups(groups) {
+    return (groups || [])
+        .flatMap((group) => group.questions || [])
+        .map((question) => {
+            const number = Number(question.number || question.questionNumber);
+            const answer = String(question.answer || "").trim();
+            return number && answer ? `${number}: ${answer}` : "";
+        })
+        .filter(Boolean)
+        .join("\n");
+}
+
+function fallbackListeningTestFromFullTest(fullTest) {
+    const sections = fullTest.listening?.sections || [];
+
+    return {
+        id: fullTest.id,
+        title: fullTest.title || "IELTS Listening Practice",
+        part: "full",
+        duration: 40,
+        parts: sections.map((section, index) => {
+            const partNumber = Number(section.number) || index + 1;
+            const groups = section.questionGroups || [];
+
+            return {
+                partNumber,
+                title: section.title || `Part ${partNumber}`,
+                questionRange: section.questionRange || questionRangeFromQuestions(
+                    groups.flatMap((group) => group.questions || []),
+                    `Questions ${(partNumber - 1) * 10 + 1}-${partNumber * 10}`
+                ),
+                audioUrl: section.audio || fullTest.listening?.audio || "",
+                instruction: section.instruction || groups[0]?.instructionText || "",
+                answerText: answerTextFromQuestionGroups(groups),
+                blocks: groups.flatMap((group, groupIndex) => listeningBlocksFromQuestionGroup(group, groupIndex, fullTest.images))
+            };
+        })
+    };
+}
+
+function normalizeFullListeningPlayerTest(fullTest, manualTest) {
+    const source = manualTest && Array.isArray(manualTest.parts)
+        ? manualTest
+        : fallbackListeningTestFromFullTest(fullTest);
+    const parts = (source.parts || []).map((part, index) => ({
+        ...part,
+        partNumber: Number(part.partNumber) || index + 1,
+        title: part.title || `Part ${index + 1}`,
+        audioUrl: part.audioUrl || part.audio || fullTest.listening?.audio || ""
+    }));
+
+    return {
+        ...source,
+        id: fullTest.id || source.id,
+        sourceListeningTestId: source.id,
+        title: fullTest.title || source.title || "IELTS Listening Practice",
+        part: "full",
+        duration: 40,
+        headerTitle: "Full Test",
+        dashboardHref: "listeningfulltest.html",
+        parts
+    };
+}
+
+function parseListeningAnswerKey(test) {
+    const answers = {};
+
+    (test.parts || []).forEach((part) => {
+        String(part.answerText || "")
+            .split(/\n+/)
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .forEach((line) => {
+                const match = line.match(/^(\d{1,2})\s*[\).:\-=\|]\s*(.+)$/);
+                if (!match) return;
+                answers[match[1]] = match[2]
+                    .split(/\s*\|\s*/)
+                    .map((answer) => answer.trim())
+                    .filter(Boolean);
+            });
+    });
+
+    return answers;
+}
+
+function listeningAnswerValue(root, number) {
+    const namedFields = [...root.querySelectorAll(`[name="q${number}"]`)];
+    const isChoiceField = namedFields.some((field) => field.matches?.('input[type="radio"], input[type="checkbox"]'));
+    const selected = root.querySelector(`[name="q${number}"]:checked`);
+    if (isChoiceField) return selected ? selected.value : "";
+
+    const field = root.querySelector(`#q${number}, [name="q${number}"]`);
+    return selected ? selected.value : (field?.value || "");
+}
+
+function gradeFullListeningTest(root, test) {
+    const answerKey = parseListeningAnswerKey(test);
+    const gradedMultipleSelectQuestions = new Set();
+    const questionResults = [];
+
+    root.querySelectorAll(".lc-multiple-select").forEach((group) => {
+        const numbers = String(group.dataset.questionNumbers || "")
+            .split(",")
+            .map(Number)
+            .filter((number) => answerKey[number]);
+        const selected = (
+            [...group.querySelectorAll('input[type="checkbox"]:checked')]
+                .map((input) => input.value)
+                .filter(Boolean)
+        );
+        const usedSelected = new Set();
+
+        if (!numbers.length) return;
+        numbers.forEach((number) => gradedMultipleSelectQuestions.add(number));
+
+        numbers.forEach((number) => {
+            const accepted = answerKey[number] || [];
+            let selectedIndex = selected.findIndex((value, index) =>
+                !usedSelected.has(index) && (
+                    ResultUtils.answersMatch
+                        ? ResultUtils.answersMatch(value, accepted)
+                        : accepted.map(normalizeAnswer).includes(normalizeAnswer(value))
+                )
+            );
+
+            if (selectedIndex === -1) {
+                selectedIndex = selected.findIndex((_, index) => !usedSelected.has(index));
+            }
+
+            const userAnswer = selectedIndex >= 0 ? selected[selectedIndex] : "";
+            if (selectedIndex >= 0) usedSelected.add(selectedIndex);
+            questionResults.push(evaluateQuestionResult({ number }, userAnswer, accepted));
+        });
+    });
+
+    Object.entries(answerKey).forEach(([number, accepted]) => {
+        if (gradedMultipleSelectQuestions.has(Number(number))) return;
+        questionResults.push(evaluateQuestionResult({ number }, listeningAnswerValue(root, number), accepted));
+    });
+
+    const result = summarizeQuestionResults(
+        questionResults.sort((a, b) => Number(a.number) - Number(b.number)),
+        "listening"
+    );
+
+    return {
+        ...result,
+        answerNumbers: Object.keys(answerKey).map(Number).filter(Number.isFinite).sort((a, b) => a - b)
+    };
+}
+
+function showFullListeningResult(root, result) {
+    const modal = root.querySelector("[data-listening-result-modal]");
+    if (!modal) return;
+
+    modal.querySelector("[data-listening-result-score]").textContent = `${result.correct} / ${result.total}`;
+    modal.querySelector("[data-listening-result-band]").textContent = `Estimated band: ${result.band}`;
+    modal.querySelector("[data-listening-result-unanswered]").textContent =
+        `${result.unanswered} unanswered question${result.unanswered === 1 ? "" : "s"}.`;
+    modal.querySelector("[data-listening-result-correct]").textContent =
+        `${result.correct} correct answer${result.correct === 1 ? "" : "s"}`;
+    modal.querySelector("[data-listening-result-incorrect]").textContent =
+        `${result.incorrect} incorrect answer${result.incorrect === 1 ? "" : "s"}`;
+    modal.classList.remove("hidden");
+}
+
+function listeningStatusLabel(status) {
+    if (status === "correct") return "Correct";
+    if (status === "incorrect") return "Incorrect";
+    return "Unanswered";
+}
+
+function formatReviewAnswer(value) {
+    return ResultUtils.formatAnswer ? ResultUtils.formatAnswer(value) : (String(value || "").trim() || "\u2014");
+}
+
+function optionMatchesAccepted(value, accepted) {
+    const answers = Array.isArray(accepted) ? accepted : [accepted];
+    return ResultUtils.answersMatch
+        ? ResultUtils.answersMatch(value, answers)
+        : answers.map(normalizeAnswer).includes(normalizeAnswer(value));
+}
+
+function applyListeningChoiceReview(field, result) {
+    const optionLabel = field.closest(".lc-choice-row");
+    if (!optionLabel) return;
+
+    const isCorrectOption = optionMatchesAccepted(field.value, result.correctAnswers || [result.mainAnswer]);
+    if (isCorrectOption) {
+        optionLabel.classList.add("lc-choice-row--correct");
+    }
+    if (field.checked && !isCorrectOption) {
+        optionLabel.classList.add("lc-choice-row--incorrect");
+    }
+}
+
+function applyListeningMultiSelectReview(root, result) {
+    const number = Number(result.number);
+
+    root.querySelectorAll(".lc-multiple-select").forEach((group) => {
+        const numbers = String(group.dataset.questionNumbers || "").split(",").map(Number);
+        if (!numbers.includes(number)) return;
+
+        group.querySelectorAll('input[type="checkbox"]').forEach((field) => {
+            field.disabled = true;
+            applyListeningChoiceReview(field, result);
+        });
+    });
+}
+
+function applyListeningFieldReview(root, result) {
+    const number = Number(result.number);
+    const fields = root.querySelectorAll(`#q${number}, [name="q${number}"]`);
+    const statusClass = `lc-answer-field--${result.status}`;
+
+    fields.forEach((field) => {
+        field.readOnly = true;
+        field.disabled = true;
+        field.classList.add(statusClass);
+
+        if (field.matches?.('input[type="radio"], input[type="checkbox"]')) {
+            applyListeningChoiceReview(field, result);
+        }
+    });
+    applyListeningMultiSelectReview(root, result);
+
+    const inline = root.querySelector(`[data-question="${number}"]`);
+    if (inline) {
+        inline.classList.add(`lc-answer-inline--${result.status}`);
+        const existing = inline.querySelector(".lc-inline-correct-answer");
+        if (existing) existing.remove();
+        if (result.status !== "correct") {
+            const hint = document.createElement("span");
+            hint.className = "lc-inline-correct-answer";
+            hint.textContent = `Correct: ${formatReviewAnswer(result.mainAnswer)}`;
+            inline.appendChild(hint);
+        }
+    }
+}
+
+function renderListeningReview(root, result) {
+    if (!result?.questionResults?.length) return;
+
+    root.classList.add("lc-review-mode");
+    root.querySelectorAll(".lc-answer-input, input[type='radio'], input[type='checkbox'], select, textarea").forEach((field) => {
+        field.readOnly = true;
+        field.disabled = true;
+    });
+    result.questionResults.forEach((item) => applyListeningFieldReview(root, item));
+
+    root.querySelector(".lc-review-summary")?.remove();
+    const summary = document.createElement("section");
+    summary.className = "lc-review-summary";
+    summary.innerHTML = `
+        <div class="lc-review-summary-header">
+            <span>Review answers</span>
+            <h2>Question results</h2>
+        </div>
+        <div class="lc-review-grid">
+            ${result.questionResults.map((item) => `
+                <article class="lc-review-card lc-review-card--${item.status}">
+                    <h3>Question ${item.number}</h3>
+                    <p><strong>Your answer:</strong> ${escapeListeningHtml(formatReviewAnswer(item.userAnswer))}</p>
+                    <p><strong>Correct answer:</strong> ${escapeListeningHtml(formatReviewAnswer(item.mainAnswer))}
+                        ${item.alternatives?.length ? `<span class="lc-answer-alternatives"> Alternatives: ${escapeListeningHtml(item.alternatives.join(", "))}</span>` : ""}
+                    </p>
+                    <p><strong>Status:</strong> <span>${listeningStatusLabel(item.status)}</span></p>
+                </article>
+            `).join("")}
+        </div>
+    `;
+    root.querySelector(".lc-main")?.appendChild(summary);
+}
+
+async function loadFullListeningPlayerTest() {
+    if (!testId) {
+        throw new Error("Missing test id");
+    }
+
+    const fullTest = await fetchJson(`/api/full-tests/${encodeURIComponent(testId)}?skill=listening`, "Could not load Listening full test");
+    const manualListeningId = fullTest.manualListeningTestId || fullTest.sourceListeningTestId || "";
+    let manualTest = null;
+
+    if (manualListeningId) {
+        try {
+            manualTest = await fetchJson(
+                `/api/listening-tests/${encodeURIComponent(manualListeningId)}`,
+                "Could not load Academic Listening layout"
+            );
+        } catch {
+            manualTest = null;
+        }
+    }
+
+    return normalizeFullListeningPlayerTest(fullTest, manualTest);
+}
+
+function renderFullListeningPlayer() {
+    ensureListeningStyles();
+
+    if (!window.ListeningComponents) {
+        rootElement.innerHTML = `<main class="cbt-status"><h1>Could not load test</h1><p>Academic Listening components are unavailable.</p></main>`;
+        return;
+    }
+
+    rootElement.innerHTML = `<main class="cbt-status"><p>Loading IELTS Listening test...</p></main>`;
+    loadFullListeningPlayerTest()
+        .then((test) => {
+            document.title = `${test.title || "IELTS Listening"} - Full Test`;
+            rootElement.innerHTML = window.ListeningComponents.ListeningTestPage(test);
+            window.ListeningComponents.bindListeningTest(rootElement);
+            rootElement.addEventListener("listening-submit", () => {
+                const result = gradeFullListeningTest(rootElement, test);
+                const status = rootElement.querySelector(".lc-submit-status");
+
+                if (!result.total) {
+                    if (status) status.textContent = "This Listening test does not have an answer key yet.";
+                    return;
+                }
+
+                if (status) status.textContent = `Result: ${result.correct}/${result.total} correct answers.`;
+                rootElement._listeningResult = result;
+                showFullListeningResult(rootElement, result);
+                window.authClient?.recordTestResult({
+                    type: "full-test",
+                    skill: "listening",
+                    title: test.title || "IELTS Listening Practice",
+                    correct: result.correct,
+                    total: result.total,
+                    band: result.band,
+                    testId: test.id || testId,
+                    part: "full",
+                    practiceUrl: window.location.pathname,
+                    correctAnswers: result.questionResults
+                        .filter((item) => item.status === "correct")
+                        .map((item) => ({
+                            number: item.number,
+                            userAnswer: item.userAnswer,
+                            correctAnswer: item.mainAnswer,
+                            alternatives: item.alternatives || []
+                        })),
+                    wrongAnswers: result.questionResults
+                        .filter((item) => item.status !== "correct")
+                        .map((item) => ({
+                            number: item.number,
+                            userAnswer: item.userAnswer,
+                            correctAnswer: item.mainAnswer,
+                            alternatives: item.alternatives || [],
+                            status: item.status
+                        }))
+                });
+            });
+            rootElement.addEventListener("listening-review", () => {
+                renderListeningReview(rootElement, rootElement._listeningResult);
+            });
+        })
+        .catch((error) => {
+            rootElement.innerHTML = `<main class="cbt-status"><h1>Could not load test</h1><p>${escapeListeningHtml(error.message)}</p></main>`;
+        });
 }
 
 function normalizeVocabularyWord(value) {
@@ -470,8 +1055,10 @@ function BottomBar({ passages, activeIndex, onSelect, onPrevious, onNext, fullMo
     );
 }
 
-function ResultModal({ result, onClose }) {
+function ResultModal({ result, onClose, onReview, vocabularyCount = 0 }) {
     if (!result) return null;
+
+    const resultTitle = skill === "listening" ? "IELTS Listening result" : "IELTS Reading result";
 
     return h("div", { className: "cbt-modal-backdrop", onClick: onClose },
         h("section", {
@@ -481,11 +1068,25 @@ function ResultModal({ result, onClose }) {
             onClick: (event) => event.stopPropagation()
         },
             h("button", { className: "cbt-modal-close", type: "button", onClick: onClose, "aria-label": "Close" }, "×"),
-            h("span", { className: "cbt-result-eyebrow" }, "IELTS Reading result"),
+            h("span", { className: "cbt-result-eyebrow" }, resultTitle),
             h("h2", null, `${result.correct} / ${result.total}`),
             h("p", { className: "cbt-band" }, `Estimated band: ${result.band}`),
-            h("p", null, `${result.unanswered} unanswered question${result.unanswered === 1 ? "" : "s"}.`),
-            h("button", { className: "cbt-button cbt-button--primary", type: "button", onClick: onClose }, "Review answers")
+            h("div", { className: "cbt-result-stats" },
+                h("span", null, `${result.correct} correct answer${result.correct === 1 ? "" : "s"}`),
+                h("span", null, `${result.incorrect} incorrect answer${result.incorrect === 1 ? "" : "s"}`),
+                h("span", null, `${result.unanswered} unanswered question${result.unanswered === 1 ? "" : "s"}`)
+            ),
+            skill === "reading"
+                ? h("p", { className: "cbt-result-vocab-count" },
+                    vocabularyCount
+                        ? `${vocabularyCount} unknown word${vocabularyCount === 1 ? "" : "s"} checked.`
+                        : "No unknown words were checked during this test."
+                )
+                : null,
+            h("div", { className: "cbt-result-actions" },
+                h("button", { className: "cbt-button cbt-button--primary", type: "button", onClick: onReview }, "Review answers"),
+                h("button", { className: "cbt-button cbt-button--secondary", type: "button", onClick: onClose }, "Close")
+            )
         )
     );
 }
@@ -493,20 +1094,116 @@ function ResultModal({ result, onClose }) {
 function VocabularyPopover({ item, onClose }) {
     if (!item) return null;
 
+    const [coords, setCoords] = useState({
+        left: item.left || 0,
+        top: item.top || 0,
+        opacity: 0,
+        placement: "below",
+        arrowLeft: 24
+    });
+    const popoverRef = useRef(null);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+        };
+
+        const handleClickOutside = (e) => {
+            if (e.target.closest(".cbt-vocab-popover") || e.target.closest(".cbt-vocab-word")) {
+                return;
+            }
+            onClose();
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [onClose]);
+
+    useEffect(() => {
+        const el = popoverRef.current;
+        if (!el || !item.targetRect) return;
+
+        const rect = item.targetRect;
+        const popupWidth = 300;
+        const popupHeight = el.offsetHeight;
+
+        const container = document.querySelector(".cbt-passage-panel");
+        const containerRect = container 
+            ? container.getBoundingClientRect() 
+            : { left: 0, right: window.innerWidth, top: 0, bottom: window.innerHeight, width: window.innerWidth, height: window.innerHeight };
+
+        let left = rect.left + rect.width / 2 - popupWidth / 2;
+        const minLeft = containerRect.left + 16;
+        const maxLeft = containerRect.right - popupWidth - 16;
+        
+        if (maxLeft < minLeft) {
+            left = containerRect.left + (containerRect.width - popupWidth) / 2;
+        } else {
+            left = Math.min(Math.max(minLeft, left), maxLeft);
+        }
+
+        const gap = 8;
+        const spaceAbove = rect.top - containerRect.top;
+        const spaceBelow = containerRect.bottom - rect.bottom;
+
+        let top = 0;
+        let placement = "below";
+
+        if (spaceAbove > popupHeight + 16 + gap) {
+            top = rect.top - popupHeight - gap;
+            placement = "above";
+        } else if (spaceBelow > popupHeight + 16 + gap) {
+            top = rect.bottom + gap;
+            placement = "below";
+        } else {
+            if (spaceAbove > spaceBelow) {
+                top = Math.max(containerRect.top + 16, rect.top - popupHeight - gap);
+                placement = "above";
+            } else {
+                top = Math.min(containerRect.bottom - popupHeight - 16, rect.bottom + gap);
+                placement = "below";
+            }
+        }
+
+        top = Math.min(Math.max(containerRect.top + 16, top), containerRect.bottom - popupHeight - 16);
+
+        // Arrow left placement relative to popup
+        let arrowLeft = rect.left + rect.width / 2 - left - 6; // 6px is half of 12px arrow width
+        arrowLeft = Math.min(Math.max(16, arrowLeft), popupWidth - 24);
+
+        setCoords({ left, top, opacity: 1, placement, arrowLeft });
+    }, [item]);
+
     const hasDefinition = Boolean(item.definition);
     const hasTranslation = Boolean(item.uzbekTranslation);
     const meta = [item.phonetic, item.partOfSpeech].filter(Boolean).join(" · ");
 
     return h("aside", {
+        ref: popoverRef,
         className: "cbt-vocab-popover",
         role: "dialog",
         "aria-label": `Vocabulary for ${item.word}`,
         style: {
-            left: `${item.left}px`,
-            top: `${item.top}px`,
-            width: `${item.width}px`
+            left: `${coords.left}px`,
+            top: `${coords.top}px`,
+            width: `300px`,
+            opacity: coords.opacity,
+            transition: "opacity 0.15s ease-in-out"
         }
     },
+        coords.opacity > 0 ? h("div", {
+            className: "cbt-vocab-arrow",
+            style: coords.placement === "above"
+                ? { bottom: "-7px", left: `${coords.arrowLeft}px`, transform: "rotate(225deg)" }
+                : { top: "-7px", left: `${coords.arrowLeft}px`, transform: "rotate(45deg)" }
+        }) : null,
         h("button", {
             className: "cbt-vocab-close",
             type: "button",
@@ -516,40 +1213,50 @@ function VocabularyPopover({ item, onClose }) {
         h("span", { className: "cbt-vocab-eyebrow" }, item.isLoading ? "Translating" : "Selected word"),
         h("h2", null, item.word),
         meta ? h("p", { className: "cbt-vocab-meta" }, meta) : null,
-        item.isLoading
-            ? h("p", { className: "cbt-vocab-loading" }, "Translating selected word...")
-            : null,
-        !item.isLoading && (hasDefinition || hasTranslation)
-            ? h(Fragment, null,
-                h("dl", { className: "cbt-vocab-definition-list" },
-                    h("div", null,
-                        h("dt", null, "Uzbek translation"),
-                        h("dd", null, item.uzbekTranslation || "Uzbek translation is not available yet.")
+        h("div", { className: "cbt-vocab-content" },
+            item.isLoading
+                ? h("p", { className: "cbt-vocab-loading" }, "Translating selected word...")
+                : null,
+            !item.isLoading && (hasDefinition || hasTranslation)
+                ? h(Fragment, null,
+                    h("dl", { className: "cbt-vocab-definition-list" },
+                        h("div", null,
+                            h("dt", null, "Uzbek translation"),
+                            h("dd", null, item.uzbekTranslation || "Uzbek translation is not available yet.")
+                        ),
+                        h("div", null,
+                            h("dt", null, "English definition"),
+                            h("dd", null, item.definition || "Definition is not available yet.")
+                        )
                     ),
-                    h("div", null,
-                        h("dt", null, "English definition"),
-                        h("dd", null, item.definition || "Definition is not available yet.")
-                    )
-                ),
-                item.example
-                    ? h("p", { className: "cbt-vocab-example" }, item.example)
-                    : null
-            )
-            : (!item.isLoading ? h("p", { className: "cbt-vocab-fallback" }, "Definition is not available yet.") : null)
+                    item.example
+                        ? h("p", { className: "cbt-vocab-example" }, item.example)
+                        : null
+                )
+                : (!item.isLoading ? h("p", { className: "cbt-vocab-fallback" }, "Definition is not available yet.") : null)
+        )
     );
 }
 
 function VocabularyReview({ words }) {
     return h("section", { className: "cbt-vocab-review", "aria-labelledby": "checkedVocabularyTitle" },
         h("div", { className: "cbt-vocab-review-header" },
-            h("span", { className: "cbt-vocab-review-kicker" }, "Vocabulary review"),
-            h("h2", { id: "checkedVocabularyTitle" }, "Words you checked during the test")
+            h("span", { className: "cbt-vocab-review-kicker" }, "Reading review"),
+            h("h2", { id: "checkedVocabularyTitle" }, "Unknown words you checked")
         ),
         words.length
             ? h("div", { className: "cbt-vocab-review-grid" },
                 words.map((item) =>
-                    h("article", { key: item.normalized, className: "cbt-vocab-review-card" },
+                    h("article", { key: `${item.passageId || "passage"}:${item.normalized}`, className: "cbt-vocab-review-card" },
                         h("h3", null, item.word),
+                        item.passageNumber || item.count > 1
+                            ? h("p", { className: "cbt-vocab-review-meta" },
+                                [
+                                    item.passageNumber ? `Passage ${item.passageNumber}` : "",
+                                    item.count > 1 ? `checked ${item.count} times` : ""
+                                ].filter(Boolean).join(" · ")
+                            )
+                            : null,
                         item.phonetic || item.partOfSpeech
                             ? h("p", { className: "cbt-vocab-review-meta" },
                                 [item.phonetic, item.partOfSpeech].filter(Boolean).join(" · ")
@@ -572,7 +1279,7 @@ function VocabularyReview({ words }) {
                     )
                 )
             )
-            : h("p", { className: "cbt-vocab-review-empty" }, "No words were checked during this attempt.")
+            : h("p", { className: "cbt-vocab-review-empty" }, "No unknown words were checked during this test.")
     );
 }
 
@@ -585,6 +1292,8 @@ function ReadingApp() {
     const [textScale, setTextScale] = useState(1);
     const [focus, setFocus] = useState(false);
     const [result, setResult] = useState(null);
+    const [showResultModal, setShowResultModal] = useState(false);
+    const [reviewMode, setReviewMode] = useState(false);
     const [checkedVocabulary, setCheckedVocabulary] = useState([]);
     const [activeVocabulary, setActiveVocabulary] = useState(null);
     const attemptIdRef = useRef(makeAttemptId(testId));
@@ -601,7 +1310,7 @@ function ReadingApp() {
         }
 
         const endpoint = mode === "full"
-            ? `/api/full-tests/${encodeURIComponent(testId)}`
+            ? `/api/full-tests/${encodeURIComponent(testId)}?skill=${encodeURIComponent(skill)}`
             : `/api/reading-tests/${encodeURIComponent(testId)}`;
 
         fetch(endpoint)
@@ -611,7 +1320,11 @@ function ReadingApp() {
                 return data;
             })
             .then((data) => {
-                setTest(mode === "full" ? normalizeFullTest(data) : normalizeManualTest(data));
+                const normalized = mode === "full" ? normalizeFullTest(data) : normalizeManualTest(data);
+                document.title = skill === "listening"
+                    ? `${normalized.title || "IELTS Listening"} - Listening`
+                    : `${normalized.title || "IELTS Academic Reading"} - Reading`;
+                setTest(normalized);
             })
             .catch((loadError) => setError(loadError.message));
     }, []);
@@ -628,7 +1341,7 @@ function ReadingApp() {
 
     useEffect(() => {
         if (test?.part === "full" && mode !== "full") {
-            setSeconds(40 * 60);
+            setSeconds(60 * 60);
         }
     }, [test?.part]);
 
@@ -640,6 +1353,9 @@ function ReadingApp() {
         vocabularyRequestsRef.current = new Map();
         setCheckedVocabulary([]);
         setActiveVocabulary(null);
+        setResult(null);
+        setShowResultModal(false);
+        setReviewMode(false);
     }, [test?.id]);
 
     useEffect(() => {
@@ -670,7 +1386,7 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = skill === "reading" && mode === "individual" && !isFullTest;
+    const enableVocabulary = skill === "reading" && !isFullTest;
     const canUseVocabulary = enableVocabulary && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
@@ -678,8 +1394,8 @@ function ReadingApp() {
     );
 
     function answerQuestion(number, value) {
+        if (result) return;
         setAnswers((current) => ({ ...current, [number]: value }));
-        setResult(null);
     }
 
     function selectPassage(index) {
@@ -689,7 +1405,7 @@ function ReadingApp() {
         questionsPanelRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function addCheckedVocabulary(record) {
+    function addCheckedVocabulary(record, options = {}) {
         setCheckedVocabulary((current) => {
             const index = current.findIndex((item) => (
                 item.passageId === record.passageId &&
@@ -702,14 +1418,16 @@ function ReadingApp() {
             ));
 
             if (index === -1) {
-                return [...current, record];
+                return [...current, { ...record, count: record.count || 1 }];
             }
 
             const next = [...current];
             next[index] = {
                 ...next[index],
                 ...record,
-                timestamp: next[index].timestamp || record.timestamp
+                timestamp: next[index].timestamp || record.timestamp,
+                lastClickedAt: record.lastClickedAt || record.timestamp || new Date().toISOString(),
+                count: (next[index].count || 1) + (options.increment ? 1 : 0)
             };
             return next;
         });
@@ -770,6 +1488,16 @@ function ReadingApp() {
             return;
         }
 
+        const rect = target.getBoundingClientRect();
+        const targetRect = {
+            left: rect.left,
+            right: rect.right,
+            top: rect.top,
+            bottom: rect.bottom,
+            width: rect.width,
+            height: rect.height
+        };
+
         const passageId = passage?.id || `${test?.id || testId}-passage-${passage?.number || 1}`;
         const position = positionVocabularyPopover(target);
         const baseRecord = {
@@ -782,8 +1510,11 @@ function ReadingApp() {
             uzbekTranslation: "",
             example: "",
             passageId: passage?.id || `${test?.id || testId}-passage-${passage?.number || 1}`,
+            passageNumber: passage?.number || activeIndex + 1,
             attemptId: attemptIdRef.current,
             timestamp: new Date().toISOString(),
+            lastClickedAt: new Date().toISOString(),
+            count: 1,
             isAvailable: true,
             isLoading: true,
             source: ""
@@ -794,11 +1525,20 @@ function ReadingApp() {
         ));
 
         if (existing) {
-            setActiveVocabulary({ ...existing, selectedNormalized: normalizedWord, ...position });
+            const timestamp = new Date().toISOString();
+            addCheckedVocabulary({ ...existing, selectedNormalized: normalizedWord, lastClickedAt: timestamp }, { increment: true });
+            setActiveVocabulary({
+                ...existing,
+                selectedNormalized: normalizedWord,
+                count: (existing.count || 1) + 1,
+                lastClickedAt: timestamp,
+                targetRect,
+                ...position
+            });
             return;
         }
 
-        setActiveVocabulary({ ...baseRecord, ...position });
+        setActiveVocabulary({ ...baseRecord, targetRect, ...position });
         addCheckedVocabulary(baseRecord);
         lookupVocabulary(baseRecord)
             .then((record) => {
@@ -813,7 +1553,7 @@ function ReadingApp() {
                 setActiveVocabulary((current) => (
                     current?.attemptId === baseRecord.attemptId &&
                     current?.selectedNormalized === normalizedWord
-                        ? { ...finalRecord, ...position }
+                        ? { ...finalRecord, targetRect, ...position }
                         : current
                 ));
             })
@@ -830,33 +1570,28 @@ function ReadingApp() {
                 setActiveVocabulary((current) => (
                     current?.attemptId === baseRecord.attemptId &&
                     current?.selectedNormalized === normalizedWord
-                        ? { ...fallbackRecord, ...position }
+                        ? { ...fallbackRecord, targetRect, ...position }
                         : current
                 ));
             });
     }
 
     function submit() {
-        let correct = 0;
-        questions.forEach((question) => {
-            if (acceptedAnswers(question.answer).includes(normalizeAnswer(answers[question.number]))) {
-                correct += 1;
-            }
-        });
-        const unanswered = questions.filter((question) => !normalizeAnswer(answers[question.number])).length;
-        const nextResult = { correct, total: questions.length, unanswered, band: scoreBand(correct, questions.length) };
+        const nextResult = gradeReadingQuestions(questions, answers);
         setResult(nextResult);
+        setShowResultModal(true);
+        setReviewMode(false);
 
         window.authClient?.recordTestResult({
             type: skill === "listening" ? "Listening" : "Reading",
             title: test?.title || "IELTS Academic Reading",
-            correct,
-            total: questions.length,
+            correct: nextResult.correct,
+            total: nextResult.total,
             band: nextResult.band,
             testId: test?.id || testId,
             part: isFullTest ? "full" : passage?.number,
-            attemptId: enableVocabulary ? attemptIdRef.current : undefined,
-            vocabulary: enableVocabulary ? checkedVocabulary : undefined
+            attemptId: skill === "reading" ? attemptIdRef.current : undefined,
+            vocabulary: skill === "reading" ? checkedVocabulary : undefined
         });
     }
 
@@ -864,18 +1599,20 @@ function ReadingApp() {
         return h("main", { className: "cbt-status" }, h("h1", null, "Could not load test"), h("p", null, error));
     }
     if (!test) {
-        return h("main", { className: "cbt-status" }, h("p", null, "Loading IELTS Reading test..."));
+        return h("main", { className: "cbt-status" }, h("p", null, `Loading IELTS ${skill === "listening" ? "Listening" : "Reading"} test...`));
     }
     if (!passage) {
         return h("main", { className: "cbt-status" },
-            h("h1", null, "No reading passage found"),
-            h("p", null, "The uploaded test did not contain a parsed reading passage.")
+            h("h1", null, skill === "listening" ? "No listening section found" : "No reading passage found"),
+            h("p", null, skill === "listening"
+                ? "The uploaded test did not contain a parsed listening section."
+                : "The uploaded test did not contain a parsed reading passage.")
         );
     }
 
-    const dashboardHref = skill === "listening"
-        ? "listeningfulltest.html"
-        : (isFullTest ? "fulltest.html" : `part${passage.number || 1}.html`);
+    const dashboardHref = isFullTest
+        ? (skill === "listening" ? "listeningfulltest.html" : "fulltest.html")
+        : (skill === "listening" ? "listening.html" : `part${passage.number || 1}.html`);
     const answeredCurrent = currentQuestions.filter((question) => normalizeAnswer(answers[question.number])).length;
 
     return h(Fragment, null,
@@ -913,9 +1650,11 @@ function ReadingApp() {
                             groups: passage.questionGroups || [],
                             images: test.images,
                             answers,
-                            onAnswer: answerQuestion
+                            onAnswer: answerQuestion,
+                            reviewResults: reviewMode ? result?.questionResults : [],
+                            readOnly: Boolean(result)
                         }),
-                        result && enableVocabulary
+                        reviewMode && result && skill === "reading"
                             ? h(VocabularyReview, { words: checkedVocabulary })
                             : null
                     ),
@@ -937,9 +1676,28 @@ function ReadingApp() {
                 : null
         ),
         h(VocabularyPopover, { item: activeVocabulary, onClose: () => setActiveVocabulary(null) }),
-        h(ResultModal, { result, onClose: () => setResult(null) })
+        showResultModal
+            ? h(ResultModal, {
+                result,
+                vocabularyCount: checkedVocabulary.length,
+                onClose: () => {
+                    setShowResultModal(false);
+                    setReviewMode(true);
+                    questionsPanelRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+                },
+                onReview: () => {
+                    setShowResultModal(false);
+                    setReviewMode(true);
+                    questionsPanelRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            })
+            : null
     );
 }
 
-ReactDOM.createRoot(rootElement).render(h(ReadingApp));
+if (mode === "full" && skill === "listening") {
+    renderFullListeningPlayer();
+} else {
+    ReactDOM.createRoot(rootElement).render(h(ReadingApp));
+}
 })();

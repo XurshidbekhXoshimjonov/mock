@@ -4,10 +4,17 @@ module.exports = {
         "./reading-template.html",
         "./full-test-player.html",
         "./reading-cbt-app.js",
-        "./ielts-test-components.js"
+        "./ielts-test-components.js",
+        "./profile.html",
+        "./profile-settings.html",
+        "./profile-dashboard.js"
     ],
     theme: {
-        extend: {}
+        extend: {
+            boxShadow: {
+                card: "0 18px 45px rgba(7, 21, 71, 0.09)"
+            }
+        }
     },
     plugins: []
 };

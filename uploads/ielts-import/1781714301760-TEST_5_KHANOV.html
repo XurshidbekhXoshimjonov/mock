@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Reading — Test 5</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;background:#fff;
+    display:flex;flex-direction:column;height:100vh;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* HEADER */
+  .header{
+    height:52px;flex:0 0 52px;border-bottom:1px solid #ddd;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;position:relative;z-index:10;
+  }
+  .h-left{display:flex;align-items:center;gap:12px}
+  .ielts-badge{
+    background:#c41230;color:#fff;font-weight:700;
+    padding:6px 12px;border-radius:4px;font-size:14px;letter-spacing:1px;
+  }
+  .tg-pill{
+    display:inline-flex;align-items:center;gap:8px;background:#f4f4f4;
+    border-radius:999px;padding:3px 14px 3px 3px;
+    font-size:13px;font-weight:500;color:#1a1a1a;transition:background .15s;
+  }
+  .tg-pill:hover{background:#ececec}
+  .tg-icon{
+    width:28px;height:28px;border-radius:50%;
+    background:linear-gradient(135deg,#37AEE2 0%,#1E96C8 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .h-right{position:relative}
+  .hamburger{
+    width:36px;height:36px;border:none;background:transparent;cursor:pointer;
+    border-radius:6px;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;gap:4px;
+  }
+  .hamburger:hover{background:#f0f0f0}
+  .hamburger span{display:block;width:18px;height:2px;background:#333;border-radius:1px}
+  .menu-panel{
+    position:absolute;top:46px;right:0;background:#fff;border:1px solid #ddd;
+    border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.1);
+    padding:14px;min-width:240px;display:none;z-index:200;
+  }
+  .menu-panel.open{display:block}
+  .menu-row{
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:13px;padding:6px 0;
+  }
+  .menu-row+.menu-row{border-top:1px solid #f0f0f0;margin-top:2px}
+  .menu-ctrls{display:flex;align-items:center;gap:6px}
+  .size-btn{
+    width:28px;height:28px;border:1px solid #ccc;background:#fff;border-radius:4px;
+    cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;
+  }
+  .size-btn:hover{background:#f5f5f5}
+  .size-val{min-width:42px;text-align:center;font-size:12px;color:#666}
+
+  /* PROGRESS */
+  .progress{height:3px;background:#eee;flex:0 0 3px}
+  .progress-fill{height:100%;background:#c41230;width:0;transition:width .25s}
+
+  /* MAIN */
+  .main{flex:1 1 auto;display:flex;overflow:hidden;min-height:0}
+  .pane{overflow-y:auto;padding:24px 28px 40px;min-width:200px}
+  .pane-left{background:#fafafa;width:50%;flex:0 0 50%}
+  .pane-right{background:#fff;flex:1 1 auto}
+  .pane::-webkit-scrollbar{width:10px}
+  .pane::-webkit-scrollbar-thumb{background:#ccc;border-radius:5px}
+  .pane::-webkit-scrollbar-thumb:hover{background:#aaa}
+  .divider{
+    width:6px;background:#e0e0e0;cursor:col-resize;flex:0 0 6px;
+    position:relative;transition:background .15s;
+  }
+  .divider:hover,.divider.dragging{background:#c41230}
+  .divider::after{
+    content:'';position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);width:2px;height:34px;
+    background:#999;border-radius:1px;
+  }
+  .divider:hover::after,.divider.dragging::after{background:#fff}
+
+  /* PASSAGE */
+  #passagePane{font-size:14px;line-height:1.65}
+  .pass-title{font-size:1.55em;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+  .pass-sub{
+    font-size:0.95em;color:#666;font-style:italic;
+    margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #c41230;
+  }
+  .pass-body p{margin-bottom:14px;text-align:justify;hyphens:auto}
+  .highlight{
+    background:#fff59d;cursor:pointer;padding:1px 2px;
+    border-radius:2px;transition:background .15s;
+  }
+  .highlight:hover{background:#ffeb3b}
+  .hl-pill{
+    position:fixed;background:#1a1a1a;color:#fff;padding:7px 14px;
+    border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;
+    z-index:1500;box-shadow:0 4px 12px rgba(0,0,0,.25);display:none;user-select:none;
+  }
+  .hl-pill:hover{background:#000}
+
+  /* QUESTIONS */
+  #questionPane{font-size:13px;line-height:1.55}
+  .q-instr{
+    background:#f5f5f5;border-left:3px solid #c41230;
+    padding:10px 14px;margin-bottom:18px;
+    font-size:0.95em;line-height:1.55;border-radius:0 4px 4px 0;
+  }
+  .q-instr strong{color:#c41230}
+  .q-item{margin-bottom:16px;padding:6px 0;scroll-margin-top:30px}
+  .q-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:26px;height:22px;background:#1a1a1a;color:#fff;
+    padding:0 6px;border-radius:3px;font-weight:700;font-size:11px;
+    margin-right:8px;flex-shrink:0;
+  }
+  .q-text{margin-bottom:8px;line-height:1.55;display:flex;align-items:flex-start}
+  .q-text-body{flex:1}
+  .q-options{display:flex;flex-direction:column;gap:6px;margin-left:34px}
+  .q-options.radio-row{flex-direction:row;gap:0;flex-wrap:wrap}
+  .q-options.mcq-vert{flex-direction:column;gap:6px}
+  .opt-label{
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    padding:5px 10px;border:1px solid #ccc;background:#fff;
+    font-size:0.92em;transition:all .12s;user-select:none;border-radius:4px;
+  }
+  .opt-label:hover{background:#f5f5f5}
+  .opt-label input{cursor:pointer;margin:0}
+  .opt-label.selected{background:#c41230;color:#fff;border-color:#c41230}
+  .radio-row .opt-label{border-radius:0;border-right:none}
+  .radio-row .opt-label:first-of-type{border-radius:4px 0 0 4px}
+  .radio-row .opt-label:last-of-type{border-radius:0 4px 4px 0;border-right:1px solid #ccc}
+  .radio-row .opt-label.selected+.opt-label{border-left-color:#c41230}
+
+  .q-input{
+    border:none;border-bottom:2px solid #888;background:transparent;
+    font-family:inherit;font-size:inherit;color:inherit;
+    padding:2px 4px;min-width:110px;outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .q-input:focus{border-bottom-color:#c41230;background:#fffbe5}
+  .q-input.has-value{background:#fff3cd;border-bottom-color:#f9a825}
+
+  /* Q# prefix blank (inline in table/summary) */
+  .q-blank{display:inline-block;white-space:nowrap;margin:0 2px}
+  .q-blank-num{
+    display:inline-block;vertical-align:middle;min-width:20px;height:18px;
+    background:#1a1a1a;color:#fff;border-radius:3px;
+    font-weight:700;font-size:10px;padding:0 5px;line-height:18px;
+    margin-right:4px;text-align:center;
+  }
+  .q-blank input{vertical-align:middle;min-width:100px;max-width:160px}
+
+  /* Completion table */
+  .completion-table{
+    width:100%;border-collapse:collapse;margin-bottom:20px;font-size:0.95em;
+  }
+  .completion-table th,.completion-table td{
+    border:2px solid #b0b0b0;padding:12px 16px;
+    vertical-align:middle;line-height:2;
+  }
+  .completion-table thead th{
+    background:#f0f0f0;font-weight:700;text-align:center;
+    color:#333;text-transform:uppercase;letter-spacing:.5px;
+  }
+  .completion-table td:first-child{
+    font-weight:700;text-align:center;width:66px;
+    background:#fafafa;color:#555;font-size:0.95em;
+  }
+
+  /* Matching list */
+  .matching-list{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:14px 20px;background:#fcfcfa;margin-bottom:18px;
+  }
+  .matching-list-title{
+    font-weight:700;text-align:center;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #ddd;font-size:1.05em;
+  }
+  .matching-list ol{list-style:none;padding:0;margin:0}
+  .matching-list li{padding:5px 0;display:flex;gap:10px;line-height:1.5}
+  .matching-list .letter{font-weight:700;flex-shrink:0;min-width:22px;color:#c41230}
+  .matching-list .desc{flex:1}
+  .matching-list ol.two-col{
+    display:grid;grid-template-columns:1fr 1fr;gap:0 24px;
+  }
+
+  /* Select dropdown */
+  .q-select{
+    font-family:inherit;font-size:0.92em;padding:5px 8px;
+    border:1px solid #888;border-radius:4px;background:#fff;
+    cursor:pointer;color:inherit;outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .q-select:focus{border-color:#c41230}
+  .q-select.has-value{background:#fff3cd;border-color:#f9a825}
+  .q-select.narrow{min-width:80px;max-width:120px}
+  .q-select.medium{min-width:160px;max-width:200px}
+  .q-select.wide{min-width:200px;max-width:300px}
+  .select-q-row{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;padding:6px 0;
+    flex-wrap:wrap;scroll-margin-top:30px;
+  }
+  .select-q-row .q-num{flex-shrink:0}
+  .select-q-text{flex:1;min-width:0;line-height:1.7}
+
+  /* BOTTOM NAV */
+  .bottom-nav{
+    height:44px;flex:0 0 44px;background:#f0f0f0;border-top:1px solid #ddd;
+    display:flex;align-items:center;padding:0 12px;gap:8px;
+    overflow-x:auto;overflow-y:hidden;
+  }
+  .bottom-nav::-webkit-scrollbar{height:4px}
+  .bottom-nav::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+  .nav-pass{
+    font-weight:700;font-size:13px;cursor:pointer;padding:5px 10px;
+    border-radius:4px;white-space:nowrap;transition:background .15s;flex-shrink:0;
+  }
+  .nav-pass:hover{background:#e0e0e0}
+  .nav-pass.active{color:#c41230}
+  .nav-pass small{font-weight:500;color:#666;font-size:0.85em}
+  .q-pill{
+    width:26px;height:26px;border:1px solid #bbb;background:#fff;
+    border-radius:4px;font-size:11px;cursor:pointer;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:inherit;color:#333;transition:all .12s;
+  }
+  .q-pill:hover{background:#ebebeb;border-color:#999}
+  .q-pill.answered{font-weight:700;background:#ffd54f;border-color:#f9a825;color:#5d4037}
+  .nav-sep{width:1px;height:26px;background:#ccc;flex-shrink:0;margin:0 4px}
+  .nav-spacer{flex:1}
+  .submit-btn{
+    height:30px;padding:0 16px;background:#28a745;color:#fff;
+    border:none;border-radius:4px;cursor:pointer;font-weight:600;
+    font-size:13px;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px;
+    flex-shrink:0;transition:background .15s;
+  }
+  .submit-btn:hover{background:#218838}
+
+  /* MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:3000;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:#fff;border-radius:10px;max-width:820px;width:100%;
+    max-height:90vh;overflow-y:auto;padding:28px;position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;background:transparent;border:none;
+    font-size:28px;line-height:1;cursor:pointer;color:#888;
+    width:34px;height:34px;border-radius:50%;transition:background .15s;
+  }
+  .modal-close:hover{background:#f0f0f0;color:#000}
+  .modal h2{margin-bottom:20px;font-size:24px;color:#1a1a1a}
+  .result-pass{
+    margin-bottom:20px;border:1px solid #e0e0e0;
+    border-radius:8px;overflow:hidden;
+  }
+  .result-pass-header{
+    background:#fafafa;padding:14px 18px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border-bottom:1px solid #e0e0e0;
+  }
+  .result-pass-info{flex:1;min-width:0}
+  .result-pass-title{font-weight:700;font-size:14px;color:#1a1a1a}
+  .result-pass-sub{font-size:12px;color:#666;margin-top:3px}
+  .score-badge{
+    padding:5px 14px;border-radius:999px;
+    color:#fff;font-weight:700;font-size:13px;flex-shrink:0;
+  }
+  .badge-green{background:#28a745}
+  .badge-orange{background:#fd7e14}
+  .badge-red{background:#dc3545}
+  .result-table{width:100%;border-collapse:collapse;font-size:13px}
+  .result-table th,.result-table td{
+    padding:8px 14px;text-align:left;border-bottom:1px solid #f0f0f0;
+  }
+  .result-table th{
+    background:#f9f9f9;font-weight:600;font-size:12px;
+    color:#555;text-transform:uppercase;letter-spacing:.4px;
+  }
+  .result-table td{vertical-align:middle}
+  .row-correct{background:#e8f5e9}
+  .row-wrong{background:#ffebee}
+  .mark{font-weight:700;font-size:15px}
+  .mark-ok{color:#28a745}
+  .mark-x{color:#dc3545}
+  .total-strip{
+    margin-top:24px;padding:22px 24px;
+    background:linear-gradient(135deg,#c41230 0%,#8b0d23 100%);
+    color:#fff;border-radius:10px;
+    display:flex;justify-content:space-around;align-items:center;
+    text-align:center;flex-wrap:wrap;gap:16px;
+  }
+  .total-block{flex:1;min-width:140px}
+  .total-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+  .total-value{font-size:32px;font-weight:700;margin-top:2px}
+  .total-band-value{font-size:36px}
+
+  body.dragging{user-select:none;cursor:col-resize}
+  body.dragging *{cursor:col-resize!important}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-left">
+    <div class="ielts-badge">IELTS</div>
+    <a class="tg-pill" href="https://t.me/Abdurazzoq_Khanov" target="_blank" rel="noopener">
+      <span class="tg-icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.27 1.4.18 1.12 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#fff"/>
+        </svg>
+      </span>
+      <span>Abdurazzoq Khanov</span>
+    </a>
+  </div>
+  <div class="h-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-row">
+        <span>Passage text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="passage" data-dir="-1">A−</button>
+          <span class="size-val" id="passSizeVal">14px</span>
+          <button class="size-btn" data-target="passage" data-dir="1">A+</button>
+        </div>
+      </div>
+      <div class="menu-row">
+        <span>Question text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="question" data-dir="-1">A−</button>
+          <span class="size-val" id="qSizeVal">13px</span>
+          <button class="size-btn" data-target="question" data-dir="1">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<main class="main">
+  <section class="pane pane-left" id="passagePane"></section>
+  <div class="divider" id="divider"></div>
+  <section class="pane pane-right" id="questionPane"></section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+<div class="hl-pill" id="hlPill">✏ Highlight</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h2>Your Results</h2>
+    <div id="resultsBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function blank(n){
+  return `<span class="q-blank"><span class="q-blank-num">${n}</span><input class="q-input" data-q="${n}" autocomplete="off" spellcheck="false"></span>`;
+}
+function displayAnswer(v){
+  if (!v && v !== 0) return '—';
+  if (v==='T') return 'TRUE'; if (v==='F') return 'FALSE';
+  if (v==='Y') return 'YES'; if (v==='N') return 'NO';
+  if (v==='NGV') return 'NOT GIVEN';
+  return v;
+}
+function normalize(s){ return String(s).trim().toLowerCase().replace(/\s+/g,' '); }
+function checkAnswer(user, correct){
+  if (!user) return false;
+  const u = normalize(user);
+  return (Array.isArray(correct) ? correct : [correct]).some(c => normalize(c) === u);
+}
+function displayCorrect(c){
+  return displayAnswer(Array.isArray(c) ? c[0] : c);
+}
+
+/* Lucy options string (A-J) for inline selects */
+const LUCY_OPTS = `<option value="">— select —</option>
+  <option value="A">A — method</option>
+  <option value="B">B — language</option>
+  <option value="C">C — cardboard</option>
+  <option value="D">D — design</option>
+  <option value="E">E — purpose</option>
+  <option value="F">F — gender</option>
+  <option value="G">G — box</option>
+  <option value="H">H — material</option>
+  <option value="I">I — similarity</option>
+  <option value="J">J — wood</option>`;
+
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+  1: `
+    <h1 class="pass-title">Manhattan's Skyscrapers Race to the Top</h1>
+    <div class="pass-sub">The rise of New York's skyscrapers: 1890–1960s</div>
+    <div class="pass-body">
+      <p>During the late 19th and 20th centuries, New York City and the skyline of Manhattan, the most famous of the city's five boroughs, or districts, were radically transformed. New technology, stronger building materials, and abundant labor allowed the towers of Manhattan to rise — eventually becoming the tallest in the world.</p>
+      <p>The race to the sky began in 1854, when inventor Elisha Otis demonstrated his elevator safety brake to curious crowds in New York. No matter how many times a man cut through cables holding the elevator platform high above gasping onlookers, Otis would descend just a few inches before safely stopping. Along with Otis's elevator, other innovations laid the groundwork for the future. In 1855 Henry Bessemer patented his process for producing a new kind of strong and low-cost steel. Plate glass, produced in volume from the 1850s, and electric lighting in the 1880s also contributed to the rise of the skyscraper.</p>
+      <p>Technology alone did not create the Manhattan skyline. Other essential factors included an increasing population, soaring property values, rivalry, geology, vanity, and greed. In 1871, when Chicago developers built the first so-called 'skyscraper', New York entrepreneurs responded as they had a geological advantage. While Chicago was built on muddy soil, Manhattan stood on solid granite. And because Manhattan was surrounded by water, there was little room for ambitious new buildings to grow unless they looked upward.</p>
+      <p>The first tall buildings to rise in New York City appeared in the late 1800s. Completed in 1890, the 94-meter New York World Building was the tallest in the world until the Manhattan Life Insurance Building surpassed it four years later, setting the fast pace and ambitious character of future Manhattan skyscrapers.</p>
+      <p>These buildings were striking achievements, but perhaps the most stunning was the Woolworth Building, completed in 1912. At 222 meters, the Woolworth became the world's tallest building. Upon its completion, this architectural wonder was soon as much a symbol of New York City as the famous Statue of Liberty. It promised freedom and very big dreams.</p>
+      <p>As parts of New York began to resemble man-made mountain ranges, concerns over the nature of skyscrapers grew. From the sidewalks, streets felt increasingly like canyons. To counteract this, from 1916, city authorities issued zoning laws that stipulated that tall buildings must become narrower at higher levels — causing Manhattan's skyscrapers to resemble multi-layered wedding cakes.</p>
+      <p>In 1928, construction began on one of New York's most iconic structures: the Chrysler Building. Walter Chrysler, a motor-industry leader, incorporated several unique features into his building's design. Much of the building's distinctive ornamentation resembled features of the automobile from which Chrysler made his fortune. Upon completion, the Chrysler Building was the world's tallest, at 319 meters high.</p>
+      <p>The Chrysler Building's time at the top would be short. Just 11 months after the Chrysler's completion in May 1930, the 102-story Empire State Building became the world's tallest building. It was opened by the U.S. president to great acclaim. At 381 meters, the tower matched the ambition of the New York financier John J. Raskob, who commissioned the legendary skyscraper.</p>
+      <p>Unfortunately, the American economy crashed as the Empire State Building rose at record speed. Not even the building's famous appearance in the 1933 movie King Kong could boost its fortunes. Unable to find tenants, Raskob's magnificent structure was mockingly called the 'Empty State Building.' It took World War II to fill the building with government agencies. Even then, a B-25 bomber almost brought it down, crashing — accidentally — between the 78th and 80th floors in dense fog on July 28, 1945. Five years later, the Empire State Building finally turned a profit. The building itself was an architectural marvel, remaining the world's tallest skyscraper for 40 years.</p>
+      <p>In the years following World War II, architecture in New York transformed again. Instead of decorative designs, buildings started to favor a modern look with a sleek design and gleaming surfaces. Completed in 1952, the United Nations Building was constructed in this style. Designed by the Swiss architect Le Corbusier, the slim tower was like nothing the city had seen before. The trend toward modern lines continued into the 1950s. By the time the Seagram Building was completed in 1958, rectilinear office buildings — with their straight up-and-down walls — were to become typical. With its unique bronze exterior, it was not the tallest building in New York, but it became a model for designing other office towers built from the 1960s onward.</p>
+      <p>Le Corbusier is often cited as the villain behind this move towards less elegant architecture, yet when he visited New York in 1935 and witnessed the physical impact of skyscrapers for the first time, he said: 'The skyscrapers of New York are romantic, a gesture of pride... but the street has been killed...'. Today his observation hardly seems true: Manhattan's skyscrapers failed to kill the street. In fact, New York City remains one of the world's great walking cities, its avenues and streets lined by towering giants born of a golden age of opportunity and ambition.</p>
+    </div>
+  `,
+  2: `
+    <h1 class="pass-title">Wolf Pack</h1>
+    <div class="pass-sub">"For the strength of the pack is the wolf, and the strength of the wolf is the pack." — Rudyard Kipling, <em>The Law for the Wolves</em></div>
+    <div class="pass-body">
+      <p>A wolf pack is an extremely well-organised family group with a well-defined social structure and a clear-cut code of conduct. Every wolf has a certain place and function within the pack and every member has to do its fair share of the work. The supreme leader is a very experienced wolf — the alpha — who has dominance over the whole pack. It is the protector and decision-maker and directs the others as to where, when and what to hunt. However, it does not lead the pack into the hunt, for it is far too valuable to risk being injured or killed. That is the responsibility of the beta wolf, who assumes second place in the hierarchy of the pack. The beta takes on the role of enforcer — fighter or 'tough guy' — big, strong and very aggressive. It is both the disciplinarian of the pack and the alpha's bodyguard.</p>
+      <p>The tester, a watchful and distrustful character, will alert the alpha if it encounters anything suspicious while it is scouting around looking for signs of trouble. It is also the quality controller, ensuring that the others are deserving of their place in the pack. It does this by creating a situation that tests their bravery and courage, by starting a fight, for instance. At the bottom of the social ladder is the omega wolf, subordinate and submissive to all the others, but often playing the role of peacemaker by intervening in an intra-pack squabble and defusing the situation by clowning around. Whereas the tester may create conflict, the omega is more likely to resolve it.</p>
+      <p>The rest of the pack is made up of mid- to low-ranking non-breeding adults and the immature offspring of the alpha and its mate. The size of the group varies from around six to ten members or more, depending on the abundance of food and numbers of the wolf population in general.</p>
+      <p>Wolves have earned themselves an undeserved reputation for being ruthless predators and a danger to humans and livestock. The wolf has been portrayed in fairy tales and folklore as a very bad creature, killing any people and other animals it encounters. However, the truth is that wolves only kill to eat, never kill more than they need, and rarely attack humans unless their safety is threatened in some way. It has been suggested that hybrid wolf-dogs or wolves suffering from rabies are actually responsible for many of the historical offences as well as more recent incidents.</p>
+      <p>Wolves hunt mainly at night. They usually seek out large herbivores, such as deer, although they also eat smaller animals, such as beavers, hares and rodents, if these are obtainable. Some wolves in western Canada are known to fish for salmon. The alpha wolf picks out a specific animal in a large herd by the scent it leaves behind. The prey is often a very young, old or injured animal in poor condition. The alpha signals to its hunters which animal to take down and when to strike by using tail movements and the scent from a gland at the tip of its spine above the tail.</p>
+      <p>Wolves kill to survive. Obviously, they need to eat to maintain strength and health but the way they feast on the prey also reinforces social order. Every member of the family has a designated spot at the carcass and the alpha directs them to their places through various ear postures: moving an ear forward, flattening it back against the head or swivelling it around. The alpha wolf eats the prized internal organs while the beta is entitled to the muscle-meat of the rump and thigh, and the omega and other low ranks are assigned the intestinal contents and less desirable parts such as the backbone and ribs.</p>
+      <p>The rigid class structure in a wolf pack entails frequent displays of supremacy and respect. When a higher-ranking wolf approaches, a lesser-ranking wolf must slow down, lower itself, and pass to the side with head averted to show deference; or, in an extreme act of passive submission, it may roll onto its back, exposing its throat and belly. The dominant wolf stands over it, stiff-legged and tall, asserting its superiority and its authority in the pack.</p>
+    </div>
+  `,
+  3: `
+    <h1 class="pass-title">You are what you speak</h1>
+    <div class="pass-sub"><em>Does your mother tongue really affect the way you see the world?</em></div>
+    <div class="pass-body">
+      <p>Does the language you speak influence the way you think? Does it help define your world view? Anyone who has tried to master a foreign tongue has at least thought about the possibility.</p>
+      <p>At first glance the idea seems perfectly plausible. Conveying even simple messages requires that you make completely different observations depending on your language. Imagine being asked to count some pens on a table. As an English speaker, you only have to count them and give the number. But a Russian may need to consider the gender and a Japanese speaker has to take into account their shape (long and cylindrical) as well, and use the number word designated for items of that shape.</p>
+      <p>On the other hand, surely pens are just pens, no matter what your language compels you to specify about them? Little linguistic peculiarities, though amusing, don't change the objective world we are describing. So how can they alter the way we think?</p>
+      <p>Scientists and philosophers have been grappling with this thorny question for centuries. There have always been those who argue that our picture of the Universe depends on our native tongue. Since the 1960s, however, with the ascent of thinkers like Noam Chomsky, and a host of cognitive scientists, the consensus has been that linguistic differences don't really matter, that language is a universal human trait, and that our ability to talk to one another owes more to our shared genetics than to our varying cultures. But now the pendulum is beginning to swing the other way as psychologists re-examine the question.</p>
+      <p>A new generation of scientists is not convinced that language is innate and hard-wired into our brain and they say that small, even apparently insignificant differences between languages do affect the way speakers perceive the world. 'The brain is shaped by experience,' says Dan Slobin of the University of California at Berkeley. 'Some people argue that language just changes what you attend to,' says Lera Boroditsky of the Massachusetts Institute of Technology. 'But what you attend to changes what you encode and remember.' In short, it changes how you think.</p>
+      <p>To start with the simplest and perhaps subtlest example, preparing to say something in a particular language demands that you pay attention to certain things and ignore others. In Korean, for instance, simply to say 'hello' you need to know if you're older or younger than the person you're addressing. Spanish speakers have to decide whether they are on intimate enough terms to call someone by the informal <em>tu</em> rather than the formal <em>Usted</em>. In Japanese, simply deciding which form of the word 'I' to use demands complex calculations involving things such as your gender, their gender and your relative status. Slobin argues that this process can have a huge impact on what we deem important and, ultimately, how we think about the world.</p>
+      <p>Whether your language places an emphasis on an object's shape, substance or function also seems to affect your relationship with the world, according to John Lucy, a researcher at the Max Planck Institute of Psycholinguistics in the Netherlands. He has compared American English with Yucatec Maya, spoken in Mexico's Yucatan Peninsula. Among the many differences between the two languages is the way objects are classified. In English, shape is implicit in many nouns. We think in terms of discrete objects, and it is only when we want to quantify amorphous things like sugar that we employ units such as 'cube' or 'cup'. But in Yucatec, objects tend to be defined by separate words that describe shape. So, for example, 'long banana' describes the fruit, while 'flat banana' means the 'banana leaf' and 'seated banana' is the 'banana tree'.</p>
+      <p>To find out if this classification system has any far-reaching effects on how people think, Lucy asked English- and Yucatec-speaking volunteers to do a likeness task. In one experiment, he gave them three combs and asked which two were most alike. One was plastic with a handle, another wooden with a handle, the third plastic without a handle. English speakers thought the combs with handles were more alike, but Yucatec speakers felt the two plastic combs were. In another test, Lucy used a plastic box, a cardboard box and a piece of cardboard. The Americans thought the two boxes belonged together, whereas the Mayans chose the two cardboard items. In other words, Americans focused on form, while the Mayans focused on substance.</p>
+      <p>Despite some criticism of his findings, Lucy points to his studies indicating that, at about the age of eight, differences begin to emerge that reflect language. 'Everyone comes with the same possibilities,' he says, 'but there's a tendency to make the world fit into our linguistic categories.' Boroditsky agrees, arguing that even artificial classification systems, such as gender, can be important.</p>
+      <p>Nevertheless, the general consensus is that while the experiments done by Lucy, Boroditsky and others may be intriguing, they are not compelling enough to shift the orthodox view that language does not have a strong bearing on thought or perception. The classic example used by Chomskians to back this up is colour. Over the years many researchers have tried to discover whether linguistic differences in categorising colours lead to differences in perceiving them. Colours, after all, fall on a continuous spectrum, so we shouldn't be surprised if one person's 'red' is another person's 'orange'. Yet most studies suggest that people agree on where the boundaries are, regardless of the colour terms used in their own language.</p>
+    </div>
+  `
+};
+
+const PASSAGE_TITLES = {
+  1: "Manhattan's Skyscrapers Race to the Top",
+  2: "Wolf Pack",
+  3: "You are what you speak"
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  1:'F', 2:'T', 3:'F', 4:'NGV', 5:'NGV', 6:'T', 7:'NGV', 8:'NGV',
+  9:'brake', 10:'steel', 11:'laws', 12:'automobile', 13:'fog',
+  14:'B', 15:'D', 16:'A', 17:'C', 18:'B', 19:'C',
+  20:'F', 21:'T', 22:'NGV', 23:'T', 24:'F', 25:'T', 26:'NGV',
+  27:'T', 28:'F', 29:'F', 30:'NGV', 31:'T',
+  32:'C', 33:'E', 34:'A', 35:'B', 36:'D',
+  37:'H', 38:'D', 39:'C', 40:'A'
+};
+
+const pRanges = { 1:[1,13], 2:[14,26], 3:[27,40] };
+const TOTAL_Q = 40;
+
+/* ============================================================
+   SHARED OPTION SETS
+============================================================ */
+const WOLF_ABCD = [
+  ['A','A — Alpha wolf'],
+  ['B','B — Beta wolf'],
+  ['C','C — Tester wolf'],
+  ['D','D — Omega wolf']
+];
+
+const LANG_AE = [
+  ['A','A — Russian'],
+  ['B','B — Japanese'],
+  ['C','C — Korean'],
+  ['D','D — Spanish'],
+  ['E','E — Yucatec Maya']
+];
+
+/* ============================================================
+   QUESTIONS
+============================================================ */
+const QUESTIONS = {
+  1: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 1–8</strong><br>Do the following statements agree with the information given in Reading Passage 1?<br>Write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, <strong>NOT GIVEN</strong> if there is no information on this.</div>` },
+    { type:'tfng', n:1, text:'Construction of tall buildings in New York City started in the twentieth century.' },
+    { type:'tfng', n:2, text:"An important force in the development of Manhattan's skyscrapers was the increasing price of land." },
+    { type:'tfng', n:3, text:'Chicago was a better place to build skyscrapers than New York.' },
+    { type:'tfng', n:4, text:'The New York World Building took four years to complete.' },
+    { type:'tfng', n:5, text:'In 1912, the Woolworth Building was visited as often as the Statue of Liberty.' },
+    { type:'tfng', n:6, text:'In its early years, the Empire State Building was a commercial failure.' },
+    { type:'tfng', n:7, text:'The Empire State Building was the first skyscraper to be featured in a film.' },
+    { type:'tfng', n:8, text:"Le Corbusier is frequently considered responsible for changing New York's architecture." },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 9–13</strong><br>Complete the table below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <table class="completion-table">
+        <thead>
+          <tr><th>YEARS</th><th>DEVELOPMENT</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1854</td>
+            <td>Elisha Otis introduced New Yorkers to a new invention — a ${blank(9)} for elevators.</td>
+          </tr>
+          <tr>
+            <td>1855</td>
+            <td>Henry Bessemer created a way of making ${blank(10)} that was sturdy and inexpensive.</td>
+          </tr>
+          <tr>
+            <td>1890</td>
+            <td>The New York World Building was completed.</td>
+          </tr>
+          <tr>
+            <td>1916</td>
+            <td>New ${blank(11)} required that the upper floors of buildings were smaller in area than the lower floors.</td>
+          </tr>
+          <tr>
+            <td>1928</td>
+            <td>Some of the decorations on the Chrysler Building looked like ${blank(12)} parts.</td>
+          </tr>
+          <tr>
+            <td>1945</td>
+            <td>An aeroplane lost in ${blank(13)} hit the Empire State Building.</td>
+          </tr>
+        </tbody>
+      </table>
+    `}
+  ],
+
+  2: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 14–19</strong><br>Classify the following statements as referring to:<br><strong>A</strong>&nbsp; the alpha wolf &nbsp;&nbsp;<strong>B</strong>&nbsp; the beta wolf &nbsp;&nbsp;<strong>C</strong>&nbsp; the tester wolf &nbsp;&nbsp;<strong>D</strong>&nbsp; the omega wolf<br><em>NB You may use any letter more than once.</em></div>` },
+    { type:'select-q', n:14, text:'It is at the forefront of the pack when it makes a kill.', options:WOLF_ABCD, selectClass:'narrow' },
+    { type:'select-q', n:15, text:'It tries to calm tensions and settle disputes between pack members.', options:WOLF_ABCD, selectClass:'narrow' },
+    { type:'select-q', n:16, text:'It is the wolf in charge and maintains control over the pack.', options:WOLF_ABCD, selectClass:'narrow' },
+    { type:'select-q', n:17, text:'It warns the leader of potential danger.', options:WOLF_ABCD, selectClass:'narrow' },
+    { type:'select-q', n:18, text:'It protects the leader of the pack.', options:WOLF_ABCD, selectClass:'narrow' },
+    { type:'select-q', n:19, text:'It sets up a trial to determine whether a wolf is worthy of its status in the pack.', options:WOLF_ABCD, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 20–26</strong><br>Do the following statements agree with the information given in Reading Passage 2?<br>Write <strong>TRUE</strong>, <strong>FALSE</strong>, or <strong>NOT GIVEN</strong>.</div>` },
+    { type:'tfng', n:20, text:'Wolves are a constant danger to humans.' },
+    { type:'tfng', n:21, text:'Crossbred wolves or sick wolves are most likely to blame for attacks on people.' },
+    { type:'tfng', n:22, text:'Canadian wolves prefer to eat fish, namely salmon.' },
+    { type:'tfng', n:23, text:'The wolf pack leader identifies a particular target for attack by its smell.' },
+    { type:'tfng', n:24, text:'When wolves attack a herd, they go after the healthiest animal.' },
+    { type:'tfng', n:25, text:'The piece of a dead animal that a wolf may eat depends on its status in the pack.' },
+    { type:'tfng', n:26, text:'A low-ranking wolf must show submission or the dominant wolf will attack it.' }
+  ],
+
+  3: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 27–31</strong><br>Do the following statements agree with the information given in Reading Passage 3?<br>Write <strong>TRUE</strong>, <strong>FALSE</strong>, or <strong>NOT GIVEN</strong>.</div>` },
+    { type:'tfng', n:27, text:'Learning a foreign language makes people consider the relationship between language and thought.' },
+    { type:'tfng', n:28, text:'In the last century, cognitive scientists believed that linguistic differences had a critical effect on communication.' },
+    { type:'tfng', n:29, text:'Dan Slobin agrees with Chomsky on how we perceive the world.' },
+    { type:'tfng', n:30, text:'Boroditsky has conducted gender experiments on a range of speakers.' },
+    { type:'tfng', n:31, text:'The way we perceive colour is a well-established test of the effect of language on thought.' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 32–36</strong><br>Look at the following features and the list of languages below.<br>Match each feature with the correct language, <strong>A–E</strong>.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Languages</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">Russian</span></li>
+          <li><span class="letter">B</span><span class="desc">Japanese</span></li>
+          <li><span class="letter">C</span><span class="desc">Korean</span></li>
+          <li><span class="letter">D</span><span class="desc">Spanish</span></li>
+          <li><span class="letter">E</span><span class="desc">Yucatec Maya</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:32, text:'The importance of the relative age of speakers', options:LANG_AE, selectClass:'narrow' },
+    { type:'select-q', n:33, text:'The use of adjectives to distinguish the names of objects or things', options:LANG_AE, selectClass:'narrow' },
+    { type:'select-q', n:34, text:'A need to use some numbers with the correct gender', options:LANG_AE, selectClass:'narrow' },
+    { type:'select-q', n:35, text:'A relationship between form and number', options:LANG_AE, selectClass:'narrow' },
+    { type:'select-q', n:36, text:'The need to know how friendly your relationship is with the person you are addressing', options:LANG_AE, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 37–40</strong><br>Complete the summary of Lucy's experiments. Choose the correct letter, <strong>A–J</strong>, for each answer.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">Options A–J</div>
+        <ol class="two-col">
+          <li><span class="letter">A</span><span class="desc">method</span></li>
+          <li><span class="letter">B</span><span class="desc">language</span></li>
+          <li><span class="letter">C</span><span class="desc">cardboard</span></li>
+          <li><span class="letter">D</span><span class="desc">design</span></li>
+          <li><span class="letter">E</span><span class="desc">purpose</span></li>
+          <li><span class="letter">F</span><span class="desc">gender</span></li>
+          <li><span class="letter">G</span><span class="desc">box</span></li>
+          <li><span class="letter">H</span><span class="desc">material</span></li>
+          <li><span class="letter">I</span><span class="desc">similarity</span></li>
+          <li><span class="letter">J</span><span class="desc">wood</span></li>
+        </ol>
+      </div>
+      <div class="q-item select-q-row" id="q-37">
+        <span class="q-num">37</span>
+        <span class="select-q-text">In the likeness task, two of the combs were made of the same
+          <select class="q-select narrow" data-q="37">${LUCY_OPTS}</select></span>
+      </div>
+      <div class="q-item select-q-row" id="q-38">
+        <span class="q-num">38</span>
+        <span class="select-q-text">Two other combs were alike in that they had the same
+          <select class="q-select narrow" data-q="38">${LUCY_OPTS}</select></span>
+      </div>
+      <div class="q-item select-q-row" id="q-39">
+        <span class="q-num">39</span>
+        <span class="select-q-text">In another experiment, plastic and
+          <select class="q-select narrow" data-q="39">${LUCY_OPTS}</select>
+          items were used.</span>
+      </div>
+      <div class="q-item select-q-row" id="q-40">
+        <span class="q-num">40</span>
+        <span class="select-q-text">The
+          <select class="q-select narrow" data-q="40">${LUCY_OPTS}</select>
+          that English and Yucatec speakers used to group these objects helped Lucy show that different languages affect how people think.</span>
+      </div>
+    `}
+  ]
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  activePassage:1, answers:{}, passageSize:14, questionSize:13
+};
+const passagePane = document.getElementById('passagePane');
+const questionPane = document.getElementById('questionPane');
+const bottomNav = document.getElementById('bottomNav');
+const progressFill = document.getElementById('progressFill');
+const hlPill = document.getElementById('hlPill');
+
+/* ============================================================
+   RENDER
+============================================================ */
+function renderPassage(){
+  passagePane.innerHTML = PASSAGES[state.activePassage];
+  passagePane.style.fontSize = state.passageSize + 'px';
+}
+
+function renderRadioItem(n, text, pairs, current, cls){
+  const opts = pairs.map(([v,l]) =>
+    `<label class="opt-label ${current===v?'selected':''}">
+      <input type="radio" name="q${n}" value="${v}" ${current===v?'checked':''}> ${l}
+    </label>`).join('');
+  return `<div class="q-item" id="q-${n}">
+    <div class="q-text"><span class="q-num">${n}</span><span class="q-text-body">${text}</span></div>
+    <div class="q-options ${cls}">${opts}</div>
+  </div>`;
+}
+
+function renderQuestions(){
+  const items = QUESTIONS[state.activePassage];
+  let html = '';
+  for (const item of items) {
+    if (item.type === 'group-header') { html += item.content; continue; }
+    if (item.type === 'tfng') {
+      html += renderRadioItem(item.n, item.text,
+        [['T','TRUE'],['F','FALSE'],['NGV','NOT GIVEN']],
+        state.answers[item.n]||'', 'radio-row');
+      continue;
+    }
+    if (item.type === 'ynng') {
+      html += renderRadioItem(item.n, item.text,
+        [['Y','YES'],['N','NO'],['NGV','NOT GIVEN']],
+        state.answers[item.n]||'', 'radio-row');
+      continue;
+    }
+    if (item.type === 'mcq') {
+      html += renderRadioItem(item.n, item.text, item.options, state.answers[item.n]||'', 'mcq-vert');
+      continue;
+    }
+    if (item.type === 'select-q') {
+      const cur = state.answers[item.n]||'';
+      const sc = item.selectClass||'';
+      const opts = `<option value="">— select —</option>` +
+        item.options.map(([v,l]) => `<option value="${v}" ${cur===v?'selected':''}>${escapeAttr(l)}</option>`).join('');
+      html += `<div class="q-item select-q-row" id="q-${item.n}">
+        <span class="q-num">${item.n}</span>
+        <span class="select-q-text">${item.text}</span>
+        <select class="q-select ${sc} ${cur?'has-value':''}" data-q="${item.n}">${opts}</select>
+      </div>`;
+      continue;
+    }
+    if (item.type === 'html') { html += item.content; }
+  }
+  questionPane.innerHTML = html;
+  questionPane.style.fontSize = state.questionSize + 'px';
+  hydrateInputs();
+  attachQuestionListeners();
+}
+
+function hydrateInputs(){
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    const cur = state.answers[inp.dataset.q];
+    if (cur && !inp.value) inp.value = cur;
+    if (inp.value) inp.classList.add('has-value');
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    const cur = state.answers[sel.dataset.q];
+    if (cur && !sel.value) { sel.value = cur; sel.classList.add('has-value'); }
+  });
+}
+
+function attachQuestionListeners(){
+  questionPane.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', e => {
+      const key = e.target.name.substring(1);
+      state.answers[key] = e.target.value;
+      questionPane.querySelectorAll(`input[name="${e.target.name}"]`).forEach(rr =>
+        rr.closest('.opt-label').classList.toggle('selected', rr.checked));
+      updateNav(); updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value.trim();
+      if (v) state.answers[key] = e.target.value; else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav(); updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    sel.addEventListener('change', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value;
+      if (v) state.answers[key] = v; else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav(); updateProgress();
+    });
+  });
+}
+
+/* ============================================================
+   NAV
+============================================================ */
+function renderNav(){
+  const passes = [1,2,3];
+  let html = '';
+  passes.forEach((p,i) => {
+    if (i>0) html += `<div class="nav-sep"></div>`;
+    const [first,last] = pRanges[p];
+    if (p === state.activePassage) {
+      html += `<span class="nav-pass active" data-pass="${p}">Passage ${p}</span>`;
+      for (let q=first;q<=last;q++){
+        const ans = state.answers[q];
+        html += `<button class="q-pill ${ans?'answered':''}" data-q="${q}">${q}</button>`;
+      }
+    } else {
+      const total = last-first+1;
+      let answered = 0;
+      for (let q=first;q<=last;q++) if (state.answers[q]) answered++;
+      html += `<span class="nav-pass" data-pass="${p}">Passage ${p} <small>(${answered} of ${total} answered)</small></span>`;
+    }
+  });
+  html += `<div class="nav-spacer"></div><button class="submit-btn" id="submitBtn">✓ Submit</button>`;
+  bottomNav.innerHTML = html;
+  bottomNav.querySelectorAll('.q-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      const q = p.dataset.q;
+      const el = document.getElementById('q-'+q) || questionPane.querySelector(`[data-q="${q}"]`);
+      if (el) {
+        el.scrollIntoView({behavior:'smooth',block:'center'});
+        if (el.tagName==='INPUT'||el.tagName==='SELECT') setTimeout(()=>el.focus(),320);
+        else { el.style.transition='background .3s'; el.style.background='#fffbe5'; setTimeout(()=>el.style.background='',700); }
+      }
+    });
+  });
+  bottomNav.querySelectorAll('.nav-pass').forEach(l => {
+    l.addEventListener('click', () => {
+      const p = parseInt(l.dataset.pass,10);
+      if (p !== state.activePassage) {
+        state.activePassage = p;
+        renderPassage(); renderQuestions(); renderNav();
+        passagePane.scrollTop = 0; questionPane.scrollTop = 0;
+      }
+    });
+  });
+  document.getElementById('submitBtn').addEventListener('click', showResults);
+}
+
+function updateNav(){ renderNav(); }
+function updateProgress(){
+  const answered = Object.keys(state.answers).length;
+  progressFill.style.width = (answered/TOTAL_Q*100)+'%';
+}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+passagePane.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    const sel = window.getSelection();
+    if (!sel||sel.isCollapsed){hlPill.style.display='none';return;}
+    const range = sel.getRangeAt(0);
+    if (!passagePane.contains(range.commonAncestorContainer)){hlPill.style.display='none';return;}
+    if (!range.toString().trim()){hlPill.style.display='none';return;}
+    const rect = range.getBoundingClientRect();
+    hlPill.style.display = 'block';
+    const pw=hlPill.offsetWidth, ph=hlPill.offsetHeight;
+    let left = rect.left+rect.width/2-pw/2;
+    let top = rect.top-ph-8;
+    if (top<8) top = rect.bottom+8;
+    left = Math.max(8, Math.min(left, window.innerWidth-pw-8));
+    hlPill.style.left = left+'px'; hlPill.style.top = top+'px';
+  }, 0);
+});
+hlPill.addEventListener('mousedown', e => {
+  e.preventDefault();
+  const sel = window.getSelection();
+  if (!sel||sel.isCollapsed) return;
+  const range = sel.getRangeAt(0);
+  if (!passagePane.contains(range.commonAncestorContainer)) return;
+  try {
+    const span = document.createElement('span');
+    span.className = 'highlight';
+    span.appendChild(range.extractContents());
+    range.insertNode(span);
+    sel.removeAllRanges();
+  } catch(e){}
+  hlPill.style.display = 'none';
+});
+passagePane.addEventListener('click', e => {
+  if (e.target.classList&&e.target.classList.contains('highlight')){
+    const s=e.target, p=s.parentNode;
+    while(s.firstChild) p.insertBefore(s.firstChild,s);
+    p.removeChild(s); p.normalize();
+  }
+});
+document.addEventListener('mousedown', e => {
+  if (e.target!==hlPill&&!passagePane.contains(e.target)) hlPill.style.display='none';
+});
+
+/* ============================================================
+   DIVIDER DRAG
+============================================================ */
+const divider=document.getElementById('divider');
+const mainEl=document.querySelector('.main');
+let dragging=false;
+divider.addEventListener('mousedown',e=>{dragging=true;divider.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();});
+document.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  const rect=mainEl.getBoundingClientRect();
+  const pct=(e.clientX-rect.left)/rect.width*100;
+  if(pct>=20&&pct<=80){passagePane.style.flex=`0 0 ${pct}%`;passagePane.style.width=`${pct}%`;}
+});
+document.addEventListener('mouseup',()=>{if(dragging){dragging=false;divider.classList.remove('dragging');document.body.classList.remove('dragging');}});
+
+/* ============================================================
+   MENU + FONT
+============================================================ */
+const hamburger=document.getElementById('hamburger');
+const menuPanel=document.getElementById('menuPanel');
+hamburger.addEventListener('click',e=>{e.stopPropagation();menuPanel.classList.toggle('open');});
+document.addEventListener('click',e=>{
+  if(!menuPanel.contains(e.target)&&e.target!==hamburger&&!hamburger.contains(e.target)) menuPanel.classList.remove('open');
+});
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=btn.dataset.target, dir=parseInt(btn.dataset.dir,10);
+    if(target==='passage'){
+      state.passageSize=Math.min(22,Math.max(10,state.passageSize+dir));
+      passagePane.style.fontSize=state.passageSize+'px';
+      document.getElementById('passSizeVal').textContent=state.passageSize+'px';
+    } else {
+      state.questionSize=Math.min(22,Math.max(10,state.questionSize+dir));
+      questionPane.style.fontSize=state.questionSize+'px';
+      document.getElementById('qSizeVal').textContent=state.questionSize+'px';
+    }
+  });
+});
+
+/* ============================================================
+   RESULTS
+============================================================ */
+function bandFromCorrect(n){
+  if(n>=39)return 9.0; if(n>=37)return 8.5; if(n>=35)return 8.0;
+  if(n>=33)return 7.5; if(n>=30)return 7.0; if(n>=27)return 6.5;
+  if(n>=23)return 6.0; if(n>=19)return 5.5; if(n>=15)return 5.0;
+  if(n>=13)return 4.5; return 4.0;
+}
+
+function showResults(){
+  const passes=[1,2,3];
+  let totalCorrect=0, html='';
+  passes.forEach(p=>{
+    const [first,last]=pRanges[p];
+    let correct=0,rows='';
+    for(let q=first;q<=last;q++){
+      const u=state.answers[q], c=AK[q];
+      const ok=checkAnswer(u,c);
+      if(ok) correct++;
+      rows+=`<tr class="${ok?'row-correct':'row-wrong'}">
+        <td><strong>${q}</strong></td>
+        <td>${u!==undefined&&u!==''?displayAnswer(u):'<em style="color:#999">—</em>'}</td>
+        <td>${displayCorrect(c)}</td>
+        <td class="mark ${ok?'mark-ok':'mark-x'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    totalCorrect+=correct;
+    const total=last-first+1;
+    const pct=correct/total*100;
+    const badge=pct>=70?'badge-green':pct>=50?'badge-orange':'badge-red';
+    html+=`<div class="result-pass">
+      <div class="result-pass-header">
+        <div class="result-pass-info">
+          <div class="result-pass-title">Passage ${p}: ${PASSAGE_TITLES[p]}</div>
+          <div class="result-pass-sub">Questions ${first}–${last}</div>
+        </div>
+        <div class="score-badge ${badge}">${correct} / ${total}</div>
+      </div>
+      <table class="result-table">
+        <thead><tr><th>Q#</th><th>Your Answer</th><th>Correct Answer</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  });
+  const band=bandFromCorrect(totalCorrect);
+  html+=`<div class="total-strip">
+    <div class="total-block"><div class="total-label">Score</div><div class="total-value">${totalCorrect} / ${TOTAL_Q}</div></div>
+    <div class="total-block"><div class="total-label">Accuracy</div><div class="total-value">${(totalCorrect/TOTAL_Q*100).toFixed(0)}%</div></div>
+    <div class="total-block"><div class="total-label">Estimated Band</div><div class="total-value total-band-value">${band.toFixed(1)}</div></div>
+  </div>`;
+  document.getElementById('resultsBody').innerHTML=html;
+  document.getElementById('modal').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')document.getElementById('modal').classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modal').classList.remove('open');});
+
+/* INIT */
+renderPassage(); renderQuestions(); renderNav(); updateProgress();
+</script>
+</body>
+</html>

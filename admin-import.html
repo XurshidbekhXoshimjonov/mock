@@ -11,19 +11,21 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="admin-import.css">
+    <link rel="stylesheet" href="ielts-cbt.css">
+    <link rel="stylesheet" href="listening-template.css">
 </head>
 
 <body class="admin-page" data-skip-global-navbar>
     <header class="admin-topbar">
         <div class="admin-topbar__brand">
-            <span class="admin-kicker">IELTS Mock</span>
-            <strong>Separate Full Tests</strong>
+            <span class="admin-kicker">IELTSX</span>
+            <strong>Test Importer & Builder</strong>
         </div>
         <nav class="admin-nav" aria-label="Admin navigation">
             <a href="/admin">Dashboard</a>
             <a href="admin-reading.html">Reading</a>
             <a href="admin-listening.html">Listening</a>
-            <a href="full-tests.html">Published tests</a>
+            <a href="fulltest.html">Published reading tests</a>
         </nav>
     </header>
 
@@ -31,17 +33,81 @@
         <section class="admin-hero">
             <span class="admin-kicker">Full test support</span>
             <h1>Create Reading or Listening Full Test</h1>
-            <p class="admin-help">Reading and Listening are created independently. Select only the parts for the skill you are building; questions, answers, and scoring data are inherited automatically.</p>
+            <p class="admin-help">Import an HTML/CDI file directly or combine existing parts. We support automatic skill detection, audio upload, and live CBT question previews.</p>
         </section>
 
         <div class="import-layout">
             <div class="import-main">
-                <section class="admin-card import-tabs" aria-label="Full test type">
-                    <button type="button" class="import-tab is-active" data-skill-tab="reading">Reading Full Test</button>
-                    <button type="button" class="import-tab" data-skill-tab="listening">Listening Full Test</button>
+                <!-- Mode switcher tabs -->
+                <section class="admin-card import-tabs" aria-label="Import mode selection" style="margin-bottom: 8px;">
+                    <button type="button" class="import-tab is-active" id="modeImportTab">Import HTML/CDI File</button>
+                    <button type="button" class="import-tab" id="modeCombineTab">Combine Existing Parts</button>
                 </section>
 
-                <form id="combineForm" class="import-form">
+                <!-- NEW: HTML Import Form -->
+                <form id="importForm" class="import-form">
+                    <section class="admin-card import-section">
+                        <span class="import-step">1</span>
+                        <div class="import-section__content">
+                            <h2>Upload Test File</h2>
+                            <p class="admin-help" style="margin-top: -12px; margin-bottom: 12px;">Select a CDI HTML practice test file.</p>
+                            <div class="drop-zone" id="htmlDropZone">
+                                <span class="drop-zone__prompt">Drag & drop .html file here or <span class="browse-link">browse</span></span>
+                                <input type="file" id="htmlFile" accept=".html,.htm" required style="display: none;">
+                            </div>
+                            <p id="htmlUploadStatus" class="status-text" style="margin-top: 8px; font-weight: 600;"></p>
+                        </div>
+                    </section>
+
+                    <section id="importMetaSection" class="admin-card import-section hidden">
+                        <span class="import-step">2</span>
+                        <div class="import-section__content">
+                            <h2>Full Test Information</h2>
+                            <div style="display: grid; gap: 14px; grid-template-columns: 1fr 1fr;">
+                                <label class="import-field">
+                                    <span>Full Test Title</span>
+                                    <input type="text" id="importTestTitle" name="title" placeholder="Cambridge 19 Test 2" required>
+                                </label>
+                                <label class="import-field">
+                                    <span>Skill Type</span>
+                                    <select id="importTestSkill" name="skill">
+                                        <option value="auto">Auto-detect from file</option>
+                                        <option value="reading">Reading Full Test</option>
+                                        <option value="listening">Listening Full Test</option>
+                                        <option value="combined">Both Reading & Listening (Combined)</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Listening Audio Upload (Visible only for listening/combined tests) -->
+                    <section id="importAudioSection" class="admin-card import-section hidden">
+                        <span class="import-step">3</span>
+                        <div class="import-section__content">
+                            <h2>Listening Audio File</h2>
+                            <p class="admin-help" style="margin-top: -12px; margin-bottom: 12px;">Attach the listening section audio track.</p>
+                            <div class="drop-zone" id="audioDropZone">
+                                <span class="drop-zone__prompt">Drag & drop .mp3 audio file here or <span class="browse-link">browse</span></span>
+                                <input type="file" id="audioFile" accept="audio/*" style="display: none;">
+                            </div>
+                            <p id="audioUploadStatus" class="status-text" style="margin-top: 8px; font-weight: 600;"></p>
+                        </div>
+                    </section>
+
+                    <div id="importActions" class="import-actions import-actions--footer hidden">
+                        <button type="button" class="btn-secondary" id="resetImportBtn">Reset</button>
+                        <button type="submit" class="btn-primary" id="publishImportBtn">Publish Test</button>
+                    </div>
+                </form>
+
+                <!-- LEGACY: Combine Form -->
+                <form id="combineForm" class="import-form hidden">
+                    <section class="admin-card import-tabs" aria-label="Full test type" style="padding: 8px;">
+                        <button type="button" class="import-tab is-active" data-skill-tab="reading">Reading Full Test</button>
+                        <button type="button" class="import-tab" data-skill-tab="listening">Listening Full Test</button>
+                    </section>
+
                     <section class="admin-card import-section">
                         <span class="import-step">1</span>
                         <div class="import-section__content">
@@ -76,35 +142,81 @@
                         <a class="btn-secondary" href="/admin">Cancel</a>
                         <button type="submit" class="btn-primary" id="combineBtn">Create Full Reading Test</button>
                     </div>
-                    <p id="importStatus" class="import-status" role="status" aria-live="polite"></p>
                 </form>
 
+                <p id="importStatus" class="import-status" role="status" aria-live="polite"></p>
+
+                <!-- Status & Result Panel -->
                 <section id="resultPanel" class="admin-card hidden">
                     <h2>Full test created</h2>
                     <p id="resultMeta" class="admin-help admin-help--tight"></p>
                     <div class="import-actions">
                         <a id="openPlayerLink" class="btn-primary" href="#">Open in player</a>
-                        <a class="btn-secondary" href="full-tests.html">All full tests</a>
+                        <a class="btn-secondary" href="fulltest.html">Reading full tests</a>
+                        <a class="btn-secondary" href="listeningfulltest.html">Listening full tests</a>
+                    </div>
+                </section>
+
+                <!-- Live Preview Panel -->
+                <section id="livePreviewPanel" class="admin-card preview-panel hidden">
+                    <div class="preview-toolbar">
+                        <h2>CBT Live Preview</h2>
+                        <span id="previewStats" style="font-weight: 600; color: #4b5563;"></span>
+                    </div>
+                    <div class="preview-grid">
+                        <div class="preview-sidebar">
+                            <h3>Test Structure</h3>
+                            <div id="structureNav" class="structure-nav"></div>
+                            <h3 style="margin-top: 20px;">Media Images</h3>
+                            <div id="previewImages" class="image-list">No images found.</div>
+                        </div>
+                        <div class="preview-body">
+                            <div id="editorContent" class="editor-content">
+                                <!-- React preview injected here -->
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
 
+            <!-- Guide Panel -->
             <aside class="admin-card import-guide">
                 <h2>How it works</h2>
-                <ol class="import-workflow">
-                    <li><strong>Create parts</strong><span>Build each Reading or Listening part separately.</span></li>
-                    <li><strong>Select parts</strong><span>Choose the parts in the correct IELTS order.</span></li>
-                    <li><strong>Create full test</strong><span>The CBT-ready test is assembled automatically.</span></li>
-                </ol>
-                <div class="import-result-note">
-                    <strong>Result</strong>
-                    <p id="guideResult">One complete Reading test with 3 parts.</p>
+                <div id="guideImportMode">
+                    <ol class="import-workflow">
+                        <li><strong>Upload HTML</strong><span>Select your standard or CDI generated practice HTML file.</span></li>
+                        <li><strong>Configure Title</strong><span>The title is automatically generated as Test {N} but can be modified.</span></li>
+                        <li><strong>Attach Audio</strong><span>For tests containing listening sections, upload the audio file.</span></li>
+                        <li><strong>Publish</strong><span>Verify the live layout preview and publish to generate separate CBT parts.</span></li>
+                    </ol>
+                    <div class="import-result-note">
+                        <strong>Result</strong>
+                        <p>A full, published CBT test ready for student practice.</p>
+                    </div>
+                </div>
+                <div id="guideCombineMode" class="hidden">
+                    <ol class="import-workflow">
+                        <li><strong>Create parts</strong><span>Build each Reading or Listening part separately.</span></li>
+                        <li><strong>Select parts</strong><span>Choose the parts in the correct IELTS order.</span></li>
+                        <li><strong>Create full test</strong><span>The CBT-ready test is assembled automatically.</span></li>
+                    </ol>
+                    <div class="import-result-note">
+                        <strong>Result</strong>
+                        <p id="guideResult">One complete Reading test with 3 parts.</p>
+                    </div>
                 </div>
             </aside>
         </div>
     </main>
 
+    <!-- Scripts -->
+    <script src="vendor-react.production.min.js"></script>
+    <script src="vendor-react-dom.production.min.js"></script>
     <script src="auth-client.js"></script>
+    <script src="ielts-instruction-utils.js"></script>
+    <script src="listening-test-components.js"></script>
+    <script src="ielts-test-components.js"></script>
+    <script src="admin-import-preview.js"></script>
     <script src="admin-import.js"></script>
 </body>
 

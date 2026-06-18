@@ -1,8 +1,15 @@
 {
   "id": "1780587000000-full-listening-cdi-original",
-  "title": "Full Listening CDI",
+  "title": "Sunshine Activity Holidays",
   "duration": 40,
   "part": "full",
+  "audio": "/uploads/audio/1780586439693-p1_2_.mp3",
+  "assetFiles": [
+    "/uploads/audio/1780586439693-p1_2_.mp3",
+    "/uploads/audio/1780586481840-p2.mp3",
+    "/uploads/audio/1780586489511-p3.mp3",
+    "/uploads/audio/1780586494492-p4.mp3"
+  ],
   "parts": [
     {
       "partNumber": 1,
@@ -583,6 +590,475 @@
       ]
     }
   ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Contact address",
+      "options": [],
+      "answer": "463 Beacon"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Start date",
+      "options": [],
+      "answer": "June 27"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Sports",
+      "options": [],
+      "answer": "Sailing"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Sports",
+      "options": [],
+      "answer": "Surfing"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Sports",
+      "options": [],
+      "answer": "Confidence"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Sports",
+      "options": [],
+      "answer": "Gold"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Indoor activities",
+      "options": [],
+      "answer": "Drama"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Indoor activities",
+      "options": [],
+      "answer": "Cookery"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Extra requests",
+      "options": [],
+      "answer": "Wet suit"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Extra requests",
+      "options": [],
+      "answer": "7.00"
+    },
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What was Jill surprised about?",
+      "options": [
+        "the work on the house will start soon",
+        "the house was poorly insulated",
+        "she could get financial help"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What does Jill say every family can do straight away?",
+      "options": [
+        "use energy-saving bulbs",
+        "turn thermostats down",
+        "turn down the thermostat"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "What is Jill pleased about the energy provider?",
+      "options": [
+        "reduce the price with prompt payment",
+        "allow online payment by customers",
+        "have a reduction of price of the energy-saving sources"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What difficulty did Jill have with the energy meters?",
+      "options": [
+        "they are difficult to access",
+        "the figures are hard to be read accurately",
+        "she can't tell whether it's for electricity or for gas"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What energy-saving method does Jill going to take next?",
+      "options": [
+        "install double-glazed window",
+        "use energy-saving boiler",
+        "have the walls checked with insulation level"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "Why is Jill doubtful about the renewable energy?",
+      "options": [
+        "she thinks it's unsuitable for her house",
+        "she doesn't understand the technical details",
+        "she believes it's too expensive"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "Which TWO water-saving tips does Jill recommend?",
+      "options": [
+        "use more showers than baths",
+        "keep the washing machine full before using it",
+        "boil as much water as you need",
+        "turn off the taps while you are brushing your teeth",
+        "repair leaking tap"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "Which TWO water-saving tips does Jill recommend?",
+      "options": [
+        "use more showers than baths",
+        "keep the washing machine full before using it",
+        "boil as much water as you need",
+        "turn off the taps while you are brushing your teeth",
+        "repair leaking tap"
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "What TWO topics do people most frequently ask?",
+      "options": [
+        "the ideal temperature of the thermostat",
+        "whether to leave the light on or not",
+        "the type of computer that uses less energy",
+        "how to work out the running cost of the appliances",
+        "if the solar panels only work on sunny days"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "What TWO topics do people most frequently ask?",
+      "options": [
+        "the ideal temperature of the thermostat",
+        "whether to leave the light on or not",
+        "the type of computer that uses less energy",
+        "how to work out the running cost of the appliances",
+        "if the solar panels only work on sunny days"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What is the problem that the students are having with the project?",
+      "options": [
+        "the project is taking too long",
+        "the readings are too difficult",
+        "the readings are not interesting"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "When can extensions be granted?",
+      "options": [
+        "scheduling issues",
+        "illness or accidents",
+        "problems with planning"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Listening question 23",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Listening question 24",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Listening question 25",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Listening question 26",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "Listening question 27",
+      "options": [
+        "much money spending on marketing",
+        "external factor",
+        "competition",
+        "employees",
+        "customer satisfaction",
+        "long-term gain",
+        "knowledge about their customers"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Listening question 28",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Listening question 29",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Listening question 30",
+      "options": [
+        "It needs more innovative marketing",
+        "It has been operating for too long",
+        "It will close down in the end",
+        "It has good managers",
+        "There are not enough music shops",
+        "It has a good long-term future"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "- At first, engineers saw ethics as a _____ issue",
+      "options": [],
+      "answer": "personal"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "- Attitudes changed because of three disasters involving the collapse of _____",
+      "options": [],
+      "answer": "bridges"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "- 1879 - Scotland (the impact of _____ on the structure was miscalculated)",
+      "options": [],
+      "answer": "wind"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "- 1907 - Canada (the structure could not support its own _____)",
+      "options": [],
+      "answer": "weight"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "- At the time, molasses was the main _____ used in the USA",
+      "options": [],
+      "answer": "sweetener"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "- Boston company: collapse of a _____ released 8 million liters of molasses",
+      "options": [],
+      "answer": "tank"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "- Local residents insisted on a _____ of the molasses company",
+      "options": [],
+      "answer": "trial"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "- Insufficient _____ checks",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "- Fermentation raised the _____ to a dangerous level",
+      "options": [],
+      "answer": "pressure"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "- It is now obligatory for engineers to have a _____",
+      "options": [],
+      "answer": "license | licence"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-20",
+      "instruction": "Listen and answer questions 11-20.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21-30",
+      "instruction": "Listen and answer questions 21-30.",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
   "createdAt": "2026-06-04T15:30:00.000Z",
-  "updatedAt": "2026-06-05T00:53:18.217Z"
+  "updatedAt": "2026-06-17T06:58:06.208Z"
 }

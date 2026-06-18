@@ -964,7 +964,7 @@
         const active = currentPageName();
 
         host.innerHTML = `
-            <a class="ielts-navbar__brand" href="ieltsmock.html" aria-label="IELTS Prep home">
+            <a class="ielts-navbar__brand" href="ieltsmock.html" aria-label="IELTSX home">
                 <img class="ielts-navbar__logo" src="Rasm-logo.png" alt="IELTSX.org">
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
@@ -1013,6 +1013,7 @@
             closeOpenMenus();
         }
     });
+    window.addEventListener("hashchange", renderGlobalNavbar);
 
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", renderGlobalNavbar);

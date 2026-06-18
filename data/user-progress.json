@@ -58,7 +58,7 @@
           "total": 40,
           "accuracy": 0,
           "band": 0,
-          "practiceUrl": "/full-test-player.html?id=1780619933115-reading-full-test-3&skill=reading",
+          "practiceUrl": "/full-test-player?id=1780619933115-reading-full-test-3&skill=reading",
           "completedAt": "2026-06-05T00:39:33.611Z"
         },
         {
@@ -230,6 +230,655 @@
         "targetBand": 8.5
       },
       "results": [
+        {
+          "id": "1781712914612-502d041a",
+          "testId": "1780622717280-ielts-listening-practice-test-1-part-1",
+          "title": "THEATRE ROYAL PLYMOUTH - Part 1",
+          "type": "part-1",
+          "skill": "listening",
+          "part": 1,
+          "correct": 0,
+          "total": 10,
+          "accuracy": 0,
+          "band": 2.5,
+          "practiceUrl": "/listening/theatre-royal-plymouth-part-1",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [
+            {
+              "number": 1,
+              "userAnswer": "",
+              "correctAnswer": "26",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 2,
+              "userAnswer": "",
+              "correctAnswer": "7:00",
+              "alternatives": [
+                "7.00"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 3,
+              "userAnswer": "",
+              "correctAnswer": "circle",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 4,
+              "userAnswer": "",
+              "correctAnswer": "a21 to 24",
+              "alternatives": [
+                "A21 to 24",
+                "A21-24",
+                "a21-24"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 5,
+              "userAnswer": "",
+              "correctAnswer": "mastercard",
+              "alternatives": [
+                "master card"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 6,
+              "userAnswer": "",
+              "correctAnswer": "3290587644012899",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 7,
+              "userAnswer": "",
+              "correctAnswer": "Whitton",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 8,
+              "userAnswer": "",
+              "correctAnswer": "42 South",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 9,
+              "userAnswer": "",
+              "correctAnswer": "SW25GE",
+              "alternatives": [
+                "SW2 5GE"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 10,
+              "userAnswer": "",
+              "correctAnswer": "headphones",
+              "alternatives": [
+                "headphone"
+              ],
+              "status": "unanswered"
+            }
+          ],
+          "completedAt": "2026-06-17T16:15:14.612Z"
+        },
+        {
+          "id": "1781696672166-c8c41b4d",
+          "testId": "1781695922498-Full_CDI",
+          "title": "Test 3",
+          "type": "Reading",
+          "skill": "reading",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1781695922498-Full_CDI-1781696665100-c97962",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-06-17T11:44:32.166Z"
+        },
+        {
+          "id": "1781696386284-6f7a0e78",
+          "testId": "1781695922498-Full_CDI",
+          "title": "Test 3",
+          "type": "Reading",
+          "skill": "reading",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1781695922498-Full_CDI-1781696356611-f7895a",
+          "vocabulary": [
+            {
+              "word": "mind",
+              "normalized": "mind",
+              "definition": "The ability for rational thought.",
+              "uzbekTranslation": "aqli",
+              "example": "Despite advancing age, his mind was still as sharp as ever.",
+              "passageId": "1781695922498-Full_CDI-passage-1",
+              "attemptId": "reading-1781695922498-Full_CDI-1781696356611-f7895a",
+              "timestamp": "2026-06-17T11:39:19.635Z"
+            }
+          ],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-06-17T11:39:46.284Z"
+        },
+        {
+          "id": "1781693675329-dfadfd88",
+          "testId": "test-1-reading-full-imported-part-1",
+          "title": "Copy your neighbour",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 7,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-test-1-reading-full-imported-part-1-1781693505075-993fbd",
+          "vocabulary": [
+            {
+              "word": "Polynesian",
+              "normalized": "polynesian",
+              "definition": "Definition is not available yet.",
+              "uzbekTranslation": "polineziya",
+              "example": "",
+              "passageId": "test-1-reading-full-imported-part-1-passage-1",
+              "attemptId": "reading-test-1-reading-full-imported-part-1-1781693505075-993fbd",
+              "timestamp": "2026-06-17T10:51:46.719Z"
+            },
+            {
+              "word": "dominated",
+              "normalized": "dominated",
+              "definition": "To govern, rule or control by superior authority or power",
+              "uzbekTranslation": "hukmronlik qilgan",
+              "example": "",
+              "passageId": "test-1-reading-full-imported-part-1-passage-1",
+              "attemptId": "reading-test-1-reading-full-imported-part-1-1781693505075-993fbd",
+              "timestamp": "2026-06-17T10:53:21.279Z"
+            }
+          ],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-06-17T10:54:35.329Z"
+        },
+        {
+          "id": "1781680302883-3d5a95f2",
+          "testId": "test-1-listening-full-imported",
+          "title": "Test 1",
+          "type": "full-test",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 2.5,
+          "practiceUrl": "full-test-player.html?id=test-1-listening-full-imported&skill=listening",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [
+            {
+              "number": 1,
+              "userAnswer": "",
+              "correctAnswer": "accountant",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 2,
+              "userAnswer": "",
+              "correctAnswer": "over 50",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 3,
+              "userAnswer": "",
+              "correctAnswer": "family",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 4,
+              "userAnswer": "",
+              "correctAnswer": "9",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 5,
+              "userAnswer": "",
+              "correctAnswer": "doctor",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 6,
+              "userAnswer": "",
+              "correctAnswer": "swimming pool",
+              "alternatives": [
+                "pool"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 7,
+              "userAnswer": "",
+              "correctAnswer": "pay extra",
+              "alternatives": [
+                "extra"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 8,
+              "userAnswer": "",
+              "correctAnswer": "social events",
+              "alternatives": [
+                "events"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 9,
+              "userAnswer": "",
+              "correctAnswer": "air conditioning",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 10,
+              "userAnswer": "",
+              "correctAnswer": "restaurant",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 11,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 12,
+              "userAnswer": "",
+              "correctAnswer": "F",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 13,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 14,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 15,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 16,
+              "userAnswer": "",
+              "correctAnswer": "G",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 17,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 18,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 19,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 20,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 21,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 22,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 23,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 24,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 25,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 26,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 27,
+              "userAnswer": "",
+              "correctAnswer": "G",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 28,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 29,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 30,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 31,
+              "userAnswer": "",
+              "correctAnswer": "ice age",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 32,
+              "userAnswer": "",
+              "correctAnswer": "invisible",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 33,
+              "userAnswer": "",
+              "correctAnswer": "infections",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 34,
+              "userAnswer": "",
+              "correctAnswer": "flavor",
+              "alternatives": [
+                "flavour"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 35,
+              "userAnswer": "",
+              "correctAnswer": "fungi",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 36,
+              "userAnswer": "",
+              "correctAnswer": "sexes",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 37,
+              "userAnswer": "",
+              "correctAnswer": "extinction",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 38,
+              "userAnswer": "",
+              "correctAnswer": "lowland",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 39,
+              "userAnswer": "",
+              "correctAnswer": "shelter",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 40,
+              "userAnswer": "",
+              "correctAnswer": "cuttings",
+              "alternatives": [],
+              "status": "unanswered"
+            }
+          ],
+          "completedAt": "2026-06-17T07:11:42.883Z"
+        },
+        {
+          "id": "1781678890741-b87e646b",
+          "testId": "test-1-reading-full-imported-part-3",
+          "title": "Test 1 - Part 3",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 3,
+          "correct": 0,
+          "total": 14,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-test-1-reading-full-imported-part-3-1781678887578-cf5fb4",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T06:48:10.741Z"
+        },
+        {
+          "id": "1781662175893-dbcbeaa5",
+          "testId": "1780587000000-full-listening-cdi-original-part-1",
+          "title": "Full Listening CDI - Part 1",
+          "type": "Listening",
+          "skill": "listening",
+          "part": 1,
+          "correct": 0,
+          "total": 10,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T02:09:35.893Z"
+        },
+        {
+          "id": "1781662164312-e9cc44af",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 1,
+          "total": 13,
+          "accuracy": 8,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781662153453-a4b183",
+          "vocabulary": [
+            {
+              "word": "can",
+              "normalized": "can",
+              "definition": "(auxiliary verb, defective) To know how to; to be able to.",
+              "uzbekTranslation": "mumkin",
+              "example": "She can speak English, French, and German.   I can play football.   Can you remember your fifth birthday?",
+              "passageId": "1780564838895-developmental-tasks-of-normal-adolescence-passage-1",
+              "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781662153453-a4b183",
+              "timestamp": "2026-06-17T02:09:14.818Z"
+            }
+          ],
+          "completedAt": "2026-06-17T02:09:24.312Z"
+        },
+        {
+          "id": "1781662138993-7092261c",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781662136913-334bb1",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T02:08:58.993Z"
+        },
+        {
+          "id": "1781661188187-46db7878",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781661187095-9c66f5",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T01:53:08.187Z"
+        },
+        {
+          "id": "1781661104677-c9c5899b",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781661103264-9d1a65",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T01:51:44.677Z"
+        },
+        {
+          "id": "1781661101393-c4604fc3",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781661099235-4dcc94",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T01:51:41.393Z"
+        },
+        {
+          "id": "1781660217625-a44a8aff",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781660175904-14dab4",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T01:36:57.625Z"
+        },
+        {
+          "id": "1781660196463-89e0f1ac",
+          "testId": "1780564838895-developmental-tasks-of-normal-adolescence",
+          "title": "Developmental Tasks of Normal Adolescence",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 0,
+          "total": 13,
+          "accuracy": 0,
+          "band": 0,
+          "practiceUrl": "",
+          "attemptId": "reading-1780564838895-developmental-tasks-of-normal-adolescence-1781660175904-14dab4",
+          "vocabulary": [],
+          "completedAt": "2026-06-17T01:36:36.463Z"
+        },
         {
           "id": "1781175710736-fb141030",
           "testId": "1780565990914-sleepy-students-perform-worse",

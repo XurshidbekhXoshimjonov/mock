@@ -105,6 +105,10 @@ body[data-profile-page] summary {
     overflow-wrap: anywhere;
 }
 
+#results {
+    scroll-margin-top: 110px;
+}
+
 .result-details > div {
     overflow-x: auto;
 }
@@ -146,4 +150,34 @@ body[data-profile-page] summary {
         border-radius: 1rem !important;
         font-size: 1.15rem !important;
     }
+}
+
+/* Global premium scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5b5cf6 #eef2ff;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #eef2ff;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
+  border-radius: 999px;
+  border: 2px solid #eef2ff;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4f46e5, #4338ca);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }

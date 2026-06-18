@@ -1,0 +1,100 @@
+{
+  "id": "1781714484712-Full_Listening_CDI._2_-listening-s4",
+  "title": "Test 3 — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/1781714501154-IELTS_Listening_Test_26.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "questions 31–40",
+      "instruction": "Part 4 Listen and answer .",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Deserts found in what is known as a (or dry area)",
+      "options": [],
+      "answer": "rain shadow"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Annual rainfall, if any, amounts to",
+      "options": [],
+      "answer": "inches"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Soil contains a lot of salt and",
+      "options": [],
+      "answer": "other minerals | minerals"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "They can and store water",
+      "options": [],
+      "answer": "collect"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Saguaro Cactus: stores water in its",
+      "options": [],
+      "answer": "green stem | stem"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Barrel Cactus: can or shrink according to weather",
+      "options": [],
+      "answer": "expand"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Old Man Cactus: has that reflect the sun",
+      "options": [],
+      "answer": "white hairs"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Prickly Pear Cactus: has to keep away animals",
+      "options": [],
+      "answer": "sharp thorns | thorns"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Desert Spoon: leaves are to reduce water loss",
+      "options": [],
+      "answer": "very tough | tough"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Aloe Plant: leaf surface acts like a covering and keeps water inside",
+      "options": [],
+      "answer": "plastic"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1781714484712-Full_Listening_CDI._2_",
+  "createdAt": "2026-06-17T16:41:25.079Z"
+}

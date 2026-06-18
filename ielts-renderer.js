@@ -6,6 +6,8 @@ const IeltsRenderer = (() => {
     const SELECT_TYPES = [
         "matching_headings",
         "matching_information",
+        "matching_features",
+        "matching_sentence_endings",
         "matching",
         "map_labeling",
         "diagram_labeling"
@@ -22,6 +24,12 @@ const IeltsRenderer = (() => {
         "summary_completion",
         "table_completion"
     ];
+
+    function renderRichCompletion(contentHtml) {
+        return (contentHtml || "").replace(/<span\s+class="ielts-blank"[^>]*data-blank="(\d+)"[^>]*>.*?<\/span>/gi, (match, number) => {
+            return '<span class="cbt-blank-wrapper"><strong class="cbt-blank-number">' + number + '</strong><input type="text" class="ielts-blank-input" id="q' + number + '" name="q' + number + '" autocomplete="off"></span>';
+        }).replace(/<span\s+class="ielts-blank"[^>]*>.*?<\/span>/gi, '______');
+    }
 
     function extractFirstQuestionNumber(text) {
         const value = String(text || "").trim();
@@ -171,6 +179,22 @@ const IeltsRenderer = (() => {
             return explicitType;
         }
 
+        const instructionText = [
+            group.title,
+            group.instructionTitle,
+            group.instruction,
+            group.instructionText,
+            group.rule
+        ].filter(Boolean).join(" ").toUpperCase();
+
+        if (instructionText.includes("TRUE") && instructionText.includes("FALSE") && instructionText.includes("NOT GIVEN")) {
+            return "true_false_not_given";
+        }
+
+        if (instructionText.includes("YES") && instructionText.includes("NO") && instructionText.includes("NOT GIVEN")) {
+            return "yes_no_not_given";
+        }
+
         const questionTypes = (questions || [])
             .map((question) => normalizeQuestionType(question.type))
             .filter(Boolean);
@@ -180,7 +204,21 @@ const IeltsRenderer = (() => {
             : "";
     }
 
-    function renderTfngInstructionBlock(questions) {
+    function choicePromptMatches(type, text) {
+        if (!/do\s+the\s+following\s+statements\s+agree/i.test(text || "")) return false;
+
+        if (type === "yes_no_not_given") {
+            return /claims?\s+of\s+(?:the\s+)?writer|writer[’']?s\s+claims|what\s+the\s+writer\s+thinks/i.test(text);
+        }
+
+        if (type === "true_false_not_given") {
+            return /information\s+given/i.test(text);
+        }
+
+        return false;
+    }
+
+    function renderChoiceInstructionBlock(type, questions, options = {}) {
         const numbers = (questions || [])
             .map((question) => Number(question.number))
             .filter(Number.isFinite)
@@ -188,25 +226,37 @@ const IeltsRenderer = (() => {
         const first = numbers[0];
         const last = numbers[numbers.length - 1];
         const range = first === last ? String(first) : `${first} - ${last}`;
+        const prompt = type === "yes_no_not_given"
+            ? "Do the following statements agree with the claims of the writer in the reading passage?"
+            : "Do the following statements agree with the information given in the reading passage?";
+        const rows = type === "yes_no_not_given"
+            ? [
+                ["YES.", "if the statement agrees with the claims of the writer"],
+                ["NO.", "if the statement contradicts the claims of the writer"],
+                ["NOT GIVEN.", "if it is impossible to say what the writer thinks about this"]
+            ]
+            : [
+                ["TRUE.", "if the statement agrees with the information"],
+                ["FALSE.", "if the statement contradicts the information"],
+                ["NOT GIVEN.", "if there is no information on this"]
+            ];
         const lead = numbers.length
             ? `<p class="ielts-choice-instruction-lead">In boxes <strong>${range}</strong> on your answer sheet, write</p>`
             : "";
 
-        return `${lead}
-            <div class="ielts-choice-definition-list" aria-label="TRUE FALSE NOT GIVEN instructions">
-                <div class="ielts-choice-definition-row">
-                    <strong>TRUE.</strong>
-                    <span>if the statement agrees with the information</span>
-                </div>
-                <div class="ielts-choice-definition-row">
-                    <strong>FALSE.</strong>
-                    <span>if the statement contradicts the information</span>
-                </div>
-                <div class="ielts-choice-definition-row">
-                    <strong>NOT GIVEN.</strong>
-                    <span>if there is no information on this</span>
-                </div>
+        return `${options.showPrompt === false ? "" : `<p class="ielts-choice-instruction-prompt">${prompt}</p>`}${lead}
+            <div class="ielts-choice-definition-list" aria-label="${type === "yes_no_not_given" ? "YES NO NOT GIVEN" : "TRUE FALSE NOT GIVEN"} instructions">
+                ${rows.map(([label, description]) => `<div class="ielts-choice-definition-row">
+                    <strong>${label}</strong>
+                    <span>${description}</span>
+                </div>`).join("")}
             </div>`;
+    }
+
+    function highlightInstructionText(text) {
+        return window.IeltsInstructionHighlighter
+            ? window.IeltsInstructionHighlighter.highlightText(text, { preserveLineBreaks: true })
+            : escapeHtml(text).replace(/\n/g, "<br>");
     }
 
     function renderInstructionBlock(group, questions) {
@@ -223,13 +273,20 @@ const IeltsRenderer = (() => {
 
         if (instruction) {
             html += '<p class="ielts-instruction-body">' +
-                escapeHtml(instruction).replace(/\n/g, "<br>") + "</p>";
+                highlightInstructionText(instruction) + "</p>";
         }
 
-        if (type === "true_false_not_given") {
-            html += renderTfngInstructionBlock(questions);
+        if (type === "true_false_not_given" || type === "yes_no_not_given") {
+            const instructionText = [instruction, rule].filter(Boolean).join(" ");
+            const hasChoiceDefinitions = /if\s+(?:the\s+statement|there\s+is|it\s+is|the\s+writer)/i.test(instructionText);
+            const hasVisibleChoicePrompt = choicePromptMatches(type, instructionText);
+            if (!hasChoiceDefinitions) {
+                html += renderChoiceInstructionBlock(type, questions, {
+                    showPrompt: !hasVisibleChoicePrompt
+                });
+            }
         } else if (rule) {
-            html += '<p class="ielts-instruction-rule"><span>' + escapeHtml(rule) + "</span></p>";
+            html += '<p class="ielts-instruction-rule"><span>' + highlightInstructionText(rule) + "</span></p>";
         }
 
         html += "</" + tag + ">";
@@ -284,13 +341,21 @@ const IeltsRenderer = (() => {
         let html = '<section class="ielts-question-group ielts-question-group--' + escapeHtml(type) + '">';
         html += renderInstructionBlock(group, questions);
 
-        if (SELECT_TYPES.includes(type)) {
+        const isRichCompletion = group.contentHtml && COMPLETION_TYPES.includes(type);
+
+        if (group.contentHtml) {
+            if (isRichCompletion) {
+                html += '<div class="ielts-rich-completion">' + renderRichCompletion(group.contentHtml) + '</div>';
+            } else {
+                html += '<div class="ielts-group-content-html">' + group.contentHtml + '</div>';
+            }
+        } else if (SELECT_TYPES.includes(type)) {
             html += renderGroupOptionsBox(group, questions);
         }
 
         if (type === "multi_select") {
             html += renderMultiSelectGroup(group, questions);
-        } else {
+        } else if (!isRichCompletion) {
             html += '<div class="ielts-question-list">';
             questions.forEach((question) => {
                 html += renderQuestion(question, type);
