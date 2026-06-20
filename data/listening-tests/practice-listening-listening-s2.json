@@ -1,0 +1,354 @@
+{
+  "id": "practice-listening-listening-s2",
+  "title": "IELTS CDI Listening Practice - Part 2: Business School Project",
+  "slug": "practice-listening-part-2",
+  "part": 2,
+  "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-14",
+      "instruction": "Choose the correct answer.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What is the project that Mark and Gina want to start?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "business school requirements"
+        },
+        {
+          "letter": "B",
+          "text": "directions to the business school"
+        },
+        {
+          "letter": "C",
+          "text": "explaining the business school experience"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Who is the target audience?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "business students"
+        },
+        {
+          "letter": "B",
+          "text": "business school applicants"
+        },
+        {
+          "letter": "C",
+          "text": "summer school attendees"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "How will they convey the information?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "summer course lecture"
+        },
+        {
+          "letter": "B",
+          "text": "informational video"
+        },
+        {
+          "letter": "C",
+          "text": "pamphlet in the mail"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "They want to do this project because",
+      "options": [
+        {
+          "letter": "A",
+          "text": "students worry about their studies."
+        },
+        {
+          "letter": "B",
+          "text": "they want to obtain a good grade."
+        },
+        {
+          "letter": "C",
+          "text": "they want to attract future business school applicants."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "sentence_completion",
+      "question": "Project topic: 15",
+      "options": [],
+      "answer": "teaching methods"
+    },
+    {
+      "number": 16,
+      "type": "sentence_completion",
+      "question": "Project topic: 16",
+      "options": [],
+      "answer": "accommodation"
+    },
+    {
+      "number": 17,
+      "type": "sentence_completion",
+      "question": "Project topic: 17",
+      "options": [],
+      "answer": "flats"
+    },
+    {
+      "number": 18,
+      "type": "sentence_completion",
+      "question": "Project topic: 18",
+      "options": [],
+      "answer": "disco"
+    },
+    {
+      "number": 19,
+      "type": "sentence_completion",
+      "question": "Project topic: 19",
+      "options": [],
+      "answer": "international evening"
+    },
+    {
+      "number": 20,
+      "type": "sentence_completion",
+      "question": "Conclusion time: nearly 20",
+      "options": [],
+      "answer": "2 minutes|two minutes"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "practice-listening",
+  "createdAt": "2026-06-19T17:13:42.073Z",
+  "updatedAt": "2026-06-19T17:13:42.073Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2: Business School Project",
+      "questionRange": "Questions 11-20",
+      "blocks": [
+        {
+          "id": "practice-listening-part-2-project-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-14",
+          "instruction": "Choose the correct answer.",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "type": "multiple_choice",
+              "question": "What is the project that Mark and Gina want to start?",
+              "text": "What is the project that Mark and Gina want to start?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "business school requirements"
+                },
+                {
+                  "letter": "B",
+                  "text": "directions to the business school"
+                },
+                {
+                  "letter": "C",
+                  "text": "explaining the business school experience"
+                }
+              ],
+              "answer": "C"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "type": "multiple_choice",
+              "question": "Who is the target audience?",
+              "text": "Who is the target audience?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "business students"
+                },
+                {
+                  "letter": "B",
+                  "text": "business school applicants"
+                },
+                {
+                  "letter": "C",
+                  "text": "summer school attendees"
+                }
+              ],
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "type": "multiple_choice",
+              "question": "How will they convey the information?",
+              "text": "How will they convey the information?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "summer course lecture"
+                },
+                {
+                  "letter": "B",
+                  "text": "informational video"
+                },
+                {
+                  "letter": "C",
+                  "text": "pamphlet in the mail"
+                }
+              ],
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "type": "multiple_choice",
+              "question": "They want to do this project because",
+              "text": "They want to do this project because",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "students worry about their studies."
+                },
+                {
+                  "letter": "B",
+                  "text": "they want to obtain a good grade."
+                },
+                {
+                  "letter": "C",
+                  "text": "they want to attract future business school applicants."
+                }
+              ],
+              "answer": "A"
+            }
+          ]
+        },
+        {
+          "id": "practice-listening-part-2-project-table",
+          "type": "table_completion",
+          "questionRange": "Questions 15-20",
+          "title": "Project plan",
+          "instruction": "Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "columns": [
+            "Topic",
+            "Time"
+          ],
+          "rows": [
+            [
+              "Academics<br>{{15}}",
+              "7 minutes"
+            ],
+            [
+              "{{16}}<br>Cafeteria<br>{{17}}",
+              "6 minutes"
+            ],
+            [
+              "Social activity<br>{{18}}<br>{{19}}",
+              "8 minutes"
+            ],
+            [
+              "Conclusion",
+              "nearly {{20}}"
+            ]
+          ],
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "type": "sentence_completion",
+              "question": "Project topic: 15",
+              "text": "Project topic: 15",
+              "options": [],
+              "answer": "teaching methods"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "type": "sentence_completion",
+              "question": "Project topic: 16",
+              "text": "Project topic: 16",
+              "options": [],
+              "answer": "accommodation"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "type": "sentence_completion",
+              "question": "Project topic: 17",
+              "text": "Project topic: 17",
+              "options": [],
+              "answer": "flats"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "type": "sentence_completion",
+              "question": "Project topic: 18",
+              "text": "Project topic: 18",
+              "options": [],
+              "answer": "disco"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "type": "sentence_completion",
+              "question": "Project topic: 19",
+              "text": "Project topic: 19",
+              "options": [],
+              "answer": "international evening"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "type": "sentence_completion",
+              "question": "Conclusion time: nearly 20",
+              "text": "Conclusion time: nearly 20",
+              "options": [],
+              "answer": "2 minutes|two minutes"
+            }
+          ]
+        }
+      ],
+      "instruction": "",
+      "audioUrl": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+      "audioFileName": "Practice Listening.mp3",
+      "answerText": "11: C\n12: B\n13: B\n14: A\n15: teaching methods\n16: accommodation\n17: flats\n18: disco\n19: international evening\n20: 2 minutes|two minutes"
+    }
+  ]
+}

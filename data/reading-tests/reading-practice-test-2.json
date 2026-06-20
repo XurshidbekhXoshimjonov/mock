@@ -35,7 +35,8 @@
         12,
         13
       ],
-      "options": []
+      "options": [],
+      "contentHtml": "\n<table class=\"completion-table\">\n<thead>\n<tr><th>YEARS</th><th>DEVELOPMENT</th></tr>\n</thead>\n<tbody>\n<tr>\n<td>1854</td>\n<td>Elisha Otis introduced New Yorkers to a new invention — a <span class=\"ielts-blank\" data-blank=\"9\">______</span> for elevators.</td>\n</tr>\n<tr>\n<td>1855</td>\n<td>Henry Bessemer created a way of making <span class=\"ielts-blank\" data-blank=\"10\">______</span> that was sturdy and inexpensive.</td>\n</tr>\n<tr>\n<td>1890</td>\n<td>The New York World Building was completed.</td>\n</tr>\n<tr>\n<td>1916</td>\n<td>New <span class=\"ielts-blank\" data-blank=\"11\">______</span> required that the upper floors of buildings were smaller in area than the lower floors.</td>\n</tr>\n<tr>\n<td>1928</td>\n<td>Some of the decorations on the Chrysler Building looked like <span class=\"ielts-blank\" data-blank=\"12\">______</span> parts.</td>\n</tr>\n<tr>\n<td>1945</td>\n<td>An aeroplane lost in <span class=\"ielts-blank\" data-blank=\"13\">______</span> hit the Empire State Building.</td>\n</tr>\n</tbody>\n</table>\n"
     },
     {
       "title": "Questions 14–19",
@@ -132,7 +133,8 @@
           "value": "E",
           "label": "E — Yucatec Maya"
         }
-      ]
+      ],
+      "contentHtml": "\n<div class=\"matching-list\">\n<div class=\"matching-list-title\">List of Languages</div>\n<ol>\n<li><span class=\"letter\">A</span><span class=\"desc\">Russian</span></li>\n<li><span class=\"letter\">B</span><span class=\"desc\">Japanese</span></li>\n<li><span class=\"letter\">C</span><span class=\"desc\">Korean</span></li>\n<li><span class=\"letter\">D</span><span class=\"desc\">Spanish</span></li>\n<li><span class=\"letter\">E</span><span class=\"desc\">Yucatec Maya</span></li>\n</ol>\n</div>\n"
     },
     {
       "title": "Questions 37–40",
@@ -145,7 +147,8 @@
         39,
         40
       ],
-      "options": []
+      "options": [],
+      "contentHtml": "<div class=\"matching-list\">\n<div class=\"matching-list-title\">Options A–J</div>\n<ol class=\"two-col\">\n<li><span class=\"letter\">A</span><span class=\"desc\">method</span></li>\n<li><span class=\"letter\">B</span><span class=\"desc\">language</span></li>\n<li><span class=\"letter\">C</span><span class=\"desc\">cardboard</span></li>\n<li><span class=\"letter\">D</span><span class=\"desc\">design</span></li>\n<li><span class=\"letter\">E</span><span class=\"desc\">purpose</span></li>\n<li><span class=\"letter\">F</span><span class=\"desc\">gender</span></li>\n<li><span class=\"letter\">G</span><span class=\"desc\">box</span></li>\n<li><span class=\"letter\">H</span><span class=\"desc\">material</span></li>\n<li><span class=\"letter\">I</span><span class=\"desc\">similarity</span></li>\n<li><span class=\"letter\">J</span><span class=\"desc\">wood</span></li>\n</ol>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-37\">\n<span class=\"q-num\">37</span>\n<span class=\"select-q-text\">In the likeness task, two of the combs were made of the same <span class=\"ielts-blank\" data-blank=\"37\">______</span></span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-38\">\n<span class=\"q-num\">38</span>\n<span class=\"select-q-text\">Two other combs were alike in that they had the same <span class=\"ielts-blank\" data-blank=\"38\">______</span></span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-39\">\n<span class=\"q-num\">39</span>\n<span class=\"select-q-text\">In another experiment, plastic and <span class=\"ielts-blank\" data-blank=\"39\">______</span> items were used.</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-40\">\n<span class=\"q-num\">40</span>\n<span class=\"select-q-text\">The <span class=\"ielts-blank\" data-blank=\"40\">______</span> that English and Yucatec speakers used to group these objects helped Lucy show that different languages affect how people think.</span>\n</div>"
     }
   ],
   "questions": [
@@ -240,35 +243,40 @@
     {
       "number": 9,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
+      "stemHtml": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
       "options": [],
       "answer": "brake"
     },
     {
       "number": 10,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
+      "stemHtml": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
       "options": [],
       "answer": "steel"
     },
     {
       "number": 11,
       "type": "sentence_completion",
-      "question": "",
+      "question": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
+      "stemHtml": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
       "options": [],
       "answer": "laws"
     },
     {
       "number": 12,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Some of the decorations on the Chrysler Building looked like ______ parts.",
+      "stemHtml": "Some of the decorations on the Chrysler Building looked like ______ parts.",
       "options": [],
       "answer": "automobile"
     },
     {
       "number": 13,
       "type": "sentence_completion",
-      "question": "",
+      "question": "An aeroplane lost in ______ hit the Empire State Building.",
+      "stemHtml": "An aeroplane lost in ______ hit the Empire State Building.",
       "options": [],
       "answer": "fog"
     },

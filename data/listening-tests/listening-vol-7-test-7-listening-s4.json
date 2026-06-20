@@ -1,0 +1,242 @@
+{
+  "id": "listening-vol-7-test-7-listening-s4",
+  "title": "Listening Vol 7 Test 7 - Part 4: The Music of Salvatore Sciarrino",
+  "slug": "listening-vol-7-test-7-part-4",
+  "part": 4,
+  "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "As well as music, he has written many 31",
+      "options": [],
+      "answer": "essays"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "He has won many awards - including one in 2011 for in music 32",
+      "options": [],
+      "answer": "originality"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "His music often features and very soft sounds 33",
+      "options": [],
+      "answer": "silence"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Violins often produce sounds which resemble those found in 34",
+      "options": [],
+      "answer": "nature"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "He is seen as a of music 35",
+      "options": [],
+      "answer": "pioneer"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Sciarrino compares his music to a distant 36",
+      "options": [],
+      "answer": "volcano"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Finished in 1979 and written in memory of a 37",
+      "options": [],
+      "answer": "friend"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Starts with a noise that sounds like 38",
+      "options": [],
+      "answer": "thunder"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Produced by two people moving large pieces of 39",
+      "options": [],
+      "answer": "metal"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Although the music is unusual, it has a traditional 40",
+      "options": [],
+      "answer": "structure"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-7",
+  "createdAt": "2026-06-19T17:07:01.418Z",
+  "updatedAt": "2026-06-19T17:07:01.418Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4: The Music of Salvatore Sciarrino",
+      "questionRange": "Questions 31-40",
+      "instruction": "",
+      "blocks": [
+        {
+          "id": "vol-7-test-7-part-4-sciarrino",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "The Music of Salvatore Sciarrino",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>Biographical details</strong>",
+            "He was born in Palermo in 1947.",
+            "He moved to Rome in 1969 and took a course in electronic music, which influenced his style as a composer.",
+            "",
+            "<strong>Work</strong>",
+            "In the 1970s he composed a lot of music and taught until 1982.",
+            "As well as music, he has written many {{31}}.",
+            "He has won many awards - including one in 2011 for {{32}} in music.",
+            "",
+            "<strong>Musical characteristics</strong>",
+            "Surprisingly, his music often features {{33}} and very soft sounds.",
+            "His music uses unusual instrument techniques, e.g. violins often produce sounds which resemble those found in {{34}}.",
+            "He is seen as a {{35}} of music.",
+            "Sciarrino compares his music to a distant {{36}}.",
+            "",
+            "<strong>Concert piece</strong>",
+            "For piano, chorus and orchestra.",
+            "Finished in 1979 and written in memory of a {{37}}.",
+            "Very difficult to play.",
+            "Starts with a noise that sounds like {{38}}.",
+            "Produced by two people moving large pieces of {{39}}.",
+            "Although the music is unusual, it has a traditional {{40}}."
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "As well as music, he has written many 31",
+              "text": "As well as music, he has written many 31",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "essays"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "He has won many awards - including one in 2011 for in music 32",
+              "text": "He has won many awards - including one in 2011 for in music 32",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "originality"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "His music often features and very soft sounds 33",
+              "text": "His music often features and very soft sounds 33",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "silence"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Violins often produce sounds which resemble those found in 34",
+              "text": "Violins often produce sounds which resemble those found in 34",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "nature"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "He is seen as a of music 35",
+              "text": "He is seen as a of music 35",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "pioneer"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Sciarrino compares his music to a distant 36",
+              "text": "Sciarrino compares his music to a distant 36",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "volcano"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Finished in 1979 and written in memory of a 37",
+              "text": "Finished in 1979 and written in memory of a 37",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "friend"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Starts with a noise that sounds like 38",
+              "text": "Starts with a noise that sounds like 38",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "thunder"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Produced by two people moving large pieces of 39",
+              "text": "Produced by two people moving large pieces of 39",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "metal"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Although the music is unusual, it has a traditional 40",
+              "text": "Although the music is unusual, it has a traditional 40",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "structure"
+            }
+          ]
+        }
+      ],
+      "audioUrl": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+      "audioFileName": "Test 7 (1).m4a",
+      "answerText": "31: essays\n32: originality\n33: silence\n34: nature\n35: pioneer\n36: volcano\n37: friend\n38: thunder\n39: metal\n40: structure"
+    }
+  ]
+}

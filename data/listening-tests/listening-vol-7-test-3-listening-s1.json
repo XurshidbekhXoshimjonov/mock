@@ -1,0 +1,237 @@
+{
+  "id": "listening-vol-7-test-3-listening-s1",
+  "title": "Listening Vol 7 Test 3 - Part 1: Planning a party",
+  "slug": "listening-vol-7-test-3-part-1",
+  "part": 1,
+  "audio": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Number of people: 1",
+      "options": [],
+      "answer": "80"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Date: 2",
+      "options": [],
+      "answer": "26 September"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Location: the Room 3",
+      "options": [],
+      "answer": "King"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Type of music 4",
+      "options": [],
+      "answer": "jazz"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Service option 5",
+      "options": [],
+      "answer": "table"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Flavour of cake: 6",
+      "options": [],
+      "answer": "lemon"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Message on cake: 7",
+      "options": [],
+      "answer": "congratulations"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Credit card number: 8",
+      "options": [],
+      "answer": "5544120043268887"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Name: Brian Troy 9",
+      "options": [],
+      "answer": "SEBASTIAN"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Additional fees: extra charge for 10",
+      "options": [],
+      "answer": "service"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-3",
+  "createdAt": "2026-06-19T16:07:47.720Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1: Planning a party",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+      "instruction": "",
+      "answerText": "1: 80\n2: 26 September\n3: King\n4: jazz\n5: table\n6: lemon\n7: congratulations\n8: 5544120043268887\n9: SEBASTIAN\n10: service",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Planning a party",
+          "example": "Example - Reason for event: wife's promotion",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>EVENT DETAILS</strong>",
+            "Event option: large surprise party",
+            "Number of people: {{1}}",
+            "Date: {{2}}",
+            "Day of week: Friday",
+            "Time: 6 - 10 p.m.",
+            "Location: the {{3}} Room",
+            "Type of music {{4}}",
+            "<strong>FOOD</strong>",
+            "Service option {{5}}",
+            "Flavour of cake: {{6}}",
+            "Message on cake: {{7}}",
+            "<strong>PAYMENT</strong>",
+            "Reservation fee paid: $100",
+            "Credit card type: Mastercard",
+            "Credit card number: {{8}}",
+            "Name: Brian {{9}} Troy",
+            "Additional fees: extra charge for {{10}}"
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Number of people: 1",
+              "text": "Number of people: 1",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "80"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Date: 2",
+              "text": "Date: 2",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "26 September"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Location: the Room 3",
+              "text": "Location: the Room 3",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "King"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Type of music 4",
+              "text": "Type of music 4",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "jazz"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Service option 5",
+              "text": "Service option 5",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "table"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Flavour of cake: 6",
+              "text": "Flavour of cake: 6",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lemon"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Message on cake: 7",
+              "text": "Message on cake: 7",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "congratulations"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Credit card number: 8",
+              "text": "Credit card number: 8",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "5544120043268887"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Name: Brian Troy 9",
+              "text": "Name: Brian Troy 9",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SEBASTIAN"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Additional fees: extra charge for 10",
+              "text": "Additional fees: extra charge for 10",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "service"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

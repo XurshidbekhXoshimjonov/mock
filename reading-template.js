@@ -31,7 +31,7 @@ function partLabel(part) {
 }
 
 function partPage(part) {
-    return part === "full" ? "fulltest.html" : `part${part}.html`;
+    return part === "full" ? "/fulltest.html" : `/part${part}.html`;
 }
 
 submitAnswers.addEventListener("click", () => {
@@ -55,7 +55,7 @@ submitAnswers.addEventListener("click", () => {
 });
 
 closeModal.addEventListener("click", () => {
-    const destination = activeTest ? partPage(activeTest.part) : "part1.html";
+    const destination = activeTest ? partPage(activeTest.part) : "/part1.html";
     window.location.href = destination;
 });
 

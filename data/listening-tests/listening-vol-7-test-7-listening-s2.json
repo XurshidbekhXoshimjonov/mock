@@ -1,0 +1,945 @@
+{
+  "id": "listening-vol-7-test-7-listening-s2",
+  "title": "Listening Vol 7 Test 7 - Part 2: School fair",
+  "slug": "listening-vol-7-test-7-part-2",
+  "part": 2,
+  "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-14",
+      "instruction": "What does the speaker say about each of the following volunteer roles at the school fair? Choose FOUR correct answers, A-F, next to questions 11-14.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Label the map below. Write the correct letter, A-I, next to questions 15-20.",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Entertainment co-ordinator",
+      "options": [
+        {
+          "letter": "A",
+          "text": "An office will be provided for this role."
+        },
+        {
+          "letter": "B",
+          "text": "More than one person is needed for this role."
+        },
+        {
+          "letter": "C",
+          "text": "This is a new role for this year's fair."
+        },
+        {
+          "letter": "D",
+          "text": "This role will start next month."
+        },
+        {
+          "letter": "E",
+          "text": "This role will mainly involve evening work."
+        },
+        {
+          "letter": "F",
+          "text": "To do this role you need your own transport."
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Advertising and promotion co-ordinator",
+      "options": [
+        {
+          "letter": "A",
+          "text": "An office will be provided for this role."
+        },
+        {
+          "letter": "B",
+          "text": "More than one person is needed for this role."
+        },
+        {
+          "letter": "C",
+          "text": "This is a new role for this year's fair."
+        },
+        {
+          "letter": "D",
+          "text": "This role will start next month."
+        },
+        {
+          "letter": "E",
+          "text": "This role will mainly involve evening work."
+        },
+        {
+          "letter": "F",
+          "text": "To do this role you need your own transport."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Technical co-ordinator",
+      "options": [
+        {
+          "letter": "A",
+          "text": "An office will be provided for this role."
+        },
+        {
+          "letter": "B",
+          "text": "More than one person is needed for this role."
+        },
+        {
+          "letter": "C",
+          "text": "This is a new role for this year's fair."
+        },
+        {
+          "letter": "D",
+          "text": "This role will start next month."
+        },
+        {
+          "letter": "E",
+          "text": "This role will mainly involve evening work."
+        },
+        {
+          "letter": "F",
+          "text": "To do this role you need your own transport."
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Staffing co-ordinator",
+      "options": [
+        {
+          "letter": "A",
+          "text": "An office will be provided for this role."
+        },
+        {
+          "letter": "B",
+          "text": "More than one person is needed for this role."
+        },
+        {
+          "letter": "C",
+          "text": "This is a new role for this year's fair."
+        },
+        {
+          "letter": "D",
+          "text": "This role will start next month."
+        },
+        {
+          "letter": "E",
+          "text": "This role will mainly involve evening work."
+        },
+        {
+          "letter": "F",
+          "text": "To do this role you need your own transport."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "Fairground rides",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "I"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "Entertainment stage",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "Cafe",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "First aid tent",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "Market stalls",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "Pony rides",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Location A"
+        },
+        {
+          "letter": "B",
+          "text": "Location B"
+        },
+        {
+          "letter": "C",
+          "text": "Location C"
+        },
+        {
+          "letter": "D",
+          "text": "Location D"
+        },
+        {
+          "letter": "E",
+          "text": "Location E"
+        },
+        {
+          "letter": "F",
+          "text": "Location F"
+        },
+        {
+          "letter": "G",
+          "text": "Location G"
+        },
+        {
+          "letter": "H",
+          "text": "Location H"
+        },
+        {
+          "letter": "I",
+          "text": "Location I"
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [
+    {
+      "id": "fairground-map",
+      "url": "https://i.postimg.cc/wMZ07MLb/image.png",
+      "alt": "Fairground Map"
+    }
+  ],
+  "sourceFullTestId": "listening-vol-7-test-7",
+  "createdAt": "2026-06-19T17:07:01.418Z",
+  "updatedAt": "2026-06-19T17:07:01.418Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2: School fair",
+      "questionRange": "Questions 11-20",
+      "instruction": "",
+      "blocks": [
+        {
+          "id": "vol-7-test-7-part-2-volunteer-roles",
+          "type": "matching",
+          "questionRange": "Questions 11-14",
+          "title": "Volunteer roles",
+          "instruction": "What does the speaker say about each of the following volunteer roles at the school fair? Choose FOUR correct answers, A-F, next to questions 11-14.",
+          "imageUrl": "",
+          "options": [
+            {
+              "letter": "A",
+              "text": "An office will be provided for this role."
+            },
+            {
+              "letter": "B",
+              "text": "More than one person is needed for this role."
+            },
+            {
+              "letter": "C",
+              "text": "This is a new role for this year's fair."
+            },
+            {
+              "letter": "D",
+              "text": "This role will start next month."
+            },
+            {
+              "letter": "E",
+              "text": "This role will mainly involve evening work."
+            },
+            {
+              "letter": "F",
+              "text": "To do this role you need your own transport."
+            }
+          ],
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "type": "multiple_choice",
+              "question": "Entertainment co-ordinator",
+              "text": "Entertainment co-ordinator",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "An office will be provided for this role."
+                },
+                {
+                  "letter": "B",
+                  "text": "More than one person is needed for this role."
+                },
+                {
+                  "letter": "C",
+                  "text": "This is a new role for this year's fair."
+                },
+                {
+                  "letter": "D",
+                  "text": "This role will start next month."
+                },
+                {
+                  "letter": "E",
+                  "text": "This role will mainly involve evening work."
+                },
+                {
+                  "letter": "F",
+                  "text": "To do this role you need your own transport."
+                }
+              ],
+              "answer": "E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "type": "multiple_choice",
+              "question": "Advertising and promotion co-ordinator",
+              "text": "Advertising and promotion co-ordinator",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "An office will be provided for this role."
+                },
+                {
+                  "letter": "B",
+                  "text": "More than one person is needed for this role."
+                },
+                {
+                  "letter": "C",
+                  "text": "This is a new role for this year's fair."
+                },
+                {
+                  "letter": "D",
+                  "text": "This role will start next month."
+                },
+                {
+                  "letter": "E",
+                  "text": "This role will mainly involve evening work."
+                },
+                {
+                  "letter": "F",
+                  "text": "To do this role you need your own transport."
+                }
+              ],
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "type": "multiple_choice",
+              "question": "Technical co-ordinator",
+              "text": "Technical co-ordinator",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "An office will be provided for this role."
+                },
+                {
+                  "letter": "B",
+                  "text": "More than one person is needed for this role."
+                },
+                {
+                  "letter": "C",
+                  "text": "This is a new role for this year's fair."
+                },
+                {
+                  "letter": "D",
+                  "text": "This role will start next month."
+                },
+                {
+                  "letter": "E",
+                  "text": "This role will mainly involve evening work."
+                },
+                {
+                  "letter": "F",
+                  "text": "To do this role you need your own transport."
+                }
+              ],
+              "answer": "F"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "type": "multiple_choice",
+              "question": "Staffing co-ordinator",
+              "text": "Staffing co-ordinator",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "An office will be provided for this role."
+                },
+                {
+                  "letter": "B",
+                  "text": "More than one person is needed for this role."
+                },
+                {
+                  "letter": "C",
+                  "text": "This is a new role for this year's fair."
+                },
+                {
+                  "letter": "D",
+                  "text": "This role will start next month."
+                },
+                {
+                  "letter": "E",
+                  "text": "This role will mainly involve evening work."
+                },
+                {
+                  "letter": "F",
+                  "text": "To do this role you need your own transport."
+                }
+              ],
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "vol-7-test-7-part-2-fairground-map",
+          "type": "matching",
+          "questionRange": "Questions 15-20",
+          "title": "Fairground Map",
+          "instruction": "Label the map below. Write the correct letter, A-I, next to questions 15-20.",
+          "imageUrl": "https://i.postimg.cc/wMZ07MLb/image.png",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Location A"
+            },
+            {
+              "letter": "B",
+              "text": "Location B"
+            },
+            {
+              "letter": "C",
+              "text": "Location C"
+            },
+            {
+              "letter": "D",
+              "text": "Location D"
+            },
+            {
+              "letter": "E",
+              "text": "Location E"
+            },
+            {
+              "letter": "F",
+              "text": "Location F"
+            },
+            {
+              "letter": "G",
+              "text": "Location G"
+            },
+            {
+              "letter": "H",
+              "text": "Location H"
+            },
+            {
+              "letter": "I",
+              "text": "Location I"
+            }
+          ],
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "type": "multiple_choice",
+              "question": "Fairground rides",
+              "text": "Fairground rides",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "I"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "type": "multiple_choice",
+              "question": "Entertainment stage",
+              "text": "Entertainment stage",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "D"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "type": "multiple_choice",
+              "question": "Cafe",
+              "text": "Cafe",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "A"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "type": "multiple_choice",
+              "question": "First aid tent",
+              "text": "First aid tent",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "H"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "type": "multiple_choice",
+              "question": "Market stalls",
+              "text": "Market stalls",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "E"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "type": "multiple_choice",
+              "question": "Pony rides",
+              "text": "Pony rides",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Location A"
+                },
+                {
+                  "letter": "B",
+                  "text": "Location B"
+                },
+                {
+                  "letter": "C",
+                  "text": "Location C"
+                },
+                {
+                  "letter": "D",
+                  "text": "Location D"
+                },
+                {
+                  "letter": "E",
+                  "text": "Location E"
+                },
+                {
+                  "letter": "F",
+                  "text": "Location F"
+                },
+                {
+                  "letter": "G",
+                  "text": "Location G"
+                },
+                {
+                  "letter": "H",
+                  "text": "Location H"
+                },
+                {
+                  "letter": "I",
+                  "text": "Location I"
+                }
+              ],
+              "answer": "B"
+            }
+          ]
+        }
+      ],
+      "audioUrl": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+      "audioFileName": "Test 7 (1).m4a",
+      "answerText": "11: E\n12: B\n13: F\n14: C\n15: I\n16: D\n17: A\n18: H\n19: E\n20: B"
+    }
+  ]
+}

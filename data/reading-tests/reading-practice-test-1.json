@@ -63,10 +63,11 @@
         7,
         8
       ],
-      "options": []
+      "options": [],
+      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-5\">\n<span class=\"q-num\">5</span>\n<span class=\"select-q-text\">\nThese days, museum visitors tend to be referred to as\n<span class=\"ielts-blank\" data-blank=\"5\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-6\">\n<span class=\"q-num\">6</span>\n<span class=\"select-q-text\">\nMuseum curators now need\n<span class=\"ielts-blank\" data-blank=\"6\">______</span>\nrather than academic qualifications.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-7\">\n<span class=\"q-num\">7</span>\n<span class=\"select-q-text\">\nThe linking of a range of public institutions that entertain the public is known as\n<span class=\"ielts-blank\" data-blank=\"7\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-8\">\n<span class=\"q-num\">8</span>\n<span class=\"select-q-text\">\nThere is discussion about whether museums can be regarded in the same way as other\n<span class=\"ielts-blank\" data-blank=\"8\">______</span>.\n</span>\n</div>\n"
     },
     {
-      "title": "",
+      "title": "Questions 9-10",
       "instruction": "Questions 9 and 10 Choose TWO letters, A–E. The order in which you select them does not matter.",
       "rule": "A–E",
       "type": "matching_information",
@@ -95,7 +96,8 @@
           "value": "E",
           "label": "E"
         }
-      ]
+      ],
+      "contentHtml": "\n<div class=\"mcq-pair-box\">\n<div class=\"mcq-pair-stem\">Which <strong>TWO</strong> of the following are mentioned by the writer as <em>advantages</em> of blockbusters?</div>\n<ol>\n<li><span class=\"letter\">A</span><span class=\"desc\">Some of the money they raise can be used for structural repairs.</span></li>\n<li><span class=\"letter\">B</span><span class=\"desc\">They can provide funds to help support amateur artists.</span></li>\n<li><span class=\"letter\">C</span><span class=\"desc\">Local services benefit from the extra business they bring about.</span></li>\n<li><span class=\"letter\">D</span><span class=\"desc\">They encourage overseas workers into the local area.</span></li>\n<li><span class=\"letter\">E</span><span class=\"desc\">They raise employee performance levels.</span></li>\n</ol>\n</div>\n"
     },
     {
       "title": "Questions 11–13",
@@ -136,7 +138,8 @@
           "value": "G",
           "label": "G"
         }
-      ]
+      ],
+      "contentHtml": "\n<div class=\"mcq-pair-box\">\n<div class=\"mcq-pair-stem\">Which <strong>THREE</strong> of the following are mentioned by the writer as <em>disadvantages</em> of blockbusters?</div>\n<ol>\n<li><span class=\"letter\">A</span><span class=\"desc\">They do not suit museum management styles.</span></li>\n<li><span class=\"letter\">B</span><span class=\"desc\">Specialist business advice has to be paid for.</span></li>\n<li><span class=\"letter\">C</span><span class=\"desc\">They involve an increased workload for personnel.</span></li>\n<li><span class=\"letter\">D</span><span class=\"desc\">They do not increase overall annual visitor numbers.</span></li>\n<li><span class=\"letter\">E</span><span class=\"desc\">They are very tiring to put on.</span></li>\n<li><span class=\"letter\">F</span><span class=\"desc\">What is popular in one country may not be popular in another.</span></li>\n<li><span class=\"letter\">G</span><span class=\"desc\">The content can be weakened through financial pressure.</span></li>\n</ol>\n</div>\n"
     },
     {
       "title": "Questions 14–20",
@@ -189,7 +192,8 @@
           "value": "IX",
           "label": "IX"
         }
-      ]
+      ],
+      "contentHtml": "\n<div class=\"matching-list\">\n<div class=\"matching-list-title\">List of Headings</div>\n<ol>\n<li><span class=\"letter\">I</span><span class=\"desc\">Fluctuations in bittern numbers over time</span></li>\n<li><span class=\"letter\">II</span><span class=\"desc\">Research findings on habitat needs of adult bitterns</span></li>\n<li><span class=\"letter\">III</span><span class=\"desc\">Predators in the natural world</span></li>\n<li><span class=\"letter\">IV</span><span class=\"desc\">The importance in the natural world</span></li>\n<li><span class=\"letter\">V</span><span class=\"desc\">Initial habitat investigation and decisions</span></li>\n<li><span class=\"letter\">VI</span><span class=\"desc\">The need for co-operation to ensure nature preservation</span></li>\n<li><span class=\"letter\">VII</span><span class=\"desc\">Impressive results of initial intervention</span></li>\n<li><span class=\"letter\">VIII</span><span class=\"desc\">Determining how many bitterns there are</span></li>\n<li><span class=\"letter\">IX</span><span class=\"desc\">Education as the key to preserving wildlife</span></li>\n</ol>\n</div>\n"
     },
     {
       "title": "Questions 21–25",
@@ -203,7 +207,8 @@
         24,
         25
       ],
-      "options": []
+      "options": [],
+      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-21\">\n<span class=\"q-num\">21</span>\n<span class=\"select-q-text\">\nWhen was the bittern population largest?\n<span class=\"ielts-blank\" data-blank=\"21\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-22\">\n<span class=\"q-num\">22</span>\n<span class=\"select-q-text\">\nWhat word is used in the passage to describe the bittern's character?\n<span class=\"ielts-blank\" data-blank=\"22\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-23\">\n<span class=\"q-num\">23</span>\n<span class=\"select-q-text\">\nWhat is probably the main cause of death of bittern chicks?\n<span class=\"ielts-blank\" data-blank=\"23\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-24\">\n<span class=\"q-num\">24</span>\n<span class=\"select-q-text\">\nWhat food supply do bittern chicks depend on?\n<span class=\"ielts-blank\" data-blank=\"24\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-25\">\n<span class=\"q-num\">25</span>\n<span class=\"select-q-text\">\nWhat other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat?\n<span class=\"ielts-blank\" data-blank=\"25\">______</span>\n</span>\n</div>\n"
     },
     {
       "title": "Question 26",
@@ -277,7 +282,8 @@
           "value": "H",
           "label": "H — should be able to get a high income"
         }
-      ]
+      ],
+      "contentHtml": "\n<div class=\"matching-list\">\n<div class=\"matching-list-title\">List of Endings</div>\n<ol>\n<li><span class=\"letter\">A</span><span class=\"desc\">should be easy to understand.</span></li>\n<li><span class=\"letter\">B</span><span class=\"desc\">can improve without treatment.</span></li>\n<li><span class=\"letter\">C</span><span class=\"desc\">can cost the patient less.</span></li>\n<li><span class=\"letter\">D</span><span class=\"desc\">ought to last a minimum length of time.</span></li>\n<li><span class=\"letter\">E</span><span class=\"desc\">can require a range of different products.</span></li>\n<li><span class=\"letter\">F</span><span class=\"desc\">can be described as serious.</span></li>\n<li><span class=\"letter\">G</span><span class=\"desc\">should give it greater recognition.</span></li>\n<li><span class=\"letter\">H</span><span class=\"desc\">should be able to get a high income.</span></li>\n</ol>\n</div>\n"
     },
     {
       "title": "Questions 32–34",
@@ -488,28 +494,32 @@
     {
       "number": 5,
       "type": "sentence_completion",
-      "question": "",
+      "question": "These days, museum visitors tend to be referred to as ______.",
+      "stemHtml": "These days, museum visitors tend to be referred to as ______.",
       "options": [],
       "answer": "customers"
     },
     {
       "number": 6,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Museum curators now need ______ rather than academic qualifications.",
+      "stemHtml": "Museum curators now need ______ rather than academic qualifications.",
       "options": [],
       "answer": "public relations skills|public relation skills"
     },
     {
       "number": 7,
       "type": "sentence_completion",
-      "question": "",
+      "question": "The linking of a range of public institutions that entertain the public is known as ______.",
+      "stemHtml": "The linking of a range of public institutions that entertain the public is known as ______.",
       "options": [],
       "answer": "museology"
     },
     {
       "number": 8,
       "type": "sentence_completion",
-      "question": "",
+      "question": "There is discussion about whether museums can be regarded in the same way as other ______.",
+      "stemHtml": "There is discussion about whether museums can be regarded in the same way as other ______.",
       "options": [],
       "answer": "tourist attractions"
     },
@@ -988,35 +998,40 @@
     {
       "number": 21,
       "type": "sentence_completion",
-      "question": "",
+      "question": "When was the bittern population largest? ______",
+      "stemHtml": "When was the bittern population largest? ______",
       "options": [],
       "answer": "1950"
     },
     {
       "number": 22,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What word is used in the passage to describe the bittern's character? ______",
+      "stemHtml": "What word is used in the passage to describe the bittern's character? ______",
       "options": [],
       "answer": "shy"
     },
     {
       "number": 23,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What is probably the main cause of death of bittern chicks? ______",
+      "stemHtml": "What is probably the main cause of death of bittern chicks? ______",
       "options": [],
       "answer": "starvation"
     },
     {
       "number": 24,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What food supply do bittern chicks depend on? ______",
+      "stemHtml": "What food supply do bittern chicks depend on? ______",
       "options": [],
       "answer": "fish"
     },
     {
       "number": 25,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
+      "stemHtml": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
       "options": [],
       "answer": "otters"
     },

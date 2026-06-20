@@ -278,37 +278,37 @@
       },
       "rule": "",
       "options": [],
-      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-5\">\n<span class=\"q-num\">5</span>\n<span class=\"select-q-text\">\nThese days, museum visitors tend to be referred to as\n<span class=\"ielts-blank\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-6\">\n<span class=\"q-num\">6</span>\n<span class=\"select-q-text\">\nMuseum curators now need\n<span class=\"ielts-blank\">______</span>\nrather than academic qualifications.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-7\">\n<span class=\"q-num\">7</span>\n<span class=\"select-q-text\">\nThe linking of a range of public institutions that entertain the public is known as\n<span class=\"ielts-blank\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-8\">\n<span class=\"q-num\">8</span>\n<span class=\"select-q-text\">\nThere is discussion about whether museums can be regarded in the same way as other\n<span class=\"ielts-blank\">______</span>.\n</span>\n</div>\n",
+      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-5\">\n<span class=\"q-num\">5</span>\n<span class=\"select-q-text\">\nThese days, museum visitors tend to be referred to as\n<span class=\"ielts-blank\" data-blank=\"5\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-6\">\n<span class=\"q-num\">6</span>\n<span class=\"select-q-text\">\nMuseum curators now need\n<span class=\"ielts-blank\" data-blank=\"6\">______</span>\nrather than academic qualifications.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-7\">\n<span class=\"q-num\">7</span>\n<span class=\"select-q-text\">\nThe linking of a range of public institutions that entertain the public is known as\n<span class=\"ielts-blank\" data-blank=\"7\">______</span>.\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-8\">\n<span class=\"q-num\">8</span>\n<span class=\"select-q-text\">\nThere is discussion about whether museums can be regarded in the same way as other\n<span class=\"ielts-blank\" data-blank=\"8\">______</span>.\n</span>\n</div>\n",
       "questions": [
         {
           "number": 5,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "These days, museum visitors tend to be referred to as ______.",
+          "stemHtml": "These days, museum visitors tend to be referred to as ______.",
           "options": [],
           "answer": "customers"
         },
         {
           "number": 6,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "Museum curators now need ______ rather than academic qualifications.",
+          "stemHtml": "Museum curators now need ______ rather than academic qualifications.",
           "options": [],
           "answer": "public relations skills|public relation skills"
         },
         {
           "number": 7,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "The linking of a range of public institutions that entertain the public is known as ______.",
+          "stemHtml": "The linking of a range of public institutions that entertain the public is known as ______.",
           "options": [],
           "answer": "museology"
         },
         {
           "number": 8,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "There is discussion about whether museums can be regarded in the same way as other ______.",
+          "stemHtml": "There is discussion about whether museums can be regarded in the same way as other ______.",
           "options": [],
           "answer": "tourist attractions"
         }
@@ -323,10 +323,10 @@
     {
       "id": "scripted-reading-p1-g3",
       "type": "matching_information",
-      "instructionTitle": "",
+      "instructionTitle": "Questions 9-10",
       "instructionText": "Questions 9 and 10 Choose TWO letters, A–E. The order in which you select them does not matter.",
       "instructionHtml": {
-        "titleHtml": "",
+        "titleHtml": "<h3>Questions 9-10</h3>",
         "bodyHtml": "",
         "rulesHtml": ""
       },
@@ -748,28 +748,32 @@
     {
       "number": 5,
       "type": "sentence_completion",
-      "question": "",
+      "question": "These days, museum visitors tend to be referred to as ______.",
+      "stemHtml": "These days, museum visitors tend to be referred to as ______.",
       "options": [],
       "answer": "customers"
     },
     {
       "number": 6,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Museum curators now need ______ rather than academic qualifications.",
+      "stemHtml": "Museum curators now need ______ rather than academic qualifications.",
       "options": [],
       "answer": "public relations skills|public relation skills"
     },
     {
       "number": 7,
       "type": "sentence_completion",
-      "question": "",
+      "question": "The linking of a range of public institutions that entertain the public is known as ______.",
+      "stemHtml": "The linking of a range of public institutions that entertain the public is known as ______.",
       "options": [],
       "answer": "museology"
     },
     {
       "number": 8,
       "type": "sentence_completion",
-      "question": "",
+      "question": "There is discussion about whether museums can be regarded in the same way as other ______.",
+      "stemHtml": "There is discussion about whether museums can be regarded in the same way as other ______.",
       "options": [],
       "answer": "tourist attractions"
     },

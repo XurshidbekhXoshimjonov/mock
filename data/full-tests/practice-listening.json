@@ -1,0 +1,701 @@
+{
+  "id": "practice-listening",
+  "title": "IELTS CDI Listening Practice",
+  "slug": "practice-listening",
+  "sourceFile": "Practice Listening.html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "Practice Listening"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1: Tourism Survey",
+        "questionRange": "Questions 1-10",
+        "instruction": "",
+        "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 1-10</div>\n<p>Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</p>\n<div><strong>Tourism Survey</strong></div>\n<div><strong>Name:</strong> Robert Goddard</div>\n<div><strong>Destination:</strong> Melbourne</div>\n<div><strong>First time visited Melbourne?</strong> <span class=\"question-number\">1</span></div>\n<div><strong>Best thing about the city:</strong> <span class=\"question-number\">2</span></div>\n<div><strong>Favourite attraction:</strong> <span class=\"question-number\">3</span></div>\n<div><strong>Best thing about the destination's dining options:</strong> <span class=\"question-number\">4</span> of food</div>\n<div><strong>Method of transport to destination:</strong> by <span class=\"question-number\">5</span></div>\n<div><strong>Age group:</strong> <span class=\"question-number\">6</span></div>\n<div><strong>Income level:</strong> <span class=\"question-number\">7</span></div>\n<div><strong>Purpose of visit:</strong></div>\n<div>- on business</div>\n<div>- <span class=\"question-number\">8</span></div>\n<div><strong>Occupation:</strong></div>\n<div>- <span class=\"question-number\">9</span></div>\n<div>- writer for a travel magazine</div>\n<div><strong>Opinion about accommodation:</strong> <span class=\"question-number\">10</span></div></div>",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 1-10",
+            "instructionText": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+            "title": "Tourism Survey",
+            "question": "",
+            "columns": [],
+            "rows": [],
+            "content": [
+              "<strong>Name:</strong> Robert Goddard",
+              "<strong>Destination:</strong> Melbourne",
+              "<strong>First time visited Melbourne?</strong> {{1}}",
+              "<strong>Best thing about the city:</strong> {{2}}",
+              "<strong>Favourite attraction:</strong> {{3}}",
+              "<strong>Best thing about the destination's dining options:</strong> {{4}} of food",
+              "<strong>Method of transport to destination:</strong> by {{5}}",
+              "<strong>Age group:</strong> {{6}}",
+              "<strong>Income level:</strong> {{7}}",
+              "<strong>Purpose of visit:</strong>",
+              "- on business",
+              "- {{8}}",
+              "<strong>Occupation:</strong>",
+              "- {{9}}",
+              "- writer for a travel magazine",
+              "<strong>Opinion about accommodation:</strong> {{10}}"
+            ],
+            "options": [],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "First time visited Melbourne? 1",
+                "options": [],
+                "answer": "no"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Best thing about the city: 2",
+                "options": [],
+                "answer": "amazing weather|weather"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Favourite attraction: 3",
+                "options": [],
+                "answer": "Town Hall"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Best thing about the destination's dining options: 4 of food",
+                "options": [],
+                "answer": "variety"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Method of transport to destination: by 5",
+                "options": [],
+                "answer": "plane"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Age group: 6",
+                "options": [],
+                "answer": "older than 40"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Income level: 7",
+                "options": [],
+                "answer": "mid-range"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Purpose of visit: 8",
+                "options": [],
+                "answer": "tourism"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Occupation: 9",
+                "options": [],
+                "answer": "computer programmer"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Opinion about accommodation: 10",
+                "options": [],
+                "answer": "good value"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2: Business School Project",
+        "questionRange": "Questions 11-20",
+        "instruction": "",
+        "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 11-14</div>\n<p>Choose the correct answer.</p>\n<div>11 What is the project that Mark and Gina want to start? <span class=\"question-number\">11</span></div>\n<div>12 Who is the target audience? <span class=\"question-number\">12</span></div>\n<div>13 How will they convey the information? <span class=\"question-number\">13</span></div>\n<div>14 They want to do this project because <span class=\"question-number\">14</span></div>\n<div class=\"scenario-title\">Questions 15-20</div>\n<p>Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</p>\n<div><strong>Project plan</strong></div>\n<table><thead><tr><th>Topic</th><th>Time</th></tr></thead><tbody>\n<tr><td>Academics<br><span class=\"question-number\">15</span></td><td>7 minutes</td></tr>\n<tr><td><span class=\"question-number\">16</span><br>Cafeteria<br><span class=\"question-number\">17</span></td><td>6 minutes</td></tr>\n<tr><td>Social activity<br><span class=\"question-number\">18</span><br><span class=\"question-number\">19</span></td><td>8 minutes</td></tr>\n<tr><td>Conclusion</td><td>nearly <span class=\"question-number\">20</span></td></tr>\n</tbody></table></div>",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11-14",
+            "instructionText": "Choose the correct answer.",
+            "title": "",
+            "question": "",
+            "columns": [],
+            "rows": [],
+            "content": [],
+            "options": [],
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What is the project that Mark and Gina want to start?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "business school requirements"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "directions to the business school"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "explaining the business school experience"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "Who is the target audience?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "business students"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "business school applicants"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "summer school attendees"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "How will they convey the information?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "summer course lecture"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "informational video"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "pamphlet in the mail"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "They want to do this project because",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "students worry about their studies."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "they want to obtain a good grade."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "they want to attract future business school applicants."
+                  }
+                ],
+                "answer": "A"
+              }
+            ]
+          },
+          {
+            "type": "table_completion",
+            "instructionTitle": "Questions 15-20",
+            "instructionText": "Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+            "title": "Project plan",
+            "question": "",
+            "columns": [
+              "Topic",
+              "Time"
+            ],
+            "rows": [
+              [
+                "Academics<br>{{15}}",
+                "7 minutes"
+              ],
+              [
+                "{{16}}<br>Cafeteria<br>{{17}}",
+                "6 minutes"
+              ],
+              [
+                "Social activity<br>{{18}}<br>{{19}}",
+                "8 minutes"
+              ],
+              [
+                "Conclusion",
+                "nearly {{20}}"
+              ]
+            ],
+            "content": [],
+            "options": [],
+            "questions": [
+              {
+                "number": 15,
+                "type": "sentence_completion",
+                "question": "Project topic: 15",
+                "options": [],
+                "answer": "teaching methods"
+              },
+              {
+                "number": 16,
+                "type": "sentence_completion",
+                "question": "Project topic: 16",
+                "options": [],
+                "answer": "accommodation"
+              },
+              {
+                "number": 17,
+                "type": "sentence_completion",
+                "question": "Project topic: 17",
+                "options": [],
+                "answer": "flats"
+              },
+              {
+                "number": 18,
+                "type": "sentence_completion",
+                "question": "Project topic: 18",
+                "options": [],
+                "answer": "disco"
+              },
+              {
+                "number": 19,
+                "type": "sentence_completion",
+                "question": "Project topic: 19",
+                "options": [],
+                "answer": "international evening"
+              },
+              {
+                "number": 20,
+                "type": "sentence_completion",
+                "question": "Conclusion time: nearly 20",
+                "options": [],
+                "answer": "2 minutes|two minutes"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3: History Subjects",
+        "questionRange": "Questions 21-30",
+        "instruction": "",
+        "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 21-26</div>\n<p>Complete the table. Write NO MORE THAN TWO WORDS for each answer.</p>\n<div><strong>History textbooks</strong></div>\n<table><thead><tr><th>Subject</th><th>Textbook Used</th><th>Criticism of this book</th></tr></thead><tbody>\n<tr><td>Social History</td><td><span class=\"question-number\">21</span></td><td>It is <span class=\"question-number\">22</span></td></tr>\n<tr><td>Cultural Studies</td><td><span class=\"question-number\">23</span></td><td>It <span class=\"question-number\">24</span></td></tr>\n<tr><td><span class=\"question-number\">25</span></td><td>Government in Action</td><td>It is <span class=\"question-number\">26</span></td></tr>\n</tbody></table>\n<div class=\"scenario-title\">Questions 27-30</div>\n<p>Choose the correct letter, S, C, or P. NB You may use a letter more than once.</p>\n<div><strong>Favourite subjects</strong></div>\n<div>Options</div>\n<div><strong>S</strong> Social History</div>\n<div><strong>C</strong> Cultural Studies</div>\n<div><strong>P</strong> Political Theory</div>\n<div>27 Steve <span class=\"question-number\">27</span></div>\n<div>28 David <span class=\"question-number\">28</span></div>\n<div>29 Susan <span class=\"question-number\">29</span></div>\n<div>30 Olive <span class=\"question-number\">30</span></div></div>",
+        "questionGroups": [
+          {
+            "type": "table_completion",
+            "instructionTitle": "Questions 21-26",
+            "instructionText": "Complete the table. Write NO MORE THAN TWO WORDS for each answer.",
+            "title": "History textbooks",
+            "question": "",
+            "columns": [
+              "Subject",
+              "Textbook Used",
+              "Criticism of this book"
+            ],
+            "rows": [
+              [
+                "Social History",
+                "{{21}}",
+                "It is {{22}}"
+              ],
+              [
+                "Cultural Studies",
+                "{{23}}",
+                "It {{24}}"
+              ],
+              [
+                "{{25}}",
+                "Government in Action",
+                "It is {{26}}"
+              ]
+            ],
+            "content": [],
+            "options": [],
+            "questions": [
+              {
+                "number": 21,
+                "type": "sentence_completion",
+                "question": "Social History textbook used: 21",
+                "options": [],
+                "answer": "Welfare State"
+              },
+              {
+                "number": 22,
+                "type": "sentence_completion",
+                "question": "Social History criticism: It is 22",
+                "options": [],
+                "answer": "too long"
+              },
+              {
+                "number": 23,
+                "type": "sentence_completion",
+                "question": "Cultural Studies textbook used: 23",
+                "options": [],
+                "answer": "in perspective"
+              },
+              {
+                "number": 24,
+                "type": "sentence_completion",
+                "question": "Cultural Studies criticism: It 24",
+                "options": [],
+                "answer": "oversimplifies"
+              },
+              {
+                "number": 25,
+                "type": "sentence_completion",
+                "question": "Subject: 25",
+                "options": [],
+                "answer": "Political Theory"
+              },
+              {
+                "number": 26,
+                "type": "sentence_completion",
+                "question": "Political Theory criticism: It is 26",
+                "options": [],
+                "answer": "not relevant"
+              }
+            ]
+          },
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 27-30",
+            "instructionText": "Choose the correct letter, S, C, or P. NB You may use a letter more than once.",
+            "title": "Favourite subjects",
+            "question": "",
+            "columns": [],
+            "rows": [],
+            "content": [],
+            "options": [
+              {
+                "letter": "S",
+                "text": "Social History"
+              },
+              {
+                "letter": "C",
+                "text": "Cultural Studies"
+              },
+              {
+                "letter": "P",
+                "text": "Political Theory"
+              }
+            ],
+            "questions": [
+              {
+                "number": 27,
+                "type": "multiple_choice",
+                "question": "Steve",
+                "options": [
+                  {
+                    "letter": "S",
+                    "text": "Social History"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Cultural Studies"
+                  },
+                  {
+                    "letter": "P",
+                    "text": "Political Theory"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 28,
+                "type": "multiple_choice",
+                "question": "David",
+                "options": [
+                  {
+                    "letter": "S",
+                    "text": "Social History"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Cultural Studies"
+                  },
+                  {
+                    "letter": "P",
+                    "text": "Political Theory"
+                  }
+                ],
+                "answer": "S"
+              },
+              {
+                "number": 29,
+                "type": "multiple_choice",
+                "question": "Susan",
+                "options": [
+                  {
+                    "letter": "S",
+                    "text": "Social History"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Cultural Studies"
+                  },
+                  {
+                    "letter": "P",
+                    "text": "Political Theory"
+                  }
+                ],
+                "answer": "P"
+              },
+              {
+                "number": 30,
+                "type": "multiple_choice",
+                "question": "Olive",
+                "options": [
+                  {
+                    "letter": "S",
+                    "text": "Social History"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Cultural Studies"
+                  },
+                  {
+                    "letter": "P",
+                    "text": "Political Theory"
+                  }
+                ],
+                "answer": "P"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4: Pleasanton Town Market",
+        "questionRange": "Questions 31-40",
+        "instruction": "",
+        "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 31-35</div>\n<p>Choose the correct answer.</p>\n<div>31 Why did the lecturer choose to focus on the Pleasanton Town Market? <span class=\"question-number\">31</span></div>\n<div>32 The Town Market originally made a large profit selling <span class=\"question-number\">32</span></div>\n<div>33 The money that the marketers made contributes to local <span class=\"question-number\">33</span></div>\n<div>34 Market sales plummeted due to a lack of viable <span class=\"question-number\">34</span></div>\n<div>35 Mayor John C. Wiley decided the Clock Tower would be used as a ... in the early stages of the uprising <span class=\"question-number\">35</span></div>\n<div class=\"scenario-title\">Questions 36-40</div>\n<p>Complete the table below. Write ONE WORD ONLY for each answer.</p>\n<div><strong>Research methods</strong></div>\n<table><thead><tr><th>Research Methods</th><th>Objects</th><th>Problems</th></tr></thead><tbody>\n<tr><td>reference section</td><td><span class=\"question-number\">36</span></td><td>there is too much information</td></tr>\n<tr><td><span class=\"question-number\">37</span></td><td>Rebellion</td><td>bias makes it <span class=\"question-number\">38</span></td></tr>\n<tr><td><span class=\"question-number\">39</span></td><td>Jim Wiley</td><td>the information is insufficient</td></tr>\n<tr><td>newspaper archives</td><td><span class=\"question-number\">40</span></td><td>more detail is needed</td></tr>\n</tbody></table></div>",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 31-35",
+            "instructionText": "Choose the correct answer.",
+            "title": "",
+            "question": "",
+            "columns": [],
+            "rows": [],
+            "content": [],
+            "options": [],
+            "questions": [
+              {
+                "number": 31,
+                "type": "multiple_choice",
+                "question": "Why did the lecturer choose to focus on the Pleasanton Town Market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It was the first ever Town Market."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It has been covered extensively in local history classes."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It is often mentioned in some literature of the library."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 32,
+                "type": "multiple_choice",
+                "question": "The Town Market originally made a large profit selling",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "handcrafts"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "vegetables"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "animals"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 33,
+                "type": "multiple_choice",
+                "question": "The money that the marketers made contributes to local",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "reconstruction"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "development"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "defense"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 34,
+                "type": "multiple_choice",
+                "question": "Market sales plummeted due to a lack of viable",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "agriculture"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "transport"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "city planning"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 35,
+                "type": "multiple_choice",
+                "question": "Mayor John C. Wiley decided the Clock Tower would be used as a ... in the early stages of the uprising",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "clock"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "grounds for battle"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "jail"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "type": "table_completion",
+            "instructionTitle": "Questions 36-40",
+            "instructionText": "Complete the table below. Write ONE WORD ONLY for each answer.",
+            "title": "Research methods",
+            "question": "",
+            "columns": [
+              "Research Methods",
+              "Objects",
+              "Problems"
+            ],
+            "rows": [
+              [
+                "reference section",
+                "{{36}}",
+                "there is too much information"
+              ],
+              [
+                "{{37}}",
+                "Rebellion",
+                "bias makes it {{38}}"
+              ],
+              [
+                "{{39}}",
+                "Jim Wiley",
+                "the information is insufficient"
+              ],
+              [
+                "newspaper archives",
+                "{{40}}",
+                "more detail is needed"
+              ]
+            ],
+            "content": [],
+            "options": [],
+            "questions": [
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Reference section object: 36",
+                "options": [],
+                "answer": "market"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Research method: 37",
+                "options": [],
+                "answer": "interviews"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Bias makes it 38",
+                "options": [],
+                "answer": "useless"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Research method: 39",
+                "options": [],
+                "answer": "photographs"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Newspaper archives object: 40",
+                "options": [],
+                "answer": "crime"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "images": [],
+  "createdAt": "2026-06-19T17:13:42.073Z",
+  "updatedAt": "2026-06-19T17:13:42.073Z"
+}

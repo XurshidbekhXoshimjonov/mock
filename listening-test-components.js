@@ -42,7 +42,16 @@ const ListeningComponents = (() => {
         }
 
         parts.push(escapeHtml(text.slice(lastIndex)));
-        return parts.join("").replace(/\n/g, "<br>");
+        return parts.join("")
+            .replace(/&lt;strong&gt;/gi, "<strong>")
+            .replace(/&lt;\/strong&gt;/gi, "</strong>")
+            .replace(/&lt;b&gt;/gi, "<strong>")
+            .replace(/&lt;\/b&gt;/gi, "</strong>")
+            .replace(/&lt;u&gt;/gi, "<u>")
+            .replace(/&lt;\/u&gt;/gi, "</u>")
+            .replace(/&lt;i&gt;/gi, "<em>")
+            .replace(/&lt;\/i&gt;/gi, "</em>")
+            .replace(/\n/g, "<br>");
     }
 
     function renderMixedParts(parts) {
@@ -89,6 +98,145 @@ const ListeningComponents = (() => {
         </section>`;
     }
 
+    function splitMultipleSelectInstruction(instruction, questionText) {
+        const rawInstruction = String(instruction || "").trim();
+        const rawQuestion = String(questionText || "").trim();
+
+        if (!rawInstruction) {
+            return { instruction: "", question: rawQuestion };
+        }
+
+        const rangePattern = /\b\d{1,2}\s*[-–—]\s*\d{1,2}\b/;
+        const rangeMatch = rawInstruction.match(rangePattern);
+
+        if (rawQuestion && rawInstruction.includes(rawQuestion)) {
+            const beforeQuestion = rawInstruction
+                .slice(0, rawInstruction.indexOf(rawQuestion))
+                .replace(rangePattern, "")
+                .trim()
+                .replace(/\s*[.,:;]+\s*$/, ".");
+
+            return {
+                instruction: beforeQuestion,
+                question: rawQuestion
+            };
+        }
+
+        if (rangeMatch) {
+            const instructionOnly = rawInstruction
+                .slice(0, rangeMatch.index)
+                .trim()
+                .replace(/\s*[.,:;]+\s*$/, ".");
+            const questionOnly = rawInstruction
+                .slice(rangeMatch.index + rangeMatch[0].length)
+                .trim();
+
+            return {
+                instruction: instructionOnly,
+                question: rawQuestion || questionOnly
+            };
+        }
+
+        return {
+            instruction: rawInstruction,
+            question: rawQuestion
+        };
+    }
+
+    function plainText(value) {
+        return String(value || "").replace(/<[^>]+>/g, "").trim();
+    }
+
+    function looksLikeInstructionTitle(value) {
+        const text = plainText(value);
+        return /^(complete|write|choose|listen|answer|read|look|label|match)\b/i.test(text)
+            || /\b(for each answer|correct answers?|answer sheet)\b/i.test(text);
+    }
+
+    function canUseAsNoteTitle(value) {
+        const text = plainText(value);
+        return text
+            && !looksLikeInstructionTitle(text)
+            && !/^\s*[-*]\s+/.test(String(value || ""))
+            && !/\{\{\d{1,2}\}\}/.test(String(value || ""))
+            && !/^<strong>[\s\S]*<\/strong>$/i.test(String(value || "").trim());
+    }
+
+    function cleanOptionText(value) {
+        return String(value || "").replace(/^[-–—]\s*/, "").trim();
+    }
+
+    function isFlowChartMatchingBlock(block) {
+        return /flow\s*-\s*chart|flowchart/i.test(block.instruction || "")
+            || (block.content || []).some((line) => /\{\{\d{1,2}\}\}/.test(String(line || "")));
+    }
+
+    function flowchartAnswerInput(questionNumber, options = []) {
+        const number = Number(questionNumber);
+        const optionTags = (options || []).map((option) => {
+            const letter = escapeHtml(option.letter || "");
+            const text = escapeHtml(cleanOptionText(option.text || ""));
+            return `<option value="${letter}">${letter}${text ? ` - ${text}` : ""}</option>`;
+        }).join("");
+
+        return `<span class="lc-flowchart-answer" data-question="${number}">
+            <select class="lc-flowchart-select" id="q${number}" name="q${number}" aria-label="Answer ${number}">
+                <option value="">Select</option>
+                ${optionTags}
+            </select>
+            <span class="lc-question-badge">${number}</span>
+        </span>`;
+    }
+
+    function renderFlowchartText(value, options = []) {
+        const text = String(value || "");
+        const parts = [];
+        let lastIndex = 0;
+
+        for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+            parts.push(escapeHtml(text.slice(lastIndex, match.index)));
+            parts.push(flowchartAnswerInput(match[1], options));
+            lastIndex = match.index + match[0].length;
+        }
+
+        parts.push(escapeHtml(text.slice(lastIndex)));
+        return parts.join("")
+            .replace(/&lt;strong&gt;/gi, "<strong>")
+            .replace(/&lt;\/strong&gt;/gi, "</strong>")
+            .replace(/&lt;b&gt;/gi, "<strong>")
+            .replace(/&lt;\/b&gt;/gi, "</strong>");
+    }
+
+    function flowchartLineFromQuestion(question) {
+        const number = Number(question.questionNumber || question.number);
+        const text = String(question.text || question.question || "").trim();
+        const placeholder = `{{${number}}}`;
+
+        if (/top on a world map/i.test(text)) {
+            return text.replace(/\btop\s+on\b/i, `top ${placeholder} on`);
+        }
+        if (/different$/i.test(text)) {
+            return `${text} ${placeholder}`;
+        }
+        if (/\bpossible\s+to\b/i.test(text)) {
+            return text.replace(/\bpossible\s+to\b/i, `possible ${placeholder} to`);
+        }
+        if (/\ba\s+about\b/i.test(text)) {
+            return text.replace(/\ba\s+about\b/i, `a ${placeholder} about`);
+        }
+        if (/\bthe\s+of\b/i.test(text)) {
+            return text.replace(/\bthe\s+of\b/i, `the ${placeholder} of`);
+        }
+        return `${text} ${placeholder}`.trim();
+    }
+
+    function flowchartInstructionText(instruction) {
+        return String(instruction || "")
+            .replace(/\s+Options\b[\s\S]*$/i, "")
+            .replace(/\.\s+(Choose\b)/i, ".\n$1")
+            .trim();
+    }
+
     function FormCompletionBlock(block) {
         const rows = (block.rows || []).map((row) => `<tr>
             <th scope="row">${escapeHtml(row.label || "")}</th>
@@ -104,19 +252,38 @@ const ListeningComponents = (() => {
     }
 
     function MultipleSelectBlock(block) {
+        const splitInstruction = splitMultipleSelectInstruction(block.instruction, block.question);
+        const instruction = splitInstruction.instruction;
+        const questionText = splitInstruction.question;
+        
         const groupName = `multi-${escapeHtml(block.id || block.questionNumber || "")}`;
         const questionNumbers = [
             Number(block.questionNumber),
             ...(block.answerQuestions || []).map((question) => Number(question.questionNumber))
         ].filter((number, index, numbers) => number && numbers.indexOf(number) === index);
+        
+        const rangeNumbers = questionNumbers.length > 1
+            ? `${questionNumbers[0]}-${questionNumbers[questionNumbers.length - 1]}`
+            : String(questionNumbers[0] || "");
+            
+        const formattedQuestion = `<p class="lc-question-text lc-question-text--large">
+            <span class="lc-question-badge-range">${rangeNumbers}</span>
+            ${questionText ? `<span>${escapeHtml(questionText)}</span>` : ""}
+        </p>`;
+
         const options = (block.options || []).map((option) => `<label class="lc-choice-row">
             <span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>
             <input type="checkbox" name="${groupName}" value="${escapeHtml(option.letter || "")}">
             <span>${escapeHtml(option.text || "")}</span>
         </label>`).join("");
 
-        return blockCard(block, `
-            <p class="lc-question-text">${escapeHtml(block.question || "")}</p>
+        const blockClone = {
+            ...block,
+            instruction: instruction
+        };
+
+        return blockCard(blockClone, `
+            ${formattedQuestion}
             <div class="lc-choice-list lc-multiple-select" data-max-selections="${Number(block.maxSelections) || 2}" data-question-numbers="${questionNumbers.join(",")}">
                 ${options}
             </div>
@@ -125,9 +292,14 @@ const ListeningComponents = (() => {
     }
 
     function SentenceCompletionInlineBlock(block) {
-        const sentences = Array.isArray(block.content)
-            ? block.content
-            : String(block.content || "").split(/\n+/).filter(Boolean);
+        let sentences = [];
+        if (Array.isArray(block.content) && block.content.length) {
+            sentences = block.content;
+        } else if (Array.isArray(block.questions) && block.questions.length) {
+            sentences = block.questions.map((q) => q.question || q.text || "");
+        } else {
+            sentences = String(block.content || "").split(/\n+/).filter(Boolean);
+        }
         const content = sentences.map((sentence) =>
             `<p class="lc-inline-sentence">${renderPlaceholderText(sentence)}</p>`
         ).join("");
@@ -136,6 +308,26 @@ const ListeningComponents = (() => {
     }
 
     function MultipleChoiceBlock(block) {
+        if (Array.isArray(block.questions) && block.questions.length) {
+            const html = block.questions.map((q) => {
+                const qNum = Number(q.questionNumber || q.number);
+                const name = `q${qNum}`;
+                const options = (q.options || block.options || []).map((option) => `<label class="lc-choice-row">
+                    <span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>
+                    <input type="radio" name="${name}" value="${escapeHtml(option.letter || "")}">
+                    <span>${escapeHtml(option.text || "")}</span>
+                </label>`).join("");
+
+                return `
+                    <div class="lc-mcq-item" style="margin-bottom: 24px;">
+                        <p class="lc-question-text"><span class="lc-question-badge">${qNum}</span>${escapeHtml(q.question || "")}</p>
+                        <div class="lc-choice-list">${options}</div>
+                    </div>
+                `;
+            }).join("");
+            return blockCard(block, html, "lc-multiple-choice-block");
+        }
+
         const name = `q${Number(block.questionNumber)}`;
         const options = (block.options || []).map((option) => `<label class="lc-choice-row">
             <span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>
@@ -150,20 +342,108 @@ const ListeningComponents = (() => {
     }
 
     function NoteCompletionBlock(block) {
-        const lines = Array.isArray(block.content)
-            ? block.content
-            : String(block.content || "").split("\n");
-        const items = lines.map((line) => {
-            const trimmed = String(line).trim();
-            if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-                return `<li>${renderPlaceholderText(trimmed.slice(2))}</li>`;
+        let lines = [];
+        if (Array.isArray(block.content) && block.content.length) {
+            lines = block.content;
+        } else if (Array.isArray(block.questions) && block.questions.length) {
+            lines = block.questions.map((q) => q.question || q.text || "");
+        } else {
+            lines = String(block.content || "").split("\n");
+        }
+        const noteLines = [...lines];
+        const blockTitle = String(block.title || "").trim();
+        let displayTitle = looksLikeInstructionTitle(blockTitle) ? "" : blockTitle;
+
+        if (!displayTitle && canUseAsNoteTitle(noteLines[0])) {
+            displayTitle = String(noteLines.shift()).trim();
+        }
+
+        function noteLabelMatch(line) {
+            return String(line).trim().match(/^<strong>([\s\S]*?)<\/strong>\s*([\s\S]*)$/i);
+        }
+
+        function shouldRenderNoteTable(lines) {
+            const meaningfulLines = (lines || [])
+                .map((line) => String(line).trim())
+                .filter(Boolean);
+            const nonBulletLines = meaningfulLines.filter((line) => !/^[-*]\s+/.test(line));
+            const labelLines = nonBulletLines.filter(noteLabelMatch);
+
+            return labelLines.length >= 4 && labelLines.length / Math.max(nonBulletLines.length, 1) >= 0.65;
+        }
+
+        function renderNoteTable(lines) {
+            const rows = [];
+
+            for (let index = 0; index < lines.length; index += 1) {
+                const trimmed = String(lines[index]).trim();
+                if (!trimmed) continue;
+
+                const match = noteLabelMatch(trimmed);
+                if (!match) {
+                    rows.push(`<tr class="lc-note-table-row--plain"><td colspan="2">${renderNoteLine(trimmed)}</td></tr>`);
+                    continue;
+                }
+
+                const label = plainText(match[1]);
+                const valueParts = [];
+                let hasListItems = false;
+                const inlineValue = String(match[2] || "").trim();
+                if (inlineValue) {
+                    valueParts.push(renderPlaceholderText(inlineValue));
+                }
+
+                while (index + 1 < lines.length) {
+                    const nextLine = String(lines[index + 1]).trim();
+                    if (!/^[-*]\s+/.test(nextLine)) break;
+                    valueParts.push(`<span class="lc-note-table-list-item">${renderPlaceholderText(nextLine.slice(2))}</span>`);
+                    hasListItems = true;
+                    index += 1;
+                }
+
+                const value = valueParts.length
+                    ? `<div class="lc-note-table-value ${hasListItems ? "lc-note-table-value--stacked" : ""}">${valueParts.join("")}</div>`
+                    : "";
+
+                rows.push(`<tr>
+                    <th scope="row">${escapeHtml(label)}</th>
+                    <td>${value}</td>
+                </tr>`);
             }
-            return trimmed ? `<p>${renderPlaceholderText(trimmed)}</p>` : "<br>";
+
+            return `<table class="lc-note-table"><tbody>${rows.join("")}</tbody></table>`;
+        }
+
+        function renderNoteLine(line) {
+            const trimmed = String(line).trim();
+            if (!trimmed) return "<br>";
+
+            if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.slice(2))}</li>`;
+            }
+
+            const strongOnly = /^<strong>[\s\S]*<\/strong>$/i.test(trimmed);
+            const labelOnly = strongOnly && /:\s*$/i.test(plainText(trimmed));
+            const className = strongOnly && !labelOnly ? "lc-note-section-title" : "lc-note-line";
+            return `<p class="${className}">${renderPlaceholderText(trimmed)}</p>`;
+        }
+
+        const items = noteLines.map((line) => {
+            return renderNoteLine(line);
         }).join("");
+        const tableItems = shouldRenderNoteTable(noteLines) ? renderNoteTable(noteLines) : "";
+
+        const exampleBox = block.example ? `
+            <div class="lc-notes-example">
+                <span class="lc-example-badge">Example</span>
+                <div class="lc-example-content">${escapeHtml(block.example.replace(/^Example\s*[-–—:\s]*/i, ""))}</div>
+            </div>
+        ` : "";
 
         return blockCard(block, `
-            ${block.title ? `<h4 class="lc-form-title">${escapeHtml(block.title)}</h4>` : ""}
-            <div class="lc-notes">${items.includes("<li>") ? `<ul>${items}</ul>` : items}</div>
+            ${displayTitle ? `<h4 class="lc-form-title">${renderPlaceholderText(displayTitle)}</h4>` : ""}
+            ${exampleBox}
+            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${tableItems || (items.includes("<li>") ? `<ul>${items}</ul>` : items)}</div>
         `, "lc-note-completion");
     }
 
@@ -186,11 +466,44 @@ const ListeningComponents = (() => {
     }
 
     function MatchingBlock(block) {
+        if (isFlowChartMatchingBlock(block)) {
+            const optionItems = (block.options || []).map((option) =>
+                `<div class="lc-flowchart-option"><strong>${escapeHtml(option.letter || "")}</strong> ${escapeHtml(cleanOptionText(option.text || ""))}</div>`
+            ).join("");
+            const lines = Array.isArray(block.content) && block.content.length
+                ? block.content
+                : (block.questions || []).map(flowchartLineFromQuestion);
+            const lineItems = lines.map((line) => {
+                const className = /\{\{\d{1,2}\}\}/.test(String(line || ""))
+                    ? "lc-flowchart-line"
+                    : "lc-flowchart-intro";
+                return `<p class="${className}">${renderFlowchartText(line, block.options)}</p>`;
+            }).join("");
+            const flowchartTitle = block.title
+                ? `<h4 class="lc-flowchart-title">${escapeHtml(block.title)}</h4>`
+                : "";
+            const blockClone = {
+                ...block,
+                instruction: flowchartInstructionText(block.instruction)
+            };
+
+            return blockCard(blockClone, `
+                <div class="lc-flowchart-options-box">
+                    <h4>Options</h4>
+                    <div class="lc-flowchart-options-grid">${optionItems}</div>
+                </div>
+                <div class="lc-flowchart-panel">
+                    ${flowchartTitle}
+                    ${lineItems}
+                </div>
+            `, "lc-matching-block lc-flowchart-block");
+        }
+
         const options = (block.options || []).map((option) =>
-            `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${escapeHtml(option.text || "")}</div>`
+            `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${escapeHtml(cleanOptionText(option.text || ""))}</div>`
         ).join("");
         const optionTags = (block.options || []).map((option) =>
-            `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(option.letter || "")} - ${escapeHtml(option.text || "")}</option>`
+            `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(option.letter || "")} - ${escapeHtml(cleanOptionText(option.text || ""))}</option>`
         ).join("");
         const rows = (block.questions || []).map((question) => {
             const questionNumber = Number(question.questionNumber);
@@ -215,19 +528,27 @@ const ListeningComponents = (() => {
             </div>`
             : "";
         const hasImage = Boolean(block.imageUrl);
+        const optionsTitle = options ? `<h4 class="lc-matching-options-title">Categories</h4>` : "";
         const content = hasImage
             ? `<div class="lc-matching-map-layout">
                 ${image}
                 <div class="lc-matching-answer-panel">
+                    ${optionsTitle}
                     <div class="lc-matching-options">${options}</div>
                     <div class="lc-matching-rows">${rows}</div>
                 </div>
             </div>`
             : `${image}
+            ${optionsTitle}
             <div class="lc-matching-options">${options}</div>
             <div class="lc-matching-rows">${rows}</div>`;
 
-        return blockCard(block, content, `lc-matching-block ${hasImage ? "lc-matching-block--image" : ""}`);
+        const blockClone = {
+            ...block,
+            instruction: block.instruction ? block.instruction.split(/\bCategories\b/i)[0].trim() : ""
+        };
+
+        return blockCard(blockClone, content, `lc-matching-block ${hasImage ? "lc-matching-block--image" : ""}`);
     }
 
     function MapLabellingBlock(block) {
@@ -277,12 +598,12 @@ const ListeningComponents = (() => {
         const duration = listeningDuration(test);
         const isFull = isFullListeningTest(test);
         const dashboardHref = test.dashboardHref || (isFull
-            ? "listeningfulltest.html"
-            : `listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`);
+            ? "/listeningfulltest.html"
+            : `/listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`);
         const headerTitle = test.headerTitle || "Academic Listening";
         return `<header class="lc-header">
             <div class="lc-brand-group">
-                <img class="lc-logo" src="IELTS-logo.png" alt="IELTS">
+                <img class="lc-logo" src="/IELTS-logo.png" alt="IELTS">
                 <span class="lc-brand-divider"></span>
                 <strong>${escapeHtml(headerTitle)}</strong>
             </div>

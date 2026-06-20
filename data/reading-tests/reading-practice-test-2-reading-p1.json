@@ -192,45 +192,45 @@
       },
       "rule": "",
       "options": [],
-      "contentHtml": "\n<table class=\"completion-table\">\n<thead>\n<tr><th>YEARS</th><th>DEVELOPMENT</th></tr>\n</thead>\n<tbody>\n<tr>\n<td>1854</td>\n<td>Elisha Otis introduced New Yorkers to a new invention — a <span class=\"ielts-blank\">______</span> for elevators.</td>\n</tr>\n<tr>\n<td>1855</td>\n<td>Henry Bessemer created a way of making <span class=\"ielts-blank\">______</span> that was sturdy and inexpensive.</td>\n</tr>\n<tr>\n<td>1890</td>\n<td>The New York World Building was completed.</td>\n</tr>\n<tr>\n<td>1916</td>\n<td>New <span class=\"ielts-blank\">______</span> required that the upper floors of buildings were smaller in area than the lower floors.</td>\n</tr>\n<tr>\n<td>1928</td>\n<td>Some of the decorations on the Chrysler Building looked like <span class=\"ielts-blank\">______</span> parts.</td>\n</tr>\n<tr>\n<td>1945</td>\n<td>An aeroplane lost in <span class=\"ielts-blank\">______</span> hit the Empire State Building.</td>\n</tr>\n</tbody>\n</table>\n",
+      "contentHtml": "\n<table class=\"completion-table\">\n<thead>\n<tr><th>YEARS</th><th>DEVELOPMENT</th></tr>\n</thead>\n<tbody>\n<tr>\n<td>1854</td>\n<td>Elisha Otis introduced New Yorkers to a new invention — a <span class=\"ielts-blank\" data-blank=\"9\">______</span> for elevators.</td>\n</tr>\n<tr>\n<td>1855</td>\n<td>Henry Bessemer created a way of making <span class=\"ielts-blank\" data-blank=\"10\">______</span> that was sturdy and inexpensive.</td>\n</tr>\n<tr>\n<td>1890</td>\n<td>The New York World Building was completed.</td>\n</tr>\n<tr>\n<td>1916</td>\n<td>New <span class=\"ielts-blank\" data-blank=\"11\">______</span> required that the upper floors of buildings were smaller in area than the lower floors.</td>\n</tr>\n<tr>\n<td>1928</td>\n<td>Some of the decorations on the Chrysler Building looked like <span class=\"ielts-blank\" data-blank=\"12\">______</span> parts.</td>\n</tr>\n<tr>\n<td>1945</td>\n<td>An aeroplane lost in <span class=\"ielts-blank\" data-blank=\"13\">______</span> hit the Empire State Building.</td>\n</tr>\n</tbody>\n</table>\n",
       "questions": [
         {
           "number": 9,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
+          "stemHtml": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
           "options": [],
           "answer": "brake"
         },
         {
           "number": 10,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
+          "stemHtml": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
           "options": [],
           "answer": "steel"
         },
         {
           "number": 11,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
+          "stemHtml": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
           "options": [],
           "answer": "laws"
         },
         {
           "number": 12,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "Some of the decorations on the Chrysler Building looked like ______ parts.",
+          "stemHtml": "Some of the decorations on the Chrysler Building looked like ______ parts.",
           "options": [],
           "answer": "automobile"
         },
         {
           "number": 13,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "An aeroplane lost in ______ hit the Empire State Building.",
+          "stemHtml": "An aeroplane lost in ______ hit the Empire State Building.",
           "options": [],
           "answer": "fog"
         }
@@ -335,35 +335,40 @@
     {
       "number": 9,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
+      "stemHtml": "Elisha Otis introduced New Yorkers to a new invention — a ______ for elevators.",
       "options": [],
       "answer": "brake"
     },
     {
       "number": 10,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
+      "stemHtml": "Henry Bessemer created a way of making ______ that was sturdy and inexpensive.",
       "options": [],
       "answer": "steel"
     },
     {
       "number": 11,
       "type": "sentence_completion",
-      "question": "",
+      "question": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
+      "stemHtml": "New ______ required that the upper floors of buildings were smaller in area than the lower floors.",
       "options": [],
       "answer": "laws"
     },
     {
       "number": 12,
       "type": "sentence_completion",
-      "question": "",
+      "question": "Some of the decorations on the Chrysler Building looked like ______ parts.",
+      "stemHtml": "Some of the decorations on the Chrysler Building looked like ______ parts.",
       "options": [],
       "answer": "automobile"
     },
     {
       "number": 13,
       "type": "sentence_completion",
-      "question": "",
+      "question": "An aeroplane lost in ______ hit the Empire State Building.",
+      "stemHtml": "An aeroplane lost in ______ hit the Empire State Building.",
       "options": [],
       "answer": "fog"
     }

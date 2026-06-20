@@ -312,20 +312,20 @@
     {
       "type": "sentence_completion",
       "instruction": {
-        "title": "Questions 36–40",
+        "title": "Questions 36-40",
         "titleHtml": "",
-        "bodyHtml": "<p><strong></strong><br>Complete the summary below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 36–40 on your answer sheet.</p>",
+        "bodyHtml": "<p><strong>Questions 36-40</strong><br>Complete the summary below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 36-40 on your answer sheet.</p>",
         "rulesHtml": "",
         "questionRange": [
           36,
           40
         ]
       },
-      "instructionTitle": "Questions 36–40",
-      "instructionText": "Complete the summary below.\nWrite NO MORE THAN TWO WORDS from the passage for each answer.\nWrite your answers in boxes 36–40 on your answer sheet.",
+      "instructionTitle": "Questions 36-40",
+      "instructionText": "Questions 36-40Complete the summary below.\nWrite NO MORE THAN TWO WORDS from the passage for each answer.\nWrite your answers in boxes 36-40 on your answer sheet.",
       "instructionHtml": {
         "titleHtml": "",
-        "bodyHtml": "<p><strong></strong><br>Complete the summary below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 36–40 on your answer sheet.</p>",
+        "bodyHtml": "<p><strong>Questions 36-40</strong><br>Complete the summary below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 36-40 on your answer sheet.</p>",
         "rulesHtml": ""
       },
       "rule": "",
@@ -333,51 +333,52 @@
         36,
         40
       ],
-      "contentHtml": "\n<p>Easing the strain on the licence fees</p>\n<p>Lannucci recommended increasing BBC's profit by pushing ourselves more <span class=\"ielts-blank\">______</span>.\nHe suggests being more aggressive in selling British shows, through advertising and proper international <span class=\"ielts-blank\">______</span>.\nAlso, he invokes producers to stop being <span class=\"ielts-blank\">______</span> and modest about making money and invest into even <span class=\"ielts-blank\">______</span> quality shows.\nHowever, Mr Whittingdale denied any <span class=\"ielts-blank\">______</span> that the Conservative Party had always wanted to change the BBC because of its editorial line.</p>\n",
+      "contentHtml": "\n<p>Easing the strain on the licence fee</p>\n<p>Iannucci recommended increasing BBC's profit by pushing ourselves more <span class=\"ielts-blank\" data-blank=\"36\">______</span>.\nHe suggests being more aggressive in selling British shows, through advertising and proper international <span class=\"ielts-blank\" data-blank=\"37\">______</span>.\nAlso, he urges producers to stop being <span class=\"ielts-blank\" data-blank=\"38\">______</span> and modest about making money and invest in even more <span class=\"ielts-blank\" data-blank=\"39\">______</span> quality shows.\nHowever, Mr Whittingdale denied any <span class=\"ielts-blank\" data-blank=\"40\">______</span> that the Conservative Party had always wanted to change the BBC because of its editorial line.</p>\n",
       "layoutHtml": "<div class=\"question\" data-q-start=\"36\" data-q-end=\"40\">\n<div class=\"question-prompt\">\n<p><strong>Questions 36–40</strong><br>Complete the summary below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 36–40 on your answer sheet.</p>\n</div>\n<div class=\"summary-text\">\n<p>Easing the strain on the licence fees</p>\n<p>Lannucci recommended increasing BBC's profit by pushing ourselves more .\nHe suggests being more aggressive in selling British shows, through advertising and proper international .\nAlso, he invokes producers to stop being  and modest about making money and invest into even  quality shows.\nHowever, Mr Whittingdale denied any  that the Conservative Party had always wanted to change the BBC because of its editorial line.</p>\n</div>\n</div>",
       "questions": [
         {
           "number": 36,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "Iannucci recommended increasing BBC's profit by pushing ourselves more ______.",
+          "question": "Iannucci recommended increasing BBC's profit by pushing ourselves more ______.",
           "options": [],
           "answer": "commercially abroad"
         },
         {
           "number": 37,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "He suggests being more aggressive in selling British shows, through advertising and proper international ______.",
+          "question": "He suggests being more aggressive in selling British shows, through advertising and proper international ______.",
           "options": [],
           "answer": "subscription channels"
         },
         {
           "number": 38,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "Also, he urges producers to stop being ______ and modest about making money.",
+          "question": "Also, he urges producers to stop being ______ and modest about making money.",
           "options": [],
           "answer": "icky"
         },
         {
           "number": 39,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "He says the money should be invested in even more ______ quality shows.",
+          "question": "He says the money should be invested in even more ______ quality shows.",
           "options": [],
           "answer": "ambitious"
         },
         {
           "number": 40,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "Mr Whittingdale denied any ______ that the Conservative Party had always wanted to change the BBC because of its editorial line.",
+          "question": "Mr Whittingdale denied any ______ that the Conservative Party had always wanted to change the BBC because of its editorial line.",
           "options": [],
           "answer": "speculation"
         }
       ],
-      "imageIds": []
+      "imageIds": [],
+      "title": "Questions 36-40"
     }
   ],
   "questions": [
@@ -555,37 +556,42 @@
     {
       "number": 36,
       "type": "summary_completion",
-      "question": "",
+      "question": "Iannucci recommended increasing BBC's profit by pushing ourselves more ______.",
       "options": [],
-      "answer": "commercially abroad"
+      "answer": "commercially abroad",
+      "stemHtml": "Iannucci recommended increasing BBC's profit by pushing ourselves more ______."
     },
     {
       "number": 37,
       "type": "summary_completion",
-      "question": "",
+      "question": "He suggests being more aggressive in selling British shows, through advertising and proper international ______.",
       "options": [],
-      "answer": "subscription channels"
+      "answer": "subscription channels",
+      "stemHtml": "He suggests being more aggressive in selling British shows, through advertising and proper international ______."
     },
     {
       "number": 38,
       "type": "summary_completion",
-      "question": "",
+      "question": "Also, he urges producers to stop being ______ and modest about making money.",
       "options": [],
-      "answer": "icky"
+      "answer": "icky",
+      "stemHtml": "Also, he urges producers to stop being ______ and modest about making money."
     },
     {
       "number": 39,
       "type": "summary_completion",
-      "question": "",
+      "question": "He says the money should be invested in even more ______ quality shows.",
       "options": [],
-      "answer": "ambitious"
+      "answer": "ambitious",
+      "stemHtml": "He says the money should be invested in even more ______ quality shows."
     },
     {
       "number": 40,
       "type": "summary_completion",
-      "question": "",
+      "question": "Mr Whittingdale denied any ______ that the Conservative Party had always wanted to change the BBC because of its editorial line.",
       "options": [],
-      "answer": "speculation"
+      "answer": "speculation",
+      "stemHtml": "Mr Whittingdale denied any ______ that the Conservative Party had always wanted to change the BBC because of its editorial line."
     }
   ],
   "sourceFullTestId": "reading-practice-test-3",

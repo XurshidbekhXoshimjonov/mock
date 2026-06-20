@@ -702,5 +702,104 @@
     "uzbek_translation": "the",
     "example_sentence": "It looks weaker and weaker, the more I think about it.",
     "clicked_at": "2026-06-18T03:32:06.815Z"
+  },
+  {
+    "id": "1781873872373-activity-cad278",
+    "attempt_id": "reading-reading-practice-test-5-reading-p1-1781873870873-399b97",
+    "passage_id": "reading-practice-test-5-reading-p1-passage-1",
+    "word": "activity",
+    "normalized_word": "activity",
+    "english_definition": "The state or quality of being active; activeness.",
+    "uzbek_translation": "faoliyat",
+    "example_sentence": "Pit row was abuzz with activity.",
+    "clicked_at": "2026-06-19T12:57:52.373Z"
+  },
+  {
+    "id": "1781916725003-condition-fce48b",
+    "attempt_id": "reading-reading-practice-test-3-reading-p1-1781916723956-22fe62",
+    "passage_id": "reading-practice-test-3-reading-p1-passage-1",
+    "word": "condition",
+    "normalized_word": "condition",
+    "english_definition": "A logical clause or phrase that a conditional statement uses. The phrase can either be true or false.",
+    "uzbek_translation": "holat",
+    "example_sentence": "",
+    "clicked_at": "2026-06-20T00:52:05.003Z"
+  },
+  {
+    "id": "1781916844533-how-def06f",
+    "attempt_id": "reading-reading-practice-test-3-reading-p1-1781916842139-bc2563",
+    "passage_id": "reading-practice-test-3-reading-p1-passage-1",
+    "word": "How",
+    "normalized_word": "how",
+    "english_definition": "The means by which something is accomplished.",
+    "uzbek_translation": "Qanaqasiga",
+    "example_sentence": "I am not interested in the why, but in the how.",
+    "clicked_at": "2026-06-20T00:54:04.533Z"
+  },
+  {
+    "id": "1781916853033-along-6718d0",
+    "attempt_id": "reading-reading-practice-test-3-reading-p1-1781916842139-bc2563",
+    "passage_id": "reading-practice-test-3-reading-p1-passage-1",
+    "word": "along",
+    "normalized_word": "along",
+    "english_definition": "In company; together.",
+    "uzbek_translation": "birga",
+    "example_sentence": "John played the piano and everyone sang along.",
+    "clicked_at": "2026-06-20T00:54:13.033Z"
+  },
+  {
+    "id": "1781916854848-sandy-631443",
+    "attempt_id": "reading-reading-practice-test-3-reading-p1-1781916842139-bc2563",
+    "passage_id": "reading-practice-test-3-reading-p1-passage-1",
+    "word": "sandy",
+    "normalized_word": "sandy",
+    "english_definition": "Covered with sand.",
+    "uzbek_translation": "qumli",
+    "example_sentence": "",
+    "clicked_at": "2026-06-20T00:54:14.848Z"
+  },
+  {
+    "id": "1781917144981-home-6cb0d3",
+    "attempt_id": "reading-reading-practice-test-4-reading-p3-1781917140984-7db669",
+    "passage_id": "reading-practice-test-4-reading-p3-passage-3",
+    "word": "home",
+    "normalized_word": "home",
+    "english_definition": "A dwelling.",
+    "uzbek_translation": "uy",
+    "example_sentence": "",
+    "clicked_at": "2026-06-20T00:59:04.981Z"
+  },
+  {
+    "id": "1781917152756-without-ed16f7",
+    "attempt_id": "reading-reading-practice-test-4-reading-p3-1781917140984-7db669",
+    "passage_id": "reading-practice-test-4-reading-p3-passage-3",
+    "word": "without",
+    "normalized_word": "without",
+    "english_definition": "Outside, externally. This is still used in the names of some civil parishes in England, e.g. St Cuthbert Without.",
+    "uzbek_translation": "holda",
+    "example_sentence": "",
+    "clicked_at": "2026-06-20T00:59:12.756Z"
+  },
+  {
+    "id": "1781917153791-of-79686d",
+    "attempt_id": "reading-reading-practice-test-4-reading-p3-1781917140984-7db669",
+    "passage_id": "reading-practice-test-4-reading-p3-passage-3",
+    "word": "of",
+    "normalized_word": "of",
+    "english_definition": "Expressing distance or motion.",
+    "uzbek_translation": "ning",
+    "example_sentence": "",
+    "clicked_at": "2026-06-20T00:59:13.791Z"
+  },
+  {
+    "id": "1781917807108-strong-1d4d76",
+    "attempt_id": "reading-reading-practice-test-3-reading-p3-1781917805350-89d613",
+    "passage_id": "reading-practice-test-3-reading-p3-passage-3",
+    "word": "strong",
+    "normalized_word": "strong",
+    "english_definition": "Capable of producing great physical force.",
+    "uzbek_translation": "kuchli",
+    "example_sentence": "a big strong man; Jake was tall and strong",
+    "clicked_at": "2026-06-20T01:10:07.108Z"
   }
 ]

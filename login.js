@@ -9,7 +9,7 @@ function showMessage(message, type) {
 }
 
 if (window.authClient) {
-    window.authClient.redirectIfAuthenticated("profile.html");
+    window.authClient.redirectIfAuthenticated("/profile.html");
 }
 
 loginForm.addEventListener("submit", async (event) => {
@@ -42,7 +42,7 @@ loginForm.addEventListener("submit", async (event) => {
             user: data.user
         });
 
-        window.location.href = "profile.html";
+        window.location.href = "/profile.html";
     } catch (error) {
         showMessage(error.message, "error");
         loginBtn.disabled = false;

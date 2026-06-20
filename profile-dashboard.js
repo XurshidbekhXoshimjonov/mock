@@ -506,7 +506,7 @@
         let user = getAuthUser();
 
         if (!user) {
-            window.location.href = "login.html";
+            window.location.href = "/login.html";
             return;
         }
 
@@ -517,7 +517,7 @@
         }
 
         if (!user) {
-            window.location.href = "login.html";
+            window.location.href = "/login.html";
             return;
         }
 

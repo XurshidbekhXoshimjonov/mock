@@ -1,0 +1,697 @@
+{
+  "id": "1781866508926-full-listening-cdi",
+  "title": "Test 2",
+  "sourceFile": "full-listening-cdi.html",
+  "status": "draft",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "full-listening-cdi"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 1</strong></p>\n<p>Questions 1–10</p>\n<p>Complete the notes below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>\n</div>\n\n<div class=\"questions-container\">\n<p class=\"centered-title\">Sunshine Activity Holidays</p>\n\n<table>\n<tbody><tr><td>Name(s):</td><td>David William Smith; Maria Fiona Smith</td></tr>\n<tr><td>Contact address:</td><td>1  Street, Boston, MA 02116</td></tr>\n<tr><td>Home phone number:</td><td>617 742 9835</td></tr>\n<tr><td>Start date:</td><td>Saturday, </td></tr>\n<tr><td>Duration:</td><td>one week</td></tr>\n</tbody></table>\n\n<p>Activities selected:</p>\n<p>Sports:</p>\n<ul>\n<li> (both have some experience)</li>\n<li> (Maria only)</li>\n<li>Rock climbing (David only)</li>\n<li>Horse-riding (Maria is experienced, David needs to develop his )</li>\n<li>Swimming (David would like to try for the  swimming certificate)</li>\n</ul>\n\n<p>Indoor activities:</p>\n<ul>\n<li> (David and Maria)</li>\n<li> (David and Maria)</li>\n</ul>\n\n<p>Extra requests:</p>\n<ul>\n<li>Equipment to be hired: a </li>\n<li>Meet children in arrival hall at  a.m</li>\n</ul>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "Questions 1–10",
+            "instructionText": "Part 1 Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "1 Street, Boston, MA 02116",
+                "options": [],
+                "answer": "463 Beacon"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Saturday,",
+                "options": [],
+                "answer": "June 27"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "(both have some experience)",
+                "options": [],
+                "answer": "Sailing"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "(Maria only)",
+                "options": [],
+                "answer": "Surfing"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Horse-riding (Maria is experienced, David needs to develop his )",
+                "options": [],
+                "answer": "Confidence"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Swimming (David would like to try for the swimming certificate)",
+                "options": [],
+                "answer": "Gold"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "(David and Maria)",
+                "options": [],
+                "answer": "Drama"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "(David and Maria)",
+                "options": [],
+                "answer": "Cookery"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Equipment to be hired: a",
+                "options": [],
+                "answer": "Wet suit"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Meet children in arrival hall at a.m",
+                "options": [],
+                "answer": "7.00"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 2</strong></p>\n<p>Listen and answer questions 11–20.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 11-16</strong></p>\n<p>Choose the correct letter, <strong>A, B or C</strong>.</p>\n</div>\n\n<div class=\"example-box\">\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>11. What was Jill surprised about?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A the work on the house will start soon</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B the house was poorly insulated</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C she could get financial help</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>12. What does Jill say every family can do straight away?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A use energy-saving bulbs</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B turn thermostats down</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C turn down the thermostat</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>13. What is Jill pleased about the energy provider?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A reduce the price with prompt payment</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B allow online payment by customers</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C have a reduction of price of the energy-saving sources</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>14. What difficulty did Jill have with the energy meters?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A they are difficult to access</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B the figures are hard to be read accurately</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C she can't tell whether it's for electricity or for gas</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>15. What energy-saving method does Jill going to take next?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A install double-glazed window</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B use energy-saving boiler</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C have the walls checked with insulation level</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>16. Why is Jill doubtful about the renewable energy?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A she thinks it's unsuitable for her house</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B she doesn't understand the technical details</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C she believes it's too expensive</label>\n</div>\n</div>\n</div>\n</div>\n\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 17-18</strong></p>\n<p>Which TWO water-saving tips does Jill recommend?</p>\n<p>Write <strong>TWO</strong> letters, <strong>A-E</strong>, next to questions 17-18 in your answer sheet.</p>\n</div>\n\n<div class=\"example-box\">\n<div>\n<p><strong>A</strong> use more showers than baths</p>\n<p><strong>B</strong> keep the washing machine full before using it</p>\n<p><strong>C</strong> boil as much water as you need</p>\n<p><strong>D</strong> turn off the taps while you are brushing your teeth</p>\n<p><strong>E</strong> repair leaking tap</p>\n</div>\n\n<div class=\"checkbox-group\">\n<label> A use more showers than baths</label>\n<label> B keep the washing machine full before using it</label>\n<label> C boil as much water as you need</label>\n<label> D turn off the taps while you are brushing your teeth</label>\n<label> E repair leaking tap</label>\n</div>\n</div>\n\n<div class=\"question-prompt\">\n<p><strong>Questions 19-20</strong></p>\n<p>What TWO topics do people most frequently ask?</p>\n<p>Write <strong>TWO</strong> letters, <strong>A-E</strong>, next to questions 19-20 in your answer sheet.</p>\n</div>\n\n<div class=\"example-box\">\n<div>\n<p><strong>A</strong> the ideal temperature of the thermostat</p>\n<p><strong>B</strong> whether to leave the light on or not</p>\n<p><strong>C</strong> the type of computer that uses less energy</p>\n<p><strong>D</strong> how to work out the running cost of the appliances</p>\n<p><strong>E</strong> if the solar panels only work on sunny days</p>\n</div>\n\n<div class=\"checkbox-group\">\n<label> A the ideal temperature of the thermostat</label>\n<label> B whether to leave the light on or not</label>\n<label> C the type of computer that uses less energy</label>\n<label> D how to work out the running cost of the appliances</label>\n<label> E if the solar panels only work on sunny days</label>\n</div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11-16",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What was Jill surprised about?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the work on the house will start soon",
+                    "html": "the work on the house will start soon"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B the house was poorly insulated",
+                    "html": "the house was poorly insulated"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C she could get financial help",
+                    "html": "she could get financial help"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "What does Jill say every family can do straight away?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A use energy-saving bulbs",
+                    "html": "use energy-saving bulbs"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B turn thermostats down",
+                    "html": "turn thermostats down"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C turn down the thermostat",
+                    "html": "turn down the thermostat"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "What is Jill pleased about the energy provider?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A reduce the price with prompt payment",
+                    "html": "reduce the price with prompt payment"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B allow online payment by customers",
+                    "html": "allow online payment by customers"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C have a reduction of price of the energy-saving sources",
+                    "html": "have a reduction of price of the energy-saving sources"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "What difficulty did Jill have with the energy meters?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A they are difficult to access",
+                    "html": "they are difficult to access"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B the figures are hard to be read accurately",
+                    "html": "the figures are hard to be read accurately"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C she can't tell whether it's for electricity or for gas",
+                    "html": "she can't tell whether it's for electricity or for gas"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "What energy-saving method does Jill going to take next?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A install double-glazed window",
+                    "html": "install double-glazed window"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B use energy-saving boiler",
+                    "html": "use energy-saving boiler"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C have the walls checked with insulation level",
+                    "html": "have the walls checked with insulation level"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "Why is Jill doubtful about the renewable energy?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A she thinks it's unsuitable for her house",
+                    "html": "she thinks it's unsuitable for her house"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B she doesn't understand the technical details",
+                    "html": "she doesn't understand the technical details"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C she believes it's too expensive",
+                    "html": "she believes it's too expensive"
+                  }
+                ],
+                "answer": "A"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 17-18",
+            "instructionText": "Which TWO water-saving tips does Jill recommend? Write TWO letters, A-E, next to questions 17-18 in your answer sheet.",
+            "questions": [
+              {
+                "number": 17,
+                "type": "multi_select",
+                "question": "Which TWO water-saving tips does Jill recommend?\nWrite letters, , next to questions 17-18 in your answer sheet.",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A use more showers than baths",
+                    "html": "use more showers than baths"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B keep the washing machine full before using it",
+                    "html": "keep the washing machine full before using it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C boil as much water as you need",
+                    "html": "boil as much water as you need"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D turn off the taps while you are brushing your teeth",
+                    "html": "turn off the taps while you are brushing your teeth"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E repair leaking tap",
+                    "html": "repair leaking tap"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 18,
+                "type": "multi_select",
+                "question": "Which TWO water-saving tips does Jill recommend?\nWrite letters, , next to questions 17-18 in your answer sheet.",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A use more showers than baths",
+                    "html": "use more showers than baths"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B keep the washing machine full before using it",
+                    "html": "keep the washing machine full before using it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C boil as much water as you need",
+                    "html": "boil as much water as you need"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D turn off the taps while you are brushing your teeth",
+                    "html": "turn off the taps while you are brushing your teeth"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E repair leaking tap",
+                    "html": "repair leaking tap"
+                  }
+                ],
+                "answer": "E"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 19-20",
+            "instructionText": "What TWO topics do people most frequently ask? Write TWO letters, A-E, next to questions 19-20 in your answer sheet.",
+            "questions": [
+              {
+                "number": 19,
+                "type": "multi_select",
+                "question": "Which TWO water-saving tips does Jill recommend?\nWrite letters, , next to questions 17-18 in your answer sheet.",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the ideal temperature of the thermostat",
+                    "html": "the ideal temperature of the thermostat"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B whether to leave the light on or not",
+                    "html": "whether to leave the light on or not"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the type of computer that uses less energy",
+                    "html": "the type of computer that uses less energy"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D how to work out the running cost of the appliances",
+                    "html": "how to work out the running cost of the appliances"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E if the solar panels only work on sunny days",
+                    "html": "if the solar panels only work on sunny days"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 20,
+                "type": "multi_select",
+                "question": "Which TWO water-saving tips does Jill recommend?\nWrite letters, , next to questions 17-18 in your answer sheet.",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the ideal temperature of the thermostat",
+                    "html": "the ideal temperature of the thermostat"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B whether to leave the light on or not",
+                    "html": "whether to leave the light on or not"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the type of computer that uses less energy",
+                    "html": "the type of computer that uses less energy"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D how to work out the running cost of the appliances",
+                    "html": "how to work out the running cost of the appliances"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E if the solar panels only work on sunny days",
+                    "html": "if the solar panels only work on sunny days"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 3</strong></p>\n<p>Listen and answer questions 21–30.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 21-22</strong></p>\n<p>Choose the correct letter, <strong>A, B or C</strong>.</p>\n</div>\n\n<div class=\"example-box\">\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>21. What is the problem that the students are having with the project?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A the project is taking too long</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B the readings are too difficult</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C the readings are not interesting</label>\n</div>\n</div>\n\n<div class=\"multi-choice-question\">\n<div class=\"question-prompt\">\n<p><strong>22. When can extensions be granted?</strong></p>\n</div>\n<div class=\"multi-choice-option\">\n<label> A scheduling issues</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> B illness or accidents</label>\n</div>\n<div class=\"multi-choice-option\">\n<label> C problems with planning</label>\n</div>\n</div>\n</div>\n</div>\n\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 23-27</strong></p>\n<p>What main problem do the students suggest each company has?</p>\n<p>Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-G</strong>, next to questions 23-27.</p>\n</div>\n\n<div class=\"example-box\">\n<div>\n<p><strong>A</strong> much money spending on marketing</p>\n<p><strong>B</strong> external factor</p>\n<p><strong>C</strong> competition</p>\n<p><strong>D</strong> employees</p>\n<p><strong>E</strong> customer satisfaction</p>\n<p><strong>F</strong> long-term gain</p>\n<p><strong>G</strong> knowledge about their customers</p>\n</div>\n\n<div class=\"aligned-form\">\n<div class=\"question-row\"><span class=\"question-label\">23. Princeton Windows</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">24. MK Cars</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">25. Lakeside Golf</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">26. Bryson's Meats</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">27. Mojo's Music Shop</span> </div>\n</div>\n</div>\n</div>\n\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 28-30</strong></p>\n<p>Which opinion does each person express about Mojo's Music?</p>\n<p>Choose <strong>THREE</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to questions 28-30.</p>\n</div>\n\n<div class=\"example-box\">\n<div>\n<p><strong>A</strong> It needs more innovative marketing</p>\n<p><strong>B</strong> It has been operating for too long</p>\n<p><strong>C</strong> It will close down in the end</p>\n<p><strong>D</strong> It has good managers</p>\n<p><strong>E</strong> There are not enough music shops</p>\n<p><strong>F</strong> It has a good long-term future</p>\n</div>\n\n<div class=\"aligned-form\">\n<div class=\"question-row\"><span class=\"question-label\">28. Sarah</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">29. John</span> </div>\n<div class=\"question-row\"><span class=\"question-label\">30. Neil</span> </div>\n</div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 21-22",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "What is the problem that the students are having with the project?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the project is taking too long",
+                    "html": "the project is taking too long"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B the readings are too difficult",
+                    "html": "the readings are too difficult"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the readings are not interesting",
+                    "html": "the readings are not interesting"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "When can extensions be granted?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A scheduling issues",
+                    "html": "scheduling issues"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B illness or accidents",
+                    "html": "illness or accidents"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C problems with planning",
+                    "html": "problems with planning"
+                  }
+                ],
+                "answer": "B"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "Questions 23-27",
+            "instructionText": "What main problem do the students suggest each company has? Choose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.",
+            "questions": [
+              {
+                "number": 23,
+                "type": "sentence_completion",
+                "question": "Questions 23-27\nWhat main problem do the students suggest each company has?\nChoose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.\n\nA much money spending on marketing\nB external factor\nC competition\nD employees\nE customer satisfaction\nF long-term gain\nG knowledge about their customers\n\n23. Princeton Windows\n24. MK Cars\n25. Lakeside Golf\n26. Bryson's Meats\n27. Mojo's Music Shop",
+                "options": [],
+                "answer": "F"
+              },
+              {
+                "number": 24,
+                "type": "sentence_completion",
+                "question": "Questions 23-27\nWhat main problem do the students suggest each company has?\nChoose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.\n\nA much money spending on marketing\nB external factor\nC competition\nD employees\nE customer satisfaction\nF long-term gain\nG knowledge about their customers\n\n23. Princeton Windows\n24. MK Cars\n25. Lakeside Golf\n26. Bryson's Meats\n27. Mojo's Music Shop",
+                "options": [],
+                "answer": "G"
+              },
+              {
+                "number": 25,
+                "type": "sentence_completion",
+                "question": "Questions 23-27\nWhat main problem do the students suggest each company has?\nChoose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.\n\nA much money spending on marketing\nB external factor\nC competition\nD employees\nE customer satisfaction\nF long-term gain\nG knowledge about their customers\n\n23. Princeton Windows\n24. MK Cars\n25. Lakeside Golf\n26. Bryson's Meats\n27. Mojo's Music Shop",
+                "options": [],
+                "answer": "E"
+              },
+              {
+                "number": 26,
+                "type": "sentence_completion",
+                "question": "Questions 23-27\nWhat main problem do the students suggest each company has?\nChoose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.\n\nA much money spending on marketing\nB external factor\nC competition\nD employees\nE customer satisfaction\nF long-term gain\nG knowledge about their customers\n\n23. Princeton Windows\n24. MK Cars\n25. Lakeside Golf\n26. Bryson's Meats\n27. Mojo's Music Shop",
+                "options": [],
+                "answer": "B"
+              },
+              {
+                "number": 27,
+                "type": "sentence_completion",
+                "question": "Questions 23-27\nWhat main problem do the students suggest each company has?\nChoose FIVE answers from the box and write the correct letter, A-G, next to questions 23-27.\n\nA much money spending on marketing\nB external factor\nC competition\nD employees\nE customer satisfaction\nF long-term gain\nG knowledge about their customers\n\n23. Princeton Windows\n24. MK Cars\n25. Lakeside Golf\n26. Bryson's Meats\n27. Mojo's Music Shop",
+                "options": [],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "Questions 28-30",
+            "instructionText": "Which opinion does each person express about Mojo's Music? Choose THREE answers from the box and write the correct letter, A-F, next to questions 28-30.",
+            "questions": [
+              {
+                "number": 28,
+                "type": "sentence_completion",
+                "question": "Questions 28-30\nWhich opinion does each person express about Mojo's Music?\nChoose THREE answers from the box and write the correct letter, A-F, next to questions 28-30.\n\nA It needs more innovative marketing\nB It has been operating for too long\nC It will close down in the end\nD It has good managers\nE There are not enough music shops\nF It has a good long-term future\n\n28. Sarah\n29. John\n30. Neil",
+                "options": [],
+                "answer": "F"
+              },
+              {
+                "number": 29,
+                "type": "sentence_completion",
+                "question": "Questions 28-30\nWhich opinion does each person express about Mojo's Music?\nChoose THREE answers from the box and write the correct letter, A-F, next to questions 28-30.\n\nA It needs more innovative marketing\nB It has been operating for too long\nC It will close down in the end\nD It has good managers\nE There are not enough music shops\nF It has a good long-term future\n\n28. Sarah\n29. John\n30. Neil",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 30,
+                "type": "sentence_completion",
+                "question": "Questions 28-30\nWhich opinion does each person express about Mojo's Music?\nChoose THREE answers from the box and write the correct letter, A-F, next to questions 28-30.\n\nA It needs more innovative marketing\nB It has been operating for too long\nC It will close down in the end\nD It has good managers\nE There are not enough music shops\nF It has a good long-term future\n\n28. Sarah\n29. John\n30. Neil",
+                "options": [],
+                "answer": "A"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 4</strong></p>\n<p>Questions 31–40</p>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n</div>\n\n<div class=\"questions-container\">\n<p class=\"centered-title\">Ethics In Engineering</p>\n\n<p>Ethics - principles relating to right and wrong conduct</p>\n<ul>\n<li>At first, engineers saw ethics as a  issue</li>\n<li>Attitudes changed because of three disasters involving the collapse of </li>\n<li>1876 - USA (metal fatigue)</li>\n<li>1879 - Scotland (the impact of  on the structure was miscalculated)</li>\n<li>1907 - Canada (the structure could not support its own )</li>\n</ul>\n\n<p>Boston Molasses Disaster</p>\n<ul>\n<li>At the time, molasses was the main  used in the USA</li>\n<li>Boston company: collapse of a  released 8 million liters of molasses</li>\n<li>The wave of molasses destroyed buildings and the railway</li>\n<li>Local residents insisted on a  of the molasses company</li>\n<li>The company had to pay compensation</li>\n<li>Probable causes of the accident:</li>\n<ul>\n<li>Insufficient  checks</li>\n<li>Fermentation raised the  to a dangerous level</li>\n</ul>\n<li>It is now obligatory for engineers to have a </li>\n</ul>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "Part 4 Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "At first, engineers saw ethics as a issue",
+                "options": [],
+                "answer": "personal"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "Attitudes changed because of three disasters involving the collapse of",
+                "options": [],
+                "answer": "bridges"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "1879 - Scotland (the impact of on the structure was miscalculated)",
+                "options": [],
+                "answer": "wind"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "1907 - Canada (the structure could not support its own )",
+                "options": [],
+                "answer": "weight"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "At the time, molasses was the main used in the USA",
+                "options": [],
+                "answer": "sweetener"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Boston company: collapse of a released 8 million liters of molasses",
+                "options": [],
+                "answer": "tank"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Local residents insisted on a of the molasses company",
+                "options": [],
+                "answer": "trial"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Insufficient checks",
+                "options": [],
+                "answer": "safety"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Fermentation raised the to a dangerous level",
+                "options": [],
+                "answer": "pressure"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "It is now obligatory for engineers to have a",
+                "options": [],
+                "answer": "license / licence"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "463 Beacon",
+    "2": "June 27",
+    "3": "Sailing",
+    "4": "Surfing",
+    "5": "Confidence",
+    "6": "Gold",
+    "7": "Drama",
+    "8": "Cookery",
+    "9": "Wet suit",
+    "10": "7.00",
+    "11": "A",
+    "12": "C",
+    "13": "B",
+    "14": "B",
+    "15": "C",
+    "16": "A",
+    "17": "C",
+    "18": "E",
+    "19": "A",
+    "20": "C",
+    "21": "A",
+    "22": "B",
+    "23": "F",
+    "24": "G",
+    "25": "E",
+    "26": "B",
+    "27": "C",
+    "28": "F",
+    "29": "C",
+    "30": "A",
+    "31": "personal",
+    "32": "bridges",
+    "33": "wind",
+    "34": "weight",
+    "35": "sweetener",
+    "36": "tank",
+    "37": "trial",
+    "38": "safety",
+    "39": "pressure",
+    "40": "license / licence"
+  },
+  "images": [
+    {
+      "id": "img-1",
+      "src": "/IELTS-logo.png",
+      "alt": "IELTS",
+      "section": "reading",
+      "sectionNumber": null,
+      "questionGroupIndex": null
+    }
+  ],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 1,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-06-19T10:55:09.593Z",
+  "publishedAt": null,
+  "skill": "listening",
+  "subtitle": "Listening full test"
+}

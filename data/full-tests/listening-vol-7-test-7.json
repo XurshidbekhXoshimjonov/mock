@@ -1,0 +1,1239 @@
+{
+  "id": "listening-vol-7-test-7",
+  "title": "Listening Vol 7 Test 7",
+  "slug": "listening-vol-7-test-7",
+  "sourceFile": "Vol 7 test 7 .html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "generic",
+  "metadata": {
+    "book": "Vol 7",
+    "testNumber": 7,
+    "label": "Vol 7 test 7"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1: Places to visit with children",
+        "questionRange": "Questions 1-10",
+        "instruction": "",
+        "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 1-10</div>\n<p>Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.</p>\n<div><strong>Places to visit with children</strong></div>\n<div>\n<div><strong>Alma Park</strong></div>\n<div>Go to the zoo.</div>\n<div>A family ticket is $<span class=\"question-number\">1</span>.</div>\n<div>The fastest bus takes about <span class=\"question-number\">2</span> minutes.</div>\n<div>You can hold some animals and have a <span class=\"question-number\">3</span> for a small fee.</div>\n<div></div>\n<div><strong>The Entertainment Room</strong></div>\n<div>John <span class=\"question-number\">4</span> is performing.</div>\n<div>Performances run from Tuesday to <span class=\"question-number\">5</span>.</div>\n<div>There is a <span class=\"question-number\">6</span> on tickets for Monday night's preview.</div>\n<div></div>\n<div><strong>The City</strong></div>\n<div>Go to the city center <span class=\"question-number\">7</span> to see a special exhibition.</div>\n<div>Do origami - we'll need to take a small <span class=\"question-number\">8</span>.</div>\n<div></div>\n<div><strong>Bunyabbie Island</strong></div>\n<div>Explore with a four-wheel drive.</div>\n<div>Go snorkelling at Salty Lake - it's on the <span class=\"question-number\">9</span> side of the island.</div>\n<div>You're not allowed to <span class=\"question-number\">10</span> on the island.</div>\n</div></div>",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 1-10",
+            "instructionText": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "title": "Places to visit with children",
+            "imageUrl": "",
+            "options": [],
+            "content": [
+              "<strong>Alma Park</strong>",
+              "Go to the zoo.",
+              "A family ticket is ${{1}}.",
+              "The fastest bus takes about {{2}} minutes.",
+              "You can hold some animals and have a {{3}} for a small fee.",
+              "",
+              "<strong>The Entertainment Room</strong>",
+              "John {{4}} is performing.",
+              "Performances run from Tuesday to {{5}}.",
+              "There is a {{6}} on tickets for Monday night's preview.",
+              "",
+              "<strong>The City</strong>",
+              "Go to the city center {{7}} to see a special exhibition.",
+              "Do origami - we'll need to take a small {{8}}.",
+              "",
+              "<strong>Bunyabbie Island</strong>",
+              "Explore with a four-wheel drive.",
+              "Go snorkelling at Salty Lake - it's on the {{9}} side of the island.",
+              "You're not allowed to {{10}} on the island."
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "A family ticket is $ 1",
+                "options": [],
+                "answer": "65"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "The fastest bus takes about minutes 2",
+                "options": [],
+                "answer": "40"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "You can hold some animals and have a for a small fee 3",
+                "options": [],
+                "answer": "photo"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "John is performing 4",
+                "options": [],
+                "answer": "Rosie"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Performances run from Tuesday to 5",
+                "options": [],
+                "answer": "Saturday"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "There is a on tickets for Monday night's preview 6",
+                "options": [],
+                "answer": "discount"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Go to the city center to see a special exhibition 7",
+                "options": [],
+                "answer": "museum"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Do origami - we'll need to take a small 8",
+                "options": [],
+                "answer": "box"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Go snorkelling at Salty Lake - it's on the side of the island 9",
+                "options": [],
+                "answer": "Ocean"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "You're not allowed to on the island 10",
+                "options": [],
+                "answer": "camp"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2: School fair",
+        "questionRange": "Questions 11-20",
+        "instruction": "",
+        "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 11-14</div>\n<p>What does the speaker say about each of the following volunteer roles at the school fair? Choose FOUR correct answers, A-F, next to questions 11-14.</p>\n<div><strong>Volunteer roles</strong></div>\n<div>Options</div>\n<div><strong>A</strong> An office will be provided for this role.</div>\n<div><strong>B</strong> More than one person is needed for this role.</div>\n<div><strong>C</strong> This is a new role for this year's fair.</div>\n<div><strong>D</strong> This role will start next month.</div>\n<div><strong>E</strong> This role will mainly involve evening work.</div>\n<div><strong>F</strong> To do this role you need your own transport.</div>\n<div>11 Entertainment co-ordinator <span class=\"question-number\">11</span></div>\n<div>12 Advertising and promotion co-ordinator <span class=\"question-number\">12</span></div>\n<div>13 Technical co-ordinator <span class=\"question-number\">13</span></div>\n<div>14 Staffing co-ordinator <span class=\"question-number\">14</span></div>\n<div class=\"scenario-title\">Questions 15-20</div>\n<p>Label the map below. Write the correct letter, A-I, next to questions 15-20.</p>\n<div><strong>Fairground Map</strong></div>\n<div>Options</div>\n<div><strong>A</strong> Location A</div>\n<div><strong>B</strong> Location B</div>\n<div><strong>C</strong> Location C</div>\n<div><strong>D</strong> Location D</div>\n<div><strong>E</strong> Location E</div>\n<div><strong>F</strong> Location F</div>\n<div><strong>G</strong> Location G</div>\n<div><strong>H</strong> Location H</div>\n<div><strong>I</strong> Location I</div>\n<img src=\"https://i.postimg.cc/wMZ07MLb/image.png\" alt=\"Fairground Map\">\n<div>15 Fairground rides <span class=\"question-number\">15</span></div>\n<div>16 Entertainment stage <span class=\"question-number\">16</span></div>\n<div>17 Cafe <span class=\"question-number\">17</span></div>\n<div>18 First aid tent <span class=\"question-number\">18</span></div>\n<div>19 Market stalls <span class=\"question-number\">19</span></div>\n<div>20 Pony rides <span class=\"question-number\">20</span></div></div>",
+        "questionGroups": [
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 11-14",
+            "instructionText": "What does the speaker say about each of the following volunteer roles at the school fair? Choose FOUR correct answers, A-F, next to questions 11-14.",
+            "title": "Volunteer roles",
+            "imageUrl": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "An office will be provided for this role."
+              },
+              {
+                "letter": "B",
+                "text": "More than one person is needed for this role."
+              },
+              {
+                "letter": "C",
+                "text": "This is a new role for this year's fair."
+              },
+              {
+                "letter": "D",
+                "text": "This role will start next month."
+              },
+              {
+                "letter": "E",
+                "text": "This role will mainly involve evening work."
+              },
+              {
+                "letter": "F",
+                "text": "To do this role you need your own transport."
+              }
+            ],
+            "content": [],
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "Entertainment co-ordinator",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "An office will be provided for this role."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "More than one person is needed for this role."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "This is a new role for this year's fair."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "This role will start next month."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "This role will mainly involve evening work."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "To do this role you need your own transport."
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "Advertising and promotion co-ordinator",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "An office will be provided for this role."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "More than one person is needed for this role."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "This is a new role for this year's fair."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "This role will start next month."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "This role will mainly involve evening work."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "To do this role you need your own transport."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "Technical co-ordinator",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "An office will be provided for this role."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "More than one person is needed for this role."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "This is a new role for this year's fair."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "This role will start next month."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "This role will mainly involve evening work."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "To do this role you need your own transport."
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "Staffing co-ordinator",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "An office will be provided for this role."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "More than one person is needed for this role."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "This is a new role for this year's fair."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "This role will start next month."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "This role will mainly involve evening work."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "To do this role you need your own transport."
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 15-20",
+            "instructionText": "Label the map below. Write the correct letter, A-I, next to questions 15-20.",
+            "title": "Fairground Map",
+            "imageUrl": "https://i.postimg.cc/wMZ07MLb/image.png",
+            "options": [
+              {
+                "letter": "A",
+                "text": "Location A"
+              },
+              {
+                "letter": "B",
+                "text": "Location B"
+              },
+              {
+                "letter": "C",
+                "text": "Location C"
+              },
+              {
+                "letter": "D",
+                "text": "Location D"
+              },
+              {
+                "letter": "E",
+                "text": "Location E"
+              },
+              {
+                "letter": "F",
+                "text": "Location F"
+              },
+              {
+                "letter": "G",
+                "text": "Location G"
+              },
+              {
+                "letter": "H",
+                "text": "Location H"
+              },
+              {
+                "letter": "I",
+                "text": "Location I"
+              }
+            ],
+            "content": [],
+            "questions": [
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "Fairground rides",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "I"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "Entertainment stage",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 17,
+                "type": "multiple_choice",
+                "question": "Cafe",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 18,
+                "type": "multiple_choice",
+                "question": "First aid tent",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 19,
+                "type": "multiple_choice",
+                "question": "Market stalls",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 20,
+                "type": "multiple_choice",
+                "question": "Pony rides",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Location A"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Location B"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Location C"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Location D"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Location E"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "Location F"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "Location G"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "Location H"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "Location I"
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3: Environmental Science modules",
+        "questionRange": "Questions 21-30",
+        "instruction": "",
+        "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 21-26</div>\n<p>What is the student's opinion on each of the following Environmental Science modules? Choose SIX correct answers from the box and write the correct letter, A-I, next to questions 21-26.</p>\n<div><strong>Environmental Science modules</strong></div>\n<div>Options</div>\n<div><strong>A</strong> was surprisingly interesting</div>\n<div><strong>B</strong> covered too many topics</div>\n<div><strong>C</strong> included out-of-date materials</div>\n<div><strong>D</strong> involved practical applications</div>\n<div><strong>E</strong> supplied useful technical information</div>\n<div><strong>F</strong> was too basic to be useful</div>\n<div><strong>G</strong> provided unnecessary detail</div>\n<div><strong>H</strong> was relevant to a topic in the news</div>\n<div><strong>I</strong> seemed too limited geographically</div>\n<div>21 Statistics for environmental research <span class=\"question-number\">21</span></div>\n<div>22 Sewage and drainage systems <span class=\"question-number\">22</span></div>\n<div>23 Agriculture and food security <span class=\"question-number\">23</span></div>\n<div>24 Sustainable energy <span class=\"question-number\">24</span></div>\n<div>25 Government policy <span class=\"question-number\">25</span></div>\n<div>26 Water management <span class=\"question-number\">26</span></div>\n<div class=\"scenario-title\">Questions 27-28</div>\n<p>Choose TWO correct answers.</p>\n<div>Options</div>\n<div><strong>A</strong> the amount of reading</div>\n<div><strong>B</strong> the flexibility in the length of the course</div>\n<div><strong>C</strong> the convenience of choosing when to take modules</div>\n<div><strong>D</strong> the range of different modules offered</div>\n<div><strong>E</strong> the relevance of the module content</div>\n<div>27 Which TWO aspects of the course organisation did both Jamie and Martha like? <span class=\"question-number\">27</span></div>\n<div>28 Which TWO aspects of the course organisation did both Jamie and Martha like? <span class=\"question-number\">28</span></div>\n<div class=\"scenario-title\">Questions 29-30</div>\n<p>Choose TWO correct answers.</p>\n<div>Options</div>\n<div><strong>A</strong> The time for choosing a topic should be changed.</div>\n<div><strong>B</strong> The permitted word limit should be increased.</div>\n<div><strong>C</strong> Discussions with fellow students should be arranged.</div>\n<div><strong>D</strong> Face-to-face feedback sessions with the tutor should be scheduled.</div>\n<div><strong>E</strong> Tutors should give more help in topic selection.</div>\n<div>29 Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown? <span class=\"question-number\">29</span></div>\n<div>30 Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown? <span class=\"question-number\">30</span></div></div>",
+        "questionGroups": [
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 21-26",
+            "instructionText": "What is the student's opinion on each of the following Environmental Science modules? Choose SIX correct answers from the box and write the correct letter, A-I, next to questions 21-26.",
+            "title": "Environmental Science modules",
+            "imageUrl": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "was surprisingly interesting"
+              },
+              {
+                "letter": "B",
+                "text": "covered too many topics"
+              },
+              {
+                "letter": "C",
+                "text": "included out-of-date materials"
+              },
+              {
+                "letter": "D",
+                "text": "involved practical applications"
+              },
+              {
+                "letter": "E",
+                "text": "supplied useful technical information"
+              },
+              {
+                "letter": "F",
+                "text": "was too basic to be useful"
+              },
+              {
+                "letter": "G",
+                "text": "provided unnecessary detail"
+              },
+              {
+                "letter": "H",
+                "text": "was relevant to a topic in the news"
+              },
+              {
+                "letter": "I",
+                "text": "seemed too limited geographically"
+              }
+            ],
+            "content": [],
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "Statistics for environmental research",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "Sewage and drainage systems",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 23,
+                "type": "multiple_choice",
+                "question": "Agriculture and food security",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 24,
+                "type": "multiple_choice",
+                "question": "Sustainable energy",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 25,
+                "type": "multiple_choice",
+                "question": "Government policy",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "I"
+              },
+              {
+                "number": 26,
+                "type": "multiple_choice",
+                "question": "Water management",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "was surprisingly interesting"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "covered too many topics"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "included out-of-date materials"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "involved practical applications"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "supplied useful technical information"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "was too basic to be useful"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "provided unnecessary detail"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "was relevant to a topic in the news"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "seemed too limited geographically"
+                  }
+                ],
+                "answer": "G"
+              }
+            ]
+          },
+          {
+            "type": "multiple_select",
+            "instructionTitle": "Questions 27-28",
+            "instructionText": "Choose TWO correct answers.",
+            "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+            "maxSelections": 2,
+            "options": [
+              {
+                "letter": "A",
+                "text": "the amount of reading"
+              },
+              {
+                "letter": "B",
+                "text": "the flexibility in the length of the course"
+              },
+              {
+                "letter": "C",
+                "text": "the convenience of choosing when to take modules"
+              },
+              {
+                "letter": "D",
+                "text": "the range of different modules offered"
+              },
+              {
+                "letter": "E",
+                "text": "the relevance of the module content"
+              }
+            ],
+            "questions": [
+              {
+                "number": 27,
+                "type": "multiple_select",
+                "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the amount of reading"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the flexibility in the length of the course"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the convenience of choosing when to take modules"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the range of different modules offered"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the relevance of the module content"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 28,
+                "type": "multiple_select",
+                "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the amount of reading"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the flexibility in the length of the course"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the convenience of choosing when to take modules"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the range of different modules offered"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the relevance of the module content"
+                  }
+                ],
+                "answer": "E"
+              }
+            ]
+          },
+          {
+            "type": "multiple_select",
+            "instructionTitle": "Questions 29-30",
+            "instructionText": "Choose TWO correct answers.",
+            "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+            "maxSelections": 2,
+            "options": [
+              {
+                "letter": "A",
+                "text": "The time for choosing a topic should be changed."
+              },
+              {
+                "letter": "B",
+                "text": "The permitted word limit should be increased."
+              },
+              {
+                "letter": "C",
+                "text": "Discussions with fellow students should be arranged."
+              },
+              {
+                "letter": "D",
+                "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+              },
+              {
+                "letter": "E",
+                "text": "Tutors should give more help in topic selection."
+              }
+            ],
+            "questions": [
+              {
+                "number": 29,
+                "type": "multiple_select",
+                "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "The time for choosing a topic should be changed."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "The permitted word limit should be increased."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Discussions with fellow students should be arranged."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Tutors should give more help in topic selection."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 30,
+                "type": "multiple_select",
+                "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "The time for choosing a topic should be changed."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "The permitted word limit should be increased."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Discussions with fellow students should be arranged."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Tutors should give more help in topic selection."
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4: The Music of Salvatore Sciarrino",
+        "questionRange": "Questions 31-40",
+        "instruction": "",
+        "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+        "sectionHtml": "<div><div class=\"scenario-title\">Questions 31-40</div>\n<p>Complete the notes below. Write ONE WORD ONLY for each answer.</p>\n<div><strong>The Music of Salvatore Sciarrino</strong></div>\n<div>\n<div><strong>Biographical details</strong></div>\n<div>He was born in Palermo in 1947.</div>\n<div>He moved to Rome in 1969 and took a course in electronic music, which influenced his style as a composer.</div>\n<div></div>\n<div><strong>Work</strong></div>\n<div>In the 1970s he composed a lot of music and taught until 1982.</div>\n<div>As well as music, he has written many <span class=\"question-number\">31</span>.</div>\n<div>He has won many awards - including one in 2011 for <span class=\"question-number\">32</span> in music.</div>\n<div></div>\n<div><strong>Musical characteristics</strong></div>\n<div>Surprisingly, his music often features <span class=\"question-number\">33</span> and very soft sounds.</div>\n<div>His music uses unusual instrument techniques, e.g. violins often produce sounds which resemble those found in <span class=\"question-number\">34</span>.</div>\n<div>He is seen as a <span class=\"question-number\">35</span> of music.</div>\n<div>Sciarrino compares his music to a distant <span class=\"question-number\">36</span>.</div>\n<div></div>\n<div><strong>Concert piece</strong></div>\n<div>For piano, chorus and orchestra.</div>\n<div>Finished in 1979 and written in memory of a <span class=\"question-number\">37</span>.</div>\n<div>Very difficult to play.</div>\n<div>Starts with a noise that sounds like <span class=\"question-number\">38</span>.</div>\n<div>Produced by two people moving large pieces of <span class=\"question-number\">39</span>.</div>\n<div>Although the music is unusual, it has a traditional <span class=\"question-number\">40</span>.</div>\n</div></div>",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "title": "The Music of Salvatore Sciarrino",
+            "imageUrl": "",
+            "options": [],
+            "content": [
+              "<strong>Biographical details</strong>",
+              "He was born in Palermo in 1947.",
+              "He moved to Rome in 1969 and took a course in electronic music, which influenced his style as a composer.",
+              "",
+              "<strong>Work</strong>",
+              "In the 1970s he composed a lot of music and taught until 1982.",
+              "As well as music, he has written many {{31}}.",
+              "He has won many awards - including one in 2011 for {{32}} in music.",
+              "",
+              "<strong>Musical characteristics</strong>",
+              "Surprisingly, his music often features {{33}} and very soft sounds.",
+              "His music uses unusual instrument techniques, e.g. violins often produce sounds which resemble those found in {{34}}.",
+              "He is seen as a {{35}} of music.",
+              "Sciarrino compares his music to a distant {{36}}.",
+              "",
+              "<strong>Concert piece</strong>",
+              "For piano, chorus and orchestra.",
+              "Finished in 1979 and written in memory of a {{37}}.",
+              "Very difficult to play.",
+              "Starts with a noise that sounds like {{38}}.",
+              "Produced by two people moving large pieces of {{39}}.",
+              "Although the music is unusual, it has a traditional {{40}}."
+            ],
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "As well as music, he has written many 31",
+                "options": [],
+                "answer": "essays"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "He has won many awards - including one in 2011 for in music 32",
+                "options": [],
+                "answer": "originality"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "His music often features and very soft sounds 33",
+                "options": [],
+                "answer": "silence"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Violins often produce sounds which resemble those found in 34",
+                "options": [],
+                "answer": "nature"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "He is seen as a of music 35",
+                "options": [],
+                "answer": "pioneer"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Sciarrino compares his music to a distant 36",
+                "options": [],
+                "answer": "volcano"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Finished in 1979 and written in memory of a 37",
+                "options": [],
+                "answer": "friend"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Starts with a noise that sounds like 38",
+                "options": [],
+                "answer": "thunder"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Produced by two people moving large pieces of 39",
+                "options": [],
+                "answer": "metal"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Although the music is unusual, it has a traditional 40",
+                "options": [],
+                "answer": "structure"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "images": [
+    {
+      "id": "fairground-map",
+      "url": "https://i.postimg.cc/wMZ07MLb/image.png",
+      "alt": "Fairground Map"
+    }
+  ],
+  "createdAt": "2026-06-19T17:07:01.418Z",
+  "updatedAt": "2026-06-19T17:07:01.418Z"
+}

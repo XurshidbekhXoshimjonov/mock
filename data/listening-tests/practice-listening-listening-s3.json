@@ -1,0 +1,369 @@
+{
+  "id": "practice-listening-listening-s3",
+  "title": "IELTS CDI Listening Practice - Part 3: History Subjects",
+  "slug": "practice-listening-part-3",
+  "part": 3,
+  "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-26",
+      "instruction": "Complete the table. Write NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27-30",
+      "instruction": "Choose the correct letter, S, C, or P. NB You may use a letter more than once.",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "sentence_completion",
+      "question": "Social History textbook used: 21",
+      "options": [],
+      "answer": "Welfare State"
+    },
+    {
+      "number": 22,
+      "type": "sentence_completion",
+      "question": "Social History criticism: It is 22",
+      "options": [],
+      "answer": "too long"
+    },
+    {
+      "number": 23,
+      "type": "sentence_completion",
+      "question": "Cultural Studies textbook used: 23",
+      "options": [],
+      "answer": "in perspective"
+    },
+    {
+      "number": 24,
+      "type": "sentence_completion",
+      "question": "Cultural Studies criticism: It 24",
+      "options": [],
+      "answer": "oversimplifies"
+    },
+    {
+      "number": 25,
+      "type": "sentence_completion",
+      "question": "Subject: 25",
+      "options": [],
+      "answer": "Political Theory"
+    },
+    {
+      "number": 26,
+      "type": "sentence_completion",
+      "question": "Political Theory criticism: It is 26",
+      "options": [],
+      "answer": "not relevant"
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "Steve",
+      "options": [
+        {
+          "letter": "S",
+          "text": "Social History"
+        },
+        {
+          "letter": "C",
+          "text": "Cultural Studies"
+        },
+        {
+          "letter": "P",
+          "text": "Political Theory"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "David",
+      "options": [
+        {
+          "letter": "S",
+          "text": "Social History"
+        },
+        {
+          "letter": "C",
+          "text": "Cultural Studies"
+        },
+        {
+          "letter": "P",
+          "text": "Political Theory"
+        }
+      ],
+      "answer": "S"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Susan",
+      "options": [
+        {
+          "letter": "S",
+          "text": "Social History"
+        },
+        {
+          "letter": "C",
+          "text": "Cultural Studies"
+        },
+        {
+          "letter": "P",
+          "text": "Political Theory"
+        }
+      ],
+      "answer": "P"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Olive",
+      "options": [
+        {
+          "letter": "S",
+          "text": "Social History"
+        },
+        {
+          "letter": "C",
+          "text": "Cultural Studies"
+        },
+        {
+          "letter": "P",
+          "text": "Political Theory"
+        }
+      ],
+      "answer": "P"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "practice-listening",
+  "createdAt": "2026-06-19T17:13:42.073Z",
+  "updatedAt": "2026-06-19T17:13:42.073Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3: History Subjects",
+      "questionRange": "Questions 21-30",
+      "blocks": [
+        {
+          "id": "practice-listening-part-3-history-table",
+          "type": "table_completion",
+          "questionRange": "Questions 21-26",
+          "title": "History textbooks",
+          "instruction": "Complete the table. Write NO MORE THAN TWO WORDS for each answer.",
+          "columns": [
+            "Subject",
+            "Textbook Used",
+            "Criticism of this book"
+          ],
+          "rows": [
+            [
+              "Social History",
+              "{{21}}",
+              "It is {{22}}"
+            ],
+            [
+              "Cultural Studies",
+              "{{23}}",
+              "It {{24}}"
+            ],
+            [
+              "{{25}}",
+              "Government in Action",
+              "It is {{26}}"
+            ]
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "type": "sentence_completion",
+              "question": "Social History textbook used: 21",
+              "text": "Social History textbook used: 21",
+              "options": [],
+              "answer": "Welfare State"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "type": "sentence_completion",
+              "question": "Social History criticism: It is 22",
+              "text": "Social History criticism: It is 22",
+              "options": [],
+              "answer": "too long"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "type": "sentence_completion",
+              "question": "Cultural Studies textbook used: 23",
+              "text": "Cultural Studies textbook used: 23",
+              "options": [],
+              "answer": "in perspective"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "type": "sentence_completion",
+              "question": "Cultural Studies criticism: It 24",
+              "text": "Cultural Studies criticism: It 24",
+              "options": [],
+              "answer": "oversimplifies"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "type": "sentence_completion",
+              "question": "Subject: 25",
+              "text": "Subject: 25",
+              "options": [],
+              "answer": "Political Theory"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "type": "sentence_completion",
+              "question": "Political Theory criticism: It is 26",
+              "text": "Political Theory criticism: It is 26",
+              "options": [],
+              "answer": "not relevant"
+            }
+          ]
+        },
+        {
+          "id": "practice-listening-part-3-favourite-subjects",
+          "type": "matching",
+          "questionRange": "Questions 27-30",
+          "title": "Favourite subjects",
+          "instruction": "Choose the correct letter, S, C, or P. NB You may use a letter more than once.",
+          "options": [
+            {
+              "letter": "S",
+              "text": "Social History"
+            },
+            {
+              "letter": "C",
+              "text": "Cultural Studies"
+            },
+            {
+              "letter": "P",
+              "text": "Political Theory"
+            }
+          ],
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "type": "multiple_choice",
+              "question": "Steve",
+              "text": "Steve",
+              "options": [
+                {
+                  "letter": "S",
+                  "text": "Social History"
+                },
+                {
+                  "letter": "C",
+                  "text": "Cultural Studies"
+                },
+                {
+                  "letter": "P",
+                  "text": "Political Theory"
+                }
+              ],
+              "answer": "C"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "type": "multiple_choice",
+              "question": "David",
+              "text": "David",
+              "options": [
+                {
+                  "letter": "S",
+                  "text": "Social History"
+                },
+                {
+                  "letter": "C",
+                  "text": "Cultural Studies"
+                },
+                {
+                  "letter": "P",
+                  "text": "Political Theory"
+                }
+              ],
+              "answer": "S"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "type": "multiple_choice",
+              "question": "Susan",
+              "text": "Susan",
+              "options": [
+                {
+                  "letter": "S",
+                  "text": "Social History"
+                },
+                {
+                  "letter": "C",
+                  "text": "Cultural Studies"
+                },
+                {
+                  "letter": "P",
+                  "text": "Political Theory"
+                }
+              ],
+              "answer": "P"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "type": "multiple_choice",
+              "question": "Olive",
+              "text": "Olive",
+              "options": [
+                {
+                  "letter": "S",
+                  "text": "Social History"
+                },
+                {
+                  "letter": "C",
+                  "text": "Cultural Studies"
+                },
+                {
+                  "letter": "P",
+                  "text": "Political Theory"
+                }
+              ],
+              "answer": "P"
+            }
+          ]
+        }
+      ],
+      "instruction": "",
+      "audioUrl": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+      "audioFileName": "Practice Listening.mp3",
+      "answerText": "21: Welfare State\n22: too long\n23: in perspective\n24: oversimplifies\n25: Political Theory\n26: not relevant\n27: C\n28: S\n29: P\n30: P"
+    }
+  ]
+}

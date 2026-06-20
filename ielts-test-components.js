@@ -253,36 +253,13 @@ function MultiSelectGroupRenderer({ group, answers, onAnswer, reviewByNumber, re
         .filter(Boolean);
     const selectedSet = new Set(selected);
 
-    function toggleOption(optionValue, checked) {
-        if (!onAnswer || readOnly) return;
-
-        if (checked) {
-            if (selectedSet.has(optionValue) || selected.length >= questions.length) return;
-            const emptyQuestion = questions.find((question) => !String(answers[question.number] || ""));
-            if (emptyQuestion) onAnswer(emptyQuestion.number, optionValue);
-            return;
-        }
-
-        const answeredQuestion = questions.find(
-            (question) => String(answers[question.number] || "") === optionValue
-        );
-        if (answeredQuestion) onAnswer(answeredQuestion.number, "");
-    }
-
     return h("div", { className: "cbt-multi-select-task" },
         h("div", { className: "cbt-multi-select-options", role: "group", "aria-label": "Select answers" },
             options.map((option) =>
-                h("label", {
+                h("div", {
                     key: option.value,
                     className: `cbt-option-card cbt-option-card--checkbox${selectedSet.has(option.value) ? " selected" : ""}`
                 },
-                    h("input", {
-                        type: "checkbox",
-                        value: option.value,
-                        checked: selectedSet.has(option.value),
-                        disabled: readOnly || (!selectedSet.has(option.value) && selected.length >= questions.length),
-                        onChange: (event) => toggleOption(option.value, event.target.checked)
-                    }),
                     option.html
                         ? h(SafeHtml, { html: option.html, tag: "span" })
                         : h("span", null, option.label)
@@ -297,7 +274,23 @@ function MultiSelectGroupRenderer({ group, answers, onAnswer, reviewByNumber, re
                     "data-number": question.number
                 },
                     h(QuestionBadge, { number: question.number }),
-                    h("span", null, answers[question.number] || "Select an option"),
+                    h("select", {
+                        className: "cbt-multi-select-select",
+                        value: answers[question.number] || "",
+                        disabled: readOnly,
+                        onChange: (event) => onAnswer?.(question.number, event.target.value),
+                        "aria-label": `Select answer for question ${question.number}`
+                    },
+                        h("option", { value: "" }, "Select an option"),
+                        options.map((opt) => {
+                            const isChosenElsewhere = selectedSet.has(opt.value) && answers[question.number] !== opt.value;
+                            return h("option", {
+                                key: opt.value,
+                                value: opt.value,
+                                disabled: isChosenElsewhere
+                            }, opt.value);
+                        })
+                    ),
                     h(AnswerReviewDetails, { result: reviewByNumber?.[question.number] })
                 )
             )
@@ -530,12 +523,21 @@ function groupChoiceInstructionType(group) {
 
     if (supportedTypes.includes(explicitType)) return explicitType;
 
-    const instruction = group.instructionHtml || {};
+    const groupInstructionObj = typeof group.instruction === "object" && group.instruction !== null
+        ? group.instruction
+        : {};
+    const instruction = {
+        ...groupInstructionObj,
+        ...(group.instructionHtml || {})
+    };
+
     const groupText = [
         instruction.bodyHtml,
         instruction.rulesHtml,
+        instruction.body,
+        instruction.text,
         group.instructionText,
-        group.instruction,
+        typeof group.instruction === "string" ? group.instruction : null,
         group.rule
     ].filter((value) => typeof value === "string").join(" ").toUpperCase();
 
@@ -624,10 +626,23 @@ function ChoiceInstructionBlock({ type, questions, showPrompt, showLead }) {
 }
 
 function InstructionRenderer({ group }) {
-    const instruction = group.instructionHtml || {};
-    const title = group.instructionTitle || group.title || group.instruction?.title;
-    const body = instruction.bodyHtml || group.instructionText || group.instruction;
-    const rules = instruction.rulesHtml || group.rule;
+    const groupInstructionObj = typeof group.instruction === "object" && group.instruction !== null
+        ? group.instruction
+        : {};
+    const instruction = {
+        ...groupInstructionObj,
+        ...(group.instructionHtml || {})
+    };
+    const title = group.instructionTitle || group.title || instruction.title || instruction.titleHtml;
+    const body = instruction.bodyHtml 
+        || instruction.body 
+        || instruction.text 
+        || group.instructionText 
+        || (typeof group.instruction === "string" ? group.instruction : "");
+    const rules = instruction.rulesHtml 
+        || instruction.rules 
+        || instruction.rule 
+        || group.rule;
     const bodyHtml = instruction.bodyHtml && title
         ? instruction.bodyHtml.replace(
             /<p[^>]*>\s*<strong[^>]*>\s*Questions?\s+\d+(?:\s*[-–]\s*\d+)?\s*<\/strong>\s*(?:<br\s*\/?>)?/i,

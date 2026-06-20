@@ -1,0 +1,246 @@
+{
+  "id": "ielts-full-listening-cdi-listening-s4",
+  "title": "IELTS CDI Full Listening Practice — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31 - 40",
+      "instruction": "Complete the notes. Use NO MORE THAN ONE WORD for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "People in ancient civilisations had sophisticated to record the passing of time",
+      "options": [],
+      "answer": "calendars",
+      "text": "People in ancient civilisations had sophisticated to record the passing of time"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year).",
+      "options": [],
+      "answer": "sun",
+      "text": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year)."
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Shadow clocks have been discovered in which consisted of a large column",
+      "options": [],
+      "answer": "Egypt",
+      "text": "Shadow clocks have been discovered in which consisted of a large column"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Some were constructed out of and were several metres in height",
+      "options": [],
+      "answer": "stone",
+      "text": "Some were constructed out of and were several metres in height"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "However, they were ineffective in conditions.",
+      "options": [],
+      "answer": "cold",
+      "text": "However, they were ineffective in conditions."
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Engineers in China addressed this problem by using mercury and of water instead.",
+      "options": [],
+      "answer": "sand",
+      "text": "Engineers in China addressed this problem by using mercury and of water instead."
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+      "options": [],
+      "answer": "bell",
+      "text": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation",
+      "options": [],
+      "answer": "lighter",
+      "text": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be.",
+      "options": [],
+      "answer": "portable",
+      "text": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be."
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Tompion gave one of these to an English.",
+      "options": [],
+      "answer": "king",
+      "text": "Tompion gave one of these to an English."
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-full-listening-cdi",
+  "createdAt": "2026-06-20T02:17:10.853Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/ielts-full-listening-audio.mp3",
+      "instruction": "Complete the notes. Use NO MORE THAN ONE WORD for each answer.",
+      "answerText": "31: calendars\n32: sun\n33: Egypt\n34: stone\n35: cold\n36: sand\n37: bell\n38: lighter\n39: portable\n40: king",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31 - 40",
+          "title": "A history of measuring time\nMeasuring the time in a year or a day has always been a priority",
+          "example": "",
+          "instruction": "Complete the notes. Use NO MORE THAN ONE WORD for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "People in ancient civilisations had sophisticated {{31}} to record the passing of time",
+            "<strong>Some ancient tools for measuring time</strong>",
+            "Stonehenge: a 5000-year-old stone circle in England",
+            "- It was possibly built by druids (priests)",
+            "- The stones seem to have been erected for viewing the {{32}} on the solstice (the longest day of the year).",
+            "In the past, days were divided into 12 periods",
+            "- Shadow clocks have been discovered in {{33}} which consisted of a large column",
+            "- Some were constructed out of {{34}} and were several metres in height",
+            "<strong>Water clocks</strong>",
+            "- These were used in various locations and had moving parts",
+            "- However, they were ineffective in {{35}} conditions. Engineers in China addressed this problem by using mercury and {{36}} of water instead.",
+            "<strong>Mechanical clocks</strong>",
+            "- The first known one was constructed in Germany in the 10th century",
+            "- In the 14th century, a clock with a {{37}} to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+            "<strong>Further developments in clock making</strong>",
+            "- Clockmakers aimed to produce clocks that were {{38}} and able to tell the time more precisely, especially to aid sailors with navigation",
+            "- Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be {{39}}.",
+            "- Tompion gave one of these to an English {{40}}."
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "People in ancient civilisations had sophisticated to record the passing of time",
+              "text": "People in ancient civilisations had sophisticated to record the passing of time",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "calendars"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year).",
+              "text": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year).",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sun"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Shadow clocks have been discovered in which consisted of a large column",
+              "text": "Shadow clocks have been discovered in which consisted of a large column",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Egypt"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Some were constructed out of and were several metres in height",
+              "text": "Some were constructed out of and were several metres in height",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "stone"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "However, they were ineffective in conditions.",
+              "text": "However, they were ineffective in conditions.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cold"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Engineers in China addressed this problem by using mercury and of water instead.",
+              "text": "Engineers in China addressed this problem by using mercury and of water instead.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sand"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+              "text": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "bell"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation",
+              "text": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lighter"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be.",
+              "text": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "portable"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Tompion gave one of these to an English.",
+              "text": "Tompion gave one of these to an English.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "king"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

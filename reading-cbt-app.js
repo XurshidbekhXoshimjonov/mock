@@ -333,11 +333,11 @@ function escapeListeningHtml(value) {
 }
 
 function ensureListeningStyles() {
-    if (document.querySelector('link[href="listening-template.css"]')) return;
+    if (document.querySelector('link[href^="listening-template.css"]')) return;
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css";
+    stylesheet.href = "listening-template.css?v=1.0.10";
     document.head.appendChild(stylesheet);
 }
 
@@ -363,7 +363,7 @@ function questionRangeFromQuestions(questions, fallback = "Questions") {
 
 function listeningQuestionText(question) {
     const number = Number(question.number || question.questionNumber);
-    const raw = String(question.stemHtml || question.question || question.text || `Question ${number}`).trim();
+    const raw = sanitizeLabel(String(question.stemHtml || question.question || question.text || `Question ${number}`).trim());
     const blankPattern = /_{3,}|<span[^>]*class=["'][^"']*ielts-blank[^"']*["'][^>]*>.*?<\/span>/i;
 
     if (/\{\{\d{1,2}\}\}/.test(raw)) {
@@ -377,17 +377,30 @@ function listeningQuestionText(question) {
     return `${raw} {{${number}}}`;
 }
 
+/** Strip __(...)__ formatting artifacts that may appear in imported data */
+function sanitizeLabel(str) {
+    if (!str || typeof str !== "string") return str || "";
+    let s = str;
+    // Replace  __(  and  )__  with a single space to preserve word boundaries
+    s = s.replace(/\s*__\(\s*/g, " ");
+    s = s.replace(/\s*\)__\s*/g, " ");
+    // Fix punctuation spacing: " ." → "."
+    s = s.replace(/\s+([.,;:!?])/g, "$1");
+    return s.trim();
+}
+
 function normalizeListeningOption(option) {
     if (typeof option === "object" && option !== null) {
-        const label = String(option.text || option.label || option.value || "").trim();
+        const label = sanitizeLabel(String(option.text || option.label || option.value || "").trim());
         const letter = String(option.letter || option.value || label.match(/^([A-Za-z0-9ivx]+)[\).:\s]/)?.[1] || "").trim();
-        const text = option.text || label.replace(new RegExp(`^${letter}[\\).:\\s-]*`, "i"), "").trim() || label;
+        const rawText = option.text ? sanitizeLabel(option.text) : label.replace(new RegExp(`^${letter}[\\).:\\s-]*`, "i"), "").trim() || label;
+        const text = rawText.replace(/^[-–—]\s*/, "").trim();
         return { letter, text };
     }
 
-    const label = String(option || "").trim();
+    const label = sanitizeLabel(String(option || "").trim());
     const letter = label.match(/^([A-Za-z0-9ivx]+)[\).:\s-]/)?.[1] || "";
-    const text = letter ? label.slice(letter.length).replace(/^[\).:\s-]+/, "").trim() : label;
+    const text = letter ? label.slice(letter.length).replace(/^[\).:\s-]+/, "").replace(/^[-–—]\s*/, "").trim() : label;
     return { letter, text: text || label };
 }
 
@@ -417,7 +430,7 @@ function listeningBlocksFromQuestionGroup(group, index, images = []) {
     const type = String(group.type || "").toLowerCase().replace(/[\s-]+/g, "_");
     const questions = group.questions || [];
     const questionRange = group.instructionTitle || group.questionRange || questionRangeFromQuestions(questions);
-    const instruction = group.instructionText || group.instruction || group.rule || "";
+    const instruction = sanitizeLabel(group.instructionText || group.instruction || group.rule || "");
     const id = group.id || `listening-group-${index + 1}`;
 
     if (type === "matching" || type === "map_labelling" || type === "map_labeling") {
@@ -430,23 +443,28 @@ function listeningBlocksFromQuestionGroup(group, index, images = []) {
             instruction,
             imageUrl: listeningGroupImageUrl(group, images),
             options: uniqueListeningOptions(group.options || group.matchingOptions || questionOptions),
+            content: group.content || group.flowchartContent || [],
             questions: questions.map((question) => ({
                 questionNumber: Number(question.number || question.questionNumber),
-                text: question.text || question.question || `Label ${question.number || question.questionNumber}`
+                text: sanitizeLabel(question.text || question.question || `Label ${question.number || question.questionNumber}`)
             }))
         }];
     }
 
     if (type === "multiple_choice") {
-        return questions.map((question, questionIndex) => ({
-            id: `${id}-${question.number || questionIndex + 1}`,
+        return [{
+            id,
             type: "multiple_choice",
-            questionRange: `Question ${question.number || question.questionNumber}`,
+            questionRange,
             instruction,
-            questionNumber: Number(question.number || question.questionNumber),
-            question: question.question || question.text || "",
-            options: uniqueListeningOptions(question.options || group.options)
-        }));
+            questions: questions.map((question) => ({
+                number: Number(question.number || question.questionNumber),
+                questionNumber: Number(question.number || question.questionNumber),
+                question: sanitizeLabel(question.question || question.text || ""),
+                text: sanitizeLabel(question.text || question.question || ""),
+                options: uniqueListeningOptions(question.options || group.options)
+            }))
+        }];
     }
 
     if (type === "multi_select" || type === "multiple_select") {
@@ -459,12 +477,13 @@ function listeningBlocksFromQuestionGroup(group, index, images = []) {
             questionRange,
             instruction,
             maxSelections: Number(group.maxSelections) || Math.max(2, questions.length),
-            question: group.question || questions[0]?.question || "",
+            question: sanitizeLabel(group.question || questions[0]?.question || ""),
             options: uniqueListeningOptions(group.options || group.multiSelectOptions || questionOptions)
         }];
     }
 
-    if ((type === "form_completion" || type === "table_completion") && Array.isArray(group.rows)) {
+    if (((type === "form_completion" || type === "table_completion") && Array.isArray(group.rows)) ||
+        ((type === "note_completion" || type === "sentence_completion_inline") && Array.isArray(group.content))) {
         return [{
             ...group,
             id,
@@ -516,7 +535,7 @@ function fallbackListeningTestFromFullTest(fullTest) {
                     `Questions ${(partNumber - 1) * 10 + 1}-${partNumber * 10}`
                 ),
                 audioUrl: section.audio || fullTest.listening?.audio || "",
-                instruction: section.instruction || groups[0]?.instructionText || "",
+                instruction: section.instruction || "",
                 answerText: answerTextFromQuestionGroups(groups),
                 blocks: groups.flatMap((group, groupIndex) => listeningBlocksFromQuestionGroup(group, groupIndex, fullTest.images))
             };
@@ -543,7 +562,7 @@ function normalizeFullListeningPlayerTest(fullTest, manualTest) {
         part: "full",
         duration: 40,
         headerTitle: "Full Test",
-        dashboardHref: "listeningfulltest.html",
+        dashboardHref: "/listeningfulltest.html",
         parts
     };
 }
@@ -948,7 +967,13 @@ function normalizeVocabularyLookupRecord(data, fallback) {
 }
 
 function makeAttemptId(id) {
-    return `reading-${String(id || "practice")}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+    const key = `ieltsx_current_attempt_reading_${id}`;
+    let attemptId = sessionStorage.getItem(key);
+    if (!attemptId) {
+        attemptId = `reading-${String(id || "practice")}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+        sessionStorage.setItem(key, attemptId);
+    }
+    return attemptId;
 }
 
 function positionVocabularyPopover(target) {
@@ -990,7 +1015,7 @@ function Header({ seconds, dashboardHref, onSubmit }) {
 
     return h("header", { className: "cbt-header" },
         h("div", { className: "cbt-brand" },
-            h("img", { className: "cbt-logo", src: "IELTS-logo.png", alt: "IELTS" }),
+            h("img", { className: "cbt-logo", src: "/IELTS-logo.png", alt: "IELTS" }),
             h("span", { className: "cbt-brand-divider", "aria-hidden": "true" }),
             h("span", { className: "cbt-brand-title" }, title)
         ),
@@ -1611,8 +1636,8 @@ function ReadingApp() {
     }
 
     const dashboardHref = isFullTest
-        ? (skill === "listening" ? "listeningfulltest.html" : "fulltest.html")
-        : (skill === "listening" ? "listening.html" : `part${passage.number || 1}.html`);
+        ? (skill === "listening" ? "/listeningfulltest.html" : "/fulltest.html")
+        : (skill === "listening" ? "/listening.html" : `/part${passage.number || 1}.html`);
     const answeredCurrent = currentQuestions.filter((question) => normalizeAnswer(answers[question.number])).length;
 
     return h(Fragment, null,

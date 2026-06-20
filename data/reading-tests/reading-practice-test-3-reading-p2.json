@@ -468,25 +468,67 @@
           "answer": "F"
         }
       ],
-      "imageIds": []
+      "imageIds": [],
+      "options": [
+        {
+          "value": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "value": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "value": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "value": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "value": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "value": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "value": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "value": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ]
     },
     {
       "type": "sentence_completion",
       "instruction": {
-        "title": "Questions 22–25",
+        "title": "Questions 22-25",
         "titleHtml": "",
-        "bodyHtml": "<p><strong></strong><br>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 22–25 on your answer sheet.</p>",
+        "bodyHtml": "<p><strong>Questions 22-25</strong><br>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 22-25 on your answer sheet.</p>",
         "rulesHtml": "",
         "questionRange": [
           22,
           25
         ]
       },
-      "instructionTitle": "Questions 22–25",
-      "instructionText": "Complete the sentences below.\nWrite NO MORE THAN TWO WORDS from the passage for each answer.\nWrite your answers in boxes 22–25 on your answer sheet.",
+      "instructionTitle": "Questions 22-25",
+      "instructionText": "Questions 22-25Complete the sentences below.\nWrite NO MORE THAN TWO WORDS from the passage for each answer.\nWrite your answers in boxes 22-25 on your answer sheet.",
       "instructionHtml": {
         "titleHtml": "",
-        "bodyHtml": "<p><strong></strong><br>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 22–25 on your answer sheet.</p>",
+        "bodyHtml": "<p><strong>Questions 22-25</strong><br>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 22-25 on your answer sheet.</p>",
         "rulesHtml": ""
       },
       "rule": "",
@@ -494,43 +536,44 @@
         22,
         25
       ],
-      "contentHtml": "\n<p>To escape from a prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and <span class=\"ielts-blank\">______</span>.</p>\n<p>The Sinaloa cartel built a grand underground tunnel and even used a <span class=\"ielts-blank\">______</span> to avoid the fence.</p>\n<p>The main difference between two groups is that criminals, unlike large corporations, often have <span class=\"ielts-blank\">______</span> encoded into their daily life.</p>\n<p>Due to being persuasive, Walid Abdul-Wahab found a <span class=\"ielts-blank\">______</span> of Amish camel milk farmers.</p>\n",
+      "contentHtml": "\n<p>To escape from prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and <span class=\"ielts-blank\" data-blank=\"22\">______</span>.</p>\n<p>The Sinaloa cartel built a vast underground tunnel and even used a <span class=\"ielts-blank\" data-blank=\"23\">______</span> to bypass a high-tech fence.</p>\n<p>The main difference between the two groups is that criminal organisations, unlike large corporations, often have <span class=\"ielts-blank\" data-blank=\"24\">______</span> encoded into their daily behaviour.</p>\n<p>Through perseverance, Walid Abdul-Wahab found a <span class=\"ielts-blank\" data-blank=\"25\">______</span> of Amish camel milk farmers.</p>\n",
       "layoutHtml": "<div class=\"question\" data-q-start=\"22\" data-q-end=\"25\">\n<div class=\"question-prompt\">\n<p><strong>Questions 22–25</strong><br>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>\n<p>Write your answers in boxes 22–25 on your answer sheet.</p>\n</div>\n<div class=\"summary-text\">\n<p>To escape from a prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and .</p>\n<p>The Sinaloa cartel built a grand underground tunnel and even used a  to avoid the fence.</p>\n<p>The main difference between two groups is that criminals, unlike large corporations, often have  encoded into their daily life.</p>\n<p>Due to being persuasive, Walid Abdul-Wahab found a  of Amish camel milk farmers.</p>\n</div>\n</div>",
       "questions": [
         {
           "number": 22,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "To escape from prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and ______.",
+          "question": "To escape from prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and ______.",
           "options": [],
           "answer": "perseverance"
         },
         {
           "number": 23,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "The Sinaloa cartel built a vast underground tunnel and even used a ______ to bypass a high-tech fence.",
+          "question": "The Sinaloa cartel built a vast underground tunnel and even used a ______ to bypass a high-tech fence.",
           "options": [],
           "answer": "catapult"
         },
         {
           "number": 24,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "The main difference between the two groups is that criminal organisations, unlike large corporations, often have ______ encoded into their daily behaviour.",
+          "question": "The main difference between the two groups is that criminal organisations, unlike large corporations, often have ______ encoded into their daily behaviour.",
           "options": [],
           "answer": "improvisation"
         },
         {
           "number": 25,
           "type": "summary_completion",
-          "stemHtml": "",
-          "question": "",
+          "stemHtml": "Through perseverance, Walid Abdul-Wahab found a ______ of Amish camel milk farmers.",
+          "question": "Through perseverance, Walid Abdul-Wahab found a ______ of Amish camel milk farmers.",
           "options": [],
           "answer": "network"
         }
       ],
-      "imageIds": []
+      "imageIds": [],
+      "title": "Questions 22-25"
     },
     {
       "type": "multiple_choice",
@@ -980,30 +1023,34 @@
     {
       "number": 22,
       "type": "summary_completion",
-      "question": "",
+      "question": "To escape from prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and ______.",
       "options": [],
-      "answer": "perseverance"
+      "answer": "perseverance",
+      "stemHtml": "To escape from prison, Joaquin Guzman had to use such traits as creative thinking, long-term planning and ______."
     },
     {
       "number": 23,
       "type": "summary_completion",
-      "question": "",
+      "question": "The Sinaloa cartel built a vast underground tunnel and even used a ______ to bypass a high-tech fence.",
       "options": [],
-      "answer": "catapult"
+      "answer": "catapult",
+      "stemHtml": "The Sinaloa cartel built a vast underground tunnel and even used a ______ to bypass a high-tech fence."
     },
     {
       "number": 24,
       "type": "summary_completion",
-      "question": "",
+      "question": "The main difference between the two groups is that criminal organisations, unlike large corporations, often have ______ encoded into their daily behaviour.",
       "options": [],
-      "answer": "improvisation"
+      "answer": "improvisation",
+      "stemHtml": "The main difference between the two groups is that criminal organisations, unlike large corporations, often have ______ encoded into their daily behaviour."
     },
     {
       "number": 25,
       "type": "summary_completion",
-      "question": "",
+      "question": "Through perseverance, Walid Abdul-Wahab found a ______ of Amish camel milk farmers.",
       "options": [],
-      "answer": "network"
+      "answer": "network",
+      "stemHtml": "Through perseverance, Walid Abdul-Wahab found a ______ of Amish camel milk farmers."
     },
     {
       "number": 26,

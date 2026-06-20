@@ -1,0 +1,1438 @@
+{
+  "id": "ielts-full-listening-cdi",
+  "title": "IELTS CDI Full Listening Practice",
+  "sourceFile": "IELTS_FULL_LESTINING.html",
+  "status": "published",
+  "layout": "scripted-listening",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "IELTS_FULL_LESTINING"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "<div>Section 1</div><p></p>\n<p><strong>Questions 1 - 6</strong></p>\n<p>Complete the form. Use NO MORE THAN ONE WORD AND / OR A NUMBER for each answer.</p>\n<p><strong>WEST LAKE GYM COURSE REGISTRATION FORM</strong></p>\n\n<div>\n<span>Selected Class:</span>\n<span>Yoga</span>\n</div>\n\n<div>\n<span>Time:</span>\n<span>1) 9pm</span>\n</div>\n\n<div>\n<span>Days:</span>\n<span>Every day except </span>\n</div>\n\n<div>\n<span>Level:</span>\n<span>Beginner</span>\n</div>\n\n<div>\n<span>Price per class:</span>\n£\n</div>\n\n<div>\n<span>Customer Name:</span>\n<span>Tim </span>\n</div>\n\n<div>\n<span>Customer Address:</span>\n Slade Road\n</div>\n\n<div>\n<span>Customer Phone Number:</span>\n\n</div>\n\n<hr>\n\n<p><strong>Questions 7 - 10</strong></p>\n<p>Complete the notes. Use ONE WORD for each answer.</p>\n\n<p>The gym is located by the 7).</p>\n<p>Class members usually prefer not to have any 8).</p>\n<p>Customers can borrow a 9) for free.</p>\n<p>A self-defence class with a teacher from 10).</p>\n\n",
+        "questionGroups": [
+          {
+            "type": "form_completion",
+            "instructionTitle": "Questions 1 - 6",
+            "instructionText": "Complete the form. Use NO MORE THAN ONE WORD AND / OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Time: 9pm",
+                "options": [],
+                "answer": "7:30",
+                "text": "Time: 9pm"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Days: Every day except",
+                "options": [],
+                "answer": "Tuesday",
+                "text": "Days: Every day except"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Price per class: £",
+                "options": [],
+                "answer": "15",
+                "text": "Price per class: £"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Customer Name: Tim",
+                "options": [],
+                "answer": "Cavendish",
+                "text": "Customer Name: Tim"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Customer Address: Slade Road",
+                "options": [],
+                "answer": "43",
+                "text": "Customer Address: Slade Road"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Customer Phone Number",
+                "options": [],
+                "answer": "0188 639 423",
+                "text": "Customer Phone Number"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": "",
+            "title": "WEST LAKE GYM COURSE REGISTRATION FORM",
+            "instruction": "Complete the form. Use NO MORE THAN ONE WORD AND / OR A NUMBER for each answer.",
+            "rows": [
+              {
+                "label": "Selected Class",
+                "value": "Yoga"
+              },
+              {
+                "label": "Time",
+                "value": "{{1}} 9pm"
+              },
+              {
+                "label": "Days",
+                "value": "Every day except {{2}}"
+              },
+              {
+                "label": "Level",
+                "value": "Beginner"
+              },
+              {
+                "label": "Price per class",
+                "value": "£{{3}}"
+              },
+              {
+                "label": "Customer Name",
+                "value": "Tim {{4}}"
+              },
+              {
+                "label": "Customer Address",
+                "value": "{{5}} Slade Road"
+              },
+              {
+                "label": "Customer Phone Number",
+                "value": "{{6}}"
+              }
+            ]
+          },
+          {
+            "type": "sentence_completion_inline",
+            "instructionTitle": "Questions 7 - 10",
+            "instructionText": "Complete the notes. Use ONE WORD for each answer.",
+            "questions": [
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "The gym is located by the",
+                "options": [],
+                "answer": "fitness",
+                "text": "The gym is located by the"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Class members usually prefer not to have any",
+                "options": [],
+                "answer": "shoes",
+                "text": "Class members usually prefer not to have any"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Customers can borrow a for free",
+                "options": [],
+                "answer": "towel",
+                "text": "Customers can borrow a for free"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "A self-defence class with a teacher from",
+                "options": [],
+                "answer": "China",
+                "text": "A self-defence class with a teacher from"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": "",
+            "content": [
+              "The gym is located by the {{7}}",
+              "Class members usually prefer not to have any {{8}}",
+              "Customers can borrow a {{9}} for free",
+              "A self-defence class with a teacher from {{10}}"
+            ]
+          }
+        ],
+        "audio": "/uploads/audio/ielts-full-listening-audio.mp3"
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "<div>Section 2</div>\n<p><strong>Questions 11 - 15</strong></p>\n<p>Label the map. Write the appropriate letter, A - H.</p>\n<img src=\"map.jpg\">\n<p>11. Dining Room </p>\n<p>12. Tennis Courts </p>\n<p>13. Gunderson Room </p>\n<p>14. Swanson Room </p>\n<p>15. Swimming Pool </p>\n\n<p><strong>Questions 16 - 20</strong></p>\n<p>Choose the correct letter, A, B or C.</p>\n\n<p><strong>16. Which statement is true of the hotel's history?</strong></p>\n<label> A. It was built less than 100 years ago.</label><br>\n<label> B. The building was originally used for a different purpose.</label><br>\n<label> C. It is the oldest hotel in Castleton.</label>\n\n\n<p><strong>17. What time does breakfast start at the weekend?</strong></p>\n<label> A. 7:00</label><br>\n<label> B. 7:30</label><br>\n<label> C. 8:00</label>\n\n\n<p><strong>18. Where is the hotel located?</strong></p>\n<label> A. on the sea</label><br>\n<label> B. in the town centre</label><br>\n<label> C. near an architecture museum</label>\n\n\n<p><strong>19. The manager recommends visiting the hotel spa because</strong></p>\n<label> A. it recently won an award.</label><br>\n<label> B. it is free for hotel guests to use.</label><br>\n<label> C. it is likely to be less busy than usual.</label>\n\n\n<p><strong>20. What does the manager say that hotel staff can help guests with?</strong></p>\n<label> A. carrying baggage</label><br>\n<label> B. arranging transport</label><br>\n<label> C. finding things to do</label>\n<p></p>",
+        "questionGroups": [
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 11 - 15",
+            "instructionText": "Label the map. Write the appropriate letter, A - H.",
+            "questions": [
+              {
+                "number": 11,
+                "type": "matching",
+                "question": "Dining Room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "A",
+                    "label": "A",
+                    "html": "A"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "B",
+                    "label": "B",
+                    "html": "B"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "C",
+                    "label": "C",
+                    "html": "C"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "D",
+                    "label": "D",
+                    "html": "D"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "E",
+                    "label": "E",
+                    "html": "E"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "F",
+                    "label": "F",
+                    "html": "F"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "G",
+                    "label": "G",
+                    "html": "G"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "H",
+                    "label": "H",
+                    "html": "H"
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 12,
+                "type": "matching",
+                "question": "Tennis Courts",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "A",
+                    "label": "A",
+                    "html": "A"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "B",
+                    "label": "B",
+                    "html": "B"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "C",
+                    "label": "C",
+                    "html": "C"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "D",
+                    "label": "D",
+                    "html": "D"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "E",
+                    "label": "E",
+                    "html": "E"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "F",
+                    "label": "F",
+                    "html": "F"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "G",
+                    "label": "G",
+                    "html": "G"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "H",
+                    "label": "H",
+                    "html": "H"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 13,
+                "type": "matching",
+                "question": "Gunderson Room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "A",
+                    "label": "A",
+                    "html": "A"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "B",
+                    "label": "B",
+                    "html": "B"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "C",
+                    "label": "C",
+                    "html": "C"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "D",
+                    "label": "D",
+                    "html": "D"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "E",
+                    "label": "E",
+                    "html": "E"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "F",
+                    "label": "F",
+                    "html": "F"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "G",
+                    "label": "G",
+                    "html": "G"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "H",
+                    "label": "H",
+                    "html": "H"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 14,
+                "type": "matching",
+                "question": "Swanson Room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "A",
+                    "label": "A",
+                    "html": "A"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "B",
+                    "label": "B",
+                    "html": "B"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "C",
+                    "label": "C",
+                    "html": "C"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "D",
+                    "label": "D",
+                    "html": "D"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "E",
+                    "label": "E",
+                    "html": "E"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "F",
+                    "label": "F",
+                    "html": "F"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "G",
+                    "label": "G",
+                    "html": "G"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "H",
+                    "label": "H",
+                    "html": "H"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 15,
+                "type": "matching",
+                "question": "Swimming Pool",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "A",
+                    "label": "A",
+                    "html": "A"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "B",
+                    "label": "B",
+                    "html": "B"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "C",
+                    "label": "C",
+                    "html": "C"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "D",
+                    "label": "D",
+                    "html": "D"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "E",
+                    "label": "E",
+                    "html": "E"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "F",
+                    "label": "F",
+                    "html": "F"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "G",
+                    "label": "G",
+                    "html": "G"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "H",
+                    "label": "H",
+                    "html": "H"
+                  }
+                ],
+                "answer": "A"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": "",
+            "imageUrl": "/uploads/ielts-import/ielts-full-listening-cdi/map.jpg",
+            "options": [
+              {
+                "letter": "A",
+                "value": "A",
+                "text": "A",
+                "label": "A",
+                "html": "A"
+              },
+              {
+                "letter": "B",
+                "value": "B",
+                "text": "B",
+                "label": "B",
+                "html": "B"
+              },
+              {
+                "letter": "C",
+                "value": "C",
+                "text": "C",
+                "label": "C",
+                "html": "C"
+              },
+              {
+                "letter": "D",
+                "value": "D",
+                "text": "D",
+                "label": "D",
+                "html": "D"
+              },
+              {
+                "letter": "E",
+                "value": "E",
+                "text": "E",
+                "label": "E",
+                "html": "E"
+              },
+              {
+                "letter": "F",
+                "value": "F",
+                "text": "F",
+                "label": "F",
+                "html": "F"
+              },
+              {
+                "letter": "G",
+                "value": "G",
+                "text": "G",
+                "label": "G",
+                "html": "G"
+              },
+              {
+                "letter": "H",
+                "value": "H",
+                "text": "H",
+                "label": "H",
+                "html": "H"
+              }
+            ]
+          },
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 16 - 20",
+            "instructionText": "Choose the correct letter, A, B or C. 16. Which statement is true of the hotel's history?",
+            "questions": [
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "Which statement is true of the hotel's history?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "It was built less than 100 years ago.",
+                    "html": "It was built less than 100 years ago."
+                  },
+                  {
+                    "value": "B",
+                    "label": "The building was originally used for a different purpose.",
+                    "html": "The building was originally used for a different purpose."
+                  },
+                  {
+                    "value": "C",
+                    "label": "It is the oldest hotel in Castleton.",
+                    "html": "It is the oldest hotel in Castleton."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 17,
+                "type": "multiple_choice",
+                "question": "What time does breakfast start at the weekend?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "7:00",
+                    "html": "7:00"
+                  },
+                  {
+                    "value": "B",
+                    "label": "7:30",
+                    "html": "7:30"
+                  },
+                  {
+                    "value": "C",
+                    "label": "8:00",
+                    "html": "8:00"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 18,
+                "type": "multiple_choice",
+                "question": "Where is the hotel located?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "on the sea",
+                    "html": "on the sea"
+                  },
+                  {
+                    "value": "B",
+                    "label": "in the town centre",
+                    "html": "in the town centre"
+                  },
+                  {
+                    "value": "C",
+                    "label": "near an architecture museum",
+                    "html": "near an architecture museum"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 19,
+                "type": "multiple_choice",
+                "question": "The manager recommends visiting the hotel spa because",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "it recently won an award.",
+                    "html": "it recently won an award."
+                  },
+                  {
+                    "value": "B",
+                    "label": "it is free for hotel guests to use.",
+                    "html": "it is free for hotel guests to use."
+                  },
+                  {
+                    "value": "C",
+                    "label": "it is likely to be less busy than usual.",
+                    "html": "it is likely to be less busy than usual."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 20,
+                "type": "multiple_choice",
+                "question": "What does the manager say that hotel staff can help guests with?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "carrying baggage",
+                    "html": "carrying baggage"
+                  },
+                  {
+                    "value": "B",
+                    "label": "arranging transport",
+                    "html": "arranging transport"
+                  },
+                  {
+                    "value": "C",
+                    "label": "finding things to do",
+                    "html": "finding things to do"
+                  }
+                ],
+                "answer": "B"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/ielts-full-listening-audio.mp3"
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "<div>Section 3</div><p></p>\n<p><strong>Questions 21 - 26</strong></p>\n<p>Complete the flow-chart. Write the appropriate letter, A - H.</p>\n\n<p>\n<strong>Options:</strong><br>\nA. visuals B. sources C. time limit D. structure<br>\nE. statistics F. main purpose G. aspect of the topic H. assessment guidelines\n</p>\n\n<p><strong>Plan for preparing the presentation about globalisation</strong></p>\n\n<p>\n21) Select an appropriate\n\nto present about\n</p>\n<p>↓</p>\n<p>\n22) While preparing, refer regularly to the\n\n</p>\n<p>↓</p>\n<p>\n23) Include\n\nto support points\n</p>\n\n<p>↓</p>\n\n<p>\n24) Keep records of all\n\n</p>\n\n<p>↓</p>\n\n<p>\n25) Ensure that the audience understands the\n\n</p>\n\n<p>↓</p>\n\n<p>\n26) Practise, bearing in mind the\n\n</p>\n<p><strong>Questions 27 - 28</strong></p>\n<p>Choose TWO correct options.</p>\n\n\n<p><strong>27–28. Which TWO skills do the speakers hope to demonstrate improvement in?</strong></p>\n<label> A. speaking clearly</label><br>\n<label> B. conducting original research</label><br>\n<label> C. making the content seem interesting</label><br>\n<label> D. dealing with questions from the audience</label><br>\n<label> E. demonstrating a good understanding of the topic</label>\n\n<br><br>\n\n\n<p><strong>Questions 29 - 30</strong></p>\n<p>Choose TWO correct options.</p>\n<p><strong>29–30. Which TWO of the following do the speakers agree would be suitable ways to begin their presentation?</strong></p>\n<label> A. telling a joke</label><br>\n<label> B. using a picture</label><br>\n<label> C. reading a quotation</label><br>\n<label> D. showing a video clip</label><br>\n<label> E. asking the audience a question</label>\n<p>VIP </p>",
+        "questionGroups": [
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 21 - 26",
+            "instructionText": "Complete the flow-chart. Write the appropriate letter, A - H. Options: A. visuals B. sources C. time limit D. structure E. statistics F. main purpose G. aspect of the topic H. assessment guidelines Plan for preparing the presentation about globalisation",
+            "questions": [
+              {
+                "number": 21,
+                "type": "matching",
+                "question": "Select an appropriate\n\nto present about",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 22,
+                "type": "matching",
+                "question": "While preparing, refer regularly to the",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 23,
+                "type": "matching",
+                "question": "Include\n\nto support points",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 24,
+                "type": "matching",
+                "question": "Keep records of all",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 25,
+                "type": "matching",
+                "question": "Ensure that the audience understands the",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 26,
+                "type": "matching",
+                "question": "Practise, bearing in mind the",
+                "options": [
+                  {
+                    "letter": "A",
+                    "value": "A",
+                    "text": "visuals",
+                    "label": "A. visuals",
+                    "html": "visuals"
+                  },
+                  {
+                    "letter": "B",
+                    "value": "B",
+                    "text": "sources",
+                    "label": "B. sources",
+                    "html": "sources"
+                  },
+                  {
+                    "letter": "C",
+                    "value": "C",
+                    "text": "time limit",
+                    "label": "C. time limit",
+                    "html": "time limit"
+                  },
+                  {
+                    "letter": "D",
+                    "value": "D",
+                    "text": "structure",
+                    "label": "D. structure",
+                    "html": "structure"
+                  },
+                  {
+                    "letter": "E",
+                    "value": "E",
+                    "text": "statistics",
+                    "label": "E. statistics",
+                    "html": "statistics"
+                  },
+                  {
+                    "letter": "F",
+                    "value": "F",
+                    "text": "main purpose",
+                    "label": "F. main purpose",
+                    "html": "main purpose"
+                  },
+                  {
+                    "letter": "G",
+                    "value": "G",
+                    "text": "aspect of the topic",
+                    "label": "G. aspect of the topic",
+                    "html": "aspect of the topic"
+                  },
+                  {
+                    "letter": "H",
+                    "value": "H",
+                    "text": "assessment guidelines",
+                    "label": "H. assessment guidelines",
+                    "html": "assessment guidelines"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": "",
+            "options": [
+              {
+                "letter": "A",
+                "value": "A",
+                "text": "visuals",
+                "label": "A. visuals",
+                "html": "visuals"
+              },
+              {
+                "letter": "B",
+                "value": "B",
+                "text": "sources",
+                "label": "B. sources",
+                "html": "sources"
+              },
+              {
+                "letter": "C",
+                "value": "C",
+                "text": "time limit",
+                "label": "C. time limit",
+                "html": "time limit"
+              },
+              {
+                "letter": "D",
+                "value": "D",
+                "text": "structure",
+                "label": "D. structure",
+                "html": "structure"
+              },
+              {
+                "letter": "E",
+                "value": "E",
+                "text": "statistics",
+                "label": "E. statistics",
+                "html": "statistics"
+              },
+              {
+                "letter": "F",
+                "value": "F",
+                "text": "main purpose",
+                "label": "F. main purpose",
+                "html": "main purpose"
+              },
+              {
+                "letter": "G",
+                "value": "G",
+                "text": "aspect of the topic",
+                "label": "G. aspect of the topic",
+                "html": "aspect of the topic"
+              },
+              {
+                "letter": "H",
+                "value": "H",
+                "text": "assessment guidelines",
+                "label": "H. assessment guidelines",
+                "html": "assessment guidelines"
+              }
+            ],
+            "content": [
+              "Select an appropriate {{21}} to present about",
+              "While preparing, refer regularly to the {{22}}",
+              "Include {{23}} to support points",
+              "Keep records of all {{24}}",
+              "Ensure that the audience understands the {{25}}",
+              "Practise, bearing in mind the {{26}}"
+            ]
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 27 - 28",
+            "instructionText": "Choose TWO correct options. 27–28. Which TWO skills do the speakers hope to demonstrate improvement in?",
+            "questions": [
+              {
+                "number": 27,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A. speaking clearly",
+                    "html": "speaking clearly"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B. conducting original research",
+                    "html": "conducting original research"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C. making the content seem interesting",
+                    "html": "making the content seem interesting"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D. dealing with questions from the audience",
+                    "html": "dealing with questions from the audience"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E. demonstrating a good understanding of the topic",
+                    "html": "demonstrating a good understanding of the topic"
+                  }
+                ],
+                "answer": "C | E"
+              },
+              {
+                "number": 28,
+                "type": "multi_select",
+                "question": "",
+                "options": [],
+                "answer": "C | E"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 29 - 30",
+            "instructionText": "Choose TWO correct options. 29–30. Which TWO of the following do the speakers agree would be suitable ways to begin their presentation?",
+            "questions": [
+              {
+                "number": 29,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A. telling a joke",
+                    "html": "telling a joke"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B. using a picture",
+                    "html": "using a picture"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C. reading a quotation",
+                    "html": "reading a quotation"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D. showing a video clip",
+                    "html": "showing a video clip"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E. asking the audience a question",
+                    "html": "asking the audience a question"
+                  }
+                ],
+                "answer": "B | C"
+              },
+              {
+                "number": 30,
+                "type": "multi_select",
+                "question": "",
+                "options": [],
+                "answer": "B | C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/ielts-full-listening-audio.mp3"
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "<div>Section 4</div><p></p>\n<p><strong>Questions 31 - 40</strong></p>\n<p>Complete the notes. Use NO MORE THAN ONE WORD for each answer.</p>\n<p>A history of measuring time Measuring the time in a year or a day has always been a priority</p>\n<p>People in ancient civilisations had sophisticated (31). to record the passing of time</p>\n<p>Some ancient tools for measuring time Stonehenge: a 5000-year-old stone circle in England</p>\n<p>It was possibly built by druids (priests)</p>\n<p>The stones seem to have been erected for viewing the (32) .......... on the solstice (the longest day of the year).</p>\n<p>In the past, days were divided into 12 periods</p>\n<p>Shadow clocks have been discovered in (33) which consisted of a large column</p>\n<p>Some were constructed out of (34) ........... and were several metres in height Water clocks</p>\n<p>These were used in various locations and had moving parts</p>\n<p>However, they were ineffective in (35). conditions Engineers in China addressed this problem by using mercury and (36). of water</p>\n<p>instead</p>\n<p>Mechanical clocks The first known one was constructed in Germany in the 10th century</p>\n<p>In the 14th century, a clock with a (37). to mark the hours was constructed; this is still in Salisbury Cathedral, England</p>\n<p>Further developments in clock making Clockmakers aimed to produce clocks that were (38). and able to tell the time more precisely, especially to aid sailors with navigation</p>\n<p>Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be (39). Tompion gave one of these to an English (40).</p>\n\n\n\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 31 - 40",
+            "instructionText": "Complete the notes. Use NO MORE THAN ONE WORD for each answer.",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "People in ancient civilisations had sophisticated to record the passing of time",
+                "options": [],
+                "answer": "calendars",
+                "text": "People in ancient civilisations had sophisticated to record the passing of time"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year).",
+                "options": [],
+                "answer": "sun",
+                "text": "The stones seem to have been erected for viewing the on the solstice (the longest day of the year)."
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "Shadow clocks have been discovered in which consisted of a large column",
+                "options": [],
+                "answer": "Egypt",
+                "text": "Shadow clocks have been discovered in which consisted of a large column"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Some were constructed out of and were several metres in height",
+                "options": [],
+                "answer": "stone",
+                "text": "Some were constructed out of and were several metres in height"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "However, they were ineffective in conditions.",
+                "options": [],
+                "answer": "cold",
+                "text": "However, they were ineffective in conditions."
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Engineers in China addressed this problem by using mercury and of water instead.",
+                "options": [],
+                "answer": "sand",
+                "text": "Engineers in China addressed this problem by using mercury and of water instead."
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+                "options": [],
+                "answer": "bell",
+                "text": "In the 14th century, a clock with a to mark the hours was constructed; this is still in Salisbury Cathedral, England"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation",
+                "options": [],
+                "answer": "lighter",
+                "text": "Clockmakers aimed to produce clocks that were and able to tell the time more precisely, especially to aid sailors with navigation"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be.",
+                "options": [],
+                "answer": "portable",
+                "text": "Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be."
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Tompion gave one of these to an English.",
+                "options": [],
+                "answer": "king",
+                "text": "Tompion gave one of these to an English."
+              }
+            ],
+            "content": [
+              "People in ancient civilisations had sophisticated {{31}} to record the passing of time",
+              "<strong>Some ancient tools for measuring time</strong>",
+              "Stonehenge: a 5000-year-old stone circle in England",
+              "- It was possibly built by druids (priests)",
+              "- The stones seem to have been erected for viewing the {{32}} on the solstice (the longest day of the year).",
+              "In the past, days were divided into 12 periods",
+              "- Shadow clocks have been discovered in {{33}} which consisted of a large column",
+              "- Some were constructed out of {{34}} and were several metres in height",
+              "<strong>Water clocks</strong>",
+              "- These were used in various locations and had moving parts",
+              "- However, they were ineffective in {{35}} conditions. Engineers in China addressed this problem by using mercury and {{36}} of water instead.",
+              "<strong>Mechanical clocks</strong>",
+              "- The first known one was constructed in Germany in the 10th century",
+              "- In the 14th century, a clock with a {{37}} to mark the hours was constructed; this is still in Salisbury Cathedral, England",
+              "<strong>Further developments in clock making</strong>",
+              "- Clockmakers aimed to produce clocks that were {{38}} and able to tell the time more precisely, especially to aid sailors with navigation",
+              "- Thomas Tompion, an English clockmaker, managed to produce a clock that was small enough to be {{39}}.",
+              "- Tompion gave one of these to an English {{40}}."
+            ],
+            "imageIds": [],
+            "layoutHtml": "",
+            "title": "A history of measuring time\nMeasuring the time in a year or a day has always been a priority"
+          }
+        ],
+        "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+        "instruction": "Complete the notes. Use NO MORE THAN ONE WORD for each answer."
+      }
+    ]
+  },
+  "answers": {
+    "1": "7:30",
+    "2": "Tuesday",
+    "3": "15",
+    "4": "Cavendish",
+    "5": "43",
+    "6": "0188 639 423",
+    "7": "fitness",
+    "8": "shoes",
+    "9": "towel",
+    "10": "China",
+    "11": "H",
+    "12": "F",
+    "13": "E",
+    "14": "G",
+    "15": "A",
+    "16": "B",
+    "17": "B",
+    "18": "B",
+    "19": "C",
+    "20": "B",
+    "21": "G",
+    "22": "H",
+    "23": "E",
+    "24": "B",
+    "25": "D",
+    "26": "C",
+    "27": "C | E",
+    "28": "C | E",
+    "29": "B | C",
+    "30": "B | C",
+    "31": "calendars",
+    "32": "sun",
+    "33": "Egypt",
+    "34": "stone",
+    "35": "cold",
+    "36": "sand",
+    "37": "bell",
+    "38": "lighter",
+    "39": "portable",
+    "40": "king"
+  },
+  "images": [
+    {
+      "id": "img-1",
+      "src": "/uploads/ielts-import/ielts-full-listening-cdi/map.jpg",
+      "alt": "",
+      "section": "reading",
+      "sectionNumber": null,
+      "questionGroupIndex": null
+    }
+  ],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 1,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-06-20T02:17:10.853Z",
+  "publishedAt": "2026-06-20T02:17:10.858Z",
+  "skill": "listening",
+  "subtitle": "Listening full test",
+  "manualListeningTestId": "ielts-full-listening-cdi-listening-full"
+}

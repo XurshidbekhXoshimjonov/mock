@@ -1,0 +1,1019 @@
+{
+  "id": "listening-vol-7-test-3",
+  "title": "Listening Vol 7 Test 3",
+  "sourceFile": "Listening Vol 7 test 3.html",
+  "status": "published",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "Listening Vol 7 test 3"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1: Planning a party",
+        "sectionHtml": "\n<div>\n<div>Questions 1-10</div>\n<div>Complete the notes below.</div>\n<div>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</div>\n\n<div>\n<div>Planning a party</div>\n<div>Example<br>Reason for event: wife's promotion</div>\n\n<div>\n<div><strong>EVENT DETAILS</strong></div>\n<div>Event option: large surprise party</div>\n<div>Number of people:  <span class=\"question-number\">1</span></div>\n<div>Date:  <span class=\"question-number\">2</span></div>\n<div>Day of week: Friday</div>\n<div>Time: 6 - 10 p.m.</div>\n<div>Location: the  Room <span class=\"question-number\">3</span></div>\n<div>Type of music  <span class=\"question-number\">4</span></div>\n\n<div><strong>FOOD</strong></div>\n<div>Service option  <span class=\"question-number\">5</span></div>\n<div>Flavour of cake:  <span class=\"question-number\">6</span></div>\n<div>Message on cake:  <span class=\"question-number\">7</span></div>\n\n<div><strong>PAYMENT</strong></div>\n<div>Reservation fee paid: $100</div>\n<div>Credit card type: Mastercard</div>\n<div>Credit card number:  <span class=\"question-number\">8</span></div>\n<div>Name: Brian  Troy <span class=\"question-number\">9</span></div>\n<div>Additional fees: extra charge for  <span class=\"question-number\">10</span></div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 1-10",
+            "instructionText": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Number of people: 1",
+                "options": [],
+                "answer": "80"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Date: 2",
+                "options": [],
+                "answer": "26 September"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Location: the Room 3",
+                "options": [],
+                "answer": "King"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Type of music 4",
+                "options": [],
+                "answer": "jazz"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Service option 5",
+                "options": [],
+                "answer": "table"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Flavour of cake: 6",
+                "options": [],
+                "answer": "lemon"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Message on cake: 7",
+                "options": [],
+                "answer": "congratulations"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Credit card number: 8",
+                "options": [],
+                "answer": "5544120043268887"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Name: Brian Troy 9",
+                "options": [],
+                "answer": "SEBASTIAN"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Additional fees: extra charge for 10",
+                "options": [],
+                "answer": "service"
+              }
+            ],
+            "content": [
+              "<strong>EVENT DETAILS</strong>",
+              "Event option: large surprise party",
+              "Number of people: {{1}}",
+              "Date: {{2}}",
+              "Day of week: Friday",
+              "Time: 6 - 10 p.m.",
+              "Location: the {{3}} Room",
+              "Type of music {{4}}",
+              "<strong>FOOD</strong>",
+              "Service option {{5}}",
+              "Flavour of cake: {{6}}",
+              "Message on cake: {{7}}",
+              "<strong>PAYMENT</strong>",
+              "Reservation fee paid: $100",
+              "Credit card type: Mastercard",
+              "Credit card number: {{8}}",
+              "Name: Brian {{9}} Troy",
+              "Additional fees: extra charge for {{10}}"
+            ],
+            "title": "Planning a party",
+            "example": "Example - Reason for event: wife's promotion",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2: Riding for the Disabled (RDA)",
+        "sectionHtml": "\n<div class=\"scenario-title\">SECTION 2</div>\n\n<div class=\"scenario-title\">Questions 11-12</div>\n<p>Choose the correct letter, <strong>A, B, or C</strong>.</p>\n\n<div>\n<div>\n<div>11 Joan normally gets up at</div>\n<div>\n<label>\n\n<strong>A</strong> 5.30 a.m\n</label>\n<label>\n\n<strong>B</strong> 6.30 a.m\n</label>\n<label>\n\n<strong>C</strong> 7.30 a.m\n</label>\n</div>\n</div>\n\n<div>\n<div>12 Joan's first task of the day is to</div>\n<div>\n<label>\n\n<strong>A</strong> clean the horses.\n</label>\n<label>\n\n<strong>B</strong> organise her son.\n</label>\n<label>\n\n<strong>C</strong> do farm work.\n</label>\n</div>\n</div>\n</div>\n\n<div class=\"scenario-title\">Questions 13-14</div>\n<p>Complete the summary below.</p>\n<p>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>\n\n<div>\n<div>Riding for the Disabled (RDA)</div>\n\n<div>\n<div>Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and  helpers on the volunteer list, out of whom  come regularly. <span class=\"question-number\">13</span> <span class=\"question-number\">14</span></div>\n</div>\n</div>\n\n<div class=\"scenario-title\">Questions 15-18</div>\n<p>How much does Joan like doing each of the following activities?</p>\n<p>Choose the correct letter, <strong>A, B or C</strong> next to questions 15-18.</p>\n\n<div>\n<div>Categories</div>\n<div>\n<div><strong>A</strong> She really likes it</div>\n<div><strong>B</strong> She doesn't mind it</div>\n<div><strong>C</strong> She hates it</div>\n</div>\n</div>\n\n<div>\n<div>Activities</div>\n\n<!-- Drag and Drop for Questions 15-18 -->\n<div class=\"draggable-options\" id=\"options15-18\">\n<div class=\"drag-item\" data-value=\"A\">A</div>\n<div class=\"drag-item\" data-value=\"B\">B</div>\n<div class=\"drag-item\" data-value=\"C\">C</div>\n</div>\n\n<div>\n<div>\n15 correspondence\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">15</span>\n</div>\n<div>\n16 fund-raising\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">16</span>\n</div>\n<div>\n17 calling riders\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">17</span>\n</div>\n<div>\n18 organising accounts\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">18</span>\n</div>\n</div>\n</div>\n\n<div class=\"scenario-title\">Questions 19-20</div>\n<p>Choose <strong>TWO</strong> correct answers.</p>\n<p>19-20 Joan says the TWO ways the RDA needs to improve are by</p>\n\n<div>\n<div>\n<label>\n\n<strong>A</strong> giving special training.\n</label>\n<label>\n\n<strong>B</strong> making fund-raising more effective.\n</label>\n<label>\n\n<strong>C</strong> opening more RDA centres.\n</label>\n<label>\n\n<strong>D</strong> providing more helpers.\n</label>\n<label>\n\n<strong>E</strong> recognising difficulties of disabled riders.\n</label>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11-12",
+            "instructionText": "Choose the correct letter, A, B, or C.",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "Joan normally gets up at",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A 5.30 a.m",
+                    "html": "5.30 a.m"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B 6.30 a.m",
+                    "html": "6.30 a.m"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C 7.30 a.m",
+                    "html": "7.30 a.m"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "Joan's first task of the day is to",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A clean the horses.",
+                    "html": "clean the horses."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B organise her son.",
+                    "html": "organise her son."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C do farm work.",
+                    "html": "do farm work."
+                  }
+                ],
+                "answer": "B"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 13-14",
+            "instructionText": "Complete the summary below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 13,
+                "type": "sentence_completion",
+                "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+                "options": [],
+                "answer": "40"
+              },
+              {
+                "number": 14,
+                "type": "sentence_completion",
+                "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+                "options": [],
+                "answer": "25"
+              }
+            ],
+            "content": [
+              "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and {{13}} helpers on the volunteer list, out of whom {{14}} come regularly."
+            ],
+            "title": "Riding for the Disabled (RDA)",
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 15-18",
+            "instructionText": "How much does Joan like doing each of the following activities? Choose the correct letter, A, B or C next to questions 15-18. Categories A She really likes it B She doesn't mind it C She hates it",
+            "questions": [
+              {
+                "number": 15,
+                "type": "matching",
+                "question": "correspondence",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - She really likes it",
+                    "html": "She really likes it"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - She doesn't mind it",
+                    "html": "She doesn't mind it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - She hates it",
+                    "html": "She hates it"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 16,
+                "type": "matching",
+                "question": "fund-raising",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - She really likes it",
+                    "html": "She really likes it"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - She doesn't mind it",
+                    "html": "She doesn't mind it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - She hates it",
+                    "html": "She hates it"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "calling riders",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - She really likes it",
+                    "html": "She really likes it"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - She doesn't mind it",
+                    "html": "She doesn't mind it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - She hates it",
+                    "html": "She hates it"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "organising accounts",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - She really likes it",
+                    "html": "She really likes it"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - She doesn't mind it",
+                    "html": "She doesn't mind it"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - She hates it",
+                    "html": "She hates it"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 19-20",
+            "instructionText": "Choose TWO correct answers. 19-20 Joan says the TWO ways the RDA needs to improve are by",
+            "questions": [
+              {
+                "number": 19,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A giving special training.",
+                    "html": "giving special training."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B making fund-raising more effective.",
+                    "html": "making fund-raising more effective."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C opening more RDA centres.",
+                    "html": "opening more RDA centres."
+                  },
+                  {
+                    "value": "D",
+                    "label": "D providing more helpers.",
+                    "html": "providing more helpers."
+                  },
+                  {
+                    "value": "E",
+                    "label": "E recognising difficulties of disabled riders.",
+                    "html": "recognising difficulties of disabled riders."
+                  }
+                ],
+                "answer": "B | E"
+              },
+              {
+                "number": 20,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A giving special training.",
+                    "html": "giving special training."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B making fund-raising more effective.",
+                    "html": "making fund-raising more effective."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C opening more RDA centres.",
+                    "html": "opening more RDA centres."
+                  },
+                  {
+                    "value": "D",
+                    "label": "D providing more helpers.",
+                    "html": "providing more helpers."
+                  },
+                  {
+                    "value": "E",
+                    "label": "E recognising difficulties of disabled riders.",
+                    "html": "recognising difficulties of disabled riders."
+                  }
+                ],
+                "answer": "B | E"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3: Geography lesson plan: student activities",
+        "sectionHtml": "\n<div class=\"scenario-title\">SECTION 3</div>\n\n<div class=\"scenario-title\">Questions 21-22</div>\n<p>Choose <strong>TWO</strong> correct answers.</p>\n<p>21-22 Which TWO topics were the aims of the geography lesson related to?</p>\n\n<div>\n<div>\n<label>\n\n<strong>A</strong> global interdependency\n</label>\n<label>\n\n<strong>B</strong> manufacturing method\n</label>\n<label>\n\n<strong>C</strong> the environmental impact of trade\n</label>\n<label>\n\n<strong>D</strong> transport systems\n</label>\n<label>\n\n<strong>E</strong> the development of writing tools\n</label>\n</div>\n</div>\n\n<div class=\"scenario-title\">Questions 23-24</div>\n<p>Choose <strong>TWO</strong> correct answers.</p>\n<p>23-24 Which TWO problems do Dean and Hannah identify in their lesson?</p>\n\n<div>\n<div>\n<label>\n\n<strong>A</strong> the materials\n</label>\n<label>\n\n<strong>B</strong> the student grouping\n</label>\n<label>\n\n<strong>C</strong> the lesson structure\n</label>\n<label>\n\n<strong>D</strong> the teacher coordination\n</label>\n<label>\n\n<strong>E</strong> the timing\n</label>\n</div>\n</div>\n\n<div class=\"scenario-title\">Questions 25-30</div>\n<p>Complete the flow-chart below.</p>\n<p>Choose <strong>SIX</strong> correct answers, <strong>A-H</strong>, next to questions 25-30.</p>\n\n<div>\n<div>Options</div>\n<div>\n<div><strong>A</strong> export routes</div>\n<div><strong>B</strong> future</div>\n<div><strong>C</strong> talk</div>\n<div><strong>D</strong> homework</div>\n<div><strong>E</strong> worksheet</div>\n<div><strong>F</strong> history</div>\n<div><strong>G</strong> producers</div>\n<div><strong>H</strong> methods of transport</div>\n</div>\n</div>\n\n\n<div class=\"draggable-options\" id=\"options25-30\">\n<div class=\"drag-item\" data-value=\"A\">A - export routes</div>\n<div class=\"drag-item\" data-value=\"B\">B - future</div>\n<div class=\"drag-item\" data-value=\"C\">C - talk</div>\n<div class=\"drag-item\" data-value=\"D\">D - homework</div>\n<div class=\"drag-item\" data-value=\"E\">E - worksheet</div>\n<div class=\"drag-item\" data-value=\"F\">F - history</div>\n<div class=\"drag-item\" data-value=\"G\">G - producers</div>\n<div class=\"drag-item\" data-value=\"H\">H - methods of transport</div>\n</div>\n\n<div>\n<div>Geography lesson plan: student activities</div>\n\n<div>\n<div>Examine a pencil and discuss where the component materials come from</div>\n<div>\nLocate the top\n<div class=\"drop-zone\"></div>\non a world map <span class=\"question-number\">25</span>\n</div>\n<div>\nDiscuss the pros and cons of different\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">26</span>\n</div>\n<div>\nIn groups, discuss countries' possible\n<div class=\"drop-zone\"></div>\nto the USA <span class=\"question-number\">27</span>\n</div>\n<div>\nComplete a\n<div class=\"drop-zone\"></div>\nabout pencil distribution within the USA <span class=\"question-number\">28</span>\n</div>\n<div>\nShare ideas about the\n<div class=\"drop-zone\"></div>\nof pencils <span class=\"question-number\">29</span>\n</div>\n<div>\nPrepare a\n<div class=\"drop-zone\"></div>\n<span class=\"question-number\">30</span>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 21-22",
+            "instructionText": "Choose TWO correct answers. 21-22 Which TWO topics were the aims of the geography lesson related to?",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A global interdependency",
+                    "html": "global interdependency"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B manufacturing method",
+                    "html": "manufacturing method"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the environmental impact of trade",
+                    "html": "the environmental impact of trade"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D transport systems",
+                    "html": "transport systems"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E the development of writing tools",
+                    "html": "the development of writing tools"
+                  }
+                ],
+                "answer": "A | D"
+              },
+              {
+                "number": 22,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A global interdependency",
+                    "html": "global interdependency"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B manufacturing method",
+                    "html": "manufacturing method"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the environmental impact of trade",
+                    "html": "the environmental impact of trade"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D transport systems",
+                    "html": "transport systems"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E the development of writing tools",
+                    "html": "the development of writing tools"
+                  }
+                ],
+                "answer": "A | D"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multi_select",
+            "instructionTitle": "Questions 23-24",
+            "instructionText": "Choose TWO correct answers. 23-24 Which TWO problems do Dean and Hannah identify in their lesson?",
+            "questions": [
+              {
+                "number": 23,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the materials",
+                    "html": "the materials"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B the student grouping",
+                    "html": "the student grouping"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the lesson structure",
+                    "html": "the lesson structure"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the teacher coordination",
+                    "html": "the teacher coordination"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E the timing",
+                    "html": "the timing"
+                  }
+                ],
+                "answer": "B | E"
+              },
+              {
+                "number": 24,
+                "type": "multi_select",
+                "question": "",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the materials",
+                    "html": "the materials"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B the student grouping",
+                    "html": "the student grouping"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the lesson structure",
+                    "html": "the lesson structure"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the teacher coordination",
+                    "html": "the teacher coordination"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E the timing",
+                    "html": "the timing"
+                  }
+                ],
+                "answer": "B | E"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 25-30",
+            "instructionText": "Complete the flow-chart below.\nChoose SIX correct answers, A-H, next to questions 25-30.",
+            "title": "Geography lesson plan: student activities",
+            "content": [
+              "Examine a pencil and discuss where the component materials come from",
+              "Locate the top {{25}} on a world map",
+              "Discuss the pros and cons of different {{26}}",
+              "In groups, discuss countries' possible {{27}} to the USA",
+              "Complete a {{28}} about pencil distribution within the USA",
+              "Share ideas about the {{29}} of pencils",
+              "Prepare a {{30}}"
+            ],
+            "questions": [
+              {
+                "number": 25,
+                "type": "matching",
+                "question": "Locate the top on a world map",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 26,
+                "type": "matching",
+                "question": "Discuss the pros and cons of different",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 27,
+                "type": "matching",
+                "question": "In groups, discuss countries' possible to the USA",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 28,
+                "type": "matching",
+                "question": "Complete a about pencil distribution within the USA",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 29,
+                "type": "matching",
+                "question": "Share ideas about the of pencils",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 30,
+                "type": "matching",
+                "question": "Prepare a",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A - - export routes",
+                    "html": "- export routes"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B - - future",
+                    "html": "- future"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C - - talk",
+                    "html": "- talk"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D - - homework",
+                    "html": "- homework"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E - - worksheet",
+                    "html": "- worksheet"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F - - history",
+                    "html": "- history"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G - - producers",
+                    "html": "- producers"
+                  },
+                  {
+                    "value": "H",
+                    "label": "H - - methods of transport",
+                    "html": "- methods of transport"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4: The world's oldest mechanical computer: the Antikythera mechanism",
+        "sectionHtml": "\n<div class=\"scenario-title\">SECTION 4</div>\n\n<div class=\"scenario-title\">Questions 31-40</div>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n\n<div>\n<div>The world's oldest mechanical computer: the Antikythera mechanism</div>\n\n<div><strong>Discovery</strong></div>\n<div>\nIt was part of a ship's , found in the sea near Antikythera, in Greece. <span class=\"question-number\">31</span>\n</div>\n<div>\nIt was wrongly thought to be a piece of . <span class=\"question-number\">32</span>\n</div>\n<div>It was later found to be a mechanism that had broken into pieces.</div>\n\n<div><strong>Equipment used for analysis of the mechanism</strong></div>\n<div>\n\"Dome\" - produces photographs which make the  clearer <span class=\"question-number\">33</span>\n</div>\n<div>\n\"BladeRunner\" - produces X-rays - originally used to identify  in engines <span class=\"question-number\">34</span>\n</div>\n\n<div><strong>Description</strong></div>\n<div>The mechanism consisted of:</div>\n<div>- 30 or more gear wheels made of  <span class=\"question-number\">35</span></div>\n<div>- models of the sun, moon and planets</div>\n<div>\n- a framework made of  <span class=\"question-number\">36</span>\n</div>\n\n<div><strong>How the mechanism was used</strong></div>\n<div>\nThe operator turned a  to move the gear wheels. <span class=\"question-number\">37</span>\n</div>\n<div>The sun, moon and planets could be moved into their correct positions for any date.</div>\n<div>\nMost surprisingly, the mechanism could calculate when an  would occur. <span class=\"question-number\">38</span>\n</div>\n<div>\nIt may have been used as a  when planning festivals. <span class=\"question-number\">39</span>\n</div>\n\n<div><strong>Later use of similar technology</strong></div>\n<div>\n13th – 14th centuries: used for making  in Western Europe. <span class=\"question-number\">40</span>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "It was part of a ship's , found in the sea near Antikythera, in Greece. 31",
+                "options": [],
+                "answer": "cargo"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "It was wrongly thought to be a piece of . 32",
+                "options": [],
+                "answer": "rock"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "\"Dome\" - produces photographs which make the clearer 33",
+                "options": [],
+                "answer": "inscriptions"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "\"BladeRunner\" - produces X-rays - originally used to identify in engines 34",
+                "options": [],
+                "answer": "cracks"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "30 or more gear wheels made of 35",
+                "options": [],
+                "answer": "metal"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "a framework made of 36",
+                "options": [],
+                "answer": "wood"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "The operator turned a to move the gear wheels. 37",
+                "options": [],
+                "answer": "handle"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Most surprisingly, the mechanism could calculate when an would occur. 38",
+                "options": [],
+                "answer": "eclipse"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "It may have been used as a when planning festivals. 39",
+                "options": [],
+                "answer": "calendar"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "13th – 14th centuries: used for making in Western Europe. 40",
+                "options": [],
+                "answer": "clocks"
+              }
+            ],
+            "content": [
+              "<strong>Discovery</strong>",
+              "It was part of a ship's {{31}}, found in the sea near Antikythera, in Greece.",
+              "It was wrongly thought to be a piece of {{32}}.",
+              "It was later found to be a mechanism that had broken into pieces.",
+              "<strong>Equipment used for analysis of the mechanism</strong>",
+              "\"Dome\" - produces photographs which make the {{33}} clearer",
+              "\"BladeRunner\" - produces X-rays - originally used to identify {{34}} in engines",
+              "<strong>Description</strong>",
+              "The mechanism consisted of:",
+              "30 or more gear wheels made of {{35}}",
+              "models of the sun, moon and planets",
+              "a framework made of {{36}}",
+              "<strong>How the mechanism was used</strong>",
+              "The operator turned a {{37}} to move the gear wheels.",
+              "The sun, moon and planets could be moved into their correct positions for any date.",
+              "Most surprisingly, the mechanism could calculate when an {{38}} would occur.",
+              "It may have been used as a {{39}} when planning festivals.",
+              "<strong>Later use of similar technology</strong>",
+              "13th – 14th centuries: used for making {{40}} in Western Europe."
+            ],
+            "title": "The world's oldest mechanical computer: the Antikythera mechanism",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "80",
+    "2": "26 September",
+    "3": "King",
+    "4": "jazz",
+    "5": "table",
+    "6": "lemon",
+    "7": "congratulations",
+    "8": "5544120043268887",
+    "9": "SEBASTIAN",
+    "10": "service",
+    "11": "B",
+    "12": "B",
+    "13": "40",
+    "14": "25",
+    "15": "B",
+    "16": "C",
+    "17": "A",
+    "18": "C",
+    "19": "B | E",
+    "20": "B | E",
+    "21": "A | D",
+    "22": "A | D",
+    "23": "B | E",
+    "24": "B | E",
+    "25": "G",
+    "26": "H",
+    "27": "A",
+    "28": "E",
+    "29": "B",
+    "30": "C",
+    "31": "cargo",
+    "32": "rock",
+    "33": "inscriptions",
+    "34": "cracks",
+    "35": "metal",
+    "36": "wood",
+    "37": "handle",
+    "38": "eclipse",
+    "39": "calendar",
+    "40": "clocks"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-06-19T16:07:47.720Z",
+  "publishedAt": "2026-06-19T16:07:47.723Z"
+}

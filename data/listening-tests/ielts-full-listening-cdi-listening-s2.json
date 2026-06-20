@@ -1,0 +1,691 @@
+{
+  "id": "ielts-full-listening-cdi-listening-s2",
+  "title": "IELTS CDI Full Listening Practice — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11 - 15",
+      "instruction": "Label the map. Write the appropriate letter, A - H.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Questions 16 - 20",
+      "instruction": "Choose the correct letter, A, B or C. 16. Which statement is true of the hotel's history?",
+      "questionNumbers": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "matching",
+      "question": "Dining Room",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 12,
+      "type": "matching",
+      "question": "Tennis Courts",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 13,
+      "type": "matching",
+      "question": "Gunderson Room",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 14,
+      "type": "matching",
+      "question": "Swanson Room",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Swimming Pool",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "A",
+          "label": "A",
+          "html": "A"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "B",
+          "label": "B",
+          "html": "B"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "C",
+          "label": "C",
+          "html": "C"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "D",
+          "label": "D",
+          "html": "D"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "E",
+          "label": "E",
+          "html": "E"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "F",
+          "label": "F",
+          "html": "F"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "G",
+          "label": "G",
+          "html": "G"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "H",
+          "label": "H",
+          "html": "H"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "Which statement is true of the hotel's history?",
+      "options": [
+        {
+          "value": "A",
+          "label": "It was built less than 100 years ago.",
+          "html": "It was built less than 100 years ago."
+        },
+        {
+          "value": "B",
+          "label": "The building was originally used for a different purpose.",
+          "html": "The building was originally used for a different purpose."
+        },
+        {
+          "value": "C",
+          "label": "It is the oldest hotel in Castleton.",
+          "html": "It is the oldest hotel in Castleton."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "What time does breakfast start at the weekend?",
+      "options": [
+        {
+          "value": "A",
+          "label": "7:00",
+          "html": "7:00"
+        },
+        {
+          "value": "B",
+          "label": "7:30",
+          "html": "7:30"
+        },
+        {
+          "value": "C",
+          "label": "8:00",
+          "html": "8:00"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "Where is the hotel located?",
+      "options": [
+        {
+          "value": "A",
+          "label": "on the sea",
+          "html": "on the sea"
+        },
+        {
+          "value": "B",
+          "label": "in the town centre",
+          "html": "in the town centre"
+        },
+        {
+          "value": "C",
+          "label": "near an architecture museum",
+          "html": "near an architecture museum"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "The manager recommends visiting the hotel spa because",
+      "options": [
+        {
+          "value": "A",
+          "label": "it recently won an award.",
+          "html": "it recently won an award."
+        },
+        {
+          "value": "B",
+          "label": "it is free for hotel guests to use.",
+          "html": "it is free for hotel guests to use."
+        },
+        {
+          "value": "C",
+          "label": "it is likely to be less busy than usual.",
+          "html": "it is likely to be less busy than usual."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "What does the manager say that hotel staff can help guests with?",
+      "options": [
+        {
+          "value": "A",
+          "label": "carrying baggage",
+          "html": "carrying baggage"
+        },
+        {
+          "value": "B",
+          "label": "arranging transport",
+          "html": "arranging transport"
+        },
+        {
+          "value": "C",
+          "label": "finding things to do",
+          "html": "finding things to do"
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-full-listening-cdi",
+  "createdAt": "2026-06-20T02:17:10.853Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/ielts-full-listening-audio.mp3",
+      "instruction": "",
+      "answerText": "11: H\n12: F\n13: E\n14: G\n15: A\n16: B\n17: B\n18: B\n19: C\n20: B",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "matching",
+          "questionRange": "Questions 11 - 15",
+          "title": "",
+          "example": "",
+          "instruction": "Label the map. Write the appropriate letter, A - H.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "A"
+            },
+            {
+              "letter": "B",
+              "text": "B"
+            },
+            {
+              "letter": "C",
+              "text": "C"
+            },
+            {
+              "letter": "D",
+              "text": "D"
+            },
+            {
+              "letter": "E",
+              "text": "E"
+            },
+            {
+              "letter": "F",
+              "text": "F"
+            },
+            {
+              "letter": "G",
+              "text": "G"
+            },
+            {
+              "letter": "H",
+              "text": "H"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "/uploads/ielts-import/ielts-full-listening-cdi/map.jpg",
+          "content": [],
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Dining Room",
+              "text": "Dining Room",
+              "answer": "H"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Tennis Courts",
+              "text": "Tennis Courts",
+              "answer": "F"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Gunderson Room",
+              "text": "Gunderson Room",
+              "answer": "E"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Swanson Room",
+              "text": "Swanson Room",
+              "answer": "G"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Swimming Pool",
+              "text": "Swimming Pool",
+              "answer": "A"
+            }
+          ]
+        },
+        {
+          "id": "group-2-16",
+          "type": "multiple_choice",
+          "questionRange": "Questions 16 - 20",
+          "title": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C. 16. Which statement is true of the hotel's history?",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Which statement is true of the hotel's history?",
+              "text": "Which statement is true of the hotel's history?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It was built less than 100 years ago."
+                },
+                {
+                  "letter": "B",
+                  "text": "The building was originally used for a different purpose."
+                },
+                {
+                  "letter": "C",
+                  "text": "It is the oldest hotel in Castleton."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "What time does breakfast start at the weekend?",
+              "text": "What time does breakfast start at the weekend?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "7:00"
+                },
+                {
+                  "letter": "B",
+                  "text": "7:30"
+                },
+                {
+                  "letter": "C",
+                  "text": "8:00"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Where is the hotel located?",
+              "text": "Where is the hotel located?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "on the sea"
+                },
+                {
+                  "letter": "B",
+                  "text": "in the town centre"
+                },
+                {
+                  "letter": "C",
+                  "text": "near an architecture museum"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "The manager recommends visiting the hotel spa because",
+              "text": "The manager recommends visiting the hotel spa because",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "it recently won an award."
+                },
+                {
+                  "letter": "B",
+                  "text": "it is free for hotel guests to use."
+                },
+                {
+                  "letter": "C",
+                  "text": "it is likely to be less busy than usual."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "What does the manager say that hotel staff can help guests with?",
+              "text": "What does the manager say that hotel staff can help guests with?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "carrying baggage"
+                },
+                {
+                  "letter": "B",
+                  "text": "arranging transport"
+                },
+                {
+                  "letter": "C",
+                  "text": "finding things to do"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

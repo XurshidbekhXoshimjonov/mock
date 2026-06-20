@@ -54,7 +54,7 @@ function renderTabs(test) {
 
     viewerTabs.innerHTML = tabs.map((tab) => {
         const active = String(selectedPart) === String(tab.part) ? "active" : "";
-        return `<a class="${active}" href="test-viewer.html?id=${encodeURIComponent(test.id)}&part=${encodeURIComponent(tab.part)}&type=${encodeURIComponent(test.type)}">${tab.label}</a>`;
+        return `<a class="${active}" href="/test-viewer.html?id=${encodeURIComponent(test.id)}&part=${encodeURIComponent(tab.part)}&type=${encodeURIComponent(test.type)}">${tab.label}</a>`;
     }).join("");
 }
 

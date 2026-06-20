@@ -1,0 +1,953 @@
+{
+  "id": "listening-vol-7-test-7-listening-s3",
+  "title": "Listening Vol 7 Test 7 - Part 3: Environmental Science modules",
+  "slug": "listening-vol-7-test-7-part-3",
+  "part": 3,
+  "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-26",
+      "instruction": "What is the student's opinion on each of the following Environmental Science modules? Choose SIX correct answers from the box and write the correct letter, A-I, next to questions 21-26.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27-28",
+      "instruction": "Choose TWO correct answers.",
+      "questionNumbers": [
+        27,
+        28
+      ]
+    },
+    {
+      "title": "Questions 29-30",
+      "instruction": "Choose TWO correct answers.",
+      "questionNumbers": [
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Statistics for environmental research",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "Sewage and drainage systems",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Agriculture and food security",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Sustainable energy",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Government policy",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "I"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Water management",
+      "options": [
+        {
+          "letter": "A",
+          "text": "was surprisingly interesting"
+        },
+        {
+          "letter": "B",
+          "text": "covered too many topics"
+        },
+        {
+          "letter": "C",
+          "text": "included out-of-date materials"
+        },
+        {
+          "letter": "D",
+          "text": "involved practical applications"
+        },
+        {
+          "letter": "E",
+          "text": "supplied useful technical information"
+        },
+        {
+          "letter": "F",
+          "text": "was too basic to be useful"
+        },
+        {
+          "letter": "G",
+          "text": "provided unnecessary detail"
+        },
+        {
+          "letter": "H",
+          "text": "was relevant to a topic in the news"
+        },
+        {
+          "letter": "I",
+          "text": "seemed too limited geographically"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 27,
+      "type": "multiple_select",
+      "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the amount of reading"
+        },
+        {
+          "letter": "B",
+          "text": "the flexibility in the length of the course"
+        },
+        {
+          "letter": "C",
+          "text": "the convenience of choosing when to take modules"
+        },
+        {
+          "letter": "D",
+          "text": "the range of different modules offered"
+        },
+        {
+          "letter": "E",
+          "text": "the relevance of the module content"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "multiple_select",
+      "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the amount of reading"
+        },
+        {
+          "letter": "B",
+          "text": "the flexibility in the length of the course"
+        },
+        {
+          "letter": "C",
+          "text": "the convenience of choosing when to take modules"
+        },
+        {
+          "letter": "D",
+          "text": "the range of different modules offered"
+        },
+        {
+          "letter": "E",
+          "text": "the relevance of the module content"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 29,
+      "type": "multiple_select",
+      "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The time for choosing a topic should be changed."
+        },
+        {
+          "letter": "B",
+          "text": "The permitted word limit should be increased."
+        },
+        {
+          "letter": "C",
+          "text": "Discussions with fellow students should be arranged."
+        },
+        {
+          "letter": "D",
+          "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+        },
+        {
+          "letter": "E",
+          "text": "Tutors should give more help in topic selection."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "multiple_select",
+      "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The time for choosing a topic should be changed."
+        },
+        {
+          "letter": "B",
+          "text": "The permitted word limit should be increased."
+        },
+        {
+          "letter": "C",
+          "text": "Discussions with fellow students should be arranged."
+        },
+        {
+          "letter": "D",
+          "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+        },
+        {
+          "letter": "E",
+          "text": "Tutors should give more help in topic selection."
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-7",
+  "createdAt": "2026-06-19T17:07:01.418Z",
+  "updatedAt": "2026-06-19T17:07:01.418Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3: Environmental Science modules",
+      "questionRange": "Questions 21-30",
+      "instruction": "",
+      "blocks": [
+        {
+          "id": "vol-7-test-7-part-3-modules",
+          "type": "matching",
+          "questionRange": "Questions 21-26",
+          "title": "Environmental Science modules",
+          "instruction": "What is the student's opinion on each of the following Environmental Science modules? Choose SIX correct answers from the box and write the correct letter, A-I, next to questions 21-26.",
+          "imageUrl": "",
+          "options": [
+            {
+              "letter": "A",
+              "text": "was surprisingly interesting"
+            },
+            {
+              "letter": "B",
+              "text": "covered too many topics"
+            },
+            {
+              "letter": "C",
+              "text": "included out-of-date materials"
+            },
+            {
+              "letter": "D",
+              "text": "involved practical applications"
+            },
+            {
+              "letter": "E",
+              "text": "supplied useful technical information"
+            },
+            {
+              "letter": "F",
+              "text": "was too basic to be useful"
+            },
+            {
+              "letter": "G",
+              "text": "provided unnecessary detail"
+            },
+            {
+              "letter": "H",
+              "text": "was relevant to a topic in the news"
+            },
+            {
+              "letter": "I",
+              "text": "seemed too limited geographically"
+            }
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "type": "multiple_choice",
+              "question": "Statistics for environmental research",
+              "text": "Statistics for environmental research",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "F"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "type": "multiple_choice",
+              "question": "Sewage and drainage systems",
+              "text": "Sewage and drainage systems",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "type": "multiple_choice",
+              "question": "Agriculture and food security",
+              "text": "Agriculture and food security",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "C"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "type": "multiple_choice",
+              "question": "Sustainable energy",
+              "text": "Sustainable energy",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "D"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "type": "multiple_choice",
+              "question": "Government policy",
+              "text": "Government policy",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "I"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "type": "multiple_choice",
+              "question": "Water management",
+              "text": "Water management",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "was surprisingly interesting"
+                },
+                {
+                  "letter": "B",
+                  "text": "covered too many topics"
+                },
+                {
+                  "letter": "C",
+                  "text": "included out-of-date materials"
+                },
+                {
+                  "letter": "D",
+                  "text": "involved practical applications"
+                },
+                {
+                  "letter": "E",
+                  "text": "supplied useful technical information"
+                },
+                {
+                  "letter": "F",
+                  "text": "was too basic to be useful"
+                },
+                {
+                  "letter": "G",
+                  "text": "provided unnecessary detail"
+                },
+                {
+                  "letter": "H",
+                  "text": "was relevant to a topic in the news"
+                },
+                {
+                  "letter": "I",
+                  "text": "seemed too limited geographically"
+                }
+              ],
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "vol-7-test-7-part-3-course-organisation",
+          "type": "multiple_select",
+          "questionRange": "Questions 27-28",
+          "instruction": "Choose TWO correct answers.",
+          "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+          "questionNumber": 27,
+          "answerQuestions": [
+            {
+              "questionNumber": 28
+            }
+          ],
+          "maxSelections": 2,
+          "options": [
+            {
+              "letter": "A",
+              "text": "the amount of reading"
+            },
+            {
+              "letter": "B",
+              "text": "the flexibility in the length of the course"
+            },
+            {
+              "letter": "C",
+              "text": "the convenience of choosing when to take modules"
+            },
+            {
+              "letter": "D",
+              "text": "the range of different modules offered"
+            },
+            {
+              "letter": "E",
+              "text": "the relevance of the module content"
+            }
+          ],
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "type": "multiple_select",
+              "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+              "text": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the amount of reading"
+                },
+                {
+                  "letter": "B",
+                  "text": "the flexibility in the length of the course"
+                },
+                {
+                  "letter": "C",
+                  "text": "the convenience of choosing when to take modules"
+                },
+                {
+                  "letter": "D",
+                  "text": "the range of different modules offered"
+                },
+                {
+                  "letter": "E",
+                  "text": "the relevance of the module content"
+                }
+              ],
+              "answer": "D"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "type": "multiple_select",
+              "question": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+              "text": "Which TWO aspects of the course organisation did both Jamie and Martha like?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the amount of reading"
+                },
+                {
+                  "letter": "B",
+                  "text": "the flexibility in the length of the course"
+                },
+                {
+                  "letter": "C",
+                  "text": "the convenience of choosing when to take modules"
+                },
+                {
+                  "letter": "D",
+                  "text": "the range of different modules offered"
+                },
+                {
+                  "letter": "E",
+                  "text": "the relevance of the module content"
+                }
+              ],
+              "answer": "E"
+            }
+          ]
+        },
+        {
+          "id": "vol-7-test-7-part-3-written-assignment",
+          "type": "multiple_select",
+          "questionRange": "Questions 29-30",
+          "instruction": "Choose TWO correct answers.",
+          "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+          "questionNumber": 29,
+          "answerQuestions": [
+            {
+              "questionNumber": 30
+            }
+          ],
+          "maxSelections": 2,
+          "options": [
+            {
+              "letter": "A",
+              "text": "The time for choosing a topic should be changed."
+            },
+            {
+              "letter": "B",
+              "text": "The permitted word limit should be increased."
+            },
+            {
+              "letter": "C",
+              "text": "Discussions with fellow students should be arranged."
+            },
+            {
+              "letter": "D",
+              "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+            },
+            {
+              "letter": "E",
+              "text": "Tutors should give more help in topic selection."
+            }
+          ],
+          "questions": [
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "type": "multiple_select",
+              "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+              "text": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The time for choosing a topic should be changed."
+                },
+                {
+                  "letter": "B",
+                  "text": "The permitted word limit should be increased."
+                },
+                {
+                  "letter": "C",
+                  "text": "Discussions with fellow students should be arranged."
+                },
+                {
+                  "letter": "D",
+                  "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+                },
+                {
+                  "letter": "E",
+                  "text": "Tutors should give more help in topic selection."
+                }
+              ],
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "type": "multiple_select",
+              "question": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+              "text": "Which TWO suggestions for written assignment do Jamie and Martha agree to recommend to Dr Brown?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The time for choosing a topic should be changed."
+                },
+                {
+                  "letter": "B",
+                  "text": "The permitted word limit should be increased."
+                },
+                {
+                  "letter": "C",
+                  "text": "Discussions with fellow students should be arranged."
+                },
+                {
+                  "letter": "D",
+                  "text": "Face-to-face feedback sessions with the tutor should be scheduled."
+                },
+                {
+                  "letter": "E",
+                  "text": "Tutors should give more help in topic selection."
+                }
+              ],
+              "answer": "C"
+            }
+          ]
+        }
+      ],
+      "audioUrl": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+      "audioFileName": "Test 7 (1).m4a",
+      "answerText": "21: F\n22: A\n23: C\n24: D\n25: I\n26: G\n27: D\n28: E\n29: A\n30: C"
+    }
+  ]
+}

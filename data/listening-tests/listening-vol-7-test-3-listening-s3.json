@@ -1,0 +1,801 @@
+{
+  "id": "listening-vol-7-test-3-listening-s3",
+  "title": "Listening Vol 7 Test 3 - Part 3: Geography lesson plan: student activities",
+  "slug": "listening-vol-7-test-3-part-3",
+  "part": 3,
+  "audio": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-22",
+      "instruction": "Choose TWO correct answers.",
+      "questionNumbers": [
+        21,
+        22
+      ]
+    },
+    {
+      "title": "Questions 23-24",
+      "instruction": "Choose TWO correct answers. 23-24 Which TWO problems do Dean and Hannah identify in their lesson?",
+      "questionNumbers": [
+        23,
+        24
+      ]
+    },
+    {
+      "title": "Questions 25-30",
+      "instruction": "Complete the flow-chart below.\nChoose SIX correct answers, A-H, next to questions 25-30.",
+      "questionNumbers": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A global interdependency",
+          "html": "global interdependency"
+        },
+        {
+          "value": "B",
+          "label": "B manufacturing method",
+          "html": "manufacturing method"
+        },
+        {
+          "value": "C",
+          "label": "C the environmental impact of trade",
+          "html": "the environmental impact of trade"
+        },
+        {
+          "value": "D",
+          "label": "D transport systems",
+          "html": "transport systems"
+        },
+        {
+          "value": "E",
+          "label": "E the development of writing tools",
+          "html": "the development of writing tools"
+        }
+      ],
+      "answer": "A | D"
+    },
+    {
+      "number": 22,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A global interdependency",
+          "html": "global interdependency"
+        },
+        {
+          "value": "B",
+          "label": "B manufacturing method",
+          "html": "manufacturing method"
+        },
+        {
+          "value": "C",
+          "label": "C the environmental impact of trade",
+          "html": "the environmental impact of trade"
+        },
+        {
+          "value": "D",
+          "label": "D transport systems",
+          "html": "transport systems"
+        },
+        {
+          "value": "E",
+          "label": "E the development of writing tools",
+          "html": "the development of writing tools"
+        }
+      ],
+      "answer": "A | D"
+    },
+    {
+      "number": 23,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A the materials",
+          "html": "the materials"
+        },
+        {
+          "value": "B",
+          "label": "B the student grouping",
+          "html": "the student grouping"
+        },
+        {
+          "value": "C",
+          "label": "C the lesson structure",
+          "html": "the lesson structure"
+        },
+        {
+          "value": "D",
+          "label": "D the teacher coordination",
+          "html": "the teacher coordination"
+        },
+        {
+          "value": "E",
+          "label": "E the timing",
+          "html": "the timing"
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 24,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A the materials",
+          "html": "the materials"
+        },
+        {
+          "value": "B",
+          "label": "B the student grouping",
+          "html": "the student grouping"
+        },
+        {
+          "value": "C",
+          "label": "C the lesson structure",
+          "html": "the lesson structure"
+        },
+        {
+          "value": "D",
+          "label": "D the teacher coordination",
+          "html": "the teacher coordination"
+        },
+        {
+          "value": "E",
+          "label": "E the timing",
+          "html": "the timing"
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "Locate the top on a world map",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Discuss the pros and cons of different",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "In groups, discuss countries' possible to the USA",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Complete a about pencil distribution within the USA",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Share ideas about the of pencils",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Prepare a",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - - export routes",
+          "html": "- export routes"
+        },
+        {
+          "value": "B",
+          "label": "B - - future",
+          "html": "- future"
+        },
+        {
+          "value": "C",
+          "label": "C - - talk",
+          "html": "- talk"
+        },
+        {
+          "value": "D",
+          "label": "D - - homework",
+          "html": "- homework"
+        },
+        {
+          "value": "E",
+          "label": "E - - worksheet",
+          "html": "- worksheet"
+        },
+        {
+          "value": "F",
+          "label": "F - - history",
+          "html": "- history"
+        },
+        {
+          "value": "G",
+          "label": "G - - producers",
+          "html": "- producers"
+        },
+        {
+          "value": "H",
+          "label": "H - - methods of transport",
+          "html": "- methods of transport"
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-3",
+  "createdAt": "2026-06-19T16:07:47.720Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3: Geography lesson plan: student activities",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+      "instruction": "",
+      "answerText": "21: A | D\n22: A | D\n23: B | E\n24: B | E\n25: G\n26: H\n27: A\n28: E\n29: B\n30: C",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_select",
+          "questionRange": "Questions 21-22",
+          "title": "",
+          "example": "",
+          "instruction": "Choose TWO correct answers.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "global interdependency"
+            },
+            {
+              "letter": "B",
+              "text": "manufacturing method"
+            },
+            {
+              "letter": "C",
+              "text": "the environmental impact of trade"
+            },
+            {
+              "letter": "D",
+              "text": "transport systems"
+            },
+            {
+              "letter": "E",
+              "text": "the development of writing tools"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A global interdependency",
+                  "html": "global interdependency"
+                },
+                {
+                  "value": "B",
+                  "label": "B manufacturing method",
+                  "html": "manufacturing method"
+                },
+                {
+                  "value": "C",
+                  "label": "C the environmental impact of trade",
+                  "html": "the environmental impact of trade"
+                },
+                {
+                  "value": "D",
+                  "label": "D transport systems",
+                  "html": "transport systems"
+                },
+                {
+                  "value": "E",
+                  "label": "E the development of writing tools",
+                  "html": "the development of writing tools"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A global interdependency",
+                  "html": "global interdependency"
+                },
+                {
+                  "value": "B",
+                  "label": "B manufacturing method",
+                  "html": "manufacturing method"
+                },
+                {
+                  "value": "C",
+                  "label": "C the environmental impact of trade",
+                  "html": "the environmental impact of trade"
+                },
+                {
+                  "value": "D",
+                  "label": "D transport systems",
+                  "html": "transport systems"
+                },
+                {
+                  "value": "E",
+                  "label": "E the development of writing tools",
+                  "html": "the development of writing tools"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            }
+          ],
+          "questionNumber": 21,
+          "answerQuestions": [
+            {
+              "questionNumber": 22
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO topics were the aims of the geography lesson related to?"
+        },
+        {
+          "id": "group-3-23",
+          "type": "multiple_select",
+          "questionRange": "Questions 23-24",
+          "title": "",
+          "example": "",
+          "instruction": "Choose TWO correct answers. 23-24 Which TWO problems do Dean and Hannah identify in their lesson?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the materials"
+            },
+            {
+              "letter": "B",
+              "text": "the student grouping"
+            },
+            {
+              "letter": "C",
+              "text": "the lesson structure"
+            },
+            {
+              "letter": "D",
+              "text": "the teacher coordination"
+            },
+            {
+              "letter": "E",
+              "text": "the timing"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A the materials",
+                  "html": "the materials"
+                },
+                {
+                  "value": "B",
+                  "label": "B the student grouping",
+                  "html": "the student grouping"
+                },
+                {
+                  "value": "C",
+                  "label": "C the lesson structure",
+                  "html": "the lesson structure"
+                },
+                {
+                  "value": "D",
+                  "label": "D the teacher coordination",
+                  "html": "the teacher coordination"
+                },
+                {
+                  "value": "E",
+                  "label": "E the timing",
+                  "html": "the timing"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A the materials",
+                  "html": "the materials"
+                },
+                {
+                  "value": "B",
+                  "label": "B the student grouping",
+                  "html": "the student grouping"
+                },
+                {
+                  "value": "C",
+                  "label": "C the lesson structure",
+                  "html": "the lesson structure"
+                },
+                {
+                  "value": "D",
+                  "label": "D the teacher coordination",
+                  "html": "the teacher coordination"
+                },
+                {
+                  "value": "E",
+                  "label": "E the timing",
+                  "html": "the timing"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            }
+          ],
+          "questionNumber": 23,
+          "answerQuestions": [
+            {
+              "questionNumber": 24
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO problems do Dean and Hannah identify in their lesson?"
+        },
+        {
+          "id": "group-3-25",
+          "type": "matching",
+          "questionRange": "Questions 25-30",
+          "title": "Geography lesson plan: student activities",
+          "example": "",
+          "instruction": "Complete the flow-chart below.\nChoose SIX correct answers, A-H, next to questions 25-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "export routes"
+            },
+            {
+              "letter": "B",
+              "text": "future"
+            },
+            {
+              "letter": "C",
+              "text": "talk"
+            },
+            {
+              "letter": "D",
+              "text": "homework"
+            },
+            {
+              "letter": "E",
+              "text": "worksheet"
+            },
+            {
+              "letter": "F",
+              "text": "history"
+            },
+            {
+              "letter": "G",
+              "text": "producers"
+            },
+            {
+              "letter": "H",
+              "text": "methods of transport"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Examine a pencil and discuss where the component materials come from",
+            "Locate the top {{25}} on a world map",
+            "Discuss the pros and cons of different {{26}}",
+            "In groups, discuss countries' possible {{27}} to the USA",
+            "Complete a {{28}} about pencil distribution within the USA",
+            "Share ideas about the {{29}} of pencils",
+            "Prepare a {{30}}"
+          ],
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Locate the top on a world map",
+              "text": "Locate the top on a world map",
+              "answer": "G"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Discuss the pros and cons of different",
+              "text": "Discuss the pros and cons of different",
+              "answer": "H"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "In groups, discuss countries' possible to the USA",
+              "text": "In groups, discuss countries' possible to the USA",
+              "answer": "A"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Complete a about pencil distribution within the USA",
+              "text": "Complete a about pencil distribution within the USA",
+              "answer": "E"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Share ideas about the of pencils",
+              "text": "Share ideas about the of pencils",
+              "answer": "B"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Prepare a",
+              "text": "Prepare a",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -21,7 +21,7 @@
         const auth = window.authClient?.getAuth();
 
         if (!auth?.token) {
-            status.innerHTML = 'Result is ready. <a href="login.html">Log in</a> to save it to IELTSX history.';
+            status.innerHTML = 'Result is ready. <a href="/login.html">Log in</a> to save it to IELTSX history.';
             return;
         }
 

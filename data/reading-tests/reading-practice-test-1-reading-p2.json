@@ -428,45 +428,45 @@
       },
       "rule": "",
       "options": [],
-      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-21\">\n<span class=\"q-num\">21</span>\n<span class=\"select-q-text\">\nWhen was the bittern population largest?\n<span class=\"ielts-blank\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-22\">\n<span class=\"q-num\">22</span>\n<span class=\"select-q-text\">\nWhat word is used in the passage to describe the bittern's character?\n<span class=\"ielts-blank\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-23\">\n<span class=\"q-num\">23</span>\n<span class=\"select-q-text\">\nWhat is probably the main cause of death of bittern chicks?\n<span class=\"ielts-blank\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-24\">\n<span class=\"q-num\">24</span>\n<span class=\"select-q-text\">\nWhat food supply do bittern chicks depend on?\n<span class=\"ielts-blank\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-25\">\n<span class=\"q-num\">25</span>\n<span class=\"select-q-text\">\nWhat other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat?\n<span class=\"ielts-blank\">______</span>\n</span>\n</div>\n",
+      "contentHtml": "\n<div class=\"q-item select-q-row\" id=\"q-21\">\n<span class=\"q-num\">21</span>\n<span class=\"select-q-text\">\nWhen was the bittern population largest?\n<span class=\"ielts-blank\" data-blank=\"21\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-22\">\n<span class=\"q-num\">22</span>\n<span class=\"select-q-text\">\nWhat word is used in the passage to describe the bittern's character?\n<span class=\"ielts-blank\" data-blank=\"22\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-23\">\n<span class=\"q-num\">23</span>\n<span class=\"select-q-text\">\nWhat is probably the main cause of death of bittern chicks?\n<span class=\"ielts-blank\" data-blank=\"23\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-24\">\n<span class=\"q-num\">24</span>\n<span class=\"select-q-text\">\nWhat food supply do bittern chicks depend on?\n<span class=\"ielts-blank\" data-blank=\"24\">______</span>\n</span>\n</div>\n<div class=\"q-item select-q-row\" id=\"q-25\">\n<span class=\"q-num\">25</span>\n<span class=\"select-q-text\">\nWhat other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat?\n<span class=\"ielts-blank\" data-blank=\"25\">______</span>\n</span>\n</div>\n",
       "questions": [
         {
           "number": 21,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "When was the bittern population largest? ______",
+          "stemHtml": "When was the bittern population largest? ______",
           "options": [],
           "answer": "1950"
         },
         {
           "number": 22,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "What word is used in the passage to describe the bittern's character? ______",
+          "stemHtml": "What word is used in the passage to describe the bittern's character? ______",
           "options": [],
           "answer": "shy"
         },
         {
           "number": 23,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "What is probably the main cause of death of bittern chicks? ______",
+          "stemHtml": "What is probably the main cause of death of bittern chicks? ______",
           "options": [],
           "answer": "starvation"
         },
         {
           "number": 24,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "What food supply do bittern chicks depend on? ______",
+          "stemHtml": "What food supply do bittern chicks depend on? ______",
           "options": [],
           "answer": "fish"
         },
         {
           "number": 25,
           "type": "sentence_completion",
-          "question": "",
-          "stemHtml": "",
+          "question": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
+          "stemHtml": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
           "options": [],
           "answer": "otters"
         }
@@ -855,35 +855,40 @@
     {
       "number": 21,
       "type": "sentence_completion",
-      "question": "",
+      "question": "When was the bittern population largest? ______",
+      "stemHtml": "When was the bittern population largest? ______",
       "options": [],
       "answer": "1950"
     },
     {
       "number": 22,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What word is used in the passage to describe the bittern's character? ______",
+      "stemHtml": "What word is used in the passage to describe the bittern's character? ______",
       "options": [],
       "answer": "shy"
     },
     {
       "number": 23,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What is probably the main cause of death of bittern chicks? ______",
+      "stemHtml": "What is probably the main cause of death of bittern chicks? ______",
       "options": [],
       "answer": "starvation"
     },
     {
       "number": 24,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What food supply do bittern chicks depend on? ______",
+      "stemHtml": "What food supply do bittern chicks depend on? ______",
       "options": [],
       "answer": "fish"
     },
     {
       "number": 25,
       "type": "sentence_completion",
-      "question": "",
+      "question": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
+      "stemHtml": "What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat? ______",
       "options": [],
       "answer": "otters"
     },

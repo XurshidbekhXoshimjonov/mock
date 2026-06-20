@@ -1,0 +1,238 @@
+{
+  "id": "listening-vol-7-test-3-listening-s4",
+  "title": "Listening Vol 7 Test 3 - Part 4: The world's oldest mechanical computer: the Antikythera mechanism",
+  "slug": "listening-vol-7-test-3-part-4",
+  "part": 4,
+  "audio": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "It was part of a ship's , found in the sea near Antikythera, in Greece. 31",
+      "options": [],
+      "answer": "cargo"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "It was wrongly thought to be a piece of . 32",
+      "options": [],
+      "answer": "rock"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "\"Dome\" - produces photographs which make the clearer 33",
+      "options": [],
+      "answer": "inscriptions"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "\"BladeRunner\" - produces X-rays - originally used to identify in engines 34",
+      "options": [],
+      "answer": "cracks"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "30 or more gear wheels made of 35",
+      "options": [],
+      "answer": "metal"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "a framework made of 36",
+      "options": [],
+      "answer": "wood"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "The operator turned a to move the gear wheels. 37",
+      "options": [],
+      "answer": "handle"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Most surprisingly, the mechanism could calculate when an would occur. 38",
+      "options": [],
+      "answer": "eclipse"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "It may have been used as a when planning festivals. 39",
+      "options": [],
+      "answer": "calendar"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "13th – 14th centuries: used for making in Western Europe. 40",
+      "options": [],
+      "answer": "clocks"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-3",
+  "createdAt": "2026-06-19T16:07:47.720Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4: The world's oldest mechanical computer: the Antikythera mechanism",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+      "instruction": "",
+      "answerText": "31: cargo\n32: rock\n33: inscriptions\n34: cracks\n35: metal\n36: wood\n37: handle\n38: eclipse\n39: calendar\n40: clocks",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "The world's oldest mechanical computer: the Antikythera mechanism",
+          "example": "",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>Discovery</strong>",
+            "It was part of a ship's {{31}}, found in the sea near Antikythera, in Greece.",
+            "It was wrongly thought to be a piece of {{32}}.",
+            "It was later found to be a mechanism that had broken into pieces.",
+            "<strong>Equipment used for analysis of the mechanism</strong>",
+            "\"Dome\" - produces photographs which make the {{33}} clearer",
+            "\"BladeRunner\" - produces X-rays - originally used to identify {{34}} in engines",
+            "<strong>Description</strong>",
+            "The mechanism consisted of:",
+            "30 or more gear wheels made of {{35}}",
+            "models of the sun, moon and planets",
+            "a framework made of {{36}}",
+            "<strong>How the mechanism was used</strong>",
+            "The operator turned a {{37}} to move the gear wheels.",
+            "The sun, moon and planets could be moved into their correct positions for any date.",
+            "Most surprisingly, the mechanism could calculate when an {{38}} would occur.",
+            "It may have been used as a {{39}} when planning festivals.",
+            "<strong>Later use of similar technology</strong>",
+            "13th – 14th centuries: used for making {{40}} in Western Europe."
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "It was part of a ship's , found in the sea near Antikythera, in Greece. 31",
+              "text": "It was part of a ship's , found in the sea near Antikythera, in Greece. 31",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cargo"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "It was wrongly thought to be a piece of . 32",
+              "text": "It was wrongly thought to be a piece of . 32",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rock"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "\"Dome\" - produces photographs which make the clearer 33",
+              "text": "\"Dome\" - produces photographs which make the clearer 33",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "inscriptions"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "\"BladeRunner\" - produces X-rays - originally used to identify in engines 34",
+              "text": "\"BladeRunner\" - produces X-rays - originally used to identify in engines 34",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cracks"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "30 or more gear wheels made of 35",
+              "text": "30 or more gear wheels made of 35",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "metal"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "a framework made of 36",
+              "text": "a framework made of 36",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "wood"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "The operator turned a to move the gear wheels. 37",
+              "text": "The operator turned a to move the gear wheels. 37",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "handle"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Most surprisingly, the mechanism could calculate when an would occur. 38",
+              "text": "Most surprisingly, the mechanism could calculate when an would occur. 38",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "eclipse"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "It may have been used as a when planning festivals. 39",
+              "text": "It may have been used as a when planning festivals. 39",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "calendar"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "13th – 14th centuries: used for making in Western Europe. 40",
+              "text": "13th – 14th centuries: used for making in Western Europe. 40",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "clocks"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

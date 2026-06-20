@@ -159,7 +159,7 @@ function makeCard({ href, title, description, questionCount, config, test }) {
 
 function makeUploadedCard(test, part, config, number) {
     return makeCard({
-        href: `test-viewer.html?id=${encodeURIComponent(test.id)}&part=${encodeURIComponent(part)}&type=${encodeURIComponent(config.type)}`,
+        href: `/test-viewer.html?id=${encodeURIComponent(test.id)}&part=${encodeURIComponent(part)}&type=${encodeURIComponent(config.type)}`,
         title: displayTitle(config, number, test.title),
         description: cardMetaText(config),
         questionCount: questionCountForTest(test, config),

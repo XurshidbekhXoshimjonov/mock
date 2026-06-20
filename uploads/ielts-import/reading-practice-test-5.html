@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Full Reading Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 60px;
+        }
+
+        .test-info {
+            display: flex;  
+            align-items: center;
+            gap: 30px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .telegram-link {
+            color: #3e3e3e;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border: 2px solid #3e3e3e;
+            border-radius: 9999px;
+            background-color: #ffffff;
+            line-height: 1;
+        }
+
+        .telegram-link:hover {
+            background-color: #f6f6f6;
+        }
+
+        .telegram-link::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: currentColor;
+            -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-1.37.2-1.64l16.56-6.4c.75-.29 1.4.22 1.2.94l-2.67 12.61c-.22.95-1.13 1.18-1.78.73l-4.5-3.32l-2.23 2.15c-.47.44-1.29.21-1.48-.37z"/></svg>');
+            mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-1.37.2-1.64l16.56-6.4c.75-.29 1.4.22 1.2.94l-2.67 12.61c-.22.95-1.13 1.18-1.78.73l-4.5-3.32l-2.23 2.15c-.47.44-1.29.21-1.48-.37z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .main-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        /* Page watermark */
+        body::after {
+            content: "Full Exam Materials";
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #000000;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .panels-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .passage-panel {
+            flex: 1;
+            padding: 20px 20px 100px;
+            overflow-y: auto;
+            min-width: 200px;
+        }
+
+        /* Passage Content */
+        .text-center {
+            text-align: center;
+        }
+        .reading-passage h4 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+       
+        .reading-passage p {
+            margin-bottom: 1.2em;
+        }
+
+        .questions-panel {
+            flex: 1;
+            padding: 20px 20px 100px;
+            overflow-y: auto;
+            min-width: 200px;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .resizer {
+            position: relative;
+            background: transparent;
+            cursor: col-resize;
+            flex-shrink: 0;
+            flex-grow: 0;
+            z-index: 5;
+            width: 16px;
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            transform: translateX(-50%);
+            background-color: #3e3e3e;
+        }
+        .resizer::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background-color: #ffffff;
+            border: 2px solid #3e3e3e;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="%233e3e3e" fill="%233e3e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><line x1="4" y1="12" x2="20" y2="12"/></svg>');
+            background-repeat: no-repeat;
+            background-size: 60% 60%;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        /* Part headers */
+        .part-header {
+            background-color: #f1f2ec;
+            padding: 15px 20px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            margin: 10px 20px;
+            border-radius: 5px;
+        }
+        .part-header p {
+            margin: 0;
+        }
+        .part-header p:first-child {
+            margin-bottom: 5px;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrows {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            display: flex;
+            gap: 6px;
+            z-index: 101;
+        }
+
+        .nav-arrow {
+            width: 48px;
+            height: 48px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            outline: none;
+        }
+        .nav-arrow.prev { background-color: #4b5563; }
+        .nav-arrow.next { background-color: #000000; }
+
+        .nav-arrow:hover { transform: translateY(-1px); }
+        .nav-arrow:active { transform: translateY(0); }
+        .nav-arrow:focus-visible { box-shadow: 0 0 0 3px rgba(59,130,246,0.4); }
+
+        .nav-arrow:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Bottom Navigation */
+        .nav-row {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            height: 80px;
+            z-index: 100;
+        }
+
+        .footer__questionWrapper___1tZ46 {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .footer__questionNo___3WNct {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .footer__questionNo___3WNct:hover {
+            background-color: #f8f9fa;
+        }
+
+        .section-prefix {
+            font-size: 16px;
+        }
+
+        .sectionNr {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .attemptedCount {
+            font-size: 14px;
+            color: #666;
+            margin-left: 5px;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .attemptedCount {
+                display: none;
+            }
+            .resizer { width: 8px; }
+        }
+
+        .footer__questionWrapper___1tZ46.selected .attemptedCount {
+            display: none;
+        }
+
+        .footer__subquestionWrapper___9GgoP {
+            display: none;
+            gap: 2px;
+            margin-left: 10px;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP {
+            display: flex;
+        }
+
+        .subQuestion {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ccc;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        .subQuestion.answered {
+            background-color: #e9ecef;
+            border-color: #ddd;
+        }
+        .subQuestion.correct {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        .subQuestion.incorrect {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .subQuestion:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        .subQuestion.active {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+
+        .subQuestion.completed {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .footer__deliverButton___3FM07 {
+            margin-left: auto;
+            margin-right: 20px;
+            background-color: #f3f4f6;
+            color: #111827;
+            border: 1px solid #d1d5db;
+            padding: 10px 16px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.08s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            min-width: 160px;
+            justify-content: center;
+        }
+
+        .footer__deliverButton___3FM07:hover {
+            background-color: #ebedf0;
+            border-color: #c7ccd4;
+        }
+
+        .footer__deliverButton___3FM07:active {
+            transform: translateY(1px);
+        }
+
+        .footer__deliverButton___3FM07:focus-visible {
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.35);
+            outline: none;
+        }
+
+        .footer__deliverButton___3FM07:disabled {
+            background: #eef0f3;
+            color: #9ca3af;
+            cursor: not-allowed;
+            border-color: #e5e7eb;
+            box-shadow: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Questions styling */
+        .question {
+            margin-bottom: 40px;
+        }
+        .question p {
+            margin-bottom: 10px;
+        }
+        .question-prompt {
+            margin-bottom: 20px;
+        }
+        
+        /* Headings matching questions */
+        .headings-question {
+            padding: 10px 0px;
+            border-radius: 4px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .headings-question-line {
+            display: flex;
+            align-items: center;
+            padding: 5px 0px;
+            border-radius: 4px;
+            gap: 15px;
+        }
+        .headings-question-number {
+            border: 2px solid #ccc;
+            padding: 2px 8px;
+            margin-right: 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            transition: border-color 0.3s;
+            display: inline-block;
+        }
+        .headings-question.active-question .headings-question-number {
+            border-color: #4a90e2;
+        }
+        .headings-question-text {
+            padding-top: 3px;
+            flex: 1;
+        }
+
+        .answer-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: white;
+            color: #333;
+            border: 2px solid #333;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .answer-select option {
+            background: white;
+            color: #333;
+            padding: 8px;
+        }
+
+        .answer-select option:first-child {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* YES/NO/NOT GIVEN and TRUE/FALSE/NOT GIVEN questions */
+        .tfng-question, .tfn-question {
+            padding: 10px 0px;
+            border-radius: 4px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .tfng-question-line, .tfn-question-line {
+            display: flex;
+            align-items: center;
+            padding: 5px 0px;
+            border-radius: 4px;
+            gap: 15px;
+        }
+        .tfng-question-number, .tfn-question-number {
+            border: 2px solid #ccc;
+            padding: 2px 8px;
+            margin-right: 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            transition: border-color 0.3s;
+            display: inline-block;
+        }
+        .tfng-question.active-question .tfng-question-number,
+        .tfn-question.active-question .tfn-question-number {
+            border-color: #4a90e2;
+        }
+        .tfng-question-text, .tfn-question-text {
+            padding-top: 3px;
+            flex: 1;
+        }
+
+        .tfng-options, .tfn-options {
+            display: flex;
+            gap: 15px;
+            margin-left: 20px;
+        }
+        .tfng-option, .tfn-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .tfng-option:hover, .tfn-option:hover {
+            background-color: #f0f0f0;
+        }
+        .tfng-option input[type="radio"],
+        .tfn-option input[type="radio"] {
+            margin: 0;
+            transform: scale(1.2);
+        }
+        
+        /* Answer checking states */
+        .tfng-option.correct,
+        .tfn-option.correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+        .tfng-option.incorrect,
+        .tfn-option.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        /* Matching questions */
+        .matching-question-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .matching-questions {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .matching-question-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        .matching-question-item > span {
+            flex: 1;
+        }
+        .matching-question-item.correct {
+            background-color: #e9f7ef;
+            border-color: #28a745 !important;
+        }
+        .matching-question-item.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545 !important;
+        }
+        
+        .matching-options-bank {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .matching-answer-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: white;
+            color: #333;
+            border: 2px solid #333;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        /* Summary completion */
+        .summary-text {
+            line-height: 2.0;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .answer-input {
+            border: 1px solid #bfbfbf;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 2px 8px;
+            font-size: 16px;
+            text-align: left;
+            font-weight: 700;
+            margin-right: 6px;
+            margin-left: 6px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            height: 28px;
+            min-width: 150px;
+        }
+        .answer-input.active-input,
+        .answer-input:focus {
+            border-color: #3581d8;
+            border-width: 2px;
+            outline: none;
+        }
+        .answer-input::placeholder {
+            color: #666;
+            font-weight: 700;
+            text-align: center;
+        }
+        .answer-input.correct {
+            border-color: #28a745;
+            background-color: #e9f7ef;
+        }
+        .answer-input.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Timer */
+        .timer-container {
+            display: flex;
+            position: relative;
+            cursor: default;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            align-items: center;
+        }
+        .timer-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+        }
+        .timer-controls button {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            padding: 0;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .timer-controls button:hover {
+            background: #e0e0e0;
+        }
+        .timer-controls button svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
+
+        /* Results Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.hidden {
+            display: none;
+        }
+        .modal-content {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 14px;
+            width: 92%;
+            max-width: 780px;
+            max-height: 86vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #111827;
+        }
+        .results-summary {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 16px;
+            text-align: center;
+            border-bottom: 1px solid #eef2f7;
+            padding-bottom: 12px;
+        }
+        .results-summary p {
+            margin: 0;
+            font-size: 14px;
+            color: #374151;
+        }
+        .results-summary p span {
+            display: inline-block;
+            padding: 4px 10px;
+            margin-left: 6px;
+            border-radius: 999px;
+            background: #f3f4f6;
+            font-weight: 700;
+            color: #111827;
+        }
+        .results-details-container {
+            overflow-y: auto;
+            padding-right: 10px;
+            border-radius: 8px;
+        }
+        .result-row {
+            display: grid;
+            grid-template-columns: 56px 1fr 1fr;
+            gap: 12px;
+            padding: 10px 8px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 15px;
+            align-items: center;
+        }
+        .result-row.correct {
+            background-color: #f3faf5;
+        }
+        .result-row.incorrect {
+            background-color: #fff5f5;
+        }
+        .result-row .q-num {
+            font-weight: 700;
+            color: #111827;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            width: 42px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .result-row .user-ans {
+            color: #374151;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .result-row .correct-ans {
+            color: #065f46;
+            font-weight: 600;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        
+        .correct-answer-display {
+            font-weight: bold;
+            color: #28a745;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            min-width: 140px;
+        }
+        .context-menu-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .context-menu-item:hover {
+            background-color: #f8f9fa;
+        }
+        .context-menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+        }
+        .comment-highlight {
+            background-color: #90EE90;
+            position: relative;
+            cursor: help;
+        }
+        .comment-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .comment-highlight:hover .comment-tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="timer-container">
+            <span class="timer-display">60:00</span>
+            <div class="timer-controls">
+                <button id="timer-toggle-btn" title="Pause/Resume Timer">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                </button>
+                <button id="timer-reset-btn" title="Reset Timer">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                </button>
+            </div>
+        </div>
+        <a href="https://t.me/+dJOcy-xkd39iODUy" target="_blank" class="telegram-link">
+            Full Exam Materials
+        </a>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <div id="passage-header-container">
+            <div id="part-header-1" class="part-header">
+                <p><strong>Part 1</strong></p>
+                <p>Read the text and answer questions 1-13.</p>
+            </div>
+            <div id="part-header-2" class="part-header hidden">
+                <p><strong>Part 2</strong></p>
+                <p>Read the text and answer questions 14-26.</p>
+            </div>
+            <div id="part-header-3" class="part-header hidden">
+                <p><strong>Part 3</strong></p>
+                <p>Read the text and answer questions 27-40.</p>
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="passage-panel" id="passage-panel">
+                <!-- Passage 1 -->
+                <div id="passage-text-1" class="reading-passage">
+                    <h4 class="text-center">REVIEW OF RESEARCH ON THE EFFECTS OF FOOD PROMOTION TO CHILDREN</h4>
+                    <p><strong>A</strong>&nbsp;&nbsp;Children's food promotion is dominated by television advertising, and the great majority of this promotes the so-called 'Big Four' of pre-sugared breakfast cereals, soft-drinks, confectionary and savoury snacks. In the last ten years advertising for fast food outlets has rapidly increased. There is some evidence that the dominance of television has recently begun to wane. The importance of strong, global branding reinforces a need for multi-faceted communications combining television with merchandising, 'tie-ins' and point of sale activity. The advertised diet contrasts sharply with that recommended by public health advisors, and themes of fun and fantasy or taste, rather than health and nutrition, are used to promote it to children. Meanwhile, the recommended diet gets little promotional support.</p>
+                    <p><strong>B</strong>&nbsp;&nbsp;There is plenty of evidence that children notice and enjoy food promotion. However, establishing whether this actually influences them is a complex problem. The review tackled it by looking at studies that had examined possible effects on what children know about food, their food preferences, their actual food behaviour (both buying and eating), and their health outcomes (eg. obesity or cholesterol levels). The majority of studies examined food advertising, but a few examined other forms of food promotion. In terms of nutritional knowledge, food advertising seems to have little influence on children's general perceptions of what constitutes a healthy diet, but, in certain contexts, it does have an effect on more specific types of nutritional knowledge. For example, seeing soft drink and cereal adverts reduced primary aged children's ability to determine correctly whether or not certain products contained real fruit.</p>
+                    <p><strong>C</strong>&nbsp;&nbsp;The review also found evidence that food promotion influences children's food preferences and their purchase behaviour. A study of primary school children, for instance, found that exposure to advertising influenced which foods they claimed to like; and another showed that labelling and signage on a vending machine had an effect on what was bought by secondary school pupils. A number of studies have also shown that food advertising can influence what children eat. One, for example, showed that advertising influenced a primary class's choice of daily snack at playtime.</p>
+                    <p><strong>D</strong>&nbsp;&nbsp;The next step, of trying to establish whether or not a link exists between food promotion and diet or obesity, is extremely difficult as it requires research to be done in real world settings. A number of studies have attempted this by using amount of television viewing as a proxy for exposure to television advertising. They have established a clear link between television viewing and diet, obesity, and cholesterol levels. It is impossible to say, however, whether this effect is caused by the advertising, the sedentary nature of television viewing or snacking that might take place whilst viewing. One study resolved this problem by taking a detailed diary of children's viewing habits. This showed that the more food adverts they saw, the more snacks and calories they consumed.</p>
+                    <p><strong>E</strong>&nbsp;&nbsp;Thus the literature does suggest food promotion is influencing children's diet in a number of ways. This does not amount to proof; as noted above with this kind of research, incontrovertible proof simply isn't attainable. Nor do all studies point to this conclusion; several have not found an effect. In addition, very few studies have attempted to measure how strong these effects are relative to other factors influencing children's food choices. Nonetheless, many studies have found clear effects and they have used sophisticated methodologies that make it possible to determine that i) these effects are not just due to chance; ii) they are independent of other factors that may influence diet, such as parents' eating habits or attitudes; and iii) they occur at a brand and category level.</p>
+                    <p><strong>F</strong>&nbsp;&nbsp;Furthermore, two factors suggest that these findings actually downplay the effect that food promotion has on children. First, the literature focuses principally on television advertising; the cumulative effect of this combined with other forms of promotion and marketing is likely to be significantly greater. Second, the studies have looked at direct effects on individual children, and understate indirect influences. For example, promotion for fast food outlets may not only influence the child, but also encourage parents to take them for meals and reinforce the idea that this is a normal and desirable behaviour.</p>
+                    <p><strong>G</strong>&nbsp;&nbsp;This does not amount to proof of an effect, but in our view does provide sufficient evidence to conclude that an effect exists. The debate should now shift to what action is needed, and specifically to how the power of commercial marketing can be used to bring about improvements in young people's eating.</p>
+                </div>
+
+                <!-- Passage 2 -->
+                <div id="passage-text-2" class="reading-passage hidden">
+                    <h4 class="text-center">The Ant and the Mandarin</h4>
+                    <p><strong>A</strong>&nbsp;&nbsp;In 1476, the farmers of Berne in Switzerland decided there was only one way to rid their fields of the cutworms attacking their crops. They took the pests to court. The worms were tried, found guilty and excommunicated by the archbishop. In China, farmers had a more practical approach to pest control. Rather than relying on divine intervention, they put their faith in frogs, ducks and ants. Frogs and ducks were encouraged to snap up the pests in the paddies and the occasional plague of locusts. But the notion of biological control began with an ant. More specifically, it started with the predatory yellow citrus ant Oecophylla smaragdina, which has been polishing off pests in the orange groves of southern China for at least 1,700 years. The yellow citrus ant is a type of weaver ant, which binds leaves and twigs with silk to form a neat, tent-like nest. In the beginning, farmers made do with the odd ants' nests here and there. But it wasn't long before growing demand led to the development of a thriving trade in nests and a new type of agriculture - ant farming.</p>
+                    <p><strong>B</strong>&nbsp;&nbsp;For an insect that bites, the yellow citrus ant is remarkably popular. Even by ant standards, Oecophylla smaragdina is a fearsome predator. It's big, runs fast and has a powerful nip - painful to humans but lethal to many of the insects that plague the orange groves of Guangdong and Guangxi in southern China. And for at least 17 centuries, Chinese orange growers have harnessed these six-legged killing machines to keep their fruit groves healthy and productive.</p>
+                    <p><strong>C</strong>&nbsp;&nbsp;Citrus fruits evolved in the Far East and the Chinese discovered the delights of their flesh early on. As the ancestral home of oranges, lemons and pomelos, China also has the greatest diversity of citrus pests. And the trees that produce the sweetest fruits, the mandarins - or kan - attract a host of plant-eating insects, from black ants and sap-sucking mealy bugs to leaf devouring caterpillars. With so many enemies, fruit growers clearly had to have some way of protecting their orchards.</p>
+                    <p><strong>D</strong>&nbsp;&nbsp;The West did not discover the Chinese orange growers' secret weapon until the early 20th century. At the time, Florida was suffering an epidemic of citrus canker and in 1915 Walter Swingle, a plant physiologist working for the US Department of Agriculture, was sent to China in search of varieties of orange that were resistant to the disease. Swingle spent some time studying the citrus orchards around Guangzhou, and there he came across the story of the cultivated ant. These ants, he was told, were "grown" by the people of a small village nearby who sold them to the orange growers by the nestful.</p>
+                    <p><strong>E</strong>&nbsp;&nbsp;The earliest report of citrus ants at work among the orange trees appeared in a book on tropical and subtropical botany written by Hsi Han in AD 304. "The people of Chiao-Chih sell in their markets ants in bags of rush matting. The nests are like silk. The bags are all attached to twigs and leaves which, with the ants inside the nests, are for sale. The ants are reddish-yellow in colour, bigger than ordinary ants. In the south, if the kan trees do not have this kind of ant, the fruits will all be damaged by many harmful insects, and not a single fruit will be perfect."</p>
+                    <p><strong>F</strong>&nbsp;&nbsp;Initially, farmers relied on nests which they collected from the wild or bought in the market where trade in nests was brisk. "It is said that in the south orange trees which are free of ants will have wormy fruits. Therefore, people race to buy nests for their orange trees," wrote Liu Hsun in Strange Things Noted in the South in about 890.</p>
+                    <p><strong>G</strong>&nbsp;&nbsp;The business quickly became more sophisticated. From the 10th century, country people began to trap ants in artificial nests baited with fat. "Fruit-growing families buy these ants from vendors who make a business of collecting and selling such creatures," wrote Chuang Chi-Yu in 1130. "They trap them by filling hogs' or sheep's bladders with fat and placing them with the cavities open next to the ants' nests. They wait until the ants have migrated into the bladders and take them away. This is known as 'rearing orange ants'." Farmers attached the bladders to their trees, and in time the ants spread to other trees and built new nests.</p>
+                    <p><strong>H</strong>&nbsp;&nbsp;By the 17th century, growers were building bamboo walkways between their trees to speed the colonisation of their orchards. The ants ran along these narrow bridges from one tree to another and established nests "by the hundreds of thousands".</p>
+                    <p><strong>I</strong>&nbsp;&nbsp;Did it work? The orange growers clearly thought so. One authority, Chhii Ta-Chun, writing in 1700, stressed how important it was to keep the fruit trees free of insect pests, especially caterpillars. "It is essential to eliminate them so that the trees are not injured. But hand labour is not nearly as efficient as ant power..."</p>
+                    <p><strong>J</strong>&nbsp;&nbsp;Swingle was just as impressed. Yet despite his reports, many Western biologists were sceptical. In the West, the idea of using one insect to destroy another was new and highly controversial. The first breakthrough had come in 1888, when the infant orange industry in California had been saved from extinction by the Australian vedalia beetle. This beetle was the only thing that had made any in-roads into the explosion of cottony cushion scale that was threatening to destroy the state's citrus crops. But, as Swingle now knew, California's "first" was nothing of the sort. The Chinese had been expert in bio-control for many centuries.</p>
+                    <p><strong>K</strong>&nbsp;&nbsp;The long tradition of ants in the Chinese orchards only began to waver in the 1950s and 1960s with the introduction of powerful organic insecticides. Although most fruit growers switched to chemicals, a few hung onto their ants. Those who abandoned ants in favour of chemicals quickly became disillusioned. As costs soared and pests began to develop resistance to the chemicals, growers began to revive the old ant patrols in the late 1960s. They had good reason to have faith in their insect workforce.</p>
+                    <p><strong>L</strong>&nbsp;&nbsp;Research in the early 1960s showed that as long as there were enough ants in the trees, they did an excellent job of dispatching some pests - mainly the larger insects - and had modest success against others. Trees with yellow ants produced almost 20 per cent more healthy leaves than those without. More recent trials have shown that these trees yield just as big a crop as those protected by expensive chemical sprays.</p>
+                    <p><strong>M</strong>&nbsp;&nbsp;One apparent drawback of using ants - and one of the main reasons for the early scepticism by Western scientists - was that citrus ants do nothing to control mealy bugs, waxy-coated scale insects which can do considerable damage to fruit trees. In fact, the ants protect mealy bugs in exchange for the sweet honeydew they secrete. The orange growers always denied this was a problem but Western scientists thought they knew better.</p>
+                    <p><strong>N</strong>&nbsp;&nbsp;Research in the 1980s suggests that the growers were right all along. Where mealy bugs proliferate under the ants' protection, they are usually heavily parasitised and this limits the harm they can do.</p>
+                    <p><strong>O</strong>&nbsp;&nbsp;Orange growers who rely on carnivorous ants rather than poisonous chemicals maintain a better balance of species in their orchards. While the ants deal with the bigger insect pests, other predatory species keep down the numbers of smaller pests such as scale insects and aphids. In the long run, ants do a lot less damage than chemicals - and they're certainly more effective than excommunication.</p>
+                </div>
+
+                <!-- Passage 3 -->
+                <div id="passage-text-3" class="reading-passage hidden">
+                    <h4 class="text-center">The Fruit Book</h4>
+                    <p><strong>A</strong>&nbsp;&nbsp;It's not every scientist who writes books for people who can't read. And how many scientists want their books to look as dog-eared as possible? But Patricia Shanley, an ethnobotanist, wanted to give something back. After the poorest people of the Amazon allowed her to study their land and its ecology, she turned her research findings into a picture book that tells the local people how to get a good return on their trees without succumbing to the lure of a quick buck from a logging company. It has proved a big success.</p>
+                    <p><strong>B</strong>&nbsp;&nbsp;The book is called Fruit Trees and Useful Plants in the Lives of Amazonians, but is better known simply as the "fruit book". The second edition was produced at the request of politicians in western Amazonia. Its blend of hard science and local knowledge on the use and trade of 35 native forest species has been so well received (and well used) that no less a dignitary than Brazil's environment minister, Marina Silva, has written the foreword. "There is nothing else like the Shanley book," says Adalberto Verrísimo, director of the Institute of People and the Environment of the Amazon. "It gives science back to the poor, to the people who really need it."</p>
+                    <p><strong>C</strong>&nbsp;&nbsp;Shanley's work on the book began a decade ago, with a plea for help from the Rural Workers' Union of Paragominas, a Brazilian town whose prosperity is based on exploitation of timber. The union realised that logging companies would soon be knocking on the doors of the caboclos, peasant farmers living on the Rio Capim, an Amazon tributary in the Brazilian state of Pará. Isolated and illiterate, the caboclos would have little concept of the true value of their trees; communities downstream had already sold off large blocks of forest for a pittance. "What they wanted to know was how valuable the forests were," recalls Shanley, then a researcher in the area for the Massachusetts-based Woods Hole Research Centre.</p>
+                    <p><strong>D</strong>&nbsp;&nbsp;The Rural Workers' Union wanted to know whether harvesting wild fruits would make economic sense in the Rio Capim. "There was a lot of interest in trading non-timber forest products (NTFPs)," Shanley says. At the time, environmental groups and green-minded businesses were promoting the idea. This was the view presented in a seminal paper, Valuation of an Amazonian Rainforest, published in Nature in 1989. The researchers had calculated that revenues from the sale of fruits could far exceed those from a one-off sale of trees to loggers. "The union was keen to discover whether it made more sense conserving the forest for subsistence use and the possible sale of fruit, game and medicinal plants, than selling trees for timber," says Shanley. Whether it would work for the caboclos was far from clear.</p>
+                    <p><strong>E</strong>&nbsp;&nbsp;Although Shanley had been invited to work in the Rio Capim, some caboclos were suspicious. "When Patricia asked if she could study my forest," says Joao Fernando Moreira Brito, "my neighbours said she was a foreigner who'd come to rob me of my trees." In the end, Moreira Brito, or Mangueira as he is known, welcomed Shanley and worked on her study. His land, an hour's walk from the Rio Capim, is almost entirely covered with primary forest. A study of this and other tracts of forest selected by the communities enabled Shanley to identify three trees, found throughout the Amazon, whose fruit was much favoured by the caboclos: bacuri (Platonia insignis), uxi (Endopleura uchi) and piquia (Cayocas villosum). The caboclos used their fruits, extracted oils, and knew what sort of wildlife they attracted. But, in the face of aggressive tactics from the logging companies, they had no measure of the trees' financial worth. The only way to find out, Shanley decided, was to start from scratch with a scientific study. "From a scientific point of view, hardly anything was known about these trees," she says. But six years of field research yielded a mass of data on their flowering and fruiting behaviour. During 1993 and 1994, 30 families weighed everything they used from the forest - game, fruit, fibre, medicinal plants - and documented its source.</p>
+                    <p><strong>F</strong>&nbsp;&nbsp;After three logging sales and a major fire in 1997, the researchers were also able to study the ecosystem's reaction to logging and disturbance. They carried out a similar, though less exhaustive, study in 1999, this time with 15 families. The changes were striking. Average annual household consumption of forest fruit had fallen from 89 to 28 kilogrammes between 1993 and 1999. "What we found," says Shanley, "was that fruit collection could coexist with a certain amount of logging, but after the forest fire, it dropped dramatically." Over the same period, fibre use also dropped from around 20 to 4 kilogrammes. The fire and logging also changed the nature of the caboclo diet. In 1993 most households ate game two or three times a month. By 1999 some were fortunate if they ate game more than two or three times a year.</p>
+                    <p><strong>G</strong>&nbsp;&nbsp;The loss of certain species of tree was especially significant. Shanley's team persuaded local hunters to weigh their catch, noting the trees under which the animals were caught. Over the year, they trapped five species of game averaging 232 kilogrammes under piquia trees. Under copaiba, they caught just two species averaging 63 kilogrammes; and under uxi, four species weighing 38 kilogrammes. At last, the team was getting a handle on which trees were worth keeping, and which could reasonably be sold. "This showed that selling piquia trees to loggers for a few dollars made little sense," explains Shanley. "Their local value lies in providing a prized fruit, as well as flowers which attract more game than any other species."</p>
+                    <p><strong>H</strong>&nbsp;&nbsp;As a result of these studies, Shanley had to tell the Rural Workers' Union of Paragominas that the Nature thesis could not be applied wholesale to their community - harvesting NTFPs would not always yield more than timber sales. Fruiting patterns of trees such as uxi were unpredictable, for example. In 1994, one household collected 3,654 uxi fruits; the following year, none at all.</p>
+                    <p><strong>I</strong>&nbsp;&nbsp;This is not to say that wild fruit trees were unimportant. On the contrary, argues Shanley, they are critical for subsistence, something that is often ignored in much of the current research on NTFPs, which tends to focus on their commercial potential. Geography was another factor preventing the Rio Capim caboclos from establishing a serious trade in wild fruit: villagers in remote areas could not compete with communities collecting NTFPs close to urban markets, although they could sell them to passing river boats.</p>
+                    <p><strong>J</strong>&nbsp;&nbsp;But Shanley and her colleagues decided to do more than just report their results to the union. Together with two of her research colleagues, Shanley wrote the fruit book. This, the Bible and a publication on medicinal plants co-authored by Shanley and designed for people with minimal literacy skills are about the only books you will see along this stretch of the Rio Capim. The first print ran to only 3,000 copies, but the fruit book has been remarkably influential, and is used by colleges, peasant unions, industries and the caboclos themselves. Its success is largely due to the fact that people with poor literacy skills can understand much of the information it contains about the non-timber forest products, thanks to its illustrations, anecdotes, stories and songs. "The book doesn't tell people what to do," says Shanley, "but it does provide them with choices." The caboclos who have used the book now have a much better understanding of which trees to sell to the loggers, and which to protect.</p>
+                </div>
+            </div>
+            <div class="resizer" id="resizer"></div>
+            <div class="questions-panel" id="questions-panel">
+                <!-- Questions 1-13 -->
+                <div id="questions-1" class="question-set">
+                    <div class="questions-container">
+                        <!-- Questions 1-7: Headings Matching -->
+                        <div class="question" data-q-start="1" data-q-end="7">
+                            <div class="question-prompt">
+                                <p><strong>Questions 1–7</strong></p>
+                                <p>Reading Passage 1 has seven paragraphs, <strong>A-G</strong>.</p>
+                                <p>Choose the most suitable heading for paragraphs A-G from the list of headings below.</p>
+                                <p>Write the appropriate number, <strong>i-x</strong>, in boxes 1-7 on your answer sheet.</p>
+                                <p><strong>List of Headings</strong></p>
+                                <p>i &nbsp;&nbsp;General points of agreements and disagreements of researchers</p>
+                                <p>ii &nbsp;&nbsp;How much children really know about food</p>
+                                <p>iii &nbsp;&nbsp;Need to take action</p>
+                                <p>iv &nbsp;&nbsp;Advertising effects of the "Big Four"</p>
+                                <p>v &nbsp;&nbsp;Connection of advertising and children's weight problems</p>
+                                <p>vi &nbsp;&nbsp;Evidence that advertising affects what children buy to eat</p>
+                                <p>vii &nbsp;&nbsp;How parents influence children's eating habits</p>
+                                <p>viii &nbsp;&nbsp;Advertising's focus on unhealthy options</p>
+                                <p>ix &nbsp;&nbsp;Children often buy what they want</p>
+                                <p>x &nbsp;&nbsp;Underestimating the effects advertising has on children</p>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="1" data-q-end="1">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">1</span>
+                                    <span class="headings-question-text">Paragraph A</span>
+                                    <select name="q1" id="q1" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="2" data-q-end="2">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">2</span>
+                                    <span class="headings-question-text">Paragraph B</span>
+                                    <select name="q2" id="q2" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="3" data-q-end="3">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">3</span>
+                                    <span class="headings-question-text">Paragraph C</span>
+                                    <select name="q3" id="q3" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="4" data-q-end="4">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">4</span>
+                                    <span class="headings-question-text">Paragraph D</span>
+                                    <select name="q4" id="q4" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="5" data-q-end="5">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">5</span>
+                                    <span class="headings-question-text">Paragraph E</span>
+                                    <select name="q5" id="q5" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="6" data-q-end="6">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">6</span>
+                                    <span class="headings-question-text">Paragraph F</span>
+                                    <select name="q6" id="q6" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="7" data-q-end="7">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">7</span>
+                                    <span class="headings-question-text">Paragraph G</span>
+                                    <select name="q7" id="q7" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="i">i</option>
+                                        <option value="ii">ii</option>
+                                        <option value="iii">iii</option>
+                                        <option value="iv">iv</option>
+                                        <option value="v">v</option>
+                                        <option value="vi">vi</option>
+                                        <option value="vii">vii</option>
+                                        <option value="viii">viii</option>
+                                        <option value="ix">ix</option>
+                                        <option value="x">x</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Questions 8-13: YES/NO/NOT GIVEN -->
+                        <div class="question" data-q-start="8" data-q-end="13">
+                            <div class="question-prompt">
+                                <p><strong>Questions 8–13</strong></p>
+                                <p>Do the following statements agree with the views of the writer in Reading Passage 1?</p>
+                                <p>In boxes 8-13 on your answer sheet, write</p>
+                                <p><strong>YES</strong> &nbsp;&nbsp;&nbsp;if the statement agrees with the views of the writer</p>
+                                <p><strong>NO</strong> &nbsp;&nbsp;&nbsp;if the statement contradicts the views of the writer</p>
+                                <p><strong>NOT GIVEN</strong> &nbsp;&nbsp;&nbsp;if it is impossible to say what the writer thinks about this</p>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="8" data-q-end="8">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">8</span>
+                                    <span class="tfng-question-text">There is little difference between the number of healthy food advertisements and the number of unhealthy food advertisements.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q8" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q8" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q8" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="9" data-q-end="9">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">9</span>
+                                    <span class="tfng-question-text">TV advertising has successfully taught children nutritional knowledge about vitamins and others.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q9" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q9" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q9" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="10" data-q-end="10">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">10</span>
+                                    <span class="tfng-question-text">It is hard to decide which aspect of TV viewing has caused weight problems of children.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q10" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q10" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q10" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="11" data-q-end="11">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">11</span>
+                                    <span class="tfng-question-text">The preference of food for children is affected by their age and gender.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q11" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q11" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q11" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="12" data-q-end="12">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">12</span>
+                                    <span class="tfng-question-text">Wealthy parents tend to buy more "sensible food" for their children.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q12" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q12" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q12" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfng-question" data-q-start="13" data-q-end="13">
+                                <div class="tfng-question-line">
+                                    <span class="tfng-question-number">13</span>
+                                    <span class="tfng-question-text">There is a lack of investigation on food promotion methods other than TV advertising.</span>
+                                    <div class="tfng-options">
+                                        <label class="tfng-option"><input type="radio" name="q13" value="YES"> YES</label>
+                                        <label class="tfng-option"><input type="radio" name="q13" value="NO"> NO</label>
+                                        <label class="tfng-option"><input type="radio" name="q13" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 14-26 -->
+                <div id="questions-2" class="question-set hidden">
+                    <div class="questions-container">
+                        <!-- Questions 14-18: Date Matching -->
+                        <div class="question" data-q-start="14" data-q-end="18">
+                            <div class="question-prompt">
+                                <p><strong>Questions 14–18</strong></p>
+                                <p>Look at the following events (Questions 14-18) and the list of dates below.</p>
+                                <p>Match each event with the correct time <strong>A-G</strong>.</p>
+                                <p>Write the correct letter <strong>A-G</strong> in boxes 14-18 on your answer sheet.</p>
+                                <p><strong>List of Dates</strong></p>
+                                <p>A &nbsp;&nbsp;1888</p>
+                                <p>B &nbsp;&nbsp;AD 890</p>
+                                <p>C &nbsp;&nbsp;AD 304</p>
+                                <p>D &nbsp;&nbsp;1950s</p>
+                                <p>E &nbsp;&nbsp;1960s</p>
+                                <p>F &nbsp;&nbsp;1915</p>
+                                <p>G &nbsp;&nbsp;1130</p>
+                            </div>
+                            
+                            <div class="matching-question-container">
+                                <div class="matching-questions">
+                                    <div class="matching-question-item" data-q-start="14" data-q-end="14">
+                                        <span><strong>14</strong> The first description of citrus ants is traded in the marketplace.</span>
+                                        <select name="q14" id="q14" class="matching-answer-select">
+                                            <option value="">Choose...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="matching-question-item" data-q-start="15" data-q-end="15">
+                                        <span><strong>15</strong> Swingle came to Asia for research.</span>
+                                        <select name="q15" id="q15" class="matching-answer-select">
+                                            <option value="">Choose...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="matching-question-item" data-q-start="16" data-q-end="16">
+                                        <span><strong>16</strong> The first record of one insect is used to tackle other insects in the western world.</span>
+                                        <select name="q16" id="q16" class="matching-answer-select">
+                                            <option value="">Choose...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="matching-question-item" data-q-start="17" data-q-end="17">
+                                        <span><strong>17</strong> Chinese fruit growers started to use pesticides in place of citrus ants.</span>
+                                        <select name="q17" id="q17" class="matching-answer-select">
+                                            <option value="">Choose...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="matching-question-item" data-q-start="18" data-q-end="18">
+                                        <span><strong>18</strong> Some Chinese farmers returned to the traditional bio-method.</span>
+                                        <select name="q18" id="q18" class="matching-answer-select">
+                                            <option value="">Choose...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                            <option value="F">F</option>
+                                            <option value="G">G</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Questions 19-26: TRUE/FALSE/NOT GIVEN -->
+                        <div class="question" data-q-start="19" data-q-end="26">
+                            <div class="question-prompt">
+                                <p><strong>Questions 19–26</strong></p>
+                                <p>Do the following statements agree with the information given in Reading Passage 2?</p>
+                                <p>In boxes 19-26 on your answer sheet, write</p>
+                                <p><strong>TRUE</strong> &nbsp;&nbsp;&nbsp;if the statement agrees with the information</p>
+                                <p><strong>FALSE</strong> &nbsp;&nbsp;&nbsp;if the statement contradicts the information</p>
+                                <p><strong>NOT GIVEN</strong> &nbsp;&nbsp;&nbsp;if there is no information on this</p>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="19" data-q-end="19">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">19</span>
+                                    <span class="tfn-question-text">China has more citrus pests than any other country in the world.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q19" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q19" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q19" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="20" data-q-end="20">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">20</span>
+                                    <span class="tfn-question-text">Swingle came to China to search for an insect to bring back to the US.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q20" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q20" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q20" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="21" data-q-end="21">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">21</span>
+                                    <span class="tfn-question-text">Many people were very impressed by Swingle's discovery.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q21" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q21" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q21" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="22" data-q-end="22">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">22</span>
+                                    <span class="tfn-question-text">Chinese farmers found that pesticides became increasingly expensive.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q22" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q22" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q22" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="23" data-q-end="23">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">23</span>
+                                    <span class="tfn-question-text">Some Chinese farmers abandoned the use of pesticide.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q23" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q23" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q23" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="24" data-q-end="24">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">24</span>
+                                    <span class="tfn-question-text">Trees with ants had more leaves fall than those without.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q24" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q24" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q24" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="25" data-q-end="25">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">25</span>
+                                    <span class="tfn-question-text">Fields using ants yield as large a crop as fields using chemical pesticides.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q25" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q25" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q25" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tfn-question" data-q-start="26" data-q-end="26">
+                                <div class="tfn-question-line">
+                                    <span class="tfn-question-number">26</span>
+                                    <span class="tfn-question-text">Citrus ants often cause considerable damage to the bio-environment of the orchards.</span>
+                                    <div class="tfn-options">
+                                        <label class="tfn-option"><input type="radio" name="q26" value="TRUE"> TRUE</label>
+                                        <label class="tfn-option"><input type="radio" name="q26" value="FALSE"> FALSE</label>
+                                        <label class="tfn-option"><input type="radio" name="q26" value="NOT GIVEN"> NOT GIVEN</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 27-40 -->
+                <div id="questions-3" class="question-set hidden">
+                    <div class="questions-container">
+                        <!-- Questions 27-32: Paragraph Matching -->
+                        <div class="question" data-q-start="27" data-q-end="32">
+                            <div class="question-prompt">
+                                <p><strong>Questions 27–32</strong></p>
+                                <p>Reading Passage 3 has nine paragraphs <strong>A-I</strong>.</p>
+                                <p>Which paragraph contains the following information?</p>
+                                <p>Write the correct letter <strong>A-I</strong> in boxes 27-32 on your answer sheet.</p>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="27" data-q-end="27">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">27</span>
+                                    <span class="headings-question-text">A description of Shanley's initial data collection</span>
+                                    <select name="q27" id="q27" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="28" data-q-end="28">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">28</span>
+                                    <span class="headings-question-text">Why a government official also contributes to the book</span>
+                                    <select name="q28" id="q28" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="29" data-q-end="29">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">29</span>
+                                    <span class="headings-question-text">Reasons why the community asked Shanley to conduct the research</span>
+                                    <select name="q29" id="q29" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="30" data-q-end="30">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">30</span>
+                                    <span class="headings-question-text">Reference to the starting point of her research</span>
+                                    <select name="q30" id="q30" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="31" data-q-end="31">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">31</span>
+                                    <span class="headings-question-text">Two factors that alter food consumption patterns</span>
+                                    <select name="q31" id="q31" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="headings-question" data-q-start="32" data-q-end="32">
+                                <div class="headings-question-line">
+                                    <span class="headings-question-number">32</span>
+                                    <span class="headings-question-text">Why the book is successful</span>
+                                    <select name="q32" id="q32" class="answer-select">
+                                        <option value="">Choose...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Questions 33-40: Summary Completion -->
+                        <div class="question" data-q-start="33" data-q-end="40">
+                            <div class="question-prompt">
+                                <p><strong>Questions 33–40</strong></p>
+                                <p>Complete the summary below.</p>
+                                <p>Choose <strong>NO MORE THAN THREE WORDS</strong> from the passage for each answer.</p>
+                                <p>Write your answers in boxes 33-40 on your answer sheet.</p>
+                            </div>
+                            
+                            <div class="summary-text">
+                                <p>Forest fire has caused local villagers to consume less:</p>
+                                <p><strong>33</strong> <input type="text" class="answer-input" id="q33" placeholder="33"></p>
+                                <p><strong>34</strong> <input type="text" class="answer-input" id="q34" placeholder="34"></p>
+                                <p>Game</p>
+                                <p>There is the least amount of game hunted under <strong>35</strong> <input type="text" class="answer-input" id="q35" placeholder="35"> yield is also <strong>36</strong> <input type="text" class="answer-input" id="q36" placeholder="36">. Thus, it is more reasonable to keep <strong>37</strong> <input type="text" class="answer-input" id="q37" placeholder="37">.</p>
+                                <p>All the trees can also be used for <strong>38</strong> <input type="text" class="answer-input" id="q38" placeholder="38"> besides selling them to loggers. But this is often ignored, because most researches usually focus on the <strong>39</strong> <input type="text" class="answer-input" id="q39" placeholder="39"> of the trees.</p>
+                                <p>The purpose of the book:</p>
+                                <p>To give information about <strong>40</strong> <input type="text" class="answer-input" id="q40" placeholder="40">.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow prev" onclick="previousQuestion()" id="prevBtn" aria-label="Previous question">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button class="nav-arrow next" onclick="nextQuestion()" id="nextBtn" aria-label="Next question">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nav-row perScorableItem" aria-label="Questions">
+        <div class="footer__questionWrapper___1tZ46 multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(1)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">1</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 13</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(1)"><span class="sr-only">Question 1</span><span aria-hidden="true">1</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(2)"><span class="sr-only">Question 2</span><span aria-hidden="true">2</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(3)"><span class="sr-only">Question 3</span><span aria-hidden="true">3</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(4)"><span class="sr-only">Question 4</span><span aria-hidden="true">4</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(5)"><span class="sr-only">Question 5</span><span aria-hidden="true">5</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(6)"><span class="sr-only">Question 6</span><span aria-hidden="true">6</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(7)"><span class="sr-only">Question 7</span><span aria-hidden="true">7</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(8)"><span class="sr-only">Question 8</span><span aria-hidden="true">8</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(9)"><span class="sr-only">Question 9</span><span aria-hidden="true">9</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(10)"><span class="sr-only">Question 10</span><span aria-hidden="true">10</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(11)"><span class="sr-only">Question 11</span><span aria-hidden="true">11</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(12)"><span class="sr-only">Question 12</span><span aria-hidden="true">12</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(13)"><span class="sr-only">Question 13</span><span aria-hidden="true">13</span></button>
+            </div>
+        </div>
+        
+        <div class="footer__questionWrapper___1tZ46 selected multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(2)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">2</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 13</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(14)"><span class="sr-only">Question 14</span><span aria-hidden="true">14</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(15)"><span class="sr-only">Question 15</span><span aria-hidden="true">15</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(16)"><span class="sr-only">Question 16</span><span aria-hidden="true">16</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(17)"><span class="sr-only">Question 17</span><span aria-hidden="true">17</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(18)"><span class="sr-only">Question 18</span><span aria-hidden="true">18</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(19)"><span class="sr-only">Question 19</span><span aria-hidden="true">19</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(20)"><span class="sr-only">Question 20</span><span aria-hidden="true">20</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(21)"><span class="sr-only">Question 21</span><span aria-hidden="true">21</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(22)"><span class="sr-only">Question 22</span><span aria-hidden="true">22</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(23)"><span class="sr-only">Question 23</span><span aria-hidden="true">23</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(24)"><span class="sr-only">Question 24</span><span aria-hidden="true">24</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(25)"><span class="sr-only">Question 25</span><span aria-hidden="true">25</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(26)"><span class="sr-only">Question 26</span><span aria-hidden="true">26</span></button>
+            </div>
+        </div>
+        
+        <div class="footer__questionWrapper___1tZ46 multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(3)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">3</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 14</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(27)"><span class="sr-only">Question 27</span><span aria-hidden="true">27</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(28)"><span class="sr-only">Question 28</span><span aria-hidden="true">28</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(29)"><span class="sr-only">Question 29</span><span aria-hidden="true">29</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(30)"><span class="sr-only">Question 30</span><span aria-hidden="true">30</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(31)"><span class="sr-only">Question 31</span><span aria-hidden="true">31</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(32)"><span class="sr-only">Question 32</span><span aria-hidden="true">32</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(33)"><span class="sr-only">Question 33</span><span aria-hidden="true">33</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(34)"><span class="sr-only">Question 34</span><span aria-hidden="true">34</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(35)"><span class="sr-only">Question 35</span><span aria-hidden="true">35</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(36)"><span class="sr-only">Question 36</span><span aria-hidden="true">36</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(37)"><span class="sr-only">Question 37</span><span aria-hidden="true">37</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(38)"><span class="sr-only">Question 38</span><span aria-hidden="true">38</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(39)"><span class="sr-only">Question 39</span><span aria-hidden="true">39</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(40)"><span class="sr-only">Question 40</span><span aria-hidden="true">40</span></button>
+            </div>
+        </div>
+        
+        <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton___3FM07">
+            <i class="fa fa fa-check" aria-hidden="true"></i>
+            <span>Check Answers</span>
+        </button>
+    </nav>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu">
+        <div id="menu-highlight" class="context-menu-item" onclick="highlightText()">
+            Highlight
+        </div>
+        <div id="menu-note" class="context-menu-item" onclick="addNote()">
+            Note
+        </div>
+        <div id="menu-clear" class="context-menu-item" onclick="clearHighlight()">
+            Clear
+        </div>
+        <div id="menu-clear-all" class="context-menu-item" onclick="clearAllHighlights()">
+            Clear All
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeResultsModal()">&times;</button>
+            <h2>Results</h2>
+            <div class="results-summary">
+                <p>Score: <span id="results-score"></span> / 40</p>
+                <p>IELTS Band: <span id="results-band"></span></p>
+            </div>
+            <div id="results-details" class="results-details-container">
+                <!-- Results for each question will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- STATE VARIABLES ---
+        let currentPassage = 1;
+        let currentQuestion = 1;
+        let selectedRange = null;
+        let timeInSeconds = 3600;
+        let timerInterval;
+        let activeQuestionElement = null;
+
+        // --- ANSWERS ---
+        const correctAnswers = {
+            // Part 1 (1-13) - REVIEW OF RESEARCH ON THE EFFECTS OF FOOD PROMOTION TO CHILDREN
+            '1': 'viii',
+            '2': 'ii',
+            '3': 'vi',
+            '4': 'v',
+            '5': 'i',
+            '6': 'x',
+            '7': 'iii',
+            '8': 'NO',
+            '9': 'NO',
+            '10': 'YES',
+            '11': 'NOT GIVEN',
+            '12': 'NOT GIVEN',
+            '13': 'YES',
+            
+            // Part 2 (14-26) - The Ant and the Mandarin
+            '14': 'C',
+            '15': 'F',
+            '16': 'A',
+            '17': 'D',
+            '18': 'E',
+            '19': 'TRUE',
+            '20': 'FALSE',
+            '21': 'FALSE',
+            '22': 'TRUE',
+            '23': 'TRUE',
+            '24': 'FALSE',
+            '25': 'TRUE',
+            '26': 'FALSE',
+            
+            // Part 3 (27-40) - The Fruit Book
+            '27': 'E',
+            '28': 'B',
+            '29': 'C',
+            '30': 'C',
+            '31': 'F',
+            '32': 'J',
+            '33': 'forest fruit',
+            '34': 'fibre',
+            '35': 'uxi',
+            '36': 'low',
+            '37': 'piquia',
+            '38': 'subsistence',
+            '39': 'commercial potential',
+            '40': 'non-timber forest products'
+        };
+
+        // --- DOM ELEMENTS ---
+        const timerDisplay = document.querySelector('.timer-display');
+        const timerToggleButton = document.getElementById('timer-toggle-btn');
+        const timerResetButton = document.getElementById('timer-reset-btn');
+        const deliverButton = document.getElementById('deliver-button');
+        const resizer = document.getElementById('resizer');
+        const passagePanel = document.getElementById('passage-panel');
+        const questionsPanel = document.getElementById('questions-panel');
+        const contextMenu = document.getElementById('contextMenu');
+
+        // --- ICON SVGs ---
+        const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+        const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+
+        // --- INITIALIZATION ---
+        function initialize() {
+            console.log(`🚀 Initializing application...`);
+            startTimer();
+            setupQuestionNavigation();
+            console.log(`📋 Setting up initial state - switching to part 1`);
+            switchToPart(1);
+            
+            document.body.addEventListener('input', updateAllIndicators);
+            document.body.addEventListener('change', updateAllIndicators);
+            deliverButton.addEventListener('click', checkAnswers);
+            timerToggleButton.addEventListener('click', toggleTimer);
+            timerResetButton.addEventListener('click', resetTimer);
+
+            // Auto-close dropdowns on selection
+            document.querySelectorAll('.answer-select, .matching-answer-select').forEach(sel => {
+                sel.addEventListener('change', () => sel.blur());
+            });
+
+            resizer.addEventListener('mousedown', initResize, false);
+            initializeContextMenu();
+        }
+
+        function setupQuestionNavigation() {
+            // Add click listeners to question containers for navigation
+            document.querySelectorAll('[data-q-start]').forEach(el => {
+                el.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    
+                    const qNum = parseInt(el.dataset.qStart, 10);
+                    const qEnd = parseInt(el.dataset.qEnd, 10);
+                    
+                    if (isNaN(qNum)) {
+                        return;
+                    }
+                    
+                    if (qNum === qEnd || el.classList.contains('headings-question') || 
+                        el.classList.contains('tfng-question') || el.classList.contains('tfn-question')) {
+                        if (currentQuestion !== qNum) {
+                            goToQuestion(qNum);
+                        }
+                    }
+                });
+            });
+            
+            // Add specific click listeners for individual question elements
+            document.querySelectorAll('.headings-question, .tfng-question, .tfn-question, .summary-text').forEach(el => {
+                el.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const qNum = parseInt(el.dataset.qStart, 10);
+                    
+                    if (isNaN(qNum)) {
+                        return;
+                    }
+                    
+                    if (currentQuestion !== qNum) {
+                        goToQuestion(qNum);
+                    }
+                });
+            });
+            
+            // Add specific click listeners for input elements
+            document.querySelectorAll('.answer-input').forEach(input => {
+                input.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const qNum = parseInt(input.id.replace('q', ''), 10);
+                    
+                    if (currentQuestion !== qNum) {
+                        goToQuestion(qNum);
+                    }
+                });
+            });
+        }
+
+        // --- CORE TEST LOGIC ---
+
+        function checkAnswers() {
+            // Disable all inputs
+            const allInputs = document.querySelectorAll('input, select, textarea');
+            allInputs.forEach(input => {
+                input.disabled = true;
+                input.style.cursor = 'not-allowed';
+            });
+
+            // Disable submit button
+            deliverButton.disabled = true;
+            deliverButton.style.cursor = 'not-allowed';
+            
+            // Stop timer
+            clearInterval(timerInterval);
+            
+            let score = 0;
+            const totalQuestions = 40;
+            const resultsDetailsContainer = document.getElementById('results-details');
+            resultsDetailsContainer.innerHTML = '';
+
+            // Clear previous markings
+            document.querySelectorAll('.correct, .incorrect, .correct-answer-highlight').forEach(el => {
+                el.classList.remove('correct', 'incorrect', 'correct-answer-highlight');
+            });
+            document.querySelectorAll('.correct-answer-display').forEach(el => el.remove());
+
+            // Check each question
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionKey = String(i);
+                const correctAnswer = correctAnswers[questionKey];
+                let userAnswer = '';
+                let isCorrect = false;
+                let userAnswerDisplay = 'Not Answered';
+                const correctAnswerText = Array.isArray(correctAnswer) ? correctAnswer.join(' / ') : correctAnswer;
+
+                // Get user answer based on question type
+                const textInput = document.getElementById(`q${i}`);
+                const selectInput = document.querySelector(`select[name="q${i}"]`);
+                const radioInputs = document.querySelectorAll(`input[name="q${i}"]`);
+                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+
+                if (textInput && textInput.tagName === 'INPUT') {
+                    // Text input (summary completion)
+                    userAnswer = textInput.value.trim().toLowerCase();
+                    userAnswerDisplay = userAnswer || 'Not Answered';
+                    const normalizedCorrect = Array.isArray(correctAnswer) 
+                        ? correctAnswer.map(ans => ans.toLowerCase().trim())
+                        : correctAnswer.toLowerCase().trim();
+                    
+                    if (Array.isArray(correctAnswer)) {
+                        isCorrect = normalizedCorrect.some(ans => userAnswer.includes(ans));
+                    } else {
+                        isCorrect = userAnswer === normalizedCorrect;
+                    }
+                    
+                    if (isCorrect) {
+                        score++;
+                        textInput.classList.add('correct');
+                    } else {
+                        textInput.classList.add('incorrect');
+                        const correctAnswerSpan = document.createElement('span');
+                        correctAnswerSpan.className = 'correct-answer-display';
+                        correctAnswerSpan.innerHTML = `&nbsp;➜&nbsp;<span class="correct-answer-highlight">${correctAnswerText}</span>`;
+                        textInput.parentNode.insertBefore(correctAnswerSpan, textInput.nextSibling);
+                    }
+                } else if (selectInput) {
+                    // Select dropdown (headings matching, date matching)
+                    userAnswer = selectInput.value;
+                    userAnswerDisplay = userAnswer || 'Not Answered';
+                    isCorrect = userAnswer === correctAnswer;
+                    
+                    if (isCorrect) {
+                        score++;
+                        selectInput.classList.add('correct');
+                    } else {
+                        selectInput.classList.add('incorrect');
+                        const correctAnswerSpan = document.createElement('span');
+                        correctAnswerSpan.className = 'correct-answer-display';
+                        correctAnswerSpan.innerHTML = `&nbsp;➜&nbsp;<span class="correct-answer-highlight">${correctAnswerText}</span>`;
+                        selectInput.parentNode.insertBefore(correctAnswerSpan, selectInput.nextSibling);
+                    }
+                } else if (radioInputs.length > 0) {
+                    // Radio buttons (YES/NO/NOT GIVEN, TRUE/FALSE/NOT GIVEN)
+                    if (checkedRadio) {
+                        userAnswer = checkedRadio.value;
+                        userAnswerDisplay = userAnswer;
+                        isCorrect = userAnswer === correctAnswer;
+                        
+                        const optionContainer = checkedRadio.closest('.tfng-option, .tfn-option');
+                        if (optionContainer) {
+                            optionContainer.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        }
+                        
+                        if (isCorrect) {
+                            score++;
+                        } else {
+                            // Highlight correct answer
+                            const correctOption = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`);
+                            if (correctOption) {
+                                const correctContainer = correctOption.closest('.tfng-option, .tfn-option');
+                                if (correctContainer) {
+                                    correctContainer.classList.add('correct-answer-highlight');
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Add result to modal
+                const resultRow = `
+                    <div class="result-row ${isCorrect ? '' : 'incorrect'}">
+                        <span class="q-num">${i}</span>
+                        <span class="user-ans">${userAnswerDisplay}</span>
+                        <span class="correct-ans">${correctAnswerText}</span>
+                    </div>`;
+                resultsDetailsContainer.innerHTML += resultRow;
+                
+                // Update nav button color
+                const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                if (navButton) {
+                    navButton.classList.remove('answered', 'active');
+                    navButton.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            // Update results summary
+            document.getElementById('results-score').textContent = score;
+            document.getElementById('results-band').textContent = calculateBandScore(score);
+            document.body.classList.add('results-mode');
+            document.getElementById('results-modal').classList.remove('hidden');
+            
+            // Change button to "My Result"
+            deliverButton.innerHTML = `<span>My Result</span>`;
+            deliverButton.style.backgroundColor = '#4CAF50';
+            deliverButton.style.color = 'white';
+            deliverButton.style.borderColor = '#4CAF50';
+            deliverButton.disabled = false;
+            deliverButton.style.cursor = 'pointer';
+            deliverButton.removeEventListener('click', checkAnswers);
+            deliverButton.addEventListener('click', showResultsModal);
+            
+            // Highlight correct answers in the passage
+            highlightCorrectAnswersInPassage();
+        }
+
+        function calculateBandScore(score) {
+            if (score >= 39) return '9.0';
+            const mapping = {
+                40: 9.0, 39: 9.0, 38: 8.5, 37: 8.5, 36: 8.0, 35: 8.0, 34: 7.5,
+                33: 7.5, 32: 7.0, 31: 7.0, 30: 7.0, 29: 6.5, 28: 6.5, 27: 6.5,
+                26: 6.0, 25: 6.0, 24: 6.0, 23: 5.5, 22: 5.5, 21: 5.5, 20: 5.5,
+                19: 5.0, 18: 5.0, 17: 5.0, 16: 5.0, 15: 5.0, 14: 4.5, 13: 4.5,
+                12: 4.0, 11: 4.0, 10: 4.0, 9: 3.5, 8: 3.5, 7: 3.0, 6: 3.0,
+                5: 2.5, 4: 2.5
+            };
+            if (score <= 0) return 0.0;
+            if (score === 1) return 1.0;
+            if (score <= 3) return 2.0;
+            if (score <= 5) return 2.5;
+            return mapping[score] || 0.0;
+        }
+
+        function highlightCorrectAnswersInPassage() {
+            // Define the text passages and their corresponding question numbers
+            const part1Highlights = [
+                { question: 1, text: "The advertised diet contrasts sharply with that recommended by public health advisors", answer: "viii" },
+                { question: 2, text: "In terms of nutritional knowledge, food advertising seems to have little influence on children's general perceptions of what constitutes a healthy diet", answer: "ii" },
+                { question: 3, text: "The review also found evidence that food promotion influences children's food preferences and their purchase behaviour", answer: "vi" },
+                { question: 4, text: "They have established a clear link between television viewing and diet, obesity, and cholesterol levels", answer: "v" },
+                { question: 5, text: "Nor do all studies point to this conclusion; several have not found an effect", answer: "i" },
+                { question: 6, text: "two factors suggest that these findings actually downplay the effect that food promotion has on children", answer: "x" },
+                { question: 7, text: "The debate should now shift to what action is needed", answer: "iii" },
+                { question: 8, text: "The advertised diet contrasts sharply with that recommended by public health advisors", answer: "NO" },
+                { question: 9, text: "food advertising seems to have little influence on children's general perceptions of what constitutes a healthy diet", answer: "NO" },
+                { question: 10, text: "It is impossible to say, however, whether this effect is caused by the advertising, the sedentary nature of television viewing or snacking", answer: "YES" },
+                { question: 13, text: "the literature focuses principally on television advertising", answer: "YES" }
+            ];
+
+            const part2Highlights = [
+                { question: 14, text: "The earliest report of citrus ants at work among the orange trees appeared in a book on tropical and subtropical botany written by Hsi Han in AD 304", answer: "C" },
+                { question: 15, text: "in 1915 Walter Swingle, a plant physiologist working for the US Department of Agriculture, was sent to China", answer: "F" },
+                { question: 16, text: "The first breakthrough had come in 1888, when the infant orange industry in California had been saved from extinction by the Australian vedalia beetle", answer: "A" },
+                { question: 17, text: "The long tradition of ants in the Chinese orchards only began to waver in the 1950s and 1960s with the introduction of powerful organic insecticides", answer: "D" },
+                { question: 18, text: "growers began to revive the old ant patrols in the late 1960s", answer: "E" },
+                { question: 19, text: "China also has the greatest diversity of citrus pests", answer: "TRUE" },
+                { question: 20, text: "was sent to China in search of varieties of orange that were resistant to the disease", answer: "FALSE" },
+                { question: 21, text: "many Western biologists were sceptical", answer: "FALSE" },
+                { question: 22, text: "As costs soared and pests began to develop resistance to the chemicals", answer: "TRUE" },
+                { question: 23, text: "a few hung onto their ants", answer: "TRUE" },
+                { question: 24, text: "Trees with yellow ants produced almost 20 per cent more healthy leaves than those without", answer: "FALSE" },
+                { question: 25, text: "these trees yield just as big a crop as those protected by expensive chemical sprays", answer: "TRUE" },
+                { question: 26, text: "ants do a lot less damage than chemicals", answer: "FALSE" }
+            ];
+
+            const part3Highlights = [
+                { question: 27, text: "During 1993 and 1994, 30 families weighed everything they used from the forest", answer: "E" },
+                { question: 28, text: "no less a dignitary than Brazil's environment minister, Marina Silva, has written the foreword", answer: "B" },
+                { question: 29, text: "The union realised that logging companies would soon be knocking on the doors of the caboclos", answer: "C" },
+                { question: 30, text: "Shanley's work on the book began a decade ago, with a plea for help from the Rural Workers' Union", answer: "C" },
+                { question: 31, text: "The fire and logging also changed the nature of the caboclo diet", answer: "F" },
+                { question: 32, text: "Its success is largely due to the fact that people with poor literacy skills can understand much of the information", answer: "J" },
+                { question: 33, text: "Average annual household consumption of forest fruit had fallen from 89 to 28 kilogrammes", answer: "forest fruit" },
+                { question: 34, text: "fibre use also dropped from around 20 to 4 kilogrammes", answer: "fibre" },
+                { question: 35, text: "under uxi, four species weighing 38 kilogrammes", answer: "uxi" },
+                { question: 36, text: "38 kilogrammes", answer: "low" },
+                { question: 37, text: "selling piquia trees to loggers for a few dollars made little sense", answer: "piquia" },
+                { question: 38, text: "they are critical for subsistence", answer: "subsistence" },
+                { question: 39, text: "tends to focus on their commercial potential", answer: "commercial potential" },
+                { question: 40, text: "the non-timber forest products", answer: "non-timber forest products" }
+            ];
+
+            // Function to apply highlights
+            function applyHighlights(passageElement, highlights) {
+                if (!passageElement) return;
+
+                // Clear existing highlights
+                passageElement.querySelectorAll('.answer-highlight').forEach(el => {
+                    const parent = el.parentNode;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                    parent.normalize();
+                });
+
+                // Add highlights
+                highlights.forEach(item => {
+                    const paragraphs = passageElement.querySelectorAll('p');
+                    paragraphs.forEach(paragraph => {
+                        const html = paragraph.innerHTML;
+                        if (!html || typeof html !== 'string') return;
+                        
+                        // Check if this paragraph contains the target text
+                        if (html.toLowerCase().includes(item.text.toLowerCase())) {
+                            const escapeRegExp = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            const re = new RegExp(escapeRegExp(item.text), 'gi');
+                            const replaced = html.replace(
+                                re,
+                                match => `<span class="answer-highlight" data-question="${item.question}" style="
+                                    background-color: #ffeb3b;
+                                    padding: 2px 4px;
+                                    border-radius: 3px;
+                                    font-weight: bold;
+                                    position: relative;
+                                ">${match}<span style="
+                                    position: absolute;
+                                    top: -8px;
+                                    right: -8px;
+                                    background-color: #2196f3;
+                                    color: white;
+                                    border-radius: 50%;
+                                    width: 20px;
+                                    height: 20px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 12px;
+                                    font-weight: bold;
+                                ">${item.question}</span></span>`
+                            );
+                            paragraph.innerHTML = replaced;
+                        }
+                    });
+                });
+            }
+
+            // Apply highlights to each passage
+            applyHighlights(document.getElementById('passage-text-1'), part1Highlights);
+            applyHighlights(document.getElementById('passage-text-2'), part2Highlights);
+            applyHighlights(document.getElementById('passage-text-3'), part3Highlights);
+        }
+
+        // --- UI & NAVIGATION ---
+
+        function switchToPart(partNumber) {
+            console.log(`🔀 switchToPart called with partNumber: ${partNumber}`);
+            
+            currentPassage = partNumber;
+
+            // Hide all passages and questions
+            document.querySelectorAll('.reading-passage, .question-set, .part-header').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Show the correct passage, questions, and header
+            document.getElementById(`passage-text-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`questions-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`part-header-${partNumber}`).classList.remove('hidden');
+
+            // Update bottom navigation
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => {
+                wrapper.classList.toggle('selected', (index + 1) === partNumber);
+            });
+
+            // Go to first question of the part
+            const firstQuestionOfPart = {1: 1, 2: 14, 3: 27}[partNumber];
+            goToQuestion(firstQuestionOfPart);
+        }
+        
+        function goToQuestion(questionNumber) {
+            console.log(`🎯 goToQuestion called with questionNumber: ${questionNumber}`);
+            
+            currentQuestion = questionNumber;
+
+            let passageNumber = 1;
+            if (questionNumber >= 14 && questionNumber <= 26) passageNumber = 2;
+            else if (questionNumber >= 27) passageNumber = 3;
+            
+            if (currentPassage !== passageNumber) {
+                switchToPart(passageNumber);
+                return;
+            }
+
+            // Remove active style from previous element
+            if (activeQuestionElement) {
+                activeQuestionElement.classList.remove('active-question', 'active-input');
+                const prevBlock = activeQuestionElement.closest('[data-q-start]');
+                if (prevBlock) prevBlock.classList.remove('active-question');
+            }
+
+            // Find and activate the new question element
+            let targetEl = document.getElementById(`q${questionNumber}`);
+            if (targetEl) {
+                activeQuestionElement = targetEl;
+                targetEl.classList.add('active-input');
+                scrollIntoViewIfNeeded(targetEl);
+                if (typeof targetEl.focus === 'function') {
+                    targetEl.focus();
+                }
+            } else {
+                targetEl = document.querySelector(`[data-q-start="${questionNumber}"]`);
+                if (targetEl) {
+                    activeQuestionElement = targetEl;
+                    targetEl.classList.add('active-question');
+                    scrollIntoViewIfNeeded(targetEl);
+                    
+                    // Focus the first input in the question if available
+                    const firstInput = targetEl.querySelector('input, select');
+                    if (firstInput && typeof firstInput.focus === 'function') {
+                        firstInput.focus();
+                    }
+                }
+            }
+
+            updateNavigation();
+        }
+        
+        function updateNavigation() {
+            // Update active nav button
+            const navButtons = document.querySelectorAll('.subQuestion');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            const activeNav = document.querySelector(`.subQuestion[onclick="goToQuestion(${currentQuestion})"]`);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Update answered status
+            updateAllIndicators();
+        }
+        
+        window.nextQuestion = () => currentQuestion < 40 && goToQuestion(currentQuestion + 1);
+        window.previousQuestion = () => currentQuestion > 1 && goToQuestion(currentQuestion - 1);
+
+        function updateAllIndicators() {
+            updateAttemptedCount(1, 1, 13);
+            updateAttemptedCount(2, 14, 26);
+            updateAttemptedCount(3, 27, 40);
+            updateAnsweredNav();
+        }
+        
+        function updateAnsweredNav() {
+            const navButtons = document.querySelectorAll('.subQuestion');
+            navButtons.forEach(btn => {
+                const qNum = parseInt(btn.textContent, 10);
+                if (isQuestionAnswered(qNum)) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.remove('answered');
+                }
+            });
+        }
+        
+        function isQuestionAnswered(qNum) {
+            const textInput = document.getElementById(`q${qNum}`);
+            if (textInput && textInput.value.trim() !== '') {
+                return true;
+            }
+            
+            const selectInput = document.querySelector(`select[name="q${qNum}"]`);
+            if (selectInput && selectInput.value !== '') {
+                return true;
+            }
+            
+            const checkedRadio = document.querySelector(`input[name="q${qNum}"]:checked`);
+            if (checkedRadio) {
+                return true;
+            }
+            
+            return false;
+        }
+
+        function updateAttemptedCount(part, startQ, endQ) {
+            let answeredCount = 0;
+            for (let i = startQ; i <= endQ; i++) {
+                if (isQuestionAnswered(i)) {
+                    answeredCount++;
+                }
+            }
+            const partHeader = document.querySelector(`.footer__questionNo___3WNct[onclick="switchToPart(${part})"]`);
+            if (partHeader) {
+                const countSpan = partHeader.querySelector('.attemptedCount');
+                if (countSpan) {
+                     countSpan.textContent = `${answeredCount} of ${endQ - startQ + 1}`;
+                }
+            }
+        }
+
+        function scrollIntoViewIfNeeded(element) {
+            const panel = element.closest('.questions-panel, .passage-panel');
+            const panelRect = panel.getBoundingClientRect();
+            const elementRect = element.getBoundingClientRect();
+            if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // --- TIMER FUNCTIONS ---
+        
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeInSeconds--;
+                const minutes = Math.floor(timeInSeconds / 60);
+                const seconds = timeInSeconds % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (timeInSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = "Time's up!";
+                }
+            }, 1000);
+            timerToggleButton.innerHTML = pauseIcon;
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerToggleButton.innerHTML = playIcon;
+        }
+
+        function toggleTimer() {
+            if (timerToggleButton.innerHTML.includes('M6 19h4V5H6v14z')) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function resetTimer() {
+            timeInSeconds = 3600;
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            startTimer();
+            timerToggleButton.innerHTML = pauseIcon;
+        }
+
+        // --- RESIZE FUNCTION ---
+        
+        function initResize(e) {
+            e.preventDefault();
+            const startX = e.clientX;
+            const startWidth = passagePanel.offsetWidth;
+            
+            const doDrag = (e) => {
+                const newWidth = startWidth + e.clientX - startX;
+                if (newWidth > 200 && (document.body.clientWidth - newWidth - resizer.offsetWidth) > 200) {
+                    passagePanel.style.flex = `0 0 ${newWidth}px`;
+                }
+            };
+            const stopDrag = () => {
+                window.removeEventListener('mousemove', doDrag, false);
+                window.removeEventListener('mouseup', stopDrag, false);
+            };
+            
+            window.addEventListener('mousemove', doDrag, false);
+            window.addEventListener('mouseup', stopDrag, false);
+        }
+        
+        // --- CONTEXT MENU FUNCTIONS ---
+        
+        function initializeContextMenu() {
+            const panels = [passagePanel, questionsPanel];
+
+            document.addEventListener('selectionchange', () => {
+                const selection = window.getSelection();
+                if (selection && !selection.isCollapsed && selection.toString().trim().length > 0) {
+                    const range = selection.getRangeAt(0);
+                    if (panels.some(panel => panel.contains(range.commonAncestorContainer))) {
+                        selectedRange = range;
+                    }
+                }
+            });
+
+            const showContextMenu = (e) => {
+                const target = e.target;
+                const isClickOnHighlight = target.closest('.highlight, .comment-highlight');
+                const isSelectionActive = selectedRange && selectedRange.toString().trim().length > 0;
+                
+                let showMenu = false;
+
+                if (isClickOnHighlight) {
+                    document.getElementById('menu-highlight').style.display = 'none';
+                    document.getElementById('menu-note').style.display = 'none';
+                    document.getElementById('menu-clear').style.display = 'block';
+                    document.getElementById('menu-clear-all').style.display = 'block';
+                    contextMenu.targetElementForClear = isClickOnHighlight;
+                    showMenu = true;
+                } else if (isSelectionActive && panels.some(panel => panel.contains(selectedRange.commonAncestorContainer))) {
+                    document.getElementById('menu-highlight').style.display = 'flex';
+                    document.getElementById('menu-note').style.display = 'flex';
+                    document.getElementById('menu-clear').style.display = 'none';
+                    document.getElementById('menu-clear-all').style.display = 'block';
+                    showMenu = true;
+                }
+
+                if (showMenu) {
+                    e.preventDefault();
+                    contextMenu.style.display = 'block';
+                    const menuHeight = contextMenu.offsetHeight;
+                    const menuWidth = contextMenu.offsetWidth;
+                    let left = e.pageX;
+                    let top = e.pageY;
+                    if (left + menuWidth > window.innerWidth) left = window.innerWidth - menuWidth - 5;
+                    if (top + menuHeight > window.innerHeight) top = e.pageY - menuHeight - 5;
+                    else top = e.pageY - menuHeight - 5;
+                    
+                    contextMenu.style.left = `${left}px`;
+                    contextMenu.style.top = `${top}px`;
+                }
+            };
+
+            panels.forEach(panel => {
+                panel.addEventListener('contextmenu', showContextMenu);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (contextMenu.style.display === 'block' && !contextMenu.contains(e.target)) {
+                    closeContextMenu();
+                }
+            });
+        }
+
+        function closeContextMenu() {
+            contextMenu.style.display = 'none';
+            selectedRange = null;
+        }
+
+        function unwrapElement(element) {
+            const parent = element.parentNode;
+            if (!parent) return;
+            while (element.firstChild) {
+                parent.insertBefore(element.firstChild, element);
+            }
+            parent.removeChild(element);
+            parent.normalize();
+        }
+
+        window.highlightText = () => {
+            if (selectedRange && !selectedRange.collapsed) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(selectedRange.extractContents());
+                selectedRange.insertNode(span);
+            }
+            closeContextMenu();
+            window.getSelection().removeAllRanges();
+        };
+
+        window.addNote = () => {
+            const note = prompt('Enter your note:');
+            if (note && selectedRange && !selectedRange.collapsed) {
+                const span = document.createElement('span');
+                span.className = 'comment-highlight';
+                const tooltip = document.createElement('span');
+                tooltip.className = 'comment-tooltip';
+                tooltip.textContent = note;
+                span.appendChild(selectedRange.extractContents());
+                span.appendChild(tooltip);
+                selectedRange.insertNode(span);
+            }
+            closeContextMenu();
+            window.getSelection().removeAllRanges();
+        };
+
+        window.clearHighlight = () => {
+             const elementToClear = contextMenu.targetElementForClear;
+             if (elementToClear) {
+                 unwrapElement(elementToClear);
+             }
+             closeContextMenu();
+             window.getSelection().removeAllRanges();
+        };
+        
+        window.clearAllHighlights = () => {
+            document.querySelectorAll('.highlight, .comment-highlight').forEach(unwrapElement);
+            closeContextMenu();
+            window.getSelection().removeAllRanges();
+        };
+
+        // --- RESULTS MODAL ---
+        
+        function showResultsModal() {
+            document.getElementById('results-modal').classList.remove('hidden');
+        }
+
+        window.closeResultsModal = function() {
+            document.getElementById('results-modal').classList.add('hidden');
+            document.body.classList.remove('results-mode');
+        }
+
+        // --- GLOBAL FUNCTION EXPOSURE ---
+        window.nextQuestion = nextQuestion;
+        window.previousQuestion = previousQuestion;
+        window.goToQuestion = goToQuestion;
+        window.switchToPart = switchToPart;
+        window.closeResultsModal = closeResultsModal;
+        window.highlightText = highlightText;
+        window.addNote = addNote;
+        window.clearHighlight = clearHighlight;
+        window.clearAllHighlights = clearAllHighlights;
+
+        // --- START THE APP ---
+        initialize();
+    });
+    </script>
+</body>
+</html>

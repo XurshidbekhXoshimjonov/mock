@@ -1,0 +1,543 @@
+{
+  "id": "listening-vol-7-test-3-listening-s2",
+  "title": "Listening Vol 7 Test 3 - Part 2: Riding for the Disabled (RDA)",
+  "slug": "listening-vol-7-test-3-part-2",
+  "part": 2,
+  "audio": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-12",
+      "instruction": "Choose the correct letter, A, B, or C.",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13-14",
+      "instruction": "Complete the summary below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-18",
+      "instruction": "How much does Joan like doing each of the following activities? Choose the correct letter, A, B or C next to questions 15-18. Categories A She really likes it B She doesn't mind it C She hates it",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "title": "Questions 19-20",
+      "instruction": "Choose TWO correct answers. 19-20 Joan says the TWO ways the RDA needs to improve are by",
+      "questionNumbers": [
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Joan normally gets up at",
+      "options": [
+        {
+          "value": "A",
+          "label": "A 5.30 a.m",
+          "html": "5.30 a.m"
+        },
+        {
+          "value": "B",
+          "label": "B 6.30 a.m",
+          "html": "6.30 a.m"
+        },
+        {
+          "value": "C",
+          "label": "C 7.30 a.m",
+          "html": "7.30 a.m"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Joan's first task of the day is to",
+      "options": [
+        {
+          "value": "A",
+          "label": "A clean the horses.",
+          "html": "clean the horses."
+        },
+        {
+          "value": "B",
+          "label": "B organise her son.",
+          "html": "organise her son."
+        },
+        {
+          "value": "C",
+          "label": "C do farm work.",
+          "html": "do farm work."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "sentence_completion",
+      "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+      "options": [],
+      "answer": "40"
+    },
+    {
+      "number": 14,
+      "type": "sentence_completion",
+      "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+      "options": [],
+      "answer": "25"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "correspondence",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - She really likes it",
+          "html": "She really likes it"
+        },
+        {
+          "value": "B",
+          "label": "B - She doesn't mind it",
+          "html": "She doesn't mind it"
+        },
+        {
+          "value": "C",
+          "label": "C - She hates it",
+          "html": "She hates it"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "fund-raising",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - She really likes it",
+          "html": "She really likes it"
+        },
+        {
+          "value": "B",
+          "label": "B - She doesn't mind it",
+          "html": "She doesn't mind it"
+        },
+        {
+          "value": "C",
+          "label": "C - She hates it",
+          "html": "She hates it"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "calling riders",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - She really likes it",
+          "html": "She really likes it"
+        },
+        {
+          "value": "B",
+          "label": "B - She doesn't mind it",
+          "html": "She doesn't mind it"
+        },
+        {
+          "value": "C",
+          "label": "C - She hates it",
+          "html": "She hates it"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "organising accounts",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - She really likes it",
+          "html": "She really likes it"
+        },
+        {
+          "value": "B",
+          "label": "B - She doesn't mind it",
+          "html": "She doesn't mind it"
+        },
+        {
+          "value": "C",
+          "label": "C - She hates it",
+          "html": "She hates it"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 19,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A giving special training.",
+          "html": "giving special training."
+        },
+        {
+          "value": "B",
+          "label": "B making fund-raising more effective.",
+          "html": "making fund-raising more effective."
+        },
+        {
+          "value": "C",
+          "label": "C opening more RDA centres.",
+          "html": "opening more RDA centres."
+        },
+        {
+          "value": "D",
+          "label": "D providing more helpers.",
+          "html": "providing more helpers."
+        },
+        {
+          "value": "E",
+          "label": "E recognising difficulties of disabled riders.",
+          "html": "recognising difficulties of disabled riders."
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 20,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A giving special training.",
+          "html": "giving special training."
+        },
+        {
+          "value": "B",
+          "label": "B making fund-raising more effective.",
+          "html": "making fund-raising more effective."
+        },
+        {
+          "value": "C",
+          "label": "C opening more RDA centres.",
+          "html": "opening more RDA centres."
+        },
+        {
+          "value": "D",
+          "label": "D providing more helpers.",
+          "html": "providing more helpers."
+        },
+        {
+          "value": "E",
+          "label": "E recognising difficulties of disabled riders.",
+          "html": "recognising difficulties of disabled riders."
+        }
+      ],
+      "answer": "B | E"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-3",
+  "createdAt": "2026-06-19T16:07:47.720Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2: Riding for the Disabled (RDA)",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "https://archive.org/download/test-3-1-2/Test%203%20%281%29%20%282%29.m4a",
+      "instruction": "",
+      "answerText": "11: B\n12: B\n13: 40\n14: 25\n15: B\n16: C\n17: A\n18: C\n19: B | E\n20: B | E",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-12",
+          "title": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B, or C.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Joan normally gets up at",
+              "text": "Joan normally gets up at",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "5.30 a.m"
+                },
+                {
+                  "letter": "B",
+                  "text": "6.30 a.m"
+                },
+                {
+                  "letter": "C",
+                  "text": "7.30 a.m"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Joan's first task of the day is to",
+              "text": "Joan's first task of the day is to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "clean the horses."
+                },
+                {
+                  "letter": "B",
+                  "text": "organise her son."
+                },
+                {
+                  "letter": "C",
+                  "text": "do farm work."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "group-2-13",
+          "type": "note_completion",
+          "questionRange": "Questions 13-14",
+          "title": "Riding for the Disabled (RDA)",
+          "example": "",
+          "instruction": "Complete the summary below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and {{13}} helpers on the volunteer list, out of whom {{14}} come regularly."
+          ],
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+              "text": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "40"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+              "text": "Joan's official title in Riding for the Disabled (RDA) is chairperson. In her local district there are at present twenty-two riders and helpers on the volunteer list, out of whom come regularly. 13 14",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "25"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15-18",
+          "title": "",
+          "example": "",
+          "instruction": "How much does Joan like doing each of the following activities? Choose the correct letter, A, B or C next to questions 15-18. Categories A She really likes it B She doesn't mind it C She hates it",
+          "options": [
+            {
+              "letter": "A",
+              "text": "She really likes it"
+            },
+            {
+              "letter": "B",
+              "text": "She doesn't mind it"
+            },
+            {
+              "letter": "C",
+              "text": "She hates it"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "correspondence",
+              "text": "correspondence",
+              "answer": "B"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "fund-raising",
+              "text": "fund-raising",
+              "answer": "C"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "calling riders",
+              "text": "calling riders",
+              "answer": "A"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "organising accounts",
+              "text": "organising accounts",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "group-2-19",
+          "type": "multiple_select",
+          "questionRange": "Questions 19-20",
+          "title": "",
+          "example": "",
+          "instruction": "Choose TWO correct answers. 19-20 Joan says the TWO ways the RDA needs to improve are by",
+          "options": [
+            {
+              "letter": "A",
+              "text": "giving special training."
+            },
+            {
+              "letter": "B",
+              "text": "making fund-raising more effective."
+            },
+            {
+              "letter": "C",
+              "text": "opening more RDA centres."
+            },
+            {
+              "letter": "D",
+              "text": "providing more helpers."
+            },
+            {
+              "letter": "E",
+              "text": "recognising difficulties of disabled riders."
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A giving special training.",
+                  "html": "giving special training."
+                },
+                {
+                  "value": "B",
+                  "label": "B making fund-raising more effective.",
+                  "html": "making fund-raising more effective."
+                },
+                {
+                  "value": "C",
+                  "label": "C opening more RDA centres.",
+                  "html": "opening more RDA centres."
+                },
+                {
+                  "value": "D",
+                  "label": "D providing more helpers.",
+                  "html": "providing more helpers."
+                },
+                {
+                  "value": "E",
+                  "label": "E recognising difficulties of disabled riders.",
+                  "html": "recognising difficulties of disabled riders."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A giving special training.",
+                  "html": "giving special training."
+                },
+                {
+                  "value": "B",
+                  "label": "B making fund-raising more effective.",
+                  "html": "making fund-raising more effective."
+                },
+                {
+                  "value": "C",
+                  "label": "C opening more RDA centres.",
+                  "html": "opening more RDA centres."
+                },
+                {
+                  "value": "D",
+                  "label": "D providing more helpers.",
+                  "html": "providing more helpers."
+                },
+                {
+                  "value": "E",
+                  "label": "E recognising difficulties of disabled riders.",
+                  "html": "recognising difficulties of disabled riders."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            }
+          ],
+          "questionNumber": 19,
+          "answerQuestions": [
+            {
+              "questionNumber": 20
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Joan says the TWO ways the RDA needs to improve are by"
+        }
+      ]
+    }
+  ]
+}

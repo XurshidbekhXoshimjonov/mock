@@ -390,7 +390,7 @@ if (closeModal) {
 closeModal.addEventListener("click", () => {
 
     window.location.href =
-    "listeningpart1.html";
+    "/listeningpart1.html";
 
 });
 }

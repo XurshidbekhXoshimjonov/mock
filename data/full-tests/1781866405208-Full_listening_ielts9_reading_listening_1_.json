@@ -1,0 +1,689 @@
+{
+  "id": "1781866405208-Full_listening_ielts9_reading_listening_1_",
+  "title": "Test 1",
+  "sourceFile": "Full listening @ielts9_reading_listening (1).htm",
+  "status": "draft",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "Full listening @ielts9_reading_listening (1)"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 1</strong></p>\n<p>Listen and answer questions 1–10.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 1–10</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>\n</div>\n<p class=\"centered-title\"><strong>A conversation about a new school</strong></p>\n<p><strong>General comment:</strong></p>\n<ul>\n<li>better than the old school</li>\n</ul>\n<p><strong>Teachers:</strong></p>\n<ul>\n<li> is a nice person</li>\n<li>others are more likely to be decent. The French teacher seems to be more native than the  accent</li>\n<li>the school principal's talk mentioned to:</li>\n<ul>\n<li> (studying enjoyment, working hard of students)</li>\n<li>other things on how to  a good shape, which helps you have a better </li>\n</ul>\n</ul>\n<p><strong>Fitness centre:</strong></p>\n<ul>\n<li>the  is bigger than the one at old school</li>\n<li>the gym includes everything, i.e., cycling and  machines</li>\n</ul>\n<p><strong>Other issues:</strong></p>\n<ul>\n<li>filming the teachers and students' interviews for their , and video project at the main </li>\n<li>they saw Mr. Clark as their former teacher of  subject</li>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "questions 1–10",
+            "instructionText": "Part 1 Listen and answer .",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "is a nice person",
+                "options": [],
+                "answer": "headmaster"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "others are more likely to be decent. The French teacher seems to be more native than the accent",
+                "options": [],
+                "answer": "Smith"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "(studying enjoyment, working hard of students)",
+                "options": [],
+                "answer": "education"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "other things on how to a good shape, which helps you have a better",
+                "options": [],
+                "answer": "keep"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "other things on how to a good shape, which helps you have a better",
+                "options": [],
+                "answer": "mood"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "the is bigger than the one at old school",
+                "options": [],
+                "answer": "pool"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "the gym includes everything, i.e., cycling and machines",
+                "options": [],
+                "answer": "rowing"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "filming the teachers and students' interviews for their , and video project at the main",
+                "options": [],
+                "answer": "article"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "filming the teachers and students' interviews for their , and video project at the main",
+                "options": [],
+                "answer": "hall"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "they saw Mr. Clark as their former teacher of subject",
+                "options": [],
+                "answer": "music"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 2</strong></p>\n<p>Listen and answer questions 11–20.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 11–15</strong></p>\n<p>Choose the correct letter, A, B, or C.</p>\n</div>\n<p class=\"centered-title\"><strong>London Parks' Introduction</strong></p>\n<p><strong>11. What is the first thing that tourists are going to experience at the London Parks Society?</strong></p>\n<div class=\"multi-choice-question\">\n<div class=\"multi-choice-option\"><label> A as much as they feel right</label></div>\n<div class=\"multi-choice-option\"><label> B no tip at all</label></div>\n<div class=\"multi-choice-option\"><label> C 10% tip</label></div>\n</div>\n<p><strong>12. What is true about the \"royal park\" being built in London?</strong></p>\n<div class=\"multi-choice-question\">\n<div class=\"multi-choice-option\"><label> A It has a harmonious natural landscape.</label></div>\n<div class=\"multi-choice-option\"><label> B It was built by members of the royal family.</label></div>\n<div class=\"multi-choice-option\"><label> C It is replicated all over the UK.</label></div>\n</div>\n<p><strong>13. The Hyde Park is the most famous park in London that covers</strong></p>\n<div class=\"multi-choice-question\">\n<div class=\"multi-choice-option\"><label> A all of the finest sceneries in London.</label></div>\n<div class=\"multi-choice-option\"><label> B an area of about 260 hectares and a circumference of 6.5 km.</label></div>\n<div class=\"multi-choice-option\"><label> C 613 acres, with a 4-mile perimeter.</label></div>\n</div>\n<p><strong>14. The Hyde Park began to construct</strong></p>\n<div class=\"multi-choice-question\">\n<div class=\"multi-choice-option\"><label> A in 1820s and its design was done by Decimus Burton.</label></div>\n<div class=\"multi-choice-option\"><label> B in 1536 after King Henry VIII occupied the land from the monks.</label></div>\n<div class=\"multi-choice-option\"><label> C from 1500s and finished in 1800s.</label></div>\n</div>\n<p><strong>15. The Crystal Palace was</strong></p>\n<div class=\"multi-choice-question\">\n<div class=\"multi-choice-option\"><label> A constructed on the Hyde Park site in 1851.</label></div>\n<div class=\"multi-choice-option\"><label> B used for the Great Exhibition in 1968.</label></div>\n<div class=\"multi-choice-option\"><label> C used for the Rolling Stones concert in 2010.</label></div>\n</div>\n</div>\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 16–20</strong></p>\n<p>Which sites in the London Parks Society are suitable for the following descriptions?</p>\n<p>Choose <strong>FIVE</strong> answers from the box and write the correct letter, A–G, next to the questions.</p>\n</div>\n<div class=\"matching-container\">\n<div class=\"matching-questions\">\n<p><strong>Descriptions of Attractive Sites:</strong></p>\n<p><strong>16. Grand Entrance:</strong></p>\n<div class=\"drop-zone\"><span class=\"placeholder\">Drop answer here</span></div>\n<p><strong>17. Princess of Wales:</strong></p>\n<div class=\"drop-zone\"><span class=\"placeholder\">Drop answer here</span></div>\n<p><strong>18. Regent's Park:</strong></p>\n<div class=\"drop-zone\"><span class=\"placeholder\">Drop answer here</span></div>\n<p><strong>19. St. James's Park:</strong></p>\n<div class=\"drop-zone\"><span class=\"placeholder\">Drop answer here</span></div>\n<p><strong>20. Greenwich Park:</strong></p>\n<div class=\"drop-zone\"><span class=\"placeholder\">Drop answer here</span></div>\n<!-- Hidden inputs to store answers -->\n\n\n\n\n\n</div>\n<div class=\"matching-options-list\" id=\"part2-options-box\">\n<p><strong>Options</strong></p>\n<div class=\"drag-item\">A the largest park in the UK</div>\n<div class=\"drag-item\">B followed Greek architectural design</div>\n<div class=\"drag-item\">C the most ancient park of the Royal</div>\n<div class=\"drag-item\">D the largest area for outdoor activities</div>\n<div class=\"drag-item\">E included the oldest fountain</div>\n<div class=\"drag-item\">F located near the Serpentine Lake</div>\n<div class=\"drag-item\">G situated in the centre of London</div>\n</div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11–15",
+            "instructionText": "Choose the correct letter, A, B, or C.",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What is the first thing that tourists are going to experience at the London Parks Society?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A as much as they feel right",
+                    "html": "as much as they feel right"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B no tip at all",
+                    "html": "no tip at all"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C 10% tip",
+                    "html": "10% tip"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "What is true about the \"royal park\" being built in London?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A It has a harmonious natural landscape.",
+                    "html": "It has a harmonious natural landscape."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B It was built by members of the royal family.",
+                    "html": "It was built by members of the royal family."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C It is replicated all over the UK.",
+                    "html": "It is replicated all over the UK."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "The Hyde Park is the most famous park in London that covers",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A all of the finest sceneries in London.",
+                    "html": "all of the finest sceneries in London."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B an area of about 260 hectares and a circumference of 6.5 km.",
+                    "html": "an area of about 260 hectares and a circumference of 6.5 km."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C 613 acres, with a 4-mile perimeter.",
+                    "html": "613 acres, with a 4-mile perimeter."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "The Hyde Park began to construct",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A in 1820s and its design was done by Decimus Burton.",
+                    "html": "in 1820s and its design was done by Decimus Burton."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B in 1536 after King Henry VIII occupied the land from the monks.",
+                    "html": "in 1536 after King Henry VIII occupied the land from the monks."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C from 1500s and finished in 1800s.",
+                    "html": "from 1500s and finished in 1800s."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "The Crystal Palace was",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A constructed on the Hyde Park site in 1851.",
+                    "html": "constructed on the Hyde Park site in 1851."
+                  },
+                  {
+                    "value": "B",
+                    "label": "B used for the Great Exhibition in 1968.",
+                    "html": "used for the Great Exhibition in 1968."
+                  },
+                  {
+                    "value": "C",
+                    "label": "C used for the Rolling Stones concert in 2010.",
+                    "html": "used for the Rolling Stones concert in 2010."
+                  }
+                ],
+                "answer": "A"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "matching",
+            "instructionTitle": "Questions 16–20",
+            "instructionText": "Which sites in the London Parks Society are suitable for the following descriptions? Choose FIVE answers from the box and write the correct letter, A–G, next to the questions.",
+            "questions": [
+              {
+                "number": 16,
+                "type": "matching",
+                "question": "Grand Entrance:",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the largest park in the UK",
+                    "html": "the largest park in the UK"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B followed Greek architectural design",
+                    "html": "followed Greek architectural design"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the most ancient park of the Royal",
+                    "html": "the most ancient park of the Royal"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the largest area for outdoor activities",
+                    "html": "the largest area for outdoor activities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E included the oldest fountain",
+                    "html": "included the oldest fountain"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F located near the Serpentine Lake",
+                    "html": "located near the Serpentine Lake"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G situated in the centre of London",
+                    "html": "situated in the centre of London"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "Princess of Wales:",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the largest park in the UK",
+                    "html": "the largest park in the UK"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B followed Greek architectural design",
+                    "html": "followed Greek architectural design"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the most ancient park of the Royal",
+                    "html": "the most ancient park of the Royal"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the largest area for outdoor activities",
+                    "html": "the largest area for outdoor activities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E included the oldest fountain",
+                    "html": "included the oldest fountain"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F located near the Serpentine Lake",
+                    "html": "located near the Serpentine Lake"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G situated in the centre of London",
+                    "html": "situated in the centre of London"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "Regent's Park:",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the largest park in the UK",
+                    "html": "the largest park in the UK"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B followed Greek architectural design",
+                    "html": "followed Greek architectural design"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the most ancient park of the Royal",
+                    "html": "the most ancient park of the Royal"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the largest area for outdoor activities",
+                    "html": "the largest area for outdoor activities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E included the oldest fountain",
+                    "html": "included the oldest fountain"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F located near the Serpentine Lake",
+                    "html": "located near the Serpentine Lake"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G situated in the centre of London",
+                    "html": "situated in the centre of London"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "question": "St. James's Park:",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the largest park in the UK",
+                    "html": "the largest park in the UK"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B followed Greek architectural design",
+                    "html": "followed Greek architectural design"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the most ancient park of the Royal",
+                    "html": "the most ancient park of the Royal"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the largest area for outdoor activities",
+                    "html": "the largest area for outdoor activities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E included the oldest fountain",
+                    "html": "included the oldest fountain"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F located near the Serpentine Lake",
+                    "html": "located near the Serpentine Lake"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G situated in the centre of London",
+                    "html": "situated in the centre of London"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "question": "Greenwich Park:",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "A the largest park in the UK",
+                    "html": "the largest park in the UK"
+                  },
+                  {
+                    "value": "B",
+                    "label": "B followed Greek architectural design",
+                    "html": "followed Greek architectural design"
+                  },
+                  {
+                    "value": "C",
+                    "label": "C the most ancient park of the Royal",
+                    "html": "the most ancient park of the Royal"
+                  },
+                  {
+                    "value": "D",
+                    "label": "D the largest area for outdoor activities",
+                    "html": "the largest area for outdoor activities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "E included the oldest fountain",
+                    "html": "included the oldest fountain"
+                  },
+                  {
+                    "value": "F",
+                    "label": "F located near the Serpentine Lake",
+                    "html": "located near the Serpentine Lake"
+                  },
+                  {
+                    "value": "G",
+                    "label": "G situated in the centre of London",
+                    "html": "situated in the centre of London"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 3</strong></p>\n<p>Listen and answer questions 21–30.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 21–30</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n</div>\n<p class=\"centered-title\"><strong>Video Project on Student Life</strong></p>\n<p><strong>Enjoyments (Cristina):</strong></p>\n<ul>\n<li>using the camera</li>\n<li>going to a British </li>\n</ul>\n<p><strong>Enjoyments (Ibrahim):</strong></p>\n<ul>\n<li>contact with students doing other courses by asking some to have </li>\n</ul>\n<p><strong>Language practice (Cristina):</strong></p>\n<ul>\n<li>listening to instructions</li>\n<li>learning  words</li>\n</ul>\n<p><strong>Language practice (Ibrahim):</strong></p>\n<ul>\n<li>listening to British students' language because of:</li>\n<ul>\n<li>normal speed</li>\n<li>a lot of </li>\n</ul>\n</ul>\n<p><strong>Usefulness (Cristina):</strong></p>\n<ul>\n<li>operating video camera</li>\n<li>working with other people:</li>\n<ul>\n<li>learning about </li>\n<li>compromising</li>\n<li> people who have different views</li>\n</ul>\n</ul>\n<p><strong>Usefulness (Ibrahim):</strong></p>\n<ul>\n<li>the importance of </li>\n</ul>\n<p><strong>Future works (Cristina):</strong></p>\n<ul>\n<li>decide when to  each stage at the beginning</li>\n<li>make more effort to  with the camera</li>\n</ul>\n<p><strong>Future works (Ibrahim):</strong></p>\n<ul>\n<li>don't make the film too </li>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "questions 21–30",
+            "instructionText": "Part 3 Listen and answer .",
+            "questions": [
+              {
+                "number": 21,
+                "type": "sentence_completion",
+                "question": "going to a British",
+                "options": [],
+                "answer": "home"
+              },
+              {
+                "number": 22,
+                "type": "sentence_completion",
+                "question": "contact with students doing other courses by asking some to have",
+                "options": [],
+                "answer": "dinner"
+              },
+              {
+                "number": 23,
+                "type": "sentence_completion",
+                "question": "learning words",
+                "options": [],
+                "answer": "technical"
+              },
+              {
+                "number": 24,
+                "type": "sentence_completion",
+                "question": "a lot of",
+                "options": [],
+                "answer": "slang"
+              },
+              {
+                "number": 25,
+                "type": "sentence_completion",
+                "question": "learning about",
+                "options": [],
+                "answer": "cooperating"
+              },
+              {
+                "number": 26,
+                "type": "sentence_completion",
+                "question": "people who have different views",
+                "options": [],
+                "answer": "persuading"
+              },
+              {
+                "number": 27,
+                "type": "sentence_completion",
+                "question": "the importance of",
+                "options": [],
+                "answer": "editing"
+              },
+              {
+                "number": 28,
+                "type": "sentence_completion",
+                "question": "decide when to each stage at the beginning",
+                "options": [],
+                "answer": "complete"
+              },
+              {
+                "number": 29,
+                "type": "sentence_completion",
+                "question": "make more effort to with the camera",
+                "options": [],
+                "answer": "experiment"
+              },
+              {
+                "number": 30,
+                "type": "sentence_completion",
+                "question": "don't make the film too",
+                "options": [],
+                "answer": "long"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 4</strong></p>\n<p>Listen and answer questions 31–40.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 31–40</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD ONLY OR A NUMBER</strong> for each answer.</p>\n</div>\n<p class=\"centered-title\"><strong>The Knowledge of Antarctica Continent</strong></p>\n<p><strong>Geography:</strong></p>\n<ul>\n<li>world's highest, coldest, and windiest continent</li>\n<li>more than  times as big as the UK</li>\n<li>most of the area is classified as </li>\n</ul>\n<p><strong>Research Stations:</strong></p>\n<ul>\n<li>international teams work together</li>\n<li> is integrated with technical support</li>\n<li>stations contain accommodation, work areas, a kitchen, a , and a gym</li>\n<li>supplies were brought to Zero One station by sledge from alan  at the edge of the ice 15 km away</li>\n<li>problem of snow build-ups solved by building stations on  with adjustable legs</li>\n</ul>\n<p><strong>Food and Diet:</strong></p>\n<ul>\n<li>average daily requirement for an adult in Antarctica is approximately  kilocalories</li>\n<li>rations for fieldwork prepared by process of freeze-drying</li>\n</ul>\n<p><strong>Research:</strong></p>\n<ul>\n<li>The most important research focuses on climate change, including:</li>\n<ul>\n<li>measuring changes in the ice-cap (because of effects on sea levels and )</li>\n<li>monitoring the hole in the ozone layer</li>\n<li>analyzing air from bubbles in ice to measure  caused by human activity</li>\n</ul>\n</ul>\n<p><strong>Work Opportunities:</strong></p>\n<ul>\n<li>Many openings for  people including:</li>\n<ul>\n<li>research assistants</li>\n<li>administrative and technical positions</li>\n</ul>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "sentence_completion",
+            "instructionTitle": "questions 31–40",
+            "instructionText": "Part 4 Listen and answer .",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "more than times as big as the UK",
+                "options": [],
+                "answer": "58"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "most of the area is classified as",
+                "options": [],
+                "answer": "desert"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "is integrated with technical support",
+                "options": [],
+                "answer": "science"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "stations contain accommodation, work areas, a kitchen, a , and a gym",
+                "options": [],
+                "answer": "hospital"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "supplies were brought to Zero One station by sledge from alan at the edge of the ice 15 km away",
+                "options": [],
+                "answer": "ship"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "problem of snow build-ups solved by building stations on with adjustable legs",
+                "options": [],
+                "answer": "platforms"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "average daily requirement for an adult in Antarctica is approximately kilocalories",
+                "options": [],
+                "answer": "3500"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "measuring changes in the ice-cap (because of effects on sea levels and )",
+                "options": [],
+                "answer": "currents"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "analyzing air from bubbles in ice to measure caused by human activity",
+                "options": [],
+                "answer": "pollution"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Many openings for people including:",
+                "options": [],
+                "answer": "young"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "headmaster",
+    "2": "Smith",
+    "3": "education",
+    "4": "keep",
+    "5": "mood",
+    "6": "pool",
+    "7": "rowing",
+    "8": "article",
+    "9": "hall",
+    "10": "music",
+    "11": "C",
+    "12": "A",
+    "13": "B",
+    "14": "B",
+    "15": "A",
+    "16": "B",
+    "17": "F",
+    "18": "D",
+    "19": "G",
+    "20": "C",
+    "21": "home",
+    "22": "dinner",
+    "23": "technical",
+    "24": "slang",
+    "25": "cooperating",
+    "26": "persuading",
+    "27": "editing",
+    "28": "complete",
+    "29": "experiment",
+    "30": "long",
+    "31": "58",
+    "32": "desert",
+    "33": "science",
+    "34": "hospital",
+    "35": "ship",
+    "36": "platforms",
+    "37": "3500",
+    "38": "currents",
+    "39": "pollution",
+    "40": "young"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-06-19T10:53:26.177Z",
+  "publishedAt": null,
+  "skill": "listening",
+  "subtitle": "Listening full test"
+}

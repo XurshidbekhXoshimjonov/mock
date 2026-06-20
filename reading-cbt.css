@@ -749,41 +749,63 @@ select:focus-visible {
 
 .cbt-multi-select-task {
     display: grid;
-    gap: 16px;
+    gap: 20px;
 }
 
 .cbt-multi-select-options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
-.cbt-option-card--checkbox {
-    min-height: 44px;
-}
 
 .cbt-multi-select-slots {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
 .cbt-multi-select-slot {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 9px;
-    border: 1px solid #dce3ec;
-    border-radius: 7px;
-    background: #f8fafc;
-    padding: 8px;
+    gap: 8px;
+    border: 1.5px dashed #d0d8e4;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f5f8 100%);
+    padding: 8px 14px;
     color: #475467;
+    font-size: 13px;
+    transition: all 0.18s ease;
+}
+
+.cbt-multi-select-select {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 4px;
+    margin: 0;
+    appearance: auto;
+}
+
+.cbt-multi-select-select:focus {
+    outline: none;
+}
+
+.cbt-multi-select-slot .cbt-question-badge {
+    flex-shrink: 0;
 }
 
 .cbt-multi-select-count {
     margin: 0;
-    color: #667085;
+    color: var(--cbt-muted);
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.01em;
 }
 
 .cbt-question {
@@ -867,6 +889,37 @@ select:focus-visible {
     height: 15px;
     margin: 0;
     accent-color: var(--cbt-accent);
+}
+
+/* ── Multi-select checkbox card overrides (must come after base .cbt-option-card) ── */
+.cbt-option-card--checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    border: 1.5px solid var(--cbt-border);
+    border-radius: 10px;
+    background: var(--cbt-paper);
+    cursor: default;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    transition: all 0.18s ease;
+}
+
+.cbt-option-card--checkbox.selected {
+    border-color: var(--cbt-accent);
+    background: linear-gradient(135deg, #eff6ff 0%, #e8f1fd 100%);
+    box-shadow: 0 0 0 1px var(--cbt-accent), 0 2px 8px rgba(9, 105, 218, 0.12);
+    color: #084f9e;
+}
+
+.cbt-option-card--checkbox > span {
+    flex: 1;
+    min-width: 0;
 }
 
 .cbt-select,

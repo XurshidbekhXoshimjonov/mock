@@ -1,0 +1,236 @@
+{
+  "id": "practice-listening-listening-s1",
+  "title": "IELTS CDI Listening Practice - Part 1: Tourism Survey",
+  "slug": "practice-listening-part-1",
+  "part": 1,
+  "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "First time visited Melbourne? 1",
+      "options": [],
+      "answer": "no"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Best thing about the city: 2",
+      "options": [],
+      "answer": "amazing weather|weather"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Favourite attraction: 3",
+      "options": [],
+      "answer": "Town Hall"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Best thing about the destination's dining options: 4 of food",
+      "options": [],
+      "answer": "variety"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Method of transport to destination: by 5",
+      "options": [],
+      "answer": "plane"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Age group: 6",
+      "options": [],
+      "answer": "older than 40"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Income level: 7",
+      "options": [],
+      "answer": "mid-range"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Purpose of visit: 8",
+      "options": [],
+      "answer": "tourism"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Occupation: 9",
+      "options": [],
+      "answer": "computer programmer"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Opinion about accommodation: 10",
+      "options": [],
+      "answer": "good value"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "practice-listening",
+  "createdAt": "2026-06-19T17:13:42.073Z",
+  "updatedAt": "2026-06-19T17:13:42.073Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1: Tourism Survey",
+      "questionRange": "Questions 1-10",
+      "blocks": [
+        {
+          "id": "practice-listening-part-1-tourism-survey",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Tourism Survey",
+          "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>Name:</strong> Robert Goddard",
+            "<strong>Destination:</strong> Melbourne",
+            "<strong>First time visited Melbourne?</strong> {{1}}",
+            "<strong>Best thing about the city:</strong> {{2}}",
+            "<strong>Favourite attraction:</strong> {{3}}",
+            "<strong>Best thing about the destination's dining options:</strong> {{4}} of food",
+            "<strong>Method of transport to destination:</strong> by {{5}}",
+            "<strong>Age group:</strong> {{6}}",
+            "<strong>Income level:</strong> {{7}}",
+            "<strong>Purpose of visit:</strong>",
+            "- on business",
+            "- {{8}}",
+            "<strong>Occupation:</strong>",
+            "- {{9}}",
+            "- writer for a travel magazine",
+            "<strong>Opinion about accommodation:</strong> {{10}}"
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "type": "sentence_completion",
+              "question": "First time visited Melbourne? 1",
+              "text": "First time visited Melbourne? 1",
+              "options": [],
+              "answer": "no"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "type": "sentence_completion",
+              "question": "Best thing about the city: 2",
+              "text": "Best thing about the city: 2",
+              "options": [],
+              "answer": "amazing weather|weather"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "type": "sentence_completion",
+              "question": "Favourite attraction: 3",
+              "text": "Favourite attraction: 3",
+              "options": [],
+              "answer": "Town Hall"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "type": "sentence_completion",
+              "question": "Best thing about the destination's dining options: 4 of food",
+              "text": "Best thing about the destination's dining options: 4 of food",
+              "options": [],
+              "answer": "variety"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "type": "sentence_completion",
+              "question": "Method of transport to destination: by 5",
+              "text": "Method of transport to destination: by 5",
+              "options": [],
+              "answer": "plane"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "type": "sentence_completion",
+              "question": "Age group: 6",
+              "text": "Age group: 6",
+              "options": [],
+              "answer": "older than 40"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "type": "sentence_completion",
+              "question": "Income level: 7",
+              "text": "Income level: 7",
+              "options": [],
+              "answer": "mid-range"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "type": "sentence_completion",
+              "question": "Purpose of visit: 8",
+              "text": "Purpose of visit: 8",
+              "options": [],
+              "answer": "tourism"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "type": "sentence_completion",
+              "question": "Occupation: 9",
+              "text": "Occupation: 9",
+              "options": [],
+              "answer": "computer programmer"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "type": "sentence_completion",
+              "question": "Opinion about accommodation: 10",
+              "text": "Opinion about accommodation: 10",
+              "options": [],
+              "answer": "good value"
+            }
+          ]
+        }
+      ],
+      "instruction": "",
+      "audioUrl": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+      "audioFileName": "Practice Listening.mp3",
+      "answerText": "1: no\n2: amazing weather|weather\n3: Town Hall\n4: variety\n5: plane\n6: older than 40\n7: mid-range\n8: tourism\n9: computer programmer\n10: good value"
+    }
+  ]
+}

@@ -5,33 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speaking</title>
-    <link rel="stylesheet" href="site-modern.css">
+    <link rel="stylesheet" href="/site-modern.css?v=1.0.1">
 </head>
 
-<body class="public-page test-list-page coming-soon-page">
+<body class="public-page speaking-coming-soon">
     <header id="globalNavbar" data-global-navbar="true"></header>
 
     <main class="coming-soon-shell">
         <section class="coming-soon-panel" aria-labelledby="comingSoonTitle">
-            <span class="coming-soon-chip">Coming Soon</span>
-            <span class="coming-soon-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 18.5a5.5 5.5 0 0 0 5.5-5.5V7a5.5 5.5 0 0 0-11 0v6a5.5 5.5 0 0 0 5.5 5.5Z"></path>
-                    <path d="M5 12.5a7 7 0 0 0 14 0"></path>
-                    <path d="M12 19v3"></path>
-                </svg>
-            </span>
-            <h1 id="comingSoonTitle">Speaking</h1>
-            <p class="coming-soon-message">Speaking practice is coming soon.</p>
-            <p>This section is being prepared. Please check back soon.</p>
-            <div class="coming-soon-actions">
-                <a href="ieltsmock.html">Back to Home</a>
+            <div class="speaking-hero-content">
+                <span class="coming-soon-chip">Coming Soon</span>
+                <span class="coming-soon-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 15.5a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5.5a4 4 0 0 0 4 4Z"></path>
+                        <path d="M5 10.5a7 7 0 0 0 14 0"></path>
+                        <path d="M12 17.5V21"></path>
+                        <path d="M9 21h6"></path>
+                    </svg>
+                </span>
+                <h1 id="comingSoonTitle">Speaking Practice</h1>
+                <p class="coming-soon-message">AI-powered IELTS Speaking mock tests are being prepared.</p>
+                <p class="speaking-description">Practice Part 1, Part 2 and Part 3 with real exam-style questions, timer, recording, and AI band feedback.</p>
+
+                <div class="coming-soon-actions">
+                    <button class="speaking-primary-button" type="button" disabled>Launching Soon</button>
+                    <a class="speaking-secondary-button" href="/ieltsmock.html">Back to Home</a>
+                </div>
+            </div>
+
+            <div class="speaking-feature-grid" aria-label="Speaking test parts">
+                <article class="speaking-feature-card">
+                    <span>Part 1</span>
+                    <strong>Short Questions</strong>
+                </article>
+                <article class="speaking-feature-card">
+                    <span>Part 2</span>
+                    <strong>Cue Card</strong>
+                </article>
+                <article class="speaking-feature-card">
+                    <span>Part 3</span>
+                    <strong>Discussion</strong>
+                </article>
+            </div>
+
+            <div class="speaking-upcoming-row" aria-label="Upcoming speaking features">
+                <span>AI Band Score</span>
+                <span>Fluency Feedback</span>
+                <span>Pronunciation Check</span>
+                <span>Real Exam Timer</span>
             </div>
         </section>
     </main>
 
     <footer class="home-footer">© 2026 IELTSX.org All rights reserved</footer>
-    <script src="auth-client.js"></script>
+    <script src="/auth-client.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,589 @@
+/* premium IELTS-style annotations (highlight & notes) styling */
+
+/* Highlight Styling */
+mark.ieltsx-highlight {
+    background-color: rgba(249, 115, 22, 0.26) !important;
+    color: #ea580c !important; /* fiery orange text color */
+    font-weight: 600 !important; /* semi-bold to make the color pop */
+    border-bottom: 2.5px solid #f97316 !important; /* premium orange underline */
+    padding: 1px 0 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: inline !important;
+    line-height: inherit !important;
+}
+
+mark.ieltsx-highlight:hover {
+    background-color: rgba(249, 115, 22, 0.38) !important;
+    color: #c2410c !important;
+}
+
+/* Note Indicator on Text */
+.ieltsx-note-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6366f1, #4f46e5); /* indigo gradient */
+    color: white;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-left: 4px;
+    margin-right: 2px;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    user-select: none;
+}
+
+.ieltsx-note-indicator:hover {
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+}
+
+/* Note Badge next to Question Badges */
+.ieltsx-q-note-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ec4899; /* pink accent */
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+    min-width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-left: 2px;
+    vertical-align: super;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(236, 72, 153, 0.4);
+    animation: ieltsx-bounce 0.3s ease;
+}
+
+@keyframes ieltsx-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* Floating Toolbar */
+.ieltsx-toolbar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(15, 23, 42, 0.85); /* Slate 900 translucent */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 6px 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    pointer-events: auto;
+    animation: ieltsx-fade-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom center;
+}
+
+@keyframes ieltsx-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ieltsx-toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.ieltsx-toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.ieltsx-toolbar-btn.highlight-yellow {
+    color: #fdba74; /* soft orange color */
+}
+
+.ieltsx-toolbar-btn.highlight-yellow:hover {
+    background: rgba(253, 186, 116, 0.2);
+}
+
+.ieltsx-toolbar-btn.remove-btn {
+    color: #ef4444; /* red */
+}
+
+.ieltsx-toolbar-btn.remove-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+.ieltsx-toolbar-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 4px;
+}
+
+/* Note Popover / Modal Overlay */
+.ieltsx-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ieltsx-fade-in-overlay 0.2s ease;
+}
+
+@keyframes ieltsx-fade-in-overlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Note Modal Box */
+.ieltsx-note-modal {
+    background: rgba(30, 41, 59, 0.95); /* Slate 800 */
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 440px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 10002;
+    animation: ieltsx-scale-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: #f8fafc;
+    font-family: inherit;
+}
+
+@keyframes ieltsx-scale-up {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.ieltsx-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ieltsx-modal-preview {
+    font-size: 13px;
+    font-style: italic;
+    color: #cbd5e1; /* Slate 300 */
+    background: rgba(15, 23, 42, 0.4);
+    padding: 10px 14px;
+    border-left: 3px solid #6366f1; /* Indigo left border */
+    border-radius: 4px;
+    margin: 0;
+    max-height: 80px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+.ieltsx-modal-textarea {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.ieltsx-modal-textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+.ieltsx-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.ieltsx-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.ieltsx-btn-cancel {
+    background: transparent;
+    color: #cbd5e1;
+}
+
+.ieltsx-btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.ieltsx-btn-delete {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    margin-right: auto;
+}
+
+.ieltsx-btn-delete:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.ieltsx-btn-save {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+}
+
+.ieltsx-btn-save:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+}
+
+/* "Notes" Drawer Toggle Button */
+.ieltsx-notes-toggle-btn.floating {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #071437 !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-radius: 30px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    z-index: 999;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.ieltsx-notes-toggle-btn.floating:hover {
+    background: #f8fafc !important;
+    border-color: #b8c4d8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.ieltsx-notes-toggle-btn.header-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    cursor: pointer !important;
+    min-height: 40px; /* match dashboard min-height */
+}
+
+.ieltsx-notes-toggle-count {
+    background: #ec4899 !important;
+    color: white !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    padding: 1px 6px !important;
+    border-radius: 10px !important;
+    margin-left: 4px !important;
+}
+
+/* Annotations Drawer */
+.ieltsx-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    animation: ieltsx-fade-in-overlay 0.2s ease;
+}
+
+.ieltsx-drawer {
+    position: fixed;
+    top: 0;
+    left: -380px; /* Start hidden on the left */
+    width: 360px;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95); /* Slate 900 translucent */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 10px 0 25px -5px rgba(0, 0, 0, 0.4);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #f8fafc;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.ieltsx-drawer.open {
+    left: 0;
+}
+
+.ieltsx-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ieltsx-drawer-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.ieltsx-drawer-close {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.ieltsx-drawer-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.ieltsx-drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ieltsx-group-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ieltsx-group-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #818cf8; /* indigo light */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+    padding-bottom: 4px;
+    margin: 0;
+}
+
+.ieltsx-note-item {
+    background: rgba(30, 41, 59, 0.6); /* Slate 800 translucent */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.ieltsx-note-item:hover {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.ieltsx-note-item-meta {
+    font-size: 11px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ieltsx-note-item-q {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.ieltsx-note-item-text {
+    font-size: 12px;
+    font-style: italic;
+    color: #cbd5e1;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding-left: 8px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ieltsx-note-item-comment {
+    font-size: 13px;
+    color: #f1f5f9;
+    margin: 0;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.ieltsx-note-item-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.ieltsx-note-item:hover .ieltsx-note-item-actions {
+    opacity: 1;
+}
+
+.ieltsx-note-item-btn {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.ieltsx-note-item-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ieltsx-note-item-btn.edit-btn:hover {
+    color: #818cf8;
+}
+
+.ieltsx-note-item-btn.delete-btn:hover {
+    color: #f87171;
+}
+
+.ieltsx-drawer-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #64748b;
+    padding: 40px 20px;
+    gap: 12px;
+}
+
+.ieltsx-drawer-empty-icon {
+    font-size: 32px;
+    opacity: 0.5;
+}
+
+.ieltsx-drawer-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.ieltsx-btn-clear-all {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    width: 100%;
+}
+
+.ieltsx-btn-clear-all:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+}
+
+/* Responsive Mobile Style (Bottom Sheet Drawer) */
+@media (max-width: 768px) {
+    .ieltsx-drawer {
+        left: 0;
+        bottom: -100%; /* Start hidden at bottom */
+        top: auto;
+        width: 100%;
+        height: 70%;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.4);
+        transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .ieltsx-drawer.open {
+        bottom: 0;
+    }
+    
+    .ieltsx-drawer.open {
+        left: 0; /* Keep left fixed */
+    }
+    
+    .ieltsx-notes-toggle-btn.floating {
+        top: auto !important;
+        bottom: 80px !important; /* Position floating above mobile footer */
+        right: 16px !important;
+    }
+}

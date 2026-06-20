@@ -25,6 +25,14 @@ const studentPreviewContent = document.getElementById("studentPreviewContent");
 const savedTestsModal = document.getElementById("savedTestsModal");
 const savedTestsList = document.getElementById("savedTestsList");
 const btnNewTest = document.getElementById("btnNewTest");
+const importHtmlBtn = document.getElementById("importHtmlBtn");
+const importHtmlModal = document.getElementById("importHtmlModal");
+const htmlImportDropZone = document.getElementById("htmlImportDropZone");
+const htmlImportFile = document.getElementById("htmlImportFile");
+const htmlImportStatus = document.getElementById("htmlImportStatus");
+// DOM Selectors and State Extensions
+const appWorkspace = document.getElementById("appWorkspace");
+const previewBtn = document.getElementById("previewBtn");
 
 // Block Types configuration
 const BLOCK_TYPES = [
@@ -87,6 +95,17 @@ function selectedPart() {
     return builderState.parts[selectedPartIndex];
 }
 
+function updateSelectedPartSidebarMeta() {
+    const button = partSidebarRoot.querySelector(`[data-part-index="${selectedPartIndex}"]`);
+    const part = selectedPart();
+    if (!button || !part) return;
+
+    const titleNode = button.querySelector(".part-info-meta strong");
+    const rangeNode = button.querySelector(".part-info-meta span");
+    if (titleNode) titleNode.textContent = part.title || `Part ${part.partNumber}`;
+    if (rangeNode) rangeNode.textContent = part.questionRange || "Questions";
+}
+
 function ensureFourParts(parts = []) {
     const byNumber = new Map((parts || []).map((part) => [Number(part.partNumber), part]));
     return LISTENING_PART_NUMBERS.map((number) => ({
@@ -109,6 +128,17 @@ function applySaveScope(scope, partNumber = savePartNumber) {
 
 function currentDurationMinutes() {
     return saveScope === "full" ? 40 : 10;
+}
+
+function composedPartSaveTitle(baseTitle, part) {
+    const globalTitle = String(baseTitle || "").trim();
+    const partNumber = Number(part?.partNumber) || savePartNumber || 1;
+    const partTitle = String(part?.title || `Part ${partNumber}`).trim();
+
+    if (!globalTitle) return partTitle;
+    if (!partTitle) return globalTitle;
+    if (globalTitle.toLowerCase().includes(partTitle.toLowerCase())) return globalTitle;
+    return `${globalTitle} - ${partTitle}`;
 }
 
 // Convert Dynamic Flat JSON Questions into Builder Blocks Structure
@@ -214,9 +244,221 @@ function convertLegacyTestToBuilderFormat(test) {
     };
 }
 
+function convertImportedFullTestToBuilder(test) {
+    if (!test) return createBlankTest();
+    if (test.parts && Array.isArray(test.parts) && test.parts.length) {
+        return test;
+    }
+    const title = test.title || "";
+    const listeningData = test.listening || {};
+    const sections = listeningData.sections || [];
+    const parts = [1, 2, 3, 4].map((partNum) => {
+        const section = sections.find((s) => Number(s.number) === partNum) || {};
+        const start = (partNum - 1) * 10 + 1;
+        const end = start + 9;
+        const blocks = [];
+        const answers = [];
+        (section.questionGroups || []).forEach((group, groupIdx) => {
+            const rangeStr = group.instructionTitle || `Questions ${start}-${end}`;
+            const instText = group.instructionText || "";
+            const gType = group.type || "note_completion";
+            const blockId = `block-${partNum}-${groupIdx}-${Date.now()}`;
+            (group.questions || []).forEach((q) => {
+                if (q.number && q.answer) {
+                    const ansVal = Array.isArray(q.answer) ? q.answer.join(" / ") : String(q.answer).replace(/\s*\|\s*/g, " / ");
+                    answers.push(`${q.number} | ${ansVal}`);
+                }
+            });
+            if (gType === "form_completion") {
+                blocks.push({
+                    id: blockId,
+                    type: "form_completion",
+                    questionRange: rangeStr,
+                    title: group.instructionTitle || "Form Completion",
+                    instruction: instText,
+                    rows: (group.rows || []).map((row) => {
+                        let val = row.value;
+                        if (val && val.type === "mixed") {
+                            val = {
+                                type: "mixed",
+                                parts: (val.parts || []).map(p => {
+                                    if (p.type === "input") {
+                                        return { type: "input", questionNumber: Number(p.questionNumber) };
+                                    }
+                                    return { type: "text", text: p.text || "" };
+                                })
+                            };
+                        } else if (val && val.type === "input") {
+                            val = { type: "input", questionNumber: Number(val.questionNumber) };
+                        } else {
+                            val = { type: "text", text: val?.text || "" };
+                        }
+                        return { label: row.label || "", value: val };
+                    })
+                });
+            } else if (gType === "table_completion") {
+                blocks.push({
+                    id: blockId,
+                    type: "table_completion",
+                    questionRange: rangeStr,
+                    title: group.instructionTitle || "Table Completion",
+                    instruction: instText,
+                    columns: group.columns || [],
+                    rows: (group.rows || []).map((row) => {
+                        return (row || []).map((cell) => {
+                            if (cell && cell.type === "input") {
+                                return { type: "input", questionNumber: Number(cell.questionNumber) };
+                            }
+                            return { type: "text", text: cell?.text || "" };
+                        });
+                    })
+                });
+            } else if (gType === "multiple_choice") {
+                (group.questions || []).forEach((q, qIdx) => {
+                    blocks.push({
+                        id: `${blockId}-${qIdx}`,
+                        type: "multiple_choice",
+                        questionRange: `Question ${q.number}`,
+                        questionNumber: Number(q.number),
+                        question: q.question || "",
+                        options: (q.options || []).map((opt, optIdx) => {
+                            if (typeof opt === "object") {
+                                return {
+                                    letter: opt.letter || opt.value || String.fromCharCode(65 + optIdx),
+                                    text: opt.text || opt.html || opt.label || ""
+                                };
+                            }
+                            return {
+                                letter: String.fromCharCode(65 + optIdx),
+                                text: String(opt)
+                            };
+                        })
+                    });
+                });
+            } else if (gType === "multi_select" || gType === "multiple_select") {
+                const firstQ = group.questions?.[0] || {};
+                const qNum = Number(firstQ.number) || start;
+                blocks.push({
+                    id: blockId,
+                    type: "multiple_select",
+                    questionRange: rangeStr,
+                    questionNumber: qNum,
+                    maxSelections: group.questions?.length || 2,
+                    question: firstQ.question || "Choose options",
+                    options: (firstQ.options || []).map((opt, optIdx) => {
+                        if (typeof opt === "object") {
+                            return {
+                                letter: opt.letter || opt.value || String.fromCharCode(65 + optIdx),
+                                text: opt.text || opt.html || opt.label || ""
+                            };
+                        }
+                        return {
+                            letter: String.fromCharCode(65 + optIdx),
+                            text: String(opt)
+                        };
+                    })
+                });
+            } else if (gType === "matching") {
+                blocks.push({
+                    id: blockId,
+                    type: "matching",
+                    questionRange: rangeStr,
+                    title: group.instructionTitle || "Matching",
+                    instruction: instText,
+                    options: (group.options || []).map((opt, optIdx) => {
+                        if (typeof opt === "object") {
+                            return {
+                                letter: opt.letter || opt.value || String.fromCharCode(65 + optIdx),
+                                text: opt.text || opt.html || opt.label || ""
+                            };
+                        }
+                        const match = String(opt).match(/^([A-Z])\s*\|\s*(.+)$/i);
+                        if (match) {
+                            return { letter: match[1].toUpperCase(), text: match[2].trim() };
+                        }
+                        return {
+                            letter: String.fromCharCode(65 + optIdx),
+                            text: String(opt)
+                        };
+                    }),
+                    questions: (group.questions || []).map((q) => ({
+                        questionNumber: Number(q.number),
+                        text: q.question || ""
+                    }))
+                });
+            } else if (gType === "map_labelling" || gType === "map_labeling" || gType === "diagram_labelling" || gType === "diagram_labeling") {
+                blocks.push({
+                    id: blockId,
+                    type: "map_labelling",
+                    questionRange: rangeStr,
+                    title: group.instructionTitle || "Map Labelling",
+                    instruction: instText,
+                    imageUrl: group.imageUrl || "",
+                    imageFileName: group.imageUrl ? String(group.imageUrl).split("/").pop() : "",
+                    labels: (group.questions || []).map((q) => {
+                        const marker = (group.labels || []).find(l => l.questionNumber === q.number) || {};
+                        return {
+                            questionNumber: Number(q.number),
+                            x: marker.x !== undefined ? Number(marker.x) : 50,
+                            y: marker.y !== undefined ? Number(marker.y) : 50
+                        };
+                    })
+                });
+            } else {
+                const sentenceCompletion = gType === "sentence_completion";
+                const blockType = sentenceCompletion ? "sentence_completion_inline" : "note_completion";
+                const contentLines = [];
+                if (group.content) {
+                    if (Array.isArray(group.content)) {
+                        contentLines.push(...group.content);
+                    } else {
+                        contentLines.push(...String(group.content).split("\n"));
+                    }
+                } else if (group.questions && group.questions.length) {
+                    group.questions.forEach((q) => {
+                        const questionText = q.question || "";
+                        if (sentenceCompletion) {
+                            contentLines.push(questionText ? `${questionText} {{${q.number}}}` : `Sentence detail placeholder {{${q.number}}}`);
+                        } else {
+                            contentLines.push(questionText ? `- ${questionText} {{${q.number}}}` : `- Detail placeholder {{${q.number}}}`);
+                        }
+                    });
+                }
+                blocks.push({
+                    id: blockId,
+                    type: blockType,
+                    questionRange: rangeStr,
+                    title: group.instructionTitle || (sentenceCompletion ? "Sentence Completion" : "Note Completion"),
+                    instruction: instText,
+                    content: contentLines
+                });
+            }
+        });
+        return {
+            partNumber: partNum,
+            title: section.title || `Part ${partNum}`,
+            questionRange: `Questions ${start}-${end}`,
+            audioUrl: section.audio || listeningData.audio || "",
+            audioFileName: (section.audio || listeningData.audio) ? String(section.audio || listeningData.audio).split("/").pop() : "",
+            instruction: section.instruction || (section.questionGroups?.[0]?.instructionText) || `Listen and answer Questions ${start}-${end}.`,
+            answerText: answers.join("\n"),
+            blocks
+        };
+    });
+    return {
+        title,
+        parts
+    };
+}
+
 function hydrateBuilderState(test) {
     if (!test) return;
-    const normalized = convertLegacyTestToBuilderFormat(test);
+    let normalized;
+    if (test.listening && !test.parts) {
+        normalized = convertImportedFullTestToBuilder(test);
+    } else {
+        normalized = convertLegacyTestToBuilderFormat(test);
+    }
     builderState = {
         ...createBlankTest(),
         ...normalized,
@@ -279,45 +521,421 @@ async function uploadImage(file) {
 }
 
 // Elements markup generators
+// 0-Error Auto-Numbering Engine
+function autoCalculateQuestionRanges() {
+    builderState.parts.forEach((part) => {
+        const partNumber = Number(part.partNumber) || 1;
+        let nextNumber = (partNumber - 1) * 10 + 1; // Part 1 starts at 1, Part 2 at 11, etc.
+        
+        part.blocks.forEach((block) => {
+            const startNum = nextNumber;
+            let count = 0;
+            
+            if (block.type === "multiple_choice") {
+                block.questionNumber = startNum;
+                block.questionRange = `Question ${startNum}`;
+                count = 1;
+            } else if (block.type === "multiple_select") {
+                block.questionNumber = startNum;
+                const maxSel = Number(block.maxSelections) || 2;
+                const endNum = startNum + maxSel - 1;
+                block.questionRange = `Questions ${startNum}-${endNum}`;
+                count = maxSel;
+            } else if (block.type === "matching") {
+                const qCount = Array.isArray(block.questions) ? block.questions.length : 0;
+                if (qCount > 0) {
+                    block.questions.forEach((q, idx) => {
+                        q.questionNumber = startNum + idx;
+                    });
+                    const endNum = startNum + qCount - 1;
+                    block.questionRange = qCount === 1 ? `Question ${startNum}` : `Questions ${startNum}-${endNum}`;
+                    count = qCount;
+                } else {
+                    block.questionRange = `Questions ${startNum}`;
+                    count = 0;
+                }
+            } else if (block.type === "map_labelling") {
+                const labelCount = Array.isArray(block.labels) ? block.labels.length : 0;
+                if (labelCount > 0) {
+                    block.labels.forEach((lbl, idx) => {
+                        lbl.questionNumber = startNum + idx;
+                    });
+                    const endNum = startNum + labelCount - 1;
+                    block.questionRange = labelCount === 1 ? `Question ${startNum}` : `Questions ${startNum}-${endNum}`;
+                    count = labelCount;
+                } else {
+                    block.questionRange = `Questions ${startNum}`;
+                    count = 0;
+                }
+            } else if (block.type === "form_completion") {
+                let inputIdx = 0;
+                if (Array.isArray(block.rows)) {
+                    block.rows.forEach((row) => {
+                        if (row.value && (row.value.type === "input" || row.value.type === "mixed")) {
+                            row.value.questionNumber = startNum + inputIdx;
+                            inputIdx++;
+                        }
+                    });
+                }
+                count = inputIdx;
+                const endNum = startNum + count - 1;
+                block.questionRange = count === 1 ? `Question ${startNum}` : (count > 0 ? `Questions ${startNum}-${endNum}` : `Questions ${startNum}`);
+            } else if (block.type === "sentence_completion_inline" || block.type === "note_completion" || block.type === "table_completion") {
+                let placeholderCount = 0;
+                if (block.type === "table_completion") {
+                    if (Array.isArray(block.rows)) {
+                        block.rows.forEach((row) => {
+                            if (Array.isArray(row)) {
+                                row.forEach((cell) => {
+                                    if (cell && cell.type === "input") {
+                                        cell.questionNumber = startNum + placeholderCount;
+                                        placeholderCount++;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                } else {
+                    if (Array.isArray(block.content)) {
+                        block.content = block.content.map((line) => {
+                            let lineResult = line;
+                            const matches = [...line.matchAll(/\{{2}(\d+|\?)\}{2}/g)];
+                            matches.forEach((match) => {
+                                const currentQNum = startNum + placeholderCount;
+                                lineResult = lineResult.replace(match[0], `{{${currentQNum}}}`);
+                                placeholderCount++;
+                            });
+                            return lineResult;
+                        });
+                    }
+                }
+                count = placeholderCount;
+                const endNum = startNum + count - 1;
+                block.questionRange = count === 1 ? `Question ${startNum}` : (count > 0 ? `Questions ${startNum}-${endNum}` : `Questions ${startNum}`);
+            }
+            
+            nextNumber = startNum + count;
+        });
+        
+        // Auto-assign part question range label
+        const partStart = (partNumber - 1) * 10 + 1;
+        const partEnd = partStart + 9;
+        const numbers = collectQuestionNumbersFromBlocks(part.blocks);
+        if (numbers.length) {
+            const first = Math.min(...numbers);
+            const last = Math.max(...numbers);
+            part.questionRange = first === last ? `Question ${first}` : `Questions ${first}-${last}`;
+        } else {
+            part.questionRange = `Questions ${partStart}-${partEnd}`;
+        }
+        
+        // Auto-populate Answer Key template
+        const answersList = [];
+        part.blocks.forEach((block) => {
+            if (block.type === "multiple_choice" && block.questionNumber) {
+                const ans = parseAnswerKeyForQuestion(part.answerText, block.questionNumber) || "";
+                answersList.push(`${block.questionNumber} | ${ans}`);
+            } else if (block.type === "multiple_select" && block.questionNumber) {
+                const maxSel = Number(block.maxSelections) || 2;
+                for (let i = 0; i < maxSel; i++) {
+                    const qNum = block.questionNumber + i;
+                    const ans = parseAnswerKeyForQuestion(part.answerText, qNum) || "";
+                    answersList.push(`${qNum} | ${ans}`);
+                }
+            } else if (block.type === "matching" && Array.isArray(block.questions)) {
+                block.questions.forEach((q) => {
+                    const ans = parseAnswerKeyForQuestion(part.answerText, q.questionNumber) || "";
+                    answersList.push(`${q.questionNumber} | ${ans}`);
+                });
+            } else if (block.type === "map_labelling" && Array.isArray(block.labels)) {
+                block.labels.forEach((lbl) => {
+                    const ans = parseAnswerKeyForQuestion(part.answerText, lbl.questionNumber) || "";
+                    answersList.push(`${lbl.questionNumber} | ${ans}`);
+                });
+            } else if (block.type === "form_completion" && Array.isArray(block.rows)) {
+                block.rows.forEach((row) => {
+                    if (row.value && (row.value.type === "input" || row.value.type === "mixed")) {
+                        const qNum = row.value.questionNumber;
+                        const ans = parseAnswerKeyForQuestion(part.answerText, qNum) || "";
+                        answersList.push(`${qNum} | ${ans}`);
+                    }
+                });
+            } else if (block.type === "table_completion" && Array.isArray(block.rows)) {
+                block.rows.forEach((row) => {
+                    if (Array.isArray(row)) {
+                        row.forEach((cell) => {
+                            if (cell && cell.type === "input" && cell.questionNumber) {
+                                const ans = parseAnswerKeyForQuestion(part.answerText, cell.questionNumber) || "";
+                                answersList.push(`${cell.questionNumber} | ${ans}`);
+                            }
+                        });
+                    }
+                });
+            } else if (Array.isArray(block.content)) {
+                block.content.forEach((line) => {
+                    const matches = [...line.matchAll(/\{{2}(\d+)\}{2}/g)];
+                    matches.forEach((match) => {
+                        const qNum = Number(match[1]);
+                        const ans = parseAnswerKeyForQuestion(part.answerText, qNum) || "";
+                        answersList.push(`${qNum} | ${ans}`);
+                    });
+                });
+            }
+        });
+        
+        // Build answer text, retaining manual overrides
+        const parsedAnswers = parseAnswerLinesMap(part.answerText);
+        const finalAnswers = answersList.map((item) => {
+            const [num] = item.split(" | ");
+            const originalVal = parsedAnswers.get(Number(num));
+            return originalVal ? `${num} | ${originalVal}` : item;
+        });
+        
+        part.answerText = finalAnswers.join("\n");
+    });
+}
+
+function parseAnswerKeyForQuestion(text, questionNumber) {
+    const map = parseAnswerLinesMap(text);
+    return map.get(Number(questionNumber)) || "";
+}
+
+function parseAnswerLinesMap(text) {
+    const map = new Map();
+    String(text || "")
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .forEach((line) => {
+            const match = line.match(/^(\d{1,2})\s*[\).:\-=\|]\s*(.+)$/);
+            if (match) {
+                map.set(Number(match[1]), match[2].trim());
+            }
+        });
+    return map;
+}
+
+// Real-Time Student CBT Preview compiler
+function updateRealtimePreview() {
+    const previewContainer = document.getElementById("realtimePreviewContainer");
+    if (!previewContainer) return;
+    
+    if (!appWorkspace || !appWorkspace.classList.contains("split-active")) {
+        return;
+    }
+    
+    try {
+        const payload = buildSavePayload();
+        const currentPartData = saveScope === "part"
+            ? payload.parts[0]
+            : payload.parts[selectedPartIndex];
+        
+        if (!currentPartData) {
+            previewContainer.innerHTML = '<div class="preview-placeholder"><h3>No part loaded</h3></div>';
+            return;
+        }
+        
+        const previewTest = {
+            id: editingTestId || "preview-id",
+            title: payload.title || "Preview Test",
+            part: saveScope === "full" ? "full" : String(selectedPartIndex + 1),
+            parts: [ {
+                ...currentPartData,
+                partNumber: 1
+            } ]
+        };
+        
+        previewContainer.innerHTML = ListeningTestPage(previewTest);
+        bindListeningTest(previewContainer, { isPreview: true });
+        
+        // Disable interactive controls inside preview
+        previewContainer.querySelectorAll("input, select, textarea, button").forEach((el) => {
+            if (el.tagName !== "AUDIO" && !el.closest(".lc-audio-custom")) {
+                el.disabled = true;
+                el.style.pointerEvents = "none";
+            }
+        });
+    } catch (e) {
+        previewContainer.innerHTML = `<div style="padding: 24px; color: var(--danger); font-weight: 600;">Unable to compile preview: ${escapeHtml(e.message)}</div>`;
+    }
+}
+
+// Save Scope Selector UI
 function SaveScopeSelector() {
-    return `<div class="scope-text-info">
-        <span>Create as</span>
-        <strong>${saveScope === "full" ? "Full Listening Test" : `Listening Part ${savePartNumber}`}</strong>
-        <p>${saveScope === "full"
-            ? "Save all four parts together as a combined Full Listening test."
-            : `Only Part ${savePartNumber} will be saved as an individual listening test.`}</p>
-    </div>
-    <div class="scope-actions" style="display: flex; gap: 8px;">
-        <button class="scope-btn ${saveScope === "full" ? "is-active" : ""}" data-save-scope="full" type="button">Full Test</button>
-        ${LISTENING_PART_NUMBERS.map((number) => `<button class="scope-btn ${saveScope === "part" && savePartNumber === number ? "is-active" : ""}" data-save-scope="part" data-save-part="${number}" type="button">Part ${number}</button>`).join("")}
-    </div>`;
-}
-
-function PartSidebar() {
-    return builderState.parts.map((part, index) => `
-        <button class="part-sidebar-button ${index === selectedPartIndex ? "is-active" : ""} ${saveScope === "part" && Number(part.partNumber) === savePartNumber ? "is-save-target" : ""}" data-part-index="${index}" type="button">
-            <strong>${escapeHtml(part.title)}</strong>
-            <span>${escapeHtml(part.questionRange)}</span>
-            <small>${(part.blocks || []).length} blocks${saveScope === "part" && Number(part.partNumber) === savePartNumber ? " (target)" : ""}</small>
+    return `
+        <button class="scope-btn ${saveScope === "full" ? "is-active" : ""}" data-save-scope="full" type="button">
+            <strong>Full Test</strong>
+            <span>Create all 4 parts under a unified Listening test ID.</span>
         </button>
-    `).join("");
+        <button class="scope-btn ${saveScope === "part" ? "is-active" : ""}" data-save-scope="part" data-save-part="${savePartNumber}" type="button">
+            <strong>Single Part</strong>
+            <span>Save active part separately as an individual listening practice.</span>
+        </button>
+    `;
 }
 
-function AudioUpload(part) {
-    return `<div class="audio-card">
-        <div class="audio-info">
-            <strong>Part Audio File</strong>
-            <span>${part.audioFileName ? escapeHtml(part.audioFileName) : "No audio uploaded. Accepted formats: MP3, WAV, M4A"}</span>
+// Part Sidebar UI with Badges
+function PartSidebar() {
+    return builderState.parts.map((part, index) => {
+        const isActive = index === selectedPartIndex;
+        const numbers = collectQuestionNumbersFromBlocks(part.blocks);
+        const qCount = numbers.length;
+        
+        let statusClass = "warning";
+        let statusText = "No Questions";
+        if (qCount > 0) {
+            if (part.audioUrl) {
+                statusClass = "complete";
+                statusText = `${qCount} Questions`;
+            } else {
+                statusText = "No Audio";
+            }
+        } else if (part.audioUrl) {
+            statusText = "No Questions";
+        }
+        
+        return `
+            <button class="part-sidebar-button ${isActive ? "is-active" : ""}" data-part-index="${index}" type="button">
+                <span class="part-icon-circle">${part.partNumber}</span>
+                <div class="part-info-meta">
+                    <strong>${escapeHtml(part.title || `Part ${part.partNumber}`)}</strong>
+                    <span>${escapeHtml(part.questionRange || "Questions")}</span>
+                </div>
+                <span class="part-status-badge ${statusClass}">${statusText}</span>
+            </button>
+        `;
+    }).join("");
+}
+
+// Part Editor UI
+function PartEditor() {
+    const part = selectedPart();
+    const audioCardHtml = part.audioUrl ? `
+        <div class="audio-card">
+            <div class="audio-icon-badge">🎵</div>
+            <div class="audio-card-details">
+                <h4>${escapeHtml(part.audioFileName || "Attached audio file")}</h4>
+                <p>Path: ${escapeHtml(part.audioUrl)}</p>
+                <audio controls src="${escapeHtml(part.audioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
+            </div>
+            <button class="btn btn-danger btn-sm" data-action="remove-audio" type="button">Replace</button>
         </div>
-        <div class="audio-controls">
-            ${part.audioUrl ? `<audio controls preload="metadata" src="${escapeHtml(part.audioUrl)}" style="height: 38px; border-radius: 6px;"></audio>` : ""}
-            <label class="btn btn-secondary" for="audioInput" style="margin-bottom: 0;">
-                ${part.audioUrl ? "Change audio" : "Upload audio"}
-            </label>
-            <input id="audioInput" class="upload-input" type="file" style="display: none;" accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/mp4">
-            ${part.audioUrl ? '<button class="btn btn-danger" data-action="remove-audio" type="button">Remove</button>' : ""}
+    ` : `
+        <div class="drop-zone" onclick="document.getElementById('audioInput').click();">
+            <div class="drop-zone-icon">🎙️</div>
+            <span class="drop-zone__prompt">Drag & drop part audio track (.mp3) here or <span class="browse-link">browse</span></span>
+            <input type="file" id="audioInput" accept=".mp3,.wav,.m4a" style="display: none;">
         </div>
-    </div>`;
+    `;
+    
+    return `
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="part-settings-grid">
+                <div class="form-group">
+                    <label for="partTitle">Part Title</label>
+                    <input id="partTitle" data-part-field="title" type="text" value="${escapeHtml(part.title || "")}" placeholder="e.g., Part 1 - Conversation">
+                </div>
+                <div class="form-group">
+                    <label for="partQuestionRange">Question Range</label>
+                    <input id="partQuestionRange" data-part-field="questionRange" type="text" value="${escapeHtml(part.questionRange || "")}" placeholder="e.g., Questions 1-10">
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label>Audio Track</label>
+                ${audioCardHtml}
+            </div>
+            <div class="form-group">
+                <label for="partInstruction">Active Part Instructions</label>
+                <textarea id="partInstruction" data-part-field="instruction" placeholder="Enter test instructions for this part...">${escapeHtml(part.instruction || "")}</textarea>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span>Question Blocks</span>
+        </div>
+        
+        <div class="blocks-timeline">
+            ${PartBlocks(part.blocks)}
+            <button class="btn-add-block-dashed" data-action="add-block" type="button">
+                <div style="font-size: 20px;">+</div>
+                <span>Add Question Block</span>
+            </button>
+        </div>
+        
+        <div class="card" style="margin-top: 24px;">
+            <div class="form-group">
+                <label for="answerText">Part Answer Keys (One question per line)</label>
+                <div style="font-size: 11px; color: var(--muted); margin-bottom: 8px;">Format: [Question Number] | [Answer] (e.g., "1 | 25 High Street" or "2 | A")</div>
+                <textarea id="answerText" data-part-field="answerText" placeholder="e.g. 1 | A\n2 | B" style="height: 140px; font-family: monospace;">${escapeHtml(part.answerText || "")}</textarea>
+            </div>
+        </div>
+    `;
+}
+
+function PartBlocks(blocks = []) {
+    if (!blocks.length) {
+        return '<div class="card" style="text-align: center; padding: 40px; color: var(--muted); border-style: dashed;">No question blocks added. Add a block to start editing.</div>';
+    }
+    return blocks.map((block, index) => BlockCard(block, index)).join("");
+}
+
+function BlockCard(block, index) {
+    const blocks = selectedPart().blocks;
+    const isFirst = index === 0;
+    const isLast = index === blocks.length - 1;
+    
+    let previewHtml = "";
+    if (block.type === "multiple_choice") {
+        previewHtml = `Option choices: ${(block.options || []).length} choices. Question: ${escapeHtml(block.question || "")}`;
+    } else if (block.type === "multiple_select") {
+        previewHtml = `Checkbox choices: ${(block.options || []).length} options. Max choices allowed: ${block.maxSelections || 2}`;
+    } else if (block.type === "matching") {
+        previewHtml = `Matching items count: ${(block.questions || []).length} questions matching ${(block.options || []).length} options.`;
+    } else if (block.type === "form_completion") {
+        previewHtml = `Form structure: ${(block.rows || []).length} rows configured.`;
+    } else if (block.type === "table_completion") {
+        previewHtml = `Table columns: ${(block.columns || []).join(" | ")}. Rows: ${(block.rows || []).length} rows.`;
+    } else if (Array.isArray(block.content)) {
+        previewHtml = block.content.map(c => `<div style="margin-bottom: 4px;">${escapeHtml(c)}</div>`).join("");
+    }
+    
+    return `
+        <article class="block-card" style="border-left-color: ${getBlockColor(block.type)}">
+            <div class="block-card-header">
+                <div class="block-title-group">
+                    <span class="block-type-tag">${escapeHtml(blockTypeName(block.type))}</span>
+                    <h3>${escapeHtml(block.title || "Untitled Block")}</h3>
+                </div>
+                <span class="block-range-badge">${escapeHtml(block.questionRange || "Questions")}</span>
+            </div>
+            
+            <div class="block-card-body">
+                ${previewHtml}
+            </div>
+            
+            <div class="block-card-actions">
+                <button class="block-action-btn" data-action="move-up" data-block-index="${index}" title="Move Up" type="button" ${isFirst ? "disabled" : ""}>▲</button>
+                <button class="block-action-btn" data-action="move-down" data-block-index="${index}" title="Move Down" type="button" ${isLast ? "disabled" : ""}>▼</button>
+                <button class="block-action-btn" data-action="duplicate-block" data-block-index="${index}" title="Duplicate" type="button">❐</button>
+                <button class="block-action-btn" data-action="edit-block" data-block-index="${index}" title="Edit block content" type="button">✎</button>
+                <button class="block-action-btn delete" data-action="delete-block" data-block-index="${index}" title="Delete block" type="button">✕</button>
+            </div>
+        </article>
+    `;
+}
+
+function getBlockColor(type) {
+    const colors = {
+        form_completion: "#6366f1",
+        multiple_choice: "#10b981",
+        multiple_select: "#f59e0b",
+        matching: "#3b82f6",
+        map_labelling: "#ec4899",
+        note_completion: "#8b5cf6",
+        table_completion: "#06b6d4",
+        sentence_completion_inline: "#14b8a6"
+    };
+    return colors[type] || "#64748b";
 }
 
 function blockTypeName(type) {
@@ -325,108 +943,9 @@ function blockTypeName(type) {
     return matched ? matched.name : "Question Block";
 }
 
-function blockSummary(block) {
-    if (block.type === "multiple_choice") return `MCQ: "${block.question || "Empty question"}"`;
-    if (block.type === "multiple_select") return `Select: "${block.question || "Empty question"}"`;
-    if (block.type === "sentence_completion_inline" || block.type === "note_completion") {
-        const text = Array.isArray(block.content) ? block.content.join(" ") : block.content || "";
-        return text.substring(0, 80) + (text.length > 80 ? "..." : "");
-    }
-    if (block.type === "table_completion") return `Table columns: ${(block.columns || []).join(", ")}`;
-    if (block.type === "matching") return `Matching: ${(block.questions || []).length} items`;
-    if (block.type === "map_labelling") return `Map: ${(block.labels || []).length} marker labels`;
-    return block.title || "No summary available";
-}
-
-function QuestionBlockList(part) {
-    if (!(part.blocks || []).length) {
-        return '<div class="builder-empty">No blocks in this part yet. Add the first question block below.</div>';
-    }
-
-    return `<div class="question-blocks-list">${part.blocks.map((block, index) => `
-        <article class="builder-question-card">
-            <div class="card-header-row">
-                <div class="block-title-info">
-                    <span class="block-badge">${escapeHtml(blockTypeName(block.type))}</span>
-                    <strong style="font-size: 15px; color: var(--dark); font-weight: 700;">${escapeHtml(block.questionRange || "Questions")}</strong>
-                </div>
-                <div class="card-actions">
-                    <button class="card-action-btn" data-action="move-up" data-block-index="${index}" title="Move Up" type="button" ${index === 0 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""}>
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                    </button>
-                    <button class="card-action-btn" data-action="move-down" data-block-index="${index}" title="Move Down" type="button" ${index === part.blocks.length - 1 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""}>
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <button class="card-action-btn" data-action="duplicate-block" data-block-index="${index}" title="Duplicate" type="button">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    </button>
-                    <button class="card-action-btn" data-action="edit-block" data-block-index="${index}" title="Edit" type="button">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                    </button>
-                    <button class="card-action-btn" data-action="delete-block" data-block-index="${index}" title="Delete" style="color:var(--danger);" type="button">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                    </button>
-                </div>
-            </div>
-            <div class="block-body-info">
-                <p style="color: var(--muted); font-size: 13px;">${escapeHtml(blockSummary(block))}</p>
-            </div>
-        </article>
-    `).join("")}</div>`;
-}
-
-function PartEditor() {
-    const part = selectedPart();
-    return `<div class="card">
-        <header class="part-editor-header">
-            <h2>${escapeHtml(part.title)}</h2>
-            <p>Configure part audio, instructions, and question blocks.</p>
-        </header>
-
-        <div class="part-meta-fields">
-            <div class="form-group">
-                <label>Part Title</label>
-                <input data-part-field="title" type="text" value="${escapeHtml(part.title)}">
-            </div>
-            <div class="form-group">
-                <label>Question Range</label>
-                <input data-part-field="questionRange" type="text" value="${escapeHtml(part.questionRange)}">
-            </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label>Part Instruction</label>
-            <textarea data-part-field="instruction" style="height: 80px;">${escapeHtml(part.instruction || "")}</textarea>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 24px;">
-            <label class="answer-key-label">Answer Key for this Part</label>
-            <textarea class="answer-key-textarea" data-part-field="answerText" placeholder="1 | library&#10;2 | computers">${escapeHtml(part.answerText || "")}</textarea>
-            <small style="color: var(--muted); font-size: 11px; display: block; margin-top: 4px;">
-                Format: <code>[Number] | [Answer]</code>. One per line. Multiple valid options separated by /. E.g. <code>1 | library / room</code>.
-            </small>
-        </div>
-
-        <div style="margin-bottom: 28px;">
-            ${AudioUpload(part)}
-        </div>
-
-        <div style="border-top: 1px solid var(--border); padding-top: 24px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                <h3 style="font-size: 16px; font-weight: 700; color: var(--dark);">Question Blocks</h3>
-            </div>
-            ${QuestionBlockList(part)}
-            <div class="add-block-container">
-                <button class="btn-add-block" data-action="add-block" type="button">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    Add Question Block
-                </button>
-            </div>
-        </div>
-    </div>`;
-}
-
+// Listening Test Builder Root Renderer
 function ListeningTestBuilder() {
+    autoCalculateQuestionRanges();
     testTitleInput.value = builderState.title || "";
     if (fixedDurationLabel) {
         fixedDurationLabel.textContent = saveScope === "full"
@@ -436,7 +955,17 @@ function ListeningTestBuilder() {
     testScopeRoot.innerHTML = SaveScopeSelector();
     partSidebarRoot.innerHTML = PartSidebar();
     partEditorRoot.innerHTML = PartEditor();
+    updateRealtimePreview();
 }
+
+// Toggle preview split panel
+previewBtn.addEventListener("click", () => {
+    const isActive = appWorkspace.classList.toggle("split-active");
+    previewBtn.classList.toggle("is-active", isActive);
+    if (isActive) {
+        updateRealtimePreview();
+    }
+});
 
 function AddQuestionBlockMenu() {
     return BLOCK_TYPES.map((item) => `<button class="block-type-btn" data-block-type="${item.type}" type="button">
@@ -707,6 +1236,7 @@ function setupMapMarkerDrag() {
                 const y = Math.min(100, Math.max(0, ((moveEvent.clientY - rect.top) / rect.height) * 100));
                 blockDraft.labels[index].x = Number(x.toFixed(2));
                 blockDraft.labels[index].y = Number(y.toFixed(2));
+                updateRealtimePreview();
                 marker.style.left = `${x}%`;
                 marker.style.top = `${y}%`;
                 const row = blockEditorContent.querySelector(`[data-marker-row="${index}"]`);
@@ -823,6 +1353,7 @@ function syncBlockEditorForm() {
             return { questionNumber, answerKey: `q${questionNumber}`, x: read("x"), y: read("y") };
         });
     }
+    updateRealtimePreview();
 }
 
 function openBlockEditor(index) {
@@ -933,8 +1464,10 @@ function buildSavePayload() {
 
     if (saveScope === "part") {
         const part = parts.find((item) => Number(item.partNumber) === savePartNumber) || parts[savePartNumber - 1];
+        const partTitle = composedPartSaveTitle(title, part);
         return {
             ...payload,
+            title: partTitle,
             part: savePartNumber,
             parts: [part]
         };
@@ -1084,6 +1617,10 @@ partEditorRoot.addEventListener("input", (event) => {
     const field = event.target.closest("[data-part-field]");
     if (!field) return;
     selectedPart()[field.dataset.partField] = field.value;
+    if (["title", "questionRange"].includes(field.dataset.partField)) {
+        updateSelectedPartSidebarMeta();
+    }
+    updateRealtimePreview();
 });
 
 partEditorRoot.addEventListener("change", async (event) => {
@@ -1199,6 +1736,7 @@ blockEditorForm.addEventListener("submit", (event) => {
 
 testTitleInput.addEventListener("input", () => {
     builderState.title = testTitleInput.value;
+    updateRealtimePreview();
 });
 
 btnNewTest.addEventListener("click", () => {
@@ -1214,7 +1752,7 @@ btnNewTest.addEventListener("click", () => {
     showStatus("New test builder ready.", "success");
 });
 
-document.getElementById("previewBtn").addEventListener("click", StudentPreviewModal);
+// Replaced with split screen live preview toggle
 document.getElementById("saveTestBtn").addEventListener("click", () => saveTest().catch((error) => showStatus(error.message, "error")));
 document.getElementById("loadTestsBtn").addEventListener("click", () => loadSavedTests().catch((error) => {
     savedTestsList.textContent = error.message;
@@ -1236,6 +1774,126 @@ document.addEventListener("click", (event) => {
     const button = event.target.closest("[data-close-dialog]");
     if (!button) return;
     document.getElementById(button.dataset.closeDialog).close();
+});
+
+// Import HTML handlers
+importHtmlBtn.addEventListener("click", () => {
+    htmlImportStatus.textContent = "";
+    htmlImportStatus.className = "status-text";
+    htmlImportFile.value = "";
+    importHtmlModal.showModal();
+});
+
+function makeImportDropZoneInteractive(zone, input, statusEl) {
+    zone.addEventListener("click", () => input.click());
+
+    zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("drag-over");
+    });
+
+    ["dragleave", "dragend"].forEach((type) => {
+        zone.addEventListener(type, () => {
+            zone.classList.remove("drag-over");
+        });
+    });
+
+    zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drag-over");
+        if (e.dataTransfer.files.length) {
+            input.files = e.dataTransfer.files;
+            handleImportFileSelected(e.dataTransfer.files[0], statusEl);
+        }
+    });
+
+    input.addEventListener("change", () => {
+        if (input.files.length) {
+            handleImportFileSelected(input.files[0], statusEl);
+        }
+    });
+}
+
+async function handleImportFileSelected(file, statusEl) {
+    statusEl.textContent = "Uploading and parsing HTML file...";
+    statusEl.className = "status-text";
+    
+    try {
+        const formData = new FormData();
+        formData.append("html", file);
+        formData.append("skill", "listening");
+
+        const token = window.authClient?.getAuth()?.token;
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+        const response = await fetch("/api/full-tests/import", {
+            method: "POST",
+            headers: headers,
+            body: formData
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || "Failed to parse HTML file");
+        }
+
+        statusEl.textContent = `Successfully imported: ${file.name}`;
+        statusEl.className = "status-text success";
+        
+        // Hydrate builder with the parsed imported test
+        hydrateBuilderState(data.test);
+        ListeningTestBuilder();
+        
+        showStatus("Test imported successfully from HTML.", "success");
+        
+        setTimeout(() => {
+            importHtmlModal.close();
+        }, 1500);
+
+    } catch (error) {
+        statusEl.textContent = error.message;
+        statusEl.className = "status-text error";
+        showStatus(error.message, "error");
+    }
+}
+
+makeImportDropZoneInteractive(htmlImportDropZone, htmlImportFile, htmlImportStatus);
+
+
+// Audio drop-zone drag/drop handlers via event delegation
+partEditorRoot.addEventListener("dragover", (e) => {
+    const zone = e.target.closest(".drop-zone");
+    if (!zone) return;
+    e.preventDefault();
+    zone.classList.add("drag-over");
+});
+partEditorRoot.addEventListener("dragleave", (e) => {
+    const zone = e.target.closest(".drop-zone");
+    if (!zone) return;
+    zone.classList.remove("drag-over");
+});
+partEditorRoot.addEventListener("drop", async (e) => {
+    const zone = e.target.closest(".drop-zone");
+    if (!zone) return;
+    e.preventDefault();
+    zone.classList.remove("drag-over");
+    if (e.dataTransfer.files.length) {
+        const file = e.dataTransfer.files[0];
+        if (!file.name.endsWith(".mp3") && !file.name.endsWith(".wav") && !file.name.endsWith(".m4a")) {
+            showStatus("Only MP3, WAV, or M4A audio files are allowed.", "error");
+            return;
+        }
+        showStatus("Uploading part audio...");
+        try {
+            const result = await uploadAudio(file);
+            selectedPart().audioUrl = result.audioUrl;
+            selectedPart().audioFileName = result.fileName;
+            ListeningTestBuilder();
+            showStatus("Audio uploaded.", "success");
+        } catch (error) {
+            showStatus(error.message, "error");
+        }
+    }
 });
 
 // App Entry Initialization

@@ -4,37 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IELTS Listening - Admin Builder</title>
-    <link rel="stylesheet" href="listening-template.css">
-    <link rel="stylesheet" href="admin-listening.css">
+    <link rel="stylesheet" href="/listening-template.css?v=1.0.10">
+    <link rel="stylesheet" href="/admin-listening.css?v=1.0.2">
 </head>
 <body class="listening-builder-app" data-skip-global-navbar>
 
-    <!-- App Topbar -->
+    <!-- App Header Topbar -->
     <header class="app-header">
         <div class="brand-info">
-            <span class="brand-badge">IELTS Listening Admin</span>
+            <span class="brand-badge">IELTSX Admin Workspace</span>
             <h1 class="brand-text">Listening Test Builder</h1>
         </div>
+        
+        <div class="test-title-wrapper">
+            <input id="testTitle" type="text" placeholder="Enter Listening Test Title (e.g., Cambridge 18 Test 1)...">
+        </div>
+
         <div class="action-nav">
-            <a href="/admin" class="btn btn-secondary">
+            <a href="/admin" class="btn btn-secondary" title="Go back to Admin Dashboard">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
-                Dashboard
+                <span>Dashboard</span>
             </a>
-            <button id="btnNewTest" class="btn btn-secondary" type="button">
+            <button id="btnNewTest" class="btn btn-secondary" type="button" title="Start a fresh test structure">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                New Test
+                <span>New Test</span>
             </button>
-            <button id="loadTestsBtn" class="btn btn-secondary" type="button">
+            <button id="importHtmlBtn" class="btn btn-secondary" type="button" title="Import from a CDI HTML template">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <span>Import HTML</span>
+            </button>
+            <button id="loadTestsBtn" class="btn btn-secondary" type="button" title="Browse and load saved tests">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                Saved Tests
+                <span>Saved Tests</span>
             </button>
-            <button id="previewBtn" class="btn btn-secondary" type="button">
+            <button id="previewBtn" class="btn btn-secondary btn-preview-toggle" type="button" title="Toggle split screen live student preview">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                Preview Student
+                <span>Live Preview</span>
             </button>
-            <button id="saveTestBtn" class="btn btn-primary" type="button">
+            <button id="saveTestBtn" class="btn btn-primary" type="button" title="Save current test setup to database">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                Save Test
+                <span>Save Test</span>
             </button>
         </div>
     </header>
@@ -44,23 +53,25 @@
         <!-- Sidebar Navigation -->
         <aside class="app-sidebar">
             <div class="section-title">
-                <span>Test Parts</span>
+                <span>Listening Parts</span>
                 <span class="badge-pill">4 Parts</span>
             </div>
             <div id="partSidebar" class="parts-nav-list"></div>
+            
+            <div class="sidebar-divider"></div>
+            
+            <div class="section-title">
+                <span>Save Configuration</span>
+            </div>
+            <!-- Scope Selector (Full vs Part Test) -->
+            <div id="testScope" class="scope-card-selector"></div>
         </aside>
 
         <!-- Workspace Section -->
-        <section class="app-workspace">
-            <!-- Scope Selector (Full vs Part Test) -->
-            <div id="testScope" class="scope-card-selector"></div>
-
-            <!-- Global Metadata Card -->
-            <div class="card detail-card">
-                <div class="form-group">
-                    <label for="testTitle">Listening Test Title</label>
-                    <input id="testTitle" type="text" placeholder="e.g. Cambridge 17 Test 2 Listening">
-                </div>
+        <section class="app-workspace split-active" id="appWorkspace">
+            <!-- Left Pane: Editor Form -->
+            <div class="editor-panel">
+                <!-- Part Duration Indicator -->
                 <div class="duration-box">
                     <div class="box-header">
                         <svg class="icon text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -68,10 +79,28 @@
                     </div>
                     <p class="box-desc">Individual parts use 10 minutes limit when saved separately.</p>
                 </div>
+
+                <!-- Active Part Editor Workspace -->
+                <div id="partEditor" class="editor-area"></div>
             </div>
 
-            <!-- Active Part Editor Workspace -->
-            <div id="partEditor" class="editor-area"></div>
+            <!-- Right Pane: Real-Time Live Preview -->
+            <div class="preview-panel" id="previewPanel">
+                <div class="preview-header">
+                    <span class="preview-dot"></span>
+                    <span class="preview-title">Real-Time Student Preview</span>
+                    <span class="preview-device">Computer-Based IELTS Player</span>
+                </div>
+                <div class="preview-content-wrapper">
+                    <div id="realtimePreviewContainer" class="realtime-preview-container">
+                        <div class="preview-placeholder">
+                            <div class="placeholder-icon">🎧</div>
+                            <h3>Live Player Simulation</h3>
+                            <p>Upload a part audio track and add question blocks to preview the interactive exam interface here in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Global Toast Status Notification -->
             <div id="builderStatus" class="app-toast" role="status" aria-live="polite"></div>
@@ -83,7 +112,7 @@
         <div class="modal-header">
             <div>
                 <span class="modal-subtitle">New Element</span>
-                <h2 class="modal-title">Select block type</h2>
+                <h2 class="modal-title">Select Question Type</h2>
             </div>
             <button class="modal-close" data-close-dialog="addBlockModal" type="button">&times;</button>
         </div>
@@ -95,15 +124,15 @@
         <form id="blockEditorForm" method="dialog">
             <div class="modal-header">
                 <div>
-                    <span class="modal-subtitle">Question Block Configuration</span>
-                    <h2 id="blockEditorTitle" class="modal-title">Edit block</h2>
+                    <span class="modal-subtitle">Configuration Workspace</span>
+                    <h2 id="blockEditorTitle" class="modal-title">Edit Block</h2>
                 </div>
                 <button class="modal-close" data-close-dialog="blockEditorModal" type="button">&times;</button>
             </div>
             <div id="blockEditorContent" class="modal-scroll-content"></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-close-dialog="blockEditorModal" type="button">Cancel</button>
-                <button class="btn btn-primary" type="submit">Save Block</button>
+                <button class="btn btn-primary" type="submit">Apply Block Changes</button>
             </div>
         </form>
     </dialog>
@@ -113,28 +142,48 @@
         <div class="modal-header">
             <div>
                 <span class="modal-subtitle">Load Saved Data</span>
-                <h2 class="modal-title">Saved tests</h2>
+                <h2 class="modal-title">Saved IELTS Tests</h2>
             </div>
             <button class="modal-close" data-close-dialog="savedTestsModal" type="button">&times;</button>
         </div>
-        <div id="savedTestsList" class="saved-tests-list scrollable-content">Loading...</div>
+        <div id="savedTestsList" class="saved-tests-list scrollable-content">Loading saved tests...</div>
     </dialog>
 
-    <!-- Dialog Modal: Student Simulation Preview -->
+    <!-- Dialog Modal: Student Simulation Preview (Fallback/Modal mode if needed) -->
     <dialog id="studentPreviewModal" class="modal modal-full">
         <div class="modal-header">
             <div>
                 <span class="modal-subtitle">Student Simulation</span>
-                <h2 class="modal-title">Exact Listening test preview</h2>
+                <h2 class="modal-title">Fullscreen CBT Player Preview</h2>
             </div>
             <button class="modal-close" data-close-dialog="studentPreviewModal" type="button">&times;</button>
         </div>
         <div id="studentPreviewContent" class="student-preview-body"></div>
     </dialog>
 
+    <!-- Dialog Modal: Import HTML -->
+    <dialog id="importHtmlModal" class="modal modal-small">
+        <div class="modal-header">
+            <div>
+                <span class="modal-subtitle">Import Test</span>
+                <h2 class="modal-title">Upload CDI HTML</h2>
+            </div>
+            <button class="modal-close" data-close-dialog="importHtmlModal" type="button">&times;</button>
+        </div>
+        <div class="modal-scroll-content">
+            <div class="drop-zone" id="htmlImportDropZone">
+                <div class="drop-zone-icon">📄</div>
+                <span class="drop-zone__prompt">Drag & drop .html file here or <span class="browse-link">browse</span></span>
+                <input type="file" id="htmlImportFile" accept=".html,.htm" style="display: none;">
+            </div>
+            <p id="htmlImportStatus" class="status-text"></p>
+        </div>
+    </dialog>
+
     <!-- Scripts -->
-    <script src="ielts-instruction-utils.js"></script>
-    <script src="listening-test-components.js"></script>
-    <script src="admin-listening.js"></script>
+    <script src="/auth-client.js"></script>
+    <script src="/ielts-instruction-utils.js"></script>
+    <script src="/listening-test-components.js?v=1.0.10"></script>
+    <script src="/admin-listening.js?v=1.0.2"></script>
 </body>
 </html>

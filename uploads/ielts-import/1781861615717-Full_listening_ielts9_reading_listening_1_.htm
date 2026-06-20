@@ -1,0 +1,3668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Listening Practice Test</title>
+    <style>
+        /* === Text Size Modes (non-breaking) === */
+        body.text-normal {}
+        body.text-large {}
+        body.text-xlarge {}
+
+        /* Scale common reading/UI text */
+        body.text-large p,
+        body.text-large li,
+        body.text-large .instruction,
+        body.text-large .question p,
+        body.text-large .multi-choice-option label,
+        body.text-large .checkbox-group label,
+        body.text-large .drag-item,
+        body.text-large #transcription-text,
+        body.text-large .footer__questionNo___3WNct,
+        body.text-large .attemptedCount,
+        body.text-large .footer__deliverButton___3FM07,
+        body.text-large .answer-input,
+        body.text-large .question-number {
+          font-size: 18px !important;
+        }
+
+        body.text-xlarge p,
+        body.text-xlarge li,
+        body.text-xlarge .instruction,
+        body.text-xlarge .question p,
+        body.text-xlarge .multi-choice-option label,
+        body.text-xlarge .checkbox-group label,
+        body.text-xlarge .drag-item,
+        body.text-xlarge #transcription-text,
+        body.text-xlarge .footer__questionNo___3WNct,
+        body.text-xlarge .attemptedCount,
+        body.text-xlarge .footer__deliverButton___3FM07,
+        body.text-xlarge .answer-input,
+        body.text-xlarge .question-number {
+          font-size: 20px !important;
+        }
+
+        /* Headings / titles */
+        body.text-large .section-title,
+        body.text-large #transcription-container h2,
+        body.text-large .centered-title {
+          font-size: 20px !important;
+        }
+        body.text-xlarge .section-title,
+        body.text-xlarge #transcription-container h2,
+        body.text-xlarge .centered-title {
+          font-size: 22px !important;
+        }
+
+        /* Keep pill/button ergonomics in step */
+        body.text-large .subQuestion { font-size: 16px !important; }
+        body.text-xlarge .subQuestion { font-size: 18px !important; }
+
+        /* Optional: size the switcher itself modestly */
+        .text-size-switcher label { margin-right: 6px; font-weight: 600; }
+        .text-size-switcher select { padding: 2px 6px; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+            padding-bottom: 90px; /* nav-row height (80px) + some extra spacing */
+        }
+
+        /* Page watermark */
+        body::after {
+            content: "@Farruxusanov29";
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #000000;
+            opacity: 0.02; /* subtle */
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 1px solid #7aa5fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 60px;
+        }
+
+        .ielts-logo {
+            display: none;
+        }
+
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .audio-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+
+        .audio-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon></svg>') no-repeat center;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .telegram-link {
+            color: #FFD700;              /* yellow text */
+            text-decoration: none;
+            font-weight: 700;            /* already bold */
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border: 2px solid #FFD700;   /* yellow border */
+            border-radius: 9999px;
+            background-color: #222;      /* dark background */
+            line-height: 1;
+            position: absolute;          /* top-right positioning */
+            top: 20px;
+            right: 20px;
+            z-index: 9999;               /* stays on top */
+        }
+
+        .telegram-link:hover {
+            background-color: #333;      /* slightly lighter dark on hover */
+            color: #ffea00;              /* brighter yellow on hover */
+            border-color: #ffea00;
+        }
+
+        .telegram-link::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: currentColor;
+            -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-1.37.2-1.64l16.56-6.4c.75-.29 1.4.22 1.2.94l-2.67 12.61c-.22.95-1.13 1.18-1.78.73l-4.5-3.32l-2.23 2.15c-.47.44-1.29.21-1.48-.37z"/></svg>');
+            mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-1.37.2-1.64l16.56-6.4c.75-.29 1.4.22 1.2.94l-2.67 12.61c-.22.95-1.13 1.18-1.78.73l-4.5-3.32l-2.23 2.15c-.47.44-1.29.21-1.48-.37z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        #volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 80px;
+            height: 4px;
+            background: #ddd;
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        #volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+        }
+
+        #volume-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            border: none;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0.7;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon:hover {
+            opacity: 1;
+        }
+        
+        #play-pause-btn {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .main-container {
+            margin-top: 60px;
+            display: flex;
+            background: #ffffff;
+            padding-bottom: 100px; /* Space for bottom nav */
+        }
+
+        .main-container.results-mode {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            width: 100%;
+            padding: 20px;
+            transition: width 0.4s ease;
+        }
+
+        .main-container.results-mode .left-panel {
+            width: 75%;
+            overflow-y: auto;
+            height: calc(100vh - 195px);
+        }
+
+        /* Right Panel */
+        .right-panel {
+            display: none;
+            width: 50%;
+            padding: 20px;
+            position: relative;
+            border-left: 1px solid #e0e0e0;
+            overflow-y: auto;
+            height: calc(100vh - 195px);
+        }
+
+        #transcription-container h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #transcription-text {
+            white-space: pre-wrap; /* preserve line breaks from source */
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .transcription-instruction {
+            display: block;
+            margin: 1em 0;
+            font-style: italic;
+            color: #444;
+        }
+
+        .main-container.results-mode .right-panel {
+            display: block;
+            width: 25%;
+            border-left: 1px solid #e0e0e0;
+            border-top: none;
+            height: calc(100vh - 195px);
+            overflow-y: auto;
+        }
+
+        .help-button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Inline correct answer hint (shown after checking) */
+        .correct-inline {
+            color: #28a745;
+            font-weight: 700;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .correct-inline::before {
+            content: "\2192  "; /* right arrow */
+            font-weight: 700;
+        }
+
+        .help-button:hover {
+            background: #357abd;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .people-section {
+            margin-bottom: 30px;
+        }
+
+        .people-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        .people-table th {
+            text-align: left;
+            padding: 10px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+
+        .people-table td {
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+        }
+
+        #part-1 table td {
+            line-height: 1.8;
+        }
+        /* Increase line height for tables in Part 4 */
+        #part-4 table td {
+            line-height: 2.0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #part-4 table td div { margin: 8px 0; }
+        /* Increase line height for Part 3 table (Questions 24-30) */
+        #part-3 table td {
+            line-height: 2.0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            vertical-align: top;
+        }
+        /* Geosequestration table styling */
+        .geo-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .geo-table th, .geo-table td { border: 1px solid #e5e7eb; padding: 14px; vertical-align: top; }
+        .geo-table thead th { background: #f7f9fc; text-align: center; font-weight: 700; }
+        .geo-table .arrow-row td { text-align: center; font-size: 20px; color: #6b7280; }
+
+        .person-name {
+            font-size: 16px;
+        }
+
+        .question-number {
+            background: white;
+            border: 1px solid #4a90e2;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #4a90e2;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .assigned-responsibility {
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+
+        .responsibilities-section {
+            margin-bottom: 30px;
+        }
+
+        .responsibility-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .responsibility-item {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: move;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .responsibility-item:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        .responsibility-item.dragging {
+            opacity: 0.5;
+            transform: rotate(2deg);
+        }
+
+        .questions-section {
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .instruction {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .centered-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Map Styles */
+        .map-container {
+            position: relative;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+            /* display: block; */
+            /* display: flex; */
+        }
+        .map-container img {
+            width: 100%;
+            display: block;
+        }
+        .map-drop-zone {
+            position: absolute;
+            width: 13%;
+            height: 15%;
+            border: 2px dashed #999;
+            background-color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #555;
+            border-radius: 4px;
+            padding: 2px;
+        }
+        .map-drop-zone:hover {
+            background-color: rgba(230, 244, 255, 0.7);
+            border-color: #4a90e2;
+        }
+        .map-drop-zone .drag-item {
+            font-size: 14px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+        .map-options-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .map-options-list .drag-item {
+            width: calc(25% - 10px);
+            text-align: center;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrows {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-arrow:hover {
+            background: #555;
+        }
+
+        .nav-arrow:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Bottom Navigation - Exact Match */
+        .nav-row {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+        
+            padding: 0;
+            display: flex;
+            align-items: center;
+            height: 80px;
+            z-index: 100;
+
+            /* Allow horizontal scrolling on smaller screens */
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent "Score/Band" button text overflow on small screens */
+        .footer__deliverButton___3FM07 {
+            max-width: 42%;
+            white-space: normal;          /* allow wrapping */
+            word-break: break-word;       /* break long text if needed */
+            line-height: 1.2;
+        }
+        @media (max-width: 768px) {
+            .footer__deliverButton___3FM07 {
+                max-width: 55%;
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            .footer__deliverButton___3FM07 {
+                max-width: 65%;
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+        }
+
+        .footer__questionWrapper___1tZ46 {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+
+        .footer__questionNo___3WNct {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .footer__questionNo___3WNct:hover {
+            background-color: #f8f9fa;
+        }
+
+        .section-prefix {
+            font-size: 16px;
+        }
+
+        .sectionNr {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .attemptedCount {
+            font-size: 14px;
+            color: #666;
+            margin-left: 5px;
+            font-weight: 400; /* Normal weight */
+        }
+
+        @media (max-width: 1024px) {
+            .attemptedCount {
+                display: none;
+            }
+        }
+
+        .footer__questionWrapper___1tZ46.selected .attemptedCount {
+            display: none;
+        }
+
+        .footer__subquestionWrapper___9GgoP {
+            display: none;
+            gap: 2px;
+            margin-left: 10px;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP {
+            display: flex;
+        }
+
+        .subQuestion {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #fcfcfc;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        .subQuestion.answered {
+            background-color: #ececf9;
+            border-color: #ddd;
+        }
+        .subQuestion.correct {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        .subQuestion.incorrect {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .subQuestion:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        .subQuestion.active {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+
+        .subQuestion.completed {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .footer__deliverButton___3FM07 {
+            margin-left: auto;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, border-color 0.2s;
+            min-width: 170px;
+            justify-content: center;
+        }
+
+        .footer__deliverButton___3FM07:hover {
+            background-color: #e0e0e0;
+            border-color: #bbb;
+        }
+        /* Success style for "My Results" button after checking */
+        .footer__deliverButton___3FM07.success {
+            background-color: #28a745;
+            color: #fff;
+            border-color: #28a745;
+        }
+        .footer__deliverButton___3FM07.success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .footer__deliverButton___3FM07:disabled {
+            background: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        .fa-check::before {
+            content: "✓";
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            min-width: 140px;
+        }
+
+        .context-menu-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .context-menu-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .context-menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+        }
+
+        .comment-highlight {
+            background-color: #90EE90;
+            position: relative;
+            cursor: help;
+        }
+
+        .comment-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .comment-highlight:hover .comment-tooltip {
+            opacity: 1;
+        }
+
+        .question {
+            margin-bottom: 40px;
+        }
+        .question p {
+            margin-bottom: 10px;
+        }
+        .question ul, .question .people-table {
+            margin-top: 0;
+        }
+        .question-prompt {
+            margin-bottom: 20px;
+        }
+        .question ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .question ul li {
+            margin-bottom: 5px;
+        }
+        .answer-input {
+            border: 1px solid #9aa3ad;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 4px 8px;
+            font-size: 16px;
+            text-align: left; /* start typing from left */
+            margin-right: 4px;
+            width: 140px;
+            max-width: 160px;
+            min-width: 120px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            height: 28px;
+            min-height: 28px;
+            line-height: 1.2;
+            vertical-align: middle;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .answer-input::placeholder {
+            color: #999;
+            font-weight: bold;
+            text-align: center; /* numbers centered until typing starts */
+        }
+        .answer-input:focus {
+            outline: none;
+            border-color: #2c6bed;
+            border-width: 2px;
+        }
+        .answer-input.correct {
+            border-color: #28a745;
+            background-color: #e9f7ef;
+        }
+        .answer-input.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .answer-input {
+    z-index: 10;
+    position: relative;
+    pointer-events: auto;
+}
+        .drag-drop-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            align-items: flex-start;
+        }
+        .recommendations-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 10px;
+            min-height: 200px;
+        }
+        .drag-item {
+            background: white;
+    border: 1px solid #9c9c9c;
+    font-weight: 600;
+    padding: 0px 5px;
+            border-radius: 4px;
+            cursor: move;
+            font-size: 16px;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .drag-item:hover {
+            background: #e9ecef;
+        }
+        .drag-item.dragging {
+            opacity: 0.5;
+            transform: rotate(2deg);
+        }
+        .drop-zone {
+            border: 2px dashed #aaa;
+            border-radius: 4px;
+            height: 25px;
+            margin-top: 19px;
+            margin-bottom: 5px;
+            transition: background-color 0.2s, border-color 0.2s;
+            padding: 0.5px 5px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: #b3b3b3;
+            font-weight: 600;
+            min-width: 200px;
+            width: auto;
+        }
+        .drop-zone.drag-over {
+            background-color: #e6f4ff;
+            border-color: #4a90e2;
+        }
+        /* Letter pill displayed inside drop-zones */
+        .drop-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 20px;
+            padding: 0 6px;
+            border: 1px solid #4a90e2;
+            color: #0f5bd7;
+            background: #eef5ff;
+            border-radius: 9999px;
+            font-weight: 700;
+            cursor: move;
+            user-select: none;
+        }
+        .drop-zone.correct {
+            background-color: #e9f7ef;
+            border-color: #28a745;
+            border-style: solid;
+        }
+        .drop-zone.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            border-style: solid;
+        }
+        .drop-zone .drag-item {
+            cursor: default;
+        }
+        .drag-item.selected {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 1px #4a90e2;
+        }
+        .questions-container {
+            width: 50%;
+        }
+        /* When transcription (results mode) is visible, give questions container 80% of left panel */
+        .main-container.results-mode .questions-container {
+            width: 80%;
+        }
+        audio {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .part-header {
+            background-color: #f1f2ec;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        .part-header p {
+            margin: 0;
+        }
+
+        .question li.correct {
+            color: #155724;
+            font-weight: bold;
+        }
+        .question li.incorrect {
+            color: #721c24;
+        }
+        .question li.correct::before {
+            content: '✔ ';
+            color: #28a745;
+        }
+        .question li.incorrect::before {
+            content: '✖ ';
+            color: #dc3545;
+        }
+
+        .example-box {
+            margin: 20px 0;
+        }
+
+        .timer-container {
+            display: none; /* Timer hidden */
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .timer-container .timer-tooltip {
+            display: none;
+        }
+
+        .audio-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(40, 40, 40, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .audio-modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 500px;
+            padding: 20px;
+        }
+        .audio-modal-content p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #eee;
+        }
+        .audio-modal-icon {
+            margin-bottom: 20px;
+        }
+        .modal-play-btn {
+            background-color: #000;
+            color: white;
+            border: 1px solid white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+        .modal-play-btn:hover {
+            background-color: #333;
+        }
+        #goto-widget {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        #goto-input {
+            width: 80px;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #goto-btn {
+            padding: 4px 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @keyframes flash {
+            0% { background-color: #e6f4ff; }
+            100% { background-color: transparent; }
+        }
+
+        .question.flash {
+            animation: flash 1s ease-out;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            font-size: 24px;
+            color: #333;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #888;
+            line-height: 1;
+        }
+        .modal-close-btn:hover {
+            color: #333;
+        }
+
+        #part-2 .questions-container {
+width: 75%;
+        }
+        #score-summary {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #result-details table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        #result-details th, #result-details td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        #result-details th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        #result-details td:nth-child(1) {
+            font-weight: bold;
+            text-align: center;
+        }
+        .result-correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .result-incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .context-menu-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 20px;
+            align-items: flex-start;
+        }
+        /* Two-column drag-and-drop layout like screenshot */
+        .dnd-col-title { font-weight: 700; margin-bottom: 10px; }
+        .matching-question-container { display: flex; gap: 30px; align-items: flex-start; }
+        .matching-options-bank { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .matching-questions { flex: 2; display: flex; flex-direction: column; gap: 24px; }
+        .matching-questions .matching-question-item { display: flex; align-items: center; gap: 16px; padding: 6px 0; }
+        .matching-questions .matching-question-item span { min-width: 180px; }
+        .matching-questions .drop-zone { width: 100%; min-width: 360px; height: 34px; border: 2px dashed #aab3bd; border-radius: 4px; background: #fff; display: flex; align-items: center; padding: 0 8px; justify-content: flex-start; text-align: left; }
+        .matching-questions .drop-zone .placeholder { color: #6b7280; font-weight: 700; }
+        .matching-options-bank .drag-item { border-radius: 6px; padding: 6px 12px; background: #ffffff; border: 1px solid #d1d5db; font-weight: 600; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
+        .matching-table {
+            flex: 4;
+            border-collapse: collapse;
+        }
+        .matching-table th, .matching-table td {
+            padding: 6px 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .matching-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .matching-table .drop-zone {
+            /* Unify with global drop-zone styling */
+            border: 2px dashed #aaa;
+            border-radius: 4px;
+            height: 25px;
+            width: 100%;
+            max-width: none;
+            min-width: 200px;
+            padding: 0.5px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            background-color: transparent;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            text-align: left;
+            line-height: 1.2;
+            color: #b3b3b3;
+            font-weight: 600;
+        }
+        .matching-table .drop-zone .drag-item {
+            width: auto;
+            max-width: none;
+            text-align: left;
+            padding: 6px 8px;
+            font-size: 14px;
+            line-height: 1.2;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 2px;
+        }
+        .matching-options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            min-height: 250px;
+            min-width: 280px; /* ensure enough width for long option text to stay on one line */
+        }
+        .matching-options-list .drag-item {
+            width: 100%;
+        }
+        .matching-question-item .drop-zone .placeholder {
+            color: #999;
+            font-weight: bold;
+        }
+
+        /* Clickable cell styles for matching questions */
+        .clickable-cell {
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+            min-width: 50px;
+            min-height: 50px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            background-color: #f8f9fa;
+            margin: 2px;
+        }
+       
+        .clickable-cell:hover {
+            background-color: #e6f4ff;
+            border-color: #4a90e2;
+        }
+        .clickable-cell.selected {
+            background-color: #75a8e4 !important;
+            color: white !important;
+        }
+       
+        .clickable-cell.correct {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+        .clickable-cell.correct::after {
+            content: "✓";
+            font-weight: bold;
+        }
+        .clickable-cell.incorrect {
+            background-color: #dc3545 !important;
+            color: white !important;
+        }
+        .clickable-cell.incorrect::after {
+            content: "✗";
+            font-weight: bold;
+        }
+        
+        /* Clickable cell styles for questions 27-30 */
+        .clickable-cell {
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+            min-width: 50px;
+            min-height: 50px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            background-color: #f8f9fa;
+            margin: 2px;
+        }
+       
+        .clickable-cell:hover {
+            background-color: #e6f4ff;
+            border-color: #4a90e2;
+        }
+        .clickable-cell.selected {
+            background-color: #4a90e2 !important;
+            color: white !important;
+        }
+        
+        .clickable-cell.correct {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+        
+        .clickable-cell.incorrect {
+            background-color: #dc3545 !important;
+            color: white !important;
+        }
+        
+
+        
+        .statement {
+            font-weight: 500;
+            padding-right: 20px;
+        }
+
+        .option strong,
+        .question ul li label strong {
+            display: none;
+        }
+
+        /* Mobile selection toolbar */
+        .mobile-selection-menu {
+            position: absolute;
+            background: #333;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: flex;
+            gap: 8px;
+            z-index: 3000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+        .mobile-selection-menu button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .mobile-selection-menu.hidden {
+            display: none;
+        }
+
+        /* === Matching table styling for Questions 13-16 === */
+        .matching-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .matching-table th,
+        .matching-table td {
+            border: 1px solid #ddd;
+            padding: 8px 4px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .matching-table .clickable-cell {
+            padding: 8px 4px;
+            min-width: 50px;
+            min-height: 50px;
+        }
+        .matching-table th {
+            background-color: #1e6de6;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: center;
+        }
+        .matching-table th:first-child {
+            text-align: left;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .matching-table tbody td:first-child {
+            font-weight: 500;
+            text-align: left;
+            background-color: #f8f9fa;
+        }
+        .matching-table tr:nth-child(even) td {
+            background-color: #f8faff;
+        }
+
+        /* === MCQ table styling for Questions 11-15 === */
+        .mcq-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .mcq-table th,
+        .mcq-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .mcq-table th {
+            background-color: #1e6de6; /* vibrant blue header like screenshot */
+            color: #ffffff;
+            font-weight: 600;
+            text-align: center;
+        }
+        .mcq-table th:first-child {
+            text-align: left;
+        }
+        .mcq-table tbody td:first-child {
+            font-weight: 500;
+            text-align: left;
+        }
+        .mcq-table tr:nth-child(even) td {
+            background-color: #f8faff; /* subtle alternating row colour */
+        }
+        .mcq-table input[type="radio"] {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        /* list of options (A, B, C) shown above the table */
+        .mcq-options {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+        .mcq-options li {
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        /* MCQ design: full-width selectable panels */
+        .multi-choice-question { margin: 12px 0 18px; }
+        .multi-choice-option { display:block; width:100%; padding: 12px 14px;  background-color: #fff; border: 1px solid transparent;  transition: background-color 0.2s ease, border-color 0.2s ease; }
+        .multi-choice-option:hover { background-color: #f1f7ff; border-color: #c6dcfb; }
+        .multi-choice-option:has(input[type="radio"]:checked) { background-color: #cfe3f9; }
+        .multi-choice-option label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 16px; width:100%; }
+
+        .aligned-form .question-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .aligned-form .question-label {
+            width: 230px;
+            padding-right: 10px;
+        }
+
+        /* Responsive adjustments for tablets */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .right-panel, .main-container.results-mode .right-panel {
+                display: none;
+            }
+            .left-panel, .main-container.results-mode .left-panel {
+                width: 100%;
+                padding: 20px 10px;
+                height: auto; /* Reset height for mobile */
+            }
+            .questions-container {
+                width: 100%;
+            }
+        }
+
+        .single-choice label.correct {
+            color: #155724;
+            font-weight: bold;
+        }
+        .single-choice label.correct::before {
+            content: '✔ ';
+            color: #28a745;
+        }
+        .single-choice label.incorrect {
+            color: #721c24;
+            text-decoration: line-through;
+        }
+        .single-choice label.incorrect::before {
+            content: '✖ ';
+            color: #dc3545;
+        }
+        .mcq-table tbody tr.correct {
+            background-color: #d4edda !important;
+            color: #155724;
+            font-weight: bold;
+        }
+        .mcq-table tbody tr.incorrect {
+            background-color: #f8d7da !important;
+            text-decoration: line-through;
+        }
+        .mcq-table tbody tr.incorrect td {
+            color: #721c24;
+        }
+
+        /* New Audio Player Styles */
+        .audio-player-container {
+            position: fixed;
+            top: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            max-width: 90%;
+            height: 40px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 99;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .main-container {
+            margin-top: 115px;
+        }
+        .player-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .player-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
+        .progress-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #progress-bar {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: #ddd;
+            outline: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+        }
+        #progress-bar::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+            border: none;
+        }
+        #current-time, #total-duration {
+            font-size: 12px;
+            color: #555;
+            min-width: 35px;
+            text-align: center;
+        }
+        .controls-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .volume-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        #new-volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 60px;
+            height: 3px;
+            background: #ccc;
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-left: 8px;
+            display: block; 
+        }
+    
+        #new-volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+        }
+        #new-volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+            border: none;
+        }
+        .speed-container {
+            position: relative;
+        }
+        #speed-btn {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 4px 8px;
+        }
+        #speed-options {
+            position: absolute;
+            top: calc(100% + 5px); /* Position below the button with a small gap */
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        #speed-options div {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        #speed-options div:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Flowchart styles */
+        .flowchart-container {
+            border: 1px solid #ccc;
+            padding: 0 20px;
+        }
+        .flowchart-step {
+            text-align: center;
+            margin: 0;
+            padding: 20px 0;
+            border-top: 1px solid #ddd;
+        }
+        .flowchart-step:first-child {
+            border-top: none;
+            padding-top: 20px;
+            margin-top: 0;
+        }
+        .flowchart-arrow {
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+            font-size: 20px;
+            color: #555;
+            border-top: 1px solid #ddd;
+        }
+        .flowchart-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .flowchart-split-col {
+            width: 48%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .flowchart-split .flowchart-step {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        .flowchart-split .flowchart-arrow {
+            border-top: none;
+            padding: 15px 0;
+        }
+
+
+        /* Responsive adjustments for tablets */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .right-panel, .main-container.results-mode .right-panel {
+                display: none;
+            }
+            .left-panel, .main-container.results-mode .left-panel {
+                width: 100%;
+                padding: 20px 10px;
+                height: auto; /* Reset height for mobile */
+            }
+            .questions-container {
+                width: 100%;
+            }
+            
+            /* Adjust input boxes for tablets */
+            .answer-input {
+                width: 90px;
+                max-width: 110px;
+                font-size: 15px;
+            }
+            
+            .drop-zone {
+                max-width: 110px;
+                min-width: 90px;
+            }
+            
+            .matching-table .drop-zone {
+                max-width: 110px;
+                min-width: 90px;
+            }
+        }
+        
+        /* Responsive adjustments for mobile phones */
+        @media (max-width: 768px) {
+            .answer-input {
+                width: 80px;
+                max-width: 100px;
+                font-size: 14px;
+                padding: 2px 4px;
+            }
+            
+            .drop-zone {
+                max-width: 100px;
+                min-width: 80px;
+                font-size: 14px;
+            }
+            
+            .matching-table .drop-zone {
+                max-width: 100px;
+                min-width: 80px;
+            }
+            
+            .drag-item {
+                font-size: 13px;
+                padding: 4px 6px;
+            }
+            
+            .matching-table .drop-zone .drag-item {
+                font-size: 12px;
+            }
+            
+            /* Ensure drag-drop containers are more mobile-friendly */
+            .drag-drop-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .matching-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .answer-input {
+                width: 70px;
+                max-width: 90px;
+                font-size: 13px;
+            }
+            
+            .drop-zone {
+                max-width: 90px;
+                min-width: 70px;
+            }
+            
+            .matching-table .drop-zone {
+                max-width: 90px;
+                min-width: 70px;
+            }
+        }
+
+        /* ===== Imported designs from Reading 4.html ===== */
+        /* TRUE/FALSE/NOT GIVEN styles */
+        .tf-question { margin-bottom: 25px; padding: 10px 0; border-radius: 4px; }
+        .tf-question-line { display: flex; align-items: flex-start; margin-bottom: 15px; padding: 5px 0; border-radius: 4px; }
+        .tf-question-number, .question-number-box { border: 2px solid #ccc; padding: 2px 8px; margin-right: 10px; border-radius: 3px; font-weight: bold; display: inline-block; }
+        .tf-question.active-question .tf-question-number { border-color: #4a90e2; }
+        .tf-question-text { padding-top: 3px; }
+        .tf-options { padding-left: 5px; }
+        .tf-option { display: flex; align-items: center; padding: 10px 12px; background-color: #fff; transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+        .tf-option:hover { background-color: #f1f7ff; border-color: #c6dcfb; }
+        .tf-option.correct { background-color: #d4edda !important; border-color: #28a745 !important; }
+        .tf-option.incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; }
+        .tf-option input[type="radio"] { margin-right: 10px; transform: scale(1.2); }
+        .tf-question.correct .tf-question-line { background-color: #e9f7ef; }
+        .tf-question.incorrect .tf-question-line { background-color: #f8d7da; }
+
+        /* Multi-choice question styles */
+        .multi-choice-question { margin-bottom: 20px; padding: 10px; border-radius: 4px; border: 3px solid transparent; }
+        .multi-choice-question .question-prompt p > strong:first-child { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; padding: 2px 6px; margin-right: 8px; border: 1px solid #d0d7e2; border-radius: 6px; background: #fff; }
+        .multi-choice-question.active-question .question-prompt p > strong:first-child { border-color: #4a90e2; border-width: 2px; }
+        .multi-choice-option { padding: 10px 12px; background-color: #fff; transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+        .multi-choice-option:hover { background-color: #f1f7ff; border-color: #c6dcfb; }
+        .multi-choice-option.correct { background-color: #d4edda !important;  }
+        .multi-choice-option.incorrect { background-color: #f8d7da !important;  }
+        .multi-choice-option label { display: flex; align-items: center; cursor: pointer; font-size: 16px; }
+        .multi-choice-option input[type="checkbox"], .multi-choice-option input[type="radio"] { margin-right: 12px; transform: scale(1.3); accent-color: #4a90e2; }
+
+        /* Checkbox TWO-answers block (match screenshot) */
+        .checkbox-question .question-prompt p > strong:first-child {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+           
+            background: #fff;
+        }
+        .checkbox-group { display: flex; flex-direction: column;  }
+        .checkbox-group label { display: flex; align-items: center; padding: 10px 12px; border: 1px solid transparent; background: #fff; transition: background-color 0.2s, border-color 0.2s; }
+        .checkbox-group label:hover { background: #f1f7ff; border-color: #c6dcfb; }
+        .checkbox-group label:has(input[type="checkbox"]:checked) { background: #cfe3f9; }
+        .checkbox-group input[type="checkbox"] { margin-right: 10px; transform: scale(1.2); }
+        .checkbox-group label.correct { background-color: #d4edda !important; }
+        .checkbox-group label.incorrect { background-color: #f8d7da !important;  }
+        .checkbox-group label.correct::before { content: '✔ '; color: #28a745; font-weight: 600; margin-right: 6px; }
+        .checkbox-group label.incorrect::before { content: '✖ '; color: #dc3545; font-weight: 600; margin-right: 6px; }
+
+        /* Drag & Drop enhancements */
+        /* When filled, hide zone border and show a blue outlined pill around the dropped option */
+        .drop-zone.filled { 
+            background: transparent; 
+            border: none !important; 
+            padding: 0; 
+            justify-content: flex-start; 
+            width: auto;
+            min-width: fit-content;
+        }
+        .drop-zone.filled .drag-item { 
+            width: auto; 
+            height: auto; 
+            display: inline-block; 
+            white-space: nowrap; 
+            border: 1px solid #2c6bed; 
+            border-radius: 4px; 
+            padding: 2px 6px; 
+            font-weight: 600; 
+            background: #fff; 
+            color: #222; 
+        }
+
+        /* ===== Results Modal UI ===== */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 3000; padding: 20px; }
+        .modal-content { background: #ffffff; width: 100%; max-width: 900px; max-height: 85vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); overflow: hidden; display: flex; flex-direction: column; }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #e5e7eb; background: #f8fafc; position: sticky; top: 0; z-index: 1; }
+        .modal-header h2 { margin: 0; font-size: 20px; font-weight: 700; color: #111827; }
+        .modal-close-btn { background: transparent; border: none; font-size: 26px; line-height: 1; cursor: pointer; color: #6b7280; }
+        .modal-close-btn:hover { color: #111827; }
+        .modal-body { padding: 16px 18px; overflow: auto; }
+        #score-summary { font-size: 16px; font-weight: 600; color: #111827; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 10px 12px; border-radius: 8px; display: inline-block; }
+        .result-controls { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+        .result-controls .spacer { flex: 1; }
+        .result-controls label { display: inline-flex; align-items: center; gap: 6px; color: #374151; }
+        .btn-secondary { padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; color: #111827; cursor: pointer; }
+        .btn-secondary:hover { background: #f8fafc; }
+        #result-details { overflow: auto; }
+        #result-details table { width: 100%; border-collapse: collapse; border: 1px solid #e5e7eb; }
+        #result-details th, #result-details td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; }
+        #result-details thead th { position: sticky; top: 0; background: #f1f5f9; z-index: 1; }
+        #result-details tr:nth-child(even) td { background: #fafafa; }
+        #result-details td.result-correct { color: #0f5132; font-weight: 600; }
+        #result-details td.result-incorrect { color: #842029; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="header">
+
+<div class="text-size-switcher">
+  <label for="textSizeSelect">Text Size:</label>
+  <select id="textSizeSelect">
+    <option value="normal">Normal</option>
+    <option value="large">Large</option>
+    <option value="xlarge">Extra Large</option>
+  </select>
+</div>
+
+
+        <div class="timer-container">
+            <span class="timer-display">60:00</span>
+        </div>
+        <a href="https://t.me/ielts9_reading_listening" target="_blank" class="telegram-link">
+            For More CD Mocks 
+        </a>
+        <div class="header-icons">
+        
+        </div>
+    </div>
+
+    <div class="audio-player-container">
+        <button id="play-pause-btn" class="player-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="progress-container">
+            <span id="current-time">0:00</span>
+            <input type="range" id="progress-bar" value="0" step="1" style="width: 100%;">
+            <span id="total-duration">0:00</span>
+        </div>
+        <div class="controls-container">
+            <div class="volume-container">
+                <button id="volume-btn" class="player-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <input type="range" id="new-volume-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+            <div class="speed-container">
+                <button id="speed-btn" class="player-btn">1x</button>
+                <div id="speed-options" class="hidden">
+                    <div data-speed="0.5">0.5x</div>
+                    <div data-speed="0.75">0.75x</div>
+                    <div data-speed="1">1x</div>
+                    <div data-speed="1.25">1.25x</div>
+                    <div data-speed="1.5">1.5x</div>
+                    <div data-speed="2">2x</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            
+<!-- ====================== PART 1 ====================== -->
+<div id="part-1" class="question-part">
+  <div class="part-header">
+    <p><strong>Part 1</strong></p>
+    <p>Listen and answer questions 1–10.</p>
+  </div>
+  <div class="questions-container">
+    <div class="question">
+      <div class="question-prompt">
+        <p><strong>Questions 1–10</strong></p>
+        <p>Complete the notes below.</p>
+        <p>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+      </div>
+      <p class="centered-title"><strong>A conversation about a new school</strong></p>
+      <p><strong>General comment:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>better than the old school</li>
+      </ul>
+      <p><strong>Teachers:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li><input type="text" id="q1" class="answer-input" placeholder="1" autocomplete="off"> is a nice person</li>
+        <li>others are more likely to be decent. The French teacher seems to be more native than the <input type="text" id="q2" class="answer-input" placeholder="2" autocomplete="off"> accent</li>
+        <li>the school principal's talk mentioned to:</li>
+        <ul style="list-style-type: circle; padding-left: 40px;">
+          <li><input type="text" id="q3" class="answer-input" placeholder="3" autocomplete="off"> (studying enjoyment, working hard of students)</li>
+          <li>other things on how to <input type="text" id="q4" class="answer-input" placeholder="4" autocomplete="off"> a good shape, which helps you have a better <input type="text" id="q5" class="answer-input" placeholder="5" autocomplete="off"></li>
+        </ul>
+      </ul>
+      <p><strong>Fitness centre:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>the <input type="text" id="q6" class="answer-input" placeholder="6" autocomplete="off"> is bigger than the one at old school</li>
+        <li>the gym includes everything, i.e., cycling and <input type="text" id="q7" class="answer-input" placeholder="7" autocomplete="off"> machines</li>
+      </ul>
+      <p><strong>Other issues:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>filming the teachers and students' interviews for their <input type="text" id="q8" class="answer-input" placeholder="8" autocomplete="off">, and video project at the main <input type="text" id="q9" class="answer-input" placeholder="9" autocomplete="off"></li>
+        <li>they saw Mr. Clark as their former teacher of <input type="text" id="q10" class="answer-input" placeholder="10" autocomplete="off"> subject</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART 2 ====================== -->
+<div id="part-2" class="question-part hidden">
+  <div class="part-header">
+    <p><strong>Part 2</strong></p>
+    <p>Listen and answer questions 11–20.</p>
+  </div>
+  <div class="questions-container">
+    <div class="question">
+      <div class="question-prompt">
+        <p><strong>Questions 11–15</strong></p>
+        <p>Choose the correct letter, A, B, or C.</p>
+      </div>
+      <p class="centered-title"><strong>London Parks' Introduction</strong></p>
+      <p><strong>11. What is the first thing that tourists are going to experience at the London Parks Society?</strong></p>
+      <div class="multi-choice-question">
+        <div class="multi-choice-option"><label><input type="radio" name="q11" value="A"> A as much as they feel right</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q11" value="B"> B no tip at all</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q11" value="C"> C 10% tip</label></div>
+      </div>
+      <p><strong>12. What is true about the "royal park" being built in London?</strong></p>
+      <div class="multi-choice-question">
+        <div class="multi-choice-option"><label><input type="radio" name="q12" value="A"> A It has a harmonious natural landscape.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q12" value="B"> B It was built by members of the royal family.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q12" value="C"> C It is replicated all over the UK.</label></div>
+      </div>
+      <p><strong>13. The Hyde Park is the most famous park in London that covers</strong></p>
+      <div class="multi-choice-question">
+        <div class="multi-choice-option"><label><input type="radio" name="q13" value="A"> A all of the finest sceneries in London.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q13" value="B"> B an area of about 260 hectares and a circumference of 6.5 km.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q13" value="C"> C 613 acres, with a 4-mile perimeter.</label></div>
+      </div>
+      <p><strong>14. The Hyde Park began to construct</strong></p>
+      <div class="multi-choice-question">
+        <div class="multi-choice-option"><label><input type="radio" name="q14" value="A"> A in 1820s and its design was done by Decimus Burton.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q14" value="B"> B in 1536 after King Henry VIII occupied the land from the monks.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q14" value="C"> C from 1500s and finished in 1800s.</label></div>
+      </div>
+      <p><strong>15. The Crystal Palace was</strong></p>
+      <div class="multi-choice-question">
+        <div class="multi-choice-option"><label><input type="radio" name="q15" value="A"> A constructed on the Hyde Park site in 1851.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q15" value="B"> B used for the Great Exhibition in 1968.</label></div>
+        <div class="multi-choice-option"><label><input type="radio" name="q15" value="C"> C used for the Rolling Stones concert in 2010.</label></div>
+      </div>
+    </div>
+    <div class="question" style="margin-top: 40px;">
+      <div class="question-prompt">
+        <p><strong>Questions 16–20</strong></p>
+        <p>Which sites in the London Parks Society are suitable for the following descriptions?</p>
+        <p>Choose <strong>FIVE</strong> answers from the box and write the correct letter, A–G, next to the questions.</p>
+      </div>
+      <div class="matching-container" style="display: flex; justify-content: space-between;">
+        <div class="matching-questions" style="width: 50%;">
+          <p><strong>Descriptions of Attractive Sites:</strong></p>
+          <p><strong>16. Grand Entrance:</strong></p>
+          <div class="drop-zone" data-question-id="16" data-question="16"><span class="placeholder">Drop answer here</span></div>
+          <p><strong>17. Princess of Wales:</strong></p>
+          <div class="drop-zone" data-question-id="17" data-question="17"><span class="placeholder">Drop answer here</span></div>
+          <p><strong>18. Regent's Park:</strong></p>
+          <div class="drop-zone" data-question-id="18" data-question="18"><span class="placeholder">Drop answer here</span></div>
+          <p><strong>19. St. James's Park:</strong></p>
+          <div class="drop-zone" data-question-id="19" data-question="19"><span class="placeholder">Drop answer here</span></div>
+          <p><strong>20. Greenwich Park:</strong></p>
+          <div class="drop-zone" data-question-id="20" data-question="20"><span class="placeholder">Drop answer here</span></div>
+          <!-- Hidden inputs to store answers -->
+          <input type="hidden" id="q16" value="">
+          <input type="hidden" id="q17" value="">
+          <input type="hidden" id="q18" value="">
+          <input type="hidden" id="q19" value="">
+          <input type="hidden" id="q20" value="">
+        </div>
+        <div class="matching-options-list" id="part2-options-box" style="width: 40%;">
+          <p><strong>Options</strong></p>
+          <div class="drag-item" data-letter="A" draggable="true">A the largest park in the UK</div>
+          <div class="drag-item" data-letter="B" draggable="true">B followed Greek architectural design</div>
+          <div class="drag-item" data-letter="C" draggable="true">C the most ancient park of the Royal</div>
+          <div class="drag-item" data-letter="D" draggable="true">D the largest area for outdoor activities</div>
+          <div class="drag-item" data-letter="E" draggable="true">E included the oldest fountain</div>
+          <div class="drag-item" data-letter="F" draggable="true">F located near the Serpentine Lake</div>
+          <div class="drag-item" data-letter="G" draggable="true">G situated in the centre of London</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART 3 ====================== -->
+<div id="part-3" class="question-part hidden">
+  <div class="part-header">
+    <p><strong>Part 3</strong></p>
+    <p>Listen and answer questions 21–30.</p>
+  </div>
+  <div class="questions-container">
+    <div class="question">
+      <div class="question-prompt">
+        <p><strong>Questions 21–30</strong></p>
+        <p>Complete the notes below.</p>
+        <p>Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+      </div>
+      <p class="centered-title"><strong>Video Project on Student Life</strong></p>
+      <p><strong>Enjoyments (Cristina):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>using the camera</li>
+        <li>going to a British <input type="text" id="q21" class="answer-input" placeholder="21" autocomplete="off"></li>
+      </ul>
+      <p><strong>Enjoyments (Ibrahim):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>contact with students doing other courses by asking some to have <input type="text" id="q22" class="answer-input" placeholder="22" autocomplete="off"></li>
+      </ul>
+      <p><strong>Language practice (Cristina):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>listening to instructions</li>
+        <li>learning <input type="text" id="q23" class="answer-input" placeholder="23" autocomplete="off"> words</li>
+      </ul>
+      <p><strong>Language practice (Ibrahim):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>listening to British students' language because of:</li>
+        <ul style="list-style-type: circle; padding-left: 40px;">
+          <li>normal speed</li>
+          <li>a lot of <input type="text" id="q24" class="answer-input" placeholder="24" autocomplete="off"></li>
+        </ul>
+      </ul>
+      <p><strong>Usefulness (Cristina):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>operating video camera</li>
+        <li>working with other people:</li>
+        <ul style="list-style-type: circle; padding-left: 40px;">
+          <li>learning about <input type="text" id="q25" class="answer-input" placeholder="25" autocomplete="off"></li>
+          <li>compromising</li>
+          <li><input type="text" id="q26" class="answer-input" placeholder="26" autocomplete="off"> people who have different views</li>
+        </ul>
+      </ul>
+      <p><strong>Usefulness (Ibrahim):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>the importance of <input type="text" id="q27" class="answer-input" placeholder="27" autocomplete="off"></li>
+      </ul>
+      <p><strong>Future works (Cristina):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>decide when to <input type="text" id="q28" class="answer-input" placeholder="28" autocomplete="off"> each stage at the beginning</li>
+        <li>make more effort to <input type="text" id="q29" class="answer-input" placeholder="29" autocomplete="off"> with the camera</li>
+      </ul>
+      <p><strong>Future works (Ibrahim):</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>don't make the film too <input type="text" id="q30" class="answer-input" placeholder="30" autocomplete="off"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART 4 ====================== -->
+<div id="part-4" class="question-part hidden">
+  <div class="part-header">
+    <p><strong>Part 4</strong></p>
+    <p>Listen and answer questions 31–40.</p>
+  </div>
+  <div class="questions-container">
+    <div class="question">
+      <div class="question-prompt">
+        <p><strong>Questions 31–40</strong></p>
+        <p>Complete the notes below.</p>
+        <p>Write <strong>ONE WORD ONLY OR A NUMBER</strong> for each answer.</p>
+      </div>
+      <p class="centered-title"><strong>The Knowledge of Antarctica Continent</strong></p>
+      <p><strong>Geography:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>world's highest, coldest, and windiest continent</li>
+        <li>more than <input type="text" id="q31" class="answer-input" placeholder="31" autocomplete="off"> times as big as the UK</li>
+        <li>most of the area is classified as <input type="text" id="q32" class="answer-input" placeholder="32" autocomplete="off"></li>
+      </ul>
+      <p><strong>Research Stations:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>international teams work together</li>
+        <li><input type="text" id="q33" class="answer-input" placeholder="33" autocomplete="off"> is integrated with technical support</li>
+        <li>stations contain accommodation, work areas, a kitchen, a <input type="text" id="q34" class="answer-input" placeholder="34" autocomplete="off">, and a gym</li>
+        <li>supplies were brought to Zero One station by sledge from alan <input type="text" id="q35" class="answer-input" placeholder="35" autocomplete="off"> at the edge of the ice 15 km away</li>
+        <li>problem of snow build-ups solved by building stations on <input type="text" id="q36" class="answer-input" placeholder="36" autocomplete="off"> with adjustable legs</li>
+      </ul>
+      <p><strong>Food and Diet:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>average daily requirement for an adult in Antarctica is approximately <input type="text" id="q37" class="answer-input" placeholder="37" autocomplete="off"> kilocalories</li>
+        <li>rations for fieldwork prepared by process of freeze-drying</li>
+      </ul>
+      <p><strong>Research:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>The most important research focuses on climate change, including:</li>
+        <ul style="list-style-type: circle; padding-left: 40px;">
+          <li>measuring changes in the ice-cap (because of effects on sea levels and <input type="text" id="q38" class="answer-input" placeholder="38" autocomplete="off">)</li>
+          <li>monitoring the hole in the ozone layer</li>
+          <li>analyzing air from bubbles in ice to measure <input type="text" id="q39" class="answer-input" placeholder="39" autocomplete="off"> caused by human activity</li>
+        </ul>
+      </ul>
+      <p><strong>Work Opportunities:</strong></p>
+      <ul style="list-style-type: disc; padding-left: 20px;">
+        <li>Many openings for <input type="text" id="q40" class="answer-input" placeholder="40" autocomplete="off"> people including:</li>
+        <ul style="list-style-type: circle; padding-left: 40px;">
+          <li>research assistants</li>
+          <li>administrative and technical positions</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>            
+
+    <!-- Answer Key -->
+    <div id="answer-key" style="display:none;">
+        <h3>Correct Answers:</h3>
+        <p><strong>Part 1 (Questions 1-10):</strong></p>
+        <p>1. headmaster<br>2. Smith<br>3. education<br>4. keep<br>5. mood<br>6. pool<br>7. rowing<br>8. article<br>9. hall<br>10. music</p>
+        
+        <p><strong>Part 2 (Questions 11-20):</strong></p>
+        <p>11. C<br>12. A<br>13. B<br>14. B<br>15. A<br>16. B<br>17. F<br>18. D<br>19. G<br>20. C</p>
+        
+        <p><strong>Part 3 (Questions 21-30):</strong></p>
+        <p>21. home<br>22. dinner<br>23. technical<br>24. slang<br>25. cooperating<br>26. persuading<br>27. editing<br>28. complete<br>29. experiment<br>30. long</p>
+        
+        <p><strong>Part 4 (Questions 31-40):</strong></p>
+        <p>31. 58<br>32. desert<br>33. science<br>34. hospital<br>35. ship<br>36. platforms<br>37. 3500<br>38. currents<br>39. pollution<br>40. young</p>
+    </div>
+
+    <audio id="global-audio-player" class="hidden"></audio>
+
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow" onclick="previousPart()" id="prevBtn">‹</button>
+        <button class="nav-arrow" onclick="nextPart()" id="nextBtn">›</button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nav-row perScorableItem" aria-label="Questions">
+        <div class="footer__questionWrapper___1tZ46 multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(1)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">1</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(1)"><span class="sr-only">Question 1</span><span aria-hidden="true">1</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(2)"><span class="sr-only">Question 2</span><span aria-hidden="true">2</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(3)"><span class="sr-only">Question 3</span><span aria-hidden="true">3</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(4)"><span class="sr-only">Question 4</span><span aria-hidden="true">4</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(5)"><span class="sr-only">Question 5</span><span aria-hidden="true">5</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(6)"><span class="sr-only">Question 6</span><span aria-hidden="true">6</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(7)"><span class="sr-only">Question 7</span><span aria-hidden="true">7</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(8)"><span class="sr-only">Question 8</span><span aria-hidden="true">8</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(9)"><span class="sr-only">Question 9</span><span aria-hidden="true">9</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(10)"><span class="sr-only">Question 10</span><span aria-hidden="true">10</span></button>
+            </div>
+        </div>
+        
+        <div class="footer__questionWrapper___1tZ46 selected multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(2)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">2</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(11)"><span class="sr-only">Question 11</span><span aria-hidden="true">11</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(12)">
+                    <span class="sr-only">Question 12</span>
+                    <span aria-hidden="true">12</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(13)">
+                    <span class="sr-only">Question 13</span>
+                    <span aria-hidden="true">13</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(14)">
+                    <span class="sr-only">Question 14</span>
+                    <span aria-hidden="true">14</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(15)">
+                    <span class="sr-only">Question 15</span>
+                    <span aria-hidden="true">15</span>
+                </button>
+                <button class="subQuestion active scorable-item" onclick="goToQuestion(16)">
+                    <span class="sr-only">Question 16</span>
+                    <span aria-hidden="true">16</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(17)">
+                    <span class="sr-only">Question 17</span>
+                    <span aria-hidden="true">17</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(18)">
+                    <span class="sr-only">Question 18</span>
+                    <span aria-hidden="true">18</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(19)">
+                    <span class="sr-only">Question 19</span>
+                    <span aria-hidden="true">19</span>
+                </button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(20)">
+                    <span class="sr-only">Question 20</span>
+                    <span aria-hidden="true">20</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer__questionWrapper___1tZ46 multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(3)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">3</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(21)"><span class="sr-only">Question 21</span><span aria-hidden="true">21</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(22)"><span class="sr-only">Question 22</span><span aria-hidden="true">22</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(23)"><span class="sr-only">Question 23</span><span aria-hidden="true">23</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(24)"><span class="sr-only">Question 24</span><span aria-hidden="true">24</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(25)"><span class="sr-only">Question 25</span><span aria-hidden="true">25</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(26)"><span class="sr-only">Question 26</span><span aria-hidden="true">26</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(27)"><span class="sr-only">Question 27</span><span aria-hidden="true">27</span></button>
+                <button class="subQuestion scrable-item" onclick="goToQuestion(28)"><span class="sr-only">Question 28</span><span aria-hidden="true">28</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(29)"><span class="sr-only">Question 29</span><span aria-hidden="true">29</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(30)"><span class="sr-only">Question 30</span><span aria-hidden="true">30</span></button>
+            </div>
+        </div>
+        
+        <div class="footer__questionWrapper___1tZ46 multiple" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(4)">
+                <span>
+                    <span aria-hidden="true" class="section-prefix">Part </span>
+                    <span class="sectionNr" aria-hidden="true">4</span>
+                    <span class="attemptedCount" aria-hidden="true">0 of 10</span>
+                </span>
+            </button>
+            <div class="footer__subquestionWrapper___9GgoP">
+                <button class="subQuestion scorable-item" onclick="goToQuestion(31)"><span class="sr-only">Question 31</span><span aria-hidden="true">31</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(32)"><span class="sr-only">Question 32</span><span aria-hidden="true">32</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(33)"><span class="sr-only">Question 33</span><span aria-hidden="true">33</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(34)"><span class="sr-only">Question 34</span><span aria-hidden="true">34</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(35)"><span class="sr-only">Question 35</span><span aria-hidden="true">35</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(36)"><span class="sr-only">Question 36</span><span aria-hidden="true">36</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(37)"><span class="sr-only">Question 37</span><span aria-hidden="true">37</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(38)"><span class="sr-only">Question 38</span><span aria-hidden="true">38</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(39)"><span class="sr-only">Question 39</span><span aria-hidden="true">39</span></button>
+                <button class="subQuestion scorable-item" onclick="goToQuestion(40)"><span class="sr-only">Question 40</span><span aria-hidden="true">40</span></button>
+            </div>
+        </div>
+        
+        <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton___3FM07">
+            <i class="fa fa fa-check" aria-hidden="true"></i>
+            <span>Check Answers</span>
+        </button>
+    </nav>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu-item" id="highlight-item" onclick="highlightText()">
+            <span class="context-menu-icon">
+                <svg viewBox="0 0 24 24" fill="black"><path d="M15.24 12.32L12.28 9.36l-1.04 1.04-1.04-1.04-1.04 1.04-1.04-1.04-1.04 1.04-1.04-1.04-3.12 3.12c-.59.58-1.54.58-2.12 0l-1.04-1.04c-.58-.59-.58-1.54 0-2.12L7.88.88c.59-.58 1.54-.58 2.12 0l1.04 1.04 1.04-1.04 1.04 1.04 1.04-1.04 1.04 1.04 1.04-1.04 3.12 3.12c.58.59.58 1.54 0 2.12l-1.04 1.04c-.58.59-1.54.59-2.12 0zM12 15l-3 3-7-7 3-3 7 7zm-9-5l-2.29 2.29c-.39.39-.39 1.02 0 1.41l8.29 8.29c.39.39 1.02.39 1.41 0L22.7 8.41c.39-.39.39-1.02 0-1.41L14.42.29c-.39-.39-1.02-.39-1.41 0L3 10z"/></svg>
+            </span>
+            <span>Highlight</span>
+        </div>
+        <div class="context-menu-item" id="comment-item" onclick="addComment()">
+            <span class="context-menu-icon">
+                <svg viewBox="0 0 24 24" fill="black"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 12H5.17L4 15.17V4h16v10z"/></svg>
+            </span>
+            <span>Comment</span>
+        </div>
+        <div class="context-menu-item" id="clear-item" onclick="clearHighlight()" style="display:none;">
+            <span class="context-menu-icon">
+                <svg viewBox="0 0 24 24" fill="black"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            </span>
+            <span>Clear</span>
+        </div>
+        <div class="context-menu-item" onclick="clearAllHighlights()">
+            <span class="context-menu-icon">
+                <svg viewBox="0 0 24 24" fill="black"><path d="M16 9h-2.29l3-3-1.42-1.42-3 3V5h-2v2.29l-3-3-1.42 1.42 3 3H5v2h2.29l-3 3 1.42 1.42 3-3V17h2v-2.29l3 3 1.42-1.42-3-3H17V9h-2zm-4 4h-2v-2h2v2z"/></svg>
+            </span>
+            <span>Clear All</span>
+        </div>
+    </div>
+
+    <!-- Mobile highlight/comment toolbar -->
+    <div id="mobile-selection-menu" class="mobile-selection-menu hidden">
+        <button onclick="highlightText()">Highlight</button>
+        <button onclick="addComment()">Comment</button>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Results</h2>
+                <button id="modal-close-button" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="score-summary"></p>
+                <div id="result-details"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let selectedText = '';
+        let selectedRange = null;
+        let draggedElement = null;
+        let testStarted = false;
+        let timeInSeconds = 3600;
+        let isHovering = false;
+        let timerInterval;
+        let contextElement = null;
+
+        function updateAnsweredIndicators() {
+            for (let qNum = 1; qNum <= 40; qNum++) {
+                const btn = document.querySelector(`.subQuestion[onclick="goToQuestion(${qNum})"]`);
+                if (!btn) continue;
+
+                // Do not change style if it's already marked correct or incorrect
+                if (btn.classList.contains('correct') || btn.classList.contains('incorrect')) {
+                    continue;
+                }
+
+                let isAnswered = false;
+                const textInput = document.getElementById(`q${qNum}`);
+                const radioInput = document.querySelector(`input[name="q${qNum}"]:checked`);
+                const dropZone = document.querySelector(`.drop-zone[data-question-id="${qNum}"]`);
+                const clickableCell = document.querySelector(`.clickable-cell[data-question="${qNum}"].selected`);
+
+                // Check for checkbox questions with multiple answer requirements
+                // Questions 11-12: group name q11-12, choose TWO
+                if (qNum === 11) {
+                    const checkboxes = document.querySelectorAll('input[name="q11-12"]:checked');
+                    if (checkboxes.length >= 1) { isAnswered = true; }
+                } else if (qNum === 12) {
+                    const checkboxes = document.querySelectorAll('input[name="q11-12"]:checked');
+                    if (checkboxes.length >= 2) { isAnswered = true; }
+                // Questions 13-14: group name q13-14, choose TWO
+                } else if (qNum === 13) {
+                    const checkboxes = document.querySelectorAll('input[name="q13-14"]:checked');
+                    if (checkboxes.length >= 1) { isAnswered = true; }
+                } else if (qNum === 14) {
+                    const checkboxes = document.querySelectorAll('input[name="q13-14"]:checked');
+                    if (checkboxes.length >= 2) { isAnswered = true; }
+                } else if (textInput && typeof textInput.value === 'string' && textInput.value.trim() !== '') {
+                    isAnswered = true;
+                } else if (radioInput) {
+                    isAnswered = true;
+                    if (qNum >= 17 && qNum <= 20) {
+                        console.log(`Question ${qNum} radio detected as answered: ${radioInput.value}`);
+                    }
+                } else if (dropZone && dropZone.querySelector('.drag-item')) {
+                    isAnswered = true;
+                } else if (clickableCell) {
+                    isAnswered = true;
+                    if (qNum >= 13 && qNum <= 16 || qNum >= 25 && qNum <= 30) {
+                        console.log(`Question ${qNum} clickable cell detected as answered: ${clickableCell.getAttribute('data-value')}`);
+                        console.log(`Clickable cell element:`, clickableCell);
+                    }
+                }
+
+                if (isAnswered) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.remove('answered');
+                }
+            }
+            // Keep attempted count in sync with latest interactions
+            updateAttemptedCount(currentPart);
+        }
+
+        const audioPlayer = document.getElementById('global-audio-player');
+        const timerContainer = document.querySelector('.timer-container');
+        const timerDisplay = document.querySelector('.timer-display');
+        const volumeSlider = document.getElementById('new-volume-slider');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalDurationEl = document.getElementById('total-duration');
+        const speedBtn = document.getElementById('speed-btn');
+        const speedOptions = document.getElementById('speed-options');
+        const volumeBtn = document.getElementById('volume-btn');
+
+        const audioSource = 'https://example.com/audio-file.mp3'; // Replace with actual audio URL
+        audioPlayer.src = audioSource;
+
+        function setupCheckboxLimits() {
+            const groupsWithLimits = [
+                { name: 'q11-12', max: 2 }, // Questions 11-12: choose TWO
+                { name: 'q13-14', max: 2 }, // Questions 13-14: choose TWO
+            ];
+
+            groupsWithLimits.forEach(({ name, max }) => {
+                const checkboxes = Array.from(document.querySelectorAll(`input[type="checkbox"][name="${name}"]`));
+                if (checkboxes.length === 0) return;
+
+                const applyLimitState = () => {
+                    const checkedCount = checkboxes.filter(c => c.checked).length;
+                    if (checkedCount >= max) {
+                        // Disable all remaining unchecked options when limit reached
+                        checkboxes.forEach(c => { if (!c.checked) c.disabled = true; });
+                    } else {
+                        // Re-enable options when below limit
+                        checkboxes.forEach(c => { c.disabled = false; });
+                    }
+                    updateAnsweredIndicators();
+                };
+
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', applyLimitState);
+                });
+
+                // Initialize on load
+                applyLimitState();
+            });
+        }
+
+        // Ensure checkbox limits are applied once the DOM is ready
+        document.addEventListener('DOMContentLoaded', setupCheckboxLimits);
+
+        // Test function to verify clickable cells are working
+        function testClickableCells() {
+            console.log('Testing clickable cells...');
+            const cells = document.querySelectorAll('.clickable-cell');
+            console.log(`Found ${cells.length} clickable cells`);
+            cells.forEach((cell, index) => {
+                const question = cell.getAttribute('data-question');
+                const value = cell.getAttribute('data-value');
+                const onclick = cell.getAttribute('onclick');
+                console.log(`Cell ${index}: question=${question}, value=${value}, onclick=${onclick}`);
+            });
+        }
+        
+        function selectCell(cell, questionNumber, value) {
+            try {
+                console.log(`selectCell called: question ${questionNumber}, value ${value}`);
+                console.log('Cell element:', cell);
+                console.log('Cell classes:', cell.className);
+                console.log('Cell data-question:', cell.getAttribute('data-question'));
+                console.log('Cell data-value:', cell.getAttribute('data-value'));
+                
+                // Remove previous selection for this question
+                const row = cell.closest('tr');
+                if (!row) {
+                    console.error('Could not find row for cell');
+                    return;
+                }
+                
+                const cells = row.querySelectorAll('.clickable-cell');
+                console.log(`Found ${cells.length} clickable cells in row`);
+                cells.forEach(c => {
+                    c.classList.remove('selected');
+                    console.log(`Removed 'selected' class from cell with value: ${c.getAttribute('data-value')}`);
+                });
+                
+                // Select the clicked cell
+                cell.classList.add('selected');
+                console.log(`Added 'selected' class to cell with value: ${value}`);
+                console.log('Cell classes after selection:', cell.className);
+                
+                // Store the answer in the hidden input
+                const hiddenInput = document.getElementById(`q${questionNumber}`);
+                if (hiddenInput) {
+                    hiddenInput.value = value;
+                    console.log(`Hidden input q${questionNumber} value set to: ${value}`);
+                } else {
+                    console.error(`Hidden input q${questionNumber} not found`);
+                }
+
+                // Update answered indicators
+                updateAnsweredIndicators();
+                
+                // Force a visual update
+                cell.style.display = 'none';
+                cell.offsetHeight; // Force reflow
+                cell.style.display = '';
+                
+            } catch (error) {
+                console.error('Error in selectCell:', error);
+            }
+        }
+
+        function switchToPart(partNumber, andPlay = false) {
+            if (currentPart !== partNumber) {
+                const firstQuestionOfPart = (partNumber - 1) * 10 + 1;
+                currentQuestion = firstQuestionOfPart;
+            }
+            
+            currentPart = partNumber;
+
+            updateNavigation();
+            document.querySelectorAll('.question-part').forEach(part => part.classList.add('hidden'));
+            const partToShow = document.getElementById(`part-${partNumber}`);
+            if (partToShow) {
+                partToShow.classList.remove('hidden');
+            }
+
+            if (document.querySelector('.main-container.results-mode')) {
+                const transcriptionSource = document.querySelector(`#transcription-data [data-part="${partNumber}"]`);
+                const transcriptionTarget = document.getElementById('transcription-text');
+                if (transcriptionSource && transcriptionTarget) {
+                    transcriptionTarget.innerHTML = transcriptionSource.innerHTML;
+                }
+            }
+
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => {
+                wrapper.classList.remove('selected');
+                updateAttemptedCount(index + 1);
+            });
+            const currentWrapper = document.querySelectorAll('.footer__questionWrapper___1tZ46')[currentPart - 1];
+            if (currentWrapper) {
+                currentWrapper.classList.add('selected');
+            }
+            document.getElementById('prevBtn').disabled = currentQuestion === 1;
+            document.getElementById('nextBtn').disabled = currentQuestion === 40;
+        }
+
+        function goToQuestion(questionNumber) {
+            currentQuestion = questionNumber;
+            let partNumber = 1;
+            if (questionNumber > 10 && questionNumber <= 20) partNumber = 2;
+            else if (questionNumber > 20 && questionNumber <= 30) partNumber = 3;
+            else if (questionNumber > 30) partNumber = 4;
+            if (currentPart !== partNumber) {
+                switchToPart(partNumber);
+            }
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const questionBtn = document.querySelector(`.subQuestion[onclick="goToQuestion(${questionNumber})"]`);
+            if (questionBtn) questionBtn.classList.add('active');
+
+            // Scroll to the question
+            let questionElement;
+            if (questionNumber >= 27 && questionNumber <= 28) {
+               questionElement = document.querySelector('input[name="q27-28"]');
+            } else if (questionNumber >= 29 && questionNumber <= 30) {
+               questionElement = document.querySelector('input[name="q29-30"]');
+            } else {
+                questionElement = document.getElementById(`q${questionNumber}`) || // text inputs
+                                document.querySelector(`[data-question-id="${questionNumber}"]`) || // drag-drop
+                                document.querySelector(`input[name="q${questionNumber}"]`) || // radio buttons
+                                document.querySelector(`.clickable-cell[data-question="${questionNumber}"]`); // clickable cells (27-30)
+            }
+            
+            if (questionElement) {
+                const questionContainer = questionElement.closest('.question');
+                if(questionContainer) {
+                    questionContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    questionContainer.classList.add('flash');
+                    setTimeout(() => {
+                        questionContainer.classList.remove('flash');
+                    }, 1000);
+                }
+            }
+            updateNavigation();
+        }
+
+        function nextPart() {
+            if (currentQuestion < 40) {
+                goToQuestion(currentQuestion + 1);
+            }
+        }
+
+        function previousPart() {
+            if (currentQuestion > 1) {
+                goToQuestion(currentQuestion - 1);
+            }
+        }
+
+        function highlightText() {
+            if (!selectedRange || selectedRange.collapsed) {
+                closeContextMenu();
+                return;
+            }
+            
+            try {
+                // Check if selection spans multiple elements
+                const startContainer = selectedRange.startContainer;
+                const endContainer = selectedRange.endContainer;
+                
+                if (startContainer === endContainer && startContainer.nodeType === Node.TEXT_NODE) {
+                    // Simple case: selection within a single text node
+                    const span = document.createElement('span');
+                    span.className = 'highlight';
+                    selectedRange.surroundContents(span);
+                } else {
+                    // Complex case: selection spans multiple elements
+                    // Handle partial text selections and complex DOM structures
+                    
+                    // First, handle partial text at the start
+                    const startOffset = selectedRange.startOffset;
+                    const endOffset = selectedRange.endOffset;
+                    
+                    if (startContainer.nodeType === Node.TEXT_NODE && startOffset > 0) {
+                        // Split the start text node if selection starts in the middle
+                        const startText = startContainer.textContent;
+                        const beforeText = startText.substring(0, startOffset);
+                        const selectedStartText = startText.substring(startOffset);
+                        
+                        const beforeNode = document.createTextNode(beforeText);
+                        const selectedNode = document.createTextNode(selectedStartText);
+                        
+                        const parent = startContainer.parentNode;
+                        parent.insertBefore(beforeNode, startContainer);
+                        parent.insertBefore(selectedNode, startContainer);
+                        parent.removeChild(startContainer);
+                        
+                        // Update the range to start from the new node
+                        selectedRange.setStart(selectedNode, 0);
+                    }
+                    
+                    if (endContainer.nodeType === Node.TEXT_NODE && endOffset < endContainer.textContent.length) {
+                        // Split the end text node if selection ends in the middle
+                        const endText = endContainer.textContent;
+                        const selectedEndText = endText.substring(0, endOffset);
+                        const afterText = endText.substring(endOffset);
+                        
+                        const selectedNode = document.createTextNode(selectedEndText);
+                        const afterNode = document.createTextNode(afterText);
+                        
+                        const parent = endContainer.parentNode;
+                        parent.insertBefore(selectedNode, endContainer);
+                        parent.insertBefore(afterNode, endContainer);
+                        parent.removeChild(endContainer);
+                        
+                        // Update the range to end at the new node
+                        selectedRange.setEnd(selectedNode, selectedNode.textContent.length);
+                    }
+                    
+                    // Now extract the contents and highlight all text nodes
+                    const fragment = selectedRange.extractContents();
+                    
+                    // Create a tree walker to find all text nodes
+                    const walker = document.createTreeWalker(
+                        fragment,
+                        NodeFilter.SHOW_TEXT,
+                        {
+                            acceptNode: function(node) {
+                                // Accept text nodes that have content (not just whitespace)
+                                return node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+                            }
+                        },
+                        false
+                    );
+                    
+                    const textNodes = [];
+                    let node;
+                    while (node = walker.nextNode()) {
+                        textNodes.push(node);
+                    }
+                    
+                    // Wrap each text node in a highlight span
+                    textNodes.forEach(textNode => {
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        const parent = textNode.parentNode;
+                        if (parent) {
+                            parent.insertBefore(span, textNode);
+                            span.appendChild(textNode);
+                        }
+                    });
+                    
+                    // Insert the highlighted fragment back
+                    selectedRange.insertNode(fragment);
+                }
+            } catch(err) {
+                console.warn('Primary highlighting failed, trying robust fallback:', err);
+                
+                // Robust fallback for complex selections
+                try {
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        const range = selection.getRangeAt(0);
+                        
+                        // Get all nodes in the selection
+                        const startContainer = range.startContainer;
+                        const endContainer = range.endContainer;
+                        const commonAncestor = range.commonAncestorContainer;
+                        
+                        // Create a temporary range to work with
+                        const tempRange = document.createRange();
+                        tempRange.selectNodeContents(commonAncestor);
+                        
+                        // Find the start and end positions
+                        const startPos = range.startOffset;
+                        const endPos = range.endOffset;
+                        
+                        // Extract and highlight the content
+                        const contents = range.extractContents();
+                        
+                        // Recursively highlight all text content
+                        function highlightAllText(node) {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                if (node.textContent.trim()) {
+                                    const span = document.createElement('span');
+                                    span.className = 'highlight';
+                                    span.style.backgroundColor = '#ffff00';
+                                    const parent = node.parentNode;
+                                    if (parent) {
+                                        parent.insertBefore(span, node);
+                                    }
+                                }
+                            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                                Array.from(node.childNodes).forEach(child => {
+                                    highlightAllText(child);
+                                });
+                            }
+                        }
+                        
+                        highlightAllText(contents);
+                        range.insertNode(contents);
+                    }
+                } catch(e2) {
+                    console.warn('Robust fallback failed, using final method:', e2);
+                    // Final fallback - use execCommand
+                    try {
+                        document.execCommand('backColor', false, 'yellow');
+                    } catch(e3) {
+                        console.error('All highlighting methods failed:', e3);
+                        // Show user feedback
+                        alert('Highlighting failed for this selection. Please try selecting smaller portions of text.');
+                    }
+                }
+            }
+            
+            window.getSelection().removeAllRanges();
+            closeContextMenu();
+        }
+
+        function addComment() {
+            const commentText = prompt('Enter your comment:');
+            if (!commentText || !selectedRange || selectedRange.collapsed) {
+                closeContextMenu();
+                return;
+            }
+            try {
+                const span = document.createElement('span');
+                span.className = 'comment-highlight';
+                const tooltip = document.createElement('span');
+                tooltip.className = 'comment-tooltip';
+                tooltip.textContent = commentText;
+                span.appendChild(tooltip);
+                selectedRange.surroundContents(span);
+            }catch(err){
+                console.warn('Complex selection – cannot comment');
+            }
+            window.getSelection().removeAllRanges();
+            closeContextMenu();
+        }
+
+        function clearHighlight() {
+           const elementToClear = contextElement;
+           if (!elementToClear) {
+               closeContextMenu();
+               return;
+           }
+           const parent = elementToClear.parentNode;
+           
+           while (elementToClear.firstChild) {
+               if (!elementToClear.firstChild.classList?.contains('comment-tooltip')) {
+                   parent.insertBefore(elementToClear.firstChild, elementToClear);
+               } else {
+                   elementToClear.removeChild(elementToClear.firstChild);
+               }
+           }
+           parent.removeChild(elementToClear);
+           parent.normalize();
+           closeContextMenu();
+        }
+
+        function clearAllHighlights() {
+            document.querySelectorAll('.highlight, .comment-highlight').forEach(element => {
+                const parent = element.parentNode;
+                const fragment = document.createDocumentFragment();
+
+                while (element.firstChild) {
+                    if (element.firstChild.nodeType === 1 && element.firstChild.classList.contains('comment-tooltip')) {
+                        element.removeChild(element.firstChild);
+                    } else {
+                        fragment.appendChild(element.firstChild);
+                    }
+                }
+                parent.replaceChild(fragment, element);
+            });
+            closeContextMenu();
+        }
+        
+        function closeContextMenu() {
+            document.getElementById('contextMenu').style.display = 'none';
+            contextElement = null;
+        }
+
+        function updateAttemptedCount(partNumber) {
+            const partContainer = document.getElementById(`part-${partNumber}`);
+            if (!partContainer) return;
+            const inputs = partContainer.querySelectorAll('input.answer-input:not([disabled]):not([type="hidden"]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled])');
+            let answeredCount = 0;
+            const answeredGroups = {};
+            inputs.forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    if (input.name === 'q11-12') {
+                        const checkedCount = partContainer.querySelectorAll('input[name="q11-12"]:checked').length;
+                        // Represent q11 and q12 as two separate questions in the footer count
+                        // Count 1 if at least one selected, and +1 again if two selected
+                        const keyFirst = 'q11-12-first';
+                        const keySecond = 'q11-12-second';
+                        if (checkedCount >= 1 && !answeredGroups[keyFirst]) {
+                            answeredCount++;
+                            answeredGroups[keyFirst] = true;
+                        }
+                        if (checkedCount >= 2 && !answeredGroups[keySecond]) {
+                            answeredCount++;
+                            answeredGroups[keySecond] = true;
+                        }
+                    } else if (input.name === 'q13-14') {
+                        const checkedCount = partContainer.querySelectorAll('input[name="q13-14"]:checked').length;
+                        // Represent q13 and q14 as two separate questions in the footer count
+                        // Count 1 if at least one selected, and +1 again if two selected
+                        const keyFirst = 'q13-14-first';
+                        const keySecond = 'q13-14-second';
+                        if (checkedCount >= 1 && !answeredGroups[keyFirst]) {
+                            answeredCount++;
+                            answeredGroups[keyFirst] = true;
+                        }
+                        if (checkedCount >= 2 && !answeredGroups[keySecond]) {
+                            answeredCount++;
+                            answeredGroups[keySecond] = true;
+                        }
+                    } else if (input.name === 'q28-30') {
+                        const checkedCount = partContainer.querySelectorAll('input[name="q28-30"]:checked').length;
+                        // Represent q28, q29, and q30 as three separate questions in the footer count
+                        const keyFirst = 'q28-30-first';
+                        const keySecond = 'q28-30-second';
+                        const keyThird = 'q28-30-third';
+                        if (checkedCount >= 1 && !answeredGroups[keyFirst]) {
+                            answeredCount++;
+                            answeredGroups[keyFirst] = true;
+                        }
+                        if (checkedCount >= 2 && !answeredGroups[keySecond]) {
+                            answeredCount++;
+                            answeredGroups[keySecond] = true;
+                        }
+                        if (checkedCount >= 3 && !answeredGroups[keyThird]) {
+                            answeredCount++;
+                            answeredGroups[keyThird] = true;
+                        }
+                    } else if (input.name === 'q31-32') {
+                        const checkedCount = partContainer.querySelectorAll('input[name="q31-32"]:checked').length;
+                        // Represent q31 and q32 as two separate questions in the footer count
+                        const keyFirst = 'q31-32-first';
+                        const keySecond = 'q31-32-second';
+                        if (checkedCount >= 1 && !answeredGroups[keyFirst]) {
+                            answeredCount++;
+                            answeredGroups[keyFirst] = true;
+                        }
+                        if (checkedCount >= 2 && !answeredGroups[keySecond]) {
+                            answeredCount++;
+                            answeredGroups[keySecond] = true;
+                        }
+                    } else if (input.checked && !answeredGroups[input.name]) {
+                        answeredCount++;
+                        answeredGroups[input.name] = true;
+                    }
+                } else {
+                    if (input.value.trim() !== '') answeredCount++;
+                }
+            });
+            // Include drag/drop filled zones as answered
+            const zones = partContainer.querySelectorAll('.drop-zone[data-question-id]');
+            zones.forEach(zone => {
+                if (zone.querySelector('.drag-item')) {
+                    answeredCount++;
+                }
+            });
+            
+            // Include clickable cells as answered
+            const clickableCells = partContainer.querySelectorAll('.clickable-cell.selected');
+            clickableCells.forEach(cell => {
+                const questionNum = cell.getAttribute('data-question');
+                if (questionNum && !answeredGroups[`clickable-${questionNum}`]) {
+                    answeredCount++;
+                    answeredGroups[`clickable-${questionNum}`] = true;
+                }
+            });
+            
+            // Include map questions (15-20) as answered if they have a selection
+            for (let i = 15; i <= 20; i++) {
+                const selectElement = partContainer.querySelector(`#q${i}`);
+                if (selectElement && selectElement.value && selectElement.value !== '' && !answeredGroups[`map-${i}`]) {
+                    answeredCount++;
+                    answeredGroups[`map-${i}`] = true;
+                }
+            }
+            const countDisplay = document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${partNumber}) .attemptedCount`);
+            if (countDisplay) countDisplay.textContent = `${answeredCount} of 10`;
+        }
+
+        // === Answer key and question type mapping ===
+        const correctAnswers = {
+            // Part 1
+            q1: 'headmaster',
+            q2: 'Smith',
+            q3: 'education',
+            q4: 'keep',
+            q5: 'mood',
+            q6: 'pool',
+            q7: 'rowing',
+            q8: 'article',
+            q9: 'hall',
+            q10: 'music',
+            
+            // Part 2
+            q11: 'C',
+            q12: 'A',
+            q13: 'B',
+            q14: 'B',
+            q15: 'A',
+            q16: 'B',
+            q17: 'F',
+            q18: 'D',
+            q19: 'G',
+            q20: 'C',
+            
+            // Part 3
+            q21: 'home',
+            q22: 'dinner',
+            q23: 'technical',
+            q24: 'slang',
+            q25: 'cooperating',
+            q26: 'persuading',
+            q27: 'editing',
+            q28: 'complete',
+            q29: 'experiment',
+            q30: 'long',
+            
+            // Part 4
+            q31: '58',
+            q32: 'desert',
+            q33: 'science',
+            q34: 'hospital',
+            q35: 'ship',
+            q36: 'platforms',
+            q37: '3500',
+            q38: 'currents',
+            q39: 'pollution',
+            q40: 'young'
+        };
+
+        const questionTypes = {
+            // Part 1 (text inputs)
+            q1: 'text', q2: 'text', q3: 'text', q4: 'text', q5: 'text',
+            q6: 'text', q7: 'text', q8: 'text', q9: 'text', q10: 'text',
+
+            // Part 2 (MCQs + matching)
+            q11: 'mcq', q12: 'mcq', q13: 'mcq', q14: 'mcq', q15: 'mcq',
+            q16: 'dragdrop', q17: 'dragdrop', q18: 'dragdrop', q19: 'dragdrop', q20: 'dragdrop',
+
+            // Part 3 (text inputs)
+            q21: 'text', q22: 'text', q23: 'text', q24: 'text', q25: 'text',
+            q26: 'text', q27: 'text', q28: 'text', q29: 'text', q30: 'text',
+
+            // Part 4 (text inputs)
+            q31: 'text', q32: 'text', q33: 'text', q34: 'text', q35: 'text',
+            q36: 'text', q37: 'text', q38: 'text', q39: 'text', q40: 'text'
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            let resultsData = [];
+            document.querySelectorAll('.correct, .incorrect, .correct-answer-text, .correct-inline').forEach(el => {
+                if (el.classList.contains('correct-answer-text') || el.classList.contains('correct-inline')) {
+                    el.remove();
+                } else {
+                    el.classList.remove('correct', 'incorrect');
+                }
+            });
+            
+            Object.keys(correctAnswers).forEach(key => {
+                const correctAnswer = correctAnswers[key];
+                let userAnswer = '';
+                let isCorrect = false;
+                const questionType = questionTypes[key];
+                
+                // Handle different question types
+                if (key.includes('-')) {
+                    // Multi-question keys like 'q11-12', 'q13-14'
+                    const [startQ, endQ] = key.split('-').map(q => parseInt(q.replace('q', '')));
+                    
+                    switch(questionType) {
+                        case 'checkbox':
+                            const checkedBoxes = document.querySelectorAll(`input[name="${key}"]:checked`);
+                            const userAnswers = Array.from(checkedBoxes).map(cb => cb.value).sort();
+                            userAnswer = userAnswers.join(', ');
+                            const correctAnswersSorted = Array.isArray(correctAnswer) ? [...correctAnswer].sort() : [correctAnswer];
+                            
+                            // Count how many correct answers the user selected
+                            const correctUserAnswers = userAnswers.filter(ans => correctAnswersSorted.includes(ans));
+                            
+                            // Additive-only scoring: 1 point per correct selected; no penalty for incorrect
+                            const questionScore = correctUserAnswers.length;
+                            score += questionScore;
+                            
+                            // Mark group as fully correct only if all correct options are selected and no extra are selected
+                            isCorrect = (correctUserAnswers.length === correctAnswersSorted.length && userAnswers.length === correctAnswersSorted.length);
+                            
+                            // Mark individual checkboxes
+                            checkedBoxes.forEach(cb => {
+                                const label = cb.closest('label');
+                                if (label) {
+                                    if (correctAnswersSorted.includes(cb.value)) {
+                                        label.classList.add('correct');
+                                    } else {
+                                        label.classList.add('incorrect');
+                                    }
+                                }
+                            });
+                            
+                            // Mark correct answers that weren't selected
+                            correctAnswersSorted.forEach(correctVal => {
+                                const correctCheckbox = document.querySelector(`input[name="${key}"][value="${correctVal}"]`);
+                                if (correctCheckbox && !correctCheckbox.checked) {
+                                    const correctLabel = correctCheckbox.closest('label');
+                                    if (correctLabel) {
+                                        correctLabel.classList.add('correct');
+                                    }
+                                }
+                            });
+                            break;
+                    }
+                    
+                    // Mark buttons for the question range
+                    for (let qNum = startQ; qNum <= endQ; qNum++) {
+                        const btn = document.querySelector(`.subQuestion[onclick="goToQuestion(${qNum})"]`);
+                        if (btn) {
+                            btn.classList.remove('answered');
+                            btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        }
+                    }
+                    
+                    resultsData.push({
+                        question: `${startQ}-${endQ}`,
+                        userAnswer: userAnswer || 'No Answer',
+                        correctAnswer: Array.isArray(correctAnswer) ? correctAnswer.join(', ') : String(correctAnswer),
+                        isCorrect: isCorrect
+                    });
+                    
+                    // For checkbox questions in multi-question keys, score was already added in switch statement
+                    // Don't add additional score here - return to next iteration of forEach
+                    return;
+                }
+                
+                   const qNum = parseInt(key.replace('q', ''));
+                   const btn = document.querySelector(`.subQuestion[onclick="goToQuestion(${qNum})"]`);
+                   const element = document.getElementById(key) || document.querySelector(`input[name="${key}"]`);
+
+                   // Determine question type: prefer explicit mapping over DOM input type
+                   if (!questionType) {
+                       if (element?.type === 'radio') questionType = 'mcq';
+                       else if (element?.type === 'text') questionType = 'text';
+                   }
+                   
+                    switch (questionType) {
+                       case 'text':
+                           userAnswer = element.value.trim();
+                           const acceptedAnswers = Array.isArray(correctAnswer) ? correctAnswer : [String(correctAnswer)];
+                           isCorrect = acceptedAnswers.some(ans => ans.toLowerCase() === userAnswer.toLowerCase());
+                           element.classList.add(isCorrect ? 'correct' : 'incorrect');
+                           if (!isCorrect) {
+                                const correctAnswerSpan = document.createElement('span');
+                                correctAnswerSpan.className = 'correct-inline';
+                                correctAnswerSpan.textContent = acceptedAnswers[0];
+                                element.insertAdjacentElement('afterend', correctAnswerSpan);
+                           }
+                           break;
+                        case 'mcq':
+                            // For map questions (15-20), use the select dropdown selection instead of radios
+                            if (qNum >= 15 && qNum <= 20) {
+                                const selectElement = document.getElementById(key);
+                                if (selectElement) {
+                                    userAnswer = (selectElement.value || '').trim();
+                                    isCorrect = userAnswer === correctAnswer;
+                                    selectElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+                                    if (!isCorrect) {
+                                        const correctAnswerSpan = document.createElement('span');
+                                        correctAnswerSpan.className = 'correct-inline';
+                                        correctAnswerSpan.textContent = String(correctAnswer);
+                                        selectElement.insertAdjacentElement('afterend', correctAnswerSpan);
+                                    }
+                                    break;
+                                }
+                            }
+
+                            // Default MCQ grading via radio inputs
+                            const radioChecked = document.querySelector(`input[name="${key}"]:checked`);
+                            userAnswer = radioChecked ? radioChecked.value : 'No Answer';
+                            isCorrect = userAnswer === correctAnswer;
+                            const radios = document.querySelectorAll(`input[name="${key}"]`);
+                            radios.forEach(radio => {
+                                const label = radio.closest('label');
+                                const wrapper = radio.closest('.multi-choice-option') || label;
+                                if (radio.value === correctAnswer) {
+                                    wrapper.classList.add('correct');
+                                } else if (radio.checked) {
+                                    wrapper.classList.add('incorrect');
+                                }
+                            });
+                            break;
+                        case 'dragdrop': {
+                            const dz = document.querySelector(`.drop-zone[data-question-id="${qNum}"]`);
+                            const dropped = dz ? dz.querySelector('.drag-item') : null;
+                            // Prefer hidden input (kept in sync on drop), then dataset/attribute
+                            const hiddenVal = element ? element.value.trim() : '';
+                            if (hiddenVal) {
+                                userAnswer = hiddenVal;
+                            } else if (dropped) {
+                                const dataLetter = dropped.getAttribute('data-letter') || dropped.dataset.letter;
+                                userAnswer = (dataLetter && dataLetter.trim()) || dropped.textContent.trim();
+                            } else {
+                                userAnswer = '';
+                            }
+                            const accepted = Array.isArray(correctAnswer) ? correctAnswer.map(a=>String(a).toLowerCase()) : [String(correctAnswer).toLowerCase()];
+                            isCorrect = userAnswer && accepted.includes(String(userAnswer).toLowerCase());
+                            if (!isCorrect) {
+                                const correctAnswerSpan = document.createElement('span');
+                                correctAnswerSpan.className = 'correct-inline';
+                                // show canonical uppercase answer for letters
+                                const showVal = Array.isArray(correctAnswer) ? String(correctAnswer[0]) : String(correctAnswer);
+                                correctAnswerSpan.textContent = showVal;
+                                // Make sure it sits inline with the question row
+                                correctAnswerSpan.style.display = 'inline-block';
+                                correctAnswerSpan.style.marginLeft = '8px';
+                                const anchor = dz || element; // prefer drop-zone, fallback to hidden input
+                                if (anchor) {
+                                    anchor.insertAdjacentElement('afterend', correctAnswerSpan);
+                                }
+                            }
+                            break; }
+                       case 'clickable':
+                           console.log(`Checking clickable question ${qNum}, correct answer: ${correctAnswer}`);
+                           const selectedCell = document.querySelector(`.clickable-cell[data-question="${qNum}"].selected`);
+                           console.log(`Selected cell for question ${qNum}:`, selectedCell);
+                           userAnswer = selectedCell ? selectedCell.getAttribute('data-value') : 'No Answer';
+                           console.log(`User answer for question ${qNum}: ${userAnswer}`);
+                           isCorrect = userAnswer === correctAnswer;
+                           console.log(`Question ${qNum} is correct: ${isCorrect}`);
+                           
+                           // Mark cells as correct/incorrect
+                           const allCells = document.querySelectorAll(`.clickable-cell[data-question="${qNum}"]`);
+                           allCells.forEach(cell => {
+                               if (cell.getAttribute('data-value') === correctAnswer) {
+                                   cell.classList.add('correct');
+                               } else if (cell.classList.contains('selected')) {
+                                   cell.classList.add('incorrect');
+                               }
+                           });
+                           break;
+                       case 'checkbox':
+                           const checkedBoxes = document.querySelectorAll(`input[name="${key}"]:checked`);
+                           const userAnswers = Array.from(checkedBoxes).map(cb => cb.value).sort();
+                           userAnswer = userAnswers.join(', ');
+                           const correctAnswersSorted = Array.isArray(correctAnswer) ? correctAnswer.sort() : [correctAnswer];
+                           
+                           // Count how many correct answers the user selected
+                           const correctUserAnswers = userAnswers.filter(ans => correctAnswersSorted.includes(ans));
+                           
+                           // Additive-only scoring: 1 point per correct selected; no penalty for incorrect
+                           const questionScore = correctUserAnswers.length;
+                           score += questionScore;
+                           
+                           // Mark group as fully correct only if all correct options are selected and no extra are selected
+                           isCorrect = (correctUserAnswers.length === correctAnswersSorted.length && userAnswers.length === correctAnswersSorted.length);
+                           
+                           // Mark individual checkboxes
+                           checkedBoxes.forEach(cb => {
+                               const label = cb.closest('label');
+                               if (label) {
+                                   if (correctAnswersSorted.includes(cb.value)) {
+                                       label.classList.add('correct');
+                                   } else {
+                                       label.classList.add('incorrect');
+                                   }
+                               }
+                           });
+                           
+                           // Mark correct answers that weren't selected
+                           correctAnswersSorted.forEach(correctVal => {
+                               const correctCheckbox = document.querySelector(`input[name="${key}"][value="${correctVal}"]`);
+                               if (correctCheckbox && !correctCheckbox.checked) {
+                                   const correctLabel = correctCheckbox.closest('label');
+                                   if (correctLabel) {
+                                       correctLabel.classList.add('correct');
+                                   }
+                               }
+                           });
+                           break;
+                   }
+
+                   if (btn) {
+                       btn.classList.remove('answered');
+                       btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                   }
+
+                   resultsData.push({
+                       question: qNum,
+                       userAnswer: userAnswer || 'No Answer',
+                       correctAnswer: Array.isArray(correctAnswer) ? correctAnswer.join(' / ') : String(correctAnswer),
+                       isCorrect: isCorrect
+                   });
+
+                // For checkbox questions, score was already added in the switch statement
+                // Only add score for non-checkbox questions
+                if (questionType !== 'checkbox' && isCorrect) {
+                   score++;
+               }
+            });
+
+            const deliverButton = document.getElementById('deliver-button');
+            const band = (function(raw){
+                if(raw>=39) return 9;
+                if(raw>=37) return 8.5;
+                if(raw>=35) return 8;
+                if(raw>=32) return 7.5;
+                if(raw>=30) return 7;
+                if(raw>=26) return 6.5;
+                if(raw>=23) return 6;
+                if(raw>=18) return 5.5;
+                if(raw>=16) return 5;
+                if(raw>=13) return 4.5;
+                if(raw>=10) return 4;
+                if(raw>=8)  return 3.5;
+                if(raw>=6)  return 3;
+                if(raw>=4)  return 2.5;
+                if(raw>=2)  return 2;
+                if(raw===1) return 1.5;
+                return 0;
+            })(score);
+
+            // Disable all inputs after grading
+            document.querySelectorAll('.answer-input, input[type="radio"], input[type="checkbox"]').forEach(input => {
+                input.disabled = true;
+            });
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.setAttribute('draggable', 'false');
+                item.style.cursor = 'default';
+            });
+            document.querySelectorAll('.clickable-cell').forEach(cell => {
+                cell.style.pointerEvents = 'none';
+            });
+
+            // Update the button text and style
+            deliverButton.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i><span>My Results: ' + score + '/40 (Band ' + band.toFixed(1) + ')</span>';
+            deliverButton.classList.add('success');
+            deliverButton.onclick = showResults;
+
+            // Store results for later display
+            window.testResults = {
+                score: score,
+                band: band,
+                details: resultsData
+            };
+        }
+
+        function showResults() {
+            const results = window.testResults;
+            if (!results) {
+                alert('Please check your answers first to see results.');
+                return;
+            }
+            const modal = document.getElementById('result-modal');
+            const summary = document.getElementById('score-summary');
+            const details = document.getElementById('result-details');
+            
+            summary.textContent = `Your Score: ${results.score}/40 (Band ${results.band.toFixed(1)})`;
+            
+            // Build results table
+            let tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="10%">Question</th>
+                            <th width="45%">Your Answer</th>
+                            <th width="45%">Correct Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            
+            results.details.forEach(item => {
+                const isCorrect = item.isCorrect;
+                const questionNum = item.question;
+                const userAnswer = item.userAnswer;
+                const correctAnswer = item.correctAnswer;
+                
+                tableHTML += `
+                    <tr>
+                        <td>${questionNum}</td>
+                        <td class="${isCorrect ? 'result-correct' : 'result-incorrect'}">${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                    </tr>`;
+            });
+            
+            tableHTML += `</tbody></table>`;
+            details.innerHTML = tableHTML;
+            modal.style.display = 'flex';
+        }
+
+        function closeResultsModal() {
+            document.getElementById('result-modal').style.display = 'none';
+        }
+
+        // Initialize the test
+        document.addEventListener('DOMContentLoaded', function() {
+            switchToPart(1);
+            updateAnsweredIndicators();
+            
+            // Set up event listeners for answer inputs
+            document.querySelectorAll('.answer-input, input[type="radio"], input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', updateAnsweredIndicators);
+                input.addEventListener('input', updateAnsweredIndicators);
+            });
+
+            // Set up drag and drop for matching questions
+            setupDragAndDrop();
+
+            // Set up clickable cells for questions 27-30
+            setupClickableCells();
+
+            // Set up context menu
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                const selection = window.getSelection();
+                if (!selection.isCollapsed) {
+                    selectedText = selection.toString();
+                    selectedRange = selection.getRangeAt(0);
+                    const contextMenu = document.getElementById('contextMenu');
+                    contextMenu.style.left = e.pageX + 'px';
+                    contextMenu.style.top = e.pageY + 'px';
+                    contextMenu.style.display = 'block';
+                    
+                    // Check if the selection contains a highlight
+                    const hasHighlight = selectionContainsHighlight(selection);
+                    document.getElementById('highlight-item').style.display = hasHighlight ? 'none' : 'block';
+                    document.getElementById('comment-item').style.display = hasHighlight ? 'none' : 'block';
+                    document.getElementById('clear-item').style.display = hasHighlight ? 'block' : 'none';
+                }
+            });
+
+            // Close context menu on click elsewhere
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#contextMenu')) {
+                    closeContextMenu();
+                }
+            });
+
+            // Mobile selection handling
+            document.addEventListener('selectionchange', function() {
+                const selection = window.getSelection();
+                if (selection.toString().trim() && isMobileDevice()) {
+                    showMobileSelectionMenu(selection);
+                }
+            });
+
+            // Set up the "Check Answers" button
+            document.getElementById('deliver-button').addEventListener('click', checkAnswers);
+            
+            // Set up the modal close button
+            document.getElementById('modal-close-button').addEventListener('click', closeResultsModal);
+
+            // Set up text size switcher
+            document.getElementById('textSizeSelect').addEventListener('change', function() {
+                const size = this.value;
+                document.body.className = 'text-' + size;
+            });
+
+            // Set up audio player controls
+            setupAudioPlayer();
+        });
+
+        function setupAudioPlayer() {
+            // Set initial volume
+            audioPlayer.volume = volumeSlider.value;
+            
+            // Play/Pause button
+            playPauseBtn.addEventListener('click', function() {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playPauseBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+                } else {
+                    audioPlayer.pause();
+                    playPauseBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                }
+            });
+            
+            // Update progress bar as audio plays
+            audioPlayer.addEventListener('timeupdate', function() {
+                const currentTime = audioPlayer.currentTime;
+                const duration = audioPlayer.duration;
+                const progressPercent = (currentTime / duration) * 100;
+                
+                progressBar.value = progressPercent;
+                currentTimeEl.textContent = formatTime(currentTime);
+                
+                if (!isNaN(duration)) {
+                    totalDurationEl.textContent = formatTime(duration);
+                }
+            });
+            
+            // Seek when progress bar is adjusted
+            progressBar.addEventListener('input', function() {
+                const seekTime = (this.value / 100) * audioPlayer.duration;
+                audioPlayer.currentTime = seekTime;
+            });
+            
+            // Volume control
+            volumeSlider.addEventListener('input', function() {
+                audioPlayer.volume = this.value;
+            });
+            
+            // Speed control
+            speedBtn.addEventListener('click', function() {
+                speedOptions.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#speed-options div').forEach(option => {
+                option.addEventListener('click', function() {
+                    const speed = parseFloat(this.getAttribute('data-speed'));
+                    audioPlayer.playbackRate = speed;
+                    speedBtn.textContent = speed + 'x';
+                    speedOptions.classList.add('hidden');
+                });
+            });
+            
+            // Close speed options when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.speed-container')) {
+                    speedOptions.classList.add('hidden');
+                }
+            });
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        function setupDragAndDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', this.getAttribute('data-letter'));
+                });
+                
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    draggedElement = null;
+                });
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    if (draggedElement) {
+                        // Clear existing content
+                        this.innerHTML = '';
+                        
+                        // Create a new drag item for the drop zone
+                        const newItem = draggedElement.cloneNode(true);
+                        newItem.setAttribute('draggable', 'false');
+                        newItem.style.cursor = 'default';
+                        this.appendChild(newItem);
+                        
+                        // Store the answer in the hidden input
+                        const questionId = this.getAttribute('data-question-id');
+                        const hiddenInput = document.getElementById(`q${questionId}`);
+                        if (hiddenInput) {
+                            hiddenInput.value = newItem.getAttribute('data-letter');
+                        }
+                        
+                        // Update answered indicators
+                        updateAnsweredIndicators();
+                    }
+                });
+            });
+        }
+
+        function setupClickableCells() {
+            console.log('Setting up clickable cells...');
+            const cells = document.querySelectorAll('.clickable-cell');
+            console.log(`Found ${cells.length} clickable cells`);
+            
+            cells.forEach(cell => {
+                const questionNumber = cell.getAttribute('data-question');
+                const value = cell.getAttribute('data-value');
+                
+                // Remove any existing onclick handlers to prevent duplication
+                cell.removeAttribute('onclick');
+                
+                // Add the click handler
+                cell.addEventListener('click', function() {
+                    console.log(`Cell clicked: question ${questionNumber}, value ${value}`);
+                    selectCell(this, questionNumber, value);
+                });
+            });
+        }
+
+        function selectionContainsHighlight(selection) {
+            if (selection.rangeCount === 0) return false;
+            const range = selection.getRangeAt(0);
+            let node = range.startContainer;
+            
+            // Traverse up the DOM to find if we're inside a highlight
+            while (node !== document) {
+                if (node.nodeType === Node.ELEMENT_NODE && 
+                    (node.classList.contains('highlight') || node.classList.contains('comment-highlight'))) {
+                    contextElement = node;
+                    return true;
+                }
+                node = node.parentNode;
+            }
+            return false;
+        }
+
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function showMobileSelectionMenu(selection) {
+            const menu = document.getElementById('mobile-selection-menu');
+            const rect = selection.getRangeAt(0).getBoundingClientRect();
+            
+            menu.style.left = (rect.left + window.scrollX) + 'px';
+            menu.style.top = (rect.bottom + window.scrollY) + 'px';
+            menu.classList.remove('hidden');
+            
+            selectedText = selection.toString();
+            selectedRange = selection.getRangeAt(0);
+        }
+
+        // Test the clickable cells on load
+        window.addEventListener('load', function() {
+            testClickableCells();
+            setupClickableCells();
+        });
+    </script>
+</body>
+</html>

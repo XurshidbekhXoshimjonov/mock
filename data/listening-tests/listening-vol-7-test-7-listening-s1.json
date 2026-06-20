@@ -1,0 +1,239 @@
+{
+  "id": "listening-vol-7-test-7-listening-s1",
+  "title": "Listening Vol 7 Test 7 - Part 1: Places to visit with children",
+  "slug": "listening-vol-7-test-7-part-1",
+  "part": 1,
+  "audio": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "A family ticket is $ 1",
+      "options": [],
+      "answer": "65"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "The fastest bus takes about minutes 2",
+      "options": [],
+      "answer": "40"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "You can hold some animals and have a for a small fee 3",
+      "options": [],
+      "answer": "photo"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "John is performing 4",
+      "options": [],
+      "answer": "Rosie"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Performances run from Tuesday to 5",
+      "options": [],
+      "answer": "Saturday"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "There is a on tickets for Monday night's preview 6",
+      "options": [],
+      "answer": "discount"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Go to the city center to see a special exhibition 7",
+      "options": [],
+      "answer": "museum"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Do origami - we'll need to take a small 8",
+      "options": [],
+      "answer": "box"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Go snorkelling at Salty Lake - it's on the side of the island 9",
+      "options": [],
+      "answer": "Ocean"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "You're not allowed to on the island 10",
+      "options": [],
+      "answer": "camp"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-vol-7-test-7",
+  "createdAt": "2026-06-19T17:07:01.418Z",
+  "updatedAt": "2026-06-19T17:07:01.418Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1: Places to visit with children",
+      "questionRange": "Questions 1-10",
+      "instruction": "",
+      "blocks": [
+        {
+          "id": "vol-7-test-7-part-1-places",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Places to visit with children",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>Alma Park</strong>",
+            "Go to the zoo.",
+            "A family ticket is ${{1}}.",
+            "The fastest bus takes about {{2}} minutes.",
+            "You can hold some animals and have a {{3}} for a small fee.",
+            "",
+            "<strong>The Entertainment Room</strong>",
+            "John {{4}} is performing.",
+            "Performances run from Tuesday to {{5}}.",
+            "There is a {{6}} on tickets for Monday night's preview.",
+            "",
+            "<strong>The City</strong>",
+            "Go to the city center {{7}} to see a special exhibition.",
+            "Do origami - we'll need to take a small {{8}}.",
+            "",
+            "<strong>Bunyabbie Island</strong>",
+            "Explore with a four-wheel drive.",
+            "Go snorkelling at Salty Lake - it's on the {{9}} side of the island.",
+            "You're not allowed to {{10}} on the island."
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "A family ticket is $ 1",
+              "text": "A family ticket is $ 1",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "65"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "The fastest bus takes about minutes 2",
+              "text": "The fastest bus takes about minutes 2",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "40"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "You can hold some animals and have a for a small fee 3",
+              "text": "You can hold some animals and have a for a small fee 3",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "photo"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "John is performing 4",
+              "text": "John is performing 4",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Rosie"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Performances run from Tuesday to 5",
+              "text": "Performances run from Tuesday to 5",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Saturday"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "There is a on tickets for Monday night's preview 6",
+              "text": "There is a on tickets for Monday night's preview 6",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "discount"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Go to the city center to see a special exhibition 7",
+              "text": "Go to the city center to see a special exhibition 7",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "museum"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Do origami - we'll need to take a small 8",
+              "text": "Do origami - we'll need to take a small 8",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "box"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Go snorkelling at Salty Lake - it's on the side of the island 9",
+              "text": "Go snorkelling at Salty Lake - it's on the side of the island 9",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Ocean"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "You're not allowed to on the island 10",
+              "text": "You're not allowed to on the island 10",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "camp"
+            }
+          ]
+        }
+      ],
+      "audioUrl": "https://archive.org/download/test-7-1/Test%207%20%281%29.m4a",
+      "audioFileName": "Test 7 (1).m4a",
+      "answerText": "1: 65\n2: 40\n3: photo\n4: Rosie\n5: Saturday\n6: discount\n7: museum\n8: box\n9: Ocean\n10: camp"
+    }
+  ]
+}

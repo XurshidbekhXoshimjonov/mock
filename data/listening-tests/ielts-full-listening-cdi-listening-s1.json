@@ -1,0 +1,286 @@
+{
+  "id": "ielts-full-listening-cdi-listening-s1",
+  "title": "IELTS CDI Full Listening Practice — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1 - 6",
+      "instruction": "Complete the form. Use NO MORE THAN ONE WORD AND / OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "title": "Questions 7 - 10",
+      "instruction": "Complete the notes. Use ONE WORD for each answer.",
+      "questionNumbers": [
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Time: 9pm",
+      "options": [],
+      "answer": "7:30",
+      "text": "Time: 9pm"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Days: Every day except",
+      "options": [],
+      "answer": "Tuesday",
+      "text": "Days: Every day except"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Price per class: £",
+      "options": [],
+      "answer": "15",
+      "text": "Price per class: £"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Customer Name: Tim",
+      "options": [],
+      "answer": "Cavendish",
+      "text": "Customer Name: Tim"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Customer Address: Slade Road",
+      "options": [],
+      "answer": "43",
+      "text": "Customer Address: Slade Road"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Customer Phone Number",
+      "options": [],
+      "answer": "0188 639 423",
+      "text": "Customer Phone Number"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "The gym is located by the",
+      "options": [],
+      "answer": "fitness",
+      "text": "The gym is located by the"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Class members usually prefer not to have any",
+      "options": [],
+      "answer": "shoes",
+      "text": "Class members usually prefer not to have any"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Customers can borrow a for free",
+      "options": [],
+      "answer": "towel",
+      "text": "Customers can borrow a for free"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "A self-defence class with a teacher from",
+      "options": [],
+      "answer": "China",
+      "text": "A self-defence class with a teacher from"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-full-listening-cdi",
+  "createdAt": "2026-06-20T02:17:10.853Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/ielts-full-listening-audio.mp3",
+      "instruction": "",
+      "answerText": "1: 7:30\n2: Tuesday\n3: 15\n4: Cavendish\n5: 43\n6: 0188 639 423\n7: fitness\n8: shoes\n9: towel\n10: China",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "form_completion",
+          "questionRange": "Questions 1 - 6",
+          "title": "WEST LAKE GYM COURSE REGISTRATION FORM",
+          "example": "",
+          "instruction": "Complete the form. Use NO MORE THAN ONE WORD AND / OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [
+            {
+              "label": "Selected Class",
+              "value": "Yoga"
+            },
+            {
+              "label": "Time",
+              "value": "{{1}} 9pm"
+            },
+            {
+              "label": "Days",
+              "value": "Every day except {{2}}"
+            },
+            {
+              "label": "Level",
+              "value": "Beginner"
+            },
+            {
+              "label": "Price per class",
+              "value": "£{{3}}"
+            },
+            {
+              "label": "Customer Name",
+              "value": "Tim {{4}}"
+            },
+            {
+              "label": "Customer Address",
+              "value": "{{5}} Slade Road"
+            },
+            {
+              "label": "Customer Phone Number",
+              "value": "{{6}}"
+            }
+          ],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Time: 9pm",
+              "text": "Time: 9pm",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "7:30"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Days: Every day except",
+              "text": "Days: Every day except",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Tuesday"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Price per class: £",
+              "text": "Price per class: £",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "15"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Customer Name: Tim",
+              "text": "Customer Name: Tim",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Cavendish"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Customer Address: Slade Road",
+              "text": "Customer Address: Slade Road",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "43"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Customer Phone Number",
+              "text": "Customer Phone Number",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "0188 639 423"
+            }
+          ]
+        },
+        {
+          "id": "group-1-7",
+          "type": "sentence_completion_inline",
+          "questionRange": "Questions 7 - 10",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the notes. Use ONE WORD for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "The gym is located by the {{7}}",
+            "Class members usually prefer not to have any {{8}}",
+            "Customers can borrow a {{9}} for free",
+            "A self-defence class with a teacher from {{10}}"
+          ],
+          "questions": [
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "The gym is located by the",
+              "text": "The gym is located by the",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fitness"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Class members usually prefer not to have any",
+              "text": "Class members usually prefer not to have any",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "shoes"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Customers can borrow a for free",
+              "text": "Customers can borrow a for free",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "towel"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "A self-defence class with a teacher from",
+              "text": "A self-defence class with a teacher from",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "China"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

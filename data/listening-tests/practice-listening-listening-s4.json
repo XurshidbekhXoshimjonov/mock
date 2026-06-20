@@ -1,0 +1,385 @@
+{
+  "id": "practice-listening-listening-s4",
+  "title": "IELTS CDI Listening Practice - Part 4: Pleasanton Town Market",
+  "slug": "practice-listening-part-4",
+  "part": 4,
+  "audio": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-35",
+      "instruction": "Choose the correct answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "title": "Questions 36-40",
+      "instruction": "Complete the table below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "multiple_choice",
+      "question": "Why did the lecturer choose to focus on the Pleasanton Town Market?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It was the first ever Town Market."
+        },
+        {
+          "letter": "B",
+          "text": "It has been covered extensively in local history classes."
+        },
+        {
+          "letter": "C",
+          "text": "It is often mentioned in some literature of the library."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 32,
+      "type": "multiple_choice",
+      "question": "The Town Market originally made a large profit selling",
+      "options": [
+        {
+          "letter": "A",
+          "text": "handcrafts"
+        },
+        {
+          "letter": "B",
+          "text": "vegetables"
+        },
+        {
+          "letter": "C",
+          "text": "animals"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 33,
+      "type": "multiple_choice",
+      "question": "The money that the marketers made contributes to local",
+      "options": [
+        {
+          "letter": "A",
+          "text": "reconstruction"
+        },
+        {
+          "letter": "B",
+          "text": "development"
+        },
+        {
+          "letter": "C",
+          "text": "defense"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 34,
+      "type": "multiple_choice",
+      "question": "Market sales plummeted due to a lack of viable",
+      "options": [
+        {
+          "letter": "A",
+          "text": "agriculture"
+        },
+        {
+          "letter": "B",
+          "text": "transport"
+        },
+        {
+          "letter": "C",
+          "text": "city planning"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 35,
+      "type": "multiple_choice",
+      "question": "Mayor John C. Wiley decided the Clock Tower would be used as a ... in the early stages of the uprising",
+      "options": [
+        {
+          "letter": "A",
+          "text": "clock"
+        },
+        {
+          "letter": "B",
+          "text": "grounds for battle"
+        },
+        {
+          "letter": "C",
+          "text": "jail"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Reference section object: 36",
+      "options": [],
+      "answer": "market"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Research method: 37",
+      "options": [],
+      "answer": "interviews"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Bias makes it 38",
+      "options": [],
+      "answer": "useless"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Research method: 39",
+      "options": [],
+      "answer": "photographs"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Newspaper archives object: 40",
+      "options": [],
+      "answer": "crime"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "practice-listening",
+  "createdAt": "2026-06-19T17:13:42.073Z",
+  "updatedAt": "2026-06-19T17:13:42.073Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4: Pleasanton Town Market",
+      "questionRange": "Questions 31-40",
+      "blocks": [
+        {
+          "id": "practice-listening-part-4-market-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 31-35",
+          "instruction": "Choose the correct answer.",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "type": "multiple_choice",
+              "question": "Why did the lecturer choose to focus on the Pleasanton Town Market?",
+              "text": "Why did the lecturer choose to focus on the Pleasanton Town Market?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It was the first ever Town Market."
+                },
+                {
+                  "letter": "B",
+                  "text": "It has been covered extensively in local history classes."
+                },
+                {
+                  "letter": "C",
+                  "text": "It is often mentioned in some literature of the library."
+                }
+              ],
+              "answer": "C"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "type": "multiple_choice",
+              "question": "The Town Market originally made a large profit selling",
+              "text": "The Town Market originally made a large profit selling",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "handcrafts"
+                },
+                {
+                  "letter": "B",
+                  "text": "vegetables"
+                },
+                {
+                  "letter": "C",
+                  "text": "animals"
+                }
+              ],
+              "answer": "C"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "type": "multiple_choice",
+              "question": "The money that the marketers made contributes to local",
+              "text": "The money that the marketers made contributes to local",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "reconstruction"
+                },
+                {
+                  "letter": "B",
+                  "text": "development"
+                },
+                {
+                  "letter": "C",
+                  "text": "defense"
+                }
+              ],
+              "answer": "B"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "type": "multiple_choice",
+              "question": "Market sales plummeted due to a lack of viable",
+              "text": "Market sales plummeted due to a lack of viable",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "agriculture"
+                },
+                {
+                  "letter": "B",
+                  "text": "transport"
+                },
+                {
+                  "letter": "C",
+                  "text": "city planning"
+                }
+              ],
+              "answer": "B"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "type": "multiple_choice",
+              "question": "Mayor John C. Wiley decided the Clock Tower would be used as a ... in the early stages of the uprising",
+              "text": "Mayor John C. Wiley decided the Clock Tower would be used as a ... in the early stages of the uprising",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "clock"
+                },
+                {
+                  "letter": "B",
+                  "text": "grounds for battle"
+                },
+                {
+                  "letter": "C",
+                  "text": "jail"
+                }
+              ],
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "practice-listening-part-4-research-methods",
+          "type": "table_completion",
+          "questionRange": "Questions 36-40",
+          "title": "Research methods",
+          "instruction": "Complete the table below. Write ONE WORD ONLY for each answer.",
+          "columns": [
+            "Research Methods",
+            "Objects",
+            "Problems"
+          ],
+          "rows": [
+            [
+              "reference section",
+              "{{36}}",
+              "there is too much information"
+            ],
+            [
+              "{{37}}",
+              "Rebellion",
+              "bias makes it {{38}}"
+            ],
+            [
+              "{{39}}",
+              "Jim Wiley",
+              "the information is insufficient"
+            ],
+            [
+              "newspaper archives",
+              "{{40}}",
+              "more detail is needed"
+            ]
+          ],
+          "questions": [
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "type": "sentence_completion",
+              "question": "Reference section object: 36",
+              "text": "Reference section object: 36",
+              "options": [],
+              "answer": "market"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "type": "sentence_completion",
+              "question": "Research method: 37",
+              "text": "Research method: 37",
+              "options": [],
+              "answer": "interviews"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "type": "sentence_completion",
+              "question": "Bias makes it 38",
+              "text": "Bias makes it 38",
+              "options": [],
+              "answer": "useless"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "type": "sentence_completion",
+              "question": "Research method: 39",
+              "text": "Research method: 39",
+              "options": [],
+              "answer": "photographs"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "type": "sentence_completion",
+              "question": "Newspaper archives object: 40",
+              "text": "Newspaper archives object: 40",
+              "options": [],
+              "answer": "crime"
+            }
+          ]
+        }
+      ],
+      "instruction": "",
+      "audioUrl": "https://ia601006.us.archive.org/14/items/mix-23m-36s-audio-joiner.com-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy-copy/mix_23m36s%20%28audio-joiner.com%29%20-%20CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3",
+      "audioFileName": "Practice Listening.mp3",
+      "answerText": "31: C\n32: C\n33: B\n34: B\n35: C\n36: market\n37: interviews\n38: useless\n39: photographs\n40: crime"
+    }
+  ]
+}

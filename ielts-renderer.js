@@ -179,10 +179,17 @@ const IeltsRenderer = (() => {
             return explicitType;
         }
 
+        const groupInstructionObj = typeof group.instruction === "object" && group.instruction !== null
+            ? group.instruction
+            : {};
         const instructionText = [
             group.title,
             group.instructionTitle,
-            group.instruction,
+            groupInstructionObj.bodyHtml,
+            groupInstructionObj.body,
+            groupInstructionObj.text,
+            groupInstructionObj.rule,
+            typeof group.instruction === "string" ? group.instruction : null,
             group.instructionText,
             group.rule
         ].filter(Boolean).join(" ").toUpperCase();
@@ -260,9 +267,18 @@ const IeltsRenderer = (() => {
     }
 
     function renderInstructionBlock(group, questions) {
-        const title = group.title || group.instructionTitle;
-        const instruction = group.instruction || group.instructionText;
-        const rule = group.rule;
+        const groupInstructionObj = typeof group.instruction === "object" && group.instruction !== null
+            ? group.instruction
+            : {};
+        
+        const instructionText = groupInstructionObj.bodyHtml 
+            || groupInstructionObj.body 
+            || groupInstructionObj.text 
+            || group.instructionText 
+            || (typeof group.instruction === "string" ? group.instruction : "");
+
+        const title = group.title || group.instructionTitle || groupInstructionObj.title;
+        const rule = group.rule || groupInstructionObj.rulesHtml || groupInstructionObj.rule;
         const type = groupQuestionType(group, questions);
         const tag = "d" + "iv";
         let html = "<" + tag + ' class="ielts-instruction-block">';
@@ -271,15 +287,15 @@ const IeltsRenderer = (() => {
             html += '<h3 class="ielts-group-title">' + escapeHtml(title) + "</h3>";
         }
 
-        if (instruction) {
+        if (instructionText) {
             html += '<p class="ielts-instruction-body">' +
-                highlightInstructionText(instruction) + "</p>";
+                highlightInstructionText(instructionText) + "</p>";
         }
 
         if (type === "true_false_not_given" || type === "yes_no_not_given") {
-            const instructionText = [instruction, rule].filter(Boolean).join(" ");
-            const hasChoiceDefinitions = /if\s+(?:the\s+statement|there\s+is|it\s+is|the\s+writer)/i.test(instructionText);
-            const hasVisibleChoicePrompt = choicePromptMatches(type, instructionText);
+            const combinedText = [instructionText, rule].filter(Boolean).join(" ");
+            const hasChoiceDefinitions = /if\s+(?:the\s+statement|there\s+is|it\s+is|the\s+writer)/i.test(combinedText);
+            const hasVisibleChoicePrompt = choicePromptMatches(type, combinedText);
             if (!hasChoiceDefinitions) {
                 html += renderChoiceInstructionBlock(type, questions, {
                     showPrompt: !hasVisibleChoicePrompt

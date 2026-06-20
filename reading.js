@@ -250,6 +250,6 @@ document.getElementById("closeModal");
 closeModal.addEventListener("click", () => {
 
     window.location.href =
-    "part1.html";
+    "/part1.html";
 
 });

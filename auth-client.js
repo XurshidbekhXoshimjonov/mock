@@ -195,7 +195,7 @@
         }
     }
 
-    function redirectIfAuthenticated(target = "profile.html") {
+    function redirectIfAuthenticated(target = "/profile.html") {
         if (getAuth()?.token) {
             window.location.href = target;
         }
@@ -823,8 +823,8 @@
 
     function renderLoggedOutAuth() {
         return `
-            <a class="ielts-navbar__button ielts-navbar__button--login" href="login.html">Login</a>
-            <a class="ielts-navbar__button ielts-navbar__button--signup" href="signup.html">Sign Up</a>
+            <a class="ielts-navbar__button ielts-navbar__button--login" href="/login.html">Login</a>
+            <a class="ielts-navbar__button ielts-navbar__button--signup" href="/signup.html">Sign Up</a>
         `;
     }
 
@@ -858,9 +858,9 @@
                 </button>
                 <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
-                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>My Profile</a>
-                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>My Results</a>
-                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.settings}</span>Settings</a>
+                    <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/profile.html"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>My Profile</a>
+                    <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/profile.html#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>My Results</a>
+                    <a class="ielts-account__link ${settingsActive ? "is-active" : ""}" href="/profile-settings.html"><span class="ielts-account__icon ielts-account__icon--settings">${MENU_ICONS.settings}</span>Settings</a>
                     <button class="ielts-account__logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
             </div>
@@ -890,7 +890,7 @@
                     await apiFetch("/api/auth/logout", { method: "POST" });
                 } catch {}
                 clearAuth();
-                window.location.href = "ieltsmock.html";
+                window.location.href = "/ieltsmock.html";
             });
         }
     }
@@ -964,18 +964,18 @@
         const active = currentPageName();
 
         host.innerHTML = `
-            <a class="ielts-navbar__brand" href="ieltsmock.html" aria-label="IELTSX home">
-                <img class="ielts-navbar__logo" src="Rasm-logo.png" alt="IELTSX.org">
+            <a class="ielts-navbar__brand" href="/ieltsmock.html" aria-label="IELTSX home">
+                <img class="ielts-navbar__logo" src="/Rasm-logo.png" alt="IELTSX.org">
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
                 <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
             </button>
             <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
-                <a class="${active === "home" ? "is-active" : ""}" href="ieltsmock.html">Home</a>
-                <a class="${active === "listening" ? "is-active" : ""}" href="listening.html">Listening</a>
-                <a class="${active === "reading" ? "is-active" : ""}" href="reading.html">Reading</a>
-                <a class="${active === "speaking" ? "is-active" : ""}" href="speaking.html">Speaking</a>
-                <a class="${active === "writing" ? "is-active" : ""}" href="writing.html">Writing</a>
+                <a class="${active === "home" ? "is-active" : ""}" href="/ieltsmock.html">Home</a>
+                <a class="${active === "listening" ? "is-active" : ""}" href="/listening.html">Listening</a>
+                <a class="${active === "reading" ? "is-active" : ""}" href="/reading.html">Reading</a>
+                <a class="${active === "speaking" ? "is-active" : ""}" href="/speaking.html">Speaking</a>
+                <a class="${active === "writing" ? "is-active" : ""}" href="/writing.html">Writing</a>
             </nav>
             <div class="ielts-navbar__auth">
                 ${authState.isAuthenticated ? renderLoggedInAuth(authState.auth) : renderLoggedOutAuth()}

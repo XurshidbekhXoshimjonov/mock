@@ -1,0 +1,791 @@
+{
+  "id": "ielts-full-listening-cdi-listening-s3",
+  "title": "IELTS CDI Full Listening Practice — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/ielts-full-listening-audio.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21 - 26",
+      "instruction": "Complete the flow-chart. Write the appropriate letter, A - H. Options: A. visuals B. sources C. time limit D. structure E. statistics F. main purpose G. aspect of the topic H. assessment guidelines Plan for preparing the presentation about globalisation",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27 - 28",
+      "instruction": "Choose TWO correct options. 27–28. Which TWO skills do the speakers hope to demonstrate improvement in?",
+      "questionNumbers": [
+        27,
+        28
+      ]
+    },
+    {
+      "title": "Questions 29 - 30",
+      "instruction": "Choose TWO correct options. 29–30. Which TWO of the following do the speakers agree would be suitable ways to begin their presentation?",
+      "questionNumbers": [
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "matching",
+      "question": "Select an appropriate\n\nto present about",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 22,
+      "type": "matching",
+      "question": "While preparing, refer regularly to the",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 23,
+      "type": "matching",
+      "question": "Include\n\nto support points",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 24,
+      "type": "matching",
+      "question": "Keep records of all",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "Ensure that the audience understands the",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Practise, bearing in mind the",
+      "options": [
+        {
+          "letter": "A",
+          "value": "A",
+          "text": "visuals",
+          "label": "A. visuals",
+          "html": "visuals"
+        },
+        {
+          "letter": "B",
+          "value": "B",
+          "text": "sources",
+          "label": "B. sources",
+          "html": "sources"
+        },
+        {
+          "letter": "C",
+          "value": "C",
+          "text": "time limit",
+          "label": "C. time limit",
+          "html": "time limit"
+        },
+        {
+          "letter": "D",
+          "value": "D",
+          "text": "structure",
+          "label": "D. structure",
+          "html": "structure"
+        },
+        {
+          "letter": "E",
+          "value": "E",
+          "text": "statistics",
+          "label": "E. statistics",
+          "html": "statistics"
+        },
+        {
+          "letter": "F",
+          "value": "F",
+          "text": "main purpose",
+          "label": "F. main purpose",
+          "html": "main purpose"
+        },
+        {
+          "letter": "G",
+          "value": "G",
+          "text": "aspect of the topic",
+          "label": "G. aspect of the topic",
+          "html": "aspect of the topic"
+        },
+        {
+          "letter": "H",
+          "value": "H",
+          "text": "assessment guidelines",
+          "label": "H. assessment guidelines",
+          "html": "assessment guidelines"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A. speaking clearly",
+          "html": "speaking clearly"
+        },
+        {
+          "value": "B",
+          "label": "B. conducting original research",
+          "html": "conducting original research"
+        },
+        {
+          "value": "C",
+          "label": "C. making the content seem interesting",
+          "html": "making the content seem interesting"
+        },
+        {
+          "value": "D",
+          "label": "D. dealing with questions from the audience",
+          "html": "dealing with questions from the audience"
+        },
+        {
+          "value": "E",
+          "label": "E. demonstrating a good understanding of the topic",
+          "html": "demonstrating a good understanding of the topic"
+        }
+      ],
+      "answer": "C | E"
+    },
+    {
+      "number": 28,
+      "type": "multi_select",
+      "question": "",
+      "options": [],
+      "answer": "C | E"
+    },
+    {
+      "number": 29,
+      "type": "multi_select",
+      "question": "",
+      "options": [
+        {
+          "value": "A",
+          "label": "A. telling a joke",
+          "html": "telling a joke"
+        },
+        {
+          "value": "B",
+          "label": "B. using a picture",
+          "html": "using a picture"
+        },
+        {
+          "value": "C",
+          "label": "C. reading a quotation",
+          "html": "reading a quotation"
+        },
+        {
+          "value": "D",
+          "label": "D. showing a video clip",
+          "html": "showing a video clip"
+        },
+        {
+          "value": "E",
+          "label": "E. asking the audience a question",
+          "html": "asking the audience a question"
+        }
+      ],
+      "answer": "B | C"
+    },
+    {
+      "number": 30,
+      "type": "multi_select",
+      "question": "",
+      "options": [],
+      "answer": "B | C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-full-listening-cdi",
+  "createdAt": "2026-06-20T02:17:10.853Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/ielts-full-listening-audio.mp3",
+      "instruction": "",
+      "answerText": "21: G\n22: H\n23: E\n24: B\n25: D\n26: C\n27: C | E\n28: C | E\n29: B | C\n30: B | C",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "matching",
+          "questionRange": "Questions 21 - 26",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the flow-chart. Write the appropriate letter, A - H. Options: A. visuals B. sources C. time limit D. structure E. statistics F. main purpose G. aspect of the topic H. assessment guidelines Plan for preparing the presentation about globalisation",
+          "options": [
+            {
+              "letter": "A",
+              "text": "visuals"
+            },
+            {
+              "letter": "B",
+              "text": "sources"
+            },
+            {
+              "letter": "C",
+              "text": "time limit"
+            },
+            {
+              "letter": "D",
+              "text": "structure"
+            },
+            {
+              "letter": "E",
+              "text": "statistics"
+            },
+            {
+              "letter": "F",
+              "text": "main purpose"
+            },
+            {
+              "letter": "G",
+              "text": "aspect of the topic"
+            },
+            {
+              "letter": "H",
+              "text": "assessment guidelines"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Select an appropriate {{21}} to present about",
+            "While preparing, refer regularly to the {{22}}",
+            "Include {{23}} to support points",
+            "Keep records of all {{24}}",
+            "Ensure that the audience understands the {{25}}",
+            "Practise, bearing in mind the {{26}}"
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Select an appropriate\n\nto present about",
+              "text": "Select an appropriate\n\nto present about",
+              "answer": "G"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "While preparing, refer regularly to the",
+              "text": "While preparing, refer regularly to the",
+              "answer": "H"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Include\n\nto support points",
+              "text": "Include\n\nto support points",
+              "answer": "E"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Keep records of all",
+              "text": "Keep records of all",
+              "answer": "B"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Ensure that the audience understands the",
+              "text": "Ensure that the audience understands the",
+              "answer": "D"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Practise, bearing in mind the",
+              "text": "Practise, bearing in mind the",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "group-3-27",
+          "type": "multiple_select",
+          "questionRange": "Questions 27 - 28",
+          "title": "",
+          "example": "",
+          "instruction": "Choose TWO correct options. 27–28. Which TWO skills do the speakers hope to demonstrate improvement in?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "speaking clearly"
+            },
+            {
+              "letter": "B",
+              "text": "conducting original research"
+            },
+            {
+              "letter": "C",
+              "text": "making the content seem interesting"
+            },
+            {
+              "letter": "D",
+              "text": "dealing with questions from the audience"
+            },
+            {
+              "letter": "E",
+              "text": "demonstrating a good understanding of the topic"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A. speaking clearly",
+                  "html": "speaking clearly"
+                },
+                {
+                  "value": "B",
+                  "label": "B. conducting original research",
+                  "html": "conducting original research"
+                },
+                {
+                  "value": "C",
+                  "label": "C. making the content seem interesting",
+                  "html": "making the content seem interesting"
+                },
+                {
+                  "value": "D",
+                  "label": "D. dealing with questions from the audience",
+                  "html": "dealing with questions from the audience"
+                },
+                {
+                  "value": "E",
+                  "label": "E. demonstrating a good understanding of the topic",
+                  "html": "demonstrating a good understanding of the topic"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "multi_select",
+              "answer": "C | E"
+            }
+          ],
+          "questionNumber": 27,
+          "answerQuestions": [
+            {
+              "questionNumber": 28
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Choose TWO correct options. 27–28. Which TWO skills do the speakers hope to demonstrate improvement in?"
+        },
+        {
+          "id": "group-3-29",
+          "type": "multiple_select",
+          "questionRange": "Questions 29 - 30",
+          "title": "",
+          "example": "",
+          "instruction": "Choose TWO correct options. 29–30. Which TWO of the following do the speakers agree would be suitable ways to begin their presentation?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "telling a joke"
+            },
+            {
+              "letter": "B",
+              "text": "using a picture"
+            },
+            {
+              "letter": "C",
+              "text": "reading a quotation"
+            },
+            {
+              "letter": "D",
+              "text": "showing a video clip"
+            },
+            {
+              "letter": "E",
+              "text": "asking the audience a question"
+            }
+          ],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "questions": [
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "",
+              "text": "",
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A. telling a joke",
+                  "html": "telling a joke"
+                },
+                {
+                  "value": "B",
+                  "label": "B. using a picture",
+                  "html": "using a picture"
+                },
+                {
+                  "value": "C",
+                  "label": "C. reading a quotation",
+                  "html": "reading a quotation"
+                },
+                {
+                  "value": "D",
+                  "label": "D. showing a video clip",
+                  "html": "showing a video clip"
+                },
+                {
+                  "value": "E",
+                  "label": "E. asking the audience a question",
+                  "html": "asking the audience a question"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | C"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "multi_select",
+              "answer": "B | C"
+            }
+          ],
+          "questionNumber": 29,
+          "answerQuestions": [
+            {
+              "questionNumber": 30
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Choose TWO correct options. 29–30. Which TWO of the following do the speakers agree would be suitable ways to begin their presentation?"
+        }
+      ]
+    }
+  ]
+}

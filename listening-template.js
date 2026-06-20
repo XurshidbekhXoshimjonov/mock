@@ -349,7 +349,7 @@ async function loadListeningTest() {
         return window.ListeningComponents.sampleListeningTest();
     }
 
-    const response = await fetch(`/api/listening-tests/${encodeURIComponent(listeningTestId)}`);
+    const response = await fetch(`/api/listening-tests/${encodeURIComponent(listeningTestId)}?t=${Date.now()}`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -376,6 +376,10 @@ async function loadListeningTest() {
 
 loadListeningTest()
     .then((test) => {
+        if (test.part === "full" && test.sourceFullTestId) {
+            window.location.replace(`/full-test-player?id=${encodeURIComponent(test.sourceFullTestId)}&skill=listening`);
+            return;
+        }
         activeListeningTest = test;
         document.title = `${test.title || "IELTS"} - Listening`;
         listeningRoot.innerHTML = window.ListeningComponents.ListeningTestPage(test);

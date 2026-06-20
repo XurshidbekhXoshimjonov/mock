@@ -6,6 +6,24 @@
       },
       "results": [
         {
+          "id": "1781866528220-99ae1d1b",
+          "testId": "1781866528103-manual-e2e-test-listening",
+          "title": "Manual E2E Test Listening",
+          "type": "practice",
+          "skill": "listening",
+          "part": "full",
+          "correct": 3,
+          "total": 12,
+          "accuracy": 25,
+          "band": 4.5,
+          "practiceUrl": "",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-06-19T10:55:28.220Z"
+        },
+        {
           "id": "1780621746676-4c39a421",
           "testId": "1780589113846-full-cdi-reading-test",
           "title": "Full CDI Reading Test",
@@ -230,6 +248,941 @@
         "targetBand": 8.5
       },
       "results": [
+        {
+          "id": "1781922074911-cf6f5102",
+          "testId": "practice-listening",
+          "title": "IELTS CDI Listening Practice",
+          "type": "full-test",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 2.5,
+          "practiceUrl": "/listening/practice-listening",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [
+            {
+              "number": 1,
+              "userAnswer": "",
+              "correctAnswer": "no",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 2,
+              "userAnswer": "",
+              "correctAnswer": "amazing weather",
+              "alternatives": [
+                "weather"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 3,
+              "userAnswer": "",
+              "correctAnswer": "Town Hall",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 4,
+              "userAnswer": "",
+              "correctAnswer": "variety",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 5,
+              "userAnswer": "",
+              "correctAnswer": "plane",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 6,
+              "userAnswer": "",
+              "correctAnswer": "older than 40",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 7,
+              "userAnswer": "",
+              "correctAnswer": "mid-range",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 8,
+              "userAnswer": "",
+              "correctAnswer": "tourism",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 9,
+              "userAnswer": "",
+              "correctAnswer": "computer programmer",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 10,
+              "userAnswer": "",
+              "correctAnswer": "good value",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 11,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 12,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 13,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 14,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 15,
+              "userAnswer": "",
+              "correctAnswer": "teaching methods",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 16,
+              "userAnswer": "",
+              "correctAnswer": "accommodation",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 17,
+              "userAnswer": "",
+              "correctAnswer": "flats",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 18,
+              "userAnswer": "",
+              "correctAnswer": "disco",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 19,
+              "userAnswer": "",
+              "correctAnswer": "international evening",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 20,
+              "userAnswer": "",
+              "correctAnswer": "2 minutes",
+              "alternatives": [
+                "two minutes"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 21,
+              "userAnswer": "",
+              "correctAnswer": "Welfare State",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 22,
+              "userAnswer": "",
+              "correctAnswer": "too long",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 23,
+              "userAnswer": "",
+              "correctAnswer": "in perspective",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 24,
+              "userAnswer": "",
+              "correctAnswer": "oversimplifies",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 25,
+              "userAnswer": "",
+              "correctAnswer": "Political Theory",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 26,
+              "userAnswer": "",
+              "correctAnswer": "not relevant",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 27,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 28,
+              "userAnswer": "",
+              "correctAnswer": "S",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 29,
+              "userAnswer": "",
+              "correctAnswer": "P",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 30,
+              "userAnswer": "",
+              "correctAnswer": "P",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 31,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 32,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 33,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 34,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 35,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 36,
+              "userAnswer": "",
+              "correctAnswer": "market",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 37,
+              "userAnswer": "",
+              "correctAnswer": "interviews",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 38,
+              "userAnswer": "",
+              "correctAnswer": "useless",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 39,
+              "userAnswer": "",
+              "correctAnswer": "photographs",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 40,
+              "userAnswer": "",
+              "correctAnswer": "crime",
+              "alternatives": [],
+              "status": "unanswered"
+            }
+          ],
+          "completedAt": "2026-06-20T02:21:14.911Z"
+        },
+        {
+          "id": "1781921471966-39bbb2bd",
+          "testId": "ielts-full-listening-cdi",
+          "title": "IELTS CDI Full Listening Practice",
+          "type": "full-test",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 2.5,
+          "practiceUrl": "/listening/ielts-cdi-full-listening-practice",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [
+            {
+              "number": 1,
+              "userAnswer": "",
+              "correctAnswer": "7:30",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 2,
+              "userAnswer": "",
+              "correctAnswer": "Tuesday",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 3,
+              "userAnswer": "",
+              "correctAnswer": "15",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 4,
+              "userAnswer": "",
+              "correctAnswer": "Cavendish",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 5,
+              "userAnswer": "",
+              "correctAnswer": "43",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 6,
+              "userAnswer": "",
+              "correctAnswer": "0188 639 423",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 7,
+              "userAnswer": "",
+              "correctAnswer": "fitness",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 8,
+              "userAnswer": "",
+              "correctAnswer": "shoes",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 9,
+              "userAnswer": "",
+              "correctAnswer": "towel",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 10,
+              "userAnswer": "",
+              "correctAnswer": "China",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 11,
+              "userAnswer": "",
+              "correctAnswer": "H",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 12,
+              "userAnswer": "",
+              "correctAnswer": "F",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 13,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 14,
+              "userAnswer": "",
+              "correctAnswer": "G",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 15,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 16,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 17,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 18,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 19,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 20,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 21,
+              "userAnswer": "",
+              "correctAnswer": "G",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 22,
+              "userAnswer": "",
+              "correctAnswer": "H",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 23,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 24,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 25,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 26,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 27,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [
+                "E"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 28,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [
+                "E"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 29,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [
+                "C"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 30,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [
+                "C"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 31,
+              "userAnswer": "",
+              "correctAnswer": "calendars",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 32,
+              "userAnswer": "",
+              "correctAnswer": "sun",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 33,
+              "userAnswer": "",
+              "correctAnswer": "Egypt",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 34,
+              "userAnswer": "",
+              "correctAnswer": "stone",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 35,
+              "userAnswer": "",
+              "correctAnswer": "cold",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 36,
+              "userAnswer": "",
+              "correctAnswer": "sand",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 37,
+              "userAnswer": "",
+              "correctAnswer": "bell",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 38,
+              "userAnswer": "",
+              "correctAnswer": "lighter",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 39,
+              "userAnswer": "",
+              "correctAnswer": "portable",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 40,
+              "userAnswer": "",
+              "correctAnswer": "king",
+              "alternatives": [],
+              "status": "unanswered"
+            }
+          ],
+          "completedAt": "2026-06-20T02:11:11.966Z"
+        },
+        {
+          "id": "1781785023931-f8ba50e9",
+          "testId": "1781714484712-Full_Listening_CDI._2_",
+          "title": "Test 3",
+          "type": "full-test",
+          "skill": "listening",
+          "part": "full",
+          "correct": 0,
+          "total": 40,
+          "accuracy": 0,
+          "band": 2.5,
+          "practiceUrl": "/listening/test-3",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [
+            {
+              "number": 1,
+              "userAnswer": "",
+              "correctAnswer": "Dress Your Best",
+              "alternatives": [
+                "Dress your best"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 2,
+              "userAnswer": "",
+              "correctAnswer": "Kirby",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 3,
+              "userAnswer": "",
+              "correctAnswer": "09356788545",
+              "alternatives": [
+                "09356 788545"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 4,
+              "userAnswer": "",
+              "correctAnswer": "extra charge",
+              "alternatives": [
+                "charge"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 5,
+              "userAnswer": "",
+              "correctAnswer": "American Express",
+              "alternatives": [
+                "american express"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 6,
+              "userAnswer": "",
+              "correctAnswer": "black",
+              "alternatives": [
+                "dark"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 7,
+              "userAnswer": "",
+              "correctAnswer": "glass desk",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 8,
+              "userAnswer": "",
+              "correctAnswer": "TG586",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 9,
+              "userAnswer": "",
+              "correctAnswer": "yellow",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 10,
+              "userAnswer": "",
+              "correctAnswer": "coffee table",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 11,
+              "userAnswer": "",
+              "correctAnswer": "plan",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 12,
+              "userAnswer": "",
+              "correctAnswer": "on foot",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 13,
+              "userAnswer": "",
+              "correctAnswer": "sensible clothes",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 14,
+              "userAnswer": "",
+              "correctAnswer": "weather",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 15,
+              "userAnswer": "",
+              "correctAnswer": "volunteers",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 16,
+              "userAnswer": "",
+              "correctAnswer": "accidents",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 17,
+              "userAnswer": "",
+              "correctAnswer": "finish line",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 18,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 19,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 20,
+              "userAnswer": "",
+              "correctAnswer": "E",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 21,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 22,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 23,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 24,
+              "userAnswer": "",
+              "correctAnswer": "C",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 25,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 26,
+              "userAnswer": "",
+              "correctAnswer": "B",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 27,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [
+                "E"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 28,
+              "userAnswer": "",
+              "correctAnswer": "D",
+              "alternatives": [
+                "E"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 29,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [
+                "C"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 30,
+              "userAnswer": "",
+              "correctAnswer": "A",
+              "alternatives": [
+                "C"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 31,
+              "userAnswer": "",
+              "correctAnswer": "rain shadow",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 32,
+              "userAnswer": "",
+              "correctAnswer": "inches",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 33,
+              "userAnswer": "",
+              "correctAnswer": "other minerals",
+              "alternatives": [
+                "minerals"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 34,
+              "userAnswer": "",
+              "correctAnswer": "collect",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 35,
+              "userAnswer": "",
+              "correctAnswer": "green stem",
+              "alternatives": [
+                "stem"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 36,
+              "userAnswer": "",
+              "correctAnswer": "expand",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 37,
+              "userAnswer": "",
+              "correctAnswer": "white hairs",
+              "alternatives": [],
+              "status": "unanswered"
+            },
+            {
+              "number": 38,
+              "userAnswer": "",
+              "correctAnswer": "sharp thorns",
+              "alternatives": [
+                "thorns"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 39,
+              "userAnswer": "",
+              "correctAnswer": "very tough",
+              "alternatives": [
+                "tough"
+              ],
+              "status": "unanswered"
+            },
+            {
+              "number": 40,
+              "userAnswer": "",
+              "correctAnswer": "plastic",
+              "alternatives": [],
+              "status": "unanswered"
+            }
+          ],
+          "completedAt": "2026-06-18T12:17:03.930Z"
+        },
         {
           "id": "1781712914612-502d041a",
           "testId": "1780622717280-ielts-listening-practice-test-1-part-1",
@@ -963,6 +1916,18 @@
         }
       ],
       "accountActivities": [
+        {
+          "id": "1781916709833-f63b59",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-20T00:51:49.828Z"
+        },
+        {
+          "id": "1781779507324-0dc1c0",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-18T10:45:07.290Z"
+        },
         {
           "id": "1781157814804-b61322",
           "type": "account",
