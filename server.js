@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const fs = require("fs");
-const pdf = require("pdf-parse");
 const User = require("./models/User");
 const { createAuthToken, verifyAuthToken, publicUser, isAdminEmail } = require("./lib/auth");
 const { createUserStore } = require("./lib/user-store");
@@ -26,8 +25,11 @@ try {
 const app = express();
 
 const ROOT_DIR = __dirname;
-const UPLOAD_DIR = path.join(ROOT_DIR, "uploads");
-const DATA_DIR = path.join(ROOT_DIR, "data");
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const RUNTIME_WRITE_DIR = IS_VERCEL ? path.join("/tmp", "ieltsx") : ROOT_DIR;
+const BUNDLED_DATA_DIR = path.join(ROOT_DIR, "data");
+const UPLOAD_DIR = path.join(RUNTIME_WRITE_DIR, "uploads");
+const DATA_DIR = IS_VERCEL ? path.join(RUNTIME_WRITE_DIR, "data") : BUNDLED_DATA_DIR;
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
@@ -67,15 +69,45 @@ const GOOGLE_TRANSLATE_CLIENT_ENABLED = Boolean(
 let translateClient = null;
 let translateConfigWarningShown = false;
 const vocabularyLookupRequests = new Map();
+let pdfParser = null;
 
-fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-fs.mkdirSync(DATA_DIR, { recursive: true });
-fs.mkdirSync(READING_TESTS_DIR, { recursive: true });
-fs.mkdirSync(LISTENING_TESTS_DIR, { recursive: true });
-fs.mkdirSync(FULL_TESTS_DIR, { recursive: true });
-fs.mkdirSync(AUDIO_UPLOAD_DIR, { recursive: true });
-fs.mkdirSync(LISTENING_IMAGE_UPLOAD_DIR, { recursive: true });
-fs.mkdirSync(path.join(UPLOAD_DIR, "ielts-import"), { recursive: true });
+function getPdfParser() {
+    if (!pdfParser) {
+        pdfParser = require("pdf-parse");
+    }
+
+    return pdfParser;
+}
+
+function ensureRuntimeDir(dirPath) {
+    try {
+        fs.mkdirSync(dirPath, { recursive: true });
+    } catch (error) {
+        console.warn(`Could not create runtime directory ${dirPath}:`, error.message);
+    }
+}
+
+function bootstrapRuntimeDataDir() {
+    if (!IS_VERCEL || !fs.existsSync(BUNDLED_DATA_DIR) || fs.existsSync(USERS_FILE)) {
+        return;
+    }
+
+    try {
+        fs.cpSync(BUNDLED_DATA_DIR, DATA_DIR, { recursive: true });
+    } catch (error) {
+        console.warn("Could not copy bundled data to runtime storage:", error.message);
+    }
+}
+
+ensureRuntimeDir(UPLOAD_DIR);
+ensureRuntimeDir(DATA_DIR);
+bootstrapRuntimeDataDir();
+ensureRuntimeDir(READING_TESTS_DIR);
+ensureRuntimeDir(LISTENING_TESTS_DIR);
+ensureRuntimeDir(FULL_TESTS_DIR);
+ensureRuntimeDir(AUDIO_UPLOAD_DIR);
+ensureRuntimeDir(LISTENING_IMAGE_UPLOAD_DIR);
+ensureRuntimeDir(path.join(UPLOAD_DIR, "ielts-import"));
 
 function safeFileName(fileName) {
     return fileName
@@ -2535,7 +2567,7 @@ function detectReadingStructure(text) {
 }
 
 async function extractReadingPdf(filePath) {
-    const data = await pdf(fs.readFileSync(filePath));
+    const data = await getPdfParser()(fs.readFileSync(filePath));
     const extractedText = cleanText(data.text);
 
     if (!extractedText) {
@@ -3835,14 +3867,19 @@ app.use([
     "/admin/users"
 ], requireAdmin);
 
+app.use("/uploads", express.static(UPLOAD_DIR));
 app.use(express.static(ROOT_DIR));
 
 const PORT = process.env.PORT || 30004;
 
-app.listen(PORT, () => {
-    console.info(`Server running on http://localhost:${PORT}`);
+if (!IS_VERCEL) {
+    app.listen(PORT, () => {
+        console.info(`Server running on http://localhost:${PORT}`);
 
-    if (process.env.BOT_TOKEN && process.env.ADMIN_ID) {
-        sendTelegramMessage("IELTSX server started").catch(() => {});
-    }
-});
+        if (process.env.BOT_TOKEN && process.env.ADMIN_ID) {
+            sendTelegramMessage("IELTSX server started").catch(() => {});
+        }
+    });
+}
+
+module.exports = app;
