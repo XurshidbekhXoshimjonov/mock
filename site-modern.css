@@ -9,6 +9,16 @@
     --ieltsx-border: #dbe3ef;
 }
 
+html.dark-theme,
+body.dark-theme {
+    --ieltsx-navy: #1e293b;
+    --ieltsx-blue: #3b82f6;
+    --ieltsx-indigo: #6366f1;
+    --ieltsx-text: #f1f5f9;
+    --ieltsx-muted: #94a3b8;
+    --ieltsx-border: rgba(255, 255, 255, 0.08);
+}
+
 html {
     overflow-x: hidden;
 }
@@ -2265,3 +2275,208 @@ body:not(.site-ready) .public-shell {
 *::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+/* ==========================================
+   Dark Theme General Styles & Overrides
+   ========================================== */
+
+body.dark-theme.public-page {
+    background:
+        linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.1) 38%, rgba(5, 5, 21, 0) 70%),
+        linear-gradient(180deg, #050515 0%, #03030d 100%);
+    color: var(--ieltsx-text);
+}
+
+body.dark-theme .hero-modern__eyebrow {
+    background: #0d0e25;
+    border-color: rgba(59, 130, 246, 0.25);
+    color: #60a5fa;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-theme .practice-card,
+body.dark-theme .card,
+body.dark-theme .test-card {
+    background:
+        linear-gradient(145deg, rgba(13, 14, 37, 0.95), rgba(8, 8, 24, 0.90)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.08));
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+    color: var(--ieltsx-text);
+}
+
+body.dark-theme .practice-card::after,
+body.dark-theme .card::after,
+body.dark-theme .test-card::after {
+    background: radial-gradient(circle at 25% 20%, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.2) 46%, transparent 72%);
+}
+
+body.dark-theme .practice-card:hover,
+body.dark-theme .card:hover,
+body.dark-theme .test-card:hover {
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 24px 58px rgba(59, 130, 246, 0.18), 0 18px 42px rgba(99, 102, 241, 0.12);
+}
+
+body.dark-theme .practice-card__footer {
+    color: #60a5fa;
+}
+
+body.dark-theme .practice-card:hover .practice-card__footer,
+body.dark-theme .card:hover .practice-card__footer,
+body.dark-theme .test-card:hover .practice-card__footer {
+    color: #3b82f6;
+}
+
+body.dark-theme .test-list-card,
+body.dark-theme .reading-test-card,
+body.dark-theme .reading-test-list-card,
+body.dark-theme .listening-test-list-card {
+    background:
+        linear-gradient(145deg, rgba(13, 14, 37, 0.95), rgba(8, 8, 24, 0.90)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.08));
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+    color: var(--ieltsx-text);
+}
+
+body.dark-theme .test-list-card::after,
+body.dark-theme .reading-test-card::after,
+body.dark-theme .reading-test-list-card::after,
+body.dark-theme .listening-test-list-card::after {
+    background: radial-gradient(circle at 25% 20%, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.2) 46%, transparent 72%);
+}
+
+body.dark-theme .test-list-card:hover,
+body.dark-theme .reading-test-card:hover,
+body.dark-theme .reading-test-list-card:hover,
+body.dark-theme .listening-test-list-card:hover {
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 24px 58px rgba(59, 130, 246, 0.18), 0 18px 42px rgba(99, 102, 241, 0.12);
+}
+
+body.dark-theme .test-card-badge {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+body.dark-theme .test-card-stats {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+
+body.dark-theme .test-card-stats strong {
+    color: #f1f5f9;
+}
+
+body.dark-theme .test-card-button {
+    color: #60a5fa;
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .test-list-card:hover .test-card-button,
+body.dark-theme .reading-test-card:hover .test-card-button,
+body.dark-theme .reading-test-list-card:hover .test-card-button,
+body.dark-theme .listening-test-list-card:hover .test-card-button {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+body.dark-theme .test-list-eyebrow {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+body.dark-theme .test-list-meta {
+    color: #94a3b8;
+}
+
+body.dark-theme .test-list-meta strong {
+    color: #f1f5f9;
+}
+
+body.dark-theme *::-webkit-scrollbar-track {
+    background: #08081b;
+}
+
+body.dark-theme *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    border-color: #08081b;
+}
+
+body.dark-theme.public-page .home-footer {
+    background: #050515 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #94a3b8 !important;
+}
+
+body.dark-theme .card-icon,
+body.dark-theme .practice-card__icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.2)) !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
+    color: #60a5fa !important;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12) !important;
+}
+
+body.dark-theme .practice-card:hover .practice-card__icon,
+body.dark-theme .card:hover .card-icon,
+body.dark-theme .test-card:hover .practice-card__icon {
+    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Fix test list landing page header, meta, and stats boxes in dark mode */
+body.dark-theme .test-list-page-header {
+    background: linear-gradient(145deg, rgba(13, 14, 37, 0.95), rgba(8, 8, 24, 0.90)),
+                linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.08)) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-theme .test-list-page-header h1 {
+    color: #ffffff !important;
+}
+
+body.dark-theme .test-list-page-header p {
+    color: #94a3b8 !important;
+}
+
+body.dark-theme .test-list-meta span {
+    background: #141635 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94a3b8 !important;
+}
+
+body.dark-theme .test-list-meta strong {
+    color: #ffffff !important;
+}
+
+body.dark-theme .test-card-stats span {
+    background: #141635 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94a3b8 !important;
+}
+
+body.dark-theme .test-card-stats strong {
+    color: #ffffff !important;
+}
+
+body.dark-theme .test-card-icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.2)) !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
+    color: #60a5fa !important;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12) !important;
+}
+
+body.dark-theme .test-list-card:hover .test-card-icon,
+body.dark-theme .reading-test-card:hover .test-card-icon,
+body.dark-theme .reading-test-list-card:hover .test-card-icon,
+body.dark-theme .listening-test-list-card:hover .test-card-icon {
+    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3) !important;
+}
+

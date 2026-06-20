@@ -2843,6 +2843,10 @@ app.get("/admin", requireAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin.html"));
 });
 
+app.get("/admin/users", requireAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-users.html"));
+});
+
 app.get("/admin-reading", requireAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-reading.html"));
 });
@@ -2992,6 +2996,39 @@ app.put("/api/profile/preferences", requireUser, (req, res) => {
     } catch (error) {
         res.status(error.statusCode || 500).json({
             error: error.message || "Could not update profile preferences"
+        });
+    }
+});
+
+app.put("/api/profile", requireUser, async (req, res) => {
+    try {
+        const { name } = req.body || {};
+        if (!name || typeof name !== "string" || !name.trim()) {
+            return res.status(400).json({ error: "Name is required" });
+        }
+
+        const userId = req.user?.id || req.account?._id || req.account?.id;
+        console.log(`[PROFILE UPDATE] Updating user ${userId} name to "${name.trim()}"`);
+
+        const updatedUser = await userStore.updateUser(userId, {
+            name: name.trim()
+        });
+
+        if (!updatedUser) {
+            console.warn(`[PROFILE UPDATE] User not found or failed to update: ${userId}`);
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        console.info(`[PROFILE UPDATE] User ${userId} name updated successfully`);
+
+        res.json({
+            success: true,
+            user: publicUser(updatedUser)
+        });
+    } catch (error) {
+        console.error("[PROFILE UPDATE] Error updating profile name:", error);
+        res.status(error.statusCode || 500).json({
+            error: error.message || "Could not update profile"
         });
     }
 });
@@ -3415,6 +3452,83 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
     }
 });
 
+app.get("/api/admin/users", requireAdmin, async (req, res) => {
+    try {
+        const users = await userStore.getAllUsers();
+        const formatted = users.map((user) => {
+            const email = String(user.email || "").trim().toLowerCase();
+            const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
+            const isPremium = !!user.isPremium;
+            return {
+                id: String(user._id || user.id),
+                memberIdNumber: user.memberIdNumber || null,
+                memberId: user.memberId || null,
+                username: user.username,
+                name: user.name || user.username || "",
+                email: user.email,
+                role: uRole,
+                plan: user.plan || "free",
+                isPremium: isPremium,
+                premiumUntil: user.premiumUntil || null,
+                createdAt: user.createdAt || null,
+                lastLogin: user.lastLogin || null
+            };
+        });
+        const sorted = formatted.sort((a, b) => (a.memberIdNumber || 99999) - (b.memberIdNumber || 99999));
+        res.json(sorted);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Could not load admin users" });
+    }
+});
+
+app.get("/api/admin/stats/users", requireAdmin, async (req, res) => {
+    try {
+        const users = await userStore.getAllUsers();
+        const startOfToday = new Date();
+        startOfToday.setHours(0, 0, 0, 0);
+
+        let totalUsers = 0;
+        let todayUsers = 0;
+        let premiumUsers = 0;
+        let freeUsers = 0;
+        let adminUsers = 0;
+
+        for (const user of users) {
+            totalUsers++;
+            const email = String(user.email || "").trim().toLowerCase();
+            const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
+            
+            if (uRole === "admin") {
+                adminUsers++;
+            }
+
+            const isPremium = !!user.isPremium;
+            if (isPremium) {
+                premiumUsers++;
+            } else {
+                freeUsers++;
+            }
+
+            const createdDate = user.createdAt ? new Date(user.createdAt) : null;
+            if (createdDate && createdDate >= startOfToday) {
+                todayUsers++;
+            }
+        }
+
+        res.json({
+            totalUsers,
+            todayUsers,
+            premiumUsers,
+            freeUsers,
+            adminUsers
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Could not load admin user stats" });
+    }
+});
+
 app.get("/api/admin/recent-tests", requireAdmin, (req, res) => {
     try {
         const limit = Math.min(Math.max(Number(req.query.limit) || 10, 1), 50);
@@ -3498,9 +3612,10 @@ app.post("/signup", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await userStore.createUser({
             username,
+            name: username,
             email,
             passwordHash: hashedPassword,
-            role: isAdminEmail(email) ? "admin" : "student"
+            role: isAdminEmail(email) ? "admin" : "user"
         });
         const token = createAuthToken(newUser);
         userProgressStore.recordAccountActivity(newUser._id || newUser.id, "Account created");
@@ -3553,6 +3668,10 @@ app.post("/login", async (req, res) => {
                 message: "Invalid email or password"
             });
         }
+
+        const lastLogin = new Date();
+        user.lastLogin = lastLogin;
+        await userStore.updateUser(user._id || user.id, { lastLogin });
 
         const token = createAuthToken(user);
         userProgressStore.recordAccountActivity(user._id || user.id, "Signed in");
@@ -3609,6 +3728,84 @@ app.post("/api/auth/logout", (req, res) => {
     res.json({ success: true, message: "Logged out" });
 });
 
+async function runUserMigration() {
+    console.info("Checking if user ID migration is needed...");
+    
+    const isMongo = mongoose.connection.readyState === 1;
+    
+    if (isMongo) {
+        try {
+            const User = require("./models/User");
+            const countMissing = await User.countDocuments({ memberIdNumber: { $exists: false } });
+            if (countMissing > 0) {
+                console.info(`Found ${countMissing} users without memberId. Starting migration...`);
+                
+                const allDbUsers = await User.find({});
+                let adminUser = allDbUsers.find(u => u.role === "admin" || isAdminEmail(u.email));
+                
+                if (adminUser) {
+                    await User.updateOne({ _id: adminUser._id }, { $set: { memberIdNumber: 1, memberId: "001" } });
+                    console.info(`Migrated admin user: ${adminUser.email || adminUser.username} to ID 001`);
+                }
+                
+                const nonAdmins = allDbUsers.filter(u => u._id.toString() !== (adminUser?._id.toString() || ""));
+                nonAdmins.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+                
+                let nextNum = 2;
+                for (const user of nonAdmins) {
+                    const memberId = String(nextNum).padStart(3, "0");
+                    await User.updateOne({ _id: user._id }, { $set: { memberIdNumber: nextNum, memberId } });
+                    console.info(`Migrated user: ${user.email || user.username} to ID ${memberId}`);
+                    nextNum++;
+                }
+                
+                console.info("MongoDB user ID migration finished.");
+            } else {
+                console.info("MongoDB user ID migration not needed.");
+            }
+        } catch (err) {
+            console.error("MongoDB migration failed:", err);
+        }
+    } else {
+        const usersFile = path.join(ROOT_DIR, "data", "users.json");
+        if (fs.existsSync(usersFile)) {
+            try {
+                const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
+                const needsMigration = users.some(u => !u.memberIdNumber);
+                if (needsMigration) {
+                    console.info("Starting local users JSON ID migration...");
+                    let adminUser = users.find(u => u.role === "admin" || isAdminEmail(u.email));
+                    if (adminUser) {
+                        adminUser.memberIdNumber = 1;
+                        adminUser.memberId = "001";
+                    }
+                    
+                    const nonAdmins = users.filter(u => u.id !== (adminUser?.id || ""));
+                    nonAdmins.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+                    
+                    let nextNum = 2;
+                    for (const user of nonAdmins) {
+                        user.memberIdNumber = nextNum;
+                        user.memberId = String(nextNum).padStart(3, "0");
+                        nextNum++;
+                    }
+                    
+                    const migrated = [];
+                    if (adminUser) migrated.push(adminUser);
+                    migrated.push(...nonAdmins);
+                    
+                    fs.writeFileSync(usersFile, JSON.stringify(migrated, null, 2), "utf8");
+                    console.info("Local users JSON ID migration finished.");
+                } else {
+                    console.info("Local users JSON ID migration not needed.");
+                }
+            } catch (err) {
+                console.error("Local user migration failed:", err);
+            }
+        }
+    }
+}
+
 if (process.env.MONGO_URI) {
     mongoose.connect(process.env.MONGO_URI, {
         dbName: process.env.MONGO_DB_NAME || "ieltsmock",
@@ -3616,21 +3813,26 @@ if (process.env.MONGO_URI) {
     })
         .then(() => {
             console.info("MongoDB connected — using Atlas for accounts");
+            runUserMigration().catch(err => console.error("Migration error:", err));
         })
         .catch((error) => {
             console.warn("MongoDB connection error:", error.message);
             console.info("Using local file storage for accounts: data/users.json");
             console.info("Atlas fix: Network Access -> Add IP Address -> Allow Access from Anywhere (0.0.0.0/0) for development");
+            runUserMigration().catch(err => console.error("Migration error:", err));
         });
 } else {
     console.info("MONGO_URI is not set - using local file storage: data/users.json");
+    runUserMigration().catch(err => console.error("Migration error:", err));
 }
 
 app.use([
     "/admin.html",
     "/admin-reading.html",
     "/admin-listening.html",
-    "/admin-import.html"
+    "/admin-import.html",
+    "/admin-users.html",
+    "/admin/users"
 ], requireAdmin);
 
 app.use(express.static(ROOT_DIR));

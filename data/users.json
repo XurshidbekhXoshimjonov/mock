@@ -2,6 +2,8 @@
   {
     "id": "1779126631738-785144f4",
     "username": "Admin",
+    "memberIdNumber": 2,
+    "memberId": "002",
     "email": "admin@ieltsx.org",
     "password": "$2b$10$DcpG2V6QY5XSCwlQTVEGXuh0dCxceZEHKX1UFrVBejUqYHoc0Y7Iq",
     "role": "student",
@@ -10,20 +12,28 @@
   {
     "id": "1779126747331-8f56c856",
     "username": "hoshimjonov08@gmail.com",
+    "memberIdNumber": 1,
+    "memberId": "001",
     "email": "hoshimjonov08@gmail.com",
     "createdAt": "2026-05-18T17:52:27.331Z",
     "role": "admin",
-    "password": "$2b$10$nvPK/bapfm/CLZpugjjmJeqnf6ZwZQlPkio0ZnvUw5cQMWIx1rCJu"
+    "password": "$2b$10$nvPK/bapfm/CLZpugjjmJeqnf6ZwZQlPkio0ZnvUw5cQMWIx1rCJu",
+    "lastLogin": "2026-06-20T11:46:36.500Z",
+    "name": "Xoshimov"
   },
   {
     "id": "1779127063840-ac1aaa79",
     "username": "xurshidbek_77@icloud.com",
+    "memberIdNumber": 3,
+    "memberId": "003",
     "email": "xurshidbek_77@icloud.com",
     "createdAt": "2026-05-18T17:57:43.840Z"
   },
   {
     "id": "1779158419988-302c65f4",
     "username": "xoshimov_0510",
+    "memberIdNumber": 4,
+    "memberId": "004",
     "email": "xoshimjonovxurshidbek5@gmail.com",
     "password": "$2b$10$9DcHW8/B3boIKrAG5mGOSu9qyiFyKVVd3fMKkcLU0.GFz0NHSa9mG",
     "role": "student",
@@ -32,6 +42,8 @@
   {
     "id": "1780623623639-d70d5924",
     "username": "xoshimjonovxurshidbek5@gmail.com",
+    "memberIdNumber": 5,
+    "memberId": "005",
     "email": "dizayner008@gmail.com",
     "password": "$2b$10$Ui1k3B4fI/0EKPgEGWjvsOnplSNAhMnF5doCs2NPc9InjexAizy3O",
     "role": "student",

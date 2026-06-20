@@ -1,4 +1,7 @@
 const statUsers = document.getElementById("statUsers");
+const statTodayUsers = document.getElementById("statTodayUsers");
+const statPremiumUsers = document.getElementById("statPremiumUsers");
+const statFreeUsers = document.getElementById("statFreeUsers");
 const statReading = document.getElementById("statReading");
 const statListening = document.getElementById("statListening");
 const recentTests = document.getElementById("recentTests");
@@ -29,22 +32,32 @@ function showStatus(message, type = "") {
 
 function markActiveNav() {
     const path = window.location.pathname.toLowerCase();
-    const onDashboard =
-        path.endsWith("/admin") ||
-        path.endsWith("/admin.html") ||
-        path.endsWith("admin.html");
 
     document.querySelectorAll(".admin-nav a").forEach((link) => {
         const href = (link.getAttribute("href") || "").toLowerCase();
-        const isDashboardLink = href === "/admin" || href.endsWith("admin.html");
-        link.classList.toggle("is-active", onDashboard && isDashboardLink);
+        
+        let isActive = false;
+        if (href === "/admin") {
+            isActive = path.endsWith("/admin") || path.endsWith("/admin.html");
+        } else if (href.includes("listening")) {
+            isActive = path.includes("listening");
+        } else if (href.includes("reading")) {
+            isActive = path.includes("reading");
+        } else if (href.includes("users")) {
+            isActive = path.includes("users");
+        }
+
+        link.classList.toggle("is-active", isActive);
     });
 }
 
 function renderStats(data) {
-    statUsers.textContent = data.users ?? 0;
-    statReading.textContent = data.readingTests ?? 0;
-    statListening.textContent = data.listeningTests ?? 0;
+    if (statUsers) statUsers.textContent = data.totalUsers ?? data.users ?? 0;
+    if (statTodayUsers) statTodayUsers.textContent = data.todayUsers ?? 0;
+    if (statPremiumUsers) statPremiumUsers.textContent = data.premiumUsers ?? 0;
+    if (statFreeUsers) statFreeUsers.textContent = data.freeUsers ?? 0;
+    if (statReading) statReading.textContent = data.readingTests ?? 0;
+    if (statListening) statListening.textContent = data.listeningTests ?? 0;
 }
 
 function renderRecent(tests) {
@@ -92,13 +105,22 @@ async function readJson(response) {
 }
 
 async function loadStats() {
-    const response = await fetch("/api/admin/stats");
-    const data = await readJson(response);
+    const [statsResponse, userStatsResponse] = await Promise.all([
+        fetch("/api/admin/stats"),
+        fetch("/api/admin/stats/users")
+    ]);
 
-    if (!response.ok) {
-        throw new Error(data.error || "Could not load stats");
+    const statsData = await readJson(statsResponse);
+    const userStatsData = await readJson(userStatsResponse);
+
+    if (!statsResponse.ok) {
+        throw new Error(statsData.error || "Could not load stats");
+    }
+    if (!userStatsResponse.ok) {
+        throw new Error(userStatsData.error || "Could not load user stats");
     }
 
+    const data = { ...statsData, ...userStatsData };
     renderStats(data);
     return data;
 }

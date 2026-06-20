@@ -1692,3 +1692,118 @@ select:focus-visible {
   background: transparent;
 }
 
+/* ==========================================
+   Dark Theme General Styles & Overrides
+   ========================================== */
+
+html.dark-theme,
+body.dark-theme {
+    --cbt-accent: #3b82f6;
+    --cbt-accent-dark: #1d4ed8;
+    --cbt-text: #f1f5f9;
+    --cbt-muted: #94a3b8;
+    --cbt-border: rgba(255, 255, 255, 0.08);
+    --cbt-soft: #0a0a24;
+    --cbt-paper: #050515;
+    color-scheme: dark;
+}
+
+html.dark-theme .cbt-body,
+body.dark-theme .cbt-body {
+    background: #03030d;
+}
+
+html.dark-theme .cbt-button--secondary,
+html.dark-theme .cbt-button--outline {
+    background: #0d0e25;
+    color: #f1f5f9;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+html.dark-theme .cbt-button--secondary:hover,
+html.dark-theme .cbt-button--outline:hover {
+    background: #141635;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+html.dark-theme .cbt-vocab-popover,
+html.dark-theme .cbt-vocab-arrow {
+    background: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.dark-theme .cbt-vocab-review-card {
+    background: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.dark-theme .cbt-question-group {
+    background: #0d0e25;
+}
+html.dark-theme .cbt-rule-box {
+    background: #141635;
+    border-left-color: #3b82f6;
+}
+
+html.dark-theme .cbt-group-options-box {
+    background: #141635;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark-theme .cbt-group-option-chip {
+    background: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #f1f5f9;
+}
+
+html.dark-theme .cbt-option-card {
+    background: #0d0e25;
+}
+
+html.dark-theme .cbt-brand img {
+    filter: brightness(0) invert(1);
+}
+
+html.dark-theme input[type="text"],
+html.dark-theme input[type="search"],
+html.dark-theme textarea,
+html.dark-theme select {
+    background-color: #141635;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+html.dark-theme input::placeholder {
+    color: #64748b;
+}
+
+html.dark-theme .cbt-passage-kicker {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+html.dark-theme .cbt-test-tab-button:not(.is-active) {
+    background-color: #0d0e25;
+    color: #94a3b8;
+}
+
+html.dark-theme .cbt-test-tab-button.is-active {
+    background-color: #050515;
+    color: #ffffff;
+}
+
+html.dark-theme .cbt-nav-bubble {
+    background-color: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+
+html.dark-theme .cbt-nav-bubble.is-active {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+html.dark-theme .cbt-nav-bubble.is-answered {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+

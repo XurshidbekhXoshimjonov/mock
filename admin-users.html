@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Registered Users</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin-users.css">
+</head>
+
+<body class="admin-page dark-theme" data-skip-global-navbar>
+    <header class="admin-topbar">
+        <div class="admin-topbar__brand">
+            <span class="admin-kicker">IELTSX</span>
+            <strong>Admin Dashboard</strong>
+        </div>
+        <nav class="admin-nav" aria-label="Admin navigation">
+            <a href="/admin">Dashboard</a>
+            <a href="/admin-listening.html">Listening</a>
+            <a href="/admin-reading.html">Reading</a>
+            <a href="/admin/users" class="is-active">Users</a>
+            <a href="/ieltsmock.html">Home</a>
+        </nav>
+    </header>
+
+    <main class="admin-shell">
+        <section class="admin-hero">
+            <h1>Registered Users</h1>
+            <p class="admin-help">Manage registered student and admin accounts, view registration details, and track premium status.</p>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-grid" aria-live="polite">
+            <article class="stat-card">
+                <div class="stat-card__meta">
+                    <span class="stat-card__icon" aria-hidden="true">👥</span>
+                    <span class="stat-card__label">Total Users</span>
+                </div>
+                <strong class="stat-card__value" id="statUsers">—</strong>
+            </article>
+            <article class="stat-card">
+                <div class="stat-card__meta">
+                    <span class="stat-card__icon" aria-hidden="true">📅</span>
+                    <span class="stat-card__label">New Today</span>
+                </div>
+                <strong class="stat-card__value" id="statTodayUsers">—</strong>
+            </article>
+            <article class="stat-card">
+                <div class="stat-card__meta">
+                    <span class="stat-card__icon" aria-hidden="true">⭐</span>
+                    <span class="stat-card__label">Premium</span>
+                </div>
+                <strong class="stat-card__value" id="statPremiumUsers">—</strong>
+            </article>
+            <article class="stat-card">
+                <div class="stat-card__meta">
+                    <span class="stat-card__icon" aria-hidden="true">👤</span>
+                    <span class="stat-card__label">Free</span>
+                </div>
+                <strong class="stat-card__value" id="statFreeUsers">—</strong>
+            </article>
+        </section>
+
+        <!-- Users Table Card -->
+        <section class="admin-card users-card">
+            <div class="users-toolbar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Search by username, name, email...">
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="free">Free</button>
+                    <button class="filter-btn" data-filter="premium">Premium</button>
+                    <button class="filter-btn" data-filter="admin">Admin</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username / Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Plan</th>
+                            <th>Registered Date</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr>
+                            <td colspan="8" class="table-loading">Loading users...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p id="usersStatus" class="status-text" hidden></p>
+        </section>
+    </main>
+
+    <!-- Global Auth Script & User Panel scripts -->
+    <script src="/auth-client.js"></script>
+    <script src="/admin-users.js"></script>
+</body>
+
+</html>

@@ -1281,3 +1281,165 @@ form{
 *::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+/* ==========================================
+   Dark Theme General Styles & Overrides
+   ========================================== */
+
+body.dark-theme {
+    background: #050515;
+    color: #f1f5f9;
+}
+
+body.dark-theme .body2 {
+    background:
+        radial-gradient(circle at 8% 12%, rgba(59, 130, 246, 0.15), transparent 30rem),
+        radial-gradient(circle at 92% 8%, rgba(99, 102, 241, 0.12), transparent 28rem),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(99, 102, 241, 0.08) 38%, rgba(5, 5, 21, 0) 70%),
+        linear-gradient(180deg, #050515 0%, #03030d 100%);
+}
+
+body.dark-theme .body2::before,
+body.dark-theme .body2::after {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.15));
+}
+
+body.dark-theme .login-box {
+    background: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-theme .login-box h1 {
+    color: #ffffff;
+}
+
+body.dark-theme .login-box input {
+    background: #141635;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+body.dark-theme .login-box input::placeholder {
+    color: #64748b;
+}
+
+body.dark-theme .auth-subtitle {
+    color: #94a3b8;
+}
+
+body.dark-theme .auth-switch {
+    color: #94a3b8;
+}
+
+body.dark-theme .auth-switch a {
+    color: #60a5fa;
+}
+
+body.dark-theme *::-webkit-scrollbar-track {
+    background: #08081b;
+}
+
+body.dark-theme *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    border-color: #08081b;
+}
+
+body.dark-theme .body2 .tests-title {
+    color: #ffffff;
+}
+
+body.dark-theme .tests-grid .reading-test-card {
+    background:
+        linear-gradient(145deg, rgba(13, 14, 37, 0.95), rgba(8, 8, 24, 0.90)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.08));
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+    color: #f1f5f9;
+}
+
+body.dark-theme .tests-grid .reading-test-card::after {
+    background: radial-gradient(circle at 24% 18%, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.2) 46%, transparent 72%);
+}
+
+body.dark-theme .tests-grid .reading-test-card:hover {
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 24px 58px rgba(59, 130, 246, 0.18), 0 18px 44px rgba(124, 58, 237, 0.09);
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-content h2 {
+    color: #ffffff;
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-content p {
+    color: #94a3b8;
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-badge {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-stats {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-stats strong {
+    color: #f1f5f9;
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-button {
+    color: #60a5fa;
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .tests-grid .reading-test-card:hover .test-card-button {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+body.dark-theme .test-list-empty {
+    background: #0d0e25;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #94a3b8;
+}
+
+body.dark-theme .partfter {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+
+body.dark-theme .tests-grid .reading-test-card .test-card-icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.2)) !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
+    color: #60a5fa !important;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12) !important;
+}
+
+body.dark-theme .tests-grid .reading-test-card:hover .test-card-icon {
+    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Specific overrides for title visibility and stats box readable colors */
+html.dark-theme .body2 .tests-title,
+body.dark-theme .body2 .tests-title,
+html.dark-theme .tests-title,
+body.dark-theme .tests-title {
+    color: #ffffff !important;
+}
+
+html.dark-theme .tests-grid .reading-test-card .test-card-stats span,
+body.dark-theme .tests-grid .reading-test-card .test-card-stats span {
+    background: #141635 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #94a3b8 !important;
+}
+
+html.dark-theme .tests-grid .reading-test-card .test-card-stats strong,
+body.dark-theme .tests-grid .reading-test-card .test-card-stats strong {
+    color: #ffffff !important;
+}

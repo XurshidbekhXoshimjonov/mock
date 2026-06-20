@@ -66,6 +66,12 @@
             .join("") || "U";
     }
 
+    function memberIdLabel(user) {
+        const isAdmin = user?.role === "admin";
+        const memberId = user?.memberId || (user?.memberIdNumber ? String(user.memberIdNumber).padStart(3, "0") : (isAdmin ? "001" : ""));
+        return memberId ? `ID: ${memberId}` : "";
+    }
+
     function formatBand(value) {
         return Number(value || 0).toFixed(1);
     }
@@ -102,14 +108,14 @@
         );
     }
 
-    function BandRing({ score, label, accent = "#2563eb" }) {
+    function BandRing({ score, label, accent = "#2563eb", ringClass }) {
         const radius = 48;
         const circumference = 2 * Math.PI * radius;
         const progress = Math.min(Number(score || 0) / 9, 1) * circumference;
 
-        return e("div", { className: "relative flex flex-col items-center justify-center" },
+        return e("div", { className: `relative flex flex-col items-center justify-center band-ring ${ringClass || ""}` },
             e("svg", { width: 138, height: 138, viewBox: "0 0 132 132", className: "drop-shadow-sm" },
-                e("circle", { cx: 66, cy: 66, r: radius, fill: "none", stroke: "#e8edf5", strokeWidth: 11 }),
+                e("circle", { cx: 66, cy: 66, r: radius, fill: "none", stroke: "#e8edf5", strokeWidth: 11, className: "band-ring-track" }),
                 e("circle", {
                     cx: 66,
                     cy: 66,
@@ -119,12 +125,13 @@
                     strokeWidth: 11,
                     strokeLinecap: "round",
                     strokeDasharray: `${progress} ${circumference}`,
-                    transform: "rotate(-90 66 66)"
+                    transform: "rotate(-90 66 66)",
+                    className: "band-ring-progress"
                 }),
-                e("text", { x: 66, y: 64, textAnchor: "middle", className: "fill-slate-950 text-3xl font-black" }, formatBand(score)),
-                e("text", { x: 66, y: 84, textAnchor: "middle", className: "fill-slate-400 text-[10px] font-bold uppercase" }, "Band")
+                e("text", { x: 66, y: 64, textAnchor: "middle", className: "fill-slate-950 text-3xl font-black band-ring-score" }, formatBand(score)),
+                e("text", { x: 66, y: 84, textAnchor: "middle", className: "fill-slate-400 text-[10px] font-bold uppercase band-ring-text" }, "Band")
             ),
-            e("p", { className: "mt-1 text-sm font-bold text-slate-600" }, label)
+            e("p", { className: "mt-1 text-sm font-bold text-slate-600 band-ring-label" }, label)
         );
     }
 
@@ -134,10 +141,10 @@
         return e("section", { className: "profile-hero overflow-hidden rounded-[2rem] p-5 text-white shadow-card md:p-7" },
             e("div", { className: "relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center" },
                 e("div", { className: "flex items-center gap-4 md:gap-5" },
-                    e("div", { className: "flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/20 bg-white/15 text-2xl font-black shadow-2xl backdrop-blur" }, initials(user.username)),
+                    e("div", { className: "flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/20 bg-white/15 text-2xl font-black shadow-2xl backdrop-blur" }, initials(user.name || user.username)),
                     e("div", { className: "min-w-0" },
                         e("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-blue-100" }, "IELTSX Performance Center"),
-                        e("h1", { className: "mt-2 break-words text-2xl font-black tracking-tight md:text-4xl" }, user.username),
+                        e("h1", { className: "mt-2 break-words text-2xl font-black tracking-tight md:text-4xl" }, user.name || user.username),
                         e("p", { className: "mt-2 max-w-xl text-sm leading-6 text-blue-100" }, "Your completed tests, estimated bands, and study momentum in one place.")
                     )
                 ),
@@ -156,6 +163,8 @@
     }
 
     function ProfileCard({ user, stats }) {
+        const idLabel = memberIdLabel(user);
+
         return e(Card, null,
             e(SectionTitle, {
                 eyebrow: "Account",
@@ -163,9 +172,10 @@
                 description: "Your IELTSX learning account"
             }),
             e("div", { className: "flex items-center gap-4 rounded-2xl bg-slate-50 p-4" },
-                e("div", { className: "flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white" }, initials(user.username)),
-                e("div", { className: "min-w-0" },
-                    e("p", { className: "truncate font-black text-slate-950" }, user.username),
+                e("div", { className: "flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white" }, initials(user.name || user.username)),
+                e("div", { className: "min-w-0 flex-1" },
+                    idLabel && e("p", { className: "mb-0.5 text-xs font-black uppercase tracking-wide text-blue-600" }, idLabel),
+                    e("p", { className: "truncate font-black text-slate-950" }, user.name || user.username),
                     e("p", { className: "truncate text-sm text-slate-500" }, user.email || "Email not provided")
                 )
             ),
@@ -188,9 +198,9 @@
                 description: "Band estimates calculated only from completed Reading and Listening tests."
             }),
             e("div", { className: "grid gap-5 sm:grid-cols-3" },
-                e(BandRing, { score: stats.overallBand, label: "Overall Band", accent: "#071547" }),
-                e(BandRing, { score: stats.readingBand, label: "Reading Band", accent: "#2563eb" }),
-                e(BandRing, { score: stats.listeningBand, label: "Listening Band", accent: "#7c3aed" })
+                e(BandRing, { score: stats.overallBand, label: "Overall Band", accent: "#071547", ringClass: "band-ring-overall" }),
+                e(BandRing, { score: stats.readingBand, label: "Reading Band", accent: "#2563eb", ringClass: "band-ring-reading" }),
+                e(BandRing, { score: stats.listeningBand, label: "Listening Band", accent: "#7c3aed", ringClass: "band-ring-listening" })
             ),
             stats.testsCompleted
                 ? e("div", { className: "mt-5 rounded-2xl bg-slate-50 p-4" },
@@ -241,7 +251,7 @@
         return e("div", { className: "flex min-h-36 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-5 text-center text-sm text-slate-500" }, text);
     }
 
-    function LineChart({ data, valueKey, maxValue, color, suffix }) {
+    function LineChart({ data, valueKey, maxValue, color, suffix, chartClass }) {
         if (!data?.length) return e(EmptyChart, { text: "Complete tests to see this progress chart." });
         const width = 360;
         const height = 130;
@@ -255,7 +265,7 @@
             return { x, y, item };
         });
 
-        return e("div", null,
+        return e("div", { className: chartClass || "" },
             e("svg", { viewBox: `0 0 ${width} ${height}`, className: "h-36 w-full overflow-visible", role: "img" },
                 [0, 1, 2, 3].map((line) => e("line", {
                     key: line,
@@ -272,10 +282,11 @@
                     stroke: color,
                     strokeWidth: 4,
                     strokeLinecap: "round",
-                    strokeLinejoin: "round"
+                    strokeLinejoin: "round",
+                    className: "line-chart-path"
                 }),
                 points.map((point) => e("g", { key: point.item.id || point.item.completedAt },
-                    e("circle", { cx: point.x, cy: point.y, r: 5, fill: "white", stroke: color, strokeWidth: 3 }),
+                    e("circle", { cx: point.x, cy: point.y, r: 5, fill: "white", stroke: color, strokeWidth: 3, className: "line-chart-node" }),
                     e("title", null, `${point.item.label}: ${point.item[valueKey]}${suffix || ""}`)
                 ))
             ),
@@ -307,9 +318,9 @@
         const charts = stats.charts || emptyProgress.charts;
         const chartCards = [
             ["Weekly Activity", "Tests completed over the last seven days", e(WeeklyChart, { data: charts.weeklyActivity })],
-            ["Band Score Trend", "Estimated band across recent tests", e(LineChart, { data: charts.bandTrend, valueKey: "value", maxValue: 9, color: "#071547" })],
-            ["Reading Progress", "Accuracy across completed Reading tests", e(LineChart, { data: charts.readingProgress, valueKey: "accuracy", maxValue: 100, color: "#2563eb", suffix: "%" })],
-            ["Listening Progress", "Accuracy across completed Listening tests", e(LineChart, { data: charts.listeningProgress, valueKey: "accuracy", maxValue: 100, color: "#7c3aed", suffix: "%" })]
+            ["Band Score Trend", "Estimated band across recent tests", e(LineChart, { data: charts.bandTrend, valueKey: "value", maxValue: 9, color: "#071547", chartClass: "chart-band-trend" })],
+            ["Reading Progress", "Accuracy across completed Reading tests", e(LineChart, { data: charts.readingProgress, valueKey: "accuracy", maxValue: 100, color: "#2563eb", suffix: "%", chartClass: "chart-reading-progress" })],
+            ["Listening Progress", "Accuracy across completed Listening tests", e(LineChart, { data: charts.listeningProgress, valueKey: "accuracy", maxValue: 100, color: "#7c3aed", suffix: "%", chartClass: "chart-listening-progress" })]
         ];
 
         return e("section", null,
@@ -436,6 +447,7 @@
     }
 
     function SettingsPage({ user, stats }) {
+        const [name, setName] = useState(user.name || user.username || "");
         const [targetBand, setTargetBand] = useState(stats.targetBand === null ? "" : String(stats.targetBand));
         const [message, setMessage] = useState("");
         const [saving, setSaving] = useState(false);
@@ -446,10 +458,13 @@
             setMessage("");
 
             try {
+                await window.authClient.updateProfile({
+                    name: name
+                });
                 await window.authClient.updateProfilePreferences({
                     targetBand: targetBand === "" ? null : Number(targetBand)
                 });
-                setMessage("Profile preferences saved.");
+                setMessage("Profile settings saved successfully.");
             } catch (error) {
                 setMessage(error.message);
             } finally {
@@ -461,14 +476,21 @@
             e("a", { href: "profile.html", className: "mb-6 inline-flex items-center gap-2 text-sm font-black text-blue-700 hover:text-slate-950" }, e(Icon, { name: "arrow", className: "h-4 w-4 rotate-180" }), "Back to dashboard"),
             e("section", { className: "rounded-[2rem] border border-slate-200 bg-white p-6 shadow-card md:p-8" },
                 e("div", { className: "mb-8 flex items-center gap-4" },
-                    e("div", { className: "flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 text-xl font-black text-white" }, initials(user.username)),
+                    e("div", { className: "flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 text-xl font-black text-white" }, initials(name)),
                     e("div", null,
                         e("p", { className: "text-sm font-black uppercase tracking-[0.16em] text-blue-700" }, "Profile Settings"),
                         e("h1", { className: "text-3xl font-black tracking-tight text-slate-950" }, "Learning preferences")
                     )
                 ),
                 e("form", { className: "grid gap-5 md:grid-cols-2", onSubmit: savePreferences },
-                    e("label", { className: "space-y-2 text-sm font-bold text-slate-700" }, "Name", e("input", { className: "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-semibold text-slate-500", value: user.username, readOnly: true })),
+                    e("label", { className: "space-y-2 text-sm font-bold text-slate-700" }, "Name", 
+                        e("input", {
+                            className: "w-full rounded-2xl border border-slate-200 px-4 py-3 font-semibold outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-50",
+                            value: name,
+                            onChange: (e) => setName(e.target.value),
+                            placeholder: "Enter your display name"
+                        })
+                    ),
                     e("label", { className: "space-y-2 text-sm font-bold text-slate-700" }, "Email", e("input", { className: "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-semibold text-slate-500", value: user.email || "", readOnly: true })),
                     e("label", { className: "space-y-2 text-sm font-bold text-slate-700 md:col-span-2" }, "Target band",
                         e("select", {

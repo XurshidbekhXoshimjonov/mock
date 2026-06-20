@@ -1,4 +1,42 @@
 (function () {
+    // Check and apply theme immediately to prevent FOUC
+    const storedTheme = localStorage.getItem("ielts-theme") || "light";
+    const path = window.location.pathname.toLowerCase();
+    const isTestPage = path.includes("test1.html") || 
+                       path.includes("reading-template.html") ||
+                       path.includes("listening-template.html") ||
+                       path.includes("full-test-player.html") ||
+                       path.includes("listening-test1.html") ||
+                       path.includes("full-listening-cdi.html");
+
+    if (storedTheme === "dark" && !isTestPage) {
+        if (document.body && document.body.hasAttribute("data-skip-global-navbar")) {
+            document.documentElement.classList.remove("dark-theme");
+        } else {
+            document.documentElement.classList.add("dark-theme");
+            if (document.body) {
+                document.body.classList.add("dark-theme");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    if (!document.body.hasAttribute("data-skip-global-navbar")) {
+                        document.body.classList.add("dark-theme");
+                    } else {
+                        document.documentElement.classList.remove("dark-theme");
+                    }
+                });
+            }
+        }
+    } else {
+        document.documentElement.classList.remove("dark-theme");
+        if (document.body) {
+            document.body.classList.remove("dark-theme");
+        } else {
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.classList.remove("dark-theme");
+            });
+        }
+    }
+
     const AUTH_STORAGE_KEY = "ieltsmock.auth";
     const AUTH_COOKIE = "ieltsmockAuthToken";
     const TOKEN_DAYS = 7;
@@ -12,8 +50,12 @@
             .replace(/'/g, "&#039;");
     }
 
+    function getDisplayName(user) {
+        return String(user?.name || user?.username || user?.email || "User").trim() || "User";
+    }
+
     function getInitial(user) {
-        return String(user?.username || user?.email || "User")
+        return getDisplayName(user)
             .trim()
             .charAt(0)
             .toUpperCase() || "U";
@@ -228,6 +270,22 @@
         });
     }
 
+    async function updateProfile(data) {
+        const response = await apiFetch("/api/profile", {
+            method: "PUT",
+            body: JSON.stringify(data || {})
+        });
+
+        if (response && response.user) {
+            saveAuth({
+                token: getAuth()?.token,
+                user: response.user
+            });
+        }
+
+        return response;
+    }
+
     function currentPageName() {
         const path = String(window.location.pathname || "").toLowerCase();
         const params = new URLSearchParams(window.location.search || "");
@@ -325,7 +383,16 @@
             display: block;
             width: 168px;
             height: auto;
+            filter: brightness(0) saturate(100%) invert(35%) sepia(94%) saturate(2250%) hue-rotate(218deg) brightness(96%) contrast(97%);
+            transition: filter 280ms ease, opacity 280ms ease;
         }
+
+        .ielts-navbar__logo:hover {
+            filter: brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(2745%) hue-rotate(219deg) brightness(95%) contrast(101%);
+            opacity: 0.95;
+        }
+
+
 
         .ielts-navbar__wordmark {
             display: inline-flex;
@@ -816,6 +883,121 @@
                 right: -2px;
                 width: min(214px, calc(100vw - 28px));
             }
+        }
+
+            /* Theme toggle button styling (smaller, to the left of profile/auth buttons) */
+            .ielts-theme-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 38px;
+                height: 38px;
+                border: 1px solid #dbe3ef;
+                border-radius: 12px;
+                background: #ffffff;
+                color: #071547;
+                cursor: pointer;
+                transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+                padding: 0;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+            .ielts-theme-toggle:hover {
+                border-color: #bfdbfe;
+                background: #f8fbff;
+                transform: scale(1.05);
+            }
+            .ielts-theme-toggle:active {
+                transform: scale(0.95);
+            }
+            .ielts-theme-toggle svg {
+                width: 18px;
+                height: 18px;
+                transition: transform 300ms ease;
+            }
+            .ielts-theme-toggle:hover svg {
+                transform: rotate(20deg);
+            }
+
+            /* Dark Theme Navbar Overrides */
+            body.dark-theme .ielts-navbar {
+                background: #08081b;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+            body.dark-theme .ielts-navbar__brand {
+                color: #ffffff;
+            }
+
+            body.dark-theme .ielts-navbar__links a {
+                color: #94a3b8;
+            }
+            body.dark-theme .ielts-navbar__links a:hover,
+            body.dark-theme .ielts-navbar__links a.is-active {
+                background: rgba(59, 130, 246, 0.15);
+                color: #60a5fa;
+            }
+            body.dark-theme .ielts-navbar__menu-toggle {
+                border-color: rgba(255, 255, 255, 0.15);
+                background: #0a0a24;
+                color: #f1f5f9;
+            }
+            body.dark-theme .ielts-navbar__menu-toggle:hover {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+            body.dark-theme .ielts-navbar__button--login {
+                color: #60a5fa;
+                border-color: #3b82f6;
+            }
+            body.dark-theme .ielts-navbar__button--login:hover {
+                background: #3b82f6;
+                color: #ffffff;
+            }
+            body.dark-theme .ielts-navbar__button--signup {
+                background: #3b82f6;
+                border-color: #3b82f6;
+                color: #ffffff;
+            }
+            body.dark-theme .ielts-navbar__button--signup:hover {
+                background: #2563eb;
+                border-color: #2563eb;
+            }
+            body.dark-theme .ielts-theme-toggle {
+                border-color: rgba(255, 255, 255, 0.15);
+                background: #0a0a24;
+                color: #f1f5f9;
+            }
+            body.dark-theme .ielts-theme-toggle:hover {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+            body.dark-theme .ielts-account__trigger {
+                background: linear-gradient(135deg, #0a0a24 0%, #0d0d30 100%);
+                color: #f1f5f9;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+            body.dark-theme .ielts-account__avatar {
+                background: #3b82f6;
+                color: #ffffff;
+            }
+            body.dark-theme .ielts-account__dropdown {
+                border-color: rgba(255, 255, 255, 0.08);
+                background: #08081b;
+                box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+            }
+            body.dark-theme .ielts-account__link,
+            body.dark-theme .ielts-account__logout {
+                color: #f1f5f9;
+            }
+            body.dark-theme .ielts-account__link:hover,
+            body.dark-theme .ielts-account__logout:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+            body.dark-theme .ielts-account__link.is-active {
+                background: rgba(59, 130, 246, 0.15);
+                color: #60a5fa;
+            }
         }`;
 
         document.head.appendChild(style);
@@ -839,7 +1021,7 @@
     function renderLoggedInAuth(auth) {
         const user = auth.user || {};
         const initial = getInitial(user);
-        const username = escapeHtml(user.username || "User");
+        const displayName = escapeHtml(getDisplayName(user));
         const path = String(window.location.pathname || "").toLowerCase();
         const hash = String(window.location.hash || "").toLowerCase();
         const profileActive = path.includes("profile.html") && hash !== "#results";
@@ -851,9 +1033,9 @@
 
         return `
             <div class="ielts-account" id="ieltsAccount">
-                <button class="ielts-account__trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${username} profile menu">
+                <button class="ielts-account__trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
                     <span class="ielts-account__avatar" aria-hidden="true">${initial}</span>
-                    <span class="ielts-account__name">${username}</span>
+                    <span class="ielts-account__name">${displayName}</span>
                     <span class="ielts-account__chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
@@ -936,6 +1118,29 @@
         });
     }
 
+    function bindThemeToggle(host) {
+        const toggleBtn = host.querySelector("#ieltsThemeToggle");
+        if (!toggleBtn) return;
+
+        toggleBtn.addEventListener("click", () => {
+            const currentTheme = localStorage.getItem("ielts-theme") || "light";
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+            localStorage.setItem("ielts-theme", newTheme);
+
+            if (newTheme === "dark") {
+                document.documentElement.classList.add("dark-theme");
+                document.body.classList.add("dark-theme");
+            } else {
+                document.documentElement.classList.remove("dark-theme");
+                document.body.classList.remove("dark-theme");
+            }
+
+            // Re-render navbar to update theme icon
+            renderGlobalNavbar();
+        });
+    }
+
     function closeOpenMenus() {
         document.querySelectorAll(".ielts-navbar.is-menu-open").forEach((navbar) => {
             navbar.classList.remove("is-menu-open");
@@ -963,6 +1168,23 @@
         const authState = getAuthState();
         const active = currentPageName();
 
+        const currentTheme = localStorage.getItem("ielts-theme") || "light";
+        const isDark = currentTheme === "dark";
+        const toggleHtml = `
+            <button class="ielts-theme-toggle" id="ieltsThemeToggle" type="button" aria-label="Toggle theme">
+                ${isDark ? `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                ` : `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                `}
+            </button>
+        `;
+
         host.innerHTML = `
             <a class="ielts-navbar__brand" href="/ieltsmock.html" aria-label="IELTSX home">
                 <img class="ielts-navbar__logo" src="/Rasm-logo.png" alt="IELTSX.org">
@@ -978,12 +1200,14 @@
                 <a class="${active === "writing" ? "is-active" : ""}" href="/writing.html">Writing</a>
             </nav>
             <div class="ielts-navbar__auth">
+                ${toggleHtml}
                 ${authState.isAuthenticated ? renderLoggedInAuth(authState.auth) : renderLoggedOutAuth()}
             </div>
         `;
 
         bindDropdown(host);
         bindMobileMenu(host);
+        bindThemeToggle(host);
         document.body.classList.add("has-global-navbar");
         scheduleSiteReady();
     }
@@ -999,6 +1223,7 @@
         getUserStats,
         recordTestResult,
         updateProfilePreferences,
+        updateProfile,
         renderGlobalNavbar
     };
     document.documentElement.setAttribute("data-auth-client-ready", "true");

@@ -2,7 +2,7 @@
   "users": {
     "1779126747331-8f56c856": {
       "preferences": {
-        "targetBand": 7.5
+        "targetBand": 8.5
       },
       "results": [
         {
@@ -221,6 +221,12 @@
         }
       ],
       "accountActivities": [
+        {
+          "id": "1781955996505-3abf00",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-20T11:46:36.503Z"
+        },
         {
           "id": "1780623746417-9d0029",
           "type": "account",
@@ -1965,6 +1971,60 @@
           "type": "account",
           "title": "Account created",
           "occurredAt": "2026-06-05T18:24:14.141Z"
+        }
+      ]
+    },
+    "6a36791dda58206448442636": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1781954846166-cf4b6e",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-20T11:27:26.164Z"
+        },
+        {
+          "id": "1781954845744-87edc4",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-20T11:27:25.742Z"
+        }
+      ]
+    },
+    "6a367fffb8d3fccfd5cbc8ff": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1781956608453-86e451",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-20T11:56:48.451Z"
+        },
+        {
+          "id": "1781956607921-e55fde",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-20T11:56:47.918Z"
+        }
+      ]
+    },
+    "6a36886568b14d49cfb9e15c": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1781958757927-ee038d",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-20T12:32:37.926Z"
         }
       ]
     }

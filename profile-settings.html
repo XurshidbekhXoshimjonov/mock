@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings</title>
+    <script>
+        if (localStorage.getItem("ielts-theme") === "dark") {
+            document.documentElement.classList.add("dark-theme");
+        }
+    </script>
     <link rel="stylesheet" href="/reading-tailwind.generated.css">
     <link rel="stylesheet" href="/profile-dashboard.css">
 </head>
@@ -16,7 +21,7 @@
     <script src="/vendor-react.production.min.js"></script>
     <script src="/vendor-react-dom.production.min.js"></script>
     <script src="/auth-client.js"></script>
-    <script src="/profile-dashboard.js"></script>
+    <script src="/profile-dashboard.js?v=20260620-profile-id-card"></script>
 </body>
 
 </html>
