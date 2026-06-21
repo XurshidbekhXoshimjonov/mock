@@ -59,7 +59,7 @@ async function loadReadingTests() {
             </div>
             <div class="test-card-stats">
                 <span><strong>${escapeHtml(test.questionCount || 0)}</strong> Questions</span>
-                <span><strong>${test.part === "full" ? "40 min" : "20 min"}</strong> Timer</span>
+                <span><strong>${test.part === "full" ? "60 min" : "20 min"}</strong> Timer</span>
             </div>
             <div class="test-card-button">Start Test <span>-></span></div>
         </a>
