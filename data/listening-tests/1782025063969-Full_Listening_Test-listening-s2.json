@@ -1,0 +1,419 @@
+{
+  "id": "1782025063969-Full_Listening_Test-listening-s2",
+  "slug": "1782025063969-Full_Listening_Test-listening-s2",
+  "title": "Full Listening Test — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-14",
+      "instruction": "Complete the notes below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Circle the correct letter, A, B or C.",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "sentence_completion",
+      "question": "Register as a....",
+      "options": [],
+      "answer": "temporary visitor"
+    },
+    {
+      "number": 12,
+      "type": "sentence_completion",
+      "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+      "options": [],
+      "answer": "allergies"
+    },
+    {
+      "number": 13,
+      "type": "sentence_completion",
+      "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+      "options": [],
+      "answer": "current medication"
+    },
+    {
+      "number": 14,
+      "type": "sentence_completion",
+      "question": "Complete a.... with personal information such as name, address and telephone number.",
+      "options": [],
+      "answer": "registration card"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "The nurse can help you with",
+      "options": [
+        {
+          "value": "A",
+          "label": "minor operation",
+          "html": "minor operation"
+        },
+        {
+          "value": "B",
+          "label": "all sorts of remedy.",
+          "html": "all sorts of remedy."
+        },
+        {
+          "value": "C",
+          "label": "a small injury",
+          "html": "a small injury"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "You don't have to pay for the chiropodist if",
+      "options": [
+        {
+          "value": "A",
+          "label": "you have registered at the health center.",
+          "html": "you have registered at the health center."
+        },
+        {
+          "value": "B",
+          "label": "you are in your late' sixties.",
+          "html": "you are in your late' sixties."
+        },
+        {
+          "value": "C",
+          "label": "you have foot trauma.",
+          "html": "you have foot trauma."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "In case of emergency",
+      "options": [
+        {
+          "value": "A",
+          "label": "you can ask for a home visit.",
+          "html": "you can ask for a home visit."
+        },
+        {
+          "value": "B",
+          "label": "you must go to the hospital directly.",
+          "html": "you must go to the hospital directly."
+        },
+        {
+          "value": "C",
+          "label": "you should have an open surgery.",
+          "html": "you should have an open surgery."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "On Friday afternoons",
+      "options": [
+        {
+          "value": "A",
+          "label": "you don't need to wait for a long time.",
+          "html": "you don't need to wait for a long time."
+        },
+        {
+          "value": "B",
+          "label": "you don't need to make an appointment.",
+          "html": "you don't need to make an appointment."
+        },
+        {
+          "value": "C",
+          "label": "you ought not to come at a specified time.",
+          "html": "you ought not to come at a specified time."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "If you require a repeat prescription",
+      "options": [
+        {
+          "value": "A",
+          "label": "you have to see the doctor again.",
+          "html": "you have to see the doctor again."
+        },
+        {
+          "value": "B",
+          "label": "you need a special form.",
+          "html": "you need a special form."
+        },
+        {
+          "value": "C",
+          "label": "you can get one from the chemist.",
+          "html": "you can get one from the chemist."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "In which case you needn't pay for the prescription",
+      "options": [
+        {
+          "value": "A",
+          "label": "if you are a student.",
+          "html": "if you are a student."
+        },
+        {
+          "value": "B",
+          "label": "if you are unemployed or very poor.",
+          "html": "if you are unemployed or very poor."
+        },
+        {
+          "value": "C",
+          "label": "if you are pregnant.",
+          "html": "if you are pregnant."
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1782025063969-Full_Listening_Test",
+  "createdAt": "2026-06-21T08:18:07.524Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+      "instruction": "",
+      "answerText": "11: temporary visitor\n12: allergies\n13: current medication\n14: registration card\n15: C\n16: B\n17: A\n18: B\n19: B\n20: C",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "note_completion",
+          "questionRange": "Questions 11-14",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the notes below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Register as a {{11}}.",
+            "Fill in a medical history form with details of previous illness, {{12}}. surgeries and {{13}}.",
+            "Complete a {{14}}. with personal information such as name, address and telephone number."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Register as a....",
+              "text": "Register as a....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "temporary visitor"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+              "text": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "allergies"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+              "text": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "current medication"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Complete a.... with personal information such as name, address and telephone number.",
+              "text": "Complete a.... with personal information such as name, address and telephone number.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "registration card"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "multiple_choice",
+          "questionRange": "Questions 15-20",
+          "title": "",
+          "example": "",
+          "instruction": "Circle the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "The nurse can help you with",
+              "text": "The nurse can help you with",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "minor operation"
+                },
+                {
+                  "letter": "B",
+                  "text": "all sorts of remedy."
+                },
+                {
+                  "letter": "C",
+                  "text": "a small injury"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "You don't have to pay for the chiropodist if",
+              "text": "You don't have to pay for the chiropodist if",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "you have registered at the health center."
+                },
+                {
+                  "letter": "B",
+                  "text": "you are in your late' sixties."
+                },
+                {
+                  "letter": "C",
+                  "text": "you have foot trauma."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "In case of emergency",
+              "text": "In case of emergency",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "you can ask for a home visit."
+                },
+                {
+                  "letter": "B",
+                  "text": "you must go to the hospital directly."
+                },
+                {
+                  "letter": "C",
+                  "text": "you should have an open surgery."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "On Friday afternoons",
+              "text": "On Friday afternoons",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "you don't need to wait for a long time."
+                },
+                {
+                  "letter": "B",
+                  "text": "you don't need to make an appointment."
+                },
+                {
+                  "letter": "C",
+                  "text": "you ought not to come at a specified time."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "If you require a repeat prescription",
+              "text": "If you require a repeat prescription",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "you have to see the doctor again."
+                },
+                {
+                  "letter": "B",
+                  "text": "you need a special form."
+                },
+                {
+                  "letter": "C",
+                  "text": "you can get one from the chemist."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "In which case you needn't pay for the prescription",
+              "text": "In which case you needn't pay for the prescription",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "if you are a student."
+                },
+                {
+                  "letter": "B",
+                  "text": "if you are unemployed or very poor."
+                },
+                {
+                  "letter": "C",
+                  "text": "if you are pregnant."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

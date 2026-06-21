@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS Listening Part 1+2</title>
+<style>
+   :root.dark {
+    --correct-bg: #2e7d32;
+    --wrong-bg: #c62828;
+    --missed-bg: #f9a825;
+  }
+
+  .feedback-correct {
+    background-color: var(--correct-bg) !important;
+    color: white !important;
+  }
+  .feedback-wrong {
+    background-color: var(--wrong-bg) !important;
+    color: white !important;
+  }
+  .feedback-missed {
+    background-color: var(--missed-bg) !important;
+    color: black !important;
+  }
+  .feedback-missed *,
+  .feedback-correct *,
+  .feedback-wrong * {
+  color: inherit !important;
+}
+  :root {
+    --bg-color: #f5f5f5;
+    --text-color: #111;
+    --box-bg: #fff;
+    --border-color: #ccc;
+    --accent-color: #2563eb;
+  }
+ /* Instead, define them inside body.dark-mode */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --box-bg: #1a1a1a;
+  --border-color: #555;
+
+  --correct-bg: #388e3c;  /* brighter green for dark mode */
+  --wrong-bg: #d32f2f;    /* red */
+  --missed-bg: #fbc02d;   /* yellow */
+}
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  h2 {
+    text-align: center;
+    margin: 30px 0 10px;
+    color: var(--accent-color);
+  }
+  audio {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  .instructions {
+    font-weight: 600;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 90%;
+  }
+  .section, .form-box {
+    background: var(--box-bg);
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .form-row, .question-row, .question {
+    margin-bottom: 18px;
+  }
+  input, select {
+    border: 1px solid var(--border-color);
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    padding: 6px 10px;
+    font-size: 15px;
+    border-radius: 4px;
+    width: 200px;
+    margin-top: 5px;
+  }
+  select {
+    width: auto;
+    min-width: 150px;
+  }
+  .checkbox-group label {
+    display: block;
+    margin: 8px 0;
+  }
+  .toggle-dark-mode {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+
+/* Enhanced dark mode styles */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --box-bg: #1a1a1a;
+  --border-color: #555;
+}
+
+/* Dark mode table header fix */
+body.dark-mode table thead tr {
+  background-color: #333 !important;
+}
+
+/* Dark mode input/select fix */
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #2c2c2c;
+  color: #fff;    /* oq bo‘lishi kerak */
+  border-color: #666;
+}
+/* 1. Matnni oq rang qilish */
+body.dark-mode input[type="text"],
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #666 !important;
+}
+
+/* 2. Placeholder rangini kulrang qilish */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #bbb !important;
+}
+
+/* 3. Oq fonli bloklarni ham qoraga aylantirish */
+body.dark-mode .section,
+body.dark-mode .form-box,
+body.dark-mode table,
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode div[style*="background:#f9f9f9"],
+body.dark-mode div[style*="background:#fff"],
+body.dark-mode div[style*="background: #fff"] {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+}
+
+/* Highlight in dark mode */
+body.dark-mode .highlighted-selection {
+  background-color: #ffae00;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+/* Show-correct-answers color in dark mode */
+body.dark-mode span[id^="correct_"] {
+  color: #90ee90 !important;
+}
+
+
+/* Fix Part 1 table input layout */
+table input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+}
+
+table {
+  table-layout: auto;
+}
+
+td {
+  vertical-align: top;
+  word-break: break-word;
+}
+body.dark-mode input[type="text"],
+body.dark-mode textarea {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #666 !important;
+}
+</style>
+<style>
+  .q-badge {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 9999px;
+    padding: 2px 10px;
+    font-size: 13px;
+    margin-right: 8px;
+    font-weight: bold;
+  }
+</style>
+<style>
+.highlighted-selection {
+  background-color: #ffd633;
+  color: black !important;
+  padding: 0 1px;
+  cursor: pointer;
+}
+body.dark-mode .highlighted-selection {
+  background-color: #ffae00;
+  color: black !important;
+}
+/* Dark mode feedback ranglari */
+body.dark-mode input.correct-answer {
+  background-color: #2e7d32 !important; /* yashil fon */
+  color: #ffffff !important;            /* oq matn */
+  font-weight: bold;
+}
+
+body.dark-mode input.wrong-answer {
+  background-color: #c62828 !important; /* qizil fon */
+  color: #ffffff !important;            /* oq matn */
+  font-weight: bold;
+}
+
+</style></head>
+<body><button onclick="toggleDarkMode()" style="position:fixed;top:20px;right:20px;padding:10px 15px;z-index:999;">Toggle Dark Mode</button>
+<div class="section">
+  <audio controls="" style="width: 100%; margin-bottom: 20px;">
+    <source src="Listening.mp3" type="audio/mpeg"/>
+            Your browser does not support the audio element.
+        </audio>
+        <div class="section">
+          <h2>PART 1 — Questions 1–10</h2>
+          <p class="instructions">
+            Complete the table below.<br/>
+            <em>Write ONE WORD AND/OR A NUMBER for each answer.</em>
+          </p>
+          
+          <h3>Beechen Festival</h3>
+          <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+            <thead>
+              <tr style="background:#f0f0f0;">
+                <th>Date</th>
+                <th>Time</th>
+                <th>Activity</th>
+                <th>Place</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>June 19th</td>
+                <td>7 p.m.</td>
+                <td>Example – Concert</td>
+                <td>The <input id="q1" name="q1" size="10" type="text"/> <span class="q-num">(1)</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>June 20th</td>
+                <td><input id="q2" name="q2" size="5" type="text"/> p.m. <span class="q-num">(2)</span></td>
+                <td>tour</td>
+                <td>Meet at the <input id="q3" name="q3" size="6" type="text"/> <span class="q-num">(3)</span></td>
+                <td>includes a visit to an old flour mill</span></td>
+              </tr>
+              <tr>
+                <td>June 21st</td>
+                <td>all day</td>
+                <td>children’s <input id="q4" name="q4" size="8" type="text"/> competition <span class="q-num">(4)</span></td>
+                <td>Beechen Community Centre</td>
+                <td>Bring a <input id="q5" name="q5" size="6" type="text"/> <span class="q-num">(5)</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>June 21st</td>
+                <td>evening</td>
+                <td>fireworks</td>
+                <td>By the <input id="q6" name="q6" size="8" type="text"/> <span class="q-num">(6)</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <p class="instructions" style="margin-top:20px;">
+            <strong>Questions 7–10</strong><br/>
+            Complete the notes below.<br/>
+            <em>Write ONE WORD AND/OR A NUMBER for each answer.</em>
+          </p>
+          
+          <ul>
+            <li>This year, activities end by 7 <input id="q7" name="q7" size="5" type="text"/> p.m. <span class="q-num">(7)</span></li>
+            <li>There won’t be any <input id="q8" name="q8" size="8" type="text"/> in the town centre this year. <span class="q-num">(8)</span></li>
+            <li>The festival’s web address www.<input id="q9" name="q9" size="8" type="text"/>.com <span class="q-num">(9)</span></li>
+            <li>Festival organisers would like to receive <input id="q10" name="q10" size="8" type="text"/> online. <span class="q-num">(10)</span></li>
+          </ul>
+        </div>
+        
+
+  <div class="section">
+    <h2>PART 2 — Questions 11–20</h2>
+  
+    <p class="instructions">
+      <strong>Questions 11–14</strong><br/>
+      Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br/>
+      <em>Walking Holiday</em>
+    </p>
+  
+    <div class="question">
+      <strong>11.</strong> Approximately how many passengers does the ferry hold?<br/>
+      <label><input type="radio" name="q11" value="a"/> A. 160</label><br/>
+      <label><input type="radio" name="q11" value="b"/> B. 600</label><br/>
+      <label><input type="radio" name="q11" value="c"/> C. 2000</label>
+    </div>
+  
+    <div class="question">
+      <strong>12.</strong> Which items should the tourists pack in a separate bag?<br/>
+      <label><input type="radio" name="q12" value="a"/> A. food</label><br/>
+      <label><input type="radio" name="q12" value="b"/> B. reading material</label><br/>
+      <label><input type="radio" name="q12" value="c"/> C. medicines</label>
+    </div>
+  
+    <div class="question">
+      <strong>13.</strong> The hostel in La Vega de Ileana has<br/>
+      <label><input type="radio" name="q13" value="a"/> A. good washing facilities</label><br/>
+      <label><input type="radio" name="q13" value="b"/> B. a games room</label><br/>
+      <label><input type="radio" name="q13" value="c"/> C. a number of single bedrooms</label>
+    </div>
+  
+    <div class="question">
+      <strong>14.</strong> Residents at the hostel are not allowed to<br/>
+      <label><input type="radio" name="q14" value="a"/> A. take furniture out of the hostel building</label><br/>
+      <label><input type="radio" name="q14" value="b"/> B. enter the hostel after a certain time</label><br/>
+      <label><input type="radio" name="q14" value="c"/> C. smoke in the hostel gardens</label>
+    </div>
+  
+  <p class="instructions" style="margin-top:20px;">
+      <strong>Questions 15–17</strong><br/>
+      Complete the notes below.<br/>
+      <em>Write NO MORE THAN THREE WORDS for each answer.</em>
+    </p>
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:500px;">
+      <p><strong>Bring:</strong></p>
+      <ul>
+        <li>boots with thick soles</li>
+        <li>Spare <input id="q15" name="q15" size="15" type="text"/> <span class="q-num">(15)</span></li>
+        <li>light waterproofs</li>
+        <li>Sun cream: strength <input id="q16" name="q16" size="10" type="text"/> <span class="q-num">(16)</span></li>
+        <li>a <input id="q17" name="q17" size="15" type="text"/> folder for map, etc <span class="q-num">(17)</span></li>
+      </ul>
+    </div>
+    
+    <p class="instructions" style="margin-top:20px;">
+      <strong>Questions 18–20</strong><br/>
+      Choose <strong>THREE</strong> letters, <strong>A–G</strong>.<br/>
+      Which THREE of the following features of the area in Spain does the speaker talk about?
+    </p>
+  
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="q18_20" value="a"/> A. Altitude</label><br/>
+      <label><input type="checkbox" name="q18_20" value="b"/> B. Coastline</label><br/>
+      <label><input type="checkbox" name="q18_20" value="c"/> C. Economy</label><br/>
+      <label><input type="checkbox" name="q18_20" value="d"/> D. Temperatures</label><br/>
+      <label><input type="checkbox" name="q18_20" value="e"/> E. Vegetation</label><br/>
+      <label><input type="checkbox" name="q18_20" value="f"/> F. Wildlife</label>
+    </div>
+  
+  
+    
+      <h2>PART 3 — Questions 21–30</h2>
+    
+      <p class="instructions">
+        <strong>Questions 21–24</strong><br/>
+        Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br/>
+        <em>Peer Assessment</em>
+      </p>
+    
+      <div class="question">
+        <strong>21.</strong> Sally says many students see peer assessment as<br/>
+        <label><input type="radio" name="q21" value="a"/> A. a way for tutors to save time</label><br/>
+        <label><input type="radio" name="q21" value="b"/> B. a useful learning tool</label><br/>
+        <label><input type="radio" name="q21" value="c"/> C. a valuable form of assessment</label>
+      </div>
+    
+      <div class="question">
+        <strong>22.</strong> What do Steve and Sally agree is an advantage of peer assessment?<br/>
+        <label><input type="radio" name="q22" value="a"/> A. It's more reliable than self-assessment</label><br/>
+        <label><input type="radio" name="q22" value="b"/> B. It increases students' self-awareness</label><br/>
+        <label><input type="radio" name="q22" value="c"/> C. It builds rapport between students</label>
+      </div>
+    
+      <div class="question">
+        <strong>23.</strong> If the peer assessment marks seem incorrect,<br/>
+        <label><input type="radio" name="q23" value="a"/> A. the tutor should check those assignments</label><br/>
+        <label><input type="radio" name="q23" value="b"/> B. students should mark the assignments again</label><br/>
+        <label><input type="radio" name="q23" value="c"/> C. the marking criteria should be rewritten</label>
+      </div>
+    
+      <div class="question">
+        <strong>24.</strong> How were the presentations in the research project marked?<br/>
+        <label><input type="radio" name="q24" value="a"/> A. Students and lecturers marked all the presentations</label><br/>
+        <label><input type="radio" name="q24" value="b"/> B. Students chose which presentations they wanted to mark</label><br/>
+        <label><input type="radio" name="q24" value="c"/> C. Lecturers marked a selection of presentations</label>
+      </div>
+    
+      <p class="instructions" style="margin-top:20px;">
+        <strong>Questions 25–30</strong><br/>
+        How did the following categories of student markers compare with the rest of the group when marking student presentations?<br/>
+        Write the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>, next to questions 25–30.
+      </p>
+
+      <div style="margin-top:10px;">
+        <p><strong>A – They gave higher marks.<br/>
+           B – They gave lower marks.<br/>
+           C – Their marks were not significantly different.</p></strong>
+      </div>
+    
+      <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:550px;">
+        <p><strong>Categories of student markers</strong></p>
+        <p>25. male students marking female presenters 
+          <input id="q25" name="q25" size="2" type="text"/> <span class="q-num">(25)</span>
+        </p>
+        <p>26. female students marking male presenters 
+          <input id="q26" name="q26" size="2" type="text"/> <span class="q-num">(26)</span>
+        </p>
+        <p>27. female students marking female presenters 
+          <input id="q27" name="q27" size="2" type="text"/> <span class="q-num">(27)</span>
+        </p>
+        <p>28. younger students marking older presenters 
+          <input id="q28" name="q28" size="2" type="text"/> <span class="q-num">(28)</span>
+        </p>
+        <p>29. students marking presenters from a different university 
+          <input id="q29" name="q29" size="2" type="text"/> <span class="q-num">(29)</span>
+        </p>
+        <p>30. students who had helped set criteria 
+          <input id="q30" name="q30" size="2" type="text"/> <span class="q-num">(30)</span>
+        </p>
+      </div>
+    
+
+    <h2>PART 4 — Questions 31–40</h2>
+    <p class="instructions">
+      Complete the notes below.<br/>
+      <em>Write ONE WORD ONLY for each answer.</em>
+    </p>
+  
+    <h3>Bislama – The Pidgin English Language of Vanuatu</h3>
+  
+    <div style="border:1px solid #ccc; padding:12px; background:#f9f9f9; max-width:650px;">
+      <p><strong>Languages in Vanuatu</strong></p>
+      <ul>
+        <li>Local languages:
+          <ul>
+            <li>Actively spoken languages: 81</li>
+            <li>Declining languages: 17</li>
+            <li><input id="q31" name="q31" size="15" type="text"/> languages <span class="q-num">(31)</span> : 8</li>
+          </ul>
+        </li>
+      </ul>
+      <p>Total: 106</p>
+      <p>Foreign languages: English is used in the <input id="q32" name="q32" size="15" type="text"/> system <span class="q-num">(32)</span></p>
+  
+      <p><strong>Bislama</strong></p>
+      <p>It is spoken by 90% of the population today.<br/>
+      In the past this language was described as <input id="q33" name="q33" size="15" type="text"/> <span class="q-num">(33)</span></p>
+  
+      <p><strong>History of Bislama</strong></p>
+      <ul>
+        <li>Around 1800 it was used as a common language on many ships.</li>
+        <li>After 1860 Vanuatu people worked in Australian <input id="q34" name="q34" size="15" type="text"/> <span class="q-num">(34)</span></li>
+        <li>After 1950 people moved to the <input id="q35" name="q35" size="15" type="text"/> <span class="q-num">(35)</span></li>
+      </ul>
+  
+      <p><strong>Description of Bislama</strong></p>
+      <p><em>General</em></p>
+      <p>Bislama should be called a <input id="q36" name="q36" size="15" type="text"/> pidgin <span class="q-num">(36)</span></p>
+  
+      <p><em>Vocabulary</em></p>
+      <ul>
+        <li>Most words come from English.</li>
+        <li>Words such as "from" may have more <input id="q37" name="q37" size="15" type="text"/> in Bislama <span class="q-num">(37)</span></li>
+        <li>Less than 10% of words are of <input id="q38" name="q38" size="15" type="text"/> origin <span class="q-num">(38)</span></li>
+        <li>Pacific words describe the natural world and also local <input id="q39" name="q39" size="15" type="text"/> <span class="q-num">(39)</span></li>
+      </ul>
+  
+      <p><em>Grammar</em></p>
+      <ul>
+        <li>It is based on Vanuatu languages.</li>
+        <li>The word "long" acts as an important <input id="q40" name="q40" size="15" type="text"/> in Bislama <span class="q-num">(40)</span></li>
+      </ul>
+    </div>
+ 
+
+<div style="text-align:center; margin:20px;"><button onclick="checkAllAnswers()" style="padding:10px 20px; font-size:16px;">Check Answers</button><p id="score-output" style="margin-top:10px;"></p></div>
+<script>
+function checkAllAnswers() {
+  const correctAnswers = {
+    // Part 1 — Beechen Festival
+    q1: "theatre", q2: "4.30", q3: "station", q4: "cooking", q5: "plate",
+    q6: "river", q7: "11.15", q8: "parking", q9: "events", q10: "feedback",
+
+    // Part 2 — Walking Holiday
+    q11: "c", q12: "b", q13: "a", q14: "b",
+    q15: "socks", q16: "total block", q17: "plastic",
+    q18_20: ["a","f","c"],
+
+    // Part 3 — Peer Assessment
+    q21: "a", q22: "b", q23: "b", q24: "a",
+    q25: "b", q26: "c", q27: "c", q28: "a", q29: "c", q30: "b",
+
+    // Part 4 — Bislama
+    q31: "extinct", q32: "education", q33: "broken", q34: "plantation",
+    q35: "city", q36: "developed", q37: "meanings",
+    q38: "french", q39: "culture", q40: "preposition"
+  };
+
+  let score = 0;
+  let total = 40;
+
+  for (const [qid, correct] of Object.entries(correctAnswers)) {
+    if (qid === "q18_20") continue; // checkboxes alohida
+
+    let element = document.getElementById(qid);
+    let userInput = "";
+
+    if (element) {
+      // text
+      if (element.type === "text") {
+        userInput = element.value.trim().toLowerCase();
+        if (userInput === correct.toLowerCase()) {
+          element.style.backgroundColor = "#d4f4d7"; // ✅ to‘g‘ri
+          score++;
+        } else {
+          element.style.backgroundColor = "#f8d7da"; // ❌ noto‘g‘ri
+          // ✅ to‘g‘ri javobni ko‘rsatish
+          if (!element.nextElementSibling || !element.nextElementSibling.classList.contains("correct-answer")) {
+            let span = document.createElement("span");
+            span.className = "correct-answer";
+            span.style.color = "green";
+            span.style.fontWeight = "bold";
+            span.textContent = ` (Correct: ${correct})`;
+            element.insertAdjacentElement("afterend", span);
+          }
+        }
+      }
+    } else {
+      // multiple choice radio
+     let radios = document.getElementsByName(qid);
+      let chosen = "";
+      for (const r of radios) {
+        if (r.checked) chosen = r.value.toLowerCase();
+      }
+
+      if (chosen === correct.toLowerCase()) {
+        score++;
+        for (const r of radios) {
+          if (r.value.toLowerCase() === chosen) {
+            r.parentElement.style.backgroundColor = "#d4f4d7"; // ✅ to‘g‘ri yashil
+          }
+        }
+      } else {
+        for (const r of radios) {
+          if (r.checked) {
+            r.parentElement.style.backgroundColor = "#f8d7da"; // ❌ noto‘g‘ri qizil
+          }
+        }
+        // ✅ har doim to‘g‘ri javobni ko‘rsatish
+        let correctRadio = Array.from(radios).find(rr => rr.value.toLowerCase() === correct.toLowerCase());
+        if (correctRadio) {
+          correctRadio.parentElement.style.backgroundColor = "#d4f4d7"; // yashil fon
+          if (!correctRadio.parentElement.querySelector(".correct-answer")) {
+            let span = document.createElement("span");
+            span.className = "correct-answer";
+            span.style.color = "green";
+            span.style.fontWeight = "bold";
+            span.textContent = " (Correct)";
+            correctRadio.parentElement.appendChild(span);
+          }
+        }
+      }
+        }
+      }
+
+let correct = correctAnswers.q18_20;
+
+document.querySelectorAll('input[name="q18_20"]').forEach(c => {
+  let val = c.value.toLowerCase();
+  if (c.checked) {
+    if (correct.includes(val)) {
+      score++; // har bir to‘g‘ri tanlov uchun 1 ball
+      c.parentElement.style.backgroundColor = "#d4f4d7"; // yashil
+      if (!c.parentElement.querySelector(".correct-answer")) {
+        let span = document.createElement("span");
+        span.className = "correct-answer";
+        span.style.color = "green";
+        span.style.fontWeight = "bold";
+        span.textContent = " (Correct)";
+        c.parentElement.appendChild(span);
+      }
+    } else {
+      c.parentElement.style.backgroundColor = "#f8d7da"; // qizil
+    }
+  } else {
+    // agar to‘g‘ri javob belgilanmagan bo‘lsa, uni ko‘rsatamiz
+    if (correct.includes(val)) {
+      c.parentElement.style.backgroundColor = "#d4f4d7";
+      if (!c.parentElement.querySelector(".correct-answer")) {
+        let span = document.createElement("span");
+        span.className = "correct-answer";
+        span.style.color = "green";
+        span.style.fontWeight = "bold";
+        span.textContent = " (Correct)";
+        c.parentElement.appendChild(span);
+      }
+    }
+  }
+});
+  // Natija
+  document.getElementById("score-output").textContent = `Total Score: ${score} / ${total}`;
+}
+
+document.addEventListener('mouseup', () => {
+  const selection = window.getSelection();
+  const text = selection.toString().trim();
+  if (text.length > 0 && selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    if (!range || range.collapsed) return;
+
+    const span = document.createElement('span');
+    span.className = 'highlighted-selection';
+    span.setAttribute('title', 'Double-click to remove highlight');
+
+    span.addEventListener('dblclick', function() {
+      const parent = this.parentNode;
+      while (this.firstChild) parent.insertBefore(this.firstChild, this);
+      parent.removeChild(this);
+    });
+
+    try {
+      range.surroundContents(span);
+    } catch (e) {
+      alert("Please select non-overlapping text within the same element.");
+    }
+
+    selection.removeAllRanges();
+  }
+});
+</script><script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+document.addEventListener("DOMContentLoaded", function() {
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+});
+</script>
+</body></html>

@@ -1,0 +1,248 @@
+{
+  "id": "1782030276441-FULL_LISTENING-listening-s2",
+  "slug": "1782030276441-FULL_LISTENING-listening-s2",
+  "title": "Full Listening Test — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/1782030276441-FULL_LISTENING.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–14",
+      "instruction": "Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15–20",
+      "instruction": "Label the map below. Write the correct letter, A–J, next to questions 15–20.",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 15,
+      "type": "sentence_completion",
+      "question": "15 the bank →...",
+      "options": [],
+      "answer": "E"
+    },
+    {
+      "number": 16,
+      "type": "sentence_completion",
+      "question": "16 the house →...",
+      "options": [],
+      "answer": "I"
+    },
+    {
+      "number": 17,
+      "type": "sentence_completion",
+      "question": "17 the hostel →...",
+      "options": [],
+      "answer": "J"
+    },
+    {
+      "number": 18,
+      "type": "sentence_completion",
+      "question": "18 the flat →...",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 19,
+      "type": "sentence_completion",
+      "question": "19 the post office →...",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 20,
+      "type": "sentence_completion",
+      "question": "20 the bus stop →...",
+      "options": [],
+      "answer": "G"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1782030276441-FULL_LISTENING",
+  "createdAt": "2026-06-21T08:24:36.616Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/1782030276441-FULL_LISTENING.mp3",
+      "instruction": "",
+      "answerText": "11: A\n12: A\n13: B\n14: B\n15: E\n16: I\n17: J\n18: A\n19: C\n20: G",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11–14",
+          "title": "",
+          "example": "",
+          "instruction": "Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "text": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "options": [],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "text": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "options": [],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "text": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "options": [],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "text": "Questions 11–14 Which type of accommodation includes the following features? Write the correct letter, A, B or C, next to questions 11–14. Types of accommodation A the flat B the house C the hostel Features A B C 11 a garden......... 12 a garage......... 13 an alarm system......... 14 new furniture.........",
+              "options": [],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "note_completion",
+          "questionRange": "Questions 15–20",
+          "title": "",
+          "example": "",
+          "instruction": "Label the map below. Write the correct letter, A–J, next to questions 15–20.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "• <strong>15</strong> the bank → {{15}}",
+            "• <strong>16</strong> the house → {{16}}",
+            "• <strong>17</strong> the hostel → {{17}}",
+            "• <strong>18</strong> the flat → {{18}}",
+            "• <strong>19</strong> the post office → {{19}}",
+            "• <strong>20</strong> the bus stop → {{20}}"
+          ],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "15 the bank →...",
+              "text": "15 the bank →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "E"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "16 the house →...",
+              "text": "16 the house →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "I"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "17 the hostel →...",
+              "text": "17 the hostel →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "J"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "18 the flat →...",
+              "text": "18 the flat →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "A"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "19 the post office →...",
+              "text": "19 the post office →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "C"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "20 the bus stop →...",
+              "text": "20 the bus stop →...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "G"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

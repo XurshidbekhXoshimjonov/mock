@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTSX Listening Full Test — 02.09.2025</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --panel-2: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbe3ef;
+      --accent: #2563eb;
+      --accent-2: #7c3aed;
+      --danger: #dc2626;
+      --ok: #16a34a;
+      --warn: #f59e0b;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    body.dark-mode {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #182235;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --border: #334155;
+      --accent: #60a5fa;
+      --accent-2: #a78bfa;
+      --danger: #f87171;
+      --ok: #4ade80;
+      --warn: #fbbf24;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .full-test-app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      margin: -22px -22px 20px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 230px;
+    }
+
+    .logo-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.28);
+    }
+
+    .brand strong { display: block; font-size: 16px; }
+    .brand span { display: block; font-size: 12px; opacity: 0.88; }
+
+    .part-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .part-nav a,
+    .top-action {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .timer-pill {
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(15, 23, 42, 0.2);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-weight: 900;
+      min-width: 86px;
+      text-align: center;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(25px, 3vw, 38px);
+      letter-spacing: -0.04em;
+    }
+
+    .hero p { margin: 0; color: var(--muted); }
+
+    audio {
+      width: 100%;
+      margin-top: 18px;
+      display: block;
+    }
+
+    .ieltsx-part {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin: 20px 0;
+      scroll-margin-top: 88px;
+    }
+
+    .part-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .part-heading h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    .range-pill {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    h3 { margin: 20px 0 10px; }
+
+    .instructions {
+      border-left: 4px solid var(--accent);
+      background: var(--panel-2);
+      padding: 12px 14px;
+      border-radius: 14px;
+      margin: 14px 0;
+      color: var(--text);
+    }
+
+    .instruction-red {
+      color: var(--danger);
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    .question-card,
+    .note-box {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .question-card label,
+    .checkbox-group label {
+      display: block;
+      margin: 8px 0;
+      padding: 8px 10px;
+      border-radius: 12px;
+      transition: background .15s ease;
+    }
+
+    .question-card label:hover,
+    .checkbox-group label:hover { background: rgba(37, 99, 235, .08); }
+
+    input[type="text"] {
+      min-width: 96px;
+      max-width: 220px;
+      width: 170px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font: inherit;
+      margin: 0 4px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+    }
+
+    input[type="radio"], input[type="checkbox"] { transform: translateY(1px); }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    th:last-child, td:last-child { border-right: 0; }
+    tbody tr:last-child td { border-bottom: 0; }
+    thead th { background: var(--panel-2); color: var(--text); }
+
+    .q-num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 28px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 900;
+      font-size: 12px;
+      margin-left: 3px;
+    }
+
+    .submit-panel {
+      position: sticky;
+      bottom: 14px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+
+    .result-box {
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .metric strong { display:block; font-size: 28px; }
+    .metric span { color: var(--muted); font-size: 13px; }
+
+    .answer-review {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    .answer-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: var(--panel-2);
+      font-size: 13px;
+    }
+
+    .answer-item.ok { border-color: var(--ok); }
+    .answer-item.bad { border-color: var(--danger); }
+
+    .is-correct {
+      background: color-mix(in srgb, var(--ok) 20%, var(--panel)) !important;
+      border-color: var(--ok) !important;
+    }
+
+    .is-wrong {
+      background: color-mix(in srgb, var(--danger) 20%, var(--panel)) !important;
+      border-color: var(--danger) !important;
+    }
+
+    .correct-label {
+      color: var(--ok);
+      font-weight: 900;
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+
+    .highlighted-selection {
+      background: #ffd633;
+      color: #111 !important;
+      border-radius: 3px;
+      padding: 0 2px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .part-nav { justify-content: flex-start; }
+      .submit-panel { align-items: stretch; flex-direction: column; }
+      .result-grid { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+      input[type="text"] { width: 140px; }
+    }
+  </style>
+</head>
+<body data-skill="listening" data-test-mode="full-test" data-total-questions="40">
+  <div class="full-test-app" id="ieltsxFullTestApp">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo-dot">IX</div>
+        <div>
+          <strong>IELTSX Full Test Player</strong>
+          <span>Listening • 40 questions • 4 parts</span>
+        </div>
+      </div>
+      <nav class="part-nav" aria-label="Part navigation">
+        <a href="#part-1">Part 1</a>
+        <a href="#part-2">Part 2</a>
+        <a href="#part-3">Part 3</a>
+        <a href="#part-4">Part 4</a>
+      </nav>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div class="timer-pill" id="timer">40:00</div>
+        <button class="top-action" type="button" onclick="toggleDarkMode()">Dark</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Listening Full Test — 02.09.2025</h1>
+      <p>Audio fayl shu HTML bilan bir papkada <strong>Listening.mp3</strong> nomida bo‘lsa ishlaydi. Admin panelga yuklashda audio alohida ulanishi mumkin.</p>
+      <audio controls preload="metadata" data-audio-role="full-test-audio">
+        <source src="Listening.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+
+    <main>
+      <section class="ieltsx-part" id="part-1" data-part="1" data-question-start="1" data-question-end="10">
+        <div class="part-heading"><h2>PART 1</h2><span class="range-pill">Questions 1–10</span></div>
+        <p class="instructions">Complete the table below.<br><em class="instruction-red">Write ONE WORD AND/OR A NUMBER for each answer.</em></p>
+        <h3>Beechen Festival</h3>
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Time</th><th>Activity</th><th>Place</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>June 19th</td>
+              <td>7 p.m.</td>
+              <td>Example – Concert</td>
+              <td>The <input id="q1" name="q1" data-q="1" type="text"> <span class="q-num">1</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>June 20th</td>
+              <td><input id="q2" name="q2" data-q="2" type="text"> p.m. <span class="q-num">2</span></td>
+              <td>tour</td>
+              <td>Meet at the <input id="q3" name="q3" data-q="3" type="text"> <span class="q-num">3</span></td>
+              <td>includes a visit to an old flour mill</td>
+            </tr>
+            <tr>
+              <td>June 21st</td>
+              <td>all day</td>
+              <td>children’s <input id="q4" name="q4" data-q="4" type="text"> competition <span class="q-num">4</span></td>
+              <td>Beechen Community Centre</td>
+              <td>Bring a <input id="q5" name="q5" data-q="5" type="text"> <span class="q-num">5</span></td>
+            </tr>
+            <tr>
+              <td>June 21st</td>
+              <td>evening</td>
+              <td>fireworks</td>
+              <td>By the <input id="q6" name="q6" data-q="6" type="text"> <span class="q-num">6</span></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="instructions"><strong>Questions 7–10</strong><br>Complete the notes below.<br><em class="instruction-red">Write ONE WORD AND/OR A NUMBER for each answer.</em></p>
+        <ul>
+          <li>This year, activities end by 7 <input id="q7" name="q7" data-q="7" type="text"> p.m. <span class="q-num">7</span></li>
+          <li>There won’t be any <input id="q8" name="q8" data-q="8" type="text"> in the town centre this year. <span class="q-num">8</span></li>
+          <li>The festival’s web address www.<input id="q9" name="q9" data-q="9" type="text">.com <span class="q-num">9</span></li>
+          <li>Festival organisers would like to receive <input id="q10" name="q10" data-q="10" type="text"> online. <span class="q-num">10</span></li>
+        </ul>
+      </section>
+
+      <section class="ieltsx-part" id="part-2" data-part="2" data-question-start="11" data-question-end="20">
+        <div class="part-heading"><h2>PART 2</h2><span class="range-pill">Questions 11–20</span></div>
+        <p class="instructions"><strong>Questions 11–14</strong><br>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br><em>Walking Holiday</em></p>
+
+        <div class="question-card"><strong>11.</strong> Approximately how many passengers does the ferry hold?<label><input type="radio" name="q11" value="a"> A. 160</label><label><input type="radio" name="q11" value="b"> B. 600</label><label><input type="radio" name="q11" value="c"> C. 2000</label></div>
+        <div class="question-card"><strong>12.</strong> Which items should the tourists pack in a separate bag?<label><input type="radio" name="q12" value="a"> A. food</label><label><input type="radio" name="q12" value="b"> B. reading material</label><label><input type="radio" name="q12" value="c"> C. medicines</label></div>
+        <div class="question-card"><strong>13.</strong> The hostel in La Vega de Ileana has<label><input type="radio" name="q13" value="a"> A. good washing facilities</label><label><input type="radio" name="q13" value="b"> B. a games room</label><label><input type="radio" name="q13" value="c"> C. a number of single bedrooms</label></div>
+        <div class="question-card"><strong>14.</strong> Residents at the hostel are not allowed to<label><input type="radio" name="q14" value="a"> A. take furniture out of the hostel building</label><label><input type="radio" name="q14" value="b"> B. enter the hostel after a certain time</label><label><input type="radio" name="q14" value="c"> C. smoke in the hostel gardens</label></div>
+
+        <p class="instructions"><strong>Questions 15–17</strong><br>Complete the notes below.<br><em class="instruction-red">Write NO MORE THAN THREE WORDS for each answer.</em></p>
+        <div class="note-box">
+          <p><strong>Bring:</strong></p>
+          <ul>
+            <li>boots with thick soles</li>
+            <li>Spare <input id="q15" name="q15" data-q="15" type="text"> <span class="q-num">15</span></li>
+            <li>light waterproofs</li>
+            <li>Sun cream: strength <input id="q16" name="q16" data-q="16" type="text"> <span class="q-num">16</span></li>
+            <li>a <input id="q17" name="q17" data-q="17" type="text"> folder for map, etc <span class="q-num">17</span></li>
+          </ul>
+        </div>
+
+        <p class="instructions"><strong>Questions 18–20</strong><br>Choose <strong>THREE</strong> letters, <strong>A–F</strong>.<br>Which THREE of the following features of the area in Spain does the speaker talk about?</p>
+        <div class="checkbox-group question-card" data-q-group="18-20">
+          <label><input type="checkbox" name="q18_20" value="a"> A. Altitude</label>
+          <label><input type="checkbox" name="q18_20" value="b"> B. Coastline</label>
+          <label><input type="checkbox" name="q18_20" value="c"> C. Economy</label>
+          <label><input type="checkbox" name="q18_20" value="d"> D. Temperatures</label>
+          <label><input type="checkbox" name="q18_20" value="e"> E. Vegetation</label>
+          <label><input type="checkbox" name="q18_20" value="f"> F. Wildlife</label>
+        </div>
+      </section>
+
+      <section class="ieltsx-part" id="part-3" data-part="3" data-question-start="21" data-question-end="30">
+        <div class="part-heading"><h2>PART 3</h2><span class="range-pill">Questions 21–30</span></div>
+        <p class="instructions"><strong>Questions 21–24</strong><br>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br><em>Peer Assessment</em></p>
+        <div class="question-card"><strong>21.</strong> Sally says many students see peer assessment as<label><input type="radio" name="q21" value="a"> A. a way for tutors to save time</label><label><input type="radio" name="q21" value="b"> B. a useful learning tool</label><label><input type="radio" name="q21" value="c"> C. a valuable form of assessment</label></div>
+        <div class="question-card"><strong>22.</strong> What do Steve and Sally agree is an advantage of peer assessment?<label><input type="radio" name="q22" value="a"> A. It's more reliable than self-assessment</label><label><input type="radio" name="q22" value="b"> B. It increases students' self-awareness</label><label><input type="radio" name="q22" value="c"> C. It builds rapport between students</label></div>
+        <div class="question-card"><strong>23.</strong> If the peer assessment marks seem incorrect,<label><input type="radio" name="q23" value="a"> A. the tutor should check those assignments</label><label><input type="radio" name="q23" value="b"> B. students should mark the assignments again</label><label><input type="radio" name="q23" value="c"> C. the marking criteria should be rewritten</label></div>
+        <div class="question-card"><strong>24.</strong> How were the presentations in the research project marked?<label><input type="radio" name="q24" value="a"> A. Students and lecturers marked all the presentations</label><label><input type="radio" name="q24" value="b"> B. Students chose which presentations they wanted to mark</label><label><input type="radio" name="q24" value="c"> C. Lecturers marked a selection of presentations</label></div>
+
+        <p class="instructions"><strong>Questions 25–30</strong><br>How did the following categories of student markers compare with the rest of the group when marking student presentations?<br>Write the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>, next to questions 25–30.</p>
+        <div class="note-box"><strong>A – They gave higher marks.<br>B – They gave lower marks.<br>C – Their marks were not significantly different.</strong></div>
+        <div class="note-box">
+          <p><strong>Categories of student markers</strong></p>
+          <p>25. male students marking female presenters <input id="q25" name="q25" data-q="25" type="text"> <span class="q-num">25</span></p>
+          <p>26. female students marking male presenters <input id="q26" name="q26" data-q="26" type="text"> <span class="q-num">26</span></p>
+          <p>27. female students marking female presenters <input id="q27" name="q27" data-q="27" type="text"> <span class="q-num">27</span></p>
+          <p>28. younger students marking older presenters <input id="q28" name="q28" data-q="28" type="text"> <span class="q-num">28</span></p>
+          <p>29. students marking presenters from a different university <input id="q29" name="q29" data-q="29" type="text"> <span class="q-num">29</span></p>
+          <p>30. students who had helped set criteria <input id="q30" name="q30" data-q="30" type="text"> <span class="q-num">30</span></p>
+        </div>
+      </section>
+
+      <section class="ieltsx-part" id="part-4" data-part="4" data-question-start="31" data-question-end="40">
+        <div class="part-heading"><h2>PART 4</h2><span class="range-pill">Questions 31–40</span></div>
+        <p class="instructions">Complete the notes below.<br><em class="instruction-red">Write ONE WORD ONLY for each answer.</em></p>
+        <h3>Bislama – The Pidgin English Language of Vanuatu</h3>
+        <div class="note-box">
+          <p><strong>Languages in Vanuatu</strong></p>
+          <ul>
+            <li>Local languages:
+              <ul>
+                <li>Actively spoken languages: 81</li>
+                <li>Declining languages: 17</li>
+                <li><input id="q31" name="q31" data-q="31" type="text"> languages <span class="q-num">31</span> : 8</li>
+              </ul>
+            </li>
+          </ul>
+          <p>Total: 106</p>
+          <p>Foreign languages: English is used in the <input id="q32" name="q32" data-q="32" type="text"> system <span class="q-num">32</span></p>
+          <p><strong>Bislama</strong></p>
+          <p>It is spoken by 90% of the population today.<br>In the past this language was described as <input id="q33" name="q33" data-q="33" type="text"> <span class="q-num">33</span></p>
+          <p><strong>History of Bislama</strong></p>
+          <ul>
+            <li>Around 1800 it was used as a common language on many ships.</li>
+            <li>After 1860 Vanuatu people worked in Australian <input id="q34" name="q34" data-q="34" type="text"> <span class="q-num">34</span></li>
+            <li>After 1950 people moved to the <input id="q35" name="q35" data-q="35" type="text"> <span class="q-num">35</span></li>
+          </ul>
+          <p><strong>Description of Bislama</strong></p>
+          <p><em>General</em></p>
+          <p>Bislama should be called a <input id="q36" name="q36" data-q="36" type="text"> pidgin <span class="q-num">36</span></p>
+          <p><em>Vocabulary</em></p>
+          <ul>
+            <li>Most words come from English.</li>
+            <li>Words such as "from" may have more <input id="q37" name="q37" data-q="37" type="text"> in Bislama <span class="q-num">37</span></li>
+            <li>Less than 10% of words are of <input id="q38" name="q38" data-q="38" type="text"> origin <span class="q-num">38</span></li>
+            <li>Pacific words describe the natural world and also local <input id="q39" name="q39" data-q="39" type="text"> <span class="q-num">39</span></li>
+          </ul>
+          <p><em>Grammar</em></p>
+          <ul>
+            <li>It is based on Vanuatu languages.</li>
+            <li>The word "long" acts as an important <input id="q40" name="q40" data-q="40" type="text"> in Bislama <span class="q-num">40</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="result-box" id="resultBox" aria-live="polite">
+        <h2>Result</h2>
+        <div class="result-grid">
+          <div class="metric"><strong id="scoreMetric">0/40</strong><span>Correct answers</span></div>
+          <div class="metric"><strong id="bandMetric">0.0</strong><span>Estimated Listening Band</span></div>
+          <div class="metric"><strong id="percentMetric">0%</strong><span>Accuracy</span></div>
+        </div>
+        <div class="answer-review" id="answerReview"></div>
+      </section>
+
+      <div class="submit-panel">
+        <div><strong>Ready?</strong><br><span style="color:var(--muted);font-size:13px;">Submit bosilgandan keyin to‘g‘ri/noto‘g‘ri javoblar va estimated band chiqadi.</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-secondary" type="button" onclick="clearAllAnswers()">Clear</button>
+          <button class="btn-primary" type="button" onclick="submitFullTest()">Submit Full Test</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    window.IELTSX_FULL_TEST = {
+      title: "Listening Full Test — 02.09.2025",
+      skill: "listening",
+      mode: "full-test",
+      totalQuestions: 40,
+      parts: [
+        { part: 1, from: 1, to: 10 },
+        { part: 2, from: 11, to: 20 },
+        { part: 3, from: 21, to: 30 },
+        { part: 4, from: 31, to: 40 }
+      ],
+      answers: {
+        q1: ["theatre", "theater"],
+        q2: ["4.30", "4:30", "4 30"],
+        q3: ["station"],
+        q4: ["cooking"],
+        q5: ["plate"],
+        q6: ["river"],
+        q7: ["11.15", "11:15", "11 15"],
+        q8: ["parking"],
+        q9: ["events"],
+        q10: ["feedback"],
+        q11: ["c"], q12: ["b"], q13: ["a"], q14: ["b"],
+        q15: ["socks"],
+        q16: ["total block", "totalblock"],
+        q17: ["plastic"],
+        q18_20: ["a", "c", "f"],
+        q21: ["a"], q22: ["b"], q23: ["b"], q24: ["a"],
+        q25: ["b"], q26: ["c"], q27: ["c"], q28: ["a"], q29: ["c"], q30: ["b"],
+        q31: ["extinct"],
+        q32: ["education"],
+        q33: ["broken"],
+        q34: ["plantation", "plantations"],
+        q35: ["city", "cities"],
+        q36: ["developed"],
+        q37: ["meanings"],
+        q38: ["french"],
+        q39: ["culture"],
+        q40: ["preposition"]
+      }
+    };
+
+    const ANSWERS = window.IELTSX_FULL_TEST.answers;
+    const TOTAL = 40;
+
+    function normalizeAnswer(value) {
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[’']/g, "'")
+        .replace(/\s+/g, " ");
+    }
+
+    function isCorrect(qid, userAnswer) {
+      const valid = ANSWERS[qid] || [];
+      const normalized = normalizeAnswer(userAnswer);
+      return valid.some(answer => normalizeAnswer(answer) === normalized);
+    }
+
+    function getBand(score) {
+      if (score >= 39) return "9.0";
+      if (score >= 37) return "8.5";
+      if (score >= 35) return "8.0";
+      if (score >= 32) return "7.5";
+      if (score >= 30) return "7.0";
+      if (score >= 26) return "6.5";
+      if (score >= 23) return "6.0";
+      if (score >= 18) return "5.5";
+      if (score >= 16) return "5.0";
+      if (score >= 13) return "4.5";
+      if (score >= 10) return "4.0";
+      if (score >= 8) return "3.5";
+      if (score >= 6) return "3.0";
+      if (score >= 4) return "2.5";
+      return "2.0";
+    }
+
+    function removeOldFeedback() {
+      document.querySelectorAll('.is-correct, .is-wrong').forEach(el => el.classList.remove('is-correct', 'is-wrong'));
+      document.querySelectorAll('.correct-label').forEach(el => el.remove());
+    }
+
+    function markTextQuestion(qNum, review) {
+      const qid = `q${qNum}`;
+      const input = document.getElementById(qid);
+      const correct = isCorrect(qid, input ? input.value : "");
+      const correctText = (ANSWERS[qid] || [""])[0];
+      if (input) {
+        input.classList.add(correct ? 'is-correct' : 'is-wrong');
+        if (!correct) {
+          const span = document.createElement('span');
+          span.className = 'correct-label';
+          span.textContent = `Correct: ${correctText}`;
+          input.insertAdjacentElement('afterend', span);
+        }
+      }
+      review.push({ q: qNum, ok: correct, correct: correctText, user: input ? input.value : "" });
+      return correct ? 1 : 0;
+    }
+
+    function markRadioQuestion(qNum, review) {
+      const qid = `q${qNum}`;
+      const radios = Array.from(document.querySelectorAll(`input[name="${qid}"]`));
+      const selected = radios.find(r => r.checked);
+      const user = selected ? selected.value : "";
+      const correctText = (ANSWERS[qid] || [""])[0];
+      const correct = isCorrect(qid, user);
+      radios.forEach(radio => {
+        const label = radio.closest('label');
+        if (!label) return;
+        if (radio.value.toLowerCase() === correctText.toLowerCase()) {
+          label.classList.add('is-correct');
+          if (!label.querySelector('.correct-label')) {
+            const span = document.createElement('span');
+            span.className = 'correct-label';
+            span.textContent = 'Correct';
+            label.appendChild(span);
+          }
+        }
+        if (radio.checked && !correct) label.classList.add('is-wrong');
+      });
+      review.push({ q: qNum, ok: correct, correct: correctText.toUpperCase(), user: user ? user.toUpperCase() : "—" });
+      return correct ? 1 : 0;
+    }
+
+    function markCheckboxGroup(review) {
+      const correctSet = ANSWERS.q18_20.map(v => v.toLowerCase());
+      const boxes = Array.from(document.querySelectorAll('input[name="q18_20"]'));
+      let score = 0;
+      boxes.forEach(box => {
+        const label = box.closest('label');
+        const value = box.value.toLowerCase();
+        const shouldBeChecked = correctSet.includes(value);
+        if (shouldBeChecked && box.checked) score += 1;
+        if (label) {
+          if (shouldBeChecked) {
+            label.classList.add('is-correct');
+            if (!label.querySelector('.correct-label')) {
+              const span = document.createElement('span');
+              span.className = 'correct-label';
+              span.textContent = 'Correct';
+              label.appendChild(span);
+            }
+          }
+          if (box.checked && !shouldBeChecked) label.classList.add('is-wrong');
+        }
+      });
+      const selected = boxes.filter(b => b.checked).map(b => b.value.toUpperCase());
+      correctSet.forEach((ans, idx) => {
+        const num = 18 + idx;
+        const ok = selected.includes(ans.toUpperCase());
+        review.push({ q: num, ok, correct: ans.toUpperCase(), user: selected.join(', ') || '—' });
+      });
+      return score;
+    }
+
+    function renderReview(review) {
+      const container = document.getElementById('answerReview');
+      container.innerHTML = review
+        .sort((a, b) => a.q - b.q)
+        .map(item => `<div class="answer-item ${item.ok ? 'ok' : 'bad'}"><strong>Q${item.q}</strong><br>${item.ok ? '✅' : '❌'} Your: ${item.user || '—'}<br>Correct: ${item.correct}</div>`)
+        .join('');
+    }
+
+    function submitFullTest() {
+      removeOldFeedback();
+      let score = 0;
+      const review = [];
+      [1,2,3,4,5,6,7,8,9,10,15,16,17,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40].forEach(q => score += markTextQuestion(q, review));
+      [11,12,13,14,21,22,23,24].forEach(q => score += markRadioQuestion(q, review));
+      score += markCheckboxGroup(review);
+
+      const band = getBand(score);
+      document.getElementById('scoreMetric').textContent = `${score}/${TOTAL}`;
+      document.getElementById('bandMetric').textContent = band;
+      document.getElementById('percentMetric').textContent = `${Math.round((score / TOTAL) * 100)}%`;
+      renderReview(review);
+      document.getElementById('resultBox').style.display = 'block';
+      document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearAllAnswers() {
+      document.querySelectorAll('input[type="text"]').forEach(i => { i.value = ''; i.classList.remove('is-correct', 'is-wrong'); });
+      document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(i => { i.checked = false; });
+      document.querySelectorAll('.is-correct, .is-wrong').forEach(el => el.classList.remove('is-correct', 'is-wrong'));
+      document.querySelectorAll('.correct-label').forEach(el => el.remove());
+      document.getElementById('resultBox').style.display = 'none';
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('ieltsxDarkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    function startTimer(durationSeconds) {
+      const timer = document.getElementById('timer');
+      let remaining = durationSeconds;
+      setInterval(() => {
+        const min = Math.floor(remaining / 60).toString().padStart(2, '0');
+        const sec = (remaining % 60).toString().padStart(2, '0');
+        timer.textContent = `${min}:${sec}`;
+        if (remaining > 0) remaining -= 1;
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('ieltsxDarkMode') === 'true') document.body.classList.add('dark-mode');
+      startTimer(40 * 60);
+
+      document.querySelectorAll('input[name="q18_20"]').forEach(box => {
+        box.addEventListener('change', () => {
+          const checked = document.querySelectorAll('input[name="q18_20"]:checked');
+          if (checked.length > 3) box.checked = false;
+        });
+      });
+    });
+
+    document.addEventListener('mouseup', () => {
+      const selection = window.getSelection();
+      const text = selection.toString().trim();
+      if (!text || !selection.rangeCount) return;
+      const range = selection.getRangeAt(0);
+      if (range.collapsed) return;
+      const span = document.createElement('span');
+      span.className = 'highlighted-selection';
+      span.title = 'Double-click to remove highlight';
+      span.addEventListener('dblclick', function() {
+        const parent = this.parentNode;
+        while (this.firstChild) parent.insertBefore(this.firstChild, this);
+        parent.removeChild(this);
+      });
+      try { range.surroundContents(span); selection.removeAllRanges(); } catch (err) {}
+    });
+  </script>
+</body>
+</html>

@@ -22,22 +22,52 @@ const ListeningComponents = (() => {
             : escapeHtml(value).replace(/\n/g, "<br>");
     }
 
-    function answerInput(questionNumber, className = "") {
+    function answerInput(questionNumber, options = [], className = "") {
         const number = Number(questionNumber);
-        return `<span class="lc-answer-inline ${className}" data-question="${number}">
-            <span class="lc-question-badge">${number}</span>
-            <input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
-        </span>`;
+        
+        // If className is passed as second arg (compatibility helper)
+        if (typeof options === "string") {
+            className = options;
+            options = [];
+        }
+
+        if (Array.isArray(options) && options.length > 0) {
+            const optionTags = options.map((opt) => {
+                const letter = opt.letter || opt.value || "";
+                const text = opt.text || opt.html || letter;
+                const cleanText = text === letter ? "" : ` - ${text}`;
+                return `<option value="${escapeHtml(letter)}">${escapeHtml(letter)}${escapeHtml(cleanText)}</option>`;
+            }).join("");
+
+            return `<span class="lc-answer-inline ${className}" data-question="${number}">
+                <select class="lc-inline-select" id="q${number}" name="q${number}" aria-label="Answer ${number}">
+                    <option value="">Select</option>
+                    ${optionTags}
+                </select>
+                <span class="lc-question-badge">${number}</span>
+            </span>`;
+        }
+
+        return `<span class="lc-answer-inline ${className}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"></span>`;
     }
 
-    function renderPlaceholderText(value) {
-        const text = String(value || "");
+    function renderPlaceholderText(value, options = []) {
+        let text = String(value || "");
+        
+        // Unescape common HTML entities first to avoid double-escaping bugs
+        text = text
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'");
+
         const parts = [];
         let lastIndex = 0;
 
         for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
             parts.push(escapeHtml(text.slice(lastIndex, match.index)));
-            parts.push(answerInput(match[1]));
+            parts.push(answerInput(match[1], options));
             lastIndex = match.index + match[0].length;
         }
 
@@ -51,34 +81,39 @@ const ListeningComponents = (() => {
             .replace(/&lt;\/u&gt;/gi, "</u>")
             .replace(/&lt;i&gt;/gi, "<em>")
             .replace(/&lt;\/i&gt;/gi, "</em>")
+            .replace(/&lt;em&gt;/gi, "<em>")
+            .replace(/&lt;\/em&gt;/gi, "</em>")
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'")
+            .replace(/&amp;/g, "&")
             .replace(/\n/g, "<br>");
     }
 
-    function renderMixedParts(parts) {
+    function renderMixedParts(parts, options = []) {
         return (parts || []).map((part) => {
             if (part.type === "input") {
-                return answerInput(part.questionNumber);
+                return answerInput(part.questionNumber, options);
             }
 
-            return renderPlaceholderText(part.text || "");
+            return renderPlaceholderText(part.text || "", options);
         }).join("");
     }
 
-    function renderValue(value) {
+    function renderValue(value, options = []) {
         if (typeof value === "string") {
-            return renderPlaceholderText(value);
+            return renderPlaceholderText(value, options);
         }
 
         if (!value || value.type === "text") {
-            return renderPlaceholderText(value?.text || "");
+            return renderPlaceholderText(value?.text || "", options);
         }
 
         if (value.type === "input") {
-            return answerInput(value.questionNumber);
+            return answerInput(value.questionNumber, options);
         }
 
         if (value.type === "mixed") {
-            return renderMixedParts(value.parts);
+            return renderMixedParts(value.parts, options);
         }
 
         return "";
@@ -91,9 +126,18 @@ const ListeningComponents = (() => {
         </div>`;
     }
 
+    function blockImage(block) {
+        if (!block.imageUrl) return "";
+        return `<div class="lc-block-image-container" style="margin-bottom: 20px; text-align: center;">
+            <img src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Question image")}" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>`;
+    }
+
     function blockCard(block, content, extraClass = "") {
+        const showImg = block.imageUrl && !extraClass.includes("lc-matching-block") && !extraClass.includes("lc-map-labelling");
         return `<section class="lc-question-card ${extraClass}" data-block-id="${escapeHtml(block.id || "")}">
             ${blockHeading(block)}
+            ${showImg ? blockImage(block) : ""}
             ${content}
         </section>`;
     }
@@ -189,7 +233,16 @@ const ListeningComponents = (() => {
     }
 
     function renderFlowchartText(value, options = []) {
-        const text = String(value || "");
+        let text = String(value || "");
+        
+        // Unescape common HTML entities first to avoid double-escaping bugs
+        text = text
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'");
+
         const parts = [];
         let lastIndex = 0;
 
@@ -204,7 +257,17 @@ const ListeningComponents = (() => {
             .replace(/&lt;strong&gt;/gi, "<strong>")
             .replace(/&lt;\/strong&gt;/gi, "</strong>")
             .replace(/&lt;b&gt;/gi, "<strong>")
-            .replace(/&lt;\/b&gt;/gi, "</strong>");
+            .replace(/&lt;\/b&gt;/gi, "</strong>")
+            .replace(/&lt;u&gt;/gi, "<u>")
+            .replace(/&lt;\/u&gt;/gi, "</u>")
+            .replace(/&lt;i&gt;/gi, "<em>")
+            .replace(/&lt;\/i&gt;/gi, "</em>")
+            .replace(/&lt;em&gt;/gi, "<em>")
+            .replace(/&lt;\/em&gt;/gi, "</em>")
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'")
+            .replace(/&amp;/g, "&")
+            .replace(/\n/g, "<br>");
     }
 
     function flowchartLineFromQuestion(question) {
@@ -301,7 +364,7 @@ const ListeningComponents = (() => {
             sentences = String(block.content || "").split(/\n+/).filter(Boolean);
         }
         const content = sentences.map((sentence) =>
-            `<p class="lc-inline-sentence">${renderPlaceholderText(sentence)}</p>`
+            `<p class="lc-inline-sentence">${renderPlaceholderText(sentence, block.options)}</p>`
         ).join("");
 
         return blockCard(block, `<div class="lc-sentence-list">${content}</div>`, "lc-sentence-completion");
@@ -309,6 +372,99 @@ const ListeningComponents = (() => {
 
     function MultipleChoiceBlock(block) {
         if (Array.isArray(block.questions) && block.questions.length) {
+            const firstQ = block.questions[0];
+            const hasSameShortOptions = block.questions.every((q) => {
+                const qOpts = q.options || block.options || [];
+                const firstOpts = firstQ.options || block.options || [];
+                if (!qOpts.length || qOpts.length !== firstOpts.length) return false;
+                return qOpts.every((opt, i) => {
+                    const firstOpt = firstOpts[i];
+                    const cleanText = String(opt.text || "").trim();
+                    return opt.letter === firstOpt.letter && (cleanText === "" || cleanText === opt.letter || cleanText.length <= 1);
+                });
+            });
+
+            if (hasSameShortOptions && block.questions.length > 1) {
+                let cleanInstruction = block.instruction || "";
+                let optionsBoxHtml = "";
+
+                // Detect option list in instruction (e.g. "Types of accommodation A the flat B the house C the hostel")
+                const listRegex = /(Types of\s+([A-Za-z0-9\s]+?))?\s*\b(A\b\s+.*?)(?=\s*\bB\b|$)\s*\b(B\b\s+.*?)(?=\s*\bC\b|$)\s*\b(C\b\s+.*?)(?=\s*\bD\b|$)(?:\s*\b(D\b\s+.*?)(?=\s*\bE\b|$))?(?:\s*\b(E\b\s+.*?)(?=\s*\bF\b|$))?(?:\s*\b(F\b\s+.*?)(?=$))?$/i;
+                const match = cleanInstruction.match(listRegex);
+                if (match) {
+                    const matchedText = match[0];
+                    cleanInstruction = cleanInstruction.replace(matchedText, "").trim().replace(/\s*[.,:;]+\s*$/, ".");
+                    
+                    const title = match[2] ? `Types of ${match[2].trim()}` : "Options";
+                    const optionsList = [];
+                    for (let i = 3; i <= 9; i++) {
+                        if (match[i]) {
+                            const optionStr = match[i].trim();
+                            // Split letter prefix if formatted like "A the flat"
+                            const letterMatch = optionStr.match(/^([A-F])\b\s*(.+)$/i);
+                            if (letterMatch) {
+                                optionsList.push(`<li><span class="lc-letter-badge">${letterMatch[1]}</span><span>${escapeHtml(letterMatch[2])}</span></li>`);
+                            } else {
+                                optionsList.push(`<li>${escapeHtml(optionStr)}</li>`);
+                            }
+                        }
+                    }
+
+                    optionsBoxHtml = `
+                        <div class="lc-mcq-grid-options-box">
+                            <h4>${escapeHtml(title)}</h4>
+                            <ul class="lc-mcq-grid-options-list">
+                                ${optionsList.join("")}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                const firstOpts = firstQ.options || block.options || [];
+                const colHeaders = firstOpts.map((opt) => `<th>${escapeHtml(opt.letter)}</th>`).join("");
+                const rows = block.questions.map((q) => {
+                    const qNum = Number(q.questionNumber || q.number);
+                    const name = `q${qNum}`;
+                    const qOpts = q.options || block.options || [];
+                    const radioCells = qOpts.map((opt) => {
+                        return `<td>
+                            <label class="lc-choice-row lc-choice-row--grid">
+                                <input type="radio" name="${name}" value="${escapeHtml(opt.letter)}">
+                            </label>
+                        </td>`;
+                    }).join("");
+
+                    return `<tr>
+                        <td><span class="lc-question-badge">${qNum}</span> ${escapeHtml(q.question || q.text || "")}</td>
+                        ${radioCells}
+                    </tr>`;
+                }).join("");
+
+                const blockClone = {
+                    ...block,
+                    instruction: cleanInstruction
+                };
+
+                const tableHtml = `
+                    ${optionsBoxHtml}
+                    <div class="lc-table-scroll">
+                        <table class="lc-mcq-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>Features</th>
+                                    ${colHeaders}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                return blockCard(blockClone, tableHtml, "lc-multiple-choice-grid-block");
+            }
+
+
             const html = block.questions.map((q) => {
                 const qNum = Number(q.questionNumber || q.number);
                 const name = `q${qNum}`;
@@ -340,6 +496,7 @@ const ListeningComponents = (() => {
             <div class="lc-choice-list">${options}</div>
         `, "lc-multiple-choice-block");
     }
+
 
     function NoteCompletionBlock(block) {
         let lines = [];
@@ -390,13 +547,13 @@ const ListeningComponents = (() => {
                 let hasListItems = false;
                 const inlineValue = String(match[2] || "").trim();
                 if (inlineValue) {
-                    valueParts.push(renderPlaceholderText(inlineValue));
+                    valueParts.push(renderPlaceholderText(inlineValue, block.options));
                 }
 
                 while (index + 1 < lines.length) {
                     const nextLine = String(lines[index + 1]).trim();
                     if (!/^[-*]\s+/.test(nextLine)) break;
-                    valueParts.push(`<span class="lc-note-table-list-item">${renderPlaceholderText(nextLine.slice(2))}</span>`);
+                    valueParts.push(`<span class="lc-note-table-list-item">${renderPlaceholderText(nextLine.slice(2), block.options)}</span>`);
                     hasListItems = true;
                     index += 1;
                 }
@@ -419,18 +576,146 @@ const ListeningComponents = (() => {
             if (!trimmed) return "<br>";
 
             if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.slice(2))}</li>`;
+                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.slice(2), block.options)}</li>`;
             }
 
             const strongOnly = /^<strong>[\s\S]*<\/strong>$/i.test(trimmed);
             const labelOnly = strongOnly && /:\s*$/i.test(plainText(trimmed));
             const className = strongOnly && !labelOnly ? "lc-note-section-title" : "lc-note-line";
-            return `<p class="${className}">${renderPlaceholderText(trimmed)}</p>`;
+            return `<p class="${className}">${renderPlaceholderText(trimmed, block.options)}</p>`;
         }
 
-        const items = noteLines.map((line) => {
-            return renderNoteLine(line);
-        }).join("");
+        function listItem(line) {
+            const match = String(line || "").match(/^(\s*)([-*])\s+([\s\S]*)$/);
+            if (!match) return null;
+
+            const indent = match[1].replace(/\t/g, "  ").length;
+            return {
+                level: indent >= 2 ? 1 : 0,
+                text: match[3]
+            };
+        }
+
+        function renderNoteFlow(lines) {
+            const html = [];
+            let listOpen = false;
+            let nestedOpen = false;
+            let topItemOpen = false;
+
+            function closeNested() {
+                if (nestedOpen) {
+                    html.push("</ul>");
+                    nestedOpen = false;
+                }
+            }
+
+            function closeTopItem() {
+                if (topItemOpen) {
+                    closeNested();
+                    html.push("</li>");
+                    topItemOpen = false;
+                }
+            }
+
+            function closeList() {
+                closeTopItem();
+                if (listOpen) {
+                    html.push("</ul>");
+                    listOpen = false;
+                }
+            }
+
+            lines.forEach((line) => {
+                const item = listItem(line);
+                if (!item) {
+                    closeList();
+                    html.push(renderNoteLine(line));
+                    return;
+                }
+
+                if (!listOpen) {
+                    html.push('<ul class="lc-note-list">');
+                    listOpen = true;
+                }
+
+                if (item.level > 0) {
+                    if (!topItemOpen) {
+                        html.push('<li class="lc-note-list-item lc-note-list-item--empty">');
+                        topItemOpen = true;
+                    }
+                    if (!nestedOpen) {
+                        html.push('<ul class="lc-note-nested-list">');
+                        nestedOpen = true;
+                    }
+                    html.push(`<li class="lc-note-list-item lc-note-list-item--nested">${renderPlaceholderText(item.text, block.options)}</li>`);
+                    return;
+                }
+
+                closeTopItem();
+                html.push(`<li class="lc-note-list-item">${renderPlaceholderText(item.text, block.options)}`);
+                topItemOpen = true;
+            });
+
+            closeList();
+            return html.join("");
+        }
+
+        function renderJobDetailsInput(questionNumber) {
+            const number = Number(questionNumber);
+            return `<input class="lc-answer-input lc-job-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}" placeholder="${number}">`;
+        }
+
+        function renderJobDetailsLine(line) {
+            let text = String(line || "")
+                .replace(/&amp;/g, "&")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&quot;/g, '"')
+                .replace(/&#039;/g, "'");
+
+            const parts = [];
+            let lastIndex = 0;
+            for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+                parts.push(escapeHtml(text.slice(lastIndex, match.index)));
+                parts.push(renderJobDetailsInput(match[1]));
+                lastIndex = match.index + match[0].length;
+            }
+            parts.push(escapeHtml(text.slice(lastIndex)));
+
+            return parts.join("")
+                .replace(/&lt;strong&gt;/gi, "<strong>")
+                .replace(/&lt;\/strong&gt;/gi, "</strong>")
+                .replace(/&lt;b&gt;/gi, "<strong>")
+                .replace(/&lt;\/b&gt;/gi, "</strong>");
+        }
+
+        function renderJobDetailsForm(lines, title) {
+            const body = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => {
+                    if (/^<strong>Example:\s*<\/strong>/i.test(line)) {
+                        return `<div class="lc-job-example">${renderJobDetailsLine(line)}</div>`;
+                    }
+                    if (/^<strong>[\s\S]*<\/strong>$/i.test(line)) {
+                        return `<p class="lc-job-section-title">${renderJobDetailsLine(line)}</p>`;
+                    }
+                    return `<p class="lc-job-line">${renderJobDetailsLine(line)}</p>`;
+                })
+                .join("");
+
+            return `
+                <h4 class="lc-job-title">${escapeHtml(title || "Job Details")}</h4>
+                <div class="lc-job-details-form">${body}</div>
+            `;
+        }
+
+        if (block.noteStyle === "job-details-form") {
+            return blockCard(block, renderJobDetailsForm(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--job-details-form");
+        }
+
+        const noteStyleClass = block.noteStyle === "boxed-flow" ? "lc-note-completion--boxed-flow" : "";
+        const items = renderNoteFlow(noteLines);
         const tableItems = shouldRenderNoteTable(noteLines) ? renderNoteTable(noteLines) : "";
 
         const exampleBox = block.example ? `
@@ -441,17 +726,17 @@ const ListeningComponents = (() => {
         ` : "";
 
         return blockCard(block, `
-            ${displayTitle ? `<h4 class="lc-form-title">${renderPlaceholderText(displayTitle)}</h4>` : ""}
+            ${displayTitle ? `<h4 class="lc-form-title">${renderPlaceholderText(displayTitle, block.options)}</h4>` : ""}
             ${exampleBox}
-            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${tableItems || (items.includes("<li>") ? `<ul>${items}</ul>` : items)}</div>
-        `, "lc-note-completion");
+            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${tableItems || items}</div>
+        `, `lc-note-completion ${noteStyleClass}`);
     }
 
     function TableCompletionBlock(block) {
         const columns = (block.columns || []).map((column) => `<th>${escapeHtml(column)}</th>`).join("");
         const rows = (block.rows || []).map((row) => {
             const cells = Array.isArray(row) ? row : row.cells || [];
-            return `<tr>${cells.map((cell) => `<td>${renderValue(cell)}</td>`).join("")}</tr>`;
+            return `<tr>${cells.map((cell) => `<td>${renderValue(cell, block.options)}</td>`).join("")}</tr>`;
         }).join("");
 
         return blockCard(block, `

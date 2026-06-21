@@ -1,0 +1,237 @@
+{
+  "id": "1782025063969-Full_Listening_Test-listening-s4",
+  "slug": "1782025063969-Full_Listening_Test-listening-s4",
+  "title": "Full Listening Test — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "The patients preferred to choose the hospital because of the free... service provided.",
+      "options": [],
+      "answer": "transportation"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Most patients wished the hospital to be...",
+      "options": [],
+      "answer": "clean"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Patients were concerned about prior... about the hospital treatment.",
+      "options": [],
+      "answer": "information"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "improvements on website for local... as well as hospital medical staff",
+      "options": [],
+      "answer": "residents"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "extra... for staff's success in work",
+      "options": [],
+      "answer": "bonus"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "considering the opinions of the...",
+      "options": [],
+      "answer": "visitors"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "improving the effectiveness of... between patients, doctors and staff",
+      "options": [],
+      "answer": "communication"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "A new unit would be built for those who are suffering from... disturbance.",
+      "options": [],
+      "answer": "sleep"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "A new ward would be proposed to those in need of... surgery.",
+      "options": [],
+      "answer": "plastic"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "More effective... is needed to improve the efficiency of communication.",
+      "options": [],
+      "answer": "planning"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1782025063969-Full_Listening_Test",
+  "createdAt": "2026-06-21T08:18:07.524Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+      "instruction": "",
+      "answerText": "31: transportation\n32: clean\n33: information\n34: residents\n35: bonus\n36: visitors\n37: communication\n38: sleep\n39: plastic\n40: planning",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "A Survey Research",
+            "<strong>Results of Questionnaire</strong>",
+            "• The patients preferred to choose the hospital because of the free {{31}} service provided.",
+            "• Most patients wished the hospital to be {{32}}",
+            "• Patients were concerned about prior {{33}} about the hospital treatment.",
+            "<strong>Actions in the next year</strong>",
+            "• improvements on website for local {{34}} as well as hospital medical staff",
+            "• incentive to motivate the members of staff",
+            "• extra {{35}} for staff's success in work",
+            "• considering the opinions of the {{36}}",
+            "• improving the effectiveness of {{37}} between patients, doctors and staff",
+            "• first-come-first-served system",
+            "<strong>Recommendation</strong>",
+            "• A new unit would be built for those who are suffering from {{38}} disturbance.",
+            "• A new ward would be proposed to those in need of {{39}} surgery.",
+            "• The equipment is advanced enough to do with the treatments.",
+            "• More effective {{40}} is needed to improve the efficiency of communication."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "The patients preferred to choose the hospital because of the free... service provided.",
+              "text": "The patients preferred to choose the hospital because of the free... service provided.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "transportation"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Most patients wished the hospital to be...",
+              "text": "Most patients wished the hospital to be...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "clean"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Patients were concerned about prior... about the hospital treatment.",
+              "text": "Patients were concerned about prior... about the hospital treatment.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "information"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "improvements on website for local... as well as hospital medical staff",
+              "text": "improvements on website for local... as well as hospital medical staff",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "residents"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "extra... for staff's success in work",
+              "text": "extra... for staff's success in work",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "bonus"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "considering the opinions of the...",
+              "text": "considering the opinions of the...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "visitors"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "improving the effectiveness of... between patients, doctors and staff",
+              "text": "improving the effectiveness of... between patients, doctors and staff",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "communication"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "A new unit would be built for those who are suffering from... disturbance.",
+              "text": "A new unit would be built for those who are suffering from... disturbance.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sleep"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "A new ward would be proposed to those in need of... surgery.",
+              "text": "A new ward would be proposed to those in need of... surgery.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "plastic"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "More effective... is needed to improve the efficiency of communication.",
+              "text": "More effective... is needed to improve the efficiency of communication.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "planning"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

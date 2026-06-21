@@ -337,7 +337,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=1.0.18";
+    stylesheet.href = "listening-template.css?v=1.0.22";
     document.head.appendChild(stylesheet);
 }
 

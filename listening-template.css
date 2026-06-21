@@ -659,6 +659,143 @@ a {
     font-weight: 400 !important;
 }
 
+.lc-note-completion--boxed-flow .lc-form-title {
+    color: var(--lc-navy);
+    font-size: 14px;
+    text-align: left;
+}
+
+.lc-note-completion--boxed-flow .lc-notes {
+    border-left: 0;
+    padding-left: 0;
+}
+
+.lc-note-list,
+.lc-note-nested-list {
+    margin: 6px 0;
+    padding-left: 22px;
+}
+
+.lc-note-nested-list {
+    margin-top: 4px;
+    padding-left: 24px;
+}
+
+.lc-note-completion--boxed-flow .lc-note-line {
+    margin: 10px 0;
+}
+
+.lc-note-completion--boxed-flow .lc-note-section-title {
+    margin: 18px 0 8px;
+}
+
+.lc-note-completion--boxed-flow .lc-note-list-item {
+    margin: 5px 0;
+    padding-left: 4px;
+}
+
+.lc-note-completion--boxed-flow .lc-answer-inline {
+    flex-direction: row-reverse;
+    gap: 7px;
+    margin: 2px 5px;
+}
+
+.lc-note-completion--job-details-form {
+    border: 1px solid var(--lc-border);
+    border-radius: 7px;
+    background: var(--lc-card);
+    padding: 20px 24px 24px;
+    box-shadow: 0 1px 7px rgba(7, 20, 55, 0.035);
+}
+
+.lc-note-completion--job-details-form > .lc-block-heading {
+    display: block;
+}
+
+.lc-job-title {
+    margin: 4px 0 16px;
+    color: var(--lc-navy);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.lc-job-details-form {
+    position: relative;
+    width: 100%;
+    max-width: 934px;
+    min-height: 520px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--lc-border);
+    border-radius: 8px;
+    background: #fff;
+    padding: 20px 22px 22px;
+    color: var(--lc-navy);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.lc-job-details-form::after {
+    content: none;
+}
+
+.lc-job-details-form > * {
+    position: relative;
+    z-index: 1;
+}
+
+.lc-job-example,
+.lc-job-line,
+.lc-job-section-title {
+    margin: 0 0 9px;
+}
+
+.lc-job-example {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 14px;
+}
+
+.lc-job-section-title {
+    margin-top: 14px;
+    font-weight: 700;
+}
+
+.lc-job-section-title strong,
+.lc-job-example strong {
+    font-weight: 700 !important;
+}
+
+.lc-job-line strong {
+    font-weight: 700 !important;
+}
+
+.lc-job-answer-input {
+    width: 146px;
+    min-width: 126px;
+    height: 31px;
+    margin: 0 4px;
+    border: 1px solid var(--lc-input);
+    border-radius: 5px;
+    background: #fff;
+    padding: 4px 8px;
+    color: var(--lc-navy);
+    font-size: 14px;
+    text-align: center;
+}
+
+.lc-job-answer-input::placeholder {
+    color: #64748b;
+    font-weight: 700;
+    opacity: 1;
+}
+
+.lc-job-answer-input:focus::placeholder {
+    color: transparent;
+}
+
 .lc-notes--table {
     max-width: none;
     border-left: 0;
@@ -1572,4 +1709,167 @@ a {
 
 *::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+/* MCQ Grid Table Styling */
+.lc-mcq-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.lc-mcq-grid-table th {
+    background-color: #0c56d0;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 14px;
+    border: 1px solid #0c56d0;
+}
+
+.lc-mcq-grid-table th:first-child {
+    text-align: left;
+}
+
+.lc-mcq-grid-table th:not(:first-child) {
+    text-align: center;
+    width: 80px;
+}
+
+.lc-mcq-grid-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--lc-border);
+    vertical-align: middle;
+}
+
+.lc-mcq-grid-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.lc-mcq-grid-table td:not(:first-child) {
+    text-align: center;
+}
+
+.lc-mcq-grid-table .lc-question-badge {
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #edf0f5;
+    color: var(--lc-navy);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lc-choice-row--grid {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    border: 2px solid transparent !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lc-choice-row--grid:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.lc-choice-row--grid input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+/* Grid radio review styles */
+.lc-choice-row--grid.lc-choice-row--correct {
+    border: 2px solid #16a34a !important;
+    background-color: #f0fdf4 !important;
+}
+
+.lc-choice-row--grid.lc-choice-row--incorrect {
+    border: 2px solid #dc2626 !important;
+    background-color: #fef2f2 !important;
+}
+
+/* MCQ Options Box Styling */
+.lc-mcq-grid-options-box {
+    background-color: #f8fafc;
+    border: 1px solid var(--lc-border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.lc-mcq-grid-options-box h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--lc-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.lc-mcq-grid-options-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lc-mcq-grid-options-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+    color: var(--lc-navy);
+}
+
+.lc-mcq-grid-options-list .lc-letter-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #edf0f5;
+    color: var(--lc-navy);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex: 0 0 auto;
+}
+
+/* Inline dropdown select styling */
+.lc-inline-select {
+    width: auto !important;
+    min-width: 100px;
+    height: 28px !important;
+    padding: 2px 20px 2px 6px !important;
+    font-size: 13px !important;
+    border: 1px solid #c8cfd9;
+    border-radius: 4px;
+    background: #fff;
+    color: var(--lc-navy);
+    vertical-align: middle;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.lc-inline-select:focus {
+    border-color: var(--lc-blue);
+    outline: 2px solid rgba(11, 95, 255, 0.14);
 }

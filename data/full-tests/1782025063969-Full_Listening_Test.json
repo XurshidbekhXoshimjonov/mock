@@ -1,0 +1,717 @@
+{
+  "id": "1782025063969-Full_Listening_Test",
+  "title": "Full Listening Test",
+  "sourceFile": "1782025063969-Full_Listening_Test.html",
+  "status": "published",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "1782025063969-Full_Listening_Test"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 1</strong></p>\n<p>Listen and answer questions 1–10.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 1-10</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>\n</div>\n<div>\n<p class=\"centered-title\">HOUSE RENTAL</p>\n<table>\n<tbody><tr>\n<td><strong>Name:</strong></td>\n<td>Mary Collins</td>\n</tr>\n<tr>\n<td><strong>Factility available:</strong></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>General layout:</strong></td>\n<td>upstairs: living room bedrooms downstairs:<br></td>\n</tr>\n<tr>\n<td><strong>Car park:</strong></td>\n<td>availability of a large </td>\n</tr>\n<tr>\n<td><strong>Shopping:</strong></td>\n<td>at the </td>\n</tr>\n<tr>\n<td><strong>Place for children playing:</strong></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Education resources:</strong></td>\n<td>a  in the community</td>\n</tr>\n<tr>\n<td><strong>Rent:</strong></td>\n<td>$980 a month including the maintenance lees of the </td>\n</tr>\n<tr>\n<td><strong>Date of house available:</strong></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Viewing arrangement (time):</strong></td>\n<td>meet at </td>\n</tr>\n<tr>\n<td><strong>Postcode:</strong></td>\n<td>GA58ER</td>\n</tr>\n<tr>\n<td><strong>Address:</strong></td>\n<td>8 </td>\n</tr>\n</tbody></table>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "form_completion",
+            "instructionTitle": "Questions 1-10",
+            "instructionText": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "swimming pool"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "dining room"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "garage"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "local supermarket"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "park"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "primary school"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "garden"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "23rd April | 23 April"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "10.15 a.m. | 10:15 a.m. | 10:15am | 10.15am"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Questions 1-10\nComplete the notes below.\nWrite NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nHOUSE RENTAL\n\nName:\nMary Collins\n\nFactility available:...\n\nGeneral layout:\nupstairs: living room bedrooms downstairs:...\n\nCar park:\navailability of a large...\n\nShopping:\nat the...\n\nPlace for children playing:...\n\nEducation resources:\na... in the community\n\nRent:\n$980 a month including the maintenance lees of the...\n\nDate of house available:...\n\nViewing arrangement (time):\nmeet at...\n\nPostcode:\nGA58ER\n\nAddress:\n8...",
+                "options": [],
+                "answer": "Spring Street"
+              }
+            ],
+            "rows": [
+              {
+                "label": "Name:",
+                "value": "Mary Collins"
+              },
+              {
+                "label": "Factility available:",
+                "value": "{{1}}"
+              },
+              {
+                "label": "General layout:",
+                "value": "upstairs: living room bedrooms downstairs: {{2}}"
+              },
+              {
+                "label": "Car park:",
+                "value": "availability of a large {{3}}"
+              },
+              {
+                "label": "Shopping:",
+                "value": "at the {{4}}"
+              },
+              {
+                "label": "Place for children playing:",
+                "value": "{{5}}"
+              },
+              {
+                "label": "Education resources:",
+                "value": "a {{6}} in the community"
+              },
+              {
+                "label": "Rent:",
+                "value": "$980 a month including the maintenance lees of the {{7}}"
+              },
+              {
+                "label": "Date of house available:",
+                "value": "{{8}}"
+              },
+              {
+                "label": "Viewing arrangement (time):",
+                "value": "meet at {{9}}"
+              },
+              {
+                "label": "Postcode:",
+                "value": "GA58ER"
+              },
+              {
+                "label": "Address:",
+                "value": "8 {{10}}"
+              }
+            ],
+            "title": "HOUSE RENTAL",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3"
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 2</strong></p>\n<p>Listen and answer questions 11–20.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 11-14</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.</p>\n</div>\n<div>\n<p class=\"centered-title\">REGISTRATION OF FOREIGN NATIONALS AT THE HEALTH CENTER STANDARD PROCEDURES</p>\n<ul>\n<li>Register as a .</li>\n<li>Fill in a medical history form with details of previous illness, . surgeries and .</li>\n<li>Complete a . with personal information such as name, address and telephone number.</li>\n</ul>\n</div>\n</div>\n\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 15-20</strong></p>\n<p>Circle the correct letter, <strong>A, B or C</strong>.</p>\n</div>\n<div class=\"single-choice-container\">\n<div class=\"single-choice\">\n<p><strong>15</strong> The nurse can help you with</p>\n<label> minor operation</label>\n<label> all sorts of remedy.</label>\n<label> a small injury</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>16</strong> You don't have to pay for the chiropodist if</p>\n<label> you have registered at the health center.</label>\n<label> you are in your late' sixties.</label>\n<label> you have foot trauma.</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>17</strong> In case of emergency</p>\n<label> you can ask for a home visit.</label>\n<label> you must go to the hospital directly.</label>\n<label> you should have an open surgery.</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>18</strong> On Friday afternoons</p>\n<label> you don't need to wait for a long time.</label>\n<label> you don't need to make an appointment.</label>\n<label> you ought not to come at a specified time.</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>19</strong> If you require a repeat prescription</p>\n<label> you have to see the doctor again.</label>\n<label> you need a special form.</label>\n<label> you can get one from the chemist.</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>20</strong> In which case you needn't pay for the prescription</p>\n<label> if you are a student.</label>\n<label> if you are unemployed or very poor.</label>\n<label> if you are pregnant.</label>\n</div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 11-14",
+            "instructionText": "Complete the notes below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 11,
+                "type": "sentence_completion",
+                "question": "Register as a....",
+                "options": [],
+                "answer": "temporary visitor"
+              },
+              {
+                "number": 12,
+                "type": "sentence_completion",
+                "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+                "options": [],
+                "answer": "allergies"
+              },
+              {
+                "number": 13,
+                "type": "sentence_completion",
+                "question": "Fill in a medical history form with details of previous illness,.... surgeries and....",
+                "options": [],
+                "answer": "current medication"
+              },
+              {
+                "number": 14,
+                "type": "sentence_completion",
+                "question": "Complete a.... with personal information such as name, address and telephone number.",
+                "options": [],
+                "answer": "registration card"
+              }
+            ],
+            "content": [
+              "Register as a {{11}}.",
+              "Fill in a medical history form with details of previous illness, {{12}}. surgeries and {{13}}.",
+              "Complete a {{14}}. with personal information such as name, address and telephone number."
+            ],
+            "noteStyle": "boxed-flow",
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 15-20",
+            "instructionText": "Circle the correct letter, A, B or C.",
+            "questions": [
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "The nurse can help you with",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "minor operation",
+                    "html": "minor operation"
+                  },
+                  {
+                    "value": "B",
+                    "label": "all sorts of remedy.",
+                    "html": "all sorts of remedy."
+                  },
+                  {
+                    "value": "C",
+                    "label": "a small injury",
+                    "html": "a small injury"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "You don't have to pay for the chiropodist if",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "you have registered at the health center.",
+                    "html": "you have registered at the health center."
+                  },
+                  {
+                    "value": "B",
+                    "label": "you are in your late' sixties.",
+                    "html": "you are in your late' sixties."
+                  },
+                  {
+                    "value": "C",
+                    "label": "you have foot trauma.",
+                    "html": "you have foot trauma."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 17,
+                "type": "multiple_choice",
+                "question": "In case of emergency",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "you can ask for a home visit.",
+                    "html": "you can ask for a home visit."
+                  },
+                  {
+                    "value": "B",
+                    "label": "you must go to the hospital directly.",
+                    "html": "you must go to the hospital directly."
+                  },
+                  {
+                    "value": "C",
+                    "label": "you should have an open surgery.",
+                    "html": "you should have an open surgery."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 18,
+                "type": "multiple_choice",
+                "question": "On Friday afternoons",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "you don't need to wait for a long time.",
+                    "html": "you don't need to wait for a long time."
+                  },
+                  {
+                    "value": "B",
+                    "label": "you don't need to make an appointment.",
+                    "html": "you don't need to make an appointment."
+                  },
+                  {
+                    "value": "C",
+                    "label": "you ought not to come at a specified time.",
+                    "html": "you ought not to come at a specified time."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 19,
+                "type": "multiple_choice",
+                "question": "If you require a repeat prescription",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "you have to see the doctor again.",
+                    "html": "you have to see the doctor again."
+                  },
+                  {
+                    "value": "B",
+                    "label": "you need a special form.",
+                    "html": "you need a special form."
+                  },
+                  {
+                    "value": "C",
+                    "label": "you can get one from the chemist.",
+                    "html": "you can get one from the chemist."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 20,
+                "type": "multiple_choice",
+                "question": "In which case you needn't pay for the prescription",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "if you are a student.",
+                    "html": "if you are a student."
+                  },
+                  {
+                    "value": "B",
+                    "label": "if you are unemployed or very poor.",
+                    "html": "if you are unemployed or very poor."
+                  },
+                  {
+                    "value": "C",
+                    "label": "if you are pregnant.",
+                    "html": "if you are pregnant."
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3"
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 3</strong></p>\n<p>Listen and answer questions 21–30.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 21-24</strong></p>\n<p>Complete the sentences below.</p>\n<p>Write <strong>NO MORE THAN THREE WORDS</strong> for each answer.</p>\n</div>\n<ul>\n<li>• The research topic should come from one of the headings in the .</li>\n<li>• At least one reference needs to be from .</li>\n<li>• The data Julie found on past experiments is in .</li>\n<li>• Ricky has pointed out that aside from journals, he can also use . about scientific experiments.</li>\n</ul>\n</div>\n\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 25-30</strong></p>\n<p>Choose the correct letter <strong>A, B or C</strong>.</p>\n</div>\n<div class=\"single-choice-container\">\n<div class=\"single-choice\">\n<p><strong>25</strong> How should the essay be written?</p>\n<label> single-spaced</label>\n<label> double-spaced</label>\n<label> double spaces</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>26</strong> The main heading is required to be</p>\n<label> italic</label>\n<label> underlined</label>\n<label> bold</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>27</strong> Regarding all the requirements, the essay must be</p>\n<label> handwritten</label>\n<label> typed</label>\n<label> both ways are acceptable</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>28</strong> Where should the student number the pages?</p>\n<label> top left corner</label>\n<label> bottom right corner</label>\n<label> top right corner</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>29</strong> What is the suitable width of the margins?</p>\n<label> 325 pixels</label>\n<label> 3.25 pixels</label>\n<label> 3.25 centimeter</label>\n</div>\n<div class=\"single-choice\">\n<p><strong>30</strong> What should be included in the essay?</p>\n<label> student's phone number</label>\n<label> student's ID number</label>\n<label> student's ID picture</label>\n</div>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 21-24",
+            "instructionText": "Complete the sentences below. Write NO MORE THAN THREE WORDS for each answer.",
+            "questions": [
+              {
+                "number": 21,
+                "type": "sentence_completion",
+                "question": "The research topic should come from one of the headings in the....",
+                "options": [],
+                "answer": "note system"
+              },
+              {
+                "number": 22,
+                "type": "sentence_completion",
+                "question": "At least one reference needs to be from....",
+                "options": [],
+                "answer": "scientific research"
+              },
+              {
+                "number": 23,
+                "type": "sentence_completion",
+                "question": "The data Julie found on past experiments is in....",
+                "options": [],
+                "answer": "scientific journals"
+              },
+              {
+                "number": 24,
+                "type": "sentence_completion",
+                "question": "Ricky has pointed out that aside from journals, he can also use.... about scientific experiments.",
+                "options": [],
+                "answer": "the internet | information from internet | internet"
+              }
+            ],
+            "content": [
+              "• The research topic should come from one of the headings in the {{21}}.",
+              "• At least one reference needs to be from {{22}}.",
+              "• The data Julie found on past experiments is in {{23}}.",
+              "• Ricky has pointed out that aside from journals, he can also use {{24}}. about scientific experiments."
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 25-30",
+            "instructionText": "Choose the correct letter A, B or C.",
+            "questions": [
+              {
+                "number": 25,
+                "type": "multiple_choice",
+                "question": "How should the essay be written?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "single-spaced",
+                    "html": "single-spaced"
+                  },
+                  {
+                    "value": "B",
+                    "label": "double-spaced",
+                    "html": "double-spaced"
+                  },
+                  {
+                    "value": "C",
+                    "label": "double spaces",
+                    "html": "double spaces"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 26,
+                "type": "multiple_choice",
+                "question": "The main heading is required to be",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "italic",
+                    "html": "italic"
+                  },
+                  {
+                    "value": "B",
+                    "label": "underlined",
+                    "html": "underlined"
+                  },
+                  {
+                    "value": "C",
+                    "label": "bold",
+                    "html": "bold"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 27,
+                "type": "multiple_choice",
+                "question": "Regarding all the requirements, the essay must be",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "handwritten",
+                    "html": "handwritten"
+                  },
+                  {
+                    "value": "B",
+                    "label": "typed",
+                    "html": "typed"
+                  },
+                  {
+                    "value": "C",
+                    "label": "both ways are acceptable",
+                    "html": "both ways are acceptable"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 28,
+                "type": "multiple_choice",
+                "question": "Where should the student number the pages?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "top left corner",
+                    "html": "top left corner"
+                  },
+                  {
+                    "value": "B",
+                    "label": "bottom right corner",
+                    "html": "ottom right corner"
+                  },
+                  {
+                    "value": "C",
+                    "label": "top right corner",
+                    "html": "top right corner"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 29,
+                "type": "multiple_choice",
+                "question": "What is the suitable width of the margins?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "325 pixels",
+                    "html": "325 pixels"
+                  },
+                  {
+                    "value": "B",
+                    "label": "3.25 pixels",
+                    "html": "3.25 pixels"
+                  },
+                  {
+                    "value": "C",
+                    "label": "3.25 centimeter",
+                    "html": "3.25 centimeter"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 30,
+                "type": "multiple_choice",
+                "question": "What should be included in the essay?",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "student's phone number",
+                    "html": "student's phone number"
+                  },
+                  {
+                    "value": "B",
+                    "label": "student's ID number",
+                    "html": "student's ID number"
+                  },
+                  {
+                    "value": "C",
+                    "label": "student's ID picture",
+                    "html": "student's ID picture"
+                  }
+                ],
+                "answer": "B"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3"
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "\n<div class=\"part-header\">\n<p><strong>Part 4</strong></p>\n<p>Listen and answer questions 31–40.</p>\n</div>\n<div class=\"questions-container\">\n<div class=\"question\">\n<div class=\"question-prompt\">\n<p><strong>Questions 31-40</strong></p>\n<p>Complete the notes below.</p>\n<p>Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n</div>\n<div>\n<p class=\"centered-title\">A Survey Research</p>\n<p><strong>Results of Questionnaire</strong></p>\n<ul>\n<li>• The patients preferred to choose the hospital because of the free  service provided.</li>\n<li>• Most patients wished the hospital to be </li>\n<li>• Patients were concerned about prior  about the hospital treatment.</li>\n</ul>\n<p><strong>Actions in the next year</strong></p>\n<ul>\n<li>• improvements on website for local  as well as hospital medical staff</li>\n<li>• incentive to motivate the members of staff</li>\n<li>• extra  for staff's success in work</li>\n<li>• considering the opinions of the </li>\n<li>• improving the effectiveness of  between patients, doctors and staff</li>\n<li>• first-come-first-served system</li>\n</ul>\n<p><strong>Recommendation</strong></p>\n<ul>\n<li>• A new unit would be built for those who are suffering from  disturbance.</li>\n<li>• A new ward would be proposed to those in need of  surgery.</li>\n<li>• The equipment is advanced enough to do with the treatments.</li>\n<li>• More effective  is needed to improve the efficiency of communication.</li>\n</ul>\n</div>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "The patients preferred to choose the hospital because of the free... service provided.",
+                "options": [],
+                "answer": "transportation"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "Most patients wished the hospital to be...",
+                "options": [],
+                "answer": "clean"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "Patients were concerned about prior... about the hospital treatment.",
+                "options": [],
+                "answer": "information"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "improvements on website for local... as well as hospital medical staff",
+                "options": [],
+                "answer": "residents"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "extra... for staff's success in work",
+                "options": [],
+                "answer": "bonus"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "considering the opinions of the...",
+                "options": [],
+                "answer": "visitors"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "improving the effectiveness of... between patients, doctors and staff",
+                "options": [],
+                "answer": "communication"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "A new unit would be built for those who are suffering from... disturbance.",
+                "options": [],
+                "answer": "sleep"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "A new ward would be proposed to those in need of... surgery.",
+                "options": [],
+                "answer": "plastic"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "More effective... is needed to improve the efficiency of communication.",
+                "options": [],
+                "answer": "planning"
+              }
+            ],
+            "content": [
+              "A Survey Research",
+              "<strong>Results of Questionnaire</strong>",
+              "• The patients preferred to choose the hospital because of the free {{31}} service provided.",
+              "• Most patients wished the hospital to be {{32}}",
+              "• Patients were concerned about prior {{33}} about the hospital treatment.",
+              "<strong>Actions in the next year</strong>",
+              "• improvements on website for local {{34}} as well as hospital medical staff",
+              "• incentive to motivate the members of staff",
+              "• extra {{35}} for staff's success in work",
+              "• considering the opinions of the {{36}}",
+              "• improving the effectiveness of {{37}} between patients, doctors and staff",
+              "• first-come-first-served system",
+              "<strong>Recommendation</strong>",
+              "• A new unit would be built for those who are suffering from {{38}} disturbance.",
+              "• A new ward would be proposed to those in need of {{39}} surgery.",
+              "• The equipment is advanced enough to do with the treatments.",
+              "• More effective {{40}} is needed to improve the efficiency of communication."
+            ],
+            "noteStyle": "boxed-flow",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3"
+      }
+    ]
+  },
+  "answers": {
+    "1": "swimming pool",
+    "2": "dining room",
+    "3": "garage",
+    "4": "local supermarket",
+    "5": "park",
+    "6": "primary school",
+    "7": "garden",
+    "8": "23rd April | 23 April",
+    "9": "10.15 a.m. | 10:15 a.m. | 10:15am | 10.15am",
+    "10": "Spring Street",
+    "11": "temporary visitor",
+    "12": "allergies",
+    "13": "current medication",
+    "14": "registration card",
+    "15": "C",
+    "16": "B",
+    "17": "A",
+    "18": "B",
+    "19": "B",
+    "20": "C",
+    "21": "note system",
+    "22": "scientific research",
+    "23": "scientific journals",
+    "24": "the internet | information from internet | internet",
+    "25": "B",
+    "26": "A",
+    "27": "B",
+    "28": "C",
+    "29": "B",
+    "30": "B",
+    "31": "transportation",
+    "32": "clean",
+    "33": "information",
+    "34": "residents",
+    "35": "bonus",
+    "36": "visitors",
+    "37": "communication",
+    "38": "sleep",
+    "39": "plastic",
+    "40": "planning"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-06-21T08:18:07.524Z",
+  "publishedAt": "2026-06-21T08:18:07.536Z",
+  "skill": "listening",
+  "subtitle": "Listening full test"
+}

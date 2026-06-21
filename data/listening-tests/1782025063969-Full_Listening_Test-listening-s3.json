@@ -1,0 +1,420 @@
+{
+  "id": "1782025063969-Full_Listening_Test-listening-s3",
+  "slug": "1782025063969-Full_Listening_Test-listening-s3",
+  "title": "Full Listening Test — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-24",
+      "instruction": "Complete the sentences below. Write NO MORE THAN THREE WORDS for each answer.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "title": "Questions 25-30",
+      "instruction": "Choose the correct letter A, B or C.",
+      "questionNumbers": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "sentence_completion",
+      "question": "The research topic should come from one of the headings in the....",
+      "options": [],
+      "answer": "note system"
+    },
+    {
+      "number": 22,
+      "type": "sentence_completion",
+      "question": "At least one reference needs to be from....",
+      "options": [],
+      "answer": "scientific research"
+    },
+    {
+      "number": 23,
+      "type": "sentence_completion",
+      "question": "The data Julie found on past experiments is in....",
+      "options": [],
+      "answer": "scientific journals"
+    },
+    {
+      "number": 24,
+      "type": "sentence_completion",
+      "question": "Ricky has pointed out that aside from journals, he can also use.... about scientific experiments.",
+      "options": [],
+      "answer": "the internet | information from internet | internet"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "How should the essay be written?",
+      "options": [
+        {
+          "value": "A",
+          "label": "single-spaced",
+          "html": "single-spaced"
+        },
+        {
+          "value": "B",
+          "label": "double-spaced",
+          "html": "double-spaced"
+        },
+        {
+          "value": "C",
+          "label": "double spaces",
+          "html": "double spaces"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "The main heading is required to be",
+      "options": [
+        {
+          "value": "A",
+          "label": "italic",
+          "html": "italic"
+        },
+        {
+          "value": "B",
+          "label": "underlined",
+          "html": "underlined"
+        },
+        {
+          "value": "C",
+          "label": "bold",
+          "html": "bold"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "Regarding all the requirements, the essay must be",
+      "options": [
+        {
+          "value": "A",
+          "label": "handwritten",
+          "html": "handwritten"
+        },
+        {
+          "value": "B",
+          "label": "typed",
+          "html": "typed"
+        },
+        {
+          "value": "C",
+          "label": "both ways are acceptable",
+          "html": "both ways are acceptable"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Where should the student number the pages?",
+      "options": [
+        {
+          "value": "A",
+          "label": "top left corner",
+          "html": "top left corner"
+        },
+        {
+          "value": "B",
+          "label": "bottom right corner",
+          "html": "ottom right corner"
+        },
+        {
+          "value": "C",
+          "label": "top right corner",
+          "html": "top right corner"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "What is the suitable width of the margins?",
+      "options": [
+        {
+          "value": "A",
+          "label": "325 pixels",
+          "html": "325 pixels"
+        },
+        {
+          "value": "B",
+          "label": "3.25 pixels",
+          "html": "3.25 pixels"
+        },
+        {
+          "value": "C",
+          "label": "3.25 centimeter",
+          "html": "3.25 centimeter"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "What should be included in the essay?",
+      "options": [
+        {
+          "value": "A",
+          "label": "student's phone number",
+          "html": "student's phone number"
+        },
+        {
+          "value": "B",
+          "label": "student's ID number",
+          "html": "student's ID number"
+        },
+        {
+          "value": "C",
+          "label": "student's ID picture",
+          "html": "student's ID picture"
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1782025063969-Full_Listening_Test",
+  "createdAt": "2026-06-21T08:18:07.524Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/1782025063969-Full_Listening_Test.mp3",
+      "instruction": "",
+      "answerText": "21: note system\n22: scientific research\n23: scientific journals\n24: the internet | information from internet | internet\n25: B\n26: A\n27: B\n28: C\n29: B\n30: B",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "note_completion",
+          "questionRange": "Questions 21-24",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the sentences below. Write NO MORE THAN THREE WORDS for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "• The research topic should come from one of the headings in the {{21}}.",
+            "• At least one reference needs to be from {{22}}.",
+            "• The data Julie found on past experiments is in {{23}}.",
+            "• Ricky has pointed out that aside from journals, he can also use {{24}}. about scientific experiments."
+          ],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "The research topic should come from one of the headings in the....",
+              "text": "The research topic should come from one of the headings in the....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "note system"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "At least one reference needs to be from....",
+              "text": "At least one reference needs to be from....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "scientific research"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "The data Julie found on past experiments is in....",
+              "text": "The data Julie found on past experiments is in....",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "scientific journals"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Ricky has pointed out that aside from journals, he can also use.... about scientific experiments.",
+              "text": "Ricky has pointed out that aside from journals, he can also use.... about scientific experiments.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "the internet | information from internet | internet"
+            }
+          ]
+        },
+        {
+          "id": "group-3-25",
+          "type": "multiple_choice",
+          "questionRange": "Questions 25-30",
+          "title": "",
+          "example": "",
+          "instruction": "Choose the correct letter A, B or C.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "How should the essay be written?",
+              "text": "How should the essay be written?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "single-spaced"
+                },
+                {
+                  "letter": "B",
+                  "text": "double-spaced"
+                },
+                {
+                  "letter": "C",
+                  "text": "double spaces"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "The main heading is required to be",
+              "text": "The main heading is required to be",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "italic"
+                },
+                {
+                  "letter": "B",
+                  "text": "underlined"
+                },
+                {
+                  "letter": "C",
+                  "text": "bold"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Regarding all the requirements, the essay must be",
+              "text": "Regarding all the requirements, the essay must be",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "handwritten"
+                },
+                {
+                  "letter": "B",
+                  "text": "typed"
+                },
+                {
+                  "letter": "C",
+                  "text": "both ways are acceptable"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Where should the student number the pages?",
+              "text": "Where should the student number the pages?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "top left corner"
+                },
+                {
+                  "letter": "B",
+                  "text": "ottom right corner"
+                },
+                {
+                  "letter": "C",
+                  "text": "top right corner"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "What is the suitable width of the margins?",
+              "text": "What is the suitable width of the margins?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "325 pixels"
+                },
+                {
+                  "letter": "B",
+                  "text": "3.25 pixels"
+                },
+                {
+                  "letter": "C",
+                  "text": "3.25 centimeter"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "What should be included in the essay?",
+              "text": "What should be included in the essay?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "student's phone number"
+                },
+                {
+                  "letter": "B",
+                  "text": "student's ID number"
+                },
+                {
+                  "letter": "C",
+                  "text": "student's ID picture"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "id": "1782030276441-FULL_LISTENING-listening-s4",
+  "slug": "1782030276441-FULL_LISTENING-listening-s4",
+  "title": "Full Listening Test — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/1782030276441-FULL_LISTENING.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Part 4 Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "semi-synthetics, e.g. commercial celluloid – used...\nand acid",
+      "options": [],
+      "answer": "cotton"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "experiments making plastics from...\nproducts were unsuccessful",
+      "options": [],
+      "answer": "milk"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "earliest fabric to be produced was artificial...",
+      "options": [],
+      "answer": "silk"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "first plastic produced in a...",
+      "options": [],
+      "answer": "lab"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "invented by a...\ncalled Hendrik Baekeland",
+      "options": [],
+      "answer": "chemist"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "unusual because it becomes...\nwhen heated",
+      "options": [],
+      "answer": "hard"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "older plastic objects may release acidic...",
+      "options": [],
+      "answer": "gases"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "plastic objects degrade in...",
+      "options": [],
+      "answer": "light"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "chandelier made using recycled...",
+      "options": [],
+      "answer": "pens"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "car made in Japan from semi-synthetic materials based on substances found in...",
+      "options": [],
+      "answer": "wood"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "1782030276441-FULL_LISTENING",
+  "createdAt": "2026-06-21T08:24:36.616Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/1782030276441-FULL_LISTENING.mp3",
+      "instruction": "",
+      "answerText": "31: cotton\n32: milk\n33: silk\n34: lab\n35: chemist\n36: hard\n37: gases\n38: light\n39: pens\n40: wood",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "",
+          "example": "",
+          "instruction": "Part 4 Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "<strong>History</strong>",
+            "first plastic developed to replace ivory in sports equipment",
+            "semi-synthetics, e.g. commercial celluloid – used {{31}} and acid",
+            "experiments making plastics from {{32}} products were unsuccessful",
+            "earliest fabric to be produced was artificial {{33}}",
+            "Bakelite invented in 1907",
+            "first plastic produced in a {{34}}",
+            "invented by a {{35}} called Hendrik Baekeland",
+            "unusual because it becomes {{36}} when heated",
+            "<strong>Exhibition</strong>",
+            "Problems with display:",
+            "• older plastic objects may release acidic {{37}}",
+            "• plastic objects degrade in {{38}}",
+            "<strong>Popular exhibits:</strong>",
+            "• chandelier made using recycled {{39}}",
+            "• car made in Japan from semi-synthetic materials based on substances found in {{40}}"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "semi-synthetics, e.g. commercial celluloid – used...\nand acid",
+              "text": "semi-synthetics, e.g. commercial celluloid – used...\nand acid",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cotton"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "experiments making plastics from...\nproducts were unsuccessful",
+              "text": "experiments making plastics from...\nproducts were unsuccessful",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "milk"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "earliest fabric to be produced was artificial...",
+              "text": "earliest fabric to be produced was artificial...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "silk"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "first plastic produced in a...",
+              "text": "first plastic produced in a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lab"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "invented by a...\ncalled Hendrik Baekeland",
+              "text": "invented by a...\ncalled Hendrik Baekeland",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "chemist"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "unusual because it becomes...\nwhen heated",
+              "text": "unusual because it becomes...\nwhen heated",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "hard"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "older plastic objects may release acidic...",
+              "text": "older plastic objects may release acidic...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "gases"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "plastic objects degrade in...",
+              "text": "plastic objects degrade in...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "light"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "chandelier made using recycled...",
+              "text": "chandelier made using recycled...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "pens"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "car made in Japan from semi-synthetic materials based on substances found in...",
+              "text": "car made in Japan from semi-synthetic materials based on substances found in...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "wood"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

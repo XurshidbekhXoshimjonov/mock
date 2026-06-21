@@ -1,0 +1,857 @@
+{
+  "id": "listening-02-09-2025",
+  "slug": "listening-02-09-2025-full",
+  "title": "Listening Full Test - 02.09.2025",
+  "sourceFile": "02.09.2025_full_test.html",
+  "status": "published",
+  "skill": "listening",
+  "subtitle": "Listening full test",
+  "layout": "structured-listening",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "02.09.2025_full_test"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/listening-02-09-2025.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "",
+        "questionGroups": [
+          {
+            "id": "p1-q1-6",
+            "type": "table_completion",
+            "questionRange": "Questions 1-6",
+            "title": "Beechen Festival",
+            "instruction": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "columns": [
+              "Date",
+              "Time",
+              "Activity",
+              "Place",
+              "Comments"
+            ],
+            "rows": [
+              [
+                "June 19th",
+                "7 p.m.",
+                "Example - Concert",
+                "The {{1}}",
+                ""
+              ],
+              [
+                "June 20th",
+                "{{2}} p.m.",
+                "tour",
+                "Meet at the {{3}}",
+                "includes a visit to an old flour mill"
+              ],
+              [
+                "June 21st",
+                "all day",
+                "children's {{4}} competition",
+                "Beechen Community Centre",
+                "Bring a {{5}}"
+              ],
+              [
+                "June 21st",
+                "evening",
+                "fireworks",
+                "By the {{6}}",
+                ""
+              ]
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "questionNumber": 1,
+                "type": "sentence_completion",
+                "question": "The _____",
+                "text": "The _____",
+                "options": [],
+                "answer": "theatre | theater"
+              },
+              {
+                "number": 2,
+                "questionNumber": 2,
+                "type": "sentence_completion",
+                "question": "_____ p.m.",
+                "text": "_____ p.m.",
+                "options": [],
+                "answer": "4.30 | 4:30 | 4 30"
+              },
+              {
+                "number": 3,
+                "questionNumber": 3,
+                "type": "sentence_completion",
+                "question": "Meet at the _____",
+                "text": "Meet at the _____",
+                "options": [],
+                "answer": "station"
+              },
+              {
+                "number": 4,
+                "questionNumber": 4,
+                "type": "sentence_completion",
+                "question": "children's _____ competition",
+                "text": "children's _____ competition",
+                "options": [],
+                "answer": "cooking"
+              },
+              {
+                "number": 5,
+                "questionNumber": 5,
+                "type": "sentence_completion",
+                "question": "Bring a _____",
+                "text": "Bring a _____",
+                "options": [],
+                "answer": "plate"
+              },
+              {
+                "number": 6,
+                "questionNumber": 6,
+                "type": "sentence_completion",
+                "question": "By the _____",
+                "text": "By the _____",
+                "options": [],
+                "answer": "river"
+              }
+            ],
+            "instructionTitle": "Questions 1-6",
+            "instructionText": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer."
+          },
+          {
+            "id": "p1-q7-10",
+            "type": "sentence_completion_inline",
+            "questionRange": "Questions 7-10",
+            "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "content": [
+              "This year, activities end by 7 {{7}} p.m.",
+              "There won't be any {{8}} in the town centre this year.",
+              "The festival's web address www.{{9}}.com",
+              "Festival organisers would like to receive {{10}} online."
+            ],
+            "questions": [
+              {
+                "number": 7,
+                "questionNumber": 7,
+                "type": "sentence_completion",
+                "question": "This year, activities end by 7 _____ p.m.",
+                "text": "This year, activities end by 7 _____ p.m.",
+                "options": [],
+                "answer": "11.15 | 11:15 | 11 15"
+              },
+              {
+                "number": 8,
+                "questionNumber": 8,
+                "type": "sentence_completion",
+                "question": "There won't be any _____ in the town centre this year.",
+                "text": "There won't be any _____ in the town centre this year.",
+                "options": [],
+                "answer": "parking"
+              },
+              {
+                "number": 9,
+                "questionNumber": 9,
+                "type": "sentence_completion",
+                "question": "The festival's web address www._____.com",
+                "text": "The festival's web address www._____.com",
+                "options": [],
+                "answer": "events"
+              },
+              {
+                "number": 10,
+                "questionNumber": 10,
+                "type": "sentence_completion",
+                "question": "Festival organisers would like to receive _____ online.",
+                "text": "Festival organisers would like to receive _____ online.",
+                "options": [],
+                "answer": "feedback"
+              }
+            ],
+            "instructionTitle": "Questions 7-10",
+            "instructionText": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer."
+          }
+        ],
+        "audio": "/uploads/audio/listening-02-09-2025.mp3"
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "",
+        "questionGroups": [
+          {
+            "id": "p2-q11-14",
+            "type": "multiple_choice",
+            "questionRange": "Questions 11-14",
+            "title": "Walking Holiday",
+            "instruction": "Choose the correct letter, A, B or C.",
+            "questions": [
+              {
+                "number": 11,
+                "questionNumber": 11,
+                "type": "multiple_choice",
+                "question": "Approximately how many passengers does the ferry hold?",
+                "text": "Approximately how many passengers does the ferry hold?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "160",
+                    "value": "A",
+                    "label": "A. 160"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "600",
+                    "value": "B",
+                    "label": "B. 600"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "2000",
+                    "value": "C",
+                    "label": "C. 2000"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 12,
+                "questionNumber": 12,
+                "type": "multiple_choice",
+                "question": "Which items should the tourists pack in a separate bag?",
+                "text": "Which items should the tourists pack in a separate bag?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "food",
+                    "value": "A",
+                    "label": "A. food"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "reading material",
+                    "value": "B",
+                    "label": "B. reading material"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "medicines",
+                    "value": "C",
+                    "label": "C. medicines"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "questionNumber": 13,
+                "type": "multiple_choice",
+                "question": "The hostel in La Vega de Ileana has",
+                "text": "The hostel in La Vega de Ileana has",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "good washing facilities",
+                    "value": "A",
+                    "label": "A. good washing facilities"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a games room",
+                    "value": "B",
+                    "label": "B. a games room"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "a number of single bedrooms",
+                    "value": "C",
+                    "label": "C. a number of single bedrooms"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 14,
+                "questionNumber": 14,
+                "type": "multiple_choice",
+                "question": "Residents at the hostel are not allowed to",
+                "text": "Residents at the hostel are not allowed to",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "take furniture out of the hostel building",
+                    "value": "A",
+                    "label": "A. take furniture out of the hostel building"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "enter the hostel after a certain time",
+                    "value": "B",
+                    "label": "B. enter the hostel after a certain time"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "smoke in the hostel gardens",
+                    "value": "C",
+                    "label": "C. smoke in the hostel gardens"
+                  }
+                ],
+                "answer": "B"
+              }
+            ],
+            "instructionTitle": "Questions 11-14",
+            "instructionText": "Choose the correct letter, A, B or C."
+          },
+          {
+            "id": "p2-q15-17",
+            "type": "note_completion",
+            "questionRange": "Questions 15-17",
+            "instruction": "Complete the notes below. Write NO MORE THAN THREE WORDS for each answer.",
+            "title": "Bring:",
+            "questions": [
+              {
+                "number": 15,
+                "questionNumber": 15,
+                "type": "sentence_completion",
+                "question": "Spare _____",
+                "text": "Spare _____",
+                "options": [],
+                "answer": "socks"
+              },
+              {
+                "number": 16,
+                "questionNumber": 16,
+                "type": "sentence_completion",
+                "question": "Sun cream: strength _____",
+                "text": "Sun cream: strength _____",
+                "options": [],
+                "answer": "total block | totalblock"
+              },
+              {
+                "number": 17,
+                "questionNumber": 17,
+                "type": "sentence_completion",
+                "question": "a _____ folder for map, etc",
+                "text": "a _____ folder for map, etc",
+                "options": [],
+                "answer": "plastic"
+              }
+            ],
+            "instructionTitle": "Questions 15-17",
+            "instructionText": "Complete the notes below. Write NO MORE THAN THREE WORDS for each answer.",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "- boots with thick soles",
+              "- Spare {{15}}",
+              "- light waterproofs",
+              "- Sun cream: strength {{16}}",
+              "- a {{17}} folder for map, etc"
+            ]
+          },
+          {
+            "id": "p2-q18-20",
+            "type": "multiple_select",
+            "questionRange": "Questions 18-20",
+            "instruction": "Choose THREE letters, A-F.",
+            "questionNumber": 18,
+            "answerQuestions": [
+              {
+                "questionNumber": 19
+              },
+              {
+                "questionNumber": 20
+              }
+            ],
+            "maxSelections": 3,
+            "question": "Which THREE of the following features of the area in Spain does the speaker talk about?",
+            "options": [
+              {
+                "letter": "A",
+                "text": "Altitude",
+                "value": "A",
+                "label": "A. Altitude"
+              },
+              {
+                "letter": "B",
+                "text": "Coastline",
+                "value": "B",
+                "label": "B. Coastline"
+              },
+              {
+                "letter": "C",
+                "text": "Economy",
+                "value": "C",
+                "label": "C. Economy"
+              },
+              {
+                "letter": "D",
+                "text": "Temperatures",
+                "value": "D",
+                "label": "D. Temperatures"
+              },
+              {
+                "letter": "E",
+                "text": "Vegetation",
+                "value": "E",
+                "label": "E. Vegetation"
+              },
+              {
+                "letter": "F",
+                "text": "Wildlife",
+                "value": "F",
+                "label": "F. Wildlife"
+              }
+            ],
+            "questions": [
+              {
+                "number": 18,
+                "questionNumber": 18,
+                "type": "multiple_select",
+                "question": "Feature of the area in Spain",
+                "text": "Feature of the area in Spain",
+                "options": [],
+                "answer": "A"
+              },
+              {
+                "number": 19,
+                "questionNumber": 19,
+                "type": "multiple_select",
+                "question": "Feature of the area in Spain",
+                "text": "Feature of the area in Spain",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 20,
+                "questionNumber": 20,
+                "type": "multiple_select",
+                "question": "Feature of the area in Spain",
+                "text": "Feature of the area in Spain",
+                "options": [],
+                "answer": "F"
+              }
+            ],
+            "instructionTitle": "Questions 18-20",
+            "instructionText": "Choose THREE letters, A-F."
+          }
+        ],
+        "audio": "/uploads/audio/listening-02-09-2025.mp3"
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "",
+        "questionGroups": [
+          {
+            "id": "p3-q21-24",
+            "type": "multiple_choice",
+            "questionRange": "Questions 21-24",
+            "title": "Peer Assessment",
+            "instruction": "Choose the correct letter, A, B or C.",
+            "questions": [
+              {
+                "number": 21,
+                "questionNumber": 21,
+                "type": "multiple_choice",
+                "question": "Sally says many students see peer assessment as",
+                "text": "Sally says many students see peer assessment as",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "a way for tutors to save time",
+                    "value": "A",
+                    "label": "A. a way for tutors to save time"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a useful learning tool",
+                    "value": "B",
+                    "label": "B. a useful learning tool"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "a valuable form of assessment",
+                    "value": "C",
+                    "label": "C. a valuable form of assessment"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 22,
+                "questionNumber": 22,
+                "type": "multiple_choice",
+                "question": "What do Steve and Sally agree is an advantage of peer assessment?",
+                "text": "What do Steve and Sally agree is an advantage of peer assessment?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It's more reliable than self-assessment",
+                    "value": "A",
+                    "label": "A. It's more reliable than self-assessment"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It increases students' self-awareness",
+                    "value": "B",
+                    "label": "B. It increases students' self-awareness"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It builds rapport between students",
+                    "value": "C",
+                    "label": "C. It builds rapport between students"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 23,
+                "questionNumber": 23,
+                "type": "multiple_choice",
+                "question": "If the peer assessment marks seem incorrect,",
+                "text": "If the peer assessment marks seem incorrect,",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the tutor should check those assignments",
+                    "value": "A",
+                    "label": "A. the tutor should check those assignments"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "students should mark the assignments again",
+                    "value": "B",
+                    "label": "B. students should mark the assignments again"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the marking criteria should be rewritten",
+                    "value": "C",
+                    "label": "C. the marking criteria should be rewritten"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 24,
+                "questionNumber": 24,
+                "type": "multiple_choice",
+                "question": "How were the presentations in the research project marked?",
+                "text": "How were the presentations in the research project marked?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Students and lecturers marked all the presentations",
+                    "value": "A",
+                    "label": "A. Students and lecturers marked all the presentations"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Students chose which presentations they wanted to mark",
+                    "value": "B",
+                    "label": "B. Students chose which presentations they wanted to mark"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Lecturers marked a selection of presentations",
+                    "value": "C",
+                    "label": "C. Lecturers marked a selection of presentations"
+                  }
+                ],
+                "answer": "A"
+              }
+            ],
+            "instructionTitle": "Questions 21-24",
+            "instructionText": "Choose the correct letter, A, B or C."
+          },
+          {
+            "id": "p3-q25-30",
+            "type": "matching",
+            "questionRange": "Questions 25-30",
+            "instruction": "How did the following categories of student markers compare with the rest of the group when marking student presentations? Write the correct letter, A, B or C.",
+            "title": "Categories of student markers",
+            "options": [
+              {
+                "letter": "A",
+                "text": "They gave higher marks.",
+                "value": "A",
+                "label": "A. They gave higher marks."
+              },
+              {
+                "letter": "B",
+                "text": "They gave lower marks.",
+                "value": "B",
+                "label": "B. They gave lower marks."
+              },
+              {
+                "letter": "C",
+                "text": "Their marks were not significantly different.",
+                "value": "C",
+                "label": "C. Their marks were not significantly different."
+              }
+            ],
+            "questions": [
+              {
+                "number": 25,
+                "questionNumber": 25,
+                "type": "matching",
+                "question": "male students marking female presenters",
+                "text": "male students marking female presenters",
+                "options": [],
+                "answer": "B"
+              },
+              {
+                "number": 26,
+                "questionNumber": 26,
+                "type": "matching",
+                "question": "female students marking male presenters",
+                "text": "female students marking male presenters",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 27,
+                "questionNumber": 27,
+                "type": "matching",
+                "question": "female students marking female presenters",
+                "text": "female students marking female presenters",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 28,
+                "questionNumber": 28,
+                "type": "matching",
+                "question": "younger students marking older presenters",
+                "text": "younger students marking older presenters",
+                "options": [],
+                "answer": "A"
+              },
+              {
+                "number": 29,
+                "questionNumber": 29,
+                "type": "matching",
+                "question": "students marking presenters from a different university",
+                "text": "students marking presenters from a different university",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 30,
+                "questionNumber": 30,
+                "type": "matching",
+                "question": "students who had helped set criteria",
+                "text": "students who had helped set criteria",
+                "options": [],
+                "answer": "B"
+              }
+            ],
+            "instructionTitle": "Questions 25-30",
+            "instructionText": "How did the following categories of student markers compare with the rest of the group when marking student presentations? Write the correct letter, A, B or C."
+          }
+        ],
+        "audio": "/uploads/audio/listening-02-09-2025.mp3"
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "",
+        "questionGroups": [
+          {
+            "id": "p4-q31-40",
+            "type": "note_completion",
+            "questionRange": "Questions 31-40",
+            "title": "Bislama - The Pidgin English Language of Vanuatu",
+            "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "questions": [
+              {
+                "number": 31,
+                "questionNumber": 31,
+                "type": "sentence_completion",
+                "question": "_____ languages: 8",
+                "text": "_____ languages: 8",
+                "options": [],
+                "answer": "extinct"
+              },
+              {
+                "number": 32,
+                "questionNumber": 32,
+                "type": "sentence_completion",
+                "question": "English is used in the _____ system",
+                "text": "English is used in the _____ system",
+                "options": [],
+                "answer": "education"
+              },
+              {
+                "number": 33,
+                "questionNumber": 33,
+                "type": "sentence_completion",
+                "question": "In the past this language was described as _____",
+                "text": "In the past this language was described as _____",
+                "options": [],
+                "answer": "broken"
+              },
+              {
+                "number": 34,
+                "questionNumber": 34,
+                "type": "sentence_completion",
+                "question": "Australian _____",
+                "text": "Australian _____",
+                "options": [],
+                "answer": "plantation | plantations"
+              },
+              {
+                "number": 35,
+                "questionNumber": 35,
+                "type": "sentence_completion",
+                "question": "moved to the _____",
+                "text": "moved to the _____",
+                "options": [],
+                "answer": "city | cities"
+              },
+              {
+                "number": 36,
+                "questionNumber": 36,
+                "type": "sentence_completion",
+                "question": "a _____ pidgin",
+                "text": "a _____ pidgin",
+                "options": [],
+                "answer": "developed"
+              },
+              {
+                "number": 37,
+                "questionNumber": 37,
+                "type": "sentence_completion",
+                "question": "more _____ in Bislama",
+                "text": "more _____ in Bislama",
+                "options": [],
+                "answer": "meanings"
+              },
+              {
+                "number": 38,
+                "questionNumber": 38,
+                "type": "sentence_completion",
+                "question": "of _____ origin",
+                "text": "of _____ origin",
+                "options": [],
+                "answer": "french"
+              },
+              {
+                "number": 39,
+                "questionNumber": 39,
+                "type": "sentence_completion",
+                "question": "local _____",
+                "text": "local _____",
+                "options": [],
+                "answer": "culture"
+              },
+              {
+                "number": 40,
+                "questionNumber": 40,
+                "type": "sentence_completion",
+                "question": "an important _____ in Bislama",
+                "text": "an important _____ in Bislama",
+                "options": [],
+                "answer": "preposition"
+              }
+            ],
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "<strong>Languages in Vanuatu</strong>",
+              "- Local languages:",
+              "  - Actively spoken languages: 81",
+              "  - Declining languages: 17",
+              "  - {{31}} languages: 8",
+              "Total: 106",
+              "Foreign languages: English is used in the {{32}} system",
+              "<strong>Bislama</strong>",
+              "It is spoken by 90% of the population today.",
+              "In the past this language was described as {{33}}",
+              "<strong>History of Bislama</strong>",
+              "- Around 1800 it was used as a common language on many ships.",
+              "- After 1860 Vanuatu people worked in Australian {{34}}",
+              "- After 1950 people moved to the {{35}}",
+              "<strong>Description of Bislama</strong>",
+              "<em>General</em>",
+              "Bislama should be called a {{36}} pidgin",
+              "<em>Vocabulary</em>",
+              "- Most words come from English.",
+              "- Words such as \"from\" may have more {{37}} in Bislama",
+              "- Less than 10% of words are of {{38}} origin",
+              "- Pacific words describe the natural world and also local {{39}}",
+              "<em>Grammar</em>",
+              "- It is based on Vanuatu languages.",
+              "- The word \"long\" acts as an important {{40}} in Bislama"
+            ]
+          }
+        ],
+        "audio": "/uploads/audio/listening-02-09-2025.mp3"
+      }
+    ]
+  },
+  "answers": {
+    "1": "theatre | theater",
+    "2": "4.30 | 4:30 | 4 30",
+    "3": "station",
+    "4": "cooking",
+    "5": "plate",
+    "6": "river",
+    "7": "11.15 | 11:15 | 11 15",
+    "8": "parking",
+    "9": "events",
+    "10": "feedback",
+    "11": "C",
+    "12": "B",
+    "13": "A",
+    "14": "B",
+    "15": "socks",
+    "16": "total block | totalblock",
+    "17": "plastic",
+    "18": "A",
+    "19": "C",
+    "20": "F",
+    "21": "A",
+    "22": "B",
+    "23": "B",
+    "24": "A",
+    "25": "B",
+    "26": "C",
+    "27": "C",
+    "28": "A",
+    "29": "C",
+    "30": "B",
+    "31": "extinct",
+    "32": "education",
+    "33": "broken",
+    "34": "plantation | plantations",
+    "35": "city | cities",
+    "36": "developed",
+    "37": "meanings",
+    "38": "french",
+    "39": "culture",
+    "40": "preposition"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "manualListeningTestId": "listening-02-09-2025",
+  "openUrl": "/listening/listening-02-09-2025",
+  "createdAt": "2026-06-21T06:33:45.772Z",
+  "publishedAt": "2026-06-21T06:33:45.772Z"
+}
