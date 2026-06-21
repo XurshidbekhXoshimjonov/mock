@@ -1899,3 +1899,53 @@ html.dark-theme .cbt-nav-bubble.is-answered {
     background-color: rgba(59, 130, 246, 0.2);
     color: #60a5fa;
 }
+
+/* Custom bullet list styling for Khanov tests */
+.notes-box .nb-title {
+    font-weight: 800;
+    font-size: 1.25em;
+    text-align: center;
+    margin-bottom: 16px;
+    color: var(--cbt-text, #111);
+}
+.nb-sub {
+    font-weight: 700;
+    margin: 12px 0 4px;
+    color: var(--cbt-text, #333);
+    font-size: 1.05em;
+    text-decoration: underline;
+}
+.nb-ul {
+    list-style: none;
+    padding-left: 14px;
+    margin-bottom: 6px;
+}
+.nb-ul > li {
+    margin-bottom: 3px;
+    position: relative;
+    padding-left: 16px;
+    line-height: 2;
+}
+.nb-ul > li::before {
+    content: "• ";
+    color: #c41230;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+}
+.nb-ul2 {
+    list-style: none;
+    padding-left: 28px;
+    margin-bottom: 4px;
+}
+.nb-ul2 > li {
+    margin-bottom: 2px;
+    position: relative;
+    padding-left: 14px;
+}
+.nb-ul2 > li::before {
+    content: "- ";
+    color: #666;
+    position: absolute;
+    left: 0;
+}

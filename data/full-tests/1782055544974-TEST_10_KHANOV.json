@@ -1,0 +1,921 @@
+{
+  "id": "1782055544974-TEST_10_KHANOV",
+  "title": "TEST 10, KHANOV",
+  "sourceFile": "TEST 10, KHANOV.html",
+  "status": "published",
+  "layout": "scripted-reading",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "TEST 10, KHANOV"
+  },
+  "skill": "reading",
+  "subtitle": "Reading full test",
+  "reading": {
+    "passages": [
+      {
+        "number": 1,
+        "title": "The National Parks of America",
+        "displayLabel": "Reading Passage 1",
+        "passageTitle": "The National Parks of America",
+        "passageText": "AAmerica's national parks are one of the country's most remarkable and influential initiatives. The concept of the national park originated in America, though it was quickly replicated by similar parks in Canada, Finland, New Zealand, Australia and elsewhere. The first American national park was Yellowstone, created in 1872. Yellowstone comprises some 3,500 square miles of wilderness and today attracts more than four million visitors a year. Since 1872, nearly 60 additional national parks have been established in the USA, incorporating almost every type of natural environment, from mountains to deserts, lakes, rivers and coastlines. They are administered by the National Parks Service (NPS), which also manages significant monuments and historic structures such as the Statue of Liberty, the Gettysburg Museum and Ford's Theatre, where President Lincoln was assassinated.\n\nBThe creation of the national parks came in response to a growing attachment to the natural world that was developing in American society. In 1832, the painter George Catlin dreamed of creating 'a nation's park' to preserve the grasslands in the state of South Dakota. Catlin failed to see such a park established in his lifetime, but his vision lived on. Four years later the writer Ralph Waldo Emerson published an important essay entitled 'Nature' in which he argued that natural landscapes should be protected rather than exploited for agriculture and commerce. The campaigner Frederick Olmsted went further, claiming that every American, not only the wealthy and powerful, had the right to access places of natural beauty. The creation of a public park in the Yosemite Valley was directly the result of his work.\n\nCThe development of the national parks was a process that continued through the late 19th century and the early 20th century. The establishment of the first park at Yellowstone in 1872 was perhaps the defining moment in this process. The Yellowstone national park not only preserved the headwaters of the Mississippi, Colorado and Snake rivers, but also provided a sanctuary for countless endangered species by imposing a ban on hunting in all its forms. Today such an initiative would be commonplace but in these earliest days of the conservation movement, many Americans still regarded it as their right to shoot or trap wild animals.\n\nDYellowstone was followed by Sequoia (1890), Mount Rainier (1899), Crater Lake (1902) and Wind Cave (1903), among many other parks. But while the creation of additional parks enjoyed wide popular support, there were frequent disagreements about their purpose. For some, the primary goal was the protection of the natural world, while for others the parks were about providing public access to nature. These two goals were at times contradictory and led to a variety of competing voices and factions. In recognition of the difficulties of running these vast wilderness areas, their management was for many years placed in the hands of the military, rather than the federal or state government.\n\nEThe late 19th century was also a time when railroads were being constructed across America. Increasingly, these ran through even the most remote areas, where many parks were located, making tourism possible in these locations for the very first time. While this was welcomed by many park supporters, others were concerned that visitors should appreciate the parks in particular ways. Nathaniel Langford was instrumental in setting up Yellowstone and saw the park as an ideal opportunity for the education of ordinary citizens in all aspects of the natural world and environmental conservation, which was his number one priority.\n\nFIn the early 20th century, the first really significant development was the setting up of the NPS in 1916. Now for the first time a single body was charged with administering the network and managing the numerous groups and interests that had a stake in it. Stephen Mather was appointed as the first Superintendent of Parks and under his leadership seven new parks were established, including Grand Canyon, Hawaii and Mount McKinley. However, arguably even more important was Mather's transformation of the hitherto poorly managed finances of the parks.\n\nGThe NPS generally saw the primary role of the parks as being environmental protection. For this reason, most human activities were regulated — farming and forestry were certainly not allowed. However, the controversial decision to permit the construction of dams in national parks was made on the basis that the resulting supplies of water and hydroelectric power would be in the public interest. Certainly, visitor numbers were unaffected as park admissions increased every year. Then in the 1930s the number of visitors expanded dramatically, largely because mass-produced automobiles became affordable, allowing ever more city-dwellers to reach the park network. With this, the national parks assumed a pre-eminent position in the social fabric of America, a legacy that continues to the present day.",
+        "passageHtml": "\n<p><span class=\"pl\">A</span>America's national parks are one of the country's most remarkable and influential initiatives. The concept of the national park originated in America, though it was quickly replicated by similar parks in Canada, Finland, New Zealand, Australia and elsewhere. The first American national park was Yellowstone, created in 1872. Yellowstone comprises some 3,500 square miles of wilderness and today attracts more than four million visitors a year. Since 1872, nearly 60 additional national parks have been established in the USA, incorporating almost every type of natural environment, from mountains to deserts, lakes, rivers and coastlines. They are administered by the National Parks Service (NPS), which also manages significant monuments and historic structures such as the Statue of Liberty, the Gettysburg Museum and Ford's Theatre, where President Lincoln was assassinated.</p>\n<p><span class=\"pl\">B</span>The creation of the national parks came in response to a growing attachment to the natural world that was developing in American society. In 1832, the painter George Catlin dreamed of creating 'a nation's park' to preserve the grasslands in the state of South Dakota. Catlin failed to see such a park established in his lifetime, but his vision lived on. Four years later the writer Ralph Waldo Emerson published an important essay entitled 'Nature' in which he argued that natural landscapes should be protected rather than exploited for agriculture and commerce. The campaigner Frederick Olmsted went further, claiming that every American, not only the wealthy and powerful, had the right to access places of natural beauty. The creation of a public park in the Yosemite Valley was directly the result of his work.</p>\n<p><span class=\"pl\">C</span>The development of the national parks was a process that continued through the late 19th century and the early 20th century. The establishment of the first park at Yellowstone in 1872 was perhaps the defining moment in this process. The Yellowstone national park not only preserved the headwaters of the Mississippi, Colorado and Snake rivers, but also provided a sanctuary for countless endangered species by imposing a ban on hunting in all its forms. Today such an initiative would be commonplace but in these earliest days of the conservation movement, many Americans still regarded it as their right to shoot or trap wild animals.</p>\n<p><span class=\"pl\">D</span>Yellowstone was followed by Sequoia (1890), Mount Rainier (1899), Crater Lake (1902) and Wind Cave (1903), among many other parks. But while the creation of additional parks enjoyed wide popular support, there were frequent disagreements about their purpose. For some, the primary goal was the protection of the natural world, while for others the parks were about providing public access to nature. These two goals were at times contradictory and led to a variety of competing voices and factions. In recognition of the difficulties of running these vast wilderness areas, their management was for many years placed in the hands of the military, rather than the federal or state government.</p>\n<p><span class=\"pl\">E</span>The late 19th century was also a time when railroads were being constructed across America. Increasingly, these ran through even the most remote areas, where many parks were located, making tourism possible in these locations for the very first time. While this was welcomed by many park supporters, others were concerned that visitors should appreciate the parks in particular ways. Nathaniel Langford was instrumental in setting up Yellowstone and saw the park as an ideal opportunity for the education of ordinary citizens in all aspects of the natural world and environmental conservation, which was his number one priority.</p>\n<p><span class=\"pl\">F</span>In the early 20th century, the first really significant development was the setting up of the NPS in 1916. Now for the first time a single body was charged with administering the network and managing the numerous groups and interests that had a stake in it. Stephen Mather was appointed as the first Superintendent of Parks and under his leadership seven new parks were established, including Grand Canyon, Hawaii and Mount McKinley. However, arguably even more important was Mather's transformation of the hitherto poorly managed finances of the parks.</p>\n<p><span class=\"pl\">G</span>The NPS generally saw the primary role of the parks as being environmental protection. For this reason, most human activities were regulated — farming and forestry were certainly not allowed. However, the controversial decision to permit the construction of dams in national parks was made on the basis that the resulting supplies of water and hydroelectric power would be in the public interest. Certainly, visitor numbers were unaffected as park admissions increased every year. Then in the 1930s the number of visitors expanded dramatically, largely because mass-produced automobiles became affordable, allowing ever more city-dwellers to reach the park network. With this, the national parks assumed a pre-eminent position in the social fabric of America, a legacy that continues to the present day.</p>",
+        "paragraphs": [
+          {
+            "letter": "A",
+            "html": "<p>America's national parks are one of the country's most remarkable and influential initiatives. The concept of the national park originated in America, though it was quickly replicated by similar parks in Canada, Finland, New Zealand, Australia and elsewhere. The first American national park was Yellowstone, created in 1872. Yellowstone comprises some 3,500 square miles of wilderness and today attracts more than four million visitors a year. Since 1872, nearly 60 additional national parks have been established in the USA, incorporating almost every type of natural environment, from mountains to deserts, lakes, rivers and coastlines. They are administered by the National Parks Service (NPS), which also manages significant monuments and historic structures such as the Statue of Liberty, the Gettysburg Museum and Ford's Theatre, where President Lincoln was assassinated.</p>",
+            "text": "America's national parks are one of the country's most remarkable and influential initiatives. The concept of the national park originated in America, though it was quickly replicated by similar parks in Canada, Finland, New Zealand, Australia and elsewhere. The first American national park was Yellowstone, created in 1872. Yellowstone comprises some 3,500 square miles of wilderness and today attracts more than four million visitors a year. Since 1872, nearly 60 additional national parks have been established in the USA, incorporating almost every type of natural environment, from mountains to deserts, lakes, rivers and coastlines. They are administered by the National Parks Service (NPS), which also manages significant monuments and historic structures such as the Statue of Liberty, the Gettysburg Museum and Ford's Theatre, where President Lincoln was assassinated."
+          },
+          {
+            "letter": "B",
+            "html": "<p>The creation of the national parks came in response to a growing attachment to the natural world that was developing in American society. In 1832, the painter George Catlin dreamed of creating 'a nation's park' to preserve the grasslands in the state of South Dakota. Catlin failed to see such a park established in his lifetime, but his vision lived on. Four years later the writer Ralph Waldo Emerson published an important essay entitled 'Nature' in which he argued that natural landscapes should be protected rather than exploited for agriculture and commerce. The campaigner Frederick Olmsted went further, claiming that every American, not only the wealthy and powerful, had the right to access places of natural beauty. The creation of a public park in the Yosemite Valley was directly the result of his work.</p>",
+            "text": "The creation of the national parks came in response to a growing attachment to the natural world that was developing in American society. In 1832, the painter George Catlin dreamed of creating 'a nation's park' to preserve the grasslands in the state of South Dakota. Catlin failed to see such a park established in his lifetime, but his vision lived on. Four years later the writer Ralph Waldo Emerson published an important essay entitled 'Nature' in which he argued that natural landscapes should be protected rather than exploited for agriculture and commerce. The campaigner Frederick Olmsted went further, claiming that every American, not only the wealthy and powerful, had the right to access places of natural beauty. The creation of a public park in the Yosemite Valley was directly the result of his work."
+          },
+          {
+            "letter": "C",
+            "html": "<p>The development of the national parks was a process that continued through the late 19th century and the early 20th century. The establishment of the first park at Yellowstone in 1872 was perhaps the defining moment in this process. The Yellowstone national park not only preserved the headwaters of the Mississippi, Colorado and Snake rivers, but also provided a sanctuary for countless endangered species by imposing a ban on hunting in all its forms. Today such an initiative would be commonplace but in these earliest days of the conservation movement, many Americans still regarded it as their right to shoot or trap wild animals.</p>",
+            "text": "The development of the national parks was a process that continued through the late 19th century and the early 20th century. The establishment of the first park at Yellowstone in 1872 was perhaps the defining moment in this process. The Yellowstone national park not only preserved the headwaters of the Mississippi, Colorado and Snake rivers, but also provided a sanctuary for countless endangered species by imposing a ban on hunting in all its forms. Today such an initiative would be commonplace but in these earliest days of the conservation movement, many Americans still regarded it as their right to shoot or trap wild animals."
+          },
+          {
+            "letter": "D",
+            "html": "<p>Yellowstone was followed by Sequoia (1890), Mount Rainier (1899), Crater Lake (1902) and Wind Cave (1903), among many other parks. But while the creation of additional parks enjoyed wide popular support, there were frequent disagreements about their purpose. For some, the primary goal was the protection of the natural world, while for others the parks were about providing public access to nature. These two goals were at times contradictory and led to a variety of competing voices and factions. In recognition of the difficulties of running these vast wilderness areas, their management was for many years placed in the hands of the military, rather than the federal or state government.</p>",
+            "text": "Yellowstone was followed by Sequoia (1890), Mount Rainier (1899), Crater Lake (1902) and Wind Cave (1903), among many other parks. But while the creation of additional parks enjoyed wide popular support, there were frequent disagreements about their purpose. For some, the primary goal was the protection of the natural world, while for others the parks were about providing public access to nature. These two goals were at times contradictory and led to a variety of competing voices and factions. In recognition of the difficulties of running these vast wilderness areas, their management was for many years placed in the hands of the military, rather than the federal or state government."
+          },
+          {
+            "letter": "E",
+            "html": "<p>The late 19th century was also a time when railroads were being constructed across America. Increasingly, these ran through even the most remote areas, where many parks were located, making tourism possible in these locations for the very first time. While this was welcomed by many park supporters, others were concerned that visitors should appreciate the parks in particular ways. Nathaniel Langford was instrumental in setting up Yellowstone and saw the park as an ideal opportunity for the education of ordinary citizens in all aspects of the natural world and environmental conservation, which was his number one priority.</p>",
+            "text": "The late 19th century was also a time when railroads were being constructed across America. Increasingly, these ran through even the most remote areas, where many parks were located, making tourism possible in these locations for the very first time. While this was welcomed by many park supporters, others were concerned that visitors should appreciate the parks in particular ways. Nathaniel Langford was instrumental in setting up Yellowstone and saw the park as an ideal opportunity for the education of ordinary citizens in all aspects of the natural world and environmental conservation, which was his number one priority."
+          },
+          {
+            "letter": "F",
+            "html": "<p>In the early 20th century, the first really significant development was the setting up of the NPS in 1916. Now for the first time a single body was charged with administering the network and managing the numerous groups and interests that had a stake in it. Stephen Mather was appointed as the first Superintendent of Parks and under his leadership seven new parks were established, including Grand Canyon, Hawaii and Mount McKinley. However, arguably even more important was Mather's transformation of the hitherto poorly managed finances of the parks.</p>",
+            "text": "In the early 20th century, the first really significant development was the setting up of the NPS in 1916. Now for the first time a single body was charged with administering the network and managing the numerous groups and interests that had a stake in it. Stephen Mather was appointed as the first Superintendent of Parks and under his leadership seven new parks were established, including Grand Canyon, Hawaii and Mount McKinley. However, arguably even more important was Mather's transformation of the hitherto poorly managed finances of the parks."
+          },
+          {
+            "letter": "G",
+            "html": "<p>The NPS generally saw the primary role of the parks as being environmental protection. For this reason, most human activities were regulated — farming and forestry were certainly not allowed. However, the controversial decision to permit the construction of dams in national parks was made on the basis that the resulting supplies of water and hydroelectric power would be in the public interest. Certainly, visitor numbers were unaffected as park admissions increased every year. Then in the 1930s the number of visitors expanded dramatically, largely because mass-produced automobiles became affordable, allowing ever more city-dwellers to reach the park network. With this, the national parks assumed a pre-eminent position in the social fabric of America, a legacy that continues to the present day.</p>",
+            "text": "The NPS generally saw the primary role of the parks as being environmental protection. For this reason, most human activities were regulated — farming and forestry were certainly not allowed. However, the controversial decision to permit the construction of dams in national parks was made on the basis that the resulting supplies of water and hydroelectric power would be in the public interest. Certainly, visitor numbers were unaffected as park admissions increased every year. Then in the 1930s the number of visitors expanded dramatically, largely because mass-produced automobiles became affordable, allowing ever more city-dwellers to reach the park network. With this, the national parks assumed a pre-eminent position in the social fabric of America, a legacy that continues to the present day."
+          }
+        ],
+        "questionGroups": [
+          {
+            "id": "scripted-reading-p1-g1",
+            "type": "true_false_not_given",
+            "instructionTitle": "Questions 1–6",
+            "instructionText": "Choose TRUE if the statement agrees with the information given in the text, FALSE if the statement contradicts the information, or NOT GIVEN if there is no information on this.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 1–6</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "options": [],
+            "contentHtml": "",
+            "questions": [
+              {
+                "number": 1,
+                "type": "true_false_not_given",
+                "question": "America copied the idea of national parks from other countries.",
+                "stemHtml": "America copied the idea of national parks from other countries.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "FALSE"
+              },
+              {
+                "number": 2,
+                "type": "true_false_not_given",
+                "question": "Yellowstone is the most frequently visited national park in the USA.",
+                "stemHtml": "Yellowstone is the most frequently visited national park in the USA.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "NOT GIVEN"
+              },
+              {
+                "number": 3,
+                "type": "true_false_not_given",
+                "question": "The NPS is responsible for certain buildings as well as natural landscapes.",
+                "stemHtml": "The NPS is responsible for certain buildings as well as natural landscapes.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "TRUE"
+              },
+              {
+                "number": 4,
+                "type": "true_false_not_given",
+                "question": "Catlin was criticised by some people for proposing 'a nation's park'.",
+                "stemHtml": "Catlin was criticised by some people for proposing 'a nation's park'.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "NOT GIVEN"
+              },
+              {
+                "number": 5,
+                "type": "true_false_not_given",
+                "question": "Emerson believed that farms and businesses should be allowed to use land freely.",
+                "stemHtml": "Emerson believed that farms and businesses should be allowed to use land freely.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "FALSE"
+              },
+              {
+                "number": 6,
+                "type": "true_false_not_given",
+                "question": "Olmsted helped establish a park in the Yosemite Valley.",
+                "stemHtml": "Olmsted helped establish a park in the Yosemite Valley.",
+                "options": [
+                  "TRUE",
+                  "FALSE",
+                  "NOT GIVEN"
+                ],
+                "answer": "TRUE"
+              }
+            ],
+            "questionRange": [
+              1,
+              6
+            ]
+          },
+          {
+            "id": "scripted-reading-p1-g2",
+            "type": "notes_completion",
+            "instructionTitle": "Questions 7–13",
+            "instructionText": "Complete the notes. Write ONE WORD ONLY from the text in each gap.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 7–13</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "ONE WORD ONLY",
+            "options": [],
+            "contentHtml": "<div class=\"notes-box\">\n  <div class=\"nb-title\">Development of the National Parks</div>\n  <div class=\"nb-sub\">Late 19th Century</div>\n  <ul class=\"nb-ul\">\n    <li>in Yellowstone Park, every type of <span class=\"ielts-blank\" data-blank=\"7\">______</span> was prohibited</li>\n    <li>Yellowstone and other parks were administered by the <span class=\"ielts-blank\" data-blank=\"8\">______</span></li>\n    <li>the development of a railroad system encouraged new kinds of <span class=\"ielts-blank\" data-blank=\"9\">______</span></li>\n    <li>Langford believed that public <span class=\"ielts-blank\" data-blank=\"10\">______</span> was the most important role of the parks</li>\n  </ul>\n  <div class=\"nb-sub\">Early 20th Century</div>\n  <ul class=\"nb-ul\">\n    <li>Mather greatly improved the <span class=\"ielts-blank\" data-blank=\"11\">______</span> of the parks</li>\n    <li>the NPS allowed some <span class=\"ielts-blank\" data-blank=\"12\">______</span> to be built in national parks</li>\n    <li>in the 1930s, the popularity of the parks increased with the availability of <span class=\"ielts-blank\" data-blank=\"13\">______</span></li>\n  </ul>\n</div>",
+            "questions": [
+              {
+                "number": 7,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "hunting"
+              },
+              {
+                "number": 8,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "military"
+              },
+              {
+                "number": 9,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "tourism"
+              },
+              {
+                "number": 10,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "education"
+              },
+              {
+                "number": 11,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "finances"
+              },
+              {
+                "number": 12,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "dams"
+              },
+              {
+                "number": 13,
+                "type": "notes_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "automobiles"
+              }
+            ],
+            "questionRange": [
+              7,
+              13
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Children's comprehension of television advertising",
+        "displayLabel": "Reading Passage 2",
+        "passageTitle": "Children's comprehension of television advertising",
+        "passageText": "AIn 1874, long before the advent of television, the English Parliament passed a law to protect children 'from their own lack of experience and from the wiles of pushing tradesmen and moneylenders' (James, 1965). The act is one of the earliest governmental policies to address children's vulnerability to commercial exploitation and was produced before major corporations earned huge profits by marketing products directly to children. Yet the issues underlying this 19th-century policy remain much the same in the 21st century.\n\nBTelevision has long been the predominant medium that advertisers have chosen for marketing products to children. It is estimated that the average child sees more than 40,000 television commercials a year, most of which are 15 to 30 seconds in length (Kunkel, 2001). According to another estimate, children aged 14 years and under make $424 billion in direct purchases and influence $4190 billion in family purchases, underscoring the high stakes involved (McNeal, 1998). In addition, companies now recognize that brand loyalty built at an early age may reap economic rewards over a child's lifetime (McNeal, 1987).\n\nCA number of factors have contributed to an unprecedented growth in both the amount and type of advertising directed at children. First and foremost among these are changes in the media environment. In decades past, television programming targeted at children was limited and relegated to time slots unpopular with their parents, such as Saturday mornings (Turow, 1981). Today, the number of channels received in the average US home has escalated with the diffusion of cable television and satellite technologies. In this new multichannel era, there are numerous national program services devoted exclusively to children. Naturally, these channels deliver significant amounts of child-oriented marketing messages. Although parents may be pleased that their youngsters can now watch children's programming at any hour of the day they may not recognize that such viewing opportunities entail much greater exposure to advertising than any previous generation of youth has experienced.\n\nDApproximately 80% of all advertising targeted at children falls within four product categories: toys, cereals, candies, and fast-food restaurants (Kunkel et al, 1992). Commercials are highly effective at employing specific features designed to attract children's attention. For example, they use the strategy of introducing unique sound effects and rapidly moving images (Greer et al, 1982). The other most common persuasive strategy employed in advertising to children is to associate product with playfulness and happiness, rather than to provide any actual product-related information (Kunkel et al, 1992). For example, a commercial featuring Ronald McDonald dancing, singing and smiling in McDonald's restaurants without any mention of the actual food products available reflects a playful or happy theme. This strategy is also found frequently with cereal ads, which often include cartoon characters to help children identify the product. In contrast, most commercials fail to mention even the major grain used in each cereal.\n\nEAnother common feature of advertising to children is the use of product disclosures such as 'batteries not included' or 'each part sold separately'. Studies make clear that young children do not comprehend the intended meaning of these disclaimers. For example, fewer than one in four kindergarten through second grade children could grasp the meaning of 'some assembly required' in a commercial. In contrast, the use of child-friendly language such as 'you have to put it together' more than doubled the proportion of children who understood the qualifying message (Liebert et al, 1977). The phrase 'part of a balanced breakfast' is also a frequent disclosure included in most cereal ads to combat the concern that sugared cereal holds little nutritional value for children. Research shows that most children below age 7 years have no idea what the term 'balanced breakfast' means (Palmer & McDowell, 1981). Rather than informing young viewers about the importance of a nutritious breakfast, this common disclaimer actually leaves many children with the misimpression that cereal alone is sufficient for a meal. This pattern of employing creative terminology in advertising content so as to obscure certain information that might be unhelpful to the sponsor is a long-standing practice that often misleads the consumer (Geis, 1982).\n\nFVery young children do not recognize that there are two fundamentally different categories of television content: programs and commercials. Most children below the age of 4 or 5 exhibit low awareness of the concept of commercials, frequently explaining them as if they were a scene in the program itself. Once this confusion diminishes, children first recognize the difference between programs and commercials based on either affective ('commercials are funnier than TV programs') or perceptual ('commercials are short and programs are long') cues (Blatt et al, 1972).\n\nGAlthough most children's programs indicate that a commercial break is coming (e.g. by saying 'We'll be right back after these messages'), research reveals that these 'separators' generally do not help children to recognize advertising content (Palmer & McDowell, 1979). This likely occurs because they are not perceptually distinct from the adjacent programming that surrounds them; in fact, many separators feature characters that appear in the same show that the commercial has just interrupted. When an ad includes one of the characters featured in a program, this is known as host-selling. This type of advertising makes the task of discriminating between program and commercial content particularly difficult for young children (Kunkel, 1988) and is thus restricted in the US by the Federal Communications Commission during children's programs.\n\nHIn sum, because young children lack the cognitive skills and abilities of older children and adults, they do not comprehend commercial messages in the same way as more mature audiences, and are therefore uniquely susceptible to advertising influence.",
+        "passageHtml": "\n<p><span class=\"pl\">A</span>In 1874, long before the advent of television, the English Parliament passed a law to protect children 'from their own lack of experience and from the wiles of pushing tradesmen and moneylenders' (James, 1965). The act is one of the earliest governmental policies to address children's vulnerability to commercial exploitation and was produced before major corporations earned huge profits by marketing products directly to children. Yet the issues underlying this 19th-century policy remain much the same in the 21st century.</p>\n<p><span class=\"pl\">B</span>Television has long been the predominant medium that advertisers have chosen for marketing products to children. It is estimated that the average child sees more than 40,000 television commercials a year, most of which are 15 to 30 seconds in length (Kunkel, 2001). According to another estimate, children aged 14 years and under make $424 billion in direct purchases and influence $4190 billion in family purchases, underscoring the high stakes involved (McNeal, 1998). In addition, companies now recognize that brand loyalty built at an early age may reap economic rewards over a child's lifetime (McNeal, 1987).</p>\n<p><span class=\"pl\">C</span>A number of factors have contributed to an unprecedented growth in both the amount and type of advertising directed at children. First and foremost among these are changes in the media environment. In decades past, television programming targeted at children was limited and relegated to time slots unpopular with their parents, such as Saturday mornings (Turow, 1981). Today, the number of channels received in the average US home has escalated with the diffusion of cable television and satellite technologies. In this new multichannel era, there are numerous national program services devoted exclusively to children. Naturally, these channels deliver significant amounts of child-oriented marketing messages. Although parents may be pleased that their youngsters can now watch children's programming at any hour of the day they may not recognize that such viewing opportunities entail much greater exposure to advertising than any previous generation of youth has experienced.</p>\n<p><span class=\"pl\">D</span>Approximately 80% of all advertising targeted at children falls within four product categories: toys, cereals, candies, and fast-food restaurants (Kunkel et al, 1992). Commercials are highly effective at employing specific features designed to attract children's attention. For example, they use the strategy of introducing unique sound effects and rapidly moving images (Greer et al, 1982). The other most common persuasive strategy employed in advertising to children is to associate product with playfulness and happiness, rather than to provide any actual product-related information (Kunkel et al, 1992). For example, a commercial featuring Ronald McDonald dancing, singing and smiling in McDonald's restaurants without any mention of the actual food products available reflects a playful or happy theme. This strategy is also found frequently with cereal ads, which often include cartoon characters to help children identify the product. In contrast, most commercials fail to mention even the major grain used in each cereal.</p>\n<p><span class=\"pl\">E</span>Another common feature of advertising to children is the use of product disclosures such as 'batteries not included' or 'each part sold separately'. Studies make clear that young children do not comprehend the intended meaning of these disclaimers. For example, fewer than one in four kindergarten through second grade children could grasp the meaning of 'some assembly required' in a commercial. In contrast, the use of child-friendly language such as 'you have to put it together' more than doubled the proportion of children who understood the qualifying message (Liebert et al, 1977). The phrase 'part of a balanced breakfast' is also a frequent disclosure included in most cereal ads to combat the concern that sugared cereal holds little nutritional value for children. Research shows that most children below age 7 years have no idea what the term 'balanced breakfast' means (Palmer &amp; McDowell, 1981). Rather than informing young viewers about the importance of a nutritious breakfast, this common disclaimer actually leaves many children with the misimpression that cereal alone is sufficient for a meal. This pattern of employing creative terminology in advertising content so as to obscure certain information that might be unhelpful to the sponsor is a long-standing practice that often misleads the consumer (Geis, 1982).</p>\n<p><span class=\"pl\">F</span>Very young children do not recognize that there are two fundamentally different categories of television content: programs and commercials. Most children below the age of 4 or 5 exhibit low awareness of the concept of commercials, frequently explaining them as if they were a scene in the program itself. Once this confusion diminishes, children first recognize the difference between programs and commercials based on either affective ('commercials are funnier than TV programs') or perceptual ('commercials are short and programs are long') cues (Blatt et al, 1972).</p>\n<p><span class=\"pl\">G</span>Although most children's programs indicate that a commercial break is coming (e.g. by saying 'We'll be right back after these messages'), research reveals that these 'separators' generally do not help children to recognize advertising content (Palmer &amp; McDowell, 1979). This likely occurs because they are not perceptually distinct from the adjacent programming that surrounds them; in fact, many separators feature characters that appear in the same show that the commercial has just interrupted. When an ad includes one of the characters featured in a program, this is known as host-selling. This type of advertising makes the task of discriminating between program and commercial content particularly difficult for young children (Kunkel, 1988) and is thus restricted in the US by the Federal Communications Commission during children's programs.</p>\n<p><span class=\"pl\">H</span>In sum, because young children lack the cognitive skills and abilities of older children and adults, they do not comprehend commercial messages in the same way as more mature audiences, and are therefore uniquely susceptible to advertising influence.</p>",
+        "paragraphs": [
+          {
+            "letter": "A",
+            "html": "<p>In 1874, long before the advent of television, the English Parliament passed a law to protect children 'from their own lack of experience and from the wiles of pushing tradesmen and moneylenders' (James, 1965). The act is one of the earliest governmental policies to address children's vulnerability to commercial exploitation and was produced before major corporations earned huge profits by marketing products directly to children. Yet the issues underlying this 19th-century policy remain much the same in the 21st century.</p>",
+            "text": "In 1874, long before the advent of television, the English Parliament passed a law to protect children 'from their own lack of experience and from the wiles of pushing tradesmen and moneylenders' (James, 1965). The act is one of the earliest governmental policies to address children's vulnerability to commercial exploitation and was produced before major corporations earned huge profits by marketing products directly to children. Yet the issues underlying this 19th-century policy remain much the same in the 21st century."
+          },
+          {
+            "letter": "B",
+            "html": "<p>Television has long been the predominant medium that advertisers have chosen for marketing products to children. It is estimated that the average child sees more than 40,000 television commercials a year, most of which are 15 to 30 seconds in length (Kunkel, 2001). According to another estimate, children aged 14 years and under make $424 billion in direct purchases and influence $4190 billion in family purchases, underscoring the high stakes involved (McNeal, 1998). In addition, companies now recognize that brand loyalty built at an early age may reap economic rewards over a child's lifetime (McNeal, 1987).</p>",
+            "text": "Television has long been the predominant medium that advertisers have chosen for marketing products to children. It is estimated that the average child sees more than 40,000 television commercials a year, most of which are 15 to 30 seconds in length (Kunkel, 2001). According to another estimate, children aged 14 years and under make $424 billion in direct purchases and influence $4190 billion in family purchases, underscoring the high stakes involved (McNeal, 1998). In addition, companies now recognize that brand loyalty built at an early age may reap economic rewards over a child's lifetime (McNeal, 1987)."
+          },
+          {
+            "letter": "C",
+            "html": "<p>A number of factors have contributed to an unprecedented growth in both the amount and type of advertising directed at children. First and foremost among these are changes in the media environment. In decades past, television programming targeted at children was limited and relegated to time slots unpopular with their parents, such as Saturday mornings (Turow, 1981). Today, the number of channels received in the average US home has escalated with the diffusion of cable television and satellite technologies. In this new multichannel era, there are numerous national program services devoted exclusively to children. Naturally, these channels deliver significant amounts of child-oriented marketing messages. Although parents may be pleased that their youngsters can now watch children's programming at any hour of the day they may not recognize that such viewing opportunities entail much greater exposure to advertising than any previous generation of youth has experienced.</p>",
+            "text": "A number of factors have contributed to an unprecedented growth in both the amount and type of advertising directed at children. First and foremost among these are changes in the media environment. In decades past, television programming targeted at children was limited and relegated to time slots unpopular with their parents, such as Saturday mornings (Turow, 1981). Today, the number of channels received in the average US home has escalated with the diffusion of cable television and satellite technologies. In this new multichannel era, there are numerous national program services devoted exclusively to children. Naturally, these channels deliver significant amounts of child-oriented marketing messages. Although parents may be pleased that their youngsters can now watch children's programming at any hour of the day they may not recognize that such viewing opportunities entail much greater exposure to advertising than any previous generation of youth has experienced."
+          },
+          {
+            "letter": "D",
+            "html": "<p>Approximately 80% of all advertising targeted at children falls within four product categories: toys, cereals, candies, and fast-food restaurants (Kunkel et al, 1992). Commercials are highly effective at employing specific features designed to attract children's attention. For example, they use the strategy of introducing unique sound effects and rapidly moving images (Greer et al, 1982). The other most common persuasive strategy employed in advertising to children is to associate product with playfulness and happiness, rather than to provide any actual product-related information (Kunkel et al, 1992). For example, a commercial featuring Ronald McDonald dancing, singing and smiling in McDonald's restaurants without any mention of the actual food products available reflects a playful or happy theme. This strategy is also found frequently with cereal ads, which often include cartoon characters to help children identify the product. In contrast, most commercials fail to mention even the major grain used in each cereal.</p>",
+            "text": "Approximately 80% of all advertising targeted at children falls within four product categories: toys, cereals, candies, and fast-food restaurants (Kunkel et al, 1992). Commercials are highly effective at employing specific features designed to attract children's attention. For example, they use the strategy of introducing unique sound effects and rapidly moving images (Greer et al, 1982). The other most common persuasive strategy employed in advertising to children is to associate product with playfulness and happiness, rather than to provide any actual product-related information (Kunkel et al, 1992). For example, a commercial featuring Ronald McDonald dancing, singing and smiling in McDonald's restaurants without any mention of the actual food products available reflects a playful or happy theme. This strategy is also found frequently with cereal ads, which often include cartoon characters to help children identify the product. In contrast, most commercials fail to mention even the major grain used in each cereal."
+          },
+          {
+            "letter": "E",
+            "html": "<p>Another common feature of advertising to children is the use of product disclosures such as 'batteries not included' or 'each part sold separately'. Studies make clear that young children do not comprehend the intended meaning of these disclaimers. For example, fewer than one in four kindergarten through second grade children could grasp the meaning of 'some assembly required' in a commercial. In contrast, the use of child-friendly language such as 'you have to put it together' more than doubled the proportion of children who understood the qualifying message (Liebert et al, 1977). The phrase 'part of a balanced breakfast' is also a frequent disclosure included in most cereal ads to combat the concern that sugared cereal holds little nutritional value for children. Research shows that most children below age 7 years have no idea what the term 'balanced breakfast' means (Palmer &amp; McDowell, 1981). Rather than informing young viewers about the importance of a nutritious breakfast, this common disclaimer actually leaves many children with the misimpression that cereal alone is sufficient for a meal. This pattern of employing creative terminology in advertising content so as to obscure certain information that might be unhelpful to the sponsor is a long-standing practice that often misleads the consumer (Geis, 1982).</p>",
+            "text": "Another common feature of advertising to children is the use of product disclosures such as 'batteries not included' or 'each part sold separately'. Studies make clear that young children do not comprehend the intended meaning of these disclaimers. For example, fewer than one in four kindergarten through second grade children could grasp the meaning of 'some assembly required' in a commercial. In contrast, the use of child-friendly language such as 'you have to put it together' more than doubled the proportion of children who understood the qualifying message (Liebert et al, 1977). The phrase 'part of a balanced breakfast' is also a frequent disclosure included in most cereal ads to combat the concern that sugared cereal holds little nutritional value for children. Research shows that most children below age 7 years have no idea what the term 'balanced breakfast' means (Palmer & McDowell, 1981). Rather than informing young viewers about the importance of a nutritious breakfast, this common disclaimer actually leaves many children with the misimpression that cereal alone is sufficient for a meal. This pattern of employing creative terminology in advertising content so as to obscure certain information that might be unhelpful to the sponsor is a long-standing practice that often misleads the consumer (Geis, 1982)."
+          },
+          {
+            "letter": "F",
+            "html": "<p>Very young children do not recognize that there are two fundamentally different categories of television content: programs and commercials. Most children below the age of 4 or 5 exhibit low awareness of the concept of commercials, frequently explaining them as if they were a scene in the program itself. Once this confusion diminishes, children first recognize the difference between programs and commercials based on either affective ('commercials are funnier than TV programs') or perceptual ('commercials are short and programs are long') cues (Blatt et al, 1972).</p>",
+            "text": "Very young children do not recognize that there are two fundamentally different categories of television content: programs and commercials. Most children below the age of 4 or 5 exhibit low awareness of the concept of commercials, frequently explaining them as if they were a scene in the program itself. Once this confusion diminishes, children first recognize the difference between programs and commercials based on either affective ('commercials are funnier than TV programs') or perceptual ('commercials are short and programs are long') cues (Blatt et al, 1972)."
+          },
+          {
+            "letter": "G",
+            "html": "<p>Although most children's programs indicate that a commercial break is coming (e.g. by saying 'We'll be right back after these messages'), research reveals that these 'separators' generally do not help children to recognize advertising content (Palmer &amp; McDowell, 1979). This likely occurs because they are not perceptually distinct from the adjacent programming that surrounds them; in fact, many separators feature characters that appear in the same show that the commercial has just interrupted. When an ad includes one of the characters featured in a program, this is known as host-selling. This type of advertising makes the task of discriminating between program and commercial content particularly difficult for young children (Kunkel, 1988) and is thus restricted in the US by the Federal Communications Commission during children's programs.</p>",
+            "text": "Although most children's programs indicate that a commercial break is coming (e.g. by saying 'We'll be right back after these messages'), research reveals that these 'separators' generally do not help children to recognize advertising content (Palmer & McDowell, 1979). This likely occurs because they are not perceptually distinct from the adjacent programming that surrounds them; in fact, many separators feature characters that appear in the same show that the commercial has just interrupted. When an ad includes one of the characters featured in a program, this is known as host-selling. This type of advertising makes the task of discriminating between program and commercial content particularly difficult for young children (Kunkel, 1988) and is thus restricted in the US by the Federal Communications Commission during children's programs."
+          },
+          {
+            "letter": "H",
+            "html": "<p>In sum, because young children lack the cognitive skills and abilities of older children and adults, they do not comprehend commercial messages in the same way as more mature audiences, and are therefore uniquely susceptible to advertising influence.</p>",
+            "text": "In sum, because young children lack the cognitive skills and abilities of older children and adults, they do not comprehend commercial messages in the same way as more mature audiences, and are therefore uniquely susceptible to advertising influence."
+          }
+        ],
+        "questionGroups": [
+          {
+            "id": "scripted-reading-p2-g1",
+            "type": "matching_information",
+            "instructionTitle": "Questions 14–18",
+            "instructionText": "Reading Passage 2 has eight paragraphs, A–H. Which paragraph contains the following information?\nNB You may use any letter more than once.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 14–18</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "NB You may use any letter more than once.",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "contentHtml": "",
+            "questions": [
+              {
+                "number": 14,
+                "type": "matching_information",
+                "question": "a description of recent innovations in TV broadcasting",
+                "stemHtml": "a description of recent innovations in TV broadcasting",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 15,
+                "type": "matching_information",
+                "question": "a mention of the main goods and services advertised to children",
+                "stemHtml": "a mention of the main goods and services advertised to children",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 16,
+                "type": "matching_information",
+                "question": "a reference to a current limitation on television advertising aimed at children",
+                "stemHtml": "a reference to a current limitation on television advertising aimed at children",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 17,
+                "type": "matching_information",
+                "question": "two techniques used to encourage children to watch TV commercials",
+                "stemHtml": "two techniques used to encourage children to watch TV commercials",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 18,
+                "type": "matching_information",
+                "question": "a type of advertisement that may make children believe the opposite of what is true",
+                "stemHtml": "a type of advertisement that may make children believe the opposite of what is true",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "E"
+              }
+            ],
+            "questionRange": [
+              14,
+              18
+            ]
+          },
+          {
+            "id": "scripted-reading-p2-g2",
+            "type": "matching_features",
+            "instructionTitle": "Questions 19–22",
+            "instructionText": "Look at the following statements and the list of researchers below. Match each statement with the correct researcher(s), A–H.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 19–22</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "options": [
+              {
+                "value": "A",
+                "label": "A – Kunkel"
+              },
+              {
+                "value": "B",
+                "label": "B – McNeal"
+              },
+              {
+                "value": "C",
+                "label": "C – Turow"
+              },
+              {
+                "value": "D",
+                "label": "D – Kunkel et al"
+              },
+              {
+                "value": "E",
+                "label": "E – Greer et al"
+              },
+              {
+                "value": "F",
+                "label": "F – Liebert et al"
+              },
+              {
+                "value": "G",
+                "label": "G – Palmer & McDowell"
+              },
+              {
+                "value": "H",
+                "label": "H – Geis"
+              }
+            ],
+            "contentHtml": "",
+            "questions": [
+              {
+                "number": 19,
+                "type": "matching_features",
+                "question": "Advertisements often aim to teach children that a brand is fun rather than telling them about what is being sold.",
+                "stemHtml": "Advertisements often aim to teach children that a brand is fun rather than telling them about what is being sold.",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 20,
+                "type": "matching_features",
+                "question": "Originally children's programmes were only broadcast when adults rarely watched TV.",
+                "stemHtml": "Originally children's programmes were only broadcast when adults rarely watched TV.",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 21,
+                "type": "matching_features",
+                "question": "Children have a significant impact on what adults buy.",
+                "stemHtml": "Children have a significant impact on what adults buy.",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 22,
+                "type": "matching_features",
+                "question": "Tests showed that children can follow information if simple words are used.",
+                "stemHtml": "Tests showed that children can follow information if simple words are used.",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G",
+                  "H"
+                ],
+                "answer": "F"
+              }
+            ],
+            "questionRange": [
+              19,
+              22
+            ]
+          },
+          {
+            "id": "scripted-reading-p2-g3",
+            "type": "summary_completion",
+            "instructionTitle": "Questions 23–26",
+            "instructionText": "Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 23–26</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "NO MORE THAN TWO WORDS",
+            "options": [],
+            "contentHtml": "<div class=\"sum-box\">\n  <p><strong>How very young children perceive commercials</strong></p>\n  <p>Children below the age of 4 or 5 do not understand the difference between television programmes and commercials. In fact, these children often mistake an advertisement for a <span class=\"ielts-blank\" data-blank=\"23\">______</span> from the programme they are watching. This is despite the fact that children's TV programmes usually include announcements called <span class=\"ielts-blank\" data-blank=\"24\">______</span> to show that there is going to be a commercial break. The problem is made more difficult because of a technique called <span class=\"ielts-blank\" data-blank=\"25\">______</span> whereby a person or cartoon figure from the programme is used to sell a product during the commercial break. From the age of 4 or 5, children begin to realise that commercials are different from TV programmes: for example, they may then recognise that there is a difference in length or that advertisements are <span class=\"ielts-blank\" data-blank=\"26\">______</span> than actual TV.</p>\n</div>",
+            "questions": [
+              {
+                "number": 23,
+                "type": "summary_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "scene"
+              },
+              {
+                "number": 24,
+                "type": "summary_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "separators"
+              },
+              {
+                "number": 25,
+                "type": "summary_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "host-selling"
+              },
+              {
+                "number": 26,
+                "type": "summary_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "funnier"
+              }
+            ],
+            "questionRange": [
+              23,
+              26
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Business Innovation",
+        "displayLabel": "Reading Passage 3",
+        "passageTitle": "Business Innovation",
+        "passageText": "AThe Oxford English Dictionary defines innovation as 'making changes to something established'. Invention, by contrast, is the act of 'coming upon or finding; discovery'. Revolutionary 'inventions' of 20th-century US firms include, for example, the safety razor, the hydraulic brake, and DNA fingerprinting. However, as Adrian Slywotsky of Mercer Management Consulting says, 'In most industries, truly differentiating new-product breakthroughs are becoming increasingly rare'. And as 'blockbuster' novel products become steadily more elusive, big companies would do well to focus instead on making lots of small things better.\n\nBUnfortunately, big companies often have big problems with innovation. 'Innovators try to change the status quo', says Bhaskar Chakravorti of the Monitor Group, 'which is why markets tend to resist them'. Innovations frequently disrupt the way companies do things (and may have been doing them for years). And it is not just markets that are nervous of innovation. Michael Hammer, co-author of 'Re-engineering the Corporation', cites the case of a PC-maker that set out to imitate Dell's famous 'Build to Order' system of computer assembly. The company found its attempts were frustrated by both its head of manufacturing, who feared for his job, and its head of marketing, who did not want to upset his existing retail outlets. So the proposal got nowhere, and Dell continued to dominate the business.\n\nCClayton Christensen, a Harvard Business School Professor, describes how disruptive innovations — simpler, cheaper and more convenient products that seriously upset the status quo — often herald the rapid downfall of thriving, long-standing businesses. This, it is widely recognised, is because most such organisations are designed to grow through a series of sustaining innovations — the sort which simply improve on existing products for existing markets.\n\nDWilliam Baumol, professor at New York University, argues that large companies have been learning important lessons from the history of innovation. Most have both cut back and redirected their Research and Development spending in recent years. Innovation by big companies is now based less on the discoveries of white-coated scientists, and more on incremental improvements in the processes that constitute daily operations.\n\nEAccording to marketing specialist Vijay Vishwanath, companies also need to adjust to the ongoing fragmentation of markets. Once-uniform mass markets are breaking up into countless 'niches', in which everything has to be customised for a small group of consumers. Looking for blockbusters in such a world is a daunting task. Another problem, according to Chakravorti, lies in the marketing of innovations. Too many executives are still stuck with the strategies used to sell Kodak's first camera 120 years ago, when the product was so revolutionary that the company could forget about competition for at least a decade. Today, rival products can be rushed onto the market at speeds which would have been unimaginable in those days.\n\nFCompanies that fail to come up with headline-hitting new products should not despair. 'There are plenty of other, albeit less glamorous, areas where innovation can take place,' says Erik Brynjolfsson of the MIT Sloan School of Management. He claims that the roots of the USA's productivity surge originate in 'a genuine revolution in how American companies are using information technology to reinvent their business processes from top to bottom'.\n\nGHammer highlights several instances where firms have added considerably to their shareholder value through what he calls operational innovations — creativity in their business processes. Notable among these is the American retail giant Wal-Mart. While superficially mundane, their pioneering idea of 'cross-docking' — shifting merchandise off trucks from suppliers and straight onto trucks heading for stores — has been fundamental to the company's ability to offer low prices, the platform for its outstanding success.\n\nHCompanies are also being encouraged to embrace strategic innovations, following the example of such firms as Southwest Airlines, a low-cost American regional carrier, whose creative strategies and shrewd timing won it a victory over its ailing competitor US Airways. The Swedish packaging company Tetra Pak also used this style of innovation, by moving away from delivering ready-made containers for customers into providing machinery and supplying dedicated materials for them to make their own packaging. This strips out many costs from the process, and also makes it very difficult for the customer to switch suppliers. Like Southwest Airlines, they achieved success through strategic innovations alone, with little innovation in either the underlying technology or the product sold.\n\nIIn his book 'How to Grow When Markets Don't', Slywotsky and his co-author Richard Wise recommend what they call demand innovations. A few far-sighted organisations such as the French industrial gas company Air Liquide have found success not — as in the case of strategic innovations — by meeting existing demand in a new way, but by discovering new forms of demand and adapting to supply the products or services required. Air Liquide had been a leading supplier of industrial gases until the early 1990s, when gas became a commodity and their operational income plunged. Realising the value of the skills they had gained over the decades, the company became a supplier not only of gas, but also of the management services to accompany it. Within a short time their profits rose again.\n\nJThere are certain things that managers can do to make innovations like these happen within their organisations. For example, projects with potential should be rapidly hived off into independent business units, away from the smothering influence of the status quo. The ultimate outcome of any one innovation may still be unpredictable, the process from which it emerges is not.",
+        "passageHtml": "\n<p><span class=\"pl\">A</span>The Oxford English Dictionary defines innovation as 'making changes to something established'. Invention, by contrast, is the act of 'coming upon or finding; discovery'. Revolutionary 'inventions' of 20th-century US firms include, for example, the safety razor, the hydraulic brake, and DNA fingerprinting. However, as Adrian Slywotsky of Mercer Management Consulting says, 'In most industries, truly differentiating new-product breakthroughs are becoming increasingly rare'. And as 'blockbuster' novel products become steadily more elusive, big companies would do well to focus instead on making lots of small things better.</p>\n<p><span class=\"pl\">B</span>Unfortunately, big companies often have big problems with innovation. 'Innovators try to change the status quo', says Bhaskar Chakravorti of the Monitor Group, 'which is why markets tend to resist them'. Innovations frequently disrupt the way companies do things (and may have been doing them for years). And it is not just markets that are nervous of innovation. Michael Hammer, co-author of 'Re-engineering the Corporation', cites the case of a PC-maker that set out to imitate Dell's famous 'Build to Order' system of computer assembly. The company found its attempts were frustrated by both its head of manufacturing, who feared for his job, and its head of marketing, who did not want to upset his existing retail outlets. So the proposal got nowhere, and Dell continued to dominate the business.</p>\n<p><span class=\"pl\">C</span>Clayton Christensen, a Harvard Business School Professor, describes how disruptive innovations — simpler, cheaper and more convenient products that seriously upset the status quo — often herald the rapid downfall of thriving, long-standing businesses. This, it is widely recognised, is because most such organisations are designed to grow through a series of sustaining innovations — the sort which simply improve on existing products for existing markets.</p>\n<p><span class=\"pl\">D</span>William Baumol, professor at New York University, argues that large companies have been learning important lessons from the history of innovation. Most have both cut back and redirected their Research and Development spending in recent years. Innovation by big companies is now based less on the discoveries of white-coated scientists, and more on incremental improvements in the processes that constitute daily operations.</p>\n<p><span class=\"pl\">E</span>According to marketing specialist Vijay Vishwanath, companies also need to adjust to the ongoing fragmentation of markets. Once-uniform mass markets are breaking up into countless 'niches', in which everything has to be customised for a small group of consumers. Looking for blockbusters in such a world is a daunting task. Another problem, according to Chakravorti, lies in the marketing of innovations. Too many executives are still stuck with the strategies used to sell Kodak's first camera 120 years ago, when the product was so revolutionary that the company could forget about competition for at least a decade. Today, rival products can be rushed onto the market at speeds which would have been unimaginable in those days.</p>\n<p><span class=\"pl\">F</span>Companies that fail to come up with headline-hitting new products should not despair. 'There are plenty of other, albeit less glamorous, areas where innovation can take place,' says Erik Brynjolfsson of the MIT Sloan School of Management. He claims that the roots of the USA's productivity surge originate in 'a genuine revolution in how American companies are using information technology to reinvent their business processes from top to bottom'.</p>\n<p><span class=\"pl\">G</span>Hammer highlights several instances where firms have added considerably to their shareholder value through what he calls operational innovations — creativity in their business processes. Notable among these is the American retail giant Wal-Mart. While superficially mundane, their pioneering idea of 'cross-docking' — shifting merchandise off trucks from suppliers and straight onto trucks heading for stores — has been fundamental to the company's ability to offer low prices, the platform for its outstanding success.</p>\n<p><span class=\"pl\">H</span>Companies are also being encouraged to embrace strategic innovations, following the example of such firms as Southwest Airlines, a low-cost American regional carrier, whose creative strategies and shrewd timing won it a victory over its ailing competitor US Airways. The Swedish packaging company Tetra Pak also used this style of innovation, by moving away from delivering ready-made containers for customers into providing machinery and supplying dedicated materials for them to make their own packaging. This strips out many costs from the process, and also makes it very difficult for the customer to switch suppliers. Like Southwest Airlines, they achieved success through strategic innovations alone, with little innovation in either the underlying technology or the product sold.</p>\n<p><span class=\"pl\">I</span>In his book 'How to Grow When Markets Don't', Slywotsky and his co-author Richard Wise recommend what they call demand innovations. A few far-sighted organisations such as the French industrial gas company Air Liquide have found success not — as in the case of strategic innovations — by meeting existing demand in a new way, but by discovering new forms of demand and adapting to supply the products or services required. Air Liquide had been a leading supplier of industrial gases until the early 1990s, when gas became a commodity and their operational income plunged. Realising the value of the skills they had gained over the decades, the company became a supplier not only of gas, but also of the management services to accompany it. Within a short time their profits rose again.</p>\n<p><span class=\"pl\">J</span>There are certain things that managers can do to make innovations like these happen within their organisations. For example, projects with potential should be rapidly hived off into independent business units, away from the smothering influence of the status quo. The ultimate outcome of any one innovation may still be unpredictable, the process from which it emerges is not.</p>",
+        "paragraphs": [
+          {
+            "letter": "A",
+            "html": "<p>The Oxford English Dictionary defines innovation as 'making changes to something established'. Invention, by contrast, is the act of 'coming upon or finding; discovery'. Revolutionary 'inventions' of 20th-century US firms include, for example, the safety razor, the hydraulic brake, and DNA fingerprinting. However, as Adrian Slywotsky of Mercer Management Consulting says, 'In most industries, truly differentiating new-product breakthroughs are becoming increasingly rare'. And as 'blockbuster' novel products become steadily more elusive, big companies would do well to focus instead on making lots of small things better.</p>",
+            "text": "The Oxford English Dictionary defines innovation as 'making changes to something established'. Invention, by contrast, is the act of 'coming upon or finding; discovery'. Revolutionary 'inventions' of 20th-century US firms include, for example, the safety razor, the hydraulic brake, and DNA fingerprinting. However, as Adrian Slywotsky of Mercer Management Consulting says, 'In most industries, truly differentiating new-product breakthroughs are becoming increasingly rare'. And as 'blockbuster' novel products become steadily more elusive, big companies would do well to focus instead on making lots of small things better."
+          },
+          {
+            "letter": "B",
+            "html": "<p>Unfortunately, big companies often have big problems with innovation. 'Innovators try to change the status quo', says Bhaskar Chakravorti of the Monitor Group, 'which is why markets tend to resist them'. Innovations frequently disrupt the way companies do things (and may have been doing them for years). And it is not just markets that are nervous of innovation. Michael Hammer, co-author of 'Re-engineering the Corporation', cites the case of a PC-maker that set out to imitate Dell's famous 'Build to Order' system of computer assembly. The company found its attempts were frustrated by both its head of manufacturing, who feared for his job, and its head of marketing, who did not want to upset his existing retail outlets. So the proposal got nowhere, and Dell continued to dominate the business.</p>",
+            "text": "Unfortunately, big companies often have big problems with innovation. 'Innovators try to change the status quo', says Bhaskar Chakravorti of the Monitor Group, 'which is why markets tend to resist them'. Innovations frequently disrupt the way companies do things (and may have been doing them for years). And it is not just markets that are nervous of innovation. Michael Hammer, co-author of 'Re-engineering the Corporation', cites the case of a PC-maker that set out to imitate Dell's famous 'Build to Order' system of computer assembly. The company found its attempts were frustrated by both its head of manufacturing, who feared for his job, and its head of marketing, who did not want to upset his existing retail outlets. So the proposal got nowhere, and Dell continued to dominate the business."
+          },
+          {
+            "letter": "C",
+            "html": "<p>Clayton Christensen, a Harvard Business School Professor, describes how disruptive innovations — simpler, cheaper and more convenient products that seriously upset the status quo — often herald the rapid downfall of thriving, long-standing businesses. This, it is widely recognised, is because most such organisations are designed to grow through a series of sustaining innovations — the sort which simply improve on existing products for existing markets.</p>",
+            "text": "Clayton Christensen, a Harvard Business School Professor, describes how disruptive innovations — simpler, cheaper and more convenient products that seriously upset the status quo — often herald the rapid downfall of thriving, long-standing businesses. This, it is widely recognised, is because most such organisations are designed to grow through a series of sustaining innovations — the sort which simply improve on existing products for existing markets."
+          },
+          {
+            "letter": "D",
+            "html": "<p>William Baumol, professor at New York University, argues that large companies have been learning important lessons from the history of innovation. Most have both cut back and redirected their Research and Development spending in recent years. Innovation by big companies is now based less on the discoveries of white-coated scientists, and more on incremental improvements in the processes that constitute daily operations.</p>",
+            "text": "William Baumol, professor at New York University, argues that large companies have been learning important lessons from the history of innovation. Most have both cut back and redirected their Research and Development spending in recent years. Innovation by big companies is now based less on the discoveries of white-coated scientists, and more on incremental improvements in the processes that constitute daily operations."
+          },
+          {
+            "letter": "E",
+            "html": "<p>According to marketing specialist Vijay Vishwanath, companies also need to adjust to the ongoing fragmentation of markets. Once-uniform mass markets are breaking up into countless 'niches', in which everything has to be customised for a small group of consumers. Looking for blockbusters in such a world is a daunting task. Another problem, according to Chakravorti, lies in the marketing of innovations. Too many executives are still stuck with the strategies used to sell Kodak's first camera 120 years ago, when the product was so revolutionary that the company could forget about competition for at least a decade. Today, rival products can be rushed onto the market at speeds which would have been unimaginable in those days.</p>",
+            "text": "According to marketing specialist Vijay Vishwanath, companies also need to adjust to the ongoing fragmentation of markets. Once-uniform mass markets are breaking up into countless 'niches', in which everything has to be customised for a small group of consumers. Looking for blockbusters in such a world is a daunting task. Another problem, according to Chakravorti, lies in the marketing of innovations. Too many executives are still stuck with the strategies used to sell Kodak's first camera 120 years ago, when the product was so revolutionary that the company could forget about competition for at least a decade. Today, rival products can be rushed onto the market at speeds which would have been unimaginable in those days."
+          },
+          {
+            "letter": "F",
+            "html": "<p>Companies that fail to come up with headline-hitting new products should not despair. 'There are plenty of other, albeit less glamorous, areas where innovation can take place,' says Erik Brynjolfsson of the MIT Sloan School of Management. He claims that the roots of the USA's productivity surge originate in 'a genuine revolution in how American companies are using information technology to reinvent their business processes from top to bottom'.</p>",
+            "text": "Companies that fail to come up with headline-hitting new products should not despair. 'There are plenty of other, albeit less glamorous, areas where innovation can take place,' says Erik Brynjolfsson of the MIT Sloan School of Management. He claims that the roots of the USA's productivity surge originate in 'a genuine revolution in how American companies are using information technology to reinvent their business processes from top to bottom'."
+          },
+          {
+            "letter": "G",
+            "html": "<p>Hammer highlights several instances where firms have added considerably to their shareholder value through what he calls operational innovations — creativity in their business processes. Notable among these is the American retail giant Wal-Mart. While superficially mundane, their pioneering idea of 'cross-docking' — shifting merchandise off trucks from suppliers and straight onto trucks heading for stores — has been fundamental to the company's ability to offer low prices, the platform for its outstanding success.</p>",
+            "text": "Hammer highlights several instances where firms have added considerably to their shareholder value through what he calls operational innovations — creativity in their business processes. Notable among these is the American retail giant Wal-Mart. While superficially mundane, their pioneering idea of 'cross-docking' — shifting merchandise off trucks from suppliers and straight onto trucks heading for stores — has been fundamental to the company's ability to offer low prices, the platform for its outstanding success."
+          },
+          {
+            "letter": "H",
+            "html": "<p>Companies are also being encouraged to embrace strategic innovations, following the example of such firms as Southwest Airlines, a low-cost American regional carrier, whose creative strategies and shrewd timing won it a victory over its ailing competitor US Airways. The Swedish packaging company Tetra Pak also used this style of innovation, by moving away from delivering ready-made containers for customers into providing machinery and supplying dedicated materials for them to make their own packaging. This strips out many costs from the process, and also makes it very difficult for the customer to switch suppliers. Like Southwest Airlines, they achieved success through strategic innovations alone, with little innovation in either the underlying technology or the product sold.</p>",
+            "text": "Companies are also being encouraged to embrace strategic innovations, following the example of such firms as Southwest Airlines, a low-cost American regional carrier, whose creative strategies and shrewd timing won it a victory over its ailing competitor US Airways. The Swedish packaging company Tetra Pak also used this style of innovation, by moving away from delivering ready-made containers for customers into providing machinery and supplying dedicated materials for them to make their own packaging. This strips out many costs from the process, and also makes it very difficult for the customer to switch suppliers. Like Southwest Airlines, they achieved success through strategic innovations alone, with little innovation in either the underlying technology or the product sold."
+          },
+          {
+            "letter": "I",
+            "html": "<p>In his book 'How to Grow When Markets Don't', Slywotsky and his co-author Richard Wise recommend what they call demand innovations. A few far-sighted organisations such as the French industrial gas company Air Liquide have found success not — as in the case of strategic innovations — by meeting existing demand in a new way, but by discovering new forms of demand and adapting to supply the products or services required. Air Liquide had been a leading supplier of industrial gases until the early 1990s, when gas became a commodity and their operational income plunged. Realising the value of the skills they had gained over the decades, the company became a supplier not only of gas, but also of the management services to accompany it. Within a short time their profits rose again.</p>",
+            "text": "In his book 'How to Grow When Markets Don't', Slywotsky and his co-author Richard Wise recommend what they call demand innovations. A few far-sighted organisations such as the French industrial gas company Air Liquide have found success not — as in the case of strategic innovations — by meeting existing demand in a new way, but by discovering new forms of demand and adapting to supply the products or services required. Air Liquide had been a leading supplier of industrial gases until the early 1990s, when gas became a commodity and their operational income plunged. Realising the value of the skills they had gained over the decades, the company became a supplier not only of gas, but also of the management services to accompany it. Within a short time their profits rose again."
+          },
+          {
+            "letter": "J",
+            "html": "<p>There are certain things that managers can do to make innovations like these happen within their organisations. For example, projects with potential should be rapidly hived off into independent business units, away from the smothering influence of the status quo. The ultimate outcome of any one innovation may still be unpredictable, the process from which it emerges is not.</p>",
+            "text": "There are certain things that managers can do to make innovations like these happen within their organisations. For example, projects with potential should be rapidly hived off into independent business units, away from the smothering influence of the status quo. The ultimate outcome of any one innovation may still be unpredictable, the process from which it emerges is not."
+          }
+        ],
+        "questionGroups": [
+          {
+            "id": "scripted-reading-p3-g1",
+            "type": "yes_no_not_given",
+            "instructionTitle": "Questions 27–31",
+            "instructionText": "Do the following statements agree with the claims of the writer in Reading Passage 3?\nWrite YES, NO, or NOT GIVEN.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 27–31</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "options": [],
+            "contentHtml": "",
+            "questions": [
+              {
+                "number": 27,
+                "type": "yes_no_not_given",
+                "question": "In order to stay in the market, companies today need to concentrate their efforts on finding genuinely original products.",
+                "stemHtml": "In order to stay in the market, companies today need to concentrate their efforts on finding genuinely original products.",
+                "options": [
+                  "YES",
+                  "NO",
+                  "NOT GIVEN"
+                ],
+                "answer": "NO"
+              },
+              {
+                "number": 28,
+                "type": "yes_no_not_given",
+                "question": "Disruptive innovations often pose serious threats to even successful, well-established companies.",
+                "stemHtml": "Disruptive innovations often pose serious threats to even successful, well-established companies.",
+                "options": [
+                  "YES",
+                  "NO",
+                  "NOT GIVEN"
+                ],
+                "answer": "YES"
+              },
+              {
+                "number": 29,
+                "type": "yes_no_not_given",
+                "question": "A key stage in the development of sustaining innovations involves research into the strengths and weaknesses of competitors' products.",
+                "stemHtml": "A key stage in the development of sustaining innovations involves research into the strengths and weaknesses of competitors' products.",
+                "options": [
+                  "YES",
+                  "NO",
+                  "NOT GIVEN"
+                ],
+                "answer": "NOT GIVEN"
+              },
+              {
+                "number": 30,
+                "type": "yes_no_not_given",
+                "question": "Manufacturers today are able to compete with innovations over shorter time periods than in the past.",
+                "stemHtml": "Manufacturers today are able to compete with innovations over shorter time periods than in the past.",
+                "options": [
+                  "YES",
+                  "NO",
+                  "NOT GIVEN"
+                ],
+                "answer": "NOT GIVEN"
+              },
+              {
+                "number": 31,
+                "type": "yes_no_not_given",
+                "question": "It is hard to tell what the long-term result of any innovation might be.",
+                "stemHtml": "It is hard to tell what the long-term result of any innovation might be.",
+                "options": [
+                  "YES",
+                  "NO",
+                  "NOT GIVEN"
+                ],
+                "answer": "YES"
+              }
+            ],
+            "questionRange": [
+              27,
+              31
+            ]
+          },
+          {
+            "id": "scripted-reading-p3-g2",
+            "type": "matching_features",
+            "instructionTitle": "Questions 32–35",
+            "instructionText": "Look at the following points mentioned in the passage and the list of people below. Match each point with the correct person, A–E.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 32–35</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "options": [
+              {
+                "value": "A",
+                "label": "A – Bhaskar Chakravorti"
+              },
+              {
+                "value": "B",
+                "label": "B – Michael Hammer"
+              },
+              {
+                "value": "C",
+                "label": "C – William Baumol"
+              },
+              {
+                "value": "D",
+                "label": "D – Vijay Vishwanath"
+              },
+              {
+                "value": "E",
+                "label": "E – Erik Brynjolfsson"
+              }
+            ],
+            "contentHtml": "",
+            "questions": [
+              {
+                "number": 32,
+                "type": "matching_features",
+                "question": "The need for companies to cater for ever more specialised sets of customers",
+                "stemHtml": "The need for companies to cater for ever more specialised sets of customers",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 33,
+                "type": "matching_features",
+                "question": "An explanation for the recent upward trend in the US economy",
+                "stemHtml": "An explanation for the recent upward trend in the US economy",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 34,
+                "type": "matching_features",
+                "question": "An example of company personnel who resisted innovation",
+                "stemHtml": "An example of company personnel who resisted innovation",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 35,
+                "type": "matching_features",
+                "question": "A shift in the way many companies are organising their budgets",
+                "stemHtml": "A shift in the way many companies are organising their budgets",
+                "options": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ],
+                "answer": "C"
+              }
+            ],
+            "questionRange": [
+              32,
+              35
+            ]
+          },
+          {
+            "id": "scripted-reading-p3-g3",
+            "type": "table_completion",
+            "instructionTitle": "Questions 36–40",
+            "instructionText": "Complete the table below. Choose NO MORE THAN TWO WORDS from the passage for each answer.",
+            "instructionHtml": {
+              "titleHtml": "<h3>Questions 36–40</h3>",
+              "bodyHtml": "",
+              "rulesHtml": ""
+            },
+            "rule": "NO MORE THAN TWO WORDS",
+            "options": [],
+            "contentHtml": "<table class=\"comp-table\">\n  <thead>\n    <tr>\n      <th style=\"width:22%\">Type of innovations</th>\n      <th style=\"width:28%\">Definition</th>\n      <th style=\"width:30%\">Example</th>\n      <th style=\"width:20%\">Company</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Operational innovations</td>\n      <td>Being innovative in the way existing business <strong><span class=\"ielts-blank\" data-blank=\"36\">______</span></strong> are carried out</td>\n      <td>Moving goods by system known as <strong><span class=\"ielts-blank\" data-blank=\"37\">______</span></strong></td>\n      <td>Wal-Mart</td>\n    </tr>\n    <tr>\n      <td><strong><span class=\"ielts-blank\" data-blank=\"38\">______</span></strong> innovations</td>\n      <td>Developing new approaches to meeting needs of existing markets</td>\n      <td>Giving customers means to manufacture products themselves</td>\n      <td>Tetra Pak</td>\n    </tr>\n    <tr>\n      <td><strong><span class=\"ielts-blank\" data-blank=\"39\">______</span></strong></td>\n      <td>Identifying and meeting new types of customer needs</td>\n      <td>Offering customers <strong><span class=\"ielts-blank\" data-blank=\"40\">______</span></strong> to go with the main products</td>\n      <td>Air Liquide</td>\n    </tr>\n  </tbody>\n</table>",
+            "questions": [
+              {
+                "number": 36,
+                "type": "table_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "processes"
+              },
+              {
+                "number": 37,
+                "type": "table_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "cross-docking"
+              },
+              {
+                "number": 38,
+                "type": "table_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "strategic"
+              },
+              {
+                "number": 39,
+                "type": "table_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "demand innovations"
+              },
+              {
+                "number": 40,
+                "type": "table_completion",
+                "question": "",
+                "stemHtml": "",
+                "options": [],
+                "answer": "management services"
+              }
+            ],
+            "questionRange": [
+              36,
+              40
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "listening": {
+    "audio": "",
+    "transcript": "",
+    "sections": []
+  },
+  "answers": {
+    "1": "FALSE",
+    "2": "NOT GIVEN",
+    "3": "TRUE",
+    "4": "NOT GIVEN",
+    "5": "FALSE",
+    "6": "TRUE",
+    "7": "hunting",
+    "8": "military",
+    "9": "tourism",
+    "10": "education",
+    "11": "finances",
+    "12": "dams",
+    "13": "automobiles",
+    "14": "C",
+    "15": "D",
+    "16": "G",
+    "17": "D",
+    "18": "E",
+    "19": "D",
+    "20": "C",
+    "21": "B",
+    "22": "F",
+    "23": "scene",
+    "24": "separators",
+    "25": "host-selling",
+    "26": "funnier",
+    "27": "NO",
+    "28": "YES",
+    "29": "NOT GIVEN",
+    "30": "NOT GIVEN",
+    "31": "YES",
+    "32": "D",
+    "33": "E",
+    "34": "B",
+    "35": "C",
+    "36": "processes",
+    "37": "cross-docking",
+    "38": "strategic",
+    "39": "demand innovations",
+    "40": "management services"
+  },
+  "images": [],
+  "createdAt": "2026-06-21T15:27:17.761Z",
+  "publishedAt": "2026-06-21T15:27:17.794Z"
+}
