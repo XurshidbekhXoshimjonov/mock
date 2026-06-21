@@ -985,6 +985,99 @@ select:focus-visible {
     vertical-align: top;
 }
 
+.cbt-rich-completion:has(.test-8-notes-layout) {
+    border: 1px solid #d6dde8;
+    border-radius: 8px;
+    background: #f8fafc;
+    padding: 16px 18px 20px;
+    color: #071735;
+    line-height: 1.55;
+}
+
+.test-8-notes-title {
+    margin: 0 0 17px;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 9px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.test-8-notes-list,
+.test-8-sub-list {
+    list-style: none;
+}
+
+.test-8-notes-list {
+    display: grid;
+    gap: 17px;
+    margin: 0;
+    padding: 0 0 0 2px;
+}
+
+.test-8-notes-list > li {
+    position: relative;
+    padding-left: 16px;
+}
+
+.test-8-notes-list > li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--cbt-ielts-red);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.test-8-sub-list {
+    display: grid;
+    gap: 13px;
+    margin: 12px 0 0 18px;
+    padding: 0;
+}
+
+.test-8-sub-list > li {
+    position: relative;
+    padding-left: 18px;
+}
+
+.test-8-sub-list > li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #64748b;
+}
+
+.test-8-notes-layout .cbt-blank-wrapper {
+    gap: 8px !important;
+    margin: 0 8px !important;
+}
+
+.test-8-notes-layout .cbt-blank-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 5px;
+    background: #eef2f7;
+    color: #071735 !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+.test-8-notes-layout .cbt-blank-input--inline {
+    width: 136px !important;
+    min-width: 136px;
+    height: 35px;
+    min-height: 35px;
+    margin: 0 !important;
+    border-color: #cbd5e1;
+    border-radius: 5px;
+    background: #fff;
+}
+
 .cbt-diagram-task {
     display: grid;
     gap: 18px;
@@ -1806,4 +1899,3 @@ html.dark-theme .cbt-nav-bubble.is-answered {
     background-color: rgba(59, 130, 246, 0.2);
     color: #60a5fa;
 }
-

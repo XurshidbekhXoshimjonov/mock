@@ -24,6 +24,7 @@ html {
 }
 
 body.public-page {
+    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -753,8 +754,10 @@ body.public-page .r-right .signup {
 
 .test-card-content {
     display: grid;
+    align-content: start;
     gap: 7px;
     width: 100%;
+    flex: 1;
 }
 
 .test-card-content h2,
@@ -876,6 +879,7 @@ body.public-page .home-footer {
     color: var(--home-footer-text);
     font-size: 15px;
     text-align: left;
+    border-top: 0;
 }
 
 body.public-page .home-footer__card {
@@ -886,7 +890,7 @@ body.public-page .home-footer__card {
     box-sizing: border-box;
     border: 1px solid var(--home-footer-border);
     border-bottom: 0;
-    border-radius: 28px 28px 0 0;
+    border-radius: 0;
     background: var(--home-footer-surface);
     box-shadow: 0 -18px 54px rgba(0, 87, 255, 0.08), 0 -8px 24px rgba(124, 58, 237, 0.045);
     backdrop-filter: blur(16px);
@@ -920,7 +924,8 @@ body.public-page .home-footer__logo {
     text-decoration: none;
 }
 
-body.public-page .home-footer__logo img {
+body.public-page .home-footer__logo img,
+body.public-page .home-footer__logo svg {
     display: block;
     width: 168px;
     height: auto;
@@ -928,7 +933,8 @@ body.public-page .home-footer__logo img {
     transition: filter 280ms ease, opacity 280ms ease;
 }
 
-body.public-page .home-footer__logo:hover img {
+body.public-page .home-footer__logo:hover img,
+body.public-page .home-footer__logo:hover svg {
     filter: brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(2745%) hue-rotate(219deg) brightness(95%) contrast(101%);
     opacity: 0.95;
 }
@@ -1025,40 +1031,23 @@ body.public-page .home-footer__pill-icon {
     width: 32px;
     height: 32px;
     border-radius: 999px;
-    background: rgba(0, 87, 255, 0.09);
-    color: var(--home-footer-blue);
+    background: transparent;
 }
 
 body.public-page .home-footer__pill--violet .home-footer__pill-icon {
-    background: rgba(66, 71, 184, 0.09);
-    color: var(--home-footer-violet);
+    background: transparent;
 }
 
 body.public-page .home-footer__pill-icon svg {
     display: block;
-    width: 17px;
-    height: 17px;
-}
-
-body.public-page .home-footer__pill-icon path {
-    fill: currentColor;
-}
-
-body.public-page .home-footer__pill--violet .home-footer__pill-icon svg {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.9;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-body.public-page .home-footer__pill--violet .home-footer__pill-icon path {
-    fill: none;
+    width: 32px;
+    height: 32px;
 }
 
 body.public-page .home-footer__pill span:not(.home-footer__pill-icon) {
     color: var(--home-footer-text);
     font-weight: 760;
+    line-height: 1;
 }
 
 body.public-page .home-footer__pill strong {
@@ -1067,6 +1056,7 @@ body.public-page .home-footer__pill strong {
     font-size: 14px;
     font-weight: 800;
     white-space: nowrap;
+    line-height: 1;
 }
 
 body.public-page .home-footer__contact-list {
@@ -1096,7 +1086,6 @@ body.public-page .home-footer__bottom {
     align-items: center;
     justify-content: space-between;
     gap: 18px;
-    border-top: 1px solid var(--home-footer-divider);
     padding: 20px clamp(42px, 6vw, 104px) 24px;
     color: var(--home-footer-muted);
     font-size: 14px;
@@ -1105,24 +1094,44 @@ body.public-page .home-footer__bottom {
 }
 
 body.speaking-coming-soon {
-    --speaking-bg: #050817;
-    --speaking-navy: #071547;
-    --speaking-panel: rgba(12, 18, 45, 0.72);
-    --speaking-panel-strong: rgba(20, 28, 68, 0.82);
-    --speaking-border: rgba(191, 219, 254, 0.18);
-    --speaking-border-strong: rgba(196, 181, 253, 0.34);
-    --speaking-text: #f8fbff;
-    --speaking-muted: #b7c4df;
-    --speaking-indigo: #4b0082;
-    --speaking-violet: #7c3aed;
-    --speaking-blue: #0b5fff;
-    --speaking-cyan: #38bdf8;
+    --speaking-bg: #f8fafc;
+    --speaking-navy: #f1f5f9;
+    --speaking-panel: rgba(255, 255, 255, 0.82);
+    --speaking-panel-strong: rgba(255, 255, 255, 0.94);
+    --speaking-border: rgba(0, 87, 255, 0.10);
+    --speaking-border-strong: rgba(124, 58, 237, 0.20);
+    --speaking-text: #0f172a;
+    --speaking-muted: #475569;
+    --speaking-indigo: #6366f1;
+    --speaking-violet: #8b5cf6;
+    --speaking-blue: #2563eb;
+    --speaking-cyan: #06b6d4;
+    --speaking-glow-1: rgba(99, 102, 241, 0.12);
+    --speaking-glow-2: rgba(37, 99, 235, 0.12);
+    --speaking-glow-3: rgba(139, 92, 246, 0.12);
+    --speaking-panel-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8)),
+                          linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(37, 99, 235, 0.05));
+    --speaking-panel-shadow: 0 34px 110px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --speaking-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+    --speaking-card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 12px rgba(15, 23, 42, 0.03);
+    --speaking-feature-span: #6d28d9;
+    --speaking-feature-strong: #0f172a;
+    --speaking-chip-bg: rgba(99, 102, 241, 0.12);
+    --speaking-chip-border: rgba(99, 102, 241, 0.24);
+    --speaking-chip-text: #4f46e5;
+    --speaking-chip-shadow: 0 12px 32px rgba(99, 102, 241, 0.10);
+    --speaking-upcoming-bg: rgba(255, 255, 255, 0.8);
+    --speaking-upcoming-text: #334155;
+    --speaking-upcoming-border: rgba(0, 87, 255, 0.08);
+    --speaking-btn-secondary-bg: rgba(255, 255, 255, 0.8);
+    --speaking-btn-secondary-color: var(--speaking-text);
+    --speaking-btn-secondary-border: rgba(0, 87, 255, 0.16);
     min-height: 100vh;
     background:
-        radial-gradient(circle at 15% 20%, rgba(75, 0, 130, 0.42), transparent 24rem),
-        radial-gradient(circle at 84% 12%, rgba(11, 95, 255, 0.34), transparent 26rem),
-        radial-gradient(circle at 55% 88%, rgba(124, 58, 237, 0.28), transparent 28rem),
-        linear-gradient(135deg, #020617 0%, #071547 42%, #170c3d 100%);
+        radial-gradient(circle at 15% 20%, var(--speaking-glow-1), transparent 24rem),
+        radial-gradient(circle at 84% 12%, var(--speaking-glow-2), transparent 26rem),
+        radial-gradient(circle at 55% 88%, var(--speaking-glow-3), transparent 28rem),
+        linear-gradient(135deg, var(--speaking-bg) 0%, var(--speaking-navy) 42%, #e2e8f0 100%);
     color: var(--speaking-text);
 }
 
@@ -1153,26 +1162,26 @@ body.speaking-coming-soon::after {
     opacity: 0.20;
 }
 
-body.speaking-coming-soon .ielts-navbar {
+body.dark-theme.speaking-coming-soon .ielts-navbar {
     border-bottom-color: rgba(191, 219, 254, 0.14);
     background: rgba(5, 8, 23, 0.72);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(22px);
 }
 
-body.speaking-coming-soon .ielts-navbar__links a,
-body.speaking-coming-soon .ielts-navbar__account {
+body.dark-theme.speaking-coming-soon .ielts-navbar__links a,
+body.dark-theme.speaking-coming-soon .ielts-navbar__account {
     color: rgba(248, 251, 255, 0.86);
 }
 
-body.speaking-coming-soon .ielts-navbar__links a:hover,
-body.speaking-coming-soon .ielts-navbar__links a.is-active {
+body.dark-theme.speaking-coming-soon .ielts-navbar__links a:hover,
+body.dark-theme.speaking-coming-soon .ielts-navbar__links a.is-active {
     background: rgba(255, 255, 255, 0.09);
     color: #ffffff;
 }
 
-body.speaking-coming-soon .ielts-navbar__wordmark-x,
-body.speaking-coming-soon .ielts-navbar__wordmark small {
+body.dark-theme.speaking-coming-soon .ielts-navbar__wordmark-x,
+body.dark-theme.speaking-coming-soon .ielts-navbar__wordmark small {
     color: rgba(248, 251, 255, 0.78);
 }
 
@@ -1264,11 +1273,11 @@ body.speaking-coming-soon .coming-soon-panel::after {
 body.speaking-coming-soon .coming-soon-chip {
     min-height: 30px;
     margin: 0;
-    border-color: rgba(196, 181, 253, 0.34);
-    background: rgba(124, 58, 237, 0.18);
-    color: #d8b4fe;
+    border-color: var(--speaking-chip-border);
+    background: var(--speaking-chip-bg);
+    color: var(--speaking-chip-text);
     padding: 6px 12px;
-    box-shadow: 0 12px 32px rgba(75, 0, 130, 0.30);
+    box-shadow: var(--speaking-chip-shadow);
     letter-spacing: 0.12em;
 }
 
@@ -1297,17 +1306,16 @@ body.speaking-coming-soon .coming-soon-icon svg {
 body.speaking-coming-soon .coming-soon-panel h1 {
     max-width: 760px;
     margin: 0;
-    color: #ffffff;
+    color: var(--speaking-text);
     font-size: clamp(44px, 7vw, 82px);
     line-height: 0.98;
     letter-spacing: 0;
-    text-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
 }
 
 body.speaking-coming-soon .coming-soon-message {
     max-width: 760px;
     margin: 0;
-    color: rgba(248, 251, 255, 0.92);
+    color: var(--speaking-text);
     font-size: clamp(19px, 2.2vw, 27px);
     font-weight: 700;
     line-height: 1.34;
@@ -1348,9 +1356,9 @@ body.speaking-coming-soon .speaking-primary-button {
 }
 
 body.speaking-coming-soon .speaking-secondary-button {
-    border: 1px solid rgba(191, 219, 254, 0.24);
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    border: 1px solid var(--speaking-btn-secondary-border);
+    background: var(--speaking-btn-secondary-bg);
+    color: var(--speaking-btn-secondary-color);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -1373,12 +1381,10 @@ body.speaking-coming-soon .speaking-secondary-button:hover {
     overflow: hidden;
     border: 1px solid var(--speaking-border);
     border-radius: 20px;
-    background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
-        rgba(255, 255, 255, 0.04);
+    background: var(--speaking-card-bg);
     padding: 18px;
     text-align: left;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    box-shadow: var(--speaking-card-shadow);
 }
 
 .speaking-feature-card::after {
@@ -1396,7 +1402,7 @@ body.speaking-coming-soon .speaking-secondary-button:hover {
 .speaking-feature-card span {
     display: inline-flex;
     margin-bottom: 32px;
-    color: #c4b5fd;
+    color: var(--speaking-feature-span);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.09em;
@@ -1405,7 +1411,7 @@ body.speaking-coming-soon .speaking-secondary-button:hover {
 
 .speaking-feature-card strong {
     display: block;
-    color: #ffffff;
+    color: var(--speaking-feature-strong);
     font-size: 18px;
     line-height: 1.25;
 }
@@ -1421,33 +1427,65 @@ body.speaking-coming-soon .speaking-secondary-button:hover {
     display: inline-flex;
     align-items: center;
     min-height: 34px;
-    border: 1px solid rgba(191, 219, 254, 0.18);
+    border: 1px solid var(--speaking-upcoming-border);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.065);
-    color: rgba(248, 251, 255, 0.84);
+    background: var(--speaking-upcoming-bg);
+    color: var(--speaking-upcoming-text);
     padding: 0 13px;
     font-size: 13px;
     font-weight: 650;
 }
 
 body.writing-coming-soon {
-    --writing-bg: #050817;
-    --writing-navy: #071547;
-    --writing-panel: rgba(12, 18, 45, 0.72);
-    --writing-border: rgba(191, 219, 254, 0.18);
-    --writing-border-strong: rgba(196, 181, 253, 0.34);
-    --writing-text: #f8fbff;
-    --writing-muted: #b7c4df;
-    --writing-indigo: #4b0082;
-    --writing-violet: #7c3aed;
-    --writing-blue: #0b5fff;
-    --writing-cyan: #38bdf8;
+    --writing-bg: #f8fafc;
+    --writing-navy: #f1f5f9;
+    --writing-panel: rgba(255, 255, 255, 0.82);
+    --writing-border: rgba(0, 87, 255, 0.10);
+    --writing-border-strong: rgba(124, 58, 237, 0.20);
+    --writing-text: #0f172a;
+    --writing-muted: #475569;
+    --writing-indigo: #6366f1;
+    --writing-violet: #8b5cf6;
+    --writing-blue: #2563eb;
+    --writing-cyan: #06b6d4;
+    --writing-glow-1: rgba(99, 102, 241, 0.12);
+    --writing-glow-2: rgba(37, 99, 235, 0.12);
+    --writing-glow-3: rgba(139, 92, 246, 0.12);
+    --writing-panel-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8)),
+                        linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(37, 99, 235, 0.05));
+    --writing-panel-shadow: 0 34px 110px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --writing-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+    --writing-card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 12px rgba(15, 23, 42, 0.03);
+    --writing-feature-span: #6d28d9;
+    --writing-feature-strong: #0f172a;
+    --writing-chip-bg: rgba(99, 102, 241, 0.12);
+    --writing-chip-border: rgba(99, 102, 241, 0.24);
+    --writing-chip-text: #4f46e5;
+    --writing-chip-shadow: 0 12px 32px rgba(99, 102, 241, 0.10);
+    --writing-upcoming-bg: rgba(255, 255, 255, 0.8);
+    --writing-upcoming-text: #334155;
+    --writing-upcoming-border: rgba(0, 87, 255, 0.08);
+    --writing-btn-secondary-bg: rgba(255, 255, 255, 0.8);
+    --writing-btn-secondary-color: var(--writing-text);
+    --writing-btn-secondary-border: rgba(0, 87, 255, 0.16);
+    --writing-mockup-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8)),
+                          rgba(255, 255, 255, 0.8);
+    --writing-mockup-shadow: 0 28px 70px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --writing-mockup-text: #0f172a;
+    --writing-mockup-strong-bg: rgba(99, 102, 241, 0.12);
+    --writing-mockup-strong-text: #4f46e5;
+    --writing-mockup-strong-border: rgba(99, 102, 241, 0.2);
+    --writing-mockup-box-bg: rgba(255, 255, 255, 0.8);
+    --writing-mockup-box-border: rgba(0, 87, 255, 0.08);
+    --writing-mockup-box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+    --writing-mockup-span-text: #2563eb;
+    --writing-mockup-editor-line-bg: linear-gradient(90deg, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0.05));
     min-height: 100vh;
     background:
-        radial-gradient(circle at 13% 22%, rgba(75, 0, 130, 0.42), transparent 25rem),
-        radial-gradient(circle at 86% 18%, rgba(11, 95, 255, 0.36), transparent 27rem),
-        radial-gradient(circle at 68% 92%, rgba(124, 58, 237, 0.30), transparent 30rem),
-        linear-gradient(135deg, #020617 0%, #071547 44%, #190d42 100%);
+        radial-gradient(circle at 13% 22%, var(--writing-glow-1), transparent 25rem),
+        radial-gradient(circle at 86% 18%, var(--writing-glow-2), transparent 27rem),
+        radial-gradient(circle at 68% 92%, var(--writing-glow-3), transparent 30rem),
+        linear-gradient(135deg, var(--writing-bg) 0%, var(--writing-navy) 44%, #e2e8f0 100%);
     color: var(--writing-text);
 }
 
@@ -1478,26 +1516,26 @@ body.writing-coming-soon::after {
     opacity: 0.18;
 }
 
-body.writing-coming-soon .ielts-navbar {
+body.dark-theme.writing-coming-soon .ielts-navbar {
     border-bottom-color: rgba(191, 219, 254, 0.14);
     background: rgba(5, 8, 23, 0.72);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(22px);
 }
 
-body.writing-coming-soon .ielts-navbar__links a,
-body.writing-coming-soon .ielts-navbar__account {
+body.dark-theme.writing-coming-soon .ielts-navbar__links a,
+body.dark-theme.writing-coming-soon .ielts-navbar__account {
     color: rgba(248, 251, 255, 0.86);
 }
 
-body.writing-coming-soon .ielts-navbar__links a:hover,
-body.writing-coming-soon .ielts-navbar__links a.is-active {
+body.dark-theme.writing-coming-soon .ielts-navbar__links a:hover,
+body.dark-theme.writing-coming-soon .ielts-navbar__links a.is-active {
     background: rgba(255, 255, 255, 0.09);
     color: #ffffff;
 }
 
-body.writing-coming-soon .ielts-navbar__wordmark-x,
-body.writing-coming-soon .ielts-navbar__wordmark small {
+body.dark-theme.writing-coming-soon .ielts-navbar__wordmark-x,
+body.dark-theme.writing-coming-soon .ielts-navbar__wordmark small {
     color: rgba(248, 251, 255, 0.78);
 }
 
@@ -1545,13 +1583,9 @@ body.writing-coming-soon .coming-soon-panel {
     width: min(100%, 1120px);
     border: 1px solid var(--writing-border);
     border-radius: 32px;
-    background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
-        linear-gradient(135deg, rgba(75, 0, 130, 0.21), rgba(11, 95, 255, 0.11));
+    background: var(--writing-panel-bg);
     padding: clamp(26px, 4vw, 54px);
-    box-shadow:
-        0 34px 110px rgba(0, 0, 0, 0.42),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    box-shadow: var(--writing-panel-shadow);
     backdrop-filter: blur(28px);
     text-align: left;
 }
@@ -1592,11 +1626,11 @@ body.writing-coming-soon .coming-soon-panel::after {
 body.writing-coming-soon .coming-soon-chip {
     min-height: 30px;
     margin: 0;
-    border-color: rgba(196, 181, 253, 0.34);
-    background: rgba(124, 58, 237, 0.18);
-    color: #d8b4fe;
+    border-color: var(--writing-chip-border);
+    background: var(--writing-chip-bg);
+    color: var(--writing-chip-text);
     padding: 6px 12px;
-    box-shadow: 0 12px 32px rgba(75, 0, 130, 0.30);
+    box-shadow: var(--writing-chip-shadow);
     letter-spacing: 0.12em;
 }
 
@@ -1625,17 +1659,16 @@ body.writing-coming-soon .coming-soon-icon svg {
 body.writing-coming-soon .coming-soon-panel h1 {
     max-width: 620px;
     margin: 0;
-    color: #ffffff;
+    color: var(--writing-text);
     font-size: clamp(42px, 6vw, 76px);
     line-height: 0.99;
     letter-spacing: 0;
-    text-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
 }
 
 body.writing-coming-soon .coming-soon-message {
     max-width: 640px;
     margin: 0;
-    color: rgba(248, 251, 255, 0.93);
+    color: var(--writing-text);
     font-size: clamp(19px, 2vw, 26px);
     font-weight: 700;
     line-height: 1.34;
@@ -1677,9 +1710,9 @@ body.writing-coming-soon .writing-primary-button {
 }
 
 body.writing-coming-soon .writing-secondary-button {
-    border: 1px solid rgba(191, 219, 254, 0.24);
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    border: 1px solid var(--writing-btn-secondary-border);
+    background: var(--writing-btn-secondary-bg);
+    color: var(--writing-btn-secondary-color);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -1703,11 +1736,9 @@ body.writing-coming-soon .writing-secondary-button:hover {
     overflow: hidden;
     border: 1px solid var(--writing-border);
     border-radius: 20px;
-    background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
-        rgba(255, 255, 255, 0.04);
+    background: var(--writing-card-bg);
     padding: 18px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    box-shadow: var(--writing-card-shadow);
 }
 
 .writing-task-card::after {
@@ -1725,7 +1756,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
 .writing-task-card span {
     display: inline-flex;
     margin-bottom: 24px;
-    color: #c4b5fd;
+    color: var(--writing-feature-span);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.09em;
@@ -1734,7 +1765,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
 
 .writing-task-card strong {
     display: block;
-    color: #ffffff;
+    color: var(--writing-feature-strong);
     font-size: 17px;
     line-height: 1.35;
 }
@@ -1750,10 +1781,10 @@ body.writing-coming-soon .writing-secondary-button:hover {
     display: inline-flex;
     align-items: center;
     min-height: 34px;
-    border: 1px solid rgba(191, 219, 254, 0.18);
+    border: 1px solid var(--writing-upcoming-border);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.065);
-    color: rgba(248, 251, 255, 0.84);
+    background: var(--writing-upcoming-bg);
+    color: var(--writing-upcoming-text);
     padding: 0 13px;
     font-size: 13px;
     font-weight: 650;
@@ -1766,13 +1797,9 @@ body.writing-coming-soon .writing-secondary-button:hover {
     min-width: 0;
     border: 1px solid var(--writing-border-strong);
     border-radius: 26px;
-    background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.055)),
-        rgba(5, 8, 23, 0.34);
+    background: var(--writing-mockup-bg);
     padding: 18px;
-    box-shadow:
-        0 28px 70px rgba(0, 0, 0, 0.34),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    box-shadow: var(--writing-mockup-shadow);
     backdrop-filter: blur(20px);
 }
 
@@ -1796,16 +1823,16 @@ body.writing-coming-soon .writing-secondary-button:hover {
 }
 
 .writing-preview-header {
-    color: rgba(248, 251, 255, 0.86);
+    color: var(--writing-mockup-text);
     font-size: 14px;
     font-weight: 700;
 }
 
 .writing-preview-header strong {
-    border: 1px solid rgba(196, 181, 253, 0.28);
+    border: 1px solid var(--writing-mockup-strong-border);
     border-radius: 999px;
-    background: rgba(124, 58, 237, 0.18);
-    color: #ddd6fe;
+    background: var(--writing-mockup-strong-bg);
+    color: var(--writing-mockup-strong-text);
     padding: 5px 9px;
     font-size: 11px;
     text-transform: uppercase;
@@ -1822,10 +1849,10 @@ body.writing-coming-soon .writing-secondary-button:hover {
 .writing-preview-prompt,
 .writing-editor-box,
 .writing-feedback-panel {
-    border: 1px solid rgba(191, 219, 254, 0.15);
+    border: 1px solid var(--writing-mockup-box-border);
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background: var(--writing-mockup-box-bg);
+    box-shadow: var(--writing-mockup-box-shadow);
 }
 
 .writing-preview-prompt {
@@ -1835,7 +1862,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
 .writing-preview-prompt span {
     display: inline-flex;
     margin-bottom: 8px;
-    color: #93c5fd;
+    color: var(--writing-mockup-span-text);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.09em;
@@ -1844,7 +1871,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
 
 .writing-preview-prompt p {
     margin: 0;
-    color: rgba(248, 251, 255, 0.82);
+    color: var(--writing-mockup-text);
     font-size: 13px;
     line-height: 1.55;
 }
@@ -1860,7 +1887,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
     display: block;
     height: 10px;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(248, 251, 255, 0.52), rgba(191, 219, 254, 0.14));
+    background: var(--writing-mockup-editor-line-bg);
 }
 
 .writing-editor-box span:nth-child(1) {
@@ -1891,16 +1918,16 @@ body.writing-coming-soon .writing-secondary-button:hover {
 .writing-preview-stats span {
     display: grid;
     gap: 4px;
-    border: 1px solid rgba(191, 219, 254, 0.15);
+    border: 1px solid var(--writing-mockup-box-border);
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--writing-mockup-box-bg);
     color: var(--writing-muted);
     padding: 12px;
     font-size: 12px;
 }
 
 .writing-preview-stats strong {
-    color: #ffffff;
+    color: var(--writing-text);
     font-size: 19px;
 }
 
@@ -1926,7 +1953,7 @@ body.writing-coming-soon .writing-secondary-button:hover {
 
 .writing-feedback-panel p {
     margin: 0;
-    color: rgba(248, 251, 255, 0.76);
+    color: var(--writing-mockup-text);
     font-size: 13px;
 }
 
@@ -2262,7 +2289,7 @@ body:not(.site-ready) .public-shell {
     body.public-page .home-footer__card {
         width: 100%;
         max-width: none;
-        border-radius: 24px 24px 0 0;
+        border-radius: 0;
     }
 
     body.public-page .home-footer__grid {
@@ -2807,4 +2834,88 @@ body.dark-theme .listening-test-list-card:hover .test-card-icon {
     background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
     color: #ffffff !important;
     box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Speaking & Writing Coming Soon pages - Dark Theme Overrides */
+body.dark-theme.speaking-coming-soon {
+    --speaking-bg: #050817;
+    --speaking-navy: #071547;
+    --speaking-panel: rgba(12, 18, 45, 0.72);
+    --speaking-panel-strong: rgba(20, 28, 68, 0.82);
+    --speaking-border: rgba(191, 219, 254, 0.18);
+    --speaking-border-strong: rgba(196, 181, 253, 0.34);
+    --speaking-text: #f8fbff;
+    --speaking-muted: #b7c4df;
+    --speaking-indigo: #4b0082;
+    --speaking-violet: #7c3aed;
+    --speaking-blue: #0b5fff;
+    --speaking-cyan: #38bdf8;
+    --speaking-glow-1: rgba(75, 0, 130, 0.42);
+    --speaking-glow-2: rgba(11, 95, 255, 0.34);
+    --speaking-glow-3: rgba(124, 58, 237, 0.28);
+    --speaking-panel-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
+                          linear-gradient(135deg, rgba(75, 0, 130, 0.22), rgba(11, 95, 255, 0.11));
+    --speaking-panel-shadow: 0 34px 110px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    --speaking-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+                         rgba(255, 255, 255, 0.04);
+    --speaking-card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    --speaking-feature-span: #c4b5fd;
+    --speaking-feature-strong: #ffffff;
+    --speaking-chip-bg: rgba(124, 58, 237, 0.18);
+    --speaking-chip-border: rgba(196, 181, 253, 0.34);
+    --speaking-chip-text: #d8b4fe;
+    --speaking-chip-shadow: 0 12px 32px rgba(75, 0, 130, 0.30);
+    --speaking-upcoming-bg: rgba(255, 255, 255, 0.065);
+    --speaking-upcoming-text: rgba(248, 251, 255, 0.84);
+    --speaking-upcoming-border: rgba(191, 219, 254, 0.18);
+    --speaking-btn-secondary-bg: rgba(255, 255, 255, 0.08);
+    --speaking-btn-secondary-color: #ffffff;
+    --speaking-btn-secondary-border: rgba(191, 219, 254, 0.24);
+}
+
+body.dark-theme.writing-coming-soon {
+    --writing-bg: #050817;
+    --writing-navy: #071547;
+    --writing-panel: rgba(12, 18, 45, 0.72);
+    --writing-border: rgba(191, 219, 254, 0.18);
+    --writing-border-strong: rgba(196, 181, 253, 0.34);
+    --writing-text: #f8fbff;
+    --writing-muted: #b7c4df;
+    --writing-indigo: #4b0082;
+    --writing-violet: #7c3aed;
+    --writing-blue: #0b5fff;
+    --writing-cyan: #38bdf8;
+    --writing-glow-1: rgba(75, 0, 130, 0.42);
+    --writing-glow-2: rgba(11, 95, 255, 0.36);
+    --writing-glow-3: rgba(124, 58, 237, 0.30);
+    --writing-panel-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
+                        linear-gradient(135deg, rgba(75, 0, 130, 0.21), rgba(11, 95, 255, 0.11));
+    --writing-panel-shadow: 0 34px 110px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    --writing-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+                       rgba(255, 255, 255, 0.04);
+    --writing-card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    --writing-feature-span: #c4b5fd;
+    --writing-feature-strong: #ffffff;
+    --writing-chip-bg: rgba(124, 58, 237, 0.18);
+    --writing-chip-border: rgba(196, 181, 253, 0.34);
+    --writing-chip-text: #d8b4fe;
+    --writing-chip-shadow: 0 12px 32px rgba(75, 0, 130, 0.30);
+    --writing-upcoming-bg: rgba(255, 255, 255, 0.065);
+    --writing-upcoming-text: rgba(248, 251, 255, 0.84);
+    --writing-upcoming-border: rgba(191, 219, 254, 0.18);
+    --writing-btn-secondary-bg: rgba(255, 255, 255, 0.08);
+    --writing-btn-secondary-color: #ffffff;
+    --writing-btn-secondary-border: rgba(191, 219, 254, 0.24);
+    --writing-mockup-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.055)),
+                         rgba(5, 8, 23, 0.34);
+    --writing-mockup-shadow: 0 28px 70px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    --writing-mockup-text: rgba(248, 251, 255, 0.86);
+    --writing-mockup-strong-bg: rgba(124, 58, 237, 0.18);
+    --writing-mockup-strong-text: #ddd6fe;
+    --writing-mockup-strong-border: rgba(196, 181, 253, 0.28);
+    --writing-mockup-box-bg: rgba(255, 255, 255, 0.07);
+    --writing-mockup-box-border: rgba(191, 219, 254, 0.15);
+    --writing-mockup-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    --writing-mockup-span-text: #93c5fd;
+    --writing-mockup-editor-line-bg: linear-gradient(90deg, rgba(248, 251, 255, 0.52), rgba(191, 219, 254, 0.14));
 }

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Reading 103 – Mock Test</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;overflow:hidden;height:100vh;display:flex;flex-direction:column;background:#f8f8f8}
+
+/* ── HEADER ── */
+#hdr{height:52px;background:#fff;border-bottom:2px solid #e4e4e4;display:flex;align-items:center;padding:0 16px;justify-content:space-between;flex-shrink:0;position:relative;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.hdr-left{display:flex;align-items:center;gap:12px}
+#ielts-badge{font-weight:900;font-size:17px;color:#c41230;letter-spacing:2px;text-transform:uppercase;border:2px solid #c41230;padding:3px 10px;border-radius:4px}
+.tg-pill{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,#2CA5E0 0%,#1A76B5 100%);color:#fff;border-radius:20px;padding:5px 14px 5px 6px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 2px 8px rgba(28,140,201,.3)}
+.tg-pill:hover{filter:brightness(1.1)}
+.hdr-right{display:flex;align-items:center;gap:10px}
+#hamburger-btn{cursor:pointer;background:none;border:1px solid #ddd;border-radius:6px;padding:7px 8px;display:flex;flex-direction:column;gap:4px;transition:background .2s}
+#hamburger-btn:hover{background:#f5f5f5}
+#hamburger-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#font-menu{display:none;position:absolute;top:56px;right:14px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px 20px;box-shadow:0 6px 20px rgba(0,0,0,.13);z-index:200;min-width:240px}
+#font-menu.open{display:block}
+#font-menu h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:12px}
+.fm-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:13px;color:#444}
+.fm-ctrl{display:flex;align-items:center;gap:6px}
+.fm-btn{width:30px;height:30px;border-radius:6px;border:1px solid #ccc;background:#f5f5f5;cursor:pointer;font-size:16px;font-weight:bold;display:flex;align-items:center;justify-content:center;line-height:1}
+.fm-btn:hover{background:#e0e0e0}
+.fm-size{font-size:13px;font-weight:bold;width:36px;text-align:center;color:#333}
+
+/* ── PROGRESS BAR ── */
+#pb-wrap{height:5px;background:#e8e8e8;flex-shrink:0}
+#pb{height:100%;background:linear-gradient(90deg,#c41230,#e53935);width:0%;transition:width .35s ease}
+
+/* ── MAIN SPLIT ── */
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#pass-pane{width:50%;overflow-y:auto;padding:28px 30px;min-width:180px;background:#fff;border-right:1px solid #e0e0e0}
+#divider{width:7px;background:#e8e8e8;cursor:col-resize;flex-shrink:0;transition:background .2s;position:relative}
+#divider:hover,#divider.dragging{background:#c41230}
+#divider::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:3px;height:36px;background:rgba(0,0,0,.15);border-radius:3px}
+#q-pane{flex:1;overflow-y:auto;padding:24px 28px;min-width:180px;background:#fafafa}
+
+/* ── PASSAGE ── */
+.p-title{font-size:20px;font-weight:800;margin-bottom:4px;color:#111;line-height:1.3}
+.p-sub{font-size:13px;font-style:italic;color:#666;margin-bottom:18px;line-height:1.5}
+.p-body p{margin-bottom:14px;line-height:1.75;color:#222;text-align:justify}
+.p-body p .pl{font-weight:800;color:#c41230;margin-right:5px;font-size:.9em}
+.highlight{background:#ffe566;border-radius:2px;cursor:pointer;padding:1px 0}
+.highlight:hover{background:#ffd600}
+#hi-pill{position:fixed;background:#222;color:#fff;border-radius:20px;padding:6px 16px;font-size:13px;cursor:pointer;z-index:300;box-shadow:0 3px 10px rgba(0,0,0,.25);display:none;white-space:nowrap;transition:transform .15s}
+#hi-pill:hover{transform:scale(1.04)}
+
+/* ── QUESTIONS ── */
+.qs-header{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#c41230;border-bottom:2px solid #c41230;padding-bottom:6px;margin-bottom:16px}
+.q-instr{background:#fff4f5;border-left:3px solid #c41230;padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:16px;font-size:13px;line-height:1.6;color:#333}
+.q-instr strong{font-weight:700;color:#111}
+.q-item{margin-bottom:18px;padding:0}
+.q-num{font-weight:800;font-size:14px;color:#111;display:inline-block;min-width:24px}
+.q-text{font-size:13px;color:#222;margin-top:3px;line-height:1.55}
+.rg{display:flex;gap:0;margin-top:8px;flex-wrap:wrap}
+.rg label{display:flex;align-items:center;gap:5px;background:#fff;border:1px solid #ccc;padding:6px 13px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;border-right:none;color:#444}
+.rg label:first-child{border-radius:6px 0 0 6px}
+.rg label:last-child{border-radius:0 6px 6px 0;border-right:1px solid #ccc}
+.rg label:hover{background:#fde8ec;border-color:#c41230;color:#c41230;z-index:1}
+.rg input[type=radio]{accent-color:#c41230;width:13px;height:13px}
+.rg label.sel{background:#c41230;color:#fff;border-color:#c41230;font-weight:700}
+.rg label.sel+label{border-left-color:#c41230}
+.mcq-g{margin-top:8px}
+.mcq-g label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;margin-bottom:3px;cursor:pointer;border-radius:6px;font-size:13px;line-height:1.45;border:1px solid transparent;transition:all .15s;color:#333}
+.mcq-g label:hover{background:#fff;border-color:#ddd}
+.mcq-g label.sel{background:#fde8ec;border-color:#c41230;color:#c41230}
+.mcq-g .ol{font-weight:800;flex-shrink:0;margin-top:1px;min-width:18px}
+.mcq-g input[type=radio]{display:none}
+
+/* ── NOTES BOX ── */
+.notes-box{border:2px solid #888;border-radius:6px;padding:18px 22px;margin-bottom:18px;font-size:13px;line-height:2;background:#fff}
+.notes-box .nb-title{font-weight:800;font-size:15px;text-align:center;margin-bottom:14px;color:#111}
+.nb-section{font-weight:700;color:#333;margin-top:10px;margin-bottom:2px}
+.nb-ul{list-style:none;padding-left:16px}
+.nb-ul li{margin-bottom:2px}
+.nb-ul li::before{content:"– ";color:#666}
+.nb-p{margin-bottom:6px}
+.ii{border:none;border-bottom:2px solid #c41230;padding:1px 4px;font-size:13px;width:96px;outline:none;font-family:Arial,Helvetica,sans-serif;background:transparent;color:#111}
+.ii:focus{border-bottom-color:#1565C0;background:#f0f5ff}
+.qn-lbl{font-weight:800;font-size:11px;color:#c41230;margin-right:1px}
+
+/* ── SUMMARY PROSE BOX ── */
+.sum-box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px 22px;margin-bottom:18px;font-size:13px;line-height:2.4}
+.sum-box p{margin-bottom:8px}
+
+/* ── MATCHING BOX ── */
+.match-box{border:2px solid #888;border-radius:6px;padding:14px 18px;margin-bottom:14px;font-size:13px;background:#fff}
+.match-box .mi{margin-bottom:6px;line-height:1.5}
+.match-box .ml{font-weight:800;color:#c41230;margin-right:6px}
+.q-sel{border:1px solid #ccc;border-radius:5px;padding:5px 8px;font-size:13px;font-family:Arial,Helvetica,sans-serif;background:#fff;cursor:pointer;min-width:120px;margin-top:6px;color:#222}
+.q-sel:focus{outline:2px solid #c41230;border-color:#c41230}
+
+/* ── BOTTOM NAV ── */
+#bot-nav{height:44px;background:#f0f0f0;border-top:1px solid #d0d0d0;display:flex;align-items:center;padding:0 10px;gap:5px;flex-shrink:0;overflow-x:auto;white-space:nowrap}
+.p-tab{font-size:12px;font-weight:700;color:#555;cursor:pointer;padding:5px 10px;border-radius:5px;border:1px solid #ccc;background:#fff;white-space:nowrap;flex-shrink:0;transition:all .2s;user-select:none}
+.p-tab.act{background:#c41230;color:#fff;border-color:#c41230}
+.p-tab:not(.act):hover{background:#eee}
+.bn-sep{width:1px;height:26px;background:#ccc;flex-shrink:0;margin:0 3px}
+.pills-wrap{display:inline-flex;gap:3px;align-items:center}
+.qpill{width:26px;height:26px;border-radius:50%;border:1px solid #ccc;background:#fff;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;color:#555}
+.qpill.ans{background:#c41230;color:#fff;border-color:#a00e22}
+.qpill:hover:not(.ans){background:#ffe0e4;border-color:#c41230;color:#c41230}
+#nav-spacer{flex:1}
+#submit-btn{background:#1b5e20;color:#fff;border:none;border-radius:7px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0;transition:background .2s;font-family:Arial,Helvetica,sans-serif}
+#submit-btn:hover{background:#2e7d32}
+
+/* ── RESULTS MODAL ── */
+#res-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;overflow-y:auto;padding:24px 16px}
+#res-overlay.open{display:block}
+#res-modal{background:#fff;border-radius:14px;max-width:820px;margin:0 auto;padding:30px}
+.rm-head{text-align:center;margin-bottom:20px}
+.rm-head h2{font-size:21px;font-weight:800;color:#111}
+.total-strip{background:linear-gradient(135deg,#c41230,#8b0000);border-radius:10px;padding:20px;text-align:center;margin-bottom:24px;color:#fff}
+.ts-score{font-size:40px;font-weight:900;line-height:1}
+.ts-band{font-size:16px;margin-top:6px;opacity:.9}
+.pr-section{margin-bottom:28px}
+.pr-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #eee;flex-wrap:wrap;gap:8px}
+.pr-hdr h3{font-size:15px;font-weight:800;color:#111}
+.s-badge{font-size:13px;font-weight:700;border-radius:12px;padding:3px 14px;color:#fff}
+.sb-g{background:#2e7d32}.sb-o{background:#e65100}.sb-r{background:#c62828}
+.rt{width:100%;border-collapse:collapse;font-size:13px}
+.rt th{background:#f5f5f5;padding:8px 12px;text-align:left;border-bottom:2px solid #ddd;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#555}
+.rt td{padding:7px 12px;border-bottom:1px solid #f0f0f0;color:#222}
+.rt tr.cr{background:#f1f8e9}
+.rt tr.wr{background:#ffebee}
+.ck{color:#2e7d32;font-weight:800;font-size:15px}
+.cx{color:#c62828;font-weight:800;font-size:15px}
+#close-res{display:block;margin:20px auto 0;padding:11px 36px;background:#c41230;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:Arial,Helvetica,sans-serif}
+#close-res:hover{background:#a00e22}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="hdr">
+  <div class="hdr-left">
+    <div id="ielts-badge">IELTS</div>
+    <a class="tg-pill" href="https://t.me/Abdurazzoq_Khanov" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="tgg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5ebaff"/><stop offset="100%" stop-color="#1c84c7"/></linearGradient></defs>
+        <circle cx="20" cy="20" r="20" fill="url(#tgg)"/>
+        <path d="M8 19.8l24-9.3c1.1-.4 2 .3 1.7 1.7l-4.1 19.4c-.3 1.3-1.1 1.6-2.2 1l-6-4.4-2.9 2.8c-.3.3-.6.6-1.3.6l.5-6.7 13-11.7c.6-.5-.1-.8-.9-.3L10.9 23.1 8 22.1c-1.3-.4-1.3-1.4 0-2.3z" fill="white"/>
+      </svg>
+      Abdurazzoq Khanov
+    </a>
+  </div>
+  <div class="hdr-right">
+    <button id="hamburger-btn" onclick="toggleMenu()" title="Font size settings">
+      <span></span><span></span><span></span>
+    </button>
+    <div id="font-menu">
+      <h4>Font Size</h4>
+      <div class="fm-row">
+        <span>Passage text</span>
+        <div class="fm-ctrl">
+          <button class="fm-btn" onclick="chFont('p',-1)">A−</button>
+          <span class="fm-size" id="ps-disp">14px</span>
+          <button class="fm-btn" onclick="chFont('p',1)">A+</button>
+        </div>
+      </div>
+      <div class="fm-row">
+        <span>Questions text</span>
+        <div class="fm-ctrl">
+          <button class="fm-btn" onclick="chFont('q',-1)">A−</button>
+          <span class="fm-size" id="qs-disp">13px</span>
+          <button class="fm-btn" onclick="chFont('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="pb-wrap"><div id="pb"></div></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="pass-pane"></div>
+  <div id="divider"></div>
+  <div id="q-pane"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div id="bot-nav">
+  <div class="p-tab act" id="tab-1" onclick="sw(1)">Passage 1</div>
+  <div class="pills-wrap" id="pw-1"></div>
+  <div class="bn-sep"></div>
+  <div class="p-tab" id="tab-2" onclick="sw(2)">Passage 2</div>
+  <div class="pills-wrap" id="pw-2" style="display:none"></div>
+  <div class="bn-sep"></div>
+  <div class="p-tab" id="tab-3" onclick="sw(3)">Passage 3</div>
+  <div class="pills-wrap" id="pw-3" style="display:none"></div>
+  <div id="nav-spacer"></div>
+  <button id="submit-btn" onclick="showResults()">✓ Submit</button>
+</div>
+
+<!-- HIGHLIGHT PILL -->
+<div id="hi-pill" onclick="doHighlight()">✏ Highlight</div>
+
+<!-- RESULTS OVERLAY -->
+<div id="res-overlay" onclick="if(event.target===this)closeRes()">
+  <div id="res-modal"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
+const PASSAGES = {
+  1: {
+    title: `Book review: <em>Triumph of the City</em>`,
+    sub: null,
+    html: `
+<p><span class="pl">A</span><em>Triumph of the City</em>, by Edward Glaeser, is a thrilling and very readable hymn of praise to an invention so vast and so effective that it is generally taken for granted. More than half the global population already live in urban areas and, every month, five million more flood into the cities of the developed and developing worlds. The crowds and poverty of some of these modern cities may horrify us. They shouldn't, says Glaeser — they are signs of growth, energy and aspiration. Cities are our best and brightest hope.</p>
+<p><span class="pl">B</span>This idea has had more than two hundred years of resistance. Not long after the Industrial Revolution began in Britain, the Romantic poets turned away from the smoke and factories of their cities to celebrate the air and light of untouched nature. In 19th-century America, the writer Henry David Thoreau retreated to the wilderness of Walden Pond to live the solitary, simple life, and convinced generations of Americans that cities were bad and nature was good.</p>
+<p><span class="pl">C</span>They had, Glaeser admits, a point. The early industrial cities were dirty, since they lacked efficient waste disposal systems, and disease spread rapidly among the population. But more importantly they were profitable, and there were enormous commercial incentives to make them work, as well as political ones. Their transformation could be achieved at a stroke: in the second half of the 19th century, the French Emperor Napoleon III gave Baron Haussmann unrestricted power to turn the slum-infested city of Paris into one of the wonders and delights of the modern world. Or the transformation could be done by trial and error. Glaeser gives a brilliant account of the stop-start progression of New York to its late 20th-century position as the cultural and economic centre of the world. Either way, Paris, New York and other cities developed because they were truly effective markets of ideas and innovation.</p>
+<p><span class="pl">D</span>For these and many other reasons, we should not be so upset by the spectacle of urban poverty. The poor flock to cities in the hope of becoming richer (which, by and large, they do). They also reinvigorate the economy of the city. It is folly to drive them away by forcing property prices to soar with unreasonable planning regulations. Instead, cities should build more houses and thereby hold property prices in check.</p>
+<p><span class="pl">E</span>It can go wrong, of course. In Glaeser's view, this is primarily because municipal authorities fail to understand the principal virtues of their cities. The heart of Paris, as many Parisians say, is turning into a museum because of the desire to preserve Baron Haussmann's 19th-century boulevards. Glaeser defends their preservation, but argues that in the 1950s the French made a mistake in establishing a huge high-rise commercial development — <em>La Défense</em> — on the outskirts of the city. Far better, he says, to have turned the central area of Montparnasse into a new commercial district. This would have revitalised much of the city centre without destroying its fabric. In India, Mumbai could save itself from ever-more inefficient sprawl over the surrounding area simply by relaxing the rules presently imposed on the height of new constructions.</p>
+<p><span class="pl">F</span>In America, it is the suburbs that have proved to be the real disaster. Glaeser is repentant on this subject himself. He moved to the suburbs when he had children. His entirely legitimate excuse is that the government made him (and millions like him) do it. By under-taxing petrol and imposing tight planning restrictions on inner cities that drove up the cost of property, it made flight to the suburbs more or less inevitable for the middle classes.</p>
+<p><span class="pl">G</span>This is a disaster because nothing is more inefficient than a suburb. Suburbanites mingle less, and lose the face-to-face contact that makes being an urbanite so much more creative. Moreover, houses are costlier to heat and cool than flats, and suburbanites drive thousands more miles per year than city dwellers. Every aspect of life involves more consumption. This leads to the strongest and newest argument in favour of cities — they are good for the environment. To live in the country or the suburbs is to have a vastly larger carbon footprint than any urbanite.</p>
+<p><span class="pl">H</span>Full of characters and accessible information, this is a tremendous book, not least because, like me, you will find yourself constantly seeking reasons to disagree. Like the poor in the city, this is a sign of success. If you hate the city and get moist-eyed at the thought of the country then, one way or another, Glaeser is the man you will have to take on.</p>`
+  },
+  2: {
+    title: `The Tasmanian Tiger`,
+    sub: null,
+    html: `
+<p><span class="pl">A</span>The Tasmanian tiger, or thylocine, was a carnivorous marsupial (a meat-eating mammal which carries its young in a pouch). It was given the name 'tiger' because it had striped fur, and because it was ferocious. Between 24 million and 15 million years ago, many types of thylocine roamed across Australia, their powerful jaws playing a role in maintaining a balance in the ecosystems of their day. Some species were fox-sized, while others were barely the size of kittens.</p>
+<p><span class="pl">B</span>But when a period of climate change cooled Australia about 12 million years ago, the numbers of these ancient thylocines began to decline. By about 3 million years ago, only one species was left. About 4,000 years ago, these vanished completely from the Australian mainland, so that Tasmania, a large island to the south of Australia, was then the last remaining place where thylocines existed. They ruled the animal life of that island unchallenged until Europeans with sheep, dogs and a great indifference to native flora and fauna, seem to have brought about their extinction. In 1936, the last captive Tasmanian tiger died in Hobart Zoo. Since then, many expeditions have searched for tigers in the Tasmanian bush, but no definitive evidence has been found. Despite this, there are many who keep searching.</p>
+<p><span class="pl">C</span>In 1981, Dutch-born zoologist Hans Naarding was in Tasmania conducting a survey of Latham's snipe, a species of endangered bird. One night he saw an animal in the light from the searchlight mounted on his vehicle. He described it as about the size of a large dog, but with slightly sloping hindquarters and a fairly thick tail continuing straight on from its backbone. He said that it had 12 distinct stripes on its back, running down to the point where the tail began. He reported the sighting to the Director of Tasmania's National Parks. When the news broke, said Naarding, he was besieged by television crews, including four or five from Japan, and others from the United Kingdom, Germany, New Zealand and South America.</p>
+<p><span class="pl">D</span>Government and private search parties combed the region, but no further sightings were made. The tiger, as always, had escaped to its lair — a place that many insist exists only in the imagination. Others disagree: there have been more than 4,000 claimed sightings of the animal since it supposedly died out, and the average number of claims reported to the authorities each year is now 150. So is it out there? Even experts differ in opinion.</p>
+<p><span class="pl">E</span>Randolph Rose, Associate Professor of Zoology at the University of Tasmania, says that he dreamed of seeing a thylocine, but is now convinced that his dream will go unfulfilled. The consensus among conservationists is that any animal with a population base of less than 1,000 is headed for extinction within 60 years. 'Sixty years ago,' he says, 'there was only one thylocine that we know of, and that was in Hobart Zoo. Take it from me, the tiger is gone.'</p>
+<p><span class="pl">F</span>But Dr David Pemberton, curator of zoology at the Tasmanian Museum, states that, despite scientific thinking that a relatively large number of animals is required to sustain a population, 'the Florida panther is down to a dozen or so animals, and, while it does have some inbreeding problems, is still ticking along!' After all, animals can be notoriously elusive. The strange fish known as the coelacanth, with its 'proto legs', was thought to have died out with dinosaurs 700 million years ago until a specimen was dragged to the surface in a shark net off the coast of South Africa in 1938.</p>
+<p><span class="pl">G</span>Wildlife biologist Nick Mooney has the unenviable task of investigating all so-called sightings of the tiger. It was Mooney who was first consulted in late February 2005 about the authenticity of new digital photographic images of a thylocine allegedly taken by a tourist. On face value, Mooney says, this particular account of a sighting and the photographs submitted as proof amount to one of the most convincing cases for the species' survival that he has seen. Many other 'sightings' have been hoaxes, and many sincere seekers are victims of obsession. 'It is a blind optimism that something is, rather than cynicism that something isn't,' Mooney says. 'If something crosses the road, it's not a case of "I wonder what that was?" Rather, it is a case of "That's a thylocine!"'</p>
+<p><span class="pl">H</span>However, Mooney treats all sightings on face value. 'I never try to embarrass people,' he says, '...but the fact that I don't pack the car immediately after they telephone can often be taken as ridicule. Obsessive characters get angry that someone in my position is not out there when they think the thylocine is there.'</p>
+<p><span class="pl">I</span>Hans Naarding, whose sighting of a striped animal two decades ago was the highlight of a lifetime of animal spotting, remains puzzled by the time and money people waste on tiger searches. He says resources would be better applied to saving another endangered animal, the Tasmanian devil, and helping declining migratory bird populations. Could the thylocine still be out there? 'Sure,' Naarding says. 'I know the vast south-west wilderness of Tasmania well. They could survive … [But] if this is the case, it will not be long before they do disappear completely.' Naarding believes that any discovery of surviving thylocines would be 'rather pointless'. 'How do you bring a species back from extinction?' he asks. 'What could you do with it? If there are thylocines out there, they are better off right where they are.'</p>`
+  },
+  3: {
+    title: `The benefits of learning an instrument`,
+    sub: `Studies show that learning a musical instrument can bring about significant improvements in your brain`,
+    html: `
+<p><span class="pl">A</span>Are music lessons the way to get smarter? That's what a lot of parents and experts believe: studying an instrument gives children an advantage in the development of their intellectual, perceptual, and cognitive skills. This may, however, turn out to be wishful thinking. Two highly convincing trials carried out recently have found no evidence to support this idea; the IQs of pre-school children who attended several weeks of music classes as part of these studies did not differ significantly from the IQs of those who had not.</p>
+<p><span class="pl">B</span>But that does not mean that the advantages of learning to play music are limited to expressing yourself, impressing friends, or just having fun. A growing number of studies show that learning an instrument in childhood can do something perhaps more valuable for the brain: it can provide benefits as we age, in the form of an added defense against memory loss, cognitive decline, and impaired hearing. Not only that, you may well get those benefits even if you haven't picked up your instrument in years, or decide to take up music for the first time in mid-life or beyond. According to neuropsychologist Brenda Hanna-Pladdy of Emory University in Atlanta, the time spent learning and practicing specific types of motor control and coordination — each finger on each hand doing something different, and for wind and brass instruments, also using your mouth and breathing — contributes to the brain boost that shows up later in life.</p>
+<p><span class="pl">C</span>You can even map the impact of musical training on the brain itself. In one study, Harvard neurologist Gottfried Schlaug found that the brains of adult professional musicians had a larger volume of grey matter than the brains of non-musicians had. Schlaug and colleagues also found that after 15 months of musical training in early childhood, structural brain changes associated with motor and auditory improvements begin to appear. 'What's unique about playing an instrument is that it requires a wide array of brain regions and cognitive functions to work together simultaneously, in both right and left hemispheres of the brain,' says Alison Balbag of the University of Southern California. 'Playing music may be an efficient way to stimulate the brain,' she says, 'cutting across a broad swath of its regions and cognitive functions and with ripple effects through the decades.'</p>
+<p><span class="pl">D</span>More research is showing this might well be the case. In her first study on the subject, Hanna-Pladdy divided 70 healthy adults between the ages of 60 and 83 into three groups: musicians who had studied an instrument for at least ten years, those who had played between one and nine years, and a control group who had never learned an instrument. The group who had studied for at least ten years scored the highest when tested in such areas as nonverbal and visuo-spatial memory, naming objects, and taking in and adapting new information. Her follow-up study a year later confirmed those findings and further suggested that starting musical training before the age of nine and keeping at it for ten years or more may yield the greatest benefits. Interestingly, it was the group who had the lowest level of general education which showed the greatest gap in scores between those who had studied an instrument in childhood and those who had not. Hanna-Pladdy suspects that musical training could have made up for the lack of cognitive stimulation these people had.</p>
+<p><span class="pl">E</span>Neuroscientist Nina Kraus of Northwestern University in Chicago has found still more positive effects of early musical training. She measured the electrical activity in the auditory brainstem of adults, aged 55 to 70, as they responded to the synthesized speech syllable 'da.' Although none of the subjects had played a musical instrument in 40 years, those who had trained the longest — between four and fourteen years — responded the fastest. 'That's significant,' says Kraus, 'because hearing tends to decline as we age, including the ability to quickly and accurately discern consonants, a skill crucial to understanding and participating in conversation. If your nervous system is not keeping up with the timing necessary for encoding consonants, you will lose out on the flow and meaning of the conversation, and that can potentially create a downward spiral leading to a sense of social isolation,' says Kraus. In addition, the fact that musical training appears to enhance auditory working memory might help reinforce in later life the memory capacity that facilitates verbal interaction.</p>
+<p><span class="pl">F</span>In another study at the University of South Florida, assistant professor of music education Jennifer Bugos studied the impact of elementary piano instruction on adults between the ages of 60 and 85. After six months, those who had received piano lessons showed more robust gains in memory, verbal fluency, the speed at which they processed information, planning ability, and other cognitive functions compared with those who had not received the lessons. Bugos believes that playing an instrument has beneficial effects, regardless of how old the person is when he or she begins. 'Musical training contains all the components of a cognitive training program that sometimes are overlooked,' she says. 'And just as we work out our bodies, we should work out our minds.'</p>`
+  }
+};
+
+// Answer key (all lowercase for easy comparison)
+const AK = {
+  1:"disease", 2:"political", 3:"richer", 4:"economy",
+  5:"museum", 6:"property", 7:"contact", 8:"consumption",
+  9:"FALSE", 10:"TRUE", 11:"NOT GIVEN", 12:"FALSE", 13:"TRUE",
+  14:"striped", 15:"australia", 16:"12 million years",
+  17:"tasmania", 18:"europeans",
+  19:"B", 20:"A", 21:"D", 22:"C", 23:"A", 24:"D",
+  25:"B", 26:"D",
+  27:"NOT GIVEN", 28:"NO", 29:"NO", 30:"YES",
+  31:"D", 32:"A", 33:"C", 34:"B", 35:"A",
+  36:"D", 37:"A", 38:"B", 39:"F", 40:"C"
+};
+
+const pRanges = {1:[1,13], 2:[14,26], 3:[27,40]};
+const pTitles = {
+  1:"Book review: Triumph of the City",
+  2:"The Tasmanian Tiger",
+  3:"The benefits of learning an instrument"
+};
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+let AP = 1;           // active passage
+let ANS = {};         // answers
+let pFS = 14;         // passage font size
+let qFS = 13;         // questions font size
+let selRange = null;  // current text selection
+
+// ═══════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════
+function ii(qn, w) {
+  const v = ANS[qn] !== undefined ? ANS[qn] : '';
+  return `<span style="white-space:nowrap"><span class="qn-lbl">${qn}</span><input class="ii" id="ii${qn}" style="width:${w||92}px" value="${v.replace(/"/g,'&quot;')}" placeholder="..." oninput="rec(${qn},this.value)"></span>`;
+}
+
+function rg(qn, opts) {
+  return `<div class="rg">${opts.map(o=>{
+    const sel = ANS[qn]===o ? 'sel' : '';
+    return `<label class="${sel}"><input type="radio" name="q${qn}" value="${o}" ${ANS[qn]===o?'checked':''} onchange="rec(${qn},this.value);updRgSel(${qn})"> ${o}</label>`;
+  }).join('')}</div>`;
+}
+
+function mcq(qn, opts) {
+  const ls = ['A','B','C','D','E','F'];
+  return `<div class="mcq-g">${opts.map((o,i)=>{
+    const l = ls[i];
+    const sel = ANS[qn]===l ? 'sel' : '';
+    return `<label class="${sel}"><input type="radio" name="q${qn}" value="${l}" ${ANS[qn]===l?'checked':''} onchange="rec(${qn},this.value);updMcqSel(${qn})"><span class="ol">${l}</span>${o}</label>`;
+  }).join('')}</div>`;
+}
+
+function sel(qn, opts) {
+  let html = `<select class="q-sel" onchange="rec(${qn},this.value)"><option value="">— select —</option>`;
+  opts.forEach(([v,lbl]) => {
+    html += `<option value="${v}" ${ANS[qn]===v?'selected':''}>${lbl}</option>`;
+  });
+  return html + `</select>`;
+}
+
+function updRgSel(qn) {
+  const labels = document.querySelectorAll(`[name="q${qn}"]`);
+  labels.forEach(inp => {
+    const lbl = inp.closest('label');
+    if(lbl) lbl.classList.toggle('sel', inp.checked);
+  });
+}
+function updMcqSel(qn) {
+  const labels = document.querySelectorAll(`[name="q${qn}"]`);
+  labels.forEach(inp => {
+    const lbl = inp.closest('label');
+    if(lbl) lbl.classList.toggle('sel', inp.checked);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// QUESTIONS HTML
+// ═══════════════════════════════════════════════════════════
+function getQH(p) {
+  if(p===1) return qP1();
+  if(p===2) return qP2();
+  if(p===3) return qP3();
+}
+
+function qP1() {
+  const tfng = (qn,txt) => `<div class="q-item" id="q${qn}"><span class="q-num">${qn}</span><div class="q-text">${txt}</div>${rg(qn,['TRUE','FALSE','NOT GIVEN'])}</div>`;
+  return `
+<div class="qs-header">Questions 1–13 · Reading Passage 1</div>
+
+<div class="q-instr"><em>Questions 1–8</em><br>Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</div>
+
+<div class="notes-box">
+  <div class="nb-title">Cities</div>
+  <ul class="nb-ul">
+    <li>Problems with early cities
+      <ul class="nb-ul">
+        <li>dirt</li>
+        <li>${ii(1,88)} (spread rapidly among the population)</li>
+      </ul>
+    </li>
+  </ul>
+  <p class="nb-p" style="margin-top:8px">but there were commercial and ${ii(2,88)} reasons for improving them</p>
+  <ul class="nb-ul" style="margin-top:6px">
+    <li>Urban poverty is not a major problem because poor people
+      <ul class="nb-ul">
+        <li>generally get ${ii(3,82)}</li>
+        <li>help to develop the urban ${ii(4,88)}</li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="nb-ul" style="margin-top:6px">
+    <li>cities do have some problems – e.g.
+      <ul class="nb-ul">
+        <li>the centre of Paris is becoming a ${ii(5,82)}</li>
+        <li>Mumbai negatively affected by height restrictions of new buildings</li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="nb-ul" style="margin-top:6px">
+    <li>In the US, middle classes moved to suburbs due to
+      <ul class="nb-ul">
+        <li>cheap petrol</li>
+        <li>high ${ii(6,84)} prices in inner cities</li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="nb-ul" style="margin-top:6px">
+    <li>disadvantages of suburb
+      <ul class="nb-ul">
+        <li>less personal ${ii(7,84)}</li>
+        <li>increased ${ii(8,100)} of resources such as heating – damaging the environment</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="q-instr"><em>Questions 9–13</em><br>Do the following statements agree with the information given in Reading Passage 1? Write <strong>TRUE</strong>, <strong>FALSE</strong>, or <strong>NOT GIVEN</strong>.</div>
+
+${tfng(9,'Glaeser believes that congestion and poverty in some modern cities indicate serious problems.')}
+${tfng(10,'The writer Henry David Thoreau discussed the ideas of the Romantic poets in his work.')}
+${tfng(11,'Emperor Napoleon III was influenced by the complaints of poor people living in Paris.')}
+${tfng(12,'Strict planning regulations may be beneficial for a city\'s development.')}
+${tfng(13,'Glaeser argues that the location of commercial development at La Défense was a bad idea.')}
+`;
+}
+
+function qP2() {
+  const pOpts = [['A','A – Hans Naarding'],['B','B – Randolph Rose'],['C','C – David Pemberton'],['D','D – Nick Mooney']];
+  const matchQ = (qn,txt) => `<div class="q-item" id="q${qn}"><span class="q-num">${qn}</span><div class="q-text" style="margin-bottom:6px">${txt}</div>${sel(qn,pOpts)}</div>`;
+  const abcdOpts = [['A','A'],['B','B'],['C','C'],['D','D']];
+
+  return `
+<div class="qs-header">Questions 14–26 · Reading Passage 2</div>
+
+<div class="q-instr"><em>Questions 14–18</em><br>Complete the summary below. Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</div>
+
+<div class="sum-box">
+  <p>The thylocine was a dog-like animal which had a ${ii(14,80)} coat and was carnivorous. It was originally spread widely throughout the mainland of ${ii(15,88)} but left that area around ${ii(16,130)} ago because of climate change.</p>
+  <p>In the end, thylocines were found only on the island of ${ii(17,90)}, until the arrival of ${ii(18,100)} with their farming practices brought about a drastic reduction in thylocine numbers. The last one is thought to have died in Hobart Zoo in 1936.</p>
+</div>
+
+<div class="q-instr"><em>Questions 19–24</em><br>Look at the following statements and the list of people below. Match each statement with the correct person <strong>A, B, C or D</strong>. <em>NB You may use any letter more than once.</em></div>
+
+<div class="match-box">
+  <div class="mi"><span class="ml">A</span> Hans Naarding</div>
+  <div class="mi"><span class="ml">B</span> Randolph Rose</div>
+  <div class="mi"><span class="ml">C</span> David Pemberton</div>
+  <div class="mi"><span class="ml">D</span> Nick Mooney</div>
+</div>
+
+${matchQ(19,'There is no longer any hope of finding a surviving Tasmanian tiger.')}
+${matchQ(20,'It would be preferable not to disturb any surviving Tasmanian tigers.')}
+${matchQ(21,'Many who claim to have seen Tasmanian tigers are not objective witnesses.')}
+${matchQ(22,'Expert estimates of numbers needed to ensure species survival may be inaccurate.')}
+${matchQ(23,'There is a great deal of international interest in Tasmanian tiger stories.')}
+${matchQ(24,'Some fresh evidence provided by a visitor to Tasmania seems credible.')}
+
+<div class="q-instr" style="margin-top:18px"><em>Questions 25–26</em><br>Choose the correct letter, <strong>A, B, C or D</strong>.</div>
+
+<div class="q-item" id="q25">
+  <span class="q-num">25</span>
+  <div class="q-text">Naarding's sighting of a Tasmanian tiger resulted in</div>
+  ${mcq(25,['the capture of the tiger.','an extensive follow-up.','many other sightings.','the death of the tiger.'])}
+</div>
+
+<div class="q-item" id="q26">
+  <span class="q-num">26</span>
+  <div class="q-text">The example of the coelacanth is used to show that</div>
+  ${mcq(26,['new animal species are still evolving.','animals can possess surprising physical characteristics.','species of sea animals can be saved from extinction.','opinions regarding extinction of animal species can be mistaken.'])}
+</div>
+`;
+}
+
+function qP3() {
+  const ynng = (qn,txt) => `<div class="q-item" id="q${qn}"><span class="q-num">${qn}</span><div class="q-text">${txt}</div>${rg(qn,['YES','NO','NOT GIVEN'])}</div>`;
+
+  return `
+<div class="qs-header">Questions 27–40 · Reading Passage 3</div>
+
+<div class="q-instr"><em>Questions 27–30</em><br>Do the following statements agree with the <strong>claims of the writer</strong> in Reading Passage 3? Write <strong>YES</strong>, <strong>NO</strong>, or <strong>NOT GIVEN</strong>.</div>
+
+${ynng(27,'Many parents indicate that their children struggle to learn a musical instrument.')}
+${ynng(28,"The findings of the recent research into pre-school children's IQs are unreliable.")}
+${ynng(29,'The main reasons people take up an instrument are that they enjoy playing music and being creative.')}
+${ynng(30,'Evidence about the long-term advantages of learning an instrument is increasing.')}
+
+<div class="q-instr" style="margin-top:18px"><em>Questions 31–35</em><br>Choose the correct letter, <strong>A, B, C or D</strong>.</div>
+
+<div class="q-item" id="q31">
+  <span class="q-num">31</span>
+  <div class="q-text">The studies mentioned in the first paragraph</div>
+  ${mcq(31,['confirm a link between musical training and intelligence.','present misleading information about the value of learning an instrument.','suggest that there are undiscovered benefits to studying music.','cast doubt on a belief about the effects of taking music lessons.'])}
+</div>
+
+<div class="q-item" id="q32">
+  <span class="q-num">32</span>
+  <div class="q-text">According to the second paragraph, there may be many benefits to studying music,</div>
+  ${mcq(32,['even for those who begin learning in adulthood.','providing the person learns the correct techniques.','especially if the person practises on a regular basis.','particularly if the person plays a range of different instruments.'])}
+</div>
+
+<div class="q-item" id="q33">
+  <span class="q-num">33</span>
+  <div class="q-text">The phrase 'this might well be the case' in the fourth paragraph suggests that</div>
+  ${mcq(33,['music lessons and long-term physical well-being may be connected.','the ability to learn music may depend on neurological features.','learning an instrument may have a lasting impact on brain function.',"older people's brains may be better suited to studying music than those of children."])}
+</div>
+
+<div class="q-item" id="q34">
+  <span class="q-num">34</span>
+  <div class="q-text">Which aspect of playing an instrument was included in Hanna-Pladdy's follow-up study but not in her first study?</div>
+  ${mcq(34,['the number of years that the person had played','at which age the person began having lessons','the length of time since the person last played','how the person had practised as a child'])}
+</div>
+
+<div class="q-item" id="q35">
+  <span class="q-num">35</span>
+  <div class="q-text">What do Hanna-Pladdy's studies suggest about people's general education?</div>
+  ${mcq(35,['Studying music compensates for an otherwise limited level of education.','Learning to play an instrument improves educational performance.','Highly educated people are more likely to benefit from music training.',"Level of education makes no difference to a person's musical ability."])}
+</div>
+
+<div class="q-instr" style="margin-top:18px"><em>Questions 36–40</em><br>Complete each sentence with the correct ending, <strong>A–F</strong>, below.</div>
+
+<div class="match-box">
+  <div class="mi"><span class="ml">A</span> comparing the brains of people who had never played an instrument with those who played for a living.</div>
+  <div class="mi"><span class="ml">B</span> activating many different parts of the brain at the same time.</div>
+  <div class="mi"><span class="ml">C</span> teaching a group of older people to play an instrument.</div>
+  <div class="mi"><span class="ml">D</span> acquiring the particular set of physical skills needed to play an instrument.</div>
+  <div class="mi"><span class="ml">E</span> discovering which group of people become the best musicians.</div>
+  <div class="mi"><span class="ml">F</span> having played an instrument for a considerable length of time.</div>
+</div>
+
+${[
+  [36,'Brenda Hanna-Pladdy believes the cognitive benefits of music lessons are a result of'],
+  [37,'The research undertaken by Gottfried Schlaug focused on'],
+  [38,'According to Alison Balbag, playing an instrument is a unique experience because it involves'],
+  [39,'Nina Kraus believes there is a link between better hearing in later life and the experience of'],
+  [40,"Jennifer Bugos's study involved"]
+].map(([qn,txt])=>`
+<div class="q-item" id="q${qn}">
+  <span class="q-num">${qn}</span>
+  <div class="q-text" style="margin-bottom:6px">${txt}</div>
+  ${sel(qn,[['A','A'],['B','B'],['C','C'],['D','D'],['E','E'],['F','F']])}
+</div>`).join('')}
+`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════
+function renderPass(p) {
+  const d = PASSAGES[p];
+  document.getElementById('pass-pane').innerHTML =
+    `<div class="p-title">${d.title}</div>` +
+    (d.sub ? `<div class="p-sub">${d.sub}</div>` : '') +
+    `<div class="p-body" style="font-size:${pFS}px">${d.html}</div>`;
+}
+
+function renderQ(p) {
+  const qp = document.getElementById('q-pane');
+  qp.innerHTML = `<div class="q-wrap" style="font-size:${qFS}px">${getQH(p)}</div>`;
+  qp.scrollTop = 0;
+}
+
+function sw(p) {
+  AP = p;
+  document.querySelectorAll('.p-tab').forEach((t,i)=>t.classList.toggle('act',i+1===p));
+  renderPass(p);
+  renderQ(p);
+  updNav();
+  updPB();
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANSWERS
+// ═══════════════════════════════════════════════════════════
+function rec(qn, val) {
+  if(val===''||val===undefined) delete ANS[qn];
+  else ANS[qn] = val;
+  updNav();
+  updPB();
+}
+
+function isAns(q) { return ANS[q]!==undefined && ANS[q]!==''; }
+
+function updPB() {
+  const done = Object.keys(ANS).filter(k=>ANS[k]!=='').length;
+  document.getElementById('pb').style.width = (done/40*100)+'%';
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════════════
+function updNav() {
+  for(let p=1;p<=3;p++) {
+    const [s,e] = pRanges[p];
+    const pw = document.getElementById(`pw-${p}`);
+    const tab = document.getElementById(`tab-${p}`);
+    const done = Object.keys(ANS).filter(k=>+k>=s&&+k<=e&&ANS[k]!=='').length;
+    const total = e-s+1;
+    if(p===AP) {
+      pw.style.display='inline-flex';
+      let html='';
+      for(let q=s;q<=e;q++){
+        html+=`<div class="qpill ${isAns(q)?'ans':''}" onclick="goQ(${q})" title="Q${q}">${q}</div>`;
+      }
+      pw.innerHTML=html;
+      tab.textContent=`Passage ${p}`;
+    } else {
+      pw.style.display='none';
+      pw.innerHTML='';
+      tab.innerHTML=`Passage ${p}&nbsp;<span style="font-size:10px;background:rgba(0,0,0,.12);border-radius:8px;padding:1px 6px">${done}/${total}</span>`;
+    }
+  }
+}
+
+function goQ(q) {
+  const el=document.getElementById(`q${q}`);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ═══════════════════════════════════════════════════════════
+// FONT SIZE
+// ═══════════════════════════════════════════════════════════
+function chFont(t, d) {
+  if(t==='p') {
+    pFS = Math.max(10,Math.min(22,pFS+d));
+    document.getElementById('ps-disp').textContent=pFS+'px';
+    const b=document.querySelector('.p-body');
+    if(b) b.style.fontSize=pFS+'px';
+  } else {
+    qFS = Math.max(10,Math.min(22,qFS+d));
+    document.getElementById('qs-disp').textContent=qFS+'px';
+    const w=document.querySelector('.q-wrap');
+    if(w) w.style.fontSize=qFS+'px';
+  }
+}
+
+function toggleMenu() { document.getElementById('font-menu').classList.toggle('open'); }
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#hamburger-btn')&&!e.target.closest('#font-menu'))
+    document.getElementById('font-menu').classList.remove('open');
+});
+
+// ═══════════════════════════════════════════════════════════
+// HIGHLIGHT
+// ═══════════════════════════════════════════════════════════
+const pp = document.getElementById('pass-pane');
+const hpill = document.getElementById('hi-pill');
+
+pp.addEventListener('mouseup', handleSel);
+pp.addEventListener('touchend', handleSel);
+pp.addEventListener('click', e=>{
+  if(e.target.classList.contains('highlight')) {
+    const p=e.target.parentNode;
+    while(e.target.firstChild) p.insertBefore(e.target.firstChild,e.target);
+    p.removeChild(e.target);
+  }
+});
+
+function handleSel() {
+  const sel = window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hpill.style.display='none';return;}
+  const r=sel.getRangeAt(0);
+  if(!pp.contains(r.commonAncestorContainer)){hpill.style.display='none';return;}
+  selRange=r;
+  const rect=r.getBoundingClientRect();
+  const top = rect.top<50 ? rect.bottom+6 : rect.top-42;
+  hpill.style.left=Math.max(6,rect.left+rect.width/2-60)+'px';
+  hpill.style.top=top+'px';
+  hpill.style.display='block';
+}
+
+function doHighlight() {
+  if(!selRange) return;
+  try{
+    const span=document.createElement('span');
+    span.className='highlight';
+    selRange.surroundContents(span);
+  }catch(e){}
+  hpill.style.display='none';
+  window.getSelection()?.removeAllRanges();
+  selRange=null;
+}
+
+document.addEventListener('mousedown',e=>{
+  if(!e.target.closest('#hi-pill')) hpill.style.display='none';
+});
+
+// ═══════════════════════════════════════════════════════════
+// DRAG DIVIDER
+// ═══════════════════════════════════════════════════════════
+(()=>{
+  const div=document.getElementById('divider');
+  const left=document.getElementById('pass-pane');
+  const main=document.getElementById('main');
+  let drag=false,sx,sw2;
+  div.addEventListener('mousedown',e=>{
+    drag=true; sx=e.clientX; sw2=left.getBoundingClientRect().width;
+    div.classList.add('dragging');
+    document.body.style.cursor='col-resize';
+    document.body.style.userSelect='none';
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!drag) return;
+    const mw=main.getBoundingClientRect().width;
+    const nw=Math.max(180,Math.min(mw-200,sw2+(e.clientX-sx)));
+    left.style.width=nw+'px';
+  });
+  document.addEventListener('mouseup',()=>{
+    if(drag){drag=false;div.classList.remove('dragging');
+      document.body.style.cursor='';document.body.style.userSelect='';}
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════════════════════
+function chkAns(q) {
+  const ua = ANS[q]; const ca = AK[q];
+  if(!ua||!ca) return false;
+  const u=ua.toString().trim().toLowerCase();
+  const c=ca.toString().trim().toLowerCase();
+  return u===c;
+}
+
+function dispAK(q) {
+  const a=AK[q]; if(!a) return '—';
+  const s=a.toString();
+  // fill-in blanks: capitalize properly
+  const fills=[1,2,3,4,5,6,7,8,14,15,16,17,18];
+  if(fills.includes(q)) return s.charAt(0).toUpperCase()+s.slice(1);
+  return s.toUpperCase();
+}
+
+function dispUA(q) {
+  const ua=ANS[q];
+  if(!ua) return '<em style="color:#aaa">No answer</em>';
+  return ua;
+}
+
+function bandScore(n) {
+  if(n>=39)return'9.0';if(n>=37)return'8.5';if(n>=35)return'8.0';
+  if(n>=33)return'7.5';if(n>=30)return'7.0';if(n>=27)return'6.5';
+  if(n>=23)return'6.0';if(n>=19)return'5.5';if(n>=15)return'5.0';
+  if(n>=13)return'4.5';return'4.0';
+}
+
+function showResults() {
+  let total=0;
+  for(let q=1;q<=40;q++) if(chkAns(q)) total++;
+  const pct=Math.round(total/40*100);
+  const band=bandScore(total);
+
+  let html=`<div class="rm-head"><h2>📋 Results — IELTS Reading 103</h2></div>`;
+
+  const bandColor = pct>=70?'#2e7d32':pct>=50?'#e65100':'#c62828';
+  html+=`<div class="total-strip">
+    <div class="ts-score">${total} / 40</div>
+    <div class="ts-band">Score: ${pct}% &nbsp;·&nbsp; Estimated Band Score: <strong>${band}</strong></div>
+  </div>`;
+
+  for(let p=1;p<=3;p++) {
+    const [s,e]=pRanges[p];
+    let pc=0;
+    for(let q=s;q<=e;q++) if(chkAns(q)) pc++;
+    const pt=e-s+1;
+    const pp2=Math.round(pc/pt*100);
+    const bc=pp2>=70?'sb-g':pp2>=50?'sb-o':'sb-r';
+    html+=`<div class="pr-section">
+      <div class="pr-hdr">
+        <h3>Passage ${p}: ${pTitles[p]} <small style="color:#888;font-size:12px">&nbsp;(Q${s}–Q${e})</small></h3>
+        <span class="s-badge ${bc}">${pc}/${pt} (${pp2}%)</span>
+      </div>
+      <table class="rt"><thead><tr><th>Q#</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr></thead><tbody>`;
+    for(let q=s;q<=e;q++) {
+      const ok=chkAns(q);
+      html+=`<tr class="${ok?'cr':'wr'}"><td><strong>${q}</strong></td><td>${dispUA(q)}</td><td>${dispAK(q)}</td><td>${ok?'<span class="ck">✓</span>':'<span class="cx">✗</span>'}</td></tr>`;
+    }
+    html+=`</tbody></table></div>`;
+  }
+
+  html+=`<button id="close-res" onclick="closeRes()">✕ Close Results</button>`;
+  document.getElementById('res-modal').innerHTML=html;
+  document.getElementById('res-overlay').classList.add('open');
+}
+
+function closeRes() { document.getElementById('res-overlay').classList.remove('open'); }
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+sw(1);
+</script>
+</body>
+</html>

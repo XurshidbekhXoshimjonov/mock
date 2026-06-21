@@ -1,0 +1,246 @@
+{
+  "id": "1782016441601-test-7-reading-p2",
+  "slug": "test-7-part-2",
+  "title": "Test 7 - Part 2: Insect decision-making",
+  "subtitle": "Reading Part 2",
+  "part": 2,
+  "passage": "A. It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury.\n\nB. Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites.\n\nC. But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves.\n\nD. Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots.\n\nE. The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved.\n\nF. Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow.",
+  "passageText": "A. It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury.\n\nB. Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites.\n\nC. But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves.\n\nD. Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots.\n\nE. The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved.\n\nF. Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow.",
+  "passageTitle": "Insect decision-making",
+  "passageHtml": "<p>A. It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury.</p>\n<p>B. Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites.</p>\n<p>C. But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves.</p>\n<p>D. Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots.</p>\n<p>E. The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved.</p>\n<p>F. Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow.</p>",
+  "paragraphs": [
+    {
+      "letter": "A",
+      "html": "A. It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury.",
+      "text": "A. It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury."
+    },
+    {
+      "letter": "B",
+      "html": "B. Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites.",
+      "text": "B. Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites."
+    },
+    {
+      "letter": "C",
+      "html": "C. But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves.",
+      "text": "C. But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves."
+    },
+    {
+      "letter": "D",
+      "html": "D. Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots.",
+      "text": "D. Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots."
+    },
+    {
+      "letter": "E",
+      "html": "E. The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved.",
+      "text": "E. The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved."
+    },
+    {
+      "letter": "F",
+      "html": "F. Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow.",
+      "text": "F. Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow."
+    }
+  ],
+  "questionGroups": [
+    {
+      "title": "Questions 14–19",
+      "instruction": "Reading Passage 2 has six paragraphs, A–F. Choose the correct heading for each paragraph from the list of headings below. Write the correct number, i–vii, in boxes 14–19 on your answer sheet.",
+      "rule": "A–F",
+      "type": "matching_information",
+      "questionNumbers": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "title": "Questions 20–23",
+      "instruction": "Look at the following findings and the list of academics below. Match each finding with the correct academic, A–D. NB You may use any letter more than once.",
+      "rule": "A–D",
+      "type": "matching_information",
+      "questionNumbers": [
+        20,
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "title": "Questions 24–26",
+      "instruction": "Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.",
+      "rule": "",
+      "type": "summary_completion",
+      "questionNumbers": [
+        24,
+        25,
+        26
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 14,
+      "type": "matching_information",
+      "question": "Paragraph A",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "vii"
+    },
+    {
+      "number": 15,
+      "type": "matching_information",
+      "question": "Paragraph B",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "iii"
+    },
+    {
+      "number": 16,
+      "type": "matching_information",
+      "question": "Paragraph C",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "vi"
+    },
+    {
+      "number": 17,
+      "type": "matching_information",
+      "question": "Paragraph D",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "i"
+    },
+    {
+      "number": 18,
+      "type": "matching_information",
+      "question": "Paragraph E",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "iv"
+    },
+    {
+      "number": 19,
+      "type": "matching_information",
+      "question": "Paragraph F",
+      "options": [
+        "i — The effect of man-made imitations on insects",
+        "ii — The need to instruct additional insect guides",
+        "iii — Signals used by certain insects to indicate a discovery",
+        "iv — How urgency can affect the process of finding a new home",
+        "v — The use of trained insects in testing scientific theories",
+        "vi — The use of virtual scenarios in the study of insect behaviour",
+        "vii — How the number of decision-makers affects the decision"
+      ],
+      "answer": "ii"
+    },
+    {
+      "number": 20,
+      "type": "matching_information",
+      "question": "Certain members can influence the rest of the group to alter a previous decision.",
+      "options": [
+        "A — Nicolas de Condorcet",
+        "B — Christian List and colleagues",
+        "C — José Halloy",
+        "D — Nigel Franks and colleagues"
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 21,
+      "type": "matching_information",
+      "question": "Individual verification of a proposed choice is important for successful decision outcome.",
+      "options": [
+        "A — Nicolas de Condorcet",
+        "B — Christian List and colleagues",
+        "C — José Halloy",
+        "D — Nigel Franks and colleagues"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 22,
+      "type": "matching_information",
+      "question": "The more individuals taking part in a decision, the better the decision will be.",
+      "options": [
+        "A — Nicolas de Condorcet",
+        "B — Christian List and colleagues",
+        "C — José Halloy",
+        "D — Nigel Franks and colleagues"
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "matching_information",
+      "question": "The decision-making process of certain insects produces excellent results even when fine distinctions are required.",
+      "options": [
+        "A — Nicolas de Condorcet",
+        "B — Christian List and colleagues",
+        "C — José Halloy",
+        "D — Nigel Franks and colleagues"
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 24,
+      "type": "summary_completion",
+      "question": "A Bristol University study looked at how insects make decisions when their home has been ___.",
+      "options": [],
+      "answer": "threatened"
+    },
+    {
+      "number": 25,
+      "type": "summary_completion",
+      "question": "The ants in the experiment relied on the use of individuals called ___ to find a new nest.",
+      "options": [],
+      "answer": "scouts"
+    },
+    {
+      "number": 26,
+      "type": "summary_completion",
+      "question": "The study emphasized the necessity of having active ___ in order to execute decisions successfully.",
+      "options": [],
+      "answer": "leaders"
+    }
+  ],
+  "vocabulary": [],
+  "sourceFullTestId": "1782016441601-test-7",
+  "createdAt": "2026-06-21T04:34:01.601Z"
+}

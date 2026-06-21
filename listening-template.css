@@ -795,8 +795,20 @@ a {
 .lc-flowchart-intro,
 .lc-flowchart-line {
     margin: 0;
+    position: relative;
+    padding-left: 18px;
     font-size: 14px;
     line-height: 2;
+}
+
+.lc-flowchart-intro::before,
+.lc-flowchart-line::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+    color: var(--lc-navy);
 }
 
 .lc-flowchart-answer {

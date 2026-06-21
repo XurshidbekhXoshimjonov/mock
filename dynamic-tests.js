@@ -203,14 +203,16 @@ async function loadFullTestCards(config, grid) {
     }
 
     const tests = await response.json();
-    const linkedManualListeningIds = new Set();
+    const skipManualIds = new Set();
 
     tests.forEach((test) => {
         const href = test.openUrl || cleanTestUrl(config, test);
         const number = nextCardNumber(grid);
 
         if (config.type === "listening" && test.manualListeningTestId) {
-            linkedManualListeningIds.add(test.manualListeningTestId);
+            skipManualIds.add(test.manualListeningTestId);
+        } else if (config.type === "reading") {
+            skipManualIds.add(`${test.id}-reading-full`);
         }
 
         grid.appendChild(makeCard({
@@ -223,7 +225,7 @@ async function loadFullTestCards(config, grid) {
         }));
     });
 
-    return linkedManualListeningIds;
+    return skipManualIds;
 }
 
 async function loadManualTests(config, grid, skipIds = new Set()) {

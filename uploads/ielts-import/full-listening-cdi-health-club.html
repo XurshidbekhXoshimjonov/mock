@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS Listening Part 1+2</title>
+<style>
+   :root.dark {
+    --correct-bg: #2e7d32;
+    --wrong-bg: #c62828;
+    --missed-bg: #f9a825;
+  }
+
+  .feedback-correct {
+    background-color: var(--correct-bg) !important;
+    color: white !important;
+  }
+  .feedback-wrong {
+    background-color: var(--wrong-bg) !important;
+    color: white !important;
+  }
+  .feedback-missed {
+    background-color: var(--missed-bg) !important;
+    color: black !important;
+  }
+  .feedback-missed *,
+  .feedback-correct *,
+  .feedback-wrong * {
+  color: inherit !important;
+}
+  :root {
+    --bg-color: #f5f5f5;
+    --text-color: #111;
+    --box-bg: #fff;
+    --border-color: #ccc;
+    --accent-color: #2563eb;
+  }
+ /* Instead, define them inside body.dark-mode */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --box-bg: #1a1a1a;
+  --border-color: #555;
+
+  --correct-bg: #388e3c;  /* brighter green for dark mode */
+  --wrong-bg: #d32f2f;    /* red */
+  --missed-bg: #fbc02d;   /* yellow */
+}
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  h2 {
+    text-align: center;
+    margin: 30px 0 10px;
+    color: var(--accent-color);
+  }
+  audio {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  .instructions {
+    font-weight: 600;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 90%;
+  }
+  .section, .form-box {
+    background: var(--box-bg);
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .form-row, .question-row, .question {
+    margin-bottom: 18px;
+  }
+  input, select {
+    border: 1px solid var(--border-color);
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    padding: 6px 10px;
+    font-size: 15px;
+    border-radius: 4px;
+    width: 200px;
+    margin-top: 5px;
+  }
+  select {
+    width: auto;
+    min-width: 150px;
+  }
+  .checkbox-group label {
+    display: block;
+    margin: 8px 0;
+  }
+  .toggle-dark-mode {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+
+/* Enhanced dark mode styles */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --box-bg: #1a1a1a;
+  --border-color: #555;
+}
+
+/* Dark mode table header fix */
+body.dark-mode table thead tr {
+  background-color: #333 !important;
+}
+
+/* Dark mode input/select fix */
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #2c2c2c;
+  color: #fff;    /* oq bo‘lishi kerak */
+  border-color: #666;
+}
+/* 1. Matnni oq rang qilish */
+body.dark-mode input[type="text"],
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #666 !important;
+}
+
+/* 2. Placeholder rangini kulrang qilish */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #bbb !important;
+}
+
+/* 3. Oq fonli bloklarni ham qoraga aylantirish */
+body.dark-mode .section,
+body.dark-mode .form-box,
+body.dark-mode table,
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode div[style*="background:#f9f9f9"],
+body.dark-mode div[style*="background:#fff"],
+body.dark-mode div[style*="background: #fff"] {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+}
+
+/* Highlight in dark mode */
+body.dark-mode .highlighted-selection {
+  background-color: #ffae00;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+/* Show-correct-answers color in dark mode */
+body.dark-mode span[id^="correct_"] {
+  color: #90ee90 !important;
+}
+
+
+/* Fix Part 1 table input layout */
+table input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+}
+
+table {
+  table-layout: auto;
+}
+
+td {
+  vertical-align: top;
+  word-break: break-word;
+}
+body.dark-mode input[type="text"],
+body.dark-mode textarea {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #666 !important;
+}
+</style>
+<style>
+  .q-badge {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 9999px;
+    padding: 2px 10px;
+    font-size: 13px;
+    margin-right: 8px;
+    font-weight: bold;
+  }
+</style>
+<style>
+.highlighted-selection {
+  background-color: #ffd633;
+  color: black !important;
+  padding: 0 1px;
+  cursor: pointer;
+}
+body.dark-mode .highlighted-selection {
+  background-color: #ffae00;
+  color: black !important;
+}
+/* Dark mode feedback ranglari */
+body.dark-mode input.correct-answer {
+  background-color: #2e7d32 !important; /* yashil fon */
+  color: #ffffff !important;            /* oq matn */
+  font-weight: bold;
+}
+
+body.dark-mode input.wrong-answer {
+  background-color: #c62828 !important; /* qizil fon */
+  color: #ffffff !important;            /* oq matn */
+  font-weight: bold;
+}
+
+</style></head>
+<body><button onclick="toggleDarkMode()" style="position:fixed;top:20px;right:20px;padding:10px 15px;z-index:999;">Toggle Dark Mode</button>
+  <div class="section">
+    <h2>Part 1: Questions 1–10</h2>
+    <p class="instructions">
+      Complete the notes below. Write <b>NO MORE THAN TWO WORDS AND/OR A NUMBER</b> for each answer.
+    </p>
+  
+    <h3>Health club customer research</h3>
+  
+    <div class="form-row">
+      <label>Name: Selina Thompson</label>
+    </div>
+  
+    <div class="form-row">
+      <label>Occupation: <span class="q-badge">1</span></label>
+      <input type="text" id="q1">
+    </div>
+  
+    <div class="form-row">
+      <label>Age group: <span class="q-badge">2</span></label>
+      <input type="text" id="q2">
+    </div>
+  
+    <div class="form-row">
+      <label>Type of membership: <span class="q-badge">3</span></label>
+      <input type="text" id="q3">
+    </div>
+  
+    <div class="form-row">
+      <label>Length of membership: <span class="q-badge">4</span></label>
+      <input type="text" id="q4" style="width: 120px;"> years
+    </div>
+  
+    <div class="form-row">
+      <label>Why joined: recommended by a <span class="q-badge">5</span></label>
+      <input type="text" id="q5">
+    </div>
+  
+    <div class="form-row">
+      <label>Visits to club per month: Eight (on average)</label>
+    </div>
+  
+    <div class="form-row">
+      <label>Facility used most: <span class="q-badge">6</span></label>
+      <input type="text" id="q6">
+    </div>
+  
+    <div class="form-row">
+      <label>Facility not used (if any): tennis courts (because reluctant to <span class="q-badge">7</span>)</label>
+      <input type="text" id="q7">
+    </div>
+  
+    <div class="form-row">
+      <label>Suggestions for improvements: have more <span class="q-badge">8</span></label>
+      <input type="text" id="q8">
+    </div>
+  
+    <div class="form-row">
+      <label>Install <span class="q-badge">9</span> in the gym</label>
+      <input type="text" id="q9">
+    </div>
+  
+    <div class="form-row">
+      <label>Open <span class="q-badge">10</span> later at weekends</label>
+      <input type="text" id="q10">
+    </div>
+  </div>
+  
+  
+        
+    
+  <div class="section">
+  <h2>Part 2: Questions 11–20</h2>
+
+  <p class="instructions">
+    Complete the flow chart below. Choose <b>SIX</b> answers from the box and write the correct letter <b>A–G</b> next to questions 11–16.
+  </p>
+
+  <!-- A-G Options -->
+  <div class="options-box" style="margin-bottom:10px;">
+    <p><b>A</b> air &nbsp;&nbsp; <b>B</b> ash &nbsp;&nbsp; <b>C</b> earth &nbsp;&nbsp; 
+       <b>D</b> grass &nbsp;&nbsp; <b>E</b> sticks &nbsp;&nbsp; 
+       <b>F</b> stones &nbsp;&nbsp; <b>G</b> water
+    </p>
+  </div>
+
+  <!-- Flow Chart 11-16 -->
+  <p><b>Making a steam pit</b></p>
+  <ul style="list-style:none; padding-left:0;">
+    <li>• Dig a pit</li>
+    <li>• Arrange a row of <span class="q-badge">11</span> <input type="text" id="q11" maxlength="1" style="width:50px;"> over the pit</li>
+    <li>• Place <span class="q-badge">12</span> <input type="text" id="q12" maxlength="1" style="width:50px;"> on top</li>
+    <li>• Light the wood and let it burn out</li>
+    <li>• Remove <span class="q-badge">13</span> <input type="text" id="q13" maxlength="1" style="width:50px;"></li>
+    <li>• Insert a stick</li>
+    <li>• Cover the pit with <span class="q-badge">14</span> <input type="text" id="q14" maxlength="1" style="width:50px;"></li>
+    <li>• Place wrapped food on top and cover it with <span class="q-badge">15</span> <input type="text" id="q15" maxlength="1" style="width:50px;"></li>
+    <li>• Remove the stick and put <span class="q-badge">16</span> <input type="text" id="q16" maxlength="1" style="width:50px;"> into the hole</li>
+  </ul>
+
+  <!-- Multiple Choice 17-18 -->
+  <h3>Questions 17–18</h3>
+  <p class="instructions">Choose <b>TWO</b> letters, A–E.</p>
+  <p>Which TWO characteristics apply to the bamboo oven?</p>
+  <label><input type="checkbox" name="q17" value="A"> A It’s suitable for windy weather.</label><br>
+  <label><input type="checkbox" name="q17" value="B"> B The fire is lit below the bottom end of the bamboo.</label><br>
+  <label><input type="checkbox" name="q17" value="C"> C The bamboo is cut into equal lengths.</label><br>
+  <label><input type="checkbox" name="q17" value="D"> D The oven hangs from a stick.</label><br>
+  <label><input type="checkbox" name="q17" value="E"> E It cooks food by steaming it.</label>
+
+  <!-- Multiple Choice 19-20 -->
+  <h3>Questions 19–20</h3>
+  <p class="instructions">Choose <b>TWO</b> letters, A–E.</p>
+  <p>Which TWO pieces of advice does the speaker give about eating wild fungi?</p>
+  <label><input type="checkbox" name="q19" value="A"> A Cooking doesn’t make poisonous fungi edible.</label><br>
+  <label><input type="checkbox" name="q19" value="B"> B Edible wild fungi can be eaten without cooking.</label><br>
+  <label><input type="checkbox" name="q19" value="C"> C Wild fungi are highly nutritious.</label><br>
+  <label><input type="checkbox" name="q19" value="D"> D Some edible fungi look very similar to poisonous varieties.</label><br>
+  <label><input type="checkbox" name="q19" value="E"> E Fungi which cannot be identified should only be eaten in small quantities.</label>
+</div>
+
+<div class="section">
+  <h2>PART 3 — Questions 21–30</h2>
+  <p class="instructions">
+    <strong>Questions 21–25</strong><br/>
+    Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.
+  </p>
+
+  <div class="question">
+    <strong>21.</strong> Phoebe's main reason for choosing her topic was that<br/>
+    <label><input type="radio" name="q21" value="A"> A. Her classmates had been very interested in it.</label><br/>
+    <label><input type="radio" name="q21" value="B"> B. It would help prepare her for her first teaching post.</label><br/>
+    <label><input type="radio" name="q21" value="C"> C. She had been inspired by a particular book.</label>
+  </div>
+
+  <div class="question">
+    <strong>22.</strong> Phoebe's main research question related to<br/>
+    <label><input type="radio" name="q22" value="A"> A. The effect of teacher discipline.</label><br/>
+    <label><input type="radio" name="q22" value="B"> B. The variety of learning activities.</label><br/>
+    <label><input type="radio" name="q22" value="C"> C. Levels of pupil confidence.</label>
+  </div>
+
+  <div class="question">
+    <strong>23.</strong> Phoebe was most surprised by her finding that<br/>
+    <label><input type="radio" name="q23" value="A"> A. Gender did not influence behaviour significantly.</label><br/>
+    <label><input type="radio" name="q23" value="B"> B. Girls were more negative about school than boys.</label><br/>
+    <label><input type="radio" name="q23" value="C"> C. Boys were more talkative than girls in class.</label>
+  </div>
+
+  <div class="question">
+    <strong>24.</strong> Regarding teaching, Phoebe says she has learned that<br/>
+    <label><input type="radio" name="q24" value="A"> A. Teachers should be flexible in their lesson planning.</label><br/>
+    <label><input type="radio" name="q24" value="B"> B. Brighter children learn from supporting weaker ones.</label><br/>
+    <label><input type="radio" name="q24" value="C"> C. Children vary from each other in unpredictable ways.</label>
+  </div>
+
+  <div class="question">
+    <strong>25.</strong> Tony is particularly impressed by Phoebe’s ability to<br/>
+    <label><input type="radio" name="q25" value="A"> A. Recognise the limitations of such small-scale research.</label><br/>
+    <label><input type="radio" name="q25" value="B"> B. Reflect on her own research experience in an interesting way.</label><br/>
+    <label><input type="radio" name="q25" value="C"> C. Design her research in such a way as to minimise difficulties.</label>
+  </div>
+
+  <p class="instructions" style="margin-top:20px;">
+    <strong>Questions 26–30</strong><br/>
+    Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A–G</strong>.
+  </p>
+
+  <div style="border:1px solid #ccc; padding:12px; background:#f9f9f9; max-width:600px;">
+    <p><strong> Difficulties </strong></p>
+    <p>A – Obtaining permission<br/>
+       B – Deciding on a suitable focus<br/>
+       C – Concentrating while gathering data<br/>
+       D – Working collaboratively<br/>
+       E – Processing data she had gathered<br/>
+       F – Finding a suitable time to conduct the research<br/>
+       G – Getting hold of suitable equipment</p>
+  </div>
+
+  <div class="question">
+    <p>26. Observing lessons: <input type="text" id="q26" maxlength="1" placeholder="A–G"></p>
+  </div>
+  <div class="question">
+    <p>27. Interviewing teachers: <input type="text" id="q27" maxlength="1" placeholder="A–G"></p>
+  </div>
+  <div class="question">
+    <p>28. Interviewing pupils: <input type="text" id="q28" maxlength="1" placeholder="A–G"></p>
+  </div>
+  <div class="question">
+    <p>29. Using questionnaires: <input type="text" id="q29" maxlength="1" placeholder="A–G"></p>
+  </div>
+  <div class="question">
+    <p>30. Taking photographs: <input type="text" id="q30" maxlength="1" placeholder="A–G"></p>
+  </div>
+</div>
+  
+   
+<div class="section">
+  <h2>PART 4 — Questions 31–40</h2>
+  <p class="instructions">
+    Complete the sentences below. <br>
+    <em>Write NO MORE THAN TWO WORDS for each answer.</em>
+  </p>
+
+  <h3>Saving the juniper plant</h3>
+
+  <h4>Background</h4>
+  <div class="question">
+    <strong>31.</strong> Juniper was one of the first plants to colonise Britain after the last 
+    <input type="text" id="q31">
+  </div>
+
+  <div class="question">
+    <strong>32.</strong> Its smoke is virtually <input type="text" id="q32">, so juniper wood was used as fuel in illegal activities.
+  </div>
+
+  <div class="question">
+    <strong>33.</strong> Oils from the plant were used to prevent <input type="text" id="q33"> spreading.
+  </div>
+
+  <div class="question">
+    <strong>34.</strong> Nowadays, its berries are widely used to <input type="text" id="q34"> food and drink.
+  </div>
+
+  <h4>Ecology</h4>
+  <div class="question">
+    <strong>35.</strong> Juniper plants also support several species of insects and <input type="text" id="q35">.
+  </div>
+
+  <h4>Problems</h4>
+  <div class="question">
+    <strong>36.</strong> In current juniper populations, ratios of the <input type="text" id="q36"> are poor.
+  </div>
+
+  <div class="question">
+    <strong>37.</strong> Many of the bushes in each group are of the same age, so <input type="text" id="q37"> of whole populations is rapid.
+  </div>
+
+  <h4>Solutions</h4>
+  <div class="question">
+    <strong>38.</strong> Plantlife is trialling novel techniques across <input type="text" id="q38"> areas of England.
+  </div>
+
+  <div class="question">
+    <strong>39.</strong> One measure is to introduce <input type="text" id="q39"> for seedlings.
+  </div>
+
+  <div class="question">
+    <strong>40.</strong> A further step is to plant <input type="text" id="q40"> from healthy bushes.
+  </div>
+</div>
+
+<div style="text-align:center; margin:20px;"><button onclick="checkAllAnswers()" style="padding:10px 20px; font-size:16px;">Check Answers</button><p id="score-output" style="margin-top:10px;"></p></div>
+<script>
+function clearPreviousFeedback() {
+  // Remove feedback classes and any inserted correct-answer spans
+  document.querySelectorAll('.feedback-correct, .feedback-wrong, .feedback-missed').forEach(el => {
+    el.classList.remove('feedback-correct', 'feedback-wrong', 'feedback-missed');
+  });
+  document.querySelectorAll('.correct-answer').forEach(span => span.remove());
+  // Also remove feedback-* classes from inputs (in case they were added)
+  document.querySelectorAll('input').forEach(inp => {
+    inp.classList.remove('feedback-correct', 'feedback-wrong', 'feedback-missed', 'correct-answer');
+  });
+}
+
+function checkAllAnswers() {
+  const correctAnswers = {
+    // PART 1
+    q1: ["accountant"],
+    q2: ["over 50"],
+    q3: ["family"],
+    q4: ["9"],
+    q5: ["doctor"],
+    q6: ["swimming pool", "pool"],
+    q7: ["pay extra", "extra"],
+    q8: ["social events", "events"],
+    q9: ["air conditioning"],
+    q10: ["restaurant"],
+
+    // PART 2
+    q11: ["e"],
+    q12: ["f"],
+    q13: ["b"],
+    q14: ["d"],
+    q15: ["c"],
+    q16: ["g"],
+
+    // Multiple-answer (har biri 1 ball)
+    q17: ["b","e"],   // ikkita to‘g‘ri javob
+    q19: ["a","d"],   // ikkita to‘g‘ri javob
+
+    // PART 3
+    q21: ["c"],
+    q22: ["a"],
+    q23: ["b"],
+    q24: ["a"],
+    q25: ["b"],
+    q26: ["e"],
+    q27: ["g"],
+    q28: ["a"],
+    q29: ["d"],
+    q30: ["b"],
+
+    // PART 4
+    q31: ["ice age"],
+    q32: ["invisible"],
+    q33: ["infections"],
+    q34: ["flavor", "flavour"],
+    q35: ["fungi"],
+    q36: ["sexes"],
+    q37: ["extinction"],
+    q38: ["lowland"],
+    q39: ["shelter"],
+    q40: ["cuttings"]
+  };
+
+  let score = 0;
+  let total = 40;
+
+  for (const [qid, correct] of Object.entries(correctAnswers)) {
+    let el = document.getElementById(qid);
+
+    // TEXT INPUT
+    if (el && el.type === "text") {
+      let val = el.value.trim().toLowerCase();
+      if (correct.map(c => c.toLowerCase()).includes(val)) {
+        score++;
+        el.classList.add("feedback-correct");
+      } else {
+        el.classList.add("feedback-wrong");
+        showCorrect(el, correct.join(" / "));
+      }
+    }
+
+    // RADIO (bitta javob)
+    else {
+      let radios = document.getElementsByName(qid);
+      if (radios.length > 0 && radios[0].type === "radio") {
+        let chosen = "";
+        for (const r of radios) if (r.checked) chosen = r.value.toLowerCase();
+
+        if (correct.includes(chosen)) {
+          score++;
+          highlightCorrect(radios, correct);
+        } else {
+          markWrong(radios, chosen);
+          highlightCorrect(radios, correct);
+        }
+      }
+
+      // CHECKBOX (bir nechta javob)
+      let checkboxes = document.getElementsByName(qid);
+      if (checkboxes.length > 0 && checkboxes[0].type === "checkbox") {
+        let chosen = [];
+        for (const c of checkboxes) if (c.checked) chosen.push(c.value.toLowerCase());
+
+        // Har bir to‘g‘ri javob uchun 1 ball
+        correct.forEach(c => {
+          if (chosen.includes(c)) score++;
+        });
+
+        // Noto‘g‘ri belgilarni qizil qilish
+        chosen.forEach(c => {
+          if (!correct.includes(c)) {
+            let wrongBox = Array.from(checkboxes).find(cb => cb.value.toLowerCase() === c);
+            if (wrongBox) wrongBox.parentElement.style.backgroundColor = "#f8d7da";
+          }
+        });
+
+        // To‘g‘ri variantlarni yashil qilish
+        highlightCorrect(checkboxes, correct);
+      }
+    }
+  }
+
+  document.getElementById("score-output").innerHTML = `<b>Total Score: ${score} / ${total}</b>`;
+}
+
+
+
+function showCorrect(el, correct) {
+  if (!el.nextElementSibling || !el.nextElementSibling.classList.contains("correct-answer")) {
+    let span = document.createElement("span");
+    span.className = "correct-answer";
+    span.style.color = "green";
+    span.textContent = ` (Correct: ${correct})`;
+    el.insertAdjacentElement("afterend", span);
+  }
+}
+
+function highlightCorrect(radios, correctList) {
+  correctList.forEach(c => {
+    let correctRadio = Array.from(radios).find(r => r.value.toLowerCase() === c.toLowerCase());
+    if (correctRadio) {
+      correctRadio.parentElement.style.backgroundColor = "#d4f4d7";
+      if (!correctRadio.parentElement.querySelector(".correct-answer")) {
+        let span = document.createElement("span");
+        span.className = "correct-answer";
+        span.style.color = "green";
+        span.textContent = " (Correct)";
+        correctRadio.parentElement.appendChild(span);
+      }
+    }
+  });
+}
+
+function markWrong(radios, chosen) {
+  for (const r of radios) {
+    if (r.value.toLowerCase() === chosen) {
+      r.parentElement.style.backgroundColor = "#f8d7da";
+    }
+  }
+}
+
+/* Optional: keep selection highlight feature unchanged (from your original script) */
+document.addEventListener('mouseup', () => {
+  const selection = window.getSelection();
+  const text = selection.toString().trim();
+  if (text.length > 0 && selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    if (!range || range.collapsed) return;
+
+    const span = document.createElement('span');
+    span.className = 'highlighted-selection';
+    span.setAttribute('title', 'Double-click to remove highlight');
+
+    span.addEventListener('dblclick', function() {
+      const parent = this.parentNode;
+      while (this.firstChild) parent.insertBefore(this.firstChild, this);
+      parent.removeChild(this);
+    });
+
+    try {
+      range.surroundContents(span);
+    } catch (e) {
+      // ignore overlapping selection errors silently
+    }
+
+    selection.removeAllRanges();
+  }
+});
+</script><script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+document.addEventListener("DOMContentLoaded", function() {
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+});
+</script>
+</body>
+</html>

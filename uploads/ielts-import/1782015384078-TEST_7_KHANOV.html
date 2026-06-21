@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Reading — Test 7</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;background:#fff;
+    display:flex;flex-direction:column;height:100vh;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  .header{
+    height:52px;flex:0 0 52px;border-bottom:1px solid #ddd;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;position:relative;z-index:10;
+  }
+  .h-left{display:flex;align-items:center;gap:12px}
+  .ielts-badge{
+    background:#c41230;color:#fff;font-weight:700;
+    padding:6px 12px;border-radius:4px;font-size:14px;letter-spacing:1px;
+  }
+  .tg-pill{
+    display:inline-flex;align-items:center;gap:8px;background:#f4f4f4;
+    border-radius:999px;padding:3px 14px 3px 3px;
+    font-size:13px;font-weight:500;color:#1a1a1a;transition:background .15s;
+  }
+  .tg-pill:hover{background:#ececec}
+  .tg-icon{
+    width:28px;height:28px;border-radius:50%;
+    background:linear-gradient(135deg,#37AEE2 0%,#1E96C8 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .h-right{position:relative}
+  .hamburger{
+    width:36px;height:36px;border:none;background:transparent;cursor:pointer;
+    border-radius:6px;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;gap:4px;
+  }
+  .hamburger:hover{background:#f0f0f0}
+  .hamburger span{display:block;width:18px;height:2px;background:#333;border-radius:1px}
+  .menu-panel{
+    position:absolute;top:46px;right:0;background:#fff;border:1px solid #ddd;
+    border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.1);
+    padding:14px;min-width:240px;display:none;z-index:200;
+  }
+  .menu-panel.open{display:block}
+  .menu-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:6px 0}
+  .menu-row+.menu-row{border-top:1px solid #f0f0f0;margin-top:2px}
+  .menu-ctrls{display:flex;align-items:center;gap:6px}
+  .size-btn{
+    width:28px;height:28px;border:1px solid #ccc;background:#fff;border-radius:4px;
+    cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;
+  }
+  .size-btn:hover{background:#f5f5f5}
+  .size-val{min-width:42px;text-align:center;font-size:12px;color:#666}
+
+  .progress{height:3px;background:#eee;flex:0 0 3px}
+  .progress-fill{height:100%;background:#c41230;width:0;transition:width .25s}
+
+  .main{flex:1 1 auto;display:flex;overflow:hidden;min-height:0}
+  .pane{overflow-y:auto;padding:24px 28px 40px;min-width:200px}
+  .pane-left{background:#fafafa;width:50%;flex:0 0 50%}
+  .pane-right{background:#fff;flex:1 1 auto}
+  .pane::-webkit-scrollbar{width:10px}
+  .pane::-webkit-scrollbar-thumb{background:#ccc;border-radius:5px}
+  .pane::-webkit-scrollbar-thumb:hover{background:#aaa}
+  .divider{
+    width:6px;background:#e0e0e0;cursor:col-resize;flex:0 0 6px;
+    position:relative;transition:background .15s;
+  }
+  .divider:hover,.divider.dragging{background:#c41230}
+  .divider::after{
+    content:'';position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);width:2px;height:34px;background:#999;border-radius:1px;
+  }
+  .divider:hover::after,.divider.dragging::after{background:#fff}
+
+  #passagePane{font-size:14px;line-height:1.65}
+  .pass-title{font-size:1.55em;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+  .pass-sub{
+    font-size:0.95em;color:#666;font-style:italic;
+    margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #c41230;
+  }
+  .pass-body p{margin-bottom:14px;text-align:justify;hyphens:auto}
+  .para-letter{font-weight:700;display:inline-block;margin-right:8px;color:#c41230}
+  .highlight{
+    background:#fff59d;cursor:pointer;padding:1px 2px;
+    border-radius:2px;transition:background .15s;
+  }
+  .highlight:hover{background:#ffeb3b}
+  .hl-pill{
+    position:fixed;background:#1a1a1a;color:#fff;padding:7px 14px;
+    border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;
+    z-index:1500;box-shadow:0 4px 12px rgba(0,0,0,.25);display:none;user-select:none;
+  }
+  .hl-pill:hover{background:#000}
+
+  #questionPane{font-size:13px;line-height:1.55}
+  .q-instr{
+    background:#f5f5f5;border-left:3px solid #c41230;
+    padding:10px 14px;margin-bottom:18px;
+    font-size:0.95em;line-height:1.55;border-radius:0 4px 4px 0;
+  }
+  .q-instr strong{color:#c41230}
+  .q-item{margin-bottom:16px;padding:6px 0;scroll-margin-top:30px}
+  .q-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:26px;height:22px;background:#1a1a1a;color:#fff;
+    padding:0 6px;border-radius:3px;font-weight:700;font-size:11px;
+    margin-right:8px;flex-shrink:0;
+  }
+  .q-text{margin-bottom:8px;line-height:1.55;display:flex;align-items:flex-start}
+  .q-text-body{flex:1}
+  .q-options{display:flex;flex-direction:column;gap:6px;margin-left:34px}
+  .q-options.radio-row{flex-direction:row;gap:0;flex-wrap:wrap}
+  .q-options.mcq-vert{flex-direction:column;gap:6px}
+  .opt-label{
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    padding:5px 10px;border:1px solid #ccc;background:#fff;
+    font-size:0.92em;transition:all .12s;user-select:none;border-radius:4px;
+  }
+  .opt-label:hover{background:#f5f5f5}
+  .opt-label input{cursor:pointer;margin:0}
+  .opt-label.selected{background:#c41230;color:#fff;border-color:#c41230}
+  .opt-label.selected input{accent-color:#fff}
+  .radio-row .opt-label{border-radius:0;border-right:none}
+  .radio-row .opt-label:first-of-type{border-radius:4px 0 0 4px}
+  .radio-row .opt-label:last-of-type{border-radius:0 4px 4px 0;border-right:1px solid #ccc}
+  .radio-row .opt-label.selected+.opt-label{border-left-color:#c41230}
+  .mcq-vert .opt-label{
+    display:flex;align-items:flex-start;padding:8px 12px;text-align:left;line-height:1.4;
+  }
+  .mcq-vert .opt-label input{margin-top:2px;flex-shrink:0}
+
+  .q-input{
+    border:none;border-bottom:2px solid #888;background:transparent;
+    font-family:inherit;font-size:inherit;color:inherit;
+    padding:2px 4px;min-width:110px;outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .q-input:focus{border-bottom-color:#c41230;background:#fffbe5}
+  .q-input.has-value{background:#fff3cd;border-bottom-color:#f9a825}
+
+  .q-blank{display:inline-block;white-space:nowrap;margin:0 2px}
+  .q-blank-num{
+    display:inline-block;vertical-align:middle;min-width:20px;height:18px;
+    background:#1a1a1a;color:#fff;border-radius:3px;
+    font-weight:700;font-size:10px;padding:0 5px;line-height:18px;
+    margin-right:4px;text-align:center;
+  }
+  .q-blank input{vertical-align:middle;min-width:100px;max-width:150px}
+
+  /* Notes box */
+  .notes-box{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:16px 22px 18px;background:#fcfcfa;margin-bottom:20px;
+  }
+  .notes-title{
+    font-weight:700;text-align:center;font-size:1.15em;
+    margin-bottom:14px;padding-bottom:10px;
+    border-bottom:1px solid #ddd;color:#1a1a1a;
+  }
+  /* Main bullet list (•) */
+  .notes-main-list{list-style:none;padding:0;margin:0}
+  .notes-main-list>li{
+    position:relative;padding-left:20px;
+    margin-bottom:10px;line-height:2;
+  }
+  .notes-main-list>li::before{
+    content:'•';position:absolute;left:0;
+    color:#c41230;font-weight:700;font-size:1.1em;
+  }
+  /* Sub-dash list (–) */
+  .notes-sub-list{list-style:none;padding:0;margin:6px 0 6px 12px}
+  .notes-sub-list li{
+    position:relative;padding-left:18px;margin-bottom:6px;line-height:2;
+  }
+  .notes-sub-list li::before{
+    content:'–';position:absolute;left:0;color:#999;font-weight:700;
+  }
+
+  /* Summary block */
+  .summary-block{margin-bottom:20px}
+  .summary-title{font-weight:700;font-size:1.1em;margin-bottom:12px;text-align:center}
+  .summary-block p{line-height:2.2;margin-bottom:10px;text-align:justify}
+
+  /* Matching list box */
+  .matching-list{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:14px 20px;background:#fcfcfa;margin-bottom:18px;
+  }
+  .matching-list-title{
+    font-weight:700;text-align:center;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #ddd;font-size:1.05em;
+  }
+  .matching-list ol{list-style:none;padding:0;margin:0}
+  .matching-list li{padding:5px 0;display:flex;gap:10px;line-height:1.5}
+  .matching-list .letter{font-weight:700;flex-shrink:0;min-width:22px;color:#c41230}
+  .matching-list .desc{flex:1}
+
+  /* Select dropdown */
+  .q-select{
+    font-family:inherit;font-size:0.92em;padding:5px 8px;
+    border:1px solid #888;border-radius:4px;background:#fff;
+    cursor:pointer;color:inherit;outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .q-select:focus{border-color:#c41230}
+  .q-select.has-value{background:#fff3cd;border-color:#f9a825}
+  .q-select.narrow{min-width:80px;max-width:110px}
+  .q-select.wide{min-width:210px;max-width:300px}
+  .select-q-row{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;padding:6px 0;flex-wrap:wrap;scroll-margin-top:30px;
+  }
+  .select-q-row .q-num{flex-shrink:0}
+  .select-q-text{flex:1;min-width:0;line-height:1.8}
+
+  /* Bottom nav */
+  .bottom-nav{
+    height:44px;flex:0 0 44px;background:#f0f0f0;border-top:1px solid #ddd;
+    display:flex;align-items:center;padding:0 12px;gap:8px;
+    overflow-x:auto;overflow-y:hidden;
+  }
+  .bottom-nav::-webkit-scrollbar{height:4px}
+  .bottom-nav::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+  .nav-pass{
+    font-weight:700;font-size:13px;cursor:pointer;padding:5px 10px;
+    border-radius:4px;white-space:nowrap;transition:background .15s;flex-shrink:0;
+  }
+  .nav-pass:hover{background:#e0e0e0}
+  .nav-pass.active{color:#c41230}
+  .nav-pass small{font-weight:500;color:#666;font-size:0.85em}
+  .q-pill{
+    width:26px;height:26px;border:1px solid #bbb;background:#fff;
+    border-radius:4px;font-size:11px;cursor:pointer;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:inherit;color:#333;transition:all .12s;
+  }
+  .q-pill:hover{background:#ebebeb;border-color:#999}
+  .q-pill.answered{font-weight:700;background:#ffd54f;border-color:#f9a825;color:#5d4037}
+  .nav-sep{width:1px;height:26px;background:#ccc;flex-shrink:0;margin:0 4px}
+  .nav-spacer{flex:1}
+  .submit-btn{
+    height:30px;padding:0 16px;background:#28a745;color:#fff;
+    border:none;border-radius:4px;cursor:pointer;font-weight:600;
+    font-size:13px;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px;flex-shrink:0;transition:background .15s;
+  }
+  .submit-btn:hover{background:#218838}
+
+  /* Modal */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:3000;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:#fff;border-radius:10px;max-width:820px;width:100%;
+    max-height:90vh;overflow-y:auto;padding:28px;position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;background:transparent;border:none;
+    font-size:28px;line-height:1;cursor:pointer;color:#888;
+    width:34px;height:34px;border-radius:50%;transition:background .15s;
+  }
+  .modal-close:hover{background:#f0f0f0;color:#000}
+  .modal h2{margin-bottom:20px;font-size:24px;color:#1a1a1a}
+  .result-pass{margin-bottom:20px;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden}
+  .result-pass-header{
+    background:#fafafa;padding:14px 18px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border-bottom:1px solid #e0e0e0;
+  }
+  .result-pass-info{flex:1;min-width:0}
+  .result-pass-title{font-weight:700;font-size:14px;color:#1a1a1a}
+  .result-pass-sub{font-size:12px;color:#666;margin-top:3px}
+  .score-badge{padding:5px 14px;border-radius:999px;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
+  .badge-green{background:#28a745}
+  .badge-orange{background:#fd7e14}
+  .badge-red{background:#dc3545}
+  .result-table{width:100%;border-collapse:collapse;font-size:13px}
+  .result-table th,.result-table td{padding:8px 14px;text-align:left;border-bottom:1px solid #f0f0f0}
+  .result-table th{background:#f9f9f9;font-weight:600;font-size:12px;color:#555;text-transform:uppercase;letter-spacing:.4px}
+  .result-table td{vertical-align:middle}
+  .row-correct{background:#e8f5e9}
+  .row-wrong{background:#ffebee}
+  .mark{font-weight:700;font-size:15px}
+  .mark-ok{color:#28a745}
+  .mark-x{color:#dc3545}
+  .total-strip{
+    margin-top:24px;padding:22px 24px;
+    background:linear-gradient(135deg,#c41230 0%,#8b0d23 100%);
+    color:#fff;border-radius:10px;
+    display:flex;justify-content:space-around;align-items:center;
+    text-align:center;flex-wrap:wrap;gap:16px;
+  }
+  .total-block{flex:1;min-width:140px}
+  .total-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+  .total-value{font-size:32px;font-weight:700;margin-top:2px}
+  .total-band-value{font-size:36px}
+
+  body.dragging{user-select:none;cursor:col-resize}
+  body.dragging *{cursor:col-resize!important}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-left">
+    <div class="ielts-badge">IELTS</div>
+    <a class="tg-pill" href="https://t.me/Abdurazzoq_Khanov" target="_blank" rel="noopener">
+      <span class="tg-icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.27 1.4.18 1.12 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#fff"/>
+        </svg>
+      </span>
+      <span>Abdurazzoq Khanov</span>
+    </a>
+  </div>
+  <div class="h-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-row">
+        <span>Passage text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="passage" data-dir="-1">A−</button>
+          <span class="size-val" id="passSizeVal">14px</span>
+          <button class="size-btn" data-target="passage" data-dir="1">A+</button>
+        </div>
+      </div>
+      <div class="menu-row">
+        <span>Question text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="question" data-dir="-1">A−</button>
+          <span class="size-val" id="qSizeVal">13px</span>
+          <button class="size-btn" data-target="question" data-dir="1">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<main class="main">
+  <section class="pane pane-left" id="passagePane"></section>
+  <div class="divider" id="divider"></div>
+  <section class="pane pane-right" id="questionPane"></section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+<div class="hl-pill" id="hlPill">✏ Highlight</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h2>Your Results</h2>
+    <div id="resultsBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function blank(n){
+  return `<span class="q-blank"><span class="q-blank-num">${n}</span><input class="q-input" data-q="${n}" autocomplete="off" spellcheck="false"></span>`;
+}
+function displayAnswer(v){
+  if (!v && v!==0) return '—';
+  if (v==='T') return 'TRUE'; if (v==='F') return 'FALSE';
+  if (v==='Y') return 'YES'; if (v==='N') return 'NO';
+  if (v==='NGV') return 'NOT GIVEN';
+  return v;
+}
+function normalize(s){ return String(s).trim().toLowerCase().replace(/\s+/g,' '); }
+function checkAnswer(user, correct){
+  if (!user) return false;
+  return (Array.isArray(correct)?correct:[correct]).some(c=>normalize(c)===normalize(user));
+}
+function displayCorrect(c){ return displayAnswer(Array.isArray(c)?c[0]:c); }
+
+/* A-L word list options for Q27-32 */
+const WORD_AL = `<option value="">— select —</option>
+<option value="A">A — front feet</option>
+<option value="B">B — fish</option>
+<option value="C">C — dinosaurs</option>
+<option value="D">D — reptiles</option>
+<option value="E">E — flexibility</option>
+<option value="F">F — hind legs</option>
+<option value="G">G — amphibians</option>
+<option value="H">H — birds</option>
+<option value="I">I — strength</option>
+<option value="J">J — weight</option>
+<option value="K">K — tail</option>
+<option value="L">L — hair</option>`;
+
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+  1: `
+    <h1 class="pass-title">The history of the Pencil</h1>
+    <div class="pass-sub">&nbsp;</div>
+    <div class="pass-body">
+      <p>The history of the pencil starts with a violent thunderstorm. When some particularly ferocious weather struck the Lake District in North West England in the sixteenth century, locals in the village of Borrowdale discovered a large uprooted tree. Underneath the tree lay an unknown black substance which we now know as graphite. It was slightly shiny and smooth to the touch. And it left a black smear on the hands of all who touched it.</p>
+      <p>Initially, the local farmers used the newly discovered material as a handy way to identify their sheep. However, others quickly realised the potential for using this intriguing substance to write on paper. When it was untreated the material was very soft, which meant that it was messy to handle. To make it fit for use with paper, people enclosed a thin core of the substance in stiff sheep hides or rope. At this time chemistry was still in its infancy. People searched for a word to describe this increasingly useful substance and came up with plumbago which, in Latin, means acts or writes like lead. Later the name was changed to graphite. But because words have remarkable staying power, we still call graphite the lead of a pencil even though it is now known that there is no trace of real lead in graphite.</p>
+      <p>Graphite has a very high melting point at around 3,500 degrees Celsius. This made it invaluable to the British army and navy as a secret ingredient in the manufacture of cannon balls. The Royal Ordnance, or weaponry section of the British armed forces, used graphite as a lining inside the moulds for cannon balls, which as a result the British could turn out faster and more cheaply than their European rivals. In addition to its value to the armed forces, the government quickly realised the commercial potential of the graphite at Borrowdale, and assumed control of all the mines there during the sixteenth century. Armed guards accompanied the precious graphite all the way down to the metal foundries by the naval shipyards in the south of England. The graphite was so valuable that the locals, who called it wadd, started to steal it. As a deterrent, an act of parliament in 1752 made this offence punishable by time in prison.</p>
+      <p>The Italians originally invented the wooden casing to hold a thin rod of plumbago firmly in place for ease of writing. Italian craftsmen hollowed out two small sections of cedar wood, into one of which they laid the lead. They then glued the other section over the top and left the two halves to set. When dry, the whole apparatus formed what today we know as a pencil. The Germans took this technique and developed it further by applying mass-production techniques to pencils. At the same time Nicolas-Jacques Conte, a French officer in Napoleon Bonaparte's army during the late 1700s, developed a method of mixing powdered graphite and clay together for firming in a kiln. Adding more clay to the mixture helped make the pencil harder, sharper, and more precise in its mark. More graphite helped make a pencil mark that was softer, thicker and darker.</p>
+      <p>The varying quality of pencil leads eventually gave rise to a system for categorizing the fineness of the pencil mark. Pencil manufacturers all over the world still use this so-called HB grading system today. The H stands for the Hardness of the pencil while the B stands for its Blackness. An HB pencil is a standard pencil and a variety of letters and numbers are used to designate different types of lead.</p>
+      <p>Significant seams of graphite exist in parts of China, which now produces most of the world's pencils. Interestingly, the Borrowdale mine in the Lake District remains the only significant source of graphite in its near-pure form in the world. Nowadays the highest grade of graphite at Borrowdale is totally exhausted, although other grades can still be found, and England's pencil industry continues to thrive in the nearby town of Keswick.</p>
+      <p>The pencil has turned out to be a remarkably resilient and valuable tool whose use has survived well into our high-tech times, as a well-known story shows. It is sometimes said that the American space programme spent millions of dollars to invent a pen capable of writing in the zero gravity of space. The Russians, by contrast, simply equipped their astronauts with good old-fashioned pencils that never let them down. It should be pointed out though, that the popular myth about Americans overlooking the practical advantages of pencils in zero gravity is merely fiction. In actual fact, both American and Russian astronauts were equipped with pencils in their respective country's first space flights. A private company later developed pens for writing in zero gravity. In fact, astronauts of every nation now use pens. But no matter — pencils remain in use in every classroom, every planning, building and drawing office, and in every art studio in the world. And there is nothing to suggest that we are likely to invent anything better than graphite to use in our pencils.</p>
+    </div>
+  `,
+  2: `
+    <h1 class="pass-title">Insect decision-making</h1>
+    <div class="pass-sub">&nbsp;</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>It has long been held that decisions made collectively by large groups of people are more likely to turn out to be accurate than decisions made by individuals. The idea goes back to the 'jury theorem' of Nicolas de Condorcet, an 18th-century French philosopher who was one of the first to apply mathematics to the social sciences. Condorcet's theory describes collective decisions, outlining how democratic decisions tend to outperform dictatorial ones. If, for example, each member of a jury has only partial information, the majority decision is more likely to be correct than a decision arrived at by a single juror. Moreover, the probability of a correct decision increases with the size of the jury.</p>
+      <p><span class="para-letter">B</span>Now it is becoming clear that group decisions are also extremely valuable for the success of social animals, such as ants, bees, birds and dolphins. Bees make collective decisions, and they do it rather well, according to Christian List of the London School of Economics, who has studied group decision-making in humans and animals. Researchers led by Dr List looked at colonies once the original colony reaches a certain size. The queen goes off with about two-thirds of the worker bees to live in a new home or nest, leaving a daughter queen in the old nest with the remaining workers. Among the bees that depart are some that have searched for and found some new nest sites, and reported back using a characteristic body movement known as a 'waggle dance' to indicate to the other bees the suitable places they have located. The longer the dance, the better the site. After a while, other bees start to visit the sites signalled by their companions to see for themselves and, on their return, also perform more waggle dances. The process eventually leads to a consensus on the best site and the breakaway swarm migrates. The decision is remarkably reliable, with the bees choosing the best site even when there are only small differences between alternative sites.</p>
+      <p><span class="para-letter">C</span>But exactly how do bees reach such a robust consensus? To find out, Dr List and his colleagues used a computer-generated model of the decision-making process. By experimenting with it they found that, when bees in the model were very good at finding nesting sites but did not share their information, this dramatically slowed down the migration, leaving the swarm homeless and vulnerable. Conversely, bees in the model blindly following the waggle dances of others without first checking also produced poor results. The researchers concluded that the ability of bees to identify successfully and quickly the best site depends on both the bees' interdependence in communicating the whereabouts of the nest site, and their independence in confirming this information for themselves.</p>
+      <p><span class="para-letter">D</span>Another situation in which collective decisions are taken occurs when animals are either isolated from crucial sources of information or dominated by other members of the group. José Halloy of the Free University of Brussels in Belgium used robotic cockroaches to subvert the behaviour of living cockroaches and control their decision-making process. In his experiment, the artificial bugs were introduced to the live ones and soon became sufficiently socially integrated that they were perceived by the real cockroaches as equals. By manipulating the robots, which were in the minority, Halloy was able to persuade the living cockroaches to choose an inappropriate shelter — even one which they had rejected before being infiltrated by the robots.</p>
+      <p><span class="para-letter">E</span>The way insects put into effect collective decisions can be complex and as important as the decisions themselves. At the University of Bristol, in the UK, Nigel Franks and his colleagues studied how a species of ant establishes a new nest. Franks and his associates reported how the insects reduce the problems associated with making a necessarily swift choice. If the ants' existing nest becomes suddenly threatened, the insects choose certain ants to act as scouts to find a new nest. How quickly they accomplish the transfer to a new home depends not only on how soon the best available site is found, but also on how quickly the migration there can be achieved.</p>
+      <p><span class="para-letter">F</span>Once the suitable new nest is identified, the chosen ants begin to lead others, which have made it to the new site or which may simply be in the vicinity, back to the original threatened nest. In this way, those ants which are familiar with the route can help transport, for example, the queen and young ants to the new site, and simultaneously show the way to those ants which have been left behind to guard the old nest. In this way moving processes are accomplished faster and more efficiently. Thus the dynamics of collective decision-making are closely related to the efficient implementation of those decisions. How this might apply to choices that humans make is, as yet, unclear. But it does suggest, even for humans, the importance of recruiting dynamic leaders to a cause, because the most important thing about collective decision-making, as shown by these insect experiments, is to get others to follow.</p>
+    </div>
+  `,
+  3: `
+    <h1 class="pass-title">How a prehistoric predator took to the skies</h1>
+    <div class="pass-sub"><em>Is that a bird in the sky? A plane? No, it's a pterosaur. Kate Thomas meets Professor Matthew Wilkinson, who built a life-size model to find out how this prehistoric predator ever got off the ground.</em></div>
+    <div class="pass-body">
+      <p>Pterosaurs existed from the Triassic period, 220 million years ago, to the end of the Cretaceous period, 65 million years ago, when South America pulled away from Africa and the South Atlantic was formed. They are among the least understood of all the extinct reptiles that once spent their lives in the skies while the dinosaurs dominated the land. Pterosaurs had no feathers, but at least part of their bodies was covered in hair, not unlike bats. Some believe this is an indication they were warm-blooded. Researchers also debate whether pterosaurs travelled on the ground by walking on their hind legs, like birds, or by using all fours, relying on their three-toed front feet as well as their four-toed rear feet.</p>
+      <p>Pterosaurs were vertebrates, meaning they were the first species possessing backbones to become airborne, but scientists have never quite understood their flight technique. How, they wondered, did such a heavy creature ever manage to take off? How could a wing that appears to have been supported by fine, hollow bones have carried one into the sky? Then came the discovery of a site in Brazil's Araripe basin. Here, not only were hundreds of fossils of amphibians and other reptiles found, but archaeologists unearthed a number of very well-preserved pterosaurs. The anhanguera — a fish-eating sub-species of pterosaur that ruled the skies in the Cretaceous period — was among them. With a wingspan of up to 12 metres, they would have made an amazing sight in the sky — had any human been there to witness it.</p>
+      <p>'I've been studying pterosaurs for about eight years now,' says Dr Matthew Wilkinson, a professor of zoology at Cambridge University. With an anhanguera fossil as his model, Wilkinson began gradually reconstructing its skeletal structure in his Cambridge studio. The probability of finding three-dimensional pterosaur fossils anywhere is slim. 'That was quite a find,' he says. 'Their bones are usually crushed to dust.' Once the structure was complete, it inspired him to make a robot version as a way to understand the animal's locomotion. With a team of model-makers, he has built a remote-controlled pterosaur in his studio. 'Fossils show just how large these creatures were. I've always been interested in how they managed to launch themselves, so I thought the real test would be to actually build one and fly it.'</p>
+      <p>Wilkinson hasn't been alone in his desire to recreate a prehistoric beast. Swiss scientists recently announced they had built an amphibious robot that could walk on land and swim in water using the sort of backbone movements that must have been employed by the first creatures to crawl from the sea. But Wilkinson had the added complication of working out his beast's flight technique. Unlike those of bats or flying squirrels, pterosaur wings — soft, stretchy membranes of skin tissue — are thought to have reached from the chest right to the ankle, reinforced by fibres that stiffened the wing and prevented tearing. Smaller subspecies flapped their wings during takeoff. That may have explained the creatures' flexibility, but it did not answer the most pressing question: how did such heavy animals manage to launch themselves into the sky? Working with researchers in London and Berlin, Wilkinson began to piece together the puzzle.</p>
+      <p>It emerged that the anhanguera had an elongated limb called the pteroid. It had previously been thought the pteroid pointed towards the shoulder of the creature and supported a soft forewing in front of the arm. But if that were the case, the forewing would have been too small and ineffectual for flight. However, to the surprise of many scientists, fossils from the Araripe basin showed the pteroid possibly faced the opposite way, creating a much greater forewing that would have caught the air, working in the same way as the flaps on the wings of an aeroplane. So, with both feet on the ground, the anhanguera might have simply faced into the wind, spread its wings and risen up into the sky. Initial trials in wind tunnels proved the point — models of pterosaurs with forward-facing pteroids were not only adept at gliding, but were agile flyers in spite of their size. 'This high-lift capability would have significantly reduced the minimum flight speed, allowing even the largest forms to take off without difficulty,' Wilkinson says. 'It would have enabled them to glide very slowly and may have been instrumental in the evolution of large size by the pterosaurs.'</p>
+      <p>Resting in the grass at the test site near Cambridge, the robot-model's wings ripple in the wind. In flight, the flexible membrane, while much stiffer than the real thing, allows for a smooth takeoff and landing. But the model has been troubled by other mechanical problems. 'Unlike an aircraft, which is stabilised by the tail wing at the back, the model is stabilised by its head, which means it can start spinning around. That's the most problematic bit as far as we're concerned,' Wilkinson says. 'We've had to take it flying without the head so far. When it flies with its head attached, Wilkinson will finally have proved his point.</p>
+      <p>So what's next for the zoologist — perhaps a full-size Tyrannosaurus rex? 'No,' he tells me: 'We're desperate to build really big pterosaurs. I'm talking creatures with even greater wingspans, weighing a quarter of a ton. But,' he adds, just as one begins to fear for the safety and stress levels of pilots landing nearby at Cambridge City Airport, 'it's more likely we'll start off with one of the smaller, flapping pterosaurs.' This is certainly more reassuring. Let's hope he is content to leave it at that.</p>
+    </div>
+  `
+};
+
+const PASSAGE_TITLES = {
+  1: "The history of the Pencil",
+  2: "Insect decision-making",
+  3: "How a prehistoric predator took to the skies"
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  1:'tree', 2:'sheep', 3:'soft', 4:'rope', 5:'mines', 6:'steal',
+  7:'T', 8:'NGV', 9:'F', 10:'NGV', 11:'F', 12:'T', 13:'F',
+  14:'vii', 15:'iii', 16:'vi', 17:'i', 18:'iv', 19:'ii',
+  20:'C', 21:'B', 22:'A', 23:'B',
+  24:'threatened', 25:'scouts', 26:'leaders',
+  27:'D', 28:'L', 29:'F', 30:'J', 31:'I', 32:'B',
+  33:'N', 34:'NGV', 35:'Y', 36:'NGV',
+  37:'D', 38:'A', 39:'B', 40:'C'
+};
+
+const pRanges = {1:[1,13], 2:[14,26], 3:[27,40]};
+const TOTAL_Q = 40;
+
+/* ============================================================
+   SHARED OPTION SETS
+============================================================ */
+const ROMAN_I_VII = [
+  ['i','i'],['ii','ii'],['iii','iii'],['iv','iv'],
+  ['v','v'],['vi','vi'],['vii','vii']
+];
+
+const ACAD_AD = [
+  ['A','A — Nicolas de Condorcet'],
+  ['B','B — Christian List and colleagues'],
+  ['C','C — José Halloy'],
+  ['D','D — Nigel Franks and colleagues']
+];
+
+/* ============================================================
+   QUESTIONS
+============================================================ */
+const QUESTIONS = {
+  1: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 1–6</strong><br>Complete the notes below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="notes-box">
+        <div class="notes-title">The early history of graphite in Britain</div>
+        <ul class="notes-main-list">
+          <li>Graphite was first found below a ${blank(1)} blown down in a storm.</li>
+          <li>The first use of graphite was to make marks on ${blank(2)}</li>
+          <li>The characteristics of raw graphite:
+            <ul class="notes-sub-list">
+              <li>dirty to use because it is so ${blank(3)}</li>
+              <li>originally wrapped in ${blank(4)} or animal skin to make it useable as a pencil.</li>
+            </ul>
+          </li>
+          <li>Graphite came to the notice of the government for military and commercial purposes.
+            <ul class="notes-sub-list">
+              <li>The government completely took over the ${blank(5)} at Borrowdale.</li>
+              <li>They employed guards to protect the graphite on its journey south.</li>
+            </ul>
+          </li>
+          <li>Local people began to ${blank(6)} graphite for the money involved.
+            <ul class="notes-sub-list">
+              <li>The government passed a law to protect the graphite industry.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 7–13</strong><br>Do the following statements agree with the information given in Reading Passage 1?<br>Write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, <strong>NOT GIVEN</strong> if there is no information on this.</div>` },
+    { type:'tfng', n:7, text:'The Italians were the first to make pencils out of wood.' },
+    { type:'tfng', n:8, text:'The Germans used different types of wood to produce pencils.' },
+    { type:'tfng', n:9, text:'More clay in a pencil makes it write more darkly.' },
+    { type:'tfng', n:10, text:'After the HB code was introduced, it very quickly became used by all manufacturers.' },
+    { type:'tfng', n:11, text:'English pencil factories have now all closed down.' },
+    { type:'tfng', n:12, text:'American astronauts used pencils on their early journeys into space.' },
+    { type:'tfng', n:13, text:'The use of graphite pencils is unlikely to continue into the future.' }
+  ],
+
+  2: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 14–19</strong><br>Reading Passage 2 has six paragraphs, <strong>A–F</strong>.<br>Choose the correct heading for each paragraph from the list of headings below.<br>Write the correct number, <strong>i–vii</strong>, in boxes 14–19 on your answer sheet.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Headings</div>
+        <ol>
+          <li><span class="letter">i</span><span class="desc">The effect of man-made imitations on insects</span></li>
+          <li><span class="letter">ii</span><span class="desc">The need to instruct additional insect guides</span></li>
+          <li><span class="letter">iii</span><span class="desc">Signals used by certain insects to indicate a discovery</span></li>
+          <li><span class="letter">iv</span><span class="desc">How urgency can affect the process of finding a new home</span></li>
+          <li><span class="letter">v</span><span class="desc">The use of trained insects in testing scientific theories</span></li>
+          <li><span class="letter">vi</span><span class="desc">The use of virtual scenarios in the study of insect behaviour</span></li>
+          <li><span class="letter">vii</span><span class="desc">How the number of decision-makers affects the decision</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:14, text:'Paragraph A', options:ROMAN_I_VII, selectClass:'narrow' },
+    { type:'select-q', n:15, text:'Paragraph B', options:ROMAN_I_VII, selectClass:'narrow' },
+    { type:'select-q', n:16, text:'Paragraph C', options:ROMAN_I_VII, selectClass:'narrow' },
+    { type:'select-q', n:17, text:'Paragraph D', options:ROMAN_I_VII, selectClass:'narrow' },
+    { type:'select-q', n:18, text:'Paragraph E', options:ROMAN_I_VII, selectClass:'narrow' },
+    { type:'select-q', n:19, text:'Paragraph F', options:ROMAN_I_VII, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 20–23</strong><br>Look at the following findings and the list of academics below.<br>Match each finding with the correct academic, <strong>A–D</strong>.<br><em>NB You may use any letter more than once.</em></div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Academics</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">Nicolas de Condorcet</span></li>
+          <li><span class="letter">B</span><span class="desc">Christian List and colleagues</span></li>
+          <li><span class="letter">C</span><span class="desc">José Halloy</span></li>
+          <li><span class="letter">D</span><span class="desc">Nigel Franks and colleagues</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:20, text:'Certain members can influence the rest of the group to alter a previous decision.', options:ACAD_AD, selectClass:'wide' },
+    { type:'select-q', n:21, text:'Individual verification of a proposed choice is important for successful decision outcome.', options:ACAD_AD, selectClass:'wide' },
+    { type:'select-q', n:22, text:'The more individuals taking part in a decision, the better the decision will be.', options:ACAD_AD, selectClass:'wide' },
+    { type:'select-q', n:23, text:'The decision-making process of certain insects produces excellent results even when fine distinctions are required.', options:ACAD_AD, selectClass:'wide' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 24–26</strong><br>Complete the summary below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="summary-block">
+        <div class="summary-title">A study of insect decision-making</div>
+        <p>A Bristol University study looked at how insects make decisions when their home has been ${blank(24)}. The ants in the experiment relied on the use of individuals called ${blank(25)} to find a new nest and efficiently direct the others to go there. The study concluded that the effective implementation of the ants' decision meant that the insects could change homes quickly. The study emphasized the necessity, for people as well as insects, of having active ${blank(26)} in order to execute decisions successfully.</p>
+      </div>
+    `}
+  ],
+
+  3: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 27–32</strong><br>Complete the summary using the list of words, <strong>A–L</strong>, below.</div>` },
+    { type:'html', content:`
+      <div class="matching-list" style="margin-bottom:16px">
+        <div class="matching-list-title">Word List A–L</div>
+        <ol style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px 10px">
+          <li><span class="letter">A</span><span class="desc">front feet</span></li>
+          <li><span class="letter">B</span><span class="desc">fish</span></li>
+          <li><span class="letter">C</span><span class="desc">dinosaurs</span></li>
+          <li><span class="letter">D</span><span class="desc">reptiles</span></li>
+          <li><span class="letter">E</span><span class="desc">flexibility</span></li>
+          <li><span class="letter">F</span><span class="desc">hind legs</span></li>
+          <li><span class="letter">G</span><span class="desc">amphibians</span></li>
+          <li><span class="letter">H</span><span class="desc">birds</span></li>
+          <li><span class="letter">I</span><span class="desc">strength</span></li>
+          <li><span class="letter">J</span><span class="desc">weight</span></li>
+          <li><span class="letter">K</span><span class="desc">tail</span></li>
+          <li><span class="letter">L</span><span class="desc">hair</span></li>
+        </ol>
+      </div>
+      <div class="summary-block">
+        <p>Pterosaurs are believed to have existed until the end of the Cretaceous period. They are classed as
+          <select class="q-select narrow" data-q="27">${WORD_AL}</select>
+          which were capable of flight, although, unlike modern species, they had some
+          <select class="q-select narrow" data-q="28">${WORD_AL}</select>
+          which is evidence of their having had warm blood. There are two theories as to how they moved on land: perhaps with all their feet or by using their
+          <select class="q-select narrow" data-q="29">${WORD_AL}</select>
+          only. Another mystery has concerned the ability of the pterosaur to fly despite its immense
+          <select class="q-select narrow" data-q="30">${WORD_AL}</select>
+          and the fact that the bones making up the wing did not have great
+          <select class="q-select narrow" data-q="31">${WORD_AL}</select>.
+          Thanks to reptile fossils found in Brazil, we now know that the subspecies known as anhanguera had wings that were 12 metres across and that it mainly survived on
+          <select class="q-select narrow" data-q="32">${WORD_AL}</select>.
+        </p>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 33–36</strong><br>Do the following statements agree with the <em>claims of the writer</em> in Reading Passage 3?<br>Write <strong>YES</strong> if the statement agrees with the claims of the writer, <strong>NO</strong> if the statement contradicts the claims of the writer, <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</div>` },
+    { type:'ynng', n:33, text:'It is rare to find a fossil of a pterosaur that clearly shows its skeleton.' },
+    { type:'ynng', n:34, text:'The reason for building the model was to prove pterosaurs flew for long distances.' },
+    { type:'ynng', n:35, text:'It is possible that pterosaur species achieved their wing size as a result of the pteroid.' },
+    { type:'ynng', n:36, text:"Wilkinson has made several unsuccessful replicas of the pterosaur's head." },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 37–40</strong><br>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</div>` },
+    { type:'mcq', n:37, text:"What was Professor Wilkinson's main problem, according to the third paragraph?",
+      options:[
+        ['A','A — Early amphibians had a more complex structure than pterosaurs.'],
+        ['B','B — Pterosaur wings could easily be damaged while on the ground.'],
+        ['C','C — Flying squirrels and bats were better adapted to flying than pterosaurs.'],
+        ['D','D — Large pterosaurs were not able to take off like other flying animals.']
+      ]},
+    { type:'mcq', n:38, text:'What did Professor Wilkinson discover about a bone in pterosaurs called a pteroid?',
+      options:[
+        ['A','A — It was in an unexpected position.'],
+        ['B','B — It existed only in large species of pterosaurs.'],
+        ['C','C — It allowed pterosaurs to glide rather than fly.'],
+        ['D','D — It increased the speed pterosaurs could reach in the air.']
+      ]},
+    { type:'mcq', n:39, text:"According to the writer, the main problem with the remote-controlled 'pterosaur' is that",
+      options:[
+        ['A','A — it has been unable to leave the ground so far.'],
+        ['B','B — it cannot be controlled when its head is attached.'],
+        ['C','C — its wing material is not flexible enough.'],
+        ['D','D — the force of the wind may affect its test results.']
+      ]},
+    { type:'mcq', n:40, text:"What does 'it' in the last sentence refer to?",
+      options:[
+        ['A','A — the information the tests have revealed'],
+        ["B","B — Wilkinson's sense of achievement"],
+        ["C","C — Wilkinson's desire to build models"],
+        ['D','D — the comparison between types of models']
+      ]}
+  ]
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  activePassage:1, answers:{}, passageSize:14, questionSize:13
+};
+const passagePane = document.getElementById('passagePane');
+const questionPane = document.getElementById('questionPane');
+const bottomNav = document.getElementById('bottomNav');
+const progressFill = document.getElementById('progressFill');
+const hlPill = document.getElementById('hlPill');
+
+/* ============================================================
+   RENDER
+============================================================ */
+function renderPassage(){
+  passagePane.innerHTML = PASSAGES[state.activePassage];
+  passagePane.style.fontSize = state.passageSize + 'px';
+}
+
+function renderRadioItem(n, text, pairs, current, cls){
+  const opts = pairs.map(([v,l])=>
+    `<label class="opt-label ${current===v?'selected':''}">
+      <input type="radio" name="q${n}" value="${v}" ${current===v?'checked':''}> ${l}
+    </label>`).join('');
+  return `<div class="q-item" id="q-${n}">
+    <div class="q-text"><span class="q-num">${n}</span><span class="q-text-body">${text}</span></div>
+    <div class="q-options ${cls}">${opts}</div>
+  </div>`;
+}
+
+function renderQuestions(){
+  const items = QUESTIONS[state.activePassage];
+  let html = '';
+  for (const item of items) {
+    if (item.type==='group-header'){html+=item.content;continue;}
+    if (item.type==='tfng'){
+      html+=renderRadioItem(item.n,item.text,[['T','TRUE'],['F','FALSE'],['NGV','NOT GIVEN']],state.answers[item.n]||'','radio-row');continue;
+    }
+    if (item.type==='ynng'){
+      html+=renderRadioItem(item.n,item.text,[['Y','YES'],['N','NO'],['NGV','NOT GIVEN']],state.answers[item.n]||'','radio-row');continue;
+    }
+    if (item.type==='mcq'){
+      html+=renderRadioItem(item.n,item.text,item.options,state.answers[item.n]||'','mcq-vert');continue;
+    }
+    if (item.type==='select-q'){
+      const cur=state.answers[item.n]||'';
+      const sc=item.selectClass||'';
+      const opts=`<option value="">— select —</option>`+
+        item.options.map(([v,l])=>`<option value="${v}" ${cur===v?'selected':''}>${escapeAttr(l)}</option>`).join('');
+      html+=`<div class="q-item select-q-row" id="q-${item.n}">
+        <span class="q-num">${item.n}</span>
+        <span class="select-q-text">${item.text}</span>
+        <select class="q-select ${sc} ${cur?'has-value':''}" data-q="${item.n}">${opts}</select>
+      </div>`;
+      continue;
+    }
+    if (item.type==='html'){html+=item.content;}
+  }
+  questionPane.innerHTML=html;
+  questionPane.style.fontSize=state.questionSize+'px';
+  hydrateInputs();
+  attachQuestionListeners();
+}
+
+function hydrateInputs(){
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp=>{
+    const cur=state.answers[inp.dataset.q];
+    if(cur&&!inp.value) inp.value=cur;
+    if(inp.value) inp.classList.add('has-value');
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel=>{
+    const cur=state.answers[sel.dataset.q];
+    if(cur&&!sel.value){sel.value=cur;sel.classList.add('has-value');}
+  });
+}
+
+function attachQuestionListeners(){
+  questionPane.querySelectorAll('input[type="radio"]').forEach(r=>{
+    r.addEventListener('change',e=>{
+      const key=e.target.name.substring(1);
+      state.answers[key]=e.target.value;
+      questionPane.querySelectorAll(`input[name="${e.target.name}"]`).forEach(rr=>
+        rr.closest('.opt-label').classList.toggle('selected',rr.checked));
+      updateNav();updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp=>{
+    inp.addEventListener('input',e=>{
+      const key=e.target.dataset.q;
+      const v=e.target.value.trim();
+      if(v) state.answers[key]=e.target.value; else delete state.answers[key];
+      e.target.classList.toggle('has-value',!!v);
+      updateNav();updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel=>{
+    sel.addEventListener('change',e=>{
+      const key=e.target.dataset.q;
+      const v=e.target.value;
+      if(v) state.answers[key]=v; else delete state.answers[key];
+      e.target.classList.toggle('has-value',!!v);
+      updateNav();updateProgress();
+    });
+  });
+}
+
+/* ============================================================
+   NAV
+============================================================ */
+function renderNav(){
+  let html='';
+  [1,2,3].forEach((p,i)=>{
+    if(i>0) html+=`<div class="nav-sep"></div>`;
+    const [first,last]=pRanges[p];
+    if(p===state.activePassage){
+      html+=`<span class="nav-pass active" data-pass="${p}">Passage ${p}</span>`;
+      for(let q=first;q<=last;q++){
+        const ans=state.answers[q];
+        html+=`<button class="q-pill ${ans?'answered':''}" data-q="${q}">${q}</button>`;
+      }
+    } else {
+      const total=last-first+1;
+      let answered=0;
+      for(let q=first;q<=last;q++) if(state.answers[q]) answered++;
+      html+=`<span class="nav-pass" data-pass="${p}">Passage ${p} <small>(${answered} of ${total} answered)</small></span>`;
+    }
+  });
+  html+=`<div class="nav-spacer"></div><button class="submit-btn" id="submitBtn">✓ Submit</button>`;
+  bottomNav.innerHTML=html;
+  bottomNav.querySelectorAll('.q-pill').forEach(pill=>{
+    pill.addEventListener('click',()=>{
+      const q=pill.dataset.q;
+      const el=document.getElementById('q-'+q)||questionPane.querySelector(`[data-q="${q}"]`);
+      if(el){
+        el.scrollIntoView({behavior:'smooth',block:'center'});
+        if(el.tagName==='INPUT'||el.tagName==='SELECT') setTimeout(()=>el.focus(),320);
+        else{el.style.transition='background .3s';el.style.background='#fffbe5';setTimeout(()=>el.style.background='',700);}
+      }
+    });
+  });
+  bottomNav.querySelectorAll('.nav-pass').forEach(l=>{
+    l.addEventListener('click',()=>{
+      const p=parseInt(l.dataset.pass,10);
+      if(p!==state.activePassage){
+        state.activePassage=p;renderPassage();renderQuestions();renderNav();
+        passagePane.scrollTop=0;questionPane.scrollTop=0;
+      }
+    });
+  });
+  document.getElementById('submitBtn').addEventListener('click',showResults);
+}
+function updateNav(){renderNav();}
+function updateProgress(){
+  progressFill.style.width=(Object.keys(state.answers).length/TOTAL_Q*100)+'%';
+}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+passagePane.addEventListener('mouseup',()=>{
+  setTimeout(()=>{
+    const sel=window.getSelection();
+    if(!sel||sel.isCollapsed){hlPill.style.display='none';return;}
+    const range=sel.getRangeAt(0);
+    if(!passagePane.contains(range.commonAncestorContainer)){hlPill.style.display='none';return;}
+    if(!range.toString().trim()){hlPill.style.display='none';return;}
+    const rect=range.getBoundingClientRect();
+    hlPill.style.display='block';
+    const pw=hlPill.offsetWidth,ph=hlPill.offsetHeight;
+    let left=rect.left+rect.width/2-pw/2,top=rect.top-ph-8;
+    if(top<8) top=rect.bottom+8;
+    left=Math.max(8,Math.min(left,window.innerWidth-pw-8));
+    hlPill.style.left=left+'px';hlPill.style.top=top+'px';
+  },0);
+});
+hlPill.addEventListener('mousedown',e=>{
+  e.preventDefault();
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed) return;
+  const range=sel.getRangeAt(0);
+  if(!passagePane.contains(range.commonAncestorContainer)) return;
+  try{const span=document.createElement('span');span.className='highlight';span.appendChild(range.extractContents());range.insertNode(span);sel.removeAllRanges();}catch(e){}
+  hlPill.style.display='none';
+});
+passagePane.addEventListener('click',e=>{
+  if(e.target.classList&&e.target.classList.contains('highlight')){
+    const s=e.target,p=s.parentNode;
+    while(s.firstChild) p.insertBefore(s.firstChild,s);
+    p.removeChild(s);p.normalize();
+  }
+});
+document.addEventListener('mousedown',e=>{
+  if(e.target!==hlPill&&!passagePane.contains(e.target)) hlPill.style.display='none';
+});
+
+/* ============================================================
+   DIVIDER DRAG
+============================================================ */
+const divider=document.getElementById('divider');
+const mainEl=document.querySelector('.main');
+let dragging=false;
+divider.addEventListener('mousedown',e=>{dragging=true;divider.classList.add('dragging');document.body.classList.add('dragging');e.preventDefault();});
+document.addEventListener('mousemove',e=>{
+  if(!dragging) return;
+  const rect=mainEl.getBoundingClientRect();
+  const pct=(e.clientX-rect.left)/rect.width*100;
+  if(pct>=20&&pct<=80){passagePane.style.flex=`0 0 ${pct}%`;passagePane.style.width=`${pct}%`;}
+});
+document.addEventListener('mouseup',()=>{if(dragging){dragging=false;divider.classList.remove('dragging');document.body.classList.remove('dragging');}});
+
+/* ============================================================
+   MENU + FONT
+============================================================ */
+const hamburger=document.getElementById('hamburger');
+const menuPanel=document.getElementById('menuPanel');
+hamburger.addEventListener('click',e=>{e.stopPropagation();menuPanel.classList.toggle('open');});
+document.addEventListener('click',e=>{
+  if(!menuPanel.contains(e.target)&&e.target!==hamburger&&!hamburger.contains(e.target)) menuPanel.classList.remove('open');
+});
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=btn.dataset.target,dir=parseInt(btn.dataset.dir,10);
+    if(target==='passage'){
+      state.passageSize=Math.min(22,Math.max(10,state.passageSize+dir));
+      passagePane.style.fontSize=state.passageSize+'px';
+      document.getElementById('passSizeVal').textContent=state.passageSize+'px';
+    } else {
+      state.questionSize=Math.min(22,Math.max(10,state.questionSize+dir));
+      questionPane.style.fontSize=state.questionSize+'px';
+      document.getElementById('qSizeVal').textContent=state.questionSize+'px';
+    }
+  });
+});
+
+/* ============================================================
+   RESULTS
+============================================================ */
+function bandFromCorrect(n){
+  if(n>=39)return 9.0;if(n>=37)return 8.5;if(n>=35)return 8.0;
+  if(n>=33)return 7.5;if(n>=30)return 7.0;if(n>=27)return 6.5;
+  if(n>=23)return 6.0;if(n>=19)return 5.5;if(n>=15)return 5.0;
+  if(n>=13)return 4.5;return 4.0;
+}
+function showResults(){
+  let totalCorrect=0,html='';
+  [1,2,3].forEach(p=>{
+    const [first,last]=pRanges[p];
+    let correct=0,rows='';
+    for(let q=first;q<=last;q++){
+      const u=state.answers[q],c=AK[q];
+      const ok=checkAnswer(u,c);
+      if(ok) correct++;
+      rows+=`<tr class="${ok?'row-correct':'row-wrong'}">
+        <td><strong>${q}</strong></td>
+        <td>${u!==undefined&&u!==''?displayAnswer(u):'<em style="color:#999">—</em>'}</td>
+        <td>${displayCorrect(c)}</td>
+        <td class="mark ${ok?'mark-ok':'mark-x'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    totalCorrect+=correct;
+    const total=last-first+1,pct=correct/total*100;
+    const badge=pct>=70?'badge-green':pct>=50?'badge-orange':'badge-red';
+    html+=`<div class="result-pass">
+      <div class="result-pass-header">
+        <div class="result-pass-info">
+          <div class="result-pass-title">Passage ${p}: ${PASSAGE_TITLES[p]}</div>
+          <div class="result-pass-sub">Questions ${first}–${last}</div>
+        </div>
+        <div class="score-badge ${badge}">${correct} / ${total}</div>
+      </div>
+      <table class="result-table">
+        <thead><tr><th>Q#</th><th>Your Answer</th><th>Correct Answer</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  });
+  const band=bandFromCorrect(totalCorrect);
+  html+=`<div class="total-strip">
+    <div class="total-block"><div class="total-label">Score</div><div class="total-value">${totalCorrect} / ${TOTAL_Q}</div></div>
+    <div class="total-block"><div class="total-label">Accuracy</div><div class="total-value">${(totalCorrect/TOTAL_Q*100).toFixed(0)}%</div></div>
+    <div class="total-block"><div class="total-label">Estimated Band</div><div class="total-value total-band-value">${band.toFixed(1)}</div></div>
+  </div>`;
+  document.getElementById('resultsBody').innerHTML=html;
+  document.getElementById('modal').classList.add('open');
+}
+document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')document.getElementById('modal').classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modal').classList.remove('open');});
+
+/* INIT */
+renderPassage();renderQuestions();renderNav();updateProgress();
+</script>
+</body>
+</html>

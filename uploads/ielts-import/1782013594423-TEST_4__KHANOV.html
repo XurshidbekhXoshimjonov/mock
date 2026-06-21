@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Reading — Test 4</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#1a1a1a;background:#fff;
+    display:flex;flex-direction:column;height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ===== HEADER ===== */
+  .header{
+    height:52px;flex:0 0 52px;border-bottom:1px solid #ddd;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;position:relative;z-index:10;
+  }
+  .h-left{display:flex;align-items:center;gap:12px}
+  .ielts-badge{
+    background:#c41230;color:#fff;font-weight:700;
+    padding:6px 12px;border-radius:4px;font-size:14px;letter-spacing:1px;
+  }
+  .tg-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#f4f4f4;border-radius:999px;
+    padding:3px 14px 3px 3px;font-size:13px;font-weight:500;color:#1a1a1a;
+    transition:background .15s;
+  }
+  .tg-pill:hover{background:#ececec}
+  .tg-icon{
+    width:28px;height:28px;border-radius:50%;
+    background:linear-gradient(135deg,#37AEE2 0%,#1E96C8 100%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 -1px 0 rgba(0,0,0,.08);
+  }
+  .h-right{position:relative}
+  .hamburger{
+    width:36px;height:36px;border:none;background:transparent;
+    cursor:pointer;border-radius:6px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
+  }
+  .hamburger:hover{background:#f0f0f0}
+  .hamburger span{display:block;width:18px;height:2px;background:#333;border-radius:1px}
+  .menu-panel{
+    position:absolute;top:46px;right:0;
+    background:#fff;border:1px solid #ddd;border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,.1);
+    padding:14px;min-width:240px;display:none;z-index:200;
+  }
+  .menu-panel.open{display:block}
+  .menu-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:6px 0}
+  .menu-row + .menu-row{border-top:1px solid #f0f0f0;margin-top:2px}
+  .menu-ctrls{display:flex;align-items:center;gap:6px}
+  .size-btn{
+    width:28px;height:28px;border:1px solid #ccc;background:#fff;border-radius:4px;
+    cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;
+  }
+  .size-btn:hover{background:#f5f5f5}
+  .size-val{min-width:42px;text-align:center;font-size:12px;color:#666}
+
+  /* ===== PROGRESS ===== */
+  .progress{height:3px;background:#eee;flex:0 0 3px}
+  .progress-fill{height:100%;background:#c41230;width:0;transition:width .25s}
+
+  /* ===== MAIN ===== */
+  .main{flex:1 1 auto;display:flex;overflow:hidden;min-height:0}
+  .pane{overflow-y:auto;padding:24px 28px 40px;min-width:200px}
+  .pane-left{background:#fafafa;width:50%;flex:0 0 50%}
+  .pane-right{background:#fff;flex:1 1 auto}
+  .pane::-webkit-scrollbar{width:10px}
+  .pane::-webkit-scrollbar-thumb{background:#ccc;border-radius:5px}
+  .pane::-webkit-scrollbar-thumb:hover{background:#aaa}
+  .divider{
+    width:6px;background:#e0e0e0;cursor:col-resize;
+    flex:0 0 6px;position:relative;transition:background .15s;
+  }
+  .divider:hover,.divider.dragging{background:#c41230}
+  .divider::after{
+    content:'';position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);width:2px;height:34px;background:#999;border-radius:1px;
+  }
+  .divider:hover::after,.divider.dragging::after{background:#fff}
+
+  /* ===== PASSAGE ===== */
+  #passagePane{font-size:14px;line-height:1.65}
+  .pass-title{font-size:1.55em;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+  .pass-sub{
+    font-size:0.95em;color:#666;font-style:italic;
+    margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #c41230;
+  }
+  .pass-body p{margin-bottom:14px;text-align:justify;hyphens:auto}
+  .para-letter{font-weight:700;display:inline-block;margin-right:8px;color:#c41230}
+  .highlight{
+    background:#fff59d;cursor:pointer;padding:1px 2px;
+    border-radius:2px;transition:background .15s;
+  }
+  .highlight:hover{background:#ffeb3b}
+  .hl-pill{
+    position:fixed;background:#1a1a1a;color:#fff;
+    padding:7px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;cursor:pointer;z-index:1500;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);display:none;user-select:none;
+  }
+  .hl-pill:hover{background:#000}
+
+  /* ===== QUESTIONS ===== */
+  #questionPane{font-size:13px;line-height:1.55}
+  .q-instr{
+    background:#f5f5f5;border-left:3px solid #c41230;
+    padding:10px 14px;margin-bottom:18px;
+    font-size:0.95em;line-height:1.55;border-radius:0 4px 4px 0;
+  }
+  .q-instr strong{color:#c41230}
+  .q-item{margin-bottom:16px;padding:6px 0;scroll-margin-top:30px}
+  .q-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:26px;height:22px;
+    background:#1a1a1a;color:#fff;padding:0 6px;border-radius:3px;
+    font-weight:700;font-size:11px;margin-right:8px;flex-shrink:0;
+  }
+  .q-text{margin-bottom:8px;line-height:1.55;display:flex;align-items:flex-start}
+  .q-text-body{flex:1}
+  .q-options{display:flex;flex-direction:column;gap:6px;margin-left:34px}
+  .q-options.radio-row{flex-direction:row;gap:0;flex-wrap:wrap}
+  .q-options.mcq-vert{flex-direction:column;gap:6px}
+  .opt-label{
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    padding:5px 10px;border:1px solid #ccc;background:#fff;
+    font-size:0.92em;transition:all .12s;user-select:none;border-radius:4px;
+  }
+  .opt-label:hover{background:#f5f5f5}
+  .opt-label input{cursor:pointer;margin:0}
+  .opt-label.selected{background:#c41230;color:#fff;border-color:#c41230}
+  .opt-label.selected input{accent-color:#fff}
+  .radio-row .opt-label{border-radius:0;border-right:none}
+  .radio-row .opt-label:first-of-type{border-radius:4px 0 0 4px}
+  .radio-row .opt-label:last-of-type{border-radius:0 4px 4px 0;border-right:1px solid #ccc}
+  .radio-row .opt-label.selected + .opt-label{border-left-color:#c41230}
+  .mcq-vert .opt-label{
+    display:flex;align-items:flex-start;padding:8px 12px;text-align:left;line-height:1.4;
+  }
+  .mcq-vert .opt-label input{margin-top:2px;flex-shrink:0}
+
+  .q-input{
+    border:none;border-bottom:2px solid #888;background:transparent;
+    font-family:inherit;font-size:inherit;color:inherit;
+    padding:2px 4px;min-width:120px;outline:none;
+    transition:border-color .15s,background .15s;scroll-margin-top:30px;
+  }
+  .q-input:focus{border-bottom-color:#c41230;background:#fffbe5}
+  .q-input.has-value{background:#fff3cd;border-bottom-color:#f9a825}
+
+  /* Matching list box */
+  .matching-list{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:14px 20px;background:#fcfcfa;margin-bottom:18px;
+  }
+  .matching-list-title{
+    font-weight:700;text-align:center;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #ddd;font-size:1.05em;
+  }
+  .matching-list ol{list-style:none;padding:0;margin:0}
+  .matching-list li{padding:5px 0;display:flex;gap:10px;line-height:1.5}
+  .matching-list .letter{font-weight:700;flex-shrink:0;min-width:24px;color:#c41230}
+  .matching-list .desc{flex:1}
+
+  /* MCQ pair/triple options box */
+  .mcq-pair-box{
+    border:2px solid #c0c0c0;border-radius:8px;
+    padding:14px 20px;background:#fcfcfa;margin-bottom:14px;
+  }
+  .mcq-pair-stem{font-weight:600;margin-bottom:10px;line-height:1.55}
+  .mcq-pair-box ol{list-style:none;padding:0;margin:0}
+  .mcq-pair-box li{padding:4px 0;display:flex;gap:10px;line-height:1.5}
+  .mcq-pair-box .letter{font-weight:700;flex-shrink:0;min-width:18px;color:#c41230}
+
+  /* Select dropdown */
+  .q-select{
+    font-family:inherit;font-size:0.92em;
+    padding:5px 8px;border:1px solid #888;border-radius:4px;
+    background:#fff;cursor:pointer;color:inherit;outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .q-select:focus{border-color:#c41230}
+  .q-select.has-value{background:#fff3cd;border-color:#f9a825}
+  .q-select.narrow{min-width:80px;max-width:110px}
+  .q-select.wide{min-width:220px;max-width:320px}
+  .select-q-row{
+    display:flex;align-items:flex-start;gap:10px;
+    margin-bottom:14px;padding:6px 0;flex-wrap:wrap;scroll-margin-top:30px;
+  }
+  .select-q-row .q-num{flex-shrink:0;margin-top:1px}
+  .select-q-text{flex:1;min-width:0;line-height:1.7}
+  .select-q-text input.q-input{min-width:120px;max-width:200px}
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav{
+    height:44px;flex:0 0 44px;
+    background:#f0f0f0;border-top:1px solid #ddd;
+    display:flex;align-items:center;
+    padding:0 12px;gap:8px;overflow-x:auto;overflow-y:hidden;
+  }
+  .bottom-nav::-webkit-scrollbar{height:4px}
+  .bottom-nav::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+  .nav-pass{
+    font-weight:700;font-size:13px;cursor:pointer;
+    padding:5px 10px;border-radius:4px;white-space:nowrap;
+    transition:background .15s;flex-shrink:0;
+  }
+  .nav-pass:hover{background:#e0e0e0}
+  .nav-pass.active{color:#c41230}
+  .nav-pass small{font-weight:500;color:#666;font-size:0.85em}
+  .q-pill{
+    width:26px;height:26px;border:1px solid #bbb;background:#fff;
+    border-radius:4px;font-size:11px;cursor:pointer;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:inherit;color:#333;transition:all .12s;
+  }
+  .q-pill:hover{background:#ebebeb;border-color:#999}
+  .q-pill.answered{
+    font-weight:700;background:#ffd54f;border-color:#f9a825;color:#5d4037;
+  }
+  .nav-sep{width:1px;height:26px;background:#ccc;flex-shrink:0;margin:0 4px}
+  .nav-spacer{flex:1}
+  .submit-btn{
+    height:30px;padding:0 16px;background:#28a745;color:#fff;
+    border:none;border-radius:4px;cursor:pointer;
+    font-weight:600;font-size:13px;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px;
+    flex-shrink:0;transition:background .15s;
+  }
+  .submit-btn:hover{background:#218838}
+
+  /* ===== MODAL ===== */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:3000;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:#fff;border-radius:10px;
+    max-width:820px;width:100%;max-height:90vh;
+    overflow-y:auto;padding:28px;position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    background:transparent;border:none;font-size:28px;line-height:1;
+    cursor:pointer;color:#888;width:34px;height:34px;
+    border-radius:50%;transition:background .15s;
+  }
+  .modal-close:hover{background:#f0f0f0;color:#000}
+  .modal h2{margin-bottom:20px;font-size:24px;color:#1a1a1a}
+  .result-pass{
+    margin-bottom:20px;border:1px solid #e0e0e0;
+    border-radius:8px;overflow:hidden;
+  }
+  .result-pass-header{
+    background:#fafafa;padding:14px 18px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border-bottom:1px solid #e0e0e0;
+  }
+  .result-pass-info{flex:1;min-width:0}
+  .result-pass-title{font-weight:700;font-size:14px;color:#1a1a1a}
+  .result-pass-sub{font-size:12px;color:#666;margin-top:3px}
+  .score-badge{
+    padding:5px 14px;border-radius:999px;
+    color:#fff;font-weight:700;font-size:13px;flex-shrink:0;
+  }
+  .badge-green{background:#28a745}
+  .badge-orange{background:#fd7e14}
+  .badge-red{background:#dc3545}
+  .result-table{width:100%;border-collapse:collapse;font-size:13px}
+  .result-table th,.result-table td{
+    padding:8px 14px;text-align:left;border-bottom:1px solid #f0f0f0;
+  }
+  .result-table th{
+    background:#f9f9f9;font-weight:600;font-size:12px;
+    color:#555;text-transform:uppercase;letter-spacing:.4px;
+  }
+  .result-table td{vertical-align:middle}
+  .row-correct{background:#e8f5e9}
+  .row-wrong{background:#ffebee}
+  .mark{font-weight:700;font-size:15px}
+  .mark-ok{color:#28a745}
+  .mark-x{color:#dc3545}
+  .total-strip{
+    margin-top:24px;padding:22px 24px;
+    background:linear-gradient(135deg,#c41230 0%,#8b0d23 100%);
+    color:#fff;border-radius:10px;
+    display:flex;justify-content:space-around;align-items:center;
+    text-align:center;flex-wrap:wrap;gap:16px;
+  }
+  .total-block{flex:1;min-width:140px}
+  .total-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+  .total-value{font-size:32px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+  .total-band-value{font-size:36px}
+
+  body.dragging{user-select:none;cursor:col-resize}
+  body.dragging *{cursor:col-resize!important}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-left">
+    <div class="ielts-badge">IELTS</div>
+    <a class="tg-pill" href="https://t.me/Abdurazzoq_Khanov" target="_blank" rel="noopener">
+      <span class="tg-icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.27 1.4.18 1.12 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#fff"/>
+        </svg>
+      </span>
+      <span>Abdurazzoq Khanov</span>
+    </a>
+  </div>
+  <div class="h-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-row">
+        <span>Passage text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="passage" data-dir="-1">A−</button>
+          <span class="size-val" id="passSizeVal">14px</span>
+          <button class="size-btn" data-target="passage" data-dir="1">A+</button>
+        </div>
+      </div>
+      <div class="menu-row">
+        <span>Question text</span>
+        <div class="menu-ctrls">
+          <button class="size-btn" data-target="question" data-dir="-1">A−</button>
+          <span class="size-val" id="qSizeVal">13px</span>
+          <button class="size-btn" data-target="question" data-dir="1">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<main class="main">
+  <section class="pane pane-left" id="passagePane"></section>
+  <div class="divider" id="divider"></div>
+  <section class="pane pane-right" id="questionPane"></section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+
+<div class="hl-pill" id="hlPill">✏ Highlight</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h2>Your Results</h2>
+    <div id="resultsBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function displayAnswer(v){
+  if (v === undefined || v === null || v === '') return '—';
+  if (v === 'T') return 'TRUE';
+  if (v === 'F') return 'FALSE';
+  if (v === 'Y') return 'YES';
+  if (v === 'N') return 'NO';
+  if (v === 'NGV') return 'NOT GIVEN';
+  return v;
+}
+function normalize(s){
+  return String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function checkAnswer(user, correct){
+  if (!user || user === '—') return false;
+  const userN = normalize(user);
+  const correctList = Array.isArray(correct) ? correct : [correct];
+  return correctList.some(c => normalize(c) === userN);
+}
+function displayCorrect(c){
+  const v = Array.isArray(c) ? c[0] : c;
+  return displayAnswer(v);
+}
+
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+  1: `
+    <h1 class="pass-title">The Blockbuster Phenomenon: a new museum trend</h1>
+    <div class="pass-sub">Museums in Australia, like other pleasure-giving public organisations, are adapting their activities so that they more closely reflect the marketplace.</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>Since the 1980s, the term "blockbuster" has become the fashionable word for spectacular, high-profile museum exhibitions that have the ability to attract large crowds. A blockbuster is a "large-scale loan exhibition that people who normally don't go to museums will stand in line for hours to see" (Elsen 1984). Once the museum that created the exhibition has shown it to their local market, it can be offered to other organisations for a fee. This means that you can boost your own door takings and make money from boosting someone else's door takings.</p>
+      <p><span class="para-letter">B</span>While partaking of the excitement of the blockbuster, visitors thus lured are likely to stay longer at the museum. Betty Churcher, when Director of the Australian National Gallery, summed up the new blockbuster creed as follows: the bonus of the blockbuster exhibitions is that people come to see the blockbuster and they stay to look at the permanent collection, so you are getting broader exposure for your collection.</p>
+      <p><span class="para-letter">C</span>Museums across the UK, USA, Canada and Australia currently operate under a system of plural funding: revenue raised through contributions by federal, state and/or local governments, combined with revenue raised through admission charges and other activities. Maintaining and increasing visitor levels is thus paramount and involves not only creating or hiring blockbuster exhibitions, but providing regular exhibition changes and innovations. In addition, the visiting public have become known as customers rather than visitors, and the skills that are valued in museums to keep the new customers coming through the door have changed. Curators are now administrators and being a museum director no longer requires an Arts degree — but public relations skills are essential if the museum is going to compete with other museums to stage travelling exhibitions which draw huge crowds.</p>
+      <p><span class="para-letter">D</span>The convergence of museums, the heritage industry, tourism, profit-making and pleasure-giving has resulted in the new "museology". This has given rise to much debate about whether it is appropriate to see museums primarily as tourist attractions. In literature from both UK and USA, the words that are starting to appear in some descriptions of blockbusters are "less scholarly", "non-elitist" and "popularist", while others extol the virtues of encouraging scholars to co-operate on projects, and to provide exhibitions that cater for a broad selection of community rather than an elite sector. Whatever commentators may think, managers of museums worldwide are looking for artful ways to blend culture and commerce, and blockbuster exhibitions are at the top of the list.</p>
+      <p><span class="para-letter">E</span>But do blockbusters held in public institutions really create a surplus to fund other activities? If the bottom line is profit, then according to the records of many major museums blockbusters do make money. For museums in some countries, it may be the money that they require to replace parts of their collections or to fix buildings that are in need of attention. For some museums in Australia, it may be the opportunity to illustrate that they are attempting to pay their way by recovering part of their operating costs. Also, creating or hiring a blockbuster has many positive spin-offs: blockbusters mean crowds, and crowds are good for the local economy, providing increased trade for shops, hotels, restaurants, the transport industry and retailers. The arrangement that the arts provide sustained economic benefits has been well illustrated in impact studies in the USA and UK.</p>
+      <p><span class="para-letter">F</span>However, blockbusters require large capital expenditure, and draw on resources across all branches of an organisation, and the costs don't end there. There is a Human Resource Management cost in addition to a measurable "real" dollar cost. Receiving a touring exhibition draws resources from across functional management structures in project management style. Everyone, from general labourers to building services, front of house, technical, promotional, educational and administrative staff, is required to perform additional tasks. Furthermore, as an increasing number of institutions try their hand at increasing visitor numbers and memberships (and therefore revenue) by staging blockbuster exhibitions, it may be less likely that blockbusters will continue to provide a surplus to subsidise other activities due to the competitive nature of the market.</p>
+      <p><span class="para-letter">G</span>It has been illustrated in both the UK and USA that the blockbuster ideology has resulted in the false expectation that the momentum required to stage blockbusters can be maintained continually. Creating, mounting or hiring blockbusters is exhausting, with the real costs throughout an institution difficult to calculate. Secondly, as some analysts have argued, the "shop keeping" mentality and cost benefit analysis and a pure concentration on the bottom line can squeeze substance out of an exhibition. Taking out substance can be a recipe for blockbuster failure and therefore financial failure.</p>
+      <p><span class="para-letter">H</span>Perhaps the best pathway to take is one that balances both blockbusters and regular exhibitions. However, this easy middle ground may only work if you have enough space, and have alternate sources of funding to continue to support the regular, less exciting fare. Perhaps the advice should be to make sure that you find out what your local community wants from you and make sure that your regular activities and exhibitions are more enduring.</p>
+    </div>
+  `,
+  2: `
+    <h1 class="pass-title">Saving the Bittern</h1>
+    <div class="pass-sub">&nbsp;</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>The bittern, a British waterbird, does not have a good record as far as survival is concerned. By 1886, habitat destruction and other pressures had pushed it close to extinction. Fortunately, it recovered a few decades later, and in 1950 the numbers of mature male bitterns rose to a peak of about 70. By the 1980s, however, it was clear that the bird was in trouble again. The bittern needs extensive wet reedbeds to survive, and long periods of drainage, pollution and lack of management had destroyed most of its habitat. By 1997, it again faced imminent extinction. To prevent this, the British government set up a plan for the bittern, aiming to establish a population of 50 males by 2010. However, this target was reached six years early, a rate of recovery faster than anyone had dared hope for. We at the Royal Society for the Protection of Birds (RSPB) now claim the bittern as one of Britain's greatest wildlife success stories, since figures reveal that the number of these rare birds has increased fivefold in just seven years.</p>
+      <p><span class="para-letter">B</span>Bitterns have feathers that help them to conceal themselves and a shy nature; they usually remain hidden within the cover of reedbed vegetation. Our first challenge was to develop standard methods to monitor their numbers. The booming call of the male bittern is its most distinctive feature during the breeding season, and we developed a method to count them using the sound patterns unique to each individual. This not only allowed us to be much more certain of the number of booming males in the UK, but also enabled us to estimate local survival of males from one year to the next.</p>
+      <p><span class="para-letter">C</span>Our first direct understanding of what breeding bitterns require in their ideal habitat came from comparisons of reedbed sites that had lost their male birds with those that retained them. This research showed that bitterns had been retained in reedbeds where the natural process of drying out had been slowed through management. Based on this work, broad recommendations on how to manage and rehabilitate reedbeds for bitterns were made, and funding was provided through a European Union (EU) wildlife fund to manage 13 sites within the core breeding range.</p>
+      <p><span class="para-letter">D</span>To refine these recommendations and provide fine-scale, quantitative habitat prescriptions on the bitterns' preferred feeding habitat, we started radio-tracking male bitterns on the RSPB's Minsmere and Leighton Moss reserves. This showed clear preferences for feeding in the wetter reedbed areas, particularly within reedbed next to larger open pools. The average home range sizes of the male bitterns we followed (about 20 hectares) provided a good indication of the area of reedbed necessary when managing or creating habitat for this species. Female bitterns undertake all the incubation and care of the young, so it was important to understand their requirements as well. Over the course of our research, we located 87 bittern nests and found that female bitterns preferred to nest in areas of continuous vegetation, well into the reedbed, but where water was still present during the driest part of the breeding season.</p>
+      <p><span class="para-letter">E</span>The success of the habitat prescriptions developed from this research has been spectacular. For instance, at Minsmere, male bittern numbers gradually increased from one to ten following reedbed lowering, a management technique designed to halt the drying out process. After a low point of 11 mature males in 1997, bittern numbers in Britain responded to all the habitat management work and started to increase for the first time since 1950.</p>
+      <p><span class="para-letter">F</span>The final phase of research involved understanding the diet, survival and dispersal of bittern chicks. To do this we fitted small radio tags to young bittern chicks in the nest, to determine their fate through to fledging, when they begin to fly, and beyond. Many chicks did not survive to this stage, and starvation was found to be the most likely reason for their demise. The fish prey fed to chicks was mainly those species penetrating into the reed edge. So, an important element of recent studies has been development of recommendations on habitat and water conditions to promote native fish populations. Once independent, radio-tagged young bitterns were found to seek out new sites during their first winter; a proportion of these would remain on new sites to breed if the conditions were suitable. A second EU-funded project aims to provide these suitable sites in new areas. A network of 19 sites developed through this partnership project will secure a more sustainable UK bittern population with successful breeding outside of the core area, less vulnerable to chance events and sea level rise.</p>
+      <p><span class="para-letter">G</span>By 2004, the number of booming male bitterns in the UK had increased to 55. Almost all of the increase occurred on those sites undertaking management based on advice derived from our research. As well as rescuing the bittern, the work has helped a range of other spectacular wetland species such as otters. Although science has been at the core of the bittern story, success has only been achieved through the trust, hard work and dedication of all the managers, owners and wardens of sites that have implemented, in some cases very drastic, management to secure the future of this wetland species in the UK.</p>
+    </div>
+  `,
+  3: `
+    <h1 class="pass-title">The Placebo Effect</h1>
+    <div class="pass-sub">With the right encouragement, your mind can convince the body to heal itself. What is the mysterious force that can do this?</div>
+    <div class="pass-body">
+      <p><span class="para-letter">A</span>Want to devise a new form of alternative medical treatment? No problem. Here's the recipe. As a practitioner, be warm, sympathetic, reassuring and enthusiastic. Your treatment should involve physical contact, and each session with your patients should take at least half an hour. Encourage your patients to take an active part in their treatment and understand how their disorders relate to the rest of their lives. Tell them that their own bodies possess the true power to heal. Get them to pay you well. Describe your treatment in familiar words, but embroidered with a hint of mysticism: energy fields, energy flows, energy blocks, meridians, forces, auras, rhythms and the like. Refer to the knowledge of an early age: wisdom carelessly swept aside by the rise of blind mechanistic science. Oh, come off it, you're saying. Something like that couldn't possibly work, could it?</p>
+      <p><span class="para-letter">B</span>Well yes, it could — and often well enough to earn you a living. And a very good living if you are sufficiently convincing, or, better still, really believe in your therapy. Many illnesses get better on their own, so if you are lucky and administer your treatment at just the right time you'll get the credit. But that's only part of it. Some of the improvement really would be down to you. Not necessarily because you'd recommended ginseng rather than chamomile tea, or used this crystal as opposed to that pressure point. Nothing so specific. Your healing power would be the outcome of a paradoxical force that conventional medicine recognises but remains oddly ambivalent about: the placebo effect.</p>
+      <p><span class="para-letter">C</span>Placebos are treatments that have no direct effect on the body, yet still work because the patient has faith in their power to heal. Most often the term refers to a dummy pill, but it applies just as much to any device or procedure, from a sticking plaster to a crystal. The existence of the placebo effect implies that even a complete fraud could make a difference to someone's health, which is why some practitioners of alternative medicine are sensitive about any mention of the subject. In fact, the placebo is a powerful part of all medical care, orthodox or otherwise, though its role is often neglected and misunderstood.</p>
+      <p><span class="para-letter">D</span>At one level, it should come as no surprise that our state of mind can influence our physiology: anger opens the superficial blood vessels of the face; sadness pumps the tear glands. But exactly how placebos work their medical magic is still largely unknown. Most of the scant research to date has focused on the control of pain, because it's one of the commonest complaints and lends itself to experimental study. Here, attention has turned to the endorphins, natural substances produced in the brain that are known to help control pain. Any of the neurochemicals involved in transmitting pain impulses or modulating them might also be involved in generating the placebo response, says Don Price, an oral surgeon at the University of Florida.</p>
+      <p><span class="para-letter">E</span>That case has been strengthened by the recent work of Fabrizio Benedetti of the University of Turin, who showed that the placebo effect can be abolished by a drug, naloxone, which blocks the effects of endorphins. Benedetti induced pain in a pressure cuff on the forearm. He did this several times a day for several days, using morphine each time to control the pain. On the final day, without saying anything, he replaced the morphine with a saline solution. This still relieved the subjects' pain: a placebo effect. But when he added naloxone to the saline, and blocked the endorphins, the pain relief disappeared. Here was direct proof that the relief of pain by a placebo is carried out, at least in part, by these natural opiates.</p>
+      <p><span class="para-letter">F</span>Though scientists don't know exactly how placebos work, they have accumulated a fair bit of knowledge about how to trigger the effect. A London rheumatologist found, for example, that red dummy capsules made more effective painkillers than blue, green or yellow ones. Research on American students revealed that blue pills make better tranquillisers than pink, a colour more suitable for stimulants. Even branding can make a difference: if Aspro or Tylenol are what you like to take for a headache, their chemically identical generic equivalents may be less effective.</p>
+      <p><span class="para-letter">G</span>It matters too how the treatment is delivered. Decades ago, when the major tranquilliser chlorpromazine was being introduced, a doctor in Kansas categorised his colleagues according to whether they were keen on it, openly sceptical of its benefits, or took a let's-try-and-see attitude. His conclusion: the more enthusiastic the doctor, the better the drug performed. A recent survey by Ernst on doctors' bedside manners turned up one consistent finding: physicians who adopt a warm, friendly, reassuring manner are more effective than those whose consultations are formal and do not offer reassurance.</p>
+      <p><span class="para-letter">H</span>Warm, friendly and reassuring are precisely what alternative treatment is all about, of course. Many of the ingredients of that opening recipe — the physical contact, the generous swaths of time, the strong hints of supernormal healing power — are just the kind of thing likely to impress patients. It's hardly surprising then that complementary practitioners are generally best at mobilising the placebo effect, says Arthur Kleinman, professor of social anthropology at Harvard University.</p>
+    </div>
+  `
+};
+
+const PASSAGE_TITLES = {
+  1: "The Blockbuster Phenomenon: a new museum trend",
+  2: "Saving the Bittern",
+  3: "The Placebo Effect"
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  // Passage 1
+  1: 'C', 2: 'A', 3: 'D', 4: 'C',
+  5: 'customers',
+  6: ['public relations skills', 'public relation skills'],
+  7: 'museology',
+  8: 'tourist attractions',
+  9: 'A', 10: 'C',
+  11: 'C', 12: 'E', 13: 'G',
+  // Passage 2
+  14: 'I', 15: 'VIII', 16: 'V', 17: 'II', 18: 'VII', 19: 'IV', 20: 'VI',
+  21: '1950', 22: 'shy', 23: 'starvation', 24: 'fish', 25: 'otters',
+  26: 'D',
+  // Passage 3
+  27: 'D', 28: 'A', 29: 'H', 30: 'B', 31: 'G',
+  32: 'D', 33: 'A', 34: 'C',
+  35: 'N', 36: 'NGV', 37: 'Y', 38: 'Y', 39: 'NGV', 40: 'Y'
+};
+
+const pRanges = { 1: [1, 13], 2: [14, 26], 3: [27, 40] };
+const TOTAL_Q = 40;
+
+/* Multi-letter groups: Q9-10 (TWO from A-E), Q11-13 (THREE from A-G).
+   Order doesn't matter; partial credit for valid distinct picks. */
+const ANSWER_GROUPS = {
+  9:  { partners: [10],    valid: ['A','C'],     firstQ: 9  },
+  10: { partners: [9],     valid: ['A','C'],     firstQ: 9  },
+  11: { partners: [12,13], valid: ['C','E','G'], firstQ: 11 },
+  12: { partners: [11,13], valid: ['C','E','G'], firstQ: 11 },
+  13: { partners: [11,12], valid: ['C','E','G'], firstQ: 11 }
+};
+
+function checkGroup(q, userAns){
+  if (!userAns) return false;
+  const cfg = ANSWER_GROUPS[q];
+  if (!cfg) return false;
+  const allQs = [q, ...cfg.partners].sort((a,b) => a - b);
+  const allAnswers = allQs.map(qi => state.answers[qi]);
+  const filled = allAnswers.filter(a => a);
+  // Full set match
+  if (filled.length === cfg.valid.length) {
+    const userSet = new Set(filled);
+    const validSet = new Set(cfg.valid);
+    if (userSet.size === cfg.valid.length) {
+      let allInSet = true;
+      for (const a of userSet) if (!validSet.has(a)) { allInSet = false; break; }
+      if (allInSet) return true;
+    }
+  }
+  // Per-Q fallback: user picked something in valid set, give credit to first occurrence
+  if (!cfg.valid.includes(userAns)) return false;
+  const firstWithAns = allQs.find(qi => state.answers[qi] === userAns);
+  return firstWithAns === q;
+}
+
+/* ============================================================
+   SHARED OPTION SETS
+============================================================ */
+const LETTERS_AH = [
+  ['A','A'],['B','B'],['C','C'],['D','D'],['E','E'],['F','F'],['G','G'],['H','H']
+];
+const LETTERS_AE = [['A','A'],['B','B'],['C','C'],['D','D'],['E','E']];
+const LETTERS_AG = [['A','A'],['B','B'],['C','C'],['D','D'],['E','E'],['F','F'],['G','G']];
+const ROMAN_I_IX = [
+  ['I','I'],['II','II'],['III','III'],['IV','IV'],['V','V'],
+  ['VI','VI'],['VII','VII'],['VIII','VIII'],['IX','IX']
+];
+const ENDINGS_AH = [
+  ['A','A — Should be easy to understand'],
+  ['B','B — can improve without treatment'],
+  ['C','C — can cost the patient less'],
+  ['D','D — ought to last a minimum length of time'],
+  ['E','E — can require a range of different products'],
+  ['F','F — can be described as serious'],
+  ['G','G — should give it greater recognition'],
+  ['H','H — should be able to get a high income']
+];
+
+/* ============================================================
+   QUESTIONS
+============================================================ */
+const QUESTIONS = {
+  1: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 1–4</strong><br>Reading Passage 1 has eight paragraphs, <strong>A–H</strong>.<br>Which paragraph contains the following information?<br>Write the correct letter <strong>A–H</strong> in boxes 1–4 on your answer sheet.<br><em>NB You may use any letter more than once.</em></div>` },
+    { type:'select-q', n:1, text:'The reason why museum directors need to constantly alter and update their exhibits', options: LETTERS_AH, selectClass:'narrow' },
+    { type:'select-q', n:2, text:'Mention of the length of time people will queue up to see a blockbuster', options: LETTERS_AH, selectClass:'narrow' },
+    { type:'select-q', n:3, text:'Terms that people have used when referring to blockbusters', options: LETTERS_AH, selectClass:'narrow' },
+    { type:'select-q', n:4, text:'The various ways that institutions like museums get financial support', options: LETTERS_AH, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 5–8</strong><br>Complete the sentences below.<br>Choose <strong>NO MORE THAN THREE WORDS</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="q-item select-q-row" id="q-5">
+        <span class="q-num">5</span>
+        <span class="select-q-text">
+          These days, museum visitors tend to be referred to as
+          <input class="q-input" data-q="5" autocomplete="off" spellcheck="false">.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-6">
+        <span class="q-num">6</span>
+        <span class="select-q-text">
+          Museum curators now need
+          <input class="q-input" data-q="6" autocomplete="off" spellcheck="false">
+          rather than academic qualifications.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-7">
+        <span class="q-num">7</span>
+        <span class="select-q-text">
+          The linking of a range of public institutions that entertain the public is known as
+          <input class="q-input" data-q="7" autocomplete="off" spellcheck="false">.
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-8">
+        <span class="q-num">8</span>
+        <span class="select-q-text">
+          There is discussion about whether museums can be regarded in the same way as other
+          <input class="q-input" data-q="8" autocomplete="off" spellcheck="false">.
+        </span>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 9 and 10</strong><br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>The order in which you select them does not matter.</div>` },
+    { type:'html', content:`
+      <div class="mcq-pair-box">
+        <div class="mcq-pair-stem">Which <strong>TWO</strong> of the following are mentioned by the writer as <em>advantages</em> of blockbusters?</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">Some of the money they raise can be used for structural repairs.</span></li>
+          <li><span class="letter">B</span><span class="desc">They can provide funds to help support amateur artists.</span></li>
+          <li><span class="letter">C</span><span class="desc">Local services benefit from the extra business they bring about.</span></li>
+          <li><span class="letter">D</span><span class="desc">They encourage overseas workers into the local area.</span></li>
+          <li><span class="letter">E</span><span class="desc">They raise employee performance levels.</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:9, text:'First answer', options: LETTERS_AE, selectClass:'narrow' },
+    { type:'select-q', n:10, text:'Second answer', options: LETTERS_AE, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 11–13</strong><br>Choose <strong>THREE</strong> letters, <strong>A–G</strong>.<br>The order in which you select them does not matter.</div>` },
+    { type:'html', content:`
+      <div class="mcq-pair-box">
+        <div class="mcq-pair-stem">Which <strong>THREE</strong> of the following are mentioned by the writer as <em>disadvantages</em> of blockbusters?</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">They do not suit museum management styles.</span></li>
+          <li><span class="letter">B</span><span class="desc">Specialist business advice has to be paid for.</span></li>
+          <li><span class="letter">C</span><span class="desc">They involve an increased workload for personnel.</span></li>
+          <li><span class="letter">D</span><span class="desc">They do not increase overall annual visitor numbers.</span></li>
+          <li><span class="letter">E</span><span class="desc">They are very tiring to put on.</span></li>
+          <li><span class="letter">F</span><span class="desc">What is popular in one country may not be popular in another.</span></li>
+          <li><span class="letter">G</span><span class="desc">The content can be weakened through financial pressure.</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:11, text:'First answer', options: LETTERS_AG, selectClass:'narrow' },
+    { type:'select-q', n:12, text:'Second answer', options: LETTERS_AG, selectClass:'narrow' },
+    { type:'select-q', n:13, text:'Third answer', options: LETTERS_AG, selectClass:'narrow' }
+  ],
+
+  2: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 14–20</strong><br>Reading Passage 2 has seven paragraphs, <strong>A–G</strong>.<br>Choose the correct heading for each paragraph from the list of headings below.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Headings</div>
+        <ol>
+          <li><span class="letter">I</span><span class="desc">Fluctuations in bittern numbers over time</span></li>
+          <li><span class="letter">II</span><span class="desc">Research findings on habitat needs of adult bitterns</span></li>
+          <li><span class="letter">III</span><span class="desc">Predators in the natural world</span></li>
+          <li><span class="letter">IV</span><span class="desc">The importance in the natural world</span></li>
+          <li><span class="letter">V</span><span class="desc">Initial habitat investigation and decisions</span></li>
+          <li><span class="letter">VI</span><span class="desc">The need for co-operation to ensure nature preservation</span></li>
+          <li><span class="letter">VII</span><span class="desc">Impressive results of initial intervention</span></li>
+          <li><span class="letter">VIII</span><span class="desc">Determining how many bitterns there are</span></li>
+          <li><span class="letter">IX</span><span class="desc">Education as the key to preserving wildlife</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:14, text:'Paragraph A', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:15, text:'Paragraph B', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:16, text:'Paragraph C', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:17, text:'Paragraph D', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:18, text:'Paragraph E', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:19, text:'Paragraph F', options: ROMAN_I_IX, selectClass:'narrow' },
+    { type:'select-q', n:20, text:'Paragraph G', options: ROMAN_I_IX, selectClass:'narrow' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 21–25</strong><br>Answer the questions below.<br>Choose <strong>ONE WORD AND/OR A NUMBER</strong> from the passage for each answer.</div>` },
+    { type:'html', content:`
+      <div class="q-item select-q-row" id="q-21">
+        <span class="q-num">21</span>
+        <span class="select-q-text">
+          When was the bittern population largest?
+          <input class="q-input" data-q="21" autocomplete="off" spellcheck="false">
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-22">
+        <span class="q-num">22</span>
+        <span class="select-q-text">
+          What word is used in the passage to describe the bittern's character?
+          <input class="q-input" data-q="22" autocomplete="off" spellcheck="false">
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-23">
+        <span class="q-num">23</span>
+        <span class="select-q-text">
+          What is probably the main cause of death of bittern chicks?
+          <input class="q-input" data-q="23" autocomplete="off" spellcheck="false">
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-24">
+        <span class="q-num">24</span>
+        <span class="select-q-text">
+          What food supply do bittern chicks depend on?
+          <input class="q-input" data-q="24" autocomplete="off" spellcheck="false">
+        </span>
+      </div>
+      <div class="q-item select-q-row" id="q-25">
+        <span class="q-num">25</span>
+        <span class="select-q-text">
+          What other creature mentioned in the passage has also benefited from improvements made to the bittern's habitat?
+          <input class="q-input" data-q="25" autocomplete="off" spellcheck="false">
+        </span>
+      </div>
+    `},
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Question 26</strong><br>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</div>` },
+    { type:'mcq', n:26, text:'What is the main theme of Reading Passage 2?',
+      options: [
+        ['A','A — how one species may be helped at the expense of another'],
+        ['B','B — disagreement among environmentalists on methods to protect species from extinction'],
+        ['C','C — fighting the destruction of wetland reedbeds'],
+        ['D','D — how research and good management can save an endangered species']
+      ] }
+  ],
+
+  3: [
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 27–31</strong><br>Complete each sentence with the correct ending, <strong>A–H</strong>, below.</div>` },
+    { type:'html', content:`
+      <div class="matching-list">
+        <div class="matching-list-title">List of Endings</div>
+        <ol>
+          <li><span class="letter">A</span><span class="desc">should be easy to understand.</span></li>
+          <li><span class="letter">B</span><span class="desc">can improve without treatment.</span></li>
+          <li><span class="letter">C</span><span class="desc">can cost the patient less.</span></li>
+          <li><span class="letter">D</span><span class="desc">ought to last a minimum length of time.</span></li>
+          <li><span class="letter">E</span><span class="desc">can require a range of different products.</span></li>
+          <li><span class="letter">F</span><span class="desc">can be described as serious.</span></li>
+          <li><span class="letter">G</span><span class="desc">should give it greater recognition.</span></li>
+          <li><span class="letter">H</span><span class="desc">should be able to get a high income.</span></li>
+        </ol>
+      </div>
+    `},
+    { type:'select-q', n:27, text:'An appointment with an alternative practitioner', options: ENDINGS_AH, selectClass:'wide' },
+    { type:'select-q', n:28, text:"An alternative practitioner's explanation of their treatment", options: ENDINGS_AH, selectClass:'wide' },
+    { type:'select-q', n:29, text:'If alternative practitioners have faith in their treatment, they', options: ENDINGS_AH, selectClass:'wide' },
+    { type:'select-q', n:30, text:"Quite often, a patient's illness", options: ENDINGS_AH, selectClass:'wide' },
+    { type:'select-q', n:31, text:'Conventional doctors are aware of the placebo effect and they', options: ENDINGS_AH, selectClass:'wide' },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 32–34</strong><br>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</div>` },
+    { type:'mcq', n:32, text:'In the third paragraph, the writer says that the placebo effect',
+      options: [
+        ['A','A — works best in tablet form.'],
+        ['B','B — is a new type of medical treatment.'],
+        ['C','C — is trusted more by some patients than others.'],
+        ['D','D — has a significant role in both alternative and conventional medicine.']
+      ] },
+    { type:'mcq', n:33, text:'A reference is made to anger and sadness in order to show that',
+      options: [
+        ['A','A — personal feelings can alter our physical condition.'],
+        ['B','B — some human behaviour has no clear explanation.'],
+        ['C','C — placebos, like emotions, are experienced by everyone.'],
+        ['D','D — people find some physical reactions hard to control.']
+      ] },
+    { type:'mcq', n:34, text:"The writer refers to Benedetti's experiment in order to",
+      options: [
+        ['A','A — describe a new technique for measuring pain.'],
+        ['B','B — argue that morphine is more effective than other painkillers.'],
+        ['C','C — show evidence that placebos may work partly through natural opiates.'],
+        ['D','D — criticise the use of saline solutions in pain studies.']
+      ] },
+
+    { type:'group-header', content:`<div class="q-instr"><strong>Questions 35–40</strong><br>Do the following statements agree with the claims of the writer in Reading Passage 3?<br>Write <strong>YES</strong> if the statement agrees with the claims of the writer, <strong>NO</strong> if the statement contradicts the claims of the writer, <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</div>` },
+    { type:'ynng', n:35, text:'Scientists now have enough information to understand how the placebo effect becomes active in people.' },
+    { type:'ynng', n:36, text:'As a result of experiments, some painkillers have been taken off the market.' },
+    { type:'ynng', n:37, text:'Individual preference can have an impact on the effectiveness of different brands of headache tablet.' },
+    { type:'ynng', n:38, text:'Doctors expressed a range of views on the drug chlorpromazine when it was first introduced.' },
+    { type:'ynng', n:39, text:"Ernst's study had a big influence on doctors' behaviour with patients." },
+    { type:'ynng', n:40, text:'Alternative practitioners work in a way that is likely to trigger the placebo effect.' }
+  ]
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  activePassage: 1,
+  answers: {},
+  passageSize: 14,
+  questionSize: 13
+};
+
+/* DOM refs */
+const passagePane = document.getElementById('passagePane');
+const questionPane = document.getElementById('questionPane');
+const bottomNav = document.getElementById('bottomNav');
+const progressFill = document.getElementById('progressFill');
+const hlPill = document.getElementById('hlPill');
+
+/* ============================================================
+   RENDER
+============================================================ */
+function renderPassage(){
+  passagePane.innerHTML = PASSAGES[state.activePassage];
+  passagePane.style.fontSize = state.passageSize + 'px';
+}
+
+function renderRadioItem(n, text, optionPairs, current, layoutClass){
+  const opts = optionPairs.map(([v, label]) => `
+    <label class="opt-label ${current === v ? 'selected' : ''}">
+      <input type="radio" name="q${n}" value="${v}" ${current === v ? 'checked' : ''}> ${label}
+    </label>`).join('');
+  return `<div class="q-item" id="q-${n}">
+    <div class="q-text"><span class="q-num">${n}</span><span class="q-text-body">${text}</span></div>
+    <div class="q-options ${layoutClass}">${opts}</div>
+  </div>`;
+}
+
+function renderQuestions(){
+  const items = QUESTIONS[state.activePassage];
+  let html = '';
+  for (const item of items) {
+    if (item.type === 'group-header') {
+      html += item.content;
+    }
+    else if (item.type === 'tfng') {
+      html += renderRadioItem(item.n, item.text, [['T','TRUE'],['F','FALSE'],['NGV','NOT GIVEN']], state.answers[item.n] || '', 'radio-row');
+    }
+    else if (item.type === 'ynng') {
+      html += renderRadioItem(item.n, item.text, [['Y','YES'],['N','NO'],['NGV','NOT GIVEN']], state.answers[item.n] || '', 'radio-row');
+    }
+    else if (item.type === 'mcq') {
+      html += renderRadioItem(item.n, item.text, item.options, state.answers[item.n] || '', 'mcq-vert');
+    }
+    else if (item.type === 'select-q') {
+      const cur = state.answers[item.n] || '';
+      const sc = item.selectClass || '';
+      const opts = `<option value="">— select —</option>` +
+        item.options.map(([v, label]) =>
+          `<option value="${v}" ${cur === v ? 'selected' : ''}>${escapeAttr(label)}</option>`
+        ).join('');
+      html += `<div class="q-item select-q-row" id="q-${item.n}">
+        <span class="q-num">${item.n}</span>
+        <span class="select-q-text">${item.text}</span>
+        <select class="q-select ${sc} ${cur ? 'has-value' : ''}" data-q="${item.n}">${opts}</select>
+      </div>`;
+    }
+    else if (item.type === 'html') {
+      html += item.content;
+    }
+  }
+  questionPane.innerHTML = html;
+  questionPane.style.fontSize = state.questionSize + 'px';
+  hydrateInputs();
+  attachQuestionListeners();
+}
+
+function hydrateInputs(){
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    const key = inp.dataset.q;
+    const cur = state.answers[key];
+    if (cur && !inp.value) inp.value = cur;
+    if (inp.value) inp.classList.add('has-value');
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    const key = sel.dataset.q;
+    const cur = state.answers[key];
+    if (cur && !sel.value) { sel.value = cur; sel.classList.add('has-value'); }
+  });
+}
+
+function attachQuestionListeners(){
+  questionPane.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', e => {
+      const name = e.target.name;
+      const key = name.substring(1);
+      state.answers[key] = e.target.value;
+      questionPane.querySelectorAll(`input[name="${name}"]`).forEach(rr => {
+        rr.closest('.opt-label').classList.toggle('selected', rr.checked);
+      });
+      updateNav();
+      updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('input.q-input[data-q]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value.trim();
+      if (v) state.answers[key] = e.target.value;
+      else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav();
+      updateProgress();
+    });
+  });
+  questionPane.querySelectorAll('select.q-select[data-q]').forEach(sel => {
+    sel.addEventListener('change', e => {
+      const key = e.target.dataset.q;
+      const v = e.target.value;
+      if (v) state.answers[key] = v;
+      else delete state.answers[key];
+      e.target.classList.toggle('has-value', !!v);
+      updateNav();
+      updateProgress();
+    });
+  });
+}
+
+/* ============================================================
+   BOTTOM NAV
+============================================================ */
+function renderNav(){
+  const passes = Object.keys(pRanges).map(Number);
+  let html = '';
+  passes.forEach((p, i) => {
+    if (i > 0) html += `<div class="nav-sep"></div>`;
+    const [first, last] = pRanges[p];
+    if (p === state.activePassage) {
+      html += `<span class="nav-pass active" data-pass="${p}">Passage ${p}</span>`;
+      for (let q = first; q <= last; q++) {
+        const ans = state.answers[q];
+        html += `<button class="q-pill ${ans ? 'answered' : ''}" data-q="${q}">${q}</button>`;
+      }
+    } else {
+      const total = last - first + 1;
+      let answered = 0;
+      for (let q = first; q <= last; q++) if (state.answers[q]) answered++;
+      html += `<span class="nav-pass" data-pass="${p}">Passage ${p} <small>(${answered} of ${total} answered)</small></span>`;
+    }
+  });
+  html += `<div class="nav-spacer"></div>`;
+  html += `<button class="submit-btn" id="submitBtn">✓ Submit</button>`;
+  bottomNav.innerHTML = html;
+
+  bottomNav.querySelectorAll('.q-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      const q = p.dataset.q;
+      const el = document.getElementById('q-' + q) || questionPane.querySelector(`[data-q="${q}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (el.classList && el.tagName !== 'INPUT' && el.tagName !== 'SELECT') {
+          el.style.transition = 'background .3s';
+          el.style.background = '#fffbe5';
+          setTimeout(() => el.style.background = '', 700);
+        } else if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+          setTimeout(() => el.focus(), 320);
+        }
+      }
+    });
+  });
+  bottomNav.querySelectorAll('.nav-pass').forEach(l => {
+    l.addEventListener('click', () => {
+      const p = parseInt(l.dataset.pass, 10);
+      if (p !== state.activePassage) {
+        state.activePassage = p;
+        renderPassage(); renderQuestions(); renderNav();
+        passagePane.scrollTop = 0; questionPane.scrollTop = 0;
+      }
+    });
+  });
+  document.getElementById('submitBtn').addEventListener('click', showResults);
+}
+
+function updateNav(){ renderNav(); }
+function updateProgress(){
+  const answered = Object.keys(state.answers).length;
+  progressFill.style.width = (answered / TOTAL_Q * 100) + '%';
+}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+passagePane.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) { hlPill.style.display = 'none'; return; }
+    const range = sel.getRangeAt(0);
+    if (!passagePane.contains(range.commonAncestorContainer)) { hlPill.style.display = 'none'; return; }
+    if (range.toString().trim() === '') { hlPill.style.display = 'none'; return; }
+    const rect = range.getBoundingClientRect();
+    hlPill.style.display = 'block';
+    const pillW = hlPill.offsetWidth, pillH = hlPill.offsetHeight;
+    let left = rect.left + rect.width / 2 - pillW / 2;
+    let top = rect.top - pillH - 8;
+    if (top < 8) top = rect.bottom + 8;
+    if (left < 8) left = 8;
+    if (left + pillW > window.innerWidth - 8) left = window.innerWidth - pillW - 8;
+    hlPill.style.left = left + 'px';
+    hlPill.style.top = top + 'px';
+  }, 0);
+});
+hlPill.addEventListener('mousedown', e => {
+  e.preventDefault();
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const range = sel.getRangeAt(0);
+  if (!passagePane.contains(range.commonAncestorContainer)) return;
+  try {
+    const span = document.createElement('span');
+    span.className = 'highlight';
+    span.appendChild(range.extractContents());
+    range.insertNode(span);
+    sel.removeAllRanges();
+  } catch (err) {}
+  hlPill.style.display = 'none';
+});
+passagePane.addEventListener('click', e => {
+  if (e.target.classList && e.target.classList.contains('highlight')) {
+    const span = e.target;
+    const parent = span.parentNode;
+    while (span.firstChild) parent.insertBefore(span.firstChild, span);
+    parent.removeChild(span);
+    parent.normalize();
+  }
+});
+document.addEventListener('mousedown', e => {
+  if (e.target !== hlPill && !passagePane.contains(e.target)) hlPill.style.display = 'none';
+});
+
+/* ============================================================
+   DIVIDER DRAG
+============================================================ */
+const divider = document.getElementById('divider');
+const mainEl = document.querySelector('.main');
+let dragging = false;
+divider.addEventListener('mousedown', e => {
+  dragging = true;
+  divider.classList.add('dragging');
+  document.body.classList.add('dragging');
+  e.preventDefault();
+});
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const rect = mainEl.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const pct = (x / rect.width) * 100;
+  if (pct >= 20 && pct <= 80) {
+    passagePane.style.flex = `0 0 ${pct}%`;
+    passagePane.style.width = `${pct}%`;
+  }
+});
+document.addEventListener('mouseup', () => {
+  if (dragging) { dragging = false; divider.classList.remove('dragging'); document.body.classList.remove('dragging'); }
+});
+
+/* ============================================================
+   MENU + FONT CONTROLS
+============================================================ */
+const hamburger = document.getElementById('hamburger');
+const menuPanel = document.getElementById('menuPanel');
+hamburger.addEventListener('click', e => { e.stopPropagation(); menuPanel.classList.toggle('open'); });
+document.addEventListener('click', e => {
+  if (!menuPanel.contains(e.target) && e.target !== hamburger && !hamburger.contains(e.target)) menuPanel.classList.remove('open');
+});
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    const dir = parseInt(btn.dataset.dir, 10);
+    if (target === 'passage') {
+      state.passageSize = Math.min(22, Math.max(10, state.passageSize + dir));
+      passagePane.style.fontSize = state.passageSize + 'px';
+      document.getElementById('passSizeVal').textContent = state.passageSize + 'px';
+    } else {
+      state.questionSize = Math.min(22, Math.max(10, state.questionSize + dir));
+      questionPane.style.fontSize = state.questionSize + 'px';
+      document.getElementById('qSizeVal').textContent = state.questionSize + 'px';
+    }
+  });
+});
+
+/* ============================================================
+   RESULTS / BAND
+============================================================ */
+function bandFromCorrect(correct){
+  if (correct >= 39) return 9.0;
+  if (correct >= 37) return 8.5;
+  if (correct >= 35) return 8.0;
+  if (correct >= 33) return 7.5;
+  if (correct >= 30) return 7.0;
+  if (correct >= 27) return 6.5;
+  if (correct >= 23) return 6.0;
+  if (correct >= 19) return 5.5;
+  if (correct >= 15) return 5.0;
+  if (correct >= 13) return 4.5;
+  return 4.0;
+}
+
+function showResults(){
+  const passes = Object.keys(pRanges).map(Number);
+  let totalCorrect = 0;
+  let html = '';
+  passes.forEach(p => {
+    const [first, last] = pRanges[p];
+    let correct = 0;
+    let rows = '';
+    for (let q = first; q <= last; q++) {
+      const u = state.answers[q];
+      const c = AK[q];
+      let ok;
+      if (ANSWER_GROUPS[q]) {
+        ok = checkGroup(q, u);
+      } else {
+        ok = checkAnswer(u, c);
+      }
+      if (ok) correct++;
+      rows += `<tr class="${ok?'row-correct':'row-wrong'}">
+        <td><strong>${q}</strong></td>
+        <td>${u !== undefined && u !== '' ? displayAnswer(u) : '<em style="color:#999">—</em>'}</td>
+        <td>${displayCorrect(c)}</td>
+        <td class="mark ${ok?'mark-ok':'mark-x'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    totalCorrect += correct;
+    const total = last - first + 1;
+    const pct = (correct / total) * 100;
+    const badge = pct >= 70 ? 'badge-green' : pct >= 50 ? 'badge-orange' : 'badge-red';
+    html += `<div class="result-pass">
+      <div class="result-pass-header">
+        <div class="result-pass-info">
+          <div class="result-pass-title">Passage ${p}: ${PASSAGE_TITLES[p]}</div>
+          <div class="result-pass-sub">Questions ${first}–${last}</div>
+        </div>
+        <div class="score-badge ${badge}">${correct} / ${total}</div>
+      </div>
+      <table class="result-table">
+        <thead><tr><th>Q#</th><th>Your Answer</th><th>Correct Answer</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  });
+  const totalPct = (totalCorrect / TOTAL_Q) * 100;
+  const band = bandFromCorrect(totalCorrect);
+  html += `<div class="total-strip">
+    <div class="total-block"><div class="total-label">Score</div><div class="total-value">${totalCorrect} / ${TOTAL_Q}</div></div>
+    <div class="total-block"><div class="total-label">Accuracy</div><div class="total-value">${totalPct.toFixed(0)}%</div></div>
+    <div class="total-block"><div class="total-label">Estimated Band</div><div class="total-value total-band-value">${band.toFixed(1)}</div></div>
+  </div>`;
+  document.getElementById('resultsBody').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
+document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('modal').classList.remove('open'); });
+
+/* INIT */
+renderPassage();
+renderQuestions();
+renderNav();
+updateProgress();
+</script>
+</body>
+</html>

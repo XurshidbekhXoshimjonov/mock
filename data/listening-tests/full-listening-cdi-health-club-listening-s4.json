@@ -1,0 +1,242 @@
+{
+  "id": "full-listening-cdi-health-club-listening-s4",
+  "slug": "full-listening-cdi-health-club-listening-s4",
+  "title": "Full Listening CDI - Health Club Customer Research - Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/full-listening-cdi-health-club.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Juniper was one of the first plants to colonise Britain after the last ice age",
+      "text": "Juniper was one of the first plants to colonise Britain after the last ice age",
+      "options": [],
+      "answer": "ice age"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+      "text": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+      "options": [],
+      "answer": "invisible"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Oils from the plant were used to prevent infections spreading.",
+      "text": "Oils from the plant were used to prevent infections spreading.",
+      "options": [],
+      "answer": "infections"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Nowadays, its berries are widely used to flavour food and drink.",
+      "text": "Nowadays, its berries are widely used to flavour food and drink.",
+      "options": [],
+      "answer": "flavor | flavour"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Juniper plants also support several species of insects and fungi.",
+      "text": "Juniper plants also support several species of insects and fungi.",
+      "options": [],
+      "answer": "fungi"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "In current juniper populations, ratios of the sexes are poor.",
+      "text": "In current juniper populations, ratios of the sexes are poor.",
+      "options": [],
+      "answer": "sexes"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+      "text": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+      "options": [],
+      "answer": "extinction"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Plantlife is trialling novel techniques across lowland areas of England.",
+      "text": "Plantlife is trialling novel techniques across lowland areas of England.",
+      "options": [],
+      "answer": "lowland"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "One measure is to introduce shelter for seedlings.",
+      "text": "One measure is to introduce shelter for seedlings.",
+      "options": [],
+      "answer": "shelter"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "A further step is to plant cuttings from healthy bushes.",
+      "text": "A further step is to plant cuttings from healthy bushes.",
+      "options": [],
+      "answer": "cuttings"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-cdi-health-club-listening-full",
+  "createdAt": "2026-06-21T05:03:35.738Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+      "answerText": "31: ice age\n32: invisible\n33: infections\n34: flavor | flavour\n35: fungi\n36: sexes\n37: extinction\n38: lowland\n39: shelter\n40: cuttings",
+      "blocks": [
+        {
+          "id": "health-club-part-4-juniper",
+          "type": "note_completion",
+          "title": "Saving the juniper plant",
+          "questionRange": "Questions 31-40",
+          "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+          "content": [
+            "<strong>Background</strong>",
+            "Juniper was one of the first plants to colonise Britain after the last {{31}}",
+            "Its smoke is virtually {{32}}, so juniper wood was used as fuel in illegal activities.",
+            "Oils from the plant were used to prevent {{33}} spreading.",
+            "Nowadays, its berries are widely used to {{34}} food and drink.",
+            "<strong>Ecology</strong>",
+            "Juniper plants also support several species of insects and {{35}}.",
+            "<strong>Problems</strong>",
+            "In current juniper populations, ratios of the {{36}} are poor.",
+            "Many of the bushes in each group are of the same age, so {{37}} of whole populations is rapid.",
+            "<strong>Solutions</strong>",
+            "Plantlife is trialling novel techniques across {{38}} areas of England.",
+            "One measure is to introduce {{39}} for seedlings.",
+            "A further step is to plant {{40}} from healthy bushes."
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Juniper was one of the first plants to colonise Britain after the last ice age",
+              "text": "Juniper was one of the first plants to colonise Britain after the last ice age",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ice age"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+              "text": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "invisible"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Oils from the plant were used to prevent infections spreading.",
+              "text": "Oils from the plant were used to prevent infections spreading.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "infections"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Nowadays, its berries are widely used to flavour food and drink.",
+              "text": "Nowadays, its berries are widely used to flavour food and drink.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "flavor | flavour"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Juniper plants also support several species of insects and fungi.",
+              "text": "Juniper plants also support several species of insects and fungi.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fungi"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "In current juniper populations, ratios of the sexes are poor.",
+              "text": "In current juniper populations, ratios of the sexes are poor.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sexes"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+              "text": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "extinction"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Plantlife is trialling novel techniques across lowland areas of England.",
+              "text": "Plantlife is trialling novel techniques across lowland areas of England.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lowland"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "One measure is to introduce shelter for seedlings.",
+              "text": "One measure is to introduce shelter for seedlings.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "shelter"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "A further step is to plant cuttings from healthy bushes.",
+              "text": "A further step is to plant cuttings from healthy bushes.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cuttings"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    }
+  ],
+  "assetFiles": [
+    "/uploads/audio/full-listening-cdi-health-club.mp3"
+  ]
+}

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IELTSX — Test 8 Reading Part 1</title>
+<style>
+  :root{
+    --text:#071735;
+    --muted:#536176;
+    --border:#dfe5ee;
+    --border2:#cfd8e3;
+    --blue:#0b63e5;
+    --red:#e31837;
+    --soft:#f5f7fa;
+    --instruction:#e9edf2;
+    --fontPassage:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:#fff;
+    overflow:hidden;
+  }
+  .app{
+    height:100vh;
+    display:grid;
+    grid-template-rows:64px 1fr 56px;
+  }
+  .topbar{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:18px;
+    height:64px;
+    padding:0 16px;
+    border-bottom:1px solid var(--border);
+    background:#fff;
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .ielts{color:#d91532;font-weight:900;font-size:22px;letter-spacing:-.7px}
+  .test-title{font-weight:800;font-size:15px;padding-left:14px;border-left:1px solid var(--border)}
+  .timer{display:flex;align-items:center;gap:10px}
+  .clock{width:26px;height:26px;border:3px solid var(--text);border-radius:50%;position:relative}
+  .clock:before{content:"";position:absolute;width:7px;height:3px;background:var(--text);left:50%;top:50%;transform:translate(-1px,-1px)}
+  .clock:after{content:"";position:absolute;width:8px;height:3px;background:var(--text);left:50%;top:50%;transform:translate(-1px,-1px) rotate(-90deg);transform-origin:left center}
+  .time{font-weight:900;font-size:22px;letter-spacing:.4px;line-height:1}
+  .time-label{font-size:10px;color:#435168;font-weight:800;letter-spacing:.7px;margin-top:3px}
+  .actions{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+  .btn{
+    min-height:38px;
+    padding:0 18px;
+    border:1px solid var(--border2);
+    border-radius:6px;
+    background:#fff;
+    color:var(--text);
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .submit{background:var(--red);border-color:var(--red);color:#fff}
+  .notes-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:20px;height:20px;border-radius:50%;
+    background:#e73c91;color:#fff;font-size:12px;margin-left:5px;
+  }
+
+  .split{
+    display:grid;
+    grid-template-columns:49% 51%;
+    min-height:0;
+    border-bottom:1px solid var(--border);
+  }
+  .pane{
+    min-height:0;
+    overflow:auto;
+    scrollbar-color:#aeb8c5 #eef1f5;
+    scrollbar-width:thin;
+  }
+  .pane::-webkit-scrollbar{width:10px}
+  .pane::-webkit-scrollbar-track{background:#eef1f5}
+  .pane::-webkit-scrollbar-thumb{background:#aeb8c5;border-radius:99px;border:2px solid #eef1f5}
+  .left{
+    padding:0 66px 54px 106px;
+    font-size:var(--fontPassage);
+    line-height:1.55;
+  }
+  .left h1{font-size:28px;margin:28px 0 18px}
+  .left .subtitle{font-size:16px;color:#5d6a7f;font-style:italic;margin:-8px 0 22px}
+  .left p{margin:0 0 22px;text-align:left}
+  .pl{font-weight:900;color:#d91532;margin-right:8px}
+  .right{border-left:1px solid var(--border);padding:28px 36px 80px 30px}
+  .right h2{margin:0 0 10px;font-size:22px}
+  .hint{margin:0 0 22px;color:#4e5c70;font-size:14px}
+
+  .task-card{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px 20px 26px;
+    background:#fff;
+  }
+  .task-card h3{margin:0 0 12px;font-size:16px}
+  .instruction{font-size:14px;line-height:1.5;margin:0 0 16px}
+  .notes-box{
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:#fafbfc;
+    padding:18px 20px;
+    margin:16px 0 24px;
+  }
+  .notes-title{
+    text-align:center;
+    font-weight:900;
+    padding-bottom:12px;
+    margin-bottom:14px;
+    border-bottom:1px solid var(--border2);
+  }
+  ul{margin:0;padding-left:20px}
+  li{margin:12px 0;line-height:1.7}
+  li::marker{color:var(--red)}
+  .sub{list-style:none;margin-top:8px;padding-left:20px}
+  .sub li:before{content:"–";margin-right:12px;color:#6b7280;font-weight:900}
+  .blank{
+    display:inline-flex;align-items:center;gap:6px;margin:0 4px;vertical-align:middle;
+  }
+  .q-num{
+    min-width:28px;height:28px;
+    border-radius:5px;
+    background:#eef2f7;
+    color:#17233c;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:13px;
+  }
+  .blank input{
+    width:150px;height:38px;
+    border:1px solid var(--border2);
+    border-radius:5px;
+    padding:0 10px;
+    font-size:14px;
+    outline:none;
+  }
+  .blank input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,99,229,.12)}
+
+  .tf-box{margin:16px 0 18px;border:1px solid var(--border);background:var(--instruction)}
+  .tf-row{display:grid;grid-template-columns:210px 1fr;min-height:39px;align-items:center;font-size:14px}
+  .tf-row+.tf-row{border-top:1px solid #dce2eb}
+  .tf-row b,.tf-row span{padding:0 14px}
+
+  .q-item{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;margin-top:17px;align-items:start}
+  .q-item .q-num{width:28px}
+  .q-text{font-size:14px;line-height:1.45;margin:3px 0 10px}
+  select{
+    width:320px;max-width:100%;height:38px;
+    border:1px solid var(--border2);
+    border-radius:5px;
+    background:#fff;
+    color:var(--text);
+    padding:0 12px;
+    font-size:14px;
+    font-weight:700;
+    outline:none;
+  }
+  select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,99,229,.12)}
+
+  .bottom{
+    height:56px;
+    display:grid;
+    grid-template-columns:160px 1fr 160px;
+    align-items:center;
+    padding:0 16px;
+    background:#fff;
+    box-shadow:0 -4px 15px rgba(7,23,53,.04);
+  }
+  .nav-btn{
+    height:38px;border:1px solid var(--border);border-radius:7px;
+    background:#fff;color:#a8b2c0;font-weight:900;padding:0 18px;
+  }
+  .next{margin-left:auto;background:var(--blue);color:#fff;border-color:var(--blue)}
+  .tabs{display:flex;align-items:center;justify-content:center;gap:66px;height:100%}
+  .tab{border:0;background:transparent;font-weight:800;font-size:14px;cursor:pointer;min-width:72px;height:100%;position:relative;color:#0b1831}
+  .tab.active{color:var(--blue)}
+  .tab.active:after{content:"";position:absolute;left:4px;right:4px;bottom:18px;height:3px;border-radius:99px;background:var(--blue)}
+  .status{
+    position:absolute;left:24px;bottom:66px;
+    font-size:13px;font-weight:800;color:#26344b;
+  }
+  .complete{
+    position:absolute;right:24px;bottom:66px;
+    font-size:13px;font-weight:800;color:#26344b;
+  }
+  .result{
+    display:none;
+    margin-top:20px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:#f8fafc;
+    padding:14px;
+    font-size:14px;
+    line-height:1.6;
+  }
+  .result.show{display:block}
+  .ok{color:#0f8a4b;font-weight:900}
+  .bad{color:#d91532;font-weight:900}
+  .note-panel{
+    display:none;
+    position:fixed;right:18px;top:78px;
+    width:340px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(7,23,53,.12);
+    padding:16px;
+    z-index:10;
+  }
+  .note-panel.show{display:block}
+  textarea{width:100%;min-height:150px;border:1px solid var(--border2);border-radius:8px;padding:10px;font:14px Arial;resize:vertical}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="ielts">IELTS</div>
+      <div class="test-title">Reading — Part 1</div>
+    </div>
+    <div class="timer">
+      <div class="clock"></div>
+      <div>
+        <div class="time" id="timer">20:00</div>
+        <div class="time-label">TIME LEFT</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn">▦ Dashboard</button>
+      <button class="btn" id="notesBtn">🧾 Notes <span class="notes-badge" id="notesCount">0</span></button>
+      <button class="btn submit" id="submitBtn">Submit</button>
+    </div>
+  </header>
+
+  <main class="split">
+    <section class="pane left">
+      <h1>Book review: <em>Triumph of the City</em></h1>
+      <p><span class="pl">A</span><em>Triumph of the City</em>, by Edward Glaeser, is a thrilling and very readable hymn of praise to an invention so vast and so effective that it is generally taken for granted. More than half the global population already live in urban areas and, every month, five million more flood into the cities of the developed and developing worlds. The crowds and poverty of some of these modern cities may horrify us. They shouldn't, says Glaeser — they are signs of growth, energy and aspiration. Cities are our best and brightest hope.</p>
+
+      <p><span class="pl">B</span>This idea has had more than two hundred years of resistance. Not long after the Industrial Revolution began in Britain, the Romantic poets turned away from the smoke and factories of their cities to celebrate the air and light of untouched nature. In 19th-century America, the writer Henry David Thoreau retreated to the wilderness of Walden Pond to live the solitary, simple life, and convinced generations of Americans that cities were bad and nature was good.</p>
+
+      <p><span class="pl">C</span>They had, Glaeser admits, a point. The early industrial cities were dirty, since they lacked efficient waste disposal systems, and disease spread rapidly among the population. But more importantly they were profitable, and there were enormous commercial incentives to make them work, as well as political ones. Their transformation could be achieved at a stroke: in the second half of the 19th century, the French Emperor Napoleon III gave Baron Haussmann unrestricted power to turn the slum-infested city of Paris into one of the wonders and delights of the modern world. Or the transformation could be done by trial and error. Glaeser gives a brilliant account of the stop-start progression of New York to its late 20th-century position as the cultural and economic centre of the world. Either way, Paris, New York and other cities developed because they were truly effective markets of ideas and innovation.</p>
+
+      <p><span class="pl">D</span>For these and many other reasons, we should not be so upset by the spectacle of urban poverty. The poor flock to cities in the hope of becoming richer (which, by and large, they do). They also reinvigorate the economy of the city. It is folly to drive them away by forcing property prices to soar with unreasonable planning regulations. Instead, cities should build more houses and thereby hold property prices in check.</p>
+
+      <p><span class="pl">E</span>It can go wrong, of course. In Glaeser's view, this is primarily because municipal authorities fail to understand the principal virtues of their cities. The heart of Paris, as many Parisians say, is turning into a museum because of the desire to preserve Baron Haussmann's 19th-century boulevards. Glaeser defends their preservation, but argues that in the 1950s the French made a mistake in establishing a huge high-rise commercial development — <em>La Défense</em> — on the outskirts of the city. Far better, he says, to have turned the central area of Montparnasse into a new commercial district. This would have revitalised much of the city centre without destroying its fabric. In India, Mumbai could save itself from ever-more inefficient sprawl over the surrounding area simply by relaxing the rules presently imposed on the height of new constructions.</p>
+
+      <p><span class="pl">F</span>In America, it is the suburbs that have proved to be the real disaster. Glaeser is repentant on this subject himself. He moved to the suburbs when he had children. His entirely legitimate excuse is that the government made him (and millions like him) do it. By under-taxing petrol and imposing tight planning restrictions on inner cities that drove up the cost of property, it made flight to the suburbs more or less inevitable for the middle classes.</p>
+
+      <p><span class="pl">G</span>This is a disaster because nothing is more inefficient than a suburb. Suburbanites mingle less, and lose the face-to-face contact that makes being an urbanite so much more creative. Moreover, houses are costlier to heat and cool than flats, and suburbanites drive thousands more miles per year than city dwellers. Every aspect of life involves more consumption. This leads to the strongest and newest argument in favour of cities — they are good for the environment. To live in the country or the suburbs is to have a vastly larger carbon footprint than any urbanite.</p>
+
+      <p><span class="pl">H</span>Full of characters and accessible information, this is a tremendous book, not least because, like me, you will find yourself constantly seeking reasons to disagree. Like the poor in the city, this is a sign of success. If you hate the city and get moist-eyed at the thought of the country then, one way or another, Glaeser is the man you will have to take on.</p>
+    </section>
+
+    <section class="pane right">
+      <h2>Questions 1–13</h2>
+      <p class="hint">Complete the tasks below. Your answers are saved while you move between passages.</p>
+
+      <div class="task-card">
+        <h3>Questions 1–8</h3>
+        <p class="instruction">Complete the notes below.<br>Choose <b>ONE WORD ONLY</b> from the passage for each answer.</p>
+
+        <div class="notes-box">
+          <div class="notes-title">Cities</div>
+          <ul>
+            <li>Problems with early cities
+              <ul class="sub">
+                <li>dirt</li>
+                <li>
+                  <span class="blank"><span class="q-num">1</span><input data-q="1" data-answer="disease"></span>
+                  spread rapidly among the population
+                </li>
+              </ul>
+            </li>
+
+            <li>There were commercial and
+              <span class="blank"><span class="q-num">2</span><input data-q="2" data-answer="political"></span>
+              reasons for improving them.
+            </li>
+
+            <li>Urban poverty is not a major problem because poor people
+              <ul class="sub">
+                <li>generally get
+                  <span class="blank"><span class="q-num">3</span><input data-q="3" data-answer="richer"></span>
+                </li>
+                <li>help to develop the urban
+                  <span class="blank"><span class="q-num">4</span><input data-q="4" data-answer="economy"></span>
+                </li>
+              </ul>
+            </li>
+
+            <li>Cities do have some problems — e.g.
+              <ul class="sub">
+                <li>the centre of Paris is becoming a
+                  <span class="blank"><span class="q-num">5</span><input data-q="5" data-answer="museum"></span>
+                </li>
+                <li>Mumbai is negatively affected by height restrictions of new buildings.</li>
+              </ul>
+            </li>
+
+            <li>In the US, middle classes moved to suburbs due to
+              <ul class="sub">
+                <li>cheap petrol</li>
+                <li>high
+                  <span class="blank"><span class="q-num">6</span><input data-q="6" data-answer="property"></span>
+                  prices in inner cities
+                </li>
+              </ul>
+            </li>
+
+            <li>Disadvantages of suburb
+              <ul class="sub">
+                <li>less personal
+                  <span class="blank"><span class="q-num">7</span><input data-q="7" data-answer="contact"></span>
+                </li>
+                <li>increased
+                  <span class="blank"><span class="q-num">8</span><input data-q="8" data-answer="consumption"></span>
+                  of resources such as heating — damaging the environment
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h3>Questions 9–13</h3>
+        <p class="instruction">
+          Do the following statements agree with the information given in Reading Passage 1?
+          <br><br>In boxes 9–13 on your answer sheet, write
+        </p>
+        <div class="tf-box">
+          <div class="tf-row"><b>TRUE.</b><span>if the statement agrees with the information</span></div>
+          <div class="tf-row"><b>FALSE.</b><span>if the statement contradicts the information</span></div>
+          <div class="tf-row"><b>NOT GIVEN.</b><span>if there is no information on this</span></div>
+        </div>
+
+        <div id="tfQuestions"></div>
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="status"><span id="answered">0</span> of 13 answered</div>
+  <div class="complete"><span id="complete">0</span> / 13 complete</div>
+
+  <footer class="bottom">
+    <button class="nav-btn">‹ Previous</button>
+    <div class="tabs">
+      <button class="tab active">Part 1</button>
+      <button class="tab">Part 2</button>
+      <button class="tab">Part 3</button>
+    </div>
+    <button class="nav-btn next">Next ›</button>
+  </footer>
+</div>
+
+<aside class="note-panel" id="notePanel">
+  <h3>Notes</h3>
+  <textarea id="notes" placeholder="Write your notes here..."></textarea>
+</aside>
+
+<script>
+const tfData = [
+  [9, "Glaeser believes that congestion and poverty in some modern cities indicate serious problems.", "FALSE"],
+  [10, "The writer Henry David Thoreau discussed the ideas of the Romantic poets in his work.", "TRUE"],
+  [11, "Emperor Napoleon III was influenced by the complaints of poor people living in Paris.", "NOT GIVEN"],
+  [12, "Strict planning regulations may be beneficial for a city's development.", "FALSE"],
+  [13, "Glaeser argues that the location of commercial development at La Défense was a bad idea.", "TRUE"]
+];
+
+const tfBox = document.getElementById("tfQuestions");
+tfBox.innerHTML = tfData.map(([n, text, ans]) => `
+  <div class="q-item">
+    <div class="q-num">${n}</div>
+    <div>
+      <p class="q-text">${text}</p>
+      <select data-q="${n}" data-answer="${ans}">
+        <option value="">Select answer</option>
+        <option>TRUE</option>
+        <option>FALSE</option>
+        <option>NOT GIVEN</option>
+      </select>
+    </div>
+  </div>
+`).join("");
+
+const controls = [...document.querySelectorAll("input[data-q], select[data-q]")];
+const answered = document.getElementById("answered");
+const complete = document.getElementById("complete");
+
+function updateProgress(){
+  const count = controls.filter(el => el.value.trim()).length;
+  answered.textContent = count;
+  complete.textContent = count;
+}
+controls.forEach(el => el.addEventListener("input", updateProgress));
+controls.forEach(el => el.addEventListener("change", updateProgress));
+
+document.getElementById("submitBtn").addEventListener("click", () => {
+  let score = 0;
+  let html = "";
+  controls.forEach(el => {
+    const q = el.dataset.q;
+    const user = el.value.trim();
+    const answer = el.dataset.answer;
+    const ok = user.toLowerCase() === answer.toLowerCase();
+    if(ok) score++;
+    html += `<div>${q}. ${ok ? '<span class="ok">Correct</span>' : '<span class="bad">Wrong</span>'} — Correct answer: <b>${answer}</b>${user ? `, Your answer: ${user}` : ', Not answered'}</div>`;
+  });
+  const result = document.getElementById("result");
+  result.innerHTML = `<b>Score: ${score} / 13</b><br><br>${html}`;
+  result.classList.add("show");
+  result.scrollIntoView({behavior:"smooth", block:"nearest"});
+});
+
+let seconds = 20 * 60;
+function tick(){
+  const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const s = String(seconds % 60).padStart(2, "0");
+  document.getElementById("timer").textContent = `${m}:${s}`;
+  if(seconds > 0) seconds--;
+}
+tick();
+setInterval(tick, 1000);
+
+const notesBtn = document.getElementById("notesBtn");
+const notePanel = document.getElementById("notePanel");
+const notes = document.getElementById("notes");
+const notesCount = document.getElementById("notesCount");
+notesBtn.addEventListener("click", () => {
+  notePanel.classList.toggle("show");
+  notes.focus();
+});
+notes.addEventListener("input", () => notesCount.textContent = notes.value.trim() ? 1 : 0);
+document.addEventListener("click", e => {
+  if(!notePanel.contains(e.target) && !notesBtn.contains(e.target)) notePanel.classList.remove("show");
+});
+</script>
+</body>
+</html>

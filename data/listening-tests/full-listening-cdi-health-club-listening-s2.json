@@ -1,0 +1,871 @@
+{
+  "id": "full-listening-cdi-health-club-listening-s2",
+  "slug": "full-listening-cdi-health-club-listening-s2",
+  "title": "Full Listening CDI - Health Club Customer Research - Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/full-listening-cdi-health-club.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-16",
+      "instruction": "Complete the flow chart below. Choose SIX answers from the box and write the correct letter A-G next to questions 11-16.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "title": "Questions 17-18",
+      "instruction": "Choose TWO letters, A-E. Which TWO characteristics apply to the bamboo oven?",
+      "questionNumbers": [
+        17,
+        18
+      ]
+    },
+    {
+      "title": "Questions 19-20",
+      "instruction": "Choose TWO letters, A-E. Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "questionNumbers": [
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "matching",
+      "question": "Arrange a row of sticks over the pit",
+      "text": "Arrange a row of sticks over the pit",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 12,
+      "type": "matching",
+      "question": "Place stones on top",
+      "text": "Place stones on top",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 13,
+      "type": "matching",
+      "question": "Remove ash",
+      "text": "Remove ash",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "matching",
+      "question": "Cover the pit with grass",
+      "text": "Cover the pit with grass",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Place wrapped food on top and cover it with earth",
+      "text": "Place wrapped food on top and cover it with earth",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "Remove the stick and put water into the hole",
+      "text": "Remove the stick and put water into the hole",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 17,
+      "type": "multi_select",
+      "question": "Which TWO characteristics apply to the bamboo oven?",
+      "text": "Which TWO characteristics apply to the bamboo oven?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A It's suitable for windy weather.",
+          "html": "It's suitable for windy weather.",
+          "letter": "A",
+          "text": "It's suitable for windy weather."
+        },
+        {
+          "value": "B",
+          "label": "B The fire is lit below the bottom end of the bamboo.",
+          "html": "The fire is lit below the bottom end of the bamboo.",
+          "letter": "B",
+          "text": "The fire is lit below the bottom end of the bamboo."
+        },
+        {
+          "value": "C",
+          "label": "C The bamboo is cut into equal lengths.",
+          "html": "The bamboo is cut into equal lengths.",
+          "letter": "C",
+          "text": "The bamboo is cut into equal lengths."
+        },
+        {
+          "value": "D",
+          "label": "D The oven hangs from a stick.",
+          "html": "The oven hangs from a stick.",
+          "letter": "D",
+          "text": "The oven hangs from a stick."
+        },
+        {
+          "value": "E",
+          "label": "E It cooks food by steaming it.",
+          "html": "It cooks food by steaming it.",
+          "letter": "E",
+          "text": "It cooks food by steaming it."
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 18,
+      "type": "multi_select",
+      "question": "Which TWO characteristics apply to the bamboo oven?",
+      "text": "Which TWO characteristics apply to the bamboo oven?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A It's suitable for windy weather.",
+          "html": "It's suitable for windy weather.",
+          "letter": "A",
+          "text": "It's suitable for windy weather."
+        },
+        {
+          "value": "B",
+          "label": "B The fire is lit below the bottom end of the bamboo.",
+          "html": "The fire is lit below the bottom end of the bamboo.",
+          "letter": "B",
+          "text": "The fire is lit below the bottom end of the bamboo."
+        },
+        {
+          "value": "C",
+          "label": "C The bamboo is cut into equal lengths.",
+          "html": "The bamboo is cut into equal lengths.",
+          "letter": "C",
+          "text": "The bamboo is cut into equal lengths."
+        },
+        {
+          "value": "D",
+          "label": "D The oven hangs from a stick.",
+          "html": "The oven hangs from a stick.",
+          "letter": "D",
+          "text": "The oven hangs from a stick."
+        },
+        {
+          "value": "E",
+          "label": "E It cooks food by steaming it.",
+          "html": "It cooks food by steaming it.",
+          "letter": "E",
+          "text": "It cooks food by steaming it."
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 19,
+      "type": "multi_select",
+      "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Cooking doesn't make poisonous fungi edible.",
+          "html": "Cooking doesn't make poisonous fungi edible.",
+          "letter": "A",
+          "text": "Cooking doesn't make poisonous fungi edible."
+        },
+        {
+          "value": "B",
+          "label": "B Edible wild fungi can be eaten without cooking.",
+          "html": "Edible wild fungi can be eaten without cooking.",
+          "letter": "B",
+          "text": "Edible wild fungi can be eaten without cooking."
+        },
+        {
+          "value": "C",
+          "label": "C Wild fungi are highly nutritious.",
+          "html": "Wild fungi are highly nutritious.",
+          "letter": "C",
+          "text": "Wild fungi are highly nutritious."
+        },
+        {
+          "value": "D",
+          "label": "D Some edible fungi look very similar to poisonous varieties.",
+          "html": "Some edible fungi look very similar to poisonous varieties.",
+          "letter": "D",
+          "text": "Some edible fungi look very similar to poisonous varieties."
+        },
+        {
+          "value": "E",
+          "label": "E Fungi which cannot be identified should only be eaten in small quantities.",
+          "html": "Fungi which cannot be identified should only be eaten in small quantities.",
+          "letter": "E",
+          "text": "Fungi which cannot be identified should only be eaten in small quantities."
+        }
+      ],
+      "answer": "A | D"
+    },
+    {
+      "number": 20,
+      "type": "multi_select",
+      "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Cooking doesn't make poisonous fungi edible.",
+          "html": "Cooking doesn't make poisonous fungi edible.",
+          "letter": "A",
+          "text": "Cooking doesn't make poisonous fungi edible."
+        },
+        {
+          "value": "B",
+          "label": "B Edible wild fungi can be eaten without cooking.",
+          "html": "Edible wild fungi can be eaten without cooking.",
+          "letter": "B",
+          "text": "Edible wild fungi can be eaten without cooking."
+        },
+        {
+          "value": "C",
+          "label": "C Wild fungi are highly nutritious.",
+          "html": "Wild fungi are highly nutritious.",
+          "letter": "C",
+          "text": "Wild fungi are highly nutritious."
+        },
+        {
+          "value": "D",
+          "label": "D Some edible fungi look very similar to poisonous varieties.",
+          "html": "Some edible fungi look very similar to poisonous varieties.",
+          "letter": "D",
+          "text": "Some edible fungi look very similar to poisonous varieties."
+        },
+        {
+          "value": "E",
+          "label": "E Fungi which cannot be identified should only be eaten in small quantities.",
+          "html": "Fungi which cannot be identified should only be eaten in small quantities.",
+          "letter": "E",
+          "text": "Fungi which cannot be identified should only be eaten in small quantities."
+        }
+      ],
+      "answer": "A | D"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-cdi-health-club-listening-full",
+  "createdAt": "2026-06-21T05:03:35.738Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "",
+      "answerText": "11: E\n12: F\n13: B\n14: D\n15: C\n16: G\n17: B | E\n18: B | E\n19: A | D\n20: A | D",
+      "blocks": [
+        {
+          "id": "health-club-part-2-flowchart",
+          "type": "matching",
+          "title": "Making a steam pit",
+          "questionRange": "Questions 11-16",
+          "instruction": "Complete the flow chart below. Choose SIX answers from the box and write the correct letter A-G next to questions 11-16.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "air"
+            },
+            {
+              "letter": "B",
+              "text": "ash"
+            },
+            {
+              "letter": "C",
+              "text": "earth"
+            },
+            {
+              "letter": "D",
+              "text": "grass"
+            },
+            {
+              "letter": "E",
+              "text": "sticks"
+            },
+            {
+              "letter": "F",
+              "text": "stones"
+            },
+            {
+              "letter": "G",
+              "text": "water"
+            }
+          ],
+          "content": [
+            "Dig a pit",
+            "Arrange a row of {{11}} over the pit",
+            "Place {{12}} on top",
+            "Light the wood and let it burn out",
+            "Remove {{13}}",
+            "Insert a stick",
+            "Cover the pit with {{14}}",
+            "Place wrapped food on top and cover it with {{15}}",
+            "Remove the stick and put {{16}} into the hole"
+          ],
+          "questions": [
+            {
+              "questionNumber": 11,
+              "number": 11,
+              "text": "Arrange a row of sticks over the pit",
+              "question": "Arrange a row of sticks over the pit",
+              "answer": "E"
+            },
+            {
+              "questionNumber": 12,
+              "number": 12,
+              "text": "Place stones on top",
+              "question": "Place stones on top",
+              "answer": "F"
+            },
+            {
+              "questionNumber": 13,
+              "number": 13,
+              "text": "Remove ash",
+              "question": "Remove ash",
+              "answer": "B"
+            },
+            {
+              "questionNumber": 14,
+              "number": 14,
+              "text": "Cover the pit with grass",
+              "question": "Cover the pit with grass",
+              "answer": "D"
+            },
+            {
+              "questionNumber": 15,
+              "number": 15,
+              "text": "Place wrapped food on top and cover it with earth",
+              "question": "Place wrapped food on top and cover it with earth",
+              "answer": "C"
+            },
+            {
+              "questionNumber": 16,
+              "number": 16,
+              "text": "Remove the stick and put water into the hole",
+              "question": "Remove the stick and put water into the hole",
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-2-bamboo",
+          "type": "multiple_select",
+          "questionRange": "Questions 17-18",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 17,
+          "answerQuestions": [
+            {
+              "questionNumber": 18
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO characteristics apply to the bamboo oven?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "It's suitable for windy weather."
+            },
+            {
+              "letter": "B",
+              "text": "The fire is lit below the bottom end of the bamboo."
+            },
+            {
+              "letter": "C",
+              "text": "The bamboo is cut into equal lengths."
+            },
+            {
+              "letter": "D",
+              "text": "The oven hangs from a stick."
+            },
+            {
+              "letter": "E",
+              "text": "It cooks food by steaming it."
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 17,
+              "number": 17,
+              "question": "Which TWO characteristics apply to the bamboo oven?",
+              "text": "Which TWO characteristics apply to the bamboo oven?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It's suitable for windy weather."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fire is lit below the bottom end of the bamboo."
+                },
+                {
+                  "letter": "C",
+                  "text": "The bamboo is cut into equal lengths."
+                },
+                {
+                  "letter": "D",
+                  "text": "The oven hangs from a stick."
+                },
+                {
+                  "letter": "E",
+                  "text": "It cooks food by steaming it."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            },
+            {
+              "questionNumber": 18,
+              "number": 18,
+              "question": "Which TWO characteristics apply to the bamboo oven?",
+              "text": "Which TWO characteristics apply to the bamboo oven?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It's suitable for windy weather."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fire is lit below the bottom end of the bamboo."
+                },
+                {
+                  "letter": "C",
+                  "text": "The bamboo is cut into equal lengths."
+                },
+                {
+                  "letter": "D",
+                  "text": "The oven hangs from a stick."
+                },
+                {
+                  "letter": "E",
+                  "text": "It cooks food by steaming it."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-2-fungi",
+          "type": "multiple_select",
+          "questionRange": "Questions 19-20",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 19,
+          "answerQuestions": [
+            {
+              "questionNumber": 20
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Cooking doesn't make poisonous fungi edible."
+            },
+            {
+              "letter": "B",
+              "text": "Edible wild fungi can be eaten without cooking."
+            },
+            {
+              "letter": "C",
+              "text": "Wild fungi are highly nutritious."
+            },
+            {
+              "letter": "D",
+              "text": "Some edible fungi look very similar to poisonous varieties."
+            },
+            {
+              "letter": "E",
+              "text": "Fungi which cannot be identified should only be eaten in small quantities."
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 19,
+              "number": 19,
+              "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Cooking doesn't make poisonous fungi edible."
+                },
+                {
+                  "letter": "B",
+                  "text": "Edible wild fungi can be eaten without cooking."
+                },
+                {
+                  "letter": "C",
+                  "text": "Wild fungi are highly nutritious."
+                },
+                {
+                  "letter": "D",
+                  "text": "Some edible fungi look very similar to poisonous varieties."
+                },
+                {
+                  "letter": "E",
+                  "text": "Fungi which cannot be identified should only be eaten in small quantities."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            },
+            {
+              "questionNumber": 20,
+              "number": 20,
+              "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Cooking doesn't make poisonous fungi edible."
+                },
+                {
+                  "letter": "B",
+                  "text": "Edible wild fungi can be eaten without cooking."
+                },
+                {
+                  "letter": "C",
+                  "text": "Wild fungi are highly nutritious."
+                },
+                {
+                  "letter": "D",
+                  "text": "Some edible fungi look very similar to poisonous varieties."
+                },
+                {
+                  "letter": "E",
+                  "text": "Fungi which cannot be identified should only be eaten in small quantities."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    }
+  ],
+  "assetFiles": [
+    "/uploads/audio/full-listening-cdi-health-club.mp3"
+  ]
+}

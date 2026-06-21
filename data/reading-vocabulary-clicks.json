@@ -801,5 +801,148 @@
     "uzbek_translation": "kuchli",
     "example_sentence": "a big strong man; Jake was tall and strong",
     "clicked_at": "2026-06-20T01:10:07.108Z"
+  },
+  {
+    "id": "1782013708459-can-c72a26",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "can",
+    "normalized_word": "can",
+    "english_definition": "(auxiliary verb, defective) To know how to; to be able to.",
+    "uzbek_translation": "mumkin",
+    "example_sentence": "She can speak English, French, and German.   I can play football.   Can you remember your fifth birthday?",
+    "clicked_at": "2026-06-21T03:48:28.459Z"
+  },
+  {
+    "id": "1782016860644-the-b3867a",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "the",
+    "normalized_word": "the",
+    "english_definition": "With a comparative or with more and a verb phrase, establishes a correlation with one or more other such comparatives.",
+    "uzbek_translation": "the",
+    "example_sentence": "It looks weaker and weaker, the more I think about it.",
+    "clicked_at": "2026-06-21T04:41:00.644Z"
+  },
+  {
+    "id": "1782016863334-main-1b6274",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "main",
+    "normalized_word": "main",
+    "english_definition": "Short for mainline.",
+    "uzbek_translation": "asosiy",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:03.335Z"
+  },
+  {
+    "id": "1782016866701-delicate-a0c65e",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "delicate",
+    "normalized_word": "delicate",
+    "english_definition": "A delicate item of clothing, especially underwear or lingerie.",
+    "uzbek_translation": "nozik",
+    "example_sentence": "Don't put that in with your jeans: it's a delicate!",
+    "clicked_at": "2026-06-21T04:41:06.701Z"
+  },
+  {
+    "id": "1782016872635-padding-9ac5e4",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "padding",
+    "normalized_word": "padding",
+    "english_definition": "To stuff.",
+    "uzbek_translation": "to'ldirish",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:12.635Z"
+  },
+  {
+    "id": "1782016874138-wrapping-57d765",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "wrapping",
+    "normalized_word": "wrapping",
+    "english_definition": "The material in which something is wrapped.",
+    "uzbek_translation": "o'rash",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:14.138Z"
+  },
+  {
+    "id": "1782016876372-into-cfd302",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "into",
+    "normalized_word": "into",
+    "english_definition": "To or towards the inside of.",
+    "uzbek_translation": "ichiga",
+    "example_sentence": "Mary danced into the house.",
+    "clicked_at": "2026-06-21T04:41:16.372Z"
+  },
+  {
+    "id": "1782016877266-paper-65a231",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "paper",
+    "normalized_word": "paper",
+    "english_definition": "A sheet material used for writing on or printing on (or as a non-waterproof container), usually made by draining cellulose fibres from a suspension in water.",
+    "uzbek_translation": "qog'oz",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:17.266Z"
+  },
+  {
+    "id": "1782016878075-invented-0d012e",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "invented",
+    "normalized_word": "invented",
+    "english_definition": "To design a new process or mechanism.",
+    "uzbek_translation": "ixtiro qilgan",
+    "example_sentence": "After weeks of hard work, I invented a new way to alphabetize matchbooks.",
+    "clicked_at": "2026-06-21T04:41:18.075Z"
+  },
+  {
+    "id": "1782016880295-although-d200af",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "Although",
+    "normalized_word": "although",
+    "english_definition": "Though, even though, in spite of or despite the fact that: introducing a clause that expresses a concession.",
+    "uzbek_translation": "Garchi",
+    "example_sentence": "Although it was very muddy, the football game went on.",
+    "clicked_at": "2026-06-21T04:41:20.295Z"
+  },
+  {
+    "id": "1782016888932-bark-139314",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "bark",
+    "normalized_word": "bark",
+    "english_definition": "The short, loud, explosive sound uttered by a dog, a fox, and some other animals.",
+    "uzbek_translation": "qobiq",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:28.932Z"
+  },
+  {
+    "id": "1782016890334-mulberry-07e23e",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "mulberry",
+    "normalized_word": "mulberry",
+    "english_definition": "Any of several trees, of the genus Morus, having edible fruits.",
+    "uzbek_translation": "tut",
+    "example_sentence": "",
+    "clicked_at": "2026-06-21T04:41:30.334Z"
+  },
+  {
+    "id": "1782016893465-chopped-ed86ca",
+    "attempt_id": "reading-reading-practice-test-6-reading-p1-1782013705397-7e995a",
+    "passage_id": "reading-practice-test-6-reading-p1-passage-1",
+    "word": "chopped",
+    "normalized_word": "chopped",
+    "english_definition": "To cut into pieces with short, vigorous cutting motions.",
+    "uzbek_translation": "tug'ralgan",
+    "example_sentence": "chop wood; chop an onion",
+    "clicked_at": "2026-06-21T04:41:33.465Z"
   }
 ]

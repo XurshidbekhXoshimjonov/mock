@@ -1,0 +1,2119 @@
+{
+  "id": "full-listening-cdi-health-club-listening-full",
+  "slug": "full-listening-cdi-health-club-listening-full",
+  "title": "Full Listening CDI - Health Club Customer Research",
+  "subtitle": "Listening full test",
+  "part": "full",
+  "audio": "/uploads/audio/full-listening-cdi-health-club.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-16",
+      "instruction": "Complete the flow chart below. Choose SIX answers from the box and write the correct letter A-G next to questions 11-16.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "title": "Questions 17-18",
+      "instruction": "Choose TWO letters, A-E. Which TWO characteristics apply to the bamboo oven?",
+      "questionNumbers": [
+        17,
+        18
+      ]
+    },
+    {
+      "title": "Questions 19-20",
+      "instruction": "Choose TWO letters, A-E. Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "questionNumbers": [
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21-25",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26-30",
+      "instruction": "Choose FIVE answers from the box and write the correct letter, A-G.",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Occupation",
+      "text": "Occupation",
+      "options": [],
+      "answer": "accountant"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Age group",
+      "text": "Age group",
+      "options": [],
+      "answer": "over 50"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Type of membership",
+      "text": "Type of membership",
+      "options": [],
+      "answer": "family"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Length of membership",
+      "text": "Length of membership",
+      "options": [],
+      "answer": "9"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Why joined: recommended by a",
+      "text": "Why joined: recommended by a",
+      "options": [],
+      "answer": "doctor"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Facility used most",
+      "text": "Facility used most",
+      "options": [],
+      "answer": "swimming pool | pool"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Facility not used: tennis courts",
+      "text": "Facility not used: tennis courts",
+      "options": [],
+      "answer": "pay extra | extra"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Suggestions for improvements",
+      "text": "Suggestions for improvements",
+      "options": [],
+      "answer": "social events | events"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Install in the gym",
+      "text": "Install in the gym",
+      "options": [],
+      "answer": "air conditioning"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Open later at weekends",
+      "text": "Open later at weekends",
+      "options": [],
+      "answer": "restaurant"
+    },
+    {
+      "number": 11,
+      "type": "matching",
+      "question": "Arrange a row of sticks over the pit",
+      "text": "Arrange a row of sticks over the pit",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 12,
+      "type": "matching",
+      "question": "Place stones on top",
+      "text": "Place stones on top",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 13,
+      "type": "matching",
+      "question": "Remove ash",
+      "text": "Remove ash",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "matching",
+      "question": "Cover the pit with grass",
+      "text": "Cover the pit with grass",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Place wrapped food on top and cover it with earth",
+      "text": "Place wrapped food on top and cover it with earth",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "Remove the stick and put water into the hole",
+      "text": "Remove the stick and put water into the hole",
+      "options": [
+        {
+          "value": "A",
+          "label": "A air",
+          "html": "air",
+          "letter": "A",
+          "text": "air"
+        },
+        {
+          "value": "B",
+          "label": "B ash",
+          "html": "ash",
+          "letter": "B",
+          "text": "ash"
+        },
+        {
+          "value": "C",
+          "label": "C earth",
+          "html": "earth",
+          "letter": "C",
+          "text": "earth"
+        },
+        {
+          "value": "D",
+          "label": "D grass",
+          "html": "grass",
+          "letter": "D",
+          "text": "grass"
+        },
+        {
+          "value": "E",
+          "label": "E sticks",
+          "html": "sticks",
+          "letter": "E",
+          "text": "sticks"
+        },
+        {
+          "value": "F",
+          "label": "F stones",
+          "html": "stones",
+          "letter": "F",
+          "text": "stones"
+        },
+        {
+          "value": "G",
+          "label": "G water",
+          "html": "water",
+          "letter": "G",
+          "text": "water"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 17,
+      "type": "multi_select",
+      "question": "Which TWO characteristics apply to the bamboo oven?",
+      "text": "Which TWO characteristics apply to the bamboo oven?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A It's suitable for windy weather.",
+          "html": "It's suitable for windy weather.",
+          "letter": "A",
+          "text": "It's suitable for windy weather."
+        },
+        {
+          "value": "B",
+          "label": "B The fire is lit below the bottom end of the bamboo.",
+          "html": "The fire is lit below the bottom end of the bamboo.",
+          "letter": "B",
+          "text": "The fire is lit below the bottom end of the bamboo."
+        },
+        {
+          "value": "C",
+          "label": "C The bamboo is cut into equal lengths.",
+          "html": "The bamboo is cut into equal lengths.",
+          "letter": "C",
+          "text": "The bamboo is cut into equal lengths."
+        },
+        {
+          "value": "D",
+          "label": "D The oven hangs from a stick.",
+          "html": "The oven hangs from a stick.",
+          "letter": "D",
+          "text": "The oven hangs from a stick."
+        },
+        {
+          "value": "E",
+          "label": "E It cooks food by steaming it.",
+          "html": "It cooks food by steaming it.",
+          "letter": "E",
+          "text": "It cooks food by steaming it."
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 18,
+      "type": "multi_select",
+      "question": "Which TWO characteristics apply to the bamboo oven?",
+      "text": "Which TWO characteristics apply to the bamboo oven?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A It's suitable for windy weather.",
+          "html": "It's suitable for windy weather.",
+          "letter": "A",
+          "text": "It's suitable for windy weather."
+        },
+        {
+          "value": "B",
+          "label": "B The fire is lit below the bottom end of the bamboo.",
+          "html": "The fire is lit below the bottom end of the bamboo.",
+          "letter": "B",
+          "text": "The fire is lit below the bottom end of the bamboo."
+        },
+        {
+          "value": "C",
+          "label": "C The bamboo is cut into equal lengths.",
+          "html": "The bamboo is cut into equal lengths.",
+          "letter": "C",
+          "text": "The bamboo is cut into equal lengths."
+        },
+        {
+          "value": "D",
+          "label": "D The oven hangs from a stick.",
+          "html": "The oven hangs from a stick.",
+          "letter": "D",
+          "text": "The oven hangs from a stick."
+        },
+        {
+          "value": "E",
+          "label": "E It cooks food by steaming it.",
+          "html": "It cooks food by steaming it.",
+          "letter": "E",
+          "text": "It cooks food by steaming it."
+        }
+      ],
+      "answer": "B | E"
+    },
+    {
+      "number": 19,
+      "type": "multi_select",
+      "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Cooking doesn't make poisonous fungi edible.",
+          "html": "Cooking doesn't make poisonous fungi edible.",
+          "letter": "A",
+          "text": "Cooking doesn't make poisonous fungi edible."
+        },
+        {
+          "value": "B",
+          "label": "B Edible wild fungi can be eaten without cooking.",
+          "html": "Edible wild fungi can be eaten without cooking.",
+          "letter": "B",
+          "text": "Edible wild fungi can be eaten without cooking."
+        },
+        {
+          "value": "C",
+          "label": "C Wild fungi are highly nutritious.",
+          "html": "Wild fungi are highly nutritious.",
+          "letter": "C",
+          "text": "Wild fungi are highly nutritious."
+        },
+        {
+          "value": "D",
+          "label": "D Some edible fungi look very similar to poisonous varieties.",
+          "html": "Some edible fungi look very similar to poisonous varieties.",
+          "letter": "D",
+          "text": "Some edible fungi look very similar to poisonous varieties."
+        },
+        {
+          "value": "E",
+          "label": "E Fungi which cannot be identified should only be eaten in small quantities.",
+          "html": "Fungi which cannot be identified should only be eaten in small quantities.",
+          "letter": "E",
+          "text": "Fungi which cannot be identified should only be eaten in small quantities."
+        }
+      ],
+      "answer": "A | D"
+    },
+    {
+      "number": 20,
+      "type": "multi_select",
+      "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Cooking doesn't make poisonous fungi edible.",
+          "html": "Cooking doesn't make poisonous fungi edible.",
+          "letter": "A",
+          "text": "Cooking doesn't make poisonous fungi edible."
+        },
+        {
+          "value": "B",
+          "label": "B Edible wild fungi can be eaten without cooking.",
+          "html": "Edible wild fungi can be eaten without cooking.",
+          "letter": "B",
+          "text": "Edible wild fungi can be eaten without cooking."
+        },
+        {
+          "value": "C",
+          "label": "C Wild fungi are highly nutritious.",
+          "html": "Wild fungi are highly nutritious.",
+          "letter": "C",
+          "text": "Wild fungi are highly nutritious."
+        },
+        {
+          "value": "D",
+          "label": "D Some edible fungi look very similar to poisonous varieties.",
+          "html": "Some edible fungi look very similar to poisonous varieties.",
+          "letter": "D",
+          "text": "Some edible fungi look very similar to poisonous varieties."
+        },
+        {
+          "value": "E",
+          "label": "E Fungi which cannot be identified should only be eaten in small quantities.",
+          "html": "Fungi which cannot be identified should only be eaten in small quantities.",
+          "letter": "E",
+          "text": "Fungi which cannot be identified should only be eaten in small quantities."
+        }
+      ],
+      "answer": "A | D"
+    },
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Phoebe's main reason for choosing her topic was that",
+      "text": "Phoebe's main reason for choosing her topic was that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Her classmates had been very interested in it.",
+          "html": "Her classmates had been very interested in it.",
+          "letter": "A",
+          "text": "Her classmates had been very interested in it."
+        },
+        {
+          "value": "B",
+          "label": "B It would help prepare her for her first teaching post.",
+          "html": "It would help prepare her for her first teaching post.",
+          "letter": "B",
+          "text": "It would help prepare her for her first teaching post."
+        },
+        {
+          "value": "C",
+          "label": "C She had been inspired by a particular book.",
+          "html": "She had been inspired by a particular book.",
+          "letter": "C",
+          "text": "She had been inspired by a particular book."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "Phoebe's main research question related to",
+      "text": "Phoebe's main research question related to",
+      "options": [
+        {
+          "value": "A",
+          "label": "A The effect of teacher discipline.",
+          "html": "The effect of teacher discipline.",
+          "letter": "A",
+          "text": "The effect of teacher discipline."
+        },
+        {
+          "value": "B",
+          "label": "B The variety of learning activities.",
+          "html": "The variety of learning activities.",
+          "letter": "B",
+          "text": "The variety of learning activities."
+        },
+        {
+          "value": "C",
+          "label": "C Levels of pupil confidence.",
+          "html": "Levels of pupil confidence.",
+          "letter": "C",
+          "text": "Levels of pupil confidence."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Phoebe was most surprised by her finding that",
+      "text": "Phoebe was most surprised by her finding that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Gender did not influence behaviour significantly.",
+          "html": "Gender did not influence behaviour significantly.",
+          "letter": "A",
+          "text": "Gender did not influence behaviour significantly."
+        },
+        {
+          "value": "B",
+          "label": "B Girls were more negative about school than boys.",
+          "html": "Girls were more negative about school than boys.",
+          "letter": "B",
+          "text": "Girls were more negative about school than boys."
+        },
+        {
+          "value": "C",
+          "label": "C Boys were more talkative than girls in class.",
+          "html": "Boys were more talkative than girls in class.",
+          "letter": "C",
+          "text": "Boys were more talkative than girls in class."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Regarding teaching, Phoebe says she has learned that",
+      "text": "Regarding teaching, Phoebe says she has learned that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Teachers should be flexible in their lesson planning.",
+          "html": "Teachers should be flexible in their lesson planning.",
+          "letter": "A",
+          "text": "Teachers should be flexible in their lesson planning."
+        },
+        {
+          "value": "B",
+          "label": "B Brighter children learn from supporting weaker ones.",
+          "html": "Brighter children learn from supporting weaker ones.",
+          "letter": "B",
+          "text": "Brighter children learn from supporting weaker ones."
+        },
+        {
+          "value": "C",
+          "label": "C Children vary from each other in unpredictable ways.",
+          "html": "Children vary from each other in unpredictable ways.",
+          "letter": "C",
+          "text": "Children vary from each other in unpredictable ways."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Tony is particularly impressed by Phoebe's ability to",
+      "text": "Tony is particularly impressed by Phoebe's ability to",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Recognise the limitations of such small-scale research.",
+          "html": "Recognise the limitations of such small-scale research.",
+          "letter": "A",
+          "text": "Recognise the limitations of such small-scale research."
+        },
+        {
+          "value": "B",
+          "label": "B Reflect on her own research experience in an interesting way.",
+          "html": "Reflect on her own research experience in an interesting way.",
+          "letter": "B",
+          "text": "Reflect on her own research experience in an interesting way."
+        },
+        {
+          "value": "C",
+          "label": "C Design her research in such a way as to minimise difficulties.",
+          "html": "Design her research in such a way as to minimise difficulties.",
+          "letter": "C",
+          "text": "Design her research in such a way as to minimise difficulties."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Observing lessons",
+      "text": "Observing lessons",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Interviewing teachers",
+      "text": "Interviewing teachers",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Interviewing pupils",
+      "text": "Interviewing pupils",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Using questionnaires",
+      "text": "Using questionnaires",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Taking photographs",
+      "text": "Taking photographs",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Juniper was one of the first plants to colonise Britain after the last ice age",
+      "text": "Juniper was one of the first plants to colonise Britain after the last ice age",
+      "options": [],
+      "answer": "ice age"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+      "text": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+      "options": [],
+      "answer": "invisible"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Oils from the plant were used to prevent infections spreading.",
+      "text": "Oils from the plant were used to prevent infections spreading.",
+      "options": [],
+      "answer": "infections"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Nowadays, its berries are widely used to flavour food and drink.",
+      "text": "Nowadays, its berries are widely used to flavour food and drink.",
+      "options": [],
+      "answer": "flavor | flavour"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Juniper plants also support several species of insects and fungi.",
+      "text": "Juniper plants also support several species of insects and fungi.",
+      "options": [],
+      "answer": "fungi"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "In current juniper populations, ratios of the sexes are poor.",
+      "text": "In current juniper populations, ratios of the sexes are poor.",
+      "options": [],
+      "answer": "sexes"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+      "text": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+      "options": [],
+      "answer": "extinction"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Plantlife is trialling novel techniques across lowland areas of England.",
+      "text": "Plantlife is trialling novel techniques across lowland areas of England.",
+      "options": [],
+      "answer": "lowland"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "One measure is to introduce shelter for seedlings.",
+      "text": "One measure is to introduce shelter for seedlings.",
+      "options": [],
+      "answer": "shelter"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "A further step is to plant cuttings from healthy bushes.",
+      "text": "A further step is to plant cuttings from healthy bushes.",
+      "options": [],
+      "answer": "cuttings"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-cdi-health-club",
+  "openUrl": "/full-test-player?id=full-listening-cdi-health-club&skill=listening",
+  "createdAt": "2026-06-21T05:03:35.738Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "answerText": "1: accountant\n2: over 50\n3: family\n4: 9\n5: doctor\n6: swimming pool | pool\n7: pay extra | extra\n8: social events | events\n9: air conditioning\n10: restaurant",
+      "blocks": [
+        {
+          "id": "health-club-part-1-form",
+          "type": "form_completion",
+          "title": "Health club customer research",
+          "questionRange": "Questions 1-10",
+          "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "rows": [
+            {
+              "label": "Name",
+              "value": {
+                "type": "text",
+                "text": "Selina Thompson"
+              }
+            },
+            {
+              "label": "Occupation",
+              "value": {
+                "type": "input",
+                "questionNumber": 1
+              }
+            },
+            {
+              "label": "Age group",
+              "value": {
+                "type": "input",
+                "questionNumber": 2
+              }
+            },
+            {
+              "label": "Type of membership",
+              "value": {
+                "type": "input",
+                "questionNumber": 3
+              }
+            },
+            {
+              "label": "Length of membership",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "input",
+                    "questionNumber": 4
+                  },
+                  {
+                    "type": "text",
+                    "text": " years"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Why joined",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "recommended by a "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 5
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Visits to club per month",
+              "value": {
+                "type": "text",
+                "text": "Eight (on average)"
+              }
+            },
+            {
+              "label": "Facility used most",
+              "value": {
+                "type": "input",
+                "questionNumber": 6
+              }
+            },
+            {
+              "label": "Facility not used (if any)",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "tennis courts (because reluctant to "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 7
+                  },
+                  {
+                    "type": "text",
+                    "text": ")"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Suggestions for improvements",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "have more "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 8
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gym",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Install "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 9
+                  },
+                  {
+                    "type": "text",
+                    "text": " in the gym"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weekend opening",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Open "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 10
+                  },
+                  {
+                    "type": "text",
+                    "text": " later at weekends"
+                  }
+                ]
+              }
+            }
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Occupation",
+              "text": "Occupation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "accountant"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Age group",
+              "text": "Age group",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "over 50"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Type of membership",
+              "text": "Type of membership",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "family"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Length of membership",
+              "text": "Length of membership",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "9"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Why joined: recommended by a",
+              "text": "Why joined: recommended by a",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "doctor"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Facility used most",
+              "text": "Facility used most",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "swimming pool | pool"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Facility not used: tennis courts",
+              "text": "Facility not used: tennis courts",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "pay extra | extra"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Suggestions for improvements",
+              "text": "Suggestions for improvements",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "social events | events"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Install in the gym",
+              "text": "Install in the gym",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "air conditioning"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Open later at weekends",
+              "text": "Open later at weekends",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "restaurant"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "",
+      "answerText": "11: E\n12: F\n13: B\n14: D\n15: C\n16: G\n17: B | E\n18: B | E\n19: A | D\n20: A | D",
+      "blocks": [
+        {
+          "id": "health-club-part-2-flowchart",
+          "type": "matching",
+          "title": "Making a steam pit",
+          "questionRange": "Questions 11-16",
+          "instruction": "Complete the flow chart below. Choose SIX answers from the box and write the correct letter A-G next to questions 11-16.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "air"
+            },
+            {
+              "letter": "B",
+              "text": "ash"
+            },
+            {
+              "letter": "C",
+              "text": "earth"
+            },
+            {
+              "letter": "D",
+              "text": "grass"
+            },
+            {
+              "letter": "E",
+              "text": "sticks"
+            },
+            {
+              "letter": "F",
+              "text": "stones"
+            },
+            {
+              "letter": "G",
+              "text": "water"
+            }
+          ],
+          "content": [
+            "Dig a pit",
+            "Arrange a row of {{11}} over the pit",
+            "Place {{12}} on top",
+            "Light the wood and let it burn out",
+            "Remove {{13}}",
+            "Insert a stick",
+            "Cover the pit with {{14}}",
+            "Place wrapped food on top and cover it with {{15}}",
+            "Remove the stick and put {{16}} into the hole"
+          ],
+          "questions": [
+            {
+              "questionNumber": 11,
+              "number": 11,
+              "text": "Arrange a row of sticks over the pit",
+              "question": "Arrange a row of sticks over the pit",
+              "answer": "E"
+            },
+            {
+              "questionNumber": 12,
+              "number": 12,
+              "text": "Place stones on top",
+              "question": "Place stones on top",
+              "answer": "F"
+            },
+            {
+              "questionNumber": 13,
+              "number": 13,
+              "text": "Remove ash",
+              "question": "Remove ash",
+              "answer": "B"
+            },
+            {
+              "questionNumber": 14,
+              "number": 14,
+              "text": "Cover the pit with grass",
+              "question": "Cover the pit with grass",
+              "answer": "D"
+            },
+            {
+              "questionNumber": 15,
+              "number": 15,
+              "text": "Place wrapped food on top and cover it with earth",
+              "question": "Place wrapped food on top and cover it with earth",
+              "answer": "C"
+            },
+            {
+              "questionNumber": 16,
+              "number": 16,
+              "text": "Remove the stick and put water into the hole",
+              "question": "Remove the stick and put water into the hole",
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-2-bamboo",
+          "type": "multiple_select",
+          "questionRange": "Questions 17-18",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 17,
+          "answerQuestions": [
+            {
+              "questionNumber": 18
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO characteristics apply to the bamboo oven?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "It's suitable for windy weather."
+            },
+            {
+              "letter": "B",
+              "text": "The fire is lit below the bottom end of the bamboo."
+            },
+            {
+              "letter": "C",
+              "text": "The bamboo is cut into equal lengths."
+            },
+            {
+              "letter": "D",
+              "text": "The oven hangs from a stick."
+            },
+            {
+              "letter": "E",
+              "text": "It cooks food by steaming it."
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 17,
+              "number": 17,
+              "question": "Which TWO characteristics apply to the bamboo oven?",
+              "text": "Which TWO characteristics apply to the bamboo oven?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It's suitable for windy weather."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fire is lit below the bottom end of the bamboo."
+                },
+                {
+                  "letter": "C",
+                  "text": "The bamboo is cut into equal lengths."
+                },
+                {
+                  "letter": "D",
+                  "text": "The oven hangs from a stick."
+                },
+                {
+                  "letter": "E",
+                  "text": "It cooks food by steaming it."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            },
+            {
+              "questionNumber": 18,
+              "number": 18,
+              "question": "Which TWO characteristics apply to the bamboo oven?",
+              "text": "Which TWO characteristics apply to the bamboo oven?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It's suitable for windy weather."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fire is lit below the bottom end of the bamboo."
+                },
+                {
+                  "letter": "C",
+                  "text": "The bamboo is cut into equal lengths."
+                },
+                {
+                  "letter": "D",
+                  "text": "The oven hangs from a stick."
+                },
+                {
+                  "letter": "E",
+                  "text": "It cooks food by steaming it."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-2-fungi",
+          "type": "multiple_select",
+          "questionRange": "Questions 19-20",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 19,
+          "answerQuestions": [
+            {
+              "questionNumber": 20
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Cooking doesn't make poisonous fungi edible."
+            },
+            {
+              "letter": "B",
+              "text": "Edible wild fungi can be eaten without cooking."
+            },
+            {
+              "letter": "C",
+              "text": "Wild fungi are highly nutritious."
+            },
+            {
+              "letter": "D",
+              "text": "Some edible fungi look very similar to poisonous varieties."
+            },
+            {
+              "letter": "E",
+              "text": "Fungi which cannot be identified should only be eaten in small quantities."
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 19,
+              "number": 19,
+              "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Cooking doesn't make poisonous fungi edible."
+                },
+                {
+                  "letter": "B",
+                  "text": "Edible wild fungi can be eaten without cooking."
+                },
+                {
+                  "letter": "C",
+                  "text": "Wild fungi are highly nutritious."
+                },
+                {
+                  "letter": "D",
+                  "text": "Some edible fungi look very similar to poisonous varieties."
+                },
+                {
+                  "letter": "E",
+                  "text": "Fungi which cannot be identified should only be eaten in small quantities."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            },
+            {
+              "questionNumber": 20,
+              "number": 20,
+              "question": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "text": "Which TWO pieces of advice does the speaker give about eating wild fungi?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Cooking doesn't make poisonous fungi edible."
+                },
+                {
+                  "letter": "B",
+                  "text": "Edible wild fungi can be eaten without cooking."
+                },
+                {
+                  "letter": "C",
+                  "text": "Wild fungi are highly nutritious."
+                },
+                {
+                  "letter": "D",
+                  "text": "Some edible fungi look very similar to poisonous varieties."
+                },
+                {
+                  "letter": "E",
+                  "text": "Fungi which cannot be identified should only be eaten in small quantities."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | D"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "",
+      "answerText": "21: C\n22: A\n23: B\n24: A\n25: B\n26: E\n27: G\n28: A\n29: D\n30: B",
+      "blocks": [
+        {
+          "id": "health-club-part-3-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21-25",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Phoebe's main reason for choosing her topic was that",
+              "text": "Phoebe's main reason for choosing her topic was that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Her classmates had been very interested in it."
+                },
+                {
+                  "letter": "B",
+                  "text": "It would help prepare her for her first teaching post."
+                },
+                {
+                  "letter": "C",
+                  "text": "She had been inspired by a particular book."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Phoebe's main research question related to",
+              "text": "Phoebe's main research question related to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The effect of teacher discipline."
+                },
+                {
+                  "letter": "B",
+                  "text": "The variety of learning activities."
+                },
+                {
+                  "letter": "C",
+                  "text": "Levels of pupil confidence."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Phoebe was most surprised by her finding that",
+              "text": "Phoebe was most surprised by her finding that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Gender did not influence behaviour significantly."
+                },
+                {
+                  "letter": "B",
+                  "text": "Girls were more negative about school than boys."
+                },
+                {
+                  "letter": "C",
+                  "text": "Boys were more talkative than girls in class."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Regarding teaching, Phoebe says she has learned that",
+              "text": "Regarding teaching, Phoebe says she has learned that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Teachers should be flexible in their lesson planning."
+                },
+                {
+                  "letter": "B",
+                  "text": "Brighter children learn from supporting weaker ones."
+                },
+                {
+                  "letter": "C",
+                  "text": "Children vary from each other in unpredictable ways."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Tony is particularly impressed by Phoebe's ability to",
+              "text": "Tony is particularly impressed by Phoebe's ability to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Recognise the limitations of such small-scale research."
+                },
+                {
+                  "letter": "B",
+                  "text": "Reflect on her own research experience in an interesting way."
+                },
+                {
+                  "letter": "C",
+                  "text": "Design her research in such a way as to minimise difficulties."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-3-difficulties",
+          "type": "matching",
+          "title": "Difficulties",
+          "questionRange": "Questions 26-30",
+          "instruction": "Choose FIVE answers from the box and write the correct letter, A-G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Obtaining permission"
+            },
+            {
+              "letter": "B",
+              "text": "Deciding on a suitable focus"
+            },
+            {
+              "letter": "C",
+              "text": "Concentrating while gathering data"
+            },
+            {
+              "letter": "D",
+              "text": "Working collaboratively"
+            },
+            {
+              "letter": "E",
+              "text": "Processing data she had gathered"
+            },
+            {
+              "letter": "F",
+              "text": "Finding a suitable time to conduct the research"
+            },
+            {
+              "letter": "G",
+              "text": "Getting hold of suitable equipment"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 26,
+              "number": 26,
+              "text": "Observing lessons",
+              "question": "Observing lessons",
+              "answer": "E"
+            },
+            {
+              "questionNumber": 27,
+              "number": 27,
+              "text": "Interviewing teachers",
+              "question": "Interviewing teachers",
+              "answer": "G"
+            },
+            {
+              "questionNumber": 28,
+              "number": 28,
+              "text": "Interviewing pupils",
+              "question": "Interviewing pupils",
+              "answer": "A"
+            },
+            {
+              "questionNumber": 29,
+              "number": 29,
+              "text": "Using questionnaires",
+              "question": "Using questionnaires",
+              "answer": "D"
+            },
+            {
+              "questionNumber": 30,
+              "number": 30,
+              "text": "Taking photographs",
+              "question": "Taking photographs",
+              "answer": "B"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+      "answerText": "31: ice age\n32: invisible\n33: infections\n34: flavor | flavour\n35: fungi\n36: sexes\n37: extinction\n38: lowland\n39: shelter\n40: cuttings",
+      "blocks": [
+        {
+          "id": "health-club-part-4-juniper",
+          "type": "note_completion",
+          "title": "Saving the juniper plant",
+          "questionRange": "Questions 31-40",
+          "instruction": "Complete the sentences below. Write NO MORE THAN TWO WORDS for each answer.",
+          "content": [
+            "<strong>Background</strong>",
+            "Juniper was one of the first plants to colonise Britain after the last {{31}}",
+            "Its smoke is virtually {{32}}, so juniper wood was used as fuel in illegal activities.",
+            "Oils from the plant were used to prevent {{33}} spreading.",
+            "Nowadays, its berries are widely used to {{34}} food and drink.",
+            "<strong>Ecology</strong>",
+            "Juniper plants also support several species of insects and {{35}}.",
+            "<strong>Problems</strong>",
+            "In current juniper populations, ratios of the {{36}} are poor.",
+            "Many of the bushes in each group are of the same age, so {{37}} of whole populations is rapid.",
+            "<strong>Solutions</strong>",
+            "Plantlife is trialling novel techniques across {{38}} areas of England.",
+            "One measure is to introduce {{39}} for seedlings.",
+            "A further step is to plant {{40}} from healthy bushes."
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Juniper was one of the first plants to colonise Britain after the last ice age",
+              "text": "Juniper was one of the first plants to colonise Britain after the last ice age",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ice age"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+              "text": "Its smoke is virtually invisible, so juniper wood was used as fuel in illegal activities.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "invisible"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Oils from the plant were used to prevent infections spreading.",
+              "text": "Oils from the plant were used to prevent infections spreading.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "infections"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Nowadays, its berries are widely used to flavour food and drink.",
+              "text": "Nowadays, its berries are widely used to flavour food and drink.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "flavor | flavour"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Juniper plants also support several species of insects and fungi.",
+              "text": "Juniper plants also support several species of insects and fungi.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fungi"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "In current juniper populations, ratios of the sexes are poor.",
+              "text": "In current juniper populations, ratios of the sexes are poor.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sexes"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+              "text": "Many of the bushes in each group are of the same age, so extinction of whole populations is rapid.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "extinction"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Plantlife is trialling novel techniques across lowland areas of England.",
+              "text": "Plantlife is trialling novel techniques across lowland areas of England.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lowland"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "One measure is to introduce shelter for seedlings.",
+              "text": "One measure is to introduce shelter for seedlings.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "shelter"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "A further step is to plant cuttings from healthy bushes.",
+              "text": "A further step is to plant cuttings from healthy bushes.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cuttings"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    }
+  ],
+  "assetFiles": [
+    "/uploads/audio/full-listening-cdi-health-club.mp3"
+  ],
+  "duration": 40
+}

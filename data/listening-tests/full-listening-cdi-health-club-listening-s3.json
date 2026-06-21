@@ -1,0 +1,685 @@
+{
+  "id": "full-listening-cdi-health-club-listening-s3",
+  "slug": "full-listening-cdi-health-club-listening-s3",
+  "title": "Full Listening CDI - Health Club Customer Research - Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/full-listening-cdi-health-club.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-25",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26-30",
+      "instruction": "Choose FIVE answers from the box and write the correct letter, A-G.",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Phoebe's main reason for choosing her topic was that",
+      "text": "Phoebe's main reason for choosing her topic was that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Her classmates had been very interested in it.",
+          "html": "Her classmates had been very interested in it.",
+          "letter": "A",
+          "text": "Her classmates had been very interested in it."
+        },
+        {
+          "value": "B",
+          "label": "B It would help prepare her for her first teaching post.",
+          "html": "It would help prepare her for her first teaching post.",
+          "letter": "B",
+          "text": "It would help prepare her for her first teaching post."
+        },
+        {
+          "value": "C",
+          "label": "C She had been inspired by a particular book.",
+          "html": "She had been inspired by a particular book.",
+          "letter": "C",
+          "text": "She had been inspired by a particular book."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "Phoebe's main research question related to",
+      "text": "Phoebe's main research question related to",
+      "options": [
+        {
+          "value": "A",
+          "label": "A The effect of teacher discipline.",
+          "html": "The effect of teacher discipline.",
+          "letter": "A",
+          "text": "The effect of teacher discipline."
+        },
+        {
+          "value": "B",
+          "label": "B The variety of learning activities.",
+          "html": "The variety of learning activities.",
+          "letter": "B",
+          "text": "The variety of learning activities."
+        },
+        {
+          "value": "C",
+          "label": "C Levels of pupil confidence.",
+          "html": "Levels of pupil confidence.",
+          "letter": "C",
+          "text": "Levels of pupil confidence."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Phoebe was most surprised by her finding that",
+      "text": "Phoebe was most surprised by her finding that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Gender did not influence behaviour significantly.",
+          "html": "Gender did not influence behaviour significantly.",
+          "letter": "A",
+          "text": "Gender did not influence behaviour significantly."
+        },
+        {
+          "value": "B",
+          "label": "B Girls were more negative about school than boys.",
+          "html": "Girls were more negative about school than boys.",
+          "letter": "B",
+          "text": "Girls were more negative about school than boys."
+        },
+        {
+          "value": "C",
+          "label": "C Boys were more talkative than girls in class.",
+          "html": "Boys were more talkative than girls in class.",
+          "letter": "C",
+          "text": "Boys were more talkative than girls in class."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Regarding teaching, Phoebe says she has learned that",
+      "text": "Regarding teaching, Phoebe says she has learned that",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Teachers should be flexible in their lesson planning.",
+          "html": "Teachers should be flexible in their lesson planning.",
+          "letter": "A",
+          "text": "Teachers should be flexible in their lesson planning."
+        },
+        {
+          "value": "B",
+          "label": "B Brighter children learn from supporting weaker ones.",
+          "html": "Brighter children learn from supporting weaker ones.",
+          "letter": "B",
+          "text": "Brighter children learn from supporting weaker ones."
+        },
+        {
+          "value": "C",
+          "label": "C Children vary from each other in unpredictable ways.",
+          "html": "Children vary from each other in unpredictable ways.",
+          "letter": "C",
+          "text": "Children vary from each other in unpredictable ways."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Tony is particularly impressed by Phoebe's ability to",
+      "text": "Tony is particularly impressed by Phoebe's ability to",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Recognise the limitations of such small-scale research.",
+          "html": "Recognise the limitations of such small-scale research.",
+          "letter": "A",
+          "text": "Recognise the limitations of such small-scale research."
+        },
+        {
+          "value": "B",
+          "label": "B Reflect on her own research experience in an interesting way.",
+          "html": "Reflect on her own research experience in an interesting way.",
+          "letter": "B",
+          "text": "Reflect on her own research experience in an interesting way."
+        },
+        {
+          "value": "C",
+          "label": "C Design her research in such a way as to minimise difficulties.",
+          "html": "Design her research in such a way as to minimise difficulties.",
+          "letter": "C",
+          "text": "Design her research in such a way as to minimise difficulties."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Observing lessons",
+      "text": "Observing lessons",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Interviewing teachers",
+      "text": "Interviewing teachers",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Interviewing pupils",
+      "text": "Interviewing pupils",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Using questionnaires",
+      "text": "Using questionnaires",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Taking photographs",
+      "text": "Taking photographs",
+      "options": [
+        {
+          "value": "A",
+          "label": "A Obtaining permission",
+          "html": "Obtaining permission",
+          "letter": "A",
+          "text": "Obtaining permission"
+        },
+        {
+          "value": "B",
+          "label": "B Deciding on a suitable focus",
+          "html": "Deciding on a suitable focus",
+          "letter": "B",
+          "text": "Deciding on a suitable focus"
+        },
+        {
+          "value": "C",
+          "label": "C Concentrating while gathering data",
+          "html": "Concentrating while gathering data",
+          "letter": "C",
+          "text": "Concentrating while gathering data"
+        },
+        {
+          "value": "D",
+          "label": "D Working collaboratively",
+          "html": "Working collaboratively",
+          "letter": "D",
+          "text": "Working collaboratively"
+        },
+        {
+          "value": "E",
+          "label": "E Processing data she had gathered",
+          "html": "Processing data she had gathered",
+          "letter": "E",
+          "text": "Processing data she had gathered"
+        },
+        {
+          "value": "F",
+          "label": "F Finding a suitable time to conduct the research",
+          "html": "Finding a suitable time to conduct the research",
+          "letter": "F",
+          "text": "Finding a suitable time to conduct the research"
+        },
+        {
+          "value": "G",
+          "label": "G Getting hold of suitable equipment",
+          "html": "Getting hold of suitable equipment",
+          "letter": "G",
+          "text": "Getting hold of suitable equipment"
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-cdi-health-club-listening-full",
+  "createdAt": "2026-06-21T05:03:35.738Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "",
+      "answerText": "21: C\n22: A\n23: B\n24: A\n25: B\n26: E\n27: G\n28: A\n29: D\n30: B",
+      "blocks": [
+        {
+          "id": "health-club-part-3-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21-25",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Phoebe's main reason for choosing her topic was that",
+              "text": "Phoebe's main reason for choosing her topic was that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Her classmates had been very interested in it."
+                },
+                {
+                  "letter": "B",
+                  "text": "It would help prepare her for her first teaching post."
+                },
+                {
+                  "letter": "C",
+                  "text": "She had been inspired by a particular book."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Phoebe's main research question related to",
+              "text": "Phoebe's main research question related to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The effect of teacher discipline."
+                },
+                {
+                  "letter": "B",
+                  "text": "The variety of learning activities."
+                },
+                {
+                  "letter": "C",
+                  "text": "Levels of pupil confidence."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Phoebe was most surprised by her finding that",
+              "text": "Phoebe was most surprised by her finding that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Gender did not influence behaviour significantly."
+                },
+                {
+                  "letter": "B",
+                  "text": "Girls were more negative about school than boys."
+                },
+                {
+                  "letter": "C",
+                  "text": "Boys were more talkative than girls in class."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Regarding teaching, Phoebe says she has learned that",
+              "text": "Regarding teaching, Phoebe says she has learned that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Teachers should be flexible in their lesson planning."
+                },
+                {
+                  "letter": "B",
+                  "text": "Brighter children learn from supporting weaker ones."
+                },
+                {
+                  "letter": "C",
+                  "text": "Children vary from each other in unpredictable ways."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Tony is particularly impressed by Phoebe's ability to",
+              "text": "Tony is particularly impressed by Phoebe's ability to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Recognise the limitations of such small-scale research."
+                },
+                {
+                  "letter": "B",
+                  "text": "Reflect on her own research experience in an interesting way."
+                },
+                {
+                  "letter": "C",
+                  "text": "Design her research in such a way as to minimise difficulties."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "health-club-part-3-difficulties",
+          "type": "matching",
+          "title": "Difficulties",
+          "questionRange": "Questions 26-30",
+          "instruction": "Choose FIVE answers from the box and write the correct letter, A-G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Obtaining permission"
+            },
+            {
+              "letter": "B",
+              "text": "Deciding on a suitable focus"
+            },
+            {
+              "letter": "C",
+              "text": "Concentrating while gathering data"
+            },
+            {
+              "letter": "D",
+              "text": "Working collaboratively"
+            },
+            {
+              "letter": "E",
+              "text": "Processing data she had gathered"
+            },
+            {
+              "letter": "F",
+              "text": "Finding a suitable time to conduct the research"
+            },
+            {
+              "letter": "G",
+              "text": "Getting hold of suitable equipment"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 26,
+              "number": 26,
+              "text": "Observing lessons",
+              "question": "Observing lessons",
+              "answer": "E"
+            },
+            {
+              "questionNumber": 27,
+              "number": 27,
+              "text": "Interviewing teachers",
+              "question": "Interviewing teachers",
+              "answer": "G"
+            },
+            {
+              "questionNumber": 28,
+              "number": 28,
+              "text": "Interviewing pupils",
+              "question": "Interviewing pupils",
+              "answer": "A"
+            },
+            {
+              "questionNumber": 29,
+              "number": 29,
+              "text": "Using questionnaires",
+              "question": "Using questionnaires",
+              "answer": "D"
+            },
+            {
+              "questionNumber": 30,
+              "number": 30,
+              "text": "Taking photographs",
+              "question": "Taking photographs",
+              "answer": "B"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    }
+  ],
+  "assetFiles": [
+    "/uploads/audio/full-listening-cdi-health-club.mp3"
+  ]
+}

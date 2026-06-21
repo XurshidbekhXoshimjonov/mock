@@ -1,5 +1,7 @@
 const params = new URLSearchParams(window.location.search);
-const testId = params.get("id");
+const pathParts = window.location.pathname.split("/").filter(Boolean);
+const routeSlug = pathParts[0] === "reading" ? pathParts[1] || "" : "";
+const testId = params.get("id") || routeSlug;
 
 const testTitle = document.getElementById("testTitle");
 const testPartLabel = document.getElementById("testPartLabel");

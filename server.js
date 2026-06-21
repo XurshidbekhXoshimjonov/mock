@@ -2183,22 +2183,6 @@ function uniqueRouteEntries(entries) {
 function buildPublicRouteEntries(skill) {
     const entries = [];
 
-    fullTestStore.readAll().forEach((test) => {
-        const inferredSkill = fullTestSkill(test);
-
-        if (inferredSkill !== skill && inferredSkill !== "combined") {
-            return;
-        }
-
-        entries.push({
-            skill,
-            source: "full",
-            id: test.id,
-            test,
-            htmlFile: "full-test-player.html"
-        });
-    });
-
     if (skill === "reading") {
         readManualReadingTests().forEach((test) => {
             entries.push({
@@ -2222,6 +2206,22 @@ function buildPublicRouteEntries(skill) {
             });
         });
     }
+
+    fullTestStore.readAll().forEach((test) => {
+        const inferredSkill = fullTestSkill(test);
+
+        if (inferredSkill !== skill && inferredSkill !== "combined") {
+            return;
+        }
+
+        entries.push({
+            skill,
+            source: "full",
+            id: test.id,
+            test,
+            htmlFile: "full-test-player.html"
+        });
+    });
 
     return uniqueRouteEntries(entries);
 }

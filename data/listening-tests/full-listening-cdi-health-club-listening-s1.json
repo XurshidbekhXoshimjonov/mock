@@ -1,0 +1,378 @@
+{
+  "id": "full-listening-cdi-health-club-listening-s1",
+  "slug": "full-listening-cdi-health-club-listening-s1",
+  "title": "Full Listening CDI - Health Club Customer Research - Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/full-listening-cdi-health-club.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Occupation",
+      "text": "Occupation",
+      "options": [],
+      "answer": "accountant"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Age group",
+      "text": "Age group",
+      "options": [],
+      "answer": "over 50"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Type of membership",
+      "text": "Type of membership",
+      "options": [],
+      "answer": "family"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Length of membership",
+      "text": "Length of membership",
+      "options": [],
+      "answer": "9"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Why joined: recommended by a",
+      "text": "Why joined: recommended by a",
+      "options": [],
+      "answer": "doctor"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Facility used most",
+      "text": "Facility used most",
+      "options": [],
+      "answer": "swimming pool | pool"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Facility not used: tennis courts",
+      "text": "Facility not used: tennis courts",
+      "options": [],
+      "answer": "pay extra | extra"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Suggestions for improvements",
+      "text": "Suggestions for improvements",
+      "options": [],
+      "answer": "social events | events"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Install in the gym",
+      "text": "Install in the gym",
+      "options": [],
+      "answer": "air conditioning"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Open later at weekends",
+      "text": "Open later at weekends",
+      "options": [],
+      "answer": "restaurant"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-cdi-health-club-listening-full",
+  "createdAt": "2026-06-21T05:03:35.738Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/full-listening-cdi-health-club.mp3",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "answerText": "1: accountant\n2: over 50\n3: family\n4: 9\n5: doctor\n6: swimming pool | pool\n7: pay extra | extra\n8: social events | events\n9: air conditioning\n10: restaurant",
+      "blocks": [
+        {
+          "id": "health-club-part-1-form",
+          "type": "form_completion",
+          "title": "Health club customer research",
+          "questionRange": "Questions 1-10",
+          "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "rows": [
+            {
+              "label": "Name",
+              "value": {
+                "type": "text",
+                "text": "Selina Thompson"
+              }
+            },
+            {
+              "label": "Occupation",
+              "value": {
+                "type": "input",
+                "questionNumber": 1
+              }
+            },
+            {
+              "label": "Age group",
+              "value": {
+                "type": "input",
+                "questionNumber": 2
+              }
+            },
+            {
+              "label": "Type of membership",
+              "value": {
+                "type": "input",
+                "questionNumber": 3
+              }
+            },
+            {
+              "label": "Length of membership",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "input",
+                    "questionNumber": 4
+                  },
+                  {
+                    "type": "text",
+                    "text": " years"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Why joined",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "recommended by a "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 5
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Visits to club per month",
+              "value": {
+                "type": "text",
+                "text": "Eight (on average)"
+              }
+            },
+            {
+              "label": "Facility used most",
+              "value": {
+                "type": "input",
+                "questionNumber": 6
+              }
+            },
+            {
+              "label": "Facility not used (if any)",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "tennis courts (because reluctant to "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 7
+                  },
+                  {
+                    "type": "text",
+                    "text": ")"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Suggestions for improvements",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "have more "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 8
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gym",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Install "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 9
+                  },
+                  {
+                    "type": "text",
+                    "text": " in the gym"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weekend opening",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Open "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 10
+                  },
+                  {
+                    "type": "text",
+                    "text": " later at weekends"
+                  }
+                ]
+              }
+            }
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Occupation",
+              "text": "Occupation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "accountant"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Age group",
+              "text": "Age group",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "over 50"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Type of membership",
+              "text": "Type of membership",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "family"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Length of membership",
+              "text": "Length of membership",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "9"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Why joined: recommended by a",
+              "text": "Why joined: recommended by a",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "doctor"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Facility used most",
+              "text": "Facility used most",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "swimming pool | pool"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Facility not used: tennis courts",
+              "text": "Facility not used: tennis courts",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "pay extra | extra"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Suggestions for improvements",
+              "text": "Suggestions for improvements",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "social events | events"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Install in the gym",
+              "text": "Install in the gym",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "air conditioning"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Open later at weekends",
+              "text": "Open later at weekends",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "restaurant"
+            }
+          ]
+        }
+      ],
+      "audioFileName": "full-listening-cdi-health-club.mp3"
+    }
+  ],
+  "assetFiles": [
+    "/uploads/audio/full-listening-cdi-health-club.mp3"
+  ]
+}
