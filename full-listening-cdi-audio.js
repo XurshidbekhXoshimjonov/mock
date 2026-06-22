@@ -21,6 +21,7 @@
     let timerStarted = false;
     let remainingSeconds = 40 * 60;
     let timerId = null;
+    let isSubmitted = false;
 
     function formatTime(value) {
         const seconds = Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
@@ -39,13 +40,45 @@
         if (timerStarted) return;
         timerStarted = true;
         timerId = window.setInterval(() => {
-            if (remainingSeconds > 0) remainingSeconds -= 1;
+            remainingSeconds = Math.max(0, remainingSeconds - 1);
             updateTimer();
-            if (!remainingSeconds) {
-                window.clearInterval(timerId);
-                document.getElementById("deliver-button")?.click();
+            if (remainingSeconds <= 0) {
+                handleTimeExpired();
             }
         }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerId) {
+            window.clearInterval(timerId);
+            timerId = null;
+        }
+    }
+
+    function handleTimeExpired() {
+        autoSubmitTest();
+    }
+
+    function autoSubmitTest() {
+        submitTest({ auto: true });
+    }
+
+    function submitTest(options = {}) {
+        if (isSubmitted) return;
+        isSubmitted = true;
+        const isAutoSubmit = Boolean(options.auto);
+
+        stopTimer();
+        if (isAutoSubmit) {
+            remainingSeconds = 0;
+            window.ieltsxAutoSubmitRequested = true;
+        }
+        updateTimer();
+        audio.pause();
+        playPauseButton.disabled = true;
+        startButton.disabled = true;
+        submitButton.disabled = true;
+        document.getElementById("deliver-button")?.click();
     }
 
     function loadPartAudio(partNumber) {
@@ -91,9 +124,7 @@
             playPauseButton.disabled = true;
         });
     });
-    submitButton.addEventListener("click", () => {
-        document.getElementById("deliver-button")?.click();
-    });
+    submitButton.addEventListener("click", () => submitTest());
     audio.addEventListener("play", updatePlayButton);
     audio.addEventListener("pause", updatePlayButton);
     audio.addEventListener("loadedmetadata", () => {

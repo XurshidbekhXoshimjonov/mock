@@ -7,7 +7,9 @@ const listeningTestId = listeningParams.get("id") || listeningRouteSlug;
 const listeningPart = listeningParams.get("part") || listeningRoutePart;
 let activeListeningTest = null;
 let activeListeningResult = null;
+let isSubmitted = false;
 const ListeningResultUtils = window.IeltsResultUtils || {};
+const AUTO_SUBMIT_MESSAGE = ListeningResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
 
 function normalizeAnswer(value) {
     return ListeningResultUtils.normalizeAnswer
@@ -154,7 +156,7 @@ function listeningBand(correct, total) {
     return table.find(([minimum]) => scaledCorrect >= minimum)?.[1] || "0-2";
 }
 
-function showListeningResult(result, questionNumbers = []) {
+function showListeningResult(result, questionNumbers = [], options = {}) {
     const modal = listeningRoot.querySelector("[data-listening-result-modal]");
 
     if (!modal) {
@@ -176,6 +178,11 @@ function showListeningResult(result, questionNumbers = []) {
         `${result.correct} correct answer${result.correct === 1 ? "" : "s"}`;
     modal.querySelector("[data-listening-result-incorrect]").textContent =
         `${result.incorrect || 0} incorrect answer${result.incorrect === 1 ? "" : "s"}`;
+    const notice = modal.querySelector("[data-auto-submit-message]");
+    if (notice) {
+        notice.textContent = AUTO_SUBMIT_MESSAGE;
+        notice.classList.toggle("hidden", !options.autoSubmit);
+    }
     modal.classList.remove("hidden");
 }
 
@@ -297,7 +304,10 @@ function renderListeningReview(result) {
     listeningRoot.querySelector(".lc-main")?.appendChild(summary);
 }
 
-function recordListeningResult(test) {
+function recordListeningResult(test, options = {}) {
+    if (isSubmitted) return;
+    isSubmitted = true;
+
     const structuredResult = gradeStructuredListeningTest(test);
     const result = structuredResult.total ? structuredResult : gradeLegacyListeningTest(test);
     const answerNumbers = Object.keys(parseStructuredAnswers(test)).map(Number).filter(Number.isFinite);
@@ -310,9 +320,13 @@ function recordListeningResult(test) {
         return;
     }
 
-    status.textContent = `Result: ${result.correct}/${result.total} correct answers.`;
+    status.textContent = options.autoSubmit
+        ? AUTO_SUBMIT_MESSAGE
+        : `Result: ${result.correct}/${result.total} correct answers.`;
     activeListeningResult = result;
-    showListeningResult(result, answerNumbers);
+    ListeningResultUtils.stopAudioPlayers?.(listeningRoot);
+    ListeningResultUtils.disableAnswerInputs?.(listeningRoot);
+    showListeningResult(result, answerNumbers, options);
 
     window.authClient?.recordTestResult({
         type: resultType,
@@ -381,6 +395,7 @@ loadListeningTest()
             return;
         }
         activeListeningTest = test;
+        isSubmitted = false;
         document.title = `${test.title || "IELTS"} - Listening`;
         listeningRoot.innerHTML = window.ListeningComponents.ListeningTestPage(test);
         window.ListeningComponents.bindListeningTest(listeningRoot);
@@ -389,9 +404,9 @@ loadListeningTest()
         listeningRoot.innerHTML = `<p class="lc-submit-status">${window.ListeningComponents.escapeHtml(error.message)}</p>`;
     });
 
-listeningRoot.addEventListener("listening-submit", () => {
+listeningRoot.addEventListener("listening-submit", (event) => {
     if (activeListeningTest) {
-        recordListeningResult(activeListeningTest);
+        recordListeningResult(activeListeningTest, event.detail || {});
     }
 });
 

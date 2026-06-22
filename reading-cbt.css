@@ -245,6 +245,29 @@ select:focus-visible {
     background: var(--cbt-accent-dark);
 }
 
+.fullscreen-toggle-btn {
+    white-space: nowrap;
+}
+
+.cbt-button--fullscreen {
+    border-color: rgba(99, 102, 241, 0.34);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.10));
+    color: #1d3f8f;
+}
+
+.cbt-button--fullscreen:hover {
+    border-color: rgba(99, 102, 241, 0.56);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.13), rgba(124, 58, 237, 0.16));
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.10);
+}
+
+body.exam-fullscreen-active .cbt-button--fullscreen,
+body.fullscreen-fallback .cbt-button--fullscreen {
+    border-color: rgba(124, 58, 237, 0.56);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+}
+
 .cbt-button:disabled {
     cursor: not-allowed;
     opacity: 0.38;
@@ -1241,6 +1264,18 @@ select:focus-visible {
     background: #f2f4f7;
 }
 
+.cbt-auto-submit-notice {
+    margin: 0 0 16px;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    background: #fff7ed;
+    color: #9a3412 !important;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+    padding: 10px 12px;
+}
+
 .cbt-result-eyebrow {
     color: var(--cbt-accent);
     font-size: 11px;
@@ -1617,6 +1652,142 @@ select:focus-visible {
     }
 }
 
+body.exam-fullscreen-active,
+body.fullscreen-fallback {
+    overflow: hidden !important;
+}
+
+body.exam-fullscreen-active .main-navbar,
+body.exam-fullscreen-active #globalNavbar,
+body.exam-fullscreen-active [data-global-navbar],
+body.exam-fullscreen-active footer:not(.cbt-bottom-bar):not(.cbt-panel-footer):not(.lc-bottom-bar),
+body.exam-fullscreen-active .site-footer,
+body.exam-fullscreen-active .partfter,
+body.exam-fullscreen-active .page-background,
+body.exam-fullscreen-active .site-background,
+body.exam-fullscreen-active .hero-section,
+body.fullscreen-fallback .main-navbar,
+body.fullscreen-fallback #globalNavbar,
+body.fullscreen-fallback [data-global-navbar],
+body.fullscreen-fallback footer:not(.cbt-bottom-bar):not(.cbt-panel-footer):not(.lc-bottom-bar),
+body.fullscreen-fallback .site-footer,
+body.fullscreen-fallback .partfter,
+body.fullscreen-fallback .page-background,
+body.fullscreen-fallback .site-background,
+body.fullscreen-fallback .hero-section {
+    display: none !important;
+}
+
+body.exam-fullscreen-active #readingAppRoot,
+body.fullscreen-fallback #readingAppRoot {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+}
+
+body.exam-fullscreen-active .full-test-shell,
+body.fullscreen-fallback .full-test-shell {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    z-index: 99999;
+    background: var(--lc-bg, var(--cbt-soft, #0f172a));
+    overflow: hidden;
+}
+
+body.exam-fullscreen-active .full-test-player,
+body.fullscreen-fallback .full-test-player {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow: hidden;
+}
+
+body.exam-fullscreen-active .cbt-shell.full-test-shell,
+body.fullscreen-fallback .cbt-shell.full-test-shell {
+    grid-template-rows: 66px minmax(0, 1fr) 68px;
+    padding: 0;
+}
+
+body.exam-fullscreen-active .cbt-shell.full-test-shell.no-bottom,
+body.fullscreen-fallback .cbt-shell.full-test-shell.no-bottom {
+    grid-template-rows: 66px minmax(0, 1fr);
+}
+
+body.exam-fullscreen-active .cbt-stage,
+body.fullscreen-fallback .cbt-stage {
+    min-height: 0;
+    overflow: hidden;
+}
+
+body.exam-fullscreen-active .cbt-panel,
+body.fullscreen-fallback .cbt-panel {
+    min-height: 0;
+    border-radius: 0;
+}
+
+body.exam-fullscreen-active .cbt-panel-scroll,
+body.fullscreen-fallback .cbt-panel-scroll {
+    overflow-y: auto;
+}
+
+body.exam-fullscreen-active .cbt-bottom-bar,
+body.fullscreen-fallback .cbt-bottom-bar {
+    min-height: 68px;
+    margin: 0;
+    border-radius: 0;
+}
+
+@media (max-width: 980px) {
+    body.exam-fullscreen-active .cbt-shell.full-test-shell,
+    body.fullscreen-fallback .cbt-shell.full-test-shell {
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    body.exam-fullscreen-active .cbt-stage,
+    body.exam-fullscreen-active .cbt-stage.focus-passage,
+    body.fullscreen-fallback .cbt-stage,
+    body.fullscreen-fallback .cbt-stage.focus-passage {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    body.exam-fullscreen-active,
+    body.fullscreen-fallback,
+    body.exam-fullscreen-active.cbt-body,
+    body.fullscreen-fallback.cbt-body {
+        overflow: hidden !important;
+    }
+
+    body.exam-fullscreen-active .cbt-shell.full-test-shell,
+    body.fullscreen-fallback .cbt-shell.full-test-shell {
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: 100vh;
+        height: 100dvh;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    body.exam-fullscreen-active .cbt-header-actions,
+    body.fullscreen-fallback .cbt-header-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    body.exam-fullscreen-active .cbt-header-actions .cbt-button--secondary,
+    body.fullscreen-fallback .cbt-header-actions .cbt-button--secondary {
+        grid-column: 1 / -1;
+    }
+}
+
 /* Custom imported IELTS layout boxes styling */
 .notes-box {
     border: 2px solid var(--cbt-border);
@@ -1816,6 +1987,24 @@ html.dark-theme .cbt-button--secondary:hover,
 html.dark-theme .cbt-button--outline:hover {
     background: #141635;
     border-color: rgba(255, 255, 255, 0.25);
+}
+
+html.dark-theme .cbt-button--fullscreen {
+    border-color: rgba(96, 165, 250, 0.28);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(167, 139, 250, 0.14));
+    color: #dbeafe;
+}
+
+html.dark-theme .cbt-button--fullscreen:hover {
+    border-color: rgba(147, 197, 253, 0.42);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.24), rgba(167, 139, 250, 0.20));
+}
+
+html.dark-theme body.exam-fullscreen-active .cbt-button--fullscreen,
+html.dark-theme body.fullscreen-fallback .cbt-button--fullscreen {
+    border-color: rgba(147, 197, 253, 0.46);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
 }
 
 html.dark-theme .cbt-vocab-popover,

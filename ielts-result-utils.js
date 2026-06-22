@@ -132,6 +132,45 @@
         return text || "\u2014";
     }
 
+    const AUTO_SUBMIT_MESSAGE = "Time is over. Your test has been submitted automatically.";
+
+    function disableAnswerInputs(root = document) {
+        const scope = root?.querySelectorAll ? root : document;
+        scope.querySelectorAll([
+            ".answer-input",
+            ".listening-answer",
+            ".lc-answer-input",
+            ".lc-inline-select",
+            ".cbt-blank-input",
+            ".cbt-select",
+            "input[type='radio']",
+            "input[type='checkbox']",
+            "input[id^='q']:not([type='range'])",
+            "input[name^='q']:not([type='range'])",
+            "select[name^='q']",
+            "textarea[name^='q']"
+        ].join(",")).forEach((field) => {
+            field.readOnly = true;
+            field.disabled = true;
+            field.setAttribute("aria-disabled", "true");
+        });
+    }
+
+    function stopAudioPlayers(root = document) {
+        const scope = root?.querySelectorAll ? root : document;
+        scope.querySelectorAll("audio").forEach((audio) => {
+            try {
+                audio.pause();
+            } catch {
+                // The audio element may be detached during route changes.
+            }
+        });
+        scope.querySelectorAll(".lc-play-button, #play-pause-btn, #start-listening-btn").forEach((button) => {
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+        });
+    }
+
     window.IeltsResultUtils = {
         normalizeAnswer,
         acceptedAnswers,
@@ -141,6 +180,9 @@
         summarizeResults,
         normalizeToForty,
         estimateBand,
-        formatAnswer
+        formatAnswer,
+        AUTO_SUBMIT_MESSAGE,
+        disableAnswerInputs,
+        stopAudioPlayers
     };
 })();

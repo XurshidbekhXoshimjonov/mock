@@ -898,6 +898,7 @@ const ListeningComponents = (() => {
             </div>
             <div class="lc-header-actions">
                 <a class="lc-dashboard-button" href="${dashboardHref}"><span class="lc-grid-icon"></span>Dashboard</a>
+                ${isFull ? `<button class="lc-fullscreen-button fullscreen-toggle-btn" data-fullscreen-toggle type="button" aria-pressed="false">Full Screen</button>` : ""}
                 <button class="lc-submit-button" type="button">Submit</button>
             </div>
         </header>`;
@@ -1048,7 +1049,7 @@ const ListeningComponents = (() => {
         const parts = (test.parts || []).filter((part) => (part.blocks || []).length || part.audioUrl);
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
 
-        return `<div class="lc-page">
+        return `<div class="lc-page ${isFullListeningTest(test) ? "full-test-shell full-test-player" : ""}">
             ${ListeningHeader(test)}
             <main class="lc-main">
                 ${ListeningTestTitle(test)}
@@ -1068,6 +1069,7 @@ const ListeningComponents = (() => {
                 <section class="lc-result-modal" role="dialog" aria-modal="true">
                     <button class="lc-modal-close" type="button" aria-label="Close" data-listening-result-close>&times;</button>
                     <span class="lc-result-eyebrow">IELTS Listening result</span>
+                    <p class="lc-auto-submit-notice hidden" role="alert" data-auto-submit-message></p>
                     <h2 data-listening-result-score>0 / 40</h2>
                     <p class="lc-band" data-listening-result-band>Estimated band: 0</p>
                     <div class="lc-result-stats">
@@ -1223,8 +1225,11 @@ const ListeningComponents = (() => {
         const partTabs = [...root.querySelectorAll("[data-listening-part-select]")];
         const previousButton = root.querySelector("[data-listening-part-prev]");
         const nextButton = root.querySelector("[data-listening-part-next]");
+        const autoSubmitMessage = window.IeltsResultUtils?.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
+        let isSubmitted = false;
         let resetListeningTimer = () => {};
         let shouldResetListeningTimer = false;
+        let timerInterval = null;
 
         function activePartIndex() {
             return Math.max(0, sections.findIndex((section) => !section.classList.contains("hidden")));
@@ -1301,22 +1306,69 @@ const ListeningComponents = (() => {
             let remaining = Number(timer.dataset.duration) || 600;
             const output = timer.querySelector("strong");
             const resetTimer = () => {
+                if (isSubmitted) return;
                 remaining = Number(timer.dataset.duration) || 600;
                 output.textContent = formatTime(remaining);
             };
             resetListeningTimer = resetTimer;
             resetTimer();
             clearInterval(root._listeningTimer);
-            root._listeningTimer = setInterval(() => {
-                if (remaining > 0) remaining -= 1;
+            timerInterval = setInterval(() => {
+                remaining = Math.max(0, remaining - 1);
                 output.textContent = formatTime(remaining);
+                if (remaining <= 0) {
+                    handleTimeExpired();
+                }
             }, 1000);
+            root._listeningTimer = timerInterval;
+        }
+
+        function stopListeningTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            if (root._listeningTimer) {
+                clearInterval(root._listeningTimer);
+            }
+            root._listeningTimer = null;
+            if (timer) {
+                const output = timer.querySelector("strong");
+                if (output) output.textContent = formatTime(0);
+            }
+        }
+
+        function handleTimeExpired() {
+            autoSubmitTest();
+        }
+
+        function autoSubmitTest() {
+            submitListeningTest({ auto: true });
+        }
+
+        function submitListeningTest(options = {}) {
+            const isAutoSubmit = Boolean(options.auto);
+            if (isSubmitted) return;
+            isSubmitted = true;
+
+            stopListeningTimer();
+            window.IeltsResultUtils?.stopAudioPlayers?.(root);
+            window.IeltsResultUtils?.disableAnswerInputs?.(root);
+            root.querySelector(".lc-submit-button")?.setAttribute("disabled", "true");
+
+            const status = root.querySelector(".lc-submit-status");
+            if (status) {
+                status.textContent = isAutoSubmit
+                    ? autoSubmitMessage
+                    : "Your Listening test has been submitted.";
+            }
+            root.dispatchEvent(new CustomEvent("listening-submit", {
+                bubbles: true,
+                detail: { autoSubmit: isAutoSubmit }
+            }));
         }
 
         root.querySelector(".lc-submit-button")?.addEventListener("click", () => {
-            const status = root.querySelector(".lc-submit-status");
-            status.textContent = "Your Listening test has been submitted.";
-            root.dispatchEvent(new CustomEvent("listening-submit", { bubbles: true }));
+            submitListeningTest();
         });
 
         root.querySelector("[data-listening-result-modal]")?.addEventListener("click", (event) => {

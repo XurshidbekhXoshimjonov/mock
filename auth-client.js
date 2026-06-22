@@ -1416,65 +1416,6 @@
         refreshNavbarAuthState();
     });
 
-    // Email click-to-copy handler
-    document.addEventListener("click", (event) => {
-        const mailtoLink = event.target.closest('a[href^="mailto:"]');
-        if (mailtoLink) {
-            const email = mailtoLink.getAttribute('href').replace('mailto:', '');
-            navigator.clipboard.writeText(email).then(() => {
-                showCopiedTooltip(mailtoLink);
-            }).catch(err => {
-                console.error('Could not copy text: ', err);
-            });
-        }
-    });
-
-    function showCopiedTooltip(element) {
-        if (element.querySelector('.copied-tooltip')) return;
-
-        const tooltip = document.createElement('span');
-        tooltip.className = 'copied-tooltip';
-        tooltip.textContent = 'Copied!';
-        tooltip.style.position = 'absolute';
-        tooltip.style.background = 'rgba(0, 87, 255, 0.95)';
-        tooltip.style.color = '#fff';
-        tooltip.style.padding = '4px 8px';
-        tooltip.style.borderRadius = '4px';
-        tooltip.style.fontSize = '12px';
-        tooltip.style.fontWeight = '600';
-        tooltip.style.left = '50%';
-        tooltip.style.bottom = '100%';
-        tooltip.style.transform = 'translate(-50%, -8px)';
-        tooltip.style.opacity = '0';
-        tooltip.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-        tooltip.style.pointerEvents = 'none';
-        tooltip.style.zIndex = '1000';
-        tooltip.style.boxShadow = '0 4px 12px rgba(0, 87, 255, 0.25)';
-
-        const originalPosition = window.getComputedStyle(element).position;
-        if (originalPosition === 'static') {
-            element.style.position = 'relative';
-        }
-
-        element.appendChild(tooltip);
-
-        requestAnimationFrame(() => {
-            tooltip.style.opacity = '1';
-            tooltip.style.transform = 'translate(-50%, -12px)';
-        });
-
-        setTimeout(() => {
-            tooltip.style.opacity = '0';
-            tooltip.style.transform = 'translate(-50%, -8px)';
-            setTimeout(() => {
-                tooltip.remove();
-                if (originalPosition === 'static') {
-                    element.style.position = '';
-                }
-            }, 200);
-        }, 1800);
-    }
-
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {
             renderGlobalNavbar();

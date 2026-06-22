@@ -13,6 +13,95 @@ const mode = document.body.dataset.testMode === "full" ? "full" : "individual";
 const skill = mode === "full" && (params.get("skill") === "listening" || routeSkill === "listening") ? "listening" : "reading";
 const duration = mode === "full" ? (skill === "listening" ? 40 : 60) * 60 : 20 * 60;
 const ResultUtils = window.IeltsResultUtils || {};
+const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
+
+function fullscreenButtons() {
+    return Array.from(document.querySelectorAll("[data-fullscreen-toggle]"));
+}
+
+function isFullscreenActive() {
+    return Boolean(document.fullscreenElement) || document.body.classList.contains("fullscreen-fallback");
+}
+
+function updateFullScreenUI() {
+    const active = isFullscreenActive();
+
+    document.body.classList.toggle("exam-fullscreen-active", active);
+    document.querySelectorAll(".full-test-shell").forEach((shell) => {
+        shell.classList.toggle("fullscreen", active);
+    });
+    fullscreenButtons().forEach((button) => {
+        button.textContent = active ? "Exit Full Screen" : "Full Screen";
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+        button.setAttribute("title", active ? "Exit Full Screen" : "Full Screen");
+    });
+    document.dispatchEvent(new CustomEvent(FULLSCREEN_STATE_EVENT, { detail: { active } }));
+}
+
+async function enterFullScreenMode() {
+    try {
+        if (!document.documentElement.requestFullscreen) {
+            throw new Error("Fullscreen API is not available.");
+        }
+        await document.documentElement.requestFullscreen();
+        document.body.classList.remove("fullscreen-fallback");
+        document.body.classList.add("exam-fullscreen-active");
+    } catch (error) {
+        document.body.classList.add("exam-fullscreen-active", "fullscreen-fallback");
+    }
+    updateFullScreenUI();
+}
+
+async function exitFullScreenMode() {
+    try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen();
+        }
+    } catch (error) {
+        // Restore the page layout even if the browser refuses the exit call.
+    }
+    document.body.classList.remove("exam-fullscreen-active", "fullscreen-fallback");
+    updateFullScreenUI();
+}
+
+function bindFullScreenEvents(root = document) {
+    const scope = root.querySelectorAll ? root : document;
+
+    scope.querySelectorAll("[data-fullscreen-toggle]").forEach((button) => {
+        if (button.dataset.fullscreenBound === "true") return;
+        button.dataset.fullscreenBound = "true";
+        button.addEventListener("click", () => {
+            if (isFullscreenActive()) {
+                exitFullScreenMode();
+            } else {
+                enterFullScreenMode();
+            }
+        });
+    });
+
+    if (!document.documentElement.dataset.fullscreenEventsBound) {
+        document.documentElement.dataset.fullscreenEventsBound = "true";
+        document.addEventListener("fullscreenchange", () => {
+            document.body.classList.toggle("exam-fullscreen-active", Boolean(document.fullscreenElement));
+            if (!document.fullscreenElement) {
+                document.body.classList.remove("exam-fullscreen-active");
+            }
+            updateFullScreenUI();
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && document.body.classList.contains("fullscreen-fallback")) {
+                exitFullScreenMode();
+            }
+        });
+    }
+
+    updateFullScreenUI();
+}
+
+window.enterFullScreenMode = enterFullScreenMode;
+window.exitFullScreenMode = exitFullScreenMode;
+window.updateFullScreenUI = updateFullScreenUI;
+window.bindFullScreenEvents = bindFullScreenEvents;
 
 function normalizeAnswer(value) {
     return ResultUtils.normalizeAnswer
@@ -337,7 +426,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=1.0.22";
+    stylesheet.href = "listening-template.css?v=1.0.23";
     document.head.appendChild(stylesheet);
 }
 
@@ -654,9 +743,10 @@ function gradeFullListeningTest(root, test) {
     };
 }
 
-function showFullListeningResult(root, result) {
+function showFullListeningResult(root, result, options = {}) {
     const modal = root.querySelector("[data-listening-result-modal]");
     if (!modal) return;
+    const autoSubmitMessage = ResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
 
     modal.querySelector("[data-listening-result-score]").textContent = `${result.correct} / ${result.total}`;
     modal.querySelector("[data-listening-result-band]").textContent = `Estimated band: ${result.band}`;
@@ -666,6 +756,11 @@ function showFullListeningResult(root, result) {
         `${result.correct} correct answer${result.correct === 1 ? "" : "s"}`;
     modal.querySelector("[data-listening-result-incorrect]").textContent =
         `${result.incorrect} incorrect answer${result.incorrect === 1 ? "" : "s"}`;
+    const notice = modal.querySelector("[data-auto-submit-message]");
+    if (notice) {
+        notice.textContent = autoSubmitMessage;
+        notice.classList.toggle("hidden", !options.autoSubmit);
+    }
     modal.classList.remove("hidden");
 }
 
@@ -814,18 +909,31 @@ function renderFullListeningPlayer() {
             document.title = `${test.title || "IELTS Listening"} - Full Test`;
             rootElement.innerHTML = window.ListeningComponents.ListeningTestPage(test);
             window.ListeningComponents.bindListeningTest(rootElement);
-            rootElement.addEventListener("listening-submit", () => {
+            bindFullScreenEvents(rootElement);
+            let isSubmitted = false;
+            rootElement.addEventListener("listening-submit", (event) => {
+                if (isSubmitted) return;
+                isSubmitted = true;
+
                 const result = gradeFullListeningTest(rootElement, test);
                 const status = rootElement.querySelector(".lc-submit-status");
+                const options = event.detail || {};
+                const autoSubmitMessage = ResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
 
                 if (!result.total) {
                     if (status) status.textContent = "This Listening test does not have an answer key yet.";
                     return;
                 }
 
-                if (status) status.textContent = `Result: ${result.correct}/${result.total} correct answers.`;
+                ResultUtils.stopAudioPlayers?.(rootElement);
+                ResultUtils.disableAnswerInputs?.(rootElement);
+                if (status) {
+                    status.textContent = options.autoSubmit
+                        ? autoSubmitMessage
+                        : `Result: ${result.correct}/${result.total} correct answers.`;
+                }
                 rootElement._listeningResult = result;
-                showFullListeningResult(rootElement, result);
+                showFullListeningResult(rootElement, result, options);
                 window.authClient?.recordTestResult({
                     type: "full-test",
                     skill: "listening",
@@ -1008,7 +1116,7 @@ function Timer({ seconds }) {
     );
 }
 
-function Header({ seconds, dashboardHref, onSubmit }) {
+function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false }) {
     const title = mode === "full"
         ? "Full Test"
         : (skill === "listening" ? "Academic Listening" : "Academic Reading");
@@ -1025,7 +1133,20 @@ function Header({ seconds, dashboardHref, onSubmit }) {
                 h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
                 "Dashboard"
             ),
-            h("button", { className: "cbt-button cbt-button--submit", type: "button", onClick: onSubmit }, "Submit")
+            showFullscreen
+                ? h("button", {
+                    className: "cbt-button cbt-button--fullscreen fullscreen-toggle-btn",
+                    type: "button",
+                    "data-fullscreen-toggle": "true",
+                    "aria-pressed": fullscreenActive ? "true" : "false"
+                }, fullscreenActive ? "Exit Full Screen" : "Full Screen")
+                : null,
+            h("button", {
+                className: "cbt-button cbt-button--submit",
+                type: "button",
+                onClick: onSubmit,
+                disabled: submitted
+            }, "Submit")
         )
     );
 }
@@ -1080,10 +1201,11 @@ function BottomBar({ passages, activeIndex, onSelect, onPrevious, onNext, fullMo
     );
 }
 
-function ResultModal({ result, onClose, onReview, vocabularyCount = 0 }) {
+function ResultModal({ result, onClose, onReview, vocabularyCount = 0, autoSubmitted = false }) {
     if (!result) return null;
 
     const resultTitle = skill === "listening" ? "IELTS Listening result" : "IELTS Reading result";
+    const autoSubmitMessage = ResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
 
     return h("div", { className: "cbt-modal-backdrop", onClick: onClose },
         h("section", {
@@ -1093,6 +1215,9 @@ function ResultModal({ result, onClose, onReview, vocabularyCount = 0 }) {
             onClick: (event) => event.stopPropagation()
         },
             h("button", { className: "cbt-modal-close", type: "button", onClick: onClose, "aria-label": "Close" }, "×"),
+            autoSubmitted
+                ? h("p", { className: "cbt-auto-submit-notice", role: "alert" }, autoSubmitMessage)
+                : null,
             h("span", { className: "cbt-result-eyebrow" }, resultTitle),
             h("h2", null, `${result.correct} / ${result.total}`),
             h("p", { className: "cbt-band" }, `Estimated band: ${result.band}`),
@@ -1319,9 +1444,12 @@ function ReadingApp() {
     const [result, setResult] = useState(null);
     const [showResultModal, setShowResultModal] = useState(false);
     const [reviewMode, setReviewMode] = useState(false);
+    const [autoSubmitted, setAutoSubmitted] = useState(false);
+    const [fullscreenActive, setFullscreenActive] = useState(isFullscreenActive());
     const [checkedVocabulary, setCheckedVocabulary] = useState([]);
     const [activeVocabulary, setActiveVocabulary] = useState(null);
     const attemptIdRef = useRef(makeAttemptId(testId));
+    const isSubmittedRef = useRef(false);
     const checkedVocabularyRef = useRef([]);
     const vocabularyCacheRef = useRef(new Map());
     const vocabularyRequestsRef = useRef(new Map());
@@ -1355,13 +1483,17 @@ function ReadingApp() {
     }, []);
 
     useEffect(() => {
-        if (result) return undefined;
-        const timerId = setInterval(() => setSeconds((value) => Math.max(0, value - 1)), 1000);
+        if (result || isSubmittedRef.current) return undefined;
+        const timerId = setInterval(() => {
+            setSeconds((value) => Math.max(0, value - 1));
+        }, 1000);
         return () => clearInterval(timerId);
     }, [result]);
 
     useEffect(() => {
-        if (seconds === 0 && test && !result) submit();
+        if (seconds <= 0 && test && !result && !isSubmittedRef.current) {
+            handleTimeExpired();
+        }
     }, [seconds, test]);
 
     useEffect(() => {
@@ -1381,6 +1513,8 @@ function ReadingApp() {
         setResult(null);
         setShowResultModal(false);
         setReviewMode(false);
+        setAutoSubmitted(false);
+        isSubmittedRef.current = false;
     }, [test?.id]);
 
     useEffect(() => {
@@ -1417,6 +1551,19 @@ function ReadingApp() {
     const currentQuestions = useMemo(() =>
         collectQuestions(passage ? [passage] : []), [passage]
     );
+
+    useEffect(() => {
+        if (!isFullTest) return undefined;
+
+        const syncFullscreenState = () => setFullscreenActive(isFullscreenActive());
+        bindFullScreenEvents(rootElement);
+        syncFullscreenState();
+        document.addEventListener(FULLSCREEN_STATE_EVENT, syncFullscreenState);
+
+        return () => {
+            document.removeEventListener(FULLSCREEN_STATE_EVENT, syncFullscreenState);
+        };
+    }, [isFullTest, test?.id]);
 
     function answerQuestion(number, value) {
         if (result) return;
@@ -1601,7 +1748,26 @@ function ReadingApp() {
             });
     }
 
-    function submit() {
+    function handleTimeExpired() {
+        autoSubmitTest();
+    }
+
+    function autoSubmitTest() {
+        submit({ auto: true });
+    }
+
+    function submit(options = {}) {
+        const isAutoSubmit = Boolean(options.auto);
+        if (isSubmittedRef.current) return;
+        isSubmittedRef.current = true;
+        setAutoSubmitted(isAutoSubmit);
+
+        if (isAutoSubmit) {
+            setSeconds(0);
+            ResultUtils.stopAudioPlayers?.(rootElement);
+            ResultUtils.disableAnswerInputs?.(rootElement);
+        }
+
         const nextResult = gradeReadingQuestions(questions, answers);
         setResult(nextResult);
         setShowResultModal(true);
@@ -1641,8 +1807,15 @@ function ReadingApp() {
     const answeredCurrent = currentQuestions.filter((question) => normalizeAnswer(answers[question.number])).length;
 
     return h(Fragment, null,
-        h("div", { className: `cbt-shell${!isFullTest && passages.length === 1 ? " no-bottom" : ""}` },
-            h(Header, { seconds, dashboardHref, onSubmit: submit }),
+        h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!isFullTest && passages.length === 1 ? " no-bottom" : ""}` },
+            h(Header, {
+                seconds,
+                dashboardHref,
+                onSubmit: submit,
+                showFullscreen: isFullTest,
+                fullscreenActive,
+                submitted: Boolean(result)
+            }),
             h("main", { className: `cbt-stage${focus ? " focus-passage" : ""}` },
                 h("section", { className: "cbt-panel cbt-passage-panel" },
                     h("div", {
@@ -1704,6 +1877,7 @@ function ReadingApp() {
         showResultModal
             ? h(ResultModal, {
                 result,
+                autoSubmitted,
                 vocabularyCount: checkedVocabulary.length,
                 onClose: () => {
                     setShowResultModal(false);

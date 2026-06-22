@@ -911,6 +911,8 @@
         .modal-close-btn:hover { color: #0f172a; }
         .modal-body { padding: 38px 34px 34px; text-align: center; }
         .result-eyebrow { margin: 0 0 22px; color: #0b5fff; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        #auto-submit-notice { margin: 0 0 16px; border: 1px solid #fed7aa; border-radius: 8px; background: #fff7ed; color: #9a3412; font-size: 13px; font-weight: 700; line-height: 1.45; padding: 10px 12px; }
+        #auto-submit-notice.hidden { display: none; }
         #score-summary { margin: 0; color: #0b67e8; font-size: 43px; font-weight: 500; line-height: 1; }
         #result-band { margin: 20px 0 4px; color: #111827; font-size: 18px; font-weight: 700; }
         #result-unanswered { margin: 0; color: #718096; font-size: 14px; }
@@ -1964,6 +1966,7 @@
         <div class="modal-content">
             <button id="modal-close-button" class="modal-close-btn" aria-label="Close">&times;</button>
             <div class="modal-body">
+                <p id="auto-submit-notice" class="hidden" role="alert">Time is over. Your test has been submitted automatically.</p>
                 <p class="result-eyebrow">IELTS Listening Result</p>
                 <p id="score-summary">0 / 40</p>
                 <p id="result-band">Estimated band: 0</p>
@@ -1983,6 +1986,8 @@
         let testStarted = false;
         let timeInSeconds = 2400;
         let timerInterval;
+        let isSubmitted = false;
+        const AUTO_SUBMIT_MESSAGE = 'Time is over. Your test has been submitted automatically.';
 
         // Correct answers
         const correctAnswers = {
@@ -2059,7 +2064,7 @@
             });
 
             // Check answers button
-            document.getElementById('deliver-button').addEventListener('click', checkAnswers);
+            document.getElementById('deliver-button').addEventListener('click', () => checkAnswers());
 
             // Modal close button
             document.getElementById('modal-close-button').addEventListener('click', () => {
@@ -2231,8 +2236,36 @@
             if (countDisplay) countDisplay.textContent = `${answeredCount} of 10`;
         }
 
+        function stopAudioPlayers() {
+            document.querySelectorAll('audio').forEach(audio => {
+                try {
+                    audio.pause();
+                } catch (error) {
+                    // Audio may not be ready yet.
+                }
+            });
+            document.getElementById('play-pause-btn')?.setAttribute('disabled', 'true');
+            document.getElementById('start-listening-btn')?.setAttribute('disabled', 'true');
+        }
+
+        function disableAnswerInputs() {
+            document.querySelectorAll('.answer-input, input[type="radio"], input[type="checkbox"], select, textarea').forEach(input => {
+                input.disabled = true;
+                input.readOnly = true;
+            });
+        }
+
         // Check answers function
-        function checkAnswers() {
+        function checkAnswers(options = {}) {
+            const isAutoSubmit = Boolean(options.autoSubmit || window.ieltsxAutoSubmitRequested);
+            window.ieltsxAutoSubmitRequested = false;
+            if (isSubmitted) {
+                return;
+            }
+            isSubmitted = true;
+            clearInterval(timerInterval);
+            stopAudioPlayers();
+
             let score = 0;
             let resultsData = [];
             
@@ -2330,9 +2363,7 @@
             const band = calculateBandScore(score);
 
             // Disable inputs
-            document.querySelectorAll('.answer-input, input[type="radio"], input[type="checkbox"]').forEach(input => {
-                input.disabled = true;
-            });
+            disableAnswerInputs();
 
             // Keep the full-width test visible for answer review.
             document.querySelector('.main-container').classList.remove('results-mode');
@@ -2343,11 +2374,16 @@
             const scoreSummary = document.getElementById('score-summary');
             const resultBand = document.getElementById('result-band');
             const resultUnanswered = document.getElementById('result-unanswered');
+            const autoSubmitNotice = document.getElementById('auto-submit-notice');
             const unanswered = resultsData.filter((result) => result.userAnswer === 'No Answer').length;
 
             scoreSummary.textContent = `${score} / 40`;
             resultBand.textContent = `Estimated band: ${band}`;
             resultUnanswered.textContent = `${unanswered} unanswered question${unanswered === 1 ? '' : 's'}.`;
+            if (autoSubmitNotice) {
+                autoSubmitNotice.textContent = AUTO_SUBMIT_MESSAGE;
+                autoSubmitNotice.classList.toggle('hidden', !isAutoSubmit);
+            }
             document.dispatchEvent(new CustomEvent('ieltsx-listening-result', {
                 detail: { correct: score, total: 40, band }
             }));
@@ -2473,7 +2509,7 @@
         });
    
     </script>
-    <script src="/full-listening-cdi-audio.js"></script>
+    <script src="/full-listening-cdi-audio.js?v=1.0.1"></script>
     <script src="/auth-client.js"></script>
     <script src="/full-listening-cdi-integration.js"></script>
 </body>
