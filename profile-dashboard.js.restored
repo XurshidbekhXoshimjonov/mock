@@ -141,11 +141,9 @@
         return e("section", { className: "profile-hero overflow-hidden rounded-[2rem] p-5 text-white shadow-card md:p-7" },
             e("div", { className: "relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center" },
                 e("div", { className: "flex items-center gap-4 md:gap-5" },
-                    user.avatar
-                        ? e("img", { src: user.avatar, alt: user.name || user.username, className: "flex h-20 w-20 shrink-0 rounded-[1.5rem] border border-white/20 object-cover shadow-2xl" })
-                        : e("div", { className: "flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/20 bg-white/15 text-2xl font-black shadow-2xl backdrop-blur" }, initials(user.name || user.username)),
+                    e("div", { className: "flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/20 bg-white/15 text-2xl font-black shadow-2xl backdrop-blur" }, initials(user.name || user.username)),
                     e("div", { className: "min-w-0" },
-                        e("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-blue-100" }, `IELTSX Performance Center | ${user.role || "user"}`),
+                        e("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-blue-100" }, "IELTSX Performance Center"),
                         e("h1", { className: "mt-2 break-words text-2xl font-black tracking-tight md:text-4xl" }, user.name || user.username),
                         e("p", { className: "mt-2 max-w-xl text-sm leading-6 text-blue-100" }, "Your completed tests, estimated bands, and study momentum in one place.")
                     )
@@ -174,13 +172,10 @@
                 description: "Your IELTSX learning account"
             }),
             e("div", { className: "flex items-center gap-4 rounded-2xl bg-slate-50 p-4" },
-                user.avatar
-                    ? e("img", { src: user.avatar, alt: user.name || user.username, className: "flex h-14 w-14 shrink-0 rounded-2xl object-cover shadow-sm" })
-                    : e("div", { className: "flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white" }, initials(user.name || user.username)),
+                e("div", { className: "flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white" }, initials(user.name || user.username)),
                 e("div", { className: "min-w-0 flex-1" },
                     idLabel && e("p", { className: "mb-0.5 text-xs font-black uppercase tracking-wide text-blue-600" }, idLabel),
                     e("p", { className: "truncate font-black text-slate-950" }, user.name || user.username),
-                    e("p", { className: "truncate text-[11px] font-bold uppercase tracking-wider text-slate-400" }, user.role || "user"),
                     e("p", { className: "truncate text-sm text-slate-500" }, user.email || "Email not provided")
                 )
             ),
@@ -481,11 +476,9 @@
             e("a", { href: "profile.html", className: "mb-6 inline-flex items-center gap-2 text-sm font-black text-blue-700 hover:text-slate-950" }, e(Icon, { name: "arrow", className: "h-4 w-4 rotate-180" }), "Back to dashboard"),
             e("section", { className: "rounded-[2rem] border border-slate-200 bg-white p-6 shadow-card md:p-8" },
                 e("div", { className: "mb-8 flex items-center gap-4" },
-                    user.avatar
-                        ? e("img", { src: user.avatar, alt: name, className: "flex h-16 w-16 shrink-0 rounded-3xl object-cover shadow-md" })
-                        : e("div", { className: "flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 text-xl font-black text-white" }, initials(name)),
+                    e("div", { className: "flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 text-xl font-black text-white" }, initials(name)),
                     e("div", null,
-                        e("p", { className: "text-sm font-black uppercase tracking-[0.16em] text-blue-700" }, `Profile Settings | ${user.role || "user"}`),
+                        e("p", { className: "text-sm font-black uppercase tracking-[0.16em] text-blue-700" }, "Profile Settings"),
                         e("h1", { className: "text-3xl font-black tracking-tight text-slate-950" }, "Learning preferences")
                     )
                 ),
@@ -532,44 +525,21 @@
     }
 
     async function boot() {
-        let user = null;
-        try {
-            const response = await fetch("/api/auth/me", {
-                method: "GET",
-                credentials: "include",
-                cache: "no-store"
-            });
+        let user = getAuthUser();
 
-            console.log("PROFILE_ME_STATUS:", response.status);
-
-            if (response.status === 401) {
-                console.log("PROFILE_ME_RESPONSE: Unauthorized");
-                window.location.href = "/login";
-                return;
-            }
-
-            const data = await response.json();
-            console.log("PROFILE_ME_RESPONSE:", data);
-
-            if (response.ok && data.success && data.user) {
-                user = data.user;
-                const auth = window.authClient && window.authClient.getAuth();
-                if (auth) {
-                    auth.user = user;
-                    window.authClient.saveAuth(auth);
-                }
-            } else {
-                window.location.href = "/login";
-                return;
-            }
-        } catch (error) {
-            console.error("Profile boot fetch error:", error);
-            window.location.href = "/login";
+        if (!user) {
+            window.location.href = "/login.html";
             return;
         }
 
+        try {
+            user = await window.authClient.verifyStoredSession();
+        } catch {
+            user = getAuthUser();
+        }
+
         if (!user) {
-            window.location.href = "/login";
+            window.location.href = "/login.html";
             return;
         }
 

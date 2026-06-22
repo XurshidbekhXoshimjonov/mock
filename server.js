@@ -23,6 +23,7 @@ try {
 }
 
 const app = express();
+app.disable("etag");
 
 const ROOT_DIR = __dirname;
 const IS_VERCEL = Boolean(process.env.VERCEL);
@@ -164,6 +165,22 @@ const listeningImageUpload = multer({
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    const path = req.path.toLowerCase();
+    if (
+        path.startsWith("/api/auth") || 
+        path.startsWith("/api/profile") || 
+        path === "/login" || 
+        path === "/signup" || 
+        path.startsWith("/auth/google")
+    ) {
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
+    }
+    next();
+});
 
 app.use(async (req, res, next) => {
     try {

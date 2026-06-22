@@ -220,7 +220,10 @@
         }
 
         try {
-            const data = await apiFetch("/api/auth/me");
+            const data = await apiFetch("/api/auth/me", {
+                credentials: "include",
+                cache: "no-store"
+            });
             const nextAuth = {
                 ...auth,
                 user: data.user
