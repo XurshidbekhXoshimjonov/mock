@@ -3723,6 +3723,217 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.get("/auth/google", (req, res) => {
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const callbackUrl = process.env.GOOGLE_CALLBACK_URL;
+
+    if (!clientId || !callbackUrl) {
+        return res.status(500).send("Google OAuth is not configured on the server. Please set GOOGLE_CLIENT_ID and GOOGLE_CALLBACK_URL in your environment.");
+    }
+
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + 
+        new URLSearchParams({
+            client_id: clientId,
+            redirect_uri: callbackUrl,
+            response_type: "code",
+            scope: "openid email profile",
+            access_type: "offline",
+            prompt: "select_account"
+        }).toString();
+
+    res.redirect(googleAuthUrl);
+});
+
+app.get("/auth/google/callback", async (req, res) => {
+    try {
+        const { code } = req.query;
+        if (!code) {
+            return res.status(400).send("Authorization code is missing.");
+        }
+
+        const clientId = process.env.GOOGLE_CLIENT_ID;
+        const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+        const callbackUrl = process.env.GOOGLE_CALLBACK_URL;
+
+        if (!clientId || !clientSecret || !callbackUrl) {
+            return res.status(500).send("Google OAuth configuration is incomplete.");
+        }
+
+        // Exchange code for tokens
+        const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({
+                code,
+                client_id: clientId,
+                client_secret: clientSecret,
+                redirect_uri: callbackUrl,
+                grant_type: "authorization_code"
+            })
+        });
+
+        const tokens = await tokenResponse.json();
+        if (!tokenResponse.ok) {
+            console.error("Token exchange failed:", tokens);
+            return res.status(400).send(tokens.error_description || tokens.error || "Failed to exchange authorization code.");
+        }
+
+        // Get user info from Google
+        const userInfoResponse = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: {
+                Authorization: `Bearer ${tokens.access_token}`
+            }
+        });
+
+        const userInfo = await userInfoResponse.json();
+        if (!userInfoResponse.ok) {
+            console.error("Failed to fetch user info:", userInfo);
+            return res.status(400).send("Failed to retrieve user profile from Google.");
+        }
+
+        const { sub, email, name, picture } = userInfo;
+        if (!email) {
+            return res.status(400).send("Google account does not provide an email address.");
+        }
+
+        // Determine user role
+        const adminEmail = String(process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+        const isAdmin = email.toLowerCase() === adminEmail;
+        const role = isAdmin ? "admin" : "user";
+
+        let user = null;
+
+        // Try finding user by googleId or email
+        if (userStore.isMongoReady()) {
+            user = await User.findOne({
+                $or: [
+                    { googleId: sub },
+                    { email: email.toLowerCase() }
+                ]
+            });
+        } else {
+            // Local fallback
+            const users = userStore.getAllUsers ? await userStore.getAllUsers() : [];
+            user = users.find(u => u.googleId === sub || String(u.email || "").toLowerCase() === email.toLowerCase());
+        }
+
+        if (user) {
+            // User exists, update fields if necessary
+            const updates = { lastLogin: new Date() };
+            let needsUpdate = false;
+            
+            if (!user.googleId) {
+                updates.googleId = sub;
+                needsUpdate = true;
+            }
+            if (picture && user.avatar !== picture) {
+                updates.avatar = picture;
+                needsUpdate = true;
+            }
+            if (user.role !== role) {
+                updates.role = role;
+                needsUpdate = true;
+            }
+
+            user = await userStore.updateUser(user._id || user.id, updates);
+            userProgressStore.recordAccountActivity(user._id || user.id, "Signed in (Google)");
+        } else {
+            // User does not exist, create a new one
+            const username = email.split("@")[0] || name || "google_user";
+            user = await userStore.createUser({
+                username,
+                name: name || username,
+                email: email.toLowerCase(),
+                passwordHash: "", // No password for Google OAuth
+                role
+            });
+
+            // Set Google-specific fields
+            user = await userStore.updateUser(user._id || user.id, {
+                googleId: sub,
+                avatar: picture || "",
+                lastLogin: new Date()
+            });
+
+            userProgressStore.recordAccountActivity(user._id || user.id, "Account created (Google)");
+            
+            sendTelegramMessage(
+                `🆕 New Google signup\n<b>${user.username}</b>\n${user.email}\nStorage: ${userStore.getStorageMode()}`
+            ).catch(() => {});
+        }
+
+        // Generate JWT
+        const token = createAuthToken(user);
+
+        // Store JWT in a secure httpOnly cookie
+        const isProduction = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+        res.cookie("ieltsmockAuthToken", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        });
+
+        // Redirect URL logic
+        let redirectBase = process.env.FRONTEND_URL || "";
+        if (redirectBase.endsWith("/")) {
+            redirectBase = redirectBase.slice(0, -1);
+        }
+        const targetPath = user.role === "admin" ? "/admin.html" : "/dashboard";
+        const redirectUrl = `${redirectBase}${targetPath}`;
+
+        // Return script to write to localStorage for the frontend client-side authentication
+        res.setHeader("Content-Type", "text/html");
+        res.send(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Authenticating...</title>
+                <script>
+                    const token = ${JSON.stringify(token)};
+                    const user = ${JSON.stringify(publicUser(user))};
+                    const savedAuth = {
+                        token,
+                        user,
+                        savedAt: new Date().toISOString()
+                    };
+                    localStorage.setItem("ieltsmock.auth", JSON.stringify(savedAuth));
+                    localStorage.setItem("ieltsAuth", JSON.stringify(savedAuth));
+                    
+                    // Also set the cookie client-side as fallback for existing scripts if needed
+                    document.cookie = "ieltsmockAuthToken=" + encodeURIComponent(token) + "; path=/; max-age=" + (7 * 24 * 60 * 60) + "; samesite=lax";
+                    
+                    window.location.href = ${JSON.stringify(redirectUrl)};
+                </script>
+            </head>
+            <body>
+                <div style="font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 10px;">
+                    <div style="width: 40px; height: 40px; border: 4px solid #f3f4f6; border-top: 4px solid #2563eb; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <p style="color: #4b5563; font-weight: 500;">Signing in with Google...</p>
+                </div>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            </body>
+            </html>
+        `);
+    } catch (error) {
+        console.error("Google callback error:", error);
+        res.status(500).send("Authentication failed: " + (error.message || "Unknown error"));
+    }
+});
+
+// Serve profile.html for the /dashboard route
+app.get("/dashboard", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "profile.html"));
+});
+
 app.get("/api/auth/me", async (req, res) => {
     try {
         const token = getBearerToken(req);

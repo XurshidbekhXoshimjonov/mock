@@ -322,6 +322,73 @@ nav a:hover{
     color: #111827 !important;
 }
 
+/* Google OAuth Login styles */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-divider:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.auth-divider:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: white;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.google-btn:hover {
+    background-color: #f9fafb;
+    border-color: #c0c4cc;
+}
+
+.google-icon {
+    flex-shrink: 0;
+}
+
+body.dark-theme .auth-divider::before,
+body.dark-theme .auth-divider::after {
+    border-bottom: 1px solid #4b5563;
+}
+
+body.dark-theme .google-btn {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #f3f4f6;
+}
+
+body.dark-theme .google-btn:hover {
+    background-color: #374151;
+    border-color: #6b7280;
+}
+
 .account-menu {
     position: relative;
     display: flex;
