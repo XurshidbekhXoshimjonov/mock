@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
+    authProviders: {
+        type: [String],
+        default: []
+    },
     createdAt: {
         type: Date,
         default: Date.now

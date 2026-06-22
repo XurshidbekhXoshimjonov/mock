@@ -1,15 +1,15 @@
 function getPageConfig() {
-    const page = window.location.pathname.split("/").pop().toLowerCase() || "index.html";
+    const page = window.location.pathname.split("/").pop().toLowerCase().replace(".html", "") || "index";
     const configs = {
-        "part1.html": { type: "reading", part: "1" },
-        "part2.html": { type: "reading", part: "2" },
-        "part3.html": { type: "reading", part: "3" },
-        "fulltest.html": { type: "reading", part: "full" },
-        "listeningpart1.html": { type: "listening", part: "1" },
-        "listeningpart2.html": { type: "listening", part: "2" },
-        "listeningpart3.html": { type: "listening", part: "3" },
-        "listeningpart4.html": { type: "listening", part: "4" },
-        "listeningfulltest.html": { type: "listening", part: "full" }
+        "part1": { type: "reading", part: "1" },
+        "part2": { type: "reading", part: "2" },
+        "part3": { type: "reading", part: "3" },
+        "fulltest": { type: "reading", part: "full" },
+        "listeningpart1": { type: "listening", part: "1" },
+        "listeningpart2": { type: "listening", part: "2" },
+        "listeningpart3": { type: "listening", part: "3" },
+        "listeningpart4": { type: "listening", part: "4" },
+        "listeningfulltest": { type: "listening", part: "full" }
     };
 
     return configs[page] || null;

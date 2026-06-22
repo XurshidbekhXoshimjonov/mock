@@ -165,6 +165,64 @@ const listeningImageUpload = multer({
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(async (req, res, next) => {
+    try {
+        const token = getRequestAuthToken(req);
+        if (token) {
+            const payload = verifyAuthToken(token);
+            if (payload) {
+                const user = await userStore.findUserById(payload.id);
+                if (user) {
+                    req.user = publicUser(user);
+                    req.account = user;
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Auth middleware error:", error);
+    }
+    next();
+});
+
+// Clean route redirects for navigation pages
+app.use((req, res, next) => {
+    const path = req.path.toLowerCase();
+    const redirects = {
+        "/login.html": "/login",
+        "/signup.html": "/signup",
+        "/profile.html": "/dashboard",
+        "/dashboard.html": "/dashboard",
+        "/profile-settings.html": "/profile-settings",
+        "/reading.html": "/reading",
+        "/listening.html": "/listening",
+        "/speaking.html": "/speaking",
+        "/writing.html": "/writing",
+        "/ieltsmock.html": "/",
+        "/admin.html": "/admin",
+        "/admin-users.html": "/admin/users",
+        "/admin-reading.html": "/admin-reading",
+        "/admin-listening.html": "/admin-listening",
+        "/admin-import.html": "/admin-import",
+        "/reading-tests.html": "/reading-tests",
+        "/listening-tests.html": "/listening-tests",
+        "/part1.html": "/reading/part1",
+        "/part2.html": "/reading/part2",
+        "/part3.html": "/reading/part3",
+        "/fulltest.html": "/reading/fulltest",
+        "/listeningpart1.html": "/listening/part1",
+        "/listeningpart2.html": "/listening/part2",
+        "/listeningpart3.html": "/listening/part3",
+        "/listeningpart4.html": "/listening/part4",
+        "/listeningfulltest.html": "/listening/fulltest",
+        "/full-test-player.html": "/full-test-player"
+    };
+
+    if (redirects[path] && req.method === "GET") {
+        return res.redirect(redirects[path]);
+    }
+    next();
+});
+
 function readTests() {
     if (!fs.existsSync(TESTS_FILE)) {
         return [];
@@ -2818,76 +2876,168 @@ async function getRequestUser(req) {
     return user ? publicUser(user) : null;
 }
 
-async function requireUser(req, res, next) {
-    try {
-        const payload = verifyAuthToken(getRequestAuthToken(req));
-
-        if (!payload) {
-            return res.status(401).json({ error: "Not authenticated" });
-        }
-
-        const account = await userStore.findUserById(payload.id);
-
-        if (!account) {
-            return res.status(401).json({ error: "User not found" });
-        }
-
-        req.account = account;
-        req.user = publicUser(account);
-        next();
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Could not verify account" });
-    }
+function requireAuth(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  next();
 }
 
-async function requireAdmin(req, res, next) {
-    try {
-        const user = await getRequestUser(req);
-
-        if (user?.role === "admin") {
-            req.user = user;
-            next();
-            return;
-        }
-
-        const isHtmlRequest = req.method === "GET" && !req.path.startsWith("/api") && (req.accepts("html") || req.path.endsWith(".html"));
-
-        if (isHtmlRequest) {
-            res.redirect(user ? "/profile.html" : "/login.html");
-            return;
-        }
-
-        res.status(user ? 403 : 401).json({
-            error: user ? "Admin access required" : "Not authenticated"
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Could not verify admin access" });
-    }
+function requireAdmin(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+  next();
 }
 
+const requireUser = requireAuth;
+
+// Page-level authentication check for redirection
+function requirePageAuth(req, res, next) {
+    if (!req.user) {
+        return res.redirect("/login");
+    }
+    next();
+}
+
+function requirePageAdmin(req, res, next) {
+    if (!req.user) {
+        return res.redirect("/login");
+    }
+    if (req.user.role !== "admin") {
+        return res.redirect("/dashboard");
+    }
+    next();
+}
+
+// Public pages clean routes
 app.get("/", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "ieltsmock.html"));
 });
 
-app.get("/admin", requireAdmin, (req, res) => {
+app.get("/reading", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "reading.html"));
+});
+
+app.get("/listening", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listening.html"));
+});
+
+app.get("/speaking", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/writing", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "writing.html"));
+});
+
+// Parts & Lists clean routes
+app.get("/reading/part1", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "part1.html"));
+});
+
+app.get("/reading/part2", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "part2.html"));
+});
+
+app.get("/reading/part3", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "part3.html"));
+});
+
+app.get("/reading/fulltest", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "fulltest.html"));
+});
+
+app.get("/listening/part1", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listeningpart1.html"));
+});
+
+app.get("/listening/part2", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listeningpart2.html"));
+});
+
+app.get("/listening/part3", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listeningpart3.html"));
+});
+
+app.get("/listening/part4", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listeningpart4.html"));
+});
+
+app.get("/listening/fulltest", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listeningfulltest.html"));
+});
+
+app.get("/reading-tests", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "reading-tests.html"));
+});
+
+app.get("/listening-tests", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "listening-tests.html"));
+});
+
+// Private pages clean routes
+app.get("/dashboard", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "profile.html"));
+});
+
+app.get("/profile", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "profile.html"));
+});
+
+app.get("/profile-settings", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "profile-settings.html"));
+});
+
+app.get("/my-results", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "profile.html"));
+});
+
+app.get("/full-test-player", requirePageAuth, (req, res) => {
+    if (req.query.id) {
+        const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
+        const test = resolveFullTest(req.query.id, preferredSkill);
+
+        if (test) {
+            return res.redirect(302, publicFullTestUrl(test, preferredSkill));
+        }
+    }
+    res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
+});
+
+// Admin pages clean routes
+app.get("/admin", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin.html"));
 });
 
-app.get("/admin/users", requireAdmin, (req, res) => {
+app.get("/admin-dashboard", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin.html"));
+});
+
+app.get("/admin/users", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-users.html"));
 });
 
-app.get("/admin-reading", requireAdmin, (req, res) => {
+app.get("/admin-users", requirePageAdmin, (req, res) => {
+    res.redirect("/admin/users");
+});
+
+app.get("/admin-reading", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-reading.html"));
 });
 
-app.get("/admin-listening", requireAdmin, (req, res) => {
+app.get("/admin-listening", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-listening.html"));
 });
 
-app.get("/admin-import", requireAdmin, (req, res) => {
+app.get("/admin-import", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-import.html"));
+});
+
+app.get("/admin-full-test", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-import.html"));
 });
 
@@ -2916,34 +3066,6 @@ app.get("/listening-template.html", (req, res) => {
     }
 
     res.sendFile(path.join(ROOT_DIR, "listening-template.html"));
-});
-
-app.get("/full-test-player", (req, res) => {
-    if (req.query.id) {
-        const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
-        const test = resolveFullTest(req.query.id, preferredSkill);
-
-        if (test) {
-            res.redirect(302, publicFullTestUrl(test, preferredSkill));
-            return;
-        }
-    }
-
-    res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
-});
-
-app.get("/full-test-player.html", (req, res) => {
-    if (req.query.id) {
-        const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
-        const test = resolveFullTest(req.query.id, preferredSkill);
-
-        if (test) {
-            res.redirect(302, publicFullTestUrl(test, preferredSkill));
-            return;
-        }
-    }
-
-    res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
 });
 
 app.get("/reading/:slug", (req, res) => {
@@ -3469,6 +3591,8 @@ app.delete("/api/tests/:id", requireAdmin, (req, res) => {
     res.json({ message: "Test deleted" });
 });
 
+app.use("/api/admin", requireAuth, requireAdmin);
+
 app.get("/api/admin/stats", requireAdmin, async (req, res) => {
     try {
         const stats = await getAdminStats();
@@ -3746,6 +3870,7 @@ app.get("/auth/google", (req, res) => {
 
 app.get("/auth/google/callback", async (req, res) => {
     try {
+        console.log("[AUTH CALLBACK] Google callback reached");
         const { code } = req.query;
         if (!code) {
             return res.status(400).send("Authorization code is missing.");
@@ -3793,51 +3918,63 @@ app.get("/auth/google/callback", async (req, res) => {
             return res.status(400).send("Failed to retrieve user profile from Google.");
         }
 
-        const { sub, email, name, picture } = userInfo;
+        const { sub, email, email_verified, name, picture } = userInfo;
         if (!email) {
             return res.status(400).send("Google account does not provide an email address.");
         }
+
+        // Reject if email is not verified by Google
+        const isEmailVerified = email_verified === true || email_verified === "true";
+        if (!isEmailVerified) {
+            return res.status(400).send("Login rejected: Google email is not verified.");
+        }
+        console.log("[AUTH CALLBACK] Google email verified: " + email);
 
         // Determine user role
         const adminEmail = String(process.env.ADMIN_EMAIL || "").trim().toLowerCase();
         const isAdmin = email.toLowerCase() === adminEmail;
         const role = isAdmin ? "admin" : "user";
 
-        let user = null;
-
-        // Try finding user by googleId or email
-        if (userStore.isMongoReady()) {
-            user = await User.findOne({
-                $or: [
-                    { googleId: sub },
-                    { email: email.toLowerCase() }
-                ]
-            });
-        } else {
-            // Local fallback
-            const users = userStore.getAllUsers ? await userStore.getAllUsers() : [];
-            user = users.find(u => u.googleId === sub || String(u.email || "").toLowerCase() === email.toLowerCase());
-        }
+        let user = await userStore.findUserByEmail(email);
 
         if (user) {
-            // User exists, update fields if necessary
-            const updates = { lastLogin: new Date() };
-            let needsUpdate = false;
-            
+            console.log("[AUTH CALLBACK] Existing user found in store with ID: " + (user._id || user.id));
+
             if (!user.googleId) {
-                updates.googleId = sub;
-                needsUpdate = true;
-            }
-            if (picture && user.avatar !== picture) {
-                updates.avatar = picture;
-                needsUpdate = true;
-            }
-            if (user.role !== role) {
-                updates.role = role;
-                needsUpdate = true;
+                // Link Google account to existing user
+                const providers = Array.isArray(user.authProviders) ? [...user.authProviders] : [];
+                if (!providers.includes("google")) {
+                    providers.push("google");
+                }
+
+                const updates = {
+                    googleId: sub,
+                    authProviders: providers,
+                    lastLogin: new Date()
+                };
+
+                if (!user.avatar && picture) {
+                    updates.avatar = picture;
+                }
+                if ((!user.name || user.name === user.username) && name) {
+                    updates.name = name;
+                }
+                if (user.role !== role) {
+                    updates.role = role;
+                }
+
+                user = await userStore.updateUser(user._id || user.id, updates);
+                console.log("[AUTH CALLBACK] Google account linked for user: " + user.email);
+            } else if (user.googleId !== sub) {
+                return res.status(400).send("Safe error: This email is already linked to a different Google account.");
+            } else {
+                const updates = { lastLogin: new Date() };
+                if (user.role !== role) {
+                    updates.role = role;
+                }
+                user = await userStore.updateUser(user._id || user.id, updates);
             }
 
-            user = await userStore.updateUser(user._id || user.id, updates);
             userProgressStore.recordAccountActivity(user._id || user.id, "Signed in (Google)");
         } else {
             // User does not exist, create a new one
@@ -3846,19 +3983,16 @@ app.get("/auth/google/callback", async (req, res) => {
                 username,
                 name: name || username,
                 email: email.toLowerCase(),
-                passwordHash: "", // No password for Google OAuth
-                role
-            });
-
-            // Set Google-specific fields
-            user = await userStore.updateUser(user._id || user.id, {
+                passwordHash: "",
+                role,
                 googleId: sub,
                 avatar: picture || "",
-                lastLogin: new Date()
+                authProviders: ["google"]
             });
 
+            console.log("[AUTH CALLBACK] Google account created for new user: " + user.email);
             userProgressStore.recordAccountActivity(user._id || user.id, "Account created (Google)");
-            
+
             sendTelegramMessage(
                 `🆕 New Google signup\n<b>${user.username}</b>\n${user.email}\nStorage: ${userStore.getStorageMode()}`
             ).catch(() => {});
@@ -3866,6 +4000,7 @@ app.get("/auth/google/callback", async (req, res) => {
 
         // Generate JWT
         const token = createAuthToken(user);
+        console.log("[AUTH CALLBACK] JWT session created for user: " + user.email);
 
         // Store JWT in a secure httpOnly cookie
         const isProduction = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
@@ -3876,13 +4011,14 @@ app.get("/auth/google/callback", async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
-        // Redirect URL logic
+        // Redirect URL logic using clean paths
         let redirectBase = process.env.FRONTEND_URL || "";
         if (redirectBase.endsWith("/")) {
             redirectBase = redirectBase.slice(0, -1);
         }
-        const targetPath = user.role === "admin" ? "/admin.html" : "/dashboard";
+        const targetPath = user.role === "admin" ? "/admin" : "/dashboard";
         const redirectUrl = `${redirectBase}${targetPath}`;
+        console.log("[AUTH CALLBACK] Redirect target: " + redirectUrl);
 
         // Return script to write to localStorage for the frontend client-side authentication
         res.setHeader("Content-Type", "text/html");
@@ -4069,14 +4205,28 @@ if (process.env.MONGO_URI) {
     runUserMigration().catch(err => console.error("Migration error:", err));
 }
 
-app.use([
-    "/admin.html",
-    "/admin-reading.html",
-    "/admin-listening.html",
-    "/admin-import.html",
-    "/admin-users.html",
-    "/admin/users"
-], requireAdmin);
+// Intercept direct .html file requests to enforce admin and user session security
+app.use((req, res, next) => {
+    const pathLower = req.path.toLowerCase();
+    if (pathLower.endsWith(".html")) {
+        if (pathLower.includes("admin")) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
+            if (req.user.role !== "admin") {
+                return res.redirect("/dashboard");
+            }
+        }
+
+        const privateHtmls = ["/profile.html", "/profile-settings.html", "/full-test-player.html"];
+        if (privateHtmls.includes(pathLower)) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
+        }
+    }
+    next();
+});
 
 app.use("/uploads", express.static(UPLOAD_DIR));
 app.use(express.static(ROOT_DIR));
