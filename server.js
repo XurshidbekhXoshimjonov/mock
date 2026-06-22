@@ -3776,6 +3776,14 @@ app.post("/signup", async (req, res) => {
         const token = createAuthToken(newUser);
         userProgressStore.recordAccountActivity(newUser._id || newUser.id, "Account created");
 
+        // Set the secure, httpOnly cookie correctly from backend
+        res.cookie("ieltsmockAuthToken", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "lax",
+            path: "/"
+        });
+
         res.status(201).json({
             success: true,
             message: "Account created successfully",
@@ -3795,7 +3803,7 @@ app.post("/signup", async (req, res) => {
     }
 });
 
-app.post("/login", async (req, res) => {
+async function handleLogin(req, res) {
     try {
         const email = String(req.body.email || "").trim().toLowerCase();
         const password = String(req.body.password || "");
@@ -3832,6 +3840,14 @@ app.post("/login", async (req, res) => {
         const token = createAuthToken(user);
         userProgressStore.recordAccountActivity(user._id || user.id, "Signed in");
 
+        // Set the secure, httpOnly cookie correctly from backend
+        res.cookie("ieltsmockAuthToken", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "lax",
+            path: "/"
+        });
+
         res.json({
             success: true,
             message: "Login successful",
@@ -3845,7 +3861,11 @@ app.post("/login", async (req, res) => {
             message: error.message || "Login failed"
         });
     }
-});
+}
+
+app.post("/login", handleLogin);
+app.post("/api/auth/login", handleLogin);
+
 
 app.get("/auth/google", (req, res) => {
     const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -4072,28 +4092,16 @@ app.get("/dashboard", (req, res) => {
 
 app.get("/api/auth/me", async (req, res) => {
     try {
-        const token = getBearerToken(req);
-        const payload = verifyAuthToken(token);
-
-        if (!payload) {
+        if (!req.user) {
             return res.status(401).json({
                 success: false,
                 message: "Not authenticated"
             });
         }
 
-        const user = await userStore.findUserById(payload.id);
-
-        if (!user) {
-            return res.status(401).json({
-                success: false,
-                message: "User not found"
-            });
-        }
-
         res.json({
             success: true,
-            user: publicUser(user)
+            user: req.user
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({

@@ -2045,6 +2045,26 @@
           "occurredAt": "2026-06-20T12:32:37.926Z"
         }
       ]
+    },
+    "6a38aa5bb7699fe2496ccd03": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1782098524607-ac467b",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-06-22T03:22:04.604Z"
+        },
+        {
+          "id": "1782098523960-d49a8c",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-06-22T03:22:03.957Z"
+        }
+      ]
     }
   }
 }
