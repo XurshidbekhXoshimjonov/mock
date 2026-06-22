@@ -43,7 +43,8 @@ loginForm.addEventListener("submit", async (event) => {
 
         const meResponse = await fetch("/api/auth/me", {
             method: "GET",
-            credentials: "include"
+            credentials: "include",
+            cache: "no-store"
         });
 
         let meData = null;

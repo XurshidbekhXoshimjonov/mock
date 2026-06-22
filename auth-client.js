@@ -1,6 +1,7 @@
 (function () {
     // Check and apply theme immediately to prevent FOUC
-    const storedTheme = localStorage.getItem("ielts-theme") || "light";
+    const THEME_STORAGE_KEY = "ielts-theme";
+    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
     const path = window.location.pathname.toLowerCase();
     const isTestPage = path.includes("test1.html") || 
                        path.includes("reading-template.html") ||
@@ -9,37 +10,47 @@
                        path.includes("listening-test1.html") ||
                        path.includes("full-listening-cdi.html");
 
-    if (storedTheme === "dark" && !isTestPage) {
-        if (document.body && document.body.hasAttribute("data-skip-global-navbar")) {
-            document.documentElement.classList.remove("dark-theme");
-        } else {
-            document.documentElement.classList.add("dark-theme");
-            if (document.body) {
-                document.body.classList.add("dark-theme");
-            } else {
-                document.addEventListener("DOMContentLoaded", () => {
-                    if (!document.body.hasAttribute("data-skip-global-navbar")) {
-                        document.body.classList.add("dark-theme");
-                    } else {
-                        document.documentElement.classList.remove("dark-theme");
-                    }
-                });
-            }
-        }
-    } else {
-        document.documentElement.classList.remove("dark-theme");
-        if (document.body) {
-            document.body.classList.remove("dark-theme");
-        } else {
-            document.addEventListener("DOMContentLoaded", () => {
-                document.body.classList.remove("dark-theme");
-            });
-        }
-    }
+    applyTheme(storedTheme, { persist: false });
 
     const AUTH_STORAGE_KEY = "ieltsmock.auth";
     const AUTH_COOKIE = "ieltsmockAuthToken";
     const TOKEN_DAYS = 7;
+    let navbarAuthSnapshot = {
+        status: "unknown",
+        auth: null
+    };
+
+    function normalizeTheme(theme) {
+        return theme === "dark" ? "dark" : "light";
+    }
+
+    function canApplySiteTheme() {
+        return !isTestPage && !(document.body && document.body.hasAttribute("data-skip-global-navbar"));
+    }
+
+    function applyTheme(theme, options = {}) {
+        const nextTheme = normalizeTheme(theme);
+        const useDarkTheme = nextTheme === "dark" && canApplySiteTheme();
+        const appliedTheme = useDarkTheme ? "dark" : "light";
+
+        if (options.persist !== false) {
+            localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+        }
+
+        document.documentElement.classList.toggle("dark-theme", useDarkTheme);
+        document.documentElement.setAttribute("data-theme", appliedTheme);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-theme", useDarkTheme);
+            document.body.setAttribute("data-theme", appliedTheme);
+        } else {
+            document.addEventListener("DOMContentLoaded", () => {
+                applyTheme(nextTheme, { persist: false });
+            }, { once: true });
+        }
+
+        return nextTheme;
+    }
 
     function escapeHtml(value) {
         return String(value ?? "")
@@ -180,6 +191,7 @@
         writeStorage(saved);
         setAuthCookie(saved.token);
         renderGlobalNavbar();
+        refreshNavbarAuthState();
         return saved;
     }
 
@@ -231,10 +243,18 @@
 
             writeStorage(nextAuth);
             setAuthCookie(nextAuth.token);
+            navbarAuthSnapshot = {
+                status: "user",
+                auth: nextAuth
+            };
             renderGlobalNavbar();
             return data.user;
         } catch (error) {
             clearAuth();
+            navbarAuthSnapshot = {
+                status: "guest",
+                auth: null
+            };
             renderGlobalNavbar();
             return null;
         }
@@ -574,6 +594,16 @@
             position: relative;
         }
 
+        .ielts-navbar .user-profile,
+        .ielts-navbar .navbar-user,
+        .ielts-navbar .auth-user {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            font-weight: inherit;
+            margin-right: 0;
+        }
+
         .ielts-account__trigger {
             display: grid;
             grid-template-columns: 46px minmax(92px, 136px) 12px;
@@ -619,6 +649,13 @@
             transition: transform 180ms ease, box-shadow 180ms ease;
         }
 
+        .ielts-navbar .user-avatar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+        }
+
         .ielts-account__trigger:hover .ielts-account__avatar,
         .ielts-account.is-open .ielts-account__avatar {
             transform: translateY(-1px) scale(1.03);
@@ -652,6 +689,12 @@
             transform: translateY(10px) scale(0.98);
             transform-origin: top right;
             transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+        }
+
+        .ielts-navbar .profile-dropdown,
+        .ielts-navbar .profile-menu {
+            display: block;
+            color: #111827;
         }
 
         .ielts-account.is-open .ielts-account__dropdown {
@@ -980,14 +1023,26 @@
                 color: #f1f5f9;
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
             }
+            body.dark-theme .ielts-navbar .user-profile,
+            body.dark-theme .ielts-navbar .navbar-user,
+            body.dark-theme .ielts-navbar .auth-user {
+                color: #f1f5f9;
+            }
             body.dark-theme .ielts-account__avatar {
                 background: #3b82f6;
+                color: #ffffff;
+            }
+            body.dark-theme .ielts-navbar .user-avatar {
                 color: #ffffff;
             }
             body.dark-theme .ielts-account__dropdown {
                 border-color: rgba(255, 255, 255, 0.08);
                 background: #08081b;
                 box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+            }
+            body.dark-theme .ielts-navbar .profile-dropdown,
+            body.dark-theme .ielts-navbar .profile-menu {
+                color: #f1f5f9;
             }
             body.dark-theme .ielts-account__link,
             body.dark-theme .ielts-account__logout {
@@ -1004,6 +1059,39 @@
         }`;
 
         document.head.appendChild(style);
+    }
+
+    function getStoredTheme() {
+        return normalizeTheme(localStorage.getItem(THEME_STORAGE_KEY) || "light");
+    }
+
+    function renderThemeToggleIcon(theme = getStoredTheme()) {
+        const isDark = normalizeTheme(theme) === "dark";
+
+        return isDark ? `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+        ` : `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+        `;
+    }
+
+    function renderThemeToggle() {
+        return `
+            <button class="ielts-theme-toggle" id="ieltsThemeToggle" type="button" aria-label="Toggle theme">
+                ${renderThemeToggleIcon()}
+            </button>
+        `;
+    }
+
+    function updateThemeToggleButton(root = document) {
+        root.querySelectorAll("#ieltsThemeToggle").forEach((button) => {
+            button.innerHTML = renderThemeToggleIcon();
+        });
     }
 
     function renderLoggedOutAuth() {
@@ -1039,13 +1127,13 @@
             : initial;
 
         return `
-            <div class="ielts-account" id="ieltsAccount">
+            <div class="ielts-account user-profile navbar-user auth-user" id="ieltsAccount">
                 <button class="ielts-account__trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
-                    <span class="ielts-account__avatar" aria-hidden="true" style="overflow:hidden;">${avatarHtml}</span>
+                    <span class="ielts-account__avatar user-avatar" aria-hidden="true" style="overflow:hidden;">${avatarHtml}</span>
                     <span class="ielts-account__name">${displayName}</span>
                     <span class="ielts-account__chevron" aria-hidden="true">⌄</span>
                 </button>
-                <div class="ielts-account__dropdown" id="ieltsAccountDropdown">
+                <div class="ielts-account__dropdown profile-dropdown profile-menu" id="ieltsAccountDropdown">
                     ${adminLink}
                     <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/dashboard"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>My Profile</a>
                     <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/dashboard#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>My Results</a>
@@ -1079,6 +1167,8 @@
                     await apiFetch("/api/auth/logout", { method: "POST" });
                 } catch {}
                 clearAuth();
+                console.log("NAVBAR_RENDER_GUEST");
+                updateNavbarAuthState(false, null);
                 window.location.href = "/";
             });
         }
@@ -1130,21 +1220,14 @@
         if (!toggleBtn) return;
 
         toggleBtn.addEventListener("click", () => {
-            const currentTheme = localStorage.getItem("ielts-theme") || "light";
+            const currentTheme = getStoredTheme();
             const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-            localStorage.setItem("ielts-theme", newTheme);
-
-            if (newTheme === "dark") {
-                document.documentElement.classList.add("dark-theme");
-                document.body.classList.add("dark-theme");
-            } else {
-                document.documentElement.classList.remove("dark-theme");
-                document.body.classList.remove("dark-theme");
-            }
-
-            // Re-render navbar to update theme icon
-            renderGlobalNavbar();
+            applyTheme(newTheme);
+            updateThemeToggleButton(host);
+            console.log("THEME_CHANGED", newTheme);
+            console.log("NAVBAR_AUTH_REFRESH_AFTER_THEME");
+            refreshNavbarAuthState();
         });
     }
 
@@ -1163,9 +1246,14 @@
     }
 
     let isFetchingAuthMe = false;
+    let shouldRunPendingNavbarAuthRefresh = false;
 
-    function runNavbarAuthCheck() {
-        if (isFetchingAuthMe) return;
+    function refreshNavbarAuthState() {
+        if (isFetchingAuthMe) {
+            shouldRunPendingNavbarAuthRefresh = true;
+            return;
+        }
+
         isFetchingAuthMe = true;
 
         console.log("NAVBAR_AUTH_CHECK_STARTED");
@@ -1175,12 +1263,11 @@
             cache: "no-store"
         })
         .then(response => {
-            console.log("NAVBAR_ME_STATUS:", response.status);
+            console.log("NAVBAR_ME_STATUS", response.status);
             if (response.status === 401) {
                 console.log("NAVBAR_RENDER_GUEST");
                 clearAuth();
                 updateNavbarAuthState(false, null);
-                isFetchingAuthMe = false;
                 return null;
             }
             if (!response.ok) {
@@ -1194,14 +1281,16 @@
             if (data.success && data.user) {
                 console.log("NAVBAR_RENDER_USER", data.user);
                 
-                // Sync to localStorage
-                const auth = getAuth() || {};
+                const storedAuth = normalizeStoredAuth(readStorage());
                 const nextAuth = {
-                    token: auth.token || "",
+                    token: storedAuth?.token || "",
                     user: data.user,
                     savedAt: new Date().toISOString()
                 };
-                writeStorage(nextAuth);
+
+                if (storedAuth?.token) {
+                    writeStorage(nextAuth);
+                }
 
                 updateNavbarAuthState(true, nextAuth);
             } else {
@@ -1209,41 +1298,40 @@
                 clearAuth();
                 updateNavbarAuthState(false, null);
             }
-            isFetchingAuthMe = false;
         })
         .catch(err => {
             console.error("Error in navbar auth check:", err);
-            console.log("NAVBAR_RENDER_GUEST");
-            clearAuth();
-            updateNavbarAuthState(false, null);
+        })
+        .finally(() => {
             isFetchingAuthMe = false;
+
+            if (shouldRunPendingNavbarAuthRefresh) {
+                shouldRunPendingNavbarAuthRefresh = false;
+                refreshNavbarAuthState();
+            }
         });
     }
+
+    const runNavbarAuthCheck = refreshNavbarAuthState;
+    const loadNavbarUser = refreshNavbarAuthState;
 
     function updateNavbarAuthState(isAuthenticated, authData) {
         const authContainer = document.querySelector(".ielts-navbar__auth");
         if (!authContainer) return;
 
-        const currentTheme = localStorage.getItem("ielts-theme") || "light";
-        const isDark = currentTheme === "dark";
-        const toggleHtml = `
-            <button class="ielts-theme-toggle" id="ieltsThemeToggle" type="button" aria-label="Toggle theme">
-                ${isDark ? `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-                    </svg>
-                ` : `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                    </svg>
-                `}
-            </button>
-        `;
+        navbarAuthSnapshot = isAuthenticated && authData?.user
+            ? {
+                status: "user",
+                auth: authData
+            }
+            : {
+                status: "guest",
+                auth: null
+            };
 
         authContainer.innerHTML = `
-            ${toggleHtml}
-            ${isAuthenticated ? renderLoggedInAuth(authData) : renderLoggedOutAuth()}
+            ${renderThemeToggle()}
+            ${isAuthenticated && authData?.user ? renderLoggedInAuth(authData) : renderLoggedOutAuth()}
         `;
 
         const host = ensureNavbarHost();
@@ -1261,25 +1349,10 @@
         replaceLegacyNavbarHost();
 
         const host = ensureNavbarHost();
-        const authState = getAuthState();
         const active = currentPageName();
-
-        const currentTheme = localStorage.getItem("ielts-theme") || "light";
-        const isDark = currentTheme === "dark";
-        const toggleHtml = `
-            <button class="ielts-theme-toggle" id="ieltsThemeToggle" type="button" aria-label="Toggle theme">
-                ${isDark ? `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-                    </svg>
-                ` : `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                    </svg>
-                `}
-            </button>
-        `;
+        const authHtml = navbarAuthSnapshot.status === "user" && navbarAuthSnapshot.auth?.user
+            ? renderLoggedInAuth(navbarAuthSnapshot.auth)
+            : renderLoggedOutAuth();
 
         host.innerHTML = `
             <a class="ielts-navbar__brand" href="/" aria-label="IELTSX home">
@@ -1298,8 +1371,8 @@
                 <a class="${active === "writing" ? "is-active" : ""}" href="/writing">Writing</a>
             </nav>
             <div class="ielts-navbar__auth">
-                ${toggleHtml}
-                ${authState.isAuthenticated ? renderLoggedInAuth(authState.auth) : renderLoggedOutAuth()}
+                ${renderThemeToggle()}
+                ${authHtml}
             </div>
         `;
 
@@ -1322,7 +1395,9 @@
         recordTestResult,
         updateProfilePreferences,
         updateProfile,
-        renderGlobalNavbar
+        renderGlobalNavbar,
+        refreshNavbarAuthState,
+        loadNavbarUser
     };
     document.documentElement.setAttribute("data-auth-client-ready", "true");
 
@@ -1336,7 +1411,10 @@
             closeOpenMenus();
         }
     });
-    window.addEventListener("hashchange", renderGlobalNavbar);
+    window.addEventListener("hashchange", () => {
+        renderGlobalNavbar();
+        refreshNavbarAuthState();
+    });
 
     // Email click-to-copy handler
     document.addEventListener("click", (event) => {
@@ -1400,10 +1478,10 @@
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {
             renderGlobalNavbar();
-            runNavbarAuthCheck();
+            refreshNavbarAuthState();
         });
     } else {
         renderGlobalNavbar();
-        runNavbarAuthCheck();
+        refreshNavbarAuthState();
     }
 }());

@@ -4140,6 +4140,17 @@ app.get("/api/auth/me", async (req, res) => {
 });
 
 app.post("/api/auth/logout", (req, res) => {
+    const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+
+    res.cookie("ieltsmockAuthToken", "", {
+        httpOnly: true,
+        secure: secureCookie,
+        sameSite: "lax",
+        path: "/",
+        expires: new Date(0),
+        maxAge: 0
+    });
+
     res.json({ success: true, message: "Logged out" });
 });
 
