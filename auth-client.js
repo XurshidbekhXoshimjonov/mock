@@ -1034,10 +1034,14 @@
             ? `<a class="ielts-account__link ielts-account__admin" href="/admin"><span class="ielts-account__icon ielts-account__icon--admin">${MENU_ICONS.admin}</span>Admin Panel</a>`
             : "";
 
+        const avatarHtml = user.avatar
+            ? `<img class="ielts-account__avatar-img" src="${escapeHtml(user.avatar)}" alt="${displayName}" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;" />`
+            : initial;
+
         return `
             <div class="ielts-account" id="ieltsAccount">
                 <button class="ielts-account__trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
-                    <span class="ielts-account__avatar" aria-hidden="true">${initial}</span>
+                    <span class="ielts-account__avatar" aria-hidden="true" style="overflow:hidden;">${avatarHtml}</span>
                     <span class="ielts-account__name">${displayName}</span>
                     <span class="ielts-account__chevron" aria-hidden="true">⌄</span>
                 </button>
@@ -1156,6 +1160,95 @@
             account.classList.remove("is-open");
             account.querySelector(".ielts-account__trigger")?.setAttribute("aria-expanded", "false");
         });
+    }
+
+    let isFetchingAuthMe = false;
+
+    function runNavbarAuthCheck() {
+        if (isFetchingAuthMe) return;
+        isFetchingAuthMe = true;
+
+        console.log("NAVBAR_AUTH_CHECK_STARTED");
+
+        fetch("/api/auth/me", {
+            credentials: "include",
+            cache: "no-store"
+        })
+        .then(response => {
+            console.log("NAVBAR_ME_STATUS:", response.status);
+            if (response.status === 401) {
+                console.log("NAVBAR_RENDER_GUEST");
+                clearAuth();
+                updateNavbarAuthState(false, null);
+                isFetchingAuthMe = false;
+                return null;
+            }
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data) return;
+            console.log("NAVBAR_ME_RESPONSE:", data);
+            if (data.success && data.user) {
+                console.log("NAVBAR_RENDER_USER", data.user);
+                
+                // Sync to localStorage
+                const auth = getAuth() || {};
+                const nextAuth = {
+                    token: auth.token || "",
+                    user: data.user,
+                    savedAt: new Date().toISOString()
+                };
+                writeStorage(nextAuth);
+
+                updateNavbarAuthState(true, nextAuth);
+            } else {
+                console.log("NAVBAR_RENDER_GUEST");
+                clearAuth();
+                updateNavbarAuthState(false, null);
+            }
+            isFetchingAuthMe = false;
+        })
+        .catch(err => {
+            console.error("Error in navbar auth check:", err);
+            console.log("NAVBAR_RENDER_GUEST");
+            clearAuth();
+            updateNavbarAuthState(false, null);
+            isFetchingAuthMe = false;
+        });
+    }
+
+    function updateNavbarAuthState(isAuthenticated, authData) {
+        const authContainer = document.querySelector(".ielts-navbar__auth");
+        if (!authContainer) return;
+
+        const currentTheme = localStorage.getItem("ielts-theme") || "light";
+        const isDark = currentTheme === "dark";
+        const toggleHtml = `
+            <button class="ielts-theme-toggle" id="ieltsThemeToggle" type="button" aria-label="Toggle theme">
+                ${isDark ? `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                ` : `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                `}
+            </button>
+        `;
+
+        authContainer.innerHTML = `
+            ${toggleHtml}
+            ${isAuthenticated ? renderLoggedInAuth(authData) : renderLoggedOutAuth()}
+        `;
+
+        const host = ensureNavbarHost();
+        bindDropdown(host);
+        bindThemeToggle(host);
     }
 
     function renderGlobalNavbar() {
@@ -1305,8 +1398,12 @@
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", renderGlobalNavbar);
+        document.addEventListener("DOMContentLoaded", () => {
+            renderGlobalNavbar();
+            runNavbarAuthCheck();
+        });
     } else {
         renderGlobalNavbar();
+        runNavbarAuthCheck();
     }
 }());
