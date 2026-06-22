@@ -3,7 +3,8 @@
     "start": "node server.js",
     "dev": "node server.js",
     "build": "npm run build:reading-css",
-    "build:reading-css": "tailwindcss -i ./reading-tailwind.input.css -o ./reading-tailwind.generated.css --minify"
+    "build:reading-css": "tailwindcss -i ./reading-tailwind.input.css -o ./reading-tailwind.generated.css --minify",
+    "reset:users": "node scripts/reset-users-keep-admin.js"
   },
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^5.2.8",

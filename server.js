@@ -3755,9 +3755,10 @@ function getBearerToken(req) {
 
 app.post("/signup", async (req, res) => {
     try {
-        const username = String(req.body.username || "").trim();
-        const email = String(req.body.email || "").trim().toLowerCase();
-        const password = String(req.body.password || "");
+        const body = req.body || {};
+        const username = String(body.username || "").trim();
+        const email = String(body.email || "").trim().toLowerCase();
+        const password = String(body.password || "");
 
         if (!username || !email || !password) {
             return res.status(400).json({
@@ -3822,8 +3823,9 @@ app.post("/signup", async (req, res) => {
 
 async function handleLogin(req, res) {
     try {
-        const email = String(req.body.email || "").trim().toLowerCase();
-        const password = String(req.body.password || "");
+        const body = req.body || {};
+        const email = String(body.email || "").trim().toLowerCase();
+        const password = String(body.password || "");
 
         if (!email || !password) {
             return res.status(400).json({
@@ -3852,7 +3854,13 @@ async function handleLogin(req, res) {
 
         const lastLogin = new Date();
         user.lastLogin = lastLogin;
-        await userStore.updateUser(user._id || user.id, { lastLogin });
+        
+        const updates = { lastLogin };
+        if (isAdminEmail(email) && user.role !== "admin") {
+            updates.role = "admin";
+            user.role = "admin";
+        }
+        await userStore.updateUser(user._id || user.id, updates);
 
         const token = createAuthToken(user);
         userProgressStore.recordAccountActivity(user._id || user.id, "Signed in");
