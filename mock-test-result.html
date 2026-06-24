@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test Result</title>
+    <script>
+        if (localStorage.getItem("ielts-theme") === "dark") {
+            document.documentElement.classList.add("dark-theme");
+        }
+    </script>
+    <link rel="stylesheet" href="/site-modern.css">
+    <link rel="stylesheet" href="/mock-tests.css">
+</head>
+
+<body class="public-page mock-result-page">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+
+    <main id="mockResultRoot" class="mock-result-shell">
+        <section class="mock-result-panel">
+            <h1>Loading result...</h1>
+        </section>
+    </main>
+
+    <script src="/auth-client.js"></script>
+    <script src="/mock-test-result.js"></script>
+</body>
+
+</html>

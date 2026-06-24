@@ -516,6 +516,67 @@ body[data-profile-page] summary {
     overflow: hidden;
 }
 
+.mock-test-metrics-grid,
+.mock-test-breakdown-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.mock-test-metrics-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mock-test-breakdown-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 20px;
+}
+
+.mock-test-breakdown-card {
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    background: #f8fafc;
+    padding: 16px;
+    text-align: center;
+}
+
+.mock-test-breakdown-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.mock-test-breakdown-card strong {
+    display: block;
+    margin-top: 4px;
+    color: #020617;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.mock-test-chart-wrap {
+    margin-top: 20px;
+}
+
+.mock-test-empty {
+    margin: 20px 0 0;
+    border: 1px dashed #e2e8f0;
+    border-radius: 16px;
+    background: #f8fafc;
+    padding: 16px;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 760px) {
+    .mock-test-metrics-grid,
+    .mock-test-breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .writing-dashboard-card::before {
     content: "";
     position: absolute;

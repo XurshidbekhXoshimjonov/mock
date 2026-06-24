@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test Admin</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin-reading.css">
+    <link rel="stylesheet" href="/admin-writing.css?v=1.0.0">
+    <link rel="stylesheet" href="/admin-speaking.css">
+    <link rel="stylesheet" href="/admin-listening.css?v=1.0.2">
+    <link rel="stylesheet" href="/admin-mock-tests.css">
+</head>
+
+<body class="admin-page" data-skip-global-navbar>
+    <header class="admin-topbar">
+        <div class="admin-topbar__brand">
+            <span class="admin-kicker">IELTSX</span>
+            <strong>Mock Test Admin</strong>
+        </div>
+        <nav class="admin-nav" aria-label="Admin navigation">
+            <a href="/admin">Dashboard</a>
+            <a href="/admin-listening">Listening</a>
+            <a href="/admin-reading">Reading</a>
+            <a href="/admin-speaking">Speaking</a>
+            <a href="/admin-writing">Writing</a>
+            <a href="/admin-mock-tests" class="is-active">Mock Tests</a>
+            <a href="/admin/users">Users</a>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <main class="admin-shell admin-shell--wide">
+        <section class="admin-hero">
+            <h1>Mock Test management</h1>
+            <p class="admin-help">Create complete IELTS mock tests by combining existing Listening, Reading, Writing, and Speaking tests.</p>
+        </section>
+
+        <section class="mock-admin-layout">
+            <aside class="admin-card">
+                <div class="section-title-row">
+                    <div>
+                        <h2>Mock Tests</h2>
+                        <p class="admin-help admin-help--tight">Create, edit, activate, or delete mock test packages.</p>
+                    </div>
+                    <button id="createMockTest" class="secondary-action" type="button">New</button>
+                </div>
+                <div id="mockTestList" class="mock-admin-list">Loading mock tests...</div>
+            </aside>
+
+            <section class="admin-card">
+                <div id="mockTestEditor">
+                    <p class="admin-help">Select or create a Mock Test to start editing.</p>
+                </div>
+                <p id="mockAdminStatus" class="mock-status-text" role="status" aria-live="polite"></p>
+            </section>
+        </section>
+    </main>
+
+    <dialog id="deleteMockModal" class="mock-delete-modal" aria-labelledby="deleteMockTitle">
+        <div class="mock-delete-dialog">
+            <h2 id="deleteMockTitle">Delete Mock Test</h2>
+            <p>Are you sure you want to delete this mock test?</p>
+            <div class="mock-delete-actions">
+                <button id="cancelDeleteMock" class="secondary-action" type="button">Cancel</button>
+                <button id="confirmDeleteMock" class="danger-action" type="button">Delete</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="/auth-client.js"></script>
+    <script src="/admin-mock-tests.js?v=20260624-references"></script>
+</body>
+
+</html>

@@ -978,9 +978,9 @@
             </div>
         </div>
         <div class="cbt-header-actions">
-            <a class="cbt-button cbt-button--secondary" href="/writing">
+            <a class="cbt-button cbt-button--secondary" id="writingDashboardBtn" href="/writing" data-notes-anchor>
                 <span class="cbt-grid-icon" aria-hidden="true"></span>
-                Dashboard
+                <span id="writingDashboardLabel">Dashboard</span>
             </a>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
             <button class="cbt-button cbt-button--submit" id="submitFullTestBtn" type="button" onclick="submitFullTest()" disabled>Submit</button>
@@ -1338,11 +1338,12 @@
     </div>
 
     <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.21"></script>
+    <script src="/annotations.js?v=1.0.22"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const fullTestId = urlParams.get('id');
+        const isMockWritingMode = urlParams.get('mockMode') === '1' || urlParams.has('mockTestId');
         window.IELTSX_WRITING_TASK_NUMBER = 'task1';
 
         let secondsLeft = 60 * 60; // 60 minutes
@@ -1388,6 +1389,7 @@
             const cbtHeaderEl = document.getElementById('cbtHeader');
             const selectionPageEl = document.getElementById('selectionPage');
             const selectionFooterEl = document.getElementById('selectionFooter');
+            applyMockWritingHeader();
             if (fullTestId) {
                 setWritingTaskContext('task1');
                 // Show player, hide list
@@ -1398,12 +1400,19 @@
                 if (selectionPageEl) selectionPageEl.style.display = 'none';
                 if (selectionFooterEl) selectionFooterEl.style.display = 'none';
                 document.getElementById('selectorScreen').style.display = 'none';
-                document.getElementById('writingPreStart').style.display = 'grid';
+                document.getElementById('writingPreStart').style.display = isMockWritingMode ? 'none' : 'grid';
                 document.getElementById('playerScreen').style.display = 'none';
                 document.getElementById('timerDisplay').style.display = 'flex';
                 const submitButton = document.getElementById('submitFullTestBtn');
-                if (submitButton) submitButton.disabled = true;
-                showWritingPreStartScreen();
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = mockWritingSubmitLabel();
+                }
+                if (isMockWritingMode) {
+                    startRequested = true;
+                } else {
+                    showWritingPreStartScreen();
+                }
                 loadFullTestPlayer(fullTestId);
             } else {
                 // Show list, hide player
@@ -1428,7 +1437,7 @@
             window.PreTestStartScreen?.mount(target, () => {
                 startRequested = true;
                 beginFullWritingTest();
-            });
+            }, isMockWritingMode ? { message: 'Start Test' } : {});
         }
 
         function beginFullWritingTest() {
@@ -1437,7 +1446,10 @@
             document.getElementById('writingPreStart').style.display = 'none';
             document.getElementById('playerScreen').style.display = 'block';
             const submitButton = document.getElementById('submitFullTestBtn');
-            if (submitButton) submitButton.disabled = false;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = mockWritingSubmitLabel();
+            }
             startTimer();
         }
 
@@ -1744,11 +1756,81 @@
             }
         }
 
+        function mockWritingSubmitLabel() {
+            return isMockWritingMode ? 'Submit Section' : 'Submit';
+        }
+
+        function requestMockWritingExit() {
+            if (!isMockWritingMode || window.parent === window) return;
+            window.parent.postMessage({ type: 'ieltsx-mock-exit-request' }, window.location.origin);
+        }
+
+        function applyMockWritingHeader() {
+            if (!isMockWritingMode) return;
+
+            const brandTitle = document.querySelector('#cbtHeader .cbt-brand-title');
+            const dashboardBtn = document.getElementById('writingDashboardBtn');
+            const dashboardLabel = document.getElementById('writingDashboardLabel');
+            const submitButton = document.getElementById('submitFullTestBtn');
+
+            if (brandTitle) brandTitle.textContent = 'Mock Exam';
+            if (dashboardLabel) dashboardLabel.textContent = 'Exit Mock Exam';
+            if (submitButton && !submitButton.disabled) submitButton.textContent = mockWritingSubmitLabel();
+            if (dashboardBtn && dashboardBtn.dataset.mockExitBound !== 'true') {
+                dashboardBtn.dataset.mockExitBound = 'true';
+                dashboardBtn.removeAttribute('href');
+                dashboardBtn.setAttribute('role', 'button');
+                dashboardBtn.setAttribute('tabindex', '0');
+                dashboardBtn.addEventListener('click', event => {
+                    event.preventDefault();
+                    requestMockWritingExit();
+                });
+                dashboardBtn.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        requestMockWritingExit();
+                    }
+                });
+            }
+        }
+
+        function notifyMockWritingComplete(result, task1Response, task2Response, timeSpent, isAuto) {
+            if (!isMockWritingMode || window.parent === window) return;
+
+            window.parent.postMessage({
+                type: 'ieltsx-mock-section-complete',
+                section: 'writing',
+                testId: fullTestId,
+                autoSubmit: Boolean(isAuto),
+                answers: {
+                    task1: task1Response,
+                    task2: task2Response
+                },
+                band: Number(result?.overallBand) || 0,
+                result,
+                timeSpent
+            }, window.location.origin);
+        }
+
+        function submitMockWritingSection(isAuto = false) {
+            if (!hasStarted && !isAuto) return;
+            if (isSubmitted) return;
+
+            const task1Response = document.getElementById('t1Editor')?.value.trim() || '';
+            const task2Response = document.getElementById('t2Editor')?.value.trim() || '';
+            const timeSpent = (60 * 60) - secondsLeft;
+
+            isSubmitted = true;
+            clearInterval(timerInterval);
+            setSubmitLoading(true);
+            notifyMockWritingComplete({}, task1Response, task2Response, timeSpent, isAuto);
+        }
+
         function setSubmitLoading(isLoading) {
             const button = document.getElementById('submitFullTestBtn');
             if (!button) return;
             button.disabled = isLoading;
-            button.textContent = isLoading ? 'Evaluating...' : 'Submit';
+            button.textContent = isLoading ? (isMockWritingMode ? 'Saving...' : 'Evaluating...') : mockWritingSubmitLabel();
         }
 
         function textFromElement(id) {
@@ -1814,6 +1896,11 @@
             if (!hasStarted && !isAuto) return;
             if (isSubmitted) return;
 
+            if (isMockWritingMode) {
+                submitMockWritingSection(isAuto);
+                return;
+            }
+
             const task1Response = document.getElementById('t1Editor').value.trim();
             const task2Response = document.getElementById('t2Editor').value.trim();
             const task1Prompt = textFromElement('t1PromptText');
@@ -1870,6 +1957,7 @@
                 renderFullWritingEvaluation(result, task1Response, task2Response);
                 clearFullWritingSavedData(fullTestId);
                 document.getElementById('feedbackModal').style.display = 'flex';
+                notifyMockWritingComplete(result, task1Response, task2Response, timeSpent, isAuto);
             })
             .catch(err => {
                 console.error('Writing evaluate-full request failed:', err);

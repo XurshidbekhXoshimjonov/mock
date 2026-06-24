@@ -1,5 +1,7 @@
 (function () {
     const app = document.getElementById("speakingApp");
+    const speakingParams = new URLSearchParams(window.location.search);
+    const isSpeakingMockMode = speakingParams.get("mockMode") === "1" || speakingParams.has("mockTestId");
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
     const SPEAKING_TIMING = {
         part1: 5 * 60,
@@ -521,6 +523,49 @@
         if (playerFooter) playerFooter.style.display = enabled ? "none" : "";
 
         updatePlayerHeader();
+        applySpeakingMockHeader();
+    }
+
+    function notifyMockSpeakingComplete(payload) {
+        if (!isSpeakingMockMode || window.parent === window) return;
+
+        window.parent.postMessage({
+            type: "ieltsx-mock-section-complete",
+            section: "speaking",
+            ...payload
+        }, window.location.origin);
+    }
+
+    function requestMockSpeakingExit() {
+        if (!isSpeakingMockMode || window.parent === window) return;
+        window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
+    }
+
+    function applySpeakingMockHeader() {
+        if (!isSpeakingMockMode) return;
+
+        const brandTitle = document.getElementById("speakingBrandTitle");
+        const dashboardBtn = document.getElementById("speakingDashboardBtn");
+        const dashboardLabel = document.getElementById("speakingDashboardLabel");
+
+        if (brandTitle) brandTitle.textContent = "Mock Exam";
+        if (dashboardLabel) dashboardLabel.textContent = "Exit Mock Exam";
+        if (dashboardBtn && dashboardBtn.dataset.mockExitBound !== "true") {
+            dashboardBtn.dataset.mockExitBound = "true";
+            dashboardBtn.removeAttribute("href");
+            dashboardBtn.setAttribute("role", "button");
+            dashboardBtn.setAttribute("tabindex", "0");
+            dashboardBtn.addEventListener("click", (event) => {
+                event.preventDefault();
+                requestMockSpeakingExit();
+            });
+            dashboardBtn.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    requestMockSpeakingExit();
+                }
+            });
+        }
     }
 
     function getHeaderSeconds() {
@@ -1089,10 +1134,16 @@
         state.partTimeFinished = {};
         state.fullCurrentPart = 1;
         state.recording = null;
-        state.hasStarted = false;
+        state.hasStarted = isSpeakingMockMode;
         clearAllPlayerTimers();
         setPlayerMode(true);
         document.title = `${test.title} - ${sectionMeta[sectionKey].listingTitle} - IELTSX`;
+        if (isSpeakingMockMode) {
+            startHeaderTimer(getHeaderTotalSeconds());
+            if (state.section !== "part2") {
+                startActivePartTimer();
+            }
+        }
         renderCurrentTest();
     }
 
@@ -1153,6 +1204,7 @@
                 prompt: fullPart.prompt || (partNumber === 2 ? PLAYER_DEFAULTS.part2.topic : state.test?.topic || ""),
                 questions: partNumber === 2 ? [] : (fullPart.questions?.length ? fullPart.questions : PLAYER_DEFAULTS[partKey].questions),
                 bullets: partNumber === 2 ? (fullPart.questions?.length ? fullPart.questions : PLAYER_DEFAULTS.part2.bullets) : [],
+                referenceHtml: fullPart.referenceHtml || "",
                 prepSeconds: partNumber === 2 ? SPEAKING_TIMING.part2Prep : 0,
                 durationSeconds: getPartSpeakingSeconds(partNumber),
                 isFullTest: true
@@ -1261,8 +1313,8 @@
         if (!state.hasStarted) {
             updatePlayerHeader();
             const preStartMarkup = window.PreTestStartScreen?.markup
-                ? window.PreTestStartScreen.markup()
-                : `<section class="ieltsx-prestart-stage ieltsx-prestart-stage--compact" aria-label="Start test"><button class="ieltsx-prestart-card" type="button" data-pretest-start><span class="ieltsx-prestart-text">Click <span class="ieltsx-prestart-link">here</span> to start the test</span></button></section>`;
+                ? window.PreTestStartScreen.markup(isSpeakingMockMode ? { message: "Start Test" } : {})
+                : `<section class="ieltsx-prestart-stage ieltsx-prestart-stage--compact" aria-label="Start test"><button class="ieltsx-prestart-card" type="button" data-pretest-start><span class="ieltsx-prestart-text">${isSpeakingMockMode ? "Start Test" : "Click <span class=\"ieltsx-prestart-link\">here</span> to start the test"}</span></button></section>`;
             app.innerHTML = `
                 <section class="speaking-player-screen ${state.section === "full" ? "speaking-player-screen--full" : "speaking-player-screen--single"}" aria-label="Speaking test player">
                     <main class="speaking-player-stage speaking-player-stage--prestart">
@@ -1323,6 +1375,7 @@
     function renderQuestionList(part) {
         const questions = part.questions?.length ? part.questions : PLAYER_DEFAULTS[getPartKey(part.part)].questions;
         return `
+            ${part.referenceHtml ? `<div class="speaking-html-reference">${part.referenceHtml}</div>` : ""}
             <ol class="speaking-player-question-list">
                 ${questions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
             </ol>
@@ -1332,6 +1385,7 @@
     function renderCueCardPrompt(part) {
         const bullets = part.bullets?.length ? part.bullets : PLAYER_DEFAULTS.part2.bullets;
         return `
+            ${part.referenceHtml ? `<div class="speaking-html-reference">${part.referenceHtml}</div>` : ""}
             <div class="speaking-cue-card-box">
                 <h3>${escapeHtml(part.prompt || PLAYER_DEFAULTS.part2.topic)}</h3>
                 <ul>
@@ -1627,6 +1681,19 @@
             if (!response.ok) throw new Error(data.error || "AI feedback failed. Please try again.");
             state.feedback = data.feedback;
             applyServerTranscripts(mode, data.attempt?.parts);
+            if (mode === "full_test") {
+                const submittedParts = data.attempt?.parts || parts;
+                notifyMockSpeakingComplete({
+                    testId: state.test?.id || "",
+                    band: Number(data.feedback?.overallBand) || 0,
+                    result: data.feedback,
+                    parts: submittedParts,
+                    answers: Object.fromEntries((submittedParts || []).map((part) => [
+                        `part${part.part}`,
+                        part.transcript || ""
+                    ]))
+                });
+            }
         } catch (error) {
             state.error = error.message || "AI feedback failed. Please try again.";
         } finally {

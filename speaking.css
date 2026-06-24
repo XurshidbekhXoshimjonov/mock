@@ -1337,6 +1337,37 @@ body.speaking-page .ieltsx-notes-toggle-count {
     line-height: 1.5;
 }
 
+.speaking-html-reference {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 14px;
+    border: 1px solid #d7e2f0;
+    border-radius: 10px;
+    background: #f8fbff;
+    color: #172033;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.speaking-html-reference table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.speaking-html-reference th,
+.speaking-html-reference td {
+    border: 1px solid #d7e2f0;
+    padding: 8px;
+    vertical-align: top;
+}
+
+.speaking-html-reference img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
 .speaking-time-row {
     display: flex;
     align-items: center;

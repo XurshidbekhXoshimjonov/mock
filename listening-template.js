@@ -5,6 +5,7 @@ const listeningRouteSlug = listeningPathParts[0] === "listening" ? listeningPath
 const listeningRoutePart = (listeningPathParts[2] || "").match(/^part-(\d+)$/)?.[1] || "";
 const listeningTestId = listeningParams.get("id") || listeningRouteSlug;
 const listeningPart = listeningParams.get("part") || listeningRoutePart;
+const isListeningMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId");
 let activeListeningTest = null;
 let activeListeningResult = null;
 let isSubmitted = false;
@@ -15,6 +16,50 @@ function normalizeAnswer(value) {
     return ListeningResultUtils.normalizeAnswer
         ? ListeningResultUtils.normalizeAnswer(value)
         : String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function notifyMockListeningComplete(result, options = {}) {
+    if (!isListeningMockMode || window.parent === window) return;
+
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-complete",
+        section: "listening",
+        testId: listeningTestId,
+        autoSubmit: Boolean(options.autoSubmit),
+        answers: options.answers || {},
+        result: result || undefined,
+        deferred: Boolean(options.deferred)
+    }, window.location.origin);
+}
+
+function collectListeningAnswers(test) {
+    const answers = {};
+    const answerNumbers = new Set([
+        ...Object.keys(parseStructuredAnswers(test)).map(Number).filter(Number.isFinite),
+        ...(Array.isArray(test.questions) ? test.questions : []).map((question) => Number(question.number)).filter(Number.isFinite)
+    ]);
+
+    listeningRoot.querySelectorAll(".lc-multiple-select").forEach((group) => {
+        const numbers = String(group.dataset.questionNumbers || "")
+            .split(",")
+            .map(Number)
+            .filter(Number.isFinite);
+        const selected = [...group.querySelectorAll('input[type="checkbox"]:checked')]
+            .map((input) => input.value)
+            .filter(Boolean);
+
+        numbers.forEach((number, index) => {
+            answerNumbers.add(number);
+            answers[number] = selected[index] || "";
+        });
+    });
+
+    answerNumbers.forEach((number) => {
+        if (answers[number] !== undefined) return;
+        answers[number] = getListeningAnswer(number);
+    });
+
+    return answers;
 }
 
 function getListeningAnswer(number) {
@@ -356,6 +401,8 @@ function recordListeningResult(test, options = {}) {
                 status: item.status
             }))
     });
+
+    notifyMockListeningComplete(result, options);
 }
 
 async function loadListeningTest() {
@@ -406,6 +453,14 @@ loadListeningTest()
 
 listeningRoot.addEventListener("listening-submit", (event) => {
     if (activeListeningTest) {
+        if (isListeningMockMode) {
+            notifyMockListeningComplete(null, {
+                ...(event.detail || {}),
+                answers: collectListeningAnswers(activeListeningTest),
+                deferred: true
+            });
+            return;
+        }
         recordListeningResult(activeListeningTest, event.detail || {});
     }
 });

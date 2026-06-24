@@ -853,7 +853,14 @@ const ListeningComponents = (() => {
         return blockCard(block, `${image}<div class="lc-map-fallback">${fallback}</div>`, "lc-map-labelling");
     }
 
+    function RichContentBlock(block) {
+        return blockCard(block, `
+            <div class="lc-rich-content">${block.html || ""}</div>
+        `, "lc-rich-content-block");
+    }
+
     const blockRenderers = {
+        rich_content: RichContentBlock,
         form_completion: FormCompletionBlock,
         multiple_select: MultipleSelectBlock,
         sentence_completion_inline: SentenceCompletionInlineBlock,
@@ -882,10 +889,16 @@ const ListeningComponents = (() => {
     function ListeningHeader(test) {
         const duration = listeningDuration(test);
         const isFull = isFullListeningTest(test);
+        const params = new URLSearchParams(window.location.search);
+        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
         const dashboardHref = test.dashboardHref || (isFull
             ? "/listeningfulltest.html"
             : `/listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`);
-        const headerTitle = test.headerTitle || "Academic Listening";
+        const headerTitle = isMockMode ? "Mock Exam" : (test.headerTitle || "Academic Listening");
+        const dashboardControl = isMockMode
+            ? `<button class="lc-dashboard-button" type="button" data-notes-anchor data-mock-exit><span class="lc-grid-icon"></span>Exit Mock Exam</button>`
+            : `<a class="lc-dashboard-button" href="${dashboardHref}"><span class="lc-grid-icon"></span>Dashboard</a>`;
+        const submitLabel = isMockMode ? "Submit Section" : "Submit";
         return `<header class="lc-header">
             <div class="lc-brand-group">
                 <img class="lc-logo" src="/IELTS-logo.png" alt="IELTS">
@@ -897,9 +910,9 @@ const ListeningComponents = (() => {
                 <span><strong>${String(duration).padStart(2, "0")}:00</strong><small>TIME LEFT</small></span>
             </div>
             <div class="lc-header-actions">
-                <a class="lc-dashboard-button" href="${dashboardHref}"><span class="lc-grid-icon"></span>Dashboard</a>
+                ${dashboardControl}
                 ${isFull ? `<button class="lc-fullscreen-button fullscreen-toggle-btn" data-fullscreen-toggle type="button" aria-pressed="false">Full Screen</button>` : ""}
-                <button class="lc-submit-button" type="button" disabled>Submit</button>
+                <button class="lc-submit-button" type="button" disabled>${submitLabel}</button>
             </div>
         </header>`;
     }
@@ -942,13 +955,20 @@ const ListeningComponents = (() => {
     }
 
     function ListeningPart(part) {
+        const importedHtml = part.html || part.listeningHtml || part.questionsHtml || "";
+        const importedHtmlBlock = importedHtml
+            ? `<section class="lc-question-card lc-imported-html-block">
+                <div class="lc-rich-content">${importedHtml}</div>
+            </section>`
+            : "";
+
         return `<section class="lc-part" data-part-number="${Number(part.partNumber) || 1}">
             <div class="lc-part-heading">
                 <h2>${escapeHtml(part.title || `Part ${part.partNumber}`)}</h2>
                 <p>${escapeHtml(part.questionRange || "")}</p>
                 ${part.instruction ? `<p class="lc-part-instruction">${highlightInstruction(part.instruction)}</p>` : ""}
             </div>
-            <div class="lc-question-stack">${(part.blocks || []).map(renderBlock).join("")}</div>
+            <div class="lc-question-stack">${importedHtmlBlock}${(part.blocks || []).map(renderBlock).join("")}</div>
         </section>`;
     }
 
@@ -1022,7 +1042,7 @@ const ListeningComponents = (() => {
         };
     }
 
-    function ListeningBottomBar(parts, activePartNumber) {
+    function ListeningBottomBar(parts, activePartNumber, hidden = true) {
         if (parts.length <= 1) {
             return "";
         }
@@ -1037,7 +1057,7 @@ const ListeningComponents = (() => {
             </button>`;
         }).join("");
 
-        return `<footer class="lc-bottom-bar" data-listening-bottom-bar hidden>
+        return `<footer class="lc-bottom-bar" data-listening-bottom-bar ${hidden ? "hidden" : ""}>
             <button class="lc-button lc-button--outline ${activeIndex === 0 ? "lc-button--placeholder" : ""}" type="button" data-listening-part-prev ${activeIndex === 0 ? "disabled aria-hidden=\"true\" tabindex=\"-1\"" : ""}>‹ Previous</button>
             <nav class="lc-part-tabs" aria-label="Listening parts">${tabs}</nav>
             <button class="lc-button lc-button--primary" type="button" data-listening-part-next ${activeIndex === parts.length - 1 ? "disabled" : ""}>Next ›</button>
@@ -1048,16 +1068,20 @@ const ListeningComponents = (() => {
         const test = normalizeLegacyTest(rawTest || {});
         const parts = (test.parts || []).filter((part) => (part.blocks || []).length || part.audioUrl);
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
+        const params = new URLSearchParams(window.location.search);
+        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
 
-        const preStartMarkup = window.PreTestStartScreen?.markup
-            ? window.PreTestStartScreen.markup()
-            : `<section class="ieltsx-prestart-stage ieltsx-prestart-stage--compact" aria-label="Start test"><button class="ieltsx-prestart-card" type="button" data-pretest-start><span class="ieltsx-prestart-text">Click <span class="ieltsx-prestart-link">here</span> to start the test</span></button></section>`;
+        const preStartMarkup = isMockMode
+            ? ""
+            : (window.PreTestStartScreen?.markup
+                ? window.PreTestStartScreen.markup()
+                : `<section class="ieltsx-prestart-stage ieltsx-prestart-stage--compact" aria-label="Start test"><button class="ieltsx-prestart-card" type="button" data-pretest-start><span class="ieltsx-prestart-text">Click <span class="ieltsx-prestart-link">here</span> to start the test</span></button></section>`);
 
         return `<div class="lc-page ${isFullListeningTest(test) ? "full-test-shell full-test-player" : ""}">
             ${ListeningHeader(test)}
             <main class="lc-main">
-                <div data-listening-prestart>${preStartMarkup}</div>
-                <div class="lc-test-content" data-listening-test-content hidden>
+                <div data-listening-prestart ${isMockMode ? "hidden" : ""}>${preStartMarkup}</div>
+                <div class="lc-test-content" data-listening-test-content ${isMockMode ? "" : "hidden"}>
                     ${ListeningTestTitle(test)}
                     <div class="lc-listening-stage" data-active-part="${activePartNumber}">
                         ${parts.map((part, index) => {
@@ -1071,7 +1095,7 @@ const ListeningComponents = (() => {
                     <p class="lc-submit-status" aria-live="polite"></p>
                 </div>
             </main>
-            ${ListeningBottomBar(parts, activePartNumber)}
+            ${ListeningBottomBar(parts, activePartNumber, !isMockMode)}
             <div class="lc-modal-backdrop hidden" data-listening-result-modal>
                 <section class="lc-result-modal" role="dialog" aria-modal="true">
                     <button class="lc-modal-close" type="button" aria-label="Close" data-listening-result-close>&times;</button>
@@ -1227,6 +1251,13 @@ const ListeningComponents = (() => {
 
     function bindListeningTest(root) {
         root.querySelectorAll("[data-audio-card]").forEach(bindAudioCard);
+        const listeningParams = new URLSearchParams(window.location.search);
+        const isMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId");
+        root.querySelector("[data-mock-exit]")?.addEventListener("click", () => {
+            if (window.parent !== window) {
+                window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
+            }
+        });
 
         const sections = [...root.querySelectorAll(".lc-listening-section")];
         const partTabs = [...root.querySelectorAll("[data-listening-part-select]")];
@@ -1417,6 +1448,10 @@ const ListeningComponents = (() => {
             root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
             root.dispatchEvent(new CustomEvent("listening-review", { bubbles: true }));
         });
+
+        if (isMockMode) {
+            startListeningAttempt();
+        }
     }
 
     function sampleListeningTest() {

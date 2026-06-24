@@ -51,6 +51,19 @@
         },
         recent: []
     };
+    const emptyMockTests = {
+        completedMockTests: 0,
+        bestOverallBand: 0,
+        lastResult: null,
+        breakdown: {
+            listening: 0,
+            reading: 0,
+            writing: 0,
+            speaking: 0
+        },
+        chart: [],
+        recent: []
+    };
 
     function Icon({ name, className }) {
         const common = {
@@ -1066,6 +1079,45 @@
         );
     }
 
+    function MockTestDashboard({ mockTests }) {
+        const data = { ...emptyMockTests, ...(mockTests || {}) };
+        const breakdown = { ...emptyMockTests.breakdown, ...(data.breakdown || {}) };
+        const last = data.lastResult || null;
+        const metrics = [
+            ["Completed mock tests", data.completedMockTests || 0, "Full IELTS simulations"],
+            ["Best overall band", data.completedMockTests ? formatBand(data.bestOverallBand) : "No result", "Highest saved mock score"],
+            ["Last mock result", last ? `Band ${formatBand(last.overallBand)}` : "No result", last ? formatDate(last.completedAt) : "Start a mock test"]
+        ];
+
+        return e(Card, { className: "writing-dashboard-card mock-test-dashboard-card" },
+            e(SectionTitle, {
+                eyebrow: "Mock Test",
+                title: "Mock Test Performance",
+                description: "Track complete IELTS mock tests separately from standalone practice.",
+                action: e("div", { className: "writing-quick-actions" }, e("a", { href: "/mock-tests" }, "Start Mock Test"))
+            }),
+            e("div", { className: "mock-test-metrics-grid" },
+                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
+            ),
+            e("div", { className: "mock-test-breakdown-grid" },
+                [
+                    ["Listening", breakdown.listening],
+                    ["Reading", breakdown.reading],
+                    ["Writing", breakdown.writing],
+                    ["Speaking", breakdown.speaking]
+                ].map(([label, value]) => e("div", { key: label, className: "mock-test-breakdown-card" },
+                    e("p", null, label),
+                    e("strong", null, data.completedMockTests ? formatBand(value) : "0.0")
+                ))
+            ),
+            data.chart?.length
+                ? e("div", { className: "mock-test-chart-wrap" },
+                    e(LineChart, { data: data.chart, valueKey: "value", maxValue: 9, color: "#d91532", chartClass: "chart-mock-progress" })
+                )
+                : e("p", { className: "mock-test-empty" }, "Completed mock test results will appear here.")
+        );
+    }
+
     function PerformanceDetailView({ skill, stats, onBack, onViewWritingFeedback }) {
         return e("section", { className: "performance-detail-shell" },
             e(BackToPerformanceCenter, { onBack }),
@@ -1184,6 +1236,7 @@
                 : e("section", { className: "performance-center-shell" },
                     e(PerformanceCardGrid, { stats, onOpen: openSkill })
                 ),
+            e(MockTestDashboard, { mockTests: stats.mockTests }),
             e(WritingFeedbackModal, { attempt: selectedWritingAttempt, onClose: () => setSelectedWritingAttempt(null) })
         );
     }
@@ -1346,6 +1399,22 @@
         } catch (error) {
             console.error("Speaking dashboard fetch error:", error);
             stats.speaking = emptySpeaking;
+        }
+
+        try {
+            const mockResponse = await fetch("/api/profile/mock-tests", {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store"
+            });
+            if (mockResponse.ok) {
+                stats.mockTests = { ...emptyMockTests, ...(await mockResponse.json()) };
+            } else {
+                stats.mockTests = emptyMockTests;
+            }
+        } catch (error) {
+            console.error("Mock test dashboard fetch error:", error);
+            stats.mockTests = emptyMockTests;
         }
 
         ReactDOM.createRoot(root).render(page === "settings"

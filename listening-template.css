@@ -2051,3 +2051,29 @@ html.dark-theme .lc-matching-row select {
     border-color: var(--lc-blue);
     outline: 2px solid rgba(11, 95, 255, 0.14);
 }
+
+.lc-rich-content {
+    display: grid;
+    gap: 14px;
+    color: #1f2937;
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+.lc-rich-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lc-rich-content th,
+.lc-rich-content td {
+    border: 1px solid #d8dee9;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.lc-rich-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

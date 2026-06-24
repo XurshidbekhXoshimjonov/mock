@@ -366,7 +366,7 @@
 
     function insertNotesButton() {
         if (!toggleBtnEl) return;
-        const dashboardBtn = document.querySelector('.cbt-header-actions a, .lc-header-actions a, #viewerBack');
+        const dashboardBtn = document.querySelector('.cbt-header-actions [data-notes-anchor], .lc-header-actions [data-notes-anchor], .cbt-header-actions a, .lc-header-actions a, #viewerBack');
         if (!dashboardBtn) {
             if (toggleBtnEl.parentNode !== document.body) {
                 document.body.appendChild(toggleBtnEl);

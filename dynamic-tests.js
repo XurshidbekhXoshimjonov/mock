@@ -1,10 +1,14 @@
 function getPageConfig() {
-    const page = window.location.pathname.split("/").pop().toLowerCase().replace(".html", "") || "index";
+    const pathLower = window.location.pathname.toLowerCase();
+    const page = pathLower.split("/").pop().replace(".html", "") || "index";
+    const isListeningRoute = pathLower.startsWith("/listening/") || pathLower.startsWith("/listening.");
+
     const configs = {
-        "part1": { type: "reading", part: "1" },
-        "part2": { type: "reading", part: "2" },
-        "part3": { type: "reading", part: "3" },
-        "fulltest": { type: "reading", part: "full" },
+        "part1": { type: isListeningRoute ? "listening" : "reading", part: "1" },
+        "part2": { type: isListeningRoute ? "listening" : "reading", part: "2" },
+        "part3": { type: isListeningRoute ? "listening" : "reading", part: "3" },
+        "part4": { type: "listening", part: "4" },
+        "fulltest": { type: isListeningRoute ? "listening" : "reading", part: "full" },
         "listeningpart1": { type: "listening", part: "1" },
         "listeningpart2": { type: "listening", part: "2" },
         "listeningpart3": { type: "listening", part: "3" },

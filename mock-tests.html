@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Mock Tests</title>
+    <script>
+        if (localStorage.getItem("ielts-theme") === "dark") {
+            document.documentElement.classList.add("dark-theme");
+        }
+    </script>
+    <link rel="stylesheet" href="/site-modern.css">
+    <link rel="stylesheet" href="/mock-tests.css">
+</head>
+
+<body class="public-page test-list-page" data-practice-skill="mock">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+
+    <main class="test-list-shell mock-list-shell">
+        <section class="test-list-page-header" aria-labelledby="mockTestsTitle">
+            <div>
+                <span class="test-list-eyebrow">Full IELTS Simulation</span>
+                <h1 id="mockTestsTitle">IELTS Mock Tests</h1>
+                <p>Take a complete computer-delivered IELTS practice test.</p>
+            </div>
+            <div class="test-list-meta" aria-label="Mock test metadata">
+                <span><strong id="mockTestCount">0</strong> Mock tests</span>
+                <span><strong>2h 45m</strong> Estimated time</span>
+                <span><strong>4</strong> Sections</span>
+            </div>
+        </section>
+
+        <section id="mockTestsList" class="mock-list-grid" aria-live="polite">
+            <div class="test-list-empty">Loading mock tests...</div>
+        </section>
+    </main>
+
+    <script src="/auth-client.js"></script>
+    <script src="/mock-tests.js"></script>
+</body>
+
+</html>

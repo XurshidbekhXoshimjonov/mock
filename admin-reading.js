@@ -24,6 +24,9 @@ const vocabularyList = document.getElementById("vocabularyList");
 let editingTestId = null;
 let vocabularyEntries = [];
 let editingVocabularyIndex = null;
+let importedReadingHtml = "";
+let importedReadingPassageHtml = "";
+let importedReadingRichPassages = [];
 
 function escapeHtml(value) {
     return String(value || "")
@@ -42,6 +45,25 @@ function showStatus(message, type) {
 function resetEditMode() {
     editingTestId = null;
     submitButton.textContent = "Save reading test";
+}
+
+function isSupportedHtmlFile(file) {
+    return /\.(html?|txt)$/i.test(file?.name || "");
+}
+
+function readFileAsText(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => resolve(String(event.target?.result || ""));
+        reader.onerror = () => reject(new Error("HTML upload failed. Please upload a valid .html file."));
+        reader.readAsText(file);
+    });
+}
+
+function clearImportedReadingHtml() {
+    importedReadingHtml = "";
+    importedReadingPassageHtml = "";
+    importedReadingRichPassages = [];
 }
 
 function normalizeVocabularyWord(value) {
@@ -330,6 +352,9 @@ async function loadTestForEdit(id) {
     testTitle.value = test.title;
     testPart.value = test.part;
     passageText.value = test.passage || test.passageText || "";
+    importedReadingHtml = test.readingHtml || "";
+    importedReadingPassageHtml = test.passageHtml || "";
+    importedReadingRichPassages = Array.isArray(test.richPassages) ? test.richPassages : [];
     instructionText.value = "";
     questionText.value = buildQuestionTextForEdit(test);
     answerText.value = (test.questions || [])
@@ -385,6 +410,9 @@ form.addEventListener("submit", async (event) => {
                 part: testPart.value,
                 passage,
                 passageText: passage,
+                readingHtml: importedReadingHtml,
+                passageHtml: importedReadingPassageHtml,
+                richPassages: testPart.value === "full" ? importedReadingRichPassages : [],
                 questionText: getCombinedQuestionText(),
                 answerText: answerText.value,
                 vocabulary: testPart.value === "full" ? [] : vocabularyEntries
@@ -396,9 +424,10 @@ form.addEventListener("submit", async (event) => {
             throw new Error(data.error || "Could not save test");
         }
 
-        showStatus(editingTestId ? "Updated." : "Saved.", "success");
+        showStatus("Test saved successfully.", "success");
         resetEditMode();
         form.reset();
+        clearImportedReadingHtml();
         vocabularyEntries = [];
         clearVocabularyForm();
         renderVocabularyList();
@@ -830,6 +859,7 @@ loadTestForEdit = async function(id) {
 // Hook into form reset to clear visual builder state
 form.addEventListener("reset", () => {
     visualState = { groups: [] };
+    clearImportedReadingHtml();
     if (isVisualMode) {
         setTimeout(() => {
             loadVisualStateFromRaw();
@@ -873,8 +903,14 @@ form.addEventListener("reset", () => {
     });
 
     async function handleFile(file) {
+        if (!isSupportedHtmlFile(file)) {
+            showStatus("HTML upload failed. Please upload a valid .html file.", "error");
+            return;
+        }
+
         showStatus("Importing and parsing HTML file...", "success");
         try {
+            const htmlContent = await readFileAsText(file);
             const formData = new FormData();
             formData.append("html", file);
             formData.append("skill", "reading");
@@ -898,10 +934,24 @@ form.addEventListener("reset", () => {
                 throw new Error("No reading passages found in the imported file");
             }
 
+            importedReadingHtml = htmlContent;
+
             // Fill Form Details
             testTitle.value = parsed.title || "";
             
             const passages = parsed.reading.passages;
+            importedReadingRichPassages = passages.map((passage, index) => ({
+                id: passage.id || `${parsed.id || "reading-import"}-passage-${index + 1}`,
+                number: Number(passage.number) || index + 1,
+                title: passage.title || passage.passageTitle || `Reading Passage ${index + 1}`,
+                displayLabel: passage.passageLabel || `Reading Passage ${Number(passage.number) || index + 1}`,
+                html: passage.passageHtml || "",
+                passageHtml: passage.passageHtml || "",
+                passageText: passage.passageText || "",
+                paragraphs: passage.paragraphs || []
+            }));
+            importedReadingPassageHtml = passages.length === 1 ? (passages[0].passageHtml || "") : "";
+
             if (passages.length > 1) {
                 testPart.value = "full";
                 passageText.value = passages.map((p, idx) => `READING PASSAGE ${idx + 1}: ${p.title || `Passage ${idx + 1}`}\n\n${p.passageText || ""}`).join("\n\n---\n\n");
@@ -958,7 +1008,7 @@ form.addEventListener("reset", () => {
                 renderVocabularyList();
             }
 
-            showStatus("HTML file imported and form auto-filled successfully!", "success");
+            showStatus("HTML file loaded successfully.", "success");
 
             // Delete the draft full test from the backend to clean up
             fetch(`/api/full-tests/${parsed.id}`, {
@@ -967,7 +1017,7 @@ form.addEventListener("reset", () => {
             }).catch(() => {});
 
         } catch (error) {
-            showStatus(error.message, "error");
+            showStatus(error.message || "HTML upload failed. Please upload a valid .html file.", "error");
         }
     }
 })();

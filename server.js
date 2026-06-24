@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const fs = require("fs");
 const User = require("./models/User");
+const WritingFullTest = require("./models/WritingFullTest");
+const FullSpeakingTest = require("./models/FullSpeakingTest");
 const { createAuthToken, verifyAuthToken, publicUser, isAdminEmail } = require("./lib/auth");
 const { createUserStore } = require("./lib/user-store");
 const { sendTelegramMessage } = require("./lib/telegram");
@@ -15,7 +17,10 @@ const { registerFullTestRoutes } = require("./lib/full-test-routes");
 const { registerWritingRoutes } = require("./lib/writing-routes");
 const { registerSpeakingRoutes } = require("./lib/speaking-routes");
 const { createUserProgressStore } = require("./lib/user-progress-store");
+const { createMockTestStore } = require("./lib/mock-test-store");
 const ManualTestParser = require("./lib/manual-test-parser");
+const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-import/htmlSanitizer");
+const { stripTags } = require("./lib/ielts-import/utils");
 
 let TranslateClient = null;
 try {
@@ -38,6 +43,8 @@ const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
 const userProgressStore = createUserProgressStore(USER_PROGRESS_FILE);
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
+const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
+const MOCK_TEST_RESULTS_FILE = path.join(DATA_DIR, "mock-test-results.json");
 const VOCABULARY_CACHE_FILE = path.join(DATA_DIR, "vocabulary-cache.json");
 const READING_VOCABULARY_CLICKS_FILE = path.join(DATA_DIR, "reading-vocabulary-clicks.json");
 const OUTPUT_FILE = path.join(ROOT_DIR, "output.txt");
@@ -47,6 +54,7 @@ const LISTENING_TESTS_DIR = path.join(DATA_DIR, "listening-tests");
 const FULL_TESTS_DIR = path.join(DATA_DIR, "full-tests");
 const AUDIO_UPLOAD_DIR = path.join(UPLOAD_DIR, "audio");
 const LISTENING_IMAGE_UPLOAD_DIR = path.join(UPLOAD_DIR, "listening-images");
+const MOCK_TEST_ASSET_UPLOAD_DIR = path.join(UPLOAD_DIR, "mock-tests");
 const VOCABULARY_DEFINITION_FALLBACK = "Definition is not available yet.";
 const VOCABULARY_TRANSLATION_FALLBACK = "Uzbek translation is not available yet.";
 const GOOGLE_TRANSLATE_API_KEY = String(
@@ -110,6 +118,7 @@ ensureRuntimeDir(LISTENING_TESTS_DIR);
 ensureRuntimeDir(FULL_TESTS_DIR);
 ensureRuntimeDir(AUDIO_UPLOAD_DIR);
 ensureRuntimeDir(LISTENING_IMAGE_UPLOAD_DIR);
+ensureRuntimeDir(MOCK_TEST_ASSET_UPLOAD_DIR);
 ensureRuntimeDir(path.join(UPLOAD_DIR, "ielts-import"));
 
 function safeFileName(fileName) {
@@ -165,8 +174,35 @@ const listeningImageUpload = multer({
     }
 });
 
+const mockAssetStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, MOCK_TEST_ASSET_UPLOAD_DIR);
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${safeFileName(file.originalname)}`);
+    }
+});
+
+const mockAudioUpload = multer({
+    storage: mockAssetStorage,
+    fileFilter: (req, file, cb) => {
+        const extension = path.extname(file.originalname).toLowerCase();
+        const accepted = [".mp3", ".wav", ".m4a", ".webm"].includes(extension);
+        cb(accepted ? null : new Error("Audio must be an MP3, WAV, M4A, or WebM file"), accepted);
+    }
+});
+
+const mockImageUpload = multer({
+    storage: mockAssetStorage,
+    fileFilter: (req, file, cb) => {
+        const extension = path.extname(file.originalname).toLowerCase();
+        const accepted = [".jpg", ".jpeg", ".png", ".webp"].includes(extension);
+        cb(accepted ? null : new Error("Image must be a JPG, PNG, or WebP file"), accepted);
+    }
+});
+
 app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 app.use((req, res, next) => {
     const path = req.path.toLowerCase();
@@ -223,8 +259,12 @@ app.use((req, res, next) => {
         "/admin-listening.html": "/admin-listening",
         "/admin-speaking.html": "/admin-speaking",
         "/admin-import.html": "/admin-import",
+        "/admin-mock-tests.html": "/admin-mock-tests",
         "/reading-tests.html": "/reading-tests",
         "/listening-tests.html": "/listening-tests",
+        "/mock-tests.html": "/mock-tests",
+        "/mock-test.html": "/mock-tests",
+        "/mock-test-result.html": "/mock-tests",
         "/part1.html": "/reading/part1",
         "/part2.html": "/reading/part2",
         "/part3.html": "/reading/part3",
@@ -557,6 +597,15 @@ function decodeHtmlEntities(value) {
         .replace(/&lt;/g, "<")
         .replace(/&gt;/g, ">")
         .replace(/&amp;/g, "&");
+}
+
+function escapeHtml(value) {
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
 }
 
 async function translateToUzbekWithApiKey(value) {
@@ -1175,6 +1224,84 @@ function validateManualListeningText(questionText, answerText, part) {
     }
 }
 
+function cleanImportedHtml(value) {
+    const raw = String(value || "");
+    if (!raw.trim()) {
+        return "";
+    }
+
+    if (Buffer.byteLength(raw, "utf8") > 2 * 1024 * 1024) {
+        const error = new Error("HTML upload failed. Please upload a valid .html file.");
+        error.statusCode = 413;
+        throw error;
+    }
+
+    return replaceInputsWithBlankMarkers(raw).html || sanitizeHtml(raw);
+}
+
+function plainTextFromHtml(value) {
+    return stripTags(value || "");
+}
+
+function normalizeImportedReadingPassages(passages) {
+    if (!Array.isArray(passages)) {
+        return [];
+    }
+
+    return passages
+        .map((passage, index) => {
+            const html = cleanImportedHtml(passage.html || passage.passageHtml || passage.sourceHtml || "");
+            const passageText = String(passage.passageText || plainTextFromHtml(html)).trim();
+            const paragraphs = Array.isArray(passage.paragraphs)
+                ? passage.paragraphs.map((paragraph) => {
+                    const paragraphHtml = cleanImportedHtml(paragraph.html || "");
+                    const text = String(paragraph.text || plainTextFromHtml(paragraphHtml)).trim();
+
+                    if (!paragraphHtml && !text) {
+                        return null;
+                    }
+
+                    return {
+                        letter: paragraph.letter || null,
+                        html: paragraphHtml,
+                        text
+                    };
+                }).filter(Boolean)
+                : [];
+
+            if (!paragraphs.length && html) {
+                paragraphs.push({
+                    letter: null,
+                    html,
+                    text: passageText
+                });
+            }
+
+            if (!html && !paragraphs.length && !passageText) {
+                return null;
+            }
+
+            return {
+                id: String(passage.id || `rich-passage-${index + 1}`),
+                number: Number(passage.number) || index + 1,
+                title: String(passage.title || passage.passageTitle || `Reading Passage ${index + 1}`),
+                displayLabel: String(passage.displayLabel || `Reading Passage ${Number(passage.number) || index + 1}`),
+                passageText,
+                html,
+                passageHtml: html,
+                paragraphs
+            };
+        })
+        .filter(Boolean);
+}
+
+function normalizeImportedListeningParts(parts) {
+    return (Array.isArray(parts) ? parts : []).map((part) => ({
+        ...part,
+        html: cleanImportedHtml(part.html || part.listeningHtml || part.questionsHtml || "")
+    }));
+}
+
 function buildManualReadingTest(body) {
     const part = normalizePart(body.part);
     let title = String(body.title || "").trim();
@@ -1191,6 +1318,9 @@ function buildManualReadingTest(body) {
 
     const passage = String(body.passage || body.passageText || "").trim();
     const passageTitle = String(body.passageTitle || body.passage_title || "").trim();
+    const readingHtml = cleanImportedHtml(body.readingHtml || "");
+    const passageHtml = cleanImportedHtml(body.passageHtml || "");
+    const richPassages = normalizeImportedReadingPassages(body.richPassages);
 
     if (part !== "full" && ![1, 2, 3].includes(Number(part))) {
         const error = new Error("Invalid part. Must be 1, 2, 3 or full.");
@@ -1339,6 +1469,9 @@ function buildManualReadingTest(body) {
         part,
         passage,
         passageText: passage,
+        readingHtml,
+        passageHtml,
+        richPassages,
         passageTitle,
         questionGroups,
         questions,
@@ -1451,6 +1584,7 @@ function collectStructuredListeningNumbers(value) {
 
 function normalizeListeningBlock(block, blockIndex) {
     const supportedTypes = [
+        "rich_content",
         "form_completion",
         "multiple_select",
         "sentence_completion_inline",
@@ -1462,16 +1596,23 @@ function normalizeListeningBlock(block, blockIndex) {
     ];
     const type = supportedTypes.includes(block?.type) ? block.type : "sentence_completion_inline";
 
-    return {
+    const normalized = {
         ...JSON.parse(JSON.stringify(block || {})),
         id: String(block?.id || `block-${Date.now()}-${blockIndex + 1}`),
         type
     };
+
+    if (type === "rich_content") {
+        normalized.html = cleanImportedHtml(normalized.html || "");
+    }
+
+    return normalized;
 }
 
 function buildStructuredListeningTest(body) {
     const source = typeof body.data === "string" ? JSON.parse(body.data) : body;
     const title = String(source.title || "").trim();
+    const listeningHtml = cleanImportedHtml(source.listeningHtml || source.questionsHtml || "");
     const requestedPart = source.part !== undefined
         ? normalizeListeningPart(source.part)
         : "full";
@@ -1495,6 +1636,7 @@ function buildStructuredListeningTest(body) {
         questionRange: String(part.questionRange || ""),
         audioUrl: String(part.audioUrl || ""),
         audioFileName: String(part.audioFileName || ""),
+        html: cleanImportedHtml(part.html || part.listeningHtml || part.questionsHtml || ""),
         instruction: String(part.instruction || ""),
         answerText: String(part.answerText || ""),
         blocks: Array.isArray(part.blocks)
@@ -1526,6 +1668,8 @@ function buildStructuredListeningTest(body) {
         duration,
         part: requestedPart,
         audio: savedParts[0]?.audioUrl || "",
+        listeningHtml,
+        questionsHtml: listeningHtml,
         assetFiles: savedParts
             .map((part) => part.audioUrl)
             .filter((audioUrl) => String(audioUrl || "").startsWith("/uploads/")),
@@ -2081,6 +2225,7 @@ function validateStructuredListeningPart(part) {
     // 3. Check unsupported question types and empty question text
     const allowedListeningTypes = [
         "form_completion",
+        "rich_content",
         "notes_completion",
         "note_completion",
         "multiple_choice",
@@ -2169,6 +2314,518 @@ const fullTestStore = createFullTestStore({
     saveReadingTest: saveManualReadingTest,
     saveListeningTest: saveManualListeningTest
 });
+
+const mockTestStore = createMockTestStore({
+    testsFile: MOCK_TESTS_FILE,
+    resultsFile: MOCK_TEST_RESULTS_FILE
+});
+
+function mockTestIdFromAdapterId(value, prefix) {
+    const id = String(value || "").trim();
+    return id.startsWith(prefix) ? id.slice(prefix.length) : "";
+}
+
+function getMockTestFromAdapterId(value, prefix) {
+    const testId = mockTestIdFromAdapterId(value, prefix);
+    return testId ? mockTestStore.getTest(testId, { includeDraft: true }) : null;
+}
+
+function clonePlain(value) {
+    if (!value) return value;
+    return JSON.parse(JSON.stringify(value));
+}
+
+function documentObject(doc) {
+    return typeof doc?.toObject === "function" ? doc.toObject() : doc;
+}
+
+function collectScoringQuestions(test) {
+    if (Array.isArray(test?.questions)) return test.questions;
+    if (Array.isArray(test?.questionGroups)) {
+        return test.questionGroups.flatMap((group) => group.questions || []);
+    }
+    if (Array.isArray(test?.parts)) {
+        return test.parts.flatMap((part) => (
+            Array.isArray(part.questions) && part.questions.length
+                ? part.questions
+                : structuredListeningQuestionsForPart(part)
+        ));
+    }
+    return [];
+}
+
+async function findByIdSafe(model, id) {
+    if (!id) return null;
+    try {
+        return await model.findById(id);
+    } catch {
+        return null;
+    }
+}
+
+async function buildMockScoringTest(mockTest) {
+    const listening = mockTest?.listeningTestId ? getListeningTestById(mockTest.listeningTestId) : null;
+    const reading = mockTest?.readingTestId ? getReadingTestById(mockTest.readingTestId) : null;
+
+    return {
+        ...mockTest,
+        listeningQuestions: collectScoringQuestions(listening),
+        readingQuestions: collectScoringQuestions(reading)
+    };
+}
+
+function normalizeMockQuestionType(type, fallback = "sentence_completion") {
+    return String(type || fallback)
+        .trim()
+        .toLowerCase()
+        .replace(/[\s-]+/g, "_");
+}
+
+function mockAnswerValue(answer) {
+    if (Array.isArray(answer)) {
+        return answer.map((item) => String(item || "").trim()).filter(Boolean).join(" | ");
+    }
+
+    return String(answer || "").trim();
+}
+
+function mockQuestionText(question, fallback) {
+    return String(question?.prompt || question?.question || question?.text || fallback || "").trim();
+}
+
+function optionLetter(index) {
+    return String.fromCharCode(65 + index);
+}
+
+function mockListeningOptions(question) {
+    return (Array.isArray(question?.options) ? question.options : [])
+        .map((option, index) => {
+            const value = String(option?.value || option?.letter || optionLetter(index)).trim();
+            const text = String(option?.text || option?.label || option?.value || value).trim();
+            return {
+                letter: value || optionLetter(index),
+                text: text || value || optionLetter(index)
+            };
+        })
+        .filter((option) => option.letter || option.text);
+}
+
+function questionRangeLabel(questions) {
+    const numbers = (questions || []).map((question) => Number(question.number)).filter(Number.isFinite);
+    if (!numbers.length) return "Questions";
+    const first = Math.min(...numbers);
+    const last = Math.max(...numbers);
+    return first === last ? `Question ${first}` : `Questions ${first}-${last}`;
+}
+
+function listeningCompletionLine(question) {
+    const number = Number(question.number) || 1;
+    const prompt = mockQuestionText(question, `Listening question ${number}`);
+
+    if (/\{\{\d{1,2}\}\}/.test(prompt)) {
+        return prompt;
+    }
+
+    if (/_{2,}/.test(prompt)) {
+        return prompt.replace(/_{2,}/, `{{${number}}}`);
+    }
+
+    return `${prompt} {{${number}}}`;
+}
+
+function mockListeningBlocksForPart(part) {
+    const blocks = [];
+    const completionQuestions = [];
+    let choiceQuestions = [];
+    let matchingQuestions = [];
+
+    function flushChoiceQuestions() {
+        if (!choiceQuestions.length) return;
+        blocks.push({
+            id: `mock-mcq-${part.partNumber}-${blocks.length + 1}`,
+            type: "multiple_choice",
+            questionRange: questionRangeLabel(choiceQuestions),
+            instruction: "Choose the correct answer.",
+            questions: choiceQuestions.map((question) => ({
+                questionNumber: Number(question.number),
+                question: mockQuestionText(question, `Listening question ${question.number}`),
+                options: mockListeningOptions(question)
+            }))
+        });
+        choiceQuestions = [];
+    }
+
+    function flushMatchingQuestions() {
+        if (!matchingQuestions.length) return;
+        const optionMap = new Map();
+        matchingQuestions.forEach((question) => {
+            mockListeningOptions(question).forEach((option) => {
+                if (!optionMap.has(option.letter)) optionMap.set(option.letter, option);
+            });
+        });
+        blocks.push({
+            id: `mock-matching-${part.partNumber}-${blocks.length + 1}`,
+            type: "matching",
+            title: part.title || `Part ${part.partNumber}`,
+            questionRange: questionRangeLabel(matchingQuestions),
+            instruction: part.instruction || "Choose the correct option.",
+            imageUrl: part.imageUrl || "",
+            options: [...optionMap.values()],
+            questions: matchingQuestions.map((question) => ({
+                questionNumber: Number(question.number),
+                text: mockQuestionText(question, `Listening question ${question.number}`)
+            }))
+        });
+        matchingQuestions = [];
+    }
+
+    (part.questions || []).forEach((question) => {
+        const type = normalizeMockQuestionType(question.type, "sentence_completion");
+        const hasOptions = mockListeningOptions(question).length > 0;
+
+        if (!hasOptions) {
+            flushChoiceQuestions();
+            flushMatchingQuestions();
+            completionQuestions.push(question);
+            return;
+        }
+
+        if (["matching", "map_diagram_labeling", "map_labeling", "map_labelling", "diagram_labeling", "diagram_labelling"].includes(type)) {
+            flushChoiceQuestions();
+            matchingQuestions.push(question);
+            return;
+        }
+
+        flushMatchingQuestions();
+        choiceQuestions.push(question);
+    });
+
+    flushChoiceQuestions();
+    flushMatchingQuestions();
+
+    if (completionQuestions.length) {
+        blocks.push({
+            id: `mock-completion-${part.partNumber}-${blocks.length + 1}`,
+            type: "sentence_completion_inline",
+            questionRange: questionRangeLabel(completionQuestions),
+            instruction: part.instruction || "Complete the sentences below.",
+            content: completionQuestions.map(listeningCompletionLine)
+        });
+    }
+
+    return blocks;
+}
+
+function buildMockListeningTest(id) {
+    const mockTest = getMockTestFromAdapterId(id, "mock-listening-");
+    if (!mockTest) return null;
+
+    const sourceTest = getListeningTestById(mockTest.listeningTestId);
+    if (!sourceTest) return null;
+
+    const selected = clonePlain(sourceTest);
+    const parts = Array.isArray(selected.parts) ? selected.parts : [];
+    const questions = Array.isArray(selected.questions)
+        ? selected.questions
+        : parts.flatMap(structuredListeningQuestionsForPart);
+    const sections = Array.isArray(selected.sections) && selected.sections.length
+        ? selected.sections
+        : parts.map((part) => ({
+            title: part.questionRange || part.title || `Part ${part.partNumber}`,
+            instruction: part.instruction || "",
+            rule: "",
+            questionNumbers: structuredListeningQuestionsForPart(part).map((question) => question.number)
+        }));
+
+    return {
+        ...selected,
+        id,
+        title: `${mockTest.title} - Listening`,
+        headerTitle: "Academic Listening",
+        dashboardHref: `/mock-test/${encodeURIComponent(mockTest.id)}`,
+        duration: Number(selected.duration) || listeningDurationForPart(selected.part || "full"),
+        part: selected.part || "full",
+        audio: selected.audio || parts.find((part) => part.audioUrl)?.audioUrl || "",
+        parts,
+        questions,
+        sections,
+        sourceTestId: selected.id,
+        createdAt: mockTest.createdAt,
+        updatedAt: mockTest.updatedAt
+    };
+}
+
+function mockReadingType(question) {
+    const type = normalizeMockQuestionType(question?.type, "sentence_completion");
+    const supported = new Set([
+        "true_false_not_given",
+        "yes_no_not_given",
+        "multiple_choice",
+        "multi_select",
+        "summary_completion",
+        "sentence_completion",
+        "matching_headings",
+        "matching_information",
+        "short_answer",
+        "diagram_labeling",
+        "table_completion",
+        "notes_completion",
+        "note_completion",
+        "form_completion"
+    ]);
+
+    if (type === "fill_in_the_blank") return "sentence_completion";
+    if (type === "map_diagram_labeling" || type === "map_labeling" || type === "map_labelling" || type === "diagram_labelling") return "diagram_labeling";
+    if (supported.has(type)) return type;
+    return Array.isArray(question?.options) && question.options.length ? "multiple_choice" : "sentence_completion";
+}
+
+function mockReadingOptions(question, type) {
+    if (type === "true_false_not_given") {
+        return ["TRUE", "FALSE", "NOT GIVEN"].map((value) => ({ value, label: value }));
+    }
+
+    if (type === "yes_no_not_given") {
+        return ["YES", "NO", "NOT GIVEN"].map((value) => ({ value, label: value }));
+    }
+
+    return (Array.isArray(question?.options) ? question.options : [])
+        .map((option, index) => {
+            const value = String(option?.value || option?.letter || optionLetter(index)).trim();
+            const text = String(option?.text || option?.label || option?.value || value).trim();
+            const label = text && text !== value ? `${value}. ${text}` : (text || value);
+
+            return {
+                value: value || optionLetter(index),
+                label: label || value || optionLetter(index)
+            };
+        })
+        .filter((option) => option.value || option.label);
+}
+
+function mockReadingQuestion(question, forcedNumber) {
+    const type = mockReadingType(question);
+    const number = Number(forcedNumber) || Number(question.number) || 1;
+
+    return {
+        number,
+        type,
+        question: mockQuestionText(question, `Reading question ${number}`),
+        options: mockReadingOptions(question, type),
+        answer: mockAnswerValue(question.answer)
+    };
+}
+
+function mockReadingGroupsForPassage(passage, questions) {
+    const groups = [];
+
+    questions.forEach((question) => {
+        const last = groups[groups.length - 1];
+        if (!last || last.type !== question.type) {
+            groups.push({
+                type: question.type,
+                title: questionRangeLabel([question]),
+                instruction: "",
+                rule: "",
+                questionNumbers: [question.number],
+                questions: [question]
+            });
+        } else {
+            last.questionNumbers.push(question.number);
+            last.questions.push(question);
+            last.title = questionRangeLabel(last.questions);
+        }
+    });
+
+    return groups.map((group) => ({
+        ...group,
+        title: group.title || `${passage.title || `Passage ${passage.number}`} Questions`
+    }));
+}
+
+function buildMockReadingTest(id) {
+    const mockTest = getMockTestFromAdapterId(id, "mock-reading-");
+    if (!mockTest) return null;
+
+    const sourceTest = getReadingTestById(mockTest.readingTestId);
+    if (!sourceTest) return null;
+
+    const selected = clonePlain(sourceTest);
+
+    return {
+        ...selected,
+        id,
+        title: `${mockTest.title} - Reading`,
+        passageTitle: selected.passageTitle || `${mockTest.title} - Reading`,
+        sourceTestId: selected.id,
+        createdAt: mockTest.createdAt
+    };
+}
+
+async function buildMockWritingFullTest(id) {
+    const mockTest = getMockTestFromAdapterId(id, "mock-writing-");
+    if (!mockTest) return null;
+
+    let sourceTest = null;
+    try {
+        sourceTest = await WritingFullTest.findById(mockTest.writingTestId)
+            .populate("task1PromptId")
+            .populate("task2PromptId");
+    } catch {
+        sourceTest = null;
+    }
+
+    if (!sourceTest) return null;
+
+    const selected = documentObject(sourceTest);
+
+    return {
+        _id: id,
+        id,
+        title: `${mockTest.title} - Writing`,
+        status: "published",
+        timeLimit: Number(selected.timeLimit) || 60,
+        __mockWritingTest: true,
+        sourceTestId: String(selected._id || mockTest.writingTestId),
+        task1PromptId: selected.task1PromptId,
+        task2PromptId: selected.task2PromptId
+    };
+}
+
+function normalizeSpeakingTextItems(value) {
+    if (!Array.isArray(value)) return [];
+    return value
+        .map((item) => String(typeof item === "string" ? item : item?.text || "").trim())
+        .filter(Boolean);
+}
+
+function parseSpeakingMinutes(value, fallbackMinutes) {
+    const raw = String(value || "").trim();
+    const match = raw.match(/(\d+(?:\.\d+)?)/);
+    if (!match) return fallbackMinutes;
+    const minutes = Number(match[1]);
+    return Number.isFinite(minutes) && minutes > 0 ? minutes : fallbackMinutes;
+}
+
+function speakingSeconds(value, fallbackMinutes) {
+    return Math.round(parseSpeakingMinutes(value, fallbackMinutes) * 60);
+}
+
+async function buildMockSpeakingFullTest(mockTest) {
+    let sourceTest = null;
+    try {
+        sourceTest = await FullSpeakingTest.findById(mockTest.speakingTestId)
+            .populate("part1Id")
+            .populate("part2Id")
+            .populate("part3Id");
+    } catch {
+        sourceTest = null;
+    }
+
+    if (!sourceTest) return null;
+
+    const selected = documentObject(sourceTest);
+    const part1 = selected.part1Id ? documentObject(selected.part1Id) : null;
+    const part2 = selected.part2Id ? documentObject(selected.part2Id) : null;
+    const part3 = selected.part3Id ? documentObject(selected.part3Id) : null;
+
+    return {
+        id: `mock-speaking-${mockTest.id}`,
+        title: `${mockTest.title} - Speaking`,
+        topic: [part1?.title, part2?.title, part3?.title].filter(Boolean).join(", "),
+        description: "Complete Parts 1, 2, and 3 in one full AI-evaluated test.",
+        estimatedTime: selected.estimatedTime || "11-14 min",
+        aiFeedback: selected.aiFeedback !== false,
+        sourceTestId: String(selected._id || mockTest.speakingTestId),
+        parts: [
+            part1 && {
+                part: 1,
+                title: `Part 1: ${part1.title || "Introduction and general questions"}`,
+                duration: speakingSeconds(part1.speakingTime, 5),
+                prompt: part1.description || "Answer general questions naturally.",
+                questions: normalizeSpeakingTextItems(part1.questions)
+            },
+            part2 && {
+                part: 2,
+                title: `Part 2: ${part2.title || "Cue Card"}`,
+                duration: speakingSeconds(part2.speakingTime, 2),
+                preparation: speakingSeconds(part2.prepTime, 1),
+                prompt: part2.instruction || part2.title || "",
+                questions: normalizeSpeakingTextItems(part2.bulletPoints)
+            },
+            part3 && {
+                part: 3,
+                title: `Part 3: ${part3.title || "Follow-up discussion questions"}`,
+                duration: speakingSeconds(part3.speakingTime, 5),
+                prompt: part3.description || "Answer follow-up discussion questions.",
+                questions: normalizeSpeakingTextItems(part3.questions)
+            }
+        ].filter(Boolean)
+    };
+}
+
+async function buildMockSpeakingFullTests(options = {}) {
+    const mockTests = mockTestStore.listTests({ includeDraft: Boolean(options.includeDraft) });
+    const tests = await Promise.all(mockTests.map((mockTest) => buildMockSpeakingFullTest(mockTest)));
+    return tests.filter(Boolean);
+}
+
+function hasMockHtmlImport(section) {
+    const importValue = section?.htmlImport || {};
+    return Boolean(importValue.enabled && String(importValue.html || importValue.sanitizedHtml || importValue.sourceHtml || "").trim());
+}
+
+function filled(value) {
+    return String(value || "").trim().length > 0;
+}
+
+function questionIsComplete(question) {
+    return filled(question?.prompt || question?.question || question?.text) && filled(question?.answer || question?.correctAnswer || question?.correct);
+}
+
+function validateMockTestForPublish(test) {
+    const errors = [];
+
+    if (!filled(test?.listeningTestId) || !filled(test?.readingTestId) || !filled(test?.writingTestId) || !filled(test?.speakingTestId)) {
+        errors.push("Please select Listening, Reading, Writing, and Speaking tests.");
+    }
+
+    if (!filled(test?.title)) {
+        errors.push("Mock Test title is required.");
+    }
+
+    if (!Number.isFinite(Number(test?.testNumber ?? test?.number)) || Number(test?.testNumber ?? test?.number) <= 0) {
+        errors.push("Mock Test number is required.");
+    }
+
+    return errors;
+}
+
+async function validateMockTestPayload(payload) {
+    const errors = validateMockTestForPublish(payload);
+
+    if (errors.length) {
+        return errors;
+    }
+
+    if (!getListeningTestById(payload.listeningTestId)) {
+        errors.push("Selected Listening test was not found.");
+    }
+
+    if (!getReadingTestById(payload.readingTestId)) {
+        errors.push("Selected Reading test was not found.");
+    }
+
+    if (!await findByIdSafe(WritingFullTest, payload.writingTestId)) {
+        errors.push("Selected Writing test was not found.");
+    }
+
+    if (!await findByIdSafe(FullSpeakingTest, payload.speakingTestId)) {
+        errors.push("Selected Speaking test was not found.");
+    }
+
+    return errors;
+}
 
 function readManualListeningTests() {
     if (!fs.existsSync(LISTENING_TESTS_DIR)) {
@@ -2841,6 +3498,21 @@ function getRecentManualTests(limit = 10) {
         });
     });
 
+    mockTestStore.listTests({ includeDraft: true }).forEach((test) => {
+        const summary = mockTestStore.adminSummary(test);
+
+        items.push({
+            id: test.id,
+            title: summary.title,
+            type: "mock",
+            part: "full",
+            questionCount: summary.listeningQuestionCount + summary.readingQuestionCount,
+            createdAt: test.createdAt,
+            openUrl: summary.openUrl,
+            editUrl: `/admin-mock-tests?id=${encodeURIComponent(test.id)}`
+        });
+    });
+
     return items
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, limit);
@@ -2850,6 +3522,7 @@ async function getAdminStats() {
     const readingTests = readManualReadingTests().length;
     const listeningTests = readManualListeningTests().length;
     const fullTests = fullTestStore.readAll().length;
+    const mockTests = mockTestStore.listTests({ includeDraft: true }).length;
 
     const users = await userStore.countUsers();
 
@@ -2857,7 +3530,8 @@ async function getAdminStats() {
         users,
         readingTests,
         listeningTests,
-        fullTests
+        fullTests,
+        mockTests
     };
 }
 
@@ -3043,6 +3717,18 @@ app.get("/listening-tests", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listening-tests.html"));
 });
 
+app.get("/mock-tests", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "mock-tests.html"));
+});
+
+app.get("/mock-test/:id/result", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "mock-test-result.html"));
+});
+
+app.get("/mock-test/:id", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "mock-test.html"));
+});
+
 // Private pages clean routes
 app.get("/dashboard", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile.html"));
@@ -3111,6 +3797,10 @@ app.get("/admin-import", requirePageAdmin, (req, res) => {
 
 app.get("/admin-writing", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-writing.html"));
+});
+
+app.get("/admin-mock-tests", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-mock-tests.html"));
 });
 
 app.get("/admin-full-test", requirePageAdmin, (req, res) => {
@@ -3263,6 +3953,179 @@ app.put("/api/profile", requireUser, async (req, res) => {
     }
 });
 
+app.get("/api/mock-tests", (req, res) => {
+    const tests = mockTestStore
+        .listTests()
+        .map(mockTestStore.publicSummary);
+    res.json(tests);
+});
+
+app.get("/api/mock-tests/:id", (req, res) => {
+    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const test = mockTestStore.getTest(req.params.id, { includeDraft });
+
+    if (!test) {
+        return res.status(404).json({ error: "Mock test not found" });
+    }
+
+    res.json(test);
+});
+
+app.post("/api/mock-tests/:id/progress", requireUser, (req, res) => {
+    try {
+        const progress = mockTestStore.recordSectionProgress(req.user.id, req.params.id, req.body || {});
+        res.json({ progress });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            error: error.message || "Could not save mock test progress"
+        });
+    }
+});
+
+app.delete("/api/mock-tests/:id/progress", requireUser, (req, res) => {
+    try {
+        const progress = mockTestStore.clearProgress(req.user.id, req.params.id);
+        res.json({ progress });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            error: error.message || "Could not clear mock test progress"
+        });
+    }
+});
+
+app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
+    try {
+        const mockTest = mockTestStore.getTest(req.params.id, { includeDraft: true });
+        const scoringTest = mockTest ? await buildMockScoringTest(mockTest) : null;
+        const result = mockTestStore.submitAttempt(req.user.id, req.params.id, {
+            ...(req.body || {}),
+            __scoringTest: scoringTest || undefined
+        });
+        res.status(201).json({ result });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            error: error.message || "Could not submit mock test"
+        });
+    }
+});
+
+app.get("/api/mock-tests/:id/latest-result", requireUser, (req, res) => {
+    const result = mockTestStore.latestResult(req.user.id, req.params.id);
+
+    if (!result) {
+        return res.status(404).json({ error: "Mock test result not found" });
+    }
+
+    res.json({ result });
+});
+
+app.get("/api/profile/mock-tests", requireUser, (req, res) => {
+    res.json(mockTestStore.profileSummary(req.user.id));
+});
+
+app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: "Choose an audio file" });
+    }
+
+    res.status(201).json({
+        audioUrl: `/uploads/mock-tests/${path.basename(req.file.path)}`,
+        fileName: req.file.originalname
+    });
+});
+
+app.post("/api/mock-test-assets/image", requireAdmin, mockImageUpload.single("image"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: "Choose an image file" });
+    }
+
+    res.status(201).json({
+        imageUrl: `/uploads/mock-tests/${path.basename(req.file.path)}`,
+        fileName: req.file.originalname
+    });
+});
+
+app.get("/api/admin/mock-tests", requireAdmin, (req, res) => {
+    const tests = mockTestStore
+        .listTests({ includeDraft: true })
+        .map(mockTestStore.adminSummary);
+    res.json({ tests });
+});
+
+app.get("/api/admin/mock-tests/:id", requireAdmin, (req, res) => {
+    const test = mockTestStore.getTest(req.params.id, { includeDraft: true });
+
+    if (!test) {
+        return res.status(404).json({ error: "Mock test not found" });
+    }
+
+    res.json({ test });
+});
+
+app.post("/api/admin/mock-tests", requireAdmin, async (req, res) => {
+    try {
+        const payload = req.body || {};
+        const errors = await validateMockTestPayload(payload);
+
+        if (errors.length) {
+            return res.status(400).json({ error: errors.join(" ") });
+        }
+
+        const test = mockTestStore.createTest(payload);
+        res.status(201).json({
+            message: "Mock test created successfully.",
+            test
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            error: error.statusCode ? error.message : "Failed to save mock test."
+        });
+    }
+});
+
+app.put("/api/admin/mock-tests/:id", requireAdmin, async (req, res) => {
+    try {
+        const existing = mockTestStore.getTest(req.params.id, { includeDraft: true });
+
+        if (!existing) {
+            return res.status(404).json({ error: "Mock test not found" });
+        }
+
+        const payload = req.body || {};
+        const errors = await validateMockTestPayload({
+            ...existing,
+            ...payload
+        });
+
+        if (errors.length) {
+            return res.status(400).json({ error: errors.join(" ") });
+        }
+
+        const test = mockTestStore.updateTest(req.params.id, payload);
+
+        if (!test) {
+            return res.status(404).json({ error: "Mock test not found" });
+        }
+
+        res.json({
+            message: "Mock test updated successfully.",
+            test
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            error: error.statusCode ? error.message : "Failed to save mock test."
+        });
+    }
+});
+
+app.delete("/api/admin/mock-tests/:id", requireAdmin, (req, res) => {
+    if (!mockTestStore.deleteTest(req.params.id)) {
+        return res.status(404).json({ error: "Mock test not found" });
+    }
+
+    res.json({ message: "Mock test deleted successfully." });
+});
+
 function getReadingTestById(id) {
     const filePath = getReadingTestPath(id);
 
@@ -3297,14 +4160,16 @@ registerFullTestRoutes(app, {
 registerWritingRoutes(app, {
     requireAuth,
     requireAdmin,
-    listeningImageUpload
+    listeningImageUpload,
+    getMockWritingFullTest: buildMockWritingFullTest
 });
 
 registerSpeakingRoutes(app, {
     requireAuth,
     requireAdmin,
     uploadsRoot: UPLOAD_DIR,
-    safeFileName
+    safeFileName,
+    getMockSpeakingTests: buildMockSpeakingFullTests
 });
 
 app.get("/login", (req, res) => {
@@ -3343,7 +4208,7 @@ app.get("/api/reading-tests", (req, res) => {
 });
 
 app.get("/api/reading-tests/:id", (req, res) => {
-    const test = resolveManualReadingTest(req.params.id);
+    const test = buildMockReadingTest(req.params.id) || resolveManualReadingTest(req.params.id);
 
     if (!test) {
         return res.status(404).json({ error: "Reading test not found" });
@@ -3563,7 +4428,7 @@ app.get("/api/listening-tests", (req, res) => {
 });
 
 app.get("/api/listening-tests/:id", (req, res) => {
-    const test = resolveManualListeningTest(req.params.id);
+    const test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
 
     if (!test) {
         return res.status(404).json({ error: "Listening test not found" });
@@ -3689,7 +4554,8 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
             users: stats.users,
             readingTests: stats.readingTests,
             listeningTests: stats.listeningTests,
-            fullTests: stats.fullTests
+            fullTests: stats.fullTests,
+            mockTests: stats.mockTests
         });
     } catch (error) {
         console.error(error);

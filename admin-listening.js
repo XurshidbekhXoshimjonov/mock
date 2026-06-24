@@ -59,6 +59,7 @@ function createBlankPart(partNumber) {
         questionRange: `Questions ${start}-${end}`,
         audioUrl: "",
         audioFileName: "",
+        html: "",
         instruction: `Listen and answer Questions ${start}-${end}.`,
         answerText: "",
         blocks: []
@@ -68,6 +69,8 @@ function createBlankPart(partNumber) {
 function createBlankTest() {
     return {
         title: "",
+        listeningHtml: "",
+        questionsHtml: "",
         parts: LISTENING_PART_NUMBERS.map(createBlankPart)
     };
 }
@@ -89,6 +92,19 @@ function showStatus(message, type = "") {
     setTimeout(() => {
         builderStatus.style.display = "none";
     }, 4000);
+}
+
+function isSupportedHtmlFile(file) {
+    return /\.(html?|txt)$/i.test(file?.name || "");
+}
+
+function readFileAsText(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => resolve(String(event.target?.result || ""));
+        reader.onerror = () => reject(new Error("HTML upload failed. Please upload a valid .html file."));
+        reader.readAsText(file);
+    });
 }
 
 function selectedPart() {
@@ -232,6 +248,7 @@ function convertLegacyTestToBuilderFormat(test) {
             questionRange: `Questions ${partStart}-${partEnd}`,
             audioUrl,
             audioFileName,
+            html: matchingSection ? (matchingSection.sectionHtml || matchingSection.html || "") : "",
             instruction,
             answerText: answerLines.join("\n"),
             blocks
@@ -440,6 +457,7 @@ function convertImportedFullTestToBuilder(test) {
             questionRange: `Questions ${start}-${end}`,
             audioUrl: section.audio || listeningData.audio || "",
             audioFileName: (section.audio || listeningData.audio) ? String(section.audio || listeningData.audio).split("/").pop() : "",
+            html: section.sectionHtml || section.html || "",
             instruction: section.instruction || (section.questionGroups?.[0]?.instructionText) || `Listen and answer Questions ${start}-${end}.`,
             answerText: answers.join("\n"),
             blocks
@@ -447,6 +465,8 @@ function convertImportedFullTestToBuilder(test) {
     });
     return {
         title,
+        listeningHtml: test.listeningHtml || test.questionsHtml || "",
+        questionsHtml: test.questionsHtml || test.listeningHtml || "",
         parts
     };
 }
@@ -1561,7 +1581,7 @@ async function saveTest() {
     loadedSaveKey = saveKey();
     history.replaceState({}, "", `admin-listening.html?id=${encodeURIComponent(editingTestId)}`);
     ListeningTestBuilder();
-    showStatus(saveScope === "full" ? "Full Listening test saved." : `Listening Part ${savePartNumber} saved.`, "success");
+    showStatus("Test saved successfully.", "success");
 }
 
 async function loadTest(id) {
@@ -1815,10 +1835,18 @@ function makeImportDropZoneInteractive(zone, input, statusEl) {
 }
 
 async function handleImportFileSelected(file, statusEl) {
+    if (!isSupportedHtmlFile(file)) {
+        statusEl.textContent = "HTML upload failed. Please upload a valid .html file.";
+        statusEl.className = "status-text error";
+        showStatus("HTML upload failed. Please upload a valid .html file.", "error");
+        return;
+    }
+
     statusEl.textContent = "Uploading and parsing HTML file...";
     statusEl.className = "status-text";
     
     try {
+        const htmlContent = await readFileAsText(file);
         const formData = new FormData();
         formData.append("html", file);
         formData.append("skill", "listening");
@@ -1842,18 +1870,21 @@ async function handleImportFileSelected(file, statusEl) {
         
         // Hydrate builder with the parsed imported test
         hydrateBuilderState(data.test);
+        builderState.listeningHtml = htmlContent;
+        builderState.questionsHtml = htmlContent;
         ListeningTestBuilder();
         
-        showStatus("Test imported successfully from HTML.", "success");
+        statusEl.textContent = "HTML file loaded successfully.";
+        showStatus("HTML file loaded successfully.", "success");
         
         setTimeout(() => {
             importHtmlModal.close();
         }, 1500);
 
     } catch (error) {
-        statusEl.textContent = error.message;
+        statusEl.textContent = error.message || "HTML upload failed. Please upload a valid .html file.";
         statusEl.className = "status-text error";
-        showStatus(error.message, "error");
+        showStatus(statusEl.textContent, "error");
     }
 }
 

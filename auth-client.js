@@ -323,6 +323,7 @@
         const testType = String(params.get("type") || "").toLowerCase();
         if (testType === "listening") return "listening";
         if (testType === "reading") return "reading";
+        if (path.includes("mock-test") || path.includes("mock-tests")) return "mock";
         if (path.includes("speaking")) return "speaking";
         if (path.includes("writing")) return "writing";
         if (path.includes("listening")) return "listening";
@@ -1403,6 +1404,7 @@
                 <a class="${active === "reading" ? "is-active" : ""}" href="/reading">Reading</a>
                 <a class="${active === "speaking" ? "is-active" : ""}" href="/speaking">Speaking</a>
                 <a class="${active === "writing" ? "is-active" : ""}" href="/writing">Writing</a>
+                <a class="${active === "mock" ? "is-active" : ""}" href="/mock-tests">Mock Test</a>
             </nav>
             <div class="ielts-navbar__auth">
                 ${renderThemeToggle()}

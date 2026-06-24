@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Academic Reading - Reading Passage 3</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e31837;
+      --blue: #0d6efd;
+      --dark: #071433;
+      --muted: #64748b;
+      --line: #dbe3ef;
+      --bg: #f6f8fb;
+      --soft: #f1f5f9;
+      --card: #ffffff;
+      --green: #16a34a;
+      --wrong: #dc2626;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      overflow: hidden;
+    }
+
+    .topbar {
+      height: 64px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-weight: 700;
+    }
+
+    .logo {
+      color: var(--red);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .exam-type {
+      padding-left: 18px;
+      border-left: 1px solid var(--line);
+      font-size: 16px;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 800;
+      font-size: 24px;
+    }
+
+    .timer-icon {
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--dark);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .timer-icon::before {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 9px;
+      background: var(--dark);
+      left: 50%;
+      top: 6px;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .timer-icon::after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 3px;
+      background: var(--dark);
+      left: 50%;
+      top: 50%;
+      border-radius: 2px;
+    }
+
+    .time-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      margin-top: -2px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn {
+      height: 42px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      border-radius: 7px;
+      padding: 0 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover { background: #f8fafc; }
+
+    .btn-submit {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+      min-width: 96px;
+      justify-content: center;
+    }
+
+    .btn-submit:hover { background: #c8122d; }
+
+    .main {
+      height: calc(100vh - 64px - 56px);
+      display: grid;
+      grid-template-columns: 49% 51%;
+      background: #fff;
+    }
+
+    .pane {
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: #aeb8c6 #eef2f7;
+    }
+
+    .pane::-webkit-scrollbar { width: 10px; }
+    .pane::-webkit-scrollbar-track { background: #eef2f7; }
+    .pane::-webkit-scrollbar-thumb { background: #aeb8c6; border-radius: 10px; }
+
+    .left-pane {
+      border-right: 2px solid #c8d1dc;
+      padding: 34px 64px 80px 118px;
+    }
+
+    .right-pane {
+      padding: 34px 42px 80px 34px;
+    }
+
+    .passage-check {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .passage-check input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue);
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0 0 24px;
+    }
+
+    .review-title {
+      text-align: center;
+      font-size: 24px;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      font-weight: 800;
+    }
+
+    .review-title em {
+      font-style: italic;
+    }
+
+    .passage-content {
+      font-size: 17px;
+      line-height: 1.46;
+    }
+
+    .passage-content p {
+      margin-bottom: 18px;
+    }
+
+    .passage-content em {
+      font-style: italic;
+    }
+
+    .word-count {
+      position: fixed;
+      left: 25px;
+      bottom: 14px;
+      color: #23324b;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 60;
+    }
+
+    .questions-header h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .questions-header p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 26px;
+    }
+
+    .question-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 22px 22px 28px;
+      margin-bottom: 30px;
+    }
+
+    .question-card h2 {
+      font-size: 17px;
+      margin-bottom: 11px;
+    }
+
+    .instruction {
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .q-row {
+      display: grid;
+      grid-template-columns: 34px minmax(220px, 1fr);
+      gap: 12px;
+      align-items: start;
+      margin: 18px 0;
+    }
+
+    .q-num {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #10203a;
+      font-size: 14px;
+    }
+
+    .q-body label,
+    .q-body .q-text {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .choice-group {
+      display: grid;
+      gap: 11px;
+      max-width: 760px;
+    }
+
+    .choice {
+      border: 1px solid #d6dee9;
+      border-radius: 5px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      background: #fff;
+      line-height: 1.35;
+    }
+
+    .choice:hover {
+      border-color: #9bb5d3;
+      background: #fbfdff;
+    }
+
+    .choice input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--blue);
+    }
+
+    select {
+      width: 360px;
+      max-width: 100%;
+      height: 43px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      background: #fff;
+      padding: 0 14px;
+      font-size: 15px;
+      color: var(--dark);
+      outline: none;
+    }
+
+    select:focus {
+      border-color: #7cb3ff;
+      box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.18);
+    }
+
+    .tf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    .tf-table td {
+      padding: 16px 18px;
+      border: 1px solid #e1e7ef;
+    }
+
+    .tf-table tr:nth-child(odd) { background: #e9edf2; }
+
+    .tf-table td:first-child {
+      width: 25%;
+      font-weight: 800;
+    }
+
+    .letters-strip {
+      background: var(--soft);
+      border-left: 3px solid #cbd5e1;
+      color: var(--red);
+      font-weight: 800;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+
+    .endings-box {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 20px 24px;
+      margin-bottom: 26px;
+    }
+
+    .endings-title {
+      text-align: center;
+      font-weight: 800;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .ending-row {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      margin: 14px 0;
+      font-size: 15px;
+    }
+
+    .ending-letter {
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    .bottom-bar {
+      height: 56px;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 24px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 55;
+    }
+
+    .center-tools {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .progress-left {
+      justify-self: start;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .progress-right {
+      justify-self: end;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-backdrop.show { display: flex; }
+
+    .result-modal {
+      width: 485px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+      padding: 32px 38px 38px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-size: 32px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-kicker {
+      color: var(--blue);
+      letter-spacing: 1.7px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .score {
+      color: var(--blue);
+      font-size: 50px;
+      line-height: 1;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .band {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      border: 1px solid #d9e1ec;
+      border-radius: 7px;
+      background: #f8fafc;
+      min-height: 62px;
+      padding: 10px 7px;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.35;
+    }
+
+    .unknown {
+      color: #7b8498;
+      font-size: 15px;
+      margin: 15px 0 21px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .modal-actions .btn { height: 45px; }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .review-mode .correct-choice {
+      border-color: rgba(22, 163, 74, .8);
+      background: rgba(22, 163, 74, .08);
+    }
+
+    .review-mode .wrong-choice {
+      border-color: rgba(220, 38, 38, .8);
+      background: rgba(220, 38, 38, .08);
+    }
+
+    .select-correct {
+      border-color: var(--green) !important;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, .12) !important;
+    }
+
+    .select-wrong {
+      border-color: var(--wrong) !important;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, .12) !important;
+    }
+
+    @media (max-width: 1000px) {
+      body { overflow: auto; }
+
+      .topbar {
+        height: auto;
+        min-height: 64px;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .timer {
+        position: static;
+        transform: none;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .main {
+        height: auto;
+        display: block;
+      }
+
+      .pane {
+        height: auto;
+        overflow: visible;
+      }
+
+      .left-pane,
+      .right-pane {
+        padding: 28px 18px 80px;
+        border-right: 0;
+      }
+
+      .bottom-bar {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        height: auto;
+        padding: 8px 14px;
+      }
+
+      .center-tools,
+      .progress-left,
+      .progress-right {
+        justify-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">IELTS</div>
+      <div class="exam-type">Academic Reading</div>
+    </div>
+
+    <div class="timer">
+      <div class="timer-icon"></div>
+      <div>
+        <span id="time">20:00</span>
+        <span class="time-label">TIME LEFT</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-submit" id="submitBtn">Submit</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="pane left-pane" id="passagePane">
+      <div class="passage-check">
+        <input type="checkbox" id="passage3" />
+        <label for="passage3">Reading Passage 3</label>
+      </div>
+      <hr class="divider" />
+
+      <h1 class="review-title">Review: <em>The Hidden Life of Trees</em> by Peter Wohlleben</h1>
+
+      <div class="passage-content">
+        <p>
+          That so many copies of Peter Wohlleben’s book <em>The Hidden Life of Trees</em> have been sold is no surprise.
+          Life in the urban jungle can be overwhelming, and many of us long to escape by seeking more natural environments.
+          We hope an encounter with nature might make us feel more ‘alive’. Would we use this same term to describe nature itself,
+          though? Forests and the trees that form them are commonly perceived as objects lacking awareness, like rocks or stones.
+          But here, Wohlleben would beg to differ. From his observations, he has concluded that they are conscious in a way we do
+          not fully understand.
+        </p>
+
+        <p>
+          In recent decades, a number of writers have investigated our planet’s flora. <em>The Cabaret of Plants</em> by Richard
+          Mabey and <em>What a Plant Knows</em> by Daniel Chamovitz, for example, have done much to reformulate our views about
+          the green world. Central to many of these books is a serious message about sustainability, and <em>The Hidden Life of Trees</em>
+          is no exception. What sets it apart is its approach to description: at the start Wohlleben announces that ‘When you know
+          that trees . . . have memories and that tree parents live together with their children, then you can no longer just chop
+          them down.’ Not everyone will be comfortable with this kind of anthropomorphism.
+        </p>
+
+        <p>
+          Nevertheless, Wohlleben’s experience of working in a beech forest in the Eifel mountains of Germany may put him in a
+          better position than many to write a book about trees. In the introduction, he explains that he started out as a
+          state-employed forester, taking care of trees purely for industrial reasons. The straighter they were, the more
+          high-quality logs could be sawn. But after a while he began to appreciate trees for more than just their commercial
+          worth. He gives some of the credit for this realisation to the tourists that would come to the forest, who were more
+          enchanted by bent, crooked trees, which did not conform to the straight ideal.
+        </p>
+
+        <p>
+          An anecdote that stands out is Wohlleben’s encounter with ‘the gnarled remains of an enormous tree stump’ in the Eifel
+          forest. More than anything else, it was this encounter that prompted him to look further into the hidden behaviour of
+          trees. To his surprise, after scraping at the outside layer of bark covering the stump, he discovered a green layer
+          underneath. This was chlorophyll, the pigment normally produced by living trees. Wohlleben realised that the only way the
+          stump could still be alive was if the surrounding beeches were providing it with a sugar solution through their own roots.
+        </p>
+
+        <p>
+          Wohlleben is not the first person to claim that trees are cooperative. In the 1990s, Dr Suzanne Simard realised that fir
+          and birch trees were supplying each other with carbon. Simard’s findings made complete sense to Wohlleben, who believes
+          that this kind of nutrient exchange between neighbours is typical of a healthy forest. Wohlleben also had the opportunity
+          to deepen his understanding of tree biology when researchers from Aachen University set up investigative programmes in
+          his beech forest. Discussions with them reinforced his beliefs about the way trees thrived, and Wohlleben eventually
+          found himself strongly opposed to some traditional forestry practices. He finally succeeded in persuading local villagers
+          that the forest should be allowed to return to a natural state: this involved banning the use of machinery for logging,
+          and giving up on pesticides for a start. Since then, Wohlleben has been noting how his beech forest has developed, and
+          his observations formed the foundation for the book. Humour and a straightforward narrative make it instantly appealing
+          to readers without a science background — elements that have successfully been translated into over a dozen languages.
+          Those that do have scientific training, however, will be more demanding. Critics of Wohlleben point out that proper
+          academic studies need to be done to prove all his claims are factually accurate. This seems a fair point. What the book
+          will certainly do is transform nature lovers’ experiences of a forest walk. Once you know what is happening below ground,
+          you can’t help but marvel at the complex life of trees. Will it transform the way we produce timber for the manufacturing
+          industry? As large corporations tend to focus on immediate profits, they are hardly likely to adopt the longer-term
+          practices that Wohlleben recommends.
+        </p>
+
+        <p>
+          One of these is allowing trees to grow nearer to each other. This is the opposite of what happens in many state-owned
+          forests, where foresters deliberately space out trees so they can get more sunlight and grow faster. But Wohlleben claims
+          this spacing prevents vital root interaction, and so lowers resistance to drought. Older, established trees, he explains,
+          draw up moisture through their deep roots and provide this to juvenile trees growing below them. Without this assistance,
+          they could die. The relationship between fungi and trees is also given attention. For instance, when pines require more
+          nitrogen, the fungi growing at their base release a poison into the soil. This poison kills many minute organisms, which
+          release nitrogen as they die, and this is absorbed by the trees’ roots. In return, the fungi receive photosynthesised
+          sugar from the pines. Then Wohlleben explores the way trees employ scent, giving the example of acacia trees in
+          sub-Saharan Africa. When giraffes begin feeding on an acacia’s leaves, the tree emits ethylene gas as a warning to
+          neighbouring acacias. These then pump tannins into their leaves — substances toxic to giraffes. More controversial is
+          Wohlleben’s suggestion that trees feel pain. Although scientific research has now established that if branches are broken
+          off or the trunk is hit with an axe, a tree will emit electrical signals from the site of the wound, the application of
+          the concept of ‘pain’ might be an instance where readers are unconvinced.
+        </p>
+      </div>
+    </section>
+
+    <section class="pane right-pane" id="questionPane">
+      <div class="questions-header">
+        <h1>Questions 27–40</h1>
+        <p>Complete the tasks below. Your answers are saved while you move between passages.</p>
+      </div>
+
+      <div class="question-card">
+        <h2>Questions 27–30</h2>
+        <p class="instruction">Choose the correct letter, A, B, C or D.</p>
+
+        <div class="q-row">
+          <div class="q-num">27</div>
+          <div class="q-body">
+            <div class="q-text">What is the reviewer emphasising in the phrase ‘Wohlleben would beg to differ’?</div>
+            <div class="choice-group" data-q="27">
+              <label class="choice"><input type="radio" name="q27" value="A"> A — the fact that trees might not live as passively as we think</label>
+              <label class="choice"><input type="radio" name="q27" value="B"> B — the idea that a forest trip might increase people’s vitality</label>
+              <label class="choice"><input type="radio" name="q27" value="C"> C — the way that a forest is the key feature of many landscapes</label>
+              <label class="choice"><input type="radio" name="q27" value="D"> D — the belief that trees exist only for the benefit of humans</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">28</div>
+          <div class="q-body">
+            <div class="q-text">According to the reviewer, a unique feature of <em>The Hidden Life of Trees</em> is</div>
+            <div class="choice-group" data-q="28">
+              <label class="choice"><input type="radio" name="q28" value="A"> A — its suggestion that ordinary people can act to protect forests.</label>
+              <label class="choice"><input type="radio" name="q28" value="B"> B — its viewpoint that only certain kinds of tree are worth preserving.</label>
+              <label class="choice"><input type="radio" name="q28" value="C"> C — its tendency to refer to trees as if they had human qualities.</label>
+              <label class="choice"><input type="radio" name="q28" value="D"> D — its simplistic rather than academic approach to writing.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">29</div>
+          <div class="q-body">
+            <div class="q-text">What are we told about Peter Wohlleben’s time as a state-employed forester?</div>
+            <div class="choice-group" data-q="29">
+              <label class="choice"><input type="radio" name="q29" value="A"> A — He hoped he could make a good living from cutting down trees.</label>
+              <label class="choice"><input type="radio" name="q29" value="B"> B — He changed his mind about the way in which trees were valuable.</label>
+              <label class="choice"><input type="radio" name="q29" value="C"> C — He rejected the ideas that visitors to the beech forest put forward.</label>
+              <label class="choice"><input type="radio" name="q29" value="D"> D — He introduced new techniques for improving the growth of trees.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">30</div>
+          <div class="q-body">
+            <div class="q-text">The reviewer mentions the tree stump anecdote in order to</div>
+            <div class="choice-group" data-q="30">
+              <label class="choice"><input type="radio" name="q30" value="A"> A — question traditional thinking about the way trees grow.</label>
+              <label class="choice"><input type="radio" name="q30" value="B"> B — explain the motivation behind Wohlleben’s area of research.</label>
+              <label class="choice"><input type="radio" name="q30" value="C"> C — highlight Wohlleben’s lack of formal scientific training.</label>
+              <label class="choice"><input type="radio" name="q30" value="D"> D — suggest how personal stories have brought a dull topic to life.</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <h2>Questions 31–36</h2>
+        <p class="instruction">Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+
+        <table class="tf-table">
+          <tr><td>YES</td><td>if the statement agrees with the views of the writer</td></tr>
+          <tr><td>NO</td><td>if the statement contradicts the views of the writer</td></tr>
+          <tr><td>NOT GIVEN</td><td>if it is impossible to say what the writer thinks about this</td></tr>
+        </table>
+
+        <div class="q-row">
+          <div class="q-num">31</div>
+          <div class="q-body">
+            <label>Wohlleben was sceptical about the results of Dr Suzanne Simard’s research.</label>
+            <select data-q="31">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">32</div>
+          <div class="q-body">
+            <label>Wohlleben’s theories about trees were confirmed after talking to Aachen University scientists.</label>
+            <select data-q="32">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">33</div>
+          <div class="q-body">
+            <label>It was a good decision to get rid of machinery and pesticides from the beech forest.</label>
+            <select data-q="33">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">34</div>
+          <div class="q-body">
+            <label>The translators of <em>The Hidden Life of Trees</em> should be given more recognition for their contribution.</label>
+            <select data-q="34">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">35</div>
+          <div class="q-body">
+            <label>Some of Wohlleben’s ideas about trees must be investigated further before they can be accepted as true.</label>
+            <select data-q="35">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">36</div>
+          <div class="q-body">
+            <label><em>The Hidden Life of Trees</em> is likely to affect how forests are managed by the manufacturing industry.</label>
+            <select data-q="36">
+              <option value="">Select answer</option>
+              <option>YES</option>
+              <option>NO</option>
+              <option>NOT GIVEN</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <h2>Questions 37–40</h2>
+        <p class="instruction">Complete each sentence with the correct ending, <b>A–G</b>, below.</p>
+        <div class="letters-strip">A–G</div>
+
+        <div class="endings-box">
+          <div class="endings-title">List of Endings</div>
+          <div class="ending-row"><span class="ending-letter">A</span><span>may prevent harm occurring to the same tree species.</span></div>
+          <div class="ending-row"><span class="ending-letter">B</span><span>can be the result of different forms of damage.</span></div>
+          <div class="ending-row"><span class="ending-letter">C</span><span>might help the spread of trees in a new location.</span></div>
+          <div class="ending-row"><span class="ending-letter">D</span><span>could be a sign that trees have reached maturity.</span></div>
+          <div class="ending-row"><span class="ending-letter">E</span><span>may affect how vulnerable young trees are during dry periods.</span></div>
+          <div class="ending-row"><span class="ending-letter">F</span><span>can play a part in providing essential nutrients.</span></div>
+          <div class="ending-row"><span class="ending-letter">G</span><span>might encourage disease in trees growing nearby.</span></div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">37</div>
+          <div class="q-body">
+            <label>The distance between trees in state-owned forests</label>
+            <select data-q="37">
+              <option value="">Select answer</option>
+              <option value="A">A — may prevent harm occurring to the same tree species.</option>
+              <option value="B">B — can be the result of different forms of damage.</option>
+              <option value="C">C — might help the spread of trees in a new location.</option>
+              <option value="D">D — could be a sign that trees have reached maturity.</option>
+              <option value="E">E — may affect how vulnerable young trees are during dry periods.</option>
+              <option value="F">F — can play a part in providing essential nutrients.</option>
+              <option value="G">G — might encourage disease in trees growing nearby.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">38</div>
+          <div class="q-body">
+            <label>The fungi growing at the base of trees</label>
+            <select data-q="38">
+              <option value="">Select answer</option>
+              <option value="A">A — may prevent harm occurring to the same tree species.</option>
+              <option value="B">B — can be the result of different forms of damage.</option>
+              <option value="C">C — might help the spread of trees in a new location.</option>
+              <option value="D">D — could be a sign that trees have reached maturity.</option>
+              <option value="E">E — may affect how vulnerable young trees are during dry periods.</option>
+              <option value="F">F — can play a part in providing essential nutrients.</option>
+              <option value="G">G — might encourage disease in trees growing nearby.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">39</div>
+          <div class="q-body">
+            <label>The scent sometimes given off by trees</label>
+            <select data-q="39">
+              <option value="">Select answer</option>
+              <option value="A">A — may prevent harm occurring to the same tree species.</option>
+              <option value="B">B — can be the result of different forms of damage.</option>
+              <option value="C">C — might help the spread of trees in a new location.</option>
+              <option value="D">D — could be a sign that trees have reached maturity.</option>
+              <option value="E">E — may affect how vulnerable young trees are during dry periods.</option>
+              <option value="F">F — can play a part in providing essential nutrients.</option>
+              <option value="G">G — might encourage disease in trees growing nearby.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">40</div>
+          <div class="q-body">
+            <label>The electrical signals sent out by trees</label>
+            <select data-q="40">
+              <option value="">Select answer</option>
+              <option value="A">A — may prevent harm occurring to the same tree species.</option>
+              <option value="B">B — can be the result of different forms of damage.</option>
+              <option value="C">C — might help the spread of trees in a new location.</option>
+              <option value="D">D — could be a sign that trees have reached maturity.</option>
+              <option value="E">E — may affect how vulnerable young trees are during dry periods.</option>
+              <option value="F">F — can play a part in providing essential nutrients.</option>
+              <option value="G">G — might encourage disease in trees growing nearby.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bottom-bar">
+    <div class="progress-left">Word count: 883</div>
+    <div class="center-tools">
+      <span>⌕ Zoom</span>
+      <span>Aa&nbsp; Text size 2</span>
+      <span id="answeredCount">0 of 14 answered</span>
+    </div>
+    <div class="progress-right" id="completeCount">0 / 14 complete</div>
+  </footer>
+
+  <div class="modal-backdrop" id="resultModal">
+    <div class="result-modal">
+      <button class="modal-close" id="closeModal">×</button>
+      <div class="modal-kicker">IELTS READING RESULT</div>
+      <div class="score"><span id="scoreCorrect">0</span> / 14</div>
+      <div class="band">Estimated band: <span id="bandScore">0–2</span></div>
+      <div class="stats">
+        <div class="stat"><span><span id="correctStat">0</span> correct<br>answers</span></div>
+        <div class="stat"><span><span id="incorrectStat">0</span> incorrect<br>answers</span></div>
+        <div class="stat"><span><span id="unansweredStat">14</span> unanswered<br>questions</span></div>
+      </div>
+      <p class="unknown">No unknown words were checked during this test.</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="reviewBtn">Review answers</button>
+        <button class="btn" id="closeBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const answers = {
+      27: "A",
+      28: "C",
+      29: "B",
+      30: "B",
+      31: "NO",
+      32: "NO",
+      33: "YES",
+      34: "NOT GIVEN",
+      35: "YES",
+      36: "NO",
+      37: "E",
+      38: "F",
+      39: "A",
+      40: "B"
+    };
+
+    const total = 14;
+    let seconds = 20 * 60;
+
+    const timeEl = document.getElementById("time");
+    const answeredCount = document.getElementById("answeredCount");
+    const completeCount = document.getElementById("completeCount");
+    const submitBtn = document.getElementById("submitBtn");
+    const resultModal = document.getElementById("resultModal");
+    const closeModal = document.getElementById("closeModal");
+    const closeBtn = document.getElementById("closeBtn");
+
+    function formatTime(value) {
+      const m = Math.floor(value / 60).toString().padStart(2, "0");
+      const s = (value % 60).toString().padStart(2, "0");
+      return `${m}:${s}`;
+    }
+
+    setInterval(() => {
+      if (seconds > 0) {
+        seconds--;
+        timeEl.textContent = formatTime(seconds);
+      }
+    }, 1000);
+
+    function getUserAnswers() {
+      const result = {};
+
+      document.querySelectorAll("select[data-q]").forEach(select => {
+        result[select.dataset.q] = select.value;
+      });
+
+      document.querySelectorAll(".choice-group[data-q]").forEach(group => {
+        const checked = group.querySelector("input:checked");
+        result[group.dataset.q] = checked ? checked.value : "";
+      });
+
+      return result;
+    }
+
+    function updateProgress() {
+      const userAnswers = getUserAnswers();
+      const answered = Object.values(userAnswers).filter(Boolean).length;
+
+      answeredCount.textContent = `${answered} of ${total} answered`;
+      completeCount.textContent = `${answered} / ${total} complete`;
+    }
+
+    function getBand(correct) {
+      if (correct <= 2) return "0–2";
+      if (correct <= 4) return "3–4";
+      if (correct <= 6) return "4.5–5";
+      if (correct <= 8) return "5.5–6";
+      if (correct <= 10) return "6.5–7";
+      if (correct <= 12) return "7.5–8";
+      return "8.5–9";
+    }
+
+    function clearReviewMarks() {
+      document.body.classList.remove("review-mode");
+      document.querySelectorAll(".correct-choice, .wrong-choice").forEach(el => {
+        el.classList.remove("correct-choice", "wrong-choice");
+      });
+      document.querySelectorAll("select").forEach(el => {
+        el.classList.remove("select-correct", "select-wrong");
+      });
+    }
+
+    function markReview() {
+      clearReviewMarks();
+      document.body.classList.add("review-mode");
+      const userAnswers = getUserAnswers();
+
+      document.querySelectorAll(".choice-group[data-q]").forEach(group => {
+        const q = group.dataset.q;
+        const correct = answers[q];
+
+        group.querySelectorAll(".choice").forEach(label => {
+          const input = label.querySelector("input");
+          if (input.value === correct) label.classList.add("correct-choice");
+          if (input.checked && input.value !== correct) label.classList.add("wrong-choice");
+        });
+      });
+
+      document.querySelectorAll("select[data-q]").forEach(select => {
+        const q = select.dataset.q;
+        if (!select.value) return;
+        select.classList.add(select.value === answers[q] ? "select-correct" : "select-wrong");
+      });
+    }
+
+    function showResult() {
+      const userAnswers = getUserAnswers();
+      let correct = 0;
+      let answered = 0;
+
+      Object.keys(answers).forEach(q => {
+        if (userAnswers[q]) answered++;
+        if (userAnswers[q] === answers[q]) correct++;
+      });
+
+      const incorrect = answered - correct;
+      const unanswered = total - answered;
+
+      document.getElementById("scoreCorrect").textContent = correct;
+      document.getElementById("bandScore").textContent = getBand(correct);
+      document.getElementById("correctStat").textContent = correct;
+      document.getElementById("incorrectStat").textContent = incorrect;
+      document.getElementById("unansweredStat").textContent = unanswered;
+
+      resultModal.classList.add("show");
+    }
+
+    document.addEventListener("change", updateProgress);
+    submitBtn.addEventListener("click", showResult);
+    closeModal.addEventListener("click", () => resultModal.classList.remove("show"));
+    closeBtn.addEventListener("click", () => resultModal.classList.remove("show"));
+    document.getElementById("reviewBtn").addEventListener("click", () => {
+      resultModal.classList.remove("show");
+      markReview();
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>

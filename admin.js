@@ -4,6 +4,7 @@ const statPremiumUsers = document.getElementById("statPremiumUsers");
 const statFreeUsers = document.getElementById("statFreeUsers");
 const statReading = document.getElementById("statReading");
 const statListening = document.getElementById("statListening");
+const statMockTests = document.getElementById("statMockTests");
 const recentTests = document.getElementById("recentTests");
 const refreshRecent = document.getElementById("refreshRecent");
 const dashboardStatus = document.getElementById("dashboardStatus");
@@ -43,6 +44,8 @@ function markActiveNav() {
             isActive = path.includes("listening");
         } else if (href.includes("reading")) {
             isActive = path.includes("reading");
+        } else if (href.includes("mock-tests")) {
+            isActive = path.includes("mock-tests");
         } else if (href.includes("users")) {
             isActive = path.includes("users");
         }
@@ -58,6 +61,7 @@ function renderStats(data) {
     if (statFreeUsers) statFreeUsers.textContent = data.freeUsers ?? 0;
     if (statReading) statReading.textContent = data.readingTests ?? 0;
     if (statListening) statListening.textContent = data.listeningTests ?? 0;
+    if (statMockTests) statMockTests.textContent = data.mockTests ?? 0;
 }
 
 function renderRecent(tests) {
@@ -126,46 +130,14 @@ async function loadStats() {
 }
 
 async function loadRecent() {
-    const [readingResponse, listeningResponse] = await Promise.all([
-        fetch("/api/reading-tests"),
-        fetch("/api/listening-tests")
-    ]);
+    const response = await fetch("/api/admin/recent-tests?limit=10");
+    const data = await readJson(response);
 
-    const readingData = await readJson(readingResponse);
-    const listeningData = await readJson(listeningResponse);
-
-    if (!readingResponse.ok) {
-        throw new Error(readingData.error || "Could not load reading tests");
+    if (!response.ok) {
+        throw new Error(data.error || "Could not load recent tests");
     }
 
-    if (!listeningResponse.ok) {
-        throw new Error(listeningData.error || "Could not load listening tests");
-    }
-
-    const tests = [
-        ...readingData.map((test) => ({
-            id: test.id,
-            title: test.title,
-            type: "reading",
-            part: test.part,
-            questionCount: test.questionCount,
-            createdAt: test.createdAt,
-            openUrl: test.openUrl || `/reading/${encodeURIComponent(test.slug || test.title || "test")}`,
-            editUrl: "admin-reading.html"
-        })),
-        ...listeningData.map((test) => ({
-            id: test.id,
-            title: test.title,
-            type: "listening",
-            part: test.part,
-            questionCount: test.questionCount,
-            createdAt: test.createdAt,
-            openUrl: test.openUrl || `/listening/${encodeURIComponent(test.slug || test.title || "test")}`,
-            editUrl: `admin-listening.html?id=${encodeURIComponent(test.id)}`
-        }))
-    ]
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 10);
+    const tests = data.tests || [];
 
     renderRecent(tests);
     return tests;

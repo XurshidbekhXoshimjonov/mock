@@ -1,0 +1,310 @@
+{
+  "users": {
+    "6a22ff78f2a736006bbaf1f8": {
+      "progress": {
+        "mock-test-2": {
+          "listening": {
+            "answers": {
+              "1": "",
+              "11": "",
+              "21": "",
+              "31": ""
+            },
+            "result": {
+              "correct": 0,
+              "incorrect": 0,
+              "unanswered": 4,
+              "total": 4,
+              "normalizedScore": 0,
+              "band": "2.5",
+              "questionResults": [
+                {
+                  "number": 1,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "library"
+                  ],
+                  "mainAnswer": "library",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                },
+                {
+                  "number": 11,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "A"
+                  ],
+                  "mainAnswer": "A",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                },
+                {
+                  "number": 21,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "library"
+                  ],
+                  "mainAnswer": "library",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                },
+                {
+                  "number": 31,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "library"
+                  ],
+                  "mainAnswer": "library",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                }
+              ]
+            },
+            "band": 2.5,
+            "completed": true,
+            "savedAt": "2026-06-24T14:54:13.725Z"
+          },
+          "reading": {
+            "answers": {},
+            "result": {
+              "correct": 0,
+              "incorrect": 0,
+              "unanswered": 3,
+              "total": 3,
+              "normalizedScore": 0,
+              "band": "0-2",
+              "questionResults": [
+                {
+                  "number": 1,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "TRUE"
+                  ],
+                  "mainAnswer": "TRUE",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                },
+                {
+                  "number": 14,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "A"
+                  ],
+                  "mainAnswer": "A",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                },
+                {
+                  "number": 27,
+                  "userAnswer": "",
+                  "correctAnswers": [
+                    "A"
+                  ],
+                  "mainAnswer": "A",
+                  "alternatives": [],
+                  "status": "unanswered",
+                  "isCorrect": false,
+                  "isUnanswered": true
+                }
+              ]
+            },
+            "band": 0,
+            "completed": true,
+            "savedAt": "2026-06-24T14:54:52.018Z"
+          },
+          "writing": {
+            "answers": {
+              "task1": "aaa",
+              "task2": "ssd"
+            },
+            "result": {
+              "overallBand": 3.5,
+              "task1": {
+                "band": 2,
+                "criteria": {
+                  "taskAchievement": 2,
+                  "coherenceCohesion": 2,
+                  "lexicalResource": 2,
+                  "grammar": 2
+                },
+                "strengths": [],
+                "areasForImprovement": [
+                  "Did not address the task requirements",
+                  "Lacked any relevant information or analysis",
+                  "No clear structure or organization"
+                ],
+                "suggestions": [
+                  "Provide a summary of the main features of the chart",
+                  "Use appropriate vocabulary related to data description",
+                  "Organize the response into clear paragraphs"
+                ],
+                "improvedVersion": ""
+              },
+              "task2": {
+                "band": 4,
+                "criteria": {
+                  "taskResponse": 4,
+                  "coherenceCohesion": 4,
+                  "lexicalResource": 4,
+                  "grammar": 4
+                },
+                "strengths": [],
+                "areasForImprovement": [
+                  "Failed to develop a clear argument or position",
+                  "Limited vocabulary and expression",
+                  "Frequent grammatical errors affecting clarity"
+                ],
+                "suggestions": [
+                  "Clearly state your opinion in the introduction",
+                  "Develop your argument with examples and explanations",
+                  "Use a wider range of vocabulary and sentence structures"
+                ],
+                "improvedVersion": ""
+              }
+            },
+            "band": 3.5,
+            "completed": true,
+            "savedAt": "2026-06-24T14:55:06.746Z"
+          }
+        }
+      },
+      "results": [
+        {
+          "id": "mock-result-1782313518795-3434f7",
+          "testId": "mock-test-1",
+          "testNumber": 1,
+          "title": "Mock Test 1",
+          "overallBand": 2,
+          "listening": {
+            "correct": 0,
+            "total": 4,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 3,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 1,
+            "status": "completed"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "11": "",
+                "21": "",
+                "31": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-06-24T15:03:11.461Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-06-24T15:03:15.876Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-06-24T15:03:18.421Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "what's up Beijing what's up Beijing",
+                "part2": "👏👏👏",
+                "part3": "Tac, tac, tac, tac, tchut, tchut, tchut."
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Introduction and Interview",
+                  "prompt": "Answer general questions naturally.\nWhat do you do?\nWhy are you taking IELTS?\nHow do you usually study English?",
+                  "transcript": "what's up Beijing what's up Beijing",
+                  "audioUrl": "/uploads/speaking/1782313499876-a562ada4d361e-audio.webm"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Cue Card",
+                  "prompt": "Describe a useful website you use for studying. You should say what it is, how often you use it, why it is useful, and explain how it helps you learn.\nwhat it is\nhow often you use it\nwhy it is useful\nexplain how it helps you learn",
+                  "transcript": "👏👏👏",
+                  "audioUrl": "/uploads/speaking/1782313499913-4f02123c76a0c8-audio.webm"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Discussion",
+                  "prompt": "Answer follow-up discussion questions.\nHow has online learning changed education?\nDo people need teachers if they have good online resources?\nWhat makes a practice test reliable?",
+                  "transcript": "Tac, tac, tac, tac, tchut, tchut, tchut.",
+                  "audioUrl": "/uploads/speaking/1782313499915-bf4a46aa55182-audio.webm"
+                }
+              ],
+              "result": {
+                "overallBand": 1,
+                "fluencyCoherence": 1,
+                "lexicalResource": 1,
+                "grammaticalRangeAccuracy": 1,
+                "pronunciation": 1,
+                "detailedFeedback": "The responses provided are extremely limited and do not address the prompts adequately. There is no coherent speech or relevant vocabulary used, which makes it difficult to assess fluency and coherence. The lack of grammatical structures and pronunciation issues further contribute to a very low score.",
+                "strengths": [],
+                "problems": [
+                  "Responses are too short and lack content.",
+                  "No relevant answers to the questions asked.",
+                  "Incoherent speech with no clear structure."
+                ],
+                "howToImprove": [
+                  "Provide complete answers to the questions.",
+                  "Practice speaking on various topics to build fluency.",
+                  "Use a wider range of vocabulary and grammatical structures."
+                ],
+                "improvedAnswers": [
+                  "For the question 'What do you do?', I could say: 'I am currently a student studying English and I also work part-time as a tutor.'",
+                  "For 'Why are you taking IELTS?', I might respond: 'I am taking IELTS to improve my English skills for university admission.'",
+                  "For 'How do you usually study English?', I could answer: 'I usually study English by using online resources and practicing speaking with friends.'"
+                ],
+                "practicalTips": [
+                  "Engage in regular speaking practice with a partner or tutor.",
+                  "Record yourself speaking and listen for areas of improvement.",
+                  "Expand your vocabulary by reading and using new words in conversation."
+                ]
+              },
+              "band": 1,
+              "completedAt": "2026-06-24T15:05:18.374Z"
+            }
+          },
+          "completedAt": "2026-06-24T15:05:18.796Z"
+        }
+      ]
+    }
+  }
+}

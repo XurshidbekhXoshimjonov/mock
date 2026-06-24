@@ -12,6 +12,7 @@ const rootElement = document.getElementById("readingAppRoot");
 const mode = document.body.dataset.testMode === "full" ? "full" : "individual";
 const skill = mode === "full" && (params.get("skill") === "listening" || routeSkill === "listening") ? "listening" : "reading";
 const duration = mode === "full" ? (skill === "listening" ? 40 : 60) * 60 : 20 * 60;
+const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
 const ResultUtils = window.IeltsResultUtils || {};
 const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
 
@@ -36,6 +37,22 @@ function updateFullScreenUI() {
         button.setAttribute("title", active ? "Exit Full Screen" : "Full Screen");
     });
     document.dispatchEvent(new CustomEvent(FULLSCREEN_STATE_EVENT, { detail: { active } }));
+}
+
+function notifyMockSectionComplete(section, payload) {
+    if (!isMockMode || window.parent === window) return;
+
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-complete",
+        section,
+        ...payload
+    }, window.location.origin);
+}
+
+function requestMockExamExit() {
+    if (isMockMode && window.parent !== window) {
+        window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
+    }
 }
 
 async function enterFullScreenMode() {
@@ -235,12 +252,55 @@ function splitFullManualPassages(test, groups) {
 function normalizeManualTest(test) {
     const passageNumber = Number(test.part) || 1;
     const passageText = test.passage || test.passageText || "";
-    const paragraphs = paragraphsFromText(passageText);
+    const passageHtml = test.passageHtml || test.readingHtml || "";
+    const paragraphs = passageHtml
+        ? [{
+            letter: null,
+            html: passageHtml,
+            text: passageText
+        }]
+        : paragraphsFromText(passageText);
     const groups = test.questionGroups?.length
         ? hydrateGroups(test.questionGroups, test.questions)
         : groupManualQuestions(test.questions);
     const fullManualPassages = test.part === "full"
         ? splitFullManualPassages(test, groups)
+        : null;
+    const richManualPassages = test.part === "full" && Array.isArray(test.richPassages) && test.richPassages.length
+        ? test.richPassages.map((richPassage, index) => {
+            const ranges = [[1, 13], [14, 26], [27, 40]];
+            const [firstQuestion, lastQuestion] = ranges[index] || [1, 40];
+            const questionGroups = groups
+                .map((group) => {
+                    const questions = (group.questions || []).filter((question) => {
+                        const number = Number(question.number);
+                        return number >= firstQuestion && number <= lastQuestion;
+                    });
+
+                    return {
+                        ...group,
+                        questionNumbers: questions.map((question) => question.number),
+                        questions
+                    };
+                })
+                .filter((group) => group.questions.length);
+
+            return {
+                id: richPassage.id || `${test.id}-rich-passage-${index + 1}`,
+                number: Number(richPassage.number) || index + 1,
+                title: richPassage.title || `Reading Passage ${index + 1}`,
+                displayLabel: richPassage.displayLabel || `Reading Passage ${index + 1}`,
+                passageText: richPassage.passageText || "",
+                paragraphs: Array.isArray(richPassage.paragraphs) && richPassage.paragraphs.length
+                    ? richPassage.paragraphs
+                    : [{
+                        letter: null,
+                        html: richPassage.html || "",
+                        text: richPassage.passageText || ""
+                    }],
+                questionGroups
+            };
+        })
         : null;
 
     return {
@@ -249,7 +309,7 @@ function normalizeManualTest(test) {
         part: test.part,
         images: test.images || [],
         vocabulary: test.part === "full" ? [] : normalizeVocabularyEntries(test.vocabulary),
-        passages: fullManualPassages || [{
+        passages: richManualPassages || fullManualPassages || [{
             id: `${test.id}-passage-${passageNumber}`,
             number: passageNumber,
             title: test.title || `Reading Passage ${passageNumber}`,
@@ -1117,9 +1177,12 @@ function Timer({ seconds }) {
 }
 
 function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false, submitDisabled = false }) {
-    const title = mode === "full"
+    const title = isMockMode
+        ? "Mock Exam"
+        : mode === "full"
         ? "Full Test"
         : (skill === "listening" ? "Academic Listening" : "Academic Reading");
+    const submitLabel = isMockMode ? "Submit Section" : "Submit";
 
     return h("header", { className: "cbt-header" },
         h("div", { className: "cbt-brand" },
@@ -1129,10 +1192,20 @@ function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, full
         ),
         h(Timer, { seconds }),
         h("div", { className: "cbt-header-actions" },
-            h("a", { className: "cbt-button cbt-button--secondary", href: dashboardHref },
-                h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
-                "Dashboard"
-            ),
+            isMockMode
+                ? h("button", {
+                    className: "cbt-button cbt-button--secondary",
+                    type: "button",
+                    "data-notes-anchor": "true",
+                    onClick: requestMockExamExit
+                },
+                    h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
+                    "Exit Mock Exam"
+                )
+                : h("a", { className: "cbt-button cbt-button--secondary", href: dashboardHref },
+                    h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
+                    "Dashboard"
+                ),
             showFullscreen
                 ? h("button", {
                     className: "cbt-button cbt-button--fullscreen fullscreen-toggle-btn",
@@ -1146,7 +1219,7 @@ function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, full
                 type: "button",
                 onClick: onSubmit,
                 disabled: submitted || submitDisabled
-            }, "Submit")
+            }, submitLabel)
         )
     );
 }
@@ -1445,7 +1518,7 @@ function ReadingApp() {
     const [showResultModal, setShowResultModal] = useState(false);
     const [reviewMode, setReviewMode] = useState(false);
     const [autoSubmitted, setAutoSubmitted] = useState(false);
-    const [hasStarted, setHasStarted] = useState(false);
+    const [hasStarted, setHasStarted] = useState(isMockMode);
     const [fullscreenActive, setFullscreenActive] = useState(isFullscreenActive());
     const [checkedVocabulary, setCheckedVocabulary] = useState([]);
     const [activeVocabulary, setActiveVocabulary] = useState(null);
@@ -1515,7 +1588,7 @@ function ReadingApp() {
         setShowResultModal(false);
         setReviewMode(false);
         setAutoSubmitted(false);
-        setHasStarted(false);
+        setHasStarted(isMockMode);
         setSeconds(test?.part === "full" && mode !== "full" ? 60 * 60 : duration);
         isSubmittedRef.current = false;
     }, [test?.id]);
@@ -1766,6 +1839,16 @@ function ReadingApp() {
         isSubmittedRef.current = true;
         setAutoSubmitted(isAutoSubmit);
 
+        if (isMockMode) {
+            notifyMockSectionComplete(skill === "listening" ? "listening" : "reading", {
+                testId: test?.id || testId,
+                autoSubmit: isAutoSubmit,
+                answers,
+                deferred: true
+            });
+            return;
+        }
+
         if (isAutoSubmit) {
             setSeconds(0);
             ResultUtils.stopAudioPlayers?.(rootElement);
@@ -1787,6 +1870,13 @@ function ReadingApp() {
             part: isFullTest ? "full" : passage?.number,
             attemptId: skill === "reading" ? attemptIdRef.current : undefined,
             vocabulary: skill === "reading" ? checkedVocabulary : undefined
+        });
+
+        notifyMockSectionComplete(skill === "listening" ? "listening" : "reading", {
+            testId: test?.id || testId,
+            autoSubmit: isAutoSubmit,
+            answers,
+            result: nextResult
         });
     }
 
@@ -1823,11 +1913,13 @@ function ReadingApp() {
             }),
             !hasStarted
                 ? h("main", { className: "cbt-stage cbt-stage--prestart" },
-                    window.PreTestStartScreen?.renderReact
+                    isMockMode && window.PreTestStartScreen?.renderReact
+                        ? window.PreTestStartScreen.renderReact(h, { onStart: () => setHasStarted(true), message: "Start Test" })
+                    : window.PreTestStartScreen?.renderReact
                         ? window.PreTestStartScreen.renderReact(h, { onStart: () => setHasStarted(true) })
                         : h("section", { className: "ieltsx-prestart-stage", "aria-label": "Start test" },
                             h("button", { className: "ieltsx-prestart-card", type: "button", onClick: () => setHasStarted(true) },
-                                h("span", { className: "ieltsx-prestart-text" }, "Click ", h("span", { className: "ieltsx-prestart-link" }, "here"), " to start the test")
+                                h("span", { className: "ieltsx-prestart-text" }, isMockMode ? "Start Test" : h(Fragment, null, "Click ", h("span", { className: "ieltsx-prestart-link" }, "here"), " to start the test"))
                             )
                         )
                 )
