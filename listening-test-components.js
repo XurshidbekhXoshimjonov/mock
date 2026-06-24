@@ -899,7 +899,7 @@ const ListeningComponents = (() => {
             <div class="lc-header-actions">
                 <a class="lc-dashboard-button" href="${dashboardHref}"><span class="lc-grid-icon"></span>Dashboard</a>
                 ${isFull ? `<button class="lc-fullscreen-button fullscreen-toggle-btn" data-fullscreen-toggle type="button" aria-pressed="false">Full Screen</button>` : ""}
-                <button class="lc-submit-button" type="button">Submit</button>
+                <button class="lc-submit-button" type="button" disabled>Submit</button>
             </div>
         </header>`;
     }
@@ -1037,7 +1037,7 @@ const ListeningComponents = (() => {
             </button>`;
         }).join("");
 
-        return `<footer class="lc-bottom-bar">
+        return `<footer class="lc-bottom-bar" data-listening-bottom-bar hidden>
             <button class="lc-button lc-button--outline ${activeIndex === 0 ? "lc-button--placeholder" : ""}" type="button" data-listening-part-prev ${activeIndex === 0 ? "disabled aria-hidden=\"true\" tabindex=\"-1\"" : ""}>‹ Previous</button>
             <nav class="lc-part-tabs" aria-label="Listening parts">${tabs}</nav>
             <button class="lc-button lc-button--primary" type="button" data-listening-part-next ${activeIndex === parts.length - 1 ? "disabled" : ""}>Next ›</button>
@@ -1049,20 +1049,27 @@ const ListeningComponents = (() => {
         const parts = (test.parts || []).filter((part) => (part.blocks || []).length || part.audioUrl);
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
 
+        const preStartMarkup = window.PreTestStartScreen?.markup
+            ? window.PreTestStartScreen.markup()
+            : `<section class="ieltsx-prestart-stage ieltsx-prestart-stage--compact" aria-label="Start test"><button class="ieltsx-prestart-card" type="button" data-pretest-start><span class="ieltsx-prestart-text">Click <span class="ieltsx-prestart-link">here</span> to start the test</span></button></section>`;
+
         return `<div class="lc-page ${isFullListeningTest(test) ? "full-test-shell full-test-player" : ""}">
             ${ListeningHeader(test)}
             <main class="lc-main">
-                ${ListeningTestTitle(test)}
-                <div class="lc-listening-stage" data-active-part="${activePartNumber}">
-                    ${parts.map((part, index) => {
-                        const partNumber = Number(part.partNumber) || index + 1;
-                        return `<div class="lc-listening-section ${index === 0 ? "" : "hidden"}" data-listening-part="${partNumber}">
-                            ${AudioPlayerCard(part)}
-                            ${ListeningPart(part)}
-                        </div>`;
-                    }).join("")}
+                <div data-listening-prestart>${preStartMarkup}</div>
+                <div class="lc-test-content" data-listening-test-content hidden>
+                    ${ListeningTestTitle(test)}
+                    <div class="lc-listening-stage" data-active-part="${activePartNumber}">
+                        ${parts.map((part, index) => {
+                            const partNumber = Number(part.partNumber) || index + 1;
+                            return `<div class="lc-listening-section ${index === 0 ? "" : "hidden"}" data-listening-part="${partNumber}">
+                                ${AudioPlayerCard(part)}
+                                ${ListeningPart(part)}
+                            </div>`;
+                        }).join("")}
+                    </div>
+                    <p class="lc-submit-status" aria-live="polite"></p>
                 </div>
-                <p class="lc-submit-status" aria-live="polite"></p>
             </main>
             ${ListeningBottomBar(parts, activePartNumber)}
             <div class="lc-modal-backdrop hidden" data-listening-result-modal>
@@ -1225,8 +1232,13 @@ const ListeningComponents = (() => {
         const partTabs = [...root.querySelectorAll("[data-listening-part-select]")];
         const previousButton = root.querySelector("[data-listening-part-prev]");
         const nextButton = root.querySelector("[data-listening-part-next]");
+        const submitButton = root.querySelector(".lc-submit-button");
+        const preStartShell = root.querySelector("[data-listening-prestart]");
+        const testContent = root.querySelector("[data-listening-test-content]");
+        const bottomBar = root.querySelector("[data-listening-bottom-bar]");
         const autoSubmitMessage = window.IeltsResultUtils?.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
         let isSubmitted = false;
+        let hasStarted = false;
         let resetListeningTimer = () => {};
         let shouldResetListeningTimer = false;
         let timerInterval = null;
@@ -1264,7 +1276,7 @@ const ListeningComponents = (() => {
             if (nextButton) nextButton.disabled = nextIndex === sections.length - 1;
             root.querySelector(".lc-listening-stage")?.setAttribute("data-active-part", String(partNumber));
             root.querySelector(".lc-main")?.scrollTo({ top: 0, behavior: "smooth" });
-            if (shouldResetListeningTimer) {
+            if (hasStarted && shouldResetListeningTimer) {
                 resetListeningTimer();
             }
         }
@@ -1301,27 +1313,46 @@ const ListeningComponents = (() => {
         });
 
         const timer = root.querySelector(".lc-timer");
+        let remaining = timer ? Number(timer.dataset.duration) || 600 : 0;
+        const output = timer?.querySelector("strong");
         if (timer) {
             shouldResetListeningTimer = timer.dataset.resetOnPartChange === "true";
-            let remaining = Number(timer.dataset.duration) || 600;
-            const output = timer.querySelector("strong");
             const resetTimer = () => {
                 if (isSubmitted) return;
                 remaining = Number(timer.dataset.duration) || 600;
-                output.textContent = formatTime(remaining);
+                if (output) output.textContent = formatTime(remaining);
             };
             resetListeningTimer = resetTimer;
             resetTimer();
             clearInterval(root._listeningTimer);
+        }
+
+        function startListeningTimer() {
+            if (!timer) return;
+            clearInterval(timerInterval);
+            clearInterval(root._listeningTimer);
             timerInterval = setInterval(() => {
                 remaining = Math.max(0, remaining - 1);
-                output.textContent = formatTime(remaining);
+                if (output) output.textContent = formatTime(remaining);
                 if (remaining <= 0) {
                     handleTimeExpired();
                 }
             }, 1000);
             root._listeningTimer = timerInterval;
         }
+
+        function startListeningAttempt() {
+            if (hasStarted || isSubmitted) return;
+            hasStarted = true;
+            if (preStartShell) preStartShell.hidden = true;
+            if (testContent) testContent.hidden = false;
+            if (bottomBar) bottomBar.hidden = false;
+            if (submitButton) submitButton.disabled = false;
+            resetListeningTimer();
+            startListeningTimer();
+        }
+
+        root.querySelector("[data-pretest-start]")?.addEventListener("click", startListeningAttempt);
 
         function stopListeningTimer() {
             if (timerInterval) {
@@ -1368,6 +1399,7 @@ const ListeningComponents = (() => {
         }
 
         root.querySelector(".lc-submit-button")?.addEventListener("click", () => {
+            if (!hasStarted) return;
             submitListeningTest();
         });
 

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Writing Test Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin-writing.css?v=1.0.0">
+</head>
+
+<body class="admin-page admin-writing-page" data-skip-global-navbar>
+    <header class="admin-topbar admin-writing-topbar">
+        <div class="admin-topbar__brand">
+            <span class="admin-kicker">IELTSX</span>
+            <strong>Admin Dashboard</strong>
+        </div>
+        <nav class="admin-nav" aria-label="Admin navigation">
+            <a href="/admin">Dashboard</a>
+            <a href="/admin-listening">Listening</a>
+            <a href="/admin-reading">Reading</a>
+            <a href="/admin-speaking">Speaking</a>
+            <a href="/admin-writing" class="is-active">Writing</a>
+            <a href="/admin/users">Users</a>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <main class="admin-writing-shell">
+        <section class="admin-writing-header">
+            <div>
+                <span class="admin-writing-kicker">IELTS Academic Writing</span>
+                <h1>Writing Test Manager</h1>
+                <p>Create, edit, and manage IELTS Academic Writing tasks.</p>
+            </div>
+            <button class="admin-writing-primary-btn" id="createWritingTestBtn" type="button">
+                <svg class="admin-writing-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                Create Writing Test
+            </button>
+        </section>
+
+        <section class="admin-writing-stats" aria-label="Writing test overview">
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></svg>
+                </span>
+                <strong id="statTotal">0</strong>
+                <span>Total Writing Tests</span>
+            </article>
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M8 13h8"></path><path d="M8 17h5"></path></svg>
+                </span>
+                <strong id="statTask1">0</strong>
+                <span>Task 1 Tests</span>
+            </article>
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+                </span>
+                <strong id="statTask2">0</strong>
+                <span>Task 2 Tests</span>
+            </article>
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></svg>
+                </span>
+                <strong id="statFull">0</strong>
+                <span>Full Writing Tests</span>
+            </article>
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                </span>
+                <strong id="statPublished">0</strong>
+                <span>Published Tests</span>
+            </article>
+            <article class="admin-writing-stat-card">
+                <span class="admin-writing-stat-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                </span>
+                <strong id="statDraft">0</strong>
+                <span>Draft Tests</span>
+            </article>
+        </section>
+
+        <section class="admin-writing-card admin-writing-toolbar" aria-label="Writing filters">
+            <div class="admin-writing-tabs" id="writingTabs">
+                <button class="admin-writing-tab active" type="button" data-filter="all">All Tests</button>
+                <button class="admin-writing-tab" type="button" data-filter="task1">Task 1</button>
+                <button class="admin-writing-tab" type="button" data-filter="task2">Task 2</button>
+                <button class="admin-writing-tab" type="button" data-filter="full">Full Tests</button>
+                <button class="admin-writing-tab" type="button" data-filter="draft">Drafts</button>
+                <button class="admin-writing-tab" type="button" data-filter="published">Published</button>
+            </div>
+            <div class="admin-writing-controls">
+                <label class="admin-writing-search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    <input id="writingSearchInput" type="search" placeholder="Search test number or internal title">
+                </label>
+                <label class="admin-writing-sort">
+                    <span>Sort</span>
+                    <select id="writingSortSelect">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="published">Published first</option>
+                        <option value="draft">Draft first</option>
+                        <option value="type">Task type</option>
+                    </select>
+                </label>
+            </div>
+        </section>
+
+        <section class="admin-writing-list-section">
+            <div class="admin-writing-section-head">
+                <div>
+                    <h2>Writing Tests</h2>
+                    <p id="writingListSummary">Loading writing tests...</p>
+                </div>
+            </div>
+            <div class="admin-writing-grid" id="writingTestsGrid" aria-live="polite"></div>
+            <div class="admin-writing-empty is-hidden" id="writingEmptyState">
+                <span class="admin-writing-empty-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 15h6"></path><path d="M12 12v6"></path></svg>
+                </span>
+                <h3>No writing tests yet</h3>
+                <p>Create Task 1, Task 2, or Full Writing tests from one clean workspace.</p>
+                <button class="admin-writing-primary-btn" id="emptyCreateBtn" type="button">Create your first Writing test</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="admin-writing-modal-shell is-hidden" id="builderModal" aria-hidden="true">
+        <div class="admin-writing-modal admin-writing-builder" role="dialog" aria-modal="true" aria-labelledby="builderModalTitle">
+            <div class="admin-writing-modal-head">
+                <div>
+                    <span class="admin-writing-kicker">Writing Test Builder</span>
+                    <h2 id="builderModalTitle">Create Writing Test</h2>
+                </div>
+                <button class="admin-writing-icon-btn" id="closeBuilderBtn" type="button" aria-label="Close builder">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="admin-writing-builder-grid">
+                <form id="writingBuilderForm" class="admin-writing-builder-form">
+                    <input type="hidden" id="builderId">
+
+                    <label class="admin-writing-field">
+                        <span>Test Type</span>
+                        <select id="builderType">
+                            <option value="task1">Task 1</option>
+                            <option value="task2">Task 2</option>
+                            <option value="full">Full Writing Test</option>
+                        </select>
+                    </label>
+
+                    <label class="admin-writing-field">
+                        <span>Test title/internal name</span>
+                        <input id="builderTitle" type="text" placeholder="Internal title for admin search" required>
+                    </label>
+
+                    <div class="admin-writing-builder-fields" id="task1Fields">
+                        <label class="admin-writing-field">
+                            <span>Task prompt</span>
+                            <textarea id="task1PromptText" rows="6" placeholder="Enter the Task 1 chart/table/map/diagram prompt"></textarea>
+                        </label>
+                        <label class="admin-writing-field">
+                            <span>Instructions</span>
+                            <textarea id="task1Instructions" rows="3" placeholder="Summarise the information by selecting and reporting the main features..."></textarea>
+                        </label>
+                        <div class="admin-writing-upload">
+                            <div class="admin-writing-upload-zone" id="imageDropZone">
+                                <input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m17 8-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+                                <strong>Upload chart/table/map image</strong>
+                                <span>Drop PNG, JPG, JPEG, or WEBP here, or browse</span>
+                            </div>
+                            <input type="hidden" id="promptImageUrl">
+                            <div class="admin-writing-image-preview is-hidden" id="imagePreviewBox">
+                                <img id="imagePreview" alt="Task 1 image preview">
+                                <button class="admin-writing-light-btn" id="removeImageBtn" type="button">Remove image</button>
+                            </div>
+                        </div>
+                        <div class="admin-writing-two-col">
+                            <label class="admin-writing-field">
+                                <span>Word limit</span>
+                                <input id="task1WordLimit" type="number" min="1" value="150">
+                            </label>
+                            <label class="admin-writing-field">
+                                <span>Time limit</span>
+                                <input id="task1TimeLimit" type="number" min="1" value="20">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="admin-writing-builder-fields is-hidden" id="task2Fields">
+                        <label class="admin-writing-field">
+                            <span>Essay question</span>
+                            <textarea id="task2PromptText" rows="7" placeholder="Enter the Task 2 essay question"></textarea>
+                        </label>
+                        <label class="admin-writing-field">
+                            <span>Question type</span>
+                            <select id="task2QuestionType">
+                                <option value="agree-disagree">Agree / Disagree</option>
+                                <option value="discuss-both-views">Discuss both views</option>
+                                <option value="advantages-disadvantages">Advantages / Disadvantages</option>
+                                <option value="problem-solution">Problem / Solution</option>
+                                <option value="opinion">Opinion</option>
+                            </select>
+                        </label>
+                        <div class="admin-writing-two-col">
+                            <label class="admin-writing-field">
+                                <span>Word limit</span>
+                                <input id="task2WordLimit" type="number" min="1" value="250">
+                            </label>
+                            <label class="admin-writing-field">
+                                <span>Time limit</span>
+                                <input id="task2TimeLimit" type="number" min="1" value="40">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="admin-writing-builder-fields is-hidden" id="fullFields">
+                        <label class="admin-writing-field">
+                            <span>Select Task 1</span>
+                            <select id="fullTask1Select"></select>
+                        </label>
+                        <label class="admin-writing-field">
+                            <span>Select Task 2</span>
+                            <select id="fullTask2Select"></select>
+                        </label>
+                        <label class="admin-writing-field">
+                            <span>Time limit</span>
+                            <input id="fullTimeLimit" type="number" min="1" value="60">
+                        </label>
+                    </div>
+
+                    <label class="admin-writing-field">
+                        <span>Status</span>
+                        <select id="builderStatus">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </label>
+
+                    <div class="admin-writing-modal-actions">
+                        <button class="admin-writing-light-btn" id="cancelBuilderBtn" type="button">Cancel</button>
+                        <button class="admin-writing-primary-btn" type="submit">Save Writing Test</button>
+                    </div>
+                </form>
+
+                <aside class="admin-writing-preview" aria-label="Live preview">
+                    <div class="admin-writing-preview-head">
+                        <span class="admin-writing-preview-dot"></span>
+                        <strong>Student Writing Player Preview</strong>
+                    </div>
+                    <div class="admin-writing-preview-body" id="livePreviewPanel"></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-writing-modal-shell is-hidden" id="previewModal" aria-hidden="true">
+        <div class="admin-writing-modal admin-writing-preview-modal" role="dialog" aria-modal="true" aria-labelledby="previewModalTitle">
+            <div class="admin-writing-modal-head">
+                <div>
+                    <span class="admin-writing-kicker">Preview</span>
+                    <h2 id="previewModalTitle">Writing Test Preview</h2>
+                </div>
+                <button class="admin-writing-icon-btn" id="closePreviewBtn" type="button" aria-label="Close preview">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+            <div id="previewModalContent"></div>
+        </div>
+    </div>
+
+    <div class="admin-writing-modal-shell is-hidden" id="deleteModal" aria-hidden="true">
+        <div class="admin-writing-modal admin-writing-confirm" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+            <div class="admin-writing-danger-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+            </div>
+            <h2 id="deleteModalTitle">Are you sure you want to delete this writing test?</h2>
+            <p>This action cannot be undone.</p>
+            <div class="admin-writing-modal-actions">
+                <button class="admin-writing-light-btn" id="cancelDeleteBtn" type="button">Cancel</button>
+                <button class="admin-writing-danger-btn" id="confirmDeleteBtn" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-writing-toast is-hidden" id="writingToast" role="status" aria-live="polite"></div>
+
+    <script src="/auth-client.js"></script>
+    <script src="/admin-writing.js?v=1.0.0"></script>
+</body>
+
+</html>

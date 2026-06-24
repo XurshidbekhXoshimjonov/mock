@@ -26,6 +26,31 @@
             bandTrend: []
         }
     };
+    const emptyWriting = {
+        summary: {
+            totalAttempts: 0,
+            task1Attempts: 0,
+            task2Attempts: 0,
+            fullAttempts: 0,
+            averageBand: 0,
+            bestBand: 0,
+            latestBand: 0
+        },
+        recent: []
+    };
+    const emptySpeaking = {
+        summary: {
+            totalAttempts: 0,
+            part1Attempts: 0,
+            cueCardAttempts: 0,
+            part3Attempts: 0,
+            fullAttempts: 0,
+            averageBand: 0,
+            bestBand: 0,
+            latestBand: 0
+        },
+        recent: []
+    };
 
     function Icon({ name, className }) {
         const common = {
@@ -47,6 +72,8 @@
             target: [e("circle", { cx: 12, cy: 12, r: 9, key: 1 }), e("circle", { cx: 12, cy: 12, r: 4, key: 2 }), e("path", { d: "M12 3v3M21 12h-3", key: 3 })],
             calendar: [e("rect", { x: 3, y: 5, width: 18, height: 16, rx: 2, key: 1 }), e("path", { d: "M16 3v4M8 3v4M3 10h18", key: 2 })],
             headphones: [e("path", { d: "M3 14v-2a9 9 0 0 1 18 0v2", key: 1 }), e("path", { d: "M5 14h3v6H5zM16 14h3v6h-3z", key: 2 })],
+            pen: [e("path", { d: "M12 20h9", key: 1 }), e("path", { d: "M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z", key: 2 })],
+            mic: [e("path", { d: "M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z", key: 1 }), e("path", { d: "M19 10v2a7 7 0 0 1-14 0v-2", key: 2 }), e("path", { d: "M12 19v3", key: 3 }), e("path", { d: "M8 22h8", key: 4 })],
             arrow: [e("path", { d: "M5 12h14M13 6l6 6-6 6", key: 1 })]
         };
         return e("svg", common, paths[name] || paths.user);
@@ -76,6 +103,12 @@
         return Number(value || 0).toFixed(1);
     }
 
+    function roundHalfBand(value) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 0;
+        return Math.round(numeric * 2) / 2;
+    }
+
     function formatDate(value, fallback = "No practice yet") {
         if (!value) return fallback;
         const date = new Date(value);
@@ -88,6 +121,106 @@
         if (test?.skill === "listening") return "listening.html";
         if (test?.skill === "reading") return "reading.html";
         return "ieltsmock.html";
+    }
+
+    function averageValue(items) {
+        const values = items.map(Number).filter(Number.isFinite);
+        if (!values.length) return 0;
+        return values.reduce((sum, value) => sum + value, 0) / values.length;
+    }
+
+    function sortedByDate(items, dateKey) {
+        return (Array.isArray(items) ? items : [])
+            .slice()
+            .sort((a, b) => new Date(b?.[dateKey] || 0) - new Date(a?.[dateKey] || 0));
+    }
+
+    function skillAttempts(stats, skill) {
+        return sortedByDate((stats.testHistory || []).filter((test) => test.skill === skill), "completedAt");
+    }
+
+    function summarizeObjectiveSkill(stats, skill) {
+        const attempts = skillAttempts(stats, skill);
+        const bands = attempts.map((attempt) => Number(attempt.band)).filter(Number.isFinite);
+        const latest = attempts[0] || null;
+
+        return {
+            attempts,
+            totalAttempts: attempts.length,
+            averageBand: bands.length ? averageValue(bands) : 0,
+            bestBand: bands.length ? Math.max(...bands) : 0,
+            latestBand: latest ? Number(latest.band || 0) : 0,
+            latestResult: latest ? `Band ${formatBand(latest.band)}` : "No result",
+            lastActivityDate: latest?.completedAt || null,
+            averageScore: attempts.length ? Math.round(averageValue(attempts.map((attempt) => attempt.accuracy))) : null
+        };
+    }
+
+    function writingOverview(writing) {
+        const data = writing || emptyWriting;
+        const summary = { ...emptyWriting.summary, ...(data.summary || {}) };
+        const recent = sortedByDate(Array.isArray(data.recent) ? data.recent : [], "createdAt");
+        const latest = recent[0] || null;
+
+        return {
+            summary,
+            recent,
+            totalAttempts: summary.totalAttempts || 0,
+            averageBand: Number(summary.averageBand || 0),
+            bestBand: Number(summary.bestBand || 0),
+            latestBand: Number(summary.latestBand || 0),
+            latestResult: summary.totalAttempts ? `Band ${formatBand(summary.latestBand)}` : "No result",
+            lastActivityDate: latest?.createdAt || null
+        };
+    }
+
+    function speakingOverview(stats) {
+        const payload = stats.speaking || emptySpeaking;
+        const explicitRecent = Array.isArray(payload.recent) ? payload.recent : [];
+        const historyRecent = (stats.testHistory || []).filter((test) => test.skill === "speaking");
+        const recent = sortedByDate(explicitRecent.length ? explicitRecent : historyRecent, explicitRecent.length ? "createdAt" : "completedAt");
+        const summary = { ...emptySpeaking.summary, ...(payload.summary || {}) };
+        const cueCardAttempts = summary.cueCardAttempts || recent.filter((attempt) => {
+            const type = String(attempt.testType || attempt.type || attempt.title || "").toLowerCase();
+            return type.includes("cue") || type.includes("part 2") || type.includes("part2");
+        }).length;
+        const fullAttempts = summary.fullAttempts || recent.filter((attempt) => {
+            const type = String(attempt.testType || attempt.type || attempt.title || "").toLowerCase();
+            return type.includes("full");
+        }).length;
+        const bands = recent
+            .map((attempt) => Number(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand))
+            .filter(Number.isFinite);
+        const latest = recent[0] || null;
+        const latestBand = Number(summary.latestBand || latest?.overallBand || latest?.band || latest?.estimatedBand || 0);
+
+        return {
+            summary: {
+                ...summary,
+                totalAttempts: summary.totalAttempts || recent.length,
+                cueCardAttempts,
+                fullAttempts,
+                averageBand: summary.averageBand || (bands.length ? averageValue(bands) : 0),
+                bestBand: summary.bestBand || (bands.length ? Math.max(...bands) : 0),
+                latestBand
+            },
+            recent,
+            totalAttempts: summary.totalAttempts || recent.length,
+            averageBand: summary.averageBand || (bands.length ? averageValue(bands) : 0),
+            bestBand: summary.bestBand || (bands.length ? Math.max(...bands) : 0),
+            latestBand,
+            latestResult: (summary.totalAttempts || recent.length) ? `Band ${formatBand(latestBand)}` : "No result",
+            lastActivityDate: latest?.createdAt || latest?.completedAt || null
+        };
+    }
+
+    function speakingTypeLabel(type) {
+        const normalized = String(type || "").toLowerCase();
+        if (normalized === "part_1" || normalized.includes("part 1")) return "Speaking Part 1";
+        if (normalized === "cue_card" || normalized.includes("cue") || normalized.includes("part 2")) return "Cue Card";
+        if (normalized === "part_3" || normalized.includes("part 3")) return "Speaking Part 3";
+        if (normalized === "full_test" || normalized.includes("full")) return "Full Speaking Test";
+        return "Speaking";
     }
 
     function Card({ children, className, id }) {
@@ -108,13 +241,12 @@
         );
     }
 
-    function BandRing({ score, label, accent = "#2563eb", ringClass }) {
+    function BandRing({ score, label, accent = "#2563eb", ringClass, onClick, attempted = true, size = "standard" }) {
         const radius = 48;
         const circumference = 2 * Math.PI * radius;
         const progress = Math.min(Number(score || 0) / 9, 1) * circumference;
-
-        return e("div", { className: `relative flex flex-col items-center justify-center band-ring ${ringClass || ""}` },
-            e("svg", { width: 138, height: 138, viewBox: "0 0 132 132", className: "drop-shadow-sm" },
+        const content = [
+            e("svg", { key: "svg", width: 138, height: 138, viewBox: "0 0 132 132", className: "drop-shadow-sm" },
                 e("circle", { cx: 66, cy: 66, r: radius, fill: "none", stroke: "#e8edf5", strokeWidth: 11, className: "band-ring-track" }),
                 e("circle", {
                     cx: 66,
@@ -131,8 +263,15 @@
                 e("text", { x: 66, y: 64, textAnchor: "middle", className: "fill-slate-950 text-3xl font-black band-ring-score" }, formatBand(score)),
                 e("text", { x: 66, y: 84, textAnchor: "middle", className: "fill-slate-400 text-[10px] font-bold uppercase band-ring-text" }, "Band")
             ),
-            e("p", { className: "mt-1 text-sm font-bold text-slate-600 band-ring-label" }, label)
-        );
+            e("p", { key: "label", className: "mt-1 text-sm font-bold text-slate-600 band-ring-label" }, label)
+        ];
+
+        return e(onClick ? "button" : "div", {
+            type: onClick ? "button" : undefined,
+            className: `relative flex flex-col items-center justify-center band-ring ${onClick ? "band-ring-button" : ""} ${size === "large" ? "band-ring-large" : ""} ${ringClass || ""}`,
+            onClick,
+            "aria-label": onClick ? `Open ${label}` : undefined
+        }, content);
     }
 
     function Hero({ user, stats }) {
@@ -195,29 +334,110 @@
         );
     }
 
-    function PerformanceCard({ stats }) {
-        return e(Card, { className: "lg:col-span-2", id: "results" },
+    function analyticsBands(stats) {
+        const reading = summarizeObjectiveSkill(stats, "reading");
+        const listening = summarizeObjectiveSkill(stats, "listening");
+        const writing = writingOverview(stats.writing);
+        const speaking = speakingOverview(stats);
+        const availableBands = [
+            listening.totalAttempts ? listening.averageBand : null,
+            reading.totalAttempts ? reading.averageBand : null,
+            writing.totalAttempts ? writing.averageBand : null,
+            speaking.totalAttempts ? speaking.averageBand : null
+        ].filter((value) => Number.isFinite(Number(value)));
+        const overallBand = availableBands.length ? roundHalfBand(averageValue(availableBands)) : 0;
+
+        return {
+            overall: {
+                key: "center",
+                label: "Overall Band",
+                score: overallBand,
+                attempted: availableBands.length > 0,
+                accent: "#071547",
+                ringClass: "band-ring-overall"
+            },
+            skills: [
+                {
+                    key: "listening",
+                    label: "Listening Band",
+                    score: listening.totalAttempts ? listening.averageBand : 0,
+                    attempted: listening.totalAttempts > 0,
+                    accent: "#7c3aed",
+                    ringClass: "band-ring-listening"
+                },
+                {
+                    key: "reading",
+                    label: "Reading Band",
+                    score: reading.totalAttempts ? reading.averageBand : 0,
+                    attempted: reading.totalAttempts > 0,
+                    accent: "#2563eb",
+                    ringClass: "band-ring-reading"
+                },
+                {
+                    key: "writing",
+                    label: "Writing Band",
+                    score: writing.totalAttempts ? writing.averageBand : 0,
+                    attempted: writing.totalAttempts > 0,
+                    accent: "#e11d48",
+                    ringClass: "band-ring-writing"
+                },
+                {
+                    key: "speaking",
+                    label: "Speaking Band",
+                    score: speaking.totalAttempts ? speaking.averageBand : 0,
+                    attempted: speaking.totalAttempts > 0,
+                    accent: "#0ea5e9",
+                    ringClass: "band-ring-speaking"
+                }
+            ]
+        };
+    }
+
+    function PerformanceCard({ stats, onOpen }) {
+        const bands = analyticsBands(stats);
+        const progress = Math.round((bands.overall.score / 9) * 100);
+
+        return e(Card, { className: "ielts-performance-card", id: "results" },
             e(SectionTitle, {
                 eyebrow: "Live analytics",
                 title: "IELTS Performance",
-                description: "Band estimates calculated only from completed Reading and Listening tests."
+                description: "Band estimates calculated from completed Listening, Reading, Writing, and Speaking tests."
             }),
-            e("div", { className: "grid gap-5 sm:grid-cols-3" },
-                e(BandRing, { score: stats.overallBand, label: "Overall Band", accent: "#071547", ringClass: "band-ring-overall" }),
-                e(BandRing, { score: stats.readingBand, label: "Reading Band", accent: "#2563eb", ringClass: "band-ring-reading" }),
-                e(BandRing, { score: stats.listeningBand, label: "Listening Band", accent: "#7c3aed", ringClass: "band-ring-listening" })
+            e("div", { className: "performance-analytics-layout" },
+                e("div", { className: "performance-overall-ring" },
+                    e(BandRing, {
+                        score: bands.overall.score,
+                        label: bands.overall.label,
+                        accent: bands.overall.accent,
+                        ringClass: bands.overall.ringClass,
+                        attempted: bands.overall.attempted,
+                        size: "large",
+                        onClick: () => onOpen?.(bands.overall.key)
+                    })
+                ),
+                e("div", { className: "performance-skill-rings" },
+                    bands.skills.map((band) => e(BandRing, {
+                        key: band.key,
+                        score: band.score,
+                        label: band.label,
+                        accent: band.accent,
+                        ringClass: band.ringClass,
+                        attempted: band.attempted,
+                        onClick: () => onOpen?.(band.key)
+                    }))
+                )
             ),
-            stats.testsCompleted
+            bands.overall.attempted
                 ? e("div", { className: "mt-5 rounded-2xl bg-slate-50 p-4" },
                     e("div", { className: "flex items-center justify-between text-sm font-bold" },
                         e("span", { className: "text-slate-500" }, "Overall progress toward Band 9"),
-                        e("span", { className: "text-slate-950" }, `${Math.round((stats.overallBand / 9) * 100)}%`)
+                        e("span", { className: "text-slate-950" }, `${progress}%`)
                     ),
                     e("div", { className: "mt-3 h-2 overflow-hidden rounded-full bg-slate-200" },
-                        e("span", { className: "block h-full rounded-full bg-gradient-to-r from-blue-700 via-blue-500 to-violet-500", style: { width: `${Math.min((stats.overallBand / 9) * 100, 100)}%` } })
+                        e("span", { className: "block h-full rounded-full bg-gradient-to-r from-blue-700 via-blue-500 to-violet-500", style: { width: `${Math.min(progress, 100)}%` } })
                     )
                 )
-                : e("p", { className: "mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500" }, "Complete a Reading or Listening test to calculate your IELTS performance.")
+                : e("p", { className: "mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500" }, "Complete a Listening, Reading, Writing, or Speaking test to calculate your IELTS performance.")
         );
     }
 
@@ -363,6 +583,500 @@
         );
     }
 
+    function writingTypeLabel(type) {
+        if (type === "task1") return "Task 1";
+        if (type === "task2") return "Task 2";
+        return "Full Test";
+    }
+
+    function criteriaLabel(key) {
+        const labels = {
+            taskAchievement: "Task Achievement",
+            taskResponse: "Task Response",
+            coherenceCohesion: "Coherence & Cohesion",
+            lexicalResource: "Lexical Resource",
+            grammarRangeAccuracy: "Grammatical Range & Accuracy",
+            grammar: "Grammatical Range & Accuracy"
+        };
+        return labels[key] || key.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
+    }
+
+    function WritingMetricCard({ label, value, note }) {
+        return e("article", { className: "writing-metric-card" },
+            e("span", { className: "writing-metric-label" }, label),
+            e("strong", null, value),
+            note ? e("span", { className: "writing-metric-note" }, note) : null
+        );
+    }
+
+    function WritingListBlock({ title, items }) {
+        const list = Array.isArray(items) ? items.filter(Boolean) : [];
+        return e("section", { className: "writing-feedback-list" },
+            e("h4", null, title),
+            list.length
+                ? e("ul", null, list.map((item, index) => e("li", { key: `${title}-${index}` }, item)))
+                : e("p", null, "No saved notes for this section.")
+        );
+    }
+
+    function CriteriaGrid({ attempt }) {
+        const scores = attempt?.criteriaScores || {};
+        const isFull = attempt?.testType === "full";
+        const groups = isFull
+            ? [
+                ["Task 1 Criteria", scores.task1 || {}],
+                ["Task 2 Criteria", scores.task2 || {}]
+            ]
+            : [["Criteria", scores]];
+
+        return e("div", { className: "writing-criteria-groups" },
+            groups.map(([title, group]) => e("section", { key: title, className: "writing-criteria-group" },
+                e("h4", null, title),
+                Object.keys(group || {}).length
+                    ? e("div", { className: "writing-criteria-grid" },
+                        Object.entries(group).map(([key, value]) => e("div", { key, className: "writing-criteria-row" },
+                            e("span", null, criteriaLabel(key)),
+                            e("strong", null, formatBand(value))
+                        ))
+                    )
+                    : e("p", { className: "writing-muted" }, "Criteria scores were not saved for this attempt.")
+            ))
+        );
+    }
+
+    function WritingFeedbackModal({ attempt, onClose }) {
+        if (!attempt) return null;
+
+        const isFull = attempt.testType === "full";
+        return e("div", { className: "writing-feedback-modal-shell", role: "presentation", onClick: onClose },
+            e("section", {
+                className: "writing-feedback-modal",
+                role: "dialog",
+                "aria-modal": "true",
+                "aria-labelledby": "writingFeedbackTitle",
+                onClick: (event) => event.stopPropagation()
+            },
+                e("div", { className: "writing-feedback-modal-head" },
+                    e("div", null,
+                        e("p", { className: "text-xs font-black uppercase tracking-[0.16em] text-blue-600" }, writingTypeLabel(attempt.testType)),
+                        e("h3", { id: "writingFeedbackTitle" }, attempt.taskTitle || "Writing attempt"),
+                        e("p", null, formatDate(attempt.createdAt))
+                    ),
+                    e("button", { type: "button", className: "writing-modal-close", onClick: onClose, "aria-label": "Close feedback" }, "Close")
+                ),
+                e("div", { className: "writing-feedback-band-row" },
+                    e("div", null, e("span", null, "Overall Band"), e("strong", null, formatBand(attempt.overallBand))),
+                    isFull ? e("div", null, e("span", null, "Task 1 Band"), e("strong", null, formatBand(attempt.task1Band))) : null,
+                    isFull ? e("div", null, e("span", null, "Task 2 Band"), e("strong", null, formatBand(attempt.task2Band))) : null
+                ),
+                e(CriteriaGrid, { attempt }),
+                e("section", { className: "writing-response-section" },
+                    e("h4", null, "User Response"),
+                    isFull
+                        ? e("div", { className: "writing-response-grid" },
+                            e("div", null, e("strong", null, "Task 1"), e("p", null, attempt.task1Response || "No Task 1 response saved.")),
+                            e("div", null, e("strong", null, "Task 2"), e("p", null, attempt.task2Response || "No Task 2 response saved."))
+                        )
+                        : e("p", null, attempt.userResponse || "No response saved.")
+                ),
+                e("div", { className: "writing-feedback-three" },
+                    e(WritingListBlock, { title: "Strengths", items: attempt.strengths }),
+                    e(WritingListBlock, { title: "Areas of Improvement", items: attempt.areasForImprovement }),
+                    e(WritingListBlock, { title: "Suggestions", items: attempt.suggestions })
+                )
+            )
+        );
+    }
+
+    function WritingDashboard({ writing, onViewFeedback }) {
+        const data = writing || emptyWriting;
+        const summary = { ...emptyWriting.summary, ...(data.summary || {}) };
+        const recent = Array.isArray(data.recent) ? data.recent : [];
+        const metrics = [
+            ["Total Writing attempts", summary.totalAttempts || 0, "All AI-scored submissions"],
+            ["Task 1 attempts", summary.task1Attempts || 0, "Report writing"],
+            ["Task 2 attempts", summary.task2Attempts || 0, "Essay writing"],
+            ["Full Writing Test attempts", summary.fullAttempts || 0, "60-minute mocks"],
+            ["Average Writing Band", formatBand(summary.averageBand), "Across attempts"],
+            ["Best Writing Band", formatBand(summary.bestBand), "Highest saved band"],
+            ["Latest Writing Band", formatBand(summary.latestBand), "Most recent attempt"]
+        ];
+
+        return e(Card, { className: "writing-dashboard-card" },
+            e(SectionTitle, {
+                eyebrow: "Writing",
+                title: "Writing Performance",
+                description: "Track AI-evaluated Task 1, Task 2, and Full Writing Test attempts.",
+                action: e("div", { className: "writing-quick-actions" },
+                    e("a", { href: "/writing/task-1" }, "Practice Task 1"),
+                    e("a", { href: "/writing/task-2" }, "Practice Task 2"),
+                    e("a", { href: "/writing/full-test" }, "Start Full Writing Test")
+                )
+            }),
+            e("div", { className: "writing-metrics-grid" },
+                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
+            ),
+            recent.length
+                ? e("div", { className: "writing-results-wrap" },
+                    e("div", { className: "writing-results-head" },
+                        e("h3", null, "Recent Writing Results"),
+                        e("p", null, "Open an attempt to review your saved AI feedback.")
+                    ),
+                    e("div", { className: "writing-results-table-scroll" },
+                        e("table", { className: "writing-results-table" },
+                            e("thead", null,
+                                e("tr", null,
+                                    ["Test type", "Test title", "Date", "Band score", "Action"].map((heading) => e("th", { key: heading }, heading))
+                                )
+                            ),
+                            e("tbody", null,
+                                recent.slice(0, 8).map((attempt, index) => e("tr", { key: attempt.id || index },
+                                    e("td", null, e("span", { className: `writing-type-badge ${attempt.testType || "task1"}` }, writingTypeLabel(attempt.testType))),
+                                    e("td", null, e("strong", null, attempt.taskTitle || `Writing Test ${index + 1}`)),
+                                    e("td", null, formatDate(attempt.createdAt)),
+                                    e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand)}`)),
+                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => onViewFeedback(attempt) }, "View Feedback"))
+                                ))
+                            )
+                        )
+                    )
+                )
+                : e("div", { className: "writing-empty-state" },
+                    e("div", { className: "writing-empty-icon" }, e(Icon, { name: "pen", className: "h-6 w-6" })),
+                    e("h3", null, "No Writing attempts yet"),
+                    e("p", null, "Start your first Writing practice and get AI feedback."),
+                    e("a", { href: "/writing", className: "writing-empty-action" }, "Start Writing Practice")
+                )
+        );
+    }
+
+    function PerformanceCenterHeader({ user }) {
+        return e("header", { className: "performance-center-header" },
+            e("div", null,
+                e("p", { className: "performance-center-kicker" }, "IELTSX Performance Center"),
+                e("h1", null, "Your IELTS Performance"),
+                e("p", null, "Choose a skill to review attempts, band scores, and saved feedback.")
+            ),
+            e("a", { href: "profile-settings.html", className: "performance-settings-link" },
+                e(Icon, { name: "settings", className: "h-4 w-4" }),
+                e("span", null, "Profile settings")
+            )
+        );
+    }
+
+    function performanceCards(stats) {
+        const listening = summarizeObjectiveSkill(stats, "listening");
+        const reading = summarizeObjectiveSkill(stats, "reading");
+        const writing = writingOverview(stats.writing);
+        const speaking = speakingOverview(stats);
+
+        return [
+            {
+                key: "listening",
+                title: "Listening Performance",
+                description: "Bands and answer accuracy from completed Listening tests.",
+                icon: "headphones",
+                tone: "listening",
+                stats: [
+                    ["Total attempts", listening.totalAttempts || 0],
+                    ["Average band", listening.totalAttempts ? formatBand(listening.averageBand) : "No result"],
+                    ["Best band", listening.totalAttempts ? formatBand(listening.bestBand) : "No result"],
+                    ["Latest result", listening.latestResult],
+                    ["Last activity", formatDate(listening.lastActivityDate)]
+                ]
+            },
+            {
+                key: "reading",
+                title: "Reading Performance",
+                description: "Reading attempts, passage results, and correct-answer review.",
+                icon: "book",
+                tone: "reading",
+                stats: [
+                    ["Total attempts", reading.totalAttempts || 0],
+                    ["Average band", reading.totalAttempts ? formatBand(reading.averageBand) : "No result"],
+                    ["Best band", reading.totalAttempts ? formatBand(reading.bestBand) : "No result"],
+                    ["Latest result", reading.latestResult],
+                    ["Last activity", formatDate(reading.lastActivityDate)]
+                ]
+            },
+            {
+                key: "writing",
+                title: "Writing Performance",
+                description: "AI-scored Task 1, Task 2, and Full Writing Test feedback.",
+                icon: "pen",
+                tone: "writing",
+                stats: [
+                    ["Total attempts", writing.totalAttempts || 0],
+                    ["Average band", writing.totalAttempts ? formatBand(writing.averageBand) : "No result"],
+                    ["Best band", writing.totalAttempts ? formatBand(writing.bestBand) : "No result"],
+                    ["Latest result", writing.latestResult],
+                    ["Last activity", formatDate(writing.lastActivityDate)]
+                ]
+            },
+            {
+                key: "speaking",
+                title: "Speaking Performance",
+                description: "Speaking practice, cue cards, and saved feedback when available.",
+                icon: "mic",
+                tone: "speaking",
+                stats: [
+                    ["Total attempts", speaking.totalAttempts || 0],
+                    ["Average band", speaking.totalAttempts ? formatBand(speaking.averageBand) : "No result"],
+                    ["Best band", speaking.totalAttempts ? formatBand(speaking.bestBand) : "No result"],
+                    ["Latest result", speaking.latestResult],
+                    ["Last activity", formatDate(speaking.lastActivityDate)]
+                ]
+            }
+        ];
+    }
+
+    function PerformanceSkillCard({ card, onOpen }) {
+        return e("button", {
+            type: "button",
+            className: `performance-skill-card ${card.tone}`,
+            onClick: () => onOpen(card.key)
+        },
+            e("span", { className: "performance-skill-card-top" },
+                e("span", { className: "performance-skill-icon" }, e(Icon, { name: card.icon, className: "h-5 w-5" })),
+                e("span", { className: "performance-skill-arrow" }, e(Icon, { name: "arrow", className: "h-4 w-4" }))
+            ),
+            e("span", { className: "performance-skill-title" }, card.title),
+            e("span", { className: "performance-skill-description" }, card.description),
+            e("span", { className: "performance-skill-stats" },
+                card.stats.map(([label, value]) => e("span", { className: "performance-skill-stat", key: label },
+                    e("span", null, label),
+                    e("strong", null, value)
+                ))
+            )
+        );
+    }
+
+    function PerformanceCardGrid({ stats, onOpen }) {
+        return e("section", { className: "performance-card-grid", "aria-label": "IELTS skill performance" },
+            performanceCards(stats).map((card) => e(PerformanceSkillCard, { key: card.key, card, onOpen }))
+        );
+    }
+
+    function BackToPerformanceCenter({ onBack, label = "Back to dashboard" }) {
+        return e("button", { type: "button", className: "performance-back-btn", onClick: onBack },
+            e(Icon, { name: "arrow", className: "h-4 w-4 rotate-180" }),
+            e("span", null, label)
+        );
+    }
+
+    function ResultReviewPanel({ result, skill }) {
+        if (!result) return null;
+
+        return e("section", { className: "performance-result-panel" },
+            e("div", { className: "performance-result-panel-head" },
+                e("div", null,
+                    e("p", null, skill === "listening" ? "Listening Result" : "Reading Result"),
+                    e("h3", null, result.title || "Completed test")
+                ),
+                e("span", { className: "writing-band-pill" }, `Band ${formatBand(result.band)}`)
+            ),
+            e("div", { className: "performance-result-summary" },
+                [["Correct answers", `${result.correct || 0}/${result.total || 0}`], ["Accuracy", `${result.accuracy || 0}%`], ["Date", formatDate(result.completedAt)], ["Part", result.part || "Practice"]].map(([label, value]) =>
+                    e("div", { key: label },
+                        e("span", null, label),
+                        e("strong", null, value)
+                    )
+                )
+            ),
+            (result.correctAnswers?.length || result.wrongAnswers?.length)
+                ? e("div", { className: "performance-answer-review" },
+                    e(AnswerReviewList, { title: "Correct answers", items: result.correctAnswers || [], tone: "correct" }),
+                    e(AnswerReviewList, { title: "Wrong or unanswered", items: result.wrongAnswers || [], tone: "wrong" })
+                )
+                : e("p", { className: "writing-muted" }, "Answer-by-answer review was not saved for this attempt.")
+        );
+    }
+
+    function ObjectiveSkillDetail({ skill, stats }) {
+        const [selectedResult, setSelectedResult] = useState(null);
+        const data = summarizeObjectiveSkill(stats, skill);
+        const isListening = skill === "listening";
+        const title = isListening ? "Listening Performance" : "Reading Performance";
+        const titleColumn = isListening ? "Test title" : "Passage/Test title";
+        const practiceUrl = isListening ? "/listening" : "/reading";
+        const metricPrefix = isListening ? "Listening" : "Reading";
+        const recent = data.attempts;
+        const metrics = [
+            [`Total ${metricPrefix} attempts`, data.totalAttempts || 0, "Submitted tests"],
+            [`Average ${metricPrefix} band`, data.totalAttempts ? formatBand(data.averageBand) : "No result", "Across attempts"],
+            [`Best ${metricPrefix} band`, data.totalAttempts ? formatBand(data.bestBand) : "No result", "Highest saved band"],
+            [`Latest ${metricPrefix} band`, data.totalAttempts ? formatBand(data.latestBand) : "No result", "Most recent attempt"],
+            ["Last activity date", formatDate(data.lastActivityDate), "Most recent completion"]
+        ];
+
+        return e(Card, { className: `performance-detail-card writing-dashboard-card ${skill}` },
+            e(SectionTitle, {
+                eyebrow: metricPrefix,
+                title,
+                description: isListening
+                    ? "Review Listening attempts, band scores, and answer accuracy."
+                    : "Review Reading attempts, passage results, and answer accuracy.",
+                action: e("div", { className: "writing-quick-actions" }, e("a", { href: practiceUrl }, isListening ? "Practice Listening" : "Practice Reading"))
+            }),
+            e("div", { className: "writing-metrics-grid skill-detail-metrics" },
+                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
+            ),
+            e("div", { className: "writing-results-wrap" },
+                e("div", { className: "writing-results-head" },
+                    e("h3", null, `Recent ${metricPrefix} Results`),
+                    e("p", null, "Open a completed attempt to inspect the saved result.")
+                ),
+                recent.length
+                    ? e("div", { className: "writing-results-table-scroll" },
+                        e("table", { className: "writing-results-table" },
+                            e("thead", null,
+                                e("tr", null,
+                                    [titleColumn, "Date", "Band score", "Correct answers", "Action"].map((heading) => e("th", { key: heading }, heading))
+                                )
+                            ),
+                            e("tbody", null,
+                                recent.map((result) => e("tr", { key: result.id },
+                                    e("td", null, e("strong", null, result.title || "Completed test")),
+                                    e("td", null, formatDate(result.completedAt)),
+                                    e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(result.band)}`)),
+                                    e("td", null, `${result.correct || 0}/${result.total || 0}`),
+                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => setSelectedResult(result) }, "View Result"))
+                                ))
+                            )
+                        )
+                    )
+                    : e("div", { className: "writing-empty-state" },
+                        e("div", { className: "writing-empty-icon" }, e(Icon, { name: isListening ? "headphones" : "book", className: "h-6 w-6" })),
+                        e("h3", null, `No ${metricPrefix} attempts yet`),
+                        e("p", null, `Complete a ${metricPrefix} test to see your results here.`),
+                        e("a", { href: practiceUrl, className: "writing-empty-action" }, isListening ? "Start Listening Practice" : "Start Reading Practice")
+                    )
+            ),
+            e(ResultReviewPanel, { result: selectedResult, skill })
+        );
+    }
+
+    function SpeakingFeedbackPanel({ attempt }) {
+        if (!attempt) return null;
+
+        const feedback = attempt.feedback || attempt.aiFeedback || attempt.notes || "";
+        const criteria = feedback && typeof feedback === "object"
+            ? [
+                ["Fluency and Coherence", feedback.fluencyCoherence],
+                ["Lexical Resource", feedback.lexicalResource],
+                ["Grammar", feedback.grammaticalRangeAccuracy],
+                ["Pronunciation", feedback.pronunciation]
+            ]
+            : [];
+        const feedbackList = (title, items) => e("section", { className: "writing-feedback-list" },
+            e("h4", null, title),
+            Array.isArray(items) && items.length
+                ? e("ul", null, items.map((item, index) => e("li", { key: `${title}-${index}` }, item)))
+                : e("p", null, "No saved notes for this section.")
+        );
+
+        return e("section", { className: "performance-result-panel" },
+            e("div", { className: "performance-result-panel-head" },
+                e("div", null,
+                    e("p", null, "Speaking Feedback"),
+                    e("h3", null, attempt.title || attempt.taskTitle || "Speaking attempt")
+                ),
+                e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand)}`)
+            ),
+            feedback && typeof feedback === "object"
+                ? e("div", null,
+                    e("div", { className: "performance-result-summary" },
+                        criteria.map(([label, value]) => e("div", { key: label },
+                            e("span", null, label),
+                            e("strong", null, formatBand(value))
+                        ))
+                    ),
+                    feedback.detailedFeedback ? e("p", { className: "performance-feedback-copy" }, feedback.detailedFeedback) : null,
+                    e("div", { className: "writing-feedback-three" },
+                        feedbackList("Strengths", feedback.strengths),
+                        feedbackList("Problems", feedback.problems),
+                        feedbackList("How to improve", feedback.howToImprove)
+                    ),
+                    e("div", { className: "writing-feedback-three" },
+                        feedbackList("Suggested improved answers", feedback.improvedAnswers),
+                        feedbackList("Practical tips", feedback.practicalTips)
+                    )
+                )
+                : feedback
+                    ? e("p", { className: "performance-feedback-copy" }, String(feedback))
+                    : e("p", { className: "writing-muted" }, "Detailed feedback was not saved for this speaking attempt.")
+        );
+    }
+
+    function SpeakingDashboard({ stats }) {
+        const [selectedAttempt, setSelectedAttempt] = useState(null);
+        const data = speakingOverview(stats);
+        const summary = data.summary;
+        const metrics = [
+            ["Speaking attempts", summary.totalAttempts || 0, "All saved speaking practice"],
+            ["Cue Card attempts", summary.cueCardAttempts || 0, "Part 2 practice"],
+            ["Full Speaking Test attempts", summary.fullAttempts || 0, "Full mocks"],
+            ["Average Speaking Band", summary.totalAttempts ? formatBand(summary.averageBand) : "No result", "Across attempts"],
+            ["Best Speaking Band", summary.totalAttempts ? formatBand(summary.bestBand) : "No result", "Highest saved band"],
+            ["Latest Speaking Band", summary.totalAttempts ? formatBand(summary.latestBand) : "No result", "Most recent attempt"]
+        ];
+
+        return e(Card, { className: "performance-detail-card writing-dashboard-card speaking" },
+            e(SectionTitle, {
+                eyebrow: "Speaking",
+                title: "Speaking Performance",
+                description: "Track cue-card and full Speaking Test attempts when feedback is saved.",
+                action: e("div", { className: "writing-quick-actions" }, e("a", { href: "/speaking" }, "Practice Speaking"))
+            }),
+            e("div", { className: "writing-metrics-grid skill-detail-metrics speaking-detail-metrics" },
+                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
+            ),
+            data.recent.length
+                ? e("div", { className: "writing-results-wrap" },
+                    e("div", { className: "writing-results-head" },
+                        e("h3", null, "Recent Speaking Results"),
+                        e("p", null, "Open an attempt to review saved feedback.")
+                    ),
+                    e("div", { className: "writing-results-table-scroll" },
+                        e("table", { className: "writing-results-table" },
+                            e("thead", null,
+                                e("tr", null,
+                                    ["Attempt type", "Title", "Date", "Band score", "Action"].map((heading) => e("th", { key: heading }, heading))
+                                )
+                            ),
+                            e("tbody", null,
+                                data.recent.map((attempt, index) => e("tr", { key: attempt.id || index },
+                                    e("td", null, speakingTypeLabel(attempt.testType || attempt.type)),
+                                    e("td", null, e("strong", null, attempt.title || attempt.taskTitle || `Speaking attempt ${index + 1}`)),
+                                    e("td", null, formatDate(attempt.createdAt || attempt.completedAt)),
+                                    e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand)}`)),
+                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => setSelectedAttempt(attempt) }, "View Feedback"))
+                                ))
+                            )
+                        )
+                    ),
+                    e(SpeakingFeedbackPanel, { attempt: selectedAttempt })
+                )
+                : e("div", { className: "writing-empty-state" },
+                    e("div", { className: "writing-empty-icon" }, e(Icon, { name: "mic", className: "h-6 w-6" })),
+                    e("h3", null, "No Speaking attempts yet"),
+                    e("p", null, "Saved Speaking feedback will appear here after practice."),
+                    e("a", { href: "/speaking", className: "writing-empty-action" }, "Start Speaking Practice")
+                )
+        );
+    }
+
+    function PerformanceDetailView({ skill, stats, onBack, onViewWritingFeedback }) {
+        return e("section", { className: "performance-detail-shell" },
+            e(BackToPerformanceCenter, { onBack }),
+            skill === "writing"
+                ? e("div", { className: "writing-dashboard-wrap" }, e(WritingDashboard, { writing: stats.writing, onViewFeedback: onViewWritingFeedback }))
+                : skill === "speaking"
+                    ? e("div", { className: "writing-dashboard-wrap" }, e(SpeakingDashboard, { stats }))
+                    : e("div", { className: "writing-dashboard-wrap" }, e(ObjectiveSkillDetail, { skill, stats }))
+        );
+    }
+
     function TestHistory({ stats }) {
         const tests = stats.testHistory || [];
 
@@ -436,18 +1150,41 @@
     }
 
     function Dashboard({ user, stats }) {
-        return e("main", { className: "mx-auto max-w-7xl space-y-7 px-5 py-7 lg:px-8" },
+        const [selectedWritingAttempt, setSelectedWritingAttempt] = useState(null);
+        const [selectedSkill, setSelectedSkill] = useState(null);
+
+        function openSkill(skill) {
+            if (skill === "center") {
+                setSelectedSkill(null);
+                window.requestAnimationFrame(() => {
+                    document.querySelector(".performance-center-shell")?.scrollIntoView({ block: "start" });
+                });
+                return;
+            }
+
+            setSelectedSkill(skill);
+            window.requestAnimationFrame(() => {
+                document.querySelector(".performance-detail-shell")?.scrollIntoView({ block: "start" });
+            });
+        }
+
+        return e("main", { className: "profile-dashboard-main space-y-7" },
             e(Hero, { user, stats }),
-            e("div", { className: "grid gap-5 lg:grid-cols-3" },
+            e("div", { className: "dashboard-overview-grid" },
                 e(ProfileCard, { user, stats }),
-                e(PerformanceCard, { stats })
+                e(PerformanceCard, { stats, onOpen: openSkill })
             ),
-            e(StatsSection, { stats }),
-            e(ProgressCharts, { stats }),
-            e("div", { className: "grid gap-5 lg:grid-cols-3" },
-                e(TestHistory, { stats }),
-                e(RecentActivity, { stats })
-            )
+            selectedSkill
+                ? e(PerformanceDetailView, {
+                    skill: selectedSkill,
+                    stats,
+                    onBack: () => setSelectedSkill(null),
+                    onViewWritingFeedback: setSelectedWritingAttempt
+                })
+                : e("section", { className: "performance-center-shell" },
+                    e(PerformanceCardGrid, { stats, onOpen: openSkill })
+                ),
+            e(WritingFeedbackModal, { attempt: selectedWritingAttempt, onClose: () => setSelectedWritingAttempt(null) })
         );
     }
 
@@ -578,6 +1315,38 @@
         try {
             stats = { ...emptyProgress, ...(await window.authClient.getUserProgress()) };
         } catch {}
+
+        try {
+            const writingResponse = await fetch("/api/profile/writing", {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store"
+            });
+            if (writingResponse.ok) {
+                stats.writing = { ...emptyWriting, ...(await writingResponse.json()) };
+            } else {
+                stats.writing = emptyWriting;
+            }
+        } catch (error) {
+            console.error("Writing dashboard fetch error:", error);
+            stats.writing = emptyWriting;
+        }
+
+        try {
+            const speakingResponse = await fetch("/api/profile/speaking", {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store"
+            });
+            if (speakingResponse.ok) {
+                stats.speaking = { ...emptySpeaking, ...(await speakingResponse.json()) };
+            } else {
+                stats.speaking = emptySpeaking;
+            }
+        } catch (error) {
+            console.error("Speaking dashboard fetch error:", error);
+            stats.speaking = emptySpeaking;
+        }
 
         ReactDOM.createRoot(root).render(page === "settings"
             ? e(SettingsPage, { user, stats })

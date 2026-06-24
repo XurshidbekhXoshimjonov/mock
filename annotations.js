@@ -121,11 +121,15 @@
     function getTestConfig() {
         const params = new URLSearchParams(window.location.search);
         const pathParts = window.location.pathname.split("/").filter(Boolean);
+        const pathname = window.location.pathname.toLowerCase();
+        const title = document.title.toLowerCase();
         
         let skill = 'reading';
-        if (pathParts.includes('listening') || params.get('skill') === 'listening') {
+        if (pathname.includes('writing') || params.get('skill') === 'writing' || document.body.dataset.practiceSkill === 'writing' || title.includes('writing')) {
+            skill = 'writing';
+        } else if (pathParts.includes('listening') || params.get('skill') === 'listening') {
             skill = 'listening';
-        } else if (document.body.dataset.practiceSkill === 'listening' || document.title.toLowerCase().includes('listening') || document.getElementById('listeningTestRoot')) {
+        } else if (document.body.dataset.practiceSkill === 'listening' || title.includes('listening') || document.getElementById('listeningTestRoot')) {
             skill = 'listening';
         }
         
@@ -137,6 +141,16 @@
         }
         if (!testId) {
             testId = 'practice';
+        }
+
+        if (skill === 'writing') {
+            const taskNumber = getWritingTaskNumber();
+            return {
+                skill,
+                testId,
+                taskNumber,
+                attemptId: `writing-${testId}-${taskNumber}`
+            };
         }
         
         const attemptKey = `ieltsx_current_attempt_${skill}_${testId}`;
@@ -150,8 +164,77 @@
         return { skill, testId, attemptId };
     }
 
+    function getWritingTaskNumber() {
+        const explicitTask = window.IELTSX_WRITING_TASK_NUMBER || document.body.dataset.writingTaskNumber;
+        if (explicitTask === 'task1' || explicitTask === 'task2') {
+            return explicitTask;
+        }
+
+        const pathname = window.location.pathname.toLowerCase();
+        if (pathname.includes('task-2') || pathname.includes('writing-task2')) {
+            return 'task2';
+        }
+
+        const task2Stage = document.getElementById('stageTask2');
+        if (task2Stage && window.getComputedStyle(task2Stage).display !== 'none') {
+            return 'task2';
+        }
+
+        return 'task1';
+    }
+
     function getStorageKey() {
+        if (currentConfig.skill === 'writing') {
+            return `writing_highlights_${currentConfig.testId}_${currentConfig.taskNumber}`;
+        }
         return `ieltsx_annotations_${currentConfig.skill}_${currentConfig.testId}_${currentConfig.attemptId}`;
+    }
+
+    function sameConfig(a, b) {
+        return Boolean(a && b)
+            && a.skill === b.skill
+            && a.testId === b.testId
+            && a.attemptId === b.attemptId
+            && (a.taskNumber || '') === (b.taskNumber || '');
+    }
+
+    function reloadAnnotationsForConfig() {
+        const nextConfig = getTestConfig();
+        if (sameConfig(nextConfig, currentConfig)) {
+            return;
+        }
+
+        currentConfig = nextConfig;
+        loadAnnotations();
+        restoreAllAnnotations();
+        updateToggleBtnBadge();
+        insertNotesButton();
+    }
+
+    function setWritingTask(taskNumber) {
+        if (taskNumber !== 'task1' && taskNumber !== 'task2') {
+            return;
+        }
+
+        window.IELTSX_WRITING_TASK_NUMBER = taskNumber;
+        reloadAnnotationsForConfig();
+    }
+
+    function clearWritingStorage(testId, taskNumber) {
+        if (!testId || (taskNumber !== 'task1' && taskNumber !== 'task2')) {
+            return;
+        }
+
+        localStorage.removeItem(`writing_highlights_${testId}_${taskNumber}`);
+
+        if (currentConfig?.skill === 'writing'
+            && currentConfig.testId === testId
+            && currentConfig.taskNumber === taskNumber) {
+            annotationsData = { highlights: [], notes: [] };
+            restoreAllAnnotations();
+            updateToggleBtnBadge();
+            renderDrawerNotes();
+        }
     }
 
     function loadAnnotations() {
@@ -820,6 +903,7 @@
                 skill: currentConfig.skill,
                 testId: currentConfig.testId,
                 attemptId: currentConfig.attemptId,
+                taskNumber: currentConfig.taskNumber || null,
                 part,
                 questionNumber,
                 selectedText: activeSelectedText,
@@ -969,6 +1053,7 @@
                     skill: currentConfig.skill,
                     testId: currentConfig.testId,
                     attemptId: currentConfig.attemptId,
+                    taskNumber: currentConfig.taskNumber || null,
                     part: getCurrentPart(activeSelectionRange.startContainer),
                     questionNumber: getClosestQuestionNumber(activeSelectionRange.startContainer),
                     selectedText: activeSelectedText,
@@ -989,6 +1074,7 @@
                 skill: currentConfig.skill,
                 testId: currentConfig.testId,
                 attemptId: currentConfig.attemptId,
+                taskNumber: currentConfig.taskNumber || null,
                 part,
                 questionNumber,
                 selectedText: activeSelectedText,
@@ -1245,6 +1331,15 @@
 
     function clearAllAnnotations() {
         if (confirm("Are you sure you want to clear all highlights and notes? This will start a fresh attempt session.")) {
+            if (currentConfig.skill === 'writing') {
+                localStorage.removeItem(getStorageKey());
+                annotationsData = { highlights: [], notes: [] };
+                restoreAllAnnotations();
+                updateToggleBtnBadge();
+                closeDrawer();
+                return;
+            }
+
             // Delete key from localStorage
             localStorage.removeItem(getStorageKey());
             
@@ -1325,7 +1420,7 @@
             mutationTimeout = setTimeout(() => {
                 // Check if config changed (e.g. user went to another test)
                 const freshConfig = getTestConfig();
-                if (freshConfig.testId !== currentConfig.testId || freshConfig.skill !== currentConfig.skill || freshConfig.attemptId !== currentConfig.attemptId) {
+                if (!sameConfig(freshConfig, currentConfig)) {
                     currentConfig = freshConfig;
                     loadAnnotations();
                     updateToggleBtnBadge();
@@ -1339,6 +1434,16 @@
             domObserver.observe(node, { childList: true, subtree: true });
         });
     }
+
+    window.IeltsAnnotations = {
+        setWritingTask,
+        clearWritingStorage,
+        refresh: reloadAnnotationsForConfig
+    };
+
+    document.addEventListener('ieltsx-writing-task-change', (event) => {
+        setWritingTask(event.detail?.taskNumber);
+    });
 
     // Escape HTML helper
     function escapeHtml(value) {

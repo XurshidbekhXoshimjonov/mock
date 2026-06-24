@@ -12,6 +12,8 @@ const { createUserStore } = require("./lib/user-store");
 const { sendTelegramMessage } = require("./lib/telegram");
 const { createFullTestStore } = require("./lib/full-test-store");
 const { registerFullTestRoutes } = require("./lib/full-test-routes");
+const { registerWritingRoutes } = require("./lib/writing-routes");
+const { registerSpeakingRoutes } = require("./lib/speaking-routes");
 const { createUserProgressStore } = require("./lib/user-progress-store");
 const ManualTestParser = require("./lib/manual-test-parser");
 
@@ -219,6 +221,7 @@ app.use((req, res, next) => {
         "/admin-users.html": "/admin/users",
         "/admin-reading.html": "/admin-reading",
         "/admin-listening.html": "/admin-listening",
+        "/admin-speaking.html": "/admin-speaking",
         "/admin-import.html": "/admin-import",
         "/reading-tests.html": "/reading-tests",
         "/listening-tests.html": "/listening-tests",
@@ -2943,12 +2946,56 @@ app.get("/listening", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listening.html"));
 });
 
-app.get("/speaking", (req, res) => {
+app.get("/speaking", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "speaking.html"));
 });
 
-app.get("/writing", (req, res) => {
+app.get("/speaking/part1", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/part1/:testId", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/part2", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/part2/:testId", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/part3", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/part3/:testId", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/full-test", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/speaking/full-test/:testId", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+});
+
+app.get("/writing", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "writing.html"));
+});
+
+app.get("/writing/task-1", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "writing-task1.html"));
+});
+
+app.get("/writing/task-2", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "writing-task2.html"));
+});
+
+app.get("/writing/full-test", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "full-writing-test.html"));
 });
 
 // Parts & Lists clean routes
@@ -3050,8 +3097,20 @@ app.get("/admin-listening", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-listening.html"));
 });
 
+app.get("/admin-speaking", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-speaking.html"));
+});
+
+app.get("/admin-speaking/:section", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-speaking.html"));
+});
+
 app.get("/admin-import", requirePageAdmin, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "admin-import.html"));
+});
+
+app.get("/admin-writing", requirePageAdmin, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "admin-writing.html"));
 });
 
 app.get("/admin-full-test", requirePageAdmin, (req, res) => {
@@ -3233,6 +3292,19 @@ registerFullTestRoutes(app, {
     getListeningTestById,
     resolveFullTestLocator: resolveFullTest,
     publicUrlForFullTest: publicFullTestUrl
+});
+
+registerWritingRoutes(app, {
+    requireAuth,
+    requireAdmin,
+    listeningImageUpload
+});
+
+registerSpeakingRoutes(app, {
+    requireAuth,
+    requireAdmin,
+    uploadsRoot: UPLOAD_DIR,
+    safeFileName
 });
 
 app.get("/login", (req, res) => {

@@ -279,6 +279,11 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     min-height: 0;
 }
 
+.cbt-stage--prestart {
+    display: block;
+    overflow: hidden;
+}
+
 .cbt-panel {
     display: grid;
     grid-template-rows: minmax(0, 1fr) 54px;

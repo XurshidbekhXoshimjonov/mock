@@ -1116,7 +1116,7 @@ function Timer({ seconds }) {
     );
 }
 
-function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false }) {
+function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false, submitDisabled = false }) {
     const title = mode === "full"
         ? "Full Test"
         : (skill === "listening" ? "Academic Listening" : "Academic Reading");
@@ -1145,7 +1145,7 @@ function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, full
                 className: "cbt-button cbt-button--submit",
                 type: "button",
                 onClick: onSubmit,
-                disabled: submitted
+                disabled: submitted || submitDisabled
             }, "Submit")
         )
     );
@@ -1445,6 +1445,7 @@ function ReadingApp() {
     const [showResultModal, setShowResultModal] = useState(false);
     const [reviewMode, setReviewMode] = useState(false);
     const [autoSubmitted, setAutoSubmitted] = useState(false);
+    const [hasStarted, setHasStarted] = useState(false);
     const [fullscreenActive, setFullscreenActive] = useState(isFullscreenActive());
     const [checkedVocabulary, setCheckedVocabulary] = useState([]);
     const [activeVocabulary, setActiveVocabulary] = useState(null);
@@ -1483,12 +1484,12 @@ function ReadingApp() {
     }, []);
 
     useEffect(() => {
-        if (result || isSubmittedRef.current) return undefined;
+        if (!hasStarted || result || isSubmittedRef.current) return undefined;
         const timerId = setInterval(() => {
             setSeconds((value) => Math.max(0, value - 1));
         }, 1000);
         return () => clearInterval(timerId);
-    }, [result]);
+    }, [hasStarted, result]);
 
     useEffect(() => {
         if (seconds <= 0 && test && !result && !isSubmittedRef.current) {
@@ -1514,6 +1515,8 @@ function ReadingApp() {
         setShowResultModal(false);
         setReviewMode(false);
         setAutoSubmitted(false);
+        setHasStarted(false);
+        setSeconds(test?.part === "full" && mode !== "full" ? 60 * 60 : duration);
         isSubmittedRef.current = false;
     }, [test?.id]);
 
@@ -1566,7 +1569,7 @@ function ReadingApp() {
     }, [isFullTest, test?.id]);
 
     function answerQuestion(number, value) {
-        if (result) return;
+        if (!hasStarted || result) return;
         setAnswers((current) => ({ ...current, [number]: value }));
     }
 
@@ -1758,6 +1761,7 @@ function ReadingApp() {
 
     function submit(options = {}) {
         const isAutoSubmit = Boolean(options.auto);
+        if (!hasStarted && !isAutoSubmit) return;
         if (isSubmittedRef.current) return;
         isSubmittedRef.current = true;
         setAutoSubmitted(isAutoSubmit);
@@ -1807,16 +1811,27 @@ function ReadingApp() {
     const answeredCurrent = currentQuestions.filter((question) => normalizeAnswer(answers[question.number])).length;
 
     return h(Fragment, null,
-        h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!isFullTest && passages.length === 1 ? " no-bottom" : ""}` },
+        h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!hasStarted || (!isFullTest && passages.length === 1) ? " no-bottom" : ""}` },
             h(Header, {
                 seconds,
                 dashboardHref,
                 onSubmit: submit,
                 showFullscreen: isFullTest,
                 fullscreenActive,
-                submitted: Boolean(result)
+                submitted: Boolean(result),
+                submitDisabled: !hasStarted
             }),
-            h("main", { className: `cbt-stage${focus ? " focus-passage" : ""}` },
+            !hasStarted
+                ? h("main", { className: "cbt-stage cbt-stage--prestart" },
+                    window.PreTestStartScreen?.renderReact
+                        ? window.PreTestStartScreen.renderReact(h, { onStart: () => setHasStarted(true) })
+                        : h("section", { className: "ieltsx-prestart-stage", "aria-label": "Start test" },
+                            h("button", { className: "ieltsx-prestart-card", type: "button", onClick: () => setHasStarted(true) },
+                                h("span", { className: "ieltsx-prestart-text" }, "Click ", h("span", { className: "ieltsx-prestart-link" }, "here"), " to start the test")
+                            )
+                        )
+                )
+                : h("main", { className: `cbt-stage${focus ? " focus-passage" : ""}` },
                 h("section", { className: "cbt-panel cbt-passage-panel" },
                     h("div", {
                         ref: passagePanelRef,
@@ -1862,7 +1877,7 @@ function ReadingApp() {
                     )
                 )
             ),
-            isFullTest
+            hasStarted && isFullTest
                 ? h(BottomBar, {
                     passages,
                     activeIndex,

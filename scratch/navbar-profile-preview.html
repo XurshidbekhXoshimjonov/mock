@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Profile Preview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main style="padding: 120px 32px; font-family: var(--ieltsx-font, sans-serif);">
+        <h1>Navbar profile preview</h1>
+        <p>This local preview mocks the authenticated navbar response only.</p>
+    </main>
+    <script>
+        const originalFetch = window.fetch.bind(window);
+        window.fetch = (url, options) => {
+            if (String(url).includes("/api/auth/me")) {
+                return Promise.resolve(new Response(JSON.stringify({
+                    success: true,
+                    user: {
+                        name: "Alexandria Montgomery-Smith",
+                        email: "alexandria@example.com",
+                        role: "user"
+                    }
+                }), {
+                    status: 200,
+                    headers: { "Content-Type": "application/json" }
+                }));
+            }
+            return originalFetch(url, options);
+        };
+    </script>
+    <script src="/auth-client.js?v=profile-pill-preview"></script>
+</body>
+</html>

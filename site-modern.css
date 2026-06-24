@@ -634,9 +634,32 @@ body.public-page .r-right .signup {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+.writing-test-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+@media (min-width: 1100px) {
+    .writing-test-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1099px) {
+    .writing-test-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .writing-test-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .test-list-card,
 .reading-test-card,
 .reading-test-list-card,
+.writing-test-card,
 .listening-test-list-card {
     position: relative;
     isolation: isolate;
@@ -665,6 +688,7 @@ body.public-page .r-right .signup {
 .test-list-card::after,
 .reading-test-card::after,
 .reading-test-list-card::after,
+.writing-test-card::after,
 .listening-test-list-card::after {
     content: "";
     position: absolute;
@@ -681,6 +705,7 @@ body.public-page .r-right .signup {
 .test-list-card:hover,
 .reading-test-card:hover,
 .reading-test-list-card:hover,
+.writing-test-card:hover,
 .listening-test-list-card:hover {
     transform: translateY(-7px);
     border-color: rgba(37, 99, 235, 0.40);
@@ -690,6 +715,7 @@ body.public-page .r-right .signup {
 .test-list-card:hover::after,
 .reading-test-card:hover::after,
 .reading-test-list-card:hover::after,
+.writing-test-card:hover::after,
 .listening-test-list-card:hover::after {
     opacity: 1;
     transform: translateY(4px);
@@ -727,6 +753,7 @@ body.public-page .r-right .signup {
 .test-list-card:hover .test-card-icon,
 .reading-test-card:hover .test-card-icon,
 .reading-test-list-card:hover .test-card-icon,
+.writing-test-card:hover .test-card-icon,
 .listening-test-list-card:hover .test-card-icon,
 .test-list-card:hover .practice-card__icon {
     transform: translateX(-6px);
@@ -764,6 +791,7 @@ body.public-page .r-right .signup {
 .test-list-card h2,
 .reading-test-card h2,
 .reading-test-list-card h2,
+.writing-test-card h2,
 .listening-test-list-card h2 {
     margin: 0;
     color: var(--ieltsx-text);
@@ -777,6 +805,7 @@ body.public-page .r-right .signup {
 .test-list-card p,
 .reading-test-card p,
 .reading-test-list-card p,
+.writing-test-card p,
 .listening-test-list-card p {
     margin: 0;
     max-width: none;
@@ -839,6 +868,7 @@ body.public-page .r-right .signup {
 .test-list-card:hover .test-card-button,
 .reading-test-card:hover .test-card-button,
 .reading-test-list-card:hover .test-card-button,
+.writing-test-card:hover .test-card-button,
 .listening-test-list-card:hover .test-card-button {
     background: #2563eb;
     box-shadow: 0 18px 32px rgba(37, 99, 235, 0.26);
@@ -847,6 +877,7 @@ body.public-page .r-right .signup {
 .test-list-card:hover .test-card-button span,
 .reading-test-card:hover .test-card-button span,
 .reading-test-list-card:hover .test-card-button span,
+.writing-test-card:hover .test-card-button span,
 .listening-test-list-card:hover .test-card-button span {
     transform: translateX(4px);
 }
@@ -860,6 +891,55 @@ body.public-page .r-right .signup {
     color: var(--ieltsx-muted);
     font-size: 15px;
     text-align: center;
+}
+
+.writing-selection-footer {
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    box-sizing: border-box;
+    margin-top: 80px;
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+    padding: 20px;
+    border-top: 1px solid #e5e7eb;
+    background: transparent;
+    color: #858b96;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.writing-selection-footer p {
+    margin: 0;
+}
+
+body.writing-selection-mode.cbt-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body.writing-selection-mode .writing-task-page,
+body.writing-selection-mode .writing-selection-wrapper {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    width: 100%;
+}
+
+body.writing-selection-mode > .test-list-shell,
+body.writing-selection-mode .writing-task-page > .test-list-shell,
+body.writing-selection-mode .writing-selection-wrapper > .test-list-shell {
+    flex: 1 0 auto;
+}
+
+body.writing-selection-mode .writing-selection-footer {
+    margin-top: auto;
 }
 
 body.public-page .home-footer {
@@ -2111,6 +2191,10 @@ body:not(.site-ready) .public-shell {
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
+    .writing-selection-footer {
+        margin-top: auto;
+    }
+
     .public-shell {
         width: min(100% - 48px, 920px);
         padding: 28px 0 22px;
@@ -2230,6 +2314,11 @@ body:not(.site-ready) .public-shell {
 }
 
 @media (max-width: 767px) {
+    .writing-selection-footer {
+        margin-top: auto;
+        padding: 16px;
+    }
+
     body.public-page .r-header {
         min-height: auto;
         padding: 12px 16px;
@@ -2662,6 +2751,7 @@ body.dark-theme .test-card:hover .practice-card__footer {
 body.dark-theme .test-list-card,
 body.dark-theme .reading-test-card,
 body.dark-theme .reading-test-list-card,
+body.dark-theme .writing-test-card,
 body.dark-theme .listening-test-list-card {
     background:
         linear-gradient(145deg, rgba(13, 14, 37, 0.95), rgba(8, 8, 24, 0.90)),
@@ -2674,6 +2764,7 @@ body.dark-theme .listening-test-list-card {
 body.dark-theme .test-list-card::after,
 body.dark-theme .reading-test-card::after,
 body.dark-theme .reading-test-list-card::after,
+body.dark-theme .writing-test-card::after,
 body.dark-theme .listening-test-list-card::after {
     background: radial-gradient(circle at 25% 20%, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.2) 46%, transparent 72%);
 }
@@ -2681,6 +2772,7 @@ body.dark-theme .listening-test-list-card::after {
 body.dark-theme .test-list-card:hover,
 body.dark-theme .reading-test-card:hover,
 body.dark-theme .reading-test-list-card:hover,
+body.dark-theme .writing-test-card:hover,
 body.dark-theme .listening-test-list-card:hover {
     border-color: rgba(59, 130, 246, 0.45);
     box-shadow: 0 24px 58px rgba(59, 130, 246, 0.18), 0 18px 42px rgba(99, 102, 241, 0.12);
@@ -2709,6 +2801,7 @@ body.dark-theme .test-card-button {
 body.dark-theme .test-list-card:hover .test-card-button,
 body.dark-theme .reading-test-card:hover .test-card-button,
 body.dark-theme .reading-test-list-card:hover .test-card-button,
+body.dark-theme .writing-test-card:hover .test-card-button,
 body.dark-theme .listening-test-list-card:hover .test-card-button {
     color: #3b82f6;
     background: rgba(59, 130, 246, 0.1);
@@ -2766,6 +2859,12 @@ body.dark-theme.public-page .home-footer__pill {
 
 body.dark-theme.public-page .home-footer__pill:hover {
     background: rgba(13, 14, 37, 0.82);
+}
+
+html.dark-theme .writing-selection-footer,
+body.dark-theme .writing-selection-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
 }
 
 body.dark-theme .card-icon,
@@ -2830,6 +2929,7 @@ body.dark-theme .test-card-icon {
 body.dark-theme .test-list-card:hover .test-card-icon,
 body.dark-theme .reading-test-card:hover .test-card-icon,
 body.dark-theme .reading-test-list-card:hover .test-card-icon,
+body.dark-theme .writing-test-card:hover .test-card-icon,
 body.dark-theme .listening-test-list-card:hover .test-card-icon {
     background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
     color: #ffffff !important;

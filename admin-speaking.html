@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Speaking Test Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin-speaking.css?v=20260624-admin-speaking">
+</head>
+
+<body class="admin-page admin-speaking-page" data-skip-global-navbar>
+    <header class="admin-topbar admin-speaking-topbar">
+        <div class="admin-topbar__brand">
+            <span class="admin-kicker">IELTSX</span>
+            <strong>Admin Dashboard</strong>
+        </div>
+        <nav class="admin-nav" aria-label="Admin navigation">
+            <a href="/admin">Dashboard</a>
+            <a href="/admin-listening">Listening</a>
+            <a href="/admin-reading">Reading</a>
+            <a href="/admin-speaking" class="is-active">Speaking</a>
+            <a href="/admin-writing">Writing</a>
+            <a href="/admin/users">Users</a>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <main class="admin-speaking-shell">
+        <section class="admin-speaking-header">
+            <div>
+                <span class="admin-speaking-kicker">IELTS Speaking</span>
+                <h1>Speaking Test Manager</h1>
+                <p>Create, edit, publish, preview, and combine IELTS Speaking tests.</p>
+            </div>
+            <button class="admin-speaking-primary-btn" id="createSpeakingTestBtn" type="button">
+                <svg class="admin-speaking-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                Create Speaking Test
+            </button>
+        </section>
+
+        <section class="admin-speaking-stats" aria-label="Speaking test overview">
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></span>
+                <strong id="statPart1">0</strong>
+                <span>Part 1 Tests</span>
+            </article>
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></svg></span>
+                <strong id="statPart2">0</strong>
+                <span>Part 2 Tests</span>
+            </article>
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></svg></span>
+                <strong id="statPart3">0</strong>
+                <span>Part 3 Tests</span>
+            </article>
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+                <strong id="statFull">0</strong>
+                <span>Full Tests</span>
+            </article>
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+                <strong id="statPublished">0</strong>
+                <span>Published</span>
+            </article>
+            <article class="admin-speaking-stat-card">
+                <span class="admin-speaking-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="10"></circle></svg></span>
+                <strong id="statDraft">0</strong>
+                <span>Drafts</span>
+            </article>
+        </section>
+
+        <section class="admin-speaking-card admin-speaking-toolbar" aria-label="Speaking filters">
+            <div class="admin-speaking-tabs" id="speakingTabs">
+                <button class="admin-speaking-tab active" type="button" data-section="part1">Part 1</button>
+                <button class="admin-speaking-tab" type="button" data-section="part2">Part 2</button>
+                <button class="admin-speaking-tab" type="button" data-section="part3">Part 3</button>
+                <button class="admin-speaking-tab" type="button" data-section="full">Full Speaking</button>
+            </div>
+            <div class="admin-speaking-controls">
+                <label class="admin-speaking-search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    <input id="speakingSearchInput" type="search" placeholder="Search title, ID, status">
+                </label>
+                <label class="admin-speaking-sort">
+                    <span>Sort</span>
+                    <select id="speakingSortSelect">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="published">Published first</option>
+                        <option value="draft">Draft first</option>
+                        <option value="title">Title</option>
+                    </select>
+                </label>
+            </div>
+        </section>
+
+        <section class="admin-speaking-list-section">
+            <div class="admin-speaking-section-head">
+                <div>
+                    <h2 id="sectionTitle">Admin Speaking Part 1</h2>
+                    <p id="speakingListSummary">Loading Speaking tests...</p>
+                </div>
+                <button class="admin-speaking-light-btn" id="refreshSpeakingBtn" type="button">Refresh</button>
+            </div>
+            <div class="admin-speaking-table-wrap">
+                <table class="admin-speaking-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Test</th>
+                            <th>Topic/title</th>
+                            <th>Items</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="speakingTestsBody"></tbody>
+                </table>
+            </div>
+            <div class="admin-speaking-empty is-hidden" id="speakingEmptyState">
+                <span class="admin-speaking-empty-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+                <h3>No Speaking tests yet</h3>
+                <p>Create the first test for this section, then publish it when it is ready.</p>
+                <button class="admin-speaking-primary-btn" id="emptyCreateSpeakingBtn" type="button">Create test</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="admin-speaking-modal-shell is-hidden" id="builderModal" aria-hidden="true">
+        <div class="admin-speaking-modal admin-speaking-builder" role="dialog" aria-modal="true" aria-labelledby="builderModalTitle">
+            <div class="admin-speaking-modal-head">
+                <div>
+                    <span class="admin-speaking-kicker">Speaking Builder</span>
+                    <h2 id="builderModalTitle">Create Speaking Test</h2>
+                </div>
+                <button class="admin-speaking-icon-btn" id="closeBuilderBtn" type="button" aria-label="Close builder">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="admin-speaking-builder-grid">
+                <form id="speakingBuilderForm" class="admin-speaking-builder-form">
+                    <input type="hidden" id="builderId">
+
+                    <label class="admin-speaking-field">
+                        <span>Speaking section</span>
+                        <select id="builderSection">
+                            <option value="part1">Admin Speaking Part 1</option>
+                            <option value="part2">Admin Speaking Part 2</option>
+                            <option value="part3">Admin Speaking Part 3</option>
+                            <option value="full">Admin Full Speaking Test</option>
+                        </select>
+                    </label>
+
+                    <label class="admin-speaking-field">
+                        <span>Title / topic</span>
+                        <input id="builderTitle" type="text" placeholder="Websites" required>
+                    </label>
+
+                    <div class="admin-speaking-builder-fields" id="part1Fields">
+                        <label class="admin-speaking-field">
+                            <span>Short description / instruction</span>
+                            <textarea id="part1Description" rows="4" placeholder="Answer general questions about websites and online habits."></textarea>
+                        </label>
+                        <div class="admin-speaking-two-col">
+                            <label class="admin-speaking-field">
+                                <span>Prep time</span>
+                                <input id="part1PrepTime" type="text" value="No prep">
+                            </label>
+                            <label class="admin-speaking-field">
+                                <span>Estimated speaking time</span>
+                                <input id="part1SpeakingTime" type="text" value="5 min">
+                            </label>
+                        </div>
+                        <div class="admin-speaking-list-builder">
+                            <div class="admin-speaking-list-builder-head">
+                                <span>Questions</span>
+                                <button class="admin-speaking-light-btn" type="button" data-add-item="questions">Add question</button>
+                            </div>
+                            <div class="admin-speaking-sortable-list" id="questionsList"></div>
+                        </div>
+                    </div>
+
+                    <div class="admin-speaking-builder-fields is-hidden" id="part2Fields">
+                        <label class="admin-speaking-field">
+                            <span>Main task instruction</span>
+                            <textarea id="part2Instruction" rows="5" placeholder="Describe a place with a lot of trees that you would like to visit."></textarea>
+                        </label>
+                        <div class="admin-speaking-two-col">
+                            <label class="admin-speaking-field">
+                                <span>Preparation time</span>
+                                <input id="part2PrepTime" type="text" value="1 min">
+                            </label>
+                            <label class="admin-speaking-field">
+                                <span>Speaking time</span>
+                                <input id="part2SpeakingTime" type="text" value="2 min">
+                            </label>
+                        </div>
+                        <div class="admin-speaking-list-builder">
+                            <div class="admin-speaking-list-builder-head">
+                                <span>Bullet points</span>
+                                <button class="admin-speaking-light-btn" type="button" data-add-item="bulletPoints">Add bullet point</button>
+                            </div>
+                            <div class="admin-speaking-sortable-list" id="bulletPointsList"></div>
+                        </div>
+                    </div>
+
+                    <div class="admin-speaking-builder-fields is-hidden" id="part3Fields">
+                        <label class="admin-speaking-field">
+                            <span>Short description / instruction</span>
+                            <textarea id="part3Description" rows="4" placeholder="Follow-up discussion about parks, forests, and nature."></textarea>
+                        </label>
+                        <div class="admin-speaking-two-col">
+                            <label class="admin-speaking-field">
+                                <span>Prep time</span>
+                                <input id="part3PrepTime" type="text" value="No prep">
+                            </label>
+                            <label class="admin-speaking-field">
+                                <span>Estimated speaking time</span>
+                                <input id="part3SpeakingTime" type="text" value="5 min">
+                            </label>
+                        </div>
+                        <div class="admin-speaking-list-builder">
+                            <div class="admin-speaking-list-builder-head">
+                                <span>Questions</span>
+                                <button class="admin-speaking-light-btn" type="button" data-add-item="questions">Add question</button>
+                            </div>
+                            <div class="admin-speaking-sortable-list" id="part3QuestionsList"></div>
+                        </div>
+                    </div>
+
+                    <div class="admin-speaking-builder-fields is-hidden" id="fullFields">
+                        <label class="admin-speaking-field">
+                            <span>Select published Part 1</span>
+                            <select id="fullPart1Select"></select>
+                        </label>
+                        <label class="admin-speaking-field">
+                            <span>Select published Part 2</span>
+                            <select id="fullPart2Select"></select>
+                        </label>
+                        <label class="admin-speaking-field">
+                            <span>Select published Part 3</span>
+                            <select id="fullPart3Select"></select>
+                        </label>
+                        <div class="admin-speaking-two-col">
+                            <label class="admin-speaking-field">
+                                <span>Total estimated time</span>
+                                <input id="fullEstimatedTime" type="text" value="11-14 min" readonly>
+                            </label>
+                            <label class="admin-speaking-check">
+                                <input id="fullAiFeedback" type="checkbox" checked>
+                                <span>AI feedback included</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <label class="admin-speaking-field">
+                        <span>Status</span>
+                        <select id="builderStatus">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </label>
+
+                    <div class="admin-speaking-modal-actions">
+                        <button class="admin-speaking-light-btn" id="cancelBuilderBtn" type="button">Cancel</button>
+                        <button class="admin-speaking-primary-btn" type="submit">Save Speaking Test</button>
+                    </div>
+                </form>
+
+                <aside class="admin-speaking-preview" aria-label="Live preview">
+                    <div class="admin-speaking-preview-head">
+                        <span class="admin-speaking-preview-dot"></span>
+                        <strong>User preview</strong>
+                    </div>
+                    <div id="livePreviewPanel"></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-speaking-modal-shell is-hidden" id="previewModal" aria-hidden="true">
+        <div class="admin-speaking-modal admin-speaking-preview-modal" role="dialog" aria-modal="true" aria-labelledby="previewModalTitle">
+            <div class="admin-speaking-modal-head">
+                <div>
+                    <span class="admin-speaking-kicker">Preview</span>
+                    <h2 id="previewModalTitle">Speaking Test Preview</h2>
+                </div>
+                <button class="admin-speaking-icon-btn" id="closePreviewBtn" type="button" aria-label="Close preview">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+            <div id="previewModalContent"></div>
+        </div>
+    </div>
+
+    <div class="admin-speaking-modal-shell is-hidden" id="deleteModal" aria-hidden="true">
+        <div class="admin-speaking-modal admin-speaking-confirm" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+            <span class="admin-speaking-danger-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path></svg></span>
+            <h2 id="deleteModalTitle">Delete Speaking test?</h2>
+            <p>This cannot be undone.</p>
+            <div class="admin-speaking-modal-actions">
+                <button class="admin-speaking-light-btn" id="cancelDeleteBtn" type="button">Cancel</button>
+                <button class="admin-speaking-danger-btn" id="confirmDeleteBtn" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-speaking-toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="/auth-client.js"></script>
+    <script src="/admin-speaking.js?v=20260624-admin-speaking"></script>
+</body>
+
+</html>

@@ -1,0 +1,847 @@
+@import url("typography.css");
+
+.admin-writing-page {
+    --writing-red: #e11d48;
+    --writing-red-dark: #be123c;
+    --writing-red-soft: #fff1f2;
+    --writing-ink: #0f172a;
+    --writing-muted: #64748b;
+    --writing-line: #e5e7eb;
+    --writing-panel: #ffffff;
+    --writing-bg: #f8fafc;
+    --writing-green: #047857;
+    --writing-green-soft: #ecfdf5;
+    --writing-amber: #b45309;
+    --writing-amber-soft: #fffbeb;
+    min-height: 100vh;
+    background: var(--writing-bg);
+    color: var(--writing-ink);
+    font-family: "Plus Jakarta Sans", var(--ieltsx-font), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.admin-writing-page *,
+.admin-writing-page *::before,
+.admin-writing-page *::after {
+    box-sizing: border-box;
+}
+
+.admin-writing-page button,
+.admin-writing-page input,
+.admin-writing-page select,
+.admin-writing-page textarea {
+    font: inherit;
+}
+
+.admin-writing-page button {
+    width: auto;
+}
+
+.admin-writing-topbar .admin-kicker,
+.admin-writing-topbar .admin-nav a:hover {
+    color: var(--writing-red);
+}
+
+.admin-writing-topbar .admin-nav a:hover {
+    background: var(--writing-red-soft);
+}
+
+.admin-writing-topbar .admin-nav a.is-active {
+    background: var(--writing-red);
+    color: #ffffff;
+}
+
+.admin-writing-shell {
+    width: min(1440px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 24px 0 48px;
+}
+
+.admin-writing-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: linear-gradient(135deg, #ffffff, #fff5f7);
+    border: 1px solid var(--writing-line);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.admin-writing-kicker {
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 8px;
+    color: var(--writing-red);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-writing-header h1,
+.admin-writing-modal h2,
+.admin-writing-section-head h2,
+.admin-writing-empty h3,
+.admin-writing-test-card h3 {
+    margin: 0;
+    letter-spacing: 0;
+}
+
+.admin-writing-header h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.05;
+}
+
+.admin-writing-header p,
+.admin-writing-section-head p,
+.admin-writing-empty p,
+.admin-writing-confirm p {
+    margin: 8px 0 0;
+    color: var(--writing-muted);
+    line-height: 1.55;
+}
+
+.admin-writing-primary-btn,
+.admin-writing-danger-btn,
+.admin-writing-light-btn,
+.admin-writing-icon-btn,
+.admin-writing-card-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.admin-writing-primary-btn {
+    min-height: 46px;
+    background: var(--writing-red);
+    color: #ffffff;
+    border: none;
+    padding: 12px 18px;
+    box-shadow: 0 14px 26px rgba(225, 29, 72, 0.22);
+    white-space: nowrap;
+}
+
+.admin-writing-primary-btn:hover {
+    background: var(--writing-red-dark);
+    transform: translateY(-1px);
+}
+
+.admin-writing-light-btn {
+    min-height: 42px;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid var(--writing-line);
+    padding: 10px 16px;
+}
+
+.admin-writing-light-btn:hover,
+.admin-writing-card-action:hover {
+    border-color: #fecdd3;
+    color: var(--writing-red);
+    background: var(--writing-red-soft);
+}
+
+.admin-writing-danger-btn {
+    min-height: 42px;
+    background: var(--writing-red);
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+}
+
+.admin-writing-danger-btn:hover {
+    background: var(--writing-red-dark);
+}
+
+.admin-writing-icon,
+.admin-writing-page svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.admin-writing-stats {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.admin-writing-stat-card,
+.admin-writing-card,
+.admin-writing-test-card {
+    background: var(--writing-panel);
+    border: 1px solid var(--writing-line);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.admin-writing-stat-card {
+    min-height: 132px;
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    align-content: space-between;
+    gap: 12px;
+}
+
+.admin-writing-stat-icon,
+.admin-writing-empty-icon,
+.admin-writing-danger-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: var(--writing-red-soft);
+    color: var(--writing-red);
+}
+
+.admin-writing-stat-card strong {
+    display: block;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.admin-writing-stat-card span:last-child {
+    color: var(--writing-muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-writing-card {
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.admin-writing-toolbar {
+    margin-top: 18px;
+}
+
+.admin-writing-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 18px;
+}
+
+.admin-writing-tab {
+    border: 1px solid var(--writing-line);
+    background: #ffffff;
+    color: #334155;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.admin-writing-tab:hover {
+    border-color: #fecdd3;
+    color: var(--writing-red);
+    transform: translateY(-1px);
+}
+
+.admin-writing-tab.active {
+    background: var(--writing-red);
+    color: #ffffff;
+    border-color: var(--writing-red);
+}
+
+.admin-writing-controls {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(190px, 240px);
+    gap: 12px;
+}
+
+.admin-writing-search,
+.admin-writing-sort,
+.admin-writing-field {
+    display: grid;
+    gap: 8px;
+}
+
+.admin-writing-search {
+    position: relative;
+}
+
+.admin-writing-search svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.admin-writing-search input {
+    padding-left: 42px;
+}
+
+.admin-writing-sort span,
+.admin-writing-field span {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.admin-writing-page input,
+.admin-writing-page select,
+.admin-writing-page textarea {
+    width: 100%;
+    border: 1px solid #dbe2ea;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--writing-ink);
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.admin-writing-page textarea {
+    resize: vertical;
+}
+
+.admin-writing-page input:focus,
+.admin-writing-page select:focus,
+.admin-writing-page textarea:focus {
+    border-color: #fb7185;
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1);
+}
+
+.admin-writing-list-section {
+    margin-top: 22px;
+}
+
+.admin-writing-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.admin-writing-section-head h2 {
+    font-size: 22px;
+}
+
+.admin-writing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+    gap: 18px;
+}
+
+.admin-writing-test-card {
+    display: grid;
+    gap: 16px;
+    min-height: 338px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07), 0 0 0 1px rgba(225, 29, 72, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-writing-test-card:hover {
+    transform: translateY(-3px);
+    border-color: #fecdd3;
+    box-shadow: 0 24px 46px rgba(15, 23, 42, 0.09), 0 16px 38px rgba(225, 29, 72, 0.08);
+}
+
+.admin-writing-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.admin-writing-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #fff1f2;
+    color: var(--writing-red);
+    box-shadow: inset 0 0 0 1px #ffe4e6;
+}
+
+.admin-writing-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.admin-writing-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.admin-writing-badge.type {
+    background: #eef2ff;
+    color: #3730a3;
+}
+
+.admin-writing-badge.published {
+    background: var(--writing-green-soft);
+    color: var(--writing-green);
+}
+
+.admin-writing-badge.draft {
+    background: var(--writing-amber-soft);
+    color: var(--writing-amber);
+}
+
+.admin-writing-test-card h3 {
+    font-size: 24px;
+}
+
+.admin-writing-card-subtitle {
+    margin: -8px 0 0;
+    color: var(--writing-muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.admin-writing-card-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.admin-writing-card-stat {
+    min-height: 64px;
+    border: 1px solid #edf2f7;
+    border-radius: 14px;
+    background: #f8fafc;
+    padding: 10px;
+}
+
+.admin-writing-card-stat span {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-writing-card-stat strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--writing-ink);
+    font-size: 14px;
+}
+
+.admin-writing-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-self: end;
+}
+
+.admin-writing-card-action {
+    min-height: 36px;
+    border: 1px solid var(--writing-line);
+    background: #ffffff;
+    color: #475569;
+    padding: 8px 10px;
+    font-size: 12px;
+}
+
+.admin-writing-card-action.danger {
+    color: var(--writing-red);
+}
+
+.admin-writing-empty {
+    display: grid;
+    place-items: center;
+    gap: 12px;
+    border: 1px dashed #fecdd3;
+    border-radius: 22px;
+    background: #ffffff;
+    padding: 52px 20px;
+    text-align: center;
+}
+
+.admin-writing-empty h3 {
+    font-size: 22px;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.admin-writing-modal-shell {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: rgba(15, 23, 42, 0.48);
+}
+
+.admin-writing-modal {
+    width: min(1100px, 100%);
+    max-height: min(92vh, 980px);
+    overflow: auto;
+    background: #ffffff;
+    border: 1px solid var(--writing-line);
+    border-radius: 24px;
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.28);
+}
+
+.admin-writing-modal-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--writing-line);
+}
+
+.admin-writing-modal h2 {
+    font-size: 24px;
+}
+
+.admin-writing-icon-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--writing-line);
+    background: #ffffff;
+    color: #475569;
+    padding: 0;
+}
+
+.admin-writing-icon-btn:hover {
+    color: var(--writing-red);
+    border-color: #fecdd3;
+    background: var(--writing-red-soft);
+}
+
+.admin-writing-builder-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    gap: 0;
+}
+
+.admin-writing-builder-form {
+    display: grid;
+    gap: 16px;
+    padding: 24px;
+}
+
+.admin-writing-builder-fields {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-writing-two-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.admin-writing-upload {
+    display: grid;
+    gap: 12px;
+}
+
+.admin-writing-upload-zone {
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    min-height: 170px;
+    border: 1.5px dashed #fda4af;
+    border-radius: 18px;
+    background: #fff7f8;
+    color: var(--writing-red);
+    text-align: center;
+    padding: 22px;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.admin-writing-upload-zone:hover,
+.admin-writing-upload-zone.drag-over {
+    background: #fff1f2;
+    border-color: var(--writing-red);
+}
+
+.admin-writing-upload-zone input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.admin-writing-upload-zone svg {
+    width: 30px;
+    height: 30px;
+}
+
+.admin-writing-upload-zone strong {
+    color: var(--writing-ink);
+}
+
+.admin-writing-upload-zone span {
+    color: var(--writing-muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-writing-image-preview {
+    display: grid;
+    gap: 10px;
+    border: 1px solid var(--writing-line);
+    border-radius: 16px;
+    background: #f8fafc;
+    padding: 10px;
+}
+
+.admin-writing-image-preview img {
+    display: block;
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.admin-writing-preview {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100%;
+    border-left: 1px solid var(--writing-line);
+    background: #f8fafc;
+}
+
+.admin-writing-preview-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--writing-line);
+}
+
+.admin-writing-preview-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--writing-red);
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.12);
+}
+
+.admin-writing-preview-body {
+    padding: 20px;
+}
+
+.admin-writing-preview-stack {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-writing-preview-card {
+    display: grid;
+    gap: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    padding: 18px;
+}
+
+.admin-writing-preview-card h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.admin-writing-preview-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.admin-writing-preview-card img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border: 1px solid var(--writing-line);
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-writing-preview-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.admin-writing-preview-meta span {
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.admin-writing-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.admin-writing-preview-modal,
+.admin-writing-confirm {
+    width: min(720px, 100%);
+}
+
+#previewModalContent {
+    padding: 24px;
+}
+
+.admin-writing-confirm {
+    display: grid;
+    place-items: center;
+    gap: 12px;
+    padding: 28px;
+    text-align: center;
+}
+
+.admin-writing-danger-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--writing-red-soft);
+}
+
+.admin-writing-toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1200;
+    max-width: min(360px, calc(100vw - 44px));
+    border-radius: 14px;
+    background: var(--writing-ink);
+    color: #ffffff;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+    padding: 14px 16px;
+    font-weight: 800;
+}
+
+@media (max-width: 1180px) {
+    .admin-writing-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 920px) {
+    .admin-writing-shell {
+        width: min(100% - 28px, 760px);
+        padding-top: 18px;
+    }
+
+    .admin-writing-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-writing-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-writing-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-writing-builder-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-writing-preview {
+        border-left: none;
+        border-top: 1px solid var(--writing-line);
+    }
+}
+
+@media (max-width: 640px) {
+    .admin-writing-shell {
+        width: min(100% - 20px, 520px);
+        padding-bottom: 28px;
+    }
+
+    .admin-writing-header,
+    .admin-writing-card,
+    .admin-writing-builder-form,
+    .admin-writing-preview-body,
+    #previewModalContent {
+        padding: 16px;
+    }
+
+    .admin-writing-header {
+        border-radius: 18px;
+    }
+
+    .admin-writing-header h1 {
+        font-size: 28px;
+    }
+
+    .admin-writing-primary-btn {
+        width: 100%;
+    }
+
+    .admin-writing-stats,
+    .admin-writing-grid,
+    .admin-writing-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-writing-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-writing-tab {
+        padding-inline: 10px;
+    }
+
+    .admin-writing-modal-shell {
+        align-items: stretch;
+        padding: 10px;
+    }
+
+    .admin-writing-modal {
+        max-height: calc(100vh - 20px);
+        border-radius: 18px;
+    }
+
+    .admin-writing-modal-head {
+        padding: 16px;
+    }
+}

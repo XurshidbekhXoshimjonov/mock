@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Writing Test Player - IELTSX</title>
+    <link rel="stylesheet" href="/site-modern.css?v=20260624-writing-footer">
+    <link class="ieltsx-theme-css" rel="stylesheet" href="/reading-cbt.css?v=1.0.13">
+    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
+    <style>
+        :root {
+            --cbt-ielts-red: #e31837;
+            --cbt-ielts-red-dark: #c8102e;
+            --writing-scale: 1;
+        }
+
+        .cbt-header {
+            border: 1px solid var(--cbt-border);
+            background: #fff;
+        }
+
+        .cbt-brand-title {
+            color: #071437;
+        }
+
+        .cbt-timer.warning {
+            color: var(--cbt-ielts-red) !important;
+        }
+
+        .cbt-button--secondary {
+            border-color: #cbd5e1;
+            background: #fff;
+            color: #071437;
+        }
+
+        .cbt-button--secondary:hover {
+            border-color: #b8c4d8;
+            background: #f8fafc;
+        }
+
+        /* Step navigation tabs */
+        .step-tabs-container {
+            background: #fff;
+            border-bottom: 1px solid var(--cbt-border);
+            padding: 8px 30px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .tab-btn {
+            background: #f1f5f9;
+            border: 1px solid var(--cbt-border);
+            border-radius: 6px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .tab-btn.active {
+            background: var(--cbt-ielts-red);
+            color: white;
+            border-color: var(--cbt-ielts-red);
+        }
+
+        /* Split-screen layout */
+        .writing-stage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 66px - 54px); /* Header: 66px, top task tabs: 54px */
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .writing-panel {
+            padding: 30px;
+            overflow-y: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--cbt-border);
+            font-size: calc(16px * var(--writing-scale));
+        }
+
+        .editor-panel {
+            background: #fff;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .prompt-text {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .prompt-image-container {
+            text-align: center;
+            margin-top: 15px;
+            border: 1px dashed var(--cbt-border);
+            padding: 10px;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .prompt-image {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .essay-textarea {
+            width: 100%;
+            flex-grow: 1;
+            border: 1px solid var(--cbt-border);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: inherit;
+            font-size: calc(16px * var(--writing-scale));
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .essay-textarea:focus {
+            border-color: var(--cbt-ielts-red);
+            box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.1);
+        }
+
+        .panel-footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .word-count-badge {
+            font-size: 14px;
+            color: var(--cbt-muted);
+            font-weight: 600;
+        }
+
+        .word-count-badge.invalid {
+            color: var(--cbt-ielts-red);
+        }
+
+        .btn-submit-writing {
+            background: var(--cbt-ielts-red);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .btn-submit-writing:hover {
+            background: var(--cbt-ielts-red-dark);
+        }
+
+        .btn-submit-writing:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        /* Bottom status bar */
+        .writing-bottom-bar {
+            height: 45px;
+            border-top: 1px solid var(--cbt-border);
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .tool-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .tool-btn {
+            background: none;
+            border: 1px solid var(--cbt-border);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tool-btn:hover {
+            background: var(--cbt-soft);
+            border-color: var(--cbt-ielts-red);
+        }
+
+        .tool-btn.active {
+            background: var(--cbt-ielts-red);
+            color: white;
+            border-color: var(--cbt-ielts-red);
+        }
+
+        /* Loading & Results Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            border: 4px solid rgba(0,0,0,0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border-left-color: var(--cbt-ielts-red);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Full Test Feedback Container */
+        .feedback-container {
+            max-width: 1300px;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            max-height: 95vh;
+            overflow: hidden;
+        }
+
+        .feedback-header {
+            background: var(--cbt-ielts-red);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feedback-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .band-scores-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .band-score-pill {
+            background: white;
+            color: var(--cbt-ielts-red);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .band-score-pill.overall {
+            background: #fee2e2;
+            border: 1px solid var(--cbt-ielts-red);
+        }
+
+        .feedback-tabs {
+            background: #f8fafc;
+            border-bottom: 1px solid var(--cbt-border);
+            padding: 10px 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .fb-tab-btn {
+            background: #e2e8f0;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .fb-tab-btn.active {
+            background: var(--cbt-ielts-red);
+            color: white;
+        }
+
+        .feedback-body {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            overflow-y: auto;
+            height: calc(95vh - 70px - 53px);
+        }
+
+        .feedback-left {
+            padding: 30px;
+            border-right: 1px solid var(--cbt-border);
+        }
+
+        .feedback-right {
+            padding: 30px;
+            background: #f8fafc;
+        }
+
+        .crit-card {
+            background: #fff;
+            border: 1px solid var(--cbt-border);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .crit-score-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .crit-score-val {
+            color: var(--cbt-ielts-red);
+        }
+
+        .bullets-section {
+            margin-top: 20px;
+        }
+
+        .bullets-section h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .bullets-section ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .bullets-section li {
+            margin-bottom: 6px;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+        .comparison-box {
+            background: #fff;
+            border: 1px solid var(--cbt-border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-box h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--cbt-border);
+            padding-bottom: 6px;
+        }
+
+        .essay-content-display {
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            color: #334155;
+        }
+
+        /* Selector Prompts grid */
+        .selector-stage {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .selector-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--cbt-border);
+            padding-bottom: 20px;
+        }
+
+        .selector-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .selector-header p {
+            color: var(--cbt-muted);
+            font-size: 16px;
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .prompt-item-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--cbt-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            background: #fff;
+            transition: all 0.2s ease;
+        }
+
+        .prompt-item-card:hover {
+            border-color: var(--cbt-ielts-red);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transform: translateX(4px);
+        }
+
+        .prompt-item-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .prompt-item-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--cbt-muted);
+        }
+
+        .btn-start-practice {
+            background: var(--cbt-ielts-red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.15s ease;
+        }
+
+        .btn-start-practice:hover {
+            background: var(--cbt-ielts-red-dark);
+        }
+
+        /* Focus mode */
+        .writing-stage.focus-passage {
+            grid-template-columns: 1fr 0fr;
+        }
+
+        .writing-stage.focus-passage .editor-panel {
+            display: none;
+        }
+
+        html.dark-theme .cbt-header {
+            background: #1e293b;
+        }
+        html.dark-theme .step-tabs-container {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        html.dark-theme .tab-btn {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f8fafc;
+        }
+        html.dark-theme .writing-stage {
+            background: #0f172a;
+        }
+        html.dark-theme #playerScreen {
+            background: #0f172a;
+        }
+        html.dark-theme .writing-task-tabs-shell {
+            border-color: #334155;
+            background: #1e293b;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+        }
+        html.dark-theme .writing-task-tabs-shell .cbt-part-tabs button {
+            color: #cbd5e1;
+        }
+        html.dark-theme .writing-task-tabs-shell .cbt-part-tabs button.active {
+            color: #60a5fa;
+        }
+        html.dark-theme .writing-task-tabs-shell .cbt-part-tabs button.active::after {
+            background: #60a5fa;
+        }
+        html.dark-theme .writing-panel {
+            background: #0f172a;
+            color: #cbd5e1;
+            border-color: #334155;
+        }
+        html.dark-theme .editor-panel {
+            background: #1e293b;
+        }
+        html.dark-theme .essay-textarea {
+            background: #0f172a;
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        html.dark-theme .writing-bottom-bar {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        html.dark-theme .tool-btn {
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        html.dark-theme .feedback-tabs {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        html.dark-theme .prompt-item-card {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f8fafc;
+        }
+
+        /* Premium three-column layout styles */
+        #playerScreen {
+            box-sizing: border-box;
+            height: calc(100vh - 66px);
+            padding: 0 0 10px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .writing-task-tabs-shell {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            width: min(100% - 40px, 1200px);
+            min-height: 54px;
+            box-sizing: border-box;
+            margin: 7px auto 0;
+            border: 1px solid var(--cbt-border);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 10px 28px rgba(7, 20, 55, 0.06);
+        }
+
+        .writing-task-tabs-shell .cbt-part-tabs {
+            align-self: stretch;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 34px;
+        }
+
+        .writing-task-tabs-shell .cbt-part-tabs button {
+            min-width: 110px;
+            color: #071437;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .writing-task-tabs-shell .cbt-part-tabs button.active {
+            color: var(--cbt-accent);
+        }
+
+        .writing-task-tabs-shell .cbt-part-tabs button.active::after {
+            background: var(--cbt-accent);
+        }
+
+        .writing-stage {
+            display: grid;
+            grid-template-columns: 4.5fr 4.5fr 3fr;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 66px - 71px); /* Header and bottom task tabs area */
+            overflow: hidden;
+            background: #f8fafc;
+            box-sizing: border-box;
+        }
+
+        .player-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .panel-header-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .panel-header-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--cbt-ielts-red);
+        }
+
+        .panel-header-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            color: #1e293b;
+        }
+
+        .info-alert-box {
+            background: #fff5f5;
+            border: 1px solid #fee2e2;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .info-alert-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--cbt-ielts-red);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-alert-content {
+            font-size: 14px;
+            color: #991b1b;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .view-larger-container {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .btn-view-larger {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: var(--cbt-ielts-red);
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn-view-larger:hover {
+            background: #fff5f5;
+            border-color: var(--cbt-ielts-red);
+        }
+
+        /* Editor Panel Card */
+        .editor-panel-card {
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .editor-panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            color: #1e293b;
+        }
+
+        .rich-editor-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            flex-grow: 1;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .rich-editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .rich-editor-toolbar button {
+            background: none;
+            border: none;
+            color: #64748b;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.15s;
+            padding: 0;
+        }
+
+        .rich-editor-toolbar button:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .toolbar-separator {
+            width: 1px;
+            height: 18px;
+            background: #e2e8f0;
+            margin: 0 4px;
+        }
+
+        .toolbar-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .rich-textarea-container {
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .essay-textarea-new {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+            font-family: inherit;
+            box-sizing: border-box;
+            min-height: 200px;
+        }
+
+        .rich-editor-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .editor-autosave-status {
+            display: flex;
+            align-items: center;
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .checkmark-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            font-size: 10px;
+            margin-left: 4px;
+            font-weight: 700;
+        }
+
+        .editor-actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-submit-answer {
+            background: var(--cbt-ielts-red);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .btn-submit-answer:hover {
+            background: var(--cbt-ielts-red-dark);
+        }
+
+        .btn-submit-answer:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar Styling */
+        .player-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .sidebar-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            box-sizing: border-box;
+        }
+
+        .sidebar-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .sidebar-info-group {
+            margin-bottom: 16px;
+        }
+
+        .sidebar-info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .red-text {
+            color: var(--cbt-ielts-red);
+        }
+
+        .tips-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .tips-list li {
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .tips-list li::marker {
+            color: var(--cbt-ielts-red);
+        }
+
+        /* Red badge override for notes count */
+        .ieltsx-notes-toggle-count {
+            background: var(--cbt-ielts-red) !important;
+            border-radius: 50% !important;
+            width: 20px !important;
+            height: 20px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0 !important;
+            margin-left: 6px !important;
+            color: white !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+        }
+
+    </style>
+</head>
+
+<body class="cbt-body antialiased" data-skip-global-navbar>
+    <script>
+        const hasFullWritingTestId = Boolean(new URLSearchParams(window.location.search).get('id'));
+        document.body.classList.toggle('writing-player-mode', hasFullWritingTestId);
+        document.body.classList.toggle('writing-selection-mode', !hasFullWritingTestId);
+        if (!hasFullWritingTestId) {
+            document.body.removeAttribute("data-skip-global-navbar");
+        }
+    </script>
+
+    <header class="cbt-header" id="cbtHeader" style="display: none;">
+        <div class="cbt-brand">
+            <img class="cbt-logo" src="/IELTS-logo.png" alt="IELTS">
+            <span class="cbt-brand-divider" aria-hidden="true"></span>
+            <span class="cbt-brand-title">Academic Writing</span>
+        </div>
+        <div class="cbt-timer" id="timerDisplay" style="display: none;">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+            </svg>
+            <div>
+                <strong id="timerVal">60:00</strong>
+                <span>TIME LEFT</span>
+            </div>
+        </div>
+        <div class="cbt-header-actions">
+            <a class="cbt-button cbt-button--secondary" href="/writing">
+                <span class="cbt-grid-icon" aria-hidden="true"></span>
+                Dashboard
+            </a>
+            <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
+            <button class="cbt-button cbt-button--submit" id="submitFullTestBtn" type="button" onclick="submitFullTest()" disabled>Submit</button>
+        </div>
+    </header>
+
+    <div class="page-wrapper writing-selection-wrapper" id="selectionPage">
+    <header id="globalNavbar" data-global-navbar="true" style="display: none;"></header>
+
+    <!-- Full Tests Selector Screen -->
+    <main class="test-list-shell main-content" id="selectorScreen">
+        <section class="test-list-page-header" style="text-align: center; margin-bottom: 40px; margin-top: 20px;">
+            <div>
+                <span class="test-list-eyebrow" style="text-align: center; display: block; margin-bottom: 8px;">Academic Writing</span>
+                <h1 style="text-align: center; font-size: 32px; font-weight: 800; color: #071437; margin-bottom: 12px;">Full Writing Tests</h1>
+                <div style="width: 60px; height: 4px; background: linear-gradient(90deg, #2563eb, #7c3aed); margin: 0 auto 16px auto; border-radius: 99px;"></div>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto; color: var(--ieltsx-muted);">Select a practice exam containing both Task 1 and Task 2 to start practicing under real test conditions.</p>
+            </div>
+        </section>
+        <div class="test-list-grid test-list-grid--manual writing-test-grid" id="promptsList" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="test-list-empty">Loading Full Writing tests...</div>
+        </div>
+    </main>
+
+    <footer class="simple-test-footer writing-selection-footer" id="selectionFooter" aria-label="IELTSX footer">
+        <p>&copy; 2026 ieltsx.org All rights reserved.</p>
+    </footer>
+    </div>
+
+    <!-- Player Screen -->
+    <main id="writingPreStart" style="display: none;"></main>
+
+    <div id="playerScreen" style="display: none;">
+        <!-- TASK 1 VIEW -->
+        <main class="writing-stage" id="stageTask1">
+            <!-- Left Column -->
+            <div class="player-panel prompt-panel-card">
+                <div class="prompt-card-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--cbt-ielts-red);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                    <h2 style="font-size: 18px; font-weight: 700; margin: 0; color: #1e293b;" id="t1Title">Writing Task 1</h2>
+                </div>
+                <div class="info-alert-box">
+                    <span class="info-alert-icon">i</span>
+                    <div class="info-alert-content">
+                        You should spend about 20 minutes on this task.<br>
+                        Write at least 150 words.
+                    </div>
+                </div>
+                <div class="cbt-passage-paragraph prompt-text" id="t1PromptText">
+                    Loading Task 1 prompt...
+                </div>
+                <div class="prompt-image-container" id="t1ImageContainer" style="display: none;">
+                    <img src="" alt="Task 1 Diagram" class="prompt-image" id="t1Image">
+                    <div class="view-larger-container">
+                        <button class="btn-view-larger" type="button" onclick="viewLargerT1Image()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg> View larger</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column -->
+            <div class="player-panel editor-panel-card">
+                <h2 class="editor-panel-title">Your Answer</h2>
+                <div class="rich-editor-wrapper">
+                    <div class="rich-editor-toolbar">
+                        <button type="button" title="Undo" onclick="toggleStyle('undo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg></button>
+                        <button type="button" title="Redo" onclick="toggleStyle('redo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M21 7v6h-6"></path><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path></svg></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Bold" onclick="toggleStyle('bold')"><strong>B</strong></button>
+                        <button type="button" title="Italic" onclick="toggleStyle('italic')"><em>I</em></button>
+                        <button type="button" title="Underline" onclick="toggleStyle('underline')"><ins>U</ins></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Bullet List" onclick="toggleStyle('bullet')">•—</button>
+                        <button type="button" title="Numbered List" onclick="toggleStyle('number')">1—</button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Align Left" onclick="toggleStyle('left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg></button>
+                        <button type="button" title="Align Center" onclick="toggleStyle('center')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Insert Link" onclick="insertLinkPrompt()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+                    </div>
+                    <div class="rich-textarea-container">
+                        <textarea class="essay-textarea-new" id="t1Editor" placeholder="Write your answer here..." oninput="updateWordCount('task1')"></textarea>
+                    </div>
+                    <div class="rich-editor-footer">
+                        <span class="editor-word-count" id="t1WordCountLabel">Word Count: 0</span>
+                        <span class="editor-autosave-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width: 14px; height: 14px; color: #16a34a; margin-right: 4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Auto-saved <span class="checkmark-circle">✓</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="player-sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title">Task Information</h3>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Task Type</div>
+                        <div class="info-value red-text">Writing Task 1</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Time Allowed</div>
+                        <div class="info-value red-text">20 minutes</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Word Limit</div>
+                        <div class="info-value red-text">At least 150 words</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Your Word Count</div>
+                        <div class="info-value red-text" id="t1SidebarWordCountVal">0 words</div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title" style="display: flex; align-items: center; gap: 8px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--cbt-ielts-red);"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
+                        Tips
+                    </h3>
+                    <ul class="tips-list">
+                        <li>Summarise main features</li>
+                        <li>Make comparisons where relevant</li>
+                        <li>Use clear paragraphing</li>
+                        <li>Write at least 150 words</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <!-- TASK 2 VIEW -->
+        <main class="writing-stage" id="stageTask2" style="display: none;">
+            <!-- Left Column -->
+            <div class="player-panel prompt-panel-card">
+                <div class="prompt-card-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--cbt-ielts-red);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                    <h2 style="font-size: 18px; font-weight: 700; margin: 0; color: #1e293b;" id="t2Title">Writing Task 2</h2>
+                </div>
+                <div class="info-alert-box">
+                    <span class="info-alert-icon">i</span>
+                    <div class="info-alert-content">
+                        You should spend about 40 minutes on this task.<br>
+                        Write at least 250 words.
+                    </div>
+                </div>
+                <div class="cbt-passage-paragraph prompt-text" id="t2PromptText">
+                    Loading Task 2 prompt...
+                </div>
+            </div>
+
+            <!-- Center Column -->
+            <div class="player-panel editor-panel-card">
+                <h2 class="editor-panel-title">Your Answer</h2>
+                <div class="rich-editor-wrapper">
+                    <div class="rich-editor-toolbar">
+                        <button type="button" title="Undo" onclick="toggleStyle('undo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg></button>
+                        <button type="button" title="Redo" onclick="toggleStyle('redo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M21 7v6h-6"></path><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path></svg></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Bold" onclick="toggleStyle('bold')"><strong>B</strong></button>
+                        <button type="button" title="Italic" onclick="toggleStyle('italic')"><em>I</em></button>
+                        <button type="button" title="Underline" onclick="toggleStyle('underline')"><ins>U</ins></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Bullet List" onclick="toggleStyle('bullet')">•—</button>
+                        <button type="button" title="Numbered List" onclick="toggleStyle('number')">1—</button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Align Left" onclick="toggleStyle('left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg></button>
+                        <button type="button" title="Align Center" onclick="toggleStyle('center')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg></button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" title="Insert Link" onclick="insertLinkPrompt()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toolbar-icon"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+                    </div>
+                    <div class="rich-textarea-container">
+                        <textarea class="essay-textarea-new" id="t2Editor" placeholder="Write your answer here..." oninput="updateWordCount('task2')"></textarea>
+                    </div>
+                    <div class="rich-editor-footer">
+                        <span class="editor-word-count" id="t2WordCountLabel">Word Count: 0</span>
+                        <span class="editor-autosave-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width: 14px; height: 14px; color: #16a34a; margin-right: 4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Auto-saved <span class="checkmark-circle">✓</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="player-sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title">Task Information</h3>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Task Type</div>
+                        <div class="info-value red-text">Writing Task 2</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Time Allowed</div>
+                        <div class="info-value red-text">40 minutes</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Word Limit</div>
+                        <div class="info-value red-text">At least 250 words</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Your Word Count</div>
+                        <div class="info-value red-text" id="t2SidebarWordCountVal">0 words</div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title" style="display: flex; align-items: center; gap: 8px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--cbt-ielts-red);"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
+                        Tips
+                    </h3>
+                    <ul class="tips-list">
+                        <li>Address all parts of prompt</li>
+                        <li>Present a clear position</li>
+                        <li>Use clear paragraphing</li>
+                        <li>Write at least 250 words</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <nav class="writing-task-tabs-shell" aria-label="Writing tasks">
+            <div class="cbt-part-tabs">
+                <button class="active" id="taskTabBtn1" type="button" onclick="switchTask('task1')" aria-pressed="true">
+                    Task 1
+                </button>
+                <button id="taskTabBtn2" type="button" onclick="switchTask('task2')" aria-pressed="false">
+                    Task 2
+                </button>
+            </div>
+        </nav>
+
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal-overlay" id="loadingModal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner"></div>
+            <h3>Evaluating Exam Writing Sections</h3>
+            <p>Our AI examiners are scoring both Task 1 and Task 2. This takes about 15-20 seconds...</p>
+        </div>
+    </div>
+
+    <!-- Combined Feedback Modal -->
+    <div class="modal-overlay" id="feedbackModal" style="display: none;">
+        <div class="feedback-container">
+            <div class="feedback-header">
+                <h2 id="fbHeaderTitle">Academic Writing Full Test Evaluation</h2>
+                <div class="band-scores-row">
+                    <div class="band-score-pill overall" id="fbOverallBand">Overall Band: --</div>
+                    <div class="band-score-pill" id="fbT1Band">Task 1: --</div>
+                    <div class="band-score-pill" id="fbT2Band">Task 2: --</div>
+                </div>
+            </div>
+
+            <div class="feedback-tabs">
+                <button class="fb-tab-btn active" id="fbTabT1" onclick="toggleFeedbackView('task1')">Task 1 Feedback</button>
+                <button class="fb-tab-btn" id="fbTabT2" onclick="toggleFeedbackView('task2')">Task 2 Feedback</button>
+            </div>
+
+            <!-- FB TASK 1 SECTION -->
+            <div class="feedback-body" id="fbBodyT1">
+                <div class="feedback-left">
+                    <h3>Task 1 Criteria breakdown</h3>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Task Achievement</span>
+                            <span class="crit-score-val" id="fbCritT1TA">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Coherence & Cohesion</span>
+                            <span class="crit-score-val" id="fbCritT1CC">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Lexical Resource</span>
+                            <span class="crit-score-val" id="fbCritT1LR">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Grammatical Range & Accuracy</span>
+                            <span class="crit-score-val" id="fbCritT1GR">--</span>
+                        </div>
+                    </div>
+
+                    <div class="bullets-section">
+                        <h4 style="color: #027a48;">✓ Strengths</h4>
+                        <ul id="fbT1Strengths"></ul>
+                    </div>
+                    <div class="bullets-section">
+                        <h4 style="color: #b42318;">⚠ Areas of Improvement</h4>
+                        <ul id="fbT1Mistakes"></ul>
+                    </div>
+                    <div class="bullets-section">
+                        <h4 style="color: #b54708;">💡 Suggestions</h4>
+                        <ul id="fbT1Suggestions"></ul>
+                    </div>
+                </div>
+                <div class="feedback-right">
+                    <div class="comparison-box">
+                        <h4>Your Response</h4>
+                        <div class="essay-content-display" id="fbT1StudentEssay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FB TASK 2 SECTION -->
+            <div class="feedback-body" id="fbBodyT2" style="display: none;">
+                <div class="feedback-left">
+                    <h3>Task 2 Criteria breakdown</h3>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Task Response</span>
+                            <span class="crit-score-val" id="fbCritT2TR">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Coherence & Cohesion</span>
+                            <span class="crit-score-val" id="fbCritT2CC">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Lexical Resource</span>
+                            <span class="crit-score-val" id="fbCritT2LR">--</span>
+                        </div>
+                    </div>
+                    <div class="crit-card">
+                        <div class="crit-score-row">
+                            <span>Grammatical Range & Accuracy</span>
+                            <span class="crit-score-val" id="fbCritT2GR">--</span>
+                        </div>
+                    </div>
+
+                    <div class="bullets-section">
+                        <h4 style="color: #027a48;">✓ Strengths</h4>
+                        <ul id="fbT2Strengths"></ul>
+                    </div>
+                    <div class="bullets-section">
+                        <h4 style="color: #b42318;">⚠ Areas of Improvement</h4>
+                        <ul id="fbT2Mistakes"></ul>
+                    </div>
+                    <div class="bullets-section">
+                        <h4 style="color: #b54708;">💡 Suggestions</h4>
+                        <ul id="fbT2Suggestions"></ul>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <a href="/writing" class="btn-submit-writing" style="text-decoration: none; display: inline-block;">Finish & Return</a>
+                    </div>
+                </div>
+                <div class="feedback-right">
+                    <div class="comparison-box">
+                        <h4>Your Response</h4>
+                        <div class="essay-content-display" id="fbT2StudentEssay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/auth-client.js"></script>
+    <script src="/annotations.js?v=1.0.21"></script>
+    <script src="/pre-test-start.js?v=1.0.0"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullTestId = urlParams.get('id');
+        window.IELTSX_WRITING_TASK_NUMBER = 'task1';
+
+        let secondsLeft = 60 * 60; // 60 minutes
+        let timerInterval;
+        let t1WordCount = 0;
+        let t2WordCount = 0;
+        let isSubmitted = false;
+        let activeTab = 'task1';
+        let hasStarted = false;
+        let testReady = false;
+        let startRequested = false;
+
+        function writingAnswerKey(testId, taskNumber) {
+            return `writing_answer_${testId}_${taskNumber}`;
+        }
+
+        function writingHighlightsKey(testId, taskNumber) {
+            return `writing_highlights_${testId}_${taskNumber}`;
+        }
+
+        function setWritingTaskContext(taskNumber) {
+            window.IELTSX_WRITING_TASK_NUMBER = taskNumber;
+            document.body.dataset.writingTaskNumber = taskNumber;
+            window.IeltsAnnotations?.setWritingTask(taskNumber);
+            document.dispatchEvent(new CustomEvent('ieltsx-writing-task-change', { detail: { taskNumber } }));
+        }
+
+        function clearWritingTaskSavedData(testId, taskNumber) {
+            if (!testId) return;
+            localStorage.removeItem(writingAnswerKey(testId, taskNumber));
+            localStorage.removeItem(writingHighlightsKey(testId, taskNumber));
+            window.IeltsAnnotations?.clearWritingStorage(testId, taskNumber);
+        }
+
+        function clearFullWritingSavedData(testId) {
+            clearWritingTaskSavedData(testId, 'task1');
+            clearWritingTaskSavedData(testId, 'task2');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            bindWritingFullScreen();
+            const globalNavbarEl = document.getElementById('globalNavbar');
+            const cbtHeaderEl = document.getElementById('cbtHeader');
+            const selectionPageEl = document.getElementById('selectionPage');
+            const selectionFooterEl = document.getElementById('selectionFooter');
+            if (fullTestId) {
+                setWritingTaskContext('task1');
+                // Show player, hide list
+                document.body.classList.add('writing-player-mode');
+                document.body.classList.remove('writing-selection-mode');
+                if (globalNavbarEl) globalNavbarEl.style.display = 'none';
+                if (cbtHeaderEl) cbtHeaderEl.style.display = 'grid';
+                if (selectionPageEl) selectionPageEl.style.display = 'none';
+                if (selectionFooterEl) selectionFooterEl.style.display = 'none';
+                document.getElementById('selectorScreen').style.display = 'none';
+                document.getElementById('writingPreStart').style.display = 'grid';
+                document.getElementById('playerScreen').style.display = 'none';
+                document.getElementById('timerDisplay').style.display = 'flex';
+                const submitButton = document.getElementById('submitFullTestBtn');
+                if (submitButton) submitButton.disabled = true;
+                showWritingPreStartScreen();
+                loadFullTestPlayer(fullTestId);
+            } else {
+                // Show list, hide player
+                document.body.classList.add('writing-selection-mode');
+                document.body.classList.remove('writing-player-mode');
+                if (globalNavbarEl) globalNavbarEl.style.removeProperty('display');
+                if (cbtHeaderEl) cbtHeaderEl.style.display = 'none';
+                if (selectionPageEl) selectionPageEl.style.removeProperty('display');
+                if (selectionFooterEl) selectionFooterEl.style.removeProperty('display');
+                document.getElementById('selectorScreen').style.display = 'block';
+                document.getElementById('writingPreStart').style.display = 'none';
+                document.getElementById('playerScreen').style.display = 'none';
+                document.getElementById('timerDisplay').style.display = 'none';
+                loadFullTestsList();
+            }
+        });
+
+        function showWritingPreStartScreen() {
+            const target = document.getElementById('writingPreStart');
+            if (!target) return;
+            target.style.display = 'grid';
+            window.PreTestStartScreen?.mount(target, () => {
+                startRequested = true;
+                beginFullWritingTest();
+            });
+        }
+
+        function beginFullWritingTest() {
+            if (hasStarted || !testReady) return;
+            hasStarted = true;
+            document.getElementById('writingPreStart').style.display = 'none';
+            document.getElementById('playerScreen').style.display = 'block';
+            const submitButton = document.getElementById('submitFullTestBtn');
+            if (submitButton) submitButton.disabled = false;
+            startTimer();
+        }
+
+        function isWritingFullScreenActive() {
+            return Boolean(document.fullscreenElement) || document.body.classList.contains('fullscreen-fallback');
+        }
+
+        function updateWritingFullScreenUI() {
+            const active = isWritingFullScreenActive();
+            document.body.classList.toggle('exam-fullscreen-active', active);
+            document.querySelectorAll('[data-fullscreen-toggle]').forEach(button => {
+                button.textContent = active ? 'Exit Full Screen' : 'Full Screen';
+                button.setAttribute('aria-pressed', active ? 'true' : 'false');
+                button.setAttribute('title', active ? 'Exit Full Screen' : 'Full Screen');
+            });
+        }
+
+        async function enterWritingFullScreen() {
+            try {
+                if (!document.documentElement.requestFullscreen) {
+                    throw new Error('Fullscreen API is not available.');
+                }
+                await document.documentElement.requestFullscreen();
+                document.body.classList.remove('fullscreen-fallback');
+            } catch (error) {
+                document.body.classList.add('fullscreen-fallback');
+            }
+            updateWritingFullScreenUI();
+        }
+
+        async function exitWritingFullScreen() {
+            try {
+                if (document.fullscreenElement && document.exitFullscreen) {
+                    await document.exitFullscreen();
+                }
+            } catch (error) {
+                // Keep the UI recoverable if the browser rejects the exit call.
+            }
+            document.body.classList.remove('exam-fullscreen-active', 'fullscreen-fallback');
+            updateWritingFullScreenUI();
+        }
+
+        function bindWritingFullScreen() {
+            document.querySelectorAll('[data-fullscreen-toggle]').forEach(button => {
+                if (button.dataset.fullscreenBound === 'true') return;
+                button.dataset.fullscreenBound = 'true';
+                button.addEventListener('click', () => {
+                    if (isWritingFullScreenActive()) {
+                        exitWritingFullScreen();
+                    } else {
+                        enterWritingFullScreen();
+                    }
+                });
+            });
+
+            if (!document.documentElement.dataset.writingFullscreenEventsBound) {
+                document.documentElement.dataset.writingFullscreenEventsBound = 'true';
+                document.addEventListener('fullscreenchange', updateWritingFullScreenUI);
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape' && document.body.classList.contains('fullscreen-fallback')) {
+                        exitWritingFullScreen();
+                    }
+                });
+            }
+
+            updateWritingFullScreenUI();
+        }
+
+        function escapeHtml(value) {
+            return String(value || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Load Full Tests List
+        function loadFullTestsList() {
+            fetch('/api/writing/full-tests')
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to load full tests');
+                    return res.json();
+                })
+                .then(data => {
+                    const listEl = document.getElementById('promptsList');
+                    if (data.length === 0) {
+                        listEl.innerHTML = '<div class="empty-state">No published Full Writing tests found in database.</div>';
+                        return;
+                    }
+                    
+                    // Sort by createdAt descending just in case the backend sorting isn't deterministic
+                    data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                    listEl.innerHTML = data.map((item, index) => `
+                        <a class="reading-test-list-card writing-test-card" href="?id=${item._id}">
+                            <div class="test-card-top">
+                                <span class="test-card-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                        <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>
+                                    </svg>
+                                </span>
+                                <span class="test-card-badge">FULL TEST</span>
+                            </div>
+                            <div class="test-card-content">
+                                <h2>Test ${index + 1}</h2>
+                                <p>Academic Writing Mock Test</p>
+                            </div>
+                            <div class="test-card-stats">
+                                <span><strong>2</strong> Tasks</span>
+                                <span><strong>60 min</strong></span>
+                            </div>
+                            <div class="test-card-button">Start Test <span>-&gt;</span></div>
+                        </a>
+                    `).join("");
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('promptsList').innerHTML = '<div class="empty-state" style="color: #b42318;">Failed to load practice exams. Make sure you are logged in.</div>';
+                });
+        }
+
+        // Load Full Test Details
+        function loadFullTestPlayer(id) {
+            fetch(`/api/writing/full-tests/${id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to load full test');
+                    return res.json();
+                })
+                .then(test => {
+                    // Task 1
+                    document.getElementById('t1Title').textContent = `Task 1: ${test.task1PromptId.title}`;
+                    document.getElementById('t1PromptText').innerHTML = test.task1PromptId.promptText.replace(/\n/g, '<br>');
+                    if (test.task1PromptId.imageUrl) {
+                        document.getElementById('t1Image').src = test.task1PromptId.imageUrl;
+                        document.getElementById('t1ImageContainer').style.display = 'block';
+                    }
+
+                    // Task 2
+                    document.getElementById('t2Title').textContent = `Task 2: ${test.task2PromptId.title}`;
+                    document.getElementById('t2PromptText').innerHTML = test.task2PromptId.promptText.replace(/\n/g, '<br>');
+
+                    // Restore each task's answer independently for this full test.
+                    document.getElementById('t1Editor').value = localStorage.getItem(writingAnswerKey(id, 'task1')) || '';
+                    updateWordCount('task1');
+                    document.getElementById('t2Editor').value = localStorage.getItem(writingAnswerKey(id, 'task2')) || '';
+                    updateWordCount('task2');
+
+                    testReady = true;
+                    if (startRequested) beginFullWritingTest();
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('t1PromptText').textContent = 'Error loading test details. Check network connection.';
+                });
+        }
+
+        // Timer
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    secondsLeft = 0;
+                    document.getElementById('timerVal').textContent = '00:00';
+                    alert('Exam time has expired! Submitting your answers.');
+                    submitFullTest(true);
+                } else {
+                    const minutes = Math.floor(secondsLeft / 60);
+                    const remainder = String(secondsLeft % 60).padStart(2, '0');
+                    document.getElementById('timerVal').textContent = `${minutes}:${remainder}`;
+                    
+                    if (secondsLeft <= 300) {
+                        document.getElementById('timerDisplay').classList.add('warning');
+                    }
+                }
+            }, 1000);
+        }
+
+        // Switch Task Tabs
+        function switchTask(task) {
+            activeTab = task;
+            const stageT1 = document.getElementById('stageTask1');
+            const stageT2 = document.getElementById('stageTask2');
+            const tabBtn1 = document.getElementById('taskTabBtn1');
+            const tabBtn2 = document.getElementById('taskTabBtn2');
+
+            if (task === 'task1') {
+                stageT1.style.display = 'grid';
+                stageT2.style.display = 'none';
+                if (tabBtn1) {
+                    tabBtn1.classList.add('active');
+                    tabBtn1.setAttribute('aria-pressed', 'true');
+                }
+                if (tabBtn2) {
+                    tabBtn2.classList.remove('active');
+                    tabBtn2.setAttribute('aria-pressed', 'false');
+                }
+            } else {
+                stageT1.style.display = 'none';
+                stageT2.style.display = 'grid';
+                if (tabBtn1) {
+                    tabBtn1.classList.remove('active');
+                    tabBtn1.setAttribute('aria-pressed', 'false');
+                }
+                if (tabBtn2) {
+                    tabBtn2.classList.add('active');
+                    tabBtn2.setAttribute('aria-pressed', 'true');
+                }
+            }
+
+            setWritingTaskContext(task);
+        }
+
+        // Live Word counts
+        function updateWordCount(task) {
+            if (task === 'task1') {
+                const text = document.getElementById('t1Editor').value;
+                t1WordCount = text.trim().split(/\s+/).filter(Boolean).length;
+                document.getElementById('t1WordCountLabel').textContent = `Word Count: ${t1WordCount}`;
+                
+                const sidebarCountVal = document.getElementById('t1SidebarWordCountVal');
+                if (sidebarCountVal) {
+                    sidebarCountVal.textContent = `${t1WordCount} words`;
+                }
+                
+                const badge = document.getElementById('t1WordCountLabel');
+                if (t1WordCount < 150) badge.classList.add('invalid');
+                else badge.classList.remove('invalid');
+
+                if (fullTestId && !isSubmitted) {
+                    localStorage.setItem(writingAnswerKey(fullTestId, 'task1'), text);
+                }
+            } else {
+                const text = document.getElementById('t2Editor').value;
+                t2WordCount = text.trim().split(/\s+/).filter(Boolean).length;
+                document.getElementById('t2WordCountLabel').textContent = `Word Count: ${t2WordCount}`;
+                
+                const sidebarCountVal = document.getElementById('t2SidebarWordCountVal');
+                if (sidebarCountVal) {
+                    sidebarCountVal.textContent = `${t2WordCount} words`;
+                }
+                
+                const badge = document.getElementById('t2WordCountLabel');
+                if (t2WordCount < 250) badge.classList.add('invalid');
+                else badge.classList.remove('invalid');
+
+                if (fullTestId && !isSubmitted) {
+                    localStorage.setItem(writingAnswerKey(fullTestId, 'task2'), text);
+                }
+            }
+        }
+
+        // Image Magnifier
+        function viewLargerT1Image() {
+            const img = document.getElementById('t1Image');
+            if (img && img.src) {
+                window.open(img.src, '_blank');
+            }
+        }
+
+        // Formatting Placeholders (CBT is plain text)
+        function toggleStyle(cmd) {
+            console.log("Styling toggled: " + cmd);
+        }
+        function insertLinkPrompt() {
+            console.log("Link prompt toggled");
+        }
+
+        // Zoom & size controls
+        let zoomActive = false;
+        function toggleZoom() {
+            zoomActive = !zoomActive;
+            const stage1 = document.getElementById('stageTask1');
+            const stage2 = document.getElementById('stageTask2');
+            const btn = document.getElementById('zoomBtn');
+            if (zoomActive) {
+                stage1.classList.add('focus-passage');
+                stage2.classList.add('focus-passage');
+                btn.classList.add('active');
+            } else {
+                stage1.classList.remove('focus-passage');
+                stage2.classList.remove('focus-passage');
+                btn.classList.remove('active');
+            }
+        }
+
+        let textScale = 0;
+        function increaseTextSize() {
+            textScale = (textScale + 1) % 4;
+            const val = 1 + (textScale * 0.08);
+            document.documentElement.style.setProperty('--writing-scale', val);
+        }
+
+        function isDevelopmentHost() {
+            return ['localhost', '127.0.0.1'].includes(window.location.hostname);
+        }
+
+        function logDevelopment(label, payload) {
+            if (isDevelopmentHost()) {
+                console.log(label, payload);
+            }
+        }
+
+        function setSubmitLoading(isLoading) {
+            const button = document.getElementById('submitFullTestBtn');
+            if (!button) return;
+            button.disabled = isLoading;
+            button.textContent = isLoading ? 'Evaluating...' : 'Submit';
+        }
+
+        function textFromElement(id) {
+            return (document.getElementById(id)?.innerText || '').trim();
+        }
+
+        function formatBand(value) {
+            const numeric = Number(value);
+            if (!Number.isFinite(numeric)) {
+                throw new Error('Invalid AI evaluation response.');
+            }
+            return Number.isInteger(numeric) ? String(numeric) : numeric.toFixed(1);
+        }
+
+        function setOptionalEssay(boxId, contentId, essay) {
+            const box = document.getElementById(boxId);
+            const content = document.getElementById(contentId);
+            const text = String(essay || '').trim();
+            if (!box || !content) return;
+            if (!text) {
+                box.style.display = 'none';
+                content.textContent = '';
+                return;
+            }
+            box.style.display = 'block';
+            content.textContent = text;
+        }
+
+        function renderFullWritingEvaluation(evaluation, task1Response, task2Response) {
+            if (!evaluation || !evaluation.task1 || !evaluation.task2 || !evaluation.task1.criteria || !evaluation.task2.criteria) {
+                throw new Error('Invalid AI evaluation response.');
+            }
+
+            document.getElementById('fbOverallBand').textContent = `Overall Band: ${formatBand(evaluation.overallBand)}`;
+            document.getElementById('fbT1Band').textContent = `Task 1 Band: ${formatBand(evaluation.task1.band)}`;
+            document.getElementById('fbT2Band').textContent = `Task 2 Band: ${formatBand(evaluation.task2.band)}`;
+
+            document.getElementById('fbCritT1TA').textContent = formatBand(evaluation.task1.criteria.taskAchievement);
+            document.getElementById('fbCritT1CC').textContent = formatBand(evaluation.task1.criteria.coherenceCohesion);
+            document.getElementById('fbCritT1LR').textContent = formatBand(evaluation.task1.criteria.lexicalResource);
+            document.getElementById('fbCritT1GR').textContent = formatBand(evaluation.task1.criteria.grammar);
+            renderBullets('fbT1Strengths', evaluation.task1.strengths);
+            renderBullets('fbT1Mistakes', evaluation.task1.areasForImprovement);
+            renderBullets('fbT1Suggestions', evaluation.task1.suggestions);
+            document.getElementById('fbT1StudentEssay').textContent = task1Response;
+            // Ignore/Hide polished / improved essay in Full Writing Test evaluation
+            setOptionalEssay('fbT1ImprovedEssayBox', 'fbT1ImprovedEssay', '');
+
+            document.getElementById('fbCritT2TR').textContent = formatBand(evaluation.task2.criteria.taskResponse);
+            document.getElementById('fbCritT2CC').textContent = formatBand(evaluation.task2.criteria.coherenceCohesion);
+            document.getElementById('fbCritT2LR').textContent = formatBand(evaluation.task2.criteria.lexicalResource);
+            document.getElementById('fbCritT2GR').textContent = formatBand(evaluation.task2.criteria.grammar);
+            renderBullets('fbT2Strengths', evaluation.task2.strengths);
+            renderBullets('fbT2Mistakes', evaluation.task2.areasForImprovement);
+            renderBullets('fbT2Suggestions', evaluation.task2.suggestions);
+            document.getElementById('fbT2StudentEssay').textContent = task2Response;
+            // Ignore/Hide polished / improved essay in Full Writing Test evaluation
+            setOptionalEssay('fbT2ImprovedEssayBox', 'fbT2ImprovedEssay', '');
+        }
+
+        // Submit Full Test
+        function submitFullTest(isAuto = false) {
+            if (!hasStarted && !isAuto) return;
+            if (isSubmitted) return;
+
+            const task1Response = document.getElementById('t1Editor').value.trim();
+            const task2Response = document.getElementById('t2Editor').value.trim();
+            const task1Prompt = textFromElement('t1PromptText');
+            const task2Prompt = textFromElement('t2PromptText');
+
+            if (!task1Response) {
+                switchTask('task1');
+                alert('Task 1 answer must not be empty.');
+                return;
+            }
+            if (!task2Response) {
+                switchTask('task2');
+                alert('Task 2 answer must not be empty.');
+                return;
+            }
+
+            isSubmitted = true;
+            clearInterval(timerInterval);
+            setSubmitLoading(true);
+
+            const timeSpent = (60 * 60) - secondsLeft;
+            const payload = {
+                fullTestId,
+                task1Prompt,
+                task1Response,
+                task2Prompt,
+                task2Response,
+                testType: 'academic-writing-full',
+                timeSpent
+            };
+
+            logDevelopment('Writing evaluate-full request payload:', payload);
+            document.getElementById('loadingModal').style.display = 'flex';
+
+            fetch('/api/writing/evaluate-full', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(async res => {
+                const body = await res.json().catch(() => ({}));
+                logDevelopment('Writing evaluate-full backend response:', body);
+                if (!res.ok) {
+                    throw new Error(body.error || body.message || 'AI evaluation failed. Please try again.');
+                }
+                return body;
+            })
+            .then(result => {
+                document.getElementById('loadingModal').style.display = 'none';
+                setSubmitLoading(false);
+
+                renderFullWritingEvaluation(result, task1Response, task2Response);
+                clearFullWritingSavedData(fullTestId);
+                document.getElementById('feedbackModal').style.display = 'flex';
+            })
+            .catch(err => {
+                console.error('Writing evaluate-full request failed:', err);
+                document.getElementById('loadingModal').style.display = 'none';
+                setSubmitLoading(false);
+                alert('AI evaluation failed. Please try again.');
+                isSubmitted = false;
+                if (hasStarted) startTimer();
+            });
+        }
+
+        function toggleFeedbackView(task) {
+            const bodyT1 = document.getElementById('fbBodyT1');
+            const bodyT2 = document.getElementById('fbBodyT2');
+            const tabT1 = document.getElementById('fbTabT1');
+            const tabT2 = document.getElementById('fbTabT2');
+
+            if (task === 'task1') {
+                bodyT1.style.display = 'grid';
+                bodyT2.style.display = 'none';
+                tabT1.classList.add('active');
+                tabT2.classList.remove('active');
+            } else {
+                bodyT1.style.display = 'none';
+                bodyT2.style.display = 'grid';
+                tabT1.classList.remove('active');
+                tabT2.classList.add('active');
+            }
+        }
+
+        function renderBullets(elementId, items) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = '';
+            if (Array.isArray(items) && items.length > 0) {
+                items.forEach(it => {
+                    const li = document.createElement('li');
+                    li.textContent = it;
+                    el.appendChild(li);
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

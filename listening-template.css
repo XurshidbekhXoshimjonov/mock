@@ -58,6 +58,11 @@ a {
     overflow-x: hidden;
 }
 
+.lc-test-content[hidden],
+.lc-bottom-bar[hidden] {
+    display: none !important;
+}
+
 .lc-header {
     display: grid;
     grid-template-columns: 1fr auto 1fr;

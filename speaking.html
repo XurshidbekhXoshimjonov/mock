@@ -6,61 +6,49 @@
         if (localStorage.getItem("ielts-theme") === "dark") {
             document.documentElement.classList.add("dark-theme");
         }
+        if (/^\/speaking\/(?:part-?1|part-?2|cue-card|part-?3|full-?test)(?:\/|$)/.test(window.location.pathname.replace(/\/+$/, ""))) {
+            document.documentElement.classList.add("speaking-subroute");
+        }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speaking</title>
-    <link rel="stylesheet" href="/site-modern.css?v=1.0.1">
+    <title>Speaking Practice</title>
+    <link rel="stylesheet" href="/site-modern.css?v=20260624-footer">
+    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
+    <link rel="stylesheet" href="/speaking.css?v=20260624-speaking-footer-routes">
 </head>
 
-<body class="public-page speaking-coming-soon">
+<body class="public-page test-list-page speaking-page" data-page="speaking" data-practice-skill="speaking">
+    <header class="cbt-header speaking-cbt-header" id="speakingCbtHeader" style="display: none;">
+        <div class="cbt-brand">
+            <img class="cbt-logo" src="/IELTS-logo.png" alt="IELTS">
+            <span class="cbt-brand-divider" aria-hidden="true"></span>
+            <span class="cbt-brand-title">Academic Speaking</span>
+        </div>
+        <div class="cbt-timer" id="speakingTimerDisplay">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+            </svg>
+            <div>
+                <strong id="speakingTimerVal">13:00</strong>
+                <span>TIME LEFT</span>
+            </div>
+        </div>
+        <div class="cbt-header-actions">
+            <a class="cbt-button cbt-button--secondary" href="/speaking">
+                <span class="cbt-grid-icon" aria-hidden="true"></span>
+                Dashboard
+            </a>
+            <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
+            <button class="cbt-button cbt-button--submit" id="speakingHeaderSubmitBtn" type="button" data-speaking-header-submit>Submit</button>
+        </div>
+    </header>
+
     <header id="globalNavbar" data-global-navbar="true"></header>
 
-    <main class="coming-soon-shell">
-        <section class="coming-soon-panel" aria-labelledby="comingSoonTitle">
-            <div class="speaking-hero-content">
-                <span class="coming-soon-chip">Coming Soon</span>
-                <span class="coming-soon-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 15.5a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5.5a4 4 0 0 0 4 4Z"></path>
-                        <path d="M5 10.5a7 7 0 0 0 14 0"></path>
-                        <path d="M12 17.5V21"></path>
-                        <path d="M9 21h6"></path>
-                    </svg>
-                </span>
-                <h1 id="comingSoonTitle">Speaking Practice</h1>
-                <p class="coming-soon-message">AI-powered IELTS Speaking mock tests are being prepared.</p>
-                <p class="speaking-description">Practice Part 1, Part 2 and Part 3 with real exam-style questions, timer, recording, and AI band feedback.</p>
-
-                <div class="coming-soon-actions">
-                    <button class="speaking-primary-button" type="button" disabled>Launching Soon</button>
-                    <a class="speaking-secondary-button" href="/">Back to Home</a>
-                </div>
-            </div>
-
-            <div class="speaking-feature-grid" aria-label="Speaking test parts">
-                <article class="speaking-feature-card">
-                    <span>Part 1</span>
-                    <strong>Short Questions</strong>
-                </article>
-                <article class="speaking-feature-card">
-                    <span>Part 2</span>
-                    <strong>Cue Card</strong>
-                </article>
-                <article class="speaking-feature-card">
-                    <span>Part 3</span>
-                    <strong>Discussion</strong>
-                </article>
-            </div>
-
-            <div class="speaking-upcoming-row" aria-label="Upcoming speaking features">
-                <span>AI Band Score</span>
-                <span>Fluency Feedback</span>
-                <span>Pronunciation Check</span>
-                <span>Real Exam Timer</span>
-            </div>
-        </section>
-    </main>
+    <main id="speakingApp" class="speaking-shell" aria-live="polite"></main>
 
     <footer class="home-footer" aria-label="IELTSX footer">
         <div class="home-footer__card">
@@ -131,7 +119,15 @@
             </div>
         </div>
     </footer>
+
+    <footer class="partfter speaking-part-footer" aria-label="IELTSX footer">
+        <p>&copy; 2026 ieltsx.org All rights reserved.</p>
+    </footer>
+
     <script src="/auth-client.js"></script>
+    <script src="/annotations.js?v=1.0.21"></script>
+    <script src="/pre-test-start.js?v=1.0.0"></script>
+    <script src="/speaking.js?v=20260624-footer"></script>
 </body>
 
 </html>
