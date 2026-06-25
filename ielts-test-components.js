@@ -650,26 +650,26 @@ function InstructionRenderer({ group }) {
         )
         : instruction.bodyHtml;
     const choiceType = groupChoiceInstructionType(group);
-    const instructionText = [bodyHtml, body, rules].filter(Boolean).join(" ");
     const visibleBodyText = [bodyHtml, body].filter(Boolean).join(" ");
-    const hasChoiceDefinitions = /if\s+(?:the\s+statement|there\s+is|it\s+is|the\s+writer)/i.test(instructionText);
+    const bodyHasChoiceDefinitions = /if\s+(?:the\s+statement|there\s+is|it\s+is|the\s+writer)/i.test(visibleBodyText);
     const hasVisibleChoicePrompt = choicePromptMatches(choiceType, visibleBodyText);
     const hasVisibleChoiceLead = /in\s+boxes?\s+\d/i.test(visibleBodyText);
-    const showAutomaticChoiceInstructions = choiceType && !hasChoiceDefinitions;
+    const showAutomaticChoiceInstructions = Boolean(choiceType);
+    const renderBody = !bodyHasChoiceDefinitions;
 
     return h("header", { className: "cbt-group-instructions" },
         instruction.titleHtml
             ? h(SafeHtml, { html: instruction.titleHtml, className: "cbt-group-title" })
             : (title ? h("h3", { className: "cbt-group-title" }, title) : null),
-        bodyHtml
+        renderBody && bodyHtml
             ? h(SafeHtml, { html: bodyHtml, className: "cbt-instruction-copy", highlightInstructions: true })
-            : (body ? h(SafeHtml, { tag: "p", html: highlightInstructionText(body), className: "cbt-instruction-copy" }) : null),
+            : (renderBody && body ? h(SafeHtml, { tag: "p", html: highlightInstructionText(body), className: "cbt-instruction-copy" }) : null),
         showAutomaticChoiceInstructions
             ? h(ChoiceInstructionBlock, {
                 type: choiceType,
                 questions: group.questions || [],
-                showPrompt: !hasVisibleChoicePrompt,
-                showLead: !hasVisibleChoiceLead
+                showPrompt: renderBody ? !hasVisibleChoicePrompt : true,
+                showLead: renderBody ? !hasVisibleChoiceLead : true
             })
             : (rules
             ? (instruction.rulesHtml

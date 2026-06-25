@@ -84,6 +84,23 @@ let loadedSaveKey = "full";
 let editingBlockIndex = null;
 let blockDraft = null;
 
+const mockBuilderParams = new URLSearchParams(window.location.search);
+const isMockBuilderEmbed = mockBuilderParams.get("mockBuilder") === "1";
+
+if (isMockBuilderEmbed) {
+    document.body.classList.add("mock-builder-embed");
+}
+
+function notifyMockBuilder(test) {
+    if (!isMockBuilderEmbed || window.parent === window || !test) return;
+    window.parent.postMessage({
+        type: "ieltsx-admin-test-saved",
+        section: "listening",
+        testId: test.id || test._id,
+        test
+    }, window.location.origin);
+}
+
 // Display Status Log / Toast
 function showStatus(message, type = "") {
     builderStatus.textContent = message;
@@ -1582,6 +1599,7 @@ async function saveTest() {
     history.replaceState({}, "", `admin-listening.html?id=${encodeURIComponent(editingTestId)}`);
     ListeningTestBuilder();
     showStatus("Test saved successfully.", "success");
+    notifyMockBuilder(result.test);
 }
 
 async function loadTest(id) {

@@ -1076,5 +1076,19 @@
     "passage_id": "reading-practice-test-6-reading-p1-passage-1",
     "created_at": "2026-06-21T04:41:33.341Z",
     "updated_at": "2026-06-21T04:41:33.341Z"
+  },
+  {
+    "id": "1782347129009-since-197217",
+    "word": "since",
+    "normalized_word": "since",
+    "phonetic": "/sɪns/",
+    "part_of_speech": "adverb",
+    "english_definition": "From a specified time in the past.",
+    "uzbek_translation": "beri",
+    "example_sentence": "A short/long time since",
+    "source": "api_generated",
+    "passage_id": "art-of-deception-reading-p3-passage-3",
+    "created_at": "2026-06-25T00:25:28.571Z",
+    "updated_at": "2026-06-25T00:25:28.571Z"
   }
 ]

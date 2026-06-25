@@ -1080,3 +1080,18 @@ dialog::backdrop {
     border: 2px solid #ffffff;
     user-select: none;
 }
+
+body.listening-builder-app.mock-builder-embed {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+body.listening-builder-app.mock-builder-embed .app-header {
+    display: none;
+}
+
+body.listening-builder-app.mock-builder-embed .app-layout {
+    height: auto;
+    min-height: 100vh;
+}

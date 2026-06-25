@@ -37,12 +37,36 @@ const state = {
     toastTimer: null
 };
 
+const mockBuilderParams = new URLSearchParams(window.location.search);
+const isMockBuilderEmbed = mockBuilderParams.get("mockBuilder") === "1";
+
+function notifyMockBuilder(test, options = {}) {
+    if (!isMockBuilderEmbed || window.parent === window || !test) return;
+    window.parent.postMessage({
+        type: "ieltsx-admin-test-saved",
+        section: "speaking",
+        testId: test._id || test.id,
+        test,
+        attachable: options.attachable !== false,
+        message: options.message || ""
+    }, window.location.origin);
+}
+
+function openInitialMockBuilderForm() {
+    if (!isMockBuilderEmbed) return;
+    const section = mockBuilderParams.get("section") || sectionFromPath() || "full";
+    openBuilder(SECTION_LABELS[section] ? section : "full");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    if (isMockBuilderEmbed) {
+        document.body.classList.add("mock-builder-embed");
+    }
     state.activeSection = sectionFromPath() || "part1";
     bindEvents();
     syncTabs();
     updateBuilderMode();
-    loadAllData();
+    loadAllData().then(openInitialMockBuilderForm).catch(() => {});
 });
 
 function el(id) {
@@ -431,7 +455,7 @@ async function saveBuilder(event) {
     try {
         const body = buildPayload(section);
         await validatePayload(section, body);
-        await requestJson(id ? `/api/admin/speaking/${section}/${id}` : `/api/admin/speaking/${section}`, {
+        const savedTest = await requestJson(id ? `/api/admin/speaking/${section}/${id}` : `/api/admin/speaking/${section}`, {
             method: id ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -442,6 +466,14 @@ async function saveBuilder(event) {
         syncTabs();
         renderDashboard();
         showToast("Speaking test saved.");
+        if (section === "full") {
+            notifyMockBuilder(savedTest);
+        } else {
+            notifyMockBuilder(savedTest, {
+                attachable: false,
+                message: "Speaking part saved. Create or save a Full Speaking Test to attach it to this Mock Test."
+            });
+        }
     } catch (error) {
         console.error("Failed to save Speaking test:", error);
         showToast(error.message || "Failed to save Speaking test.");

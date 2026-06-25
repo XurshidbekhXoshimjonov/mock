@@ -2783,12 +2783,8 @@ function questionIsComplete(question) {
     return filled(question?.prompt || question?.question || question?.text) && filled(question?.answer || question?.correctAnswer || question?.correct);
 }
 
-function validateMockTestForPublish(test) {
+function validateMockTestBasics(test) {
     const errors = [];
-
-    if (!filled(test?.listeningTestId) || !filled(test?.readingTestId) || !filled(test?.writingTestId) || !filled(test?.speakingTestId)) {
-        errors.push("Please select Listening, Reading, Writing, and Speaking tests.");
-    }
 
     if (!filled(test?.title)) {
         errors.push("Mock Test title is required.");
@@ -2802,25 +2798,32 @@ function validateMockTestForPublish(test) {
 }
 
 async function validateMockTestPayload(payload) {
-    const errors = validateMockTestForPublish(payload);
+    const errors = validateMockTestBasics(payload);
 
     if (errors.length) {
         return errors;
     }
 
-    if (!getListeningTestById(payload.listeningTestId)) {
+    const isActive = ["active", "published"].includes(String(payload?.status || "").trim().toLowerCase());
+
+    if (isActive && (!filled(payload?.listeningTestId) || !filled(payload?.readingTestId) || !filled(payload?.writingTestId) || !filled(payload?.speakingTestId))) {
+        errors.push("Please select Listening, Reading, Writing, and Speaking tests.");
+        return errors;
+    }
+
+    if (filled(payload.listeningTestId) && !getListeningTestById(payload.listeningTestId)) {
         errors.push("Selected Listening test was not found.");
     }
 
-    if (!getReadingTestById(payload.readingTestId)) {
+    if (filled(payload.readingTestId) && !getReadingTestById(payload.readingTestId)) {
         errors.push("Selected Reading test was not found.");
     }
 
-    if (!await findByIdSafe(WritingFullTest, payload.writingTestId)) {
+    if (filled(payload.writingTestId) && !await findByIdSafe(WritingFullTest, payload.writingTestId)) {
         errors.push("Selected Writing test was not found.");
     }
 
-    if (!await findByIdSafe(FullSpeakingTest, payload.speakingTestId)) {
+    if (filled(payload.speakingTestId) && !await findByIdSafe(FullSpeakingTest, payload.speakingTestId)) {
         errors.push("Selected Speaking test was not found.");
     }
 

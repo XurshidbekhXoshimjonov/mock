@@ -944,5 +944,16 @@
     "uzbek_translation": "tug'ralgan",
     "example_sentence": "chop wood; chop an onion",
     "clicked_at": "2026-06-21T04:41:33.465Z"
+  },
+  {
+    "id": "1782347129019-since-fe9ae4",
+    "attempt_id": "reading-art-of-deception-reading-p3-1782346736746-d17dc3",
+    "passage_id": "art-of-deception-reading-p3-passage-3",
+    "word": "since",
+    "normalized_word": "since",
+    "english_definition": "From a specified time in the past.",
+    "uzbek_translation": "beri",
+    "example_sentence": "A short/long time since",
+    "clicked_at": "2026-06-25T00:25:29.019Z"
   }
 ]

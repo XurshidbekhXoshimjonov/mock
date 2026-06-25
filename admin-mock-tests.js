@@ -1,23 +1,74 @@
-const mockTestList = document.getElementById("mockTestList");
-const mockTestEditor = document.getElementById("mockTestEditor");
-const createMockTest = document.getElementById("createMockTest");
+const mockBuilderForm = document.getElementById("mockBuilderForm");
+const mockTitleInput = document.getElementById("mockTitle");
+const mockNumberInput = document.getElementById("mockNumber");
+const mockStatusInput = document.getElementById("mockStatus");
+const sectionGrid = document.getElementById("sectionGrid");
 const mockAdminStatus = document.getElementById("mockAdminStatus");
+const newMockBtn = document.getElementById("newMockBtn");
+const deleteMockBtn = document.getElementById("deleteMockBtn");
+const testFormModal = document.getElementById("testFormModal");
+const formIframe = document.getElementById("formIframe");
+const modalTitle = document.getElementById("modalTitle");
+const modalKicker = document.getElementById("modalKicker");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const refreshCatalogBtn = document.getElementById("refreshCatalogBtn");
 const deleteMockModal = document.getElementById("deleteMockModal");
 const cancelDeleteMock = document.getElementById("cancelDeleteMock");
 const confirmDeleteMock = document.getElementById("confirmDeleteMock");
 
-const REQUIRED_SELECTION_MESSAGE = "Please select Listening, Reading, Writing, and Speaking tests.";
-const SAVE_FAILED_MESSAGE = "Failed to save mock test.";
+const SECTION_CONFIG = {
+    listening: {
+        label: "Listening",
+        idField: "listeningTestId",
+        endpoint: "/api/listening-tests?includeDerived=1",
+        adminUrl: "/admin-listening?mockBuilder=1&section=listening",
+        createLabel: "Create Listening Test",
+        description: "Upload audio, build all four parts, transcripts, questions, and answer keys.",
+        accent: "blue",
+        icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"></path><path d="M5 14h3v6H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2Z"></path><path d="M16 14h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-3v-6Z"></path></svg>`
+    },
+    reading: {
+        label: "Reading",
+        idField: "readingTestId",
+        endpoint: "/api/reading-tests",
+        adminUrl: "/admin-reading?mockBuilder=1&section=reading",
+        createLabel: "Create or Upload Reading Test",
+        description: "Use passage text, HTML upload, question groups, answers, and vocabulary tools.",
+        accent: "indigo",
+        icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></svg>`
+    },
+    writing: {
+        label: "Writing",
+        idField: "writingTestId",
+        endpoint: "/api/admin/writing/full-tests",
+        adminUrl: "/admin-writing?mockBuilder=1&type=full&section=writing",
+        createLabel: "Create Writing Test",
+        description: "Create Task 1, Task 2, then combine them into a Full Writing Test.",
+        accent: "violet",
+        icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>`
+    },
+    speaking: {
+        label: "Speaking",
+        idField: "speakingTestId",
+        endpoint: "/api/admin/speaking/full",
+        adminUrl: "/admin-speaking/full?mockBuilder=1&section=full",
+        createLabel: "Create Speaking Test",
+        description: "Create Part 1, cue-card Part 2, Part 3, and publish a Full Speaking Test.",
+        accent: "purple",
+        icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path></svg>`
+    }
+};
+
+const sectionOrder = Object.keys(SECTION_CONFIG);
 
 let summaries = [];
-let activeTest = null;
+let activeTest = blankMockTest();
 let pendingDeleteId = "";
-let catalog = {
-    listening: [],
-    reading: [],
-    writing: [],
-    speaking: []
-};
+let activeModalSection = "";
+let catalog = sectionOrder.reduce((items, section) => {
+    items[section] = [];
+    return items;
+}, {});
 
 function escapeHtml(value) {
     return String(value || "")
@@ -28,9 +79,9 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
-function showStatus(message, type = "") {
+function setStatus(message, type = "") {
     mockAdminStatus.textContent = message || "";
-    mockAdminStatus.style.color = type === "error" ? "#dc2626" : "";
+    mockAdminStatus.dataset.type = type;
 }
 
 async function readJson(response) {
@@ -45,13 +96,32 @@ function optionId(item) {
     return String(item?._id || item?.id || "");
 }
 
+function getItemStatus(item) {
+    return String(item?.status || item?.state || "").trim();
+}
+
+function normalizePartLabel(part) {
+    const raw = String(part || "").trim();
+    if (!raw || raw === "full") return "Full test";
+    return /^part\s+/i.test(raw) ? raw : `Part ${raw}`;
+}
+
 function optionTitle(item, fallback) {
-    const parts = [
-        item?.title || fallback,
-        item?.part && item.part !== "full" ? `Part ${item.part}` : "",
-        item?.status ? item.status : ""
-    ].filter(Boolean);
-    return parts.join(" - ");
+    return String(item?.title || item?.name || fallback || "Untitled test").trim();
+}
+
+function optionMeta(item, section) {
+    const meta = [];
+    const status = getItemStatus(item);
+    if (section === "reading" || section === "listening") {
+        meta.push(normalizePartLabel(item?.part));
+    } else {
+        meta.push("Full test");
+    }
+    if (status) meta.push(status);
+    const count = Number(item?.questionCount || item?.questionsCount || item?.answersCount);
+    if (Number.isFinite(count) && count > 0) meta.push(`${count} questions`);
+    return meta.filter(Boolean).join(" | ");
 }
 
 function uniqueById(items) {
@@ -64,19 +134,21 @@ function uniqueById(items) {
     });
 }
 
+function hasAllSectionIds(test) {
+    return sectionOrder.every((section) => String(test?.[SECTION_CONFIG[section].idField] || "").trim());
+}
+
 function nextMockNumber() {
     return summaries.reduce((max, test) => Math.max(max, Number(test.testNumber || test.number) || 0), 0) + 1;
 }
 
 function blankMockTest() {
-    const number = nextMockNumber();
     return {
         id: "",
         title: "",
-        testNumber: number,
-        number,
-        description: "",
-        status: "active",
+        testNumber: 1,
+        number: 1,
+        status: "draft",
         listeningTestId: "",
         readingTestId: "",
         writingTestId: "",
@@ -84,313 +156,354 @@ function blankMockTest() {
     };
 }
 
-async function loadCatalogs() {
-    const [listening, reading, writing, speaking] = await Promise.all([
-        readJson(await fetch("/api/listening-tests?includeDerived=1", { cache: "no-store" })),
-        readJson(await fetch("/api/reading-tests", { cache: "no-store" })),
-        readJson(await fetch("/api/admin/writing/full-tests", { cache: "no-store" })),
-        readJson(await fetch("/api/admin/speaking/full", { cache: "no-store" }))
-    ]);
+function sectionValue(section) {
+    return String(activeTest?.[SECTION_CONFIG[section].idField] || "");
+}
 
-    catalog = {
-        listening: uniqueById(listening),
-        reading: uniqueById(reading),
-        writing: uniqueById(writing),
-        speaking: uniqueById(speaking)
+function selectedCatalogItem(section) {
+    const id = sectionValue(section);
+    return (catalog[section] || []).find((item) => optionId(item) === id) || null;
+}
+
+function selectedCount() {
+    return sectionOrder.filter((section) => sectionValue(section)).length;
+}
+
+function applyTestToForm(test) {
+    const normalized = {
+        ...blankMockTest(),
+        ...test,
+        testNumber: Number(test?.testNumber || test?.number) || nextMockNumber(),
+        number: Number(test?.testNumber || test?.number) || nextMockNumber(),
+        status: test?.status === "active" ? "active" : "draft"
+    };
+    activeTest = normalized;
+    mockTitleInput.value = normalized.title || "";
+    mockNumberInput.value = normalized.testNumber || normalized.number || nextMockNumber();
+    mockStatusInput.value = normalized.status;
+    deleteMockBtn.classList.toggle("is-hidden", !normalized.id);
+    renderSectionCards();
+}
+
+function updateActiveFromForm() {
+    activeTest = {
+        ...activeTest,
+        title: mockTitleInput.value.trim(),
+        testNumber: Number(mockNumberInput.value) || 1,
+        number: Number(mockNumberInput.value) || 1,
+        status: mockStatusInput.value === "active" ? "active" : "draft"
     };
 }
 
-async function loadMockTests(selectId = "") {
-    const data = await readJson(await fetch("/api/admin/mock-tests", { cache: "no-store" }));
-    summaries = Array.isArray(data.tests) ? data.tests : [];
-    renderList();
+function renderSectionCards() {
+    sectionGrid.innerHTML = sectionOrder.map((section) => {
+        const config = SECTION_CONFIG[section];
+        const selected = sectionValue(section);
+        const items = catalog[section] || [];
+        const options = items.map((item) => {
+            const id = optionId(item);
+            const meta = optionMeta(item, section);
+            const label = meta ? `${optionTitle(item, config.label)} - ${meta}` : optionTitle(item, config.label);
+            return `<option value="${escapeHtml(id)}" ${selected === id ? "selected" : ""}>${escapeHtml(label)}</option>`;
+        }).join("");
+        const preview = renderPreview(section);
 
-    if (selectId) {
-        await selectMockTest(selectId);
-        return;
-    }
-
-    if (activeTest?.id && summaries.some((test) => test.id === activeTest.id)) {
-        await selectMockTest(activeTest.id);
-        return;
-    }
-
-    activeTest = summaries.length ? { ...summaries[0] } : null;
-    if (activeTest?.id) {
-        await selectMockTest(activeTest.id);
-    } else {
-        renderEditor();
-    }
+        return `
+            <article class="mock-section-card mock-section-card--${escapeHtml(config.accent)}">
+                <div class="mock-section-card__top">
+                    <span class="mock-section-icon">${config.icon}</span>
+                    <div>
+                        <h3>${escapeHtml(config.label)}</h3>
+                        <p>${escapeHtml(config.description)}</p>
+                    </div>
+                </div>
+                <label class="mock-field">
+                    <span>Select existing test</span>
+                    <select data-section-select="${escapeHtml(section)}">
+                        <option value="">Select ${escapeHtml(config.label)} test</option>
+                        ${options}
+                    </select>
+                </label>
+                <button class="mock-btn mock-btn--light mock-create-btn" type="button" data-create-section="${escapeHtml(section)}">
+                    ${escapeHtml(config.createLabel)}
+                </button>
+                <div class="mock-selected-preview" id="${escapeHtml(section)}Preview">${preview}</div>
+            </article>
+        `;
+    }).join("");
 }
 
-async function selectMockTest(id) {
+function renderPreview(section) {
+    const config = SECTION_CONFIG[section];
+    const item = selectedCatalogItem(section);
+    if (!item) {
+        return `
+            <div class="mock-preview-empty">
+                <strong>No ${escapeHtml(config.label)} test selected</strong>
+                <span>Create a new test or choose one from the dropdown.</span>
+            </div>
+        `;
+    }
+
+    const meta = optionMeta(item, section);
+    const openUrl = item.openUrl || "";
+    const editUrl = section === "listening"
+        ? `/admin-listening?id=${encodeURIComponent(optionId(item))}`
+        : section === "reading"
+            ? "/admin-reading"
+            : section === "writing"
+                ? "/admin-writing"
+                : "/admin-speaking/full";
+
+    return `
+        <div class="mock-preview-selected">
+            <span>Selected ${escapeHtml(config.label)}</span>
+            <strong>${escapeHtml(optionTitle(item, config.label))}</strong>
+            ${meta ? `<small>${escapeHtml(meta)}</small>` : ""}
+            <div class="mock-preview-links">
+                ${openUrl ? `<a href="${escapeHtml(openUrl)}" target="_blank" rel="noreferrer">Open</a>` : ""}
+                <a href="${escapeHtml(editUrl)}" target="_blank" rel="noreferrer">Edit</a>
+            </div>
+        </div>
+    `;
+}
+
+async function loadCatalog(section) {
+    const config = SECTION_CONFIG[section];
+    const items = await readJson(await fetch(config.endpoint, { cache: "no-store" }));
+    catalog[section] = uniqueById(items);
+}
+
+async function loadCatalogs() {
+    await Promise.all(sectionOrder.map(loadCatalog));
+}
+
+async function loadMockTests() {
+    const data = await readJson(await fetch("/api/admin/mock-tests", { cache: "no-store" }));
+    summaries = Array.isArray(data.tests) ? data.tests : [];
+}
+
+async function loadCurrentMockTest() {
+    const id = new URLSearchParams(window.location.search).get("id");
     if (!id) {
-        activeTest = null;
-        renderList();
-        renderEditor();
+        const draft = blankMockTest();
+        draft.testNumber = nextMockNumber();
+        draft.number = draft.testNumber;
+        applyTestToForm(draft);
         return;
     }
 
     const data = await readJson(await fetch(`/api/admin/mock-tests/${encodeURIComponent(id)}`, { cache: "no-store" }));
-    activeTest = data.test;
-    renderList();
-    renderEditor();
-}
-
-function statusLabel(status) {
-    return status === "active" ? "Active" : "Inactive";
-}
-
-function renderList() {
-    if (!summaries.length) {
-        mockTestList.innerHTML = '<div class="empty-state">No mock tests available yet.</div>';
-        return;
-    }
-
-    mockTestList.innerHTML = summaries.map((test) => `
-        <button class="mock-admin-row ${activeTest?.id === test.id ? "is-active" : ""}" type="button" data-select-test="${escapeHtml(test.id)}">
-            <strong>${escapeHtml(test.title)}</strong>
-            <span>Mock Test ${escapeHtml(test.testNumber || test.number || "")} - ${escapeHtml(statusLabel(test.status))}</span>
-        </button>
-    `).join("");
-}
-
-function catalogSelect(section, label, selectedValue) {
-    const items = catalog[section] || [];
-    const disabled = items.length ? "" : " disabled";
-    const options = items.map((item) => {
-        const id = optionId(item);
-        return `<option value="${escapeHtml(id)}" ${String(selectedValue || "") === id ? "selected" : ""}>${escapeHtml(optionTitle(item, label))}</option>`;
-    }).join("");
-    const warning = items.length
-        ? ""
-        : `<p class="mock-field-warning">No ${escapeHtml(label)} tests found. Please create a ${escapeHtml(label)} test first.</p>`;
-
-    return `
-        <label class="mock-field">
-            <span>${escapeHtml(label)} test</span>
-            <select data-field="${section}TestId"${disabled}>
-                <option value="">Select ${escapeHtml(label)} test</option>
-                ${options}
-            </select>
-            ${warning}
-        </label>
-    `;
-}
-
-function renderEditor() {
-    if (!activeTest) {
-        mockTestEditor.innerHTML = `
-            <div class="mock-editor-empty">
-                <h2>No mock test selected</h2>
-                <p class="admin-help">Create a mock test, then choose existing Listening, Reading, Writing, and Speaking tests.</p>
-            </div>
-        `;
-        return;
-    }
-
-    const isSaved = Boolean(activeTest.id);
-    mockTestEditor.innerHTML = `
-        <form id="mockTestForm" class="mock-create-panel">
-            <div class="mock-editor-head">
-                <div class="mock-editor-title">
-                    <strong>${escapeHtml(isSaved ? activeTest.title : "New Mock Test")}</strong>
-                    <span class="admin-help">Mock tests reference existing section tests. Content is managed in each section admin page.</span>
-                </div>
-                <div class="mock-admin-actions">
-                    <button class="secondary-action" type="button" data-action="new">New</button>
-                    ${isSaved ? '<button class="danger-action" type="button" data-action="delete">Delete</button>' : ""}
-                    <button class="primary-action" type="submit">Save</button>
-                </div>
-            </div>
-
-            <div class="mock-form-grid mock-meta-grid">
-                <label class="mock-field">
-                    <span>Mock Test title</span>
-                    <input data-field="title" type="text" value="${escapeHtml(activeTest.title)}" required>
-                </label>
-                <label class="mock-field">
-                    <span>Mock Test number</span>
-                    <input data-field="testNumber" type="number" min="1" step="1" value="${escapeHtml(activeTest.testNumber || activeTest.number || 1)}" required>
-                </label>
-                <label class="mock-field">
-                    <span>Status</span>
-                    <select data-field="status">
-                        <option value="active" ${activeTest.status === "active" ? "selected" : ""}>Active</option>
-                        <option value="inactive" ${activeTest.status !== "active" ? "selected" : ""}>Inactive</option>
-                    </select>
-                </label>
-                <label class="mock-field full">
-                    <span>Description</span>
-                    <textarea data-field="description" rows="4" placeholder="Optional description">${escapeHtml(activeTest.description || "")}</textarea>
-                </label>
-                ${catalogSelect("listening", "Listening", activeTest.listeningTestId)}
-                ${catalogSelect("reading", "Reading", activeTest.readingTestId)}
-                ${catalogSelect("writing", "Writing", activeTest.writingTestId)}
-                ${catalogSelect("speaking", "Speaking", activeTest.speakingTestId)}
-            </div>
-        </form>
-    `;
-}
-
-function collectPayload() {
-    const payload = {
-        title: "",
-        testNumber: 1,
-        description: "",
-        status: "active",
-        listeningTestId: "",
-        readingTestId: "",
-        writingTestId: "",
-        speakingTestId: ""
-    };
-
-    mockTestEditor.querySelectorAll("[data-field]").forEach((field) => {
-        const key = field.dataset.field;
-        payload[key] = key === "testNumber" ? Number(field.value) : field.value.trim();
-    });
-
-    return payload;
+    applyTestToForm(data.test);
 }
 
 function validatePayload(payload) {
     if (!payload.title) {
-        showStatus("Mock Test title is required.", "error");
+        setStatus("Mock Test title is required.", "error");
         return false;
     }
-
-    if (!Number.isFinite(Number(payload.testNumber)) || Number(payload.testNumber) <= 0) {
-        showStatus("Mock Test number is required.", "error");
+    if (!Number.isFinite(Number(payload.number)) || Number(payload.number) <= 0) {
+        setStatus("Mock Test number is required.", "error");
         return false;
     }
-
-    if (!payload.listeningTestId || !payload.readingTestId || !payload.writingTestId || !payload.speakingTestId) {
-        showStatus(REQUIRED_SELECTION_MESSAGE, "error");
+    if (payload.status === "active" && !hasAllSectionIds(payload)) {
+        setStatus("Active Mock Test requires Listening, Reading, Writing, and Speaking tests.", "error");
         return false;
     }
-
     return true;
 }
 
-async function saveActiveTest() {
-    if (!activeTest) return;
+function collectPayload() {
+    updateActiveFromForm();
+    return {
+        title: activeTest.title,
+        number: activeTest.number,
+        testNumber: activeTest.testNumber,
+        status: activeTest.status,
+        listeningTestId: activeTest.listeningTestId || "",
+        readingTestId: activeTest.readingTestId || "",
+        writingTestId: activeTest.writingTestId || "",
+        speakingTestId: activeTest.speakingTestId || ""
+    };
+}
 
+async function saveMockTest() {
     const payload = collectPayload();
     if (!validatePayload(payload)) return;
 
-    const isUpdate = Boolean(activeTest.id);
-    const response = await fetch(isUpdate ? `/api/admin/mock-tests/${encodeURIComponent(activeTest.id)}` : "/api/admin/mock-tests", {
-        method: isUpdate ? "PUT" : "POST",
+    setStatus("Saving Mock Test...");
+    const url = activeTest.id
+        ? `/api/admin/mock-tests/${encodeURIComponent(activeTest.id)}`
+        : "/api/admin/mock-tests";
+    const data = await readJson(await fetch(url, {
+        method: activeTest.id ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-    });
+    }));
 
-    const data = await readJson(response);
-    const savedTest = data.test || {};
-    showStatus(data.message || (isUpdate ? "Mock test updated successfully." : "Mock test created successfully."));
-    await loadMockTests(savedTest.id);
-}
-
-function openDeleteModal() {
-    if (!activeTest?.id) return;
-    pendingDeleteId = activeTest.id;
-    if (deleteMockModal?.showModal) {
-        deleteMockModal.showModal();
-    } else if (deleteMockModal) {
-        deleteMockModal.classList.add("is-open");
-    }
-}
-
-function closeDeleteModal() {
-    pendingDeleteId = "";
-    if (deleteMockModal?.close) {
-        deleteMockModal.close();
-    } else if (deleteMockModal) {
-        deleteMockModal.classList.remove("is-open");
-    }
-}
-
-async function deleteActiveTest() {
-    if (!pendingDeleteId) return;
-    const response = await fetch(`/api/admin/mock-tests/${encodeURIComponent(pendingDeleteId)}`, {
-        method: "DELETE"
-    });
-    const data = await readJson(response);
-    closeDeleteModal();
-    showStatus(data.message || "Mock test deleted successfully.");
-    activeTest = null;
     await loadMockTests();
+    applyTestToForm(data.test);
+    const savedUrl = new URL(window.location.href);
+    savedUrl.searchParams.set("id", data.test.id);
+    history.replaceState({}, "", savedUrl.toString());
+    setStatus(`Mock Test saved. ${selectedCount()} of 4 sections selected.`, "success");
 }
 
-mockTestList.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-select-test]");
-    if (!button) return;
-    selectMockTest(button.dataset.selectTest).catch((error) => showStatus(error.message, "error"));
-});
+function openCreateModal(section) {
+    const config = SECTION_CONFIG[section];
+    activeModalSection = section;
+    modalKicker.textContent = `${config.label} section`;
+    modalTitle.textContent = config.createLabel;
+    formIframe.src = config.adminUrl;
+    if (!testFormModal.open) testFormModal.showModal();
+}
 
-mockTestEditor.addEventListener("input", (event) => {
-    const field = event.target.closest("[data-field]");
-    if (!field || !activeTest) return;
-    const key = field.dataset.field;
-    activeTest[key] = key === "testNumber" ? Number(field.value) : field.value;
-});
+function closeCreateModal() {
+    formIframe.src = "about:blank";
+    activeModalSection = "";
+    testFormModal.close();
+}
 
-mockTestEditor.addEventListener("change", (event) => {
-    const field = event.target.closest("[data-field]");
-    if (!field || !activeTest) return;
-    const key = field.dataset.field;
-    activeTest[key] = key === "testNumber" ? Number(field.value) : field.value;
-});
+function findNewestItem(section) {
+    return (catalog[section] || [])
+        .slice()
+        .sort((a, b) => new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0))[0] || null;
+}
 
-mockTestEditor.addEventListener("click", (event) => {
-    const action = event.target.closest("[data-action]")?.dataset.action;
-    if (!action) return;
+async function refreshAndAttach(section = activeModalSection, preferredId = "") {
+    if (!section) return;
+    await loadCatalog(section);
+    const selected = preferredId
+        ? (catalog[section] || []).find((item) => optionId(item) === String(preferredId))
+        : findNewestItem(section);
 
-    if (action === "new") {
-        activeTest = blankMockTest();
-        renderList();
-        renderEditor();
-        showStatus("");
+    if (selected) {
+        activeTest[SECTION_CONFIG[section].idField] = optionId(selected);
+        renderSectionCards();
+        setStatus(`${SECTION_CONFIG[section].label} test attached to this Mock Test.`, "success");
+    } else {
+        renderSectionCards();
+        setStatus(`No ${SECTION_CONFIG[section].label} test found yet.`, "error");
+    }
+}
+
+function handleBuilderMessage(event) {
+    if (event.origin !== window.location.origin) return;
+    const data = event.data || {};
+    if (data.type !== "ieltsx-admin-test-saved") return;
+
+    const section = data.section === "full" ? activeModalSection : data.section;
+    if (!section || !SECTION_CONFIG[section]) return;
+
+    if (data.attachable === false) {
+        loadCatalog(section)
+            .then(() => {
+                renderSectionCards();
+                setStatus(data.message || `${SECTION_CONFIG[section].label} item saved. Create or save a full test to attach it to this Mock Test.`, "success");
+            })
+            .catch((error) => setStatus(error.message, "error"));
         return;
     }
 
-    if (action === "delete") {
-        openDeleteModal();
-    }
+    const testId = data.testId || data.id || data.test?._id || data.test?.id || "";
+    refreshAndAttach(section, testId).then(() => {
+        if (testFormModal.open) {
+            closeCreateModal();
+        }
+    }).catch((error) => setStatus(error.message, "error"));
+}
+
+async function deleteCurrentMockTest() {
+    if (!pendingDeleteId) return;
+    setStatus("Deleting Mock Test...");
+    await readJson(await fetch(`/api/admin/mock-tests/${encodeURIComponent(pendingDeleteId)}`, {
+        method: "DELETE"
+    }));
+    pendingDeleteId = "";
+    deleteMockModal.close();
+    await loadMockTests();
+    const draft = blankMockTest();
+    draft.testNumber = nextMockNumber();
+    draft.number = draft.testNumber;
+    applyTestToForm(draft);
+    history.replaceState({}, "", "/admin-mock-tests");
+    setStatus("Mock Test deleted.", "success");
+}
+
+function resetBuilder() {
+    const draft = blankMockTest();
+    draft.testNumber = nextMockNumber();
+    draft.number = draft.testNumber;
+    applyTestToForm(draft);
+    history.replaceState({}, "", "/admin-mock-tests");
+    setStatus("New draft ready.", "success");
+}
+
+sectionGrid.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-section-select]");
+    if (!select) return;
+    const section = select.dataset.sectionSelect;
+    activeTest[SECTION_CONFIG[section].idField] = select.value;
+    renderSectionCards();
 });
 
-mockTestEditor.addEventListener("submit", (event) => {
+sectionGrid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-create-section]");
+    if (!button) return;
+    openCreateModal(button.dataset.createSection);
+});
+
+mockBuilderForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    saveActiveTest().catch((error) => {
-        const message = error.message && error.message.includes(REQUIRED_SELECTION_MESSAGE)
-            ? REQUIRED_SELECTION_MESSAGE
-            : SAVE_FAILED_MESSAGE;
-        showStatus(message, "error");
-    });
+    saveMockTest().catch((error) => setStatus(error.message || "Failed to save Mock Test.", "error"));
 });
 
-createMockTest.addEventListener("click", () => {
-    activeTest = blankMockTest();
-    renderList();
-    renderEditor();
-    showStatus("");
+[mockTitleInput, mockNumberInput, mockStatusInput].forEach((field) => {
+    field.addEventListener("input", updateActiveFromForm);
+    field.addEventListener("change", updateActiveFromForm);
 });
 
-cancelDeleteMock?.addEventListener("click", closeDeleteModal);
-deleteMockModal?.addEventListener("cancel", closeDeleteModal);
-confirmDeleteMock?.addEventListener("click", () => {
-    deleteActiveTest().catch((error) => showStatus(error.message || "Could not delete mock test.", "error"));
+newMockBtn.addEventListener("click", resetBuilder);
+
+deleteMockBtn.addEventListener("click", () => {
+    if (!activeTest.id) return;
+    pendingDeleteId = activeTest.id;
+    deleteMockModal.showModal();
 });
 
-(async function boot() {
+cancelDeleteMock.addEventListener("click", () => {
+    pendingDeleteId = "";
+    deleteMockModal.close();
+});
+
+confirmDeleteMock.addEventListener("click", () => {
+    deleteCurrentMockTest().catch((error) => setStatus(error.message || "Failed to delete Mock Test.", "error"));
+});
+
+closeModalBtn.addEventListener("click", () => {
+    closeCreateModal();
+});
+
+refreshCatalogBtn.addEventListener("click", () => {
+    refreshAndAttach().catch((error) => setStatus(error.message, "error"));
+});
+
+testFormModal.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeModalBtn.click();
+});
+
+window.addEventListener("message", handleBuilderMessage);
+
+(async function initMockBuilder() {
     try {
-        mockTestList.textContent = "Loading mock tests...";
-        mockTestEditor.innerHTML = '<p class="admin-help">Loading Mock Test admin...</p>';
-        await loadCatalogs();
-        await loadMockTests();
+        setStatus("Loading Mock Test Builder...");
+        await Promise.all([loadMockTests(), loadCatalogs()]);
+        await loadCurrentMockTest();
+        setStatus("Builder ready.", "success");
     } catch (error) {
-        mockTestList.innerHTML = '<div class="empty-state">Could not load mock tests.</div>';
-        mockTestEditor.innerHTML = '<p class="admin-help">Please sign in as an admin and make sure the section test pages are available.</p>';
-        showStatus(error.message || "Failed to save mock test.", "error");
+        console.error("Failed to load Mock Test Builder:", error);
+        setStatus(error.message || "Could not load Mock Test Builder.", "error");
+        renderSectionCards();
     }
-}());
+})();

@@ -29,9 +29,33 @@ const state = {
     toastTimer: null
 };
 
+const mockBuilderParams = new URLSearchParams(window.location.search);
+const isMockBuilderEmbed = mockBuilderParams.get("mockBuilder") === "1";
+
+function notifyMockBuilder(test, options = {}) {
+    if (!isMockBuilderEmbed || window.parent === window || !test) return;
+    window.parent.postMessage({
+        type: "ieltsx-admin-test-saved",
+        section: "writing",
+        testId: test._id || test.id,
+        test,
+        attachable: options.attachable !== false,
+        message: options.message || ""
+    }, window.location.origin);
+}
+
+function openInitialMockBuilderForm() {
+    if (!isMockBuilderEmbed) return;
+    const type = mockBuilderParams.get("type") || "full";
+    openBuilder(TYPE_LABELS[type] ? type : "full");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    if (isMockBuilderEmbed) {
+        document.body.classList.add("mock-builder-embed");
+    }
     bindPageEvents();
-    loadAllData();
+    loadAllData().then(openInitialMockBuilderForm).catch(() => {});
     updateBuilderMode();
     updateLivePreview();
 });
@@ -374,15 +398,24 @@ async function saveBuilder(event) {
     const id = el("builderId").value;
 
     try {
+        let savedTest = null;
         if (type === "task1" || type === "task2") {
-            await savePrompt(type, id);
+            savedTest = await savePrompt(type, id);
         } else {
-            await saveFullTest(id);
+            savedTest = await saveFullTest(id);
         }
 
         closeBuilder();
         await loadAllData();
         showToast("Writing test saved.");
+        if (type === "full") {
+            notifyMockBuilder(savedTest);
+        } else {
+            notifyMockBuilder(savedTest, {
+                attachable: false,
+                message: "Writing prompt saved. Create or save a Full Writing Test to attach it to this Mock Test."
+            });
+        }
     } catch (error) {
         console.error("Failed to save Writing test:", error);
         showToast(error.message || "Failed to save Writing test.");
@@ -407,7 +440,7 @@ async function savePrompt(type, id) {
         throw new Error("Title and prompt are required.");
     }
 
-    await requestJson(id ? `/api/admin/writing/prompts/${id}` : "/api/admin/writing/prompts", {
+    return requestJson(id ? `/api/admin/writing/prompts/${id}` : "/api/admin/writing/prompts", {
         method: id ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -427,7 +460,7 @@ async function saveFullTest(id) {
         throw new Error("Full Writing Test requires a title, Task 1, and Task 2.");
     }
 
-    await requestJson(id ? `/api/admin/writing/full-tests/${id}` : "/api/admin/writing/full-tests", {
+    return requestJson(id ? `/api/admin/writing/full-tests/${id}` : "/api/admin/writing/full-tests", {
         method: id ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

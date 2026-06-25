@@ -845,3 +845,18 @@
         padding: 16px;
     }
 }
+
+.admin-page.mock-builder-embed .admin-writing-topbar {
+    display: none;
+}
+
+.admin-page.mock-builder-embed .admin-writing-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 16px;
+}
+
+.admin-page.mock-builder-embed .admin-writing-header {
+    margin-top: 0;
+}

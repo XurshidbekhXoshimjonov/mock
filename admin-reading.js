@@ -28,6 +28,23 @@ let importedReadingHtml = "";
 let importedReadingPassageHtml = "";
 let importedReadingRichPassages = [];
 
+const mockBuilderParams = new URLSearchParams(window.location.search);
+const isMockBuilderEmbed = mockBuilderParams.get("mockBuilder") === "1";
+
+if (isMockBuilderEmbed) {
+    document.body.classList.add("mock-builder-embed");
+}
+
+function notifyMockBuilder(test) {
+    if (!isMockBuilderEmbed || window.parent === window || !test) return;
+    window.parent.postMessage({
+        type: "ieltsx-admin-test-saved",
+        section: "reading",
+        testId: test.id || test._id,
+        test
+    }, window.location.origin);
+}
+
 function escapeHtml(value) {
     return String(value || "")
         .replace(/&/g, "&amp;")
@@ -425,6 +442,7 @@ form.addEventListener("submit", async (event) => {
         }
 
         showStatus("Test saved successfully.", "success");
+        notifyMockBuilder(data.test || data);
         resetEditMode();
         form.reset();
         clearImportedReadingHtml();

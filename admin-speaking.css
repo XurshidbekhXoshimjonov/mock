@@ -716,3 +716,18 @@
         width: 100%;
     }
 }
+
+.admin-page.mock-builder-embed .admin-speaking-topbar {
+    display: none;
+}
+
+.admin-page.mock-builder-embed .admin-speaking-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 16px;
+}
+
+.admin-page.mock-builder-embed .admin-speaking-header {
+    margin-top: 0;
+}

@@ -4,17 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock Test Admin</title>
+    <title>Mock Test Builder</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/admin.css">
-    <link rel="stylesheet" href="/admin-reading.css">
-    <link rel="stylesheet" href="/admin-writing.css?v=1.0.0">
-    <link rel="stylesheet" href="/admin-speaking.css">
-    <link rel="stylesheet" href="/admin-listening.css?v=1.0.2">
-    <link rel="stylesheet" href="/admin-mock-tests.css">
+    <link rel="stylesheet" href="/admin-mock-tests.css?v=20260625-builder">
 </head>
 
-<body class="admin-page" data-skip-global-navbar>
+<body class="admin-page mock-builder-admin" data-skip-global-navbar>
     <header class="admin-topbar">
         <div class="admin-topbar__brand">
             <span class="admin-kicker">IELTSX</span>
@@ -32,46 +28,97 @@
         </nav>
     </header>
 
-    <main class="admin-shell admin-shell--wide">
-        <section class="admin-hero">
-            <h1>Mock Test management</h1>
-            <p class="admin-help">Create complete IELTS mock tests by combining existing Listening, Reading, Writing, and Speaking tests.</p>
+    <main class="admin-shell admin-shell--wide mock-builder-shell">
+        <section class="mock-builder-hero" aria-labelledby="mockBuilderTitle">
+            <div>
+                <span class="mock-builder-kicker">IELTSX Full Exam Workspace</span>
+                <h1 id="mockBuilderTitle">Mock Test Builder</h1>
+                <p>Create a complete IELTS mock exam by creating or selecting Listening, Reading, Writing, and Speaking tests.</p>
+            </div>
+            <div class="mock-builder-hero__badge">
+                <strong>4</strong>
+                <span>IELTS sections</span>
+            </div>
         </section>
 
-        <section class="mock-admin-layout">
-            <aside class="admin-card">
-                <div class="section-title-row">
+        <form id="mockBuilderForm" class="mock-builder-form">
+            <section class="mock-meta-card" aria-labelledby="mockMetaTitle">
+                <div class="mock-section-head">
                     <div>
-                        <h2>Mock Tests</h2>
-                        <p class="admin-help admin-help--tight">Create, edit, activate, or delete mock test packages.</p>
+                        <span class="mock-section-eyebrow">Mock details</span>
+                        <h2 id="mockMetaTitle">Test information</h2>
                     </div>
-                    <button id="createMockTest" class="secondary-action" type="button">New</button>
+                    <div class="mock-builder-actions">
+                        <button id="newMockBtn" class="mock-btn mock-btn--light" type="button">New Draft</button>
+                        <button id="deleteMockBtn" class="mock-btn mock-btn--danger is-hidden" type="button">Delete</button>
+                        <button class="mock-btn mock-btn--primary" type="submit">Save Mock Test</button>
+                    </div>
                 </div>
-                <div id="mockTestList" class="mock-admin-list">Loading mock tests...</div>
-            </aside>
 
-            <section class="admin-card">
-                <div id="mockTestEditor">
-                    <p class="admin-help">Select or create a Mock Test to start editing.</p>
+                <div class="mock-meta-grid">
+                    <label class="mock-field">
+                        <span>Mock test title</span>
+                        <input id="mockTitle" type="text" placeholder="IELTSX Full Mock Test" autocomplete="off" required>
+                    </label>
+                    <label class="mock-field">
+                        <span>Mock test number</span>
+                        <input id="mockNumber" type="number" min="1" step="1" placeholder="1" required>
+                    </label>
+                    <label class="mock-field">
+                        <span>Status</span>
+                        <select id="mockStatus">
+                            <option value="draft">Draft</option>
+                            <option value="active">Active</option>
+                        </select>
+                    </label>
                 </div>
                 <p id="mockAdminStatus" class="mock-status-text" role="status" aria-live="polite"></p>
             </section>
-        </section>
+
+            <section class="mock-section-builder" aria-labelledby="mockSectionsTitle">
+                <div class="mock-section-head">
+                    <div>
+                        <span class="mock-section-eyebrow">Section tests</span>
+                        <h2 id="mockSectionsTitle">Build the full IELTS sequence</h2>
+                    </div>
+                </div>
+                <div id="sectionGrid" class="mock-section-grid" aria-live="polite"></div>
+            </section>
+        </form>
     </main>
+
+    <dialog id="testFormModal" class="test-form-modal" aria-labelledby="modalTitle">
+        <div class="test-form-modal__header">
+            <div>
+                <span id="modalKicker" class="mock-section-eyebrow">Create section test</span>
+                <h2 id="modalTitle">Create Test</h2>
+            </div>
+            <div class="test-form-modal__actions">
+                <button id="refreshCatalogBtn" class="mock-btn mock-btn--light" type="button">Refresh and attach latest</button>
+                <button id="closeModalBtn" class="mock-icon-btn" type="button" aria-label="Close form">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <iframe id="formIframe" title="Section test builder"></iframe>
+    </dialog>
 
     <dialog id="deleteMockModal" class="mock-delete-modal" aria-labelledby="deleteMockTitle">
         <div class="mock-delete-dialog">
             <h2 id="deleteMockTitle">Delete Mock Test</h2>
-            <p>Are you sure you want to delete this mock test?</p>
+            <p>This will remove the mock package. The original Listening, Reading, Writing, and Speaking tests will stay saved.</p>
             <div class="mock-delete-actions">
-                <button id="cancelDeleteMock" class="secondary-action" type="button">Cancel</button>
-                <button id="confirmDeleteMock" class="danger-action" type="button">Delete</button>
+                <button id="cancelDeleteMock" class="mock-btn mock-btn--light" type="button">Cancel</button>
+                <button id="confirmDeleteMock" class="mock-btn mock-btn--danger" type="button">Delete</button>
             </div>
         </div>
     </dialog>
 
     <script src="/auth-client.js"></script>
-    <script src="/admin-mock-tests.js?v=20260624-references"></script>
+    <script src="/admin-mock-tests.js?v=20260625-builder"></script>
 </body>
 
 </html>

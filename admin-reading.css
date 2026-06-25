@@ -517,3 +517,11 @@
     font-weight: 700;
 }
 
+body.mock-builder-embed .manual-admin {
+    max-width: none;
+    padding: 16px;
+}
+
+body.mock-builder-embed .manual-admin-header {
+    display: none;
+}

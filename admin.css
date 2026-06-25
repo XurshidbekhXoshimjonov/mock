@@ -519,3 +519,26 @@
         grid-template-columns: 34px minmax(0, 1fr);
     }
 }
+
+.admin-page.mock-builder-embed {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.admin-page.mock-builder-embed .admin-topbar {
+    display: none;
+}
+
+.admin-page.mock-builder-embed .admin-shell,
+.admin-page.mock-builder-embed .admin-writing-shell,
+.admin-page.mock-builder-embed .admin-speaking-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 16px;
+}
+
+.admin-page.mock-builder-embed .admin-writing-header,
+.admin-page.mock-builder-embed .admin-speaking-header {
+    margin-top: 0;
+}
