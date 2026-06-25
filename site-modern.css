@@ -2618,6 +2618,20 @@ body:not(.site-ready) .public-shell {
     }
 }
 
+@media (max-width: 640px) {
+    .hero-title,
+    .hero-modern h1 {
+        font-size: clamp(42px, 11vw, 58px);
+        line-height: 1.05;
+    }
+
+    .hero-subtitle,
+    .hero-modern p {
+        font-size: 20px;
+        line-height: 1.35;
+    }
+}
+
 @media (max-width: 420px) {
     .test-card-stats {
         grid-template-columns: 1fr;

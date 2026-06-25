@@ -997,6 +997,118 @@
                 transform: rotate(20deg);
             }
 
+        @media (max-width: 640px) {
+            .navbar,
+            .ielts-navbar {
+                height: 72px;
+                min-height: 72px;
+                padding: 10px 14px;
+                gap: 8px;
+            }
+
+            .navbar-container {
+                gap: 8px;
+            }
+
+            .logo img,
+            .navbar-logo img,
+            .ielts-navbar__logo {
+                width: 135px;
+                height: auto;
+            }
+
+            .nav-icon-btn,
+            .menu-btn,
+            .theme-toggle,
+            .ielts-navbar__menu-toggle,
+            .ielts-theme-toggle {
+                width: 38px;
+                height: 38px;
+                min-width: 38px;
+                border-radius: 12px;
+            }
+
+            .ielts-navbar__menu-toggle,
+            .ielts-theme-toggle {
+                flex: 0 0 38px;
+            }
+
+            .nav-icon-btn svg,
+            .menu-btn svg,
+            .theme-toggle svg,
+            .ielts-theme-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .ielts-theme-toggle {
+                margin-right: 0;
+            }
+
+            .auth-buttons,
+            .ielts-navbar__auth {
+                gap: 8px;
+            }
+
+            .login-btn,
+            .signup-btn,
+            .ielts-navbar__button--login,
+            .ielts-navbar__button--signup {
+                height: 38px;
+                min-height: 38px;
+                padding: 0 14px;
+                font-size: 14px;
+                border-radius: 12px;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .logo img,
+            .navbar-logo img,
+            .ielts-navbar__logo {
+                width: 120px;
+            }
+
+            .navbar,
+            .ielts-navbar {
+                padding: 8px 10px;
+                gap: 6px;
+            }
+
+            .navbar-container {
+                gap: 6px;
+            }
+
+            .login-btn,
+            .ielts-navbar__button--login {
+                display: none;
+            }
+
+            .signup-btn,
+            .ielts-navbar__button--signup {
+                height: 36px;
+                min-height: 36px;
+                padding: 0 12px;
+                font-size: 13px;
+            }
+
+            .nav-icon-btn,
+            .menu-btn,
+            .theme-toggle,
+            .ielts-navbar__menu-toggle,
+            .ielts-theme-toggle {
+                width: 36px;
+                height: 36px;
+                min-width: 36px;
+            }
+
+            .ielts-navbar__menu-toggle,
+            .ielts-theme-toggle {
+                flex-basis: 36px;
+            }
+        }
+
             /* Dark Theme Navbar Overrides */
             body.dark-theme .ielts-navbar {
                 background: #08081b;

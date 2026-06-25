@@ -1431,6 +1431,20 @@ body.dark-theme .review-btn:hover {
     color: #60a5fa;
 }
 
+@media (max-width: 640px) {
+    .hero-title,
+    .hero h1 {
+        font-size: clamp(42px, 11vw, 58px);
+        line-height: 1.05;
+    }
+
+    .hero-subtitle,
+    .hero p {
+        font-size: 20px;
+        line-height: 1.35;
+    }
+}
+
 body.dark-theme *::-webkit-scrollbar-track {
     background: #08081b;
 }
