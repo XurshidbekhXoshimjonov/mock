@@ -49,4 +49,7 @@ const writingPromptSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+writingPromptSchema.index({ taskType: 1, status: 1, createdAt: -1 });
+writingPromptSchema.index({ status: 1, createdAt: -1 });
+
 module.exports = mongoose.models.WritingPrompt || mongoose.model("WritingPrompt", writingPromptSchema);

@@ -29,4 +29,8 @@ const writingFullTestSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+writingFullTestSchema.index({ status: 1, createdAt: -1 });
+writingFullTestSchema.index({ task1PromptId: 1 });
+writingFullTestSchema.index({ task2PromptId: 1 });
+
 module.exports = mongoose.models.WritingFullTest || mongoose.model("WritingFullTest", writingFullTestSchema);

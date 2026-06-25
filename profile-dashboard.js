@@ -97,6 +97,22 @@
         return authState?.isAuthenticated ? authState.user : null;
     }
 
+    async function fetchProfileAttemptDetail(kind, attempt) {
+        if (!attempt?.id) return attempt;
+        try {
+            const response = await fetch(`/api/profile/${kind}/${encodeURIComponent(attempt.id)}`, {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store"
+            });
+            if (!response.ok) throw new Error(`Could not load ${kind} feedback`);
+            return await response.json();
+        } catch (error) {
+            console.error(`Profile ${kind} feedback fetch error:`, error);
+            return attempt;
+        }
+    }
+
     function initials(name) {
         return String(name || "User")
             .split(/[\s._-]+/)
@@ -1024,6 +1040,10 @@
     function SpeakingDashboard({ stats }) {
         const [selectedAttempt, setSelectedAttempt] = useState(null);
         const data = speakingOverview(stats);
+
+        async function openSpeakingFeedback(attempt) {
+            setSelectedAttempt(await fetchProfileAttemptDetail("speaking", attempt));
+        }
         const summary = data.summary;
         const metrics = [
             ["Speaking attempts", summary.totalAttempts || 0, "All saved speaking practice"],
@@ -1063,7 +1083,7 @@
                                     e("td", null, e("strong", null, attempt.title || attempt.taskTitle || `Speaking attempt ${index + 1}`)),
                                     e("td", null, formatDate(attempt.createdAt || attempt.completedAt)),
                                     e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand)}`)),
-                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => setSelectedAttempt(attempt) }, "View Feedback"))
+                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => openSpeakingFeedback(attempt) }, "View Feedback"))
                                 ))
                             )
                         )
@@ -1205,6 +1225,10 @@
         const [selectedWritingAttempt, setSelectedWritingAttempt] = useState(null);
         const [selectedSkill, setSelectedSkill] = useState(null);
 
+        async function openWritingFeedback(attempt) {
+            setSelectedWritingAttempt(await fetchProfileAttemptDetail("writing", attempt));
+        }
+
         function openSkill(skill) {
             if (skill === "center") {
                 setSelectedSkill(null);
@@ -1231,7 +1255,7 @@
                     skill: selectedSkill,
                     stats,
                     onBack: () => setSelectedSkill(null),
-                    onViewWritingFeedback: setSelectedWritingAttempt
+                    onViewWritingFeedback: openWritingFeedback
                 })
                 : e("section", { className: "performance-center-shell" },
                     e(PerformanceCardGrid, { stats, onOpen: openSkill })
@@ -1324,24 +1348,30 @@
     async function boot() {
         let user = null;
         try {
-            const response = await fetch("/api/auth/me", {
-                method: "GET",
-                credentials: "include",
-                cache: "no-store"
-            });
+            const authResult = window.authClient?.fetchAuthMe
+                ? await window.authClient.fetchAuthMe()
+                : await fetch("/api/auth/me", {
+                    method: "GET",
+                    credentials: "include",
+                    cache: "no-store"
+                }).then(async (response) => ({
+                    status: response.status,
+                    ok: response.ok,
+                    data: await response.json().catch(() => ({}))
+                }));
 
-            console.log("PROFILE_ME_STATUS:", response.status);
+            console.log("PROFILE_ME_STATUS:", authResult.status);
 
-            if (response.status === 401) {
+            if (authResult.status === 401) {
                 console.log("PROFILE_ME_RESPONSE: Unauthorized");
                 window.location.href = "/login";
                 return;
             }
 
-            const data = await response.json();
+            const data = authResult.data || {};
             console.log("PROFILE_ME_RESPONSE:", data);
 
-            if (response.ok && data.success && data.user) {
+            if (authResult.ok && data.success && data.user) {
                 user = data.user;
                 const auth = window.authClient && window.authClient.getAuth();
                 if (auth) {
@@ -1370,7 +1400,7 @@
         } catch {}
 
         try {
-            const writingResponse = await fetch("/api/profile/writing", {
+            const writingResponse = await fetch("/api/profile/writing?limit=8", {
                 method: "GET",
                 credentials: "include",
                 cache: "no-store"
@@ -1386,7 +1416,7 @@
         }
 
         try {
-            const speakingResponse = await fetch("/api/profile/speaking", {
+            const speakingResponse = await fetch("/api/profile/speaking?limit=8", {
                 method: "GET",
                 credentials: "include",
                 cache: "no-store"

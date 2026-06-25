@@ -100,4 +100,10 @@ const writingSubmissionSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+writingSubmissionSchema.index({ userId: 1, createdAt: -1 });
+writingSubmissionSchema.index({ mode: 1, createdAt: -1 });
+writingSubmissionSchema.index({ testType: 1, createdAt: -1 });
+writingSubmissionSchema.index({ task1PromptId: 1, createdAt: -1 });
+writingSubmissionSchema.index({ task2PromptId: 1, createdAt: -1 });
+
 module.exports = mongoose.models.WritingSubmission || mongoose.model("WritingSubmission", writingSubmissionSchema);

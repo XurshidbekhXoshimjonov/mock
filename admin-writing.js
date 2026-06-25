@@ -135,8 +135,8 @@ async function loadAllData() {
             requestJson("/api/admin/writing/prompts"),
             requestJson("/api/admin/writing/full-tests")
         ]);
-        state.prompts = Array.isArray(prompts) ? prompts : [];
-        state.fullTests = Array.isArray(fullTests) ? fullTests : [];
+        state.prompts = listItems(prompts);
+        state.fullTests = listItems(fullTests);
         populateFullSelects();
         renderDashboard();
     } catch (error) {
@@ -161,6 +161,29 @@ async function requestJson(url, options = {}) {
         throw new Error(body?.error || body?.message || `Request failed: ${response.status}`);
     }
     return body;
+}
+
+function listItems(data) {
+    if (Array.isArray(data)) return data;
+    if (Array.isArray(data?.items)) return data.items;
+    if (Array.isArray(data?.tests)) return data.tests;
+    return [];
+}
+
+async function fetchWritingItemDetail(item) {
+    if (!item) return null;
+    const endpoint = item.type === "full"
+        ? `/api/admin/writing/full-tests/${encodeURIComponent(item.id)}`
+        : `/api/admin/writing/prompts/${encodeURIComponent(item.id)}`;
+    const detail = await requestJson(endpoint);
+    if (item.type === "full") {
+        const index = state.fullTests.findIndex((test) => test._id === item.id);
+        if (index >= 0) state.fullTests[index] = detail;
+        return normalizeFullTestItem(detail);
+    }
+    const index = state.prompts.findIndex((prompt) => prompt._id === item.id);
+    if (index >= 0) state.prompts[index] = detail;
+    return normalizePromptItem(detail);
 }
 
 function renderDashboard() {
@@ -302,18 +325,26 @@ function matchesSearch(item) {
     return haystack.includes(state.search);
 }
 
-function handleCardAction(event) {
-    const button = event.target.closest("[data-action]");
-    if (!button) return;
+async function handleCardAction(event) {
+    try {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
 
-    const item = findItem(button.dataset.id, button.dataset.type);
-    if (!item) return;
+        let item = findItem(button.dataset.id, button.dataset.type);
+        if (!item) return;
 
-    if (button.dataset.action === "preview") openPreview(item);
-    if (button.dataset.action === "edit") openBuilder(item.type, item);
-    if (button.dataset.action === "duplicate") duplicateItem(item);
-    if (button.dataset.action === "publish") togglePublish(item);
-    if (button.dataset.action === "delete") openDeleteConfirm(item);
+        if (["preview", "edit", "duplicate"].includes(button.dataset.action)) {
+            item = await fetchWritingItemDetail(item);
+        }
+
+        if (button.dataset.action === "preview") openPreview(item);
+        if (button.dataset.action === "edit") openBuilder(item.type, item);
+        if (button.dataset.action === "duplicate") duplicateItem(item);
+        if (button.dataset.action === "publish") togglePublish(item);
+        if (button.dataset.action === "delete") openDeleteConfirm(item);
+    } catch (error) {
+        showToast(error.message || "Could not load Writing test details.");
+    }
 }
 
 function findItem(id, type) {
@@ -647,7 +678,7 @@ function renderPromptPreview(prompt, label) {
     const questionType = prompt.questionType ? `<span>${escapeHtml(QUESTION_TYPE_LABELS[prompt.questionType] || prompt.questionType)}</span>` : "";
     const instructions = prompt.instructions ? `<p>${escapeHtml(prompt.instructions)}</p>` : "";
     const image = type === "task1" && prompt.imageUrl
-        ? `<img src="${escapeHtml(prompt.imageUrl)}" alt="Task 1 visual preview">`
+        ? `<img loading="lazy" decoding="async" src="${escapeHtml(prompt.imageUrl)}" alt="Task 1 visual preview">`
         : "";
 
     return `

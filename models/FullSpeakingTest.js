@@ -41,4 +41,9 @@ const fullSpeakingTestSchema = new mongoose.Schema({
     collection: "full_speaking_tests"
 });
 
+fullSpeakingTestSchema.index({ status: 1, createdAt: -1 });
+fullSpeakingTestSchema.index({ part1Id: 1 });
+fullSpeakingTestSchema.index({ part2Id: 1 });
+fullSpeakingTestSchema.index({ part3Id: 1 });
+
 module.exports = mongoose.models.FullSpeakingTest || mongoose.model("FullSpeakingTest", fullSpeakingTestSchema);

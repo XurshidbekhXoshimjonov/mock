@@ -19,6 +19,7 @@
         status: "unknown",
         auth: null
     };
+    let authMeRequest = null;
 
     function normalizeTheme(theme) {
         return theme === "dark" ? "dark" : "light";
@@ -233,6 +234,38 @@
         return data;
     }
 
+    function fetchAuthMe() {
+        if (authMeRequest) {
+            return authMeRequest;
+        }
+
+        authMeRequest = fetch("/api/auth/me", {
+            credentials: "include",
+            cache: "no-store"
+        })
+        .then(async (response) => {
+            const text = await response.text();
+            let data = {};
+            if (text) {
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    data = {};
+                }
+            }
+            return {
+                status: response.status,
+                ok: response.ok,
+                data
+            };
+        })
+        .finally(() => {
+            authMeRequest = null;
+        });
+
+        return authMeRequest;
+    }
+
     async function verifyStoredSession() {
         const auth = getAuth();
         if (!auth?.token) {
@@ -240,10 +273,11 @@
         }
 
         try {
-            const data = await apiFetch("/api/auth/me", {
-                credentials: "include",
-                cache: "no-store"
-            });
+            const result = await fetchAuthMe();
+            if (!result.ok) {
+                throw new Error(result.data?.error || "Session check failed");
+            }
+            const data = result.data;
             const nextAuth = {
                 ...auth,
                 user: data.user
@@ -275,7 +309,7 @@
     }
 
     async function getUserProgress() {
-        return apiFetch("/api/profile/progress");
+        return apiFetch("/api/profile/progress?limit=12");
     }
 
     function getUserStats() {
@@ -1393,11 +1427,9 @@
     }
 
     let isFetchingAuthMe = false;
-    let shouldRunPendingNavbarAuthRefresh = false;
 
     function refreshNavbarAuthState() {
         if (isFetchingAuthMe) {
-            shouldRunPendingNavbarAuthRefresh = true;
             return;
         }
 
@@ -1405,22 +1437,19 @@
 
         console.log("NAVBAR_AUTH_CHECK_STARTED");
 
-        fetch("/api/auth/me", {
-            credentials: "include",
-            cache: "no-store"
-        })
-        .then(response => {
-            console.log("NAVBAR_ME_STATUS", response.status);
-            if (response.status === 401) {
+        fetchAuthMe()
+        .then(result => {
+            console.log("NAVBAR_ME_STATUS", result.status);
+            if (result.status === 401) {
                 console.log("NAVBAR_RENDER_GUEST");
                 clearAuth();
                 updateNavbarAuthState(false, null);
                 return null;
             }
-            if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
+            if (!result.ok) {
+                throw new Error("HTTP error " + result.status);
             }
-            return response.json();
+            return result.data;
         })
         .then(data => {
             if (!data) return;
@@ -1451,11 +1480,6 @@
         })
         .finally(() => {
             isFetchingAuthMe = false;
-
-            if (shouldRunPendingNavbarAuthRefresh) {
-                shouldRunPendingNavbarAuthRefresh = false;
-                refreshNavbarAuthState();
-            }
         });
     }
 
@@ -1538,6 +1562,7 @@
         clearAuth,
         redirectIfAuthenticated,
         verifyStoredSession,
+        fetchAuthMe,
         getUserProgress,
         getUserStats,
         recordTestResult,

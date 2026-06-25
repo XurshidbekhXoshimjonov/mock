@@ -129,7 +129,7 @@ const ListeningComponents = (() => {
     function blockImage(block) {
         if (!block.imageUrl) return "";
         return `<div class="lc-block-image-container" style="margin-bottom: 20px; text-align: center;">
-            <img src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Question image")}" style="max-width: 100%; height: auto; border-radius: 8px;">
+            <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Question image")}" style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>`;
     }
 
@@ -809,7 +809,7 @@ const ListeningComponents = (() => {
         }).join("");
         const image = block.imageUrl
             ? `<div class="lc-map-stage lc-matching-image">
-                <img src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening question image")}">
+                <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening question image")}">
             </div>`
             : "";
         const hasImage = Boolean(block.imageUrl);
@@ -845,7 +845,7 @@ const ListeningComponents = (() => {
         ).join("");
         const image = block.imageUrl
             ? `<div class="lc-map-stage">
-                <img src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening map")}">
+                <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening map")}">
                 ${labels}
             </div>`
             : `<div class="lc-map-placeholder">Map image has not been uploaded yet.</div>`;

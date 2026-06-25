@@ -512,7 +512,7 @@ async function readResponse(response) {
 }
 
 async function createListeningTest(data) {
-    return readResponse(await fetch("/api/listening-tests", {
+    return readResponse(await fetch("/api/listening-tests?includeDerived=1", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -853,7 +853,7 @@ function PartEditor() {
             <div class="audio-card-details">
                 <h4>${escapeHtml(part.audioFileName || "Attached audio file")}</h4>
                 <p>Path: ${escapeHtml(part.audioUrl)}</p>
-                <audio controls src="${escapeHtml(part.audioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
+                <audio controls preload="metadata" src="${escapeHtml(part.audioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
             </div>
             <button class="btn btn-danger btn-sm" data-action="remove-audio" type="button">Replace</button>
         </div>
@@ -1615,7 +1615,7 @@ async function loadTest(id) {
 async function loadSavedTests(openModal = true) {
     savedTestsList.textContent = "Loading...";
     if (openModal && !savedTestsModal.open) savedTestsModal.showModal();
-    const tests = await readResponse(await fetch("/api/listening-tests"));
+    const tests = await readResponse(await fetch("/api/listening-tests?includeDerived=1"));
 
     savedTestsList.innerHTML = tests.length ? tests.map((test) => `<article class="saved-test-row">
         <div><h3>${escapeHtml(test.title)}</h3><p>${Number(test.questionCount) || 0} questions</p></div>

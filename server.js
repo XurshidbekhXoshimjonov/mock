@@ -204,6 +204,71 @@ const mockImageUpload = multer({
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
+function responseByteSize(payload) {
+    try {
+        if (Buffer.isBuffer(payload)) return payload.length;
+        if (typeof payload === "string") return Buffer.byteLength(payload);
+        return Buffer.byteLength(JSON.stringify(payload || null));
+    } catch {
+        return 0;
+    }
+}
+
+app.use((req, res, next) => {
+    if (!req.path.startsWith("/api/")) {
+        return next();
+    }
+
+    const startedAt = process.hrtime.bigint();
+    let responseSize = 0;
+    const originalJson = res.json.bind(res);
+    const originalSend = res.send.bind(res);
+
+    res.json = (payload) => {
+        responseSize = responseByteSize(payload);
+        return originalJson(payload);
+    };
+
+    res.send = (payload) => {
+        if (!responseSize) responseSize = responseByteSize(payload);
+        return originalSend(payload);
+    };
+
+    res.on("finish", () => {
+        const durationMs = Number(process.hrtime.bigint() - startedAt) / 1e6;
+        console.info("[API PERF]", {
+            route: `${req.method} ${req.originalUrl}`,
+            status: res.statusCode,
+            ms: Math.round(durationMs * 10) / 10,
+            bytes: responseSize
+        });
+    });
+
+    return next();
+});
+
+function paginationParams(req, defaults = {}) {
+    const maxLimit = Number(defaults.maxLimit) || 100;
+    const defaultLimit = Number(defaults.defaultLimit) || 50;
+    const page = Math.max(Number(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(Number(req.query.limit) || defaultLimit, 1), maxLimit);
+    return { page, limit, skip: (page - 1) * limit };
+}
+
+function setPaginationHeaders(res, { page, limit, total }) {
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+    res.setHeader("X-Total-Count", String(total));
+    res.setHeader("X-Page", String(page));
+    res.setHeader("X-Limit", String(limit));
+    res.setHeader("X-Total-Pages", String(totalPages));
+}
+
+function paginateArray(req, res, items, defaults = {}) {
+    const pagination = paginationParams(req, defaults);
+    setPaginationHeaders(res, { ...pagination, total: items.length });
+    return items.slice(pagination.skip, pagination.skip + pagination.limit);
+}
+
 app.use((req, res, next) => {
     const path = req.path.toLowerCase();
     if (
@@ -316,6 +381,51 @@ function readJsonArray(filePath) {
 
 function writeJsonArray(filePath, items) {
     fs.writeFileSync(filePath, JSON.stringify(items, null, 2), "utf8");
+}
+
+function readFilePrefix(filePath, maxBytes = 64 * 1024) {
+    const fd = fs.openSync(filePath, "r");
+    try {
+        const buffer = Buffer.alloc(maxBytes);
+        const bytesRead = fs.readSync(fd, buffer, 0, maxBytes, 0);
+        return buffer.toString("utf8", 0, bytesRead);
+    } finally {
+        fs.closeSync(fd);
+    }
+}
+
+function jsonStringField(source, key) {
+    const pattern = new RegExp(`"${key}"\\s*:\\s*"([^"]*)"`);
+    const match = String(source || "").match(pattern);
+    if (!match) return "";
+    return match[1].replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+}
+
+function jsonNumberField(source, key) {
+    const pattern = new RegExp(`"${key}"\\s*:\\s*(\\d+)`);
+    const match = String(source || "").match(pattern);
+    return match ? Number(match[1]) : 0;
+}
+
+function publicIdUrl(skill, id, options = {}) {
+    const encoded = encodeURIComponent(id);
+    if (skill === "listening" && Number(options.part) > 0) {
+        return `/listening/${encoded}/part-${Number(options.part)}`;
+    }
+    return `/${skill}/${encoded}`;
+}
+
+function publicListMetadata({ id, title, testNumber, type, status, createdAt, extra = {} }) {
+    return {
+        _id: id,
+        id,
+        title,
+        testNumber: Number(testNumber) || undefined,
+        type,
+        status: status || "published",
+        createdAt,
+        ...extra
+    };
 }
 
 function makeId(title) {
@@ -1496,6 +1606,42 @@ function readManualReadingTests() {
                 return JSON.parse(fs.readFileSync(path.join(READING_TESTS_DIR, file), "utf8"));
             } catch (error) {
                 console.warn(`Could not read ${file}:`, error.message);
+                return null;
+            }
+        })
+        .filter(Boolean)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
+function readManualReadingTestSummaries() {
+    if (!fs.existsSync(READING_TESTS_DIR)) {
+        return [];
+    }
+
+    return fs.readdirSync(READING_TESTS_DIR)
+        .filter((file) => file.endsWith(".json"))
+        .map((file) => {
+            const filePath = path.join(READING_TESTS_DIR, file);
+            try {
+                const prefix = readFilePrefix(filePath);
+                const stat = fs.statSync(filePath);
+                const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
+                const part = String(jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "1");
+                return publicListMetadata({
+                    id,
+                    title: jsonStringField(prefix, "title") || "Untitled Reading Test",
+                    testNumber: jsonNumberField(prefix, "testNumber") || jsonNumberField(prefix, "number"),
+                    type: part === "full" ? "reading-full" : "reading",
+                    status: jsonStringField(prefix, "status") || "published",
+                    createdAt: jsonStringField(prefix, "createdAt") || stat.mtime.toISOString(),
+                    extra: {
+                        part,
+                        openUrl: publicIdUrl("reading", id),
+                        slug: id
+                    }
+                });
+            } catch (error) {
+                console.warn(`Could not read reading metadata ${file}:`, error.message);
                 return null;
             }
         })
@@ -2849,6 +2995,46 @@ function readManualListeningTests() {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 
+function readManualListeningTestSummaries() {
+    if (!fs.existsSync(LISTENING_TESTS_DIR)) {
+        return [];
+    }
+
+    return fs.readdirSync(LISTENING_TESTS_DIR)
+        .filter((file) => file.endsWith(".json"))
+        .map((file) => {
+            const filePath = path.join(LISTENING_TESTS_DIR, file);
+            try {
+                const prefix = readFilePrefix(filePath);
+                const stat = fs.statSync(filePath);
+                const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
+                const rawPart = jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "full";
+                const part = rawPart === "full" ? "full" : normalizeListeningPart(rawPart);
+                return publicListMetadata({
+                    id,
+                    title: jsonStringField(prefix, "title") || "Untitled Listening Test",
+                    testNumber: jsonNumberField(prefix, "testNumber") || jsonNumberField(prefix, "number"),
+                    type: part === "full" ? "listening-full" : "listening",
+                    status: jsonStringField(prefix, "status") || "published",
+                    createdAt: jsonStringField(prefix, "createdAt") || stat.mtime.toISOString(),
+                    extra: {
+                        part,
+                        sourceFullTestId: jsonStringField(prefix, "sourceFullTestId") || "",
+                        duration: listeningDurationForPart(part),
+                        openUrl: publicIdUrl("listening", id, { part: part === "full" ? 0 : part }),
+                        slug: id,
+                        readOnly: false
+                    }
+                });
+            } catch (error) {
+                console.warn(`Could not read listening metadata ${file}:`, error.message);
+                return null;
+            }
+        })
+        .filter(Boolean)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
 function summarizeManualListeningTest(test) {
     const part = test.part === "full" ? "full" : normalizeListeningPart(test.part);
 
@@ -3460,43 +3646,44 @@ function summarizeTest(test) {
 function getRecentManualTests(limit = 10) {
     const items = [];
 
-    readManualReadingTests().forEach((test) => {
+    readManualReadingTestSummaries().forEach((test) => {
         items.push({
             id: test.id,
             title: test.title,
             type: "reading",
             part: test.part,
-            questionCount: Array.isArray(test.questions) ? test.questions.length : 0,
+            questionCount: Number(test.questionCount) || 0,
             createdAt: test.createdAt,
-            openUrl: publicTestUrl("reading", "reading", test),
+            openUrl: test.openUrl,
             editUrl: "admin-reading.html"
         });
     });
 
-    readManualListeningTests().forEach((test) => {
+    readManualListeningTestSummaries().forEach((test) => {
         items.push({
             id: test.id,
             title: test.title,
             type: "listening",
             part: test.part,
-            questionCount: Number(test.questionCount) || listeningQuestionCount(test),
+            questionCount: Number(test.questionCount) || 0,
             createdAt: test.createdAt,
-            openUrl: publicTestUrl("listening", "listening", test),
+            openUrl: test.openUrl,
             editUrl: test.readOnly ? "" : `admin-listening.html?id=${encodeURIComponent(test.id)}`
         });
     });
 
-    fullTestStore.readAll().forEach((test) => {
-        const summary = fullTestStore.summarize(test);
-
+    const fullSummaries = typeof fullTestStore.readSummaries === "function"
+        ? fullTestStore.readSummaries()
+        : fullTestStore.readAll().map((test) => fullTestStore.summarize(test));
+    fullSummaries.forEach((summary) => {
         items.push({
-            id: test.id,
-            title: test.title,
+            id: summary.id,
+            title: summary.title,
             type: "full",
             part: "full",
-            questionCount: summary.questionCount,
-            createdAt: test.createdAt,
-            openUrl: publicFullTestUrl(test, summary.skill || "reading"),
+            questionCount: Number(summary.questionCount) || 0,
+            createdAt: summary.createdAt,
+            openUrl: summary.openUrl,
             editUrl: "admin-import.html"
         });
     });
@@ -3522,9 +3709,11 @@ function getRecentManualTests(limit = 10) {
 }
 
 async function getAdminStats() {
-    const readingTests = readManualReadingTests().length;
-    const listeningTests = readManualListeningTests().length;
-    const fullTests = fullTestStore.readAll().length;
+    const readingTests = readManualReadingTestSummaries().length;
+    const listeningTests = readManualListeningTestSummaries().length;
+    const fullTests = typeof fullTestStore.readSummaries === "function"
+        ? fullTestStore.readSummaries().length
+        : fullTestStore.readAll().length;
     const mockTests = mockTestStore.listTests({ includeDraft: true }).length;
 
     const users = await userStore.countUsers();
@@ -3886,8 +4075,11 @@ app.get("/listening/:slug", (req, res) => {
 });
 
 app.get("/api/profile/progress", requireUser, (req, res) => {
+    const limit = Math.min(Math.max(Number(req.query.limit) || 12, 1), 50);
     res.json(userProgressStore.getProgress(req.user.id, {
-        accountCreatedAt: req.account.createdAt
+        accountCreatedAt: req.account.createdAt,
+        historyLimit: limit,
+        activityLimit: 20
     }));
 });
 
@@ -3960,7 +4152,7 @@ app.get("/api/mock-tests", (req, res) => {
     const tests = mockTestStore
         .listTests()
         .map(mockTestStore.publicSummary);
-    res.json(tests);
+    res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
 });
 
 app.get("/api/mock-tests/:id", (req, res) => {
@@ -4052,7 +4244,7 @@ app.get("/api/admin/mock-tests", requireAdmin, (req, res) => {
     const tests = mockTestStore
         .listTests({ includeDraft: true })
         .map(mockTestStore.adminSummary);
-    res.json({ tests });
+    res.json({ tests: paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }) });
 });
 
 app.get("/api/admin/mock-tests/:id", requireAdmin, (req, res) => {
@@ -4201,13 +4393,13 @@ app.post("/api/reading-tests", requireAdmin, (req, res) => {
 
 app.get("/api/reading-tests", (req, res) => {
     const part = req.query.part ? normalizePart(req.query.part) : null;
-    let tests = readManualReadingTests();
+    let tests = readManualReadingTestSummaries();
 
     if (part) {
         tests = tests.filter((test) => test.part === part);
     }
 
-    res.json(tests.map(summarizeManualReadingTest));
+    res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
 });
 
 app.get("/api/reading-tests/:id", (req, res) => {
@@ -4382,43 +4574,11 @@ app.post("/api/listening-tests", requireAdmin, audioUpload.single("audio"), (req
 app.get("/api/listening-tests", (req, res) => {
     const part = req.query.part ? normalizeListeningPart(req.query.part) : null;
     const includeDerived = req.query.includeDerived === "1" || req.query.includeDerived === "true";
-    let tests = readManualListeningTests();
+    let tests = readManualListeningTestSummaries();
 
     if (part && part !== "full") {
         const partNumber = Number(part);
-        const individualPartTests = tests.filter((test) => test.part === part);
-        const publishedPartKeys = new Set(individualPartTests
-            .filter((test) => test.sourceFullTestId)
-            .map((test) => `${test.sourceFullTestId}:${test.part}`));
-        const partViews = tests
-            .filter((test) => test.part === "full" && Array.isArray(test.parts))
-            .map((test) => {
-                if (publishedPartKeys.has(`${test.id}:${partNumber}`)) {
-                    return null;
-                }
-
-                const selectedPart = test.parts.find((item) => Number(item.partNumber) === partNumber);
-
-                if (!selectedPart) {
-                    return null;
-                }
-
-                return {
-                    id: test.id,
-                    title: `${test.title} - ${selectedPart.title || `Part ${partNumber}`}`,
-                    part: partNumber,
-                    audio: selectedPart.audioUrl || "",
-                    duration: 10,
-                    questionCount: listeningQuestionCount({ parts: [selectedPart] }),
-                    createdAt: test.createdAt,
-                    openUrl: publicTestUrl("listening", "listening", test, { part: partNumber })
-                };
-            })
-            .filter(Boolean);
-
-        const individualTests = individualPartTests.map(summarizeManualListeningTest);
-
-        return res.json([...partViews, ...individualTests]);
+        return res.json(paginateArray(req, res, tests.filter((test) => Number(test.part) === partNumber), { defaultLimit: 50, maxLimit: 100 }));
     }
 
     if (part === "full") {
@@ -4427,7 +4587,7 @@ app.get("/api/listening-tests", (req, res) => {
         tests = tests.filter((test) => !test.sourceFullTestId || test.part === "full");
     }
 
-    res.json(tests.map(summarizeManualListeningTest));
+    res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
 });
 
 app.get("/api/listening-tests/:id", (req, res) => {
@@ -4521,7 +4681,7 @@ app.get("/api/tests", (req, res) => {
         tests = tests.filter((test) => test.parts.some((item) => item.number === partNumber));
     }
 
-    res.json(tests.map(summarizeTest));
+    res.json(paginateArray(req, res, tests.map(summarizeTest), { defaultLimit: 50, maxLimit: 100 }));
 });
 
 app.get("/api/tests/:id", (req, res) => {
@@ -4568,8 +4728,13 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
 
 app.get("/api/admin/users", requireAdmin, async (req, res) => {
     try {
-        const users = await userStore.getAllUsers();
-        const formatted = users.map((user) => {
+        const pagination = paginationParams(req, { defaultLimit: 50, maxLimit: 100 });
+        const result = await userStore.listUsers({
+            page: pagination.page,
+            limit: pagination.limit,
+            role: req.query.role
+        });
+        const formatted = result.items.map((user) => {
             const email = String(user.email || "").trim().toLowerCase();
             const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
             const isPremium = !!user.isPremium;
@@ -4588,8 +4753,12 @@ app.get("/api/admin/users", requireAdmin, async (req, res) => {
                 lastLogin: user.lastLogin || null
             };
         });
-        const sorted = formatted.sort((a, b) => (a.memberIdNumber || 99999) - (b.memberIdNumber || 99999));
-        res.json(sorted);
+        setPaginationHeaders(res, {
+            page: result.page,
+            limit: result.limit,
+            total: result.total
+        });
+        res.json(formatted);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Could not load admin users" });
@@ -4598,6 +4767,25 @@ app.get("/api/admin/users", requireAdmin, async (req, res) => {
 
 app.get("/api/admin/stats/users", requireAdmin, async (req, res) => {
     try {
+        if (mongoose.connection.readyState === 1) {
+            const startOfToday = new Date();
+            startOfToday.setHours(0, 0, 0, 0);
+            const [totalUsers, todayUsers, premiumUsers, adminUsers] = await Promise.all([
+                User.countDocuments(),
+                User.countDocuments({ createdAt: { $gte: startOfToday } }),
+                User.countDocuments({ isPremium: true }),
+                User.countDocuments({ role: "admin" })
+            ]);
+
+            return res.json({
+                totalUsers,
+                todayUsers,
+                premiumUsers,
+                freeUsers: Math.max(totalUsers - premiumUsers, 0),
+                adminUsers
+            });
+        }
+
         const users = await userStore.getAllUsers();
         const startOfToday = new Date();
         startOfToday.setHours(0, 0, 0, 0);
@@ -5173,16 +5361,27 @@ async function runUserMigration() {
     }
 }
 
+function connectMongooseOnce() {
+    if (!process.env.MONGO_URI) return null;
+    if (mongoose.connection.readyState === 1) return Promise.resolve(mongoose.connection);
+    if (!global.__ieltsxMongooseConnectionPromise) {
+        global.__ieltsxMongooseConnectionPromise = mongoose.connect(process.env.MONGO_URI, {
+            dbName: process.env.MONGO_DB_NAME || "ieltsmock",
+            serverSelectionTimeoutMS: 8000,
+            maxPoolSize: Number(process.env.MONGO_MAX_POOL_SIZE) || 10
+        });
+    }
+    return global.__ieltsxMongooseConnectionPromise;
+}
+
 if (process.env.MONGO_URI) {
-    mongoose.connect(process.env.MONGO_URI, {
-        dbName: process.env.MONGO_DB_NAME || "ieltsmock",
-        serverSelectionTimeoutMS: 8000
-    })
+    connectMongooseOnce()
         .then(() => {
             console.info("MongoDB connected — using Atlas for accounts");
             runUserMigration().catch(err => console.error("Migration error:", err));
         })
         .catch((error) => {
+            global.__ieltsxMongooseConnectionPromise = null;
             console.warn("MongoDB connection error:", error.message);
             console.info("Using local file storage for accounts: data/users.json");
             console.info("Atlas fix: Network Access -> Add IP Address -> Allow Access from Anywhere (0.0.0.0/0) for development");
@@ -5216,8 +5415,25 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/uploads", express.static(UPLOAD_DIR));
-app.use(express.static(ROOT_DIR));
+function staticCacheHeaders(res, filePath) {
+    const ext = path.extname(filePath).toLowerCase();
+    if (ext === ".html") {
+        res.setHeader("Cache-Control", "no-store");
+        return;
+    }
+    if ([".js", ".css", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".woff", ".woff2", ".mp3", ".m4a", ".wav", ".webm"].includes(ext)) {
+        res.setHeader("Cache-Control", "public, max-age=604800");
+    }
+}
+
+app.use("/uploads", express.static(UPLOAD_DIR, {
+    maxAge: "7d",
+    setHeaders: staticCacheHeaders
+}));
+app.use(express.static(ROOT_DIR, {
+    maxAge: "7d",
+    setHeaders: staticCacheHeaders
+}));
 
 const PORT = process.env.PORT || 30004;
 

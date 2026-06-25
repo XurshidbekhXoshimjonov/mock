@@ -69,4 +69,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.index({ role: 1, createdAt: -1 });
+userSchema.index({ plan: 1, createdAt: -1 });
+userSchema.index({ lastLogin: -1 });
+
 module.exports = mongoose.model("User", userSchema);

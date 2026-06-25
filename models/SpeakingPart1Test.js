@@ -44,4 +44,6 @@ const speakingPart1TestSchema = new mongoose.Schema({
     collection: "speaking_part1_tests"
 });
 
+speakingPart1TestSchema.index({ status: 1, createdAt: -1 });
+
 module.exports = mongoose.models.SpeakingPart1Test || mongoose.model("SpeakingPart1Test", speakingPart1TestSchema);

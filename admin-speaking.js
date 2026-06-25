@@ -155,10 +155,10 @@ async function loadAllData() {
             requestJson("/api/admin/speaking/part3"),
             requestJson("/api/admin/speaking/full")
         ]);
-        state.part1 = Array.isArray(part1) ? part1 : [];
-        state.part2 = Array.isArray(part2) ? part2 : [];
-        state.part3 = Array.isArray(part3) ? part3 : [];
-        state.full = Array.isArray(full) ? full : [];
+        state.part1 = listItems(part1);
+        state.part2 = listItems(part2);
+        state.part3 = listItems(part3);
+        state.full = listItems(full);
         populateFullSelects();
         renderDashboard();
         updateLivePreview();
@@ -182,6 +182,21 @@ async function requestJson(url, options = {}) {
         throw new Error(body?.error || body?.message || `Request failed: ${response.status}`);
     }
     return body;
+}
+
+function listItems(data) {
+    if (Array.isArray(data)) return data;
+    if (Array.isArray(data?.items)) return data.items;
+    if (Array.isArray(data?.tests)) return data.tests;
+    return [];
+}
+
+async function fetchSpeakingItemDetail(item, section) {
+    if (!item) return null;
+    const detail = await requestJson(`/api/admin/speaking/${encodeURIComponent(section)}/${encodeURIComponent(item._id)}`);
+    const index = (state[section] || []).findIndex((entry) => entry._id === item._id);
+    if (index >= 0) state[section][index] = detail;
+    return detail;
 }
 
 function syncTabs() {
@@ -269,15 +284,22 @@ function renderTableRow(item) {
     `;
 }
 
-function handleTableAction(event) {
-    const button = event.target.closest("[data-action]");
-    if (!button) return;
-    const item = findItem(button.dataset.id, state.activeSection);
-    if (!item) return;
-    if (button.dataset.action === "preview") openPreview(item, state.activeSection);
-    if (button.dataset.action === "edit") openBuilder(state.activeSection, item);
-    if (button.dataset.action === "publish") togglePublish(item, state.activeSection);
-    if (button.dataset.action === "delete") openDeleteConfirm(item, state.activeSection);
+async function handleTableAction(event) {
+    try {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
+        let item = findItem(button.dataset.id, state.activeSection);
+        if (!item) return;
+        if (["preview", "edit"].includes(button.dataset.action)) {
+            item = await fetchSpeakingItemDetail(item, state.activeSection);
+        }
+        if (button.dataset.action === "preview") openPreview(item, state.activeSection);
+        if (button.dataset.action === "edit") openBuilder(state.activeSection, item);
+        if (button.dataset.action === "publish") togglePublish(item, state.activeSection);
+        if (button.dataset.action === "delete") openDeleteConfirm(item, state.activeSection);
+    } catch (error) {
+        showToast(error.message || "Could not load Speaking test details.");
+    }
 }
 
 function findItem(id, section) {
@@ -691,6 +713,7 @@ function getItemSubtitle(item, section) {
 
 function getItemCount(item, section) {
     if (section === "full") return "3 parts";
+    if (Number.isFinite(Number(item.itemCount))) return `${Number(item.itemCount)} ${section === "part2" ? "bullets" : "questions"}`;
     if (section === "part2") return `${normalizeTextItems(item.bulletPoints).length} bullets`;
     return `${normalizeTextItems(item.questions).length} questions`;
 }

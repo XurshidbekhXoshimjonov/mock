@@ -77,4 +77,8 @@ const speakingSubmissionSchema = new mongoose.Schema({
     timestamps: true
 });
 
+speakingSubmissionSchema.index({ userId: 1, createdAt: -1 });
+speakingSubmissionSchema.index({ userObjectId: 1, createdAt: -1 });
+speakingSubmissionSchema.index({ testType: 1, createdAt: -1 });
+
 module.exports = mongoose.models.SpeakingSubmission || mongoose.model("SpeakingSubmission", speakingSubmissionSchema);

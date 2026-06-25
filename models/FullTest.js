@@ -73,4 +73,8 @@ const fullTestSchema = new mongoose.Schema({
     publishedAt: Date
 });
 
+fullTestSchema.index({ status: 1, createdAt: -1 });
+fullTestSchema.index({ "metadata.testNumber": 1 });
+fullTestSchema.index({ "images.section": 1, "images.sectionNumber": 1 });
+
 module.exports = mongoose.models.FullTest || mongoose.model("FullTest", fullTestSchema);

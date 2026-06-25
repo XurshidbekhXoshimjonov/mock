@@ -727,6 +727,21 @@
         return tests.find((item) => item.id === testId) || tests[0] || null;
     }
 
+    async function loadSpeakingTestDetail(sectionKey, testId) {
+        const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}`, {
+            credentials: "include"
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(data.error || "Could not load Speaking test.");
+        }
+        const tests = catalog[sectionKey] || [];
+        const index = tests.findIndex((item) => item.id === data.id);
+        if (index >= 0) tests[index] = data;
+        else tests.unshift(data);
+        return data;
+    }
+
     function clearTimer() {
         if (state.timer?.id) clearInterval(state.timer.id);
         state.timer = null;
@@ -1102,7 +1117,7 @@
         return `
             <div class="speaking-audio-preview">
                 <strong>Audio preview</strong>
-                <audio controls src="${record.audioUrl}"></audio>
+                <audio controls preload="metadata" src="${record.audioUrl}"></audio>
             </div>
             <div class="speaking-transcript-box">
                 <strong>Transcript</strong>
@@ -1119,11 +1134,14 @@
         else renderSinglePractice();
     }
 
-    function renderTest(sectionKey, testId) {
-        const test = findTest(sectionKey, testId);
+    async function renderTest(sectionKey, testId) {
+        let test = findTest(sectionKey, testId);
         if (!test) {
             renderListing(sectionKey);
             return;
+        }
+        if (!test.questions?.length && !test.bullets?.length && !test.parts?.length) {
+            test = await loadSpeakingTestDetail(sectionKey, test.id || testId);
         }
         state.section = sectionKey;
         state.test = test;
@@ -1718,7 +1736,7 @@
             await loadPublishedCatalog();
         }
         if (route.view === "listing") renderListing(route.sectionKey);
-        else if (route.view === "test") renderTest(route.sectionKey, route.testId);
+        else if (route.view === "test") await renderTest(route.sectionKey, route.testId);
         else {
             renderHome();
         }
