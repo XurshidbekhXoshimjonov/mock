@@ -1,0 +1,261 @@
+{
+  "id": "cambridge-21-test-1-listening-part-1",
+  "title": "Cambridge IELTS 21 Test 1 Listening - Part 1",
+  "slug": "cambridge-21-test-1-listening-part-1",
+  "status": "published",
+  "part": 1,
+  "audio": "/uploads/audio/C21T1P1.1.mp3",
+  "audioUrls": [
+    "/uploads/audio/C21T1P1.1.mp3",
+    "/uploads/audio/C21T1P1.2.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/C21T1P1.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P1.1.mp3",
+        "/uploads/audio/C21T1P1.2.mp3"
+      ],
+      "audioFileName": "C21T1P1.1.mp3, C21T1P1.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "1 | 10 | ten\n2 | weather\n3 | safety\n4 | discount\n5 | dictionary\n6 | certificate\n7 | towel\n8 | cafe | café\n9 | videos\n10 | lockers",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-1-table",
+          "type": "table_completion",
+          "questionRange": "Questions 1-6",
+          "title": "Oyster Bay Sailing Club Courses",
+          "instruction": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "columns": [
+            "Name of course",
+            "What you learn",
+            "Cost",
+            "Other information"
+          ],
+          "rows": [
+            [
+              "Taster day",
+              "introduction to sailing",
+              "£120 if booking one place",
+              "small groups (max {{1}} people)"
+            ],
+            [
+              "Level 1",
+              "basic theory e.g. understanding the {{2}} and tides\n\nbasic sailing skills including {{3}} information",
+              "£200\n\n{{4}} available for club members\n\nall inclusive (plus a useful {{5}})",
+              "a {{6}} at the end of the course for all participants"
+            ]
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "small groups (max ... people)",
+              "text": "small groups (max ... people)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "10 | ten"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "basic theory e.g. understanding the ... and tides",
+              "text": "basic theory e.g. understanding the ... and tides",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "weather"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "basic sailing skills including ... information",
+              "text": "basic sailing skills including ... information",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "safety"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "... available for club members",
+              "text": "... available for club members",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "discount"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "all inclusive (plus a useful ...)",
+              "text": "all inclusive (plus a useful ...)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "dictionary"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "a ... at the end of the course for all participants",
+              "text": "a ... at the end of the course for all participants",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "certificate"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-1-notes",
+          "type": "note_completion",
+          "questionRange": "Questions 7-10",
+          "title": "General information",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Participants must be able to swim.",
+            "- Bring suitable clothing, a {{7}} and toiletries (e.g. shampoo).",
+            "- There is an {{8}} at the club.",
+            "- Online training {{9}} are recommended.",
+            "- {{10}} are available for course participants."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Bring suitable clothing, a ... and toiletries.",
+              "text": "Bring suitable clothing, a ... and toiletries.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "towel"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "There is an ... at the club.",
+              "text": "There is an ... at the club.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cafe | café"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Online training ... are recommended.",
+              "text": "Online training ... are recommended.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "videos"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "... are available for course participants.",
+              "text": "... are available for course participants.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lockers"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "small groups (max ... people)",
+      "options": [],
+      "answer": "10 | ten"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "basic theory e.g. understanding the ... and tides",
+      "options": [],
+      "answer": "weather"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "basic sailing skills including ... information",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "... available for club members",
+      "options": [],
+      "answer": "discount"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "all inclusive (plus a useful ...)",
+      "options": [],
+      "answer": "dictionary"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "a ... at the end of the course for all participants",
+      "options": [],
+      "answer": "certificate"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Bring suitable clothing, a ... and toiletries.",
+      "options": [],
+      "answer": "towel"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "There is an ... at the club.",
+      "options": [],
+      "answer": "cafe | café"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Online training ... are recommended.",
+      "options": [],
+      "answer": "videos"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "... are available for course participants.",
+      "options": [],
+      "answer": "lockers"
+    }
+  ],
+  "sourceFullTestId": "cambridge-21-test-1-listening",
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "updatedAt": "2026-06-25T15:11:23.837Z"
+}

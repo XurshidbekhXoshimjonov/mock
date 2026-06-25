@@ -1,0 +1,248 @@
+{
+  "id": "cambridge-21-test-1-listening-part-4",
+  "title": "Cambridge IELTS 21 Test 1 Listening - Part 4",
+  "slug": "cambridge-21-test-1-listening-part-4",
+  "status": "published",
+  "part": 4,
+  "audio": "/uploads/audio/C21T1P4.mp3",
+  "audioUrls": [
+    "/uploads/audio/C21T1P4.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/C21T1P4.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P4.mp3"
+      ],
+      "audioFileName": "C21T1P4.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "31 | metal | metals\n32 | slow\n33 | demand\n34 | equator\n35 | recycle\n36 | fungus\n37 | weather\n38 | strong\n39 | roots\n40 | soil",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-4-notes",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "Sources of rubber",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Three resources which are essential for industrial civilisation",
+            "- {{31}}",
+            "- fossil fuels",
+            "- rubber",
+            "<strong>Natural rubber</strong>",
+            "This mainly comes from the Para rubber tree, now cultivated in South-East Asia.",
+            "The supply is limited because",
+            "- the growth of the tree is {{32}}",
+            "- production cannot easily be adjusted because of increasing or decreasing {{33}}",
+            "- the tree only grows near the {{34}}",
+            "- extracting the latex (rubber) is labour-intensive",
+            "- it is very difficult to {{35}} rubber after production.",
+            "<strong>New threats include</strong>",
+            "- lack of genetic diversity, leading to danger of disease caused by a {{36}}",
+            "- a shift to the cultivation of palm oil",
+            "- extreme {{37}} events.",
+            "<strong>Synthetic rubber</strong>",
+            "- may be used for engine parts and cooking utensils",
+            "- is less {{38}} than natural rubber",
+            "- is unsuitable for many purposes e.g. the tyres of aircraft.",
+            "<strong>An alternative source of natural rubber</strong>",
+            "- A wild flower (a type of dandelion) has rubber in its {{39}}.",
+            "- It can be grown in many locations and does not require good {{40}}."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Three resources which are essential for industrial civilisation: ...",
+              "text": "Three resources which are essential for industrial civilisation: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "metal | metals"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "the growth of the tree is ...",
+              "text": "the growth of the tree is ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "slow"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "production cannot easily be adjusted because of increasing or decreasing ...",
+              "text": "production cannot easily be adjusted because of increasing or decreasing ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "demand"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "the tree only grows near the ...",
+              "text": "the tree only grows near the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "equator"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "it is very difficult to ... rubber after production.",
+              "text": "it is very difficult to ... rubber after production.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "recycle"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "danger of disease caused by a ...",
+              "text": "danger of disease caused by a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fungus"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "extreme ... events.",
+              "text": "extreme ... events.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "weather"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "is less ... than natural rubber",
+              "text": "is less ... than natural rubber",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "strong"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "A wild flower has rubber in its ...",
+              "text": "A wild flower has rubber in its ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "roots"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "It can be grown in many locations and does not require good ...",
+              "text": "It can be grown in many locations and does not require good ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "soil"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Three resources which are essential for industrial civilisation: ...",
+      "options": [],
+      "answer": "metal | metals"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "the growth of the tree is ...",
+      "options": [],
+      "answer": "slow"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "production cannot easily be adjusted because of increasing or decreasing ...",
+      "options": [],
+      "answer": "demand"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "the tree only grows near the ...",
+      "options": [],
+      "answer": "equator"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "it is very difficult to ... rubber after production.",
+      "options": [],
+      "answer": "recycle"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "danger of disease caused by a ...",
+      "options": [],
+      "answer": "fungus"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "extreme ... events.",
+      "options": [],
+      "answer": "weather"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "is less ... than natural rubber",
+      "options": [],
+      "answer": "strong"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "A wild flower has rubber in its ...",
+      "options": [],
+      "answer": "roots"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "It can be grown in many locations and does not require good ...",
+      "options": [],
+      "answer": "soil"
+    }
+  ],
+  "sourceFullTestId": "cambridge-21-test-1-listening",
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "updatedAt": "2026-06-25T15:11:23.837Z"
+}

@@ -928,7 +928,11 @@ const ListeningComponents = (() => {
     }
 
     function AudioPlayerCard(part) {
-        const hasAudio = Boolean(part.audioUrl);
+        const playlist = Array.isArray(part.audioUrls)
+            ? part.audioUrls.map((item) => String(item || "").trim()).filter(Boolean)
+            : [];
+        const audioUrl = playlist[0] || part.audioUrl || "";
+        const hasAudio = Boolean(audioUrl);
         return `<section class="lc-audio-card" data-audio-card data-part-number="${Number(part.partNumber) || 1}">
             <div class="lc-audio-player">
                 <div class="lc-audio-title"><span class="lc-headphone-icon"></span><strong>Audio Player</strong></div>
@@ -940,7 +944,7 @@ const ListeningComponents = (() => {
                     <span class="lc-volume-icon">VOL</span>
                     <input class="lc-volume" type="range" min="0" max="1" value="0.75" step="0.05" aria-label="Volume">
                 </div>
-                <audio preload="metadata" src="${escapeHtml(part.audioUrl || "")}"></audio>
+                <audio preload="metadata" src="${escapeHtml(audioUrl)}" data-audio-playlist="${escapeHtml(JSON.stringify(playlist))}"></audio>
             </div>
             <div class="lc-audio-start-panel">
                 <div class="lc-audio-message">
@@ -1134,6 +1138,38 @@ const ListeningComponents = (() => {
         let started = false;
         let ended = false;
         let draggingProgress = false;
+        let segmentIndex = 0;
+        let playlist = [];
+
+        try {
+            playlist = JSON.parse(audio.dataset.audioPlaylist || "[]")
+                .map((item) => String(item || "").trim())
+                .filter(Boolean);
+        } catch {
+            playlist = [];
+        }
+        if (!playlist.length && audio.getAttribute("src")) {
+            playlist = [audio.getAttribute("src")];
+        }
+
+        function loadSegment(index, autoplay = false) {
+            if (!playlist[index]) return false;
+            segmentIndex = index;
+            audio.src = playlist[index];
+            audio.load();
+            ended = false;
+            play.disabled = !started;
+            play.textContent = "Play";
+            current.textContent = "00:00";
+            total.textContent = "--:--";
+            progress.style.width = "0%";
+            if (autoplay) {
+                audio.play().catch(() => {
+                    play.textContent = "Play";
+                });
+            }
+            return true;
+        }
 
         function duration() {
             return Number.isFinite(audio.duration) ? audio.duration : 0;
@@ -1183,6 +1219,10 @@ const ListeningComponents = (() => {
             if (!ended) play.textContent = "Play";
         });
         audio.addEventListener("ended", () => {
+            if (segmentIndex < playlist.length - 1) {
+                loadSegment(segmentIndex + 1, started);
+                return;
+            }
             ended = true;
             play.disabled = true;
             play.textContent = "Ended";
@@ -1340,6 +1380,22 @@ const ListeningComponents = (() => {
                 } else {
                     message.textContent = `${selected.length} of ${maximum} selected`;
                 }
+            });
+        });
+
+        root.querySelectorAll("input[data-sync]").forEach((field) => {
+            field.addEventListener("change", () => {
+                const groupName = String(field.dataset.sync || "");
+                const numbers = groupName.match(/\d{1,2}/g) || [];
+                const selected = [...root.querySelectorAll("input[data-sync]:checked")]
+                    .filter((input) => String(input.dataset.sync || "") === groupName)
+                    .map((input) => input.value)
+                    .filter(Boolean);
+
+                numbers.forEach((number, index) => {
+                    const target = root.querySelector(`[name="q${number}"]`);
+                    if (target) target.value = selected[index] || "";
+                });
             });
         });
 

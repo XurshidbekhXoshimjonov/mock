@@ -1,0 +1,417 @@
+{
+  "id": "cambridge-21-test-1-listening-part-3",
+  "title": "Cambridge IELTS 21 Test 1 Listening - Part 3",
+  "slug": "cambridge-21-test-1-listening-part-3",
+  "status": "published",
+  "part": 3,
+  "audio": "/uploads/audio/C21T1P3.1.mp3",
+  "audioUrls": [
+    "/uploads/audio/C21T1P3.1.mp3",
+    "/uploads/audio/C21T1P3.2.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/C21T1P3.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P3.1.mp3",
+        "/uploads/audio/C21T1P3.2.mp3"
+      ],
+      "audioFileName": "C21T1P3.1.mp3, C21T1P3.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "21 | B | D\n22 | B | D\n23 | C | E\n24 | C | E\n25 | G\n26 | B\n27 | F\n28 | H\n29 | A\n30 | E",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-3-biodiversity-impact",
+          "type": "multiple_select",
+          "questionRange": "Questions 21-22",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 21,
+          "answerQuestions": [
+            {
+              "questionNumber": 22
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the references to local problems"
+            },
+            {
+              "letter": "B",
+              "text": "the broad focus of the examples"
+            },
+            {
+              "letter": "C",
+              "text": "the practical suggestions for solutions"
+            },
+            {
+              "letter": "D",
+              "text": "the type of issues discussed"
+            },
+            {
+              "letter": "E",
+              "text": "the implications for government policy"
+            }
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "text": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the references to local problems"
+                },
+                {
+                  "letter": "B",
+                  "text": "the broad focus of the examples"
+                },
+                {
+                  "letter": "C",
+                  "text": "the practical suggestions for solutions"
+                },
+                {
+                  "letter": "D",
+                  "text": "the type of issues discussed"
+                },
+                {
+                  "letter": "E",
+                  "text": "the implications for government policy"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | D"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "text": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the references to local problems"
+                },
+                {
+                  "letter": "B",
+                  "text": "the broad focus of the examples"
+                },
+                {
+                  "letter": "C",
+                  "text": "the practical suggestions for solutions"
+                },
+                {
+                  "letter": "D",
+                  "text": "the type of issues discussed"
+                },
+                {
+                  "letter": "E",
+                  "text": "the implications for government policy"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | D"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-3-research-project",
+          "type": "multiple_select",
+          "questionRange": "Questions 23-24",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 23,
+          "answerQuestions": [
+            {
+              "questionNumber": 24
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO details about the research project particularly impressed the students?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the team's previous successes"
+            },
+            {
+              "letter": "B",
+              "text": "its wide geographical scale"
+            },
+            {
+              "letter": "C",
+              "text": "the use of new technology"
+            },
+            {
+              "letter": "D",
+              "text": "the extensive statistical evidence"
+            },
+            {
+              "letter": "E",
+              "text": "the large range of specialists involved"
+            }
+          ],
+          "questions": [
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Which TWO details about the research project particularly impressed the students?",
+              "text": "Which TWO details about the research project particularly impressed the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the team's previous successes"
+                },
+                {
+                  "letter": "B",
+                  "text": "its wide geographical scale"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of new technology"
+                },
+                {
+                  "letter": "D",
+                  "text": "the extensive statistical evidence"
+                },
+                {
+                  "letter": "E",
+                  "text": "the large range of specialists involved"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Which TWO details about the research project particularly impressed the students?",
+              "text": "Which TWO details about the research project particularly impressed the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the team's previous successes"
+                },
+                {
+                  "letter": "B",
+                  "text": "its wide geographical scale"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of new technology"
+                },
+                {
+                  "letter": "D",
+                  "text": "the extensive statistical evidence"
+                },
+                {
+                  "letter": "E",
+                  "text": "the large range of specialists involved"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-3-opinions",
+          "type": "matching",
+          "questionRange": "Questions 25-30",
+          "instruction": "What is the students' opinion of each of the following resources related to ocean biodiversity? Choose SIX answers from the box and write the correct letter, A-H, next to Questions 25-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "This is aimed at a very specialist audience."
+            },
+            {
+              "letter": "B",
+              "text": "This is now rather outdated."
+            },
+            {
+              "letter": "C",
+              "text": "This was an effective description of a new danger."
+            },
+            {
+              "letter": "D",
+              "text": "This suggests possible ways to improve the situation."
+            },
+            {
+              "letter": "E",
+              "text": "This does not give a balanced account."
+            },
+            {
+              "letter": "F",
+              "text": "This is too predictable to be useful."
+            },
+            {
+              "letter": "G",
+              "text": "This gives insufficient evidence for its claims."
+            },
+            {
+              "letter": "H",
+              "text": "This gives a clear explanation of the problems."
+            }
+          ],
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Article on invasive lionfish",
+              "text": "Article on invasive lionfish",
+              "options": [],
+              "type": "matching",
+              "answer": "G"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Documentary on microplastics",
+              "text": "Documentary on microplastics",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Podcast on ocean pollution",
+              "text": "Podcast on ocean pollution",
+              "options": [],
+              "type": "matching",
+              "answer": "F"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Book on coastal ecosystems",
+              "text": "Book on coastal ecosystems",
+              "options": [],
+              "type": "matching",
+              "answer": "H"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Article on metal toxicity",
+              "text": "Article on metal toxicity",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Podcast on floating marine cities",
+              "text": "Podcast on floating marine cities",
+              "options": [],
+              "type": "matching",
+              "answer": "E"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 21-30",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_select",
+      "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+      "options": [],
+      "answer": "B | D"
+    },
+    {
+      "number": 22,
+      "type": "multiple_select",
+      "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+      "options": [],
+      "answer": "B | D"
+    },
+    {
+      "number": 23,
+      "type": "multiple_select",
+      "question": "Which TWO details about the research project particularly impressed the students?",
+      "options": [],
+      "answer": "C | E"
+    },
+    {
+      "number": 24,
+      "type": "multiple_select",
+      "question": "Which TWO details about the research project particularly impressed the students?",
+      "options": [],
+      "answer": "C | E"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "Article on invasive lionfish",
+      "options": [],
+      "answer": "G"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Documentary on microplastics",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Podcast on ocean pollution",
+      "options": [],
+      "answer": "F"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Book on coastal ecosystems",
+      "options": [],
+      "answer": "H"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Article on metal toxicity",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Podcast on floating marine cities",
+      "options": [],
+      "answer": "E"
+    }
+  ],
+  "sourceFullTestId": "cambridge-21-test-1-listening",
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "updatedAt": "2026-06-25T15:11:23.837Z"
+}

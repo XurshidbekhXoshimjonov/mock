@@ -1195,6 +1195,22 @@ body.speaking-page .ieltsx-notes-toggle-count {
     padding-bottom: 0;
 }
 
+.speaking-player-screen--result {
+    overflow-y: auto;
+}
+
+.speaking-result-stage {
+    box-sizing: border-box;
+    min-height: calc(100vh - 66px);
+    padding: 20px;
+    background: #f8fafc;
+}
+
+.speaking-result-stage .speaking-feedback-card {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
 .speaking-player-stage {
     display: grid;
     grid-template-columns: 4.5fr 4.5fr 3fr;

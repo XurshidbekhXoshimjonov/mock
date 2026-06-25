@@ -1,0 +1,420 @@
+{
+  "id": "cambridge-21-test-1-listening-part-2",
+  "title": "Cambridge IELTS 21 Test 1 Listening - Part 2",
+  "slug": "cambridge-21-test-1-listening-part-2",
+  "status": "published",
+  "part": 2,
+  "audio": "/uploads/audio/C21T1P2.1.mp3",
+  "audioUrls": [
+    "/uploads/audio/C21T1P2.1.mp3",
+    "/uploads/audio/C21T1P2.2.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/C21T1P2.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P2.1.mp3",
+        "/uploads/audio/C21T1P2.2.mp3"
+      ],
+      "audioFileName": "C21T1P2.1.mp3, C21T1P2.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "11 | A\n12 | B\n13 | A\n14 | A\n15 | A\n16 | C\n17 | C\n18 | A\n19 | B\n20 | C",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-2-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-16",
+          "title": "Working as a makeup trainee",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What should trainees always expect to get when working on low budget short films?",
+              "text": "What should trainees always expect to get when working on low budget short films?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "travel expenses"
+                },
+                {
+                  "letter": "B",
+                  "text": "a minimum wage"
+                },
+                {
+                  "letter": "C",
+                  "text": "meals"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "According to the speaker, on big budget films trainees may get experience of",
+              "text": "According to the speaker, on big budget films trainees may get experience of",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "makeup for special effects."
+                },
+                {
+                  "letter": "B",
+                  "text": "working with different ethnicities."
+                },
+                {
+                  "letter": "C",
+                  "text": "creating a variety of hair styles."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "The speaker says a problem for makeup artists is",
+              "text": "The speaker says a problem for makeup artists is",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "dealing with difficult directors."
+                },
+                {
+                  "letter": "B",
+                  "text": "being shouted at by their supervisor."
+                },
+                {
+                  "letter": "C",
+                  "text": "waiting around for hours doing nothing."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "How did the speaker feel when she met famous actors for the first time?",
+              "text": "How did the speaker feel when she met famous actors for the first time?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "very shy"
+                },
+                {
+                  "letter": "B",
+                  "text": "very proud"
+                },
+                {
+                  "letter": "C",
+                  "text": "very disappointed"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "What advice does the speaker give about makeup kits?",
+              "text": "What advice does the speaker give about makeup kits?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Always carry a basic kit with you."
+                },
+                {
+                  "letter": "B",
+                  "text": "Only buy the best products for a makeup kit."
+                },
+                {
+                  "letter": "C",
+                  "text": "Ask other makeup artists to check your kit."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "What advice does the speaker give about creating a portfolio?",
+              "text": "What advice does the speaker give about creating a portfolio?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Keep print and digital photos."
+                },
+                {
+                  "letter": "B",
+                  "text": "Only include a small selection of photos."
+                },
+                {
+                  "letter": "C",
+                  "text": "Get permission to use photos."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-2-matching",
+          "type": "matching",
+          "questionRange": "Questions 17-20",
+          "instruction": "What ability is required for each of the following duties? Write the correct letter, A, B, or C, next to Questions 17-20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "being well-organised"
+            },
+            {
+              "letter": "B",
+              "text": "being flexible"
+            },
+            {
+              "letter": "C",
+              "text": "working quickly"
+            }
+          ],
+          "questions": [
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Prepping an actor",
+              "text": "Prepping an actor",
+              "options": [],
+              "type": "matching",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Continuity",
+              "text": "Continuity",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "General",
+              "text": "General",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Applying makeup",
+              "text": "Applying makeup",
+              "options": [],
+              "type": "matching",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 11-20",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What should trainees always expect to get when working on low budget short films?",
+      "options": [
+        {
+          "value": "A",
+          "label": "travel expenses",
+          "html": "travel expenses"
+        },
+        {
+          "value": "B",
+          "label": "a minimum wage",
+          "html": "a minimum wage"
+        },
+        {
+          "value": "C",
+          "label": "meals",
+          "html": "meals"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "According to the speaker, on big budget films trainees may get experience of",
+      "options": [
+        {
+          "value": "A",
+          "label": "makeup for special effects.",
+          "html": "makeup for special effects."
+        },
+        {
+          "value": "B",
+          "label": "working with different ethnicities.",
+          "html": "working with different ethnicities."
+        },
+        {
+          "value": "C",
+          "label": "creating a variety of hair styles.",
+          "html": "creating a variety of hair styles."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "The speaker says a problem for makeup artists is",
+      "options": [
+        {
+          "value": "A",
+          "label": "dealing with difficult directors.",
+          "html": "dealing with difficult directors."
+        },
+        {
+          "value": "B",
+          "label": "being shouted at by their supervisor.",
+          "html": "being shouted at by their supervisor."
+        },
+        {
+          "value": "C",
+          "label": "waiting around for hours doing nothing.",
+          "html": "waiting around for hours doing nothing."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "How did the speaker feel when she met famous actors for the first time?",
+      "options": [
+        {
+          "value": "A",
+          "label": "very shy",
+          "html": "very shy"
+        },
+        {
+          "value": "B",
+          "label": "very proud",
+          "html": "very proud"
+        },
+        {
+          "value": "C",
+          "label": "very disappointed",
+          "html": "very disappointed"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What advice does the speaker give about makeup kits?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Always carry a basic kit with you.",
+          "html": "Always carry a basic kit with you."
+        },
+        {
+          "value": "B",
+          "label": "Only buy the best products for a makeup kit.",
+          "html": "Only buy the best products for a makeup kit."
+        },
+        {
+          "value": "C",
+          "label": "Ask other makeup artists to check your kit.",
+          "html": "Ask other makeup artists to check your kit."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "What advice does the speaker give about creating a portfolio?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Keep print and digital photos.",
+          "html": "Keep print and digital photos."
+        },
+        {
+          "value": "B",
+          "label": "Only include a small selection of photos.",
+          "html": "Only include a small selection of photos."
+        },
+        {
+          "value": "C",
+          "label": "Get permission to use photos.",
+          "html": "Get permission to use photos."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Prepping an actor",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Continuity",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "General",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Applying makeup",
+      "options": [],
+      "answer": "C"
+    }
+  ],
+  "sourceFullTestId": "cambridge-21-test-1-listening",
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "updatedAt": "2026-06-25T15:11:23.837Z"
+}

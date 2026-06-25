@@ -591,7 +591,7 @@
         if (timerBox) timerBox.classList.toggle("warning", seconds <= 60);
         if (submitBtn) {
             submitBtn.disabled = Boolean(state.loading) || !state.hasStarted;
-            submitBtn.textContent = state.loading ? "Submitting..." : "Submit";
+            submitBtn.textContent = state.loading ? "Evaluating your speaking..." : "Submit";
         }
     }
 
@@ -1106,7 +1106,7 @@
     }
 
     function renderStatus() {
-        if (state.loading) return `<div class="speaking-status">AI is checking your speaking...</div>`;
+        if (state.loading) return `<div class="speaking-status">Evaluating your speaking...</div>`;
         if (state.recording) return `<div class="speaking-status recording">Recording: ${state.timer ? formatTime(state.timer.remaining) : "live"}</div>`;
         if (state.timer) return `<div class="speaking-status">${escapeHtml(state.timer.label)}: ${formatTime(state.timer.remaining)}</div>`;
         return `<div class="speaking-status">Ready</div>`;
@@ -1198,6 +1198,28 @@
         if (state.section === "part2") return 2;
         if (state.section === "part3") return 3;
         return 1;
+    }
+
+    function getSubmitTestMode() {
+        return state.section === "full" ? "full" : "part";
+    }
+
+    function getActiveSubmitPartNumber() {
+        if (state.section === "full") return Number(activeFullPart()?.part || state.fullCurrentPart || 1);
+        return getStandalonePartNumber();
+    }
+
+    function getSpeakingTestId() {
+        return String(state.test?.id || state.test?._id || state.test?.testId || "").trim();
+    }
+
+    function questionTextFromPart(part) {
+        const lines = [
+            part?.prompt || "",
+            ...(Array.isArray(part?.questions) ? part.questions : []),
+            ...(Array.isArray(part?.bullets) ? part.bullets : [])
+        ].map((item) => String(item || "").trim()).filter(Boolean);
+        return lines.join("\n");
     }
 
     function getSpeakingWindow(partNumber) {
@@ -1348,6 +1370,17 @@
         const recordingStatus = getRecordingStatusText(part.part);
         updatePlayerHeader();
 
+        if (state.feedback) {
+            app.innerHTML = `
+                <section class="speaking-player-screen speaking-player-screen--result" aria-label="Speaking test result">
+                    <main class="speaking-result-stage">
+                        ${renderFeedback()}
+                    </main>
+                </section>
+            `;
+            return;
+        }
+
         app.innerHTML = `
             <section class="speaking-player-screen ${state.section === "full" ? "speaking-player-screen--full" : "speaking-player-screen--single"}" aria-label="Speaking test player">
                 <main class="speaking-player-stage">
@@ -1357,7 +1390,6 @@
                 </main>
                 ${renderSpeakingBottomTabs(part.part)}
             </section>
-            ${renderFeedback()}
         `;
     }
 
@@ -1448,6 +1480,7 @@
                             <button class="speaking-record-btn speaking-record-btn--secondary" type="button" data-action="play-recording" ${canPlay ? "" : "disabled"}>Play Recording</button>
                         `}
                     </div>
+                    ${state.loading ? renderStatus() : ""}
                     ${state.error ? `<div class="speaking-error">${escapeHtml(state.error)}</div>` : ""}
                 </div>
             </div>
@@ -1529,8 +1562,14 @@
     }
 
     function submitActiveAttempt() {
+        const submitMode = getSubmitTestMode();
+        const partNumber = getActiveSubmitPartNumber();
+        console.log("Speaking submit clicked");
+        console.log("Mode:", submitMode);
+        console.log("Part:", partNumber);
         if (!state.hasStarted) return;
-        if (state.section === "full") submitFull();
+        if (state.loading) return;
+        if (state.section === "full") submitFullProgressOrFinal(partNumber);
         else if (state.section === "part2") submitCue();
         else submitSingle();
     }
@@ -1549,10 +1588,10 @@
         if (!state.feedback) return "";
         const feedback = state.feedback;
         const bands = [
-            ["Overall", feedback.overallBand],
+            ["Overall band", feedback.overallBand],
             ["Fluency and Coherence", feedback.fluencyCoherence],
             ["Lexical Resource", feedback.lexicalResource],
-            ["Grammar", feedback.grammaticalRangeAccuracy],
+            ["Grammar Range and Accuracy", feedback.grammaticalRangeAccuracy],
             ["Pronunciation", feedback.pronunciation]
         ];
         return `
@@ -1561,7 +1600,7 @@
                     <div>
                         <span class="speaking-section-kicker">AI Feedback</span>
                         <h3>Speaking Band Estimate</h3>
-                        <p>${escapeHtml(feedback.detailedFeedback || "Review your Speaking feedback below.")}</p>
+                        <p>${escapeHtml("Review your Speaking feedback below.")}</p>
                     </div>
                     <a class="speaking-secondary speaking-header-back" href="${sectionMeta[state.section].route}">&lt;- Back</a>
                 </div>
@@ -1569,12 +1608,23 @@
                     ${bands.map(([label, value]) => `<div class="speaking-band-card"><span>${escapeHtml(label)}</span><strong>${Number(value || 0).toFixed(1)}</strong></div>`).join("")}
                 </div>
                 <div class="speaking-feedback-grid">
+                    ${renderFeedbackText("Feedback", feedback.detailedFeedback)}
                     ${renderFeedbackList("Strengths", feedback.strengths)}
                     ${renderFeedbackList("Problems", feedback.problems)}
-                    ${renderFeedbackList("How to improve", feedback.howToImprove)}
+                    ${renderFeedbackList("Improvement tips", feedback.howToImprove)}
                     ${renderFeedbackList("Suggested improved answers", feedback.improvedAnswers)}
                     ${renderFeedbackList("Practical tips", feedback.practicalTips)}
                 </div>
+            </section>
+        `;
+    }
+
+    function renderFeedbackText(title, text) {
+        const value = String(text || "").trim();
+        return `
+            <section class="speaking-feedback-section">
+                <h4>${escapeHtml(title)}</h4>
+                <p class="speaking-muted">${escapeHtml(value || "No detailed feedback returned for this attempt.")}</p>
             </section>
         `;
     }
@@ -1592,20 +1642,28 @@
     }
 
     async function submitSingle() {
+        if (state.loading) return;
         const meta = sectionMeta[state.section];
         const record = state.partRecords[state.section];
         if (!record?.blob) {
             setError("Record your answer before submitting.");
             return;
         }
+        const questionText = `${state.test.topic || state.test.description || meta.categoryTitle}\n${(state.test.questions || []).join("\n")}`.trim();
+        const userAnswer = record.transcript || "";
         const part = {
             part: meta.part,
             title: meta.categoryTitle,
-            prompt: `${state.test.topic || state.test.description || meta.categoryTitle}\n${(state.test.questions || []).join("\n")}`,
-            transcript: record.transcript || ""
+            prompt: questionText,
+            questionText,
+            transcript: userAnswer,
+            userAnswer,
+            audioUrl: record.audioUrl || ""
         };
         await submitAttempt({
             mode: meta.submitMode,
+            testMode: "part",
+            partNumber: meta.part,
             title: `${meta.categoryTitle} - ${state.test.title}`,
             topic: state.test.topic || state.test.description || meta.categoryTitle,
             prompt: state.test,
@@ -1615,18 +1673,26 @@
     }
 
     async function submitCue() {
+        if (state.loading) return;
         if (!state.cueRecord?.blob) {
             setError("Record your Cue Card answer before submitting.");
             return;
         }
+        const questionText = `${state.test.topic || state.test.description || "Cue Card"}\n${(state.test.bullets || []).join("\n")}`.trim();
+        const userAnswer = state.cueRecord.transcript || "";
         const part = {
             part: 2,
             title: "Cue Card",
-            prompt: `${state.test.topic || state.test.description || "Cue Card"}\n${(state.test.bullets || []).join("\n")}`,
-            transcript: state.cueRecord.transcript || ""
+            prompt: questionText,
+            questionText,
+            transcript: userAnswer,
+            userAnswer,
+            audioUrl: state.cueRecord.audioUrl || ""
         };
         await submitAttempt({
             mode: "cue_card",
+            testMode: "part",
+            partNumber: 2,
             title: `Cue Card Practice - ${state.test.title}`,
             topic: state.test.topic,
             prompt: state.test,
@@ -1635,21 +1701,46 @@
         });
     }
 
+    function submitFullProgressOrFinal(partNumber = getActiveSubmitPartNumber()) {
+        if (state.loading) return;
+        const record = state.fullRecords[partNumber];
+        if (!record?.blob) {
+            setError(`Record Part ${partNumber} before ${partNumber === 3 ? "submitting" : "moving to the next part"}.`);
+            return;
+        }
+        if (partNumber < 3) {
+            moveToFullPart(partNumber + 1);
+            return;
+        }
+        submitFull();
+    }
+
     async function submitFull() {
+        if (state.loading) return;
         const parts = activeFullParts();
         const records = parts.map((part) => state.fullRecords[part.part]);
         if (records.some((record) => !record?.blob)) {
             setError("Record all three parts before submitting the full test.");
             return;
         }
-        const submittedParts = parts.map((part) => ({
-            part: part.part,
-            title: part.title,
-            prompt: `${part.prompt || ""}\n${(part.questions || []).join("\n")}`,
-            transcript: state.fullRecords[part.part]?.transcript || ""
-        }));
+        const submittedParts = parts.map((part) => {
+            const record = state.fullRecords[part.part];
+            const questionText = questionTextFromPart(part);
+            const userAnswer = record?.transcript || "";
+            return {
+                part: part.part,
+                title: part.title,
+                prompt: questionText,
+                questionText,
+                transcript: userAnswer,
+                userAnswer,
+                audioUrl: record?.audioUrl || ""
+            };
+        });
         await submitAttempt({
             mode: "full_test",
+            testMode: "full",
+            partNumber: 3,
             title: `Full Speaking Test - ${state.test.title}`,
             topic: state.test.topic || "Full IELTS Speaking Test",
             prompt: state.test,
@@ -1673,32 +1764,59 @@
         }
     }
 
-    async function submitAttempt({ mode, title, topic, prompt, records, parts }) {
+    async function submitAttempt({ mode, testMode, partNumber, title, topic, prompt, records, parts }) {
+        if (state.loading) return;
+        const resolvedTestMode = testMode || (mode === "full_test" ? "full" : "part");
+        const resolvedPartNumber = Number(partNumber || parts?.[0]?.part || getActiveSubmitPartNumber());
+        const testId = getSpeakingTestId();
+        const questionText = (parts || []).map((part) => part.questionText || part.prompt || "").filter(Boolean).join("\n\n");
+        const userAnswer = (parts || []).map((part) => part.userAnswer || part.transcript || "").filter(Boolean).join("\n\n");
         state.loading = true;
         state.error = "";
         state.feedback = null;
         renderCurrentTest();
         try {
             const form = new FormData();
+            form.append("testId", testId);
+            form.append("part", String(resolvedPartNumber || ""));
+            form.append("testMode", resolvedTestMode);
             form.append("mode", mode);
             form.append("title", title);
             form.append("topic", topic);
             form.append("prompt", JSON.stringify(prompt));
             form.append("parts", JSON.stringify(parts));
-            form.append("transcript", parts.map((part) => part.transcript || "").filter(Boolean).join("\n\n"));
+            form.append("questionText", questionText);
+            form.append("userAnswer", userAnswer);
+            form.append("transcript", userAnswer);
+            form.append("audioUrls", JSON.stringify((records || []).map((record) => record?.audioUrl || "")));
             records.forEach((record, index) => {
                 form.append("audio", new File([record.blob], `${mode}-${index + 1}.webm`, { type: record.blob.type || "audio/webm" }));
             });
 
-            const response = await fetch("/api/speaking/submit", {
+            console.log("Sending speaking evaluation request", {
+                testId,
+                mode: resolvedTestMode,
+                part: resolvedPartNumber,
+                apiMode: mode,
+                parts: (parts || []).map((part) => ({
+                    part: part.part,
+                    questionText: part.questionText || part.prompt || "",
+                    hasTranscript: Boolean(part.userAnswer || part.transcript),
+                    audioUrl: part.audioUrl || ""
+                }))
+            });
+
+            const response = await fetch("/api/evaluate-speaking", {
                 method: "POST",
                 credentials: "include",
                 body: form
             });
             const data = await response.json().catch(() => ({}));
-            if (!response.ok) throw new Error(data.error || "AI feedback failed. Please try again.");
+            if (!response.ok) throw new Error(data.error || data.message || "AI feedback failed. Please try again.");
+            console.log("Speaking evaluation result", data);
             state.feedback = data.feedback;
             applyServerTranscripts(mode, data.attempt?.parts);
+            clearAllPlayerTimers();
             if (mode === "full_test") {
                 const submittedParts = data.attempt?.parts || parts;
                 notifyMockSpeakingComplete({
@@ -1775,7 +1893,7 @@
             state.fullCurrentPart = Math.min(3, state.fullCurrentPart + 1);
             setError("");
         } else if (action === "submit-full") {
-            submitFull();
+            submitFullProgressOrFinal();
         }
     });
 

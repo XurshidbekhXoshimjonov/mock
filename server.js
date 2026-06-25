@@ -4396,7 +4396,7 @@ app.get("/api/reading-tests", (req, res) => {
     let tests = readManualReadingTestSummaries();
 
     if (part) {
-        tests = tests.filter((test) => test.part === part);
+        tests = tests.filter((test) => String(test.part) === String(part));
     }
 
     res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));

@@ -2052,28 +2052,457 @@ html.dark-theme .lc-matching-row select {
     outline: 2px solid rgba(11, 95, 255, 0.14);
 }
 
-.lc-rich-content {
-    display: grid;
-    gap: 14px;
-    color: #1f2937;
-    font-size: 0.96rem;
-    line-height: 1.65;
-}
-
-.lc-rich-content table {
+/* IELTS paper-style listening layout */
+.lc-test-content {
     width: 100%;
-    border-collapse: collapse;
 }
 
-.lc-rich-content th,
-.lc-rich-content td {
-    border: 1px solid #d8dee9;
-    padding: 10px;
+.lc-test-title,
+.lc-listening-stage,
+.lc-submit-status,
+body.exam-fullscreen-active .lc-test-title,
+body.exam-fullscreen-active .lc-listening-stage,
+body.exam-fullscreen-active .lc-submit-status,
+body.fullscreen-fallback .lc-test-title,
+body.fullscreen-fallback .lc-listening-stage,
+body.fullscreen-fallback .lc-submit-status {
+    width: min(940px, calc(100% - 32px));
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.lc-audio-card {
+    width: min(940px, 100%);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.lc-part {
+    width: min(760px, 100%);
+    margin: 0 auto 28px;
+    background: #fff;
+    color: #3f3f46;
+    padding: 24px 28px 34px;
+}
+
+.lc-part-heading {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 14px 34px;
+    padding: 0 0 16px;
+}
+
+.lc-part-heading h2,
+.lc-part-heading p {
+    margin: 0;
+    color: #4b4b4b;
+    line-height: 1.2;
+}
+
+.lc-part-heading h2 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.lc-part-heading p:not(.lc-part-instruction) {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 800;
+}
+
+.lc-part-instruction {
+    flex-basis: 100%;
+    color: #4b4b4b;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.lc-question-stack {
+    gap: 22px;
+}
+
+.lc-question-card,
+.lc-note-completion--job-details-form {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.lc-block-heading h3 {
+    margin: 0 0 12px;
+    color: #454545;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.lc-instruction,
+.lc-multiple-select-block .lc-instruction {
+    margin: 0 0 14px;
+    color: #454545;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.lc-instruction strong,
+.lc-part-instruction strong {
+    font-style: normal;
+    font-weight: 800;
+}
+
+.lc-form-title,
+.lc-job-title,
+.lc-flowchart-title {
+    margin: 0 0 8px;
+    color: #4a4a4a;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.lc-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.lc-form-table,
+.lc-data-table,
+.lc-note-table,
+.lc-mcq-grid-table {
+    width: 100%;
+    border: 1px solid #7d7d7d;
+    border-collapse: collapse;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.25;
+}
+
+.lc-form-table th,
+.lc-form-table td,
+.lc-data-table th,
+.lc-data-table td,
+.lc-note-table th,
+.lc-note-table td,
+.lc-mcq-grid-table th,
+.lc-mcq-grid-table td {
+    border: 1px solid #8b8b8b;
+    background: #fff;
+    color: #333;
+    padding: 5px 7px;
     vertical-align: top;
 }
 
-.lc-rich-content img {
+.lc-data-table thead th,
+.lc-mcq-grid-table th {
+    background: #fff;
+    color: #333;
+    font-weight: 800;
+    text-align: center;
+}
+
+.lc-form-table th,
+.lc-note-table th {
+    width: 34%;
+    font-weight: 700;
+}
+
+.lc-answer-inline,
+.lc-note-completion--boxed-flow .lc-answer-inline {
+    display: inline-flex;
+    align-items: baseline;
+    flex-direction: row;
+    gap: 4px;
+    margin: 0 2px;
     max-width: 100%;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.lc-question-badge,
+.lc-mcq-grid-table .lc-question-badge,
+.lc-question-badge-range,
+.lc-letter-badge,
+.lc-mcq-grid-options-list .lc-letter-badge {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
     height: auto;
-    border-radius: 10px;
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #3f3f46;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.lc-question-badge-range {
+    padding: 0;
+}
+
+.lc-answer-input,
+.lc-job-answer-input,
+.lc-inline-select,
+.lc-flowchart-select {
+    width: 132px;
+    min-width: 88px;
+    height: 22px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #111827;
+    padding: 0 4px 1px;
+    text-align: center;
+}
+
+.lc-data-table .lc-answer-input,
+.lc-form-table .lc-answer-input,
+.lc-note-table .lc-answer-input {
+    width: 116px;
+    min-width: 82px;
+}
+
+.lc-answer-input:focus,
+.lc-job-answer-input:focus,
+.lc-inline-select:focus,
+.lc-flowchart-select:focus,
+.lc-matching-row select:focus {
+    border-color: #1f2937;
+    outline: 2px solid rgba(31, 41, 55, 0.14);
+    outline-offset: 2px;
+}
+
+.lc-choice-list {
+    gap: 7px;
+}
+
+.lc-choice-row {
+    display: grid;
+    grid-template-columns: 22px 20px minmax(0, 1fr);
+    align-items: baseline;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+.lc-choice-row input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.lc-question-text,
+.lc-question-text--large {
+    align-items: baseline !important;
+    gap: 8px !important;
+    margin: 0 0 10px !important;
+    color: #333 !important;
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+}
+
+.lc-inline-sentence {
+    color: #333;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.lc-notes {
+    border-left: 0;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.45;
+    padding: 0;
+}
+
+.lc-note-completion--boxed-flow .lc-form-title {
+    margin: 0;
+    border: 1px solid #8b8b8b;
+    border-bottom: 0;
+    color: #4a4a4a;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 3px 6px;
+    text-align: left;
+}
+
+.lc-note-completion--boxed-flow .lc-notes {
+    border: 1px solid #8b8b8b;
+}
+
+.lc-note-completion--boxed-flow .lc-note-line,
+.lc-note-completion--boxed-flow .lc-note-list-item,
+.lc-note-completion--boxed-flow .lc-note-section-title {
+    margin: 0;
+    border-top: 1px solid #8b8b8b;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.35;
+    padding: 3px 8px;
+}
+
+.lc-note-completion--boxed-flow .lc-note-line:first-child,
+.lc-note-completion--boxed-flow .lc-note-section-title:first-child,
+.lc-note-completion--boxed-flow .lc-note-list > .lc-note-list-item:first-child {
+    border-top: 0;
+}
+
+.lc-note-list,
+.lc-note-nested-list {
+    margin: 0;
+    padding-left: 0;
+}
+
+.lc-note-list-item {
+    list-style-position: inside;
+}
+
+.lc-note-section-title strong,
+.lc-note-line strong,
+.lc-note-list-item strong {
+    font-weight: 800 !important;
+}
+
+.lc-matching-options,
+.lc-flowchart-options-box,
+.lc-flowchart-panel,
+.lc-mcq-grid-options-box {
+    border: 1px solid #8b8b8b;
+    border-radius: 0;
+    background: #fff;
+    color: #333;
+    padding: 8px 10px;
+}
+
+.lc-matching-options {
+    grid-template-columns: 1fr;
+}
+
+.lc-matching-option,
+.lc-flowchart-option,
+.lc-mcq-grid-options-list li {
+    color: #333;
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+.lc-matching-row {
+    grid-template-columns: 22px minmax(0, 1fr) minmax(92px, 132px);
+    align-items: baseline;
+    border-bottom: 0;
+    color: #333;
+    font-size: 15px;
+    padding: 4px 0;
+}
+
+.lc-matching-row select {
+    width: 100%;
+    min-width: 0;
+    height: 24px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #111827;
+    padding: 0 18px 1px 4px;
+}
+
+.lc-choice-row--grid {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 0 !important;
+}
+
+.lc-mcq-grid-table th {
+    border-color: #8b8b8b;
+}
+
+html.dark-theme .lc-part,
+html.dark-theme .lc-question-card,
+html.dark-theme .lc-form-table th,
+html.dark-theme .lc-form-table td,
+html.dark-theme .lc-data-table th,
+html.dark-theme .lc-data-table td,
+html.dark-theme .lc-note-table th,
+html.dark-theme .lc-note-table td,
+html.dark-theme .lc-mcq-grid-table th,
+html.dark-theme .lc-mcq-grid-table td,
+html.dark-theme .lc-matching-options,
+html.dark-theme .lc-flowchart-options-box,
+html.dark-theme .lc-flowchart-panel,
+html.dark-theme .lc-mcq-grid-options-box {
+    background: #fff;
+    color: #333;
+}
+
+html.dark-theme .lc-part *,
+html.dark-theme .lc-question-card *,
+html.dark-theme .lc-question-badge,
+html.dark-theme .lc-letter-badge {
+    color: #333;
+}
+
+@media (max-width: 650px) {
+    .lc-test-title,
+    .lc-listening-stage,
+    .lc-submit-status,
+    body.exam-fullscreen-active .lc-test-title,
+    body.exam-fullscreen-active .lc-listening-stage,
+    body.exam-fullscreen-active .lc-submit-status,
+    body.fullscreen-fallback .lc-test-title,
+    body.fullscreen-fallback .lc-listening-stage,
+    body.fullscreen-fallback .lc-submit-status {
+        width: min(100%, calc(100% - 12px));
+    }
+
+    .lc-part {
+        width: 100%;
+        padding: 20px 14px 30px;
+    }
+
+    .lc-part-heading {
+        gap: 8px 18px;
+    }
+
+    .lc-part-heading h2,
+    .lc-part-heading p:not(.lc-part-instruction) {
+        font-size: 16px;
+    }
+
+    .lc-data-table,
+    .lc-form-table,
+    .lc-note-table,
+    .lc-mcq-grid-table {
+        min-width: 620px;
+    }
+
+    .lc-answer-input,
+    .lc-job-answer-input,
+    .lc-inline-select,
+    .lc-flowchart-select {
+        width: 104px;
+        min-width: 74px;
+    }
+
+    .lc-matching-row {
+        grid-template-columns: 22px minmax(0, 1fr);
+    }
+
+    .lc-matching-row select {
+        grid-column: 2;
+        width: 132px;
+    }
 }

@@ -1,0 +1,1287 @@
+{
+  "id": "cambridge-21-test-1-listening",
+  "title": "Cambridge IELTS 21 Test 1 Listening",
+  "slug": "cambridge-21-test-1-listening",
+  "status": "published",
+  "duration": 40,
+  "part": "full",
+  "audio": "/uploads/audio/C21T1P1.1.mp3",
+  "questionsHtml": "",
+  "listeningHtml": "",
+  "assetFiles": [
+    "/uploads/audio/C21T1P1.1.mp3",
+    "/uploads/audio/C21T1P1.2.mp3",
+    "/uploads/audio/C21T1P2.1.mp3",
+    "/uploads/audio/C21T1P2.2.mp3",
+    "/uploads/audio/C21T1P3.1.mp3",
+    "/uploads/audio/C21T1P3.2.mp3",
+    "/uploads/audio/C21T1P4.mp3"
+  ],
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/C21T1P1.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P1.1.mp3",
+        "/uploads/audio/C21T1P1.2.mp3"
+      ],
+      "audioFileName": "C21T1P1.1.mp3, C21T1P1.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "1 | 10 | ten\n2 | weather\n3 | safety\n4 | discount\n5 | dictionary\n6 | certificate\n7 | towel\n8 | cafe | café\n9 | videos\n10 | lockers",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-1-table",
+          "type": "table_completion",
+          "questionRange": "Questions 1-6",
+          "title": "Oyster Bay Sailing Club Courses",
+          "instruction": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "columns": [
+            "Name of course",
+            "What you learn",
+            "Cost",
+            "Other information"
+          ],
+          "rows": [
+            [
+              "Taster day",
+              "introduction to sailing",
+              "£120 if booking one place",
+              "small groups (max {{1}} people)"
+            ],
+            [
+              "Level 1",
+              "basic theory e.g. understanding the {{2}} and tides\n\nbasic sailing skills including {{3}} information",
+              "£200\n\n{{4}} available for club members\n\nall inclusive (plus a useful {{5}})",
+              "a {{6}} at the end of the course for all participants"
+            ]
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "small groups (max ... people)",
+              "text": "small groups (max ... people)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "10 | ten"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "basic theory e.g. understanding the ... and tides",
+              "text": "basic theory e.g. understanding the ... and tides",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "weather"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "basic sailing skills including ... information",
+              "text": "basic sailing skills including ... information",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "safety"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "... available for club members",
+              "text": "... available for club members",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "discount"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "all inclusive (plus a useful ...)",
+              "text": "all inclusive (plus a useful ...)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "dictionary"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "a ... at the end of the course for all participants",
+              "text": "a ... at the end of the course for all participants",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "certificate"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-1-notes",
+          "type": "note_completion",
+          "questionRange": "Questions 7-10",
+          "title": "General information",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Participants must be able to swim.",
+            "- Bring suitable clothing, a {{7}} and toiletries (e.g. shampoo).",
+            "- There is an {{8}} at the club.",
+            "- Online training {{9}} are recommended.",
+            "- {{10}} are available for course participants."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Bring suitable clothing, a ... and toiletries.",
+              "text": "Bring suitable clothing, a ... and toiletries.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "towel"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "There is an ... at the club.",
+              "text": "There is an ... at the club.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "cafe | café"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Online training ... are recommended.",
+              "text": "Online training ... are recommended.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "videos"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "... are available for course participants.",
+              "text": "... are available for course participants.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lockers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/C21T1P2.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P2.1.mp3",
+        "/uploads/audio/C21T1P2.2.mp3"
+      ],
+      "audioFileName": "C21T1P2.1.mp3, C21T1P2.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "11 | A\n12 | B\n13 | A\n14 | A\n15 | A\n16 | C\n17 | C\n18 | A\n19 | B\n20 | C",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-2-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-16",
+          "title": "Working as a makeup trainee",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What should trainees always expect to get when working on low budget short films?",
+              "text": "What should trainees always expect to get when working on low budget short films?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "travel expenses"
+                },
+                {
+                  "letter": "B",
+                  "text": "a minimum wage"
+                },
+                {
+                  "letter": "C",
+                  "text": "meals"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "According to the speaker, on big budget films trainees may get experience of",
+              "text": "According to the speaker, on big budget films trainees may get experience of",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "makeup for special effects."
+                },
+                {
+                  "letter": "B",
+                  "text": "working with different ethnicities."
+                },
+                {
+                  "letter": "C",
+                  "text": "creating a variety of hair styles."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "The speaker says a problem for makeup artists is",
+              "text": "The speaker says a problem for makeup artists is",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "dealing with difficult directors."
+                },
+                {
+                  "letter": "B",
+                  "text": "being shouted at by their supervisor."
+                },
+                {
+                  "letter": "C",
+                  "text": "waiting around for hours doing nothing."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "How did the speaker feel when she met famous actors for the first time?",
+              "text": "How did the speaker feel when she met famous actors for the first time?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "very shy"
+                },
+                {
+                  "letter": "B",
+                  "text": "very proud"
+                },
+                {
+                  "letter": "C",
+                  "text": "very disappointed"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "What advice does the speaker give about makeup kits?",
+              "text": "What advice does the speaker give about makeup kits?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Always carry a basic kit with you."
+                },
+                {
+                  "letter": "B",
+                  "text": "Only buy the best products for a makeup kit."
+                },
+                {
+                  "letter": "C",
+                  "text": "Ask other makeup artists to check your kit."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "What advice does the speaker give about creating a portfolio?",
+              "text": "What advice does the speaker give about creating a portfolio?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Keep print and digital photos."
+                },
+                {
+                  "letter": "B",
+                  "text": "Only include a small selection of photos."
+                },
+                {
+                  "letter": "C",
+                  "text": "Get permission to use photos."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-2-matching",
+          "type": "matching",
+          "questionRange": "Questions 17-20",
+          "instruction": "What ability is required for each of the following duties? Write the correct letter, A, B, or C, next to Questions 17-20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "being well-organised"
+            },
+            {
+              "letter": "B",
+              "text": "being flexible"
+            },
+            {
+              "letter": "C",
+              "text": "working quickly"
+            }
+          ],
+          "questions": [
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Prepping an actor",
+              "text": "Prepping an actor",
+              "options": [],
+              "type": "matching",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Continuity",
+              "text": "Continuity",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "General",
+              "text": "General",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Applying makeup",
+              "text": "Applying makeup",
+              "options": [],
+              "type": "matching",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/C21T1P3.1.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P3.1.mp3",
+        "/uploads/audio/C21T1P3.2.mp3"
+      ],
+      "audioFileName": "C21T1P3.1.mp3, C21T1P3.2.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "21 | B | D\n22 | B | D\n23 | C | E\n24 | C | E\n25 | G\n26 | B\n27 | F\n28 | H\n29 | A\n30 | E",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-3-biodiversity-impact",
+          "type": "multiple_select",
+          "questionRange": "Questions 21-22",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 21,
+          "answerQuestions": [
+            {
+              "questionNumber": 22
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the references to local problems"
+            },
+            {
+              "letter": "B",
+              "text": "the broad focus of the examples"
+            },
+            {
+              "letter": "C",
+              "text": "the practical suggestions for solutions"
+            },
+            {
+              "letter": "D",
+              "text": "the type of issues discussed"
+            },
+            {
+              "letter": "E",
+              "text": "the implications for government policy"
+            }
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "text": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the references to local problems"
+                },
+                {
+                  "letter": "B",
+                  "text": "the broad focus of the examples"
+                },
+                {
+                  "letter": "C",
+                  "text": "the practical suggestions for solutions"
+                },
+                {
+                  "letter": "D",
+                  "text": "the type of issues discussed"
+                },
+                {
+                  "letter": "E",
+                  "text": "the implications for government policy"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | D"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "text": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the references to local problems"
+                },
+                {
+                  "letter": "B",
+                  "text": "the broad focus of the examples"
+                },
+                {
+                  "letter": "C",
+                  "text": "the practical suggestions for solutions"
+                },
+                {
+                  "letter": "D",
+                  "text": "the type of issues discussed"
+                },
+                {
+                  "letter": "E",
+                  "text": "the implications for government policy"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | D"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-3-research-project",
+          "type": "multiple_select",
+          "questionRange": "Questions 23-24",
+          "instruction": "Choose TWO letters, A-E.",
+          "questionNumber": 23,
+          "answerQuestions": [
+            {
+              "questionNumber": 24
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO details about the research project particularly impressed the students?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the team's previous successes"
+            },
+            {
+              "letter": "B",
+              "text": "its wide geographical scale"
+            },
+            {
+              "letter": "C",
+              "text": "the use of new technology"
+            },
+            {
+              "letter": "D",
+              "text": "the extensive statistical evidence"
+            },
+            {
+              "letter": "E",
+              "text": "the large range of specialists involved"
+            }
+          ],
+          "questions": [
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Which TWO details about the research project particularly impressed the students?",
+              "text": "Which TWO details about the research project particularly impressed the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the team's previous successes"
+                },
+                {
+                  "letter": "B",
+                  "text": "its wide geographical scale"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of new technology"
+                },
+                {
+                  "letter": "D",
+                  "text": "the extensive statistical evidence"
+                },
+                {
+                  "letter": "E",
+                  "text": "the large range of specialists involved"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Which TWO details about the research project particularly impressed the students?",
+              "text": "Which TWO details about the research project particularly impressed the students?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the team's previous successes"
+                },
+                {
+                  "letter": "B",
+                  "text": "its wide geographical scale"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of new technology"
+                },
+                {
+                  "letter": "D",
+                  "text": "the extensive statistical evidence"
+                },
+                {
+                  "letter": "E",
+                  "text": "the large range of specialists involved"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-21-test-1-listening-part-3-opinions",
+          "type": "matching",
+          "questionRange": "Questions 25-30",
+          "instruction": "What is the students' opinion of each of the following resources related to ocean biodiversity? Choose SIX answers from the box and write the correct letter, A-H, next to Questions 25-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "This is aimed at a very specialist audience."
+            },
+            {
+              "letter": "B",
+              "text": "This is now rather outdated."
+            },
+            {
+              "letter": "C",
+              "text": "This was an effective description of a new danger."
+            },
+            {
+              "letter": "D",
+              "text": "This suggests possible ways to improve the situation."
+            },
+            {
+              "letter": "E",
+              "text": "This does not give a balanced account."
+            },
+            {
+              "letter": "F",
+              "text": "This is too predictable to be useful."
+            },
+            {
+              "letter": "G",
+              "text": "This gives insufficient evidence for its claims."
+            },
+            {
+              "letter": "H",
+              "text": "This gives a clear explanation of the problems."
+            }
+          ],
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Article on invasive lionfish",
+              "text": "Article on invasive lionfish",
+              "options": [],
+              "type": "matching",
+              "answer": "G"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Documentary on microplastics",
+              "text": "Documentary on microplastics",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Podcast on ocean pollution",
+              "text": "Podcast on ocean pollution",
+              "options": [],
+              "type": "matching",
+              "answer": "F"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Book on coastal ecosystems",
+              "text": "Book on coastal ecosystems",
+              "options": [],
+              "type": "matching",
+              "answer": "H"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Article on metal toxicity",
+              "text": "Article on metal toxicity",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Podcast on floating marine cities",
+              "text": "Podcast on floating marine cities",
+              "options": [],
+              "type": "matching",
+              "answer": "E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/C21T1P4.mp3",
+      "audioUrls": [
+        "/uploads/audio/C21T1P4.mp3"
+      ],
+      "audioFileName": "C21T1P4.mp3",
+      "html": "",
+      "instruction": "",
+      "answerText": "31 | metal | metals\n32 | slow\n33 | demand\n34 | equator\n35 | recycle\n36 | fungus\n37 | weather\n38 | strong\n39 | roots\n40 | soil",
+      "blocks": [
+        {
+          "id": "cambridge-21-test-1-listening-part-4-notes",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "Sources of rubber",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Three resources which are essential for industrial civilisation",
+            "- {{31}}",
+            "- fossil fuels",
+            "- rubber",
+            "<strong>Natural rubber</strong>",
+            "This mainly comes from the Para rubber tree, now cultivated in South-East Asia.",
+            "The supply is limited because",
+            "- the growth of the tree is {{32}}",
+            "- production cannot easily be adjusted because of increasing or decreasing {{33}}",
+            "- the tree only grows near the {{34}}",
+            "- extracting the latex (rubber) is labour-intensive",
+            "- it is very difficult to {{35}} rubber after production.",
+            "<strong>New threats include</strong>",
+            "- lack of genetic diversity, leading to danger of disease caused by a {{36}}",
+            "- a shift to the cultivation of palm oil",
+            "- extreme {{37}} events.",
+            "<strong>Synthetic rubber</strong>",
+            "- may be used for engine parts and cooking utensils",
+            "- is less {{38}} than natural rubber",
+            "- is unsuitable for many purposes e.g. the tyres of aircraft.",
+            "<strong>An alternative source of natural rubber</strong>",
+            "- A wild flower (a type of dandelion) has rubber in its {{39}}.",
+            "- It can be grown in many locations and does not require good {{40}}."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Three resources which are essential for industrial civilisation: ...",
+              "text": "Three resources which are essential for industrial civilisation: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "metal | metals"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "the growth of the tree is ...",
+              "text": "the growth of the tree is ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "slow"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "production cannot easily be adjusted because of increasing or decreasing ...",
+              "text": "production cannot easily be adjusted because of increasing or decreasing ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "demand"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "the tree only grows near the ...",
+              "text": "the tree only grows near the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "equator"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "it is very difficult to ... rubber after production.",
+              "text": "it is very difficult to ... rubber after production.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "recycle"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "danger of disease caused by a ...",
+              "text": "danger of disease caused by a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fungus"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "extreme ... events.",
+              "text": "extreme ... events.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "weather"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "is less ... than natural rubber",
+              "text": "is less ... than natural rubber",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "strong"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "A wild flower has rubber in its ...",
+              "text": "A wild flower has rubber in its ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "roots"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "It can be grown in many locations and does not require good ...",
+              "text": "It can be grown in many locations and does not require good ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "soil"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-20",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21-30",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "small groups (max ... people)",
+      "options": [],
+      "answer": "10 | ten"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "basic theory e.g. understanding the ... and tides",
+      "options": [],
+      "answer": "weather"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "basic sailing skills including ... information",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "... available for club members",
+      "options": [],
+      "answer": "discount"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "all inclusive (plus a useful ...)",
+      "options": [],
+      "answer": "dictionary"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "a ... at the end of the course for all participants",
+      "options": [],
+      "answer": "certificate"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Bring suitable clothing, a ... and toiletries.",
+      "options": [],
+      "answer": "towel"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "There is an ... at the club.",
+      "options": [],
+      "answer": "cafe | café"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Online training ... are recommended.",
+      "options": [],
+      "answer": "videos"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "... are available for course participants.",
+      "options": [],
+      "answer": "lockers"
+    },
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What should trainees always expect to get when working on low budget short films?",
+      "options": [
+        {
+          "value": "A",
+          "label": "travel expenses",
+          "html": "travel expenses"
+        },
+        {
+          "value": "B",
+          "label": "a minimum wage",
+          "html": "a minimum wage"
+        },
+        {
+          "value": "C",
+          "label": "meals",
+          "html": "meals"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "According to the speaker, on big budget films trainees may get experience of",
+      "options": [
+        {
+          "value": "A",
+          "label": "makeup for special effects.",
+          "html": "makeup for special effects."
+        },
+        {
+          "value": "B",
+          "label": "working with different ethnicities.",
+          "html": "working with different ethnicities."
+        },
+        {
+          "value": "C",
+          "label": "creating a variety of hair styles.",
+          "html": "creating a variety of hair styles."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "The speaker says a problem for makeup artists is",
+      "options": [
+        {
+          "value": "A",
+          "label": "dealing with difficult directors.",
+          "html": "dealing with difficult directors."
+        },
+        {
+          "value": "B",
+          "label": "being shouted at by their supervisor.",
+          "html": "being shouted at by their supervisor."
+        },
+        {
+          "value": "C",
+          "label": "waiting around for hours doing nothing.",
+          "html": "waiting around for hours doing nothing."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "How did the speaker feel when she met famous actors for the first time?",
+      "options": [
+        {
+          "value": "A",
+          "label": "very shy",
+          "html": "very shy"
+        },
+        {
+          "value": "B",
+          "label": "very proud",
+          "html": "very proud"
+        },
+        {
+          "value": "C",
+          "label": "very disappointed",
+          "html": "very disappointed"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What advice does the speaker give about makeup kits?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Always carry a basic kit with you.",
+          "html": "Always carry a basic kit with you."
+        },
+        {
+          "value": "B",
+          "label": "Only buy the best products for a makeup kit.",
+          "html": "Only buy the best products for a makeup kit."
+        },
+        {
+          "value": "C",
+          "label": "Ask other makeup artists to check your kit.",
+          "html": "Ask other makeup artists to check your kit."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "What advice does the speaker give about creating a portfolio?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Keep print and digital photos.",
+          "html": "Keep print and digital photos."
+        },
+        {
+          "value": "B",
+          "label": "Only include a small selection of photos.",
+          "html": "Only include a small selection of photos."
+        },
+        {
+          "value": "C",
+          "label": "Get permission to use photos.",
+          "html": "Get permission to use photos."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Prepping an actor",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Continuity",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "General",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Applying makeup",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 21,
+      "type": "multiple_select",
+      "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+      "options": [],
+      "answer": "B | D"
+    },
+    {
+      "number": 22,
+      "type": "multiple_select",
+      "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+      "options": [],
+      "answer": "B | D"
+    },
+    {
+      "number": 23,
+      "type": "multiple_select",
+      "question": "Which TWO details about the research project particularly impressed the students?",
+      "options": [],
+      "answer": "C | E"
+    },
+    {
+      "number": 24,
+      "type": "multiple_select",
+      "question": "Which TWO details about the research project particularly impressed the students?",
+      "options": [],
+      "answer": "C | E"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "Article on invasive lionfish",
+      "options": [],
+      "answer": "G"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "Documentary on microplastics",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Podcast on ocean pollution",
+      "options": [],
+      "answer": "F"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Book on coastal ecosystems",
+      "options": [],
+      "answer": "H"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Article on metal toxicity",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Podcast on floating marine cities",
+      "options": [],
+      "answer": "E"
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Three resources which are essential for industrial civilisation: ...",
+      "options": [],
+      "answer": "metal | metals"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "the growth of the tree is ...",
+      "options": [],
+      "answer": "slow"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "production cannot easily be adjusted because of increasing or decreasing ...",
+      "options": [],
+      "answer": "demand"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "the tree only grows near the ...",
+      "options": [],
+      "answer": "equator"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "it is very difficult to ... rubber after production.",
+      "options": [],
+      "answer": "recycle"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "danger of disease caused by a ...",
+      "options": [],
+      "answer": "fungus"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "extreme ... events.",
+      "options": [],
+      "answer": "weather"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "is less ... than natural rubber",
+      "options": [],
+      "answer": "strong"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "A wild flower has rubber in its ...",
+      "options": [],
+      "answer": "roots"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "It can be grown in many locations and does not require good ...",
+      "options": [],
+      "answer": "soil"
+    }
+  ],
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "updatedAt": "2026-06-25T15:11:23.837Z"
+}
