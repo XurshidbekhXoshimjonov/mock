@@ -180,6 +180,7 @@ body.public-page .r-right .signup {
     font-weight: 700;
     line-height: 1.02;
     letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
 }
 
 .hero-modern p {
@@ -189,6 +190,7 @@ body.public-page .r-right .signup {
     font-size: 20px;
     font-weight: 400;
     line-height: 1.55;
+    overflow-wrap: anywhere;
 }
 
 .practice-grid,
@@ -539,6 +541,10 @@ body.public-page .r-right .signup {
     overflow: hidden;
 }
 
+.test-list-page-header > * {
+    min-width: 0;
+}
+
 .test-list-page-header::before {
     content: "";
     position: absolute;
@@ -594,6 +600,7 @@ body.public-page .r-right .signup {
     font-size: 15px;
     font-weight: 400;
     line-height: 1.42;
+    overflow-wrap: anywhere;
 }
 
 .test-list-meta {
@@ -727,6 +734,7 @@ body.public-page .r-right .signup {
     justify-content: space-between;
     gap: 14px;
     width: 100%;
+    min-width: 0;
 }
 
 .test-card-icon,
@@ -765,6 +773,8 @@ body.public-page .r-right .signup {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 0 1 auto;
+    max-width: 100%;
     min-height: 28px;
     padding: 6px 10px;
     border: 1px solid rgba(37, 99, 235, 0.16);
@@ -784,6 +794,7 @@ body.public-page .r-right .signup {
     align-content: start;
     gap: 7px;
     width: 100%;
+    min-width: 0;
     flex: 1;
 }
 
@@ -822,11 +833,13 @@ body.public-page .r-right .signup {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 7px;
     width: 100%;
+    min-width: 0;
 }
 
 .test-card-stats span {
     display: grid;
     gap: 3px;
+    min-width: 0;
     padding: 8px 10px;
     border: 1px solid rgba(148, 163, 184, 0.25);
     border-radius: 14px;
@@ -847,6 +860,8 @@ body.public-page .r-right .signup {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    box-sizing: border-box;
+    max-width: 100%;
     min-height: 40px;
     width: 100%;
     margin-top: auto;
@@ -2436,7 +2451,59 @@ body:not(.site-ready) .public-shell {
     .practice-card,
     .card,
     .test-card {
-        min-height: 210px;
+        min-height: 164px;
+        gap: 11px;
+        padding: 16px;
+        border-radius: 18px;
+        box-shadow: 0 14px 32px rgba(7, 21, 71, 0.075);
+    }
+
+    .practice-card::after,
+    .card::after,
+    .test-card::after,
+    .test-list-card::after,
+    .reading-test-card::after,
+    .reading-test-list-card::after,
+    .writing-test-card::after,
+    .listening-test-list-card::after {
+        inset: 10px;
+        filter: blur(16px);
+    }
+
+    .practice-card__icon,
+    .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 15px;
+    }
+
+    .practice-card__icon svg,
+    .card-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    .practice-card h1,
+    .practice-card h2,
+    .card h1,
+    .card h2,
+    .test-card h1,
+    .test-card h2 {
+        font-size: 28px;
+        line-height: 1.12;
+    }
+
+    .practice-card p,
+    .card p,
+    .test-card p {
+        max-width: none;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .practice-card__footer {
+        gap: 8px;
+        font-size: 13px;
     }
 
     .test-list-shell {
@@ -2466,6 +2533,88 @@ body:not(.site-ready) .public-shell {
     .test-list-grid,
     .test-list-grid--manual {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .test-list-card,
+    .reading-test-card,
+    .reading-test-list-card,
+    .writing-test-card,
+    .listening-test-list-card {
+        min-height: 172px;
+        gap: 10px;
+        padding: 14px;
+        border-radius: 16px;
+        box-shadow: 0 14px 32px rgba(7, 21, 71, 0.075);
+    }
+
+    .test-card-top {
+        gap: 10px;
+    }
+
+    .test-card-icon,
+    .test-list-card .practice-card__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+    }
+
+    .test-card-icon svg,
+    .test-list-card .practice-card__icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .test-card-badge {
+        min-height: 24px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    .test-card-content {
+        gap: 5px;
+    }
+
+    .test-card-content h2,
+    .test-list-card h2,
+    .reading-test-card h2,
+    .reading-test-list-card h2,
+    .writing-test-card h2,
+    .listening-test-list-card h2 {
+        font-size: 22px;
+        line-height: 1.14;
+    }
+
+    .test-card-content p,
+    .test-list-card p,
+    .reading-test-card p,
+    .reading-test-list-card p,
+    .writing-test-card p,
+    .listening-test-list-card p {
+        font-size: 13px;
+        line-height: 1.38;
+    }
+
+    .test-card-stats {
+        gap: 6px;
+    }
+
+    .test-card-stats span {
+        gap: 2px;
+        padding: 7px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+    }
+
+    .test-card-stats strong {
+        font-size: 13px;
+    }
+
+    .test-card-button {
+        min-height: 36px;
+        padding: 0 12px;
+        border-radius: 12px;
+        font-size: 13px;
     }
 
     .coming-soon-shell {
@@ -2632,7 +2781,7 @@ body:not(.site-ready) .public-shell {
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 340px) {
     .test-card-stats {
         grid-template-columns: 1fr;
     }

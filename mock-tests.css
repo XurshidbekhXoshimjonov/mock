@@ -1006,6 +1006,21 @@ body.mock-result-page * {
     .mock-result-grid,
     .mock-section-list {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .mock-test-card {
+        min-height: 188px;
+    }
+
+    .mock-card-lines {
+        gap: 6px;
+        font-size: 12px;
+    }
+
+    .mock-card-lines span::before {
+        width: 6px;
+        height: 6px;
     }
 
     .mock-intro-card {
