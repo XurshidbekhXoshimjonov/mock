@@ -2120,53 +2120,82 @@
         }
         
         function goToQuestion(questionNumber) {
-            console.log(`🎯 goToQuestion called with questionNumber: ${questionNumber}`);
-            
+            console.log("Universal goToQuestion called for: " + questionNumber);
             currentQuestion = questionNumber;
-
-            let passageNumber = 1;
-            if (questionNumber >= 14 && questionNumber <= 26) passageNumber = 2;
-            else if (questionNumber >= 27) passageNumber = 3;
             
-            if (currentPassage !== passageNumber) {
-                switchToPart(passageNumber);
+            // Detect total passages/parts
+            const totalPassages = document.querySelectorAll('.reading-passage, .passage-panel').length || 3;
+            let partNumber = 1;
+            
+            if (totalPassages === 4 || document.getElementById('part-4') || questionNumber > 30) {
+                // Listening test (4 parts, 10 questions each)
+                if (questionNumber > 10 && questionNumber <= 20) partNumber = 2;
+                else if (questionNumber > 20 && questionNumber <= 30) partNumber = 3;
+                else if (questionNumber > 30) partNumber = 4;
+            } else {
+                // Reading test (3 passages)
+                let targetEl = document.getElementById(`q${questionNumber}lock_opt`) ||
+                               document.getElementById(`q${questionNumber}`) ||
+                               document.querySelector(`[name="q${questionNumber}"]`) ||
+                               document.querySelector(`input[name="q${questionNumber}"]`);
+                if (targetEl) {
+                    const parentPart = targetEl.closest('[id^="questions-"]') || 
+                                       targetEl.closest('.question-part') || 
+                                       targetEl.closest('[data-part-number]');
+                    if (parentPart) {
+                        const idMatch = parentPart.id.match(/\d+/);
+                        if (idMatch) partNumber = parseInt(idMatch[0], 10);
+                        else if (parentPart.dataset.partNumber) partNumber = parseInt(parentPart.dataset.partNumber, 10);
+                    }
+                }
+                
+                if (!partNumber || partNumber === 1) {
+                    if (questionNumber >= 14 && questionNumber <= 26) partNumber = 2;
+                    else if (questionNumber >= 27) partNumber = 3;
+                }
+            }
+
+            const currentPartNum = typeof currentPassage !== 'undefined' ? currentPassage : (typeof currentPart !== 'undefined' ? currentPart : 1);
+            if (currentPartNum !== partNumber) {
+                console.log("Switching parts from " + currentPartNum + " to " + partNumber);
+                switchToPart(partNumber);
+                setTimeout(() => goToQuestion(questionNumber), 100);
                 return;
             }
 
-            // Remove active style from previous element
-            if (activeQuestionElement) {
-                activeQuestionElement.classList.remove('active-question', 'active-input');
-                const prevBlock = activeQuestionElement.closest('[data-q-start]');
-                if (prevBlock) prevBlock.classList.remove('active-question');
-            }
+            // Update active class on navigation buttons
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const questionBtn = document.querySelector(`.subQuestion[onclick="goToQuestion(${questionNumber})"]`);
+            if (questionBtn) questionBtn.classList.add('active');
 
-            // Find and activate the new question element
-            let targetEl = document.getElementById(`q${questionNumber}`);
-            if (targetEl) {
-                activeQuestionElement = targetEl;
-                targetEl.classList.add('active-input');
-                scrollIntoViewIfNeeded(targetEl);
-                if (typeof targetEl.focus === 'function') {
-                    targetEl.focus();
+            // Scroll and focus
+            let questionElement = document.getElementById(`q${questionNumber}`) ||
+                                 document.querySelector(`input[name="q${questionNumber}"]`) ||
+                                 document.querySelector(`[name="q${questionNumber}"]`);
+            
+            if (questionElement) {
+                if (typeof questionElement.focus === 'function') {
+                    questionElement.focus();
                 }
-            } else {
-                targetEl = document.querySelector(`[data-q-start="${questionNumber}"]`);
-                if (targetEl) {
-                    activeQuestionElement = targetEl;
-                    targetEl.classList.add('active-question');
-                    scrollIntoViewIfNeeded(targetEl);
-                    
-                    // Focus the first input in the question if available
-                    const firstInput = targetEl.querySelector('input, select');
-                    if (firstInput && typeof firstInput.focus === 'function') {
-                        firstInput.focus();
-                    }
+                const targetToScroll = questionElement.closest('.multi-choice-question') ||
+                                      questionElement.closest('.question') ||
+                                      questionElement.closest('tr') ||
+                                      questionElement.closest('li') ||
+                                      questionElement;
+                if (targetToScroll) {
+                    targetToScroll.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetToScroll.classList.add('flash');
+                    setTimeout(() => {
+                        targetToScroll.classList.remove('flash');
+                    }, 1000);
                 }
             }
-
-            updateNavigation();
+            
+            if (typeof updateNavigation === 'function') {
+                updateNavigation();
+            }
         }
-        
+
         function updateNavigation() {
             // Update active nav button
             const navButtons = document.querySelectorAll('.subQuestion');

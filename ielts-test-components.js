@@ -115,6 +115,7 @@ function AnswerReviewDetails({ result }) {
 
 function QuestionShell({ question, children, className = "", reviewResult }) {
     return h("article", {
+        id: `question-${question.number}`,
         className: `cbt-question ${className} ${reviewResult ? `cbt-question--review cbt-question--${reviewResult.status}` : ""}`.trim(),
         "data-number": question.number
     }, children);
@@ -367,6 +368,7 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
             if (!question) return;
 
             const wrapper = document.createElement("span");
+            wrapper.id = `question-${question.number}`;
             wrapper.className = "cbt-blank-wrapper";
             wrapper.style.display = "inline-flex";
             wrapper.style.alignItems = "center";

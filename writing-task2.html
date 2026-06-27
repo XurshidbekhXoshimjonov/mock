@@ -43,7 +43,7 @@
         /* Split-screen layout */
         .writing-stage {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 4fr 6fr;
             height: calc(100vh - 66px - 45px); /* Header: 66px, BottomBar: 45px */
             overflow: hidden;
             background: #f8f9fa;
@@ -455,7 +455,7 @@
         /* Premium three-column layout styles */
         .writing-stage {
             display: none;
-            grid-template-columns: 4.5fr 4.5fr 3fr;
+            grid-template-columns: 4fr 6fr;
             gap: 20px;
             padding: 20px;
             height: calc(100vh - 66px - 50px);
@@ -861,6 +861,47 @@
             font-size: 11px !important;
             font-weight: 700 !important;
         }
+
+        .task2-topic {
+            margin-top: 24px;
+            line-height: 1.7;
+            color: #020617;
+            font-size: 16px;
+        }
+
+        .task2-main-topic {
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .task2-label {
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        .task2-question-line {
+            margin-top: 28px;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .writing-stage {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto 1fr;
+                height: auto !important;
+                overflow-y: auto !important;
+            }
+            .player-panel {
+                height: auto !important;
+                overflow-y: visible !important;
+            }
+            #writingStage {
+                height: auto !important;
+                overflow-y: auto !important;
+            }
+        }
     </style>
 </head>
 
@@ -939,6 +980,9 @@
             <div class="cbt-passage-paragraph prompt-text" id="promptText">
                 Loading essay topic description...
             </div>
+            <p class="prompt-instruction-fixed" style="font-weight: 500; margin-top: 10px; margin-bottom: 20px; line-height: 1.6; color: #1e293b;">
+                Give reasons for your answer and include any relevant examples from your knowledge or experience.
+            </p>
         </div>
 
         <!-- Center Panel: Editor -->
@@ -975,42 +1019,6 @@
 
             <div class="editor-actions-row" style="justify-content: flex-end;">
                 <button class="btn-submit-answer" type="button" id="submitBtn" onclick="submitEssay()">Submit Answer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-left: 6px; transform: rotate(-30deg);"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
-            </div>
-        </div>
-
-        <!-- Right Panel: Sidebar -->
-        <div class="player-sidebar">
-            <div class="sidebar-card">
-                <h3 class="sidebar-card-title">Task Information</h3>
-                <div class="sidebar-info-group">
-                    <div class="info-label">Task Type</div>
-                    <div class="info-value red-text">Writing Task 2</div>
-                </div>
-                <div class="sidebar-info-group">
-                    <div class="info-label">Time Allowed</div>
-                    <div class="info-value red-text">40 minutes</div>
-                </div>
-                <div class="sidebar-info-group">
-                    <div class="info-label">Word Limit</div>
-                    <div class="info-value red-text">At least 250 words</div>
-                </div>
-                <div class="sidebar-info-group">
-                    <div class="info-label">Your Word Count</div>
-                    <div class="info-value red-text" id="sidebarWordCountVal">0 words</div>
-                </div>
-            </div>
-
-            <div class="sidebar-card">
-                <h3 class="sidebar-card-title" style="display: flex; align-items: center; gap: 8px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--cbt-ielts-red);"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
-                    Tips
-                </h3>
-                <ul class="tips-list">
-                    <li>Address all parts of prompt</li>
-                    <li>Present a clear position</li>
-                    <li>Use clear paragraphing</li>
-                    <li>Write at least 250 words</li>
-                </ul>
             </div>
         </div>
     </main>
@@ -1114,6 +1122,82 @@
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
+        function formatTask2PromptText(promptText) {
+            if (!promptText) return "";
+            
+            let cleanText = promptText.trim();
+            cleanText = cleanText.replace(/📝\s*TASK\s*2\s*:/gi, "");
+            cleanText = cleanText.replace(/TASK\s*2\s*:/gi, "");
+            
+            const questionPatterns = [
+                /to what extent do you agree or disagree\??/i,
+                /do you agree or disagree\??/i,
+                /discuss both (these )?views and give your opinion\??/i,
+                /discuss both sides and give your opinion\??/i,
+                /discuss both views and give your opinion\??/i,
+                /what are the advantages and disadvantages\??/i,
+                /do the advantages outweigh the disadvantages\??/i,
+                /do the benefits outweigh the drawbacks\??/i,
+                /what is your opinion\??/i,
+                /is this a positive or negative development\??/i,
+                /give your opinion\??/i,
+                /discuss both views\??/i
+            ];
+            
+            let mainTopic = cleanText;
+            let questionLine = "";
+            
+            const paragraphs = cleanText
+                .replace(/<\/p>\s*<p>/gi, '\n')
+                .replace(/<br\s*\/?>/gi, '\n')
+                .replace(/<\/?[a-z0-9]+[^>]*>/gi, '') 
+                .split(/\n+/)
+                .map(l => l.trim())
+                .filter(Boolean);
+                
+            if (paragraphs.length > 1) {
+                questionLine = paragraphs[paragraphs.length - 1];
+                mainTopic = paragraphs.slice(0, -1).join('<br><br>');
+            } else {
+                let matched = false;
+                const plainTopic = cleanText.replace(/<\/?[a-z0-9]+[^>]*>/gi, '');
+                for (const pattern of questionPatterns) {
+                    const match = plainTopic.match(pattern);
+                    if (match) {
+                        const index = match.index;
+                        questionLine = plainTopic.substring(index).trim();
+                        mainTopic = plainTopic.substring(0, index).trim();
+                        matched = true;
+                        break;
+                    }
+                }
+                
+                if (!matched && plainTopic.includes('?')) {
+                    const sentences = plainTopic.split(/(?<=\.|\?)\s+/);
+                    if (sentences.length > 1) {
+                        const lastSentence = sentences[sentences.length - 1];
+                        if (lastSentence.includes('?')) {
+                            questionLine = lastSentence.trim();
+                            mainTopic = sentences.slice(0, -1).join(" ").trim();
+                        }
+                    }
+                }
+            }
+
+            mainTopic = mainTopic.replace(/^\s*[:,-]\s*/, "").trim();
+            questionLine = questionLine.replace(/^\s*[:,-]\s*/, "").trim();
+            
+            let html = `<div class="task2-topic">
+                <span class="task2-label">📝 TASK 2:</span>
+                <span class="task2-main-topic">${mainTopic}</span>
+            </div>`;
+            
+            if (questionLine) {
+                html += `<div class="task2-question-line">${questionLine}</div>`;
+            }
+            
+            return html;
+        }
         const promptId = urlParams.get('id');
         window.IELTSX_WRITING_TASK_NUMBER = 'task2';
         
@@ -1301,7 +1385,7 @@
                 })
                 .then(prompt => {
                     document.getElementById('promptTitle').textContent = prompt.title;
-                    document.getElementById('promptText').innerHTML = prompt.promptText.replace(/\n/g, '<br>');
+                    document.getElementById('promptText').innerHTML = formatTask2PromptText(prompt.promptText);
 
                     // Restore only this test's Task 2 answer.
                     document.getElementById('essayEditor').value = localStorage.getItem(writingAnswerKey(id, 'task2')) || '';

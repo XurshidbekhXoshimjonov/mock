@@ -39,7 +39,7 @@ const ListeningComponents = (() => {
                 return `<option value="${escapeHtml(letter)}">${escapeHtml(letter)}${escapeHtml(cleanText)}</option>`;
             }).join("");
 
-            return `<span class="lc-answer-inline ${className}" data-question="${number}">
+            return `<span class="lc-answer-inline ${className}" id="question-${number}" data-question="${number}">
                 <select class="lc-inline-select" id="q${number}" name="q${number}" aria-label="Answer ${number}">
                     <option value="">Select</option>
                     ${optionTags}
@@ -48,7 +48,7 @@ const ListeningComponents = (() => {
             </span>`;
         }
 
-        return `<span class="lc-answer-inline ${className}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"></span>`;
+        return `<span class="lc-answer-inline ${className}" id="question-${number}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"></span>`;
     }
 
     function renderPlaceholderText(value, options = []) {
@@ -223,7 +223,7 @@ const ListeningComponents = (() => {
             return `<option value="${letter}">${letter}${text ? ` - ${text}` : ""}</option>`;
         }).join("");
 
-        return `<span class="lc-flowchart-answer" data-question="${number}">
+        return `<span class="lc-flowchart-answer" id="question-${number}" data-question="${number}">
             <select class="lc-flowchart-select" id="q${number}" name="q${number}" aria-label="Answer ${number}">
                 <option value="">Select</option>
                 ${optionTags}
@@ -434,7 +434,7 @@ const ListeningComponents = (() => {
                         </td>`;
                     }).join("");
 
-                    return `<tr>
+                    return `<tr id="question-${qNum}">
                         <td><span class="lc-question-badge">${qNum}</span> ${escapeHtml(q.question || q.text || "")}</td>
                         ${radioCells}
                     </tr>`;
@@ -475,7 +475,7 @@ const ListeningComponents = (() => {
                 </label>`).join("");
 
                 return `
-                    <div class="lc-mcq-item" style="margin-bottom: 24px;">
+                    <div class="lc-mcq-item" id="question-${qNum}" style="margin-bottom: 24px;">
                         <p class="lc-question-text"><span class="lc-question-badge">${qNum}</span>${escapeHtml(q.question || "")}</p>
                         <div class="lc-choice-list">${options}</div>
                     </div>
@@ -492,7 +492,7 @@ const ListeningComponents = (() => {
         </label>`).join("");
 
         return blockCard(block, `
-            <p class="lc-question-text"><span class="lc-question-badge">${Number(block.questionNumber)}</span>${escapeHtml(block.question || "")}</p>
+            <p class="lc-question-text" id="question-${Number(block.questionNumber)}"><span class="lc-question-badge">${Number(block.questionNumber)}</span>${escapeHtml(block.question || "")}</p>
             <div class="lc-choice-list">${options}</div>
         `, "lc-multiple-choice-block");
     }
@@ -1070,6 +1070,7 @@ const ListeningComponents = (() => {
 
     function ListeningTestPage(rawTest) {
         const test = normalizeLegacyTest(rawTest || {});
+        window.ListeningComponents._activeTest = test;
         const parts = (test.parts || []).filter((part) => (part.blocks || []).length || part.audioUrl);
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
         const params = new URLSearchParams(window.location.search);
@@ -1083,6 +1084,7 @@ const ListeningComponents = (() => {
 
         return `<div class="lc-page ${isFullListeningTest(test) ? "full-test-shell full-test-player" : ""}">
             ${ListeningHeader(test)}
+            <div class="lc-question-nav-container hidden" data-listening-question-nav></div>
             <main class="lc-main">
                 <div data-listening-prestart ${isMockMode ? "hidden" : ""}>${preStartMarkup}</div>
                 <div class="lc-test-content" data-listening-test-content ${isMockMode ? "" : "hidden"}>
@@ -1289,7 +1291,285 @@ const ListeningComponents = (() => {
         });
     }
 
-    function bindListeningTest(root) {
+    function bindListeningQuestionNav(root, test) {
+        const navContainer = root.querySelector("[data-listening-question-nav]");
+        if (!navContainer) return;
+
+        // Inject navigation styles
+        if (!document.getElementById("ieltsmock-question-nav-styles")) {
+            const style = document.createElement("style");
+            style.id = "ieltsmock-question-nav-styles";
+            style.textContent = `
+                .lc-question-nav-container {
+                    width: 100%;
+                }
+                .lc-question-nav-container.hidden {
+                    display: none !important;
+                }
+                .question-nav {
+                    display: flex;
+                    align-items: center;
+                    gap: 32px;
+                    padding: 12px 24px;
+                    background: #ffffff;
+                    border-bottom: 1px solid #e2e8f0;
+                    overflow-x: auto;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                }
+                .question-nav-part {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    white-space: nowrap;
+                }
+                .question-nav-title {
+                    font-weight: 700;
+                    color: #1e293b;
+                    font-size: 14px;
+                }
+                .question-nav-progress {
+                    font-size: 12px;
+                    color: #64748b;
+                    font-weight: 500;
+                    background: #f1f5f9;
+                    padding: 2px 8px;
+                    border-radius: 9999px;
+                    margin-right: 4px;
+                }
+                .question-nav-buttons {
+                    display: flex;
+                    gap: 6px;
+                }
+                .question-number-btn {
+                    width: 28px;
+                    height: 28px;
+                    border: 1px solid #cbd5e1;
+                    background: #ffffff;
+                    color: #334155;
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 150ms ease;
+                }
+                .question-number-btn:hover {
+                    border-color: #3b82f6;
+                    color: #3b82f6;
+                    background: #f0f7ff;
+                }
+                .question-number-btn.active {
+                    background: #2563eb;
+                    color: #ffffff;
+                    border-color: #2563eb;
+                    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+                }
+                .question-number-btn.answered {
+                    background: #eff6ff;
+                    border-color: #bfdbfe;
+                    color: #1e40af;
+                }
+                .flash {
+                    animation: flash 1s ease-out;
+                }
+                @keyframes flash {
+                    0% { background-color: rgba(59, 130, 246, 0.25); }
+                    100% { background-color: transparent; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Build partsConfig
+        const partsConfig = [];
+        const parts = ((test && test.parts) || []).filter((part) => part && ((part.blocks || []).length || part.audioUrl));
+        parts.forEach((part, pIdx) => {
+            if (!part) return;
+            const partNumber = Number(part.partNumber) || pIdx + 1;
+            const questionNumbers = [];
+            (part.blocks || []).forEach((block) => {
+                if (!block) return;
+                if (Array.isArray(block.questions)) {
+                    block.questions.forEach((q) => {
+                        if (!q) return;
+                        const qNum = Number(q.questionNumber || q.number);
+                        if (qNum && !questionNumbers.includes(qNum)) {
+                            questionNumbers.push(qNum);
+                        }
+                    });
+                } else if (block.questionNumber) {
+                    const qNum = Number(block.questionNumber);
+                    if (qNum && !questionNumbers.includes(qNum)) {
+                        questionNumbers.push(qNum);
+                    }
+                }
+                if (Array.isArray(block.questionNumbers)) {
+                    block.questionNumbers.forEach((qNum) => {
+                        const num = Number(qNum);
+                        if (num && !questionNumbers.includes(num)) {
+                            questionNumbers.push(num);
+                        }
+                    });
+                }
+            });
+            questionNumbers.sort((a, b) => a - b);
+            partsConfig.push({
+                partNumber,
+                questions: questionNumbers
+            });
+        });
+
+        // Fallback to standard segments
+        if (partsConfig.length === 0 || partsConfig.every((p) => !p.questions || p.questions.length === 0)) {
+            partsConfig.length = 0;
+            partsConfig.push({ partNumber: 1, questions: Array.from({ length: 10 }, (_, i) => i + 1) });
+            partsConfig.push({ partNumber: 2, questions: Array.from({ length: 10 }, (_, i) => i + 11) });
+            partsConfig.push({ partNumber: 3, questions: Array.from({ length: 10 }, (_, i) => i + 21) });
+            partsConfig.push({ partNumber: 4, questions: Array.from({ length: 10 }, (_, i) => i + 31) });
+        }
+
+        // Render HTML markup
+        const navHtml = `
+            <div class="question-nav">
+                ${partsConfig.map((config) => {
+                    const partQs = config.questions;
+                    const buttonsHtml = partQs.map((qNum) => {
+                        return `<button class="question-number-btn" type="button" data-nav-q="${qNum}" data-nav-part="${config.partNumber}">${qNum}</button>`;
+                    }).join("");
+
+                    return `
+                        <div class="question-nav-part">
+                            <span class="question-nav-title">Part ${config.partNumber}</span>
+                            <span class="question-nav-progress" data-part-progress="${config.partNumber}">0 of ${partQs.length}</span>
+                            <div class="question-nav-buttons">${buttonsHtml}</div>
+                        </div>
+                    `;
+                }).join("")}
+            </div>
+        `;
+        navContainer.innerHTML = navHtml;
+
+        // Track active question
+        let activeQNum = 1;
+
+        function updateNavStates() {
+            partsConfig.forEach((config) => {
+                let answeredCount = 0;
+                config.questions.forEach((qNum) => {
+                    const btn = navContainer.querySelector(`[data-nav-q="${qNum}"]`);
+                    if (!btn) return;
+
+                    const isAnswered = isQuestionAnswered(qNum);
+                    if (isAnswered) answeredCount++;
+
+                    const isActive = activeQNum === qNum;
+                    btn.className = `question-number-btn${isActive ? " active" : ""}${isAnswered && !isActive ? " answered" : ""}`;
+                });
+
+                const progressEl = navContainer.querySelector(`[data-part-progress="${config.partNumber}"]`);
+                if (progressEl) {
+                    progressEl.textContent = `${answeredCount} of ${config.questions.length}`;
+                }
+            });
+        }
+
+        function isQuestionAnswered(qNum) {
+            const input = root.querySelector(`input[name="q${qNum}"], select[name="q${qNum}"], input#q${qNum}, select#q${qNum}, textarea#q${qNum}`);
+            if (!input) return false;
+            if (input.type === 'radio' || input.type === 'checkbox') {
+                return root.querySelector(`[name="q${qNum}"]:checked`) !== null;
+            }
+            return (input.value || "").trim().length > 0;
+        }
+
+        // Click handler to scroll to question
+        navContainer.addEventListener("click", (event) => {
+            const btn = event.target.closest("[data-nav-q]");
+            if (!btn) return;
+
+            const qNum = Number(btn.dataset.navQ);
+            const partNum = Number(btn.dataset.navPart);
+
+            // Dispatch event to switch part
+            root.dispatchEvent(new CustomEvent("switch-listening-part", { detail: { partNumber: partNum } }));
+
+            // Scroll to element
+            setTimeout(() => {
+                let target = root.querySelector(`#question-${qNum}`);
+                if (!target) {
+                    // Check fallback options
+                    target = [...root.querySelectorAll('[data-question-numbers]')].find(el => {
+                        const nums = el.dataset.questionNumbers.split(',');
+                        return nums.includes(String(qNum));
+                    });
+                }
+                if (!target) {
+                    const input = root.querySelector(`#q${qNum}, [name="q${qNum}"]`);
+                    if (input) {
+                        target = input.closest('.lc-question-card') || input.closest('.lc-part') || input;
+                    }
+                }
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.classList.add('flash');
+                    setTimeout(() => {
+                        target.classList.remove('flash');
+                    }, 1000);
+                }
+            }, 150);
+
+            activeQNum = qNum;
+            updateNavStates();
+        });
+
+        // Watch for changes to update answered states
+        root.addEventListener("input", updateNavStates);
+        root.addEventListener("change", updateNavStates);
+
+        // Scroll observer for active question highlighting
+        const scrollContainer = root.querySelector(".lc-main");
+        if (scrollContainer) {
+            scrollContainer.addEventListener("scroll", () => {
+                const containerRect = scrollContainer.getBoundingClientRect();
+                const containerCenter = containerRect.top + containerRect.height / 2;
+
+                const visibleSection = [...root.querySelectorAll(".lc-listening-section")].find((s) => !s.classList.contains("hidden"));
+                if (!visibleSection) return;
+
+                const questionElements = [
+                    ...visibleSection.querySelectorAll('[id^="question-"]'),
+                    ...visibleSection.querySelectorAll('[data-question]')
+                ];
+                if (!questionElements.length) return;
+
+                let closestQNum = null;
+                let minDistance = Infinity;
+
+                questionElements.forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    const elementCenter = rect.top + rect.height / 2;
+                    const distance = Math.abs(elementCenter - containerCenter);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        const qNum = Number(el.id?.replace('question-', '') || el.dataset.question);
+                        if (qNum) closestQNum = qNum;
+                    }
+                });
+
+                if (closestQNum && closestQNum !== activeQNum) {
+                    activeQNum = closestQNum;
+                    updateNavStates();
+                }
+            }, { passive: true });
+        }
+
+        // Initialize state
+        updateNavStates();
+    }
+
+    function bindListeningTest(root, test) {
         root.querySelectorAll("[data-audio-card]").forEach(bindAudioCard);
         const listeningParams = new URLSearchParams(window.location.search);
         const isMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId");
@@ -1297,6 +1577,10 @@ const ListeningComponents = (() => {
             if (window.parent !== window) {
                 window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
             }
+        });
+
+        root.addEventListener("switch-listening-part", (event) => {
+            showListeningPart(event.detail.partNumber);
         });
 
         const sections = [...root.querySelectorAll(".lc-listening-section")];
@@ -1435,6 +1719,10 @@ const ListeningComponents = (() => {
             if (testContent) testContent.hidden = false;
             if (bottomBar) bottomBar.hidden = false;
             if (submitButton) submitButton.disabled = false;
+            
+            const navContainer = root.querySelector("[data-listening-question-nav]");
+            if (navContainer) navContainer.classList.remove("hidden");
+
             resetListeningTimer();
             startListeningTimer();
         }
@@ -1504,6 +1792,10 @@ const ListeningComponents = (() => {
             root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
             root.dispatchEvent(new CustomEvent("listening-review", { bubbles: true }));
         });
+
+        // Initialize Question Navigation
+        const activeTest = test || window.ListeningComponents._activeTest || {};
+        bindListeningQuestionNav(root, activeTest);
 
         if (isMockMode) {
             startListeningAttempt();

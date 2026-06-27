@@ -64,13 +64,13 @@ select:focus-visible {
 
 .cbt-shell {
     display: grid;
-    grid-template-rows: 66px minmax(0, 1fr) 68px;
+    grid-template-rows: auto minmax(0, 1fr) 68px;
     height: 100vh;
     padding: 0 0 10px;
 }
 
 .cbt-shell.no-bottom {
-    grid-template-rows: 66px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
 }
 
 .cbt-header,

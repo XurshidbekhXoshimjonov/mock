@@ -1364,6 +1364,7 @@
 
             if (authResult.status === 401) {
                 console.log("PROFILE_ME_RESPONSE: Unauthorized");
+                window.authClient?.clearAuth();
                 window.location.href = "/login";
                 return;
             }
@@ -1379,16 +1380,19 @@
                     window.authClient.saveAuth(auth);
                 }
             } else {
+                window.authClient?.clearAuth();
                 window.location.href = "/login";
                 return;
             }
         } catch (error) {
             console.error("Profile boot fetch error:", error);
+            window.authClient?.clearAuth();
             window.location.href = "/login";
             return;
         }
 
         if (!user) {
+            window.authClient?.clearAuth();
             window.location.href = "/login";
             return;
         }

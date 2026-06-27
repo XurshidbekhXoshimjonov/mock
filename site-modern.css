@@ -193,20 +193,28 @@ body.public-page .r-right .signup {
     overflow-wrap: anywhere;
 }
 
-.practice-grid,
-.home-practice-grid {
+.practice-grid {
     display: grid;
     align-items: stretch;
     justify-content: center;
     gap: 18px;
-}
-
-.practice-grid {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .home-practice-grid {
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    display: grid;
+    align-items: stretch;
+    justify-content: center;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    max-width: 1220px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.home-practice-grid .card {
+    min-height: 270px;
+    padding: 32px 28px;
 }
 
 .practice-card,
@@ -2241,9 +2249,17 @@ body:not(.site-ready) .public-shell {
     }
 
     .practice-grid,
-    .home-practice-grid,
     .skeleton-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-practice-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .home-practice-grid .card {
+        padding: 28px 24px;
     }
 
     body.public-page .home-footer {
@@ -2380,9 +2396,17 @@ body:not(.site-ready) .public-shell {
     }
 
     .practice-grid,
-    .home-practice-grid,
     .skeleton-grid {
         grid-template-columns: 1fr;
+    }
+
+    .home-practice-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .home-practice-grid .card {
+        padding: 24px 20px;
     }
 
     body.public-page .home-footer {

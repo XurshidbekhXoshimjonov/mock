@@ -1506,10 +1506,179 @@ function VocabularyReview({ words }) {
     );
 }
 
+const injectNavigationStyles = () => {
+    if (document.getElementById("ieltsmock-question-nav-styles")) return;
+    const style = document.createElement("style");
+    style.id = "ieltsmock-question-nav-styles";
+    style.textContent = `
+        .question-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            padding: 12px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+        .question-nav-part {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+        .question-nav-title {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 14px;
+        }
+        .question-nav-progress {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            margin-right: 4px;
+        }
+        .question-nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+        .question-number-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 150ms ease;
+        }
+        .question-number-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: #f0f7ff;
+        }
+        .question-number-btn.active {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        .question-number-btn.answered {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+        }
+        .flash {
+            animation: flash 1s ease-out;
+        }
+    `;
+    document.head.appendChild(style);
+};
+
+function QuestionNavigationPanel({ passages, answers, activeIndex, selectPassage, activeQuestionNumber, setActiveQuestionNumber }) {
+    const passagesConfig = useMemo(() => {
+        return passages.map((passage, pIdx) => {
+            const pNumber = pIdx + 1;
+            const questionNumbers = [];
+            (passage.questionGroups || []).forEach((group) => {
+                (group.questions || []).forEach((q) => {
+                    const qNum = Number(q.number || q.questionNumber);
+                    if (qNum && !questionNumbers.includes(qNum)) {
+                        questionNumbers.push(qNum);
+                    }
+                });
+            });
+            questionNumbers.sort((a, b) => a - b);
+            return {
+                passageIndex: pIdx,
+                passageNumber: pNumber,
+                questions: questionNumbers
+            };
+        });
+    }, [passages]);
+
+    const handleQuestionClick = (qNumber, pIdx) => {
+        if (activeIndex !== pIdx) {
+            selectPassage(pIdx);
+            setTimeout(() => {
+                scrollToQuestion(qNumber);
+            }, 150);
+        } else {
+            scrollToQuestion(qNumber);
+        }
+        setActiveQuestionNumber(qNumber);
+    };
+
+    const scrollToQuestion = (number) => {
+        let target = document.getElementById(`question-${number}`);
+        if (!target) {
+            // Check fallback options
+            target = [...document.querySelectorAll('[data-number]')].find(el => Number(el.dataset.number) === number);
+        }
+        if (!target) {
+            const input = document.getElementById(`q${number}`) || 
+                          document.querySelector(`[name="q${number}"]`) || 
+                          document.querySelector(`[aria-label*="${number}"]`);
+            if (input) {
+                target = input.closest('.cbt-question') || input.closest('.questions-panel') || input;
+            }
+        }
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('flash');
+            setTimeout(() => {
+                target.classList.remove('flash');
+            }, 1000);
+        }
+    };
+
+    return h("div", { className: "question-nav" },
+        passagesConfig.map((config) => {
+            const answeredCount = config.questions.filter((qNum) => {
+                const ans = answers[qNum];
+                return ans && String(ans).trim().length > 0;
+            }).length;
+
+            return h("div", { key: config.passageNumber, className: "question-nav-part" },
+                h("span", { className: "question-nav-title" }, `Part ${config.passageNumber}`),
+                h("span", { className: "question-nav-progress" }, `${answeredCount} of ${config.questions.length}`),
+                h("div", { className: "question-nav-buttons", style: { display: "flex", gap: "6px" } },
+                    config.questions.map((qNum) => {
+                        const isActive = activeQuestionNumber === qNum;
+                        const isAnswered = answers[qNum] && String(answers[qNum]).trim().length > 0;
+                        const btnClass = `question-number-btn${isActive ? " active" : ""}${isAnswered && !isActive ? " answered" : ""}`;
+
+                        return h("button", {
+                            key: qNum,
+                            type: "button",
+                            className: btnClass,
+                            onClick: () => handleQuestionClick(qNum, config.passageIndex)
+                        }, qNum);
+                    })
+                )
+            );
+        })
+    );
+}
+
 function ReadingApp() {
     const [test, setTest] = useState(null);
     const [error, setError] = useState("");
     const [activeIndex, setActiveIndex] = useState(0);
+    const [activeQuestionNumber, setActiveQuestionNumber] = useState(1);
+    const activeQuestionNumberRef = useRef(1);
+    useEffect(() => {
+        activeQuestionNumberRef.current = activeQuestionNumber;
+    }, [activeQuestionNumber]);
     const [answers, setAnswers] = useState({});
     const [seconds, setSeconds] = useState(duration);
     const [textScale, setTextScale] = useState(1);
@@ -1529,6 +1698,10 @@ function ReadingApp() {
     const vocabularyRequestsRef = useRef(new Map());
     const passagePanelRef = useRef(null);
     const questionsPanelRef = useRef(null);
+
+    useEffect(() => {
+        injectNavigationStyles();
+    }, []);
 
     useEffect(() => {
         if (!testId) {
@@ -1640,6 +1813,44 @@ function ReadingApp() {
             document.removeEventListener(FULLSCREEN_STATE_EVENT, syncFullscreenState);
         };
     }, [isFullTest, test?.id]);
+
+    useEffect(() => {
+        const container = questionsPanelRef.current;
+        if (!container || !hasStarted) return undefined;
+
+        const handleScroll = () => {
+            const containerRect = container.getBoundingClientRect();
+            const containerCenter = containerRect.top + containerRect.height / 2;
+
+            const questionElements = [...container.querySelectorAll('[id^="question-"]')];
+            if (!questionElements.length) return;
+
+            let closestQuestionNumber = null;
+            let minDistance = Infinity;
+
+            questionElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                const elementCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(elementCenter - containerCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    const qNum = Number(el.id.replace('question-', ''));
+                    if (qNum) closestQuestionNumber = qNum;
+                }
+            });
+
+            if (closestQuestionNumber && closestQuestionNumber !== activeQuestionNumberRef.current) {
+                setActiveQuestionNumber(closestQuestionNumber);
+            }
+        };
+
+        container.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
+
+        return () => {
+            container.removeEventListener("scroll", handleScroll);
+        };
+    }, [hasStarted, activeIndex]);
 
     function answerQuestion(number, value) {
         if (!hasStarted || result) return;
@@ -1895,6 +2106,9 @@ function ReadingApp() {
         );
     }
 
+    const isMock = new URLSearchParams(window.location.search).has("mockTestId") || new URLSearchParams(window.location.search).get("mockMode") === "1";
+    const isFullTestOrMock = isFullTest || isMock;
+
     const dashboardHref = isFullTest
         ? (skill === "listening" ? "/listeningfulltest.html" : "/fulltest.html")
         : (skill === "listening" ? "/listening.html" : `/part${passage.number || 1}.html`);
@@ -1902,15 +2116,27 @@ function ReadingApp() {
 
     return h(Fragment, null,
         h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!hasStarted || (!isFullTest && passages.length === 1) ? " no-bottom" : ""}` },
-            h(Header, {
-                seconds,
-                dashboardHref,
-                onSubmit: submit,
-                showFullscreen: isFullTest,
-                fullscreenActive,
-                submitted: Boolean(result),
-                submitDisabled: !hasStarted
-            }),
+            h("div", { className: "cbt-header-wrapper" },
+                h(Header, {
+                    seconds,
+                    dashboardHref,
+                    onSubmit: submit,
+                    showFullscreen: isFullTest,
+                    fullscreenActive,
+                    submitted: Boolean(result),
+                    submitDisabled: !hasStarted
+                }),
+                hasStarted && isFullTestOrMock
+                    ? h(QuestionNavigationPanel, {
+                        passages,
+                        answers,
+                        activeIndex,
+                        selectPassage,
+                        activeQuestionNumber,
+                        setActiveQuestionNumber
+                    })
+                    : null
+            ),
             !hasStarted
                 ? h("main", { className: "cbt-stage cbt-stage--prestart" },
                     isMockMode && window.PreTestStartScreen?.renderReact

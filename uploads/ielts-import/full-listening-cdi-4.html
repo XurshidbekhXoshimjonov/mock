@@ -837,7 +837,7 @@
             100% { background-color: transparent; }
         }
 
-        .question.flash {
+        .question.flash, .flash {
             animation: flash 1s ease-out;
         }
 
@@ -2724,63 +2724,83 @@ function updateNavigation() {
 }
 
 function goToQuestion(questionNumber) {
-    currentQuestion = questionNumber;
-    
-    // Determine part
-    let partNumber = 1;
-    if (questionNumber > 10 && questionNumber <= 20) partNumber = 2;
-    else if (questionNumber > 20 && questionNumber <= 30) partNumber = 3;
-    else if (questionNumber > 30) partNumber = 4;
-    
-    // Switch part if needed
-    if (currentPart !== partNumber) {
-        switchToPart(partNumber);
-    }
-    
-    // Update active question in navigation
-    document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
-    const questionBtn = document.querySelector(`.subQuestion[onclick="goToQuestion(${questionNumber})"]`);
-    if (questionBtn) {
-        questionBtn.classList.add('active');
-    }
-    
-    // Scroll to question
-    scrollToQuestion(questionNumber);
-    updateNavigation();
-}
-
-function scrollToQuestion(questionNumber) {
-    let questionElement;
-    
-    // Find the question element
-    if (questionNumber >= 17 && questionNumber <= 18) {
-        questionElement = document.querySelector(`input[name="q17-18"]`);
-    } else if (questionNumber >= 19 && questionNumber <= 20) {
-        questionElement = document.querySelector(`input[name="q19-20"]`);
-    } else if (questionNumber >= 11 && questionNumber <= 16) {
-        questionElement = document.getElementById(`q${questionNumber}`);
-    } else if (questionNumber >= 25 && questionNumber <= 30) {
-        questionElement = document.getElementById(`q${questionNumber}`);
-    } else {
-        questionElement = document.getElementById(`q${questionNumber}`) ||
-                         document.querySelector(`input[name="q${questionNumber}"]`);
-    }
-    
-    if (questionElement) {
-        const questionContainer = questionElement.closest('.question') || questionElement.closest('.mcq-item');
-        if (questionContainer) {
-            questionContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            console.log("Universal goToQuestion called for: " + questionNumber);
+            currentQuestion = questionNumber;
             
-            // Flash animation
-            questionContainer.classList.add('flash');
-            setTimeout(() => {
-                questionContainer.classList.remove('flash');
-            }, 1000);
-        }
-    }
-}
+            // Detect total passages/parts
+            const totalPassages = document.querySelectorAll('.reading-passage, .passage-panel').length || 3;
+            let partNumber = 1;
+            
+            if (totalPassages === 4 || document.getElementById('part-4') || questionNumber > 30) {
+                // Listening test (4 parts, 10 questions each)
+                if (questionNumber > 10 && questionNumber <= 20) partNumber = 2;
+                else if (questionNumber > 20 && questionNumber <= 30) partNumber = 3;
+                else if (questionNumber > 30) partNumber = 4;
+            } else {
+                // Reading test (3 passages)
+                let targetEl = document.getElementById(`q${questionNumber}lock_opt`) ||
+                               document.getElementById(`q${questionNumber}`) ||
+                               document.querySelector(`[name="q${questionNumber}"]`) ||
+                               document.querySelector(`input[name="q${questionNumber}"]`);
+                if (targetEl) {
+                    const parentPart = targetEl.closest('[id^="questions-"]') || 
+                                       targetEl.closest('.question-part') || 
+                                       targetEl.closest('[data-part-number]');
+                    if (parentPart) {
+                        const idMatch = parentPart.id.match(/\d+/);
+                        if (idMatch) partNumber = parseInt(idMatch[0], 10);
+                        else if (parentPart.dataset.partNumber) partNumber = parseInt(parentPart.dataset.partNumber, 10);
+                    }
+                }
+                
+                if (!partNumber || partNumber === 1) {
+                    if (questionNumber >= 14 && questionNumber <= 26) partNumber = 2;
+                    else if (questionNumber >= 27) partNumber = 3;
+                }
+            }
 
-function nextPart() {
+            const currentPartNum = typeof currentPassage !== 'undefined' ? currentPassage : (typeof currentPart !== 'undefined' ? currentPart : 1);
+            if (currentPartNum !== partNumber) {
+                console.log("Switching parts from " + currentPartNum + " to " + partNumber);
+                switchToPart(partNumber);
+                setTimeout(() => goToQuestion(questionNumber), 100);
+                return;
+            }
+
+            // Update active class on navigation buttons
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const questionBtn = document.querySelector(`.subQuestion[onclick="goToQuestion(${questionNumber})"]`);
+            if (questionBtn) questionBtn.classList.add('active');
+
+            // Scroll and focus
+            let questionElement = document.getElementById(`q${questionNumber}`) ||
+                                 document.querySelector(`input[name="q${questionNumber}"]`) ||
+                                 document.querySelector(`[name="q${questionNumber}"]`);
+            
+            if (questionElement) {
+                if (typeof questionElement.focus === 'function') {
+                    questionElement.focus();
+                }
+                const targetToScroll = questionElement.closest('.multi-choice-question') ||
+                                      questionElement.closest('.question') ||
+                                      questionElement.closest('tr') ||
+                                      questionElement.closest('li') ||
+                                      questionElement;
+                if (targetToScroll) {
+                    targetToScroll.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetToScroll.classList.add('flash');
+                    setTimeout(() => {
+                        targetToScroll.classList.remove('flash');
+                    }, 1000);
+                }
+            }
+            
+            if (typeof updateNavigation === 'function') {
+                updateNavigation();
+            }
+        }
+
+        function nextPart() {
     if (currentQuestion < 40) {
         goToQuestion(currentQuestion + 1);
     }
