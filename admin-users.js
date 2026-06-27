@@ -17,8 +17,12 @@
     function checkAuth() {
         console.log("Users page opened");
         const auth = window.authClient?.getAuth();
-        console.log("Current token:", auth?.token ? "exists" : "missing");
-        console.log("Current user role:", auth?.user?.role || "none");
+        const token = auth?.token;
+        const user = auth?.user;
+        console.log("TOKEN:", token ? "exists" : "missing");
+        console.log("USER:", user);
+        console.log("ROLE:", user?.role);
+        console.log("IS_ADMIN:", user?.isAdmin);
         
         if (!auth || !auth.user) {
             console.log("Redirect reason: auth or auth.user is missing");
@@ -133,6 +137,7 @@
             allUsers = data;
             renderTable();
         } catch (error) {
+            console.log("USERS API ERROR:", error.response?.status || error.status || "none");
             console.error("Users load error:", error);
             usersTableBody.innerHTML = `<tr><td colspan="8" class="table-loading" style="color: #ef4444;">Error: ${escapeHtml(error.message)}</td></tr>`;
             showStatus(error.message, "error");
