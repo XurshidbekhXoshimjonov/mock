@@ -15,9 +15,19 @@
 
     // Client-side authentication check
     function checkAuth() {
+        console.log("Users page opened");
         const auth = window.authClient?.getAuth();
-        if (!auth || !auth.user || auth.user.role !== "admin") {
+        console.log("Current token:", auth?.token ? "exists" : "missing");
+        console.log("Current user role:", auth?.user?.role || "none");
+        
+        if (!auth || !auth.user) {
+            console.log("Redirect reason: auth or auth.user is missing");
             window.location.replace("/login.html");
+            return false;
+        }
+        if (auth.user.role !== "admin") {
+            console.log("Redirect reason: User role is not admin (role: " + auth.user.role + ")");
+            window.location.replace("/dashboard");
             return false;
         }
         return true;
@@ -66,7 +76,12 @@
 
     async function loadStats() {
         try {
-            const response = await fetch("/api/admin/stats/users");
+            const auth = window.authClient?.getAuth();
+            const headers = {};
+            if (auth?.token) {
+                headers["Authorization"] = `Bearer ${auth.token}`;
+            }
+            const response = await fetch("/api/admin/stats/users", { headers });
             const text = await response.text();
             
             let data;
@@ -77,7 +92,7 @@
             }
 
             if (!response.ok) {
-                throw new Error(data.error || "Failed to load statistics.");
+                throw new Error(data.error || data.message || "Failed to load statistics.");
             }
 
             statUsers.textContent = data.totalUsers ?? 0;
@@ -92,7 +107,12 @@
     async function loadUsers() {
         try {
             showStatus("");
-            const response = await fetch("/api/admin/users");
+            const auth = window.authClient?.getAuth();
+            const headers = {};
+            if (auth?.token) {
+                headers["Authorization"] = `Bearer ${auth.token}`;
+            }
+            const response = await fetch("/api/admin/users", { headers });
             const text = await response.text();
             
             let data;
@@ -102,8 +122,12 @@
                 throw new Error("Invalid user list response from server.");
             }
 
+            if (response.status === 403) {
+                throw new Error("Access denied");
+            }
+
             if (!response.ok) {
-                throw new Error(data.error || "Failed to fetch user list.");
+                throw new Error(data.error || data.message || "Failed to fetch user list.");
             }
 
             allUsers = data;

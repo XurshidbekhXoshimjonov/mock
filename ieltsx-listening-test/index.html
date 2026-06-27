@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTSX Listening Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">X</div>
+        <div>
+          <strong>IELTSX</strong>
+          <small>Listening Full Test</small>
+        </div>
+      </div>
+      <div class="timer" aria-label="timer">
+        <span>Time left</span>
+        <span id="timer">40:00</span>
+      </div>
+      <div class="actions">
+        <button class="btn-light" onclick="document.documentElement.requestFullscreen?.()">Full Screen</button>
+        <button class="btn-light" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+        <button class="btn-danger" onclick="checkAnswers()">Submit</button>
+      </div>
+    </header>
+    <main class="layout">
+      <aside class="sidebar">
+        <h3>Questions</h3>
+        <a class="part-link" href="#part1">Part 1 <span>1–10</span></a>
+        <a class="part-link" href="#part2">Part 2 <span>11–20</span></a>
+        <a class="part-link" href="#part3">Part 3 <span>21–30</span></a>
+        <a class="part-link" href="#part4">Part 4 <span>31–40</span></a>
+        <div class="jump-grid">
+          <!-- Jump links omitted for brevity -->
+        </div>
+      </aside>
+      <section class="content">
+        <div class="hero">
+          <h1>Listening Practice Test</h1>
+          <p>Complete all four parts. Answers are checked automatically after pressing Submit.</p>
+          <div class="audio-card">
+            <div class="audio-icon">♫</div>
+            <audio controls>
+              <source src="" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+        <!-- Insert original body content from the source file (sections, tables, etc.) here -->
+        <!-- BEGIN ORIGINAL CONTENT -->
+        <section class="section" id="part1">
+          <div class="section-header">
+            <div class="section-title">
+              <h2>PART 1 — Questions 1–10</h2>
+              <p>Complete the table below.</p>
+            </div>
+            <span class="badge">ONE WORD AND/OR A NUMBER</span>
+          </div>
+          <div class="instruction">Write <em>ONE WORD AND/OR A NUMBER</em> for each answer.</div>
+          <table class="ielts-table">
+            <thead>
+              <tr>
+                <th style="width:25%">Course</th>
+                <th style="width:19%">Date</th>
+                <th style="width:18%">Cost</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="course">Vietnamese food</td>
+                <td id="q1"><span class="qline"><span class="qnum">1</span><input class="answer medium-input" data-q="1" placeholder="answer"></span></td>
+                <td>£59</td>
+                <td>It provides information on the use of herbs.<br>There are no places at present.</td>
+              </tr>
+              <!-- Additional rows should be copied from the original file -->
+            </tbody>
+          </table>
+        </section>
+        <!-- END ORIGINAL CONTENT -->
+      </section>
+    </main>
+    <footer class="bottom-nav">
+      <div class="bottom-inner">
+        <div class="part-tabs">
+          <!-- Part tabs omitted for brevity -->
+        </div>
+        <div class="progress">
+          <span class="timer"><span id="progress">0</span>% completed</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    // Original JavaScript from the source file should be placed here.
+  </script>
+</body>
+</html>

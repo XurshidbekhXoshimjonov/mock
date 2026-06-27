@@ -1,0 +1,817 @@
+{
+  "id": "cambridge-21-test-1-listening",
+  "title": "Cambridge IELTS 21 Test 1 Listening",
+  "sourceFile": "cambridge-21-test-1-listening.json",
+  "status": "published",
+  "layout": "split",
+  "metadata": {
+    "skill": "listening",
+    "label": "Cambridge 21"
+  },
+  "skill": "listening",
+  "subtitle": "Listening full test",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/C21T1P1.1.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "audio": "/uploads/audio/C21T1P1.1.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-21-test-1-listening-part-1-table",
+            "type": "table_completion",
+            "instructionTitle": "Questions 1-6",
+            "instructionText": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "rule": "",
+            "title": "Oyster Bay Sailing Club Courses",
+            "example": "",
+            "options": [],
+            "rows": [
+              [
+                "Taster day",
+                "introduction to sailing",
+                "£120 if booking one place",
+                "small groups (max {{1}} people)"
+              ],
+              [
+                "Level 1",
+                "basic theory e.g. understanding the {{2}} and tides\n\nbasic sailing skills including {{3}} information",
+                "£200\n\n{{4}} available for club members\n\nall inclusive (plus a useful {{5}})",
+                "a {{6}} at the end of the course for all participants"
+              ]
+            ],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "small groups (max ... people)",
+                "options": [],
+                "answer": "10 | ten"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "basic theory e.g. understanding the ... and tides",
+                "options": [],
+                "answer": "weather"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "basic sailing skills including ... information",
+                "options": [],
+                "answer": "safety"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "... available for club members",
+                "options": [],
+                "answer": "discount"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "all inclusive (plus a useful ...)",
+                "options": [],
+                "answer": "dictionary"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "a ... at the end of the course for all participants",
+                "options": [],
+                "answer": "certificate"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-21-test-1-listening-part-1-notes",
+            "type": "note_completion",
+            "instructionTitle": "Questions 7-10",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "rule": "",
+            "title": "General information",
+            "example": "",
+            "options": [],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [
+              "Participants must be able to swim.",
+              "- Bring suitable clothing, a {{7}} and toiletries (e.g. shampoo).",
+              "- There is an {{8}} at the club.",
+              "- Online training {{9}} are recommended.",
+              "- {{10}} are available for course participants."
+            ],
+            "noteStyle": "boxed-flow",
+            "questions": [
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Bring suitable clothing, a ... and toiletries.",
+                "options": [],
+                "answer": "towel"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "There is an ... at the club.",
+                "options": [],
+                "answer": "cafe | café"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Online training ... are recommended.",
+                "options": [],
+                "answer": "videos"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "... are available for course participants.",
+                "options": [],
+                "answer": "lockers"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "audio": "/uploads/audio/C21T1P2.1.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-21-test-1-listening-part-2-mcq",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11-16",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "rule": "",
+            "title": "Working as a makeup trainee",
+            "example": "",
+            "options": [],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What should trainees always expect to get when working on low budget short films?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "travel expenses"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a minimum wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "meals"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "According to the speaker, on big budget films trainees may get experience of",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "makeup for special effects."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "working with different ethnicities."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "creating a variety of hair styles."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "The speaker says a problem for makeup artists is",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "dealing with difficult directors."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "being shouted at by their supervisor."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "waiting around for hours doing nothing."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "How did the speaker feel when she met famous actors for the first time?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "very shy"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "very proud"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "very disappointed"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "What advice does the speaker give about makeup kits?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Always carry a basic kit with you."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Only buy the best products for a makeup kit."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Ask other makeup artists to check your kit."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "What advice does the speaker give about creating a portfolio?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Keep print and digital photos."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Only include a small selection of photos."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Get permission to use photos."
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-21-test-1-listening-part-2-matching",
+            "type": "matching",
+            "instructionTitle": "Questions 17-20",
+            "instructionText": "What ability is required for each of the following duties? Write the correct letter, A, B, or C, next to Questions 17-20.",
+            "rule": "",
+            "title": "",
+            "example": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "being well-organised"
+              },
+              {
+                "letter": "B",
+                "text": "being flexible"
+              },
+              {
+                "letter": "C",
+                "text": "working quickly"
+              }
+            ],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "Prepping an actor",
+                "options": [],
+                "answer": "C"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "Continuity",
+                "options": [],
+                "answer": "A"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "question": "General",
+                "options": [],
+                "answer": "B"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "question": "Applying makeup",
+                "options": [],
+                "answer": "C"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "audio": "/uploads/audio/C21T1P3.1.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-21-test-1-listening-part-3-biodiversity-impact",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 21-22",
+            "instructionText": "Choose TWO letters, A-E.",
+            "rule": "",
+            "title": "",
+            "example": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "the references to local problems"
+              },
+              {
+                "letter": "B",
+                "text": "the broad focus of the examples"
+              },
+              {
+                "letter": "C",
+                "text": "the practical suggestions for solutions"
+              },
+              {
+                "letter": "D",
+                "text": "the type of issues discussed"
+              },
+              {
+                "letter": "E",
+                "text": "the implications for government policy"
+              }
+            ],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multi_select",
+                "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the references to local problems"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the broad focus of the examples"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the practical suggestions for solutions"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the type of issues discussed"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the implications for government policy"
+                  }
+                ],
+                "answer": "B | D"
+              },
+              {
+                "number": 22,
+                "type": "multi_select",
+                "question": "Which TWO features of the lecture on ocean biodiversity had the greatest impact on the students?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the references to local problems"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the broad focus of the examples"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the practical suggestions for solutions"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the type of issues discussed"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the implications for government policy"
+                  }
+                ],
+                "answer": "B | D"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-21-test-1-listening-part-3-research-project",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 23-24",
+            "instructionText": "Choose TWO letters, A-E.",
+            "rule": "",
+            "title": "",
+            "example": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "the team's previous successes"
+              },
+              {
+                "letter": "B",
+                "text": "its wide geographical scale"
+              },
+              {
+                "letter": "C",
+                "text": "the use of new technology"
+              },
+              {
+                "letter": "D",
+                "text": "the extensive statistical evidence"
+              },
+              {
+                "letter": "E",
+                "text": "the large range of specialists involved"
+              }
+            ],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 23,
+                "type": "multi_select",
+                "question": "Which TWO details about the research project particularly impressed the students?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the team's previous successes"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "its wide geographical scale"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the use of new technology"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the extensive statistical evidence"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the large range of specialists involved"
+                  }
+                ],
+                "answer": "C | E"
+              },
+              {
+                "number": 24,
+                "type": "multi_select",
+                "question": "Which TWO details about the research project particularly impressed the students?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the team's previous successes"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "its wide geographical scale"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the use of new technology"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the extensive statistical evidence"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the large range of specialists involved"
+                  }
+                ],
+                "answer": "C | E"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-21-test-1-listening-part-3-opinions",
+            "type": "matching",
+            "instructionTitle": "Questions 25-30",
+            "instructionText": "What is the students' opinion of each of the following resources related to ocean biodiversity? Choose SIX answers from the box and write the correct letter, A-H, next to Questions 25-30.",
+            "rule": "",
+            "title": "",
+            "example": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "This is aimed at a very specialist audience."
+              },
+              {
+                "letter": "B",
+                "text": "This is now rather outdated."
+              },
+              {
+                "letter": "C",
+                "text": "This was an effective description of a new danger."
+              },
+              {
+                "letter": "D",
+                "text": "This suggests possible ways to improve the situation."
+              },
+              {
+                "letter": "E",
+                "text": "This does not give a balanced account."
+              },
+              {
+                "letter": "F",
+                "text": "This is too predictable to be useful."
+              },
+              {
+                "letter": "G",
+                "text": "This gives insufficient evidence for its claims."
+              },
+              {
+                "letter": "H",
+                "text": "This gives a clear explanation of the problems."
+              }
+            ],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [],
+            "noteStyle": "",
+            "questions": [
+              {
+                "number": 25,
+                "type": "matching",
+                "question": "Article on invasive lionfish",
+                "options": [],
+                "answer": "G"
+              },
+              {
+                "number": 26,
+                "type": "matching",
+                "question": "Documentary on microplastics",
+                "options": [],
+                "answer": "B"
+              },
+              {
+                "number": 27,
+                "type": "matching",
+                "question": "Podcast on ocean pollution",
+                "options": [],
+                "answer": "F"
+              },
+              {
+                "number": 28,
+                "type": "matching",
+                "question": "Book on coastal ecosystems",
+                "options": [],
+                "answer": "H"
+              },
+              {
+                "number": 29,
+                "type": "matching",
+                "question": "Article on metal toxicity",
+                "options": [],
+                "answer": "A"
+              },
+              {
+                "number": 30,
+                "type": "matching",
+                "question": "Podcast on floating marine cities",
+                "options": [],
+                "answer": "E"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "audio": "/uploads/audio/C21T1P4.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-21-test-1-listening-part-4-notes",
+            "type": "note_completion",
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "rule": "",
+            "title": "Sources of rubber",
+            "example": "",
+            "options": [],
+            "rows": [],
+            "labels": [],
+            "imageUrl": "",
+            "content": [
+              "Three resources which are essential for industrial civilisation",
+              "- {{31}}",
+              "- fossil fuels",
+              "- rubber",
+              "<strong>Natural rubber</strong>",
+              "This mainly comes from the Para rubber tree, now cultivated in South-East Asia.",
+              "The supply is limited because",
+              "- the growth of the tree is {{32}}",
+              "- production cannot easily be adjusted because of increasing or decreasing {{33}}",
+              "- the tree only grows near the {{34}}",
+              "- extracting the latex (rubber) is labour-intensive",
+              "- it is very difficult to {{35}} rubber after production.",
+              "<strong>New threats include</strong>",
+              "- lack of genetic diversity, leading to danger of disease caused by a {{36}}",
+              "- a shift to the cultivation of palm oil",
+              "- extreme {{37}} events.",
+              "<strong>Synthetic rubber</strong>",
+              "- may be used for engine parts and cooking utensils",
+              "- is less {{38}} than natural rubber",
+              "- is unsuitable for many purposes e.g. the tyres of aircraft.",
+              "<strong>An alternative source of natural rubber</strong>",
+              "- A wild flower (a type of dandelion) has rubber in its {{39}}.",
+              "- It can be grown in many locations and does not require good {{40}}."
+            ],
+            "noteStyle": "boxed-flow",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "Three resources which are essential for industrial civilisation: ...",
+                "options": [],
+                "answer": "metal | metals"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "the growth of the tree is ...",
+                "options": [],
+                "answer": "slow"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "production cannot easily be adjusted because of increasing or decreasing ...",
+                "options": [],
+                "answer": "demand"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "the tree only grows near the ...",
+                "options": [],
+                "answer": "equator"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "it is very difficult to ... rubber after production.",
+                "options": [],
+                "answer": "recycle"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "danger of disease caused by a ...",
+                "options": [],
+                "answer": "fungus"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "extreme ... events.",
+                "options": [],
+                "answer": "weather"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "is less ... than natural rubber",
+                "options": [],
+                "answer": "strong"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "A wild flower has rubber in its ...",
+                "options": [],
+                "answer": "roots"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "It can be grown in many locations and does not require good ...",
+                "options": [],
+                "answer": "soil"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "10 | ten",
+    "2": "weather",
+    "3": "safety",
+    "4": "discount",
+    "5": "dictionary",
+    "6": "certificate",
+    "7": "towel",
+    "8": "cafe | café",
+    "9": "videos",
+    "10": "lockers",
+    "11": "A",
+    "12": "B",
+    "13": "A",
+    "14": "A",
+    "15": "A",
+    "16": "C",
+    "17": "C",
+    "18": "A",
+    "19": "B",
+    "20": "C",
+    "21": "B | D",
+    "22": "B | D",
+    "23": "C | E",
+    "24": "C | E",
+    "25": "G",
+    "26": "B",
+    "27": "F",
+    "28": "H",
+    "29": "A",
+    "30": "E",
+    "31": "metal | metals",
+    "32": "slow",
+    "33": "demand",
+    "34": "equator",
+    "35": "recycle",
+    "36": "fungus",
+    "37": "weather",
+    "38": "strong",
+    "39": "roots",
+    "40": "soil"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "manualListeningTestId": "cambridge-21-test-1-listening",
+  "createdAt": "2026-06-25T15:11:23.837Z",
+  "publishedAt": "2026-06-27T05:31:56.978Z"
+}

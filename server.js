@@ -3769,6 +3769,13 @@ function requireAuth(req, res, next) {
   next();
 }
 
+function adminOnly(req, res, next) {
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+  next();
+}
+
 function requireAdmin(req, res, next) {
   if (!req.user) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -4726,7 +4733,7 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
     }
 });
 
-app.get("/api/admin/users", requireAdmin, async (req, res) => {
+app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
     try {
         const pagination = paginationParams(req, { defaultLimit: 50, maxLimit: 100 });
         const result = await userStore.listUsers({
@@ -4765,7 +4772,7 @@ app.get("/api/admin/users", requireAdmin, async (req, res) => {
     }
 });
 
-app.get("/api/admin/stats/users", requireAdmin, async (req, res) => {
+app.get("/api/admin/stats/users", requireAuth, adminOnly, async (req, res) => {
     try {
         if (mongoose.connection.readyState === 1) {
             const startOfToday = new Date();
@@ -4924,9 +4931,10 @@ app.post("/signup", async (req, res) => {
         userProgressStore.recordAccountActivity(newUser._id || newUser.id, "Account created");
 
         // Set the secure, httpOnly cookie correctly from backend
+        const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
         res.cookie("ieltsmockAuthToken", token, {
             httpOnly: true,
-            secure: true,
+            secure: secureCookie,
             sameSite: "lax",
             path: "/"
         });
@@ -4995,9 +5003,10 @@ async function handleLogin(req, res) {
         userProgressStore.recordAccountActivity(user._id || user.id, "Signed in");
 
         // Set the secure, httpOnly cookie correctly from backend
+        const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
         res.cookie("ieltsmockAuthToken", token, {
             httpOnly: true,
-            secure: true,
+            secure: secureCookie,
             sameSite: "lax",
             path: "/"
         });
@@ -5266,6 +5275,12 @@ app.get("/api/auth/me", async (req, res) => {
             message: error.message || "Could not verify session"
         });
     }
+});
+
+app.post("/api/client-log", (req, res) => {
+    const { type, message } = req.body || {};
+    console.info(`[CLIENT ${String(type).toUpperCase()}]`, message);
+    res.json({ success: true });
 });
 
 app.post("/api/auth/logout", (req, res) => {

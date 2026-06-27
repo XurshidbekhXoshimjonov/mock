@@ -1,4 +1,37 @@
 (function () {
+    // Console log forwarding for remote debugging
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const originalError = console.error;
+
+    function sendLogToServer(type, args) {
+        const msg = args.map(arg => {
+            if (typeof arg === "object") {
+                try { return JSON.stringify(arg); } catch { return String(arg); }
+            }
+            return String(arg);
+        }).join(" ");
+        
+        fetch("/api/client-log", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ type, message: msg })
+        }).catch(() => {});
+    }
+
+    console.log = function (...args) {
+        originalLog.apply(console, args);
+        sendLogToServer("info", args);
+    };
+    console.warn = function (...args) {
+        originalWarn.apply(console, args);
+        sendLogToServer("warn", args);
+    };
+    console.error = function (...args) {
+        originalError.apply(console, args);
+        sendLogToServer("error", args);
+    };
+
     // Check and apply theme immediately to prevent FOUC
     const THEME_STORAGE_KEY = "ielts-theme";
     const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
@@ -109,7 +142,7 @@
             return null;
         }
 
-        const [payload] = token.split(".");
+        const [, payload] = token.split(".");
 
         if (!payload) {
             return null;
@@ -129,12 +162,19 @@
         const user = auth?.user && typeof auth.user === "object" ? auth.user : null;
 
         if (!token || !user) {
+            console.log("normalizeStoredAuth: token or user is missing. Token exists:", !!token, "User exists:", !!user);
             return null;
         }
 
         const payload = decodeTokenPayload(token);
 
+        if (!payload) {
+            console.log("normalizeStoredAuth: decodeTokenPayload returned null. Raw token prefix:", token.slice(0, 15));
+            return null;
+        }
+
         if (!payload?.exp || Number(payload.exp) <= Date.now()) {
+            console.log("normalizeStoredAuth: token expired or exp missing. exp:", payload?.exp, "now:", Date.now());
             return null;
         }
 
@@ -142,6 +182,7 @@
         const storedUserId = String(user.id || user._id || "");
 
         if (payloadUserId && storedUserId && payloadUserId !== storedUserId) {
+            console.log("normalizeStoredAuth: ID mismatch. payloadUserId:", payloadUserId, "storedUserId:", storedUserId);
             return null;
         }
 
@@ -1554,6 +1595,61 @@
         document.body.classList.add("has-global-navbar");
         scheduleSiteReady();
     }
+
+    // Global fetch interceptor
+    const originalFetch = window.fetch;
+    window.fetch = async function (url, options) {
+        let modifiedOptions = options || {};
+        const auth = getAuth();
+        const urlString = String(url);
+
+        // Inject Bearer token if request is to our API and token is available
+        if (urlString.startsWith("/api/") && auth?.token) {
+            modifiedOptions.headers = {
+                ...modifiedOptions.headers
+            };
+            if (!modifiedOptions.headers.Authorization && !modifiedOptions.headers.authorization) {
+                modifiedOptions.headers.Authorization = `Bearer ${auth.token}`;
+            }
+        }
+
+        try {
+            console.log("--- FETCH REQUEST ---");
+            console.log("Request URL:", urlString);
+            console.log("Token exists:", auth?.token ? "exists" : "missing");
+            console.log("Current user role:", auth?.user?.role || "none");
+
+            const response = await originalFetch(url, modifiedOptions);
+
+            console.log("Response status:", response.status);
+            if (urlString.includes("/api/admin/users")) {
+                console.log("Users API status:", response.status);
+            }
+
+            // Handle 403 Access Denied for /api/admin/users
+            if (response.status === 403 && urlString.includes("/api/admin/users")) {
+                console.warn("Access denied for /api/admin/users (403)");
+                alert("Access denied: You do not have administrator privileges.");
+            }
+
+            // Handle 401 Unauthorized for expired or invalid token
+            if (response.status === 401) {
+                // If it is an API request, but NOT the auth check or login/logout routes
+                if (urlString.startsWith("/api/") &&
+                    !urlString.includes("/api/auth/me") &&
+                    !urlString.includes("/api/auth/login") &&
+                    !urlString.includes("/api/auth/logout")) {
+                    console.warn("Session expired or invalid (401). Logging out...");
+                    clearAuth();
+                    window.location.replace("/login");
+                }
+            }
+
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    };
 
     window.authClient = {
         getAuth,

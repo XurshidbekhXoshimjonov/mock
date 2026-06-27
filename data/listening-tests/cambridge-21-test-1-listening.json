@@ -1283,5 +1283,7 @@
     }
   ],
   "createdAt": "2026-06-25T15:11:23.837Z",
-  "updatedAt": "2026-06-25T15:11:23.837Z"
+  "updatedAt": "2026-06-25T15:11:23.837Z",
+  "sourceFullTestId": "cambridge-21-test-1-listening",
+  "openUrl": "/full-test-player?id=cambridge-21-test-1-listening&skill=listening"
 }
