@@ -1047,25 +1047,7 @@ const ListeningComponents = (() => {
     }
 
     function ListeningBottomBar(parts, activePartNumber, hidden = true) {
-        if (parts.length <= 1) {
-            return "";
-        }
-
-        const activeIndex = Math.max(0, parts.findIndex((part) => Number(part.partNumber) === Number(activePartNumber)));
-        const tabs = parts.map((part, index) => {
-            const partNumber = Number(part.partNumber) || index + 1;
-            const active = index === activeIndex;
-
-            return `<button class="${active ? "active" : ""}" type="button" data-listening-part-select="${partNumber}">
-                Part ${index + 1}
-            </button>`;
-        }).join("");
-
-        return `<footer class="lc-bottom-bar" data-listening-bottom-bar ${hidden ? "hidden" : ""}>
-            <button class="lc-button lc-button--outline ${activeIndex === 0 ? "lc-button--placeholder" : ""}" type="button" data-listening-part-prev ${activeIndex === 0 ? "disabled aria-hidden=\"true\" tabindex=\"-1\"" : ""}>‹ Previous</button>
-            <nav class="lc-part-tabs" aria-label="Listening parts">${tabs}</nav>
-            <button class="lc-button lc-button--primary" type="button" data-listening-part-next ${activeIndex === parts.length - 1 ? "disabled" : ""}>Next ›</button>
-        </footer>`;
+        return "";
     }
 
     function ListeningTestPage(rawTest) {
@@ -1084,7 +1066,6 @@ const ListeningComponents = (() => {
 
         return `<div class="lc-page ${isFullListeningTest(test) ? "full-test-shell full-test-player" : ""}">
             ${ListeningHeader(test)}
-            <div class="lc-question-nav-container hidden" data-listening-question-nav></div>
             <main class="lc-main">
                 <div data-listening-prestart ${isMockMode ? "hidden" : ""}>${preStartMarkup}</div>
                 <div class="lc-test-content" data-listening-test-content ${isMockMode ? "" : "hidden"}>
@@ -1101,6 +1082,7 @@ const ListeningComponents = (() => {
                     <p class="lc-submit-status" aria-live="polite"></p>
                 </div>
             </main>
+            <div class="lc-question-nav-container hidden" data-listening-question-nav></div>
             ${ListeningBottomBar(parts, activePartNumber, !isMockMode)}
             <div class="lc-modal-backdrop hidden" data-listening-result-modal>
                 <section class="lc-result-modal" role="dialog" aria-modal="true">
@@ -1283,7 +1265,6 @@ const ListeningComponents = (() => {
                 Home: () => seekTo(0),
                 End: () => seekTo(totalSeconds)
             };
-
             if (keyHandlers[event.key]) {
                 event.preventDefault();
                 keyHandlers[event.key]();
@@ -1306,70 +1287,77 @@ const ListeningComponents = (() => {
                 .lc-question-nav-container.hidden {
                     display: none !important;
                 }
+                .lc-main {
+                    padding-bottom: 20px !important;
+                }
                 .question-nav {
                     display: flex;
                     align-items: center;
-                    gap: 32px;
-                    padding: 12px 24px;
+                    justify-content: center;
+                    gap: 48px;
+                    padding: 0 24px;
                     background: #ffffff;
-                    border-bottom: 1px solid #e2e8f0;
+                    border-top: 1px solid #e2e8f0;
+                    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
                     overflow-x: auto;
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                    width: 100%;
+                    height: 68px;
+                    box-sizing: border-box;
                 }
                 .question-nav-part {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
                     white-space: nowrap;
+                    flex-shrink: 0;
+                }
+                .question-nav-part.active {
+                    gap: 20px;
+                }
+                .question-nav-part.inactive {
+                    gap: 12px;
                 }
                 .question-nav-title {
                     font-weight: 700;
-                    color: #1e293b;
-                    font-size: 14px;
+                    color: #000000;
+                    font-size: 15px;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 }
                 .question-nav-progress {
-                    font-size: 12px;
+                    font-size: 14px;
                     color: #64748b;
-                    font-weight: 500;
-                    background: #f1f5f9;
-                    padding: 2px 8px;
-                    border-radius: 9999px;
-                    margin-right: 4px;
+                    font-weight: 400;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 }
                 .question-nav-buttons {
                     display: flex;
-                    gap: 6px;
+                    gap: 8px;
+                    flex-wrap: nowrap;
                 }
                 .question-number-btn {
-                    width: 28px;
-                    height: 28px;
+                    width: 32px;
+                    height: 32px;
+                    min-width: 32px;
                     border: 1px solid #cbd5e1;
                     background: #ffffff;
-                    color: #334155;
-                    border-radius: 6px;
-                    font-size: 13px;
+                    color: #1f2937;
+                    border-radius: 4px;
+                    font-size: 14px;
                     font-weight: 600;
                     cursor: pointer;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
                     transition: all 150ms ease;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 }
                 .question-number-btn:hover {
                     border-color: #3b82f6;
-                    color: #3b82f6;
-                    background: #f0f7ff;
+                    background: #f8fafc;
                 }
                 .question-number-btn.active {
                     background: #2563eb;
-                    color: #ffffff;
-                    border-color: #2563eb;
-                    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-                }
-                .question-number-btn.answered {
-                    background: #eff6ff;
-                    border-color: #bfdbfe;
-                    color: #1e40af;
+                    color: #ffffff !important;
+                    border-color: #2563eb !important;
                 }
                 .flash {
                     animation: flash 1s ease-out;
@@ -1430,50 +1418,8 @@ const ListeningComponents = (() => {
             partsConfig.push({ partNumber: 4, questions: Array.from({ length: 10 }, (_, i) => i + 31) });
         }
 
-        // Render HTML markup
-        const navHtml = `
-            <div class="question-nav">
-                ${partsConfig.map((config) => {
-                    const partQs = config.questions;
-                    const buttonsHtml = partQs.map((qNum) => {
-                        return `<button class="question-number-btn" type="button" data-nav-q="${qNum}" data-nav-part="${config.partNumber}">${qNum}</button>`;
-                    }).join("");
-
-                    return `
-                        <div class="question-nav-part">
-                            <span class="question-nav-title">Part ${config.partNumber}</span>
-                            <span class="question-nav-progress" data-part-progress="${config.partNumber}">0 of ${partQs.length}</span>
-                            <div class="question-nav-buttons">${buttonsHtml}</div>
-                        </div>
-                    `;
-                }).join("")}
-            </div>
-        `;
-        navContainer.innerHTML = navHtml;
-
         // Track active question
         let activeQNum = 1;
-
-        function updateNavStates() {
-            partsConfig.forEach((config) => {
-                let answeredCount = 0;
-                config.questions.forEach((qNum) => {
-                    const btn = navContainer.querySelector(`[data-nav-q="${qNum}"]`);
-                    if (!btn) return;
-
-                    const isAnswered = isQuestionAnswered(qNum);
-                    if (isAnswered) answeredCount++;
-
-                    const isActive = activeQNum === qNum;
-                    btn.className = `question-number-btn${isActive ? " active" : ""}${isAnswered && !isActive ? " answered" : ""}`;
-                });
-
-                const progressEl = navContainer.querySelector(`[data-part-progress="${config.partNumber}"]`);
-                if (progressEl) {
-                    progressEl.textContent = `${answeredCount} of ${config.questions.length}`;
-                }
-            });
-        }
 
         function isQuestionAnswered(qNum) {
             const input = root.querySelector(`input[name="q${qNum}"], select[name="q${qNum}"], input#q${qNum}, select#q${qNum}, textarea#q${qNum}`);
@@ -1484,49 +1430,107 @@ const ListeningComponents = (() => {
             return (input.value || "").trim().length > 0;
         }
 
-        // Click handler to scroll to question
+        function renderNav() {
+            const activeConfig = partsConfig.find(config => config.questions.includes(activeQNum)) || partsConfig[0];
+            const activePartNumber = activeConfig ? activeConfig.partNumber : 1;
+
+            const navHtml = partsConfig.map((config) => {
+                const isActivePart = config.partNumber === activePartNumber;
+                const partQs = config.questions;
+                
+                // Calculate progress
+                let answeredCount = 0;
+                partQs.forEach((qNum) => {
+                    if (isQuestionAnswered(qNum)) answeredCount++;
+                });
+
+                if (isActivePart) {
+                    const buttonsHtml = partQs.map((qNum) => {
+                        const isActiveQ = activeQNum === qNum;
+                        return `<button class="question-number-btn${isActiveQ ? " active" : ""}" type="button" data-nav-q="${qNum}" data-nav-part="${config.partNumber}">${qNum}</button>`;
+                    }).join("");
+
+                    return `
+                        <div class="question-nav-part active" data-part="${config.partNumber}">
+                            <span class="question-nav-title">Part ${config.partNumber}</span>
+                            <div class="question-nav-buttons">${buttonsHtml}</div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="question-nav-part inactive" data-part="${config.partNumber}" style="cursor: pointer;">
+                            <span class="question-nav-title">Part ${config.partNumber}</span>
+                            <span class="question-nav-progress">${answeredCount} of ${partQs.length}</span>
+                        </div>
+                    `;
+                }
+            }).join("");
+
+            navContainer.innerHTML = `<div class="question-nav">${navHtml}</div>`;
+        }
+
+        function scrollToListeningQuestion(qNum) {
+            let target = root.querySelector(`#question-${qNum}`);
+            if (!target) {
+                target = [...root.querySelectorAll('[data-question-numbers]')].find(el => {
+                    const nums = el.dataset.questionNumbers.split(',');
+                    return nums.includes(String(qNum));
+                });
+            }
+            if (!target) {
+                const input = root.querySelector(`#q${qNum}, [name="q${qNum}"]`);
+                if (input) {
+                    target = input.closest('.lc-question-card') || input.closest('.lc-part') || input;
+                }
+            }
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.classList.add('flash');
+                setTimeout(() => {
+                    target.classList.remove('flash');
+                }, 1000);
+            }
+        }
+
+        // Click handler to scroll to question or switch active part
         navContainer.addEventListener("click", (event) => {
             const btn = event.target.closest("[data-nav-q]");
-            if (!btn) return;
+            if (btn) {
+                const qNum = Number(btn.dataset.navQ);
+                const partNum = Number(btn.dataset.navPart);
 
-            const qNum = Number(btn.dataset.navQ);
-            const partNum = Number(btn.dataset.navPart);
+                // Dispatch event to switch part
+                root.dispatchEvent(new CustomEvent("switch-listening-part", { detail: { partNumber: partNum } }));
 
-            // Dispatch event to switch part
-            root.dispatchEvent(new CustomEvent("switch-listening-part", { detail: { partNumber: partNum } }));
+                activeQNum = qNum;
+                renderNav();
 
-            // Scroll to element
-            setTimeout(() => {
-                let target = root.querySelector(`#question-${qNum}`);
-                if (!target) {
-                    // Check fallback options
-                    target = [...root.querySelectorAll('[data-question-numbers]')].find(el => {
-                        const nums = el.dataset.questionNumbers.split(',');
-                        return nums.includes(String(qNum));
-                    });
-                }
-                if (!target) {
-                    const input = root.querySelector(`#q${qNum}, [name="q${qNum}"]`);
-                    if (input) {
-                        target = input.closest('.lc-question-card') || input.closest('.lc-part') || input;
-                    }
-                }
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    target.classList.add('flash');
+                // Scroll to element
+                setTimeout(() => {
+                    scrollToListeningQuestion(qNum);
+                }, 150);
+                return;
+            }
+
+            const partEl = event.target.closest(".question-nav-part.inactive");
+            if (partEl) {
+                const partNum = Number(partEl.dataset.part);
+                const config = partsConfig.find(c => c.partNumber === partNum);
+                if (config && config.questions.length > 0) {
+                    const firstQ = config.questions[0];
+                    root.dispatchEvent(new CustomEvent("switch-listening-part", { detail: { partNumber: partNum } }));
+                    activeQNum = firstQ;
+                    renderNav();
                     setTimeout(() => {
-                        target.classList.remove('flash');
-                    }, 1000);
+                        scrollToListeningQuestion(firstQ);
+                    }, 150);
                 }
-            }, 150);
-
-            activeQNum = qNum;
-            updateNavStates();
+            }
         });
 
         // Watch for changes to update answered states
-        root.addEventListener("input", updateNavStates);
-        root.addEventListener("change", updateNavStates);
+        root.addEventListener("input", renderNav);
+        root.addEventListener("change", renderNav);
 
         // Scroll observer for active question highlighting
         const scrollContainer = root.querySelector(".lc-main");
@@ -1560,13 +1564,13 @@ const ListeningComponents = (() => {
 
                 if (closestQNum && closestQNum !== activeQNum) {
                     activeQNum = closestQNum;
-                    updateNavStates();
+                    renderNav();
                 }
             }, { passive: true });
         }
 
         // Initialize state
-        updateNavStates();
+        renderNav();
     }
 
     function bindListeningTest(root, test) {

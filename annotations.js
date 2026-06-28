@@ -84,6 +84,16 @@
     function init() {
         // Find test config (skill, testId, attemptId)
         currentConfig = getTestConfig();
+
+        if (currentConfig.skill !== 'reading' && currentConfig.skill !== 'listening') {
+            return;
+        }
+
+        const pathname = window.location.pathname.toLowerCase();
+        if (pathname.includes('writing') || pathname.includes('speaking') || pathname.includes('admin') || pathname.includes('profile') || pathname.includes('login') || pathname.includes('signup') || pathname.includes('dashboard')) {
+            return;
+        }
+
         loadAnnotations();
 
         // Inject HTML elements

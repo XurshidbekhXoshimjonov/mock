@@ -948,6 +948,23 @@
             font-weight: 700 !important;
         }
 
+        .task1-topic {
+            margin-top: 24px;
+            line-height: 1.7;
+            color: #020617;
+            font-size: 16px;
+        }
+
+        .task1-main-topic {
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .task1-label {
+            font-weight: 800;
+            font-style: italic;
+        }
+
         .task2-topic {
             margin-top: 24px;
             line-height: 1.7;
@@ -1315,7 +1332,7 @@
     </div>
 
     <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.22"></script>
+    <script src="/annotations.js?v=1.0.23"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -1331,7 +1348,10 @@
             cleanText = cleanText.replace(instructionPattern, "");
             
             cleanText = cleanText.replace(/^\s*[:,-]\s*/, "").trim();
-            return cleanText;
+            return `<div class="task1-topic">
+                <span class="task1-label">📊 TASK 1:</span>
+                <span class="task1-main-topic">${cleanText}</span>
+            </div>`;
         }
         function formatTask2PromptText(promptText) {
             if (!promptText) return "";

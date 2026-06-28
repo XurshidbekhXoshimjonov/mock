@@ -1240,38 +1240,7 @@ function PassageTools({ wordCount, textScale, onTextScale, focus, onFocus }) {
 }
 
 function BottomBar({ passages, activeIndex, onSelect, onPrevious, onNext, fullMode }) {
-    const showButtons = passages.length > 1;
-
-    return h("footer", { className: "cbt-bottom-bar" },
-        showButtons
-            ? h("button", {
-                className: "cbt-button cbt-button--outline",
-                type: "button",
-                disabled: activeIndex === 0,
-                onClick: onPrevious
-            }, "‹ Previous")
-            : h("span"),
-        fullMode
-            ? h("nav", { className: "cbt-part-tabs", "aria-label": "Reading passages" },
-                passages.map((passage, index) =>
-                    h("button", {
-                        key: passage.number || index,
-                        type: "button",
-                        className: index === activeIndex ? "active" : "",
-                        onClick: () => onSelect(index)
-                    }, `${skill === "listening" ? "Section" : "Part"} ${index + 1}`)
-                )
-            )
-            : h("span"),
-        showButtons
-            ? h("button", {
-                className: "cbt-button cbt-button--primary",
-                type: "button",
-                disabled: activeIndex === passages.length - 1,
-                onClick: onNext
-            }, "Next ›")
-            : h("span")
-    );
+    return null;
 }
 
 function ResultModal({ result, onClose, onReview, vocabularyCount = 0, autoSubmitted = false }) {
@@ -1514,71 +1483,78 @@ const injectNavigationStyles = () => {
         .question-nav {
             display: flex;
             align-items: center;
-            gap: 32px;
-            padding: 12px 24px;
+            justify-content: center;
+            gap: 48px;
+            padding: 0 24px;
             background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            border-top: 1px solid #e2e8f0;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
             overflow-x: auto;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             width: 100%;
+            height: 68px;
+            box-sizing: border-box;
         }
         .question-nav-part {
             display: flex;
             align-items: center;
-            gap: 10px;
             white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .question-nav-part.active {
+            gap: 20px;
+        }
+        .question-nav-part.inactive {
+            gap: 12px;
         }
         .question-nav-title {
             font-weight: 700;
-            color: #1e293b;
-            font-size: 14px;
+            color: #000000;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         .question-nav-progress {
-            font-size: 12px;
+            font-size: 14px;
             color: #64748b;
-            font-weight: 500;
-            background: #f1f5f9;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            margin-right: 4px;
+            font-weight: 400;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         .question-nav-buttons {
             display: flex;
-            gap: 6px;
+            gap: 8px;
+            flex-wrap: nowrap;
         }
         .question-number-btn {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
             border: 1px solid #cbd5e1;
             background: #ffffff;
-            color: #334155;
-            border-radius: 6px;
-            font-size: 13px;
+            color: #1f2937;
+            border-radius: 4px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: all 150ms ease;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         .question-number-btn:hover {
             border-color: #3b82f6;
-            color: #3b82f6;
-            background: #f0f7ff;
+            background: #f8fafc;
         }
         .question-number-btn.active {
             background: #2563eb;
-            color: #ffffff;
-            border-color: #2563eb;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-        }
-        .question-number-btn.answered {
-            background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
+            color: #ffffff !important;
+            border-color: #2563eb !important;
         }
         .flash {
             animation: flash 1s ease-out;
+        }
+        @keyframes flash {
+            0% { background-color: rgba(59, 130, 246, 0.25); }
+            100% { background-color: transparent; }
         }
     `;
     document.head.appendChild(style);
@@ -1618,10 +1594,16 @@ function QuestionNavigationPanel({ passages, answers, activeIndex, selectPassage
         setActiveQuestionNumber(qNumber);
     };
 
+    const handlePartClick = (config) => {
+        if (config.questions.length > 0) {
+            const firstQ = config.questions[0];
+            handleQuestionClick(firstQ, config.passageIndex);
+        }
+    };
+
     const scrollToQuestion = (number) => {
         let target = document.getElementById(`question-${number}`);
         if (!target) {
-            // Check fallback options
             target = [...document.querySelectorAll('[data-number]')].find(el => Number(el.dataset.number) === number);
         }
         if (!target) {
@@ -1643,29 +1625,40 @@ function QuestionNavigationPanel({ passages, answers, activeIndex, selectPassage
 
     return h("div", { className: "question-nav" },
         passagesConfig.map((config) => {
+            const isActivePart = config.passageIndex === activeIndex;
             const answeredCount = config.questions.filter((qNum) => {
                 const ans = answers[qNum];
-                return ans && String(ans).trim().length > 0;
+                return ans !== undefined && ans !== null && String(ans).trim().length > 0;
             }).length;
 
-            return h("div", { key: config.passageNumber, className: "question-nav-part" },
-                h("span", { className: "question-nav-title" }, `Part ${config.passageNumber}`),
-                h("span", { className: "question-nav-progress" }, `${answeredCount} of ${config.questions.length}`),
-                h("div", { className: "question-nav-buttons", style: { display: "flex", gap: "6px" } },
-                    config.questions.map((qNum) => {
-                        const isActive = activeQuestionNumber === qNum;
-                        const isAnswered = answers[qNum] && String(answers[qNum]).trim().length > 0;
-                        const btnClass = `question-number-btn${isActive ? " active" : ""}${isAnswered && !isActive ? " answered" : ""}`;
+            if (isActivePart) {
+                return h("div", { key: config.passageNumber, className: "question-nav-part active" },
+                    h("span", { className: "question-nav-title" }, `Part ${config.passageNumber}`),
+                    h("div", { className: "question-nav-buttons" },
+                        config.questions.map((qNum) => {
+                            const isActiveQ = activeQuestionNumber === qNum;
+                            const btnClass = `question-number-btn${isActiveQ ? " active" : ""}`;
 
-                        return h("button", {
-                            key: qNum,
-                            type: "button",
-                            className: btnClass,
-                            onClick: () => handleQuestionClick(qNum, config.passageIndex)
-                        }, qNum);
-                    })
-                )
-            );
+                            return h("button", {
+                                key: qNum,
+                                type: "button",
+                                className: btnClass,
+                                onClick: () => handleQuestionClick(qNum, config.passageIndex)
+                            }, qNum);
+                        })
+                    )
+                );
+            } else {
+                return h("div", {
+                    key: config.passageNumber,
+                    className: "question-nav-part inactive",
+                    style: { cursor: "pointer" },
+                    onClick: () => handlePartClick(config)
+                },
+                    h("span", { className: "question-nav-title" }, `Part ${config.passageNumber}`),
+                    h("span", { className: "question-nav-progress" }, `${answeredCount} of ${config.questions.length}`)
+                );
+            }
         })
     );
 }
@@ -2115,7 +2108,7 @@ function ReadingApp() {
     const answeredCurrent = currentQuestions.filter((question) => normalizeAnswer(answers[question.number])).length;
 
     return h(Fragment, null,
-        h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!hasStarted || (!isFullTest && passages.length === 1) ? " no-bottom" : ""}` },
+        h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!hasStarted ? " no-bottom" : ""}` },
             h("div", { className: "cbt-header-wrapper" },
                 h(Header, {
                     seconds,
@@ -2125,17 +2118,7 @@ function ReadingApp() {
                     fullscreenActive,
                     submitted: Boolean(result),
                     submitDisabled: !hasStarted
-                }),
-                hasStarted && isFullTestOrMock
-                    ? h(QuestionNavigationPanel, {
-                        passages,
-                        answers,
-                        activeIndex,
-                        selectPassage,
-                        activeQuestionNumber,
-                        setActiveQuestionNumber
-                    })
-                    : null
+                })
             ),
             !hasStarted
                 ? h("main", { className: "cbt-stage cbt-stage--prestart" },
@@ -2195,14 +2178,14 @@ function ReadingApp() {
                     )
                 )
             ),
-            hasStarted && isFullTest
-                ? h(BottomBar, {
+            hasStarted && isFullTestOrMock
+                ? h(QuestionNavigationPanel, {
                     passages,
+                    answers,
                     activeIndex,
-                    onSelect: selectPassage,
-                    onPrevious: () => selectPassage(activeIndex - 1),
-                    onNext: () => selectPassage(activeIndex + 1),
-                    fullMode: isFullTest
+                    selectPassage,
+                    activeQuestionNumber,
+                    setActiveQuestionNumber
                 })
                 : null
         ),

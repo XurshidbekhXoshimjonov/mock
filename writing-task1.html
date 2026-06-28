@@ -48,6 +48,23 @@
             margin-bottom: 20px;
         }
 
+        .task1-topic {
+            margin-top: 24px;
+            line-height: 1.7;
+            color: #020617;
+            font-size: 16px;
+        }
+
+        .task1-main-topic {
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .task1-label {
+            font-weight: 800;
+            font-style: italic;
+        }
+
         .writing-task-page .prompt-image-container {
             text-align: center;
             margin-top: 15px;
@@ -992,7 +1009,7 @@
     </div>
 
     <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.21"></script>
+    <script src="/annotations.js?v=1.0.23"></script>
     <script src="/writing-test-card.js?v=1.0.1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
@@ -1009,7 +1026,10 @@
             cleanText = cleanText.replace(instructionPattern, "");
             
             cleanText = cleanText.replace(/^\s*[:,-]\s*/, "").trim();
-            return cleanText;
+            return `<div class="task1-topic">
+                <span class="task1-label">📊 TASK 1:</span>
+                <span class="task1-main-topic">${cleanText}</span>
+            </div>`;
         }
         const promptId = urlParams.get('id');
         window.IELTSX_WRITING_TASK_NUMBER = 'task1';
