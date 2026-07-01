@@ -2,6 +2,7 @@
     const app = document.getElementById("speakingApp");
     const speakingParams = new URLSearchParams(window.location.search);
     const isSpeakingMockMode = speakingParams.get("mockMode") === "1" || speakingParams.has("mockTestId");
+    const SPEAKING_LOAD_TIMEOUT_MS = 10000;
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
     const SPEAKING_TIMING = {
         part1: 5 * 60,
@@ -48,6 +49,19 @@
         "Do not memorize answers",
         "Keep your response relevant"
     ];
+    const FREE_SPEAKING_GREETING = "Hi, I'm your AI speaking partner. Let's practice naturally. You can talk about anything, and I'll help you improve your English.";
+    const FREE_VOICE_STATE = {
+        IDLE: "idle",
+        LISTENING: "listening",
+        USER_SPEAKING: "user_speaking",
+        PROCESSING: "processing",
+        AI_SPEAKING: "ai_speaking"
+    };
+    const FREE_VOICE_SILENCE_MS = 1000;
+    const FREE_VOICE_MIN_SPEECH_MS = 120;
+    const FREE_VOICE_LEVEL_THRESHOLD = 0.018;
+    const FREE_VOICE_MAX_TURN_MS = 10 * 60 * 1000;
+    const FREE_VOICE_RESTART_DELAY_MS = 250;
 
     const sectionMeta = {
         part1: {
@@ -502,6 +516,10 @@
         recording: null,
         headerTimer: null,
         timer: null,
+        voiceFlow: null,
+        speakingMode: "free",
+        startingSpeakingMode: "",
+        introError: "",
         feedback: null,
         loading: false,
         hasStarted: false,
@@ -513,6 +531,11 @@
     function setPlayerMode(enabled) {
         document.body.classList.toggle("speaking-player-mode", enabled);
         document.body.classList.toggle("test-list-page", !enabled);
+        if (enabled) {
+            document.body.classList.remove("speaking-intro-mode");
+        } else {
+            document.body.classList.remove("speaking-voice-mode");
+        }
 
         const cbtHeader = document.getElementById("speakingCbtHeader");
         const globalNavbar = document.getElementById("globalNavbar");
@@ -536,6 +559,27 @@
         }, window.location.origin);
     }
 
+    function notifyMockSpeakingReady() {
+        if (!isSpeakingMockMode || window.parent === window) return;
+
+        window.parent.postMessage({
+            type: "ieltsx-mock-section-ready",
+            section: "speaking",
+            testId: getSpeakingTestId()
+        }, window.location.origin);
+    }
+
+    function notifyMockSpeakingError(error) {
+        if (!isSpeakingMockMode || window.parent === window) return;
+
+        window.parent.postMessage({
+            type: "ieltsx-mock-section-error",
+            section: "speaking",
+            testId: getSpeakingTestId(),
+            message: error?.message || "Speaking could not be loaded."
+        }, window.location.origin);
+    }
+
     function requestMockSpeakingExit() {
         if (!isSpeakingMockMode || window.parent === window) return;
         window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
@@ -546,25 +590,14 @@
 
         const brandTitle = document.getElementById("speakingBrandTitle");
         const dashboardBtn = document.getElementById("speakingDashboardBtn");
-        const dashboardLabel = document.getElementById("speakingDashboardLabel");
+        const exitBtn = document.getElementById("speakingExitMockBtn");
+        const fullscreenBtn = document.querySelector(".cbt-header-actions [data-fullscreen-toggle]");
 
-        if (brandTitle) brandTitle.textContent = "Mock Exam";
-        if (dashboardLabel) dashboardLabel.textContent = "Exit Mock Exam";
-        if (dashboardBtn && dashboardBtn.dataset.mockExitBound !== "true") {
-            dashboardBtn.dataset.mockExitBound = "true";
-            dashboardBtn.removeAttribute("href");
-            dashboardBtn.setAttribute("role", "button");
-            dashboardBtn.setAttribute("tabindex", "0");
-            dashboardBtn.addEventListener("click", (event) => {
-                event.preventDefault();
-                requestMockSpeakingExit();
-            });
-            dashboardBtn.addEventListener("keydown", (event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    requestMockSpeakingExit();
-                }
-            });
+        if (brandTitle) brandTitle.textContent = "Speaking";
+        if (dashboardBtn) dashboardBtn.style.display = "none";
+        if (fullscreenBtn) fullscreenBtn.style.display = "none";
+        if (exitBtn) {
+            exitBtn.style.display = "inline-flex";
         }
     }
 
@@ -591,7 +624,7 @@
         if (timerBox) timerBox.classList.toggle("warning", seconds <= 60);
         if (submitBtn) {
             submitBtn.disabled = Boolean(state.loading) || !state.hasStarted;
-            submitBtn.textContent = state.loading ? "Evaluating your speaking..." : "Submit";
+            submitBtn.textContent = state.loading ? "Evaluating your speaking..." : (isSpeakingMockMode ? "Submit Section" : "Submit");
         }
     }
 
@@ -696,10 +729,19 @@
         return `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>`;
     }
 
+    function normalizeSpeakingMode(value) {
+        return String(value || "").toLowerCase() === "exam" ? "exam" : "free";
+    }
+
+    function getSpeakingModeFromUrl() {
+        return normalizeSpeakingMode(new URLSearchParams(window.location.search).get("mode"));
+    }
+
     function parseRoute() {
         const parts = window.location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
         if (parts[0] !== "speaking") return { view: "home" };
         const rawSection = parts[1] || "";
+        if (rawSection === "player") return { view: "player", mode: getSpeakingModeFromUrl() };
         const sectionKey = rawSection === "part1" || rawSection === "part-1"
             ? "part1"
             : rawSection === "part2" || rawSection === "part-2" || rawSection === "cue-card"
@@ -728,18 +770,31 @@
     }
 
     async function loadSpeakingTestDetail(sectionKey, testId) {
-        const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}`, {
-            credentials: "include"
-        });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) {
-            throw new Error(data.error || "Could not load Speaking test.");
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), SPEAKING_LOAD_TIMEOUT_MS);
+        try {
+            const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}`, {
+                credentials: "include",
+                cache: "no-store",
+                signal: controller.signal
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(data.error || "Could not load Speaking test.");
+            }
+            const tests = catalog[sectionKey] || [];
+            const index = tests.findIndex((item) => item.id === data.id);
+            if (index >= 0) tests[index] = data;
+            else tests.unshift(data);
+            return data;
+        } catch (error) {
+            if (error.name === "AbortError") {
+                throw new Error("Speaking test could not be loaded. Please check test data or try again.");
+            }
+            throw error;
+        } finally {
+            clearTimeout(timeoutId);
         }
-        const tests = catalog[sectionKey] || [];
-        const index = tests.findIndex((item) => item.id === data.id);
-        if (index >= 0) tests[index] = data;
-        else tests.unshift(data);
-        return data;
     }
 
     function clearTimer() {
@@ -752,9 +807,25 @@
         state.headerTimer = null;
     }
 
+    function clearVoiceFlowTimers() {
+        const flow = state.voiceFlow;
+        if (!flow) return;
+        ["prepTimer", "answerTimer", "nextTimer", "silenceTimer", "restartTimer"].forEach((key) => {
+            if (flow[key]) {
+                clearTimeout(flow[key]);
+                flow[key] = null;
+            }
+        });
+        if (flow.prepInterval) {
+            clearInterval(flow.prepInterval);
+            flow.prepInterval = null;
+        }
+    }
+
     function clearAllPlayerTimers() {
         clearTimer();
         clearHeaderTimer();
+        clearVoiceFlowTimers();
     }
 
     function startHeaderTimer(seconds) {
@@ -820,6 +891,10 @@
                 }
                 recording.finalTranscript = finalText;
                 recording.transcript = `${finalText}${interim}`.trim();
+                if (recording.scope?.mode === "free-conversation" && state.voiceFlow && !state.voiceFlow.cancelled) {
+                    state.voiceFlow.latestTranscript = recording.transcript || state.voiceFlow.latestTranscript || "";
+                    state.voiceFlow.latestUserMessage = recording.transcript || state.voiceFlow.latestUserMessage || "";
+                }
                 renderCurrentTest();
             };
             recognition.onerror = () => {};
@@ -1003,19 +1078,123 @@
         `;
     }
 
+    function iconSizeFor(name, className = "") {
+        if (className.includes("speaking-landing__mic-icon")) return 42;
+        if (className.includes("speaking-landing__chip-icon")) return 24;
+        if (className.includes("speaking-landing__button-icon")) return 25;
+        if (className.includes("ai-voice-badge-icon")) return 18;
+        if (className.includes("ai-voice-control-icon")) return name === "x" ? 24 : 28;
+        if (className.includes("ai-voice-settings-icon")) return 20;
+        return 20;
+    }
+
+    function lucideIcon(name, className = "") {
+        const size = iconSizeFor(name, className);
+        const attrs = `class="${className}" width="${size}" height="${size}" style="width:${size}px;height:${size}px;max-width:${size}px;max-height:${size}px;flex:0 0 ${size}px;display:block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"`;
+        const paths = {
+            mic: `<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path>`,
+            sparkles: `<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0Z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path>`,
+            boxes: `<path d="m7.5 4.27 4.5 2.6 4.5-2.6"></path><path d="M7.5 19.73v-5.2L3 11.93v5.2Z"></path><path d="M16.5 19.73v-5.2l4.5-2.6v5.2Z"></path><path d="M3 6.73v5.2l4.5 2.6 4.5-2.6v-5.2l-4.5-2.6Z"></path><path d="M12 6.73v5.2l4.5 2.6 4.5-2.6v-5.2l-4.5-2.6Z"></path>`,
+            arrowRight: `<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>`,
+            sliders: `<path d="M10 6h10"></path><path d="M4 6h2"></path><path d="M6 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M14 12h6"></path><path d="M4 12h6"></path><path d="M10 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M18 18h2"></path><path d="M4 18h10"></path><path d="M14 18a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>`,
+            rotate: `<path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path>`,
+            x: `<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>`
+        };
+        return `<svg ${attrs}>${paths[name] || paths.mic}</svg>`;
+    }
+
+    function renderSpeakingLanding() {
+        const error = state.introError
+            ? `<div class="speaking-landing__error">${escapeHtml(state.introError)}</div>`
+            : "";
+        const freeButtonText = state.loading && state.startingSpeakingMode === "free" ? "Opening practice..." : "Free Speaking Practice";
+        const examButtonText = state.loading && state.startingSpeakingMode === "exam" ? "Opening simulation..." : "IELTS Exam Simulation";
+        return `
+            <section class="speaking-landing" aria-labelledby="speakingLandingTitle">
+                <div class="speaking-landing__card">
+                    <div class="speaking-landing__visual" aria-hidden="true">
+                        <div class="speaking-landing__mic-halo">
+                            <div class="speaking-landing__mic-core">
+                                ${lucideIcon("mic", "speaking-landing__mic-icon")}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="speaking-landing__content">
+                        <span class="speaking-landing__badge">AI VOICE PRACTICE &#10024;</span>
+                        <h1 id="speakingLandingTitle">Speaking Practice</h1>
+                        <p>Choose a natural AI voice conversation or a structured IELTS Speaking exam simulation.</p>
+                        <div class="speaking-landing__chips" aria-label="Speaking practice features">
+                            <div class="speaking-landing__chip">
+                                ${lucideIcon("mic", "speaking-landing__chip-icon")}
+                                <span><strong>Free Talk</strong><small>Default mode</small></span>
+                            </div>
+                            <div class="speaking-landing__chip">
+                                ${lucideIcon("sparkles", "speaking-landing__chip-icon")}
+                                <span><strong>Soft Corrections</strong><small>As you speak</small></span>
+                            </div>
+                            <div class="speaking-landing__chip">
+                                ${lucideIcon("boxes", "speaking-landing__chip-icon")}
+                                <span><strong>Exam Mode</strong><small>Parts 1-3</small></span>
+                            </div>
+                        </div>
+                        <div class="speaking-landing__actions">
+                            <button class="speaking-landing__button speaking-landing__button--primary" type="button" data-action="select-speaking-mode" data-mode="free" ${state.loading ? "disabled" : ""}>
+                                <span>${escapeHtml(freeButtonText)}</span>
+                                ${lucideIcon("arrowRight", "speaking-landing__button-icon")}
+                            </button>
+                            <button class="speaking-landing__button speaking-landing__button--secondary" type="button" data-action="select-speaking-mode" data-mode="exam" ${state.loading ? "disabled" : ""}>
+                                <span>${escapeHtml(examButtonText)}</span>
+                                ${lucideIcon("arrowRight", "speaking-landing__button-icon")}
+                            </button>
+                        </div>
+                        ${error}
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
+    async function startSpeakingFromIntro(mode = "free") {
+        if (state.loading) return;
+        const nextMode = normalizeSpeakingMode(mode);
+        state.loading = true;
+        state.startingSpeakingMode = nextMode;
+        state.introError = "";
+        renderHome();
+
+        try {
+            await loadPublishedCatalog();
+            prepareSpeakingPlayerState(nextMode);
+            const nextPath = `/speaking/player?mode=${encodeURIComponent(nextMode)}`;
+            if (`${window.location.pathname}${window.location.search}` !== nextPath) {
+                window.history.pushState({}, "", nextPath);
+            }
+            renderCurrentTest();
+        } catch (error) {
+            state.loading = false;
+            state.startingSpeakingMode = "";
+            state.introError = error.message || "Could not open Speaking practice. Please try again.";
+            renderHome();
+        }
+    }
+
     function renderHome() {
         clearAllPlayerTimers();
         setPlayerMode(false);
+        document.body.classList.add("speaking-intro-mode");
         document.title = "Speaking Practice - IELTSX";
-        app.innerHTML = `
-            ${renderHero({
-                title: "Speaking Practice",
-                subtitle: "Choose a speaking route or take a full speaking test with AI feedback and band estimation."
-            })}
-            <section class="speaking-route-grid" aria-label="Speaking practice routes">
-                ${Object.entries(sectionMeta).map(([sectionKey, meta]) => renderCategoryCard(sectionKey, meta)).join("")}
-            </section>
-        `;
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        state.section = null;
+        state.test = null;
+        state.error = "";
+        state.feedback = null;
+        state.hasStarted = false;
+        state.voiceFlow = null;
+        if (!state.loading) {
+            state.speakingMode = "free";
+            state.startingSpeakingMode = "";
+        }
+        app.innerHTML = renderSpeakingLanding();
     }
 
     function renderCategoryCard(sectionKey, meta) {
@@ -1044,6 +1223,7 @@
     function renderListing(sectionKey) {
         clearAllPlayerTimers();
         setPlayerMode(false);
+        document.body.classList.remove("speaking-intro-mode");
         const meta = sectionMeta[sectionKey];
         const tests = catalog[sectionKey] || [];
         document.title = `${meta.listingTitle} - IELTSX`;
@@ -1135,34 +1315,58 @@
     }
 
     async function renderTest(sectionKey, testId) {
-        let test = findTest(sectionKey, testId);
-        if (!test) {
-            renderListing(sectionKey);
-            return;
-        }
-        if (!test.questions?.length && !test.bullets?.length && !test.parts?.length) {
-            test = await loadSpeakingTestDetail(sectionKey, test.id || testId);
-        }
-        state.section = sectionKey;
-        state.test = test;
-        state.error = "";
-        state.feedback = null;
-        state.cuePrepStatus = "not_started";
-        state.fullPrepStatus = {};
-        state.partTimeFinished = {};
-        state.fullCurrentPart = 1;
-        state.recording = null;
-        state.hasStarted = isSpeakingMockMode;
-        clearAllPlayerTimers();
-        setPlayerMode(true);
-        document.title = `${test.title} - ${sectionMeta[sectionKey].listingTitle} - IELTSX`;
-        if (isSpeakingMockMode) {
-            startHeaderTimer(getHeaderTotalSeconds());
-            if (state.section !== "part2") {
-                startActivePartTimer();
+        try {
+            let test = findTest(sectionKey, testId);
+            if (!test && isSpeakingMockMode && sectionKey === "full" && testId) {
+                test = await loadSpeakingTestDetail(sectionKey, testId);
             }
+            if (!test) {
+                if (isSpeakingMockMode) {
+                    throw new Error("Speaking mock test data was not found.");
+                }
+                renderListing(sectionKey);
+                return;
+            }
+            if (!test.questions?.length && !test.bullets?.length && !test.parts?.length) {
+                test = await loadSpeakingTestDetail(sectionKey, test.id || testId);
+            }
+            state.section = sectionKey;
+            state.test = test;
+            state.error = "";
+            state.feedback = null;
+            state.cuePrepStatus = "not_started";
+            state.fullPrepStatus = {};
+            state.partTimeFinished = {};
+            state.fullCurrentPart = 1;
+            state.recording = null;
+            state.voiceFlow = null;
+            state.hasStarted = isSpeakingMockMode;
+            clearAllPlayerTimers();
+            setPlayerMode(true);
+            document.title = `${test.title} - ${sectionMeta[sectionKey].listingTitle} - IELTSX`;
+            if (isSpeakingMockMode) {
+                startHeaderTimer(getHeaderTotalSeconds());
+                if (state.section !== "part2") {
+                    startActivePartTimer();
+                }
+            }
+            renderCurrentTest();
+            notifyMockSpeakingReady();
+        } catch (error) {
+            console.error("[Mock Speaking] load failed:", error);
+            notifyMockSpeakingError(error);
+            app.innerHTML = `
+                <section class="speaking-player-screen speaking-player-screen--full" aria-label="Speaking load error">
+                    <main class="speaking-player-stage">
+                        <div class="speaking-error">${escapeHtml(error.message || "Speaking could not be loaded.")}</div>
+                        <div class="speaking-player-actions">
+                            <button class="speaking-record-btn" type="button" onclick="window.location.reload()">Retry</button>
+                            <a class="speaking-record-btn speaking-record-btn--secondary" href="/dashboard">Dashboard</a>
+                        </div>
+                    </main>
+                </section>
+            `;
         }
-        renderCurrentTest();
     }
 
     function beginSpeakingTest() {
@@ -1348,7 +1552,1457 @@
         return "start-single-recording";
     }
 
+    function defaultFullSpeakingTest() {
+        const bundled = Array.isArray(catalog.full) && catalog.full.length ? catalog.full[0] : null;
+        if (bundled?.parts?.length) return bundled;
+        const fallback = {
+            id: "ai-speaking-default",
+            title: "IELTS Speaking Test",
+            topic: "General IELTS Speaking practice",
+            parts: [
+                {
+                    part: 1,
+                    title: "Part 1: Introduction and Interview",
+                    prompt: "Answer short interview questions naturally.",
+                    questions: PLAYER_DEFAULTS.part1.questions
+                },
+                {
+                    part: 2,
+                    title: "Part 2: Cue Card",
+                    prompt: PLAYER_DEFAULTS.part2.topic,
+                    questions: PLAYER_DEFAULTS.part2.bullets
+                },
+                {
+                    part: 3,
+                    title: "Part 3: Discussion",
+                    prompt: "Answer follow-up discussion questions with reasons and examples.",
+                    questions: PLAYER_DEFAULTS.part3.questions
+                }
+            ]
+        };
+        return bundled ? { ...fallback, ...bundled, parts: fallback.parts } : fallback;
+    }
+
+    function prepareSpeakingPlayerState(mode = "free") {
+        state.speakingMode = normalizeSpeakingMode(mode);
+        state.section = "full";
+        state.test = defaultFullSpeakingTest();
+        state.error = "";
+        state.introError = "";
+        state.startingSpeakingMode = "";
+        state.feedback = null;
+        state.loading = false;
+        state.hasStarted = false;
+        state.recording = null;
+        state.voiceFlow = null;
+        state.fullCurrentPart = 1;
+        state.fullRecords = {};
+        state.partTimeFinished = {};
+        clearAllPlayerTimers();
+        state.voiceFlow = createVoiceFlow();
+    }
+
+    function defaultPartForMode(mode, index) {
+        if (mode === "part_1") return 1;
+        if (mode === "cue_card") return 2;
+        if (mode === "part_3") return 3;
+        return index + 1;
+    }
+
+    function normalizePromptText(value) {
+        if (typeof value === "string") return value.trim();
+        if (value && typeof value === "object") return String(value.text || value.question || value.prompt || "").trim();
+        return "";
+    }
+
+    function getPartQuestions(part, fallbackKey) {
+        const rawQuestions = Array.isArray(part?.questions) ? part.questions : [];
+        const normalized = rawQuestions.map(normalizePromptText).filter(Boolean);
+        return normalized.length ? normalized : PLAYER_DEFAULTS[fallbackKey].questions;
+    }
+
+    function getPartBullets(part) {
+        const rawBullets = Array.isArray(part?.bullets) && part.bullets.length
+            ? part.bullets
+            : Array.isArray(part?.questions)
+                ? part.questions
+                : [];
+        const normalized = rawBullets.map(normalizePromptText).filter(Boolean);
+        return normalized.length ? normalized : PLAYER_DEFAULTS.part2.bullets;
+    }
+
+    function partFromFullTest(partNumber) {
+        return activeFullParts().find((part) => Number(part.part) === Number(partNumber)) || null;
+    }
+
+    function buildCueDisplay(prompt, bullets) {
+        const bulletText = bullets.length ? ` ${bullets.join(" | ")}` : "";
+        return `${prompt}${bulletText ? ` - ${bulletText}` : ""}`;
+    }
+
+    function getConversationCueCard() {
+        const part2 = partFromFullTest(2) || {};
+        const topic = normalizePromptText(part2.prompt || part2.topic || part2.description) || PLAYER_DEFAULTS.part2.topic;
+        const bullets = getPartBullets(part2);
+        return { topic, bullets };
+    }
+
+    function cueCardDisplayText(cueCard = {}) {
+        const topic = normalizePromptText(cueCard.topic) || PLAYER_DEFAULTS.part2.topic;
+        const bullets = Array.isArray(cueCard.bullets) && cueCard.bullets.length
+            ? cueCard.bullets.map(normalizePromptText).filter(Boolean)
+            : PLAYER_DEFAULTS.part2.bullets;
+        return buildCueDisplay(topic, bullets);
+    }
+
+    function conversationTestPayload() {
+        const fullParts = activeFullParts();
+        const part1 = fullParts.find((part) => Number(part.part) === 1) || {};
+        const part2 = fullParts.find((part) => Number(part.part) === 2) || {};
+        const part3 = fullParts.find((part) => Number(part.part) === 3) || {};
+        return {
+            id: getSpeakingTestId(),
+            title: state.test?.title || "IELTS Speaking Test",
+            topic: state.test?.topic || "General IELTS Speaking practice",
+            part1Questions: getPartQuestions(part1, "part1").slice(0, 8),
+            part2CueCard: getConversationCueCard(),
+            part3Questions: getPartQuestions(part3, "part3").slice(0, 8)
+        };
+    }
+
+    function wordCount(value) {
+        return String(value || "").trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    function nextPartTurns(flow, answerPart) {
+        const partTurns = { ...(flow.partTurns || {}) };
+        if (answerPart) partTurns[answerPart] = Number(partTurns[answerPart] || 0) + 1;
+        return partTurns;
+    }
+
+    function conversationStatePayload(flow, overrides = {}) {
+        return {
+            speakingMode: flow.speakingMode || state.speakingMode || "free",
+            part: flow.part,
+            turn: flow.turn,
+            phase: flow.phase,
+            examPhase: flow.examPhase,
+            partTurns: flow.partTurns,
+            roundingAsked: flow.roundingAsked,
+            cueCard: flow.cueCard,
+            currentExaminerMessage: flow.currentExaminerMessage,
+            latestQuestion: flow.latestQuestion,
+            latestTranscript: flow.latestTranscript,
+            history: flow.history.slice(-18),
+            test: conversationTestPayload(),
+            ...overrides
+        };
+    }
+
+    function normalizeCueCard(value) {
+        const fallback = getConversationCueCard();
+        if (!value || typeof value !== "object") return fallback;
+        const topic = normalizePromptText(value.topic) || fallback.topic;
+        const bullets = Array.isArray(value.bullets)
+            ? value.bullets.map(normalizePromptText).filter(Boolean)
+            : [];
+        return {
+            topic,
+            bullets: bullets.length ? bullets : fallback.bullets
+        };
+    }
+
+    function normalizeExaminerResponse(raw, fallback) {
+        const safe = raw && typeof raw === "object" ? raw : {};
+        const allowedPhases = new Set(["conversation", "question", "prep", "long_turn", "rounding_off", "complete"]);
+        let phase = allowedPhases.has(String(safe.phase || "")) ? String(safe.phase) : fallback.phase;
+        const isFreeMode = (state.speakingMode || "free") !== "exam";
+        let part = Math.min(3, Math.max(1, Number(safe.part || fallback.part || 1)));
+        const message = String(safe.examinerMessage || safe.aiMessage || safe.assistantMessage || safe.message || fallback.examinerMessage || "").trim();
+        let cueCard = safe.cueCard ? normalizeCueCard(safe.cueCard) : (fallback.cueCard || null);
+        let isComplete = Boolean(safe.isComplete) || phase === "complete";
+        if (isFreeMode) {
+            part = 0;
+            cueCard = null;
+            isComplete = false;
+            if (phase === "complete" || phase === "prep" || phase === "long_turn" || phase === "rounding_off") {
+                phase = "conversation";
+            }
+        }
+        return {
+            examinerMessage: message || "Thank you. Let's continue.",
+            part,
+            phase,
+            cueCard,
+            shouldRecord: isFreeMode ? true : (safe.shouldRecord === false ? false : !["prep", "complete"].includes(phase)),
+            isComplete,
+            prepSeconds: Math.max(5, Number(safe.prepSeconds || fallback.prepSeconds || SPEAKING_TIMING.part2Prep)),
+            latestTranscript: String(safe.latestTranscript || fallback.latestTranscript || "").trim()
+        };
+    }
+
+    function fallbackExaminerResponse(event, transcript, payload) {
+        if ((payload.speakingMode || state.speakingMode || "free") !== "exam") {
+            if (event === "start") {
+                return {
+                    part: 0,
+                    phase: "conversation",
+                    examinerMessage: FREE_SPEAKING_GREETING,
+                    shouldRecord: true,
+                    isComplete: false
+                };
+            }
+            const speechWords = wordCount(transcript);
+            const replies = speechWords < 8
+                ? [
+                    "No worries. Say a little more, even with simple words. What happened next?",
+                    "That's a good start. Try to add one detail so your idea feels clearer.",
+                    "Take your time. You can continue with one example from your own life."
+                ]
+                : [
+                    "That's interesting. You explained the idea clearly. Try adding one specific example to make it stronger.",
+                    "I see what you mean. A more natural phrase could be: 'It helped me feel more confident.' Now continue your idea.",
+                    "Good. Let's keep talking about this for a moment. What part of that experience mattered most to you?"
+                ];
+            return {
+                part: 0,
+                phase: "conversation",
+                examinerMessage: replies[Math.min(replies.length - 1, Math.max(0, Number(payload.turn || 1) % replies.length))],
+                shouldRecord: true,
+                isComplete: false
+            };
+        }
+
+        if (event === "start") {
+            return {
+                part: 1,
+                phase: "question",
+                examinerMessage: "Let's begin with Part 1. Let's talk about your hometown. Where are you from?",
+                shouldRecord: true
+            };
+        }
+
+        const partTurns = payload.partTurns || {};
+        const answeredPart = Number(payload.answeringPart || payload.part || 1);
+        const answerWords = wordCount(transcript);
+        const cueCard = normalizeCueCard(payload.cueCard);
+
+        if (answeredPart === 1) {
+            if (answerWords > 0 && answerWords < 8 && Number(partTurns[1] || 0) < 4) {
+                return {
+                    part: 1,
+                    phase: "question",
+                    examinerMessage: "Thank you. Could you tell me a little more about that?",
+                    shouldRecord: true
+                };
+            }
+            const questions = [
+                "Thank you. What do you like most about the place where you live?",
+                "Alright. What do you usually do in your free time?",
+                "Thank you. Do you prefer spending time alone or with other people?",
+                "Alright. Is there anything you would like to change about your daily routine?"
+            ];
+            if (Number(partTurns[1] || 0) < 4) {
+                return {
+                    part: 1,
+                    phase: "question",
+                    examinerMessage: questions[Math.max(0, Number(partTurns[1] || 1) - 1)] || questions[0],
+                    shouldRecord: true
+                };
+            }
+            return {
+                part: 2,
+                phase: "prep",
+                cueCard,
+                prepSeconds: SPEAKING_TIMING.part2Prep,
+                examinerMessage: `Now I am going to give you a topic. You will have one minute to prepare and then you should speak for up to two minutes. Your topic is: ${cueCard.topic}`,
+                shouldRecord: false
+            };
+        }
+
+        if (answeredPart === 2) {
+            if (!payload.roundingAsked && payload.examPhase === "long_turn") {
+                return {
+                    part: 2,
+                    phase: "rounding_off",
+                    examinerMessage: "Thank you. Would you like to experience something like that again?",
+                    shouldRecord: true
+                };
+            }
+            return {
+                part: 3,
+                phase: "question",
+                examinerMessage: `Let's move on to Part 3. We'll discuss ideas connected with ${cueCard.topic.toLowerCase()}. Why do people value experiences like this?`,
+                shouldRecord: true
+            };
+        }
+
+        if (Number(partTurns[3] || 0) < 4) {
+            const part3Questions = [
+                "Thank you. How have people's attitudes to this topic changed in recent years?",
+                "Alright. Do you think young people and older people see this differently?",
+                "Thank you. What role should schools or governments play in this area?",
+                "Finally, how do you think this might change in the future?"
+            ];
+            return {
+                part: 3,
+                phase: "question",
+                examinerMessage: part3Questions[Math.max(0, Number(partTurns[3] || 1) - 1)] || part3Questions[0],
+                shouldRecord: true
+            };
+        }
+
+        return {
+            part: 3,
+            phase: "complete",
+            examinerMessage: "Thank you. That is the end of the speaking test.",
+            shouldRecord: false,
+            isComplete: true
+        };
+    }
+
+    function createVoiceFlow() {
+        const cueSeed = getConversationCueCard();
+        const isFreeMode = state.speakingMode !== "exam";
+        const idleMessage = isFreeMode
+            ? "Tap the microphone to start Free Speaking Practice."
+            : "Tap the microphone to begin your IELTS Speaking test.";
+        return {
+            answers: [],
+            history: [],
+            partTurns: { 1: 0, 2: 0, 3: 0 },
+            speakingMode: isFreeMode ? "free" : "exam",
+            started: false,
+            sessionActive: false,
+            listenStarting: false,
+            listenStartToken: "",
+            processingTurnToken: "",
+            cancelled: false,
+            phase: "idle",
+            examPhase: "idle",
+            status: idleMessage,
+            part: isFreeMode ? 0 : 1,
+            turn: 0,
+            currentExaminerMessage: idleMessage,
+            latestQuestion: idleMessage,
+            latestTranscript: "",
+            latestUserMessage: "",
+            cueCard: isFreeMode ? null : cueSeed,
+            prepRemaining: 0,
+            prepInterval: null,
+            answerTimer: null,
+            nextTimer: null,
+            silenceTimer: null,
+            restartTimer: null,
+            speechToken: null,
+            pendingExaminerResponse: null,
+            roundingAsked: false,
+            feedbackRequested: false,
+            isComplete: false
+        };
+    }
+
+    function ensureVoiceFlow() {
+        if (!state.voiceFlow) state.voiceFlow = createVoiceFlow();
+        return state.voiceFlow;
+    }
+
+    function isFreeVoiceFlow(flow = ensureVoiceFlow()) {
+        return flow.speakingMode === "free";
+    }
+
+    function freeVoiceStatusFor(phase) {
+        if (phase === FREE_VOICE_STATE.LISTENING) return "Listening...";
+        if (phase === FREE_VOICE_STATE.USER_SPEAKING) return "Listening to you...";
+        if (phase === FREE_VOICE_STATE.PROCESSING) return "Thinking...";
+        if (phase === FREE_VOICE_STATE.AI_SPEAKING) return "AI is speaking...";
+        return "Tap the microphone to start Free Speaking Practice.";
+    }
+
+    function setFreeVoicePhase(flow, phase, status = "") {
+        if (!flow || !isFreeVoiceFlow(flow)) return;
+        flow.phase = phase;
+        flow.status = status || freeVoiceStatusFor(phase);
+    }
+
+    function isFreeVoiceSessionActive(flow = state.voiceFlow) {
+        return Boolean(
+            flow &&
+            isFreeVoiceFlow(flow) &&
+            !flow.cancelled &&
+            (flow.sessionActive || flow.listenStarting || state.recording?.scope?.mode === "free-conversation")
+        );
+    }
+
+    function freeVoiceNow() {
+        return window.performance?.now ? window.performance.now() : Date.now();
+    }
+
+    function clearFreeVoiceSilenceTimer(flow = state.voiceFlow) {
+        if (flow?.silenceTimer) {
+            clearTimeout(flow.silenceTimer);
+            flow.silenceTimer = null;
+        }
+    }
+
+    function cleanupFreeVoiceAudioGraph(recording) {
+        if (!recording) return;
+        if (recording.vadFrame) {
+            window.cancelAnimationFrame(recording.vadFrame);
+            recording.vadFrame = null;
+        }
+        try {
+            recording.audioSource?.disconnect();
+        } catch {}
+        try {
+            recording.analyser?.disconnect();
+        } catch {}
+        if (recording.audioContext && recording.audioContext.state !== "closed") {
+            try {
+                const closeResult = recording.audioContext.close();
+                if (closeResult?.catch) closeResult.catch(() => {});
+            } catch {}
+        }
+        recording.audioSource = null;
+        recording.analyser = null;
+        recording.audioContext = null;
+    }
+
+    function cleanupFreeVoiceRecording(recording, options = {}) {
+        if (!recording) return;
+        const closeTracks = options.closeTracks !== false;
+        const stopRecognition = options.stopRecognition !== false;
+        cleanupFreeVoiceAudioGraph(recording);
+        if (stopRecognition) {
+            try {
+                recording.recognition?.stop();
+            } catch {}
+        }
+        if (closeTracks) stopTracks(recording.stream);
+    }
+
+    function isActiveFreeRecording(recording) {
+        return Boolean(
+            recording &&
+            state.recording === recording &&
+            recording.scope?.mode === "free-conversation" &&
+            !recording.cancelled &&
+            state.voiceFlow &&
+            isFreeVoiceFlow(state.voiceFlow) &&
+            state.voiceFlow.sessionActive &&
+            !state.voiceFlow.cancelled
+        );
+    }
+
+    function markFreeVoiceSpeech(recording) {
+        if (!isActiveFreeRecording(recording)) return;
+        const flow = state.voiceFlow;
+        const wasSpeaking = flow.phase === FREE_VOICE_STATE.USER_SPEAKING;
+        recording.hasSpeech = true;
+        recording.lastVoiceAt = freeVoiceNow();
+        recording.silenceStartedAt = 0;
+        clearFreeVoiceSilenceTimer(flow);
+        if (!wasSpeaking) {
+            flow.latestTranscript = recording.transcript || "";
+            flow.latestUserMessage = recording.transcript || "";
+            setFreeVoicePhase(flow, FREE_VOICE_STATE.USER_SPEAKING);
+            renderCurrentTest();
+        }
+    }
+
+    function scheduleFreeVoiceSilenceStop(recording) {
+        if (!isActiveFreeRecording(recording) || !recording.hasSpeech || recording.stopRequested) return;
+        const flow = state.voiceFlow;
+        if (flow.silenceTimer) return;
+        flow.silenceTimer = window.setTimeout(() => {
+            flow.silenceTimer = null;
+            if (isActiveFreeRecording(recording)) {
+                stopFreeVoiceListening({ reason: "silence" });
+            }
+        }, FREE_VOICE_SILENCE_MS);
+    }
+
+    function startFreeVoiceVad(recording) {
+        if (!recording?.analyser) return;
+        const buffer = new Uint8Array(recording.analyser.fftSize);
+        recording.vadStartedAt = freeVoiceNow();
+        recording.noiseFloor = 0.008;
+
+        const tick = () => {
+            if (!isActiveFreeRecording(recording)) return;
+            recording.analyser.getByteTimeDomainData(buffer);
+            let sum = 0;
+            for (let i = 0; i < buffer.length; i += 1) {
+                const centered = (buffer[i] - 128) / 128;
+                sum += centered * centered;
+            }
+            const level = Math.sqrt(sum / buffer.length);
+            const now = freeVoiceNow();
+            const elapsed = now - recording.vadStartedAt;
+            if (!recording.hasSpeech && elapsed < 700 && level < 0.035) {
+                recording.noiseFloor = recording.noiseFloor * 0.9 + level * 0.1;
+            }
+            const dynamicThreshold = Math.min(0.06, Math.max(FREE_VOICE_LEVEL_THRESHOLD, recording.noiseFloor * 2.8));
+            const isVoice = level >= dynamicThreshold;
+
+            if (isVoice) {
+                if (!recording.aboveSpeechSince) recording.aboveSpeechSince = now;
+                recording.silenceStartedAt = 0;
+                clearFreeVoiceSilenceTimer(state.voiceFlow);
+                if (now - recording.aboveSpeechSince >= FREE_VOICE_MIN_SPEECH_MS) {
+                    markFreeVoiceSpeech(recording);
+                }
+            } else {
+                recording.aboveSpeechSince = 0;
+                if (recording.hasSpeech) {
+                    if (!recording.silenceStartedAt) recording.silenceStartedAt = now;
+                    if (now - recording.silenceStartedAt >= 150) {
+                        scheduleFreeVoiceSilenceStop(recording);
+                    }
+                }
+            }
+
+            recording.vadFrame = window.requestAnimationFrame(tick);
+        };
+
+        recording.vadFrame = window.requestAnimationFrame(tick);
+    }
+
+    function cancelActiveFreeVoiceRecording() {
+        const recording = state.recording;
+        if (recording?.scope?.mode !== "free-conversation") return false;
+        recording.cancelled = true;
+        recording.processTurn = false;
+        recording.stopRequested = true;
+        cleanupFreeVoiceRecording(recording);
+        try {
+            if (recording.recorder?.state !== "inactive") recording.recorder.stop();
+        } catch {}
+        state.recording = null;
+        return true;
+    }
+
+    function resetFreeVoiceFlow(flow) {
+        if (!flow || !isFreeVoiceFlow(flow)) return;
+        const idleMessage = "Tap the microphone to start Free Speaking Practice.";
+        flow.answers = [];
+        flow.history = [];
+        flow.started = false;
+        flow.sessionActive = false;
+        flow.listenStarting = false;
+        flow.listenStartToken = "";
+        flow.processingTurnToken = "";
+        flow.pendingExaminerResponse = null;
+        flow.speechToken = null;
+        flow.turn = 0;
+        flow.currentExaminerMessage = idleMessage;
+        flow.latestQuestion = idleMessage;
+        flow.latestTranscript = "";
+        flow.latestUserMessage = "";
+        setFreeVoicePhase(flow, FREE_VOICE_STATE.IDLE, idleMessage);
+    }
+
+    async function startFreeVoiceSession() {
+        const flow = ensureVoiceFlow();
+        if (!isFreeVoiceFlow(flow) || isFreeVoiceSessionActive(flow)) return;
+        resetFreeVoiceFlow(flow);
+        flow.cancelled = false;
+        flow.started = true;
+        flow.sessionActive = true;
+        state.hasStarted = true;
+        state.error = "";
+        state.feedback = null;
+        state.loading = false;
+        flow.currentExaminerMessage = FREE_SPEAKING_GREETING;
+        flow.latestQuestion = FREE_SPEAKING_GREETING;
+        setFreeVoicePhase(flow, FREE_VOICE_STATE.LISTENING);
+        renderCurrentTest();
+        await startFreeVoiceListening();
+    }
+
+    function stopFreeVoiceSession(options = {}) {
+        const flow = state.voiceFlow;
+        if (!flow || !isFreeVoiceFlow(flow)) return;
+        flow.sessionActive = false;
+        flow.listenStarting = false;
+        flow.listenStartToken = "";
+        flow.processingTurnToken = "";
+        flow.speechToken = null;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        cancelActiveFreeVoiceRecording();
+        resetFreeVoiceFlow(flow);
+        state.error = "";
+        state.loading = false;
+        if (options.render !== false) renderCurrentTest();
+    }
+
+    function speakVoiceText(text, onDone) {
+        const done = typeof onDone === "function" ? onDone : () => {};
+        const spokenText = String(text || "").trim();
+        if (!spokenText || !window.speechSynthesis || !window.SpeechSynthesisUtterance) {
+            window.setTimeout(done, 350);
+            return;
+        }
+        try {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(spokenText);
+            utterance.lang = "en-US";
+            utterance.rate = 0.94;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            utterance.onend = done;
+            utterance.onerror = done;
+            window.speechSynthesis.speak(utterance);
+        } catch {
+            window.setTimeout(done, 350);
+        }
+    }
+
+    async function requestExaminerTurn(event, recording = null, answer = null) {
+        const flow = ensureVoiceFlow();
+        const transcript = String(answer?.transcript || recording?.transcript || recording?.finalTranscript || "").trim();
+        const answerPart = flow.speakingMode === "free" ? 0 : Number(answer?.part || flow.part || 1);
+        const payload = conversationStatePayload(flow, {
+            event,
+            answeringPart: answer ? answerPart : null,
+            partTurns: answer ? nextPartTurns(flow, answerPart) : flow.partTurns
+        });
+        const fallback = fallbackExaminerResponse(event, transcript, payload);
+
+        try {
+            const form = new FormData();
+            form.append("event", event);
+            form.append("state", JSON.stringify(payload));
+            form.append("transcript", transcript);
+            if (recording?.blob) {
+                form.append("audio", new File([recording.blob], `speaking-answer-${Date.now()}.webm`, {
+                    type: recording.blob.type || "audio/webm"
+                }));
+            }
+
+            const response = await fetch("/api/speaking/examiner-next", {
+                method: "POST",
+                credentials: "include",
+                body: form
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || "AI examiner could not continue.");
+            return normalizeExaminerResponse(data, { ...fallback, latestTranscript: transcript });
+        } catch (error) {
+            console.warn("AI examiner fallback used:", error);
+            return normalizeExaminerResponse(fallback, { ...fallback, latestTranscript: transcript });
+        }
+    }
+
+    async function requestFreeConversationTurn(recording, transcript) {
+        const flow = ensureVoiceFlow();
+        const cleanTranscript = String(transcript || recording?.transcript || recording?.finalTranscript || "").trim();
+        const payload = conversationStatePayload(flow, {
+            event: "message",
+            answeringPart: null,
+            part: 0,
+            examPhase: "conversation",
+            latestTranscript: cleanTranscript,
+            latestUserMessage: cleanTranscript
+        });
+        const fallback = fallbackExaminerResponse("message", cleanTranscript, payload);
+
+        try {
+            const form = new FormData();
+            form.append("event", "message");
+            form.append("state", JSON.stringify(payload));
+            form.append("transcript", cleanTranscript);
+            if (recording?.blob) {
+                form.append("audio", new File([recording.blob], `free-speaking-${Date.now()}.webm`, {
+                    type: recording.blob.type || "audio/webm"
+                }));
+            }
+
+            const response = await fetch("/api/speaking/conversation-turn", {
+                method: "POST",
+                credentials: "include",
+                body: form
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || "AI speaking partner could not respond.");
+            return normalizeExaminerResponse(data, { ...fallback, latestTranscript: cleanTranscript });
+        } catch (error) {
+            console.warn("AI speaking partner fallback used:", error);
+            return normalizeExaminerResponse(fallback, { ...fallback, latestTranscript: cleanTranscript });
+        }
+    }
+
+    function addExaminerHistory(response) {
+        const flow = ensureVoiceFlow();
+        const text = String(response.examinerMessage || "").trim();
+        if (!text) return;
+        const role = flow.speakingMode === "free" ? "assistant" : "examiner";
+        flow.history.push({ role, text, part: response.part, phase: response.phase });
+        flow.history = flow.history.slice(-24);
+    }
+
+    function addUserHistory(answer) {
+        const flow = ensureVoiceFlow();
+        const text = String(answer.transcript || "").trim();
+        if (!text) return;
+        flow.history.push({ role: "user", text, part: answer.part, phase: answer.examPhase });
+        flow.history = flow.history.slice(-24);
+    }
+
+    function handleExaminerSpeechDone(response) {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        flow.speechToken = null;
+        flow.pendingExaminerResponse = null;
+
+        if (response.isComplete || response.phase === "complete") {
+            flow.phase = "completed";
+            flow.status = "Speaking test completed";
+            flow.isComplete = true;
+            renderCurrentTest();
+            finishVoiceFlow();
+            return;
+        }
+
+        if (response.phase === "prep") {
+            startVoicePreparation(response);
+            return;
+        }
+
+        flow.phase = "user-turn";
+        flow.status = "Your turn";
+        renderCurrentTest();
+    }
+
+    function speakExaminerResponse(response) {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+        flow.part = response.part;
+        flow.examPhase = response.phase;
+        flow.turn += 1;
+        flow.currentExaminerMessage = response.examinerMessage;
+        flow.latestQuestion = response.phase === "prep" && response.cueCard
+            ? cueCardDisplayText(response.cueCard)
+            : response.examinerMessage;
+        if (response.cueCard) flow.cueCard = response.cueCard;
+        if (response.phase === "rounding_off") flow.roundingAsked = true;
+        flow.phase = "examiner-speaking";
+        flow.status = "Examiner speaking...";
+        flow.pendingExaminerResponse = response;
+        addExaminerHistory(response);
+        renderCurrentTest();
+
+        const token = `${Date.now()}-${Math.random()}`;
+        flow.speechToken = token;
+        speakVoiceText(response.examinerMessage, () => {
+            const activeFlow = state.voiceFlow;
+            if (!activeFlow || activeFlow.speechToken !== token) return;
+            handleExaminerSpeechDone(response);
+        });
+    }
+
+    function speakFreeConversationResponse(response) {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled || !flow.sessionActive) return;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+        flow.part = 0;
+        flow.examPhase = "conversation";
+        flow.turn += 1;
+        flow.currentExaminerMessage = response.examinerMessage;
+        flow.latestQuestion = response.examinerMessage;
+        setFreeVoicePhase(flow, FREE_VOICE_STATE.AI_SPEAKING);
+        flow.pendingExaminerResponse = response;
+        addExaminerHistory({ ...response, part: 0, phase: "conversation" });
+        renderCurrentTest();
+
+        const token = `${Date.now()}-${Math.random()}`;
+        flow.speechToken = token;
+        speakVoiceText(response.examinerMessage, () => {
+            const activeFlow = state.voiceFlow;
+            if (!activeFlow || activeFlow.speechToken !== token) return;
+            activeFlow.speechToken = null;
+            activeFlow.pendingExaminerResponse = null;
+            if (!activeFlow.sessionActive || activeFlow.cancelled) return;
+            setFreeVoicePhase(activeFlow, FREE_VOICE_STATE.LISTENING);
+            renderCurrentTest();
+            activeFlow.restartTimer = window.setTimeout(() => {
+                activeFlow.restartTimer = null;
+                startFreeVoiceListening();
+            }, FREE_VOICE_RESTART_DELAY_MS);
+        });
+    }
+
+    function finishExaminerSpeechEarly() {
+        const flow = ensureVoiceFlow();
+        const pending = flow.pendingExaminerResponse;
+        if (!pending) return;
+        flow.speechToken = null;
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        handleExaminerSpeechDone(pending);
+    }
+
+    function startVoicePreparation(response) {
+        const flow = ensureVoiceFlow();
+        clearVoiceFlowTimers();
+        const seconds = Math.max(5, Number(response.prepSeconds || SPEAKING_TIMING.part2Prep));
+        flow.part = 2;
+        flow.examPhase = "prep";
+        flow.phase = "preparing";
+        flow.status = "Preparation time";
+        flow.prepRemaining = seconds;
+        if (response.cueCard) flow.cueCard = response.cueCard;
+        flow.latestQuestion = cueCardDisplayText(flow.cueCard);
+        renderCurrentTest();
+
+        flow.prepInterval = window.setInterval(() => {
+            if (!state.voiceFlow || flow.cancelled) return;
+            flow.prepRemaining = Math.max(0, Number(flow.prepRemaining || 0) - 1);
+            if (flow.prepRemaining <= 0) {
+                clearVoiceFlowTimers();
+                beginPart2LongTurn();
+                return;
+            }
+            renderCurrentTest();
+        }, 1000);
+    }
+
+    function beginPart2LongTurn() {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        speakExaminerResponse({
+            part: 2,
+            phase: "long_turn",
+            examinerMessage: "Now you may start speaking.",
+            shouldRecord: true,
+            isComplete: false,
+            cueCard: flow.cueCard
+        });
+    }
+
+    async function startVoiceFlow() {
+        if (!state.test) state.test = defaultFullSpeakingTest();
+        state.hasStarted = true;
+        state.feedback = null;
+        state.error = "";
+        state.loading = false;
+        state.voiceFlow = createVoiceFlow();
+        const flow = state.voiceFlow;
+        flow.started = true;
+        if (flow.speakingMode === "free") {
+            startFreeVoiceSession();
+            return;
+        }
+        flow.phase = "thinking";
+        flow.status = "Thinking...";
+        renderCurrentTest();
+        const response = await requestExaminerTurn("start");
+        if (flow.cancelled) return;
+        speakExaminerResponse(response);
+    }
+
+    async function startFreeVoiceListening() {
+        const flow = ensureVoiceFlow();
+        if (!isFreeVoiceFlow(flow) || flow.cancelled || !flow.sessionActive) return;
+        if (state.recording?.scope?.mode === "free-conversation" || flow.listenStarting) return;
+        if (flow.phase === FREE_VOICE_STATE.PROCESSING || flow.phase === FREE_VOICE_STATE.AI_SPEAKING) return;
+        state.hasStarted = true;
+        state.error = "";
+        const listenToken = `${Date.now()}-${Math.random()}`;
+        flow.listenStarting = true;
+        flow.listenStartToken = listenToken;
+        setFreeVoicePhase(flow, FREE_VOICE_STATE.LISTENING);
+        renderCurrentTest();
+        let stream = null;
+        try {
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+                throw new Error("Microphone recording is not available in this browser.");
+            }
+            stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const activeFlow = state.voiceFlow;
+            if (!activeFlow || activeFlow.cancelled || !activeFlow.sessionActive || activeFlow.listenStartToken !== listenToken) {
+                stopTracks(stream);
+                return;
+            }
+            const recorder = new MediaRecorder(stream);
+            const recording = {
+                scope: {
+                    mode: "free-conversation",
+                    part: 0,
+                    questionText: "",
+                    examPhase: "conversation"
+                },
+                stream,
+                recorder,
+                chunks: [],
+                startedAt: Date.now(),
+                transcript: "",
+                finalTranscript: "",
+                processTurn: true,
+                hasSpeech: false,
+                vadAvailable: false,
+                stopRequested: false,
+                turnToken: listenToken
+            };
+
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) {
+                try {
+                    recording.audioContext = new AudioContextClass();
+                    if (recording.audioContext.state === "suspended") {
+                        recording.audioContext.resume().catch(() => {});
+                    }
+                    recording.analyser = recording.audioContext.createAnalyser();
+                    recording.analyser.fftSize = 2048;
+                    recording.analyser.smoothingTimeConstant = 0.08;
+                    recording.audioSource = recording.audioContext.createMediaStreamSource(stream);
+                    recording.audioSource.connect(recording.analyser);
+                    recording.vadAvailable = true;
+                } catch (error) {
+                    console.warn("Free voice VAD unavailable:", error);
+                    cleanupFreeVoiceAudioGraph(recording);
+                }
+            }
+
+            recorder.ondataavailable = (event) => {
+                if (event.data?.size) recording.chunks.push(event.data);
+            };
+            recorder.onstop = () => {
+                cleanupFreeVoiceRecording(recording);
+                clearFreeVoiceSilenceTimer(activeFlow);
+                if (activeFlow?.answerTimer) {
+                    clearTimeout(activeFlow.answerTimer);
+                    activeFlow.answerTimer = null;
+                }
+                if (state.recording === recording) state.recording = null;
+                if (recording.cancelled) return;
+                recording.blob = new Blob(recording.chunks, { type: recorder.mimeType || "audio/webm" });
+                recording.audioUrl = URL.createObjectURL(recording.blob);
+                const transcript = String(recording.transcript || recording.finalTranscript || "").trim();
+                const hasAudioPayload = recording.hasSpeech || Boolean(transcript) || (!recording.vadAvailable && recording.chunks.some((chunk) => chunk.size > 1024));
+                if (!recording.processTurn || !activeFlow || activeFlow.cancelled || !activeFlow.sessionActive) return;
+                if (!hasAudioPayload) {
+                    setFreeVoicePhase(activeFlow, FREE_VOICE_STATE.LISTENING);
+                    renderCurrentTest();
+                    startFreeVoiceListening();
+                    return;
+                }
+                completeFreeConversationTurn(recording);
+            };
+
+            recording.recognition = startRecognition(recording);
+            if (recording.recognition) {
+                recording.recognition.onspeechstart = () => markFreeVoiceSpeech(recording);
+                recording.recognition.onsoundstart = () => markFreeVoiceSpeech(recording);
+                recording.recognition.onspeechend = () => {
+                    scheduleFreeVoiceSilenceStop(recording);
+                };
+            }
+
+            state.recording = recording;
+            flow.listenStarting = false;
+            setFreeVoicePhase(flow, FREE_VOICE_STATE.LISTENING);
+            recorder.start(250);
+            startFreeVoiceVad(recording);
+            flow.answerTimer = window.setTimeout(() => {
+                if (state.recording === recording) {
+                    stopFreeVoiceListening({ reason: "max-turn" });
+                }
+            }, FREE_VOICE_MAX_TURN_MS);
+            renderCurrentTest();
+        } catch (error) {
+            if (stream) stopTracks(stream);
+            flow.sessionActive = false;
+            flow.started = false;
+            flow.listenStarting = false;
+            state.error = error.name === "NotAllowedError"
+                ? "Microphone permission was denied. Allow microphone access and try again."
+                : (error.message || "Could not access your microphone. Check browser permissions and try again.");
+            setFreeVoicePhase(flow, FREE_VOICE_STATE.IDLE, "Connection failed. Please try again.");
+            renderCurrentTest();
+        } finally {
+            if (state.voiceFlow?.listenStartToken === listenToken) {
+                state.voiceFlow.listenStarting = false;
+            }
+        }
+    }
+
+    async function startVoiceFlowRecording() {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) {
+            await startFreeVoiceListening();
+            return;
+        }
+        if (state.recording || flow.cancelled || flow.phase !== "user-turn") return;
+        try {
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+                throw new Error("Microphone recording is not available in this browser.");
+            }
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(stream);
+            const part = flow.speakingMode === "free" ? 0 : Number(flow.part || 1);
+            const recording = {
+                scope: {
+                    mode: "voice-flow",
+                    part,
+                    questionText: flow.latestQuestion || flow.currentExaminerMessage || "",
+                    examPhase: flow.examPhase
+                },
+                stream,
+                recorder,
+                chunks: [],
+                startedAt: Date.now(),
+                transcript: "",
+                finalTranscript: ""
+            };
+
+            recorder.ondataavailable = (event) => {
+                if (event.data?.size) recording.chunks.push(event.data);
+            };
+            recorder.onstop = () => {
+                if (recording.cancelled) return;
+                recording.blob = new Blob(recording.chunks, { type: recorder.mimeType || "audio/webm" });
+                recording.audioUrl = URL.createObjectURL(recording.blob);
+                stopTracks(recording.stream);
+                try {
+                    recording.recognition?.stop();
+                } catch {}
+                state.recording = null;
+                clearVoiceFlowTimers();
+                if (!state.voiceFlow?.cancelled) completeVoiceFlowAnswer(recording);
+            };
+
+            recording.recognition = startRecognition(recording);
+            if (recording.recognition) {
+                recording.recognition.onspeechend = () => {
+                    const activeFlow = ensureVoiceFlow();
+                    if (activeFlow.silenceTimer) clearTimeout(activeFlow.silenceTimer);
+                    const silenceDelay = flow.speakingMode === "free" ? 3600 : part === 2 ? 5200 : 2800;
+                    activeFlow.silenceTimer = window.setTimeout(() => {
+                        if (state.recording?.scope?.mode === "voice-flow") stopVoiceFlowRecording();
+                    }, silenceDelay);
+                };
+            }
+
+            state.recording = recording;
+            flow.phase = "listening";
+            flow.status = "Listening...";
+            flow.latestTranscript = "";
+            recorder.start();
+            const maxSeconds = flow.speakingMode === "free" ? 10 * 60 : part === 2 ? SPEAKING_TIMING.part2Speaking + 15 : part === 3 ? 90 : 75;
+            flow.answerTimer = window.setTimeout(() => {
+                if (state.recording?.scope?.mode === "voice-flow") stopVoiceFlowRecording();
+            }, maxSeconds * 1000);
+            renderCurrentTest();
+        } catch (error) {
+            state.error = error.name === "NotAllowedError"
+                ? "Microphone permission was denied. Allow microphone access and try again."
+                : (error.message || "Could not access your microphone. Check browser permissions and try again.");
+            flow.phase = "failed";
+            flow.status = "Connection failed. Please try again.";
+            renderCurrentTest();
+        }
+    }
+
+    function stopVoiceFlowRecording() {
+        if (state.recording?.scope?.mode !== "voice-flow") return false;
+        if (state.recording.recorder.state !== "inactive") {
+            state.recording.recorder.stop();
+        }
+        return true;
+    }
+
+    function stopFreeVoiceListening(options = {}) {
+        const recording = state.recording;
+        if (recording?.scope?.mode !== "free-conversation") return false;
+        if (recording.stopRequested) return false;
+        recording.stopRequested = true;
+        recording.processTurn = options.processTurn !== false;
+        cleanupFreeVoiceAudioGraph(recording);
+        clearFreeVoiceSilenceTimer(state.voiceFlow);
+        if (state.voiceFlow?.answerTimer) {
+            clearTimeout(state.voiceFlow.answerTimer);
+            state.voiceFlow.answerTimer = null;
+        }
+        if (recording.recorder.state !== "inactive") {
+            recording.recorder.stop();
+        }
+        return true;
+    }
+
+    async function completeFreeConversationTurn(recording) {
+        const flow = ensureVoiceFlow();
+        if (!isFreeVoiceFlow(flow) || flow.cancelled || !flow.sessionActive || recording.completed) return;
+        const turnToken = recording.turnToken || `${Date.now()}-${Math.random()}`;
+        if (flow.processingTurnToken) return;
+        recording.completed = true;
+        flow.processingTurnToken = turnToken;
+        const transcript = String(recording.transcript || recording.finalTranscript || "").trim();
+
+        setFreeVoicePhase(flow, FREE_VOICE_STATE.PROCESSING);
+        flow.latestTranscript = transcript || "Transcribing what you said...";
+        flow.latestUserMessage = transcript;
+        renderCurrentTest();
+
+        const response = await requestFreeConversationTurn(recording, transcript);
+        if (flow.cancelled || !flow.sessionActive || flow.processingTurnToken !== turnToken) return;
+        flow.processingTurnToken = "";
+
+        const finalTranscript = String(response.latestTranscript || transcript || "").trim();
+        flow.latestTranscript = finalTranscript || "Transcript unavailable. Let's keep talking.";
+        flow.latestUserMessage = finalTranscript;
+        addUserHistory({
+            transcript: finalTranscript,
+            part: 0,
+            examPhase: "conversation"
+        });
+        speakFreeConversationResponse(response);
+    }
+
+    async function completeVoiceFlowAnswer(recording) {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) {
+            await completeFreeConversationTurn(recording);
+            return;
+        }
+        const transcript = String(recording.transcript || recording.finalTranscript || "").trim();
+        const answer = {
+            blob: recording.blob,
+            audioUrl: recording.audioUrl,
+            transcript,
+            durationSeconds: Math.round((Date.now() - recording.startedAt) / 1000),
+            part: flow.speakingMode === "free" ? 0 : Number(recording.scope.part || flow.part || 1),
+            title: flow.speakingMode === "free" ? "Free Speaking Practice" : `Part ${Number(recording.scope.part || flow.part || 1)}`,
+            questionText: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
+            prompt: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
+            examPhase: recording.scope.examPhase || flow.examPhase
+        };
+
+        flow.phase = "thinking";
+        flow.status = "Thinking...";
+        flow.latestTranscript = transcript || "Transcribing your answer...";
+        renderCurrentTest();
+
+        const response = await requestExaminerTurn("answer", recording, answer);
+        if (flow.cancelled) return;
+
+        const finalTranscript = response.latestTranscript || transcript;
+        answer.transcript = finalTranscript;
+        flow.latestTranscript = finalTranscript || "Transcript unavailable. Your audio was recorded.";
+        flow.partTurns = nextPartTurns(flow, answer.part);
+        flow.answers.push(answer);
+        addUserHistory(answer);
+        speakExaminerResponse(response);
+    }
+
+    function skipVoicePreparation() {
+        const flow = ensureVoiceFlow();
+        if (flow.phase !== "preparing") return;
+        clearVoiceFlowTimers();
+        beginPart2LongTurn();
+    }
+
+    async function finishVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) return;
+        if (flow.feedbackRequested) return;
+        flow.feedbackRequested = true;
+        flow.phase = "feedback";
+        flow.status = "Speaking test completed";
+        flow.isComplete = true;
+        renderCurrentTest();
+
+        if (!flow.answers.length) return;
+
+        const mode = state.section === "full" ? "full_test" : sectionMeta[state.section]?.submitMode || "full_test";
+        const testMode = state.section === "full" ? "full" : "part";
+        const submittedParts = flow.answers.map((answer, index) => ({
+            part: answer.part || defaultPartForMode(mode, index),
+            title: answer.title || `Part ${answer.part || index + 1}`,
+            prompt: answer.prompt || answer.questionText || "",
+            questionText: answer.questionText || answer.prompt || "",
+            transcript: answer.transcript || "",
+            userAnswer: answer.transcript || "",
+            audioUrl: answer.audioUrl || ""
+        }));
+        await submitAttempt({
+            mode,
+            testMode,
+            partNumber: submittedParts[submittedParts.length - 1]?.part || getActiveSubmitPartNumber(),
+            title: `${state.test?.title || "IELTS Speaking Test"} - AI Voice Interview`,
+            topic: state.test?.topic || "IELTS Speaking Test",
+            prompt: {
+                ...(state.test || {}),
+                conversation: flow.history,
+                cueCard: flow.cueCard
+            },
+            records: flow.answers,
+            parts: submittedParts
+        });
+    }
+
+    function endVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) {
+            stopFreeVoiceSession({ render: false });
+            flow.cancelled = true;
+            state.error = "";
+            state.loading = false;
+            state.feedback = null;
+            state.hasStarted = false;
+            state.voiceFlow = null;
+            if (window.location.pathname !== "/speaking") {
+                window.history.pushState({}, "", "/speaking");
+            }
+            renderHome();
+            return;
+        }
+        flow.cancelled = true;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (state.recording?.scope?.mode === "voice-flow") {
+            const activeRecording = state.recording;
+            activeRecording.cancelled = true;
+            stopTracks(activeRecording.stream);
+            try {
+                activeRecording.recognition?.stop();
+            } catch {}
+            try {
+                if (activeRecording.recorder.state !== "inactive") activeRecording.recorder.stop();
+            } catch {}
+            state.recording = null;
+        }
+        if (state.recording?.scope?.mode === "free-conversation") {
+            const activeRecording = state.recording;
+            activeRecording.cancelled = true;
+            stopTracks(activeRecording.stream);
+            try {
+                activeRecording.recognition?.stop();
+            } catch {}
+            try {
+                if (activeRecording.recorder.state !== "inactive") activeRecording.recorder.stop();
+            } catch {}
+            state.recording = null;
+        }
+        state.error = "";
+        state.loading = false;
+        state.feedback = null;
+        state.hasStarted = false;
+        state.voiceFlow = null;
+        if (window.location.pathname !== "/speaking") {
+            window.history.pushState({}, "", "/speaking");
+        }
+        renderHome();
+    }
+
+    function handleVoiceMicAction() {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) {
+            handleFreeVoiceMicAction(flow);
+            return;
+        }
+        if (state.loading || flow.phase === "thinking" || flow.phase === "feedback") return;
+        if (!flow.started || flow.phase === "idle" || flow.phase === "failed" || flow.phase === "completed") {
+            startVoiceFlow();
+            return;
+        }
+        if (flow.phase === "preparing") {
+            skipVoicePreparation();
+            return;
+        }
+        if (flow.phase === "examiner-speaking") {
+            finishExaminerSpeechEarly();
+            return;
+        }
+        if (flow.phase === "user-turn") {
+            startVoiceFlowRecording();
+            return;
+        }
+        if (flow.phase === "listening") {
+            stopVoiceFlowRecording();
+        }
+    }
+
+    function handleFreeVoiceMicAction(flow = ensureVoiceFlow()) {
+        if (isFreeVoiceSessionActive(flow)) {
+            stopFreeVoiceSession();
+            return;
+        }
+        startFreeVoiceSession();
+    }
+
+    function voiceStatusText() {
+        const flow = ensureVoiceFlow();
+        if (isFreeVoiceFlow(flow)) {
+            if (state.error) return state.error;
+            if (flow.phase === FREE_VOICE_STATE.AI_SPEAKING) return "AI is speaking...";
+            if (flow.phase === FREE_VOICE_STATE.PROCESSING) return "Thinking...";
+            if (flow.phase === FREE_VOICE_STATE.USER_SPEAKING) return "Listening to you...";
+            if (flow.phase === FREE_VOICE_STATE.LISTENING || flow.listenStarting) return "Listening...";
+            if (flow.phase === "failed") return flow.status || "Connection failed. Please try again.";
+            return flow.status || "Tap the microphone to start Free Speaking Practice.";
+        }
+        if (state.feedback) return isFreeVoiceFlow(flow) ? "Ready" : "Speaking test completed";
+        if (state.error) return state.error;
+        if (state.loading && (flow.phase === "feedback" || flow.phase === "completed")) return "Speaking test completed";
+        if (state.loading) return "Thinking...";
+        if (flow.phase === "speaking") return "AI is speaking...";
+        if (flow.phase === "examiner-speaking") return isFreeVoiceFlow(flow) ? "AI is speaking..." : "Examiner speaking...";
+        if (flow.phase === "user-turn") return isFreeVoiceFlow(flow) ? "Ready" : "Your turn";
+        if (flow.phase === "listening") return "Listening...";
+        if (flow.phase === "thinking") return "Thinking...";
+        if (flow.phase === "preparing") return "Preparation time";
+        if (flow.phase === "completed" || flow.phase === "feedback") return "Speaking test completed";
+        return flow.status || "Ready";
+    }
+
+    function renderCueCardForVoice(flow) {
+        if (flow.speakingMode === "free") return "";
+        if (!flow.cueCard || (Number(flow.part) !== 2 && flow.examPhase !== "prep" && flow.examPhase !== "long_turn")) return "";
+        const cueCard = normalizeCueCard(flow.cueCard);
+        return `
+            <div class="ai-cue-card" aria-label="Part 2 cue card">
+                <span>Part 2 cue card</span>
+                <strong>${escapeHtml(cueCard.topic)}</strong>
+                <ul>
+                    ${cueCard.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                </ul>
+                ${flow.phase === "preparing" ? `<div class="ai-prep-timer">${formatDuration(flow.prepRemaining || 0)}</div>` : ""}
+            </div>
+        `;
+    }
+
+    function renderLatestTranscript(flow) {
+        const transcript = String(flow.latestTranscript || "").trim();
+        if (!transcript || transcript === "Transcribing your answer..." || transcript === "Transcribing what you said...") {
+            return transcript ? `<p class="ai-transcript-pending">${escapeHtml(transcript)}</p>` : "";
+        }
+        const isFreeMode = flow.speakingMode === "free";
+        const label = isFreeMode ? "You said" : "Your latest answer";
+        const ariaLabel = isFreeMode ? "Latest user speech transcript" : "Latest user answer transcript";
+        return `
+            <div class="ai-latest-transcript" aria-label="${escapeHtml(ariaLabel)}">
+                <span>${escapeHtml(label)}</span>
+                <p>${escapeHtml(transcript)}</p>
+            </div>
+        `;
+    }
+
+    function renderVoiceFeedback() {
+        if (!state.feedback) return "";
+        const feedback = state.feedback;
+        const overall = Number(feedback.overallBand || 0).toFixed(1);
+        const advice = Array.isArray(feedback.howToImprove) && feedback.howToImprove.length
+            ? feedback.howToImprove[0]
+            : (feedback.detailedFeedback || "Your speaking feedback is ready.");
+        const criteria = [
+            ["Fluency & Coherence", feedback.fluencyCoherence],
+            ["Lexical Resource", feedback.lexicalResource],
+            ["Grammar Range & Accuracy", feedback.grammaticalRangeAccuracy],
+            ["Pronunciation", feedback.pronunciation]
+        ];
+        return `
+            <div class="ai-voice-feedback" role="status">
+                <span>Estimated IELTS band</span>
+                <strong>${escapeHtml(overall)}</strong>
+                <div class="ai-feedback-grid">
+                    ${criteria.map(([label, value]) => `
+                        <div>
+                            <small>${escapeHtml(label)}</small>
+                            <b>${escapeHtml(Number(value || 0).toFixed(1))}</b>
+                        </div>
+                    `).join("")}
+                </div>
+                <p>${escapeHtml(advice)}</p>
+            </div>
+        `;
+    }
+
+    function renderVoiceFlowPlayer() {
+        setPlayerMode(true);
+        document.body.classList.add("speaking-voice-mode");
+        const cbtHeader = document.getElementById("speakingCbtHeader");
+        if (cbtHeader) cbtHeader.style.display = "none";
+        const flow = ensureVoiceFlow();
+        const isRecording = state.recording?.scope?.mode === "voice-flow" || state.recording?.scope?.mode === "free-conversation";
+        const isFreeMode = flow.speakingMode === "free";
+        const visualPhase = isFreeMode
+            ? (flow.phase === FREE_VOICE_STATE.AI_SPEAKING
+                ? "speaking"
+                : flow.phase === FREE_VOICE_STATE.PROCESSING
+                    ? "thinking"
+                    : flow.phase)
+            : (flow.phase === "examiner-speaking" ? "speaking" : (state.loading ? "thinking" : flow.phase));
+        const message = flow.currentExaminerMessage || "Tap the microphone to begin.";
+        const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : "IELTS Speaking Test";
+        const freeSessionActive = isFreeVoiceSessionActive(flow);
+        const micDisabled = isFreeMode ? false : (state.loading || flow.phase === "thinking" || flow.phase === "feedback");
+        const micLabel = isFreeMode
+            ? (freeSessionActive ? "Stop voice session" : "Start voice session")
+            : (!flow.started || flow.phase === "idle" || flow.phase === "failed" || flow.phase === "completed"
+                ? "Start speaking practice"
+                : flow.phase === "listening"
+                    ? "Finish answer"
+                    : flow.phase === "preparing"
+                        ? "Skip preparation"
+                        : flow.phase === "examiner-speaking"
+                            ? "Skip examiner speech"
+                            : flow.phase === "user-turn"
+                                ? "Start answering"
+                                : "Please wait");
+        const micIcon = flow.phase === "failed" ? lucideIcon("rotate", "ai-voice-control-icon") : lucideIcon("mic", "ai-voice-control-icon");
+        const endLabel = isFreeMode ? "End session" : "End test";
+
+        app.innerHTML = `
+            <section class="ai-speaking-screen" data-ai-phase="${escapeHtml(visualPhase)}" aria-label="${escapeHtml(playerBadge)}">
+                <div class="ai-speaking-bg" aria-hidden="true"></div>
+                <header class="ai-voice-topbar">
+                    <div class="ai-voice-badge">
+                        ${lucideIcon("mic", "ai-voice-badge-icon")}
+                        <span>${escapeHtml(playerBadge)}</span>
+                    </div>
+                    <button class="ai-voice-settings" type="button" aria-label="Settings">
+                        ${lucideIcon("sliders", "ai-voice-settings-icon")}
+                    </button>
+                </header>
+                <main class="ai-voice-main" aria-live="polite">
+                    <p class="ai-voice-status">${escapeHtml(voiceStatusText())}</p>
+                    <div class="ai-orb-stage ${isRecording ? "is-recording" : ""}">
+                        <span class="ai-orbit ai-orbit-outer" aria-hidden="true"></span>
+                        <span class="ai-orbit ai-orbit-middle" aria-hidden="true"><span class="ai-orbit-dot" aria-hidden="true"></span></span>
+                        <span class="ai-orbit ai-orbit-inner" aria-hidden="true"></span>
+                        <div class="ai-orb" aria-hidden="true"></div>
+                    </div>
+                    <div class="ai-question-wrap">
+                        <p class="ai-current-question">${escapeHtml(message)}</p>
+                        ${renderCueCardForVoice(flow)}
+                        ${renderLatestTranscript(flow)}
+                    </div>
+                    ${renderVoiceFeedback()}
+                </main>
+                <div class="ai-voice-controls" aria-label="Speaking controls">
+                    <button class="ai-voice-mic-button ${isRecording ? "is-recording" : ""}" type="button" data-action="voice-mic" aria-label="${escapeHtml(micLabel)}" title="${escapeHtml(micLabel)}" ${micDisabled ? "disabled" : ""}>
+                        ${micIcon}
+                    </button>
+                    <button class="ai-voice-end-button" type="button" data-action="voice-end" aria-label="${escapeHtml(endLabel)}" title="${escapeHtml(endLabel)}">
+                        ${lucideIcon("x", "ai-voice-control-icon")}
+                    </button>
+                </div>
+            </section>
+        `;
+    }
+
     function renderSpeakingPlayer() {
+        if (state.voiceFlow) {
+            renderVoiceFlowPlayer();
+            return;
+        }
+        document.body.classList.remove("speaking-voice-mode");
         setPlayerMode(true);
         if (!state.hasStarted) {
             updatePlayerHeader();
@@ -1705,6 +3359,10 @@
         if (state.loading) return;
         const record = state.fullRecords[partNumber];
         if (!record?.blob) {
+            if (isSpeakingMockMode && partNumber === 3) {
+                submitFull();
+                return;
+            }
             setError(`Record Part ${partNumber} before ${partNumber === 3 ? "submitting" : "moving to the next part"}.`);
             return;
         }
@@ -1720,6 +3378,38 @@
         const parts = activeFullParts();
         const records = parts.map((part) => state.fullRecords[part.part]);
         if (records.some((record) => !record?.blob)) {
+            if (isSpeakingMockMode) {
+                const submittedParts = parts.map((part) => {
+                    const record = state.fullRecords[part.part] || {};
+                    const questionText = questionTextFromPart(part);
+                    const userAnswer = record.transcript || "";
+                    return {
+                        part: part.part,
+                        title: part.title,
+                        prompt: questionText,
+                        questionText,
+                        transcript: userAnswer,
+                        userAnswer,
+                        audioUrl: record.audioUrl || ""
+                    };
+                });
+                clearAllPlayerTimers();
+                notifyMockSpeakingComplete({
+                    testId: state.test?.id || "",
+                    autoSubmit: true,
+                    band: 0,
+                    result: {
+                        overallBand: 0,
+                        status: "incomplete"
+                    },
+                    parts: submittedParts,
+                    answers: Object.fromEntries(submittedParts.map((part) => [
+                        `part${part.part}`,
+                        part.transcript || ""
+                    ]))
+                });
+                return;
+            }
             setError("Record all three parts before submitting the full test.");
             return;
         }
@@ -1831,7 +3521,27 @@
                 });
             }
         } catch (error) {
+            console.error("[Mock Speaking] evaluation failed:", error);
             state.error = error.message || "AI feedback failed. Please try again.";
+            if (isSpeakingMockMode && mode === "full_test") {
+                const submittedParts = parts || [];
+                clearAllPlayerTimers();
+                notifyMockSpeakingComplete({
+                    testId: state.test?.id || "",
+                    autoSubmit: false,
+                    band: 0,
+                    result: {
+                        overallBand: 0,
+                        status: "evaluation_failed",
+                        error: state.error
+                    },
+                    parts: submittedParts,
+                    answers: Object.fromEntries((submittedParts || []).map((part) => [
+                        `part${part.part}`,
+                        part.transcript || part.userAnswer || ""
+                    ]))
+                });
+            }
         } finally {
             state.loading = false;
             renderCurrentTest();
@@ -1853,7 +3563,10 @@
         if (route.view !== "home") {
             await loadPublishedCatalog();
         }
-        if (route.view === "listing") renderListing(route.sectionKey);
+        if (route.view === "player") {
+            prepareSpeakingPlayerState(route.mode);
+            renderCurrentTest();
+        } else if (route.view === "listing") renderListing(route.sectionKey);
         else if (route.view === "test") await renderTest(route.sectionKey, route.testId);
         else {
             renderHome();
@@ -1874,7 +3587,10 @@
         const target = event.target.closest("[data-action]");
         if (!target) return;
         const action = target.dataset.action;
-        if (action === "start-single-recording") startRecording({ mode: "single" });
+        if (action === "select-speaking-mode") startSpeakingFromIntro(target.dataset.mode || "free");
+        else if (action === "voice-mic") handleVoiceMicAction();
+        else if (action === "voice-end") endVoiceFlow();
+        else if (action === "start-single-recording") startRecording({ mode: "single" });
         else if (action === "start-preparation" || action === "start-prep") startPreparationForActivePart();
         else if (action === "start-cue-recording") startRecording({ mode: "cue" });
         else if (action === "stop-recording") stopRecording();
@@ -1898,9 +3614,28 @@
     });
 
     document.addEventListener("click", (event) => {
+        if (event.target.closest("[data-mock-exit]")) {
+            event.preventDefault();
+            requestMockSpeakingExit();
+            return;
+        }
         if (!event.target.closest("[data-speaking-header-submit]")) return;
         submitActiveAttempt();
     });
 
-    boot();
+    boot().catch((error) => {
+        console.error("[Mock Speaking] boot failed:", error);
+        notifyMockSpeakingError(error);
+        app.innerHTML = `
+            <section class="speaking-player-screen speaking-player-screen--full" aria-label="Speaking load error">
+                <main class="speaking-player-stage">
+                    <div class="speaking-error">${escapeHtml(error.message || "Speaking could not be loaded.")}</div>
+                    <div class="speaking-player-actions">
+                        <button class="speaking-record-btn" type="button" onclick="window.location.reload()">Retry</button>
+                        <a class="speaking-record-btn speaking-record-btn--secondary" href="/dashboard">Dashboard</a>
+                    </div>
+                </main>
+            </section>
+        `;
+    });
 }());

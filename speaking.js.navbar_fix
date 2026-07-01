@@ -1,0 +1,4089 @@
+(function () {
+    const app = document.getElementById("speakingApp");
+    const speakingParams = new URLSearchParams(window.location.search);
+    const isSpeakingMockMode = speakingParams.get("mockMode") === "1" || speakingParams.has("mockTestId");
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+    const SPEAKING_TIMING = {
+        part1: 5 * 60,
+        part2Prep: 60,
+        part2Speaking: 2 * 60,
+        part2Total: 3 * 60,
+        part3: 5 * 60,
+        fullTotal: 13 * 60
+    };
+    const PLAYER_TITLES = {
+        1: "Part 1: Introduction and Interview",
+        2: "Part 2: Cue Card",
+        3: "Part 3: Discussion"
+    };
+    const PLAYER_DEFAULTS = {
+        part1: {
+            questions: [
+                "Do you work or study?",
+                "What do you like about your studies?",
+                "Do you prefer studying alone or with others?"
+            ]
+        },
+        part2: {
+            topic: "Describe a place you visited recently.",
+            bullets: [
+                "where it was",
+                "when you went there",
+                "who you went with",
+                "and explain why you liked it"
+            ]
+        },
+        part3: {
+            questions: [
+                "Why do people enjoy visiting new places?",
+                "How has travel changed in recent years?",
+                "Should people learn about a place before they visit it?"
+            ]
+        }
+    };
+    const PLAYER_TIPS = [
+        "Speak clearly and naturally",
+        "Give full answers",
+        "Use examples where possible",
+        "Do not memorize answers",
+        "Keep your response relevant"
+    ];
+    const FREE_SPEAKING_GREETING = "Hi, I'm your AI speaking partner. Let's practice naturally. You can talk about anything, and I'll help you improve your English.";
+
+    const sectionMeta = {
+        part1: {
+            route: "/speaking/part1",
+            mode: "part1",
+            submitMode: "part_1",
+            part: 1,
+            badge: "Speaking Part 1",
+            categoryBadge: "Foundation",
+            categoryTitle: "Speaking Part 1",
+            categoryDescription: "Short personal questions practice. Practice common introduction and interview questions.",
+            listingTitle: "Speaking Part 1 Practices",
+            listingSubtitle: "Select an introduction and interview practice set to begin.",
+            testKicker: "Speaking Part 1",
+            defaultDuration: 300,
+            button: "Start Test",
+            stats: [
+                ["10", "Questions"],
+                ["4-5 min", "Estimated time"]
+            ]
+        },
+        part2: {
+            route: "/speaking/part2",
+            mode: "cue",
+            submitMode: "cue_card",
+            part: 2,
+            badge: "Speaking Part 2",
+            categoryBadge: "Core",
+            categoryTitle: "Speaking Part 2",
+            categoryDescription: "Cue Card Practice. Practice one cue card with 1-minute preparation and 2-minute speaking.",
+            listingTitle: "Cue Card Practices",
+            listingSubtitle: "Select a cue card prompt and start practicing.",
+            testKicker: "Speaking Part 2",
+            defaultDuration: 120,
+            button: "Start Test",
+            stats: [
+                ["1", "Cue Card"],
+                ["1 min", "Prep"],
+                ["2 min", "Speaking"]
+            ]
+        },
+        part3: {
+            route: "/speaking/part3",
+            mode: "part3",
+            submitMode: "part_3",
+            part: 3,
+            badge: "Speaking Part 3",
+            categoryBadge: "Advanced",
+            categoryTitle: "Speaking Part 3",
+            categoryDescription: "Follow-up Discussion. Answer deeper discussion questions linked to the cue card topic.",
+            listingTitle: "Speaking Part 3 Practices",
+            listingSubtitle: "Select a follow-up discussion set and begin.",
+            testKicker: "Speaking Part 3",
+            defaultDuration: 300,
+            button: "Start Test",
+            stats: [
+                ["4-6", "Questions"],
+                ["4-5 min", "Estimated time"]
+            ]
+        },
+        full: {
+            route: "/speaking/full-test",
+            mode: "full",
+            submitMode: "full_test",
+            badge: "Full Speaking Test",
+            categoryBadge: "Exam Mode",
+            categoryTitle: "Full Speaking Test",
+            categoryDescription: "Complete Parts 1, 2, and 3 in one full AI-evaluated test.",
+            listingTitle: "Full Speaking Test Practices",
+            listingSubtitle: "Choose a full IELTS Speaking test with Parts 1, 2, and 3.",
+            testKicker: "Full Speaking Test",
+            defaultDuration: 720,
+            button: "Start Full Test",
+            stats: [
+                ["3", "Parts"],
+                ["11-14 min", "Estimated time"],
+                ["AI", "Feedback included"]
+            ]
+        }
+    };
+
+    const catalog = {
+        part1: [
+            {
+                id: "test-1",
+                title: "Test 1",
+                description: "Introduction, hometown, study, work, and daily life questions.",
+                questions: [
+                    "Do you work or are you a student?",
+                    "What do you enjoy about your studies or job?",
+                    "Where is your hometown?",
+                    "What do you like about your hometown?",
+                    "How do you usually spend your evenings?",
+                    "Do you prefer spending time alone or with friends?",
+                    "What kind of weather do you like?",
+                    "How often do you use public transport?",
+                    "Do you like reading books?",
+                    "What would you like to learn in the future?"
+                ]
+            },
+            {
+                id: "test-2",
+                title: "Test 2",
+                description: "Family, food, hobbies, technology, and weekend routines.",
+                questions: [
+                    "Do you live with your family?",
+                    "Who do you spend the most time with?",
+                    "What food do you usually eat at home?",
+                    "Do you enjoy cooking?",
+                    "What hobbies are popular in your country?",
+                    "How often do you use your phone?",
+                    "Do you prefer texting or calling people?",
+                    "What do you usually do on weekends?",
+                    "Do you like shopping online?",
+                    "What makes a good day for you?"
+                ]
+            },
+            {
+                id: "test-3",
+                title: "Test 3",
+                description: "Travel, clothes, music, friends, and personal preferences.",
+                questions: [
+                    "Do you like travelling?",
+                    "Which place would you like to visit next?",
+                    "What clothes do you usually wear?",
+                    "Do you think fashion is important?",
+                    "What kind of music do you like?",
+                    "Do you prefer listening to music alone or with others?",
+                    "How often do you meet your friends?",
+                    "What activities do you do with friends?",
+                    "Do you like taking photos?",
+                    "What is something you want to improve about yourself?"
+                ]
+            },
+            {
+                id: "topic-31-websites",
+                title: "Topic 31: Websites",
+                description: "Websites, online habits, popular sites, and changes in browsing routines.",
+                topic: "Websites",
+                questions: [
+                    "What kinds of websites do you often visit?",
+                    "What kinds of websites are popular in your country?",
+                    "What is your favourite website?",
+                    "Are there any changes to the websites you often visit?"
+                ]
+            }
+        ],
+        part2: [
+            {
+                id: "test-1",
+                title: "Test 1",
+                description: "Describe a person who has inspired you.",
+                topic: "Describe a person who has inspired you",
+                bullets: [
+                    "Who this person is",
+                    "How you know this person",
+                    "What this person has done",
+                    "Explain why this person inspired you"
+                ]
+            },
+            {
+                id: "test-2",
+                title: "Test 2",
+                description: "Describe a useful website you often visit.",
+                topic: "Describe a useful website you often visit",
+                bullets: [
+                    "What the website is",
+                    "How often you use it",
+                    "What you use it for",
+                    "Explain why it is useful for you"
+                ]
+            },
+            {
+                id: "test-3",
+                title: "Test 3",
+                description: "Describe a difficult decision you made.",
+                topic: "Describe a difficult decision you made",
+                bullets: [
+                    "What the decision was",
+                    "When you made it",
+                    "Why it was difficult",
+                    "Explain how you felt after making it"
+                ]
+            },
+            {
+                id: "topic-1-trees",
+                title: "Topic 1: Place with a lot of trees",
+                description: "Describe a place with a lot of trees that you would like to visit.",
+                topic: "Describe a place with a lot of trees that you would like to visit",
+                bullets: [
+                    "What park it is and where it is",
+                    "How you know about it",
+                    "Why you want to go there",
+                    "What it is like"
+                ]
+            }
+        ],
+        part3: [
+            {
+                id: "test-1",
+                title: "Test 1",
+                description: "Follow-up discussion about learning, education, and practical skills.",
+                topic: "Learning and skills",
+                questions: [
+                    "Why do people need to keep learning new skills?",
+                    "Do schools teach enough practical skills?",
+                    "How has technology changed the way people learn?",
+                    "Is it better to learn from a teacher or by yourself?",
+                    "Should governments support adult education?"
+                ]
+            },
+            {
+                id: "test-2",
+                title: "Test 2",
+                description: "Follow-up discussion about work, success, and motivation.",
+                topic: "Work and success",
+                questions: [
+                    "What makes a person successful at work?",
+                    "Do people work harder when they are young or older?",
+                    "How important is motivation in achieving goals?",
+                    "Should companies train employees more often?",
+                    "Is job satisfaction more important than salary?"
+                ]
+            },
+            {
+                id: "test-3",
+                title: "Test 3",
+                description: "Follow-up discussion about technology, society, and communication.",
+                topic: "Technology and communication",
+                questions: [
+                    "How has technology changed communication?",
+                    "Do people rely too much on smartphones?",
+                    "Is face-to-face communication still important?",
+                    "How can technology help older people?",
+                    "What problems can social media create?"
+                ]
+            },
+            {
+                id: "topic-1-parks-nature",
+                title: "Topic 1: Parks, Nature",
+                description: "Follow-up discussion about parks, forests, and nature.",
+                topic: "Parks, Nature",
+                questions: [
+                    "Why do people like visiting places with trees or forests?",
+                    "Why is it important to have parks in the city?",
+                    "What benefits can a park bring to a city?",
+                    "Are natural views better than city views?",
+                    "Do all people need some nature?",
+                    "Are people hard-wired to protect the environment?"
+                ]
+            }
+        ],
+        full: [
+            {
+                id: "test-1",
+                title: "Test 1",
+                description: "A complete Speaking test covering daily life, a future skill, and learning discussion.",
+                topic: "Learning and personal development",
+                parts: [
+                    {
+                        part: 1,
+                        title: "Part 1: Introduction and general questions",
+                        duration: 300,
+                        prompt: "Answer general questions about your work or studies, hometown, daily routine, and hobbies.",
+                        questions: [
+                            "Do you work or are you a student?",
+                            "What do you like about your hometown?",
+                            "How do you usually spend your weekends?",
+                            "Do you prefer studying alone or with other people?",
+                            "What kind of weather do you like?"
+                        ]
+                    },
+                    {
+                        part: 2,
+                        title: "Part 2: Cue Card",
+                        duration: 120,
+                        preparation: 60,
+                        prompt: "Describe a skill you would like to learn in the future.",
+                        questions: [
+                            "What the skill is",
+                            "Why you want to learn it",
+                            "How you would learn it",
+                            "Explain how this skill would help you"
+                        ]
+                    },
+                    {
+                        part: 3,
+                        title: "Part 3: Follow-up discussion questions",
+                        duration: 300,
+                        prompt: "Discuss learning, skills, education, and how people improve over time.",
+                        questions: [
+                            "Why do people need to keep learning new skills?",
+                            "Do schools teach enough practical skills?",
+                            "How has technology changed the way people learn?",
+                            "Is it better to learn from a teacher or by yourself?"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "test-2",
+                title: "Test 2",
+                description: "A complete Speaking test covering habits, a memorable journey, and travel discussion.",
+                topic: "Travel and habits",
+                parts: [
+                    {
+                        part: 1,
+                        title: "Part 1: Introduction and general questions",
+                        duration: 300,
+                        prompt: "Answer general questions about habits, free time, and transport.",
+                        questions: [
+                            "What do you usually do in your free time?",
+                            "Do you prefer mornings or evenings?",
+                            "How often do you use public transport?",
+                            "Do you enjoy trying new food?",
+                            "What do you do to relax?"
+                        ]
+                    },
+                    {
+                        part: 2,
+                        title: "Part 2: Cue Card",
+                        duration: 120,
+                        preparation: 60,
+                        prompt: "Describe a memorable journey you have taken.",
+                        questions: [
+                            "Where you went",
+                            "Who you went with",
+                            "What happened during the journey",
+                            "Explain why it was memorable"
+                        ]
+                    },
+                    {
+                        part: 3,
+                        title: "Part 3: Follow-up discussion questions",
+                        duration: 300,
+                        prompt: "Discuss travel, transport, tourism, and how people choose destinations.",
+                        questions: [
+                            "Why do people like travelling?",
+                            "How has tourism changed in recent years?",
+                            "Is public transport important in large cities?",
+                            "Should people travel more inside their own country?"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "test-3",
+                title: "Test 3",
+                description: "A complete Speaking test covering communication, a useful app, and technology discussion.",
+                topic: "Technology and communication",
+                parts: [
+                    {
+                        part: 1,
+                        title: "Part 1: Introduction and general questions",
+                        duration: 300,
+                        prompt: "Answer general questions about technology, communication, and daily routines.",
+                        questions: [
+                            "How often do you use your phone?",
+                            "Do you prefer texting or calling?",
+                            "What apps do you use every day?",
+                            "Do you like taking photos?",
+                            "How do you usually keep in touch with friends?"
+                        ]
+                    },
+                    {
+                        part: 2,
+                        title: "Part 2: Cue Card",
+                        duration: 120,
+                        preparation: 60,
+                        prompt: "Describe an app or website that is useful to you.",
+                        questions: [
+                            "What it is",
+                            "How often you use it",
+                            "What you use it for",
+                            "Explain why it is useful"
+                        ]
+                    },
+                    {
+                        part: 3,
+                        title: "Part 3: Follow-up discussion questions",
+                        duration: 300,
+                        prompt: "Discuss technology, online communication, and digital habits.",
+                        questions: [
+                            "How has technology changed communication?",
+                            "Do people spend too much time online?",
+                            "Can technology make education better?",
+                            "What problems can social media create?"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "topic-31-websites-parks-nature",
+                title: "Topic 31: Websites + Parks, Nature",
+                description: "A complete Speaking test with Websites in Part 1, a tree-filled place cue card, and Parks/Nature discussion.",
+                topic: "Websites, trees, parks, and nature",
+                parts: [
+                    {
+                        part: 1,
+                        title: "Part 1: Websites",
+                        duration: 300,
+                        prompt: "Answer general questions about websites, online habits, popular websites, and changes in browsing routines.",
+                        questions: [
+                            "What kinds of websites do you often visit?",
+                            "What kinds of websites are popular in your country?",
+                            "What is your favourite website?",
+                            "Are there any changes to the websites you often visit?"
+                        ]
+                    },
+                    {
+                        part: 2,
+                        title: "Part 2: Place with a lot of trees",
+                        duration: 120,
+                        preparation: 60,
+                        prompt: "Describe a place with a lot of trees that you would like to visit.",
+                        questions: [
+                            "What park it is and where it is",
+                            "How you know about it",
+                            "Why you want to go there",
+                            "What it is like"
+                        ]
+                    },
+                    {
+                        part: 3,
+                        title: "Part 3: Parks, Nature",
+                        duration: 300,
+                        prompt: "Discuss parks, forests, natural views, and people's relationship with nature.",
+                        questions: [
+                            "Why do people like visiting places with trees or forests?",
+                            "Why is it important to have parks in the city?",
+                            "What benefits can a park bring to a city?",
+                            "Are natural views better than city views?",
+                            "Do all people need some nature?",
+                            "Are people hard-wired to protect the environment?"
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    const state = {
+        section: null,
+        test: null,
+        cueRecord: null,
+        partRecords: {},
+        fullCurrentPart: 1,
+        fullRecords: {},
+        cuePrepStatus: "not_started",
+        fullPrepStatus: {},
+        partTimeFinished: {},
+        recording: null,
+        headerTimer: null,
+        timer: null,
+        voiceFlow: null,
+        feedback: null,
+        loading: false,
+        hasStarted: false,
+        error: "",
+        introError: "",
+        speakingMode: "free",
+        startingSpeakingMode: ""
+    };
+
+    let catalogLoaded = false;
+
+    function setPlayerMode(enabled) {
+        document.body.classList.remove("speaking-intro-mode");
+        document.body.classList.toggle("speaking-player-mode", enabled);
+        document.body.classList.toggle("test-list-page", !enabled);
+
+        const cbtHeader = document.getElementById("speakingCbtHeader");
+        const globalNavbar = document.getElementById("globalNavbar");
+        const playerFooter = document.querySelector(".speaking-part-footer");
+
+        if (cbtHeader) cbtHeader.style.display = "none";
+        if (globalNavbar) globalNavbar.style.display = enabled ? "none" : "";
+        if (playerFooter) playerFooter.style.display = enabled ? "none" : "";
+
+        updatePlayerHeader();
+        applySpeakingMockHeader();
+    }
+
+    function notifyMockSpeakingComplete(payload) {
+        if (!isSpeakingMockMode || window.parent === window) return;
+
+        window.parent.postMessage({
+            type: "ieltsx-mock-section-complete",
+            section: "speaking",
+            ...payload
+        }, window.location.origin);
+    }
+
+    function requestMockSpeakingExit() {
+        if (!isSpeakingMockMode || window.parent === window) return;
+        window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
+    }
+
+    function applySpeakingMockHeader() {
+        if (!isSpeakingMockMode) return;
+
+        const brandTitle = document.getElementById("speakingBrandTitle");
+        const dashboardBtn = document.getElementById("speakingDashboardBtn");
+        const dashboardLabel = document.getElementById("speakingDashboardLabel");
+
+        if (brandTitle) brandTitle.textContent = "Mock Exam";
+        if (dashboardLabel) dashboardLabel.textContent = "Exit Mock Exam";
+        if (dashboardBtn && dashboardBtn.dataset.mockExitBound !== "true") {
+            dashboardBtn.dataset.mockExitBound = "true";
+            dashboardBtn.removeAttribute("href");
+            dashboardBtn.setAttribute("role", "button");
+            dashboardBtn.setAttribute("tabindex", "0");
+            dashboardBtn.addEventListener("click", (event) => {
+                event.preventDefault();
+                requestMockSpeakingExit();
+            });
+            dashboardBtn.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    requestMockSpeakingExit();
+                }
+            });
+        }
+    }
+
+    function getHeaderSeconds() {
+        if (state.headerTimer) return state.headerTimer.remaining;
+        return getHeaderTotalSeconds();
+    }
+
+    function getHeaderTotalSeconds() {
+        if (state.section === "full") return SPEAKING_TIMING.fullTotal;
+        if (state.section === "part2") return SPEAKING_TIMING.part2Total;
+        if (state.section === "part1") return SPEAKING_TIMING.part1;
+        if (state.section === "part3") return SPEAKING_TIMING.part3;
+        return SPEAKING_TIMING.fullTotal;
+    }
+
+    function updatePlayerHeader() {
+        const timerVal = document.getElementById("speakingTimerVal");
+        const timerBox = document.getElementById("speakingTimerDisplay");
+        const submitBtn = document.getElementById("speakingHeaderSubmitBtn");
+        const seconds = getHeaderSeconds();
+
+        if (timerVal) timerVal.textContent = formatTime(seconds);
+        if (timerBox) timerBox.classList.toggle("warning", seconds <= 60);
+        if (submitBtn) {
+            submitBtn.disabled = Boolean(state.loading) || !state.hasStarted;
+            submitBtn.textContent = state.loading ? "Evaluating your speaking..." : "Submit";
+        }
+    }
+
+    function isSpeakingFullScreenActive() {
+        return Boolean(document.fullscreenElement) || document.body.classList.contains("fullscreen-fallback");
+    }
+
+    function updateSpeakingFullScreenUI() {
+        const active = isSpeakingFullScreenActive();
+        document.body.classList.toggle("exam-fullscreen-active", active);
+        document.querySelectorAll("[data-fullscreen-toggle]").forEach((button) => {
+            button.textContent = active ? "Exit Full Screen" : "Full Screen";
+            button.setAttribute("aria-pressed", active ? "true" : "false");
+            button.setAttribute("title", active ? "Exit Full Screen" : "Full Screen");
+        });
+    }
+
+    async function enterSpeakingFullScreen() {
+        try {
+            if (!document.documentElement.requestFullscreen) throw new Error("Fullscreen API is not available.");
+            await document.documentElement.requestFullscreen();
+            document.body.classList.remove("fullscreen-fallback");
+        } catch {
+            document.body.classList.add("fullscreen-fallback");
+        }
+        updateSpeakingFullScreenUI();
+    }
+
+    async function exitSpeakingFullScreen() {
+        try {
+            if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
+        } catch {}
+        document.body.classList.remove("exam-fullscreen-active", "fullscreen-fallback");
+        updateSpeakingFullScreenUI();
+    }
+
+    function bindSpeakingFullScreen() {
+        document.querySelectorAll("[data-fullscreen-toggle]").forEach((button) => {
+            if (button.dataset.fullscreenBound === "true") return;
+            button.dataset.fullscreenBound = "true";
+            button.addEventListener("click", () => {
+                if (isSpeakingFullScreenActive()) exitSpeakingFullScreen();
+                else enterSpeakingFullScreen();
+            });
+        });
+
+        if (!document.documentElement.dataset.speakingFullscreenEventsBound) {
+            document.documentElement.dataset.speakingFullscreenEventsBound = "true";
+            document.addEventListener("fullscreenchange", updateSpeakingFullScreenUI);
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && document.body.classList.contains("fullscreen-fallback")) {
+                    exitSpeakingFullScreen();
+                }
+            });
+        }
+
+        updateSpeakingFullScreenUI();
+    }
+
+    async function requestPublishedSpeakingTests(sectionKey) {
+        const response = await fetch(`/api/speaking/${sectionKey}`, {
+            credentials: "include"
+        });
+        const data = await response.json().catch(() => []);
+        if (!response.ok) {
+            throw new Error(data.error || "Could not load Speaking tests.");
+        }
+        return Array.isArray(data) ? data : [];
+    }
+
+    async function loadPublishedCatalog() {
+        if (catalogLoaded) return;
+        catalogLoaded = true;
+
+        try {
+            const [part1, part2, part3, full] = await Promise.all([
+                requestPublishedSpeakingTests("part1"),
+                requestPublishedSpeakingTests("part2"),
+                requestPublishedSpeakingTests("part3"),
+                requestPublishedSpeakingTests("full")
+            ]);
+
+            if (part1.length) catalog.part1 = part1;
+            if (part2.length) catalog.part2 = part2;
+            if (part3.length) catalog.part3 = part3;
+            if (full.length) catalog.full = full;
+        } catch (error) {
+            console.warn("Using bundled Speaking practice catalog:", error.message);
+        }
+    }
+
+    function sectionIcon(sectionKey) {
+        if (sectionKey === "part1") {
+            return `<path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>`;
+        }
+        if (sectionKey === "part3") {
+            return `<path d="M8 6h11"></path><path d="M8 12h11"></path><path d="M8 18h11"></path><path d="M4 6h.01"></path><path d="M4 12h.01"></path><path d="M4 18h.01"></path>`;
+        }
+        if (sectionKey === "full") {
+            return `<path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>`;
+        }
+        return `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>`;
+    }
+
+    function normalizeSpeakingMode(value) {
+        return String(value || "").toLowerCase() === "exam" ? "exam" : "free";
+    }
+
+    function getSpeakingModeFromUrl() {
+        return normalizeSpeakingMode(new URLSearchParams(window.location.search).get("mode"));
+    }
+
+    function parseRoute() {
+        const parts = window.location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+        if (parts[0] !== "speaking") return { view: "home" };
+        const rawSection = parts[1] || "";
+        if (rawSection === "player") return { view: "player", mode: getSpeakingModeFromUrl() };
+        const sectionKey = rawSection === "part1" || rawSection === "part-1"
+            ? "part1"
+            : rawSection === "part2" || rawSection === "part-2" || rawSection === "cue-card"
+                ? "part2"
+                : rawSection === "part3" || rawSection === "part-3"
+                    ? "part3"
+                    : rawSection === "full-test" || rawSection === "fulltest"
+                        ? "full"
+                        : "";
+
+        if (!sectionKey) return { view: "home" };
+        if (sectionKey !== "full" && !parts[2]) {
+            return { view: "listing", sectionKey: "full" };
+        }
+        if (!parts[2]) return { view: "listing", sectionKey };
+        return { view: "test", sectionKey, testId: parts[2] };
+    }
+
+    function formatTime(seconds) {
+        const safe = Math.max(0, Number(seconds) || 0);
+        const mins = String(Math.floor(safe / 60)).padStart(2, "0");
+        const secs = safe % 60;
+        return `${mins}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function findTest(sectionKey, testId) {
+        const tests = catalog[sectionKey] || [];
+        return tests.find((item) => item.id === testId) || tests[0] || null;
+    }
+
+    async function loadSpeakingTestDetail(sectionKey, testId) {
+        const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}`, {
+            credentials: "include"
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(data.error || "Could not load Speaking test.");
+        }
+        const tests = catalog[sectionKey] || [];
+        const index = tests.findIndex((item) => item.id === data.id);
+        if (index >= 0) tests[index] = data;
+        else tests.unshift(data);
+        return data;
+    }
+
+    function clearTimer() {
+        if (state.timer?.id) clearInterval(state.timer.id);
+        state.timer = null;
+    }
+
+    function clearHeaderTimer() {
+        if (state.headerTimer?.id) clearInterval(state.headerTimer.id);
+        state.headerTimer = null;
+    }
+
+    function clearVoiceFlowTimers() {
+        const flow = state.voiceFlow;
+        if (!flow) return;
+        ["prepTimer", "answerTimer", "nextTimer", "silenceTimer"].forEach((key) => {
+            if (flow[key]) {
+                clearTimeout(flow[key]);
+                flow[key] = null;
+            }
+        });
+        if (flow.prepInterval) {
+            clearInterval(flow.prepInterval);
+            flow.prepInterval = null;
+        }
+    }
+
+    function clearAllPlayerTimers() {
+        clearTimer();
+        clearHeaderTimer();
+        clearVoiceFlowTimers();
+    }
+
+    function startHeaderTimer(seconds) {
+        clearHeaderTimer();
+        state.headerTimer = { remaining: seconds, id: null };
+        updatePlayerHeader();
+        state.headerTimer.id = setInterval(() => {
+            if (!state.headerTimer) return;
+            state.headerTimer.remaining -= 1;
+            if (state.headerTimer.remaining <= 0) {
+                clearHeaderTimer();
+                handleHeaderTimerDone();
+                return;
+            }
+            updatePlayerHeader();
+        }, 1000);
+    }
+
+    function startTimer(label, seconds, onDone, partNumber = null, phase = "") {
+        clearTimer();
+        state.timer = { label, remaining: seconds, id: null, partNumber, phase };
+        state.timer.id = setInterval(() => {
+            if (!state.timer) return;
+            state.timer.remaining -= 1;
+            if (state.timer.remaining <= 0) {
+                const done = onDone;
+                clearTimer();
+                if (typeof done === "function") done();
+            }
+            renderCurrentTest();
+        }, 1000);
+        renderCurrentTest();
+    }
+
+    function handleHeaderTimerDone() {
+        if (state.recording) stopRecording();
+        clearTimer();
+        if (state.section === "full") {
+            submitFull();
+        } else {
+            renderCurrentTest();
+        }
+    }
+
+    function stopTracks(stream) {
+        if (stream) stream.getTracks().forEach((track) => track.stop());
+    }
+
+    function startRecognition(recording) {
+        if (!SpeechRecognition) return null;
+        try {
+            const recognition = new SpeechRecognition();
+            recognition.lang = "en-US";
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.onresult = (event) => {
+                let finalText = recording.finalTranscript || "";
+                let interim = "";
+                for (let i = event.resultIndex; i < event.results.length; i += 1) {
+                    const transcript = event.results[i][0]?.transcript || "";
+                    if (event.results[i].isFinal) finalText += `${transcript} `;
+                    else interim += transcript;
+                }
+                recording.finalTranscript = finalText;
+                recording.transcript = `${finalText}${interim}`.trim();
+                renderCurrentTest();
+            };
+            recognition.onerror = () => {};
+            recognition.start();
+            return recognition;
+        } catch {
+            return null;
+        }
+    }
+
+    function activeFullParts() {
+        return Array.isArray(state.test?.parts) ? state.test.parts : [];
+    }
+
+    function activeFullPart() {
+        return activeFullParts().find((part) => part.part === state.fullCurrentPart) || activeFullParts()[0] || null;
+    }
+
+    function durationForScope(scope) {
+        if (scope.mode === "cue") return SPEAKING_TIMING.part2Speaking;
+        if (scope.mode === "full") {
+            const partNumber = Number(scope.part) || activeFullPart()?.part || 1;
+            return getPartSpeakingSeconds(partNumber);
+        }
+        return getPartSpeakingSeconds(getStandalonePartNumber());
+    }
+
+    function getPartSpeakingSeconds(partNumber) {
+        if (partNumber === 2) return SPEAKING_TIMING.part2Speaking;
+        if (partNumber === 3) return SPEAKING_TIMING.part3;
+        return SPEAKING_TIMING.part1;
+    }
+
+    function startActivePartTimer() {
+        const part = getActivePlayerPart();
+        clearTimer();
+        if (part.part === 2) return;
+        state.partTimeFinished[part.part] = false;
+        startTimer("Speaking time", getPartSpeakingSeconds(part.part), () => {
+            handleSpeakingTimerDone(part.part);
+        }, part.part, "speaking");
+    }
+
+    function moveToFullPart(partNumber) {
+        clearTimer();
+        state.fullCurrentPart = partNumber;
+        setError("");
+        if (partNumber !== 2) startActivePartTimer();
+        else renderCurrentTest();
+    }
+
+    function handleSpeakingTimerDone(partNumber) {
+        state.partTimeFinished[partNumber] = true;
+        if (isRecordingPart(partNumber)) stopRecording();
+        if (state.section !== "full") {
+            renderCurrentTest();
+            return;
+        }
+        if (partNumber === 1) moveToFullPart(2);
+        else if (partNumber === 2) moveToFullPart(3);
+        else if (partNumber === 3) submitFull();
+    }
+
+    async function startRecording(scope) {
+        if (!state.hasStarted) return;
+        if (state.recording) return;
+        const partNumber = scope.mode === "cue"
+            ? 2
+            : scope.mode === "full"
+                ? Number(scope.part) || 1
+                : getStandalonePartNumber();
+        if (partNumber === 2 && getPrepStatus(partNumber) !== "finished" && !getRecordForPart(partNumber)?.blob) {
+            setError("Start and finish preparation time before recording.");
+            return;
+        }
+        setError("");
+        try {
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+                throw new Error("unsupported");
+            }
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(stream);
+            const recording = {
+                scope,
+                stream,
+                recorder,
+                chunks: [],
+                blob: null,
+                audioUrl: "",
+                transcript: "",
+                finalTranscript: "",
+                startedAt: Date.now()
+            };
+
+            recorder.ondataavailable = (event) => {
+                if (event.data?.size) recording.chunks.push(event.data);
+            };
+            recorder.onstop = () => {
+                recording.blob = new Blob(recording.chunks, { type: recorder.mimeType || "audio/webm" });
+                recording.audioUrl = URL.createObjectURL(recording.blob);
+                stopTracks(stream);
+                try {
+                    recording.recognition?.stop();
+                } catch {}
+                saveRecording(recording);
+                state.recording = null;
+                const recordedPartNumber = recording.scope.mode === "cue"
+                    ? 2
+                    : recording.scope.mode === "full"
+                        ? Number(recording.scope.part) || 1
+                        : getStandalonePartNumber();
+                if (state.timer?.partNumber === recordedPartNumber) {
+                    clearTimer();
+                }
+                renderCurrentTest();
+            };
+
+            recording.recognition = startRecognition(recording);
+            state.recording = recording;
+            recorder.start();
+            if (partNumber === 2) {
+                state.partTimeFinished[partNumber] = false;
+                startTimer("Speaking time", durationForScope(scope), () => {
+                    handleSpeakingTimerDone(partNumber);
+                }, partNumber, "speaking");
+            }
+        } catch (error) {
+            setError(error?.name === "NotAllowedError"
+                ? "Microphone permission was denied. Allow microphone access and try again."
+                : "Could not access your microphone. Check browser permissions and try again.");
+        }
+    }
+
+    function stopRecording() {
+        if (!state.recording) return;
+        if (state.recording.recorder.state !== "inactive") {
+            state.recording.recorder.stop();
+        }
+    }
+
+    function saveRecording(recording) {
+        const saved = {
+            blob: recording.blob,
+            audioUrl: recording.audioUrl,
+            transcript: recording.transcript || recording.finalTranscript || "",
+            durationSeconds: Math.round((Date.now() - recording.startedAt) / 1000)
+        };
+        if (recording.scope.mode === "cue") state.cueRecord = saved;
+        else if (recording.scope.mode === "full") state.fullRecords[recording.scope.part] = saved;
+        else state.partRecords[state.section] = saved;
+    }
+
+    function updateTranscript(scope, value) {
+        if (scope === "cue" && state.cueRecord) state.cueRecord.transcript = value;
+        else if (scope === "single" && state.partRecords[state.section]) state.partRecords[state.section].transcript = value;
+        else if (state.fullRecords[scope]) state.fullRecords[scope].transcript = value;
+    }
+
+    function setError(message) {
+        state.error = message || "";
+        renderCurrentTest();
+    }
+
+    function renderHero({ title, subtitle, meta = true, centered = false }) {
+        return `
+            <section class="speaking-hero ${centered ? "speaking-hero--centered" : ""}" aria-labelledby="speakingPageTitle">
+                <div>
+                    <span class="test-list-eyebrow">IELTS Speaking</span>
+                    <h1 id="speakingPageTitle">${escapeHtml(title)}</h1>
+                    <div class="speaking-hero-rule" aria-hidden="true"></div>
+                    <p>${escapeHtml(subtitle)}</p>
+                </div>
+                ${meta ? `
+                    <div class="test-list-meta speaking-hero-meta" aria-label="Speaking practice metadata">
+                        <span><strong>3</strong> Parts</span>
+                        <span><strong>AI</strong> Feedback</span>
+                        <span><strong>11-14 min</strong> Full test</span>
+                    </div>
+                ` : ""}
+            </section>
+        `;
+    }
+
+    function defaultFullSpeakingTest() {
+        const bundled = Array.isArray(catalog.full) && catalog.full.length ? catalog.full[0] : null;
+        if (bundled?.parts?.length) return bundled;
+        const fallback = {
+            id: "ai-speaking-default",
+            title: "IELTS Speaking Test",
+            topic: "General IELTS Speaking practice",
+            parts: [
+                {
+                    part: 1,
+                    title: "Part 1: Introduction and Interview",
+                    prompt: "Answer short interview questions naturally.",
+                    questions: PLAYER_DEFAULTS.part1.questions
+                },
+                {
+                    part: 2,
+                    title: "Part 2: Cue Card",
+                    prompt: PLAYER_DEFAULTS.part2.topic,
+                    questions: PLAYER_DEFAULTS.part2.bullets
+                },
+                {
+                    part: 3,
+                    title: "Part 3: Discussion",
+                    prompt: "Answer follow-up discussion questions with reasons and examples.",
+                    questions: PLAYER_DEFAULTS.part3.questions
+                }
+            ]
+        };
+        return bundled ? { ...fallback, ...bundled, parts: fallback.parts } : fallback;
+    }
+
+    async function beginAiPracticeDirect() {
+        await loadPublishedCatalog().catch(() => {});
+        const test = (catalog.full && catalog.full[0]) || null;
+        if (test) {
+            state.section = "full";
+            state.test = test;
+            state.useAiExaminer = true;
+            state.hasStarted = true;
+            startAiExaminerSession();
+        } else {
+            alert("No Speaking tests found. Please try again later.");
+        }
+    }
+
+    function prepareSpeakingPlayerState(mode = "free") {
+        state.speakingMode = normalizeSpeakingMode(mode);
+        state.section = "full";
+        state.test = defaultFullSpeakingTest();
+        state.error = "";
+        state.introError = "";
+        state.startingSpeakingMode = "";
+        state.feedback = null;
+        state.loading = false;
+        state.hasStarted = false;
+        state.recording = null;
+        state.voiceFlow = null;
+        state.fullCurrentPart = 1;
+        state.fullRecords = {};
+        state.partTimeFinished = {};
+        clearAllPlayerTimers();
+    }
+
+    async function startSpeakingFromIntro(mode = "free") {
+        if (state.loading) return;
+        const nextMode = normalizeSpeakingMode(mode);
+        state.speakingMode = nextMode;
+        state.startingSpeakingMode = nextMode;
+        state.loading = true;
+        state.introError = "";
+        renderHome();
+
+        try {
+            if (!navigator.mediaDevices?.getUserMedia) {
+                throw new Error("microphone-unavailable");
+            }
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            stopTracks(stream);
+            prepareSpeakingPlayerState(nextMode);
+            const nextPath = `/speaking/player?mode=${encodeURIComponent(nextMode)}`;
+            if (`${window.location.pathname}${window.location.search}` !== nextPath) {
+                window.history.pushState({}, "", nextPath);
+            }
+            renderSpeakingPlayer();
+            window.setTimeout(() => {
+                if (!state.voiceFlow?.started && window.location.pathname === "/speaking/player") {
+                    startVoiceFlow();
+                }
+            }, 200);
+        } catch {
+            state.loading = false;
+            state.startingSpeakingMode = "";
+            state.introError = "Microphone permission is required to start the speaking test.";
+            renderHome();
+        }
+    }
+
+    function renderSpeakingIntroPage() {
+        const error = state.introError
+            ? `<div class="mt-5 rounded-2xl border border-red-200 bg-red-50 px-5 py-3 text-center text-sm font-semibold text-red-600">${escapeHtml(state.introError)}</div>`
+            : "";
+        const freeButtonText = state.loading && state.startingSpeakingMode === "free" ? "Requesting microphone..." : "Free Speaking Practice";
+        const examButtonText = state.loading && state.startingSpeakingMode === "exam" ? "Requesting microphone..." : "IELTS Exam Simulation";
+
+        app.innerHTML = `
+            <section class="speaking-intro relative w-full bg-gradient-to-br from-white via-blue-50 to-white min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 text-slate-950">
+                <div class="speaking-intro__decor speaking-intro__decor--dots" aria-hidden="true"></div>
+                <div class="speaking-intro__decor speaking-intro__decor--rings-top" aria-hidden="true"></div>
+                <div class="speaking-intro__decor speaking-intro__decor--rings-bottom" aria-hidden="true"></div>
+
+                <div class="relative z-10 mx-auto w-full max-w-[860px] rounded-[28px] border border-blue-200 bg-gradient-to-br from-white via-blue-50/20 to-white p-8 md:p-12 shadow-[0_20px_50px_rgba(37,99,235,0.06)]">
+                    <div class="grid items-center gap-10 md:grid-cols-[190px_1fr]">
+                        <div class="flex justify-center">
+                            <div class="speaking-intro-mic-halo">
+                                <div class="speaking-intro-mic-core">
+                                    ${lucideIcon("mic", "sp-intro-card-mic-icon")}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-center md:justify-start">
+                                <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 border border-blue-100">
+                                    AI VOICE PRACTICE ✨
+                                </span>
+                            </div>
+                            
+                            <h1 class="mt-5 text-center md:text-left text-3xl font-black tracking-tight text-[#071437] sm:text-4xl">
+                                Speaking Practice
+                            </h1>
+                            
+                            <p class="mt-4 text-center md:text-left text-base font-semibold leading-relaxed text-slate-500">
+                                Choose a natural AI voice conversation or a structured IELTS Speaking exam simulation.
+                            </p>
+
+                            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                                <div class="speaking-intro-mini-stat">
+                                    ${lucideIcon("mic", "sp-intro-mini-icon")}
+                                    <span>
+                                        <strong>Free Talk</strong>
+                                        <small>Default mode</small>
+                                    </span>
+                                </div>
+                                <div class="speaking-intro-mini-stat">
+                                    ${lucideIcon("sparkles", "sp-intro-mini-icon")}
+                                    <span>
+                                        <strong>Soft Corrections</strong>
+                                        <small>As you speak</small>
+                                    </span>
+                                </div>
+                                <div class="speaking-intro-mini-stat">
+                                    ${lucideIcon("boxes", "sp-intro-mini-icon")}
+                                    <span>
+                                        <strong>Exam Mode</strong>
+                                        <small>Parts 1–3</small>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                                <button class="speaking-intro-start flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-700 to-blue-600 px-6 py-4.5 text-base font-extrabold text-white shadow-[0_12px_24px_rgba(37,99,235,0.22)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(37,99,235,0.28)] disabled:cursor-wait disabled:opacity-75" type="button" data-action="start-ai-intro" data-mode="free" ${state.loading ? "disabled" : ""}>
+                                    <span class="flex-1 text-center">${escapeHtml(freeButtonText)}</span>
+                                    ${lucideIcon("arrowRight", "sp-intro-arrow-icon")}
+                                </button>
+                                <button class="speaking-intro-start speaking-intro-start--exam flex w-full items-center justify-center gap-3 rounded-2xl border border-blue-200 bg-white px-6 py-4.5 text-base font-extrabold text-blue-600 shadow-[0_8px_16px_rgba(30,64,175,0.04)] transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-slate-50/50 disabled:cursor-wait disabled:opacity-75" type="button" data-action="start-ai-intro" data-mode="exam" ${state.loading ? "disabled" : ""}>
+                                    <span class="flex-1 text-center">${escapeHtml(examButtonText)}</span>
+                                    ${lucideIcon("arrowRight", "sp-intro-arrow-icon")}
+                                </button>
+                            </div>
+                            ${error}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
+    function renderHome() {
+        clearAllPlayerTimers();
+        setPlayerMode(false);
+        document.body.classList.add("speaking-intro-mode");
+        document.title = "Speaking Practice - IELTSX";
+
+        if (window.location.pathname !== "/speaking") {
+            window.history.replaceState({}, "", "/speaking");
+        }
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        state.section = null;
+        state.test = null;
+        state.error = "";
+        state.feedback = null;
+        state.hasStarted = false;
+        state.voiceFlow = null;
+        if (!state.loading) {
+            state.speakingMode = "free";
+            state.startingSpeakingMode = "";
+        }
+        renderSpeakingIntroPage();
+        return;
+        
+        app.innerHTML = `
+            <div class="speaking-dashboard-container">
+                <style>
+                    .speaking-dashboard-container {
+                        position: relative;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        padding: 60px 40px;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                        color: #1e293b;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        border-radius: 32px;
+                        background: radial-gradient(circle at 80% 20%, rgba(239, 246, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+                    }
+                    
+                    /* Decorative Background elements */
+                    .sd-bg-decoration {
+                        position: absolute;
+                        pointer-events: none;
+                        z-index: 0;
+                    }
+                    .sd-bg-dots {
+                        top: 60px;
+                        left: -20px;
+                        width: 100px;
+                        height: 100px;
+                        background-image: radial-gradient(rgba(37, 99, 235, 0.15) 1px, transparent 1px);
+                        background-size: 14px 14px;
+                        opacity: 0.8;
+                    }
+                    .sd-bg-circle-tr {
+                        top: -120px;
+                        right: -120px;
+                        width: 360px;
+                        height: 360px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(37, 99, 235, 0.05);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .sd-bg-circle-tr-inner {
+                        width: 290px;
+                        height: 290px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(37, 99, 235, 0.04);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .sd-bg-circle-tr-innermost {
+                        width: 220px;
+                        height: 220px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(37, 99, 235, 0.03);
+                    }
+                    .sd-bg-circle-bl {
+                        bottom: -120px;
+                        left: -120px;
+                        width: 360px;
+                        height: 360px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(37, 99, 235, 0.05);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .sd-bg-circle-bl-inner {
+                        width: 290px;
+                        height: 290px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(37, 99, 235, 0.04);
+                    }
+                    
+                    /* Hero Header */
+                    .sd-hero {
+                        position: relative;
+                        z-index: 1;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: 40px;
+                        margin-bottom: 48px;
+                        flex-wrap: wrap;
+                    }
+                    .sd-hero-left {
+                        flex: 1;
+                        min-width: 320px;
+                    }
+                    .sd-badge-top {
+                        border: 1px solid rgba(37, 99, 235, 0.25);
+                        background: rgba(37, 99, 235, 0.05);
+                        color: #2563eb;
+                        padding: 6px 14px;
+                        border-radius: 9999px;
+                        font-size: 11px;
+                        font-weight: 700;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        margin-bottom: 16px;
+                        letter-spacing: 0.5px;
+                        text-transform: uppercase;
+                    }
+                    .sd-badge-mic-icon {
+                        width: 14px;
+                        height: 14px;
+                        color: #2563eb;
+                    }
+                    .sd-title {
+                        font-size: 44px;
+                        font-weight: 800;
+                        color: #0f172a;
+                        margin: 0 0 12px 0;
+                        letter-spacing: -0.5px;
+                    }
+                    .sd-subtitle {
+                        font-size: 16px;
+                        color: #64748b;
+                        line-height: 1.6;
+                        margin: 0;
+                    }
+                    
+                    /* Stats Block */
+                    .sd-stats-card {
+                        background: #ffffff;
+                        border: 1px solid #e2e8f0;
+                        border-radius: 20px;
+                        padding: 16px 28px;
+                        display: flex;
+                        align-items: center;
+                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+                    }
+                    .sd-stat-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 0 20px;
+                    }
+                    .sd-stat-item:first-child { padding-left: 0; }
+                    .sd-stat-item:last-child { padding-right: 0; }
+                    .sd-stat-divider {
+                        width: 1px;
+                        height: 32px;
+                        background-color: #e2e8f0;
+                    }
+                    .sd-stat-icon-wrapper {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .sd-stat-icon-wrapper.blue { background: #eff6ff; color: #2563eb; }
+                    .sd-stat-icon-wrapper.purple { background: #faf5ff; color: #a855f7; }
+                    .sd-stat-icon-wrapper.amber { background: #fffbeb; color: #f59e0b; }
+                    
+                    .sd-stat-icon {
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .sd-stat-info {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .sd-stat-val {
+                        font-size: 15px;
+                        font-weight: 700;
+                        color: #0f172a;
+                    }
+                    .sd-stat-lbl {
+                        font-size: 12px;
+                        color: #64748b;
+                        font-weight: 500;
+                    }
+                    
+                    /* Middle Section */
+                    .sd-main-section {
+                        position: relative;
+                        z-index: 1;
+                        display: flex;
+                        justify-content: center;
+                        margin-bottom: 48px;
+                    }
+                    
+                    /* Premium Practice Card */
+                    .premium-practice-card {
+                        background: linear-gradient(135deg, rgba(239, 246, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 100%);
+                        border: 1.5px solid rgba(191, 219, 254, 0.4);
+                        border-radius: 28px;
+                        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.03);
+                        padding: 40px;
+                        width: 100%;
+                        max-width: 720px;
+                        box-sizing: border-box;
+                        display: grid;
+                        grid-template-columns: 140px 1fr;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                        backdrop-filter: blur(10px);
+                    }
+                    .premium-practice-card:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 25px 50px rgba(37, 99, 235, 0.06);
+                        border-color: rgba(191, 219, 254, 0.7);
+                    }
+                    
+                    /* Card Left Microphone concentric halos */
+                    .pp-left-section {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding-right: 32px;
+                    }
+                    .pp-mic-outer-circle {
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 50%;
+                        background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, rgba(37, 99, 235, 0) 70%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .pp-mic-middle-circle {
+                        width: 90px;
+                        height: 90px;
+                        border-radius: 50%;
+                        background: rgba(37, 99, 235, 0.03);
+                        border: 1px solid rgba(37, 99, 235, 0.06);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .pp-mic-inner-circle {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: #ffffff;
+                        color: #2563eb;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+                    }
+                    .pp-mic-svg {
+                        width: 26px;
+                        height: 26px;
+                    }
+                    
+                    /* Card Right content */
+                    .pp-right-section {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+                    .pp-badge {
+                        background: #2563eb;
+                        color: #ffffff;
+                        padding: 6px 14px;
+                        border-radius: 9999px;
+                        font-size: 11px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        margin-bottom: 16px;
+                    }
+                    .pp-badge-sparkle {
+                        width: 12px;
+                        height: 12px;
+                    }
+                    .pp-title {
+                        font-size: 28px;
+                        font-weight: 800;
+                        color: #0f172a;
+                        margin: 0 0 10px 0;
+                    }
+                    .pp-desc {
+                        font-size: 15px;
+                        color: #64748b;
+                        line-height: 1.6;
+                        margin: 0 0 24px 0;
+                    }
+                    
+                    /* Stat Pills */
+                    .pp-stat-pills {
+                        display: flex;
+                        gap: 12px;
+                        margin-bottom: 28px;
+                        flex-wrap: wrap;
+                    }
+                    .pp-pill {
+                        background: #ffffff;
+                        border: 1px solid #e2e8f0;
+                        border-radius: 12px;
+                        padding: 8px 14px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #334155;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+                    }
+                    .pp-pill-icon {
+                        width: 16px;
+                        height: 16px;
+                        color: #64748b;
+                    }
+                    
+                    /* Start Button */
+                    .pp-btn-start {
+                        background: #2563eb;
+                        color: #ffffff;
+                        width: 100%;
+                        border: none;
+                        padding: 18px 24px;
+                        border-radius: 16px;
+                        font-size: 16px;
+                        font-weight: 700;
+                        cursor: pointer;
+                        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        transition: all 0.2s ease;
+                        box-sizing: border-box;
+                    }
+                    .pp-btn-start:hover {
+                        background: #1d4ed8;
+                        transform: translateY(-1px);
+                        box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+                    }
+                    .pp-btn-arrow {
+                        font-size: 18px;
+                        transition: transform 0.2s;
+                    }
+                    .pp-btn-start:hover .pp-btn-arrow {
+                        transform: translateX(4px);
+                    }
+                    
+                    /* Secure Bottom Banner */
+                    .sd-secure-banner {
+                        position: relative;
+                        z-index: 1;
+                        background: rgba(241, 245, 249, 0.4);
+                        border: 1px solid #e2e8f0;
+                        border-radius: 16px;
+                        padding: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 24px;
+                        font-size: 13px;
+                        color: #475569;
+                        width: 100%;
+                        max-width: 720px;
+                        margin: 0 auto;
+                        box-sizing: border-box;
+                        flex-wrap: wrap;
+                    }
+                    .sd-secure-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+                    .sd-secure-icon {
+                        width: 16px;
+                        height: 16px;
+                        color: #2563eb;
+                    }
+                    .sd-secure-divider {
+                        color: #2563eb;
+                        font-weight: 700;
+                    }
+                    
+                    @media (max-width: 640px) {
+                        .speaking-dashboard-container { padding: 40px 20px; }
+                        .sd-hero { flex-direction: column; align-items: flex-start; gap: 24px; }
+                        .sd-stats-card { width: 100%; justify-content: space-between; gap: 12px; }
+                        .premium-practice-card {
+                            grid-template-columns: 1fr;
+                            gap: 24px;
+                            padding: 24px;
+                        }
+                        .pp-left-section {
+                            padding-right: 0;
+                        }
+                        .sd-secure-banner {
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 12px;
+                        }
+                        .sd-secure-divider {
+                            display: none;
+                        }
+                    }
+                </style>
+                
+                <!-- Background curves decoration -->
+                <div class="sd-bg-decoration sd-bg-dots"></div>
+                <div class="sd-bg-decoration sd-bg-circle-tr">
+                    <div class="sd-bg-circle-tr-inner">
+                        <div class="sd-bg-circle-tr-innermost"></div>
+                    </div>
+                </div>
+                <div class="sd-bg-decoration sd-bg-circle-bl">
+                    <div class="sd-bg-circle-bl-inner"></div>
+                </div>
+                
+                <div class="sd-hero">
+                    <div class="sd-hero-left">
+                        <div class="sd-badge-top">
+                            <svg class="sd-badge-mic-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="22"/>
+                            </svg>
+                            IELTS SPEAKING
+                        </div>
+                        <h1 class="sd-title">Speaking Practice</h1>
+                        <p class="sd-subtitle">Select a test to begin practicing with the AI Voice Examiner.</p>
+                    </div>
+                    
+                    <div class="sd-stats-card">
+                        <div class="sd-stat-item">
+                            <div class="sd-stat-icon-wrapper blue">
+                                <svg class="sd-stat-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <div class="sd-stat-info">
+                                <span class="sd-stat-val">3</span>
+                                <span class="sd-stat-lbl">Parts</span>
+                            </div>
+                        </div>
+                        <div class="sd-stat-divider"></div>
+                        <div class="sd-stat-item">
+                            <div class="sd-stat-icon-wrapper purple">
+                                <svg class="sd-stat-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l-1.813-5.096L2.096 14.09 7.187 13l1-5.09 1.813 5.09 5.09 1.096-5.09 1.096zM19.096 4.09L21 9l-1.813-5.096L14.09 2.096 19.187 1l1 5.09 1.813-5.09-1.813-5.09z" />
+                                </svg>
+                            </div>
+                            <div class="sd-stat-info">
+                                <span class="sd-stat-val">AI</span>
+                                <span class="sd-stat-lbl">Feedback</span>
+                            </div>
+                        </div>
+                        <div class="sd-stat-divider"></div>
+                        <div class="sd-stat-item">
+                            <div class="sd-stat-icon-wrapper amber">
+                                <svg class="sd-stat-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+                                </svg>
+                            </div>
+                            <div class="sd-stat-info">
+                                <span class="sd-stat-val">11-14 min</span>
+                                <span class="sd-stat-lbl">Full test</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sd-main-section">
+                    <div class="premium-practice-card">
+                        <div class="pp-left-section">
+                            <div class="pp-mic-outer-circle">
+                                <div class="pp-mic-middle-circle">
+                                    <div class="pp-mic-inner-circle">
+                                        <svg class="pp-mic-svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                            <line x1="12" y1="19" x2="12" y2="22"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pp-right-section">
+                            <span class="pp-badge">
+                                AI Exam Mode
+                                <svg class="pp-badge-sparkle" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </span>
+                            
+                            <h2 class="pp-title">Speaking Practice</h2>
+                            <p class="pp-desc">Complete Parts 1, 2, and 3 in one full test with our AI Voice Examiner.</p>
+                            
+                            <div class="pp-stat-pills">
+                                <div class="pp-pill">
+                                    <svg class="pp-pill-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                    </svg>
+                                    3 Parts
+                                </div>
+                                <div class="pp-pill">
+                                    <svg class="pp-pill-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    11-14 min Est. time
+                                </div>
+                                <div class="pp-pill">
+                                    <svg class="pp-pill-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                    AI Feedback Included
+                                </div>
+                            </div>
+                            
+                            <button class="pp-btn-start" type="button" id="btnStartSpeakingPractice">
+                                <span style="flex: 1; text-align: center; margin-left: 24px;">Start AI Exam</span>
+                                <span class="pp-btn-arrow">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sd-secure-banner">
+                    <div class="sd-secure-item">
+                        <svg class="sd-secure-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Secure practice environment
+                    </div>
+                    <span class="sd-secure-divider">&bull;</span>
+                    <div class="sd-secure-item">
+                        <svg class="sd-secure-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        Real exam structure
+                    </div>
+                    <span class="sd-secure-divider">&bull;</span>
+                    <div class="sd-secure-item">
+                        <svg class="sd-secure-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        Improve with AI insights
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const btnStart = document.getElementById("btnStartSpeakingPractice");
+        if (btnStart) {
+            btnStart.addEventListener("click", () => {
+                beginAiPracticeDirect();
+            });
+        }
+    }
+
+    function renderListing(sectionKey) {
+        renderHome();
+    }
+
+    function renderTestCard(sectionKey, test, index) {
+        const meta = sectionMeta[sectionKey];
+        const displayTitle = `Test ${index + 1}`;
+        const formatCueTime = (value, fallback) => String(value || fallback).trim().replace(/^(\d+)\s*min$/i, "$1 min");
+        const stats = sectionKey === "part2"
+            ? [["1", "Cue Card"], [formatCueTime(test.prepTime, "1 min"), "Prep"], [formatCueTime(test.speakingTime, "2 min"), "Speaking"]]
+            : sectionKey === "full"
+                ? [["3", "Parts"], [test.estimatedTime || "11-14 min", "Estimated time"], ["AI", "Feedback included"]]
+                : [[String(test.questions?.length || meta.stats[0][0]), "Questions"], [test.speakingTime || meta.stats[1][0], "Estimated time"]];
+        const statsClass = [
+            stats.length > 2 ? "speaking-card-stats--three" : "",
+            sectionKey === "part2" ? "speaking-card-stats--cue meta-grid" : ""
+        ].filter(Boolean).join(" ");
+        return `
+            <a class="writing-test-card speaking-test-card speaking-test-card--sealed" href="${meta.route}/${encodeURIComponent(test.id)}" aria-label="${escapeHtml(`${meta.badge} ${displayTitle}`)}">
+                <div class="test-card-top">
+                    <span class="test-card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            ${sectionIcon(sectionKey)}
+                        </svg>
+                    </span>
+                    <span class="test-card-badge">${escapeHtml(meta.badge)}</span>
+                </div>
+                <div class="test-card-content">
+                    <h2>${escapeHtml(displayTitle)}</h2>
+                </div>
+                <div class="test-card-stats ${statsClass}">
+                    ${stats.map(([value, label]) => sectionKey === "part2"
+                        ? `<span class="speaking-meta-box meta-box"><strong class="speaking-meta-value meta-value">${escapeHtml(value)}</strong><small class="speaking-meta-label meta-label">${escapeHtml(label)}</small></span>`
+                        : `<span><strong>${escapeHtml(value)}</strong> ${escapeHtml(label)}</span>`).join("")}
+                </div>
+                <div class="test-card-button">${escapeHtml(meta.button)} <span>-&gt;</span></div>
+            </a>
+        `;
+    }
+
+    function renderTimerBox(label, seconds) {
+        return `
+            <div class="speaking-timer-box">
+                <span>${escapeHtml(label)}</span>
+                <strong>${formatTime(seconds)}</strong>
+            </div>
+        `;
+    }
+
+    function renderStatus() {
+        if (state.loading) return `<div class="speaking-status">Evaluating your speaking...</div>`;
+        if (state.recording) return `<div class="speaking-status recording">Recording: ${state.timer ? formatTime(state.timer.remaining) : "live"}</div>`;
+        if (state.timer) return `<div class="speaking-status">${escapeHtml(state.timer.label)}: ${formatTime(state.timer.remaining)}</div>`;
+        return `<div class="speaking-status">Ready</div>`;
+    }
+
+    function renderAudioPreview(record, transcriptId) {
+        if (!record?.audioUrl) return "";
+        return `
+            <div class="speaking-audio-preview">
+                <strong>Audio preview</strong>
+                <audio controls preload="metadata" src="${record.audioUrl}"></audio>
+            </div>
+            <div class="speaking-transcript-box">
+                <strong>Transcript</strong>
+                <p class="speaking-muted">The browser transcript is optional. The server will also try to transcribe your audio before AI feedback.</p>
+                <textarea data-transcript="${transcriptId}" placeholder="Transcript will appear here if your browser supports speech recognition. You can also edit it before submitting.">${escapeHtml(record.transcript || "")}</textarea>
+            </div>
+        `;
+    }
+
+    function renderCurrentTest() {
+        if (!state.section || !state.test) return;
+        if (state.section === "full") renderFullPractice();
+        else if (state.section === "part2") renderCuePractice();
+        else renderSinglePractice();
+    }
+
+    async function renderTest(sectionKey, testId) {
+        let test = findTest(sectionKey, testId);
+        if (!test) {
+            renderListing(sectionKey);
+            return;
+        }
+        if (!test.questions?.length && !test.bullets?.length && !test.parts?.length) {
+            test = await loadSpeakingTestDetail(sectionKey, test.id || testId);
+        }
+        state.section = sectionKey;
+        state.test = test;
+        state.error = "";
+        state.feedback = null;
+        state.cuePrepStatus = "not_started";
+        state.fullPrepStatus = {};
+        state.partTimeFinished = {};
+        state.fullCurrentPart = 1;
+        state.recording = null;
+        state.voiceFlow = null;
+        state.hasStarted = isSpeakingMockMode;
+        clearAllPlayerTimers();
+        setPlayerMode(true);
+        document.title = `${test.title} - ${sectionMeta[sectionKey].listingTitle} - IELTSX`;
+        if (isSpeakingMockMode) {
+            startHeaderTimer(getHeaderTotalSeconds());
+            if (state.section !== "part2") {
+                startActivePartTimer();
+            }
+        }
+        renderCurrentTest();
+    }
+
+    function beginSpeakingTest() {
+        if (state.hasStarted || state.loading || !state.test) return;
+        state.hasStarted = true;
+        startHeaderTimer(getHeaderTotalSeconds());
+        if (state.section !== "part2") {
+            startActivePartTimer();
+        } else {
+            renderCurrentTest();
+        }
+    }
+
+    function beginAiExaminerTest() {
+        state.useAiExaminer = true;
+        state.hasStarted = true;
+        startAiExaminerSession();
+    }
+
+    let peerConnection = null;
+    let localStream = null;
+    let dataChannel = null;
+
+    async function startAiExaminerSession() {
+        state.aiStatus = "Connecting to AI Examiner...";
+        state.aiMessages = [];
+        state.currentAiTranscript = "";
+        renderAiExaminerScreen();
+
+        try {
+            const sessionRes = await fetch("/api/speaking/realtime-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({
+                    testId: state.test?.id || state.test?._id || "",
+                    title: state.test?.title || "IELTS Speaking Test",
+                    topic: state.test?.topic || "",
+                    parts: Array.isArray(state.test?.parts) ? state.test.parts : []
+                })
+            });
+            if (!sessionRes.ok) throw new Error("Failed to get ephemeral session token");
+            const sessionData = await sessionRes.json();
+            const clientSecret = sessionData.client_secret.value;
+
+            const pc = new RTCPeerConnection();
+            peerConnection = pc;
+
+            const audioEl = document.createElement("audio");
+            audioEl.autoplay = true;
+            document.body.appendChild(audioEl);
+
+            pc.ontrack = (event) => {
+                audioEl.srcObject = event.streams[0];
+            };
+
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            localStream = stream;
+            stream.getTracks().forEach((track) => pc.addTrack(track, stream));
+
+            const dc = pc.createDataChannel("oai-events");
+            dataChannel = dc;
+
+            dc.onopen = () => {
+                state.aiStatus = "Examiner is ready";
+                renderAiExaminerScreen();
+            };
+
+            dc.onmessage = (event) => {
+                try {
+                    const msg = JSON.parse(event.data);
+                    handleRealtimeEvent(msg);
+                } catch {}
+            };
+
+            const offer = await pc.createOffer();
+            await pc.setLocalDescription(offer);
+
+            const baseUrl = "https://api.openai.com/v1/realtime";
+            const model = "gpt-4o-realtime-preview-2024-12-17";
+            const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
+                method: "POST",
+                body: offer.sdp,
+                headers: {
+                    "Authorization": `Bearer ${clientSecret}`,
+                    "Content-Type": "application/sdp"
+                }
+            });
+
+            if (!sdpResponse.ok) {
+                throw new Error("Failed to negotiate WebRTC session with OpenAI");
+            }
+
+            const answerSdp = await sdpResponse.text();
+            await pc.setRemoteDescription(new RTCSessionDescription({
+                type: "answer",
+                sdp: answerSdp
+            }));
+
+            state.aiStatus = "Examiner is ready";
+            renderAiExaminerScreen();
+        } catch (err) {
+            console.error("AI Examiner error:", err);
+            state.aiStatus = "Connection failed. Please try again.";
+            renderAiExaminerScreen();
+        }
+    }
+
+    function stopAiExaminerSession() {
+        if (localStream) {
+            localStream.getTracks().forEach((track) => track.stop());
+            localStream = null;
+        }
+        if (dataChannel) {
+            dataChannel.close();
+            dataChannel = null;
+        }
+        if (peerConnection) {
+            peerConnection.close();
+            peerConnection = null;
+        }
+        state.useAiExaminer = false;
+        state.hasStarted = false;
+        state.aiMessages = null;
+        state.currentAiTranscript = null;
+        state.aiStatus = null;
+        
+        document.body.classList.remove("ai-examiner-open");
+        
+        // Show global navbar and footers again
+        const navbar = document.getElementById("globalNavbar");
+        if (navbar) navbar.style.display = "";
+        const homeFooter = document.querySelector(".home-footer");
+        if (homeFooter) homeFooter.style.display = "";
+        const partFooter = document.querySelector(".speaking-part-footer");
+        if (partFooter) partFooter.style.display = "";
+        
+        const timerDisplay = document.getElementById("speakingTimerDisplay");
+        if (timerDisplay) timerDisplay.style.display = "";
+        const submitBtn = document.getElementById("speakingHeaderSubmitBtn");
+        if (submitBtn) submitBtn.style.display = "";
+
+        setPlayerMode(false);
+        renderHome();
+    }
+
+    function handleRealtimeEvent(event) {
+        if (event.type === "input_audio_buffer.speech_started") {
+            state.aiStatus = "Listening to you...";
+            renderAiExaminerScreen();
+        } else if (event.type === "input_audio_buffer.speech_stopped") {
+            state.aiStatus = "Examiner is thinking...";
+            renderAiExaminerScreen();
+        } else if (event.type === "response.audio_transcript.delta") {
+            state.aiStatus = "Examiner is speaking...";
+            state.currentAiTranscript = (state.currentAiTranscript || "") + event.delta;
+            renderAiExaminerScreen();
+        } else if (event.type === "response.audio_transcript.done") {
+            state.aiStatus = "Examiner finished speaking";
+            if (state.currentAiTranscript) {
+                state.aiMessages.push({
+                    role: "examiner",
+                    text: state.currentAiTranscript
+                });
+                state.currentAiTranscript = "";
+            }
+            renderAiExaminerScreen();
+        } else if (event.type === "conversation.item.input_audio_transcription.completed") {
+            if (event.transcript && String(event.transcript).trim()) {
+                state.aiMessages.push({
+                    role: "user",
+                    text: String(event.transcript).trim()
+                });
+                renderAiExaminerScreen();
+            }
+        }
+    }
+
+    function renderAiExaminerScreen() {
+        renderSpeakingPlayer();
+        return;
+        setPlayerMode(true);
+        updatePlayerHeader();
+        
+        const globalHeader = document.getElementById("speakingCbtHeader");
+        if (globalHeader) globalHeader.style.display = "none";
+        
+        const timerDisplay = document.getElementById("speakingTimerDisplay");
+        if (timerDisplay) timerDisplay.style.display = "none";
+        const submitBtn = document.getElementById("speakingHeaderSubmitBtn");
+        if (submitBtn) submitBtn.style.display = "none";
+
+        // Add body class for true fullscreen overlay scroll management
+        document.body.classList.add("ai-examiner-open");
+
+        // Hide global navbar and footers while overlay is open to avoid bleed-through
+        const navbar = document.getElementById("globalNavbar");
+        if (navbar) navbar.style.display = "none";
+        const homeFooter = document.querySelector(".home-footer");
+        if (homeFooter) homeFooter.style.display = "none";
+        const partFooter = document.querySelector(".speaking-part-footer");
+        if (partFooter) partFooter.style.display = "none";
+
+        // Inject global style overrides to lock layout and prevent white body background
+        let styleTag = document.getElementById("ai-examiner-global-styles");
+        if (!styleTag) {
+            styleTag = document.createElement("style");
+            styleTag.id = "ai-examiner-global-styles";
+            styleTag.textContent = `
+                html,
+                body,
+                #speakingApp {
+                    width: 100% !important;
+                    min-height: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                body.ai-examiner-open {
+                    overflow: hidden !important;
+                    background: #020617 !important;
+                }
+            `;
+            document.head.appendChild(styleTag);
+        }
+
+        let pulseClass = "";
+        let pulseStatus = "Examiner is ready";
+        if (state.aiStatus?.includes("speaking")) {
+            pulseClass = "pulse-ai";
+            pulseStatus = "Examiner is speaking...";
+        } else if (state.aiStatus?.includes("Listening") || state.aiStatus?.includes("speaking naturally") || state.aiStatus?.includes("Listening to you")) {
+            pulseClass = "pulse-user";
+            pulseStatus = "Listening...";
+        } else if (state.aiStatus?.includes("thinking") || state.aiStatus?.includes("Processing")) {
+            pulseClass = "pulse-thinking";
+            pulseStatus = "Processing...";
+        } else if (state.aiStatus?.includes("failed")) {
+            pulseStatus = "Connection failed. Please try again.";
+        } else if (state.aiStatus?.includes("Connecting")) {
+            pulseStatus = "Connecting...";
+        } else {
+            pulseStatus = state.aiStatus || "Examiner is ready";
+        }
+
+        const partLabel = state.section === "full" ? `Speaking Part ${state.fullCurrentPart || 1}` : `Speaking Part ${getStandalonePartNumber()}`;
+
+        app.innerHTML = `
+            <div class="ai-examiner-overlay ${pulseClass}">
+                <style>
+                    .ai-examiner-overlay {
+                        position: fixed;
+                        inset: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        min-height: 100dvh;
+                        z-index: 99999;
+                        overflow: hidden;
+                        background: radial-gradient(circle at center, rgba(37, 99, 235, 0.16) 0%, rgba(15, 23, 42, 0.08) 32%, #020617 72%), #020617;
+                        color: #ffffff;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    }
+                    .ai-top-left-badge {
+                        position: absolute;
+                        top: 28px;
+                        left: 48px;
+                        padding: 9px 18px;
+                        border-radius: 999px;
+                        background: rgba(255,255,255,0.05);
+                        border: 1px solid rgba(255,255,255,0.12);
+                        color: #e5e7eb;
+                        font-size: 14px;
+                        font-weight: 600;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+                    .ai-top-left-badge svg {
+                        width: 16px;
+                        height: 16px;
+                        color: #3b82f6;
+                    }
+                    .ai-settings-button {
+                        position: absolute;
+                        top: 28px;
+                        right: 48px;
+                        width: 42px;
+                        height: 42px;
+                        border-radius: 999px;
+                        background: rgba(255,255,255,0.06);
+                        border: 1px solid rgba(255,255,255,0.12);
+                        color: #e5e7eb;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        transition: background 0.2s;
+                    }
+                    .ai-settings-button:hover {
+                        background: rgba(255,255,255,0.12);
+                    }
+                    .ai-settings-button svg {
+                        width: 20px;
+                        height: 20px;
+                        color: #e5e7eb;
+                    }
+                    .ai-center-status {
+                        position: absolute;
+                        top: 108px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        text-align: center;
+                        width: 100%;
+                        padding: 0 20px;
+                        box-sizing: border-box;
+                    }
+                    .ai-part-label {
+                        color: #3b82f6;
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                    }
+                    .ai-status-text {
+                        color: #bfdbfe;
+                        font-size: 15px;
+                        transition: color 0.3s;
+                    }
+                    .pulse-ai .ai-status-text { color: #c084fc; }
+                    .pulse-user .ai-status-text { color: #34d399; }
+                    .pulse-thinking .ai-status-text { color: #fde047; }
+                    
+                    .ai-orb-wrapper {
+                        position: absolute;
+                        left: 50%;
+                        top: 46%;
+                        transform: translate(-50%, -50%);
+                        width: 340px;
+                        height: 340px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .ai-orb-wrapper::before,
+                    .ai-orb-wrapper::after {
+                        content: "";
+                        position: absolute;
+                        border-radius: 50%;
+                        border: 1px solid rgba(59, 130, 246, 0.18);
+                    }
+                    .ai-orb-wrapper::before {
+                        width: 300px;
+                        height: 300px;
+                    }
+                    .ai-orb-wrapper::after {
+                        width: 230px;
+                        height: 230px;
+                    }
+                    .ai-orb {
+                        width: 170px;
+                        height: 170px;
+                        border-radius: 50%;
+                        background: radial-gradient(circle at 32% 26%, #ffffff 0%, #bfdbfe 16%, #60a5fa 38%, #2563eb 66%, #0f172a 100%);
+                        box-shadow: 0 0 45px rgba(59, 130, 246, 0.7), 0 0 120px rgba(37, 99, 235, 0.45);
+                        animation: orbPulse 3s ease-in-out infinite;
+                        transition: background 0.5s, box-shadow 0.5s;
+                    }
+                    .pulse-ai .ai-orb {
+                        background: radial-gradient(circle at 32% 26%, #f5f3ff 0%, #c084fc 16%, #a855f7 38%, #7c3aed 66%, #0f172a 100%);
+                        box-shadow: 0 0 45px rgba(168, 85, 247, 0.7), 0 0 120px rgba(124, 58, 237, 0.45);
+                    }
+                    .pulse-user .ai-orb {
+                        background: radial-gradient(circle at 32% 26%, #ecfdf5 0%, #6ee7b7 16%, #10b981 38%, #059669 66%, #0f172a 100%);
+                        box-shadow: 0 0 45px rgba(16, 185, 129, 0.7), 0 0 120px rgba(5, 150, 105, 0.45);
+                    }
+                    .pulse-thinking .ai-orb {
+                        background: radial-gradient(circle at 32% 26%, #fffbeb 0%, #fde047 16%, #eab308 38%, #ca8a04 66%, #0f172a 100%);
+                        box-shadow: 0 0 45px rgba(234, 179, 8, 0.7), 0 0 120px rgba(202, 138, 4, 0.45);
+                    }
+                    
+                    @keyframes orbPulse {
+                        0%, 100% {
+                            transform: scale(1);
+                            box-shadow: 0 0 45px rgba(59, 130, 246, 0.65), 0 0 120px rgba(37, 99, 235, 0.38);
+                        }
+                        50% {
+                            transform: scale(1.04);
+                            box-shadow: 0 0 65px rgba(96, 165, 250, 0.9), 0 0 150px rgba(37, 99, 235, 0.55);
+                        }
+                    }
+                    .ai-bottom-controls {
+                        position: absolute;
+                        left: 50%;
+                        bottom: 74px;
+                        transform: translateX(-50%);
+                        display: flex;
+                        align-items: center;
+                        gap: 18px;
+                    }
+                    .ai-mic-button {
+                        width: 72px;
+                        height: 72px;
+                        border-radius: 50%;
+                        border: none;
+                        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+                        color: white;
+                        box-shadow: 0 0 40px rgba(37, 99, 235, 0.55);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                    }
+                    .ai-mic-button:hover {
+                        transform: scale(1.05);
+                    }
+                    .pulse-user .ai-mic-button {
+                        background: linear-gradient(135deg, #047857, #10b981);
+                        box-shadow: 0 0 40px rgba(16, 185, 129, 0.55);
+                    }
+                    .ai-mic-button svg {
+                        width: 28px;
+                        height: 28px;
+                        color: #ffffff;
+                    }
+                    .ai-close-button {
+                        width: 56px;
+                        height: 56px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(255,255,255,0.16);
+                        background: rgba(255,255,255,0.06);
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                    }
+                    .ai-close-button:hover {
+                        background: rgba(255,255,255,0.12);
+                        transform: scale(1.05);
+                    }
+                    .ai-close-button svg {
+                        width: 22px;
+                        height: 22px;
+                        color: #ffffff;
+                    }
+                    .ai-secure-text {
+                        position: absolute;
+                        left: 50%;
+                        bottom: 32px;
+                        transform: translateX(-50%);
+                        font-size: 13px;
+                        color: rgba(226, 232, 240, 0.45);
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        white-space: nowrap;
+                    }
+                    .ai-secure-text svg {
+                        width: 14px;
+                        height: 14px;
+                        color: rgba(226, 232, 240, 0.45);
+                    }
+                </style>
+
+                <div class="ai-top-left-badge">
+                    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="22"/>
+                    </svg>
+                    IELTS Speaking Test
+                </div>
+                
+                <button class="ai-settings-button" type="button" aria-label="Settings">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                    </svg>
+                </button>
+
+                <div class="ai-center-status">
+                    <div class="ai-part-label">${escapeHtml(partLabel)}</div>
+                    <div class="ai-status-text">${escapeHtml(pulseStatus)}</div>
+                </div>
+
+                <div class="ai-orb-wrapper">
+                    <div class="ai-orb"></div>
+                </div>
+
+                <div class="ai-bottom-controls">
+                    <button class="ai-mic-button" type="button" aria-label="Microphone">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                        </svg>
+                    </button>
+                    <button class="ai-close-button" type="button" data-end-ai-examiner aria-label="End Test">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="ai-secure-text">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    Your response is being recorded securely.
+                </div>
+            </div>
+        `;
+    }
+
+    function renderSinglePractice() {
+        renderSpeakingPlayer();
+    }
+
+    function renderCuePractice() {
+        renderSpeakingPlayer();
+    }
+
+    function renderFullPractice() {
+        renderSpeakingPlayer();
+    }
+
+    function getPartKey(partNumber) {
+        if (partNumber === 2) return "part2";
+        if (partNumber === 3) return "part3";
+        return "part1";
+    }
+
+    function getStandalonePartNumber() {
+        if (state.section === "part2") return 2;
+        if (state.section === "part3") return 3;
+        return 1;
+    }
+
+    function getSubmitTestMode() {
+        return state.section === "full" ? "full" : "part";
+    }
+
+    function getActiveSubmitPartNumber() {
+        if (state.section === "full") return Number(activeFullPart()?.part || state.fullCurrentPart || 1);
+        return getStandalonePartNumber();
+    }
+
+    function getSpeakingTestId() {
+        return String(state.test?.id || state.test?._id || state.test?.testId || "").trim();
+    }
+
+    function questionTextFromPart(part) {
+        const lines = [
+            part?.prompt || "",
+            ...(Array.isArray(part?.questions) ? part.questions : []),
+            ...(Array.isArray(part?.bullets) ? part.bullets : [])
+        ].map((item) => String(item || "").trim()).filter(Boolean);
+        return lines.join("\n");
+    }
+
+    function getSpeakingWindow(partNumber) {
+        return partNumber === 2 ? "2 minutes" : "5 minutes";
+    }
+
+    function getTimeAllowedLabel(part) {
+        if (state.section === "full") return "13 minutes";
+        if (part.part === 2) return "3 minutes";
+        return "5 minutes";
+    }
+
+    function getActivePlayerPart() {
+        if (state.section === "full") {
+            const fullPart = activeFullPart() || {};
+            const partNumber = Number(fullPart.part) || 1;
+            const partKey = getPartKey(partNumber);
+            return {
+                part: partNumber,
+                title: PLAYER_TITLES[partNumber] || fullPart.title || "Speaking Test",
+                testType: `Speaking Part ${partNumber}`,
+                prompt: fullPart.prompt || (partNumber === 2 ? PLAYER_DEFAULTS.part2.topic : state.test?.topic || ""),
+                questions: partNumber === 2 ? [] : (fullPart.questions?.length ? fullPart.questions : PLAYER_DEFAULTS[partKey].questions),
+                bullets: partNumber === 2 ? (fullPart.questions?.length ? fullPart.questions : PLAYER_DEFAULTS.part2.bullets) : [],
+                referenceHtml: fullPart.referenceHtml || "",
+                prepSeconds: partNumber === 2 ? SPEAKING_TIMING.part2Prep : 0,
+                durationSeconds: getPartSpeakingSeconds(partNumber),
+                isFullTest: true
+            };
+        }
+
+        const partNumber = getStandalonePartNumber();
+        const partKey = getPartKey(partNumber);
+        return {
+            part: partNumber,
+            title: PLAYER_TITLES[partNumber],
+            testType: `Speaking Part ${partNumber}`,
+            prompt: partNumber === 2
+                ? (state.test?.topic || state.test?.description || PLAYER_DEFAULTS.part2.topic)
+                : (state.test?.topic || state.test?.description || ""),
+            questions: partNumber === 2 ? [] : (state.test?.questions?.length ? state.test.questions : PLAYER_DEFAULTS[partKey].questions),
+            bullets: partNumber === 2 ? (state.test?.bullets?.length ? state.test.bullets : PLAYER_DEFAULTS.part2.bullets) : [],
+            prepSeconds: partNumber === 2 ? SPEAKING_TIMING.part2Prep : 0,
+            durationSeconds: getPartSpeakingSeconds(partNumber),
+            isFullTest: false
+        };
+    }
+
+    function getRecordForPart(partNumber) {
+        if (state.section === "full") return state.fullRecords[partNumber];
+        if (state.section === "part2") return state.cueRecord;
+        return state.partRecords[state.section];
+    }
+
+    function isRecordingPart(partNumber) {
+        if (!state.recording) return false;
+        if (state.section === "full") {
+            return state.recording.scope?.mode === "full" && state.recording.scope?.part === partNumber;
+        }
+        if (state.section === "part2") return state.recording.scope?.mode === "cue";
+        return state.recording.scope?.mode === "single";
+    }
+
+    function getPrepStatus(partNumber) {
+        if (partNumber !== 2) return "not_needed";
+        if (state.section === "full") return state.fullPrepStatus[partNumber] || "not_started";
+        if (state.section === "part2") return state.cuePrepStatus || "not_started";
+        return "not_needed";
+    }
+
+    function setPrepStatus(partNumber, status) {
+        if (partNumber !== 2) return;
+        if (state.section === "full") state.fullPrepStatus[partNumber] = status;
+        else if (state.section === "part2") state.cuePrepStatus = status;
+    }
+
+    function isPrepTimerActive() {
+        return state.timer?.label === "Preparation time";
+    }
+
+    function getPrepRemaining(part) {
+        const status = getPrepStatus(part.part);
+        if (status === "running" && isPrepTimerActive()) return state.timer.remaining;
+        if (status === "finished") return 0;
+        return part.prepSeconds || SPEAKING_TIMING.part2Prep;
+    }
+
+    function startPreparationForActivePart() {
+        if (!state.hasStarted) return;
+        const part = getActivePlayerPart();
+        if (part.part !== 2 || state.recording || state.loading) return;
+        setError("");
+        setPrepStatus(part.part, "running");
+        startTimer("Preparation time", part.prepSeconds || SPEAKING_TIMING.part2Prep, () => {
+            setPrepStatus(part.part, "finished");
+            renderCurrentTest();
+        }, part.part, "preparation");
+    }
+
+    function getRecordingStatusText(partNumber) {
+        if (isRecordingPart(partNumber)) return "Recording";
+        return getRecordForPart(partNumber)?.blob ? "Recorded" : "Not started";
+    }
+
+    function getRecordingSeconds(partNumber) {
+        if (state.timer?.phase === "speaking" && state.timer.partNumber === partNumber) {
+            return state.timer.remaining;
+        }
+        if (state.partTimeFinished[partNumber]) return 0;
+        if (partNumber === 2 && getPrepStatus(partNumber) === "finished") return SPEAKING_TIMING.part2Speaking;
+        if (partNumber === 1 || partNumber === 3) return getPartSpeakingSeconds(partNumber);
+        const record = getRecordForPart(partNumber);
+        return record?.durationSeconds || 0;
+    }
+
+    function formatDuration(seconds) {
+        const safe = Math.max(0, Number(seconds) || 0);
+        const mins = String(Math.floor(safe / 60)).padStart(2, "0");
+        const secs = String(safe % 60).padStart(2, "0");
+        return `${mins}:${secs}`;
+    }
+
+    function getStartAction() {
+        if (state.section === "full") return "start-full-recording";
+        if (state.section === "part2") return "start-cue-recording";
+        return "start-single-recording";
+    }
+
+    function iconSizeFor(name, className = "") {
+        if (className.includes("ai-voice-badge-icon")) return 18;
+        if (className.includes("ai-voice-settings-icon")) return 20;
+        if (className.includes("ai-voice-control-icon")) return name === "x" ? 24 : 28;
+        if (className.includes("sp-intro-eyebrow-icon")) return 20;
+        if (className.includes("sp-intro-stat-icon")) return 26;
+        if (className.includes("sp-intro-card-mic-icon")) return 40;
+        if (className.includes("sp-intro-pill-icon")) return 14;
+        if (className.includes("sp-intro-mini-icon")) return 24;
+        if (className.includes("sp-intro-feature-icon")) return 18;
+        if (className.includes("sp-intro-arrow-icon")) return 26;
+        return 20;
+    }
+
+    function lucideIcon(name, className = "") {
+        const size = iconSizeFor(name, className);
+        const attrs = `class="${className}" width="${size}" height="${size}" style="width:${size}px;height:${size}px;max-width:${size}px;max-height:${size}px;flex:0 0 ${size}px;display:block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"`;
+        const paths = {
+            mic: `<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path>`,
+            sliders: `<path d="M10 6h10"></path><path d="M4 6h2"></path><path d="M6 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M14 12h6"></path><path d="M4 12h6"></path><path d="M10 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M18 18h2"></path><path d="M4 18h10"></path><path d="M14 18a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>`,
+            x: `<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>`,
+            rotate: `<path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path>`,
+            fileText: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path>`,
+            sparkles: `<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0Z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path>`,
+            clock: `<circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path>`,
+            boxes: `<path d="m7.5 4.27 4.5 2.6 4.5-2.6"></path><path d="M7.5 19.73v-5.2L3 11.93v5.2Z"></path><path d="M16.5 19.73v-5.2l4.5-2.6v5.2Z"></path><path d="M3 6.73v5.2l4.5 2.6 4.5-2.6v-5.2l-4.5-2.6Z"></path><path d="M12 6.73v5.2l4.5 2.6 4.5-2.6v-5.2l-4.5-2.6Z"></path>`,
+            shieldCheck: `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"></path><path d="m9 12 2 2 4-4"></path>`,
+            landmark: `<path d="M3 22h18"></path><path d="M6 18v-7"></path><path d="M10 18v-7"></path><path d="M14 18v-7"></path><path d="M18 18v-7"></path><path d="m12 2 9 5H3Z"></path>`,
+            trendingUp: `<path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path>`,
+            arrowRight: `<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>`
+        };
+        return `<svg ${attrs}>${paths[name] || paths.mic}</svg>`;
+    }
+
+    function normalizePromptText(value) {
+        if (typeof value === "string") return value.trim();
+        if (value && typeof value === "object") return String(value.text || value.question || value.prompt || "").trim();
+        return "";
+    }
+
+    function getPartQuestions(part, fallbackKey) {
+        const rawQuestions = Array.isArray(part?.questions) ? part.questions : [];
+        const normalized = rawQuestions.map(normalizePromptText).filter(Boolean);
+        return normalized.length ? normalized : PLAYER_DEFAULTS[fallbackKey].questions;
+    }
+
+    function getPartBullets(part) {
+        const rawBullets = Array.isArray(part?.bullets) && part.bullets.length
+            ? part.bullets
+            : Array.isArray(part?.questions)
+                ? part.questions
+                : [];
+        const normalized = rawBullets.map(normalizePromptText).filter(Boolean);
+        return normalized.length ? normalized : PLAYER_DEFAULTS.part2.bullets;
+    }
+
+    function partFromFullTest(partNumber) {
+        return activeFullParts().find((part) => Number(part.part) === Number(partNumber)) || null;
+    }
+
+    function buildCueDisplay(prompt, bullets) {
+        const bulletText = bullets.length ? ` ${bullets.join(" · ")}` : "";
+        return `${prompt}${bulletText ? ` — ${bulletText}` : ""}`;
+    }
+
+    function buildVoiceFlowItems() {
+        const isFull = state.section === "full";
+        const part1 = isFull ? partFromFullTest(1) : getStandalonePartNumber() === 1 ? getActivePlayerPart() : null;
+        const part2 = isFull ? partFromFullTest(2) : getStandalonePartNumber() === 2 ? getActivePlayerPart() : null;
+        const part3 = isFull ? partFromFullTest(3) : getStandalonePartNumber() === 3 ? getActivePlayerPart() : null;
+        const items = [];
+
+        if (part1) {
+            getPartQuestions(part1, "part1").forEach((question, index) => {
+                items.push({
+                    id: `part1-${index + 1}`,
+                    part: 1,
+                    type: "question",
+                    title: "Part 1",
+                    questionText: question,
+                    displayText: question,
+                    spokenText: `${index === 0 ? "Part one. " : ""}${question}`,
+                    maxSeconds: 45
+                });
+            });
+        }
+
+        if (part2) {
+            const prompt = normalizePromptText(part2.prompt || part2.topic || part2.description) || PLAYER_DEFAULTS.part2.topic;
+            const bullets = getPartBullets(part2);
+            const cueDisplay = buildCueDisplay(prompt, bullets);
+            items.push({
+                id: "part2-prep",
+                part: 2,
+                type: "cue-prep",
+                title: "Part 2",
+                questionText: cueDisplay,
+                displayText: cueDisplay,
+                spokenText: `Part two. ${prompt}. You should say: ${bullets.join(". ")}. You now have one minute to prepare.`,
+                prepSeconds: Number(part2.preparation || part2.prepSeconds || SPEAKING_TIMING.part2Prep) || SPEAKING_TIMING.part2Prep
+            });
+            items.push({
+                id: "part2-answer",
+                part: 2,
+                type: "cue-answer",
+                title: "Part 2",
+                questionText: cueDisplay,
+                displayText: cueDisplay,
+                spokenText: "Your preparation time is over. Please begin speaking now.",
+                maxSeconds: Number(part2.duration || part2.durationSeconds || SPEAKING_TIMING.part2Speaking) || SPEAKING_TIMING.part2Speaking
+            });
+        }
+
+        if (part3) {
+            getPartQuestions(part3, "part3").forEach((question, index) => {
+                items.push({
+                    id: `part3-${index + 1}`,
+                    part: 3,
+                    type: "question",
+                    title: "Part 3",
+                    questionText: question,
+                    displayText: question,
+                    spokenText: `${index === 0 ? "Part three. " : ""}${question}`,
+                    maxSeconds: 75
+                });
+            });
+        }
+
+        if (!items.length) {
+            PLAYER_DEFAULTS.part1.questions.forEach((question, index) => {
+                items.push({
+                    id: `fallback-${index + 1}`,
+                    part: 1,
+                    type: "question",
+                    title: "Part 1",
+                    questionText: question,
+                    displayText: question,
+                    spokenText: `${index === 0 ? "Part one. " : ""}${question}`,
+                    maxSeconds: 45
+                });
+            });
+        }
+
+        return items;
+    }
+
+    function createVoiceFlow() {
+        const cueSeed = getConversationCueCard();
+        const isFreeMode = state.speakingMode !== "exam";
+        const idleMessage = isFreeMode
+            ? "Tap the microphone to start Free Speaking Practice."
+            : "Tap the microphone to begin your IELTS Speaking test.";
+        return {
+            answers: [],
+            history: [],
+            partTurns: { 1: 0, 2: 0, 3: 0 },
+            speakingMode: isFreeMode ? "free" : "exam",
+            started: false,
+            cancelled: false,
+            phase: "idle",
+            examPhase: "idle",
+            status: "Connection failed. Please try again.",
+            part: isFreeMode ? 0 : 1,
+            turn: 0,
+            currentExaminerMessage: idleMessage,
+            latestQuestion: idleMessage,
+            latestTranscript: "",
+            cueCard: isFreeMode ? null : cueSeed,
+            prepRemaining: 0,
+            prepTimer: null,
+            prepInterval: null,
+            answerTimer: null,
+            nextTimer: null,
+            silenceTimer: null,
+            speechToken: null,
+            pendingExaminerResponse: null,
+            roundingAsked: false,
+            feedbackRequested: false,
+            isComplete: false
+        };
+    }
+
+    function ensureVoiceFlow() {
+        if (!state.voiceFlow) state.voiceFlow = createVoiceFlow();
+        return state.voiceFlow;
+    }
+
+    function getVoiceCurrentItem() {
+        return null;
+    }
+
+    function speakVoiceText(text, onDone) {
+        const done = typeof onDone === "function" ? onDone : () => {};
+        const spokenText = String(text || "").trim();
+        if (!spokenText || !window.speechSynthesis || !window.SpeechSynthesisUtterance) {
+            window.setTimeout(done, 350);
+            return;
+        }
+        try {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(spokenText);
+            utterance.lang = "en-US";
+            utterance.rate = 0.94;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            utterance.onend = done;
+            utterance.onerror = done;
+            window.speechSynthesis.speak(utterance);
+        } catch {
+            window.setTimeout(done, 350);
+        }
+    }
+
+    function getConversationCueCard() {
+        const part2 = partFromFullTest(2) || (getStandalonePartNumber() === 2 ? getActivePlayerPart() : null) || {};
+        const topic = normalizePromptText(part2.prompt || part2.topic || part2.description) || PLAYER_DEFAULTS.part2.topic;
+        const bullets = getPartBullets(part2);
+        return { topic, bullets };
+    }
+
+    function cueCardDisplayText(cueCard = {}) {
+        const topic = normalizePromptText(cueCard.topic) || PLAYER_DEFAULTS.part2.topic;
+        const bullets = Array.isArray(cueCard.bullets) && cueCard.bullets.length
+            ? cueCard.bullets.map(normalizePromptText).filter(Boolean)
+            : PLAYER_DEFAULTS.part2.bullets;
+        return buildCueDisplay(topic, bullets);
+    }
+
+    function conversationTestPayload() {
+        const fullParts = activeFullParts();
+        const part1 = fullParts.find((part) => Number(part.part) === 1) || {};
+        const part2 = fullParts.find((part) => Number(part.part) === 2) || {};
+        const part3 = fullParts.find((part) => Number(part.part) === 3) || {};
+        return {
+            id: getSpeakingTestId(),
+            title: state.test?.title || "IELTS Speaking Test",
+            topic: state.test?.topic || "General IELTS Speaking practice",
+            part1Questions: getPartQuestions(part1, "part1").slice(0, 8),
+            part2CueCard: getConversationCueCard(),
+            part3Questions: getPartQuestions(part3, "part3").slice(0, 8)
+        };
+    }
+
+    function wordCount(value) {
+        return String(value || "").trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    function nextPartTurns(flow, answerPart) {
+        const partTurns = { ...(flow.partTurns || {}) };
+        if (answerPart) partTurns[answerPart] = Number(partTurns[answerPart] || 0) + 1;
+        return partTurns;
+    }
+
+    function conversationStatePayload(flow, overrides = {}) {
+        return {
+            speakingMode: flow.speakingMode || state.speakingMode || "free",
+            part: flow.part,
+            turn: flow.turn,
+            phase: flow.phase,
+            examPhase: flow.examPhase,
+            partTurns: flow.partTurns,
+            roundingAsked: flow.roundingAsked,
+            cueCard: flow.cueCard,
+            currentExaminerMessage: flow.currentExaminerMessage,
+            latestQuestion: flow.latestQuestion,
+            latestTranscript: flow.latestTranscript,
+            history: flow.history.slice(-18),
+            test: conversationTestPayload(),
+            ...overrides
+        };
+    }
+
+    function normalizeCueCard(value) {
+        const fallback = getConversationCueCard();
+        if (!value || typeof value !== "object") return fallback;
+        const topic = normalizePromptText(value.topic) || fallback.topic;
+        const bullets = Array.isArray(value.bullets)
+            ? value.bullets.map(normalizePromptText).filter(Boolean)
+            : [];
+        return {
+            topic,
+            bullets: bullets.length ? bullets : fallback.bullets
+        };
+    }
+
+    function normalizeExaminerResponse(raw, fallback) {
+        const safe = raw && typeof raw === "object" ? raw : {};
+        const allowedPhases = new Set(["conversation", "question", "prep", "long_turn", "rounding_off", "complete"]);
+        let phase = allowedPhases.has(String(safe.phase || "")) ? String(safe.phase) : fallback.phase;
+        const isFreeMode = (state.speakingMode || "free") !== "exam";
+        let part = Math.min(3, Math.max(1, Number(safe.part || fallback.part || 1)));
+        const message = String(safe.examinerMessage || safe.message || fallback.examinerMessage || "").trim();
+        let cueCard = safe.cueCard ? normalizeCueCard(safe.cueCard) : (fallback.cueCard || null);
+        let isComplete = Boolean(safe.isComplete) || phase === "complete";
+        if (isFreeMode) {
+            part = 0;
+            cueCard = null;
+            isComplete = false;
+            if (phase === "complete" || phase === "prep" || phase === "long_turn" || phase === "rounding_off") {
+                phase = "conversation";
+            }
+        }
+        return {
+            examinerMessage: message || "Thank you. Let's continue.",
+            part,
+            phase,
+            cueCard,
+            shouldRecord: isFreeMode ? true : (safe.shouldRecord === false ? false : !["prep", "complete"].includes(phase)),
+            isComplete,
+            prepSeconds: Math.max(5, Number(safe.prepSeconds || fallback.prepSeconds || SPEAKING_TIMING.part2Prep)),
+            latestTranscript: String(safe.latestTranscript || fallback.latestTranscript || "").trim()
+        };
+    }
+
+    function fallbackExaminerResponse(event, transcript, payload) {
+        if ((payload.speakingMode || state.speakingMode || "free") !== "exam") {
+            if (event === "start") {
+                return {
+                    part: 0,
+                    phase: "conversation",
+                    examinerMessage: FREE_SPEAKING_GREETING,
+                    shouldRecord: true,
+                    isComplete: false
+                };
+            }
+            const answerWords = wordCount(transcript);
+            const replies = answerWords < 8
+                ? [
+                    "No worries. Say a little more, even with simple words. What happened next?",
+                    "That's a good start. Try to add one detail so your idea feels clearer.",
+                    "Take your time. You can continue with one example from your own life."
+                ]
+                : [
+                    "That's interesting. You explained the idea clearly. Try adding one specific example to make it stronger.",
+                    "I see what you mean. A more natural phrase could be: 'It helped me feel more confident.' Now continue your idea.",
+                    "Good. Let's keep talking about this for a moment. What part of that experience mattered most to you?"
+                ];
+            return {
+                part: 0,
+                phase: "conversation",
+                examinerMessage: replies[Math.min(replies.length - 1, Math.max(0, Number(payload.turn || 1) % replies.length))],
+                shouldRecord: true,
+                isComplete: false
+            };
+        }
+
+        if (event === "start") {
+            return {
+                part: 1,
+                phase: "question",
+                examinerMessage: "Let's begin with Part 1. Let's talk about your hometown. Where are you from?",
+                shouldRecord: true
+            };
+        }
+
+        const partTurns = payload.partTurns || {};
+        const answeredPart = Number(payload.answeringPart || payload.part || 1);
+        const answerWords = wordCount(transcript);
+        const cueCard = normalizeCueCard(payload.cueCard);
+
+        if (answeredPart === 1) {
+            if (answerWords > 0 && answerWords < 8 && Number(partTurns[1] || 0) < 4) {
+                return {
+                    part: 1,
+                    phase: "question",
+                    examinerMessage: "Thank you. Could you tell me a little more about that?",
+                    shouldRecord: true
+                };
+            }
+            const questions = [
+                "Thank you. What do you like most about the place where you live?",
+                "Alright. What do you usually do in your free time?",
+                "Thank you. Do you prefer spending time alone or with other people?",
+                "Alright. Is there anything you would like to change about your daily routine?"
+            ];
+            if (Number(partTurns[1] || 0) < 4) {
+                return {
+                    part: 1,
+                    phase: "question",
+                    examinerMessage: questions[Math.max(0, Number(partTurns[1] || 1) - 1)] || questions[0],
+                    shouldRecord: true
+                };
+            }
+            return {
+                part: 2,
+                phase: "prep",
+                cueCard,
+                prepSeconds: SPEAKING_TIMING.part2Prep,
+                examinerMessage: `Now I am going to give you a topic. You will have one minute to prepare and then you should speak for up to two minutes. Your topic is: ${cueCard.topic}`,
+                shouldRecord: false
+            };
+        }
+
+        if (answeredPart === 2) {
+            if (!payload.roundingAsked && payload.examPhase === "long_turn") {
+                return {
+                    part: 2,
+                    phase: "rounding_off",
+                    examinerMessage: "Thank you. Would you like to experience something like that again?",
+                    shouldRecord: true
+                };
+            }
+            return {
+                part: 3,
+                phase: "question",
+                examinerMessage: `Let's move on to Part 3. We'll discuss ideas connected with ${cueCard.topic.toLowerCase()}. Why do people value experiences like this?`,
+                shouldRecord: true
+            };
+        }
+
+        if (Number(partTurns[3] || 0) < 4) {
+            const part3Questions = [
+                "Thank you. How have people's attitudes to this topic changed in recent years?",
+                "Alright. Do you think young people and older people see this differently?",
+                "Thank you. What role should schools or governments play in this area?",
+                "Finally, how do you think this might change in the future?"
+            ];
+            return {
+                part: 3,
+                phase: "question",
+                examinerMessage: part3Questions[Math.max(0, Number(partTurns[3] || 1) - 1)] || part3Questions[0],
+                shouldRecord: true
+            };
+        }
+
+        return {
+            part: 3,
+            phase: "complete",
+            examinerMessage: "Thank you. That is the end of the speaking test.",
+            shouldRecord: false,
+            isComplete: true
+        };
+    }
+
+    async function requestExaminerTurn(event, recording = null, answer = null) {
+        const flow = ensureVoiceFlow();
+        const transcript = String(answer?.transcript || recording?.transcript || recording?.finalTranscript || "").trim();
+        const answerPart = flow.speakingMode === "free" ? 0 : Number(answer?.part || flow.part || 1);
+        const payload = conversationStatePayload(flow, {
+            event,
+            answeringPart: answer ? answerPart : null,
+            partTurns: answer ? nextPartTurns(flow, answerPart) : flow.partTurns
+        });
+        const fallback = fallbackExaminerResponse(event, transcript, payload);
+
+        try {
+            const form = new FormData();
+            form.append("event", event);
+            form.append("state", JSON.stringify(payload));
+            form.append("transcript", transcript);
+            if (recording?.blob) {
+                form.append("audio", new File([recording.blob], `speaking-answer-${Date.now()}.webm`, {
+                    type: recording.blob.type || "audio/webm"
+                }));
+            }
+
+            const response = await fetch("/api/speaking/examiner-next", {
+                method: "POST",
+                credentials: "include",
+                body: form
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || "AI examiner could not continue.");
+            return normalizeExaminerResponse(data, { ...fallback, latestTranscript: transcript });
+        } catch (error) {
+            console.warn("AI examiner fallback used:", error);
+            return normalizeExaminerResponse(fallback, { ...fallback, latestTranscript: transcript });
+        }
+    }
+
+    function addExaminerHistory(response) {
+        const flow = ensureVoiceFlow();
+        const text = String(response.examinerMessage || "").trim();
+        if (!text) return;
+        flow.history.push({ role: "examiner", text, part: response.part, phase: response.phase });
+        flow.history = flow.history.slice(-24);
+    }
+
+    function addUserHistory(answer) {
+        const flow = ensureVoiceFlow();
+        const text = String(answer.transcript || "").trim();
+        if (!text) return;
+        flow.history.push({ role: "user", text, part: answer.part, phase: answer.examPhase });
+        flow.history = flow.history.slice(-24);
+    }
+
+    function handleExaminerSpeechDone(response) {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        flow.speechToken = null;
+        flow.pendingExaminerResponse = null;
+
+        if (response.isComplete || response.phase === "complete") {
+            flow.phase = "completed";
+            flow.status = "Speaking test completed";
+            flow.isComplete = true;
+            renderCurrentTest();
+            finishVoiceFlow();
+            return;
+        }
+
+        if (response.phase === "prep") {
+            startVoicePreparation(response);
+            return;
+        }
+
+        flow.phase = "user-turn";
+        flow.status = "Your turn";
+        renderCurrentTest();
+    }
+
+    function speakExaminerResponse(response) {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+        flow.part = response.part;
+        flow.examPhase = response.phase;
+        flow.turn += 1;
+        flow.currentExaminerMessage = response.examinerMessage;
+        flow.latestQuestion = response.phase === "prep" && response.cueCard
+            ? cueCardDisplayText(response.cueCard)
+            : response.examinerMessage;
+        if (response.cueCard) flow.cueCard = response.cueCard;
+        if (response.phase === "rounding_off") flow.roundingAsked = true;
+        flow.phase = "examiner-speaking";
+        flow.status = "Examiner speaking...";
+        flow.pendingExaminerResponse = response;
+        addExaminerHistory(response);
+        renderCurrentTest();
+
+        const token = `${Date.now()}-${Math.random()}`;
+        flow.speechToken = token;
+        speakVoiceText(response.examinerMessage, () => {
+            const activeFlow = state.voiceFlow;
+            if (!activeFlow || activeFlow.speechToken !== token) return;
+            handleExaminerSpeechDone(response);
+        });
+    }
+
+    function finishExaminerSpeechEarly() {
+        const flow = ensureVoiceFlow();
+        const pending = flow.pendingExaminerResponse;
+        if (!pending) return;
+        flow.speechToken = null;
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        handleExaminerSpeechDone(pending);
+    }
+
+    function startVoicePreparation(response) {
+        const flow = ensureVoiceFlow();
+        clearVoiceFlowTimers();
+        const seconds = Math.max(5, Number(response.prepSeconds || SPEAKING_TIMING.part2Prep));
+        flow.part = 2;
+        flow.examPhase = "prep";
+        flow.phase = "preparing";
+        flow.status = "Preparation time";
+        flow.prepRemaining = seconds;
+        if (response.cueCard) flow.cueCard = response.cueCard;
+        flow.latestQuestion = cueCardDisplayText(flow.cueCard);
+        renderCurrentTest();
+
+        flow.prepInterval = window.setInterval(() => {
+            if (!state.voiceFlow || flow.cancelled) return;
+            flow.prepRemaining = Math.max(0, Number(flow.prepRemaining || 0) - 1);
+            if (flow.prepRemaining <= 0) {
+                clearVoiceFlowTimers();
+                beginPart2LongTurn();
+                return;
+            }
+            renderCurrentTest();
+        }, 1000);
+    }
+
+    function beginPart2LongTurn() {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled) return;
+        const response = {
+            part: 2,
+            phase: "long_turn",
+            examinerMessage: "Now you may start speaking.",
+            shouldRecord: true,
+            isComplete: false,
+            cueCard: flow.cueCard
+        };
+        speakExaminerResponse(response);
+    }
+
+    async function startVoiceFlow() {
+        if (!state.test) state.test = defaultFullSpeakingTest();
+        state.hasStarted = true;
+        state.feedback = null;
+        state.error = "";
+        state.loading = false;
+        state.voiceFlow = createVoiceFlow();
+        const flow = state.voiceFlow;
+        flow.started = true;
+        flow.phase = "thinking";
+        flow.status = "Thinking...";
+        renderCurrentTest();
+        if (flow.speakingMode === "free") {
+            speakExaminerResponse({
+                part: 0,
+                phase: "conversation",
+                examinerMessage: FREE_SPEAKING_GREETING,
+                shouldRecord: true,
+                isComplete: false
+            });
+            return;
+        }
+        const response = await requestExaminerTurn("start");
+        if (flow.cancelled) return;
+        speakExaminerResponse(response);
+    }
+
+    async function startVoiceFlowRecording() {
+        const flow = ensureVoiceFlow();
+        if (state.recording || flow.cancelled || flow.phase !== "user-turn") return;
+        try {
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+                throw new Error("Microphone recording is not available in this browser.");
+            }
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(stream);
+            const part = flow.speakingMode === "free" ? 0 : Number(flow.part || 1);
+            const recording = {
+                scope: {
+                    mode: "voice-flow",
+                    part,
+                    questionText: flow.latestQuestion || flow.currentExaminerMessage || "",
+                    examPhase: flow.examPhase
+                },
+                stream,
+                recorder,
+                chunks: [],
+                startedAt: Date.now(),
+                transcript: "",
+                finalTranscript: ""
+            };
+
+            recorder.ondataavailable = (event) => {
+                if (event.data?.size) recording.chunks.push(event.data);
+            };
+            recorder.onstop = () => {
+                if (recording.cancelled) return;
+                recording.blob = new Blob(recording.chunks, { type: recorder.mimeType || "audio/webm" });
+                recording.audioUrl = URL.createObjectURL(recording.blob);
+                stopTracks(recording.stream);
+                try {
+                    recording.recognition?.stop();
+                } catch {}
+                state.recording = null;
+                clearVoiceFlowTimers();
+                if (!state.voiceFlow?.cancelled) completeVoiceFlowAnswer(recording);
+            };
+
+            recording.recognition = startRecognition(recording);
+            if (recording.recognition) {
+                recording.recognition.onspeechend = () => {
+                    const activeFlow = ensureVoiceFlow();
+                    if (activeFlow.silenceTimer) clearTimeout(activeFlow.silenceTimer);
+                    const silenceDelay = flow.speakingMode === "free" ? 3600 : part === 2 ? 5200 : 2800;
+                    activeFlow.silenceTimer = window.setTimeout(() => {
+                        if (state.recording?.scope?.mode === "voice-flow") stopVoiceFlowRecording();
+                    }, silenceDelay);
+                };
+            }
+
+            state.recording = recording;
+            flow.phase = "listening";
+            flow.status = "Listening...";
+            flow.latestTranscript = "";
+            recorder.start();
+            const maxSeconds = flow.speakingMode === "free" ? 10 * 60 : part === 2 ? SPEAKING_TIMING.part2Speaking + 15 : part === 3 ? 90 : 75;
+            flow.answerTimer = window.setTimeout(() => {
+                if (state.recording?.scope?.mode === "voice-flow") stopVoiceFlowRecording();
+            }, maxSeconds * 1000);
+            renderCurrentTest();
+        } catch (error) {
+            state.error = error.name === "NotAllowedError"
+                ? "Microphone permission was denied. Allow microphone access and try again."
+                : (error.message || "Could not access your microphone. Check browser permissions and try again.");
+            flow.phase = "failed";
+            flow.status = "Connection failed. Please try again.";
+            renderCurrentTest();
+        }
+    }
+
+    function stopVoiceFlowRecording() {
+        if (state.recording?.scope?.mode !== "voice-flow") return false;
+        if (state.recording.recorder.state !== "inactive") {
+            state.recording.recorder.stop();
+        }
+        return true;
+    }
+
+    async function completeVoiceFlowAnswer(recording) {
+        const flow = ensureVoiceFlow();
+        const transcript = String(recording.transcript || recording.finalTranscript || "").trim();
+        const answer = {
+            blob: recording.blob,
+            audioUrl: recording.audioUrl,
+            transcript,
+            durationSeconds: Math.round((Date.now() - recording.startedAt) / 1000),
+            part: flow.speakingMode === "free" ? 0 : Number(recording.scope.part || flow.part || 1),
+            title: flow.speakingMode === "free" ? "Free Speaking Practice" : `Part ${Number(recording.scope.part || flow.part || 1)}`,
+            questionText: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
+            prompt: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
+            examPhase: recording.scope.examPhase || flow.examPhase
+        };
+
+        flow.phase = "thinking";
+        flow.status = "Thinking...";
+        flow.latestTranscript = transcript || "Transcribing your answer...";
+        renderCurrentTest();
+
+        const response = await requestExaminerTurn("answer", recording, answer);
+        if (flow.cancelled) return;
+
+        const finalTranscript = response.latestTranscript || transcript;
+        answer.transcript = finalTranscript;
+        flow.latestTranscript = finalTranscript || "Transcript unavailable. Your audio was recorded.";
+        flow.partTurns = nextPartTurns(flow, answer.part);
+        flow.answers.push(answer);
+        addUserHistory(answer);
+        speakExaminerResponse(response);
+    }
+
+    function skipVoicePreparation() {
+        const flow = ensureVoiceFlow();
+        if (flow.phase !== "preparing") return;
+        clearVoiceFlowTimers();
+        beginPart2LongTurn();
+    }
+
+    async function finishVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        if (flow.feedbackRequested) return;
+        flow.feedbackRequested = true;
+        flow.phase = "feedback";
+        flow.status = "Speaking test completed";
+        flow.isComplete = true;
+        renderCurrentTest();
+
+        if (!flow.answers.length) return;
+
+        const mode = state.section === "full" ? "full_test" : sectionMeta[state.section]?.submitMode || "full_test";
+        const testMode = state.section === "full" ? "full" : "part";
+        const submittedParts = flow.answers.map((answer, index) => ({
+            part: answer.part || defaultPartForMode(mode, index),
+            title: answer.title || `Part ${answer.part || index + 1}`,
+            prompt: answer.prompt || answer.questionText || "",
+            questionText: answer.questionText || answer.prompt || "",
+            transcript: answer.transcript || "",
+            userAnswer: answer.transcript || "",
+            audioUrl: answer.audioUrl || ""
+        }));
+        await submitAttempt({
+            mode,
+            testMode,
+            partNumber: submittedParts.at(-1)?.part || getActiveSubmitPartNumber(),
+            title: `${state.test?.title || "IELTS Speaking Test"} - AI Voice Interview`,
+            topic: state.test?.topic || "IELTS Speaking Test",
+            prompt: {
+                ...(state.test || {}),
+                conversation: flow.history,
+                cueCard: flow.cueCard
+            },
+            records: flow.answers,
+            parts: submittedParts
+        });
+    }
+
+    function endVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        flow.cancelled = true;
+        clearVoiceFlowTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (state.recording?.scope?.mode === "voice-flow") {
+            const activeRecording = state.recording;
+            activeRecording.cancelled = true;
+            stopTracks(activeRecording.stream);
+            try {
+                activeRecording.recognition?.stop();
+            } catch {}
+            try {
+                if (activeRecording.recorder.state !== "inactive") activeRecording.recorder.stop();
+            } catch {}
+            state.recording = null;
+        }
+        state.error = "";
+        state.loading = false;
+        state.feedback = null;
+        state.hasStarted = false;
+        state.voiceFlow = createVoiceFlow();
+        if (window.location.pathname !== "/speaking") {
+            window.history.pushState({}, "", "/speaking");
+        }
+        renderHome();
+    }
+
+    function handleVoiceMicAction() {
+        const flow = ensureVoiceFlow();
+        if (state.loading || flow.phase === "thinking" || flow.phase === "feedback") return;
+        if (!flow.started || flow.phase === "idle" || flow.phase === "failed" || flow.phase === "completed") {
+            startVoiceFlow();
+            return;
+        }
+        if (flow.phase === "preparing") {
+            skipVoicePreparation();
+            return;
+        }
+        if (flow.phase === "examiner-speaking") {
+            finishExaminerSpeechEarly();
+            return;
+        }
+        if (flow.phase === "user-turn") {
+            startVoiceFlowRecording();
+            return;
+        }
+        if (flow.phase === "listening") {
+            stopVoiceFlowRecording();
+        }
+    }
+
+    function voiceStatusText() {
+        const flow = ensureVoiceFlow();
+        if (state.feedback) return "Speaking test completed";
+        if (state.error) return state.error;
+        if (state.loading && (flow.phase === "feedback" || flow.phase === "completed")) return "Speaking test completed";
+        if (state.loading) return "Thinking...";
+        if (flow.phase === "examiner-speaking") return "Examiner speaking...";
+        if (flow.phase === "user-turn") return "Your turn";
+        if (flow.phase === "listening") return "Listening...";
+        if (flow.phase === "thinking") return "Thinking...";
+        if (flow.phase === "preparing") return "Preparation time";
+        if (flow.phase === "completed" || flow.phase === "feedback") return "Speaking test completed";
+        return flow.status || "Connection failed. Please try again.";
+    }
+
+    function renderCueCardForVoice(flow) {
+        if (flow.speakingMode === "free") return "";
+        if (!flow.cueCard || (Number(flow.part) !== 2 && flow.examPhase !== "prep" && flow.examPhase !== "long_turn")) return "";
+        const cueCard = normalizeCueCard(flow.cueCard);
+        return `
+            <div class="ai-cue-card" aria-label="Part 2 cue card">
+                <span>Part 2 cue card</span>
+                <strong>${escapeHtml(cueCard.topic)}</strong>
+                <ul>
+                    ${cueCard.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                </ul>
+                ${flow.phase === "preparing" ? `<div class="ai-prep-timer">${formatDuration(flow.prepRemaining || 0)}</div>` : ""}
+            </div>
+        `;
+    }
+
+    function renderLatestTranscript(flow) {
+        const transcript = String(flow.latestTranscript || "").trim();
+        if (!transcript || transcript === "Transcribing your answer...") {
+            return transcript ? `<p class="ai-transcript-pending">${escapeHtml(transcript)}</p>` : "";
+        }
+        return `
+            <div class="ai-latest-transcript" aria-label="Latest user answer transcript">
+                <span>Your latest answer</span>
+                <p>${escapeHtml(transcript)}</p>
+            </div>
+        `;
+    }
+
+    function renderVoiceFeedback() {
+        if (!state.feedback) return "";
+        const feedback = state.feedback;
+        const overall = Number(feedback.overallBand || 0).toFixed(1);
+        const advice = Array.isArray(feedback.howToImprove) && feedback.howToImprove.length
+            ? feedback.howToImprove[0]
+            : (feedback.detailedFeedback || "Your speaking feedback is ready.");
+        const criteria = [
+            ["Fluency & Coherence", feedback.fluencyCoherence],
+            ["Lexical Resource", feedback.lexicalResource],
+            ["Grammar Range & Accuracy", feedback.grammaticalRangeAccuracy],
+            ["Pronunciation", feedback.pronunciation]
+        ];
+        return `
+            <div class="ai-voice-feedback" role="status">
+                <span>Estimated IELTS band</span>
+                <strong>${escapeHtml(overall)}</strong>
+                <div class="ai-feedback-grid">
+                    ${criteria.map(([label, value]) => `
+                        <div>
+                            <small>${escapeHtml(label)}</small>
+                            <b>${escapeHtml(Number(value || 0).toFixed(1))}</b>
+                        </div>
+                    `).join("")}
+                </div>
+                <p>${escapeHtml(advice)}</p>
+            </div>
+        `;
+    }
+
+    function renderSpeakingPlayer() {
+        setPlayerMode(true);
+        updatePlayerHeader();
+        const cbtHeader = document.getElementById("speakingCbtHeader");
+        if (cbtHeader) cbtHeader.style.display = "none";
+        const flow = ensureVoiceFlow();
+        const isRecording = state.recording?.scope?.mode === "voice-flow";
+        const visualPhase = flow.phase === "examiner-speaking" ? "speaking" : (state.loading ? "thinking" : flow.phase);
+        const message = flow.currentExaminerMessage || "Tap the microphone to begin your IELTS Speaking test.";
+        const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : "IELTS Speaking Test";
+        const micDisabled = state.loading || flow.phase === "thinking" || flow.phase === "feedback";
+        const micLabel = !flow.started || flow.phase === "idle" || flow.phase === "failed" || flow.phase === "completed"
+            ? "Start speaking test"
+            : flow.phase === "listening"
+                ? "Finish answer"
+                : flow.phase === "preparing"
+                    ? "Skip preparation"
+                    : flow.phase === "examiner-speaking"
+                        ? "Skip examiner speech"
+                        : flow.phase === "user-turn"
+                            ? "Start answering"
+                            : "Please wait";
+        const micIcon = flow.phase === "failed" ? lucideIcon("rotate", "ai-voice-control-icon") : lucideIcon("mic", "ai-voice-control-icon");
+
+        app.innerHTML = `
+            <section class="ai-speaking-screen min-h-screen w-full overflow-hidden bg-[#020617] text-white relative" data-ai-phase="${escapeHtml(visualPhase)}" aria-label="IELTS Speaking Test">
+                <div class="ai-speaking-bg" aria-hidden="true"></div>
+                <header class="ai-voice-topbar absolute top-6 left-6 right-6 flex justify-between items-center">
+                    <div class="ai-voice-badge">
+                        ${lucideIcon("mic", "ai-voice-badge-icon")}
+                        <span>${escapeHtml(playerBadge)}</span>
+                    </div>
+                    <button class="ai-voice-settings" type="button" aria-label="Settings">
+                        ${lucideIcon("sliders", "ai-voice-settings-icon")}
+                    </button>
+                </header>
+
+                <main class="ai-voice-main min-h-screen flex flex-col items-center justify-center" aria-live="polite">
+                    <p class="ai-voice-status">${escapeHtml(voiceStatusText())}</p>
+                    <div class="ai-orb-stage ${isRecording ? "is-recording" : ""}">
+                        <span class="ai-orbit ai-orbit-outer" aria-hidden="true"></span>
+                        <span class="ai-orbit ai-orbit-middle" aria-hidden="true">
+                            <span class="ai-orbit-dot" aria-hidden="true"></span>
+                        </span>
+                        <span class="ai-orbit ai-orbit-inner" aria-hidden="true"></span>
+                        <div class="ai-orb" aria-hidden="true"></div>
+                    </div>
+                    <div class="ai-question-wrap">
+                        <p class="ai-current-question">${escapeHtml(message)}</p>
+                        ${renderCueCardForVoice(flow)}
+                        ${renderLatestTranscript(flow)}
+                    </div>
+                    ${state.feedback ? renderVoiceFeedback() : ""}
+                </main>
+
+                <div class="ai-voice-controls absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-5" aria-label="Speaking controls">
+                    <button class="ai-voice-mic-button ${isRecording ? "is-recording" : ""}" type="button" data-action="voice-mic" aria-label="${escapeHtml(micLabel)}" title="${escapeHtml(micLabel)}" ${micDisabled ? "disabled" : ""}>
+                        ${micIcon}
+                    </button>
+                    <button class="ai-voice-end-button" type="button" data-action="voice-end" aria-label="End test" title="End test">
+                        ${lucideIcon("x", "ai-voice-control-icon")}
+                    </button>
+                </div>
+            </section>
+        `;
+    }
+
+    function renderSpeakingQuestionPanel(part) {
+        return `
+            <div class="player-panel prompt-panel-card speaking-task-card">
+                <div class="prompt-card-header speaking-player-card-header">
+                    <svg class="panel-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                    </svg>
+                    <h2 class="panel-header-title">${escapeHtml(part.title)}</h2>
+                </div>
+                <div class="info-alert-box">
+                    <span class="info-alert-icon">!</span>
+                    <div class="info-alert-content">You should answer the questions clearly and naturally.</div>
+                </div>
+                ${part.part === 2 ? renderCueCardPrompt(part) : renderQuestionList(part)}
+                ${part.prepSeconds ? `
+                    <div class="speaking-time-row">
+                        <span>Preparation time:</span>
+                        <strong>1 minute</strong>
+                    </div>
+                ` : ""}
+                <div class="speaking-time-row">
+                    <span>Speaking time:</span>
+                    <strong>${getSpeakingWindow(part.part)}</strong>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderQuestionList(part) {
+        const questions = part.questions?.length ? part.questions : PLAYER_DEFAULTS[getPartKey(part.part)].questions;
+        return `
+            ${part.referenceHtml ? `<div class="speaking-html-reference">${part.referenceHtml}</div>` : ""}
+            <ol class="speaking-player-question-list">
+                ${questions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ol>
+        `;
+    }
+
+    function renderCueCardPrompt(part) {
+        const bullets = part.bullets?.length ? part.bullets : PLAYER_DEFAULTS.part2.bullets;
+        return `
+            ${part.referenceHtml ? `<div class="speaking-html-reference">${part.referenceHtml}</div>` : ""}
+            <div class="speaking-cue-card-box">
+                <h3>${escapeHtml(part.prompt || PLAYER_DEFAULTS.part2.topic)}</h3>
+                <ul>
+                    ${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                </ul>
+            </div>
+        `;
+    }
+
+    function renderSpeakingResponsePanel(part, record, isRecording) {
+        const requiresPrep = part.part === 2 && !record?.blob;
+        const prepStatus = getPrepStatus(part.part);
+        const prepFinished = !requiresPrep || prepStatus === "finished";
+        const prepRunning = requiresPrep && prepStatus === "running";
+        const canStart = !state.recording && !state.loading && prepFinished && !state.partTimeFinished[part.part];
+        const canPlay = Boolean(record?.audioUrl);
+        return `
+            <div class="player-panel editor-panel-card speaking-response-card">
+                <h2 class="editor-panel-title">Your Response</h2>
+                <div class="speaking-recording-wrapper">
+                    ${renderPreparationPanel(part, requiresPrep, prepStatus)}
+                    <div class="speaking-recording-panel">
+                        <div class="speaking-mic-circle ${isRecording ? "is-recording" : ""}" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 18.5a5.5 5.5 0 0 0 5.5-5.5V7a5.5 5.5 0 0 0-11 0v6a5.5 5.5 0 0 0 5.5 5.5Z"></path>
+                                <path d="M5 12.5a7 7 0 0 0 14 0"></path>
+                                <path d="M12 19v3"></path>
+                            </svg>
+                        </div>
+                        <span class="speaking-recording-timer">${formatDuration(getRecordingSeconds(part.part))}</span>
+                        <div class="speaking-waveform" aria-hidden="true">
+                            ${Array.from({ length: 18 }, (_, index) => `<span class="${isRecording && index % 3 === 0 ? "is-hot" : ""}"></span>`).join("")}
+                        </div>
+                    </div>
+                    <div class="speaking-recorder-actions ${requiresPrep && !prepFinished ? "speaking-recorder-actions--prep" : ""}">
+                        ${requiresPrep && !prepFinished ? `
+                            <button class="speaking-record-btn speaking-record-btn--primary" type="button" data-action="start-preparation" ${prepRunning ? "disabled" : ""}>Start Preparation</button>
+                            <button class="speaking-record-btn speaking-record-btn--secondary" type="button" disabled>Start Recording</button>
+                        ` : `
+                            <button class="speaking-record-btn speaking-record-btn--primary" type="button" data-action="${getStartAction()}" ${canStart ? "" : "disabled"}>Start Recording</button>
+                            <button class="speaking-record-btn speaking-record-btn--secondary" type="button" data-action="stop-recording" ${state.recording ? "" : "disabled"}>Stop Recording</button>
+                            <button class="speaking-record-btn speaking-record-btn--secondary" type="button" data-action="play-recording" ${canPlay ? "" : "disabled"}>Play Recording</button>
+                        `}
+                    </div>
+                    ${state.loading ? renderStatus() : ""}
+                    ${state.error ? `<div class="speaking-error">${escapeHtml(state.error)}</div>` : ""}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderPreparationPanel(part, requiresPrep, prepStatus) {
+        if (!requiresPrep) return "";
+        const seconds = getPrepRemaining(part);
+        const message = prepStatus === "running"
+            ? "Prepare your answer. You can make notes mentally."
+            : prepStatus === "finished"
+                ? "Preparation finished"
+                : "Start the one-minute preparation time before recording.";
+
+        return `
+            <div class="speaking-prep-panel ${prepStatus === "running" ? "is-running" : ""} ${prepStatus === "finished" ? "is-finished" : ""}">
+                <span>Preparation Time</span>
+                <strong>${formatDuration(seconds)}</strong>
+                <p>${escapeHtml(message)}</p>
+            </div>
+        `;
+    }
+
+    function renderSpeakingInfoPanel(part, recordingStatus) {
+        return `
+            <aside class="player-sidebar speaking-player-sidebar" aria-label="Speaking information">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title">Test Information</h3>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Test Type</div>
+                        <div class="info-value red-text">${escapeHtml(part.testType)}</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Time Allowed</div>
+                        <div class="info-value red-text">${escapeHtml(getTimeAllowedLabel(part))}</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Current Part</div>
+                        <div class="info-value red-text">Part ${part.part}</div>
+                    </div>
+                    <div class="sidebar-info-group">
+                        <div class="info-label">Recording Status</div>
+                        <div class="info-value red-text">${escapeHtml(recordingStatus)}</div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card-title speaking-tips-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                            <line x1="9" y1="18" x2="15" y2="18"></line>
+                            <line x1="10" y1="22" x2="14" y2="22"></line>
+                        </svg>
+                        Tips
+                    </h3>
+                    <ul class="tips-list">
+                        ${PLAYER_TIPS.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}
+                    </ul>
+                </div>
+            </aside>
+        `;
+    }
+
+    function renderSpeakingBottomTabs(activePart) {
+        if (state.section !== "full") return "";
+
+        const tabs = [1, 2, 3];
+        return `
+            <nav class="speaking-task-tabs-shell" aria-label="Speaking parts">
+                <div class="cbt-part-tabs">
+                    ${tabs.map((partNumber) => `
+                        <button class="${activePart === partNumber ? "active" : ""}" type="button" data-action="select-part" data-part="${partNumber}" aria-pressed="${activePart === partNumber ? "true" : "false"}">
+                            Part ${partNumber}
+                        </button>
+                    `).join("")}
+                </div>
+            </nav>
+        `;
+    }
+
+    function submitActiveAttempt() {
+        const submitMode = getSubmitTestMode();
+        const partNumber = getActiveSubmitPartNumber();
+        console.log("Speaking submit clicked");
+        console.log("Mode:", submitMode);
+        console.log("Part:", partNumber);
+        if (!state.hasStarted) return;
+        if (state.loading) return;
+        if (state.section === "full") submitFullProgressOrFinal(partNumber);
+        else if (state.section === "part2") submitCue();
+        else submitSingle();
+    }
+
+    function playActiveRecording() {
+        const part = getActivePlayerPart();
+        const record = getRecordForPart(part.part);
+        if (!record?.audioUrl) return;
+        const audio = new Audio(record.audioUrl);
+        audio.play().catch(() => {
+            setError("Could not play the saved recording. Try recording again.");
+        });
+    }
+
+    function renderFeedback() {
+        if (!state.feedback) return "";
+        const feedback = state.feedback;
+        const bands = [
+            ["Overall band", feedback.overallBand],
+            ["Fluency and Coherence", feedback.fluencyCoherence],
+            ["Lexical Resource", feedback.lexicalResource],
+            ["Grammar Range and Accuracy", feedback.grammaticalRangeAccuracy],
+            ["Pronunciation", feedback.pronunciation]
+        ];
+        return `
+            <section class="speaking-feedback-card">
+                <div class="speaking-card-head">
+                    <div>
+                        <span class="speaking-section-kicker">AI Feedback</span>
+                        <h3>Speaking Band Estimate</h3>
+                        <p>${escapeHtml("Review your Speaking feedback below.")}</p>
+                    </div>
+                    <a class="speaking-secondary speaking-header-back" href="${sectionMeta[state.section].route}">&lt;- Back</a>
+                </div>
+                <div class="speaking-band-row">
+                    ${bands.map(([label, value]) => `<div class="speaking-band-card"><span>${escapeHtml(label)}</span><strong>${Number(value || 0).toFixed(1)}</strong></div>`).join("")}
+                </div>
+                <div class="speaking-feedback-grid">
+                    ${renderFeedbackText("Feedback", feedback.detailedFeedback)}
+                    ${renderFeedbackList("Strengths", feedback.strengths)}
+                    ${renderFeedbackList("Problems", feedback.problems)}
+                    ${renderFeedbackList("Improvement tips", feedback.howToImprove)}
+                    ${renderFeedbackList("Suggested improved answers", feedback.improvedAnswers)}
+                    ${renderFeedbackList("Practical tips", feedback.practicalTips)}
+                </div>
+            </section>
+        `;
+    }
+
+    function renderFeedbackText(title, text) {
+        const value = String(text || "").trim();
+        return `
+            <section class="speaking-feedback-section">
+                <h4>${escapeHtml(title)}</h4>
+                <p class="speaking-muted">${escapeHtml(value || "No detailed feedback returned for this attempt.")}</p>
+            </section>
+        `;
+    }
+
+    function renderFeedbackList(title, items) {
+        const list = Array.isArray(items) ? items.filter(Boolean) : [];
+        return `
+            <section class="speaking-feedback-section">
+                <h4>${escapeHtml(title)}</h4>
+                ${list.length
+                    ? `<ul class="speaking-feedback-list">${list.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+                    : `<p class="speaking-muted">No notes saved for this section.</p>`}
+            </section>
+        `;
+    }
+
+    async function submitSingle() {
+        if (state.loading) return;
+        const meta = sectionMeta[state.section];
+        const record = state.partRecords[state.section];
+        if (!record?.blob) {
+            setError("Record your answer before submitting.");
+            return;
+        }
+        const questionText = `${state.test.topic || state.test.description || meta.categoryTitle}\n${(state.test.questions || []).join("\n")}`.trim();
+        const userAnswer = record.transcript || "";
+        const part = {
+            part: meta.part,
+            title: meta.categoryTitle,
+            prompt: questionText,
+            questionText,
+            transcript: userAnswer,
+            userAnswer,
+            audioUrl: record.audioUrl || ""
+        };
+        await submitAttempt({
+            mode: meta.submitMode,
+            testMode: "part",
+            partNumber: meta.part,
+            title: `${meta.categoryTitle} - ${state.test.title}`,
+            topic: state.test.topic || state.test.description || meta.categoryTitle,
+            prompt: state.test,
+            records: [record],
+            parts: [part]
+        });
+    }
+
+    async function submitCue() {
+        if (state.loading) return;
+        if (!state.cueRecord?.blob) {
+            setError("Record your Cue Card answer before submitting.");
+            return;
+        }
+        const questionText = `${state.test.topic || state.test.description || "Cue Card"}\n${(state.test.bullets || []).join("\n")}`.trim();
+        const userAnswer = state.cueRecord.transcript || "";
+        const part = {
+            part: 2,
+            title: "Cue Card",
+            prompt: questionText,
+            questionText,
+            transcript: userAnswer,
+            userAnswer,
+            audioUrl: state.cueRecord.audioUrl || ""
+        };
+        await submitAttempt({
+            mode: "cue_card",
+            testMode: "part",
+            partNumber: 2,
+            title: `Cue Card Practice - ${state.test.title}`,
+            topic: state.test.topic,
+            prompt: state.test,
+            records: [state.cueRecord],
+            parts: [part]
+        });
+    }
+
+    function submitFullProgressOrFinal(partNumber = getActiveSubmitPartNumber()) {
+        if (state.loading) return;
+        const record = state.fullRecords[partNumber];
+        if (!record?.blob) {
+            setError(`Record Part ${partNumber} before ${partNumber === 3 ? "submitting" : "moving to the next part"}.`);
+            return;
+        }
+        if (partNumber < 3) {
+            moveToFullPart(partNumber + 1);
+            return;
+        }
+        submitFull();
+    }
+
+    async function submitFull() {
+        if (state.loading) return;
+        const parts = activeFullParts();
+        const records = parts.map((part) => state.fullRecords[part.part]);
+        if (records.some((record) => !record?.blob)) {
+            setError("Record all three parts before submitting the full test.");
+            return;
+        }
+        const submittedParts = parts.map((part) => {
+            const record = state.fullRecords[part.part];
+            const questionText = questionTextFromPart(part);
+            const userAnswer = record?.transcript || "";
+            return {
+                part: part.part,
+                title: part.title,
+                prompt: questionText,
+                questionText,
+                transcript: userAnswer,
+                userAnswer,
+                audioUrl: record?.audioUrl || ""
+            };
+        });
+        await submitAttempt({
+            mode: "full_test",
+            testMode: "full",
+            partNumber: 3,
+            title: `Full Speaking Test - ${state.test.title}`,
+            topic: state.test.topic || "Full IELTS Speaking Test",
+            prompt: state.test,
+            records,
+            parts: submittedParts
+        });
+    }
+
+    function applyServerTranscripts(mode, parts) {
+        if (!Array.isArray(parts)) return;
+        if (mode === "cue_card" && state.cueRecord && parts[0]?.transcript) {
+            state.cueRecord.transcript = parts[0].transcript;
+        } else if ((mode === "part_1" || mode === "part_3") && state.partRecords[state.section] && parts[0]?.transcript) {
+            state.partRecords[state.section].transcript = parts[0].transcript;
+        } else if (mode === "full_test") {
+            parts.forEach((part) => {
+                if (state.fullRecords[part.part] && part.transcript) {
+                    state.fullRecords[part.part].transcript = part.transcript;
+                }
+            });
+        }
+    }
+
+    async function submitAttempt({ mode, testMode, partNumber, title, topic, prompt, records, parts }) {
+        if (state.loading) return;
+        const resolvedTestMode = testMode || (mode === "full_test" ? "full" : "part");
+        const resolvedPartNumber = Number(partNumber || parts?.[0]?.part || getActiveSubmitPartNumber());
+        const testId = getSpeakingTestId();
+        const questionText = (parts || []).map((part) => part.questionText || part.prompt || "").filter(Boolean).join("\n\n");
+        const userAnswer = (parts || []).map((part) => part.userAnswer || part.transcript || "").filter(Boolean).join("\n\n");
+        state.loading = true;
+        state.error = "";
+        state.feedback = null;
+        renderCurrentTest();
+        try {
+            const form = new FormData();
+            form.append("testId", testId);
+            form.append("part", String(resolvedPartNumber || ""));
+            form.append("testMode", resolvedTestMode);
+            form.append("mode", mode);
+            form.append("title", title);
+            form.append("topic", topic);
+            form.append("prompt", JSON.stringify(prompt));
+            form.append("parts", JSON.stringify(parts));
+            form.append("questionText", questionText);
+            form.append("userAnswer", userAnswer);
+            form.append("transcript", userAnswer);
+            form.append("audioUrls", JSON.stringify((records || []).map((record) => record?.audioUrl || "")));
+            records.forEach((record, index) => {
+                form.append("audio", new File([record.blob], `${mode}-${index + 1}.webm`, { type: record.blob.type || "audio/webm" }));
+            });
+
+            console.log("Sending speaking evaluation request", {
+                testId,
+                mode: resolvedTestMode,
+                part: resolvedPartNumber,
+                apiMode: mode,
+                parts: (parts || []).map((part) => ({
+                    part: part.part,
+                    questionText: part.questionText || part.prompt || "",
+                    hasTranscript: Boolean(part.userAnswer || part.transcript),
+                    audioUrl: part.audioUrl || ""
+                }))
+            });
+
+            const response = await fetch("/api/evaluate-speaking", {
+                method: "POST",
+                credentials: "include",
+                body: form
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || data.message || "AI feedback failed. Please try again.");
+            console.log("Speaking evaluation result", data);
+            state.feedback = data.feedback;
+            applyServerTranscripts(mode, data.attempt?.parts);
+            clearAllPlayerTimers();
+            if (mode === "full_test") {
+                const submittedParts = data.attempt?.parts || parts;
+                notifyMockSpeakingComplete({
+                    testId: state.test?.id || "",
+                    band: Number(data.feedback?.overallBand) || 0,
+                    result: data.feedback,
+                    parts: submittedParts,
+                    answers: Object.fromEntries((submittedParts || []).map((part) => [
+                        `part${part.part}`,
+                        part.transcript || ""
+                    ]))
+                });
+            }
+        } catch (error) {
+            state.error = error.message || "AI feedback failed. Please try again.";
+        } finally {
+            state.loading = false;
+            renderCurrentTest();
+        }
+    }
+
+    function escapeHtml(value) {
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    async function boot() {
+        bindSpeakingFullScreen();
+        await loadPublishedCatalog().catch(() => {});
+        await renderRoute();
+    }
+
+    async function renderRoute() {
+        const route = parseRoute();
+        if (route.view === "player") {
+            prepareSpeakingPlayerState(route.mode || "free");
+            renderSpeakingPlayer();
+            return;
+        }
+        if (route.view === "test") {
+            await renderTest(route.sectionKey, route.testId);
+            return;
+        }
+        renderHome();
+    }
+
+    app.addEventListener("input", (event) => {
+        const key = event.target.dataset.transcript;
+        if (!key) return;
+        updateTranscript(key === "single" || key === "cue" ? key : Number(key), event.target.value);
+    });
+
+    app.addEventListener("click", (event) => {
+        if (event.target.closest("[data-pretest-start]")) {
+            beginSpeakingTest();
+            return;
+        }
+        if (event.target.closest("[data-start-ai-examiner]")) {
+            beginAiExaminerTest();
+            return;
+        }
+        if (event.target.closest("[data-end-ai-examiner]")) {
+            stopAiExaminerSession();
+            return;
+        }
+        const target = event.target.closest("[data-action]");
+        if (!target) return;
+        const action = target.dataset.action;
+        if (action === "start-ai-intro") startSpeakingFromIntro(target.dataset.mode || "free");
+        else if (action === "voice-mic") handleVoiceMicAction();
+        else if (action === "voice-end") endVoiceFlow();
+        else if (action === "start-single-recording") startRecording({ mode: "single" });
+        else if (action === "start-preparation" || action === "start-prep") startPreparationForActivePart();
+        else if (action === "start-cue-recording") startRecording({ mode: "cue" });
+        else if (action === "stop-recording") stopRecording();
+        else if (action === "play-recording") playActiveRecording();
+        else if (action === "submit-single") submitSingle();
+        else if (action === "submit-cue") submitCue();
+        else if (action === "select-part") {
+            if (state.recording || isPrepTimerActive()) return;
+            moveToFullPart(Number(target.dataset.part) || 1);
+        } else if (action === "start-full-prep") {
+            startPreparationForActivePart();
+        } else if (action === "start-full-recording") {
+            const part = activeFullPart();
+            if (part) startRecording({ mode: "full", part: part.part });
+        } else if (action === "next-part") {
+            state.fullCurrentPart = Math.min(3, state.fullCurrentPart + 1);
+            setError("");
+        } else if (action === "submit-full") {
+            submitFullProgressOrFinal();
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest("[data-speaking-header-submit]")) return;
+        submitActiveAttempt();
+    });
+
+    window.addEventListener("popstate", () => {
+        renderRoute().catch(() => renderHome());
+    });
+
+    boot();
+}());

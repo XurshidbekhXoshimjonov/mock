@@ -44,6 +44,11 @@ const writingPromptSchema = new mongoose.Schema({
         type: String,
         enum: ["draft", "published"],
         default: "draft"
+    },
+    mockOnly: {
+        type: Boolean,
+        default: false,
+        index: true
     }
 }, { 
     timestamps: true 

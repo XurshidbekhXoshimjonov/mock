@@ -3,14 +3,23 @@ const listeningParams = new URLSearchParams(window.location.search);
 const listeningPathParts = window.location.pathname.split("/").filter(Boolean);
 const listeningRouteSlug = listeningPathParts[0] === "listening" ? listeningPathParts[1] || "" : "";
 const listeningRoutePart = (listeningPathParts[2] || "").match(/^part-(\d+)$/)?.[1] || "";
-const listeningTestId = listeningParams.get("id") || listeningRouteSlug;
+const listeningMockTestId = cleanListeningId(listeningParams.get("mockTestId") || listeningParams.get("testId"));
+const listeningTestId = cleanListeningId(listeningParams.get("id"))
+    || cleanListeningId(listeningRouteSlug)
+    || (listeningMockTestId ? `mock-listening-${listeningMockTestId}` : "");
 const listeningPart = listeningParams.get("part") || listeningRoutePart;
-const isListeningMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId");
+const isListeningMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId") || String(listeningTestId).includes("mock");
+const LISTENING_LOAD_TIMEOUT_MS = 10000;
 let activeListeningTest = null;
 let activeListeningResult = null;
 let isSubmitted = false;
 const ListeningResultUtils = window.IeltsResultUtils || {};
 const AUTO_SUBMIT_MESSAGE = ListeningResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
+
+function cleanListeningId(value) {
+    const resolved = decodeURIComponent(String(value || "")).trim();
+    return resolved === "undefined" || resolved === "null" ? "" : resolved;
+}
 
 function normalizeAnswer(value) {
     return ListeningResultUtils.normalizeAnswer
@@ -29,6 +38,25 @@ function notifyMockListeningComplete(result, options = {}) {
         answers: options.answers || {},
         result: result || undefined,
         deferred: Boolean(options.deferred)
+    }, window.location.origin);
+}
+
+function notifyMockListeningReady() {
+    if (!isListeningMockMode || window.parent === window) return;
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-ready",
+        section: "listening",
+        testId: listeningTestId
+    }, window.location.origin);
+}
+
+function notifyMockListeningError(error) {
+    if (!isListeningMockMode || window.parent === window) return;
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-error",
+        section: "listening",
+        testId: listeningTestId,
+        message: error?.message || "Listening could not be loaded."
     }, window.location.origin);
 }
 
@@ -407,37 +435,55 @@ function recordListeningResult(test, options = {}) {
 
 async function loadListeningTest() {
     if (!listeningTestId) {
+        if (isListeningMockMode) {
+            throw new Error("Listening test id is missing. Please open the mock test again.");
+        }
         return window.ListeningComponents.sampleListeningTest();
     }
 
-    const response = await fetch(`/api/listening-tests/${encodeURIComponent(listeningTestId)}?t=${Date.now()}`);
-    const data = await response.json();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), LISTENING_LOAD_TIMEOUT_MS);
+    try {
+        const response = await fetch(`/api/listening-tests/${encodeURIComponent(listeningTestId)}?t=${Date.now()}`, {
+            credentials: "include",
+            cache: "no-store",
+            signal: controller.signal
+        });
+        const data = await response.json().catch(() => ({}));
 
-    if (!response.ok) {
-        throw new Error(data.error || "Could not load Listening test");
-    }
-
-    if (listeningPart && Array.isArray(data.parts)) {
-        const selectedPart = data.parts.find((part) => String(part.partNumber) === String(listeningPart));
-
-        if (!selectedPart) {
-            throw new Error(`Listening Part ${listeningPart} was not found`);
+        if (!response.ok) {
+            throw new Error(data.error || "Could not load Listening test");
         }
 
-        return {
-            ...data,
-            title: `${data.title} - ${selectedPart.title || `Part ${listeningPart}`}`,
-            part: Number(listeningPart),
-            parts: [selectedPart]
-        };
-    }
+        if (listeningPart && Array.isArray(data.parts)) {
+            const selectedPart = data.parts.find((part) => String(part.partNumber) === String(listeningPart));
 
-    return data;
+            if (!selectedPart) {
+                throw new Error(`Listening Part ${listeningPart} was not found`);
+            }
+
+            return {
+                ...data,
+                title: `${data.title} - ${selectedPart.title || `Part ${listeningPart}`}`,
+                part: Number(listeningPart),
+                parts: [selectedPart]
+            };
+        }
+
+        return data;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("Listening test could not be loaded. Please check test data or try again.");
+        }
+        throw error;
+    } finally {
+        clearTimeout(timeoutId);
+    }
 }
 
 loadListeningTest()
     .then((test) => {
-        if (test.part === "full" && test.sourceFullTestId) {
+        if (!isListeningMockMode && test.part === "full" && test.sourceFullTestId) {
             window.location.replace(`/full-test-player?id=${encodeURIComponent(test.sourceFullTestId)}&skill=listening`);
             return;
         }
@@ -445,10 +491,23 @@ loadListeningTest()
         isSubmitted = false;
         document.title = `${test.title || "IELTS"} - Listening`;
         listeningRoot.innerHTML = window.ListeningComponents.ListeningTestPage(test);
-        window.ListeningComponents.bindListeningTest(listeningRoot);
+        window.ListeningComponents.bindListeningTest(listeningRoot, test);
+        notifyMockListeningReady();
     })
     .catch((error) => {
-        listeningRoot.innerHTML = `<p class="lc-submit-status">${window.ListeningComponents.escapeHtml(error.message)}</p>`;
+        console.error("[Mock Listening] load failed:", error);
+        notifyMockListeningError(error);
+        const message = window.ListeningComponents.escapeHtml(error.message || "Listening test could not be loaded.");
+        listeningRoot.innerHTML = `
+            <main class="lc-main">
+                <section class="lc-question-card">
+                    <h1>Listening could not be loaded</h1>
+                    <p class="lc-submit-status">${message}</p>
+                    <button class="lc-start-button" type="button" onclick="window.location.reload()">Retry</button>
+                    <a class="lc-secondary-button" href="/dashboard">Dashboard</a>
+                </section>
+            </main>
+        `;
     });
 
 listeningRoot.addEventListener("listening-submit", (event) => {

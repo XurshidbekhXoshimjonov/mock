@@ -201,6 +201,31 @@ const mockImageUpload = multer({
     }
 });
 
+const candidatePhotoStorage = multer.diskStorage({
+    destination(req, file, cb) {
+        const dir = path.join(UPLOAD_DIR, "candidate-photos");
+        ensureRuntimeDir(dir);
+        cb(null, dir);
+    },
+    filename(req, file, cb) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        cb(null, `${Date.now()}-${crypto.randomBytes(4).toString("hex")}${ext}`);
+    }
+});
+
+const candidatePhotoUpload = multer({
+    storage: candidatePhotoStorage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+    fileFilter(req, file, cb) {
+        const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only JPG, JPEG, and PNG images are allowed"), false);
+        }
+    }
+});
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
@@ -405,6 +430,16 @@ function jsonNumberField(source, key) {
     const pattern = new RegExp(`"${key}"\\s*:\\s*(\\d+)`);
     const match = String(source || "").match(pattern);
     return match ? Number(match[1]) : 0;
+}
+
+function jsonBooleanField(source, key) {
+    const pattern = new RegExp(`"${key}"\\s*:\\s*(true|false)`);
+    const match = String(source || "").match(pattern);
+    return match ? match[1] === "true" : false;
+}
+
+function isMockOnlyTest(test) {
+    return Boolean(test?.mockOnly || test?.mockTestOnly);
 }
 
 function publicIdUrl(skill, id, options = {}) {
@@ -1627,6 +1662,9 @@ function readManualReadingTestSummaries() {
                 const stat = fs.statSync(filePath);
                 const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
                 const part = String(jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "1");
+                if (jsonBooleanField(prefix, "mockOnly") || jsonBooleanField(prefix, "mockTestOnly")) {
+                    return null;
+                }
                 return publicListMetadata({
                     id,
                     title: jsonStringField(prefix, "title") || "Untitled Reading Test",
@@ -3010,6 +3048,9 @@ function readManualListeningTestSummaries() {
                 const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
                 const rawPart = jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "full";
                 const part = rawPart === "full" ? "full" : normalizeListeningPart(rawPart);
+                if (jsonBooleanField(prefix, "mockOnly") || jsonBooleanField(prefix, "mockTestOnly")) {
+                    return null;
+                }
                 return publicListMetadata({
                     id,
                     title: jsonStringField(prefix, "title") || "Untitled Listening Test",
@@ -3109,6 +3150,7 @@ function buildPublicRouteEntries(skill) {
 
     if (skill === "reading") {
         readManualReadingTests().forEach((test) => {
+            if (isMockOnlyTest(test)) return;
             entries.push({
                 skill: "reading",
                 source: "reading",
@@ -3121,6 +3163,7 @@ function buildPublicRouteEntries(skill) {
 
     if (skill === "listening") {
         readManualListeningTests().forEach((test) => {
+            if (isMockOnlyTest(test)) return;
             entries.push({
                 skill: "listening",
                 source: "listening",
@@ -3132,6 +3175,7 @@ function buildPublicRouteEntries(skill) {
     }
 
     fullTestStore.readAll().forEach((test) => {
+        if (isMockOnlyTest(test)) return;
         const inferredSkill = fullTestSkill(test);
 
         if (inferredSkill !== skill && inferredSkill !== "combined") {
@@ -3788,10 +3832,10 @@ function requireAdmin(req, res, next) {
 
 const requireUser = requireAuth;
 
-// Page-level authentication check for redirection
 function requirePageAuth(req, res, next) {
     if (!req.user) {
-        return res.redirect("/login");
+        const redirectUrl = encodeURIComponent(req.originalUrl || req.url);
+        return res.redirect(`/login?redirect=${redirectUrl}`);
     }
     next();
 }
@@ -3819,40 +3863,62 @@ app.get("/listening", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listening.html"));
 });
 
+function setNoStorePageHeaders(res) {
+    res.set({
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "Surrogate-Control": "no-store"
+    });
+}
+
+function sendExamPage(res, fileName) {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, fileName));
+}
+
+function sendSpeakingPage(req, res) {
+    sendExamPage(res, "speaking.html");
+}
+
 app.get("/speaking", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
+});
+
+app.get("/speaking/player", requirePageAuth, (req, res) => {
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part1", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part1/:testId", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part2", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part2/:testId", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part3", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/part3/:testId", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/full-test", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/speaking/full-test/:testId", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "speaking.html"));
+    sendSpeakingPage(req, res);
 });
 
 app.get("/writing", requirePageAuth, (req, res) => {
@@ -3860,51 +3926,50 @@ app.get("/writing", requirePageAuth, (req, res) => {
 });
 
 app.get("/writing/task-1", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "writing-task1.html"));
+    sendExamPage(res, "writing-task1.html");
 });
 
 app.get("/writing/task-2", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "writing-task2.html"));
+    sendExamPage(res, "writing-task2.html");
 });
 
 app.get("/writing/full-test", requirePageAuth, (req, res) => {
-    res.sendFile(path.join(ROOT_DIR, "full-writing-test.html"));
+    sendExamPage(res, "full-writing-test.html");
 });
 
-// Parts & Lists clean routes
-app.get("/reading/part1", (req, res) => {
+app.get("/reading/part1", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "part1.html"));
 });
 
-app.get("/reading/part2", (req, res) => {
+app.get("/reading/part2", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "part2.html"));
 });
 
-app.get("/reading/part3", (req, res) => {
+app.get("/reading/part3", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "part3.html"));
 });
 
-app.get("/reading/fulltest", (req, res) => {
+app.get("/reading/fulltest", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "fulltest.html"));
 });
 
-app.get("/listening/part1", (req, res) => {
+app.get("/listening/part1", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listeningpart1.html"));
 });
 
-app.get("/listening/part2", (req, res) => {
+app.get("/listening/part2", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listeningpart2.html"));
 });
 
-app.get("/listening/part3", (req, res) => {
+app.get("/listening/part3", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listeningpart3.html"));
 });
 
-app.get("/listening/part4", (req, res) => {
+app.get("/listening/part4", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listeningpart4.html"));
 });
 
-app.get("/listening/fulltest", (req, res) => {
+app.get("/listening/fulltest", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listeningfulltest.html"));
 });
 
@@ -3917,10 +3982,19 @@ app.get("/listening-tests", (req, res) => {
 });
 
 app.get("/mock-tests", (req, res) => {
+    setNoStorePageHeaders(res);
     res.sendFile(path.join(ROOT_DIR, "mock-tests.html"));
 });
 
+app.get("/mock-test", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "mock-test.html"));
+});
+
 app.get("/mock-test/:id/result", requirePageAuth, (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "mock-test-result.html"));
+});
+
+app.get("/mock-test-result/:resultId", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "mock-test-result.html"));
 });
 
@@ -3938,6 +4012,7 @@ app.get("/profile", requirePageAuth, (req, res) => {
 });
 
 app.get("/profile-settings", requirePageAuth, (req, res) => {
+    setNoStorePageHeaders(res);
     res.sendFile(path.join(ROOT_DIR, "profile-settings.html"));
 });
 
@@ -3946,15 +4021,16 @@ app.get("/my-results", requirePageAuth, (req, res) => {
 });
 
 app.get("/full-test-player", requirePageAuth, (req, res) => {
-    if (req.query.id) {
+    const isMockRequest = req.query.mockMode === "1" || req.query.mockTestId;
+    if (!isMockRequest && req.query.id) {
         const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
         const test = resolveFullTest(req.query.id, preferredSkill);
 
-        if (test) {
+        if (test && !isMockOnlyTest(test)) {
             return res.redirect(302, publicFullTestUrl(test, preferredSkill));
         }
     }
-    res.sendFile(path.join(ROOT_DIR, "full-test-player.html"));
+    sendExamPage(res, "full-test-player.html");
 });
 
 // Admin pages clean routes
@@ -4017,23 +4093,25 @@ function redirectToCleanTestUrl(req, res, skill, source, locator, options = {}) 
     return true;
 }
 
-app.get("/reading-template.html", (req, res) => {
-    if (req.query.id && redirectToCleanTestUrl(req, res, "reading", "reading", req.query.id)) {
+app.get("/reading-template.html", requirePageAuth, (req, res) => {
+    const isMockRequest = req.query.mockMode === "1" || req.query.mockTestId;
+    if (!isMockRequest && req.query.id && redirectToCleanTestUrl(req, res, "reading", "reading", req.query.id)) {
         return;
     }
 
-    res.sendFile(path.join(ROOT_DIR, "reading-template.html"));
+    sendExamPage(res, "reading-template.html");
 });
 
-app.get("/listening-template.html", (req, res) => {
-    if (req.query.id && redirectToCleanTestUrl(req, res, "listening", "listening", req.query.id, { part: req.query.part })) {
+app.get("/listening-template.html", requirePageAuth, (req, res) => {
+    const isMockRequest = req.query.mockMode === "1" || req.query.mockTestId;
+    if (!isMockRequest && req.query.id && redirectToCleanTestUrl(req, res, "listening", "listening", req.query.id, { part: req.query.part })) {
         return;
     }
 
-    res.sendFile(path.join(ROOT_DIR, "listening-template.html"));
+    sendExamPage(res, "listening-template.html");
 });
 
-app.get("/reading/:slug", (req, res) => {
+app.get("/reading/:slug", requirePageAuth, (req, res) => {
     const entry = resolvePublicEntry("reading", req.params.slug);
 
     if (!entry) {
@@ -4046,10 +4124,10 @@ app.get("/reading/:slug", (req, res) => {
         return;
     }
 
-    res.sendFile(path.join(ROOT_DIR, entry.htmlFile));
+    sendExamPage(res, entry.htmlFile);
 });
 
-app.get("/listening/:slug/part-:part", (req, res) => {
+app.get("/listening/:slug/part-:part", requirePageAuth, (req, res) => {
     const entry = resolvePublicEntry("listening", req.params.slug, "listening");
 
     if (!entry) {
@@ -4062,10 +4140,10 @@ app.get("/listening/:slug/part-:part", (req, res) => {
         return;
     }
 
-    res.sendFile(path.join(ROOT_DIR, "listening-template.html"));
+    sendExamPage(res, "listening-template.html");
 });
 
-app.get("/listening/:slug", (req, res) => {
+app.get("/listening/:slug", requirePageAuth, (req, res) => {
     const entry = resolvePublicEntry("listening", req.params.slug);
 
     if (!entry) {
@@ -4078,7 +4156,7 @@ app.get("/listening/:slug", (req, res) => {
         return;
     }
 
-    res.sendFile(path.join(ROOT_DIR, entry.htmlFile));
+    sendExamPage(res, entry.htmlFile);
 });
 
 app.get("/api/profile/progress", requireUser, (req, res) => {
@@ -4122,33 +4200,126 @@ app.put("/api/profile/preferences", requireUser, (req, res) => {
     }
 });
 
+async function getNextTestTakerId() {
+    const mongoose = require("mongoose");
+    if (mongoose.connection.readyState === 1) {
+        const User = require("./models/User");
+        const highestUser = await User.findOne({ testTakerId: /^[0-9]+$/ }).sort("-testTakerId").select("testTakerId");
+        let nextNum = 1;
+        if (highestUser && highestUser.testTakerId) {
+            const num = parseInt(highestUser.testTakerId, 10);
+            if (!isNaN(num)) {
+                nextNum = num + 1;
+            }
+        }
+        return String(nextNum).padStart(3, "0");
+    }
+    return "001";
+}
+
+function getNextTestTakerIdLocal(users = []) {
+    let max = 0;
+    users.forEach((u) => {
+        if (u.testTakerId && /^[0-9]+$/.test(u.testTakerId)) {
+            const num = parseInt(u.testTakerId, 10);
+            if (num > max) max = num;
+        }
+    });
+    return String(max + 1).padStart(3, "0");
+}
+
+app.post("/api/profile/photo", requireUser, (req, res) => {
+    candidatePhotoUpload.single("photo")(req, res, (err) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+        if (!req.file) {
+            return res.status(400).json({ error: "Photo file is required" });
+        }
+        res.json({
+            photoUrl: `/uploads/candidate-photos/${path.basename(req.file.path)}`
+        });
+    });
+});
+
 app.put("/api/profile", requireUser, async (req, res) => {
     try {
-        const { name } = req.body || {};
-        if (!name || typeof name !== "string" || !name.trim()) {
-            return res.status(400).json({ error: "Name is required" });
-        }
+        const {
+            firstName,
+            familyName,
+            fullName,
+            dateOfBirth,
+            sex,
+            candidatePhoto,
+            testTakerId,
+            candidateType,
+            countryOfOrigin,
+            countryOfNationality,
+            firstLanguage,
+            targetBand
+        } = req.body || {};
 
         const userId = req.user?.id || req.account?._id || req.account?.id;
-        console.log(`[PROFILE UPDATE] Updating user ${userId} name to "${name.trim()}"`);
+        const existingUser = await userStore.findUserById(userId);
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
 
-        const updatedUser = await userStore.updateUser(userId, {
-            name: name.trim()
-        });
+        const finalFirstName = (firstName !== undefined) ? firstName.trim() : (existingUser.firstName || "");
+        const finalFamilyName = (familyName !== undefined) ? familyName.trim() : (existingUser.familyName || "");
+        const finalFullName = (fullName !== undefined) ? fullName.trim() : (existingUser.fullName || existingUser.name || "");
+        const finalName = (req.body.name !== undefined) ? req.body.name.trim() : (existingUser.name || finalFullName || existingUser.username || "");
+
+        if (!finalFirstName) return res.status(400).json({ error: "First Name is required" });
+        if (!finalFamilyName) return res.status(400).json({ error: "Family Name is required" });
+        if (!finalFullName) return res.status(400).json({ error: "Full Name is required" });
+        if (!finalName) return res.status(400).json({ error: "Name is required" });
+
+        const isAdmin = req.user?.role === "admin";
+        let finalTestTakerId = existingUser.testTakerId;
+        if (!finalTestTakerId || !finalTestTakerId.trim()) {
+            const mongoose = require("mongoose");
+            if (mongoose.connection.readyState === 1) {
+                finalTestTakerId = await getNextTestTakerId();
+            } else {
+                const users = userStore.getAllUsers ? await userStore.getAllUsers() : [];
+                finalTestTakerId = getNextTestTakerIdLocal(users);
+            }
+        }
+
+        const updates = {
+            firstName: finalFirstName,
+            familyName: finalFamilyName,
+            fullName: finalFullName,
+            name: finalName,
+            dateOfBirth: (dateOfBirth !== undefined) ? dateOfBirth.trim() : (existingUser.dateOfBirth || ""),
+            sex: (sex !== undefined) ? sex.trim() : (existingUser.sex || ""),
+            candidatePhoto: (candidatePhoto !== undefined) ? (candidatePhoto || "") : (existingUser.candidatePhoto || ""),
+            testTakerId: finalTestTakerId,
+            candidateType: (candidateType !== undefined) ? candidateType.trim() : (existingUser.candidateType || "Mock Test Candidate"),
+            countryOfOrigin: (countryOfOrigin !== undefined) ? countryOfOrigin.trim() : (existingUser.countryOfOrigin || "Uzbekistan"),
+            countryOfNationality: (countryOfNationality !== undefined) ? countryOfNationality.trim() : (existingUser.countryOfNationality || "Uzbekistan"),
+            firstLanguage: (firstLanguage !== undefined) ? firstLanguage.trim() : (existingUser.firstLanguage || "Uzbek"),
+            targetBand: (targetBand !== undefined) ? (targetBand || "") : (existingUser.targetBand || "")
+        };
+
+        console.log(`[PROFILE UPDATE] Updating user ${userId} candidate settings`);
+
+        const updatedUser = await userStore.updateUser(userId, updates);
 
         if (!updatedUser) {
             console.warn(`[PROFILE UPDATE] User not found or failed to update: ${userId}`);
             return res.status(404).json({ error: "User not found" });
         }
 
-        console.info(`[PROFILE UPDATE] User ${userId} name updated successfully`);
+        console.info(`[PROFILE UPDATE] User ${userId} candidate settings updated successfully`);
 
         res.json({
             success: true,
             user: publicUser(updatedUser)
         });
     } catch (error) {
-        console.error("[PROFILE UPDATE] Error updating profile name:", error);
+        console.error("[PROFILE UPDATE] Error updating profile:", error);
         res.status(error.statusCode || 500).json({
             error: error.message || "Could not update profile"
         });
@@ -4162,12 +4333,34 @@ app.get("/api/mock-tests", (req, res) => {
     res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
 });
 
-app.get("/api/mock-tests/:id", (req, res) => {
+app.get("/api/mock-tests/latest", (req, res) => {
     const includeDraft = req.user && isAdminEmail(req.user.email);
-    const test = mockTestStore.getTest(req.params.id, { includeDraft });
+    const test = mockTestStore.latestActiveTest({
+        includeDraft,
+        requireComplete: false
+    });
 
     if (!test) {
-        return res.status(404).json({ error: "Mock test not found" });
+        return res.status(404).json({
+            error: "Mock test data not found. Please add Listening, Reading, Writing and Speaking sections in admin panel."
+        });
+    }
+
+    res.json(test);
+});
+
+app.get("/api/mock-tests/:id", (req, res) => {
+    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const requestedId = String(req.params.id || "").trim();
+    const useLatest = !requestedId || requestedId === "undefined" || requestedId === "null";
+    const test = useLatest
+        ? mockTestStore.latestActiveTest({ includeDraft, requireComplete: false })
+        : mockTestStore.getTest(requestedId, { includeDraft, requireComplete: false });
+
+    if (!test) {
+        return res.status(404).json({
+            error: "Mock test data not found. Please add Listening, Reading, Writing and Speaking sections in admin panel."
+        });
     }
 
     res.json(test);
@@ -4195,6 +4388,54 @@ app.delete("/api/mock-tests/:id/progress", requireUser, (req, res) => {
     }
 });
 
+function getCefrLevel(band) {
+    const b = Number(band);
+    if (b >= 7.0) return "C2";
+    if (b >= 5.5) return "C1";
+    if (b >= 4.0) return "B2";
+    if (b >= 3.0) return "B1";
+    if (b >= 2.0) return "A2";
+    if (b >= 1.0) return "A1";
+    return "N/A";
+}
+
+async function mapProfileFieldsToResult(userId, result) {
+    if (!result) return null;
+    const user = await userStore.findUserById(userId);
+    const mapped = { ...result };
+    if (user) {
+        mapped.firstName = user.firstName || "";
+        mapped.familyName = user.familyName || "";
+        mapped.fullName = user.fullName || user.name || "";
+        mapped.email = user.email || "";
+        mapped.dateOfBirth = user.dateOfBirth || "";
+        mapped.sex = user.sex || "";
+        mapped.candidatePhoto = user.candidatePhoto || "";
+        mapped.testTakerId = user.testTakerId || "";
+        mapped.candidateType = user.candidateType || "Mock Test Candidate";
+        mapped.countryOfOrigin = user.countryOfOrigin || "Uzbekistan";
+        mapped.countryOfNationality = user.countryOfNationality || "Uzbekistan";
+        mapped.firstLanguage = user.firstLanguage || "Uzbek";
+        mapped.targetBand = user.targetBand || "";
+    } else {
+        mapped.firstName = "";
+        mapped.familyName = "";
+        mapped.fullName = "";
+        mapped.email = "";
+        mapped.dateOfBirth = "";
+        mapped.sex = "";
+        mapped.candidatePhoto = "";
+        mapped.testTakerId = "";
+        mapped.candidateType = "Mock Test Candidate";
+        mapped.countryOfOrigin = "Uzbekistan";
+        mapped.countryOfNationality = "Uzbekistan";
+        mapped.firstLanguage = "Uzbek";
+        mapped.targetBand = "";
+    }
+    mapped.cefrLevel = getCefrLevel(mapped.overallBand);
+    return mapped;
+}
+
 app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
     try {
         const mockTest = mockTestStore.getTest(req.params.id, { includeDraft: true });
@@ -4203,7 +4444,8 @@ app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
             ...(req.body || {}),
             __scoringTest: scoringTest || undefined
         });
-        res.status(201).json({ result });
+        const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
+        res.status(201).json({ result: mappedResult });
     } catch (error) {
         res.status(error.statusCode || 500).json({
             error: error.message || "Could not submit mock test"
@@ -4211,14 +4453,26 @@ app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
     }
 });
 
-app.get("/api/mock-tests/:id/latest-result", requireUser, (req, res) => {
+app.get("/api/mock-tests/:id/latest-result", requireUser, async (req, res) => {
     const result = mockTestStore.latestResult(req.user.id, req.params.id);
 
     if (!result) {
         return res.status(404).json({ error: "Mock test result not found" });
     }
 
-    res.json({ result });
+    const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
+    res.json({ result: mappedResult });
+});
+
+app.get("/api/mock-test-results/:id", requireUser, async (req, res) => {
+    const result = mockTestStore.resultById(req.user.id, req.params.id);
+
+    if (!result) {
+        return res.status(404).json({ error: "Mock test result not found" });
+    }
+
+    const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
+    res.json({ result: mappedResult });
 });
 
 app.get("/api/profile/mock-tests", requireUser, (req, res) => {
@@ -4412,7 +4666,7 @@ app.get("/api/reading-tests", (req, res) => {
 app.get("/api/reading-tests/:id", (req, res) => {
     const test = buildMockReadingTest(req.params.id) || resolveManualReadingTest(req.params.id);
 
-    if (!test) {
+    if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-reading-"))) {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
@@ -4600,7 +4854,7 @@ app.get("/api/listening-tests", (req, res) => {
 app.get("/api/listening-tests/:id", (req, res) => {
     const test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
 
-    if (!test) {
+    if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-listening-"))) {
         return res.status(404).json({ error: "Listening test not found" });
     }
 
@@ -4997,6 +5251,20 @@ async function handleLogin(req, res) {
             updates.role = "admin";
             user.role = "admin";
         }
+        
+        if (!user.testTakerId || !user.testTakerId.trim()) {
+            const mongoose = require("mongoose");
+            let generatedId;
+            if (mongoose.connection.readyState === 1) {
+                generatedId = await getNextTestTakerId();
+            } else {
+                const users = userStore.getAllUsers ? await userStore.getAllUsers() : [];
+                generatedId = getNextTestTakerIdLocal(users);
+            }
+            updates.testTakerId = generatedId;
+            user.testTakerId = generatedId;
+        }
+        
         await userStore.updateUser(user._id || user.id, updates);
 
         const token = createAuthToken(user);
@@ -5033,20 +5301,27 @@ app.post("/api/auth/login", handleLogin);
 app.get("/auth/google", (req, res) => {
     const clientId = process.env.GOOGLE_CLIENT_ID;
     const callbackUrl = process.env.GOOGLE_CALLBACK_URL;
+    const redirectParam = req.query.redirect || "";
 
     if (!clientId || !callbackUrl) {
         return res.status(500).send("Google OAuth is not configured on the server. Please set GOOGLE_CLIENT_ID and GOOGLE_CALLBACK_URL in your environment.");
     }
 
+    const paramsObj = {
+        client_id: clientId,
+        redirect_uri: callbackUrl,
+        response_type: "code",
+        scope: "openid email profile",
+        access_type: "offline",
+        prompt: "select_account"
+    };
+
+    if (redirectParam) {
+        paramsObj.state = redirectParam;
+    }
+
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + 
-        new URLSearchParams({
-            client_id: clientId,
-            redirect_uri: callbackUrl,
-            response_type: "code",
-            scope: "openid email profile",
-            access_type: "offline",
-            prompt: "select_account"
-        }).toString();
+        new URLSearchParams(paramsObj).toString();
 
     res.redirect(googleAuthUrl);
 });
@@ -5054,7 +5329,7 @@ app.get("/auth/google", (req, res) => {
 app.get("/auth/google/callback", async (req, res) => {
     try {
         console.log("[AUTH CALLBACK] Google callback reached");
-        const { code } = req.query;
+        const { code, state } = req.query;
         if (!code) {
             return res.status(400).send("Authorization code is missing.");
         }
@@ -5199,7 +5474,8 @@ app.get("/auth/google/callback", async (req, res) => {
         if (redirectBase.endsWith("/")) {
             redirectBase = redirectBase.slice(0, -1);
         }
-        const targetPath = user.role === "admin" ? "/admin" : "/dashboard";
+        const defaultPath = user.role === "admin" ? "/admin" : "/dashboard";
+        const targetPath = state ? decodeURIComponent(state) : defaultPath;
         const redirectUrl = `${redirectBase}${targetPath}`;
         console.log("[AUTH CALLBACK] Redirect target: " + redirectUrl);
 
@@ -5371,6 +5647,104 @@ async function runUserMigration() {
                 }
             } catch (err) {
                 console.error("Local user migration failed:", err);
+            }
+        }
+    }
+
+    await runTestTakerIdMigration().catch(err => console.error("Test Taker ID migration error:", err));
+}
+
+async function runTestTakerIdMigration() {
+    console.info("Checking if Test Taker ID migration is needed...");
+    const isMongo = mongoose.connection.readyState === 1;
+
+    if (isMongo) {
+        try {
+            const User = require("./models/User");
+            const allDbUsers = await User.find({});
+            
+            allDbUsers.sort((a, b) => {
+                const dateA = new Date(a.createdAt || 0);
+                const dateB = new Date(b.createdAt || 0);
+                if (dateA.getTime() !== dateB.getTime()) {
+                    return dateA - dateB;
+                }
+                return String(a._id).localeCompare(String(b._id));
+            });
+
+            const assignedIds = new Set();
+            allDbUsers.forEach(u => {
+                if (u.testTakerId && u.testTakerId.trim()) {
+                    assignedIds.add(u.testTakerId.trim());
+                }
+            });
+
+            let currentNum = 1;
+            for (const user of allDbUsers) {
+                if (!user.testTakerId || !user.testTakerId.trim()) {
+                    while (true) {
+                        const candidate = String(currentNum).padStart(3, "0");
+                        if (!assignedIds.has(candidate)) {
+                            user.testTakerId = candidate;
+                            assignedIds.add(candidate);
+                            await User.updateOne({ _id: user._id }, { $set: { testTakerId: candidate } });
+                            console.info(`Assigned Test Taker ID ${candidate} to user: ${user.email || user.username}`);
+                            break;
+                        }
+                        currentNum++;
+                    }
+                }
+            }
+            console.info("MongoDB Test Taker ID migration completed.");
+        } catch (err) {
+            console.error("MongoDB Test Taker ID migration failed:", err);
+        }
+    } else {
+        const usersFile = path.join(ROOT_DIR, "data", "users.json");
+        if (fs.existsSync(usersFile)) {
+            try {
+                const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
+                
+                users.sort((a, b) => {
+                    const dateA = new Date(a.createdAt || 0);
+                    const dateB = new Date(b.createdAt || 0);
+                    if (dateA.getTime() !== dateB.getTime()) {
+                        return dateA - dateB;
+                    }
+                    return String(a.id).localeCompare(String(b.id));
+                });
+
+                const assignedIds = new Set();
+                users.forEach(u => {
+                    if (u.testTakerId && u.testTakerId.trim()) {
+                        assignedIds.add(u.testTakerId.trim());
+                    }
+                });
+
+                let currentNum = 1;
+                let changed = false;
+                for (const user of users) {
+                    if (!user.testTakerId || !user.testTakerId.trim()) {
+                        while (true) {
+                            const candidate = String(currentNum).padStart(3, "0");
+                            if (!assignedIds.has(candidate)) {
+                                user.testTakerId = candidate;
+                                assignedIds.add(candidate);
+                                changed = true;
+                                console.info(`Assigned Test Taker ID ${candidate} to local user: ${user.email || user.username}`);
+                                break;
+                            }
+                            currentNum++;
+                        }
+                    }
+                }
+
+                if (changed) {
+                    fs.writeFileSync(usersFile, JSON.stringify(users, null, 2), "utf8");
+                }
+                console.info("Local users JSON Test Taker ID migration completed.");
+            } catch (err) {
+                console.error("Local Test Taker ID migration failed:", err);
             }
         }
     }

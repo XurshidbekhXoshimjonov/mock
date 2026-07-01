@@ -53,6 +53,7 @@
     };
     const emptyMockTests = {
         completedMockTests: 0,
+        averageOverallBand: 0,
         bestOverallBand: 0,
         lastResult: null,
         breakdown: {
@@ -798,6 +799,13 @@
         const reading = summarizeObjectiveSkill(stats, "reading");
         const writing = writingOverview(stats.writing);
         const speaking = speakingOverview(stats);
+        const mockTests = { ...emptyMockTests, ...(stats.mockTests || {}) };
+        const completedMockTests = Number(mockTests.completedMockTests || 0);
+        const recentMockResults = Array.isArray(mockTests.recent) ? mockTests.recent : [];
+        const averageMockBand = Number.isFinite(Number(mockTests.averageOverallBand)) && Number(mockTests.averageOverallBand) > 0
+            ? Number(mockTests.averageOverallBand)
+            : averageValue(recentMockResults.map((result) => Number(result.overallBand || 0)).filter((value) => value > 0));
+        const lastMockResult = mockTests.lastResult || null;
 
         return [
             {
@@ -855,16 +863,38 @@
                     ["Latest result", speaking.latestResult],
                     ["Last activity", formatDate(speaking.lastActivityDate)]
                 ]
+            },
+            {
+                key: "mock",
+                title: "Mock Test Performance",
+                description: "Track complete IELTS mock tests separately from standalone practice.",
+                icon: "award",
+                tone: "mock",
+                stats: [
+                    ["Completed Mock Tests", completedMockTests || 0],
+                    ["Average Overall Band", completedMockTests ? formatBand(averageMockBand) : "No result"],
+                    ["Best Overall Band", completedMockTests ? formatBand(mockTests.bestOverallBand) : "No result"],
+                    ["Latest Result", lastMockResult ? `Band ${formatBand(lastMockResult.overallBand)}` : "No result"],
+                    ["Last Activity", formatDate(lastMockResult?.completedAt)]
+                ]
             }
         ];
     }
 
     function PerformanceSkillCard({ card, onOpen }) {
-        return e("button", {
-            type: "button",
+        const element = card.href ? "a" : "button";
+        const props = {
             className: `performance-skill-card ${card.tone}`,
-            onClick: () => onOpen(card.key)
-        },
+            "aria-label": card.href ? `Open ${card.title}` : undefined
+        };
+        if (card.href) {
+            props.href = card.href;
+        } else {
+            props.type = "button";
+            props.onClick = () => onOpen(card.key);
+        }
+
+        return e(element, props,
             e("span", { className: "performance-skill-card-top" },
                 e("span", { className: "performance-skill-icon" }, e(Icon, { name: card.icon, className: "h-5 w-5" })),
                 e("span", { className: "performance-skill-arrow" }, e(Icon, { name: "arrow", className: "h-4 w-4" }))
@@ -985,6 +1015,80 @@
         );
     }
 
+    function mockResultLink(result) {
+        if (result?.id) return `/mock-test-result/${encodeURIComponent(result.id)}`;
+        if (result?.testId) return `/mock-test/${encodeURIComponent(result.testId)}/result`;
+        return "/mock-tests";
+    }
+
+    function mockSectionBand(result, section) {
+        const value = result?.[section]?.band;
+        return Number(value) > 0 ? formatBand(value) : "No result";
+    }
+
+    function MockTestDetail({ stats }) {
+        const data = { ...emptyMockTests, ...(stats.mockTests || {}) };
+        const completedMockTests = Number(data.completedMockTests || 0);
+        const recent = Array.isArray(data.recent) ? data.recent : [];
+        const last = data.lastResult || recent[0] || null;
+        const averageOverallBand = Number.isFinite(Number(data.averageOverallBand)) && Number(data.averageOverallBand) > 0
+            ? Number(data.averageOverallBand)
+            : averageValue(recent.map((result) => Number(result.overallBand || 0)).filter((value) => value > 0));
+        const metrics = [
+            ["Completed mock tests", completedMockTests || 0, "Full IELTS simulations"],
+            ["Average overall band", completedMockTests ? formatBand(averageOverallBand) : "No result", "Across completed mocks"],
+            ["Best overall band", completedMockTests ? formatBand(data.bestOverallBand) : "No result", "Highest saved mock score"],
+            ["Latest mock result", last ? `Band ${formatBand(last.overallBand)}` : "No result", "Most recent completed mock"],
+            ["Last activity date", formatDate(last?.completedAt), "Most recent completion"]
+        ];
+
+        return e(Card, { className: "performance-detail-card writing-dashboard-card mock" },
+            e(SectionTitle, {
+                eyebrow: "MOCK TEST",
+                title: "Mock Test Performance",
+                description: "Track complete IELTS mock tests, overall band scores, and section results.",
+                action: e("div", { className: "writing-quick-actions" }, e("a", { href: "/mock-tests" }, "Start Mock Test"))
+            }),
+            e("div", { className: "writing-metrics-grid skill-detail-metrics mock-detail-metrics" },
+                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
+            ),
+            e("div", { className: "writing-results-wrap" },
+                e("div", { className: "writing-results-head" },
+                    e("h3", null, "Recent Mock Test Results"),
+                    e("p", null, "Open a completed mock test to inspect the saved result.")
+                ),
+                recent.length
+                    ? e("div", { className: "writing-results-table-scroll" },
+                        e("table", { className: "writing-results-table mock-results-table" },
+                            e("thead", null,
+                                e("tr", null,
+                                    ["Test Title", "Date", "Overall Band", "Listening", "Reading", "Writing", "Speaking", "Action"].map((heading) => e("th", { key: heading }, heading))
+                                )
+                            ),
+                            e("tbody", null,
+                                recent.map((result, index) => e("tr", { key: result.id || `${result.testId || "mock"}-${index}` },
+                                    e("td", null, e("strong", null, result.title || `Mock Test ${result.testNumber || index + 1}`)),
+                                    e("td", null, formatDate(result.completedAt)),
+                                    e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(result.overallBand)}`)),
+                                    e("td", null, mockSectionBand(result, "listening")),
+                                    e("td", null, mockSectionBand(result, "reading")),
+                                    e("td", null, mockSectionBand(result, "writing")),
+                                    e("td", null, mockSectionBand(result, "speaking")),
+                                    e("td", null, e("a", { className: "writing-feedback-btn", href: mockResultLink(result) }, "View Result"))
+                                ))
+                            )
+                        )
+                    )
+                    : e("div", { className: "writing-empty-state" },
+                        e("div", { className: "writing-empty-icon" }, e(Icon, { name: "award", className: "h-6 w-6" })),
+                        e("h3", null, "No Mock Test results yet"),
+                        e("p", null, "Complete a full IELTS mock test to see your section bands here."),
+                        e("a", { href: "/mock-tests", className: "writing-empty-action" }, "Start Mock Test")
+                    )
+            )
+        );
+    }
+
     function SpeakingFeedbackPanel({ attempt }) {
         if (!attempt) return null;
 
@@ -1099,45 +1203,6 @@
         );
     }
 
-    function MockTestDashboard({ mockTests }) {
-        const data = { ...emptyMockTests, ...(mockTests || {}) };
-        const breakdown = { ...emptyMockTests.breakdown, ...(data.breakdown || {}) };
-        const last = data.lastResult || null;
-        const metrics = [
-            ["Completed mock tests", data.completedMockTests || 0, "Full IELTS simulations"],
-            ["Best overall band", data.completedMockTests ? formatBand(data.bestOverallBand) : "No result", "Highest saved mock score"],
-            ["Last mock result", last ? `Band ${formatBand(last.overallBand)}` : "No result", last ? formatDate(last.completedAt) : "Start a mock test"]
-        ];
-
-        return e(Card, { className: "writing-dashboard-card mock-test-dashboard-card" },
-            e(SectionTitle, {
-                eyebrow: "Mock Test",
-                title: "Mock Test Performance",
-                description: "Track complete IELTS mock tests separately from standalone practice.",
-                action: e("div", { className: "writing-quick-actions" }, e("a", { href: "/mock-tests" }, "Start Mock Test"))
-            }),
-            e("div", { className: "mock-test-metrics-grid" },
-                metrics.map(([label, value, note]) => e(WritingMetricCard, { key: label, label, value, note }))
-            ),
-            e("div", { className: "mock-test-breakdown-grid" },
-                [
-                    ["Listening", breakdown.listening],
-                    ["Reading", breakdown.reading],
-                    ["Writing", breakdown.writing],
-                    ["Speaking", breakdown.speaking]
-                ].map(([label, value]) => e("div", { key: label, className: "mock-test-breakdown-card" },
-                    e("p", null, label),
-                    e("strong", null, data.completedMockTests ? formatBand(value) : "0.0")
-                ))
-            ),
-            data.chart?.length
-                ? e("div", { className: "mock-test-chart-wrap" },
-                    e(LineChart, { data: data.chart, valueKey: "value", maxValue: 9, color: "#d91532", chartClass: "chart-mock-progress" })
-                )
-                : e("p", { className: "mock-test-empty" }, "Completed mock test results will appear here.")
-        );
-    }
-
     function PerformanceDetailView({ skill, stats, onBack, onViewWritingFeedback }) {
         return e("section", { className: "performance-detail-shell" },
             e(BackToPerformanceCenter, { onBack }),
@@ -1145,7 +1210,9 @@
                 ? e("div", { className: "writing-dashboard-wrap" }, e(WritingDashboard, { writing: stats.writing, onViewFeedback: onViewWritingFeedback }))
                 : skill === "speaking"
                     ? e("div", { className: "writing-dashboard-wrap" }, e(SpeakingDashboard, { stats }))
-                    : e("div", { className: "writing-dashboard-wrap" }, e(ObjectiveSkillDetail, { skill, stats }))
+                    : skill === "mock"
+                        ? e("div", { className: "writing-dashboard-wrap" }, e(MockTestDetail, { stats }))
+                        : e("div", { className: "writing-dashboard-wrap" }, e(ObjectiveSkillDetail, { skill, stats }))
         );
     }
 
@@ -1260,73 +1327,771 @@
                 : e("section", { className: "performance-center-shell" },
                     e(PerformanceCardGrid, { stats, onOpen: openSkill })
                 ),
-            e(MockTestDashboard, { mockTests: stats.mockTests }),
             e(WritingFeedbackModal, { attempt: selectedWritingAttempt, onClose: () => setSelectedWritingAttempt(null) })
         );
     }
 
     function SettingsPage({ user, stats }) {
-        const [name, setName] = useState(user.name || user.username || "");
-        const [targetBand, setTargetBand] = useState(stats.targetBand === null ? "" : String(stats.targetBand));
+        const isAdmin = user.role === "admin";
+
+        const [firstName, setFirstName] = useState(user.firstName || "");
+        const [familyName, setFamilyName] = useState(user.familyName || "");
+        const [fullName, setFullName] = useState(user.fullName || "");
+        const [dateOfBirth, setDateOfBirth] = useState(user.dateOfBirth || "");
+        const [sex, setSex] = useState(user.sex || "");
+        const [candidatePhoto, setCandidatePhoto] = useState(user.candidatePhoto || "");
+        const [testTakerId, setTestTakerId] = useState(user.testTakerId || "");
+        const [candidateType, setCandidateType] = useState(user.candidateType || "Mock Test Candidate");
+        const [countryOfOrigin, setCountryOfOrigin] = useState(user.countryOfOrigin || "Uzbekistan");
+        const [countryOfNationality, setCountryOfNationality] = useState(user.countryOfNationality || "Uzbekistan");
+        const [firstLanguage, setFirstLanguage] = useState(user.firstLanguage || "Uzbek");
+        const [targetBand, setTargetBand] = useState(user.targetBand || (stats.targetBand === null ? "" : String(stats.targetBand)));
+
         const [message, setMessage] = useState("");
         const [saving, setSaving] = useState(false);
+        const [uploadingPhoto, setUploadingPhoto] = useState(false);
+        const [photoError, setPhotoError] = useState("");
+
+        async function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 2 * 1024 * 1024) {
+                setPhotoError("File size exceeds 2MB limit.");
+                return;
+            }
+
+            const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+            if (!allowedTypes.includes(file.type)) {
+                setPhotoError("Only JPG, JPEG, and PNG images are allowed.");
+                return;
+            }
+
+            setUploadingPhoto(true);
+            setPhotoError("");
+
+            try {
+                const formData = new FormData();
+                formData.append("photo", file);
+
+                const response = await fetch("/api/profile/photo", {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Failed to upload photo");
+                }
+
+                setCandidatePhoto(data.photoUrl);
+            } catch (error) {
+                setPhotoError(error.message);
+            } finally {
+                setUploadingPhoto(false);
+            }
+        }
+
+        function handleRemovePhoto() {
+            setCandidatePhoto("");
+            setPhotoError("");
+        }
 
         async function savePreferences(event) {
             event.preventDefault();
+
+            const finalName = fullName.trim() || user.fullName || user.name || "";
+            if (!finalName) {
+                setMessage("Name is required.");
+                return;
+            }
+
+            if (!firstName.trim()) {
+                setMessage("First Name is required.");
+                return;
+            }
+            if (!familyName.trim()) {
+                setMessage("Family Name is required.");
+                return;
+            }
+            if (!fullName.trim()) {
+                setMessage("Full Name is required.");
+                return;
+            }
+            if (!dateOfBirth.trim()) {
+                setMessage("Date of Birth is required.");
+                return;
+            }
+            if (!sex.trim()) {
+                setMessage("Sex is required.");
+                return;
+            }
+            if (!candidateType.trim()) {
+                setMessage("Candidate Type is required.");
+                return;
+            }
+            if (!countryOfOrigin.trim()) {
+                setMessage("Country of Origin is required.");
+                return;
+            }
+            if (!countryOfNationality.trim()) {
+                setMessage("Country of Nationality is required.");
+                return;
+            }
+            if (!firstLanguage.trim()) {
+                setMessage("First Language is required.");
+                return;
+            }
+
             setSaving(true);
             setMessage("");
 
             try {
-                await window.authClient.updateProfile({
-                    name: name
+                const profileResult = await window.authClient.updateProfile({
+                    name: finalName,
+                    firstName: firstName.trim(),
+                    familyName: familyName.trim(),
+                    fullName: fullName.trim(),
+                    dateOfBirth: dateOfBirth.trim(),
+                    sex: sex.trim(),
+                    candidatePhoto: candidatePhoto,
+                    testTakerId: testTakerId.trim(),
+                    candidateType: candidateType,
+                    countryOfOrigin: countryOfOrigin,
+                    countryOfNationality: countryOfNationality,
+                    firstLanguage: firstLanguage,
+                    targetBand: targetBand
                 });
+
+                if (profileResult && profileResult.error) {
+                    throw new Error(profileResult.error);
+                }
+
                 await window.authClient.updateProfilePreferences({
                     targetBand: targetBand === "" ? null : Number(targetBand)
                 });
+
                 setMessage("Profile settings saved successfully.");
+                
+                // If it generated a test taker ID, update local state
+                if (profileResult && profileResult.user && profileResult.user.testTakerId) {
+                    setTestTakerId(profileResult.user.testTakerId);
+                }
             } catch (error) {
-                setMessage(error.message);
+                setMessage(error.message || "Could not save profile settings.");
             } finally {
                 setSaving(false);
             }
         }
 
-        return e("main", { className: "mx-auto max-w-4xl px-5 py-8 lg:px-8" },
-            e("a", { href: "profile.html", className: "mb-6 inline-flex items-center gap-2 text-sm font-black text-blue-700 hover:text-slate-950" }, e(Icon, { name: "arrow", className: "h-4 w-4 rotate-180" }), "Back to dashboard"),
-            e("section", { className: "rounded-[2rem] border border-slate-200 bg-white p-6 shadow-card md:p-8" },
-                e("div", { className: "mb-8 flex items-center gap-4" },
-                    user.avatar
-                        ? e("img", { src: user.avatar, alt: name, className: "flex h-16 w-16 shrink-0 rounded-3xl object-cover shadow-md" })
-                        : e("div", { className: "flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 text-xl font-black text-white" }, initials(name)),
-                    e("div", null,
-                        e("p", { className: "text-sm font-black uppercase tracking-[0.16em] text-blue-700" }, `Profile Settings | ${user.role || "user"}`),
-                        e("h1", { className: "text-3xl font-black tracking-tight text-slate-950" }, "Learning preferences")
-                    )
-                ),
-                e("form", { className: "grid gap-5 md:grid-cols-2", onSubmit: savePreferences },
-                    e("label", { className: "space-y-2 text-sm font-bold text-slate-700" }, "Name", 
-                        e("input", {
-                            className: "w-full rounded-2xl border border-slate-200 px-4 py-3 font-semibold outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-50",
-                            value: name,
-                            onChange: (e) => setName(e.target.value),
-                            placeholder: "Enter your display name"
-                        })
+        return e("div", { className: "candidate-profile-container" },
+            e("style", null, `
+                .candidate-profile-container {
+                    max-width: 1500px;
+                    margin: 0 auto;
+                    padding: 32px;
+                }
+                .candidate-profile-main-card {
+                    background: white;
+                    border-radius: 28px;
+                    border: 1px solid #dbe3ef;
+                    box-shadow: 0 10px 30px rgba(7, 21, 71, 0.04);
+                    padding: 32px;
+                }
+                .candidate-profile-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    margin-bottom: 32px;
+                }
+                .candidate-profile-icon-badge {
+                    display: flex;
+                    width: 48px;
+                    height: 48px;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 16px;
+                    background-color: #091b4f;
+                    color: white;
+                    flex-shrink: 0;
+                }
+                .candidate-profile-eyebrow {
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 0.15em;
+                    color: #2563eb;
+                    margin-bottom: 2px;
+                    text-transform: uppercase;
+                }
+                .candidate-profile-title {
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #0f172a;
+                    margin-bottom: 2px;
+                }
+                .candidate-profile-subtitle {
+                    font-size: 14px;
+                    color: #64748b;
+                }
+                .candidate-profile-grid {
+                    display: grid;
+                    grid-template-columns: 1.6fr 1fr;
+                    gap: 24px;
+                    margin-bottom: 24px;
+                }
+                .candidate-profile-card {
+                    background: white;
+                    border: 1px solid #dbe3ef;
+                    border-radius: 20px;
+                    padding: 24px;
+                    box-shadow: 0 4px 20px rgba(7, 21, 71, 0.02);
+                }
+                .candidate-profile-card-title {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    letter-spacing: 0.05em;
+                    color: #091b4f;
+                    border-bottom: 1px solid #f1f5f9;
+                    padding-bottom: 16px;
+                    margin-bottom: 20px;
+                    text-transform: uppercase;
+                }
+                .candidate-profile-card-title svg {
+                    color: #2563eb;
+                    flex-shrink: 0;
+                }
+                .personal-info-inner-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 180px;
+                    gap: 20px;
+                }
+                .personal-info-fields-column {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                .candidate-photo-column {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 12px;
+                }
+                .candidate-photo-box {
+                    width: 160px;
+                    height: 160px;
+                    border: 2px dashed #cbd5e1;
+                    border-radius: 16px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background: #f8fafc;
+                    cursor: pointer;
+                    overflow: hidden;
+                    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                    padding: 12px;
+                    text-align: center;
+                    position: relative;
+                }
+                .candidate-photo-box:hover {
+                    border-color: #2563eb;
+                    background: #f0f7ff;
+                    transform: scale(1.02);
+                }
+                .candidate-photo-preview {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 12px;
+                }
+                .candidate-field-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+                }
+                .candidate-field-label {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #475569;
+                }
+                .candidate-field-input,
+                .candidate-field-select {
+                    height: 48px;
+                    border-radius: 12px;
+                    border: 1px solid #dbe3ef;
+                    padding: 0 16px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    background: white;
+                    color: #0f172a;
+                    width: 100%;
+                    outline: none;
+                    transition: all 0.2s ease;
+                }
+                .candidate-field-select {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: right 12px center;
+                    background-size: 18px;
+                    padding-right: 36px;
+                }
+                .candidate-field-input:focus,
+                .candidate-field-select:focus {
+                    border-color: #2563eb;
+                    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.06);
+                    background-color: #ffffff;
+                }
+                .candidate-field-input[readonly] {
+                    background-color: #f8fafc;
+                    border-color: #e2e8f0;
+                    color: #64748b;
+                    cursor: not-allowed;
+                }
+                .candidate-details-inner {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                .candidate-info-banner {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    border-radius: 12px;
+                    background-color: #eff6ff;
+                    border: 1px solid #bfdbfe;
+                    padding: 12px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #1e40af;
+                }
+                .candidate-important-note {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 16px;
+                    border-radius: 16px;
+                    background-color: #f8fafc;
+                    border: 1px solid #e2e8f0;
+                    padding: 24px;
+                    margin-top: 32px;
+                    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+                }
+                .candidate-important-note-title {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #0f172a;
+                    margin-bottom: 6px;
+                }
+                .candidate-important-note-text {
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: #475569;
+                    line-height: 1.6;
+                }
+                .candidate-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    margin-top: 32px;
+                }
+                .candidate-btn-save {
+                    height: 48px;
+                    padding: 0 28px;
+                    background-color: #091b4f;
+                    color: white;
+                    font-size: 14px;
+                    font-weight: 700;
+                    border-radius: 12px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                    border: none;
+                    cursor: pointer;
+                    box-shadow: 0 4px 12px rgba(9, 27, 79, 0.15);
+                }
+                .candidate-btn-save:hover {
+                    background-color: #0c256b;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 16px rgba(9, 27, 79, 0.25);
+                }
+                .candidate-btn-save:active {
+                    transform: translateY(0);
+                }
+                .candidate-btn-cancel {
+                    height: 48px;
+                    padding: 0 28px;
+                    background-color: white;
+                    color: #475569;
+                    font-size: 14px;
+                    font-weight: 700;
+                    border-radius: 12px;
+                    border: 1px solid #cbd5e1;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    transition: all 0.2s ease;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+                .candidate-btn-cancel:hover {
+                    background-color: #f8fafc;
+                    color: #0f172a;
+                    border-color: #94a3b8;
+                    transform: translateY(-1px);
+                }
+                .candidate-btn-cancel:active {
+                    transform: translateY(0);
+                }
+                .candidate-btn-back {
+                    height: 44px;
+                    padding: 0 18px;
+                    border-radius: 999px;
+                    border: 1px solid #dbe3ef;
+                    background: white;
+                    color: #2563eb;
+                    font-size: 14px;
+                    font-weight: 700;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+                    margin-bottom: 24px;
+                    width: fit-content;
+                    box-shadow: 0 2px 4px rgba(7, 21, 71, 0.02);
+                }
+                .candidate-btn-back:hover {
+                    background: #eff6ff;
+                    border-color: #bfdbfe;
+                    transform: translateX(-2px);
+                }
+                .candidate-status-message {
+                    padding: 12px 16px;
+                    border-radius: 12px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: center;
+                    margin-top: 16px;
+                    animation: fadeIn 0.3s ease;
+                }
+                .candidate-status-message.success {
+                    background-color: #ecfdf5;
+                    color: #047857;
+                    border: 1px solid #a7f3d0;
+                }
+                .candidate-status-message.error {
+                    background-color: #fef2f2;
+                    color: #b91c1c;
+                    border: 1px solid #fecaca;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(4px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @media (max-width: 900px) {
+                    .candidate-profile-container {
+                        padding: 16px;
+                    }
+                    .candidate-profile-main-card {
+                        padding: 20px;
+                        border-radius: 20px;
+                    }
+                    .candidate-profile-grid {
+                        grid-template-columns: 1fr;
+                        gap: 20px;
+                    }
+                    .personal-info-inner-grid {
+                        grid-template-columns: 1fr;
+                        gap: 16px;
+                    }
+                    .candidate-photo-column {
+                        grid-row: 1;
+                        margin-bottom: 8px;
+                    }
+                }
+            `),
+            e("div", { className: "candidate-profile-main-card" },
+                e("a", { href: "profile.html", className: "candidate-btn-back" },
+                    e("svg", { style: { width: "16px", height: "16px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2.5" },
+                        e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M10 19l-7-7m0 0l7-7m-7 7h18" })
                     ),
-                    e("label", { className: "space-y-2 text-sm font-bold text-slate-700" }, "Email", e("input", { className: "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-semibold text-slate-500", value: user.email || "", readOnly: true })),
-                    e("label", { className: "space-y-2 text-sm font-bold text-slate-700 md:col-span-2" }, "Target band",
-                        e("select", {
-                            className: "w-full rounded-2xl border border-slate-200 px-4 py-3 font-semibold outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-50",
-                            value: targetBand,
-                            onChange: (event) => setTargetBand(event.target.value)
-                        },
-                        e("option", { value: "" }, "Not set"),
-                        ["5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0"].map((band) => e("option", { key: band, value: band }, `Band ${band}`))
+                    "Back to dashboard"
+                ),
+                e("div", { className: "candidate-profile-header" },
+                    e("div", { className: "candidate-profile-icon-badge" },
+                        e("svg", { style: { width: "24px", height: "24px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                            e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" })
                         )
                     ),
-                    message ? e("p", { className: "text-sm font-bold text-blue-700 md:col-span-2" }, message) : null,
-                    e("div", { className: "flex flex-col gap-3 md:col-span-2 sm:flex-row" },
-                        e("button", { type: "submit", disabled: saving, className: "rounded-2xl bg-slate-950 px-6 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 disabled:opacity-60" }, saving ? "Saving..." : "Save preferences"),
-                        e("a", { href: "profile.html", className: "rounded-2xl border border-slate-200 px-6 py-3 text-center text-sm font-black text-slate-700 transition hover:bg-slate-50" }, "Cancel")
+                    e("div", null,
+                        e("p", { className: "candidate-profile-eyebrow" }, "PROFILE SETTINGS | CANDIDATE DETAILS"),
+                        e("h1", { className: "candidate-profile-title" }, "Candidate Profile"),
+                        e("p", { className: "candidate-profile-subtitle" }, "This information will be used in your IELTS Mock Test Result.")
+                    )
+                ),
+
+                e("form", { onSubmit: savePreferences },
+                    e("div", { className: "candidate-profile-grid" },
+                        e("div", { className: "candidate-profile-card" },
+                            e("div", { className: "candidate-profile-card-title" },
+                                e("svg", { style: { width: "20px", height: "20px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                    e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" })
+                                ),
+                                e("span", null, "Personal Information")
+                            ),
+                            e("div", { className: "personal-info-inner-grid" },
+                                e("div", { className: "personal-info-fields-column" },
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "First Name(s) ", e("span", { style: { color: "red" } }, "*")),
+                                        e("input", {
+                                            type: "text",
+                                            required: true,
+                                            autoComplete: "new-candidate-firstname",
+                                            className: "candidate-field-input",
+                                            value: firstName,
+                                            onChange: (e) => setFirstName(e.target.value),
+                                            placeholder: "First Name(s)"
+                                        })
+                                    ),
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "Full Name (as will appear on report) ", e("span", { style: { color: "red" } }, "*")),
+                                        e("input", {
+                                            type: "text",
+                                            required: true,
+                                            autoComplete: "new-candidate-fullname",
+                                            className: "candidate-field-input",
+                                            value: fullName,
+                                            onChange: (e) => setFullName(e.target.value),
+                                            placeholder: "Full Name (as will appear on report)"
+                                        })
+                                    ),
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "Email / Account ID ", e("span", { style: { color: "red" } }, "*")),
+                                        e("input", {
+                                            type: "email",
+                                            readOnly: true,
+                                            className: "candidate-field-input",
+                                            value: user.email || ""
+                                        })
+                                    )
+                                ),
+                                e("div", { className: "personal-info-fields-column" },
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "Family Name / Last Name ", e("span", { style: { color: "red" } }, "*")),
+                                        e("input", {
+                                            type: "text",
+                                            required: true,
+                                            autoComplete: "new-candidate-lastname",
+                                            className: "candidate-field-input",
+                                            value: familyName,
+                                            onChange: (e) => setFamilyName(e.target.value),
+                                            placeholder: "Family Name / Last Name"
+                                        })
+                                    ),
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "Date of Birth ", e("span", { style: { color: "red" } }, "*")),
+                                        e("input", {
+                                            type: "date",
+                                            required: true,
+                                            className: "candidate-field-input",
+                                            value: dateOfBirth,
+                                            onChange: (e) => setDateOfBirth(e.target.value)
+                                        })
+                                    ),
+                                    e("div", { className: "candidate-field-group" },
+                                        e("span", { className: "candidate-field-label" }, "Sex ", e("span", { style: { color: "red" } }, "*")),
+                                        e("select", {
+                                            required: true,
+                                            className: "candidate-field-select",
+                                            value: sex,
+                                            onChange: (e) => setSex(e.target.value)
+                                        },
+                                            e("option", { value: "" }, "Select Sex"),
+                                            e("option", { value: "M" }, "M"),
+                                            e("option", { value: "F" }, "F"),
+                                            e("option", { value: "Prefer not to say" }, "Prefer not to say")
+                                        )
+                                    )
+                                ),
+                                e("div", { className: "candidate-photo-column" },
+                                    e("div", { style: { textAlign: "center", width: "100%", marginBottom: "8px" } },
+                                        e("p", { className: "candidate-field-label", style: { marginBottom: "2px" } }, "Candidate Photo"),
+                                        e("p", { style: { fontSize: "11px", color: "#94a3b8", fontWeight: "600" } }, "Optional")
+                                    ),
+                                    candidatePhoto
+                                        ? e("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" } },
+                                            e("div", { className: "candidate-photo-box" },
+                                                e("img", { src: candidatePhoto, alt: "Candidate Photo", className: "candidate-photo-preview" })
+                                            ),
+                                            e("button", {
+                                                type: "button",
+                                                onClick: handleRemovePhoto,
+                                                style: {
+                                                    display: "inline-flex",
+                                                    alignItems: "center",
+                                                    gap: "6px",
+                                                    fontSize: "12px",
+                                                    fontWeight: "700",
+                                                    color: "#ef4444",
+                                                    background: "none",
+                                                    border: "none",
+                                                    cursor: "pointer"
+                                                }
+                                            },
+                                                e("svg", { style: { width: "14px", height: "14px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                                    e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" })
+                                                ),
+                                                "Remove photo"
+                                            )
+                                          )
+                                        : e("label", { className: "candidate-photo-box" },
+                                            e("input", { type: "file", accept: "image/jpeg,image/png", style: { display: "none" }, onChange: handlePhotoUpload, disabled: uploadingPhoto }),
+                                            uploadingPhoto
+                                                ? e("span", { style: { fontSize: "12px", fontWeight: "700", color: "#94a3b8" } }, "Uploading...")
+                                                : e(React.Fragment, null,
+                                                    e("svg", { style: { width: "24px", height: "24px", color: "#2563eb", marginBottom: "4px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                                        e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" })
+                                                    ),
+                                                    e("span", { style: { fontSize: "11px", fontWeight: "700", color: "#091b4f" } }, "Upload Photo"),
+                                                    e("span", { style: { fontSize: "9px", color: "#94a3b8", marginTop: "2px" } }, "JPG, PNG (Max 2MB)")
+                                                  )
+                                          ),
+                                    photoError && e("p", { style: { fontSize: "11px", fontWeight: "700", color: "#ef4444", textAlign: "center", marginTop: "4px" } }, photoError)
+                                )
+                            )
+                        ),
+
+                        e("div", { className: "candidate-profile-card" },
+                            e("div", { className: "candidate-profile-card-title" },
+                                e("svg", { style: { width: "20px", height: "20px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                    e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" })
+                                ),
+                                e("span", null, "Candidate Details")
+                            ),
+                            e("div", { className: "candidate-details-inner" },
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "Test Taker ID ", e("span", { style: { color: "red" } }, "*")),
+                                    e("input", {
+                                        type: "text",
+                                        required: true,
+                                        readOnly: true,
+                                        className: "candidate-field-input",
+                                        value: testTakerId,
+                                        placeholder: "001"
+                                    }),
+                                    e("span", { style: { fontSize: "11px", color: "#64748b", marginTop: "2px", fontWeight: "600" } }, "This ID is generated automatically.")
+                                ),
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "Candidate Type ", e("span", { style: { color: "red" } }, "*")),
+                                    e("select", {
+                                        required: true,
+                                        className: "candidate-field-select",
+                                        value: candidateType,
+                                        onChange: (e) => setCandidateType(e.target.value)
+                                    },
+                                        e("option", { value: "Mock Test Candidate" }, "Mock Test Candidate"),
+                                        e("option", { value: "Private Candidate" }, "Private Candidate"),
+                                        e("option", { value: "Student Candidate" }, "Student Candidate")
+                                    )
+                                ),
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "Country or Region of Origin ", e("span", { style: { color: "red" } }, "*")),
+                                    e("select", {
+                                        required: true,
+                                        className: "candidate-field-select",
+                                        value: countryOfOrigin,
+                                        onChange: (e) => setCountryOfOrigin(e.target.value)
+                                    },
+                                        ["Uzbekistan", "Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Russian Federation", "Turkey", "United Kingdom", "United States", "Other"].map(c => e("option", { key: c, value: c }, c))
+                                    )
+                                ),
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "Country of Nationality ", e("span", { style: { color: "red" } }, "*")),
+                                    e("select", {
+                                        required: true,
+                                        className: "candidate-field-select",
+                                        value: countryOfNationality,
+                                        onChange: (e) => setCountryOfNationality(e.target.value)
+                                    },
+                                        ["Uzbekistan", "Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Russian Federation", "Turkey", "United Kingdom", "United States", "Other"].map(c => e("option", { key: c, value: c }, c))
+                                    )
+                                ),
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "First Language ", e("span", { style: { color: "red" } }, "*")),
+                                    e("select", {
+                                        required: true,
+                                        className: "candidate-field-select",
+                                        value: firstLanguage,
+                                        onChange: (e) => setFirstLanguage(e.target.value)
+                                    },
+                                        ["Uzbek", "Russian", "English", "Kazakh", "Kyrgyz", "Tajik", "Turkmen", "Turkish", "Other"].map(l => e("option", { key: l, value: l }, l))
+                                    )
+                                ),
+                                e("div", { className: "candidate-field-group" },
+                                    e("span", { className: "candidate-field-label" }, "Target Band"),
+                                    e("select", {
+                                        className: "candidate-field-select",
+                                        value: targetBand,
+                                        onChange: (e) => setTargetBand(e.target.value)
+                                    },
+                                        e("option", { value: "" }, "Not set"),
+                                        ["4.0", "4.5", "5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0"].map(band => e("option", { key: band, value: band }, `Band ${band}`))
+                                    )
+                                ),
+                                e("div", { className: "candidate-info-banner" },
+                                    e("svg", { style: { width: "16px", height: "16px", flexShrink: 0 }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                        e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" })
+                                    ),
+                                    e("span", null, "Target band helps us personalize your learning experience.")
+                                )
+                            )
+                        )
+                    ),
+
+                    e("div", { className: "candidate-important-note" },
+                        e("svg", { style: { width: "20px", height: "20px", color: "#2563eb", marginTop: "2px", flexShrink: 0 }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                            e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" })
+                        ),
+                        e("div", null,
+                            e("h3", { className: "candidate-important-note-title" }, "Important Note"),
+                            e("p", { className: "candidate-important-note-text" },
+                                "Please ensure all information is accurate. This data will be used in your IELTS Mock Test Result report."
+                            )
+                        )
+                    ),
+
+                    message && e("div", {
+                        className: `candidate-status-message ${message.includes("successfully") ? "success" : "error"}`
+                    }, message),
+
+                    e("div", { className: "candidate-actions" },
+                        e("button", {
+                            type: "submit",
+                            disabled: saving,
+                            className: "candidate-btn-save"
+                        },
+                            e("svg", { style: { width: "16px", height: "16px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" })
+                            ),
+                            saving ? "Saving..." : "Save profile"
+                        ),
+                        e("a", {
+                            href: "profile.html",
+                            className: "candidate-btn-cancel"
+                        },
+                            e("svg", { style: { width: "16px", height: "16px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
+                                e("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18L18 6M6 6l12 12" })
+                            ),
+                            "Cancel"
+                        )
                     )
                 )
             )

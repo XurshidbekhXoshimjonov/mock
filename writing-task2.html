@@ -7,37 +7,14 @@
     <title>Academic Writing Task 2 Player - IELTSX</title>
     <link rel="stylesheet" href="/site-modern.css?v=20260624-writing-footer">
     <link rel="stylesheet" href="/reading-cbt.css?v=1.0.13">
-    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/exam-navbar.css?v=20260701-unified-navbar-v2">
+    <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
     <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
     <style>
         :root {
             --cbt-ielts-red: #e31837;
             --cbt-ielts-red-dark: #c8102e;
             --writing-scale: 1;
-        }
-
-        .cbt-header {
-            border: 1px solid var(--cbt-border);
-            background: #fff;
-        }
-
-        .cbt-brand-title {
-            color: #071437;
-        }
-
-        .cbt-timer.warning {
-            color: var(--cbt-ielts-red) !important;
-        }
-
-        .cbt-button--secondary {
-            border-color: #cbd5e1;
-            background: #fff;
-            color: #071437;
-        }
-
-        .cbt-button--secondary:hover {
-            border-color: #b8c4d8;
-            background: #f8fafc;
         }
 
         /* Split-screen layout */
@@ -420,9 +397,6 @@
             display: none;
         }
 
-        html.dark-theme .cbt-header {
-            background: #1e293b;
-        }
         html.dark-theme .writing-stage {
             background: #0f172a;
         }
@@ -939,6 +913,7 @@
                 Dashboard
             </a>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
+            <button class="cbt-button cbt-button--submit" id="headerSubmitBtn" type="button" onclick="submitEssay()">Submit</button>
         </div>
     </header>
 
@@ -1116,8 +1091,8 @@
         </div>
     </div>
 
-    <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.23"></script>
+    <script src="/auth-client.js?v=20260701-auth-cookie-restore"></script>
+    <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/writing-test-card.js?v=1.0.1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
@@ -1487,13 +1462,13 @@
         }
 
         function setSubmitLoading(isLoading) {
-            const button = document.getElementById('submitBtn');
-            if (!button) return;
-            if (!button.dataset.defaultHtml) {
-                button.dataset.defaultHtml = button.innerHTML;
-            }
-            button.disabled = isLoading;
-            button.innerHTML = isLoading ? 'Evaluating...' : button.dataset.defaultHtml;
+            document.querySelectorAll('#submitBtn, #headerSubmitBtn').forEach(button => {
+                if (!button.dataset.defaultHtml) {
+                    button.dataset.defaultHtml = button.innerHTML;
+                }
+                button.disabled = isLoading;
+                button.innerHTML = isLoading ? 'Evaluating...' : button.dataset.defaultHtml;
+            });
         }
 
         function isDevelopmentHost() {

@@ -6,13 +6,25 @@ const { PassageRenderer, QuestionsPanel } = IeltsTestComponents;
 const params = new URLSearchParams(window.location.search);
 const pathParts = window.location.pathname.split("/").filter(Boolean);
 const routeSkill = ["reading", "listening"].includes(pathParts[0]) ? pathParts[0] : "";
-const routeTestSlug = routeSkill ? pathParts[1] || "" : "";
-const testId = params.get("id") || routeTestSlug;
+function cleanRouteId(value) {
+    const resolved = decodeURIComponent(String(value || "")).trim();
+    return resolved === "undefined" || resolved === "null" ? "" : resolved;
+}
+const routeTestSlug = routeSkill ? cleanRouteId(pathParts[1]) : "";
+const mockTestId = cleanRouteId(params.get("mockTestId") || params.get("testId"));
+const testId = cleanRouteId(params.get("id"))
+    || routeTestSlug
+    || (mockTestId ? `mock-${routeSkill === "listening" ? "listening" : "reading"}-${mockTestId}` : "");
 const rootElement = document.getElementById("readingAppRoot");
 const mode = document.body.dataset.testMode === "full" ? "full" : "individual";
 const skill = mode === "full" && (params.get("skill") === "listening" || routeSkill === "listening") ? "listening" : "reading";
-const duration = mode === "full" ? (skill === "listening" ? 40 : 60) * 60 : 20 * 60;
 const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
+const READING_LOAD_TIMEOUT_MS = 10000;
+const duration = isMockMode
+    ? (skill === "listening" ? 40 : 60) * 60
+    : mode === "full"
+        ? (skill === "listening" ? 40 : 60) * 60
+        : 20 * 60;
 const ResultUtils = window.IeltsResultUtils || {};
 const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
 
@@ -49,11 +61,38 @@ function notifyMockSectionComplete(section, payload) {
     }, window.location.origin);
 }
 
+function notifyMockSectionReady(section) {
+    if (!isMockMode || window.parent === window) return;
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-ready",
+        section,
+        testId
+    }, window.location.origin);
+}
+
+function notifyMockSectionError(section, error) {
+    if (!isMockMode || window.parent === window) return;
+    window.parent.postMessage({
+        type: "ieltsx-mock-section-error",
+        section,
+        testId,
+        message: error?.message || `${section === "listening" ? "Listening" : "Reading"} could not be loaded.`
+    }, window.location.origin);
+}
+
 function requestMockExamExit() {
     if (isMockMode && window.parent !== window) {
         window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
     }
 }
+
+document.addEventListener("click", (event) => {
+    if (!isMockMode) return;
+    const exitButton = event.target.closest("[data-mock-exit]");
+    if (!exitButton) return;
+    event.preventDefault();
+    requestMockExamExit();
+});
 
 async function enterFullScreenMode() {
     try {
@@ -249,6 +288,51 @@ function splitFullManualPassages(test, groups) {
     }).filter((passage) => passage.passageText || passage.questionGroups.length);
 }
 
+function questionGroupsForRange(groups, firstQuestion, lastQuestion) {
+    return groups
+        .map((group) => {
+            const questions = (group.questions || []).filter((question) => {
+                const questionNumber = Number(question.number);
+                return questionNumber >= firstQuestion && questionNumber <= lastQuestion;
+            });
+
+            return {
+                ...group,
+                questionNumbers: questions.map((question) => question.number),
+                questions
+            };
+        })
+        .filter((group) => group.questions.length);
+}
+
+function splitDelimitedFullManualPassages(test, groups) {
+    const source = String(test.passage || test.passageText || "");
+    const chunks = source
+        .split(/\n\s*-{3,}\s*\n/g)
+        .map((chunk) => chunk.trim())
+        .filter(Boolean);
+
+    if (chunks.length < 2) {
+        return null;
+    }
+
+    const ranges = [[1, 13], [14, 26], [27, 40]];
+    return chunks.slice(0, 3).map((passageText, index) => {
+        const number = index + 1;
+        const [firstQuestion, lastQuestion] = ranges[index] || [1, 40];
+        const questionGroups = questionGroupsForRange(groups, firstQuestion, lastQuestion);
+
+        return {
+            number,
+            title: `Reading Passage ${number}`,
+            displayLabel: `Reading Passage ${number}`,
+            passageText,
+            paragraphs: paragraphsFromText(passageText),
+            questionGroups
+        };
+    }).filter((passage) => passage.passageText || passage.questionGroups.length);
+}
+
 function normalizeManualTest(test) {
     const passageNumber = Number(test.part) || 1;
     const passageText = test.passage || test.passageText || "";
@@ -264,7 +348,7 @@ function normalizeManualTest(test) {
         ? hydrateGroups(test.questionGroups, test.questions)
         : groupManualQuestions(test.questions);
     const fullManualPassages = test.part === "full"
-        ? splitFullManualPassages(test, groups)
+        ? (splitFullManualPassages(test, groups) || splitDelimitedFullManualPassages(test, groups))
         : null;
     const richManualPassages = test.part === "full" && Array.isArray(test.richPassages) && test.richPassages.length
         ? test.richPassages.map((richPassage, index) => {
@@ -979,6 +1063,23 @@ function renderFullListeningPlayer() {
                 const status = rootElement.querySelector(".lc-submit-status");
                 const options = event.detail || {};
                 const autoSubmitMessage = ResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
+                const isAutoSubmit = Boolean(options.autoSubmit || options.auto);
+
+                if (isMockMode) {
+                    ResultUtils.stopAudioPlayers?.(rootElement);
+                    ResultUtils.disableAnswerInputs?.(rootElement);
+                    if (status) {
+                        status.textContent = isAutoSubmit
+                            ? autoSubmitMessage
+                            : "Moving to the next section...";
+                    }
+                    notifyMockSectionComplete("listening", {
+                        testId: test?.id || testId,
+                        autoSubmit: isAutoSubmit,
+                        result
+                    });
+                    return;
+                }
 
                 if (!result.total) {
                     if (status) status.textContent = "This Listening test does not have an answer key yet.";
@@ -1176,9 +1277,9 @@ function Timer({ seconds }) {
     );
 }
 
-function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false, submitDisabled = false }) {
+function ExamNavbar({ seconds, dashboardHref, onSubmit, showFullscreen = false, fullscreenActive = false, submitted = false, submitDisabled = false }) {
     const title = isMockMode
-        ? "Mock Exam"
+        ? (skill === "listening" ? "Listening" : "Reading")
         : mode === "full"
         ? "Full Test"
         : (skill === "listening" ? "Academic Listening" : "Academic Reading");
@@ -1193,15 +1294,14 @@ function Header({ seconds, dashboardHref, onSubmit, showFullscreen = false, full
         h(Timer, { seconds }),
         h("div", { className: "cbt-header-actions" },
             isMockMode
-                ? h("button", {
-                    className: "cbt-button cbt-button--secondary",
-                    type: "button",
-                    "data-notes-anchor": "true",
-                    onClick: requestMockExamExit
-                },
-                    h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
-                    "Exit Mock Exam"
-                )
+                ? h(Fragment, null,
+                    h("button", {
+                        className: "cbt-button cbt-button--exit",
+                        type: "button",
+                        "data-mock-exit": "true"
+                    }, "Exit Exam"),
+                    h("span", { "data-notes-anchor": "true", style: { display: "none" } })
+                  )
                 : h("a", { className: "cbt-button cbt-button--secondary", href: dashboardHref },
                     h("span", { className: "cbt-grid-icon", "aria-hidden": "true" }),
                     "Dashboard"
@@ -1698,17 +1798,26 @@ function ReadingApp() {
 
     useEffect(() => {
         if (!testId) {
-            setError("Missing test id");
+            const missingIdError = new Error("Missing test id");
+            console.error("[Mock Reading] load failed:", missingIdError);
+            setError(missingIdError.message);
+            notifyMockSectionError(skill, missingIdError);
             return;
         }
 
         const endpoint = mode === "full"
             ? `/api/full-tests/${encodeURIComponent(testId)}?skill=${encodeURIComponent(skill)}`
             : `/api/reading-tests/${encodeURIComponent(testId)}`;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), READING_LOAD_TIMEOUT_MS);
 
-        fetch(endpoint)
+        fetch(endpoint, {
+            credentials: "include",
+            cache: "no-store",
+            signal: controller.signal
+        })
             .then(async (response) => {
-                const data = await response.json();
+                const data = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(data.error || "Could not load test");
                 return data;
             })
@@ -1719,8 +1828,27 @@ function ReadingApp() {
                     : `${normalized.title || "IELTS Academic Reading"} - Reading`;
                 setTest(normalized);
             })
-            .catch((loadError) => setError(loadError.message));
+            .catch((loadError) => {
+                const error = loadError.name === "AbortError"
+                    ? new Error(`${skill === "listening" ? "Listening" : "Reading"} test could not be loaded. Please check test data or try again.`)
+                    : loadError;
+                console.error("[Mock Reading] load failed:", error);
+                setError(error.message);
+                notifyMockSectionError(skill, error);
+            })
+            .finally(() => clearTimeout(timeoutId));
+
+        return () => {
+            clearTimeout(timeoutId);
+            controller.abort();
+        };
     }, []);
+
+    useEffect(() => {
+        if (test?.id) {
+            notifyMockSectionReady(skill);
+        }
+    }, [test?.id]);
 
     useEffect(() => {
         if (!hasStarted || result || isSubmittedRef.current) return undefined;
@@ -2110,11 +2238,11 @@ function ReadingApp() {
     return h(Fragment, null,
         h("div", { className: `cbt-shell${isFullTest ? " full-test-shell full-test-player" : ""}${!hasStarted ? " no-bottom" : ""}` },
             h("div", { className: "cbt-header-wrapper" },
-                h(Header, {
+                h(ExamNavbar, {
                     seconds,
                     dashboardHref,
                     onSubmit: submit,
-                    showFullscreen: isFullTest,
+                    showFullscreen: isFullTest && !isMockMode,
                     fullscreenActive,
                     submitted: Boolean(result),
                     submitDisabled: !hasStarted

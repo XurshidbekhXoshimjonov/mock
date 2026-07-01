@@ -7,7 +7,8 @@
     <title>Academic Writing Task 1 Player - IELTSX</title>
     <link rel="stylesheet" href="/site-modern.css?v=20260624-writing-footer">
     <link rel="stylesheet" href="/reading-cbt.css?v=1.0.13">
-    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/exam-navbar.css?v=20260701-unified-navbar-v2">
+    <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
     <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
     <style>
         :root {
@@ -821,6 +822,7 @@
                 Dashboard
             </a>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
+            <button class="cbt-button cbt-button--submit" id="headerSubmitBtn" type="button" onclick="submitEssay()">Submit</button>
         </div>
     </header>
 
@@ -1008,8 +1010,8 @@
 
     </div>
 
-    <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.23"></script>
+    <script src="/auth-client.js?v=20260701-auth-cookie-restore"></script>
+    <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/writing-test-card.js?v=1.0.1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
@@ -1334,13 +1336,13 @@
         }
 
         function setSubmitLoading(isLoading) {
-            const button = document.getElementById('submitBtn');
-            if (!button) return;
-            if (!button.dataset.defaultHtml) {
-                button.dataset.defaultHtml = button.innerHTML;
-            }
-            button.disabled = isLoading;
-            button.innerHTML = isLoading ? 'Evaluating...' : button.dataset.defaultHtml;
+            document.querySelectorAll('#submitBtn, #headerSubmitBtn').forEach(button => {
+                if (!button.dataset.defaultHtml) {
+                    button.dataset.defaultHtml = button.innerHTML;
+                }
+                button.disabled = isLoading;
+                button.innerHTML = isLoading ? 'Evaluating...' : button.dataset.defaultHtml;
+            });
         }
 
         function isDevelopmentHost() {

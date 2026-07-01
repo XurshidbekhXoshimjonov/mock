@@ -43,10 +43,21 @@ signupForm.addEventListener("submit", async (event) => {
             user: data.user
         });
 
-        window.location.href = "/profile.html";
+        const params = new URLSearchParams(window.location.search);
+        const redirectParam = params.get("redirect");
+        const targetPath = redirectParam ? decodeURIComponent(redirectParam) : "/profile.html";
+
+        window.location.href = targetPath;
     } catch (error) {
         showMessage(error.message, "error");
         signupBtn.disabled = false;
         signupBtn.textContent = "Create Account";
     }
 });
+
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("redirect")) {
+        showMessage("Please log in or create an account to start the test.", "info");
+    }
+})();

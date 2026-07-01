@@ -10,9 +10,26 @@
             .replace(/'/g, "&#039;");
     }
 
+    function pathParts() {
+        return window.location.pathname.split("/").filter(Boolean).map(decodeURIComponent);
+    }
+
     function mockIdFromPath() {
+        const parts = pathParts();
+        return parts[1] || "";
+    }
+
+    function resultIdFromPath() {
+        const parts = pathParts();
+        if (parts[0] === "mock-test-result") return parts[1] || "";
+        return "";
+    }
+
+    function resultApiUrl() {
+        const resultId = resultIdFromPath();
+        if (resultId) return `/api/mock-test-results/${encodeURIComponent(resultId)}`;
         const parts = window.location.pathname.split("/").filter(Boolean);
-        return decodeURIComponent(parts[1] || "");
+        return `/api/mock-tests/${encodeURIComponent(decodeURIComponent(parts[1] || ""))}/latest-result`;
     }
 
     function formatBand(value) {
@@ -38,8 +55,6 @@
                     <div>
                         <span class="test-list-eyebrow">IELTSX Mock Test Result</span>
                         <h1>${escapeHtml(result.title || "Mock Test")}</h1>
-                        <p>Completed sections: ${escapeHtml((result.completedSections || []).map((item) => item[0].toUpperCase() + item.slice(1)).join(", ") || "None")}</p>
-                        <p>Date completed: ${escapeHtml(formatDate(result.completedAt))}</p>
                     </div>
                     <div class="mock-band-badge">
                         <span>Overall Band</span>
@@ -49,37 +64,32 @@
 
                 <div class="mock-result-grid">
                     <article class="mock-result-card">
-                        <span>Listening score</span>
+                        <span>Listening band</span>
                         <strong>${formatBand(result.listening?.band)}</strong>
-                        <p>${Number(result.listening?.correct || 0)}/${Number(result.listening?.total || 0)} correct</p>
                     </article>
                     <article class="mock-result-card">
-                        <span>Reading score</span>
+                        <span>Reading band</span>
                         <strong>${formatBand(result.reading?.band)}</strong>
-                        <p>${Number(result.reading?.correct || 0)}/${Number(result.reading?.total || 0)} correct</p>
                     </article>
                     <article class="mock-result-card">
-                        <span>Writing score</span>
+                        <span>Writing band</span>
                         <strong>${formatBand(result.writing?.band)}</strong>
-                        <p>${escapeHtml(result.writing?.status || "pending")}</p>
                     </article>
                     <article class="mock-result-card">
-                        <span>Speaking score</span>
+                        <span>Speaking band</span>
                         <strong>${formatBand(result.speaking?.band)}</strong>
-                        <p>${escapeHtml(result.speaking?.status || "pending")}</p>
                     </article>
                 </div>
 
                 <div class="mock-result-actions">
-                    <a class="mock-btn" href="/mock-tests">Back to Mock Tests</a>
-                    <a class="mock-btn secondary" href="/dashboard#results">View Detailed Performance</a>
+                    <a class="mock-intro-primary" href="/dashboard">Dashboard</a>
                 </div>
             </section>
         `;
     }
 
     async function boot() {
-        const response = await fetch(`/api/mock-tests/${encodeURIComponent(mockIdFromPath())}/latest-result`, {
+        const response = await fetch(resultApiUrl(), {
             credentials: "include",
             cache: "no-store"
         });
@@ -97,9 +107,6 @@
             <section class="mock-result-panel">
                 <h1>No mock result found</h1>
                 <p>${escapeHtml(error.message)}</p>
-                <div class="mock-result-actions">
-                    <a class="mock-btn" href="/mock-tests">Back to Mock Tests</a>
-                </div>
             </section>
         `;
     });

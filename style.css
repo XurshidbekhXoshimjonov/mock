@@ -298,6 +298,17 @@ nav a:hover{
     color: #15803d;
 }
 
+.auth-message.info {
+    color: #1e40af;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    display: block;
+    text-align: center;
+}
+
 .auth-switch {
     margin: 0;
     text-align: center;

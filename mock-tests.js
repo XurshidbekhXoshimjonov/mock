@@ -10,6 +10,11 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
+function mockIntroUrl(value) {
+    const url = String(value || "/mock-test").trim();
+    return `${url}${url.includes("?") ? "&" : "?"}intro=1`;
+}
+
 async function loadMockTests() {
     const response = await fetch("/api/mock-tests", { cache: "no-store" });
     const tests = await response.json();
@@ -28,7 +33,7 @@ async function loadMockTests() {
     }
 
     mockTestsList.innerHTML = tests.map((test) => `
-        <a class="test-card mock-test-card" href="${escapeHtml(test.openUrl)}">
+        <a class="test-card mock-test-card" href="${escapeHtml(mockIntroUrl(test.openUrl))}">
             <div class="test-card-top">
                 <span class="test-card-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -38,17 +43,16 @@ async function loadMockTests() {
                         <path d="M18 16l2 2 3-4"></path>
                     </svg>
                 </span>
-                <span class="mock-access-pill">Mock Test ${escapeHtml(test.testNumber || test.number || "")}</span>
+                <span class="mock-access-pill free">FREE</span>
             </div>
             <div class="test-card-content">
                 <h2>${escapeHtml(test.title)}</h2>
-                <p>${escapeHtml(test.description || test.label || "Full IELTS mock exam")}</p>
             </div>
             <div class="mock-card-lines">
                 <span>${escapeHtml(test.sections)}</span>
                 <span>Estimated time: ${escapeHtml(test.estimatedTime)}</span>
             </div>
-            <div class="test-card-button">Start Mock Test <span>-></span></div>
+            <div class="test-card-button">Start Mock Test <span>&rarr;</span></div>
         </a>
     `).join("");
 }

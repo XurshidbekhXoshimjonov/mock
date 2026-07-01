@@ -60,7 +60,9 @@
         if (domObserver) {
             const targetNodes = [
                 document.getElementById('readingAppRoot'),
-                document.getElementById('listeningTestRoot')
+                document.getElementById('listeningTestRoot'),
+                document.getElementById('playerScreen'),
+                document.getElementById('speakingApp')
             ].filter(Boolean);
 
             if (targetNodes.length === 0) {
@@ -141,12 +143,16 @@
             skill = 'listening';
         } else if (document.body.dataset.practiceSkill === 'listening' || title.includes('listening') || document.getElementById('listeningTestRoot')) {
             skill = 'listening';
+        } else if (pathname.includes('speaking') || params.get('skill') === 'speaking' || document.body.dataset.practiceSkill === 'speaking' || title.includes('speaking') || document.getElementById('speakingApp')) {
+            skill = 'speaking';
         }
         
-        let testId = params.get('id') || '';
+        let testId = params.get('id') || params.get('sourceTestId') || params.get('testId') || '';
         if (!testId) {
             if (pathParts.length >= 2 && (pathParts[0] === 'reading' || pathParts[0] === 'listening')) {
                 testId = pathParts[1];
+            } else if (pathParts.length >= 2 && (pathParts[0] === 'writing' || pathParts[0] === 'speaking')) {
+                testId = pathParts[pathParts.length - 1];
             }
         }
         if (!testId) {
@@ -211,6 +217,7 @@
     function reloadAnnotationsForConfig() {
         const nextConfig = getTestConfig();
         if (sameConfig(nextConfig, currentConfig)) {
+            insertNotesButton();
             return;
         }
 
@@ -376,7 +383,8 @@
 
     function insertNotesButton() {
         if (!toggleBtnEl) return;
-        const dashboardBtn = document.querySelector('.cbt-header-actions [data-notes-anchor], .lc-header-actions [data-notes-anchor], .cbt-header-actions a, .lc-header-actions a, #viewerBack');
+        const dashboardBtn = document.querySelector('.cbt-header-actions [data-notes-anchor], .lc-header-actions [data-notes-anchor], #viewerBack')
+            || document.querySelector('.cbt-header-actions a, .lc-header-actions a');
         if (!dashboardBtn) {
             if (toggleBtnEl.parentNode !== document.body) {
                 document.body.appendChild(toggleBtnEl);
@@ -390,13 +398,13 @@
         }
 
         const parent = dashboardBtn.parentNode;
-        if (toggleBtnEl.parentNode !== parent) {
+        if (toggleBtnEl.parentNode !== parent || dashboardBtn.nextSibling !== toggleBtnEl) {
             parent.insertBefore(toggleBtnEl, dashboardBtn.nextSibling);
         }
         
-        if (dashboardBtn.classList.contains('cbt-button')) {
+        if (dashboardBtn.classList.contains('cbt-button') || dashboardBtn.closest('.cbt-header-actions')) {
             toggleBtnEl.className = 'cbt-button cbt-button--secondary ieltsx-notes-toggle-btn header-btn';
-        } else if (dashboardBtn.classList.contains('lc-dashboard-button')) {
+        } else if (dashboardBtn.classList.contains('lc-dashboard-button') || dashboardBtn.closest('.lc-header-actions')) {
             toggleBtnEl.className = 'lc-dashboard-button ieltsx-notes-toggle-btn header-btn';
         } else {
             toggleBtnEl.className = 'ieltsx-notes-toggle-btn header-btn';
@@ -1377,7 +1385,9 @@
     function setupMutationObserver() {
         const targetNodes = [
             document.getElementById('readingAppRoot'),
-            document.getElementById('listeningTestRoot')
+            document.getElementById('listeningTestRoot'),
+            document.getElementById('playerScreen'),
+            document.getElementById('speakingApp')
         ].filter(Boolean);
 
         if (targetNodes.length === 0) {

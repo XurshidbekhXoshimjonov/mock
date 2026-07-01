@@ -217,6 +217,8 @@ body[data-profile-page] summary {
     background: #ffffff;
     padding: 20px;
     text-align: left;
+    text-decoration: none;
+    cursor: pointer;
     box-shadow: 0 18px 45px rgba(7, 21, 71, 0.09);
     transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
@@ -235,6 +237,10 @@ body[data-profile-page] summary {
 
 .performance-skill-card.speaking::before {
     background: linear-gradient(90deg, #7c3aed, #2563eb);
+}
+
+.performance-skill-card.mock::before {
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #e11d48);
 }
 
 .performance-skill-card:hover,
@@ -282,6 +288,11 @@ body[data-profile-page] summary {
 .performance-skill-card.writing .performance-skill-icon {
     background: #fff1f2;
     color: #be123c;
+}
+
+.performance-skill-card.mock .performance-skill-icon {
+    background: #fef2f2;
+    color: #dc2626;
 }
 
 .performance-skill-arrow {
@@ -514,67 +525,6 @@ body[data-profile-page] summary {
     position: relative;
     width: 100%;
     overflow: hidden;
-}
-
-.mock-test-metrics-grid,
-.mock-test-breakdown-grid {
-    display: grid;
-    gap: 12px;
-}
-
-.mock-test-metrics-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.mock-test-breakdown-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 20px;
-}
-
-.mock-test-breakdown-card {
-    border: 1px solid #f1f5f9;
-    border-radius: 16px;
-    background: #f8fafc;
-    padding: 16px;
-    text-align: center;
-}
-
-.mock-test-breakdown-card p {
-    margin: 0;
-    color: #64748b;
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 0.025em;
-    text-transform: uppercase;
-}
-
-.mock-test-breakdown-card strong {
-    display: block;
-    margin-top: 4px;
-    color: #020617;
-    font-size: 1.25rem;
-    font-weight: 900;
-}
-
-.mock-test-chart-wrap {
-    margin-top: 20px;
-}
-
-.mock-test-empty {
-    margin: 20px 0 0;
-    border: 1px dashed #e2e8f0;
-    border-radius: 16px;
-    background: #f8fafc;
-    padding: 16px;
-    color: #64748b;
-    font-size: 0.875rem;
-}
-
-@media (max-width: 760px) {
-    .mock-test-metrics-grid,
-    .mock-test-breakdown-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .writing-dashboard-card::before {
@@ -1176,6 +1126,14 @@ body.dark-theme[data-profile-page] {
     color: #f1f5f9;
 }
 
+html.dark-theme body[data-profile-page] {
+    background:
+        radial-gradient(circle at 10% 5%, rgba(59, 130, 246, 0.15), transparent 28rem),
+        radial-gradient(circle at 92% 20%, rgba(99, 102, 241, 0.12), transparent 24rem),
+        #050515;
+    color: #f1f5f9;
+}
+
 body.dark-theme[data-profile-page] .bg-white {
     background-color: #0d0e25 !important;
 }
@@ -1287,6 +1245,137 @@ body.dark-theme[data-profile-page] *::-webkit-scrollbar-track {
 body.dark-theme[data-profile-page] *::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #3b82f6, #1d4ed8) !important;
     border-color: #08081b !important;
+}
+
+/* Candidate profile settings dark theme */
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-main-card,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-card {
+    background:
+        linear-gradient(145deg, rgba(13, 14, 37, 0.98), rgba(8, 8, 24, 0.96)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(99, 102, 241, 0.08)) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 0 22px 58px rgba(0, 0, 0, 0.38) !important;
+    color: #f1f5f9 !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-title,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-card-title,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-important-note-title {
+    color: #f8fafc !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-subtitle,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-label,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-important-note-text,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-group > span:not(.candidate-field-label) {
+    color: #b7c4df !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-eyebrow,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-card-title svg {
+    color: #60a5fa !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-card-title {
+    border-bottom-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-icon-badge {
+    background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+    color: #ffffff !important;
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-input,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-select {
+    background-color: #141635 !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-select {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 18px !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-input:focus,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-select:focus {
+    background-color: #171a3a !important;
+    border-color: rgba(96, 165, 250, 0.72) !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-field-input[readonly] {
+    background-color: #10132e !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    color: #cbd5e1 !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-photo-box {
+    background: rgba(20, 22, 53, 0.92) !important;
+    border-color: rgba(148, 163, 184, 0.38) !important;
+    color: #cbd5e1 !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-photo-box:hover {
+    background: rgba(29, 78, 216, 0.16) !important;
+    border-color: rgba(96, 165, 250, 0.72) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-photo-box span {
+    color: #cbd5e1 !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-info-banner {
+    background: rgba(37, 99, 235, 0.14) !important;
+    border-color: rgba(96, 165, 250, 0.28) !important;
+    color: #bfdbfe !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-important-note {
+    background: rgba(20, 22, 53, 0.78) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-back,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-cancel {
+    background: rgba(20, 22, 53, 0.92) !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    color: #93c5fd !important;
+    box-shadow: none !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-back:hover,
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-cancel:hover {
+    background: rgba(37, 99, 235, 0.16) !important;
+    border-color: rgba(96, 165, 250, 0.48) !important;
+    color: #bfdbfe !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-save {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-btn-save:hover {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    box-shadow: 0 18px 36px rgba(37, 99, 235, 0.34) !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-status-message.success {
+    background-color: rgba(16, 185, 129, 0.14) !important;
+    border-color: rgba(52, 211, 153, 0.28) !important;
+    color: #86efac !important;
+}
+
+:is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-status-message.error {
+    background-color: rgba(239, 68, 68, 0.14) !important;
+    border-color: rgba(248, 113, 113, 0.28) !important;
+    color: #fca5a5 !important;
 }
 
 /* ==========================================

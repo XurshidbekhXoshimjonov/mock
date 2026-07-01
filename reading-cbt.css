@@ -211,6 +211,18 @@ select:focus-visible {
     outline-offset: 2px;
 }
 
+.cbt-button--exit {
+    border-color: rgba(217, 21, 50, 0.35);
+    background: #fff5f6;
+    color: #b90f26;
+}
+
+.cbt-button--exit:hover {
+    border-color: rgba(217, 21, 50, 0.55);
+    background: #ffe8ec;
+    color: #9f0d20;
+}
+
 .cbt-grid-icon {
     width: 14px;
     height: 14px;

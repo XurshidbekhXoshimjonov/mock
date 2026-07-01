@@ -14,9 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speaking Practice</title>
     <link rel="stylesheet" href="/site-modern.css?v=20260624-footer">
-    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
     <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
-    <link rel="stylesheet" href="/speaking.css?v=20260625-speaking-submit-eval">
+    <link rel="stylesheet" href="/speaking.css?v=20260701-mock-navbar-v1">
+    <link rel="stylesheet" href="/exam-navbar.css?v=20260701-unified-navbar-v2">
 </head>
 
 <body class="public-page test-list-page speaking-page" data-page="speaking" data-practice-skill="speaking">
@@ -37,10 +38,11 @@
             </div>
         </div>
         <div class="cbt-header-actions">
-            <a class="cbt-button cbt-button--secondary" id="speakingDashboardBtn" href="/speaking" data-notes-anchor>
+            <a class="cbt-button cbt-button--secondary" id="speakingDashboardBtn" href="/speaking">
                 <span class="cbt-grid-icon" aria-hidden="true"></span>
                 <span id="speakingDashboardLabel">Dashboard</span>
             </a>
+            <button class="cbt-button cbt-button--exit" id="speakingExitMockBtn" type="button" data-mock-exit style="display: none;">Exit Exam</button>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
             <button class="cbt-button cbt-button--submit" id="speakingHeaderSubmitBtn" type="button" data-speaking-header-submit>Submit</button>
         </div>
@@ -124,10 +126,10 @@
         <p>&copy; 2026 ieltsx.org All rights reserved.</p>
     </footer>
 
-    <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.23"></script>
+    <script src="/auth-client.js?v=20260701-auth-cookie-restore"></script>
+    <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
-    <script src="/speaking.js?v=20260625-speaking-submit-eval"></script>
+    <script src="/speaking.js?v=20260701-mock-exit-unified-v1"></script>
 </body>
 
 </html>

@@ -7,37 +7,14 @@
     <title>Full Writing Test Player - IELTSX</title>
     <link rel="stylesheet" href="/site-modern.css?v=20260624-writing-footer">
     <link class="ieltsx-theme-css" rel="stylesheet" href="/reading-cbt.css?v=1.0.13">
-    <link rel="stylesheet" href="/annotations.css?v=1.0.21">
+    <link rel="stylesheet" href="/exam-navbar.css?v=20260701-unified-navbar-v2">
+    <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
     <link rel="stylesheet" href="/pre-test-start.css?v=1.0.0">
     <style>
         :root {
             --cbt-ielts-red: #e31837;
             --cbt-ielts-red-dark: #c8102e;
             --writing-scale: 1;
-        }
-
-        .cbt-header {
-            border: 1px solid var(--cbt-border);
-            background: #fff;
-        }
-
-        .cbt-brand-title {
-            color: #071437;
-        }
-
-        .cbt-timer.warning {
-            color: var(--cbt-ielts-red) !important;
-        }
-
-        .cbt-button--secondary {
-            border-color: #cbd5e1;
-            background: #fff;
-            color: #071437;
-        }
-
-        .cbt-button--secondary:hover {
-            border-color: #b8c4d8;
-            background: #f8fafc;
         }
 
         /* Step navigation tabs */
@@ -496,9 +473,6 @@
             display: none;
         }
 
-        html.dark-theme .cbt-header {
-            background: #1e293b;
-        }
         html.dark-theme .step-tabs-container {
             background: #1e293b;
             border-color: #334155;
@@ -932,20 +906,18 @@
             color: var(--cbt-ielts-red);
         }
 
-        /* Red badge override for notes count */
+        /* Match the Listening mock navbar notes badge */
         .ieltsx-notes-toggle-count {
-            background: var(--cbt-ielts-red) !important;
-            border-radius: 50% !important;
-            width: 20px !important;
-            height: 20px !important;
+            background: #ec4899 !important;
+            border-radius: 10px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            padding: 0 !important;
-            margin-left: 6px !important;
+            padding: 1px 6px !important;
+            margin-left: 4px !important;
             color: white !important;
             font-size: 11px !important;
-            font-weight: 700 !important;
+            font-weight: bold !important;
         }
 
         .task1-topic {
@@ -1036,10 +1008,11 @@
             </div>
         </div>
         <div class="cbt-header-actions">
-            <a class="cbt-button cbt-button--secondary" id="writingDashboardBtn" href="/writing" data-notes-anchor>
+            <a class="cbt-button cbt-button--secondary" id="writingDashboardBtn" href="/writing">
                 <span class="cbt-grid-icon" aria-hidden="true"></span>
                 <span id="writingDashboardLabel">Dashboard</span>
             </a>
+            <button class="cbt-button cbt-button--exit" id="writingExitMockBtn" type="button" data-mock-exit style="display: none;">Exit Exam</button>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
             <button class="cbt-button cbt-button--submit" id="submitFullTestBtn" type="button" onclick="submitFullTest()" disabled>Submit</button>
         </div>
@@ -1331,8 +1304,8 @@
         </div>
     </div>
 
-    <script src="/auth-client.js"></script>
-    <script src="/annotations.js?v=1.0.23"></script>
+    <script src="/auth-client.js?v=20260701-auth-cookie-restore"></script>
+    <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -1429,8 +1402,15 @@
             
             return html;
         }
-        const fullTestId = urlParams.get('id');
-        const isMockWritingMode = urlParams.get('mockMode') === '1' || urlParams.has('mockTestId');
+        function cleanWritingId(value) {
+            const resolved = decodeURIComponent(String(value || '')).trim();
+            return resolved === 'undefined' || resolved === 'null' ? '' : resolved;
+        }
+
+        const writingMockTestId = cleanWritingId(urlParams.get('mockTestId') || urlParams.get('testId'));
+        const fullTestId = cleanWritingId(urlParams.get('id')) || (writingMockTestId ? `mock-writing-${writingMockTestId}` : '');
+        const isMockWritingMode = urlParams.get('mockMode') === '1' || urlParams.has('mockTestId') || String(fullTestId || '').includes('mock');
+        const WRITING_LOAD_TIMEOUT_MS = 10000;
         window.IELTSX_WRITING_TASK_NUMBER = 'task1';
 
         let secondsLeft = 60 * 60; // 60 minutes
@@ -1662,12 +1642,32 @@
 
         // Load Full Test Details
         function loadFullTestPlayer(id) {
-            fetch(`/api/writing/full-tests/${id}`)
-                .then(res => {
-                    if (!res.ok) throw new Error('Failed to load full test');
-                    return res.json();
+            if (!id) {
+                const error = new Error('Writing test id is missing. Please open the mock test again.');
+                console.error('[Mock Writing] load failed:', error);
+                notifyMockWritingError(error);
+                document.getElementById('t1PromptText').textContent = error.message;
+                document.getElementById('t2PromptText').textContent = error.message;
+                return;
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), WRITING_LOAD_TIMEOUT_MS);
+
+            fetch(`/api/writing/full-tests/${encodeURIComponent(id)}`, {
+                credentials: 'include',
+                cache: 'no-store',
+                signal: controller.signal
+            })
+                .then(async res => {
+                    const body = await res.json().catch(() => ({}));
+                    if (!res.ok) throw new Error(body.error || 'Failed to load full test');
+                    return body;
                 })
                 .then(test => {
+                    if (!test?.task1PromptId || !test?.task2PromptId) {
+                        throw new Error('Writing prompts are missing for this mock test.');
+                    }
                     // Task 1
                     document.getElementById('t1Title').textContent = `Task 1: ${test.task1PromptId.title}`;
                     document.getElementById('t1PromptText').innerHTML = formatTask1PromptText(test.task1PromptId.promptText);
@@ -1688,10 +1688,19 @@
 
                     testReady = true;
                     if (startRequested) beginFullWritingTest();
+                    notifyMockWritingReady();
                 })
                 .catch(err => {
-                    console.error(err);
-                    document.getElementById('t1PromptText').textContent = 'Error loading test details. Check network connection.';
+                    const error = err.name === 'AbortError'
+                        ? new Error('Writing test could not be loaded. Please check test data or try again.')
+                        : err;
+                    console.error('[Mock Writing] load failed:', error);
+                    notifyMockWritingError(error);
+                    document.getElementById('t1PromptText').textContent = error.message || 'Error loading test details. Check network connection.';
+                    document.getElementById('t2PromptText').textContent = error.message || 'Error loading test details. Check network connection.';
+                })
+                .finally(() => {
+                    clearTimeout(timeoutId);
                 });
         }
 
@@ -1847,38 +1856,52 @@
             return isMockWritingMode ? 'Submit Section' : 'Submit';
         }
 
+        function notifyMockWritingReady() {
+            if (!isMockWritingMode || window.parent === window) return;
+            window.parent.postMessage({
+                type: 'ieltsx-mock-section-ready',
+                section: 'writing',
+                testId: fullTestId
+            }, window.location.origin);
+        }
+
+        function notifyMockWritingError(error) {
+            if (!isMockWritingMode || window.parent === window) return;
+            window.parent.postMessage({
+                type: 'ieltsx-mock-section-error',
+                section: 'writing',
+                testId: fullTestId,
+                message: error?.message || 'Writing could not be loaded.'
+            }, window.location.origin);
+        }
+
         function requestMockWritingExit() {
             if (!isMockWritingMode || window.parent === window) return;
             window.parent.postMessage({ type: 'ieltsx-mock-exit-request' }, window.location.origin);
         }
+
+        document.addEventListener('click', (event) => {
+            if (!isMockWritingMode) return;
+            const exitButton = event.target.closest('[data-mock-exit]');
+            if (!exitButton) return;
+            event.preventDefault();
+            requestMockWritingExit();
+        });
 
         function applyMockWritingHeader() {
             if (!isMockWritingMode) return;
 
             const brandTitle = document.querySelector('#cbtHeader .cbt-brand-title');
             const dashboardBtn = document.getElementById('writingDashboardBtn');
-            const dashboardLabel = document.getElementById('writingDashboardLabel');
+            const exitBtn = document.getElementById('writingExitMockBtn');
             const submitButton = document.getElementById('submitFullTestBtn');
+            const fullscreenBtn = document.querySelector('#cbtHeader [data-fullscreen-toggle]');
 
-            if (brandTitle) brandTitle.textContent = 'Mock Exam';
-            if (dashboardLabel) dashboardLabel.textContent = 'Exit Mock Exam';
+            if (brandTitle) brandTitle.textContent = 'Writing';
+            if (dashboardBtn) dashboardBtn.style.display = 'none';
+            if (exitBtn) exitBtn.style.display = 'inline-flex';
+            if (fullscreenBtn) fullscreenBtn.style.display = 'none';
             if (submitButton && !submitButton.disabled) submitButton.textContent = mockWritingSubmitLabel();
-            if (dashboardBtn && dashboardBtn.dataset.mockExitBound !== 'true') {
-                dashboardBtn.dataset.mockExitBound = 'true';
-                dashboardBtn.removeAttribute('href');
-                dashboardBtn.setAttribute('role', 'button');
-                dashboardBtn.setAttribute('tabindex', '0');
-                dashboardBtn.addEventListener('click', event => {
-                    event.preventDefault();
-                    requestMockWritingExit();
-                });
-                dashboardBtn.addEventListener('keydown', event => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        requestMockWritingExit();
-                    }
-                });
-            }
         }
 
         function notifyMockWritingComplete(result, task1Response, task2Response, timeSpent, isAuto) {

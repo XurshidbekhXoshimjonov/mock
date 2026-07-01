@@ -3,6 +3,7 @@
     const originalLog = console.log;
     const originalWarn = console.warn;
     const originalError = console.error;
+    const originalWindowFetch = window.fetch ? window.fetch.bind(window) : null;
 
     function sendLogToServer(type, args) {
         const msg = args.map(arg => {
@@ -12,7 +13,9 @@
             return String(arg);
         }).join(" ");
         
-        fetch("/api/client-log", {
+        if (!originalWindowFetch) return;
+
+        originalWindowFetch("/api/client-log", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ type, message: msg })
@@ -214,6 +217,8 @@
                 user: null
             };
         }
+
+        setAuthCookie(auth.token);
 
         return {
             isAuthenticated: true,
@@ -1600,8 +1605,13 @@
     const originalFetch = window.fetch;
     window.fetch = async function (url, options) {
         let modifiedOptions = options || {};
+        const urlString = String(url?.url || url);
+
+        if (urlString.includes("/api/client-log")) {
+            return originalFetch(url, options);
+        }
+
         const auth = getAuth();
-        const urlString = String(url);
 
         // Inject Bearer token if request is to our API and token is available
         if (urlString.startsWith("/api/") && auth?.token) {
@@ -1651,6 +1661,16 @@
         }
     };
 
+    function requireAuthBeforeTest(testUrl) {
+        const state = getAuthState();
+        if (!state.isAuthenticated) {
+            const redirectUrl = encodeURIComponent(testUrl || window.location.href);
+            window.location.href = `/login?redirect=${redirectUrl}`;
+            return false;
+        }
+        return true;
+    }
+
     window.authClient = {
         getAuth,
         getAuthState,
@@ -1666,7 +1686,8 @@
         updateProfile,
         renderGlobalNavbar,
         refreshNavbarAuthState,
-        loadNavbarUser
+        loadNavbarUser,
+        requireAuthBeforeTest
     };
     document.documentElement.setAttribute("data-auth-client-ready", "true");
 

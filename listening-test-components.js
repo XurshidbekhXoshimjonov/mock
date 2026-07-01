@@ -510,9 +510,18 @@ const ListeningComponents = (() => {
         const noteLines = [...lines];
         const blockTitle = String(block.title || "").trim();
         let displayTitle = looksLikeInstructionTitle(blockTitle) ? "" : blockTitle;
+        const isBoxedFlow = block.noteStyle === "boxed-flow";
 
         if (!displayTitle && canUseAsNoteTitle(noteLines[0])) {
             displayTitle = String(noteLines.shift()).trim();
+        }
+
+        if (isBoxedFlow && displayTitle && noteLines.length) {
+            const normalizedTitle = plainText(displayTitle).replace(/\s+/g, " ").trim().toLowerCase();
+            const normalizedFirstLine = plainText(noteLines[0]).replace(/\s+/g, " ").trim().toLowerCase();
+            if (normalizedTitle && normalizedTitle === normalizedFirstLine) {
+                noteLines.shift();
+            }
         }
 
         function noteLabelMatch(line) {
@@ -581,7 +590,14 @@ const ListeningComponents = (() => {
 
             const strongOnly = /^<strong>[\s\S]*<\/strong>$/i.test(trimmed);
             const labelOnly = strongOnly && /:\s*$/i.test(plainText(trimmed));
-            const className = strongOnly && !labelOnly ? "lc-note-section-title" : "lc-note-line";
+            const plain = plainText(trimmed);
+            const plainSubLine = /^Consumer attitudes$/i.test(plain);
+            const plainSectionHeading = !strongOnly
+                && !plainSubLine
+                && !/\{\{\d{1,2}\}\}/.test(trimmed)
+                && !/^\d{1,2}\b/.test(plain)
+                && !/:/.test(plain);
+            const className = (strongOnly && !labelOnly) || plainSectionHeading ? "lc-note-section-title" : "lc-note-line";
             return `<p class="${className}">${renderPlaceholderText(trimmed, block.options)}</p>`;
         }
 
@@ -714,7 +730,7 @@ const ListeningComponents = (() => {
             return blockCard(block, renderJobDetailsForm(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--job-details-form");
         }
 
-        const noteStyleClass = block.noteStyle === "boxed-flow" ? "lc-note-completion--boxed-flow" : "";
+        const noteStyleClass = isBoxedFlow ? "lc-note-completion--boxed-flow" : "";
         const items = renderNoteFlow(noteLines);
         const tableItems = shouldRenderNoteTable(noteLines) ? renderNoteTable(noteLines) : "";
 
@@ -726,7 +742,7 @@ const ListeningComponents = (() => {
         ` : "";
 
         return blockCard(block, `
-            ${displayTitle ? `<h4 class="lc-form-title">${renderPlaceholderText(displayTitle, block.options)}</h4>` : ""}
+            ${displayTitle ? `<h4 class="${isBoxedFlow ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : ""}
             ${exampleBox}
             <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${tableItems || items}</div>
         `, `lc-note-completion ${noteStyleClass}`);
@@ -784,6 +800,12 @@ const ListeningComponents = (() => {
             `, "lc-matching-block lc-flowchart-block");
         }
 
+        const image = block.imageUrl
+            ? `<div class="lc-map-stage lc-matching-image">
+                <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening question image")}">
+            </div>`
+            : "";
+        const hasImage = Boolean(block.imageUrl);
         const options = (block.options || []).map((option) =>
             `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${escapeHtml(cleanOptionText(option.text || ""))}</div>`
         ).join("");
@@ -799,21 +821,15 @@ const ListeningComponents = (() => {
                 : "";
 
             return `<div class="lc-matching-row ${text ? "" : "lc-matching-row--compact"}">
-            <span class="lc-question-badge">${questionNumber}</span>
+            <span class="lc-question-badge">${questionNumber}${hasImage ? "" : "."}</span>
             ${text}
             <select name="q${Number(question.questionNumber)}" aria-label="Answer ${Number(question.questionNumber)}">
-                <option value="">Select</option>
+                <option value="">${hasImage ? "Select" : "&ndash;"}</option>
                 ${optionTags}
             </select>
         </div>`;
         }).join("");
-        const image = block.imageUrl
-            ? `<div class="lc-map-stage lc-matching-image">
-                <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening question image")}">
-            </div>`
-            : "";
-        const hasImage = Boolean(block.imageUrl);
-        const optionsTitle = options ? `<h4 class="lc-matching-options-title">Categories</h4>` : "";
+        const optionsTitle = options ? `<h4 class="lc-matching-options-title">${hasImage ? "Categories" : "Main theme"}</h4>` : "";
         const content = hasImage
             ? `<div class="lc-matching-map-layout">
                 ${image}
@@ -824,16 +840,20 @@ const ListeningComponents = (() => {
                 </div>
             </div>`
             : `${image}
-            ${optionsTitle}
-            <div class="lc-matching-options">${options}</div>
+            <div class="lc-matching-options">${optionsTitle}${options}</div>
             <div class="lc-matching-rows">${rows}</div>`;
 
         const blockClone = {
             ...block,
-            instruction: block.instruction ? block.instruction.split(/\bCategories\b/i)[0].trim() : ""
+            instruction: block.instruction
+                ? block.instruction
+                    .split(/\bCategories\b/i)[0]
+                    .trim()
+                    .replace(/([?.!])\s*(Choose\b)/i, "$1\n$2")
+                : ""
         };
 
-        return blockCard(blockClone, content, `lc-matching-block ${hasImage ? "lc-matching-block--image" : ""}`);
+        return blockCard(blockClone, content, `lc-matching-block ${hasImage ? "lc-matching-block--image" : "lc-matching-block--list"}`);
     }
 
     function MapLabellingBlock(block) {
@@ -890,29 +910,29 @@ const ListeningComponents = (() => {
         const duration = listeningDuration(test);
         const isFull = isFullListeningTest(test);
         const params = new URLSearchParams(window.location.search);
-        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
+        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId") || String(params.get("id") || "").includes("mock");
         const dashboardHref = test.dashboardHref || (isFull
             ? "/listeningfulltest.html"
             : `/listeningpart${Number(test.part || test.parts?.[0]?.partNumber) || 1}.html`);
-        const headerTitle = isMockMode ? "Mock Exam" : (test.headerTitle || "Academic Listening");
+        const headerTitle = isMockMode ? "Listening" : (test.headerTitle || "Academic Listening");
         const dashboardControl = isMockMode
-            ? `<button class="lc-dashboard-button" type="button" data-notes-anchor data-mock-exit><span class="lc-grid-icon"></span>Exit Mock Exam</button>`
-            : `<a class="lc-dashboard-button" href="${dashboardHref}"><span class="lc-grid-icon"></span>Dashboard</a>`;
+            ? `<button class="lc-dashboard-button cbt-button cbt-button--exit lc-mock-exit-button" type="button" data-mock-exit>Exit Exam</button><span class="lc-dashboard-button cbt-button cbt-button--secondary" data-notes-anchor style="display:none;"></span>`
+            : `<a class="lc-dashboard-button cbt-button cbt-button--secondary" href="${dashboardHref}"><span class="lc-grid-icon cbt-grid-icon"></span>Dashboard</a>`;
         const submitLabel = isMockMode ? "Submit Section" : "Submit";
-        return `<header class="lc-header">
-            <div class="lc-brand-group">
-                <img class="lc-logo" src="/IELTS-logo.png" alt="IELTS">
-                <span class="lc-brand-divider"></span>
-                <strong>${escapeHtml(headerTitle)}</strong>
+        return `<header class="lc-header cbt-header">
+            <div class="lc-brand-group cbt-brand">
+                <img class="lc-logo cbt-logo" src="/IELTS-logo.png" alt="IELTS">
+                <span class="lc-brand-divider cbt-brand-divider"></span>
+                <strong class="cbt-brand-title">${escapeHtml(headerTitle)}</strong>
             </div>
             <div class="lc-timer" data-duration="${duration * 60}" data-reset-on-part-change="${isFull ? "false" : "true"}">
                 <span class="lc-clock-icon"></span>
                 <span><strong>${String(duration).padStart(2, "0")}:00</strong><small>TIME LEFT</small></span>
             </div>
-            <div class="lc-header-actions">
+            <div class="lc-header-actions cbt-header-actions">
                 ${dashboardControl}
-                ${isFull ? `<button class="lc-fullscreen-button fullscreen-toggle-btn" data-fullscreen-toggle type="button" aria-pressed="false">Full Screen</button>` : ""}
-                <button class="lc-submit-button" type="button" disabled>${submitLabel}</button>
+                ${isFull && !isMockMode ? `<button class="lc-fullscreen-button cbt-button cbt-button--fullscreen fullscreen-toggle-btn" data-fullscreen-toggle type="button" aria-pressed="false">Full Screen</button>` : ""}
+                <button class="lc-submit-button cbt-button cbt-button--submit" type="button" disabled>${submitLabel}</button>
             </div>
         </header>`;
     }
@@ -1050,13 +1070,24 @@ const ListeningComponents = (() => {
         return "";
     }
 
+    function hasListeningPartContent(part) {
+        return Boolean(
+            (part.blocks || []).length ||
+            (part.questions || []).length ||
+            part.html ||
+            part.listeningHtml ||
+            part.questionsHtml ||
+            part.audioUrl
+        );
+    }
+
     function ListeningTestPage(rawTest) {
         const test = normalizeLegacyTest(rawTest || {});
         window.ListeningComponents._activeTest = test;
-        const parts = (test.parts || []).filter((part) => (part.blocks || []).length || part.audioUrl);
+        const parts = (test.parts || []).filter(hasListeningPartContent);
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
         const params = new URLSearchParams(window.location.search);
-        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId");
+        const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId") || String(params.get("id") || "").includes("mock");
 
         const preStartMarkup = isMockMode
             ? ""
@@ -1114,11 +1145,14 @@ const ListeningComponents = (() => {
         const audio = card.querySelector("audio");
         const start = card.querySelector(".lc-start-button");
         const play = card.querySelector(".lc-play-button");
+        const startPanel = card.querySelector(".lc-audio-start-panel");
         const current = card.querySelector(".lc-current-time");
         const total = card.querySelector(".lc-total-time");
         const progressTrack = card.querySelector(".lc-progress-track");
         const progress = progressTrack.querySelector("span");
         const volume = card.querySelector(".lc-volume");
+        const audioParams = new URLSearchParams(window.location.search);
+        const isMockMode = audioParams.get("mockMode") === "1" || audioParams.has("mockTestId") || String(audioParams.get("id") || "").includes("mock");
         let started = false;
         let ended = false;
         let draggingProgress = false;
@@ -1211,7 +1245,7 @@ const ListeningComponents = (() => {
             play.disabled = true;
             play.textContent = "Ended";
         });
-        start.addEventListener("click", async () => {
+        async function startAudioPlayback() {
             if (started || !audio.src) return;
             started = true;
             start.disabled = true;
@@ -1221,12 +1255,27 @@ const ListeningComponents = (() => {
             try {
                 await audio.play();
             } catch {
-                started = false;
-                start.disabled = false;
-                start.textContent = "Start Listening Test";
-                play.disabled = true;
+                if (!isMockMode) {
+                    started = false;
+                    start.disabled = false;
+                    start.textContent = "Start Listening Test";
+                    play.disabled = true;
+                }
             }
-        });
+        }
+
+        card._startListeningAudio = startAudioPlayback;
+
+        if (isMockMode) {
+            if (startPanel) {
+                startPanel.hidden = true;
+                startPanel.style.setProperty("display", "none", "important");
+            }
+            card.style.gridTemplateColumns = "1fr";
+            if (play) play.disabled = false;
+        }
+
+        start.addEventListener("click", startAudioPlayback);
         play.addEventListener("click", () => {
             if (!started || ended) return;
             if (audio.paused) audio.play();
@@ -1372,7 +1421,7 @@ const ListeningComponents = (() => {
 
         // Build partsConfig
         const partsConfig = [];
-        const parts = ((test && test.parts) || []).filter((part) => part && ((part.blocks || []).length || part.audioUrl));
+        const parts = ((test && test.parts) || []).filter((part) => part && hasListeningPartContent(part));
         parts.forEach((part, pIdx) => {
             if (!part) return;
             const partNumber = Number(part.partNumber) || pIdx + 1;
@@ -1576,7 +1625,7 @@ const ListeningComponents = (() => {
     function bindListeningTest(root, test) {
         root.querySelectorAll("[data-audio-card]").forEach(bindAudioCard);
         const listeningParams = new URLSearchParams(window.location.search);
-        const isMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId");
+        const isMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId") || String(listeningParams.get("id") || "").includes("mock");
         root.querySelector("[data-mock-exit]")?.addEventListener("click", () => {
             if (window.parent !== window) {
                 window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
@@ -1637,6 +1686,14 @@ const ListeningComponents = (() => {
             root.querySelector(".lc-main")?.scrollTo({ top: 0, behavior: "smooth" });
             if (hasStarted && shouldResetListeningTimer) {
                 resetListeningTimer();
+            }
+            if (isMockMode) {
+                const activeSection = sections[nextIndex];
+                if (activeSection) {
+                    activeSection.querySelectorAll("[data-audio-card]").forEach((card) => {
+                        card._startListeningAudio?.();
+                    });
+                }
             }
         }
 
@@ -1729,6 +1786,13 @@ const ListeningComponents = (() => {
 
             resetListeningTimer();
             startListeningTimer();
+
+            if (isMockMode) {
+                const activeSection = root.querySelector(".lc-listening-section:not(.hidden)") || root;
+                activeSection.querySelectorAll("[data-audio-card]").forEach((card) => {
+                    card._startListeningAudio?.();
+                });
+            }
         }
 
         root.querySelector("[data-pretest-start]")?.addEventListener("click", startListeningAttempt);
@@ -1767,9 +1831,9 @@ const ListeningComponents = (() => {
 
             const status = root.querySelector(".lc-submit-status");
             if (status) {
-                status.textContent = isAutoSubmit
-                    ? autoSubmitMessage
-                    : "Your Listening test has been submitted.";
+                status.textContent = isMockMode
+                    ? (isAutoSubmit ? autoSubmitMessage : "Moving to the next section...")
+                    : (isAutoSubmit ? autoSubmitMessage : "Your Listening test has been submitted.");
             }
             root.dispatchEvent(new CustomEvent("listening-submit", {
                 bubbles: true,

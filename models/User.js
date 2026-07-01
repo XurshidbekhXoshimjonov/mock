@@ -32,6 +32,55 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    firstName: {
+        type: String,
+        default: ""
+    },
+    familyName: {
+        type: String,
+        default: ""
+    },
+    fullName: {
+        type: String,
+        default: ""
+    },
+    dateOfBirth: {
+        type: String,
+        default: ""
+    },
+    sex: {
+        type: String,
+        default: ""
+    },
+    candidatePhoto: {
+        type: String,
+        default: ""
+    },
+    testTakerId: {
+        type: String,
+        default: "",
+        index: { unique: true, sparse: true }
+    },
+    candidateType: {
+        type: String,
+        default: "Mock Test Candidate"
+    },
+    countryOfOrigin: {
+        type: String,
+        default: "Uzbekistan"
+    },
+    countryOfNationality: {
+        type: String,
+        default: "Uzbekistan"
+    },
+    firstLanguage: {
+        type: String,
+        default: "Uzbek"
+    },
+    targetBand: {
+        type: String,
+        default: ""
+    },
     googleId: {
         type: String,
         unique: true,

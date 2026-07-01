@@ -73,9 +73,12 @@ loginForm.addEventListener("submit", async (event) => {
             user: meData.user
         });
 
-        const targetPath = meData.user.role === "admin" ? "/admin" : "/dashboard";
+        const params = new URLSearchParams(window.location.search);
+        const redirectParam = params.get("redirect");
+        const defaultPath = meData.user.role === "admin" ? "/admin" : "/dashboard";
+        const targetPath = redirectParam ? decodeURIComponent(redirectParam) : defaultPath;
+        
         console.log("REDIRECT_TARGET:", targetPath);
-
         window.location.href = targetPath;
     } catch (error) {
         showMessage(error.message, "error");
@@ -83,3 +86,10 @@ loginForm.addEventListener("submit", async (event) => {
         loginBtn.textContent = "Login";
     }
 });
+
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("redirect")) {
+        showMessage("Please log in or create an account to start the test.", "info");
+    }
+})();

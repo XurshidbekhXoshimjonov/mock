@@ -205,16 +205,33 @@ body.public-page .r-right .signup {
     display: grid;
     align-items: stretch;
     justify-content: center;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
-    max-width: 1220px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1180px;
     margin: 0 auto;
     width: 100%;
 }
 
 .home-practice-grid .card {
-    min-height: 270px;
-    padding: 32px 28px;
+    display: flex;
+    min-width: 0;
+    min-height: 260px;
+    height: 100%;
+    padding: 22px 24px;
+}
+
+.home-practice-grid .card h2 {
+    font-size: 37px;
+    line-height: 1.08;
+    white-space: nowrap;
+}
+
+.home-practice-grid .card p {
+    max-width: 100%;
+}
+
+.home-practice-grid .practice-card__footer {
+    margin-top: auto;
 }
 
 .practice-card,
@@ -354,6 +371,18 @@ body.public-page .r-right .signup {
 .card:hover .practice-card__footer,
 .test-card:hover .practice-card__footer {
     color: #2563eb;
+}
+
+@media (max-width: 1199px) and (min-width: 1024px) {
+    .home-practice-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 26px;
+    }
+
+    .home-practice-grid .card {
+        min-height: 270px;
+        padding: 24px;
+    }
 }
 
 .coming-soon-shell {
@@ -2254,12 +2283,17 @@ body:not(.site-ready) .public-shell {
     }
 
     .home-practice-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 24px;
     }
 
     .home-practice-grid .card {
-        padding: 28px 24px;
+        min-height: 270px;
+        padding: 24px;
+    }
+
+    .home-practice-grid .card h2 {
+        font-size: 34px;
     }
 
     body.public-page .home-footer {
@@ -2406,7 +2440,13 @@ body:not(.site-ready) .public-shell {
     }
 
     .home-practice-grid .card {
+        min-height: 260px;
         padding: 24px 20px;
+    }
+
+    .home-practice-grid .card h2 {
+        font-size: 32px;
+        white-space: normal;
     }
 
     body.public-page .home-footer {

@@ -44,7 +44,7 @@
         <p class="auth-switch"><a href="/">Back to home</a></p>
     </div>
 
-    <script src="/auth-client.js"></script>
+    <script src="/auth-client.js?v=20260701-auth-cookie-restore"></script>
     <script src="/signup.js"></script>
     <script>
         (function() {
@@ -58,9 +58,11 @@
                     BACKEND_URL = window.location.origin;
                 }
             }
+            const params = new URLSearchParams(window.location.search);
+            const redirectParam = params.get("redirect") || "";
             const googleBtns = document.querySelectorAll(".google-btn");
             googleBtns.forEach(btn => {
-                btn.href = BACKEND_URL + "/auth/google";
+                btn.href = BACKEND_URL + "/auth/google" + (redirectParam ? "?redirect=" + encodeURIComponent(redirectParam) : "");
             });
         })();
     </script>

@@ -197,6 +197,18 @@ a {
     background: #f8fafc;
 }
 
+.lc-mock-exit-button {
+    border-color: rgba(217, 21, 50, 0.35);
+    background: #fff5f6;
+    color: #b90f26;
+}
+
+.lc-mock-exit-button:hover {
+    border-color: rgba(217, 21, 50, 0.55);
+    background: #ffe8ec;
+    color: #9f0d20;
+}
+
 .lc-dashboard-button:focus-visible {
     outline: 3px solid rgba(7, 20, 55, 0.14);
     outline-offset: 2px;
@@ -2328,15 +2340,15 @@ body.fullscreen-fallback .lc-submit-status {
     padding: 0;
 }
 
-.lc-note-completion--boxed-flow .lc-form-title {
-    margin: 0;
-    border: 1px solid #8b8b8b;
-    border-bottom: 0;
-    color: #4a4a4a;
+.lc-note-completion--boxed-flow .lc-boxed-flow-title {
+    margin: 0 0 10px;
+    border-bottom: 1px solid #d8d8d8;
+    color: #000;
     font-size: 15px;
     font-weight: 800;
-    padding: 3px 6px;
-    text-align: left;
+    line-height: 1.3;
+    padding: 0 0 7px;
+    text-align: center;
 }
 
 .lc-note-completion--boxed-flow .lc-notes {
@@ -2352,6 +2364,10 @@ body.fullscreen-fallback .lc-submit-status {
     font-size: 15px;
     line-height: 1.35;
     padding: 3px 8px;
+}
+
+.lc-note-completion--boxed-flow .lc-note-section-title {
+    font-weight: 800;
 }
 
 .lc-note-completion--boxed-flow .lc-note-line:first-child,
@@ -2418,6 +2434,93 @@ body.fullscreen-fallback .lc-submit-status {
     background: transparent;
     color: #111827;
     padding: 0 18px 1px 4px;
+}
+
+.lc-matching-block--list > .lc-block-heading h3 {
+    margin-bottom: 8px;
+    color: #000;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.lc-matching-block--list > .lc-block-heading .lc-instruction {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.45;
+}
+
+.lc-matching-block--list .lc-matching-options {
+    display: block;
+    max-width: 864px;
+    margin: 0 0 14px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    background: #fff;
+    padding: 14px 15px;
+}
+
+.lc-matching-block--list .lc-matching-options-title {
+    margin: 0 0 12px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.lc-matching-block--list .lc-matching-option {
+    display: block;
+    margin: 0 0 6px;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.lc-matching-block--list .lc-letter-badge {
+    margin-right: 4px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-matching-block--list .lc-matching-rows {
+    display: grid;
+    max-width: 864px;
+    gap: 8px;
+}
+
+.lc-matching-block--list .lc-matching-row {
+    grid-template-columns: 40px minmax(0, 1fr) 56px;
+    align-items: center;
+    min-height: 48px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.lc-matching-block--list .lc-matching-row .lc-question-badge {
+    color: #000;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-matching-block--list .lc-matching-question-text {
+    color: #000;
+    font-weight: 400;
+}
+
+.lc-matching-block--list .lc-matching-row select {
+    width: 56px;
+    min-width: 56px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    background: #fff;
+    color: #000;
+    padding: 2px 6px;
 }
 
 .lc-choice-row--grid {
@@ -2504,5 +2607,14 @@ html.dark-theme .lc-letter-badge {
     .lc-matching-row select {
         grid-column: 2;
         width: 132px;
+    }
+
+    .lc-matching-block--list .lc-matching-row {
+        grid-template-columns: 34px minmax(0, 1fr) 56px;
+    }
+
+    .lc-matching-block--list .lc-matching-row select {
+        grid-column: auto;
+        width: 56px;
     }
 }

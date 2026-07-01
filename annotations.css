@@ -327,6 +327,23 @@ mark.ieltsx-highlight:hover {
     min-height: 40px; /* match dashboard min-height */
 }
 
+.cbt-header-actions .ieltsx-notes-toggle-btn.header-btn {
+    justify-content: center !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 7px !important;
+    background: #ffffff !important;
+    color: #071437 !important;
+    padding: 0 17px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+}
+
+.cbt-header-actions .ieltsx-notes-toggle-btn.header-btn:hover {
+    border-color: #b8c4d8 !important;
+    background: #f8fafc !important;
+}
+
 .ieltsx-notes-toggle-count {
     background: #ec4899 !important;
     color: white !important;
