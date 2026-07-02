@@ -884,9 +884,58 @@ function renderVocabularyHtml(html, keyPrefix, enableVocabulary, activeVocabular
     );
 }
 
+function passageNumberLabel(passage) {
+    const explicitNumber = Number(passage?.number);
+    if (Number.isFinite(explicitNumber) && explicitNumber > 0) return explicitNumber;
+
+    const labelMatch = String(passage?.displayLabel || passage?.title || "").match(/passage\s+(\d+)/i);
+    return labelMatch ? Number(labelMatch[1]) : 1;
+}
+
+function passageQuestionRange(passage) {
+    const numbers = [];
+
+    (passage?.questionGroups || []).forEach((group) => {
+        (group.questions || []).forEach((question) => {
+            const number = Number(question.number);
+            if (Number.isFinite(number)) numbers.push(number);
+        });
+        (group.questionNumbers || []).forEach((value) => {
+            const number = Number(value);
+            if (Number.isFinite(number)) numbers.push(number);
+        });
+        (group.questionRange || []).forEach((value) => {
+            const number = Number(value);
+            if (Number.isFinite(number)) numbers.push(number);
+        });
+    });
+
+    (passage?.questions || []).forEach((question) => {
+        const number = Number(question.number);
+        if (Number.isFinite(number)) numbers.push(number);
+    });
+
+    if (numbers.length) {
+        return {
+            start: Math.min(...numbers),
+            end: Math.max(...numbers)
+        };
+    }
+
+    const passageNumber = passageNumberLabel(passage);
+    if (passageNumber === 2) return { start: 14, end: 26 };
+    if (passageNumber === 3) return { start: 27, end: 40 };
+    return { start: 1, end: 13 };
+}
+
 function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKey = "", onVocabularyWord }) {
     if (!passage) return null;
 
+    const passageNumber = passageNumberLabel(passage);
+    const range = passageQuestionRange(passage);
+    const rangeText = range.start === range.end
+        ? `Question ${range.start}`
+        : `Questions ${range.start}\u2013${range.end}`;
     const paragraphs = passage.paragraphs?.length
         ? passage.paragraphs
         : String(passage.passageText || "")
@@ -940,9 +989,13 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
         onClick: handleVocabularyClick,
         onKeyDown: handleVocabularyKeyDown
     },
-        h("div", { className: "cbt-passage-kicker" },
-            h("span", { className: "cbt-book-icon", "aria-hidden": "true" }, "▢"),
-            h("span", null, passage.displayLabel || `Reading Passage ${passage.number || 1}`)
+        h("header", { className: "cbt-passage-kicker" },
+            h("div", { className: "cbt-passage-label" }, `READING PASSAGE ${passageNumber}`),
+            h("p", { className: "cbt-passage-guidance" },
+                "You should spend about 20 minutes on ",
+                h("strong", null, rangeText),
+                `, which are based on Reading Passage ${passageNumber} below.`
+            )
         ),
         h("h1", { className: "cbt-passage-title" },
             passage.title || passage.passageTitle || `Reading Passage ${passage.number || 1}`

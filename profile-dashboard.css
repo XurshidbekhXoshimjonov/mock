@@ -1,8 +1,7 @@
-@import url("typography.css");
+@import url("typography.css?v=20260702-global-font");
 
 body[data-profile-page] {
     min-height: 100vh;
-    font-family: var(--ieltsx-font);
     font-weight: 400;
     background:
         radial-gradient(circle at 10% 5%, rgba(37, 99, 235, 0.08), transparent 28rem),
@@ -11,32 +10,25 @@ body[data-profile-page] {
     overflow-x: hidden;
 }
 
-body[data-profile-page] h1,
-body[data-profile-page] h2 {
+body[data-profile-page] #profileRoot h1,
+body[data-profile-page] #profileRoot h2 {
     font-weight: 700 !important;
 }
 
-body[data-profile-page] h3,
-body[data-profile-page] .font-semibold {
+body[data-profile-page] #profileRoot h3,
+body[data-profile-page] #profileRoot .font-semibold {
     font-weight: 600 !important;
 }
 
-body[data-profile-page] .font-black,
-body[data-profile-page] .font-extrabold {
+body[data-profile-page] #profileRoot .font-black,
+body[data-profile-page] #profileRoot .font-extrabold {
     font-weight: 700 !important;
 }
 
-body[data-profile-page] p,
-body[data-profile-page] span,
-body[data-profile-page] li {
+body[data-profile-page] #profileRoot p,
+body[data-profile-page] #profileRoot span,
+body[data-profile-page] #profileRoot li {
     font-weight: 400;
-}
-
-body[data-profile-page] button,
-body[data-profile-page] a,
-body[data-profile-page] strong,
-body[data-profile-page] summary {
-    font-family: inherit;
 }
 
 .profile-hero {

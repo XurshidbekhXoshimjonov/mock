@@ -1,4 +1,4 @@
-@import url("typography.css");
+@import url("typography.css?v=20260702-global-font");
 
 :root {
     --cbt-accent: #0969da;
@@ -334,12 +334,30 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 }
 
 .cbt-passage-kicker {
-    gap: 9px;
+    display: block;
     padding-bottom: 17px;
     border-bottom: 1px solid var(--cbt-border);
     font-family: var(--ieltsx-font);
-    font-size: 14px;
-    font-weight: 700;
+}
+
+.cbt-passage-label {
+    color: #4d5754;
+    font-size: calc(18px * var(--reading-scale));
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1.25;
+}
+
+.cbt-passage-guidance {
+    margin: 13px 0 0;
+    color: #344054;
+    font-size: calc(15px * var(--reading-scale));
+    font-style: italic;
+    line-height: 1.45;
+}
+
+.cbt-passage-guidance strong {
+    font-weight: 800;
 }
 
 .cbt-book-icon {
@@ -1023,6 +1041,140 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     border: 1px solid var(--cbt-border);
     padding: 10px;
     vertical-align: top;
+}
+
+.cbt-rich-completion:has(.ielts-import-flow),
+.cbt-rich-completion:has(.ielts-import-notes) {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    line-height: 1.45;
+}
+
+.ielts-import-flow,
+.ielts-import-notes {
+    color: inherit;
+}
+
+.ielts-flow-title,
+.ielts-notes-title,
+.ielts-summary-title {
+    margin: 10px 0 16px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ielts-flow-chart {
+    display: grid;
+    justify-items: center;
+}
+
+.ielts-flow-box {
+    width: min(410px, 100%);
+    border: 1px solid #777;
+    background: #fff;
+    padding: 5px 8px;
+    line-height: 1.25;
+}
+
+.ielts-flow-arrow {
+    color: #444;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1;
+    margin: 2px 0;
+}
+
+.ielts-notes-heading {
+    margin: 16px 0 6px;
+    font-weight: 700;
+}
+
+.ielts-import-notes .bullet-notes {
+    list-style: disc;
+    margin: 5px 0 14px;
+    padding-left: 24px;
+}
+
+.ielts-import-notes .bullet-notes li {
+    display: list-item;
+    margin: 4px 0;
+}
+
+.ielts-import-flow .cbt-blank-wrapper,
+.ielts-import-notes .cbt-blank-wrapper {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    vertical-align: baseline !important;
+    white-space: nowrap;
+    gap: 4px !important;
+    margin: 0 3px !important;
+}
+
+.ielts-import-flow .cbt-blank-number,
+.ielts-import-notes .cbt-blank-number {
+    min-width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight: 700 !important;
+}
+
+.ielts-import-flow .cbt-blank-input--inline,
+.ielts-import-notes .cbt-blank-input--inline {
+    width: 150px !important;
+    min-width: 120px;
+    min-height: 16px !important;
+    height: 16px !important;
+    margin: 0 3px !important;
+    border: 0;
+    border-bottom: 1px dotted currentColor;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 2px;
+    box-shadow: none;
+    font-size: inherit;
+    line-height: 16px;
+    vertical-align: baseline;
+}
+
+.ielts-import-flow .cbt-blank-input--inline:focus,
+.ielts-import-notes .cbt-blank-input--inline:focus {
+    border-bottom-style: solid;
+    outline: none;
+    box-shadow: none;
+}
+
+.ielts-import-summary .word-box {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px 28px;
+    margin-top: 14px;
+    border: 1px solid #777;
+    background: #fff;
+    padding: 11px 14px;
+    line-height: 1.25;
+}
+
+.ielts-import-summary .word-box span {
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+    min-width: 0;
+}
+
+.ielts-import-summary .word-box strong {
+    min-width: 14px;
+}
+
+@media (max-width: 760px) {
+    .ielts-import-summary .word-box {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .cbt-rich-completion:has(.test-8-notes-layout) {

@@ -459,8 +459,6 @@
         const style = document.createElement("style");
         style.id = "ieltsNavbarStyles";
         style.textContent = `
-        @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
-
         .ielts-navbar {
             position: sticky;
             top: 0;
@@ -476,11 +474,12 @@
             border-bottom: 1px solid #e5e7eb;
             background: #ffffff;
             box-shadow: 0 10px 30px rgba(7, 21, 71, 0.05);
-            font-family: "Plus Jakarta Sans", sans-serif;
+            font-family: var(--app-font, var(--ieltsx-font, "Inter", "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif));
         }
 
         .ielts-navbar * {
             box-sizing: border-box;
+            font-family: inherit;
         }
 
         .ielts-navbar__brand {
