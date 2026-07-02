@@ -1,4 +1,4 @@
-@import url("typography.css?v=20260702-global-font");
+@import url("typography.css?v=20260702-navbar-name-weight");
 
 .admin-writing-page {
     --writing-red: #e11d48;
@@ -16,7 +16,7 @@
     min-height: 100vh;
     background: var(--writing-bg);
     color: var(--writing-ink);
-    font-family: var(--app-font);
+    font-family: "Plus Jakarta Sans", var(--ieltsx-font), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .admin-writing-page *,

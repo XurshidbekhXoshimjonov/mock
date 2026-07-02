@@ -454,6 +454,8 @@
         const style = document.createElement("style");
         style.id = "ieltsNavbarStyles";
         style.textContent = `
+        @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
         .ielts-navbar {
             position: sticky;
             top: 0;
@@ -469,12 +471,11 @@
             border-bottom: 1px solid #e5e7eb;
             background: #ffffff;
             box-shadow: 0 10px 30px rgba(7, 21, 71, 0.05);
-            font-family: var(--app-font, var(--ieltsx-font, "Inter", "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif));
+            font-family: "Plus Jakarta Sans", sans-serif;
         }
 
         .ielts-navbar * {
             box-sizing: border-box;
-            font-family: inherit;
         }
 
         .ielts-navbar__brand {
@@ -719,6 +720,27 @@
             line-height: 1;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+
+        .navbar-user-name,
+        .user-name,
+        .user-display-name,
+        .profile-trigger-name,
+        .ielts-account__name {
+            font-weight: 600 !important;
+            font-family: inherit;
+        }
+
+        .navbar .user-name,
+        .navbar .navbar-user-name,
+        .navbar .user-display-name,
+        .navbar .profile-trigger-name,
+        .ielts-navbar .user-name,
+        .ielts-navbar .navbar-user-name,
+        .ielts-navbar .user-display-name,
+        .ielts-navbar .profile-trigger-name,
+        .ielts-navbar .ielts-account__name {
+            font-weight: 600 !important;
         }
 
         .ielts-account__avatar {
@@ -1352,7 +1374,7 @@
             <div class="ielts-account profile-menu user-profile navbar-user auth-user" id="ieltsAccount">
                 <button class="ielts-account__trigger profile-trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
                     <span class="ielts-account__avatar profile-avatar user-avatar" aria-hidden="true">${initial}</span>
-                    <span class="ielts-account__name profile-name">${displayName}</span>
+                    <span class="ielts-account__name profile-name navbar-user-name user-name user-display-name profile-trigger-name">${displayName}</span>
                     <span class="ielts-account__chevron profile-chevron" aria-hidden="true">${MENU_ICONS.chevron}</span>
                 </button>
                 <div class="ielts-account__dropdown profile-dropdown" id="ieltsAccountDropdown">

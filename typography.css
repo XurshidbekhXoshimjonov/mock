@@ -1,51 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
 :root {
-    --app-font: "Inter", "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --ieltsx-font: var(--app-font);
+    --ieltsx-font: "Plus Jakarta Sans", sans-serif;
 }
 
 html,
-body,
-#root {
-    font-family: var(--app-font);
+body {
+    font-family: var(--ieltsx-font);
     font-weight: 400;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-button,
-input,
-select,
-textarea,
-a {
-    font-family: inherit;
-}
-
-.navbar,
-.navbar *,
-.ielts-navbar,
-.ielts-navbar *,
-.user-menu,
-.user-menu *,
-.user-dropdown,
-.user-dropdown *,
-.ielts-account,
-.ielts-account *,
-.profile-menu,
-.profile-menu *,
-.profile-dropdown,
-.profile-dropdown *,
-.account-menu,
-.account-menu *,
-.account-dropdown,
-.account-dropdown *,
-.profile-page,
-.profile-page *,
-body[data-profile-page],
-body[data-profile-page] #profileRoot,
-body[data-profile-page] #profileRoot * {
-    font-family: var(--app-font);
+body,
+body *:not(svg):not(svg *) {
+    font-family: var(--ieltsx-font) !important;
 }
 
 h1,
