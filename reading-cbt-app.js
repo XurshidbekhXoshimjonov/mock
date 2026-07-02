@@ -317,14 +317,21 @@ function splitDelimitedFullManualPassages(test, groups) {
     }
 
     const ranges = [[1, 13], [14, 26], [27, 40]];
+    const passageTitles = Array.isArray(test.passageTitles)
+        ? test.passageTitles
+        : (Array.isArray(test.partTitles) ? test.partTitles : []);
     return chunks.slice(0, 3).map((passageText, index) => {
         const number = index + 1;
         const [firstQuestion, lastQuestion] = ranges[index] || [1, 40];
         const questionGroups = questionGroupsForRange(groups, firstQuestion, lastQuestion);
+        const configuredTitle = passageTitles[index];
+        const title = typeof configuredTitle === "string"
+            ? configuredTitle.trim()
+            : String(configuredTitle?.title || configuredTitle?.passageTitle || "").trim();
 
         return {
             number,
-            title: `Reading Passage ${number}`,
+            title: title || `Reading Passage ${number}`,
             displayLabel: `Reading Passage ${number}`,
             passageText,
             paragraphs: paragraphsFromText(passageText),
