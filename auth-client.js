@@ -206,11 +206,14 @@
     }
 
     function getAuthState() {
-        const auth = normalizeStoredAuth(readStorage());
+        const storedAuth = readStorage();
+        const auth = normalizeStoredAuth(storedAuth);
 
         if (!auth) {
             removeStorage();
-            clearAuthCookie();
+            if (storedAuth) {
+                clearAuthCookie();
+            }
             return {
                 isAuthenticated: false,
                 auth: null,
@@ -459,7 +462,7 @@
         const style = document.createElement("style");
         style.id = "ieltsNavbarStyles";
         style.textContent = `
-        @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
         .ielts-navbar {
             position: sticky;
@@ -476,7 +479,7 @@
             border-bottom: 1px solid #e5e7eb;
             background: #ffffff;
             box-shadow: 0 10px 30px rgba(7, 21, 71, 0.05);
-            font-family: "Plus Jakarta Sans", sans-serif;
+            font-family: "Plus Jakarta Sans", sans-serif !important;
         }
 
         .ielts-navbar * {
@@ -728,23 +731,30 @@
         }
 
         .navbar-user-name,
+        .profile-name,
         .user-name,
+        .account-name,
         .user-display-name,
         .profile-trigger-name,
         .ielts-account__name {
             font-weight: 600 !important;
-            font-family: inherit;
+            font-family: "Plus Jakarta Sans", sans-serif !important;
         }
 
         .navbar .user-name,
         .navbar .navbar-user-name,
+        .navbar .profile-name,
+        .navbar .account-name,
         .navbar .user-display-name,
         .navbar .profile-trigger-name,
         .ielts-navbar .user-name,
         .ielts-navbar .navbar-user-name,
+        .ielts-navbar .profile-name,
+        .ielts-navbar .account-name,
         .ielts-navbar .user-display-name,
         .ielts-navbar .profile-trigger-name,
         .ielts-navbar .ielts-account__name {
+            font-family: "Plus Jakarta Sans", sans-serif !important;
             font-weight: 600 !important;
         }
 

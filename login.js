@@ -1,95 +1,129 @@
-const loginForm = document.getElementById("loginForm");
-const authMessage = document.getElementById("authMessage");
-const loginBtn = document.getElementById("loginBtn");
+(() => {
+    function safeRedirectTarget(value, fallback) {
+        if (!value) return fallback;
 
-function showMessage(message, type) {
-    authMessage.hidden = false;
-    authMessage.textContent = message;
-    authMessage.className = `auth-message ${type || ""}`;
-}
-
-if (window.authClient) {
-    window.authClient.redirectIfAuthenticated("/profile.html");
-}
-
-loginForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    loginBtn.disabled = true;
-    loginBtn.textContent = "Signing in...";
-    authMessage.hidden = true;
-
-    try {
-        const response = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        console.log("LOGIN_RESPONSE_STATUS:", response.status);
-        console.log("LOGIN_RESPONSE_BODY:", data);
-
-        if (!response.ok || !data.success) {
-            throw new Error(data.message || "Login failed");
-        }
-
-        const meResponse = await fetch("/api/auth/me", {
-            method: "GET",
-            credentials: "include",
-            cache: "no-store"
-        });
-
-        let meData = null;
         try {
-            meData = await meResponse.json();
-        } catch (e) {
-            console.error("Failed to parse /api/auth/me response", e);
+            const decoded = decodeURIComponent(value);
+            const target = new URL(decoded, window.location.origin);
+            return target.origin === window.location.origin
+                ? `${target.pathname}${target.search}${target.hash}`
+                : fallback;
+        } catch {
+            return fallback;
         }
+    }
 
-        console.log("ME_RESPONSE_STATUS:", meResponse.status);
-        console.log("ME_RESPONSE_BODY:", meData);
+    function initLoginForm() {
+        const loginForm = document.getElementById("loginForm");
+        const authMessage = document.getElementById("authMessage");
+        const loginBtn = document.getElementById("loginBtn");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
 
-        if (meResponse.status === 401) {
-            showMessage("Login succeeded but session was not saved.", "error");
-            loginBtn.disabled = false;
-            loginBtn.textContent = "Login";
+        if (!loginForm || !authMessage || !loginBtn || !emailInput || !passwordInput) {
             return;
         }
 
-        if (!meResponse.ok || !meData || !meData.success) {
-            throw new Error(meData?.message || "Failed to fetch user session");
+        const originalButtonText = loginBtn.textContent || "Login";
+
+        function showMessage(message, type) {
+            authMessage.hidden = false;
+            authMessage.textContent = message;
+            authMessage.className = `auth-message ${type || ""}`;
         }
 
-        window.authClient.saveAuth({
-            token: data.token,
-            user: meData.user
+        function resetButton() {
+            loginBtn.disabled = false;
+            loginBtn.textContent = originalButtonText;
+        }
+
+        if (window.authClient?.verifyStoredSession) {
+            window.authClient.verifyStoredSession().then((user) => {
+                if (!user) return;
+                const fallback = user.role === "admin" ? "/admin" : "/dashboard";
+                const target = safeRedirectTarget(new URLSearchParams(window.location.search).get("redirect"), fallback);
+                window.location.assign(target);
+            }).catch(() => {});
+        }
+
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                showMessage("Email and password are required.", "error");
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = "Signing in...";
+            authMessage.hidden = true;
+
+            try {
+                const response = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    cache: "no-store",
+                    body: JSON.stringify({ email, password })
+                });
+
+                let data = {};
+                try {
+                    data = await response.json();
+                } catch {
+                    data = {};
+                }
+
+                if (!response.ok || !data.success) {
+                    throw new Error(data.message || "Invalid email or password");
+                }
+
+                const meResponse = await fetch("/api/auth/me", {
+                    method: "GET",
+                    credentials: "include",
+                    cache: "no-store"
+                });
+
+                let meData = {};
+                try {
+                    meData = await meResponse.json();
+                } catch {
+                    meData = {};
+                }
+
+                if (!meResponse.ok || !meData.success || !meData.user) {
+                    throw new Error(meData.message || "Login succeeded, but the browser did not save the session. Please try again.");
+                }
+
+                window.authClient?.saveAuth?.({
+                    token: data.token,
+                    user: meData.user
+                });
+
+                const fallback = meData.user.role === "admin" ? "/admin" : "/dashboard";
+                const target = safeRedirectTarget(new URLSearchParams(window.location.search).get("redirect"), fallback);
+                window.location.assign(target);
+            } catch (error) {
+                showMessage(error.message || "Login failed", "error");
+                resetButton();
+            }
         });
 
         const params = new URLSearchParams(window.location.search);
-        const redirectParam = params.get("redirect");
-        const defaultPath = meData.user.role === "admin" ? "/admin" : "/dashboard";
-        const targetPath = redirectParam ? decodeURIComponent(redirectParam) : defaultPath;
-        
-        console.log("REDIRECT_TARGET:", targetPath);
-        window.location.href = targetPath;
-    } catch (error) {
-        showMessage(error.message, "error");
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Login";
+        if (params.has("redirect")) {
+            showMessage("Please log in or create an account to continue.", "info");
+        }
     }
-});
 
-(function() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("redirect")) {
-        showMessage("Please log in or create an account to start the test.", "info");
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initLoginForm, { once: true });
+    } else {
+        initLoginForm();
     }
 })();

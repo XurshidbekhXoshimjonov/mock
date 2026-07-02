@@ -11,6 +11,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['"Plus Jakarta Sans"', "sans-serif"]
+            },
             boxShadow: {
                 card: "0 18px 45px rgba(7, 21, 71, 0.09)"
             }

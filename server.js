@@ -5205,6 +5205,17 @@ app.post("/signup", async (req, res) => {
         ).catch(() => {});
     } catch (error) {
         console.error(error);
+        if (error?.code === 11000) {
+            const duplicateField = Object.keys(error.keyPattern || error.keyValue || {})[0] || "account";
+            const duplicateMessage = duplicateField === "email"
+                ? "This email is already registered"
+                : "This account cannot be created with the current login method. Please try logging in instead.";
+            return res.status(409).json({
+                success: false,
+                message: duplicateMessage
+            });
+        }
+
         res.status(error.statusCode || 500).json({
             success: false,
             message: error.message || "Signup failed"
@@ -5487,6 +5498,7 @@ app.get("/auth/google/callback", async (req, res) => {
             <head>
                 <meta charset="UTF-8">
                 <title>Authenticating...</title>
+                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
                 <script>
                     const token = ${JSON.stringify(token)};
                     const user = ${JSON.stringify(publicUser(user))};
@@ -5505,7 +5517,7 @@ app.get("/auth/google/callback", async (req, res) => {
                 </script>
             </head>
             <body>
-                <div style="font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 10px;">
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 10px;">
                     <div style="width: 40px; height: 40px; border: 4px solid #f3f4f6; border-top: 4px solid #2563eb; border-radius: 50%; animation: spin 1s linear infinite;"></div>
                     <p style="color: #4b5563; font-weight: 500;">Signing in with Google...</p>
                 </div>
@@ -5582,6 +5594,7 @@ async function runUserMigration() {
     if (isMongo) {
         try {
             const User = require("./models/User");
+            await ensureUserAuthIndexes(User);
             const countMissing = await User.countDocuments({ memberIdNumber: { $exists: false } });
             if (countMissing > 0) {
                 console.info(`Found ${countMissing} users without memberId. Starting migration...`);
@@ -5652,6 +5665,30 @@ async function runUserMigration() {
     }
 
     await runTestTakerIdMigration().catch(err => console.error("Test Taker ID migration error:", err));
+}
+
+async function ensureUserAuthIndexes(UserModel) {
+    const collection = UserModel.collection;
+    const indexes = await collection.indexes();
+    const googleIdIndex = indexes.find((index) => index.name === "googleId_1");
+    const expectedPartial = googleIdIndex?.partialFilterExpression?.googleId?.$type === "string";
+
+    if (googleIdIndex && !expectedPartial) {
+        console.info("Rebuilding users.googleId index for password and Google auth compatibility...");
+        await collection.dropIndex("googleId_1");
+    }
+
+    if (!googleIdIndex || !expectedPartial) {
+        await collection.createIndex(
+            { googleId: 1 },
+            {
+                name: "googleId_1",
+                unique: true,
+                partialFilterExpression: { googleId: { $type: "string" } }
+            }
+        );
+        console.info("users.googleId index is ready.");
+    }
 }
 
 async function runTestTakerIdMigration() {

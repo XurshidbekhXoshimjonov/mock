@@ -1,4 +1,4 @@
-@import url("typography.css?v=20260702-navbar-name-weight");
+@import url("typography.css?v=20260702-plus-jakarta-sans");
 
 body{
     margin:0;
@@ -239,6 +239,47 @@ nav a:hover{
     gap:20px;
 
     box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+body.auth-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: #ffffff;
+}
+
+body.auth-page .login-box {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    width: min(350px, calc(100% - 32px));
+    margin: clamp(36px, 8vh, 84px) auto 48px;
+}
+
+body.auth-page .login-box form,
+body.auth-page .login-box input,
+body.auth-page .login-box button,
+body.auth-page .google-btn,
+body.auth-page .auth-switch a {
+    position: relative;
+    z-index: 3;
+    pointer-events: auto;
+}
+
+body.auth-page .login-box input,
+body.auth-page .login-box button[type="submit"],
+body.auth-page .google-btn {
+    box-sizing: border-box;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+}
+
+@supports (-webkit-touch-callout: none) {
+    body.auth-page {
+        min-height: -webkit-fill-available;
+    }
 }
 
 .login-box h1{

@@ -82,9 +82,7 @@ const userSchema = new mongoose.Schema({
         default: ""
     },
     googleId: {
-        type: String,
-        unique: true,
-        sparse: true
+        type: String
     },
     role: {
         type: String,
@@ -121,5 +119,12 @@ const userSchema = new mongoose.Schema({
 userSchema.index({ role: 1, createdAt: -1 });
 userSchema.index({ plan: 1, createdAt: -1 });
 userSchema.index({ lastLogin: -1 });
+userSchema.index(
+    { googleId: 1 },
+    {
+        unique: true,
+        partialFilterExpression: { googleId: { $type: "string" } }
+    }
+);
 
 module.exports = mongoose.model("User", userSchema);

@@ -13,6 +13,7 @@
           "*.png",
           "*.jpg",
           "*.json",
+          "fonts/**",
           "data/**",
           "uploads/**"
         ]

@@ -10,10 +10,10 @@
             document.documentElement.classList.add("dark-theme");
         }
     </script>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
 </head>
 
-<body>
+<body class="auth-page">
     <div class="login-box">
         <h1>Login</h1>
         <p class="auth-subtitle">Sign in to continue to IELTSX</p>
@@ -43,20 +43,11 @@
         <p class="auth-switch"><a href="/">Back to home</a></p>
     </div>
 
-    <script src="/auth-client.js?v=20260702-navbar-name-weight"></script>
-    <script src="/login.js"></script>
+    <script src="/auth-client.js?v=20260702-plus-jakarta-sans"></script>
+    <script src="/login.js?v=20260702-auth-macbook-v1"></script>
     <script>
         (function() {
-            let BACKEND_URL = "http://localhost:30004";
-            try {
-                if (import.meta && import.meta.env && import.meta.env.VITE_API_URL) {
-                    BACKEND_URL = import.meta.env.VITE_API_URL;
-                }
-            } catch (e) {
-                if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-                    BACKEND_URL = window.location.origin;
-                }
-            }
+            const BACKEND_URL = window.IELTSX_API_URL || window.location.origin;
             const params = new URLSearchParams(window.location.search);
             const redirectParam = params.get("redirect") || "";
             const googleBtns = document.querySelectorAll(".google-btn");
