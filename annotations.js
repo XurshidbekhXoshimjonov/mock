@@ -48,6 +48,62 @@
     let isToolbarClicking = false;
     let domObserver = null;
     let mutationTimeout = null;
+    const ANONYMOUS_SESSION_KEY = 'ieltsx.anonymousSessionId.v1';
+
+    function safeStoragePart(value, fallback = 'unknown') {
+        const cleaned = String(value || '')
+            .trim()
+            .replace(/[^a-zA-Z0-9_.:-]/g, '-')
+            .slice(0, 160);
+        return cleaned || fallback;
+    }
+
+    function readStoredAuthUser() {
+        try {
+            if (window.authClient?.getAuthState) {
+                return window.authClient.getAuthState()?.user || null;
+            }
+
+            const raw = localStorage.getItem('ieltsmock.auth') || localStorage.getItem('ieltsAuth');
+            const auth = raw ? JSON.parse(raw) : null;
+            return auth?.user || null;
+        } catch {
+            return null;
+        }
+    }
+
+    function getAnonymousSessionId() {
+        try {
+            let sessionId = localStorage.getItem(ANONYMOUS_SESSION_KEY);
+            if (!sessionId) {
+                sessionId = `anon-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+                localStorage.setItem(ANONYMOUS_SESSION_KEY, sessionId);
+            }
+            return safeStoragePart(sessionId, 'anonymous');
+        } catch {
+            return 'anonymous';
+        }
+    }
+
+    function getAnnotationOwner() {
+        const user = readStoredAuthUser();
+        const userId = safeStoragePart(user?.id || user?._id || user?.memberId || '');
+
+        if (userId !== 'unknown') {
+            return {
+                ownerType: 'user',
+                ownerId: userId,
+                ownerKey: `user:${userId}`
+            };
+        }
+
+        const sessionId = getAnonymousSessionId();
+        return {
+            ownerType: 'session',
+            ownerId: sessionId,
+            ownerKey: `session:${sessionId}`
+        };
+    }
 
     // Helper functions to suspend and resume the mutation observer
     function suspendObserver() {
@@ -169,15 +225,29 @@
             };
         }
         
-        const attemptKey = `ieltsx_current_attempt_${skill}_${testId}`;
+        const owner = getAnnotationOwner();
+        const partScope = getPartScope(skill, testId, params, pathParts);
+        const attemptKey = annotationAttemptKey({
+            skill,
+            ownerKey: owner.ownerKey,
+            testId,
+            partScope
+        });
         let attemptId = sessionStorage.getItem(attemptKey);
         if (!attemptId) {
-            // Check if there is an existing global attempt id on the page (for Reading React player)
-            attemptId = window.readingAttemptId || `attempt-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+            attemptId = `${skill}-${safeStoragePart(owner.ownerKey)}-${safeStoragePart(testId)}-${safeStoragePart(partScope)}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
             sessionStorage.setItem(attemptKey, attemptId);
         }
         
-        return { skill, testId, attemptId };
+        return {
+            skill,
+            testId: safeStoragePart(testId, 'practice'),
+            attemptId,
+            ownerType: owner.ownerType,
+            ownerId: owner.ownerId,
+            ownerKey: owner.ownerKey,
+            partScope
+        };
     }
 
     function getWritingTaskNumber() {
@@ -199,11 +269,45 @@
         return 'task1';
     }
 
+    function getPartScope(skill, testId, params, pathParts) {
+        const explicit = params.get('passageId')
+            || params.get('partId')
+            || params.get('part')
+            || document.querySelector('[data-passage-id]')?.dataset?.passageId
+            || document.querySelector('[data-part-number]')?.dataset?.partNumber
+            || '';
+
+        if (explicit) {
+            return safeStoragePart(explicit, 'part');
+        }
+
+        const pathname = window.location.pathname.toLowerCase();
+        if (document.body.dataset.testMode === 'full' || pathname.includes('full-test-player') || pathname.includes('fulltest')) {
+            return skill === 'listening' ? 'listening-full' : 'reading-full';
+        }
+
+        const partMatch = pathname.match(/(?:part|passage)[-_]?([1-4])/);
+        if (partMatch) {
+            return `${skill}-part-${partMatch[1]}`;
+        }
+
+        if (pathParts.length >= 2 && (pathParts[0] === 'reading' || pathParts[0] === 'listening')) {
+            return `${skill}-test`;
+        }
+
+        return safeStoragePart(testId || 'practice', 'practice');
+    }
+
+    function annotationAttemptKey(config) {
+        return `ieltsx_current_attempt_${config.skill}_${config.ownerKey}_${config.testId}_${config.partScope}`;
+    }
+
     function getStorageKey() {
         if (currentConfig.skill === 'writing') {
             return `writing_highlights_${currentConfig.testId}_${currentConfig.taskNumber}`;
         }
-        return `ieltsx_annotations_${currentConfig.skill}_${currentConfig.testId}_${currentConfig.attemptId}`;
+        const prefix = currentConfig.skill === 'reading' ? 'readingHighlights' : `${currentConfig.skill}Highlights`;
+        return `${prefix}:${currentConfig.ownerKey}:${currentConfig.testId}:${currentConfig.partScope}`;
     }
 
     function sameConfig(a, b) {
@@ -211,6 +315,8 @@
             && a.skill === b.skill
             && a.testId === b.testId
             && a.attemptId === b.attemptId
+            && a.ownerKey === b.ownerKey
+            && a.partScope === b.partScope
             && (a.taskNumber || '') === (b.taskNumber || '');
     }
 
@@ -301,7 +407,7 @@
         document.body.appendChild(toolbarEl);
 
         // Bind button actions
-        toolbarEl.querySelector('.highlight-yellow').addEventListener('click', () => applyHighlight('#fdba74'));
+        toolbarEl.querySelector('.highlight-yellow').addEventListener('click', () => applyHighlight('#fff3a3'));
         toolbarEl.querySelector('.note-btn').addEventListener('click', () => openNoteModal());
         toolbarEl.querySelector('.remove-btn').addEventListener('click', () => removeSelectedHighlight());
 
@@ -858,6 +964,7 @@
         const endContainer = range.endContainer;
         const textNodes = getTextNodesInRange(range);
         const marks = [];
+        const highlightColor = '#fff3a3';
 
         textNodes.forEach(node => {
             let nodeToWrap = node;
@@ -888,7 +995,7 @@
             // Create mark wrapper
             const mark = document.createElement('mark');
             mark.className = 'ieltsx-highlight';
-            mark.style.setProperty('background-color', color || 'rgba(251, 146, 60, 0.45)', 'important');
+            mark.style.setProperty('background-color', highlightColor, 'important');
             mark.dataset.highlightId = highlightId;
             
             nodeToWrap.parentNode.insertBefore(mark, nodeToWrap);
@@ -921,6 +1028,9 @@
                 skill: currentConfig.skill,
                 testId: currentConfig.testId,
                 attemptId: currentConfig.attemptId,
+                ownerType: currentConfig.ownerType,
+                ownerId: currentConfig.ownerId,
+                partScope: currentConfig.partScope,
                 taskNumber: currentConfig.taskNumber || null,
                 part,
                 questionNumber,
@@ -1060,7 +1170,7 @@
                 highlightId = 'h-' + Date.now() + '-' + Math.random().toString(16).slice(2, 8);
                 suspendObserver();
                 try {
-                    highlightRange(activeSelectionRange, highlightId, 'rgba(251, 146, 60, 0.2)'); // very soft orange highlight for notes
+                    highlightRange(activeSelectionRange, highlightId, '#fff3a3');
                 } finally {
                     resumeObserver();
                 }
@@ -1071,11 +1181,14 @@
                     skill: currentConfig.skill,
                     testId: currentConfig.testId,
                     attemptId: currentConfig.attemptId,
+                    ownerType: currentConfig.ownerType,
+                    ownerId: currentConfig.ownerId,
+                    partScope: currentConfig.partScope,
                     taskNumber: currentConfig.taskNumber || null,
                     part: getCurrentPart(activeSelectionRange.startContainer),
                     questionNumber: getClosestQuestionNumber(activeSelectionRange.startContainer),
                     selectedText: activeSelectedText,
-                    color: 'rgba(251, 146, 60, 0.2)',
+                    color: '#fff3a3',
                     createdAt: now,
                     containerSelector: activeContainerSelector,
                     startOffset: activeStartOffset,
@@ -1092,6 +1205,9 @@
                 skill: currentConfig.skill,
                 testId: currentConfig.testId,
                 attemptId: currentConfig.attemptId,
+                ownerType: currentConfig.ownerType,
+                ownerId: currentConfig.ownerId,
+                partScope: currentConfig.partScope,
                 taskNumber: currentConfig.taskNumber || null,
                 part,
                 questionNumber,
@@ -1362,7 +1478,7 @@
             localStorage.removeItem(getStorageKey());
             
             // Reset active attempt ID in sessionStorage to start a completely new session
-            const attemptKey = `ieltsx_current_attempt_${currentConfig.skill}_${currentConfig.testId}`;
+            const attemptKey = annotationAttemptKey(currentConfig);
             const newAttemptId = `attempt-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
             sessionStorage.setItem(attemptKey, newAttemptId);
             

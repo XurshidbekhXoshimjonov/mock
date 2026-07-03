@@ -2,20 +2,14 @@
 
 /* Highlight Styling */
 mark.ieltsx-highlight {
-    background-color: rgba(249, 115, 22, 0.26) !important;
-    color: #ea580c !important; /* fiery orange text color */
-    font-weight: 600 !important; /* semi-bold to make the color pop */
-    border-bottom: 2.5px solid #f97316 !important; /* premium orange underline */
-    padding: 1px 0 !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    display: inline !important;
-    line-height: inherit !important;
+    background-color: #fff3a3 !important;
+    color: inherit !important;
+    font-weight: inherit !important;
 }
 
 mark.ieltsx-highlight:hover {
-    background-color: rgba(249, 115, 22, 0.38) !important;
-    color: #c2410c !important;
+    background-color: #fff3a3 !important;
+    color: inherit !important;
 }
 
 /* Note Indicator on Text */

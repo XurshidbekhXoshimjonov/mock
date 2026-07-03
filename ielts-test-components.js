@@ -829,9 +829,10 @@ function renderVocabularyText(text, keyPrefix, enableVocabulary, activeVocabular
 
         return h("span", {
             key: `${keyPrefix}-word-${index}`,
-            className: `cbt-vocab-word${activeVocabularyKey === normalized ? " is-selected" : ""}`,
+            className: `cbt-vocab-word translatable-word${activeVocabularyKey === normalized ? " is-selected" : ""}`,
             role: "button",
             tabIndex: 0,
+            "data-word": normalized,
             "data-vocab-word": part,
             "data-vocab-normalized": normalized,
             "aria-label": `Check vocabulary for ${part}`
@@ -846,7 +847,7 @@ function renderVocabularyHtml(html, keyPrefix, enableVocabulary, activeVocabular
 
     const parser = new DOMParser();
     const documentFragment = parser.parseFromString(`<body>${html}</body>`, "text/html");
-    const allowedTags = new Set(["p", "strong", "em", "b", "i", "span", "br", "sup", "sub", "ul", "ol", "li"]);
+    const allowedTags = new Set(["article", "blockquote", "div", "em", "h1", "h2", "h3", "h4", "h5", "h6", "i", "li", "ol", "p", "section", "span", "strong", "b", "br", "sup", "sub", "ul"]);
 
     function renderNode(node, key) {
         if (node.nodeType === 3) {
@@ -986,6 +987,8 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
 
     return h("article", {
         className: `cbt-passage${enableVocabulary ? " has-vocabulary" : ""}`,
+        "data-passage": "true",
+        "data-passage-id": passage.id || `passage-${passageNumber}`,
         onClick: handleVocabularyClick,
         onKeyDown: handleVocabularyKeyDown
     },

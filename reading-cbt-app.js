@@ -27,6 +27,9 @@ const duration = isMockMode
         : 20 * 60;
 const ResultUtils = window.IeltsResultUtils || {};
 const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
+const VOCABULARY_ERROR_MESSAGE = "Translation unavailable. Please try again.";
+const ANONYMOUS_SESSION_KEY = "ieltsx.anonymousSessionId.v1";
+const VOCABULARY_STORAGE_PREFIX = "readingVocabulary";
 
 function fullscreenButtons() {
     return Array.from(document.querySelectorAll("[data-fullscreen-toggle]"));
@@ -189,10 +192,53 @@ function questionTypeInstruction(type) {
     return map[type] || "Complete the questions below.";
 }
 
+function normalizeReadingQuestion(question = {}) {
+    const number = Number(question.number || question.questionNumber || question.question_number || question.no);
+    return {
+        ...question,
+        number: Number.isFinite(number) ? number : question.number
+    };
+}
+
+function questionNumbersFromGroup(group = {}) {
+    const explicitNumbers = firstArray(group.questionNumbers, group.question_numbers, group.numbers);
+    if (explicitNumbers.length) {
+        return explicitNumbers.map(Number).filter(Number.isFinite);
+    }
+
+    const range = group.questionRange || group.range;
+    if (Array.isArray(range) && range.length >= 2) {
+        const start = Number(range[0]);
+        const end = Number(range[1]);
+        if (Number.isFinite(start) && Number.isFinite(end)) {
+            return Array.from({ length: Math.max(0, end - start + 1) }, (_, index) => start + index);
+        }
+    }
+
+    if (range && typeof range === "object") {
+        const start = Number(range.start || range.from || range.first);
+        const end = Number(range.end || range.to || range.last);
+        if (Number.isFinite(start) && Number.isFinite(end)) {
+            return Array.from({ length: Math.max(0, end - start + 1) }, (_, index) => start + index);
+        }
+    }
+
+    if (typeof range === "string") {
+        const matches = range.match(/\d+/g) || [];
+        const start = Number(matches[0]);
+        const end = Number(matches[1] || matches[0]);
+        if (Number.isFinite(start) && Number.isFinite(end)) {
+            return Array.from({ length: Math.max(0, end - start + 1) }, (_, index) => start + index);
+        }
+    }
+
+    return [];
+}
+
 function groupManualQuestions(questions) {
     const groups = [];
 
-    (questions || []).forEach((question) => {
+    (questions || []).map(normalizeReadingQuestion).forEach((question) => {
         const last = groups[groups.length - 1];
         if (!last || last.type !== question.type) {
             groups.push({
@@ -216,13 +262,19 @@ function groupManualQuestions(questions) {
 }
 
 function hydrateGroups(groups, questions) {
-    const byNumber = new Map((questions || []).map((question) => [Number(question.number), question]));
+    const normalizedQuestions = (questions || []).map(normalizeReadingQuestion);
+    const byNumber = new Map(normalizedQuestions.map((question) => [Number(question.number), question]));
     return (groups || []).map((group) => {
-        const embeddedQuestions = Array.isArray(group.questions) ? group.questions : [];
-        const numbers = (group.questionNumbers || []).map(Number);
+        const embeddedQuestions = Array.isArray(group.questions)
+            ? group.questions.map(normalizeReadingQuestion)
+            : [];
+        const numbers = questionNumbersFromGroup(group);
 
         return {
             ...group,
+            questionNumbers: embeddedQuestions.length
+                ? embeddedQuestions.map((question) => question.number)
+                : numbers,
             questions: embeddedQuestions.length
                 ? embeddedQuestions
                 : numbers.map((number) => byNumber.get(number)).filter(Boolean)
@@ -243,6 +295,154 @@ function paragraphsFromText(text) {
             };
         })
         .filter((paragraph) => paragraph.text);
+}
+
+function stripHtmlToText(html) {
+    return String(html || "")
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<\/p>|<\/div>|<\/section>|<\/article>|<\/h[1-6]>|<\/li>/gi, "\n\n")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+\n/g, "\n")
+        .replace(/\n\s+/g, "\n")
+        .replace(/[ \t]{2,}/g, " ")
+        .trim();
+}
+
+function readingPassageObject(source = {}) {
+    const value = source.readingPassage || source.reading_passage || source.passage;
+    return value && typeof value === "object" && !Array.isArray(value) ? value : null;
+}
+
+function readingPassageString(source = {}) {
+    const value = source.readingPassage || source.reading_passage || source.passage;
+    return typeof value === "string" ? value : "";
+}
+
+function passageHtmlFromSource(source = {}) {
+    const nested = readingPassageObject(source);
+    const value = [
+        source.passageHtml,
+        source.readingPassageHtml,
+        source.readingHtml,
+        source.html,
+        source.contentHtml,
+        nested?.passageHtml,
+        nested?.readingPassageHtml,
+        nested?.readingHtml,
+        nested?.html,
+        nested?.contentHtml
+    ].find((item) => typeof item === "string" && item.trim()) || "";
+    if (value) return String(value);
+    const content = String([
+        source.content,
+        nested?.content,
+        readingPassageString(source)
+    ].find((item) => typeof item === "string" && item.trim()) || "").trim();
+    return /<\w+[\s>]/.test(content) ? content : "";
+}
+
+function passageTextFromSource(source = {}) {
+    const nested = readingPassageObject(source);
+    const value = [
+        source.passageText,
+        source.readingText,
+        source.passage,
+        source.text,
+        source.content,
+        nested?.passageText,
+        nested?.readingText,
+        nested?.passage,
+        nested?.text,
+        nested?.content,
+        readingPassageString(source)
+    ].find((item) => typeof item === "string" && item.trim()) || "";
+    if (value && !/<\w+[\s>]/.test(String(value))) {
+        return String(value);
+    }
+    return stripHtmlToText(value || passageHtmlFromSource(source));
+}
+
+function passageParagraphsFromSource(source = {}) {
+    const nested = readingPassageObject(source);
+    const paragraphs = Array.isArray(source.paragraphs) && source.paragraphs.length
+        ? source.paragraphs
+        : (Array.isArray(nested?.paragraphs) && nested.paragraphs.length ? nested.paragraphs : null);
+
+    if (paragraphs) {
+        return paragraphs;
+    }
+
+    const html = passageHtmlFromSource(source);
+    const text = passageTextFromSource(source);
+
+    return html
+        ? [{ letter: null, html, text }]
+        : paragraphsFromText(text);
+}
+
+function firstArray(...values) {
+    return values.find((value) => Array.isArray(value) && value.length) || [];
+}
+
+function questionGroupsFromSource(source = {}, fallbackGroups = [], fallbackQuestions = []) {
+    const nested = readingPassageObject(source) || {};
+    const questionSource = firstArray(source.questions, nested.questions, fallbackQuestions)
+        .map(normalizeReadingQuestion);
+    const groupSource = firstArray(
+        source.questionGroups,
+        source.groups,
+        source.question_sections,
+        source.questionSections,
+        nested.questionGroups,
+        nested.groups
+    );
+
+    if (groupSource.length) {
+        return hydrateGroups(groupSource, questionSource);
+    }
+
+    if (questionSource.length) {
+        return groupManualQuestions(questionSource);
+    }
+
+    return fallbackGroups;
+}
+
+function flatQuestionsFromGroups(groups = []) {
+    return groups.flatMap((group) => group.questions || []);
+}
+
+function isUsableReadingPassage(passage) {
+    const hasText = Boolean(String(passage?.passageText || passage?.text || "").trim());
+    const hasParagraphs = (passage?.paragraphs || []).some((paragraph) =>
+        String(paragraph?.text || paragraph?.html || "").trim()
+    );
+    const hasGroups = (passage?.questionGroups || []).some((group) =>
+        (group.questions || []).length || (group.questionNumbers || []).length || (group.questionRange || []).length
+    );
+    const hasQuestions = (passage?.questions || []).length > 0;
+
+    return hasText || hasParagraphs || hasGroups || hasQuestions;
+}
+
+function normalizeGenericReadingPassage(source = {}, index = 0, fallbackGroups = [], fallbackQuestions = []) {
+    const number = Number(source.number || source.part || source.section || index + 1) || index + 1;
+    const text = passageTextFromSource(source);
+    const groups = questionGroupsFromSource(source, fallbackGroups, fallbackQuestions);
+    const questions = flatQuestionsFromGroups(groups);
+
+    return {
+        id: source.id || source.passageId || `reading-passage-${number}`,
+        number,
+        title: source.title || source.passageTitle || source.name || `Reading Passage ${number}`,
+        displayLabel: source.displayLabel || `Reading Passage ${number}`,
+        text,
+        passageText: text,
+        paragraphs: passageParagraphsFromSource(source),
+        vocabulary: normalizeVocabularyEntries(source.vocabulary),
+        questions,
+        questionGroups: groups
+    };
 }
 
 function splitFullManualPassages(test, groups) {
@@ -340,75 +540,191 @@ function splitDelimitedFullManualPassages(test, groups) {
     }).filter((passage) => passage.passageText || passage.questionGroups.length);
 }
 
-function normalizeManualTest(test) {
-    const passageNumber = Number(test.part) || 1;
-    const passageText = test.passage || test.passageText || "";
-    const passageHtml = test.passageHtml || test.readingHtml || "";
-    const paragraphs = passageHtml
-        ? [{
-            letter: null,
-            html: passageHtml,
-            text: passageText
-        }]
-        : paragraphsFromText(passageText);
-    const groups = test.questionGroups?.length
-        ? hydrateGroups(test.questionGroups, test.questions)
-        : groupManualQuestions(test.questions);
-    const fullManualPassages = test.part === "full"
-        ? (splitFullManualPassages(test, groups) || splitDelimitedFullManualPassages(test, groups))
-        : null;
-    const richManualPassages = test.part === "full" && Array.isArray(test.richPassages) && test.richPassages.length
-        ? test.richPassages.map((richPassage, index) => {
-            const ranges = [[1, 13], [14, 26], [27, 40]];
-            const [firstQuestion, lastQuestion] = ranges[index] || [1, 40];
-            const questionGroups = groups
-                .map((group) => {
-                    const questions = (group.questions || []).filter((question) => {
-                        const number = Number(question.number);
-                        return number >= firstQuestion && number <= lastQuestion;
-                    });
+function collectArrayValues(...values) {
+    return values.flatMap((value) => Array.isArray(value) ? value : []);
+}
 
-                    return {
-                        ...group,
-                        questionNumbers: questions.map((question) => question.number),
-                        questions
-                    };
-                })
-                .filter((group) => group.questions.length);
+function readingPassageSourcesFrom(source = {}) {
+    const nested = readingPassageObject(source) || {};
+    return collectArrayValues(
+        source.passages,
+        source.readingPassages,
+        source.reading_passages,
+        source.sections,
+        source.parts,
+        nested.passages,
+        nested.readingPassages,
+        nested.reading_passages,
+        nested.sections,
+        nested.parts
+    );
+}
 
-            return {
-                id: richPassage.id || `${test.id}-rich-passage-${index + 1}`,
-                number: Number(richPassage.number) || index + 1,
-                title: richPassage.title || `Reading Passage ${index + 1}`,
-                displayLabel: richPassage.displayLabel || `Reading Passage ${index + 1}`,
-                passageText: richPassage.passageText || "",
-                paragraphs: Array.isArray(richPassage.paragraphs) && richPassage.paragraphs.length
-                    ? richPassage.paragraphs
-                    : [{
-                        letter: null,
-                        html: richPassage.html || "",
-                        text: richPassage.passageText || ""
-                    }],
-                questionGroups
-            };
+function hasReadingPassageContent(passage) {
+    const hasText = Boolean(String(passage?.passageText || passage?.text || "").trim());
+    const hasParagraphs = (passage?.paragraphs || []).some((paragraph) =>
+        String(paragraph?.text || paragraph?.html || "").trim()
+    );
+
+    return hasText || hasParagraphs;
+}
+
+function fallbackGroupsForPassage(groups, index, total) {
+    if (!groups.length) {
+        return [];
+    }
+
+    if (total > 1) {
+        const ranges = [[1, 13], [14, 26], [27, 40]];
+        const [firstQuestion, lastQuestion] = ranges[index] || [1, 40];
+        return questionGroupsForRange(groups, firstQuestion, lastQuestion);
+    }
+
+    return groups;
+}
+
+function normalizePassageList(sources = [], topGroups = [], topQuestions = []) {
+    return sources
+        .map((item, index) => {
+            const ownGroups = questionGroupsFromSource(item, [], topQuestions);
+            const groups = ownGroups.length
+                ? ownGroups
+                : fallbackGroupsForPassage(topGroups, index, sources.length);
+            return normalizeGenericReadingPassage({
+                ...item,
+                questionGroups: groups,
+                questions: firstArray(item.questions, flatQuestionsFromGroups(groups))
+            }, index, groups, topQuestions);
         })
-        : null;
+        .filter(isUsableReadingPassage);
+}
 
-    return {
-        id: test.id,
-        title: test.title || "IELTS Academic Reading",
-        part: test.part,
-        images: test.images || [],
-        vocabulary: test.part === "full" ? [] : normalizeVocabularyEntries(test.vocabulary),
-        passages: richManualPassages || fullManualPassages || [{
-            id: `${test.id}-passage-${passageNumber}`,
-            number: passageNumber,
-            title: test.title || `Reading Passage ${passageNumber}`,
+function normalizeRichReadingPassages(source = {}, topGroups = [], topQuestions = []) {
+    if (!Array.isArray(source.richPassages) || !source.richPassages.length) {
+        return [];
+    }
+
+    return source.richPassages
+        .map((richPassage, index) => {
+            const ownGroups = questionGroupsFromSource(richPassage, [], topQuestions);
+            const groups = ownGroups.length
+                ? ownGroups
+                : fallbackGroupsForPassage(topGroups, index, source.richPassages.length);
+
+            return normalizeGenericReadingPassage({
+                ...richPassage,
+                id: richPassage.id || `${source.id || "reading"}-rich-passage-${index + 1}`,
+                number: Number(richPassage.number) || index + 1,
+                title: richPassage.title || richPassage.passageTitle || `Reading Passage ${index + 1}`,
+                displayLabel: richPassage.displayLabel || `Reading Passage ${index + 1}`,
+                questionGroups: groups,
+                questions: firstArray(richPassage.questions, flatQuestionsFromGroups(groups))
+            }, index, groups, topQuestions);
+        })
+        .filter(isUsableReadingPassage);
+}
+
+function firstReadingPassageList(...lists) {
+    const candidates = lists
+        .map((list) => (Array.isArray(list) ? list.filter(isUsableReadingPassage) : []))
+        .filter((list) => list.length);
+    const withContent = candidates.find((list) => list.some(hasReadingPassageContent));
+
+    return withContent || candidates[0] || [];
+}
+
+function looksLikeFullReading(source = {}, topQuestions = [], structuredPassages = []) {
+    const text = String(source.passage || source.passageText || readingPassageString(source) || "");
+    return String(source.part) === "full"
+        || structuredPassages.length > 1
+        || topQuestions.some((question) => Number(question.number) > 26)
+        || /READING PASSAGE\s+\d+/i.test(text)
+        || (Array.isArray(source.passageTitles) && source.passageTitles.length > 1)
+        || (Array.isArray(source.partTitles) && source.partTitles.length > 1);
+}
+
+function finalizeReadingPassages(passages = [], testId = "reading") {
+    return passages.map((passage, index) => {
+        const number = Number(passage.number || passage.part || index + 1) || index + 1;
+        const passageText = String(passage.passageText || passage.text || "").trim();
+        const paragraphs = Array.isArray(passage.paragraphs) && passage.paragraphs.length
+            ? passage.paragraphs
+            : paragraphsFromText(passageText);
+        const questionGroups = (passage.questionGroups || []).map((group) => {
+            const questions = (group.questions || []).map(normalizeReadingQuestion);
+            return {
+                ...group,
+                questionNumbers: questions.length
+                    ? questions.map((question) => question.number)
+                    : questionNumbersFromGroup(group),
+                questions
+            };
+        });
+        const questions = passage.questions?.length
+            ? passage.questions.map(normalizeReadingQuestion)
+            : flatQuestionsFromGroups(questionGroups);
+
+        return {
+            ...passage,
+            id: passage.id || `${testId}-passage-${number}`,
+            number,
+            title: passage.title || passage.passageTitle || `Reading Passage ${number}`,
+            displayLabel: passage.displayLabel || `Reading Passage ${number}`,
+            text: passageText,
             passageText,
             paragraphs,
-            questionGroups: groups
-        }]
+            questions,
+            questionGroups
+        };
+    });
+}
+
+function normalizeReadingTest(test = {}, options = {}) {
+    const readingSource = test.reading && typeof test.reading === "object" && !Array.isArray(test.reading)
+        ? test.reading
+        : {};
+    const source = Object.keys(readingSource).length
+        ? { ...test, ...readingSource }
+        : test;
+    const topQuestions = firstArray(source.questions, test.questions).map(normalizeReadingQuestion);
+    const topGroups = questionGroupsFromSource(source, [], topQuestions);
+    const allTopQuestions = topQuestions.length ? topQuestions : flatQuestionsFromGroups(topGroups);
+    const structuredPassages = normalizePassageList(readingPassageSourcesFrom(source), topGroups, allTopQuestions);
+    const richPassages = normalizeRichReadingPassages(source, topGroups, allTopQuestions);
+    const isFullReading = options.fullTest || looksLikeFullReading(source, allTopQuestions, structuredPassages);
+    const fullManualPassages = isFullReading
+        ? (splitFullManualPassages(source, topGroups) || splitDelimitedFullManualPassages(source, topGroups) || [])
+        : [];
+    const passageNumber = Number(source.part) || Number(source.number) || 1;
+    const fallbackPassage = normalizeGenericReadingPassage({
+        ...source,
+        id: source.id ? `${source.id}-passage-${passageNumber}` : undefined,
+        number: passageNumber,
+        title: source.passageTitle || source.title || `Reading Passage ${passageNumber}`,
+        displayLabel: `Reading Passage ${passageNumber}`,
+        questionGroups: topGroups,
+        questions: allTopQuestions
+    }, passageNumber - 1, topGroups, allTopQuestions);
+    const passages = firstReadingPassageList(
+        richPassages,
+        structuredPassages,
+        fullManualPassages,
+        [fallbackPassage]
+    );
+    const normalizedPassages = finalizeReadingPassages(passages, test.id || source.id || "reading");
+
+    return {
+        id: test.id || source.id,
+        title: test.title || source.title || "IELTS Academic Reading",
+        part: source.part || test.part || (normalizedPassages.length > 1 ? "full" : passageNumber),
+        images: test.images || source.images || [],
+        vocabulary: normalizeVocabularyEntries(test.vocabulary || source.vocabulary),
+        passages: normalizedPassages
     };
+}
+
+function normalizeManualTest(test) {
+    return normalizeReadingTest(test);
 }
 
 function normalizeFullTest(test) {
@@ -433,57 +749,7 @@ function normalizeFullTest(test) {
         };
     }
 
-    let passages = test.reading?.passages || [];
-    const hasReadingQuestions = collectQuestions(passages).length > 0;
-
-    if (!hasReadingQuestions) {
-        const recoveredGroups = (test.listening?.sections || [])
-            .flatMap((section) => section.questionGroups || []);
-        const recoveredQuestions = recoveredGroups.flatMap((group) => group.questions || []);
-
-        if (recoveredQuestions.length) {
-            const ranges = recoveredQuestions.some((question) => Number(question.number) > 26)
-                ? [[1, 13], [14, 26], [27, 40]]
-                : [[1, 13]];
-            const firstPassage = passages[0] || {};
-
-            passages = ranges.map(([start, end], index) => ({
-                ...(index === 0 ? firstPassage : {}),
-                number: index + 1,
-                title: index === 0
-                    ? (firstPassage.title || firstPassage.passageTitle || `Reading Passage ${index + 1}`)
-                    : `Reading Passage ${index + 1}`,
-                passageText: index === 0
-                    ? (firstPassage.passageText || "")
-                    : "Passage text was not available in the parsed upload.",
-                paragraphs: index === 0 && firstPassage.paragraphs?.length
-                    ? firstPassage.paragraphs
-                    : [{
-                        letter: null,
-                        html: "",
-                        text: index === 0
-                            ? (firstPassage.passageText || "Passage text was not available in the parsed upload.")
-                            : "Passage text was not available in the parsed upload."
-                    }],
-                questionGroups: recoveredGroups
-                    .map((group) => ({
-                        ...group,
-                        questions: (group.questions || []).filter((question) => {
-                            const number = Number(question.number);
-                            return number >= start && number <= end;
-                        })
-                    }))
-                    .filter((group) => group.questions.length)
-            })).filter((passage) => passage.questionGroups.length || passage.passageText);
-        }
-    }
-
-    return {
-        id: test.id,
-        title: test.title || "IELTS Academic Reading",
-        images: test.images || [],
-        passages
-    };
+    return normalizeReadingTest(test, { fullTest: true });
 }
 
 function collectQuestions(passages) {
@@ -1242,11 +1508,96 @@ function normalizeVocabularyLookupRecord(data, fallback) {
     };
 }
 
+function safeStoragePart(value, fallback = "unknown") {
+    const cleaned = String(value || "")
+        .trim()
+        .replace(/[^a-zA-Z0-9_.:-]/g, "-")
+        .slice(0, 160);
+    return cleaned || fallback;
+}
+
+function readStoredAuthUser() {
+    try {
+        if (window.authClient?.getAuthState) {
+            return window.authClient.getAuthState()?.user || null;
+        }
+
+        const raw = localStorage.getItem("ieltsmock.auth") || localStorage.getItem("ieltsAuth");
+        const auth = raw ? JSON.parse(raw) : null;
+        return auth?.user || null;
+    } catch {
+        return null;
+    }
+}
+
+function getAnonymousSessionId() {
+    try {
+        let sessionId = localStorage.getItem(ANONYMOUS_SESSION_KEY);
+        if (!sessionId) {
+            sessionId = `anon-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+            localStorage.setItem(ANONYMOUS_SESSION_KEY, sessionId);
+        }
+        return safeStoragePart(sessionId, "anonymous");
+    } catch {
+        return "anonymous";
+    }
+}
+
+function getReadingOwnerScope() {
+    const user = readStoredAuthUser();
+    const userId = safeStoragePart(user?.id || user?._id || user?.memberId || "");
+
+    if (userId !== "unknown") {
+        return {
+            ownerType: "user",
+            ownerId: userId,
+            ownerKey: `user:${userId}`
+        };
+    }
+
+    const sessionId = getAnonymousSessionId();
+    return {
+        ownerType: "session",
+        ownerId: sessionId,
+        ownerKey: `session:${sessionId}`
+    };
+}
+
+function readingVocabularyStorageKey(testIdValue, passageIdValue) {
+    const owner = getReadingOwnerScope();
+    return `${VOCABULARY_STORAGE_PREFIX}:${owner.ownerKey}:${safeStoragePart(testIdValue || testId || "practice")}:${safeStoragePart(passageIdValue || "passage")}`;
+}
+
+function readStoredVocabularyCache(testIdValue, passageIdValue) {
+    try {
+        return JSON.parse(localStorage.getItem(readingVocabularyStorageKey(testIdValue, passageIdValue)) || "{}") || {};
+    } catch {
+        return {};
+    }
+}
+
+function getStoredVocabularyRecord(normalizedWord, testIdValue, passageIdValue) {
+    const cache = readStoredVocabularyCache(testIdValue, passageIdValue);
+    return cache[normalizedWord] || null;
+}
+
+function setStoredVocabularyRecord(normalizedWord, record, testIdValue, passageIdValue) {
+    try {
+        const cache = readStoredVocabularyCache(testIdValue, passageIdValue);
+        cache[normalizedWord] = {
+            ...record,
+            cachedAt: new Date().toISOString()
+        };
+        localStorage.setItem(readingVocabularyStorageKey(testIdValue, passageIdValue), JSON.stringify(cache));
+    } catch {}
+}
+
 function makeAttemptId(id) {
-    const key = `ieltsx_current_attempt_reading_${id}`;
+    const owner = getReadingOwnerScope();
+    const key = `ieltsx_current_attempt_reading_${owner.ownerKey}_${safeStoragePart(id || "practice")}`;
     let attemptId = sessionStorage.getItem(key);
     if (!attemptId) {
-        attemptId = `reading-${String(id || "practice")}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+        attemptId = `reading-${safeStoragePart(owner.ownerKey)}-${safeStoragePart(id || "practice")}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
         sessionStorage.setItem(key, attemptId);
     }
     return attemptId;
@@ -1922,12 +2273,23 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = skill === "reading" && !isFullTest;
+    const enableVocabulary = skill === "reading";
     const canUseVocabulary = enableVocabulary && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
         collectQuestions(passage ? [passage] : []), [passage]
     );
+
+    useEffect(() => {
+        if (skill !== "reading") return undefined;
+        const timer = window.setTimeout(() => {
+            console.log("Reading translation initialized");
+            if (typeof window.initializeReadingTranslation === "function") {
+                window.initializeReadingTranslation();
+            }
+        }, 0);
+        return () => window.clearTimeout(timer);
+    }, [skill, test?.id, activeIndex, hasStarted]);
 
     useEffect(() => {
         if (!isFullTest) return undefined;
@@ -2021,15 +2383,25 @@ function ReadingApp() {
     }
 
     function vocabularyCacheKey(passageId, normalizedWord) {
-        return `${passageId || "passage"}:${normalizedWord}`;
+        const owner = getReadingOwnerScope();
+        return `${owner.ownerKey}:${test?.id || testId || "practice"}:${passageId || "passage"}:${normalizedWord}`;
     }
 
     async function lookupVocabulary(baseRecord) {
         const key = vocabularyCacheKey(baseRecord.passageId, baseRecord.normalized);
+        const owner = getReadingOwnerScope();
+        const lookupTestId = test?.id || testId || "";
         const cached = vocabularyCacheRef.current.get(key);
 
         if (cached) {
             return cached;
+        }
+
+        const stored = getStoredVocabularyRecord(baseRecord.normalized, lookupTestId, baseRecord.passageId);
+        if (stored) {
+            const record = normalizeVocabularyLookupRecord(stored, baseRecord);
+            vocabularyCacheRef.current.set(key, record);
+            return record;
         }
 
         const pending = vocabularyRequestsRef.current.get(key);
@@ -2041,8 +2413,10 @@ function ReadingApp() {
             word: baseRecord.word,
             normalized: baseRecord.normalized,
             passageId: baseRecord.passageId,
-            testId: test?.id || testId || "",
-            attemptId: baseRecord.attemptId
+            testId: lookupTestId,
+            attemptId: baseRecord.attemptId,
+            ownerType: owner.ownerType,
+            sessionId: owner.ownerType === "session" ? owner.ownerId : ""
         });
         const request = fetch(`/api/vocabulary/lookup?${query.toString()}`)
             .then(async (response) => {
@@ -2052,7 +2426,9 @@ function ReadingApp() {
                 }
 
                 const record = normalizeVocabularyLookupRecord(data, baseRecord);
+                console.log("Translation API response received", record);
                 vocabularyCacheRef.current.set(key, record);
+                setStoredVocabularyRecord(baseRecord.normalized, record, lookupTestId, baseRecord.passageId);
                 return record;
             })
             .finally(() => {
@@ -2074,6 +2450,8 @@ function ReadingApp() {
         if (!clickedWord || !normalizedWord) {
             return;
         }
+
+        console.log(`Word clicked: ${normalizedWord}`);
 
         const rect = target.getBoundingClientRect();
         const targetRect = {
@@ -2144,11 +2522,12 @@ function ReadingApp() {
                         : current
                 ));
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error(error);
                 const fallbackRecord = {
                     ...baseRecord,
-                    definition: "Definition is not available yet.",
-                    uzbekTranslation: "Uzbek translation is not available yet.",
+                    definition: VOCABULARY_ERROR_MESSAGE,
+                    uzbekTranslation: VOCABULARY_ERROR_MESSAGE,
                     isLoading: false,
                     isAvailable: false
                 };
@@ -2225,7 +2604,7 @@ function ReadingApp() {
     if (!test) {
         return h("main", { className: "cbt-status" }, h("p", null, `Loading IELTS ${skill === "listening" ? "Listening" : "Reading"} test...`));
     }
-    if (!passage) {
+    if (!passages.length) {
         return h("main", { className: "cbt-status" },
             h("h1", null, skill === "listening" ? "No listening section found" : "No reading passage found"),
             h("p", null, skill === "listening"

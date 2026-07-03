@@ -1001,16 +1001,47 @@ function findReadingTestForVocabulary(testId, passageId) {
     return test;
 }
 
-function saveClickedVocabulary({ attemptId, passageId, record, requestedWord }) {
+function cleanPrivacyScopeId(value, fallback = "") {
+    const cleaned = String(value || "")
+        .trim()
+        .replace(/[^a-zA-Z0-9_.:-]/g, "-")
+        .slice(0, 160);
+    return cleaned || fallback;
+}
+
+function vocabularyOwnerFromRequest(req) {
+    const userId = cleanPrivacyScopeId(req.user?.id || req.user?._id || req.user?.memberId || "");
+
+    if (userId) {
+        return {
+            ownerType: "user",
+            ownerId: userId
+        };
+    }
+
+    const sessionId = cleanPrivacyScopeId(req.query.sessionId || req.body?.sessionId || "");
+    return {
+        ownerType: "session",
+        ownerId: sessionId
+    };
+}
+
+function saveClickedVocabulary({ ownerType, ownerId, testId, attemptId, passageId, record, requestedWord }) {
     const normalized = normalizeVocabularyRecord(record);
+    const ownerScopeType = ownerType === "user" ? "user" : "session";
+    const ownerScopeId = cleanPrivacyScopeId(ownerId || "");
+    const safeTestId = cleanPrivacyScopeId(testId || "");
     const attempt = String(attemptId || "").trim();
 
-    if (!attempt || !normalized) {
+    if (!ownerScopeId || !attempt || !normalized) {
         return false;
     }
 
     const clicks = readJsonArray(READING_VOCABULARY_CLICKS_FILE);
     const alreadySaved = clicks.some((item) => (
+        item.owner_type === ownerScopeType &&
+        item.owner_id === ownerScopeId &&
+        item.test_id === safeTestId &&
         item.attempt_id === attempt &&
         item.passage_id === passageId &&
         item.normalized_word === normalized.normalized_word
@@ -1022,6 +1053,9 @@ function saveClickedVocabulary({ attemptId, passageId, record, requestedWord }) 
 
     clicks.push({
         id: `${Date.now()}-${normalized.normalized_word}-${Math.random().toString(16).slice(2, 8)}`,
+        owner_type: ownerScopeType,
+        owner_id: ownerScopeId,
+        test_id: safeTestId,
         attempt_id: attempt,
         passage_id: passageId,
         word: requestedWord || normalized.word,
@@ -4721,26 +4755,14 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
         const testId = String(req.query.testId || "").trim();
         const passageIdFromQuery = String(req.query.passageId || "").trim();
         const attemptId = String(req.query.attemptId || "").trim();
+        const owner = vocabularyOwnerFromRequest(req);
 
         if (!requestedWord || !normalized) {
             return res.status(400).json({ error: "A valid word is required" });
         }
 
-        if (String(testId).includes("-full")) {
-            return res.status(403).json({
-                error: "Vocabulary lookup is not allowed in Full Tests"
-            });
-        }
-
         const test = findReadingTestForVocabulary(testId, passageIdFromQuery);
-
-        if (!test || String(test.id).includes("-full")) {
-            return res.status(403).json({
-                error: "Vocabulary lookup is not allowed in Full Tests"
-            });
-        }
-
-        const passageId = passageIdFromQuery || `${test.id}-passage-${test.part || 1}`;
+        const passageId = passageIdFromQuery || (test ? `${test.id}-passage-${test.part || 1}` : "reading-passage");
         const candidates = vocabularyCandidates(normalized);
         let record = findManualVocabulary(test, candidates, passageId) || findCachedVocabulary(candidates);
 
@@ -4761,6 +4783,9 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
         record = await refreshFallbackTranslation(record, requestedWord);
 
         saveClickedVocabulary({
+            ownerType: owner.ownerType,
+            ownerId: owner.ownerId,
+            testId,
             attemptId,
             passageId,
             record,
@@ -4780,13 +4805,23 @@ app.get("/api/vocabulary/lookup", async (req, res) => {
 
 app.get("/api/vocabulary/clicked", (req, res) => {
     const attemptId = String(req.query.attemptId || "").trim();
+    const testId = cleanPrivacyScopeId(req.query.testId || "");
+    const owner = vocabularyOwnerFromRequest(req);
 
     if (!attemptId) {
         return res.status(400).json({ error: "attemptId is required" });
     }
+    if (!owner.ownerId) {
+        return res.status(400).json({ error: "sessionId is required for anonymous vocabulary history" });
+    }
 
     const words = readJsonArray(READING_VOCABULARY_CLICKS_FILE)
-        .filter((item) => item.attempt_id === attemptId)
+        .filter((item) => (
+            item.owner_type === owner.ownerType &&
+            item.owner_id === owner.ownerId &&
+            item.attempt_id === attemptId &&
+            (!testId || item.test_id === testId)
+        ))
         .sort((a, b) => new Date(a.clicked_at) - new Date(b.clicked_at));
 
     res.json(words);

@@ -788,7 +788,7 @@
     </style>
 </head>
 
-<body class="cbt-body antialiased" data-skip-global-navbar>
+<body class="cbt-body antialiased" data-writing-mode="standalone-writing" data-skip-global-navbar>
     <script>
         const hasWritingPromptId = Boolean(new URLSearchParams(window.location.search).get('id'));
         document.body.classList.toggle('writing-player-mode', hasWritingPromptId);
@@ -822,7 +822,6 @@
                 Dashboard
             </a>
             <button class="cbt-button cbt-button--fullscreen fullscreen-toggle-btn" type="button" data-fullscreen-toggle aria-pressed="false">Full Screen</button>
-            <button class="cbt-button cbt-button--submit" id="headerSubmitBtn" type="button" onclick="submitEssay()">Submit</button>
         </div>
     </header>
 
@@ -1336,7 +1335,7 @@
         }
 
         function setSubmitLoading(isLoading) {
-            document.querySelectorAll('#submitBtn, #headerSubmitBtn').forEach(button => {
+            document.querySelectorAll('#submitBtn').forEach(button => {
                 if (!button.dataset.defaultHtml) {
                     button.dataset.defaultHtml = button.innerHTML;
                 }
