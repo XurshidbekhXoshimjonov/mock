@@ -618,6 +618,10 @@
             color: #0b5fff;
         }
 
+        .ielts-navbar__mobile-menu {
+            display: contents;
+        }
+
         .ielts-navbar__auth {
             display: flex;
             align-items: center;
@@ -977,81 +981,134 @@
             }
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
+            html,
+            body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
             .ielts-navbar {
-                grid-template-columns: auto minmax(0, 1fr) auto;
-                gap: 10px;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 12px;
                 min-height: 72px;
-                padding-inline: 14px;
+                padding: 10px 14px;
+                overflow: visible;
             }
 
             .ielts-navbar__brand {
                 grid-column: 1;
+                min-width: 0;
             }
 
             .ielts-navbar__logo {
-                width: 132px;
+                width: min(150px, 44vw);
+                max-width: 150px;
+                height: auto;
             }
 
             .ielts-navbar__menu-toggle {
-                display: inline-flex;
+                display: flex;
                 grid-column: 2;
+                min-width: 44px;
+                width: 44px;
+                height: 44px;
             }
 
-            .ielts-navbar__auth {
-                grid-column: 3;
-                gap: 8px;
-            }
-
-            .ielts-navbar__button {
-                min-height: 38px;
-                padding-inline: 12px;
-                font-size: 13px;
-            }
-
-            .ielts-navbar__links {
+            .ielts-navbar__mobile-menu {
                 position: absolute;
-                top: calc(100% + 8px);
+                top: 100%;
                 right: 14px;
                 left: 14px;
                 z-index: 110;
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 6px;
+                display: none;
+                flex-direction: column;
+                gap: 10px;
                 width: auto;
                 margin: 0;
-                padding: 10px;
+                padding: 12px;
                 border: 1px solid #e5e7eb;
-                border-radius: 18px;
+                border-radius: 16px;
                 background: #ffffff;
                 box-shadow: 0 22px 48px rgba(7, 21, 71, 0.16);
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translateY(-6px);
-                transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+                overflow: hidden;
             }
 
-            .ielts-navbar.is-menu-open .ielts-navbar__links {
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                transform: translateY(0);
+            .ielts-navbar.is-menu-open .ielts-navbar__mobile-menu,
+            .ielts-navbar__mobile-menu.active {
+                display: flex;
+            }
+
+            .ielts-navbar__links {
+                position: static;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 6px;
+                width: 100%;
+                margin: 0;
             }
 
             .ielts-navbar__links a {
                 width: 100%;
-                padding: 12px 14px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 14px;
                 text-align: center;
+            }
+
+            .ielts-navbar__auth {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 8px;
+                padding-top: 10px;
+                border-top: 1px solid #e5e7eb;
+            }
+
+            .ielts-navbar__button {
+                width: 100%;
+                min-height: 44px;
+                padding: 0 14px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+
+            .ielts-theme-toggle {
+                width: 100%;
+                min-width: 0;
+                min-height: 44px;
+                height: auto;
+                margin: 0;
+                justify-content: flex-start;
+                gap: 10px;
+                padding: 0 14px;
+                border-radius: 12px;
+            }
+
+            .ielts-theme-toggle::after {
+                content: "Theme";
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .ielts-account,
+            .ielts-account__trigger {
+                width: 100%;
             }
 
             .ielts-account__trigger {
                 height: 44px;
                 min-width: 0;
-                width: 44px;
-                max-width: 44px;
-                gap: 0;
-                padding: 4px;
+                max-width: none;
+                justify-content: flex-start;
+                gap: 10px;
+                padding: 4px 10px;
                 background: #f1f6ff;
                 box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
             }
@@ -1065,12 +1122,21 @@
 
             .ielts-account__name,
             .ielts-account__chevron {
-                display: none;
+                display: inline-flex;
             }
 
             .ielts-account__dropdown {
-                right: -2px;
-                width: min(214px, calc(100vw - 28px));
+                position: static;
+                display: grid;
+                width: 100%;
+                min-width: 0;
+                margin-top: 8px;
+                border-radius: 12px;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: none;
             }
         }
 
@@ -1165,8 +1231,8 @@
             .signup-btn,
             .ielts-navbar__button--login,
             .ielts-navbar__button--signup {
-                height: 38px;
-                min-height: 38px;
+                height: auto;
+                min-height: 44px;
                 padding: 0 14px;
                 font-size: 14px;
                 border-radius: 12px;
@@ -1198,8 +1264,8 @@
 
             .signup-btn,
             .ielts-navbar__button--signup {
-                height: 36px;
-                min-height: 36px;
+                height: auto;
+                min-height: 44px;
                 padding: 0 12px;
                 font-size: 13px;
             }
@@ -1216,7 +1282,46 @@
 
             .ielts-navbar__menu-toggle,
             .ielts-theme-toggle {
-                flex-basis: 36px;
+                flex-basis: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ielts-navbar__menu-toggle {
+                width: 44px;
+                min-width: 44px;
+                height: 44px;
+            }
+
+            .ielts-navbar__mobile-menu .ielts-account {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .ielts-navbar__mobile-menu .ielts-account__dropdown {
+                position: static;
+                display: grid;
+                gap: 8px;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+                margin-top: 8px;
+                padding: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+                transform: none;
+            }
+
+            .ielts-navbar__mobile-menu .ielts-theme-toggle,
+            .ielts-navbar__mobile-menu .ielts-navbar__button,
+            .ielts-navbar__mobile-menu .ielts-account__trigger,
+            .ielts-navbar__mobile-menu .ielts-account__link,
+            .ielts-navbar__mobile-menu .ielts-account__logout {
+                width: 100%;
+                min-height: 44px;
             }
         }
 
@@ -1434,27 +1539,17 @@
 
     function bindMobileMenu(host) {
         const toggle = host.querySelector("#ieltsNavbarMenuToggle");
+        const menu = host.querySelector("#ieltsNavbarMobileMenu");
         const links = host.querySelector("#ieltsNavbarLinks");
 
-        if (!toggle || !links) {
+        if (!toggle || !menu || !links) {
             return;
         }
 
         const setOpen = (isOpen) => {
             host.classList.toggle("is-menu-open", isOpen);
+            menu.classList.toggle("active", isOpen);
             toggle.setAttribute("aria-expanded", String(isOpen));
-
-            if (isOpen && window.innerWidth < 768) {
-                links.style.opacity = "1";
-                links.style.visibility = "visible";
-                links.style.pointerEvents = "auto";
-                links.style.transform = "translateY(0)";
-            } else {
-                links.style.removeProperty("opacity");
-                links.style.removeProperty("visibility");
-                links.style.removeProperty("pointer-events");
-                links.style.removeProperty("transform");
-            }
         };
 
         toggle.addEventListener("click", (event) => {
@@ -1462,12 +1557,12 @@
             setOpen(!host.classList.contains("is-menu-open"));
         });
 
-        links.querySelectorAll("a").forEach((link) => {
+        menu.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => setOpen(false));
         });
 
         window.addEventListener("resize", () => {
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth > 768) {
                 setOpen(false);
             }
         });
@@ -1492,6 +1587,7 @@
     function closeOpenMenus() {
         document.querySelectorAll(".ielts-navbar.is-menu-open").forEach((navbar) => {
             navbar.classList.remove("is-menu-open");
+            navbar.querySelector(".ielts-navbar__mobile-menu")?.classList.remove("active");
             navbar.querySelector(".ielts-navbar__menu-toggle")?.setAttribute("aria-expanded", "false");
         });
     }
@@ -1608,20 +1704,22 @@
                     <path d="M 818 194 L 816 196 L 816 200 L 821 203 L 825 200 L 824 195 Z M 887 157 L 887 202 L 897 202 L 897 191 L 899 189 L 905 189 L 909 193 L 914 202 L 924 202 L 924 200 L 917 190 L 917 188 L 923 182 L 925 177 L 925 170 L 922 163 L 914 158 L 909 157 Z M 897 167 L 899 165 L 909 165 L 914 169 L 915 176 L 910 181 L 897 180 Z M 948 157 L 941 160 L 933 170 L 931 178 L 933 190 L 938 197 L 950 203 L 960 203 L 971 199 L 972 180 L 963 180 L 963 192 L 961 194 L 955 195 L 949 193 L 944 189 L 942 185 L 942 174 L 949 166 L 959 165 L 968 169 L 972 165 L 972 163 L 969 160 L 958 156 Z M 843 159 L 835 166 L 831 177 L 831 184 L 835 194 L 842 200 L 850 203 L 859 203 L 866 201 L 873 196 L 878 186 L 878 173 L 875 167 L 871 162 L 861 157 L 855 156 Z M 851 165 L 861 166 L 868 175 L 867 187 L 863 192 L 857 195 L 848 193 L 844 189 L 841 182 L 843 172 Z M 698 157 L 734 202 L 806 202 L 736 118 L 725 126 L 711 140 Z M 296 49 L 296 83 L 335 84 L 335 204 L 373 204 L 374 83 L 406 82 L 412 83 L 413 49 Z M 207 49 L 207 204 L 309 204 L 309 171 L 245 170 L 245 49 Z M 71 49 L 71 204 L 186 204 L 185 171 L 108 170 L 109 143 L 169 142 L 169 110 L 108 108 L 108 84 L 110 82 L 184 82 L 184 49 Z M 6 49 L 6 204 L 44 204 L 44 49 Z M 476 46 L 458 51 L 450 55 L 442 61 L 436 68 L 431 77 L 428 90 L 430 108 L 436 120 L 449 131 L 472 140 L 492 145 L 502 150 L 507 156 L 508 159 L 507 165 L 503 170 L 496 173 L 476 174 L 459 170 L 440 160 L 424 187 L 434 195 L 446 201 L 458 205 L 479 208 L 499 207 L 514 203 L 524 198 L 534 190 L 539 183 L 544 171 L 545 164 L 544 148 L 536 132 L 527 124 L 509 115 L 489 110 L 471 103 L 466 97 L 466 90 L 467 87 L 471 83 L 480 79 L 502 80 L 514 84 L 524 90 L 527 89 L 540 62 L 533 57 L 515 49 L 501 46 Z M 727 97 L 719 89 L 713 89 L 710 87 L 649 21 L 566 20 L 573 28 L 650 99 L 654 99 L 662 102 L 668 106 L 673 112 L 652 127 L 630 146 L 564 211 L 523 248 L 476 285 L 426 318 L 461 306 L 508 284 L 547 262 L 593 231 L 624 207 L 641 192 L 676 157 Z M 846 9 L 844 7 L 839 6 L 824 9 L 816 13 L 798 28 L 756 28 L 743 38 L 769 45 L 773 48 L 752 66 L 724 66 L 718 71 L 719 73 L 730 79 L 742 88 L 771 75 L 784 65 L 792 61 L 795 66 L 796 74 L 801 90 L 811 83 L 811 75 L 815 55 L 816 42 L 840 22 L 846 13 Z" fill="#000000" fill-rule="evenodd"/>
                 </svg>
             </a>
-            <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarLinks" aria-label="Open navigation menu">
+            <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarMobileMenu" aria-label="Open navigation menu">
                 <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
             </button>
-            <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
-                <a class="${active === "home" ? "is-active" : ""}" href="/">Home</a>
-                <a class="${active === "listening" ? "is-active" : ""}" href="/listening">Listening</a>
-                <a class="${active === "reading" ? "is-active" : ""}" href="/reading">Reading</a>
-                <a class="${active === "speaking" ? "is-active" : ""}" href="/speaking">Speaking</a>
-                <a class="${active === "writing" ? "is-active" : ""}" href="/writing">Writing</a>
-                <a class="${active === "mock" ? "is-active" : ""}" href="/mock-tests">Mock Test</a>
-            </nav>
-            <div class="ielts-navbar__auth">
-                ${renderThemeToggle()}
-                ${authHtml}
+            <div class="ielts-navbar__mobile-menu mobile-menu" id="ieltsNavbarMobileMenu">
+                <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
+                    <a class="${active === "home" ? "is-active" : ""}" href="/">Home</a>
+                    <a class="${active === "listening" ? "is-active" : ""}" href="/listening">Listening</a>
+                    <a class="${active === "reading" ? "is-active" : ""}" href="/reading">Reading</a>
+                    <a class="${active === "speaking" ? "is-active" : ""}" href="/speaking">Speaking</a>
+                    <a class="${active === "writing" ? "is-active" : ""}" href="/writing">Writing</a>
+                    <a class="${active === "mock" ? "is-active" : ""}" href="/mock-tests">Mock Test</a>
+                </nav>
+                <div class="ielts-navbar__auth">
+                    ${renderThemeToggle()}
+                    ${authHtml}
+                </div>
             </div>
         `;
 
