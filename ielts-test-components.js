@@ -949,6 +949,10 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
             return;
         }
 
+        if (event.target.closest("mark.ieltsx-highlight, .reading-highlight, .highlighted-word")) {
+            return;
+        }
+
         const target = event.target.closest("[data-vocab-word]");
 
         if (!target || !event.currentTarget.contains(target)) {
@@ -968,6 +972,10 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
         }
 
         if (!enableVocabulary || !onVocabularyWord || !event.target?.closest) {
+            return;
+        }
+
+        if (event.target.closest("mark.ieltsx-highlight, .reading-highlight, .highlighted-word")) {
             return;
         }
 

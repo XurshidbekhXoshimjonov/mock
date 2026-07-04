@@ -76,10 +76,20 @@ const GOOGLE_TRANSLATE_CLIENT_ENABLED = Boolean(
     process.env.K_SERVICE ||
     process.env.GAE_SERVICE
 );
+const OPENAI_API_KEY = String(process.env.OPENAI_API_KEY || process.env.OPENAI_KEY || "").trim();
+const OPENAI_TRANSLATION_MODEL = String(
+    process.env.OPENAI_TRANSLATION_MODEL ||
+    process.env.OPENAI_MODEL ||
+    "gpt-4o-mini"
+).trim();
+const CONTEXT_TRANSLATION_ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
+const CONTEXT_TRANSLATION_CACHE_LIMIT = 500;
 
 let translateClient = null;
 let translateConfigWarningShown = false;
 const vocabularyLookupRequests = new Map();
+const contextTranslationRequests = new Map();
+const contextTranslationCache = new Map();
 let pdfParser = null;
 
 function getPdfParser() {
@@ -1024,6 +1034,230 @@ function vocabularyOwnerFromRequest(req) {
         ownerType: "session",
         ownerId: sessionId
     };
+}
+
+function compactText(value, maxLength = 500) {
+    return String(value || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, maxLength);
+}
+
+function shortUzbekPhrase(value, maxWords = 8) {
+    let text = compactText(value, 260)
+        .replace(/^[\s"'`]+|[\s"'`]+$/g, "");
+
+    [
+        /^(?:bu\s+)?(?:yerda\s+)?(?:ushbu\s+)?(?:kontekst(?:da|dagi)?\s+)?(?:so['\u2019`]?z(?:ning)?|ibora(?:ning)?|tanlangan\s+matn(?:ning)?)?\s*(?:ma['\u2019`]?nosi|mazmuni|tarjimasi)\s*[,:;\-]?\s*/i,
+        /^(?:bu\s+)?(?:kontekst(?:da|dagi)?|yerda)\s*(?:u\s+)?(?:degani|anglatadi|bildiradi)\s*[,:;\-]?\s*/i,
+        /^(?:ya['\u2019`]?ni|demak)\s*[,:;\-]?\s*/i
+    ].forEach((pattern) => {
+        text = text.replace(pattern, "");
+    });
+
+    text = text
+        .replace(/\s+(?:ya['\u2019`]?ni|degani|anglatadi|bildiradi)\b[\s\S]*$/i, "")
+        .replace(/[.!?]\s*[\s\S]*$/, "")
+        .trim();
+
+    const words = text.split(/\s+/).filter(Boolean);
+    return (words.length > maxWords ? words.slice(0, maxWords).join(" ") : text).trim();
+}
+
+function simpleHash(value) {
+    const text = String(value || "");
+    let hash = 5381;
+
+    for (let index = 0; index < text.length; index += 1) {
+        hash = ((hash * 33) ^ text.charCodeAt(index)) >>> 0;
+    }
+
+    return hash.toString(36);
+}
+
+function normalizeContextTranslationPayload(body = {}) {
+    const selectedText = compactText(body.selectedText || body.word || body.phrase, 160);
+    const sentence = compactText(body.sentence || selectedText, 700);
+    const paragraph = compactText(body.paragraph || body.context || sentence, 1800);
+
+    return {
+        selectedText,
+        sentence,
+        paragraph,
+        testId: cleanPrivacyScopeId(body.testId || body.test_id || "practice", "practice"),
+        passageId: cleanPrivacyScopeId(body.passageId || body.passage_id || "passage", "passage")
+    };
+}
+
+function contextTranslationCacheKey(owner, payload) {
+    const ownerType = owner.ownerType === "user" ? "user" : "session";
+    const ownerId = cleanPrivacyScopeId(owner.ownerId || "");
+    const selected = normalizeVocabularyWord(payload.selectedText) || payload.selectedText.toLowerCase();
+
+    return [
+        ownerType,
+        ownerId,
+        payload.testId || "practice",
+        payload.passageId || "passage",
+        safeHashPart(selected),
+        safeHashPart(payload.sentence)
+    ].join(":");
+}
+
+function safeHashPart(value) {
+    return simpleHash(String(value || "").toLowerCase());
+}
+
+function cacheContextTranslation(cacheKey, record) {
+    if (!cacheKey || !record) {
+        return;
+    }
+
+    if (contextTranslationCache.size >= CONTEXT_TRANSLATION_CACHE_LIMIT) {
+        const oldestKey = contextTranslationCache.keys().next().value;
+        if (oldestKey) {
+            contextTranslationCache.delete(oldestKey);
+        }
+    }
+
+    contextTranslationCache.set(cacheKey, {
+        ...record,
+        cachedAt: new Date().toISOString()
+    });
+}
+
+function normalizeContextTranslationRecord(data, payload) {
+    const selectedText = compactText(data?.selectedText || payload.selectedText, 160);
+    const meaningInEnglish = compactText(data?.meaningInEnglish || data?.englishMeaning || data?.definition, 420);
+    const uzbekTranslation = shortUzbekPhrase(data?.uzbekTranslation || data?.uzbek_translation || data?.translation);
+    const contextualMeaningUzbek = shortUzbekPhrase(data?.contextualMeaningUzbek || data?.contextualUzbek);
+    const sentenceTranslationUzbek = compactText(data?.sentenceTranslationUzbek || data?.sentenceUzbek, 620);
+    const example = compactText(data?.example || data?.exampleSentence, 260);
+    const partOfSpeech = compactText(data?.partOfSpeech || data?.part_of_speech, 80);
+    const normalized = normalizeVocabularyWord(selectedText);
+
+    return {
+        selectedText,
+        meaningInEnglish,
+        uzbekTranslation,
+        contextualMeaningUzbek,
+        sentenceTranslationUzbek,
+        example,
+        partOfSpeech,
+        word: selectedText,
+        normalized,
+        normalized_word: normalized,
+        definition: meaningInEnglish,
+        english_definition: meaningInEnglish,
+        uzbek_translation: contextualMeaningUzbek || uzbekTranslation,
+        translation: contextualMeaningUzbek || uzbekTranslation,
+        example_sentence: example,
+        source: "gpt_context",
+        testId: payload.testId,
+        passageId: payload.passageId,
+        passage_id: payload.passageId
+    };
+}
+
+function parseJsonObjectFromText(value) {
+    const text = String(value || "").trim();
+
+    if (!text) {
+        return null;
+    }
+
+    try {
+        return JSON.parse(text);
+    } catch {
+        const match = text.match(/\{[\s\S]*\}/);
+        if (!match) {
+            return null;
+        }
+
+        try {
+            return JSON.parse(match[0]);
+        } catch {
+            return null;
+        }
+    }
+}
+
+async function requestContextTranslationFromGpt(payload) {
+    if (!OPENAI_API_KEY) {
+        const error = new Error("OPENAI_API_KEY is not configured");
+        error.statusCode = 503;
+        throw error;
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${OPENAI_API_KEY}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            model: OPENAI_TRANSLATION_MODEL,
+            temperature: 0.2,
+            max_tokens: 550,
+            response_format: { type: "json_object" },
+            messages: [
+                {
+                    role: "system",
+                    content: [
+                        "You help IELTS Reading learners understand vocabulary in context.",
+                        "Return only valid JSON.",
+                        "Keep every field short and useful.",
+                        "Choose the meaning that fits the supplied sentence and paragraph.",
+                        "Use natural Uzbek, not literal word-by-word translation.",
+                        "For Uzbek fields, return only the translation phrase.",
+                        "Do not include explanations, commentary, labels, or phrases like 'bu kontekstdagi ma'nosi'."
+                    ].join(" ")
+                },
+                {
+                    role: "user",
+                    content: JSON.stringify({
+                        task: "Translate the selected IELTS Reading word or phrase in context.",
+                        selectedText: payload.selectedText,
+                        sentence: payload.sentence,
+                        paragraph: payload.paragraph,
+                        rules: [
+                            "contextualMeaningUzbek must be only the selected text's short Uzbek meaning in this context, ideally 1-4 words.",
+                            "uzbekTranslation must be a short natural Uzbek translation, ideally 1-4 words.",
+                            "meaningInEnglish must be a short simple English explanation.",
+                            "Do not translate the whole sentence.",
+                            "Do not add notes, explanations, or 'means in this context' style wording."
+                        ],
+                        requiredJsonShape: {
+                            selectedText: "string",
+                            meaningInEnglish: "short simple English meaning",
+                            uzbekTranslation: "short natural Uzbek translation only",
+                            contextualMeaningUzbek: "short contextual Uzbek translation only",
+                            partOfSpeech: "noun/verb/adjective/adverb/etc"
+                        }
+                    })
+                }
+            ]
+        })
+    });
+    const body = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const error = new Error(body?.error?.message || "OpenAI translation request failed");
+        error.statusCode = response.status >= 400 && response.status < 500 ? response.status : 502;
+        throw error;
+    }
+
+    const content = body?.choices?.[0]?.message?.content || "";
+    const parsed = parseJsonObjectFromText(content);
+    const record = normalizeContextTranslationRecord(parsed, payload);
+
+    if (!record.meaningInEnglish && !record.uzbekTranslation && !record.contextualMeaningUzbek) {
+        const error = new Error("OpenAI translation response was empty");
+        error.statusCode = 502;
+        throw error;
+    }
+
+    return record;
 }
 
 function saveClickedVocabulary({ ownerType, ownerId, testId, attemptId, passageId, record, requestedWord }) {
@@ -4746,6 +4980,59 @@ app.delete("/api/reading-tests/:id", requireAdmin, (req, res) => {
     fs.unlinkSync(filePath);
 
     res.json({ message: "Reading test deleted" });
+});
+
+app.post("/api/translate-context", async (req, res) => {
+    try {
+        const owner = vocabularyOwnerFromRequest(req);
+        const payload = normalizeContextTranslationPayload(req.body || {});
+
+        if (!owner.ownerId) {
+            return res.status(400).json({
+                error: "sessionId is required for anonymous translation"
+            });
+        }
+
+        if (!payload.selectedText) {
+            return res.status(400).json({
+                error: "selectedText is required"
+            });
+        }
+
+        const cacheKey = contextTranslationCacheKey(owner, payload);
+        const cached = contextTranslationCache.get(cacheKey);
+
+        if (cached) {
+            return res.json({
+                ...cached,
+                cached: true
+            });
+        }
+
+        let pending = contextTranslationRequests.get(cacheKey);
+
+        if (!pending) {
+            pending = requestContextTranslationFromGpt(payload)
+                .then((record) => {
+                    cacheContextTranslation(cacheKey, record);
+                    return record;
+                })
+                .finally(() => contextTranslationRequests.delete(cacheKey));
+            contextTranslationRequests.set(cacheKey, pending);
+        }
+
+        const record = await pending;
+        res.json({
+            ...record,
+            cached: false
+        });
+    } catch (error) {
+        const statusCode = error.statusCode || 500;
+        console.warn("Context translation error:", error.message);
+        res.status(statusCode).json({
+            error: CONTEXT_TRANSLATION_ERROR_MESSAGE
+        });
+    }
 });
 
 app.get("/api/vocabulary/lookup", async (req, res) => {

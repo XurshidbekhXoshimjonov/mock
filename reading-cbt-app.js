@@ -27,7 +27,7 @@ const duration = isMockMode
         : 20 * 60;
 const ResultUtils = window.IeltsResultUtils || {};
 const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
-const VOCABULARY_ERROR_MESSAGE = "Translation unavailable. Please try again.";
+const VOCABULARY_ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
 const ANONYMOUS_SESSION_KEY = "ieltsx.anonymousSessionId.v1";
 const VOCABULARY_STORAGE_PREFIX = "readingVocabulary";
 
@@ -1416,6 +1416,52 @@ function normalizeVocabularyWord(value) {
         .replace(/[^a-z0-9'-]/g, "");
 }
 
+function compactContextText(value, maxLength = 500) {
+    return String(value || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, maxLength);
+}
+
+function shortUzbekPhrase(value, maxWords = 8) {
+    let text = compactContextText(value, 260)
+        .replace(/^[\s"'`]+|[\s"'`]+$/g, "");
+
+    [
+        /^(?:bu\s+)?(?:yerda\s+)?(?:ushbu\s+)?(?:kontekst(?:da|dagi)?\s+)?(?:so['\u2019`]?z(?:ning)?|ibora(?:ning)?|tanlangan\s+matn(?:ning)?)?\s*(?:ma['\u2019`]?nosi|mazmuni|tarjimasi)\s*[,:;\-]?\s*/i,
+        /^(?:bu\s+)?(?:kontekst(?:da|dagi)?|yerda)\s*(?:u\s+)?(?:degani|anglatadi|bildiradi)\s*[,:;\-]?\s*/i,
+        /^(?:ya['\u2019`]?ni|demak)\s*[,:;\-]?\s*/i
+    ].forEach((pattern) => {
+        text = text.replace(pattern, "");
+    });
+
+    text = text
+        .replace(/\s+(?:ya['\u2019`]?ni|degani|anglatadi|bildiradi)\b[\s\S]*$/i, "")
+        .replace(/[.!?]\s*[\s\S]*$/, "")
+        .trim();
+
+    const words = text.split(/\s+/).filter(Boolean);
+    return (words.length > maxWords ? words.slice(0, maxWords).join(" ") : text).trim();
+}
+
+function simpleHash(value) {
+    const text = String(value || "");
+    let hash = 5381;
+
+    for (let index = 0; index < text.length; index += 1) {
+        hash = ((hash * 33) ^ text.charCodeAt(index)) >>> 0;
+    }
+
+    return hash.toString(36);
+}
+
+function translationCacheEntryKey(selectedText, sentence) {
+    return [
+        simpleHash(compactContextText(selectedText, 180).toLowerCase()),
+        simpleHash(compactContextText(sentence, 760).toLowerCase())
+    ].join(":");
+}
+
 function vocabularyCandidates(value) {
     const normalized = normalizeVocabularyWord(value);
     const candidates = [normalized];
@@ -1487,8 +1533,12 @@ function buildVocabularyLookup(entries) {
 }
 
 function normalizeVocabularyLookupRecord(data, fallback) {
-    const word = String(data?.word || fallback.word || "").trim();
+    const word = String(data?.selectedText || data?.word || fallback.word || "").trim();
     const normalized = normalizeVocabularyWord(data?.normalized_word || data?.normalized || fallback.normalized || word);
+    const meaningInEnglish = String(data?.meaningInEnglish || data?.english_definition || data?.definition || "").trim();
+    const uzbekTranslation = shortUzbekPhrase(data?.uzbekTranslation || data?.uzbek_translation || data?.translation || "");
+    const contextualMeaningUzbek = shortUzbekPhrase(data?.contextualMeaningUzbek || "");
+    const sentenceTranslationUzbek = String(data?.sentenceTranslationUzbek || "").trim();
 
     return {
         word: word || fallback.word,
@@ -1496,11 +1546,17 @@ function normalizeVocabularyLookupRecord(data, fallback) {
         selectedNormalized: fallback.selectedNormalized || fallback.normalized,
         phonetic: String(data?.phonetic || "").trim(),
         partOfSpeech: String(data?.part_of_speech || data?.partOfSpeech || "").trim(),
-        definition: String(data?.english_definition || data?.definition || "").trim() || "Definition is not available yet.",
-        uzbekTranslation: String(data?.uzbek_translation || data?.uzbekTranslation || data?.translation || "").trim() || "Uzbek translation is not available yet.",
+        definition: meaningInEnglish || "Definition is not available yet.",
+        meaningInEnglish,
+        uzbekTranslation: contextualMeaningUzbek || uzbekTranslation || "Uzbek translation is not available yet.",
+        naturalUzbekTranslation: uzbekTranslation,
+        contextualMeaningUzbek,
+        sentenceTranslationUzbek,
         example: String(data?.example_sentence || data?.example || "").trim(),
         source: String(data?.source || fallback.source || "api_generated").trim(),
         passageId: data?.passage_id || data?.passageId || fallback.passageId,
+        sentence: fallback.sentence || "",
+        paragraph: fallback.paragraph || "",
         attemptId: fallback.attemptId,
         timestamp: fallback.timestamp || new Date().toISOString(),
         isAvailable: true,
@@ -1576,15 +1632,15 @@ function readStoredVocabularyCache(testIdValue, passageIdValue) {
     }
 }
 
-function getStoredVocabularyRecord(normalizedWord, testIdValue, passageIdValue) {
+function getStoredVocabularyRecord(cacheEntryKey, testIdValue, passageIdValue) {
     const cache = readStoredVocabularyCache(testIdValue, passageIdValue);
-    return cache[normalizedWord] || null;
+    return cache[cacheEntryKey] || null;
 }
 
-function setStoredVocabularyRecord(normalizedWord, record, testIdValue, passageIdValue) {
+function setStoredVocabularyRecord(cacheEntryKey, record, testIdValue, passageIdValue) {
     try {
         const cache = readStoredVocabularyCache(testIdValue, passageIdValue);
-        cache[normalizedWord] = {
+        cache[cacheEntryKey] = {
             ...record,
             cachedAt: new Date().toISOString()
         };
@@ -1601,6 +1657,66 @@ function makeAttemptId(id) {
         sessionStorage.setItem(key, attemptId);
     }
     return attemptId;
+}
+
+function nearestVocabularyContextElement(target) {
+    return target?.closest?.([
+        ".cbt-passage-paragraph",
+        ".cbt-paragraph-html",
+        "p",
+        "li",
+        "blockquote",
+        ".cbt-passage-copy",
+        "[data-passage]",
+        ".cbt-passage",
+        ".reading-passage",
+        ".passage-content",
+        ".passage-text"
+    ].join(","));
+}
+
+function extractVocabularySentence(paragraph, selectedText) {
+    const text = compactContextText(paragraph, 1800);
+    const selected = compactContextText(selectedText, 180);
+
+    if (!text) {
+        return selected;
+    }
+
+    const lowerText = text.toLowerCase();
+    const lowerSelected = selected.toLowerCase();
+    const selectedIndex = lowerSelected ? lowerText.indexOf(lowerSelected) : -1;
+
+    if (selectedIndex === -1) {
+        const sentences = text.match(/[^.!?]+[.!?]?/g) || [text];
+        const fallback = sentences.find((sentence) =>
+            sentence.toLowerCase().includes(lowerSelected)
+        );
+        return compactContextText(fallback || text, 700);
+    }
+
+    const before = text.slice(0, selectedIndex);
+    const sentenceStartMark = Math.max(before.lastIndexOf("."), before.lastIndexOf("?"), before.lastIndexOf("!"));
+    const start = sentenceStartMark === -1 ? 0 : sentenceStartMark + 1;
+    const afterStart = selectedIndex + selected.length;
+    const after = text.slice(afterStart);
+    const endMatch = after.search(/[.!?](?:\s|$)/);
+    const end = endMatch === -1
+        ? Math.min(text.length, afterStart + 260)
+        : afterStart + endMatch + 1;
+
+    return compactContextText(text.slice(start, end), 700) || selected;
+}
+
+function vocabularyContextForTarget(target, selectedText) {
+    const contextElement = nearestVocabularyContextElement(target);
+    const passageElement = target?.closest?.("[data-passage-id], [data-passage], .cbt-passage, .reading-passage, .passage-content, .passage-text");
+    const paragraph = compactContextText(contextElement?.textContent || passageElement?.textContent || selectedText, 1800);
+
+    return {
+        sentence: extractVocabularySentence(paragraph, selectedText),
+        paragraph: paragraph || compactContextText(selectedText, 180)
+    };
 }
 
 function positionVocabularyPopover(target) {
@@ -1833,7 +1949,8 @@ function VocabularyPopover({ item, onClose }) {
 
     const hasDefinition = Boolean(item.definition);
     const hasTranslation = Boolean(item.uzbekTranslation);
-    const meta = [item.phonetic, item.partOfSpeech].filter(Boolean).join(" · ");
+    const naturalTranslation = shortUzbekPhrase(item.naturalUzbekTranslation || item.uzbekTranslation || "");
+    const wordType = item.partOfSpeech || (String(item.word || "").trim().includes(" ") ? "phrase" : "word");
 
     return h("aside", {
         ref: popoverRef,
@@ -1860,9 +1977,8 @@ function VocabularyPopover({ item, onClose }) {
             onClick: onClose,
             "aria-label": "Close vocabulary popup"
         }, "×"),
-        h("span", { className: "cbt-vocab-eyebrow" }, item.isLoading ? "Translating" : "Selected word"),
+        h("span", { className: "cbt-vocab-eyebrow" }, item.isLoading ? "Translating" : "Selected text"),
         h("h2", null, item.word),
-        meta ? h("p", { className: "cbt-vocab-meta" }, meta) : null,
         h("div", { className: "cbt-vocab-content" },
             item.isLoading
                 ? h("p", { className: "cbt-vocab-loading" }, "Translating selected word...")
@@ -1871,19 +1987,24 @@ function VocabularyPopover({ item, onClose }) {
                 ? h(Fragment, null,
                     h("dl", { className: "cbt-vocab-definition-list" },
                         h("div", null,
-                            h("dt", null, "Uzbek translation"),
+                            h("dt", null, "Word type"),
+                            h("dd", null, wordType)
+                        ),
+                        h("div", null,
+                            h("dt", null, "Contextual Uzbek"),
                             h("dd", null, item.uzbekTranslation || "Uzbek translation is not available yet.")
                         ),
                         h("div", null,
-                            h("dt", null, "English definition"),
+                            h("dt", null, "Natural Uzbek"),
+                            h("dd", null, naturalTranslation || item.uzbekTranslation || "Uzbek translation is not available yet.")
+                        ),
+                        h("div", null,
+                            h("dt", null, "Simple English"),
                             h("dd", null, item.definition || "Definition is not available yet.")
                         )
-                    ),
-                    item.example
-                        ? h("p", { className: "cbt-vocab-example" }, item.example)
-                        : null
+                    )
                 )
-                : (!item.isLoading ? h("p", { className: "cbt-vocab-fallback" }, "Definition is not available yet.") : null)
+                : (!item.isLoading ? h("p", { className: "cbt-vocab-fallback" }, item.errorMessage || "Definition is not available yet.") : null)
         )
     );
 }
@@ -2382,13 +2503,14 @@ function ReadingApp() {
         });
     }
 
-    function vocabularyCacheKey(passageId, normalizedWord) {
+    function vocabularyCacheKey(passageId, selectedText, sentence) {
         const owner = getReadingOwnerScope();
-        return `${owner.ownerKey}:${test?.id || testId || "practice"}:${passageId || "passage"}:${normalizedWord}`;
+        return `${owner.ownerKey}:${test?.id || testId || "practice"}:${passageId || "passage"}:${translationCacheEntryKey(selectedText, sentence)}`;
     }
 
     async function lookupVocabulary(baseRecord) {
-        const key = vocabularyCacheKey(baseRecord.passageId, baseRecord.normalized);
+        const cacheEntryKey = translationCacheEntryKey(baseRecord.word, baseRecord.sentence);
+        const key = vocabularyCacheKey(baseRecord.passageId, baseRecord.word, baseRecord.sentence);
         const owner = getReadingOwnerScope();
         const lookupTestId = test?.id || testId || "";
         const cached = vocabularyCacheRef.current.get(key);
@@ -2397,7 +2519,7 @@ function ReadingApp() {
             return cached;
         }
 
-        const stored = getStoredVocabularyRecord(baseRecord.normalized, lookupTestId, baseRecord.passageId);
+        const stored = getStoredVocabularyRecord(cacheEntryKey, lookupTestId, baseRecord.passageId);
         if (stored) {
             const record = normalizeVocabularyLookupRecord(stored, baseRecord);
             vocabularyCacheRef.current.set(key, record);
@@ -2409,26 +2531,32 @@ function ReadingApp() {
             return pending;
         }
 
-        const query = new URLSearchParams({
-            word: baseRecord.word,
-            normalized: baseRecord.normalized,
-            passageId: baseRecord.passageId,
-            testId: lookupTestId,
-            attemptId: baseRecord.attemptId,
-            ownerType: owner.ownerType,
-            sessionId: owner.ownerType === "session" ? owner.ownerId : ""
-        });
-        const request = fetch(`/api/vocabulary/lookup?${query.toString()}`)
+        const request = fetch("/api/translate-context", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                selectedText: baseRecord.word,
+                sentence: baseRecord.sentence,
+                paragraph: baseRecord.paragraph,
+                passageId: baseRecord.passageId,
+                testId: lookupTestId,
+                attemptId: baseRecord.attemptId,
+                ownerType: owner.ownerType,
+                sessionId: owner.ownerType === "session" ? owner.ownerId : ""
+            })
+        })
             .then(async (response) => {
                 const data = await response.json().catch(() => ({}));
                 if (!response.ok) {
-                    throw new Error(data.error || "Could not look up vocabulary");
+                    throw new Error(data.error || VOCABULARY_ERROR_MESSAGE);
                 }
 
                 const record = normalizeVocabularyLookupRecord(data, baseRecord);
-                console.log("Translation API response received", record);
+                console.log("Context translation API response received", record);
                 vocabularyCacheRef.current.set(key, record);
-                setStoredVocabularyRecord(baseRecord.normalized, record, lookupTestId, baseRecord.passageId);
+                setStoredVocabularyRecord(cacheEntryKey, record, lookupTestId, baseRecord.passageId);
                 return record;
             })
             .finally(() => {
@@ -2465,6 +2593,7 @@ function ReadingApp() {
 
         const passageId = passage?.id || `${test?.id || testId}-passage-${passage?.number || 1}`;
         const position = positionVocabularyPopover(target);
+        const context = vocabularyContextForTarget(target, clickedWord);
         const baseRecord = {
             word: clickedWord,
             normalized: normalizedWord,
@@ -2476,6 +2605,8 @@ function ReadingApp() {
             example: "",
             passageId: passage?.id || `${test?.id || testId}-passage-${passage?.number || 1}`,
             passageNumber: passage?.number || activeIndex + 1,
+            sentence: context.sentence,
+            paragraph: context.paragraph,
             attemptId: attemptIdRef.current,
             timestamp: new Date().toISOString(),
             lastClickedAt: new Date().toISOString(),
@@ -2486,7 +2617,8 @@ function ReadingApp() {
         };
         const existing = checkedVocabularyRef.current.find((item) => (
             item.passageId === passageId &&
-            (item.selectedNormalized === normalizedWord || item.normalized === normalizedWord)
+            (item.selectedNormalized === normalizedWord || item.normalized === normalizedWord) &&
+            item.sentence === context.sentence
         ));
 
         if (existing) {
@@ -2526,8 +2658,9 @@ function ReadingApp() {
                 console.error(error);
                 const fallbackRecord = {
                     ...baseRecord,
-                    definition: VOCABULARY_ERROR_MESSAGE,
-                    uzbekTranslation: VOCABULARY_ERROR_MESSAGE,
+                    definition: "",
+                    uzbekTranslation: "",
+                    errorMessage: VOCABULARY_ERROR_MESSAGE,
                     isLoading: false,
                     isAvailable: false
                 };

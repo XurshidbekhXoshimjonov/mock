@@ -2,7 +2,7 @@
     const WORD_CLASS = "translatable-word";
     const ANONYMOUS_SESSION_KEY = "ieltsx.anonymousSessionId.v1";
     const CACHE_PREFIX = "readingVocabulary";
-    const ERROR_MESSAGE = "Translation unavailable. Please try again.";
+    const ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
     const WORD_PATTERN = /[A-Za-z0-9]+(?:[\u2019'\-][A-Za-z0-9]+)*/g;
     const PASSAGE_SELECTORS = [
         ".reading-passage",
@@ -63,6 +63,52 @@
             .replace(/^[\s.,:;()[\]{}"'\u201c\u201d\u2018\u2019!?]+|[\s.,:;()[\]{}"'\u201c\u201d\u2018\u2019!?]+$/g, "")
             .replace(/'s$/i, "")
             .replace(/[^a-z0-9'-]/g, "");
+    }
+
+    function compactText(value, maxLength = 500) {
+        return String(value || "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .slice(0, maxLength);
+    }
+
+    function shortUzbekPhrase(value, maxWords = 8) {
+        let text = compactText(value, 260)
+            .replace(/^[\s"'`]+|[\s"'`]+$/g, "");
+
+        [
+            /^(?:bu\s+)?(?:yerda\s+)?(?:ushbu\s+)?(?:kontekst(?:da|dagi)?\s+)?(?:so['\u2019`]?z(?:ning)?|ibora(?:ning)?|tanlangan\s+matn(?:ning)?)?\s*(?:ma['\u2019`]?nosi|mazmuni|tarjimasi)\s*[,:;\-]?\s*/i,
+            /^(?:bu\s+)?(?:kontekst(?:da|dagi)?|yerda)\s*(?:u\s+)?(?:degani|anglatadi|bildiradi)\s*[,:;\-]?\s*/i,
+            /^(?:ya['\u2019`]?ni|demak)\s*[,:;\-]?\s*/i
+        ].forEach((pattern) => {
+            text = text.replace(pattern, "");
+        });
+
+        text = text
+            .replace(/\s+(?:ya['\u2019`]?ni|degani|anglatadi|bildiradi)\b[\s\S]*$/i, "")
+            .replace(/[.!?]\s*[\s\S]*$/, "")
+            .trim();
+
+        const words = text.split(/\s+/).filter(Boolean);
+        return (words.length > maxWords ? words.slice(0, maxWords).join(" ") : text).trim();
+    }
+
+    function simpleHash(value) {
+        const text = String(value || "");
+        let hash = 5381;
+
+        for (let index = 0; index < text.length; index += 1) {
+            hash = ((hash * 33) ^ text.charCodeAt(index)) >>> 0;
+        }
+
+        return hash.toString(36);
+    }
+
+    function translationCacheEntryKey(selectedText, sentence) {
+        return [
+            simpleHash(compactText(selectedText, 180).toLowerCase()),
+            simpleHash(compactText(sentence, 760).toLowerCase())
+        ].join(":");
     }
 
     function safeStoragePart(value, fallback = "unknown") {
@@ -278,22 +324,22 @@
         }
     }
 
-    function setCache(word, value, testId, passageId) {
+    function setCache(entryKey, value, testId, passageId) {
         const storageKey = readingVocabularyStorageKey(testId, passageId);
-        const memoryKey = `${storageKey}:${word}`;
+        const memoryKey = `${storageKey}:${entryKey}`;
         memoryCache.set(memoryKey, value);
         try {
             const cache = getCache(storageKey);
-            cache[word] = { ...value, cachedAt: new Date().toISOString() };
+            cache[entryKey] = { ...value, cachedAt: new Date().toISOString() };
             localStorage.setItem(storageKey, JSON.stringify(cache));
         } catch {}
     }
 
-    function getCached(word, testId, passageId) {
+    function getCached(entryKey, testId, passageId) {
         const storageKey = readingVocabularyStorageKey(testId, passageId);
-        const memoryKey = `${storageKey}:${word}`;
+        const memoryKey = `${storageKey}:${entryKey}`;
         if (memoryCache.has(memoryKey)) return memoryCache.get(memoryKey);
-        const cached = getCache(storageKey)[word];
+        const cached = getCache(storageKey)[entryKey];
         if (cached) {
             memoryCache.set(memoryKey, cached);
         }
@@ -309,7 +355,7 @@
         popup.className = "reading-translation-popover";
         popup.innerHTML = `
             <button class="reading-translation-popover__close" type="button" aria-label="Close translation">x</button>
-            <span class="reading-translation-popover__eyebrow">Selected word</span>
+            <span class="reading-translation-popover__eyebrow">Selected text</span>
             <h2></h2>
             <div class="reading-translation-popover__body"></div>
         `;
@@ -424,7 +470,7 @@
         ensureStyles();
         const popup = ensurePopup();
         popup.querySelector("h2").textContent = word;
-        popup.querySelector(".reading-translation-popover__eyebrow").textContent = loading ? "Translating" : "Selected word";
+        popup.querySelector(".reading-translation-popover__eyebrow").textContent = loading ? "Translating" : "Selected text";
         popup.querySelector(".reading-translation-popover__body").innerHTML = html;
         popup.classList.add("is-open");
         positionPopup(popup, target);
@@ -443,17 +489,114 @@
             .replace(/'/g, "&#039;");
     }
 
+    function nearestContextElement(target) {
+        return target?.closest?.([
+            ".cbt-passage-paragraph",
+            ".cbt-paragraph-html",
+            "p",
+            "li",
+            "blockquote",
+            ".cbt-passage-copy",
+            ".reading-passage",
+            ".passage-content",
+            ".passage-text",
+            ".article-content",
+            ".modern-passage",
+            ".ielts-passage-panel",
+            "[data-passage]",
+            ".cbt-passage"
+        ].join(","));
+    }
+
+    function extractSentence(paragraph, selectedText) {
+        const text = compactText(paragraph, 1800);
+        const selected = compactText(selectedText, 180);
+
+        if (!text) {
+            return selected;
+        }
+
+        const lowerText = text.toLowerCase();
+        const lowerSelected = selected.toLowerCase();
+        const selectedIndex = lowerSelected ? lowerText.indexOf(lowerSelected) : -1;
+
+        if (selectedIndex === -1) {
+            const sentences = text.match(/[^.!?]+[.!?]?/g) || [text];
+            const fallback = sentences.find((sentence) =>
+                sentence.toLowerCase().includes(lowerSelected)
+            );
+            return compactText(fallback || text, 700);
+        }
+
+        const before = text.slice(0, selectedIndex);
+        const sentenceStartMark = Math.max(before.lastIndexOf("."), before.lastIndexOf("?"), before.lastIndexOf("!"));
+        const start = sentenceStartMark === -1 ? 0 : sentenceStartMark + 1;
+        const afterStart = selectedIndex + selected.length;
+        const after = text.slice(afterStart);
+        const endMatch = after.search(/[.!?](?:\s|$)/);
+        const end = endMatch === -1
+            ? Math.min(text.length, afterStart + 260)
+            : afterStart + endMatch + 1;
+
+        return compactText(text.slice(start, end), 700) || selected;
+    }
+
+    function contextForTarget(target, selectedText) {
+        const contextElement = nearestContextElement(target);
+        const passageElement = target?.closest?.("[data-passage-id], [data-passage], .cbt-passage, .reading-passage, .passage-content, .passage-text, .article-content, .modern-passage");
+        const paragraph = compactText(contextElement?.textContent || passageElement?.textContent || selectedText, 1800);
+
+        return {
+            sentence: extractSentence(paragraph, selectedText),
+            paragraph: paragraph || compactText(selectedText, 180)
+        };
+    }
+
+    function normalizeTranslationRecord(data, fallback) {
+        const selectedText = compactText(data?.selectedText || data?.word || fallback.selectedText, 180);
+        const meaningInEnglish = compactText(data?.meaningInEnglish || data?.english_definition || data?.definition, 420);
+        const uzbekTranslation = shortUzbekPhrase(data?.uzbekTranslation || data?.uzbek_translation || data?.translation);
+        const contextualMeaningUzbek = shortUzbekPhrase(data?.contextualMeaningUzbek || "");
+        const sentenceTranslationUzbek = compactText(data?.sentenceTranslationUzbek || "", 620);
+
+        return {
+            ...data,
+            selectedText,
+            meaningInEnglish,
+            uzbekTranslation,
+            contextualMeaningUzbek,
+            sentenceTranslationUzbek,
+            example: compactText(data?.example || data?.example_sentence || "", 260),
+            partOfSpeech: compactText(data?.partOfSpeech || data?.part_of_speech || "", 80),
+            definition: meaningInEnglish,
+            english_definition: meaningInEnglish,
+            translation: contextualMeaningUzbek || uzbekTranslation,
+            uzbek_translation: contextualMeaningUzbek || uzbekTranslation
+        };
+    }
+
     function renderRecord(record) {
-        const definition = record.english_definition || record.definition || "";
-        const translation = record.uzbek_translation || record.uzbekTranslation || record.translation || "";
+        const definition = record.meaningInEnglish || record.english_definition || record.definition || "";
+        const translation = shortUzbekPhrase(record.contextualMeaningUzbek || record.uzbek_translation || record.uzbekTranslation || record.translation || "");
+        const natural = shortUzbekPhrase(record.uzbekTranslation || record.translation || translation || "");
+        const partOfSpeech = record.partOfSpeech || record.part_of_speech || "";
+        const wordType = partOfSpeech || (String(record.selectedText || "").includes(" ") ? "phrase" : "word");
         return `
             <dl>
                 <div>
-                    <dt>Uzbek translation</dt>
+                    <dt>Word type</dt>
+                    <dd>${escapeHtml(wordType)}</dd>
+                </div>
+                <div>
+                    <dt>Contextual Uzbek</dt>
                     <dd>${escapeHtml(translation || ERROR_MESSAGE)}</dd>
                 </div>
                 <div>
-                    <dt>English definition</dt>
+                    <dt>Natural Uzbek</dt>
+                    <dd>${escapeHtml(natural || translation || ERROR_MESSAGE)}</dd>
+                </div>
+                <div>
+                    <dt>Simple English</dt>
                     <dd>${escapeHtml(definition || ERROR_MESSAGE)}</dd>
                 </div>
             </dl>
@@ -465,64 +608,76 @@
         return container?.dataset?.passageId || container?.id || "reading-passage";
     }
 
-    async function fetchTranslation(word, target) {
+    async function fetchTranslation(selectedText, target) {
         const testId = getReadingTestId();
         const passageId = passageIdFor(target);
         const owner = getReadingOwnerScope();
-        const cached = getCached(word, testId, passageId);
+        const context = contextForTarget(target, selectedText);
+        const entryKey = translationCacheEntryKey(selectedText, context.sentence);
+        const cached = getCached(entryKey, testId, passageId);
         if (cached) return cached;
 
-        const query = new URLSearchParams({
-            word,
-            normalized: word,
-            passageId,
-            testId,
-            attemptId: getScopedAttemptId(testId),
-            ownerType: owner.ownerType,
-            sessionId: owner.ownerType === "session" ? owner.ownerId : ""
+        const response = await fetch("/api/translate-context", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                selectedText,
+                sentence: context.sentence,
+                paragraph: context.paragraph,
+                passageId,
+                testId,
+                attemptId: getScopedAttemptId(testId),
+                ownerType: owner.ownerType,
+                sessionId: owner.ownerType === "session" ? owner.ownerId : ""
+            })
         });
-
-        const response = await fetch(`/api/vocabulary/lookup?${query.toString()}`);
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
             throw new Error(data.error || "Translation lookup failed");
         }
 
-        console.log("Translation API response received", data);
+        const record = normalizeTranslationRecord(data, { selectedText });
+        console.log("Context translation API response received", record);
 
-        const definition = data.english_definition || data.definition || "";
-        const translation = data.uzbek_translation || data.uzbekTranslation || data.translation || "";
+        const definition = record.meaningInEnglish || record.definition || "";
+        const translation = record.contextualMeaningUzbek || record.uzbekTranslation || record.translation || "";
         const noResult = !definition && !translation;
 
         if (noResult) {
             throw new Error("No translation result returned");
         }
 
-        setCache(word, data, testId, passageId);
-        return data;
+        setCache(entryKey, record, testId, passageId);
+        return record;
     }
 
     async function handleWordClick(event) {
-        const target = event.target?.closest?.(`.${WORD_CLASS}`);
-        if (!target || isInsideSkippedArea(target.parentElement)) return;
+        const target = event.target?.closest?.(`.${WORD_CLASS}, mark.ieltsx-highlight, .reading-highlight, .highlighted-word`);
+        const isHighlightTarget = target?.matches?.("mark.ieltsx-highlight, .reading-highlight, .highlighted-word");
+        if (!target) return;
+        if (isHighlightTarget && !target.closest(PASSAGE_SELECTORS.join(","))) return;
+        if (!isHighlightTarget && isInsideSkippedArea(target.parentElement)) return;
 
         if (target.matches(".cbt-vocab-word[data-vocab-word]") && target.closest(".cbt-passage.has-vocabulary")) {
             return;
         }
 
-        const word = normalizeWord(target.dataset.word || target.textContent);
-        if (!word) return;
+        const selectedText = compactText(target.textContent || target.dataset.word || "", 180);
+        const word = normalizeWord(target.dataset.word || selectedText);
+        if (!selectedText || !word) return;
 
         console.log(`Word clicked: ${word}`);
-        showPopup(target, word, "<p>Translating selected word...</p>", true);
+        showPopup(target, selectedText, "<p>Translating selected text...</p>", true);
 
         try {
-            const record = await fetchTranslation(word, target);
-            showPopup(target, word, renderRecord(record), false);
+            const record = await fetchTranslation(selectedText, target);
+            showPopup(target, selectedText, renderRecord(record), false);
         } catch (error) {
             console.error(error);
-            showPopup(target, word, `<p>${ERROR_MESSAGE}</p>`, false);
+            showPopup(target, selectedText, `<p>${ERROR_MESSAGE}</p>`, false);
         }
     }
 
