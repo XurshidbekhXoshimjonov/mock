@@ -84,6 +84,12 @@ const OPENAI_TRANSLATION_MODEL = String(
 ).trim();
 const CONTEXT_TRANSLATION_ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
 const CONTEXT_TRANSLATION_CACHE_LIMIT = 500;
+const TRANSLATE_CORS_ORIGINS = new Set([
+    "https://ieltsx.org",
+    "https://www.ieltsx.org",
+    "http://localhost:30004",
+    "http://localhost:3000"
+]);
 
 let translateClient = null;
 let translateConfigWarningShown = false;
@@ -1126,6 +1132,52 @@ function cacheContextTranslation(cacheKey, record) {
     });
 }
 
+function isUsableUzbekTranslation(value) {
+    const text = shortUzbekPhrase(value);
+    return text && text !== VOCABULARY_TRANSLATION_FALLBACK ? text : "";
+}
+
+async function requestContextTranslationFallback(payload, cause) {
+    console.warn("Context translation primary provider failed; using fallback:", {
+        message: cause?.message || "unknown error",
+        statusCode: cause?.statusCode || null,
+        provider: "openai",
+        hasOpenAIKey: Boolean(OPENAI_API_KEY),
+        hasGoogleTranslateKey: Boolean(GOOGLE_TRANSLATE_API_KEY),
+        isVercel: IS_VERCEL
+    });
+
+    const normalized = normalizeVocabularyWord(payload.selectedText);
+    const candidates = vocabularyCandidates(normalized || payload.selectedText);
+    let dictionary = null;
+
+    for (const candidate of candidates) {
+        dictionary = await fetchDictionaryVocabulary(candidate, payload.selectedText);
+        if (dictionary?.english_definition && dictionary.english_definition !== VOCABULARY_DEFINITION_FALLBACK) {
+            break;
+        }
+    }
+
+    const uzbekTranslation = isUsableUzbekTranslation(await translateToUzbek(payload.selectedText));
+
+    if (!uzbekTranslation && !dictionary?.english_definition) {
+        const error = new Error("Fallback translation providers returned no result");
+        error.statusCode = 502;
+        throw error;
+    }
+
+    return normalizeContextTranslationRecord({
+        selectedText: payload.selectedText,
+        meaningInEnglish: dictionary?.english_definition && dictionary.english_definition !== VOCABULARY_DEFINITION_FALLBACK
+            ? dictionary.english_definition
+            : `Meaning of "${payload.selectedText}" in this sentence.`,
+        uzbekTranslation,
+        contextualMeaningUzbek: uzbekTranslation,
+        partOfSpeech: dictionary?.part_of_speech || "",
+        source: "translate_fallback"
+    }, payload);
+}
+
 function normalizeContextTranslationRecord(data, payload) {
     const selectedText = compactText(data?.selectedText || payload.selectedText, 160);
     const meaningInEnglish = compactText(data?.meaningInEnglish || data?.englishMeaning || data?.definition, 420);
@@ -1152,7 +1204,7 @@ function normalizeContextTranslationRecord(data, payload) {
         uzbek_translation: contextualMeaningUzbek || uzbekTranslation,
         translation: contextualMeaningUzbek || uzbekTranslation,
         example_sentence: example,
-        source: "gpt_context",
+        source: compactText(data?.source || "gpt_context", 80),
         testId: payload.testId,
         passageId: payload.passageId,
         passage_id: payload.passageId
@@ -1258,6 +1310,14 @@ async function requestContextTranslationFromGpt(payload) {
     }
 
     return record;
+}
+
+async function requestContextTranslation(payload) {
+    try {
+        return await requestContextTranslationFromGpt(payload);
+    } catch (error) {
+        return requestContextTranslationFallback(payload, error);
+    }
 }
 
 function saveClickedVocabulary({ ownerType, ownerId, testId, attemptId, passageId, record, requestedWord }) {
@@ -4982,15 +5042,36 @@ app.delete("/api/reading-tests/:id", requireAdmin, (req, res) => {
     res.json({ message: "Reading test deleted" });
 });
 
-app.post("/api/translate-context", async (req, res) => {
+function setTranslateCorsHeaders(req, res) {
+    const origin = String(req.headers.origin || "").trim();
+
+    if (TRANSLATE_CORS_ORIGINS.has(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+        res.setHeader("Vary", "Origin");
+    }
+
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+}
+
+function handleTranslateOptions(req, res) {
+    setTranslateCorsHeaders(req, res);
+    res.status(204).end();
+}
+
+async function handleContextTranslateRequest(req, res) {
+    setTranslateCorsHeaders(req, res);
+
     try {
-        const owner = vocabularyOwnerFromRequest(req);
+        let owner = vocabularyOwnerFromRequest(req);
         const payload = normalizeContextTranslationPayload(req.body || {});
 
         if (!owner.ownerId) {
-            return res.status(400).json({
-                error: "sessionId is required for anonymous translation"
-            });
+            const forwardedFor = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim();
+            owner = {
+                ownerType: "session",
+                ownerId: cleanPrivacyScopeId(forwardedFor || req.ip || "anonymous", "anonymous")
+            };
         }
 
         if (!payload.selectedText) {
@@ -5012,7 +5093,7 @@ app.post("/api/translate-context", async (req, res) => {
         let pending = contextTranslationRequests.get(cacheKey);
 
         if (!pending) {
-            pending = requestContextTranslationFromGpt(payload)
+            pending = requestContextTranslation(payload)
                 .then((record) => {
                     cacheContextTranslation(cacheKey, record);
                     return record;
@@ -5028,12 +5109,30 @@ app.post("/api/translate-context", async (req, res) => {
         });
     } catch (error) {
         const statusCode = error.statusCode || 500;
-        console.warn("Context translation error:", error.message);
+        const requestId = `${Date.now().toString(36)}-${Math.random().toString(16).slice(2, 8)}`;
+
+        console.error("Context translation error:", {
+            requestId,
+            message: error.message,
+            statusCode,
+            stack: error.stack,
+            hasOpenAIKey: Boolean(OPENAI_API_KEY),
+            hasGoogleTranslateKey: Boolean(GOOGLE_TRANSLATE_API_KEY),
+            selectedText: req.body?.selectedText || req.body?.word || req.body?.phrase || ""
+        });
+
         res.status(statusCode).json({
-            error: CONTEXT_TRANSLATION_ERROR_MESSAGE
+            error: CONTEXT_TRANSLATION_ERROR_MESSAGE,
+            errorCode: "TRANSLATION_UNAVAILABLE",
+            requestId
         });
     }
-});
+}
+
+app.options("/api/translate", handleTranslateOptions);
+app.options("/api/translate-context", handleTranslateOptions);
+app.post("/api/translate", handleContextTranslateRequest);
+app.post("/api/translate-context", handleContextTranslateRequest);
 
 app.get("/api/vocabulary/lookup", async (req, res) => {
     try {

@@ -3,6 +3,7 @@
     const ANONYMOUS_SESSION_KEY = "ieltsx.anonymousSessionId.v1";
     const CACHE_PREFIX = "readingVocabulary";
     const ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
+    const TRANSLATE_API_ENDPOINT = "/api/translate";
     const WORD_PATTERN = /[A-Za-z0-9]+(?:[\u2019'\-][A-Za-z0-9]+)*/g;
     const PASSAGE_SELECTORS = [
         ".reading-passage",
@@ -617,7 +618,7 @@
         const cached = getCached(entryKey, testId, passageId);
         if (cached) return cached;
 
-        const response = await fetch("/api/translate-context", {
+        const response = await fetch(TRANSLATE_API_ENDPOINT, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -636,7 +637,12 @@
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
-            throw new Error(data.error || "Translation lookup failed");
+            const error = new Error(data.error || "Translation lookup failed");
+            error.status = response.status;
+            error.endpoint = TRANSLATE_API_ENDPOINT;
+            error.errorCode = data.errorCode || "";
+            error.requestId = data.requestId || "";
+            throw error;
         }
 
         const record = normalizeTranslationRecord(data, { selectedText });
@@ -676,7 +682,14 @@
             const record = await fetchTranslation(selectedText, target);
             showPopup(target, selectedText, renderRecord(record), false);
         } catch (error) {
-            console.error(error);
+            console.error("Reading translation failed", {
+                message: error?.message || String(error),
+                endpoint: error?.endpoint || TRANSLATE_API_ENDPOINT,
+                status: error?.status || null,
+                errorCode: error?.errorCode || "",
+                requestId: error?.requestId || "",
+                selectedText
+            });
             showPopup(target, selectedText, `<p>${ERROR_MESSAGE}</p>`, false);
         }
     }

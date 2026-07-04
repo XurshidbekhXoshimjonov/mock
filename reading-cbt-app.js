@@ -30,6 +30,7 @@ const FULLSCREEN_STATE_EVENT = "ieltsx-fullscreen-state-change";
 const VOCABULARY_ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
 const ANONYMOUS_SESSION_KEY = "ieltsx.anonymousSessionId.v1";
 const VOCABULARY_STORAGE_PREFIX = "readingVocabulary";
+const TRANSLATE_API_ENDPOINT = "/api/translate";
 
 function fullscreenButtons() {
     return Array.from(document.querySelectorAll("[data-fullscreen-toggle]"));
@@ -2531,7 +2532,7 @@ function ReadingApp() {
             return pending;
         }
 
-        const request = fetch("/api/translate-context", {
+        const request = fetch(TRANSLATE_API_ENDPOINT, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -2550,7 +2551,12 @@ function ReadingApp() {
             .then(async (response) => {
                 const data = await response.json().catch(() => ({}));
                 if (!response.ok) {
-                    throw new Error(data.error || VOCABULARY_ERROR_MESSAGE);
+                    const error = new Error(data.error || VOCABULARY_ERROR_MESSAGE);
+                    error.status = response.status;
+                    error.endpoint = TRANSLATE_API_ENDPOINT;
+                    error.errorCode = data.errorCode || "";
+                    error.requestId = data.requestId || "";
+                    throw error;
                 }
 
                 const record = normalizeVocabularyLookupRecord(data, baseRecord);
@@ -2655,7 +2661,15 @@ function ReadingApp() {
                 ));
             })
             .catch((error) => {
-                console.error(error);
+                console.error("Reading vocabulary translation failed", {
+                    message: error?.message || String(error),
+                    endpoint: error?.endpoint || TRANSLATE_API_ENDPOINT,
+                    status: error?.status || null,
+                    errorCode: error?.errorCode || "",
+                    requestId: error?.requestId || "",
+                    selectedText: clickedWord,
+                    passageId
+                });
                 const fallbackRecord = {
                     ...baseRecord,
                     definition: "",
