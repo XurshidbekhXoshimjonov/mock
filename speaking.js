@@ -976,6 +976,9 @@
                     state.voiceFlow.latestTranscript = recording.transcript || state.voiceFlow.latestTranscript || "";
                     state.voiceFlow.latestUserMessage = recording.transcript || state.voiceFlow.latestUserMessage || "";
                 }
+                if (recording.scope?.mode === "voice-flow" && state.voiceFlow && !state.voiceFlow.cancelled) {
+                    state.voiceFlow.latestTranscript = recording.transcript || "Listening...";
+                }
                 renderCurrentTest();
             };
             recognition.onerror = () => {};
@@ -1713,26 +1716,14 @@
 
         state.test = test;
         state.loading = false;
-        state.hasStarted = true;
+        state.hasStarted = false;
         state.voiceFlow = createVoiceFlow();
         logMockSpeakingTransition("mock speaking simulation loaded", {
             part1Total: mockPartQuestions(1).length,
             part3Total: mockPartQuestions(3).length
         });
-        startHeaderTimer(getHeaderTotalSeconds());
         renderCurrentTest();
         notifyMockSpeakingReady();
-
-        window.setTimeout(() => {
-            const flow = state.voiceFlow;
-            if (!flow || flow.started || flow.cancelled || state.loading) return;
-            startVoiceFlow().catch((error) => {
-                console.error("[Mock Speaking] simulation start failed:", error);
-                state.error = error.message || "Speaking simulation could not start.";
-                notifyMockSpeakingError(error);
-                renderCurrentTest();
-            });
-        }, 300);
     }
 
     function defaultPartForMode(mode, index) {
@@ -2421,6 +2412,7 @@
             flow.micPermission = "denied";
             flow.phase = "failed";
             flow.started = false;
+            state.hasStarted = false;
             flow.status = error?.name === "NotAllowedError"
                 ? "Microphone permission was denied. Allow microphone access and try again."
                 : (error.message || "Could not access your microphone. Check browser permissions and try again.");
@@ -2515,6 +2507,13 @@
         };
 
         flow.vadFrame = window.requestAnimationFrame(tick);
+    }
+
+    async function enterMockSpeakingExamDisplay() {
+        if (!isSpeakingMockMode) return;
+        try {
+            await enterSpeakingFullScreen();
+        } catch {}
     }
 
     function cancelActiveFreeVoiceRecording() {
@@ -2914,6 +2913,9 @@
         state.voiceFlow = createVoiceFlow();
         const flow = state.voiceFlow;
         flow.started = true;
+        if (isSpeakingMockMode) {
+            await enterMockSpeakingExamDisplay();
+        }
         logMockSpeakingTransition("transition: idle -> requestingMicPermission");
         if (flow.speakingMode === "free") {
             startFreeVoiceSession();
@@ -2924,6 +2926,7 @@
         } catch {
             return;
         }
+        startHeaderTimer(getHeaderTotalSeconds());
         flow.phase = "thinking";
         flow.status = "Thinking...";
         logMockSpeakingTransition("transition: requestingMicPermission -> movingNext start");
@@ -3130,6 +3133,7 @@
             };
 
             recording.recognition = startRecognition(recording);
+            const recognitionSupported = Boolean(recording.recognition);
             if (recording.recognition) {
                 recording.recognition.onspeechstart = () => markVoiceFlowSpeech(recording);
                 recording.recognition.onsoundstart = () => markVoiceFlowSpeech(recording);
@@ -3141,7 +3145,9 @@
             state.recording = recording;
             flow.phase = "listening";
             flow.status = "Recording...";
-            flow.latestTranscript = "";
+            flow.latestTranscript = recognitionSupported
+                ? "Listening..."
+                : "Speech recognition is not supported in this browser. Your audio is still being recorded.";
             recorder.start(250);
             logMockSpeakingTransition("recording started", {
                 part,
@@ -3149,7 +3155,7 @@
                 speechRecognitionLanguage: recording.recognition?.lang || "unavailable"
             });
             startVoiceFlowVad(recording);
-            const maxSeconds = part === 2 ? SPEAKING_TIMING.part2Speaking : part === 3 ? 90 : 75;
+            const maxSeconds = part === 2 ? SPEAKING_TIMING.part2Speaking : part === 3 ? 60 : 45;
             flow.answerTimer = window.setTimeout(() => {
                 if (state.recording === recording) stopVoiceFlowRecording("time-limit");
             }, maxSeconds * 1000);
@@ -3230,11 +3236,13 @@
             return;
         }
         const transcript = String(recording.transcript || recording.finalTranscript || "").trim();
+        const duration = Math.round((Date.now() - recording.startedAt) / 1000);
         const answer = {
             blob: recording.blob,
             audioUrl: recording.audioUrl,
             transcript,
-            durationSeconds: Math.round((Date.now() - recording.startedAt) / 1000),
+            durationSeconds: duration,
+            duration,
             timestamp: recording.timestamp || new Date(recording.startedAt).toISOString(),
             savedAt: new Date().toISOString(),
             stopReason: recording.stopReason || "unknown",
@@ -3336,6 +3344,7 @@
             userAnswer: answer.transcript || "",
             audioUrl: answer.audioUrl || "",
             durationSeconds: answer.durationSeconds || 0,
+            duration: answer.duration || answer.durationSeconds || 0,
             timestamp: answer.timestamp || "",
             savedAt: answer.savedAt || "",
             stopReason: answer.stopReason || ""
@@ -3466,6 +3475,17 @@
         if (state.error) return state.error;
         if (state.loading && (flow.phase === "feedback" || flow.phase === "completed")) return "Speaking test completed";
         if (state.loading) return "Thinking...";
+        if (isSpeakingMockMode && !isFreeVoiceFlow(flow)) {
+            if (flow.phase === "mic-permission") return "Requesting microphone permission...";
+            if (flow.phase === "examiner-speaking") return "Listen to the question...";
+            if (flow.phase === "answer-starting" || flow.phase === "user-turn") return "Recording will start automatically...";
+            if (flow.phase === "listening") return "Recording your answer...";
+            if (flow.phase === "answer-saved") return "Transcribing your answer...";
+            if (flow.phase === "moving" || flow.phase === "thinking") return "Moving to next question...";
+            if (flow.phase === "preparing") return "Preparation time...";
+            if (flow.phase === "failed") return flow.status || "Connection failed. Please try again.";
+            if (flow.phase === "completed" || flow.phase === "feedback") return "Speaking section completed";
+        }
         if (flow.phase === "mic-permission") return "Requesting microphone permission...";
         if (flow.phase === "speaking") return "AI is speaking...";
         if (flow.phase === "examiner-speaking") return isFreeVoiceFlow(flow) ? "AI is speaking..." : "Examiner speaking...";
@@ -3542,8 +3562,15 @@
     }
 
     function renderLatestTranscript(flow) {
-        const transcript = String(flow.latestTranscript || "").trim();
-        if (!transcript || transcript === "Transcribing your answer..." || transcript === "Transcribing what you said...") {
+        const fallbackTranscript = isSpeakingMockMode && !isFreeVoiceFlow(flow) && flow.phase === "listening" ? "Listening..." : "";
+        const transcript = String(flow.latestTranscript || fallbackTranscript).trim();
+        const pendingMessages = new Set([
+            "Listening...",
+            "Transcribing your answer...",
+            "Transcribing what you said...",
+            "Speech recognition is not supported in this browser. Your audio is still being recorded."
+        ]);
+        if (!transcript || pendingMessages.has(transcript)) {
             return transcript ? `<p class="ai-transcript-pending">${escapeHtml(transcript)}</p>` : "";
         }
         const isFreeMode = flow.speakingMode === "free";
@@ -3607,13 +3634,67 @@
         `;
     }
 
+    function renderMockVoiceTopbar() {
+        return `
+            <header class="ai-voice-topbar ai-voice-topbar--exam">
+                <div class="ai-voice-badge">
+                    ${lucideIcon("mic", "ai-voice-badge-icon")}
+                    <span>IELTS Speaking Test</span>
+                </div>
+                <button class="ai-voice-settings" type="button" aria-label="Settings" title="Settings">
+                    ${lucideIcon("sliders", "ai-voice-settings-icon")}
+                </button>
+            </header>
+        `;
+    }
+
+    function renderMockSpeakingIntro(flow) {
+        const statusText = state.error || flow.status || "The test will start soon";
+        return `
+            <section class="ai-speaking-screen ai-speaking-screen--mock ai-speaking-screen--intro" data-ai-phase="idle" aria-label="IELTS Speaking Test intro">
+                <div class="ai-speaking-bg" aria-hidden="true"></div>
+                ${renderMockVoiceTopbar()}
+                <main class="ai-voice-main ai-voice-main--intro" aria-live="polite">
+                    <div class="ai-intro-copy">
+                        <span>IELTS Speaking Test</span>
+                        <h1>The test will start soon</h1>
+                        <p>${escapeHtml(statusText)}</p>
+                    </div>
+                    <div class="ai-orb-stage" aria-hidden="true">
+                        <span class="ai-orbit ai-orbit-outer"></span>
+                        <span class="ai-orbit ai-orbit-middle"><span class="ai-orbit-dot"></span></span>
+                        <span class="ai-orbit ai-orbit-inner"></span>
+                        <div class="ai-orb"></div>
+                    </div>
+                    <button class="ai-start-speaking-btn" type="button" data-action="voice-mic">
+                        ${lucideIcon("mic", "ai-voice-control-icon")}
+                        <span>Start Speaking Test</span>
+                    </button>
+                    <p class="ai-intro-note">Microphone permission will be requested once. The examiner will guide the rest automatically.</p>
+                </main>
+                <div class="ai-voice-controls ai-voice-controls--intro" aria-label="Speaking controls">
+                    <div class="ai-voice-control-stack">
+                        <button class="ai-voice-end-button ai-voice-end-button--mock" type="button" data-action="voice-end" aria-label="Stop Test" title="Stop Test">
+                            ${lucideIcon("x", "ai-voice-control-icon")}
+                        </button>
+                        <span>Stop Test</span>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
     function renderVoiceFlowPlayer() {
         setPlayerMode(true);
         document.body.classList.add("speaking-voice-mode");
         const cbtHeader = document.getElementById("speakingCbtHeader");
-        if (cbtHeader) cbtHeader.style.display = isSpeakingMockMode ? "grid" : "none";
+        if (cbtHeader) cbtHeader.style.display = "none";
         if (isSpeakingMockMode) updatePlayerHeader();
         const flow = ensureVoiceFlow();
+        if (isSpeakingMockMode && !flow.started) {
+            app.innerHTML = renderMockSpeakingIntro(flow);
+            return;
+        }
         const isRecording = state.recording?.scope?.mode === "voice-flow" || state.recording?.scope?.mode === "free-conversation";
         const isFreeMode = flow.speakingMode === "free";
         const visualPhase = isFreeMode
@@ -3623,7 +3704,9 @@
                     ? "thinking"
                     : flow.phase)
             : (flow.phase === "examiner-speaking" ? "speaking" : (state.loading ? "thinking" : flow.phase));
-        const message = flow.currentExaminerMessage || "Tap the microphone to begin.";
+        const message = !isFreeMode && Number(flow.part) === 2 && (flow.phase === "preparing" || flow.examPhase === "prep")
+            ? "Prepare your cue card answer."
+            : (flow.latestQuestion || flow.currentExaminerMessage || "Tap the microphone to begin.");
         const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : (isSpeakingMockMode ? "IELTSX Mock Test Speaking" : "IELTS Speaking Test");
         const freeSessionActive = isFreeVoiceSessionActive(flow);
         const mockAutoMicDisabled = isSpeakingMockMode
@@ -3648,7 +3731,7 @@
         const micIcon = flow.phase === "failed" ? lucideIcon("rotate", "ai-voice-control-icon") : lucideIcon("mic", "ai-voice-control-icon");
         const endLabel = isFreeMode ? "End session" : "Stop Test";
         const topbarMarkup = isSpeakingMockMode
-            ? `<header class="ai-voice-topbar ai-voice-topbar--mock">${renderVoicePartTracker(flow)}</header>`
+            ? renderMockVoiceTopbar()
             : `
                 <header class="ai-voice-topbar">
                     <div class="ai-voice-badge">
@@ -3666,6 +3749,7 @@
                 <div class="ai-speaking-bg" aria-hidden="true"></div>
                 ${topbarMarkup}
                 <main class="ai-voice-main" aria-live="polite">
+                    ${isSpeakingMockMode ? renderVoicePartTracker(flow) : ""}
                     ${renderVoiceProgress(flow)}
                     <p class="ai-voice-status">${escapeHtml(voiceStatusText())}</p>
                     <div class="ai-orb-stage ${isRecording ? "is-recording" : ""}">
@@ -4185,18 +4269,20 @@
             }
             if (!entry.audioUrl && part?.audioUrl) entry.audioUrl = part.audioUrl;
             entry.answers.push({
-                part: partNumber,
-                title: part?.title || `Part ${partNumber}`,
-                    prompt,
-                    questionText: prompt,
-                    transcript,
-                    userAnswer: transcript,
-                    audioUrl: part?.audioUrl || "",
-                    durationSeconds: Number(part?.durationSeconds) || 0,
-                    timestamp: part?.timestamp || "",
-                    savedAt: part?.savedAt || "",
-                    stopReason: part?.stopReason || ""
-                });
+                        part: partNumber,
+                        title: part?.title || `Part ${partNumber}`,
+                        questionIndex: Number(part?.questionIndex || 0),
+                        prompt,
+                        questionText: prompt,
+                        transcript,
+                        userAnswer: transcript,
+                        audioUrl: part?.audioUrl || "",
+                        durationSeconds: Number(part?.durationSeconds || part?.duration) || 0,
+                        duration: Number(part?.duration || part?.durationSeconds) || 0,
+                        timestamp: part?.timestamp || "",
+                        savedAt: part?.savedAt || "",
+                        stopReason: part?.stopReason || ""
+                    });
         });
 
         return [1, 2, 3]
