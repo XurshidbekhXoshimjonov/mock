@@ -182,6 +182,1027 @@
       },
       "results": [
         {
+          "id": "mock-result-1783263462326-7c3469",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 1",
+          "overallBand": 2,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 1.5,
+            "status": "completed"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T14:55:24.361Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T14:55:26.109Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T14:55:27.902Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "📢 Share this video with your friends on social media.",
+                "part2": "alright thank you.",
+                "part3": "I'll get you since"
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "📢 Share this video with your friends on social media.",
+                  "userAnswer": "📢 Share this video with your friends on social media.",
+                  "audioUrl": "/uploads/speaking/1783263447159-5e131366f79a5-audio.webm",
+                  "testId": "mock-speaking-mock-test-4"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "alright thank you.",
+                  "userAnswer": "alright thank you.",
+                  "audioUrl": "/uploads/speaking/1783263447165-a42e75a59e57e-audio.webm",
+                  "testId": "mock-speaking-mock-test-4"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "I'll get you since",
+                  "userAnswer": "I'll get you since",
+                  "audioUrl": "/uploads/speaking/1783263447166-aa250ea0302aa8-audio.webm",
+                  "testId": "mock-speaking-mock-test-4"
+                }
+              ],
+              "result": {
+                "overallBand": 1.5,
+                "fluencyCoherence": 1,
+                "lexicalResource": 1,
+                "grammaticalRangeAccuracy": 1,
+                "pronunciation": 2,
+                "detailedFeedback": "The responses provided are extremely limited and do not address the questions asked. There is a lack of coherent speech and relevant content, which severely impacts the overall score.",
+                "strengths": [],
+                "problems": [
+                  "Responses are too short and do not answer the questions.",
+                  "Lack of fluency and coherence in speech.",
+                  "Very limited vocabulary used.",
+                  "Grammatical structures are not demonstrated.",
+                  "Pronunciation is unclear due to the lack of content."
+                ],
+                "howToImprove": [
+                  "Provide complete answers to the questions asked.",
+                  "Practice speaking in full sentences to improve fluency.",
+                  "Expand vocabulary by reading and listening to English materials.",
+                  "Work on grammatical accuracy by practicing different sentence structures.",
+                  "Engage in conversations to enhance pronunciation and clarity."
+                ],
+                "improvedAnswers": [
+                  "I currently study at university, where I focus on my major. I enjoy learning new things and meeting new people.",
+                  "What I like most about my hometown is the friendly community and beautiful parks where I can relax.",
+                  "I use technology for learning almost every day, especially for online courses and research.",
+                  "In my free time, I usually like to read books or go for a walk in nature."
+                ],
+                "practicalTips": [
+                  "Join a speaking club or find a language partner to practice speaking regularly.",
+                  "Record yourself speaking and listen to identify areas for improvement.",
+                  "Use flashcards to learn new vocabulary and practice using them in sentences.",
+                  "Set specific goals for each practice session, such as focusing on fluency or vocabulary."
+                ]
+              },
+              "band": 1.5,
+              "completedAt": "2026-07-05T14:57:41.693Z"
+            }
+          },
+          "completedAt": "2026-07-05T14:57:42.091Z"
+        },
+        {
+          "id": "mock-result-1783262955559-3efcad",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 1",
+          "overallBand": 2.5,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 0,
+            "status": "pending"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T14:46:13.200Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T14:46:15.237Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T14:46:16.965Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/79a4cd6e-f59a-49f8-94b4-de2d2bea90b3"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/c9ebfca6-2af2-4c09-ace6-9594f5a54106"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T14:49:14.924Z"
+            }
+          },
+          "completedAt": "2026-07-05T14:49:15.337Z"
+        },
+        {
+          "id": "mock-result-1783227289811-a1994b",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 4",
+          "overallBand": 2.5,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 0,
+            "status": "pending"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T04:52:34.421Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T04:52:36.119Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T04:52:38.159Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/462ae4c7-2ae1-47af-b685-675741f9c2ff"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/39e18cbd-852c-4962-a6bf-96ead2830dfe"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T04:54:49.143Z"
+            }
+          },
+          "completedAt": "2026-07-05T04:54:49.583Z"
+        },
+        {
+          "id": "mock-result-1783223745466-95dce7",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 4",
+          "overallBand": 4,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 5,
+            "status": "completed"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:52:26.486Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:52:28.446Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T03:52:30.384Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "beginning  Factory  near me",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/ffafa6b0-a81f-4c2a-8cd1-71df859aff77"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "beginning  Factory  near me",
+                  "userAnswer": "beginning  Factory  near me",
+                  "audioUrl": "blob:http://localhost:30004/159e5066-a182-4edb-b0b2-9a785ff29a3b"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T03:55:44.774Z"
+            }
+          },
+          "completedAt": "2026-07-05T03:55:45.218Z"
+        },
+        {
+          "id": "mock-result-1783220950857-b599dd",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 4",
+          "overallBand": 2.5,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 0,
+            "status": "pending"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:07:21.355Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:07:23.890Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T03:07:26.356Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/76f75bc0-9546-43ad-9e3a-98ef8c6be769"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/4b446cea-d152-423a-a9a9-6dc8a5669922"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T03:09:10.156Z"
+            }
+          },
+          "completedAt": "2026-07-05T03:09:10.615Z"
+        },
+        {
+          "id": "mock-result-1783220627989-cd2dbd",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 4",
+          "overallBand": 4,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 5,
+            "status": "completed"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:01:33.490Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T03:01:34.936Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T03:01:37.497Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "what",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/66b37366-adf6-4bed-a2e7-12ba632bc7c2"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "what",
+                  "userAnswer": "what",
+                  "audioUrl": "blob:http://localhost:30004/67063e3e-ff82-46cd-bfdc-0d363daab18a"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T03:03:47.269Z"
+            }
+          },
+          "completedAt": "2026-07-05T03:03:47.736Z"
+        },
+        {
+          "id": "mock-result-1783219334347-a9b8bc",
+          "testId": "mock-test-4",
+          "testNumber": 4,
+          "title": "Mock Test 4",
+          "overallBand": 2.5,
+          "listening": {
+            "correct": 0,
+            "total": 40,
+            "band": 2.5,
+            "rawBandBasis": 0
+          },
+          "reading": {
+            "correct": 0,
+            "total": 40,
+            "band": 0,
+            "rawBandBasis": 0
+          },
+          "writing": {
+            "band": 0,
+            "status": "pending"
+          },
+          "speaking": {
+            "band": 0,
+            "status": "pending"
+          },
+          "completedSections": [
+            "listening",
+            "reading",
+            "writing",
+            "speaking"
+          ],
+          "answers": {
+            "listening": {
+              "answers": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": "",
+                "11": "",
+                "12": "",
+                "13": "",
+                "14": "",
+                "15": "",
+                "16": "",
+                "17": "",
+                "18": "",
+                "19": "",
+                "20": "",
+                "21": "",
+                "22": "",
+                "23": "",
+                "24": "",
+                "25": "",
+                "26": "",
+                "27": "",
+                "28": "",
+                "29": "",
+                "30": "",
+                "31": "",
+                "32": "",
+                "33": "",
+                "34": "",
+                "35": "",
+                "36": "",
+                "37": "",
+                "38": "",
+                "39": "",
+                "40": ""
+              },
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T02:40:36.208Z"
+            },
+            "reading": {
+              "answers": {},
+              "result": {},
+              "band": 0,
+              "completedAt": "2026-07-05T02:40:37.971Z"
+            },
+            "writing": {
+              "answers": {
+                "task1": "",
+                "task2": ""
+              },
+              "result": {},
+              "band": 0,
+              "timeSpent": 0,
+              "completedAt": "2026-07-05T02:40:39.707Z"
+            },
+            "speaking": {
+              "answers": {
+                "part1": "",
+                "part2": "",
+                "part3": ""
+              },
+              "parts": [
+                {
+                  "part": 1,
+                  "title": "Part 1: Mock Test 4 - Speaking Part 1",
+                  "prompt": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "questionText": "Answer general IELTS Speaking Part 1 questions naturally.\nDo you work or study?\nWhat do you like about your hometown?\nHow often do you use technology for learning?\nWhat do you usually do in your free time?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/0da603e8-3b58-4f73-a6fe-b8dd14975f67"
+                },
+                {
+                  "part": 2,
+                  "title": "Part 2: Mock Test 4 - Speaking Part 2",
+                  "prompt": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "questionText": "Describe a useful skill you learned.\nwhat the skill is\nhow you learned it\nhow often you use it\nand explain why it is useful to you",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": "blob:http://localhost:30004/1959dc87-290f-4d87-856f-6ff0a154b9cd"
+                },
+                {
+                  "part": 3,
+                  "title": "Part 3: Mock Test 4 - Speaking Part 3",
+                  "prompt": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "questionText": "Answer follow-up questions related to learning and skills.\nWhy do people need to keep learning new skills?\nWhat skills are most important for young people today?\nShould schools teach more practical skills?\nHow has technology changed the way people learn?",
+                  "transcript": "",
+                  "userAnswer": "",
+                  "audioUrl": ""
+                }
+              ],
+              "result": {
+                "overallBand": 0,
+                "status": "incomplete"
+              },
+              "band": 0,
+              "completedAt": "2026-07-05T02:42:13.715Z"
+            }
+          },
+          "completedAt": "2026-07-05T02:42:14.120Z"
+        },
+        {
           "id": "mock-result-1782883139150-59be16",
           "testId": "mock-test-4",
           "testNumber": 4,
@@ -587,6 +1608,10 @@
           "completedAt": "2026-06-24T15:05:18.796Z"
         }
       ]
+    },
+    "1779126747331-8f56c856": {
+      "progress": {},
+      "results": []
     }
   }
 }

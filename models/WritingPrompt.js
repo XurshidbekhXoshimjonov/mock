@@ -31,6 +31,10 @@ const writingPromptSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    visualDiagramUrl: {
+        type: String,
+        default: ""
+    },
     imageUrl: {
         type: String,
         default: ""

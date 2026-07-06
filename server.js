@@ -185,8 +185,8 @@ const listeningImageUpload = multer({
     storage: listeningImageStorage,
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
-        const accepted = [".jpg", ".jpeg", ".png", ".webp"].includes(extension);
-        cb(accepted ? null : new Error("Image must be a JPG, PNG, or WebP file"), accepted);
+        const accepted = [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(extension);
+        cb(accepted ? null : new Error("Image must be a JPG, PNG, WebP, or GIF file"), accepted);
     }
 });
 
@@ -212,8 +212,8 @@ const mockImageUpload = multer({
     storage: mockAssetStorage,
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
-        const accepted = [".jpg", ".jpeg", ".png", ".webp"].includes(extension);
-        cb(accepted ? null : new Error("Image must be a JPG, PNG, or WebP file"), accepted);
+        const accepted = [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(extension);
+        cb(accepted ? null : new Error("Image must be a JPG, PNG, WebP, or GIF file"), accepted);
     }
 });
 
@@ -4180,6 +4180,7 @@ function requirePageAdmin(req, res, next) {
 
 // Public pages clean routes
 app.get("/", (req, res) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
     res.sendFile(path.join(ROOT_DIR, "ieltsmock.html"));
 });
 
@@ -4319,10 +4320,12 @@ app.get("/mock-test", requirePageAuth, (req, res) => {
 });
 
 app.get("/mock-test/:id/result", requirePageAuth, (req, res) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
     res.sendFile(path.join(ROOT_DIR, "mock-test-result.html"));
 });
 
 app.get("/mock-test-result/:resultId", requirePageAuth, (req, res) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
     res.sendFile(path.join(ROOT_DIR, "mock-test-result.html"));
 });
 
@@ -4764,6 +4767,469 @@ async function mapProfileFieldsToResult(userId, result) {
     return mapped;
 }
 
+const CERT_COLORS = {
+    navy: "#06164a",
+    blue: "#2563eb",
+    violet: "#6d28d9",
+    purple: "#4f46e5",
+    border: "#c9d7f2",
+    pale: "#f7f9ff",
+    muted: "#475569",
+    softBlue: "#eef4ff"
+};
+
+function certificateValue(value, fallback = "Not provided") {
+    const text = String(value ?? "").trim();
+    return text || fallback;
+}
+
+function certificateFirstNonEmpty(...values) {
+    return values.map((value) => String(value ?? "").trim()).find(Boolean) || "";
+}
+
+function certificateCandidateName(result = {}) {
+    const composed = [result.firstName, result.familyName]
+        .map((part) => String(part || "").trim())
+        .filter(Boolean)
+        .join(" ");
+
+    return certificateFirstNonEmpty(result.fullName, composed, result.name, result.email, "Candidate");
+}
+
+function certificateTestTakerId(result = {}, user = {}) {
+    return certificateFirstNonEmpty(result.testTakerId, user.testTakerId, user.memberId, "000");
+}
+
+function certificateBand(value) {
+    const number = Number.parseFloat(value);
+    return Number.isFinite(number) ? number.toFixed(1) : "0.0";
+}
+
+function certificateDate(value, fallback = "Not provided") {
+    const raw = String(value ?? "").trim();
+    if (!raw) return fallback;
+    const date = new Date(raw);
+    if (Number.isNaN(date.getTime())) return raw;
+
+    return date.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+function certificateGeneratedAt(date = new Date()) {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Tashkent",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+    }).formatToParts(date);
+    const get = (type) => parts.find((part) => part.type === type)?.value || "";
+    return `${get("day")} ${get("month")} ${get("year")}, ${get("hour")}:${get("minute")} (UTC+5)`;
+}
+
+function certificateNationality(result = {}) {
+    const raw = certificateFirstNonEmpty(result.nationality, result.firstLanguage, result.countryOfNationality);
+    if (!raw) return "Not provided";
+    if (/^uzbekistan$/i.test(raw)) return "Uzbek";
+    return raw;
+}
+
+function certificateVerificationDate(value) {
+    const date = new Date(value);
+    const valid = Number.isNaN(date.getTime()) ? new Date() : date;
+    const mm = String(valid.getMonth() + 1).padStart(2, "0");
+    const dd = String(valid.getDate()).padStart(2, "0");
+    const yy = String(valid.getFullYear()).slice(-2);
+    return `${mm}${dd}${yy}`;
+}
+
+function certificateVerificationId(result = {}, testTakerId = "000") {
+    const testNumber = String(result.testNumber || result.number || "").replace(/\D/g, "") || "X";
+    const dateCode = certificateVerificationDate(result.completedAt || result.createdAt || result.testDate);
+    const suffix = String(result.id || "")
+        .split("-")
+        .filter(Boolean)
+        .pop()
+        ?.replace(/[^a-z0-9]/gi, "")
+        .slice(0, 6)
+        .toUpperCase() || "RESULT";
+
+    return `IELTSX-MT${testNumber}-${testTakerId}-${dateCode}-${suffix}`;
+}
+
+function certificateSafeFileName(value) {
+    return String(value || "000").replace(/[^a-z0-9_-]/gi, "") || "000";
+}
+
+function drawSecurityPattern(doc) {
+    doc.save();
+    doc.opacity(0.34);
+    doc.strokeColor("#e9efff");
+    doc.lineWidth(0.55);
+
+    for (let y = 138; y < 790; y += 18) {
+        doc.moveTo(0, y);
+        for (let x = 0; x < 620; x += 120) {
+            doc.bezierCurveTo(x + 30, y - 9, x + 70, y + 9, x + 120, y);
+        }
+        doc.stroke();
+    }
+
+    doc.restore();
+}
+
+function drawLogo(doc, x, y) {
+    doc.save();
+    const logoPath = path.join(ROOT_DIR, "logo.png");
+    if (fs.existsSync(logoPath)) {
+        doc.image(logoPath, x, y - 2, {
+            width: 172
+        });
+        doc.restore();
+        return;
+    }
+
+    doc.font("Helvetica-Bold").fontSize(35).fillColor(CERT_COLORS.navy).text("IELTS", x, y, {
+        width: 116,
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(43).fillColor(CERT_COLORS.blue).text("X", x + 116, y - 6, {
+        width: 42,
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(12).fillColor(CERT_COLORS.navy).text(".ORG", x + 153, y + 28, {
+        width: 42,
+        lineBreak: false
+    });
+    doc.restore();
+}
+
+function drawSectionTab(doc, x, y, text, width = 132) {
+    doc.save();
+    doc.roundedRect(x, y, width, 28, 5).fill(CERT_COLORS.navy);
+    doc.font("Helvetica-Bold").fontSize(10).fillColor("#ffffff").text(text, x + 16, y + 9, {
+        width: width - 26,
+        lineBreak: false
+    });
+    doc.restore();
+}
+
+function drawLineIcon(doc, type, x, y, color = CERT_COLORS.navy) {
+    doc.save();
+    doc.strokeColor(color).lineWidth(1.25).lineCap("round").lineJoin("round");
+
+    if (type === "user") {
+        doc.circle(x + 7, y + 5, 4).stroke();
+        doc.moveTo(x, y + 17).quadraticCurveTo(x + 7, y + 9, x + 14, y + 17).stroke();
+    } else if (type === "id") {
+        doc.roundedRect(x, y + 1, 16, 13, 1.5).stroke();
+        doc.moveTo(x + 4, y + 5).lineTo(x + 12, y + 5).stroke();
+        doc.moveTo(x + 4, y + 9).lineTo(x + 10, y + 9).stroke();
+    } else if (type === "calendar") {
+        doc.roundedRect(x, y + 2, 17, 15, 2).stroke();
+        doc.moveTo(x, y + 7).lineTo(x + 17, y + 7).stroke();
+        doc.moveTo(x + 5, y).lineTo(x + 5, y + 4).stroke();
+        doc.moveTo(x + 12, y).lineTo(x + 12, y + 4).stroke();
+    } else if (type === "globe") {
+        doc.circle(x + 8, y + 8, 8).stroke();
+        doc.moveTo(x, y + 8).lineTo(x + 16, y + 8).stroke();
+        doc.moveTo(x + 8, y).bezierCurveTo(x + 4, y + 5, x + 4, y + 11, x + 8, y + 16).stroke();
+        doc.moveTo(x + 8, y).bezierCurveTo(x + 12, y + 5, x + 12, y + 11, x + 8, y + 16).stroke();
+    } else if (type === "flag") {
+        doc.moveTo(x + 2, y).lineTo(x + 2, y + 18).stroke();
+        doc.moveTo(x + 2, y + 2).lineTo(x + 15, y + 2).lineTo(x + 12, y + 8).lineTo(x + 2, y + 8).stroke();
+    } else if (type === "clock") {
+        doc.circle(x + 8, y + 8, 8).stroke();
+        doc.moveTo(x + 8, y + 4).lineTo(x + 8, y + 9).lineTo(x + 12, y + 11).stroke();
+    } else if (type === "monitor") {
+        doc.roundedRect(x, y + 2, 18, 12, 1.5).stroke();
+        doc.moveTo(x + 9, y + 14).lineTo(x + 9, y + 18).stroke();
+        doc.moveTo(x + 5, y + 18).lineTo(x + 13, y + 18).stroke();
+    } else if (type === "mail") {
+        doc.roundedRect(x, y + 3, 18, 13, 1.5).stroke();
+        doc.moveTo(x + 1, y + 5).lineTo(x + 9, y + 11).lineTo(x + 17, y + 5).stroke();
+    } else if (type === "shield") {
+        doc.moveTo(x + 8, y).lineTo(x + 16, y + 3).lineTo(x + 15, y + 10).quadraticCurveTo(x + 13, y + 16, x + 8, y + 18).quadraticCurveTo(x + 3, y + 16, x + 1, y + 10).lineTo(x, y + 3).closePath().stroke();
+    }
+
+    doc.restore();
+}
+
+function drawDetailRow(doc, icon, label, value, x, y, width) {
+    drawLineIcon(doc, icon, x, y + 2);
+    doc.font("Helvetica").fontSize(9.2).fillColor("#111827").text(label, x + 30, y, {
+        width,
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(10.3).fillColor("#0b102f").text(certificateValue(value), x + 30, y + 14, {
+        width,
+        lineBreak: false
+    });
+}
+
+function drawSkillIcon(doc, skill, cx, cy) {
+    doc.save();
+    doc.strokeColor(CERT_COLORS.navy).lineWidth(1.7).lineCap("round").lineJoin("round");
+    if (skill === "Listening") {
+        doc.moveTo(cx - 13, cy + 6).lineTo(cx - 13, cy - 2).bezierCurveTo(cx - 13, cy - 14, cx + 13, cy - 14, cx + 13, cy - 2).lineTo(cx + 13, cy + 6).stroke();
+        doc.roundedRect(cx - 18, cy + 3, 7, 12, 2).stroke();
+        doc.roundedRect(cx + 11, cy + 3, 7, 12, 2).stroke();
+    } else if (skill === "Reading") {
+        doc.moveTo(cx, cy - 13).lineTo(cx, cy + 14).stroke();
+        doc.moveTo(cx, cy - 10).quadraticCurveTo(cx - 16, cy - 17, cx - 18, cy - 4).lineTo(cx - 18, cy + 13).quadraticCurveTo(cx - 9, cy + 8, cx, cy + 14).stroke();
+        doc.moveTo(cx, cy - 10).quadraticCurveTo(cx + 16, cy - 17, cx + 18, cy - 4).lineTo(cx + 18, cy + 13).quadraticCurveTo(cx + 9, cy + 8, cx, cy + 14).stroke();
+    } else if (skill === "Writing") {
+        doc.moveTo(cx - 12, cy + 13).lineTo(cx + 12, cy - 11).stroke();
+        doc.moveTo(cx + 7, cy - 16).lineTo(cx + 16, cy - 7).stroke();
+        doc.moveTo(cx - 15, cy + 17).lineTo(cx - 7, cy + 14).stroke();
+        doc.moveTo(cx - 16, cy + 20).lineTo(cx + 12, cy + 20).stroke();
+    } else {
+        doc.moveTo(cx - 16, cy - 4).quadraticCurveTo(cx - 16, cy - 17, cx, cy - 17).quadraticCurveTo(cx + 17, cy - 17, cx + 17, cy - 3).quadraticCurveTo(cx + 17, cy + 11, cx, cy + 11).lineTo(cx - 9, cy + 18).lineTo(cx - 6, cy + 9).quadraticCurveTo(cx - 16, cy + 5, cx - 16, cy - 4).stroke();
+    }
+    doc.restore();
+}
+
+function drawBandBox(doc, label, score, x, y, w, h) {
+    doc.save();
+    doc.roundedRect(x, y, w, h, 5).fillAndStroke("#f7f9ff", CERT_COLORS.border);
+    drawSkillIcon(doc, label, x + w / 2, y + 26);
+    doc.font("Helvetica-Bold").fontSize(11).fillColor(CERT_COLORS.navy).text(label.toUpperCase(), x, y + 55, {
+        width: w,
+        align: "center",
+        lineBreak: false
+    });
+    doc.rect(x, y + h - 31, w, 31).fill(CERT_COLORS.navy);
+    doc.font("Helvetica-Bold").fontSize(23).fillColor("#ffffff").text(certificateBand(score), x, y + h - 26, {
+        width: w,
+        align: "center",
+        lineBreak: false
+    });
+    doc.restore();
+}
+
+function drawSeal(doc, cx, cy) {
+    doc.save();
+    doc.strokeColor(CERT_COLORS.blue).lineWidth(1.2);
+    doc.circle(cx, cy, 48).stroke();
+    doc.circle(cx, cy, 38).stroke();
+    doc.circle(cx, cy, 24).stroke();
+    doc.font("Helvetica-Bold").fontSize(18).fillColor(CERT_COLORS.blue).text("IELTSX", cx - 36, cy - 12, {
+        width: 72,
+        align: "center",
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(7.5).fillColor(CERT_COLORS.navy).text("MOCK TEST", cx - 32, cy + 10, {
+        width: 64,
+        align: "center",
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(8).fillColor(CERT_COLORS.blue).text("IELTSX.ORG", cx - 30, cy - 39, {
+        width: 60,
+        align: "center",
+        lineBreak: false
+    });
+    doc.text("IELTSX.ORG", cx - 30, cy + 30, {
+        width: 60,
+        align: "center",
+        lineBreak: false
+    });
+    doc.circle(cx - 38, cy, 2.2).fill(CERT_COLORS.blue);
+    doc.circle(cx + 38, cy, 2.2).fill(CERT_COLORS.blue);
+    doc.restore();
+}
+
+function drawFooterInfo(doc, icon, label, value, x, y, width) {
+    drawLineIcon(doc, icon, x, y + 3);
+    doc.font("Helvetica").fontSize(8.4).fillColor("#334155").text(label, x + 28, y, {
+        width,
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(8.6).fillColor(CERT_COLORS.navy).text(value, x + 28, y + 13, {
+        width,
+        lineBreak: false
+    });
+}
+
+async function streamMockResultCertificatePdf(req, res, result) {
+    const PDFDocument = require("pdfkit");
+    const QRCode = require("qrcode");
+    const doc = new PDFDocument({
+        size: "A4",
+        margin: 0,
+        info: {
+            Title: `IELTSX Mock Test Result - ${result.title || "Mock Test"}`,
+            Author: "IELTSX",
+            Subject: "IELTSX Mock Test Result"
+        }
+    });
+
+    const pageWidth = doc.page.width;
+    const pageHeight = doc.page.height;
+    const title = certificateFirstNonEmpty(result.title, result.testNumber ? `Mock Test ${result.testNumber}` : "", "Mock Test");
+    const testTakerId = certificateTestTakerId(result, req.user);
+    const candidate = certificateCandidateName(result);
+    const testDate = certificateDate(result.testDate || result.completedAt || result.createdAt);
+    const verificationId = certificateVerificationId(result, testTakerId);
+    const verificationUrl = `https://ieltsx.org/verify?code=${encodeURIComponent(verificationId)}&result=${encodeURIComponent(result.id || "")}`;
+    const qrBuffer = await QRCode.toBuffer(verificationUrl, {
+        type: "png",
+        width: 96,
+        margin: 1,
+        color: {
+            dark: CERT_COLORS.navy,
+            light: "#ffffff"
+        }
+    });
+    const fileName = `IELTSX-Mock-Test-Result-${certificateSafeFileName(testTakerId)}.pdf`;
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    doc.pipe(res);
+
+    doc.rect(0, 0, pageWidth, pageHeight).fill("#ffffff");
+    drawSecurityPattern(doc);
+
+    drawLogo(doc, 36, 38);
+    doc.font("Helvetica-Bold").fontSize(19).fillColor(CERT_COLORS.navy).text("IELTSX MOCK TEST RESULT", 284, 40, {
+        width: 278,
+        align: "right",
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(15).fillColor(CERT_COLORS.violet).text(title, 284, 66, {
+        width: 278,
+        align: "right",
+        lineBreak: false
+    });
+    doc.moveTo(32, 103).lineTo(pageWidth - 32, 103).lineWidth(1.4).strokeColor(CERT_COLORS.blue).stroke();
+
+    const cardX = 32;
+    const cardW = pageWidth - 64;
+
+    doc.roundedRect(cardX, 134, cardW, 212, 6).strokeColor(CERT_COLORS.border).lineWidth(0.9).stroke();
+    drawSectionTab(doc, cardX, 120, "CANDIDATE DETAILS", 154);
+    doc.save();
+    doc.opacity(0.06);
+    doc.font("Helvetica-Bold").fontSize(168).fillColor(CERT_COLORS.blue).text("X", cardX + 370, 180, {
+        width: 116,
+        align: "center",
+        lineBreak: false
+    });
+    doc.restore();
+    doc.moveTo(cardX + 238, 171).lineTo(cardX + 238, 322).strokeColor(CERT_COLORS.border).lineWidth(0.8).stroke();
+
+    const leftX = cardX + 38;
+    const rightX = cardX + 262;
+    const detailTop = 162;
+    drawDetailRow(doc, "user", "Candidate Name", candidate, leftX, detailTop, 142);
+    drawDetailRow(doc, "id", "Test Taker ID", testTakerId, leftX, detailTop + 32, 142);
+    drawDetailRow(doc, "calendar", "Date of Birth", certificateDate(result.dateOfBirth), leftX, detailTop + 64, 142);
+    drawDetailRow(doc, "globe", "Nationality", certificateNationality(result), leftX, detailTop + 96, 142);
+    drawDetailRow(doc, "flag", "Country", certificateValue(result.countryOfOrigin || result.countryOfNationality), leftX, detailTop + 128, 142);
+    drawDetailRow(doc, "calendar", "Test Date", testDate, rightX, detailTop, 188);
+    drawDetailRow(doc, "clock", "Test Type", "IELTSX Mock Test (Full Test)", rightX, detailTop + 43, 188);
+    drawDetailRow(doc, "monitor", "Test Format", "Computer Based Test", rightX, detailTop + 86, 188);
+    drawDetailRow(doc, "mail", "Email", certificateValue(result.email), rightX, detailTop + 129, 188);
+
+    doc.roundedRect(cardX, 376, cardW, 206, 6).strokeColor(CERT_COLORS.border).lineWidth(0.9).stroke();
+    drawSectionTab(doc, cardX, 362, "YOUR BAND SCORES", 154);
+    const scoreY = 415;
+    const boxW = 106;
+    const boxGap = 12;
+    const startX = cardX + (cardW - (boxW * 4 + boxGap * 3)) / 2;
+    [
+        ["Listening", result.listening?.band],
+        ["Reading", result.reading?.band],
+        ["Writing", result.writing?.band],
+        ["Speaking", result.speaking?.band]
+    ].forEach(([label, score], index) => {
+        drawBandBox(doc, label, score, startX + index * (boxW + boxGap), scoreY, boxW, 98);
+    });
+
+    const overallY = 537;
+    const overallX = startX;
+    const overallW = boxW * 4 + boxGap * 3;
+    doc.roundedRect(overallX, overallY, overallW, 42, 5).fillAndStroke("#fbfcff", CERT_COLORS.border);
+    doc.font("Helvetica-Bold").fontSize(13.5).fillColor(CERT_COLORS.navy).text("OVERALL BAND SCORE", overallX + 28, overallY + 15, {
+        width: overallW - 178,
+        align: "center",
+        lineBreak: false
+    });
+    const gradient = doc.linearGradient(overallX + overallW - 146, overallY, overallX + overallW, overallY);
+    gradient.stop(0, CERT_COLORS.violet).stop(1, CERT_COLORS.purple);
+    doc.roundedRect(overallX + overallW - 146, overallY + 5, 126, 32, 5).fill(gradient);
+    doc.font("Helvetica-Bold").fontSize(24).fillColor("#ffffff").text(certificateBand(result.overallBand), overallX + overallW - 146, overallY + 9, {
+        width: 126,
+        align: "center",
+        lineBreak: false
+    });
+
+    const noteY = 604;
+    doc.roundedRect(cardX, noteY, cardW, 188, 6).strokeColor(CERT_COLORS.border).lineWidth(0.9).stroke();
+    drawLineIcon(doc, "shield", cardX + 30, noteY + 24, CERT_COLORS.blue);
+    doc.font("Helvetica-Bold").fontSize(11).fillColor(CERT_COLORS.blue).text("IMPORTANT NOTE", cardX + 60, noteY + 26, {
+        width: 142,
+        lineBreak: false
+    });
+    doc.font("Helvetica").fontSize(8.4).fillColor("#111827").text("This is an IELTSX Mock Test result.\nIt is not an official IELTS Test Report Form.\nThis result is for practice and self-assessment purposes only.", cardX + 30, noteY + 58, {
+        width: 170,
+        lineGap: 5
+    });
+    doc.save();
+    doc.opacity(0.07);
+    doc.font("Helvetica-Bold").fontSize(33).fillColor(CERT_COLORS.blue).text("IELTSX", cardX + 30, noteY + 127, {
+        width: 150,
+        lineBreak: false
+    });
+    doc.restore();
+
+    drawSeal(doc, cardX + cardW / 2, noteY + 82);
+
+    doc.font("Helvetica-Bold").fontSize(10.5).fillColor(CERT_COLORS.blue).text("VERIFICATION", cardX + 382, noteY + 24, {
+        width: 120,
+        lineBreak: false
+    });
+    doc.font("Helvetica").fontSize(8.2).fillColor("#111827").text("Verification ID", cardX + 382, noteY + 48, {
+        width: 130,
+        lineBreak: false
+    });
+    doc.font("Helvetica-Bold").fontSize(8.1).fillColor("#0b102f").text(verificationId, cardX + 382, noteY + 60, {
+        width: 140
+    });
+    doc.image(qrBuffer, cardX + 382, noteY + 82, {
+        width: 52,
+        height: 52
+    });
+    doc.font("Helvetica").fontSize(7.3).fillColor("#111827").text("Scan to verify this result\nat ieltsx.org/verify", cardX + 382, noteY + 137, {
+        width: 130,
+        lineGap: 2
+    });
+
+    const noteFooterY = noteY + 156;
+    doc.moveTo(cardX, noteFooterY).lineTo(cardX + cardW, noteFooterY).strokeColor(CERT_COLORS.border).lineWidth(0.8).stroke();
+    doc.moveTo(cardX + 195, noteFooterY + 7).lineTo(cardX + 195, noteY + 180).strokeColor("#e3e9f7").lineWidth(0.6).stroke();
+    doc.moveTo(cardX + 373, noteFooterY + 7).lineTo(cardX + 373, noteY + 180).strokeColor("#e3e9f7").lineWidth(0.6).stroke();
+    drawFooterInfo(doc, "calendar", "Result Generated On", certificateGeneratedAt(), cardX + 30, noteFooterY + 10, 148);
+    drawFooterInfo(doc, "globe", "Website", "www.ieltsx.org", cardX + 220, noteFooterY + 10, 130);
+    drawFooterInfo(doc, "mail", "Support", "support@ieltsx.org", cardX + 400, noteFooterY + 10, 128);
+
+    doc.rect(0, pageHeight - 42, pageWidth, 42).fill(CERT_COLORS.navy);
+    doc.font("Helvetica-Bold").fontSize(11.5).fillColor("#ffffff").text("Thank you for practicing with IELTSX!", 0, pageHeight - 27, {
+        width: pageWidth,
+        align: "center",
+        lineBreak: false
+    });
+
+    doc.end();
+}
+
 app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
     try {
         const mockTest = mockTestStore.getTest(req.params.id, { includeDraft: true });
@@ -4790,6 +5256,28 @@ app.get("/api/mock-tests/:id/latest-result", requireUser, async (req, res) => {
 
     const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
     res.json({ result: mappedResult });
+});
+
+app.get("/api/mock-test-results/:id/pdf", requireUser, async (req, res) => {
+    try {
+        const result = mockTestStore.resultById(req.user.id, req.params.id);
+
+        if (!result) {
+            return res.status(404).json({ error: "Mock test result not found" });
+        }
+
+        const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
+        await streamMockResultCertificatePdf(req, res, mappedResult);
+    } catch (error) {
+        console.error("Mock result PDF generation failed:", error);
+        if (!res.headersSent) {
+            res.status(500).json({
+                error: error.message || "Could not generate mock test result PDF"
+            });
+        } else {
+            res.end();
+        }
+    }
 });
 
 app.get("/api/mock-test-results/:id", requireUser, async (req, res) => {
@@ -6277,6 +6765,14 @@ app.use("/uploads", express.static(UPLOAD_DIR, {
     maxAge: "7d",
     setHeaders: staticCacheHeaders
 }));
+app.get("/vendor/html2canvas.min.js", (req, res) => {
+    res.setHeader("Cache-Control", "public, max-age=604800");
+    res.sendFile(path.join(ROOT_DIR, "node_modules", "html2canvas", "dist", "html2canvas.min.js"));
+});
+app.get("/vendor/jspdf.umd.min.js", (req, res) => {
+    res.setHeader("Cache-Control", "public, max-age=604800");
+    res.sendFile(path.join(ROOT_DIR, "node_modules", "jspdf", "dist", "jspdf.umd.min.js"));
+});
 app.use(express.static(ROOT_DIR, {
     maxAge: "7d",
     setHeaders: staticCacheHeaders

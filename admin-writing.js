@@ -18,6 +18,9 @@ const QUESTION_TYPE_LABELS = {
     opinion: "Opinion"
 };
 
+const VISUAL_DIAGRAM_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+const VISUAL_DIAGRAM_HELP_TEXT = "Use an HTTPS image URL ending in .jpg, .jpeg, .png, .webp, or .gif.";
+
 const state = {
     prompts: [],
     fullTests: [],
@@ -96,14 +99,24 @@ function bindPageEvents() {
     });
     el("writingTestsGrid").addEventListener("click", handleCardAction);
     el("removeImageBtn").addEventListener("click", () => {
-        el("promptImageUrl").value = "";
-        el("imagePreview").removeAttribute("src");
-        el("imagePreviewBox").classList.add("is-hidden");
+        clearImagePreview();
+        el("imageFile").value = "";
         updateLivePreview();
     });
     el("imageFile").addEventListener("change", (event) => {
         const file = event.target.files?.[0];
         if (file) uploadPromptImage(file);
+    });
+    document.querySelectorAll('input[name="visualDiagramSource"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+            setVisualDiagramMode(radio.value);
+            setImagePreview(el("visualDiagramUrl").value.trim());
+            updateLivePreview();
+        });
+    });
+    el("visualDiagramUrl").addEventListener("input", () => {
+        setImagePreview(el("visualDiagramUrl").value.trim(), { keepValue: true });
+        updateLivePreview();
     });
     setupDropZone();
 
@@ -367,6 +380,7 @@ function openBuilder(type = "task1", item = null) {
     el("builderTitle").value = item?.source?.title || "";
     el("builderModalTitle").textContent = item ? "Edit Writing Test" : "Create Writing Test";
 
+    setVisualDiagramMode("upload");
     clearImagePreview();
     populateFullSelects();
     fillBuilderFromItem(item);
@@ -391,7 +405,9 @@ function fillBuilderFromItem(item) {
         el("task1Instructions").value = prompt.instructions || "";
         el("task1WordLimit").value = prompt.wordLimit || DEFAULTS.task1.wordLimit;
         el("task1TimeLimit").value = prompt.timeLimit || DEFAULTS.task1.timeLimit;
-        setImagePreview(prompt.imageUrl || "");
+        const visualDiagramUrl = getVisualDiagramUrl(prompt);
+        setVisualDiagramMode(isExternalVisualDiagramUrl(visualDiagramUrl) ? "url" : "upload");
+        setImagePreview(visualDiagramUrl);
     }
 
     if (item.type === "task2") {
@@ -455,13 +471,20 @@ async function saveBuilder(event) {
 
 async function savePrompt(type, id) {
     const isTask1 = type === "task1";
+    const visualDiagramUrl = isTask1 ? el("visualDiagramUrl").value.trim() : "";
+    const visualDiagramError = isTask1 ? getVisualDiagramValidationMessage(visualDiagramUrl) : "";
+    if (visualDiagramError) {
+        setImagePreview(visualDiagramUrl, { keepValue: true });
+        throw new Error(visualDiagramError);
+    }
+
     const body = {
         taskType: type,
         title: el("builderTitle").value.trim(),
         promptText: isTask1 ? el("task1PromptText").value.trim() : el("task2PromptText").value.trim(),
         instructions: isTask1 ? el("task1Instructions").value.trim() : "",
         questionType: isTask1 ? "" : el("task2QuestionType").value,
-        imageUrl: isTask1 ? el("promptImageUrl").value.trim() : "",
+        visualDiagramUrl,
         wordLimit: Number(isTask1 ? el("task1WordLimit").value : el("task2WordLimit").value),
         timeLimit: Number(isTask1 ? el("task1TimeLimit").value : el("task2TimeLimit").value),
         status: el("builderStatus").value
@@ -524,7 +547,7 @@ async function duplicateItem(item) {
                     promptText: source.promptText || "",
                     instructions: source.instructions || "",
                     questionType: source.questionType || "",
-                    imageUrl: source.imageUrl || "",
+                    visualDiagramUrl: getVisualDiagramUrl(source),
                     wordLimit: source.wordLimit || (source.taskType === "task2" ? DEFAULTS.task2.wordLimit : DEFAULTS.task1.wordLimit),
                     timeLimit: source.timeLimit || (source.taskType === "task2" ? DEFAULTS.task2.timeLimit : DEFAULTS.task1.timeLimit),
                     status: "draft"
@@ -618,7 +641,7 @@ function buildPreviewItemFromForm() {
             title,
             promptText: el("task1PromptText").value.trim(),
             instructions: el("task1Instructions").value.trim(),
-            imageUrl: el("promptImageUrl").value.trim(),
+            visualDiagramUrl: el("visualDiagramUrl").value.trim(),
             wordLimit: Number(el("task1WordLimit").value) || DEFAULTS.task1.wordLimit,
             timeLimit: Number(el("task1TimeLimit").value) || DEFAULTS.task1.timeLimit
         });
@@ -677,8 +700,9 @@ function renderPromptPreview(prompt, label) {
     const timeLimit = prompt.timeLimit || (type === "task2" ? DEFAULTS.task2.timeLimit : DEFAULTS.task1.timeLimit);
     const questionType = prompt.questionType ? `<span>${escapeHtml(QUESTION_TYPE_LABELS[prompt.questionType] || prompt.questionType)}</span>` : "";
     const instructions = prompt.instructions ? `<p>${escapeHtml(prompt.instructions)}</p>` : "";
-    const image = type === "task1" && prompt.imageUrl
-        ? `<img loading="lazy" decoding="async" src="${escapeHtml(prompt.imageUrl)}" alt="Task 1 visual preview">`
+    const visualDiagramUrl = getVisualDiagramUrl(prompt);
+    const image = type === "task1" && visualDiagramUrl && !getVisualDiagramValidationMessage(visualDiagramUrl)
+        ? `<img loading="lazy" decoding="async" src="${escapeHtml(visualDiagramUrl)}" alt="Task 1 visual preview">`
         : "";
 
     return `
@@ -731,10 +755,10 @@ function setupDropZone() {
 }
 
 async function uploadPromptImage(file) {
-    const allowed = ["image/png", "image/jpeg", "image/webp"];
-    const allowedExtension = /\.(png|jpe?g|webp)$/i.test(file.name || "");
+    const allowed = ["image/png", "image/jpeg", "image/webp", "image/gif"];
+    const allowedExtension = /\.(png|jpe?g|webp|gif)$/i.test(file.name || "");
     if (!allowed.includes(file.type) && !allowedExtension) {
-        showToast("Please upload PNG, JPG, JPEG, or WEBP.");
+        showToast("Please upload JPG, JPEG, PNG, WEBP, or GIF.");
         return;
     }
 
@@ -746,7 +770,8 @@ async function uploadPromptImage(file) {
             method: "POST",
             body: formData
         });
-        setImagePreview(data.imageUrl || "");
+        setVisualDiagramMode("upload");
+        setImagePreview(data.visualDiagramUrl || data.imageUrl || "");
         updateLivePreview();
         showToast("Image uploaded.");
     } catch (error) {
@@ -755,20 +780,110 @@ async function uploadPromptImage(file) {
     }
 }
 
-function setImagePreview(imageUrl) {
-    el("promptImageUrl").value = imageUrl || "";
-    if (!imageUrl) {
-        clearImagePreview();
+function setVisualDiagramMode(mode) {
+    const selectedMode = mode === "url" ? "url" : "upload";
+    document.querySelectorAll('input[name="visualDiagramSource"]').forEach((radio) => {
+        radio.checked = radio.value === selectedMode;
+    });
+    const urlInput = el("visualDiagramUrl");
+    const dropZone = el("imageDropZone");
+    const isUrlMode = selectedMode === "url";
+    urlInput.readOnly = !isUrlMode;
+    urlInput.placeholder = isUrlMode ? "https://example.com/diagram.png" : "Upload an image to fill this URL";
+    dropZone.classList.toggle("is-hidden", isUrlMode);
+    updateVisualDiagramValidation(urlInput.value.trim());
+}
+
+function getVisualDiagramUrl(prompt) {
+    return String(prompt?.visualDiagramUrl || prompt?.imageUrl || "").trim();
+}
+
+function isExternalVisualDiagramUrl(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return false;
+    try {
+        const parsed = new URL(raw);
+        return parsed.protocol === "https:" && hasAllowedVisualDiagramExtension(parsed.pathname);
+    } catch (error) {
+        return false;
+    }
+}
+
+function isUploadedVisualDiagramUrl(value) {
+    const raw = String(value || "").trim();
+    return raw.startsWith("/uploads/") && hasAllowedVisualDiagramExtension(raw.split(/[?#]/)[0]);
+}
+
+function hasAllowedVisualDiagramExtension(pathname) {
+    const lower = String(pathname || "").toLowerCase();
+    return VISUAL_DIAGRAM_EXTENSIONS.some((extension) => lower.endsWith(extension));
+}
+
+function getVisualDiagramValidationMessage(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+    if (isUploadedVisualDiagramUrl(raw) || isExternalVisualDiagramUrl(raw)) return "";
+    if (raw.startsWith("/uploads/")) {
+        return "Uploaded image URLs must end in .jpg, .jpeg, .png, .webp, or .gif.";
+    }
+    return "Visual Diagram URL must start with https:// and end in .jpg, .jpeg, .png, .webp, or .gif.";
+}
+
+function updateVisualDiagramValidation(value) {
+    const message = getVisualDiagramValidationMessage(value);
+    const field = el("visualDiagramUrlField");
+    const help = el("visualDiagramUrlHelp");
+    field.classList.toggle("is-invalid", Boolean(message));
+    help.textContent = message || VISUAL_DIAGRAM_HELP_TEXT;
+    return message;
+}
+
+function setImagePreview(imageUrl, options = {}) {
+    const visualDiagramUrl = String(imageUrl || "").trim();
+    if (!options.keepValue) {
+        el("visualDiagramUrl").value = visualDiagramUrl;
+    }
+    const validationMessage = updateVisualDiagramValidation(visualDiagramUrl);
+    const previewBox = el("imagePreviewBox");
+    const previewImage = el("imagePreview");
+    const previewMessage = el("imagePreviewMessage");
+
+    previewImage.onload = null;
+    previewImage.onerror = null;
+    previewImage.removeAttribute("src");
+    previewImage.classList.add("is-hidden");
+    previewMessage.classList.remove("is-error");
+    previewMessage.textContent = "";
+
+    if (!visualDiagramUrl) {
+        previewBox.classList.add("is-hidden");
         return;
     }
-    el("imagePreview").src = imageUrl;
-    el("imagePreviewBox").classList.remove("is-hidden");
+
+    previewBox.classList.remove("is-hidden");
+    if (validationMessage) {
+        previewMessage.textContent = validationMessage;
+        previewMessage.classList.add("is-error");
+        return;
+    }
+
+    previewMessage.textContent = "Loading preview...";
+    previewImage.onload = () => {
+        previewMessage.textContent = "";
+        previewImage.classList.remove("is-hidden");
+    };
+    previewImage.onerror = () => {
+        previewImage.removeAttribute("src");
+        previewImage.classList.add("is-hidden");
+        previewMessage.textContent = "Preview could not load this image. Check that the URL is public and points directly to an image.";
+        previewMessage.classList.add("is-error");
+    };
+    previewImage.src = visualDiagramUrl;
 }
 
 function clearImagePreview() {
-    el("promptImageUrl").value = "";
-    el("imagePreview").removeAttribute("src");
-    el("imagePreviewBox").classList.add("is-hidden");
+    el("visualDiagramUrl").value = "";
+    setImagePreview("", { keepValue: true });
 }
 
 function getTypeIcon(type) {

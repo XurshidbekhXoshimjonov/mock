@@ -207,31 +207,83 @@ body.public-page .r-right .signup {
     justify-content: center;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 18px;
-    max-width: 1180px;
+    max-width: 1220px;
     margin: 0 auto;
     width: 100%;
 }
 
-.home-practice-grid .card {
-    display: flex;
+.home-practice-grid .skill-card {
     min-width: 0;
-    min-height: 260px;
-    height: 100%;
-    padding: 22px 24px;
+    height: 265px;
+    min-height: 265px;
+    padding: 24px 30px 22px;
+    border: 1px solid #d9e4f7;
+    border-radius: 22px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    gap: 0;
+    text-align: left;
 }
 
-.home-practice-grid .card h2 {
-    font-size: 37px;
-    line-height: 1.08;
+.home-practice-grid .skill-card > * {
+    box-sizing: border-box;
+}
+
+.home-practice-grid .skill-card .card-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 20px 0;
+    flex: 0 0 58px;
+    flex-shrink: 0;
+}
+
+.home-practice-grid .skill-card h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #071638;
+    min-height: 42px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.home-practice-grid .skill-card p {
+    margin: 18px 0 0 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #53627c;
+    min-height: 58px;
+    max-width: none;
+    text-align: left;
+}
+
+.home-practice-grid .skill-card .practice-card__footer {
+    margin-top: auto;
+    padding: 0;
+    align-self: flex-start;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0057ff;
+    text-decoration: none;
     white-space: nowrap;
 }
 
-.home-practice-grid .card p {
-    max-width: 100%;
-}
-
-.home-practice-grid .practice-card__footer {
-    margin-top: auto;
+.home-practice-grid .skill-card:hover .card-icon,
+body.dark-theme .home-practice-grid .skill-card:hover .card-icon,
+.home-practice-grid .skill-card:hover .practice-card__footer span {
+    transform: none !important;
 }
 
 .practice-card,
@@ -379,9 +431,10 @@ body.public-page .r-right .signup {
         gap: 26px;
     }
 
-    .home-practice-grid .card {
-        min-height: 270px;
-        padding: 24px;
+    .home-practice-grid .skill-card {
+        min-height: 265px;
+        height: 265px;
+        padding: 24px 30px 22px;
     }
 }
 
@@ -2287,12 +2340,13 @@ body:not(.site-ready) .public-shell {
         gap: 24px;
     }
 
-    .home-practice-grid .card {
-        min-height: 270px;
-        padding: 24px;
+    .home-practice-grid .skill-card {
+        min-height: 265px;
+        height: 265px;
+        padding: 24px 30px 22px;
     }
 
-    .home-practice-grid .card h2 {
+    .home-practice-grid .skill-card h2 {
         font-size: 34px;
     }
 
@@ -2439,14 +2493,15 @@ body:not(.site-ready) .public-shell {
         gap: 20px;
     }
 
-    .home-practice-grid .card {
-        min-height: 260px;
-        padding: 24px 20px;
+    .home-practice-grid .skill-card {
+        min-height: 265px;
+        height: 265px;
+        padding: 24px 30px 22px;
     }
 
-    .home-practice-grid .card h2 {
-        font-size: 32px;
-        white-space: normal;
+    .home-practice-grid .skill-card h2 {
+        font-size: 34px;
+        white-space: nowrap;
     }
 
     body.public-page .home-footer {
@@ -3300,4 +3355,22 @@ body.dark-theme .skill-card::after {
 body.dark-theme .skill-card.active::after,
 body.dark-theme .skill-card:active::after {
   opacity: 0 !important;
+}
+
+body.dark-theme .home-practice-grid .skill-card {
+    background: #ffffff !important;
+    border: 1px solid #d9e4f7 !important;
+    border-radius: 22px !important;
+}
+
+body.dark-theme .home-practice-grid .skill-card h2 {
+    color: #071638 !important;
+}
+
+body.dark-theme .home-practice-grid .skill-card p {
+    color: #53627c !important;
+}
+
+body.dark-theme .home-practice-grid .skill-card .practice-card__footer {
+    color: #0057ff !important;
 }

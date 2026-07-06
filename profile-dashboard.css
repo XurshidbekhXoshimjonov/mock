@@ -200,7 +200,9 @@ body[data-profile-page] #profileRoot li {
 
 .performance-skill-card {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     min-height: 360px;
     overflow: hidden;
@@ -252,6 +254,8 @@ body[data-profile-page] #profileRoot li {
 }
 
 .performance-skill-card-top {
+    width: 100%;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: space-between;
 }
@@ -297,6 +301,8 @@ body[data-profile-page] #profileRoot li {
 
 .performance-skill-title {
     display: block;
+    width: 100%;
+    min-height: 50px;
     margin-top: 18px;
     color: #0f172a;
     font-size: 21px;
@@ -306,6 +312,7 @@ body[data-profile-page] #profileRoot li {
 
 .performance-skill-description {
     display: block;
+    width: 100%;
     min-height: 66px;
     margin-top: 10px;
     color: #64748b;
@@ -314,9 +321,10 @@ body[data-profile-page] #profileRoot li {
 }
 
 .performance-skill-stats {
+    width: 100%;
     flex-direction: column;
     gap: 9px;
-    margin-top: 18px;
+    margin-top: auto;
 }
 
 .performance-skill-stat {

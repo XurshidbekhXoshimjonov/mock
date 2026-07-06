@@ -292,7 +292,10 @@
             return `/full-writing-test.html?${params.toString()}`;
         }
 
-        return `/speaking/full-test/${encodeURIComponent(`mock-speaking-${mockId}`)}?${params.toString()}`;
+        params.set("mode", "exam");
+        params.set("id", `mock-speaking-${mockId}`);
+        params.set("speakingTestId", `mock-speaking-${mockId}`);
+        return `/speaking/player?${params.toString()}`;
     }
 
     function renderLoading(message = "Loading mock test instructions...") {

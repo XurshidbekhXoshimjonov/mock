@@ -176,15 +176,30 @@
                             <textarea id="task1Instructions" rows="3" placeholder="Summarise the information by selecting and reporting the main features..."></textarea>
                         </label>
                         <div class="admin-writing-upload">
-                            <div class="admin-writing-upload-zone" id="imageDropZone">
-                                <input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m17 8-5-5-5 5"></path><path d="M12 3v12"></path></svg>
-                                <strong>Upload chart/table/map image</strong>
-                                <span>Drop PNG, JPG, JPEG, or WEBP here, or browse</span>
+                            <div class="admin-writing-visual-mode" role="radiogroup" aria-label="Task 1 visual diagram source">
+                                <label class="admin-writing-visual-option">
+                                    <input type="radio" name="visualDiagramSource" value="upload" checked>
+                                    <span>Upload image file</span>
+                                </label>
+                                <label class="admin-writing-visual-option">
+                                    <input type="radio" name="visualDiagramSource" value="url">
+                                    <span>Paste image URL</span>
+                                </label>
                             </div>
-                            <input type="hidden" id="promptImageUrl">
+                            <label class="admin-writing-field admin-writing-url-field" id="visualDiagramUrlField">
+                                <span>Visual Diagram URL</span>
+                                <input id="visualDiagramUrl" type="url" placeholder="https://example.com/diagram.png" autocomplete="off">
+                                <small id="visualDiagramUrlHelp">Use an HTTPS image URL ending in .jpg, .jpeg, .png, .webp, or .gif.</small>
+                            </label>
+                            <div class="admin-writing-upload-zone" id="imageDropZone">
+                                <input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,image/png,image/jpeg,image/webp,image/gif">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m17 8-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+                                <strong>Upload image file</strong>
+                                <span>Drop JPG, JPEG, PNG, WEBP, or GIF here, or browse</span>
+                            </div>
                             <div class="admin-writing-image-preview is-hidden" id="imagePreviewBox">
                                 <img id="imagePreview" alt="Task 1 image preview">
+                                <p class="admin-writing-image-preview-message" id="imagePreviewMessage"></p>
                                 <button class="admin-writing-light-btn" id="removeImageBtn" type="button">Remove image</button>
                             </div>
                         </div>

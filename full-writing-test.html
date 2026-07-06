@@ -81,19 +81,43 @@
         }
 
         .prompt-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             text-align: center;
             margin-top: 15px;
             border: 1px dashed var(--cbt-border);
             padding: 10px;
             border-radius: 8px;
             background: #fff;
+            min-height: 120px;
         }
 
         .prompt-image {
+            display: block;
             max-width: 100%;
             max-height: 300px;
             height: auto;
+            object-fit: contain;
             border-radius: 4px;
+        }
+
+        .prompt-image.is-hidden {
+            display: none;
+        }
+
+        .prompt-image-message {
+            margin: 0;
+            color: var(--cbt-muted);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .prompt-image-container.has-error .prompt-image-message {
+            color: #b42318;
         }
 
         .essay-textarea {
@@ -681,6 +705,48 @@
             border-color: var(--cbt-ielts-red);
         }
 
+        .task1-image-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(15, 23, 42, 0.78);
+        }
+
+        .task1-image-modal.is-open {
+            display: flex;
+        }
+
+        .task1-image-modal img {
+            display: block;
+            max-width: 95vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .task1-image-modal-close {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.88);
+            color: #ffffff;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
         /* Editor Panel Card */
         .editor-panel-card {
             padding: 24px;
@@ -1067,9 +1133,10 @@
                     Summarise the information by selecting and reporting the main features, and make comparisons where relevant.
                 </p>
                 <div class="prompt-image-container" id="t1ImageContainer" style="display: none;">
-                    <img src="" alt="Task 1 Diagram" class="prompt-image" id="t1Image" loading="lazy" decoding="async">
+                    <img alt="Task 1 Visual Diagram" class="prompt-image is-hidden" id="t1Image" loading="lazy" decoding="async">
+                    <p class="prompt-image-message" id="t1ImageMessage"></p>
                     <div class="view-larger-container">
-                        <button class="btn-view-larger" type="button" onclick="viewLargerT1Image()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg> View larger</button>
+                        <button class="btn-view-larger" id="viewLargerT1ImageBtn" type="button" onclick="viewLargerT1Image()" style="display: none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg> View larger</button>
                     </div>
                 </div>
             </div>
@@ -1304,6 +1371,11 @@
         </div>
     </div>
 
+    <div class="task1-image-modal" id="task1ImageModal" aria-hidden="true" role="dialog" aria-label="Task 1 Visual Diagram">
+        <button class="task1-image-modal-close" type="button" onclick="closeTask1ImageModal()" aria-label="Close image preview">&times;</button>
+        <img id="task1ModalImage" alt="Task 1 Visual Diagram">
+    </div>
+
     <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
     <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
@@ -1452,6 +1524,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             bindWritingFullScreen();
+            bindTask1ImageModal();
             const globalNavbarEl = document.getElementById('globalNavbar');
             const cbtHeaderEl = document.getElementById('cbtHeader');
             const selectionPageEl = document.getElementById('selectionPage');
@@ -1496,6 +1569,18 @@
                 loadFullTestsList();
             }
         });
+
+        function bindTask1ImageModal() {
+            const modal = document.getElementById('task1ImageModal');
+            if (modal) {
+                modal.addEventListener('click', (event) => {
+                    if (event.target === modal) closeTask1ImageModal();
+                });
+            }
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeTask1ImageModal();
+            });
+        }
 
         function showWritingPreStartScreen() {
             const target = document.getElementById('writingPreStart');
@@ -1594,6 +1679,49 @@
                 .replace(/'/g, "&#039;");
         }
 
+        function getTaskVisualDiagramUrl(task) {
+            return String(task?.visualDiagramUrl || task?.imageUrl || '').trim();
+        }
+
+        function renderTask1VisualDiagram(task) {
+            const visualDiagramUrl = getTaskVisualDiagramUrl(task);
+            const container = document.getElementById('t1ImageContainer');
+            const img = document.getElementById('t1Image');
+            const message = document.getElementById('t1ImageMessage');
+            const largerButton = document.getElementById('viewLargerT1ImageBtn');
+
+            if (!container || !img || !message || !largerButton) return;
+
+            container.style.display = 'flex';
+            container.classList.remove('has-error');
+            largerButton.style.display = 'none';
+            img.onload = null;
+            img.onerror = null;
+            img.removeAttribute('src');
+            img.classList.add('is-hidden');
+            message.textContent = '';
+
+            if (!visualDiagramUrl) {
+                message.textContent = 'No visual diagram available';
+                return;
+            }
+
+            message.textContent = 'Loading visual diagram...';
+            img.onload = () => {
+                message.textContent = '';
+                img.classList.remove('is-hidden');
+                largerButton.style.display = 'inline-flex';
+            };
+            img.onerror = () => {
+                img.removeAttribute('src');
+                img.classList.add('is-hidden');
+                largerButton.style.display = 'none';
+                container.classList.add('has-error');
+                message.textContent = 'Visual diagram could not be loaded.';
+            };
+            img.src = visualDiagramUrl;
+        }
+
         // Load Full Tests List
         function loadFullTestsList() {
             fetch('/api/writing/full-tests')
@@ -1671,10 +1799,7 @@
                     // Task 1
                     document.getElementById('t1Title').textContent = `Task 1: ${test.task1PromptId.title}`;
                     document.getElementById('t1PromptText').innerHTML = formatTask1PromptText(test.task1PromptId.promptText);
-                    if (test.task1PromptId.imageUrl) {
-                        document.getElementById('t1Image').src = test.task1PromptId.imageUrl;
-                        document.getElementById('t1ImageContainer').style.display = 'block';
-                    }
+                    renderTask1VisualDiagram(test.task1PromptId);
 
                     // Task 2
                     document.getElementById('t2Title').textContent = `Task 2: ${test.task2PromptId.title}`;
@@ -1804,9 +1929,21 @@
         // Image Magnifier
         function viewLargerT1Image() {
             const img = document.getElementById('t1Image');
-            if (img && img.src) {
-                window.open(img.src, '_blank');
-            }
+            const modal = document.getElementById('task1ImageModal');
+            const modalImage = document.getElementById('task1ModalImage');
+            if (!img || !img.src || img.classList.contains('is-hidden') || !modal || !modalImage) return;
+            modalImage.src = img.src;
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeTask1ImageModal() {
+            const modal = document.getElementById('task1ImageModal');
+            const modalImage = document.getElementById('task1ModalImage');
+            if (!modal) return;
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            if (modalImage) modalImage.removeAttribute('src');
         }
 
         // Formatting Placeholders (CBT is plain text)
