@@ -420,6 +420,9 @@
             color: #f8fafc;
             border-color: #334155;
         }
+        html.dark-theme .writing-error-message {
+            color: #fca5a5;
+        }
         html.dark-theme .prompt-item-card {
             background: #1e293b;
             border-color: #334155;
@@ -707,6 +710,15 @@
             cursor: not-allowed;
         }
 
+        .writing-error-message {
+            display: none;
+            margin-top: 12px;
+            color: #b42318;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: right;
+        }
+
         /* Sidebar Styling */
         .player-sidebar {
             display: flex;
@@ -992,8 +1004,9 @@
             </div>
 
             <div class="editor-actions-row" style="justify-content: flex-end;">
-                <button class="btn-submit-answer" type="button" id="submitBtn" onclick="submitEssay()">Submit Answer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-left: 6px; transform: rotate(-30deg);"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+                <button class="btn-submit-answer" type="button" id="submitBtn" onclick="submitEssay()" disabled>Submit Answer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-left: 6px; transform: rotate(-30deg);"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
             </div>
+            <div class="writing-error-message" id="writingErrorMessage" role="alert"></div>
         </div>
     </main>
 
@@ -1016,8 +1029,8 @@
     <div class="modal-overlay" id="loadingModal" style="display: none;">
         <div class="modal-content">
             <div class="spinner"></div>
-            <h3>Evaluating Writing Response</h3>
-            <p>Our AI examiner engine is analyzing your Task Response, Coherence, Vocabulary, and Grammar. This takes about 10-15 seconds...</p>
+            <h3>Checking your writing...</h3>
+            <p>Our AI examiner is analyzing your answer against IELTS Writing Task 2 criteria.</p>
         </div>
     </div>
 
@@ -1026,7 +1039,7 @@
         <div class="feedback-container">
             <div class="feedback-header">
                 <h2 id="fbHeaderTitle">Academic Writing Evaluation</h2>
-                <div class="band-score-pill" id="fbBandScore">Estimated Band: --</div>
+                <div class="band-score-pill" id="fbBandScore">Overall Band: --</div>
             </div>
             <div class="feedback-body">
                 <div class="feedback-left">
@@ -1041,7 +1054,7 @@
                     </div>
                     <div class="crit-card">
                         <div class="crit-score-row">
-                            <span>Coherence & Cohesion</span>
+                            <span>Coherence and Cohesion</span>
                             <span class="crit-score-val" id="critCC">--</span>
                         </div>
                     </div>
@@ -1053,7 +1066,7 @@
                     </div>
                     <div class="crit-card">
                         <div class="crit-score-row">
-                            <span>Grammatical Range & Accuracy</span>
+                            <span>Grammar Range and Accuracy</span>
                             <span class="crit-score-val" id="critGR">--</span>
                         </div>
                     </div>
@@ -1063,7 +1076,7 @@
                         <ul id="listStrengths"></ul>
                     </div>
                     <div class="bullets-section">
-                        <h4 style="color: #b42318;">⚠ Areas of Improvement / Mistakes</h4>
+                        <h4 style="color: #b42318;">Weaknesses</h4>
                         <ul id="listMistakes"></ul>
                     </div>
                     <div class="bullets-section">
@@ -1078,8 +1091,12 @@
                         <div class="essay-content-display" id="dispStudentEssay"></div>
                     </div>
                     <div class="comparison-box">
-                        <h4>Polished / Improved Essay Recommendation</h4>
+                        <h4>Improved Version</h4>
                         <div class="essay-content-display" id="dispImprovedEssay" style="background: #f0fdf4; border-color: #bbf7d0; padding: 12px; border-radius: 8px;"></div>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>Examiner Feedback</h4>
+                        <div class="essay-content-display" id="dispExaminerFeedback"></div>
                     </div>
 
                     <div style="text-align: right; margin-top: 30px;">
@@ -1182,6 +1199,8 @@
         let hasStarted = false;
         let promptReady = false;
         let startRequested = false;
+        let currentPrompt = null;
+        let currentPromptText = '';
 
         function writingAnswerKey(testId, taskNumber) {
             return `writing_answer_${testId}_${taskNumber}`;
@@ -1195,7 +1214,11 @@
             if (!testId) return;
             localStorage.removeItem(writingAnswerKey(testId, taskNumber));
             localStorage.removeItem(writingHighlightsKey(testId, taskNumber));
-            window.IeltsAnnotations?.clearWritingStorage(testId, taskNumber);
+            try {
+                window.IeltsAnnotations?.clearWritingStorage(testId, taskNumber);
+            } catch (error) {
+                console.warn('Writing annotation cleanup failed:', error);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1244,6 +1267,7 @@
             document.getElementById('writingPreStart').style.display = 'none';
             document.getElementById('writingStage').style.display = 'grid';
             document.getElementById('writingBottomBar').style.display = 'flex';
+            updateSubmitButtonState();
             startTimer();
         }
 
@@ -1358,6 +1382,8 @@
                     return res.json();
                 })
                 .then(prompt => {
+                    currentPrompt = prompt;
+                    currentPromptText = String(prompt.promptText || '').trim();
                     document.getElementById('promptTitle').textContent = prompt.title;
                     document.getElementById('promptText').innerHTML = formatTask2PromptText(prompt.promptText);
 
@@ -1419,6 +1445,10 @@
             if (promptId && !isSubmitted) {
                 localStorage.setItem(writingAnswerKey(promptId, 'task2'), text);
             }
+            if (text.trim()) {
+                showWritingError('');
+            }
+            updateSubmitButtonState();
         }
 
         // Formatting Placeholders (CBT is plain text)
@@ -1466,8 +1496,29 @@
                     button.dataset.defaultHtml = button.innerHTML;
                 }
                 button.disabled = isLoading;
-                button.innerHTML = isLoading ? 'Evaluating...' : button.dataset.defaultHtml;
+                button.innerHTML = isLoading ? 'Checking your writing...' : button.dataset.defaultHtml;
             });
+            if (!isLoading) {
+                updateSubmitButtonState();
+            }
+        }
+
+        function getEssayText() {
+            return document.getElementById('essayEditor')?.value || '';
+        }
+
+        function updateSubmitButtonState() {
+            const button = document.getElementById('submitBtn');
+            if (!button) return;
+            button.disabled = isSubmitted || !getEssayText().trim();
+        }
+
+        function showWritingError(message) {
+            const el = document.getElementById('writingErrorMessage');
+            if (!el) return;
+            const text = String(message || '').trim();
+            el.textContent = text;
+            el.style.display = text ? 'block' : 'none';
         }
 
         function isDevelopmentHost() {
@@ -1485,29 +1536,37 @@
             if (!hasStarted && !isAuto) return;
             if (isSubmitted) return;
 
-            const essay = document.getElementById('essayEditor').value.trim();
+            const essay = getEssayText().trim();
             if (!essay) {
-                alert('Task 2 answer must not be empty.');
+                showWritingError('Task 2 answer must not be empty.');
+                updateSubmitButtonState();
                 return;
             }
 
             isSubmitted = true;
             clearInterval(timerInterval);
             setSubmitLoading(true);
+            showWritingError('');
 
             const timeSpent = (40 * 60) - secondsLeft;
             const payload = {
                 taskType: 'task2',
                 promptId,
+                promptTitle: currentPrompt?.title || 'Writing Task 2',
+                prompt: currentPromptText || document.getElementById('promptText')?.textContent || '',
+                question: currentPromptText || document.getElementById('promptText')?.textContent || '',
+                answer: essay,
                 essay,
+                wordCount,
                 timeSpent
             };
 
             document.getElementById('loadingModal').style.display = 'flex';
             logDevelopment('Writing evaluate request payload:', payload);
 
-            fetch('/api/writing/evaluate', {
+            fetch('/api/writing/submit-task2', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -1524,12 +1583,13 @@
             .then(sub => {
                 document.getElementById('loadingModal').style.display = 'none';
                 setSubmitLoading(false);
-                
-                clearWritingTaskSavedData(promptId, 'task2');
 
                 // Load Feedback Modal
                 const fb = sub.feedback;
-                document.getElementById('fbBandScore').textContent = `Estimated Band: ${formatBand(fb.estimatedBand)}`;
+                if (!fb) {
+                    throw new Error('Invalid AI evaluation response.');
+                }
+                document.getElementById('fbBandScore').textContent = `Overall Band: ${formatBand(fb.estimatedBand)}`;
                 document.getElementById('critTR').textContent = formatBand(fb.taskResponse);
                 document.getElementById('critCC').textContent = formatBand(fb.coherenceCohesion);
                 document.getElementById('critLR').textContent = formatBand(fb.lexicalResource);
@@ -1537,21 +1597,23 @@
 
                 // Bullets
                 renderBullets('listStrengths', fb.strengths);
-                renderBullets('listMistakes', fb.mistakes);
+                renderBullets('listMistakes', fb.weaknesses || fb.mistakes);
                 renderBullets('listSuggestions', fb.suggestions);
 
                 // Texts
                 document.getElementById('dispStudentEssay').textContent = essay;
-                document.getElementById('dispImprovedEssay').innerHTML = (fb.improvedEssay || '').replace(/\n/g, '<br>');
+                document.getElementById('dispImprovedEssay').textContent = fb.improvedVersion || fb.improvedEssay || '';
+                document.getElementById('dispExaminerFeedback').textContent = fb.examinerFeedback || 'No examiner feedback was returned for this attempt.';
 
+                clearWritingTaskSavedData(promptId, 'task2');
                 document.getElementById('feedbackModal').style.display = 'flex';
             })
             .catch(err => {
                 console.error('Writing evaluation request failed:', err);
                 document.getElementById('loadingModal').style.display = 'none';
-                setSubmitLoading(false);
-                alert('AI evaluation failed. Please try again.');
                 isSubmitted = false;
+                setSubmitLoading(false);
+                showWritingError(err.message || 'AI evaluation failed. Please try again.');
                 if (hasStarted) startTimer();
             });
         }

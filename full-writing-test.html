@@ -1514,7 +1514,11 @@
             if (!testId) return;
             localStorage.removeItem(writingAnswerKey(testId, taskNumber));
             localStorage.removeItem(writingHighlightsKey(testId, taskNumber));
-            window.IeltsAnnotations?.clearWritingStorage(testId, taskNumber);
+            try {
+                window.IeltsAnnotations?.clearWritingStorage(testId, taskNumber);
+            } catch (error) {
+                console.warn('Writing annotation cleanup failed:', error);
+            }
         }
 
         function clearFullWritingSavedData(testId) {
