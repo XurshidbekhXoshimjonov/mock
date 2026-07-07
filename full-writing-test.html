@@ -2093,7 +2093,7 @@
             if (!Number.isFinite(numeric)) {
                 throw new Error('Invalid AI evaluation response.');
             }
-            return Number.isInteger(numeric) ? String(numeric) : numeric.toFixed(1);
+            return numeric.toFixed(1);
         }
 
         function setOptionalEssay(boxId, contentId, essay) {
