@@ -5761,7 +5761,19 @@ app.get("/api/listening-tests", (req, res) => {
 });
 
 app.get("/api/listening-tests/:id", (req, res) => {
-    const test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
+    let test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
+
+    if (!test) {
+        test = resolveManualListeningTest(`${req.params.id}-listening-full`);
+    }
+
+    if (!test) {
+        const fullTest = resolveFullTest(req.params.id, "listening");
+        if (fullTest && fullTest.listening) {
+            const manualId = fullTest.manualListeningTestId || `${fullTest.id}-listening-full`;
+            test = resolveManualListeningTest(manualId);
+        }
+    }
 
     if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-listening-"))) {
         return res.status(404).json({ error: "Listening test not found" });

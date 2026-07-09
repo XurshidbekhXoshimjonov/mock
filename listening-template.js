@@ -483,10 +483,6 @@ async function loadListeningTest() {
 
 loadListeningTest()
     .then((test) => {
-        if (!isListeningMockMode && test.part === "full" && test.sourceFullTestId) {
-            window.location.replace(`/full-test-player?id=${encodeURIComponent(test.sourceFullTestId)}&skill=listening`);
-            return;
-        }
         activeListeningTest = test;
         isSubmitted = false;
         document.title = `${test.title || "IELTS"} - Listening`;
