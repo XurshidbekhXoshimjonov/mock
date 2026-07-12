@@ -696,6 +696,10 @@
 
     function initializeReadingTranslation(root = document) {
         if (!isReadingPage()) return;
+        if (document.body && (document.body.dataset.testMode === "full" || document.body.getAttribute("data-test-mode") === "full")) {
+            console.log("Reading translation is disabled in full test mode");
+            return;
+        }
 
         ensureStyles();
         console.log("Reading translation initialized");

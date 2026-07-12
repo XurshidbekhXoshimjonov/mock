@@ -368,10 +368,32 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 
 .cbt-passage-title {
     margin: 22px 0 30px;
-    font-family: var(--ieltsx-font);
+    font-family: Georgia, "Times New Roman", serif;
     font-size: calc(29px * var(--reading-scale));
+    font-weight: 700;
     line-height: 1.25;
     text-align: center;
+}
+
+.cbt-passage-title + .cbt-passage-subtitle {
+    margin-top: -22px;
+}
+
+.cbt-passage-subtitle {
+    max-width: 680px;
+    margin-right: auto;
+    margin-bottom: 28px;
+    margin-left: auto;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: calc(17px * var(--reading-scale));
+    font-style: italic;
+    line-height: 1.18;
+    text-align: center;
+}
+
+.cbt-passage-subtitle--strong {
+    color: #0f172a;
+    font-weight: 700;
 }
 
 .cbt-passage-copy {
@@ -1724,6 +1746,15 @@ body.fullscreen-fallback .cbt-button--fullscreen {
         font-size: calc(23px * var(--reading-scale));
     }
 
+    .cbt-passage-title + .cbt-passage-subtitle {
+        margin-top: -14px;
+    }
+
+    .cbt-passage-subtitle {
+        margin-bottom: 22px;
+        font-size: calc(15px * var(--reading-scale));
+    }
+
     .cbt-passage-copy {
         font-size: calc(15px * var(--reading-scale));
         line-height: 1.65;
@@ -2306,4 +2337,40 @@ html.dark-theme .cbt-nav-bubble.is-answered {
     color: #666;
     position: absolute;
     left: 0;
+}
+.cbt-question-group--matching_headings .cbt-group-content-html .example-box,
+.cbt-question-group--matching_sentence_endings .cbt-group-content-html .example-box {
+    max-width: 620px;
+    margin: 18px auto 24px;
+    padding: 12px 18px 14px;
+    border: 1px solid #8f8f8f;
+    background: #fff;
+}
+
+.cbt-question-group--matching_headings .cbt-group-content-html .example-box > p,
+.cbt-question-group--matching_sentence_endings .cbt-group-content-html .example-box > p {
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.cbt-question-group--matching_headings .cbt-group-content-html .example-box ul,
+.cbt-question-group--matching_sentence_endings .cbt-group-content-html .example-box ul {
+    margin: 0;
+    padding: 0 !important;
+    list-style: none;
+}
+
+.cbt-question-group--matching_headings .cbt-group-content-html .example-box li,
+.cbt-question-group--matching_sentence_endings .cbt-group-content-html .example-box li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+    margin: 4px 0;
+    line-height: 1.35;
+}
+
+.cbt-question-group--matching_headings .cbt-group-content-html .example-box li strong,
+.cbt-question-group--matching_sentence_endings .cbt-group-content-html .example-box li strong {
+    text-align: left;
 }

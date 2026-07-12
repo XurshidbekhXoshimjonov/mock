@@ -436,6 +436,8 @@ function normalizeGenericReadingPassage(source = {}, index = 0, fallbackGroups =
         id: source.id || source.passageId || `reading-passage-${number}`,
         number,
         title: source.title || source.passageTitle || source.name || `Reading Passage ${number}`,
+        subtitle: source.subtitle || source.passageSubtitle || "",
+        subtitleStrong: Boolean(source.subtitleStrong),
         displayLabel: source.displayLabel || `Reading Passage ${number}`,
         text,
         passageText: text,
@@ -2395,7 +2397,7 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = skill === "reading";
+    const enableVocabulary = skill === "reading" && !isFullTest;
     const canUseVocabulary = enableVocabulary && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
@@ -2403,7 +2405,7 @@ function ReadingApp() {
     );
 
     useEffect(() => {
-        if (skill !== "reading") return undefined;
+        if (skill !== "reading" || isFullTest) return undefined;
         const timer = window.setTimeout(() => {
             console.log("Reading translation initialized");
             if (typeof window.initializeReadingTranslation === "function") {
@@ -2411,7 +2413,7 @@ function ReadingApp() {
             }
         }, 0);
         return () => window.clearTimeout(timer);
-    }, [skill, test?.id, activeIndex, hasStarted]);
+    }, [skill, test?.id, activeIndex, hasStarted, isFullTest]);
 
     useEffect(() => {
         if (!isFullTest) return undefined;

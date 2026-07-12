@@ -31,9 +31,15 @@ function SafeHtml({ html, className, tag: Tag = "div", highlightInstructions = f
 
 function normalizeOption(option) {
     if (typeof option === "object" && option !== null) {
+        const value = option.value ?? option.letter ?? option.key ?? option.id ?? option.label ?? option.text ?? "";
+        const text = option.label ?? option.text ?? option.value ?? option.letter ?? "";
+        const letter = String(option.letter ?? "").trim();
+        const label = letter && String(text).trim() && !String(text).trim().toUpperCase().startsWith(`${letter.toUpperCase()} `)
+            ? `${letter} ${String(text).trim()}`
+            : String(text || value);
         return {
-            value: String(option.value || option.label || ""),
-            label: option.label || option.value || "",
+            value: String(value),
+            label,
             html: option.html || ""
         };
     }
@@ -937,12 +943,16 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
     const rangeText = range.start === range.end
         ? `Question ${range.start}`
         : `Questions ${range.start}\u2013${range.end}`;
-    const paragraphs = passage.paragraphs?.length
+    const subtitle = String(passage.subtitle || "").trim();
+    const allParagraphs = passage.paragraphs?.length
         ? passage.paragraphs
         : String(passage.passageText || "")
             .split(/\n{2,}/)
             .map((text) => ({ text, html: "" }))
             .filter((paragraph) => paragraph.text.trim());
+    const paragraphs = subtitle
+        ? allParagraphs.filter((paragraph, index) => index !== 0 || String(paragraph.text || "").trim() !== subtitle)
+        : allParagraphs;
 
     function handleVocabularyClick(event) {
         if (!enableVocabulary || !onVocabularyWord || !event.target?.closest) {
@@ -1011,6 +1021,11 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
         h("h1", { className: "cbt-passage-title" },
             passage.title || passage.passageTitle || `Reading Passage ${passage.number || 1}`
         ),
+        subtitle
+            ? h("p", {
+                className: `cbt-passage-subtitle${passage.subtitleStrong ? " cbt-passage-subtitle--strong" : ""}`
+            }, subtitle)
+            : null,
         passage.audio
             ? h("audio", { className: "cbt-audio-player", controls: true, src: passage.audio })
             : null,
