@@ -883,6 +883,23 @@ body.dark-theme .home-practice-grid .skill-card:hover .card-icon,
     white-space: nowrap;
 }
 
+.test-card-badge.test-card-badge--free {
+    min-height: 38px;
+    padding: 0 18px;
+    border: 0;
+    background: linear-gradient(135deg, #dcfce7, #eefce9);
+    color: #078638;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+body.dark-theme .test-card-badge.test-card-badge--free {
+    border: 0;
+    background: linear-gradient(135deg, #dcfce7, #eefce9);
+    color: #078638;
+}
+
 .test-card-content {
     display: grid;
     align-content: start;
@@ -3426,4 +3443,10 @@ body.dark-theme .home-practice-grid .skill-card .practice-card__footer {
 
 body.dark-theme .home-practice-grid .skill-card:hover .practice-card__footer {
     color: #a8c7ff !important;
+}
+body.dark-theme .writing-test-card .test-card-badge.test-card-badge--free,
+body.dark-theme .test-list-card .test-card-badge.test-card-badge--free {
+    border: 0;
+    background: linear-gradient(135deg, #dcfce7, #eefce9);
+    color: #078638;
 }

@@ -85,9 +85,7 @@ function estimatedTime(config, test) {
 }
 
 function difficultyLabel(config) {
-    if (config.part === "1") return "Easy";
-    if (config.part === "2") return "Medium";
-    return "Hard";
+    return "Free";
 }
 
 function partLabel(config) {
@@ -139,7 +137,7 @@ function renderCardContent({ title, description, questionCount, config, test }) 
     return `
         <div class="test-card-top">
             <span class="test-card-icon">${iconSvg(config)}</span>
-            <span class="test-card-badge">${difficultyLabel(config)}</span>
+            <span class="test-card-badge test-card-badge--free">${difficultyLabel(config)}</span>
         </div>
         <div class="test-card-content">
             <h2>${escapeHtml(title)}</h2>

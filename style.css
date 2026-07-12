@@ -1147,6 +1147,17 @@ form{
     text-transform: uppercase;
 }
 
+.test-card-badge.test-card-badge--free {
+    min-height: 38px;
+    padding: 0 18px;
+    border: 0;
+    background: linear-gradient(135deg, #dcfce7, #eefce9);
+    color: #078638;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
 .test-card-content {
     display: grid;
     gap: 7px;
@@ -1575,4 +1586,10 @@ body.dark-theme .tests-grid .reading-test-card .test-card-stats span {
 html.dark-theme .tests-grid .reading-test-card .test-card-stats strong,
 body.dark-theme .tests-grid .reading-test-card .test-card-stats strong {
     color: #ffffff !important;
+}
+html.dark-theme .tests-grid .reading-test-card .test-card-badge.test-card-badge--free,
+body.dark-theme .tests-grid .reading-test-card .test-card-badge.test-card-badge--free {
+    border: 0;
+    background: linear-gradient(135deg, #dcfce7, #eefce9);
+    color: #078638;
 }

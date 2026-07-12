@@ -2022,3 +2022,40 @@ body.dark-theme .mock-result-button--secondary:hover {
         font-size: 38px;
     }
 }
+html.dark-theme body.public-page[data-practice-skill="mock"],
+body.dark-theme.public-page[data-practice-skill="mock"] {
+    color: #f8fbff;
+    background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.13), rgba(99, 102, 241, 0.10) 42%, rgba(8, 8, 24, 0) 72%),
+        #08081b;
+}
+
+html.dark-theme body.public-page[data-practice-skill="mock"] .test-list-page-header,
+body.dark-theme.public-page[data-practice-skill="mock"] .test-list-page-header {
+    border-color: rgba(148, 163, 184, 0.16);
+    background: linear-gradient(145deg, rgba(13, 14, 37, 0.96), rgba(8, 8, 24, 0.92));
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+}
+
+html.dark-theme body.public-page[data-practice-skill="mock"] .test-list-page-header h1,
+body.dark-theme.public-page[data-practice-skill="mock"] .test-list-page-header h1,
+html.dark-theme body.public-page[data-practice-skill="mock"] .mock-test-card .test-card-content h2,
+body.dark-theme.public-page[data-practice-skill="mock"] .mock-test-card .test-card-content h2 {
+    color: #f8fbff;
+}
+
+html.dark-theme body.public-page[data-practice-skill="mock"] .test-list-page-header p,
+body.dark-theme.public-page[data-practice-skill="mock"] .test-list-page-header p,
+html.dark-theme body.public-page[data-practice-skill="mock"] .test-list-meta,
+body.dark-theme.public-page[data-practice-skill="mock"] .test-list-meta,
+html.dark-theme body.public-page[data-practice-skill="mock"] .mock-card-lines,
+body.dark-theme.public-page[data-practice-skill="mock"] .mock-card-lines {
+    color: #aebbd2;
+}
+
+html.dark-theme body.public-page[data-practice-skill="mock"] .mock-test-card,
+body.dark-theme.public-page[data-practice-skill="mock"] .mock-test-card {
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(8, 11, 31, 0.94));
+    color: #f8fbff;
+}

@@ -45,7 +45,7 @@
                     <span class="test-card-icon" aria-hidden="true">
                         ${documentIcon()}
                     </span>
-                    <span class="test-card-badge">${escapeHtml(meta.badge)}</span>
+                    <span class="test-card-badge test-card-badge--free">FREE</span>
                 </div>
                 <div class="test-card-content">
                     <h2>${escapeHtml(title)}</h2>
