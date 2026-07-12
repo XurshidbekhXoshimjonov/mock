@@ -894,10 +894,14 @@ body.dark-theme .home-practice-grid .skill-card:hover .card-icon,
     letter-spacing: 0;
 }
 
-body.dark-theme .test-card-badge.test-card-badge--free {
-    border: 0;
-    background: linear-gradient(135deg, #dcfce7, #eefce9);
-    color: #078638;
+html.dark-theme .test-card-badge.test-card-badge--free,
+body.dark-theme .test-card-badge.test-card-badge--free,
+html[data-theme="dark"] .test-card-badge.test-card-badge--free,
+body[data-theme="dark"] .test-card-badge.test-card-badge--free {
+    border: 1px solid #145c43 !important;
+    background: #062b25 !important;
+    color: #72e6a0 !important;
+    box-shadow: inset 0 0 0 1px rgba(114, 230, 160, 0.03);
 }
 
 .test-card-content {
@@ -3444,9 +3448,13 @@ body.dark-theme .home-practice-grid .skill-card .practice-card__footer {
 body.dark-theme .home-practice-grid .skill-card:hover .practice-card__footer {
     color: #a8c7ff !important;
 }
+html.dark-theme .writing-test-card .test-card-badge.test-card-badge--free,
 body.dark-theme .writing-test-card .test-card-badge.test-card-badge--free,
-body.dark-theme .test-list-card .test-card-badge.test-card-badge--free {
-    border: 0;
-    background: linear-gradient(135deg, #dcfce7, #eefce9);
-    color: #078638;
+html.dark-theme .test-list-card .test-card-badge.test-card-badge--free,
+body.dark-theme .test-list-card .test-card-badge.test-card-badge--free,
+html[data-theme="dark"] .test-card-badge.test-card-badge--free,
+body[data-theme="dark"] .test-card-badge.test-card-badge--free {
+    border: 1px solid #145c43 !important;
+    background: #062b25 !important;
+    color: #72e6a0 !important;
 }

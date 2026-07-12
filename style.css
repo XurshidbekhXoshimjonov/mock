@@ -776,85 +776,6 @@ body.dark-theme .google-btn:hover {
 .tests-title{
     text-align:center;
 
-    font-size:42px;
-
-    margin-bottom:50px;
-
-    color:#111827;
-}
-
-.tests-grid{
-    display:flex;
-
-    justify-content:center;
-
-    gap:35px;
-
-    flex-wrap:wrap;
-}
-
-.reading-test-card{
-    width:300px;
-    height:220px;
-
-    background:white;
-
-    border:2px solid #e5e7eb;
-    border-radius:28px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-decoration:none;
-
-    color:black;
-
-    transition:0.3s;
-
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
-}
-
-.reading-test-card:hover{
-    transform:translateY(-8px);
-
-    box-shadow:0 12px 28px rgba(0,0,0,0.12);
-}
-
-.reading-test-card h2{
-    font-size:32px;
-
-    margin-bottom:15px;
-
-    color:#0057ff;
-}
-
-.reading-test-card p{
-    color:gray;
-
-    font-size:17px;
-}
-.partoter{
-    margin-top:240px;
-
-    text-align:center;
-
-    padding:20px;
-
-    border-top:1px solid #e5e7eb;
-
-    color:gray;
-
-    font-size:14px;
-}
-.tests-page{
-    padding:60px;
-}
-
-.tests-title{
-    text-align:center;
-
     font-size:48px;
 
     margin-bottom:55px;
@@ -923,33 +844,6 @@ body.dark-theme .google-btn:hover {
     margin:0;
     line-height:1.35;
 }
-.partfter{
-    margin-top:270px;
-
-    text-align:center;
-
-    padding:20px;
-
-    border-top:1px solid #e5e7eb;
-
-    color:gray;
-
-    font-size:14px;
-}
-.pftoter{
-margin-top: -300px;
-
-    text-align:center;
-
-    padding:20px;
-
-    border-top:1px solid #e5e7eb;
-
-    color:gray;
-
-    font-size:14px;
-}
-
 .partfter{
 margin-top: 80px;
 
@@ -1587,9 +1481,12 @@ html.dark-theme .tests-grid .reading-test-card .test-card-stats strong,
 body.dark-theme .tests-grid .reading-test-card .test-card-stats strong {
     color: #ffffff !important;
 }
-html.dark-theme .tests-grid .reading-test-card .test-card-badge.test-card-badge--free,
-body.dark-theme .tests-grid .reading-test-card .test-card-badge.test-card-badge--free {
-    border: 0;
-    background: linear-gradient(135deg, #dcfce7, #eefce9);
-    color: #078638;
+html.dark-theme .test-card-badge.test-card-badge--free,
+body.dark-theme .test-card-badge.test-card-badge--free,
+html[data-theme="dark"] .test-card-badge.test-card-badge--free,
+body[data-theme="dark"] .test-card-badge.test-card-badge--free {
+    border: 1px solid #145c43 !important;
+    background: #062b25 !important;
+    color: #72e6a0 !important;
+    box-shadow: inset 0 0 0 1px rgba(114, 230, 160, 0.03);
 }

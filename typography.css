@@ -1,4 +1,4 @@
-@import url("/fonts/plus-jakarta-sans.css?v=20260702-local-font");
+@import url("fonts/plus-jakarta-sans.css");
 
 :root {
     --ieltsx-font: "Plus Jakarta Sans", sans-serif;
