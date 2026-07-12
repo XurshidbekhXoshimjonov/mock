@@ -83,6 +83,11 @@ const ListeningComponents = (() => {
             .replace(/&lt;\/i&gt;/gi, "</em>")
             .replace(/&lt;em&gt;/gi, "<em>")
             .replace(/&lt;\/em&gt;/gi, "</em>")
+            .replace(/&lt;ul&gt;/gi, "<ul>")
+            .replace(/&lt;\/ul&gt;/gi, "</ul>")
+            .replace(/&lt;li&gt;/gi, "<li>")
+            .replace(/&lt;\/li&gt;/gi, "</li>")
+            .replace(/&lt;br\s*\/?\s*(?:&gt;|>)/gi, "<br>")
             .replace(/&quot;/g, '"')
             .replace(/&#039;/g, "'")
             .replace(/&amp;/g, "&")
@@ -528,11 +533,15 @@ const ListeningComponents = (() => {
             return String(line).trim().match(/^<strong>([\s\S]*?)<\/strong>\s*([\s\S]*)$/i);
         }
 
+        function isBulletLine(line) {
+            return /^\s*[-*•]\s+/.test(String(line || ""));
+        }
+
         function shouldRenderNoteTable(lines) {
             const meaningfulLines = (lines || [])
                 .map((line) => String(line).trim())
                 .filter(Boolean);
-            const nonBulletLines = meaningfulLines.filter((line) => !/^[-*]\s+/.test(line));
+            const nonBulletLines = meaningfulLines.filter((line) => !isBulletLine(line));
             const labelLines = nonBulletLines.filter(noteLabelMatch);
 
             return labelLines.length >= 4 && labelLines.length / Math.max(nonBulletLines.length, 1) >= 0.65;
@@ -561,8 +570,8 @@ const ListeningComponents = (() => {
 
                 while (index + 1 < lines.length) {
                     const nextLine = String(lines[index + 1]).trim();
-                    if (!/^[-*]\s+/.test(nextLine)) break;
-                    valueParts.push(`<span class="lc-note-table-list-item">${renderPlaceholderText(nextLine.slice(2), block.options)}</span>`);
+                    if (!isBulletLine(nextLine)) break;
+                    valueParts.push(`<span class="lc-note-table-list-item">${renderPlaceholderText(nextLine.replace(/^\s*[-*•]\s+/, ""), block.options)}</span>`);
                     hasListItems = true;
                     index += 1;
                 }
@@ -584,8 +593,8 @@ const ListeningComponents = (() => {
             const trimmed = String(line).trim();
             if (!trimmed) return "<br>";
 
-            if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.slice(2), block.options)}</li>`;
+            if (isBulletLine(trimmed)) {
+                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.replace(/^\s*[-*•]\s+/, ""), block.options)}</li>`;
             }
 
             const strongOnly = /^<strong>[\s\S]*<\/strong>$/i.test(trimmed);
@@ -602,7 +611,7 @@ const ListeningComponents = (() => {
         }
 
         function listItem(line) {
-            const match = String(line || "").match(/^(\s*)([-*])\s+([\s\S]*)$/);
+            const match = String(line || "").match(/^(\s*)([-*•])\s+([\s\S]*)$/);
             if (!match) return null;
 
             const indent = match[1].replace(/\t/g, "  ").length;
@@ -730,9 +739,14 @@ const ListeningComponents = (() => {
             return blockCard(block, renderJobDetailsForm(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--job-details-form");
         }
 
-        const noteStyleClass = isBoxedFlow ? "lc-note-completion--boxed-flow" : "";
+        const isSpiritBear = isBoxedFlow && /^the spirit bear$/i.test(plainText(displayTitle));
+        const noteStyleClass = [
+            isBoxedFlow ? "lc-note-completion--boxed-flow" : "",
+            isSpiritBear ? "lc-note-completion--spirit-bear" : ""
+        ].filter(Boolean).join(" ");
         const items = renderNoteFlow(noteLines);
         const tableItems = shouldRenderNoteTable(noteLines) ? renderNoteTable(noteLines) : "";
+        const titleHtml = displayTitle ? `<h4 class="${isBoxedFlow ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : "";
 
         const exampleBox = block.example ? `
             <div class="lc-notes-example">
@@ -742,17 +756,48 @@ const ListeningComponents = (() => {
         ` : "";
 
         return blockCard(block, `
-            ${displayTitle ? `<h4 class="${isBoxedFlow ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : ""}
+            ${!isSpiritBear ? titleHtml : ""}
             ${exampleBox}
-            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${tableItems || items}</div>
+            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${isSpiritBear ? titleHtml : ""}${tableItems || items}</div>
         `, `lc-note-completion ${noteStyleClass}`);
     }
 
+    function renderTableHeaderCell(value) {
+        return escapeHtml(value).replace(/&lt;br\s*\/?\s*(?:&gt;|>)/gi, "<br>");
+    }
+
+    function normalizedTableCell(value) {
+        return plainText(String(value || "")
+            .replace(/&lt;br\s*\/?\s*&gt;/gi, " ")
+            .replace(/<br\s*\/?>/gi, " "))
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLowerCase();
+    }
+
+    function rowCells(row) {
+        return Array.isArray(row) ? row : row.cells || [];
+    }
+
+    function isRepeatedTableHeaderRow(row, columns) {
+        const cells = rowCells(row);
+        if (!columns.length || cells.length !== columns.length) return false;
+        return cells.every((cell, index) => normalizedTableCell(cell) === normalizedTableCell(columns[index]));
+    }
+
     function TableCompletionBlock(block) {
-        const columns = (block.columns || []).map((column) => `<th>${escapeHtml(column)}</th>`).join("");
-        const rows = (block.rows || []).map((row) => {
+        const rawColumns = block.columns || [];
+        const hasRowHeaders = rawColumns.length > 0 && !normalizedTableCell(rawColumns[0]);
+        const columns = rawColumns.map((column) => `<th scope="col">${renderTableHeaderCell(column)}</th>`).join("");
+        const bodyRows = (block.rows || []).filter((row, index) => index !== 0 || !isRepeatedTableHeaderRow(row, rawColumns));
+        const rows = bodyRows.map((row) => {
             const cells = Array.isArray(row) ? row : row.cells || [];
-            return `<tr>${cells.map((cell) => `<td>${renderValue(cell, block.options)}</td>`).join("")}</tr>`;
+            return `<tr>${cells.map((cell, cellIndex) => {
+                const content = renderValue(cell, block.options);
+                return hasRowHeaders && cellIndex === 0
+                    ? `<th scope="row">${content}</th>`
+                    : `<td>${content}</td>`;
+            }).join("")}</tr>`;
         }).join("");
 
         return blockCard(block, `
@@ -978,7 +1023,247 @@ const ListeningComponents = (() => {
         </section>`;
     }
 
+    function c10Blank(number, extraClass = "") {
+        return `<span class="c10-answer ${extraClass}" id="question-${number}" data-question="${number}">
+            <span class="c10-qnum">${number}</span>
+            <input class="lc-answer-input c10-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+        </span>`;
+    }
+
+    function c10Choice(name, value, text, type = "radio", extraAttrs = "") {
+        return `<label class="c10-choice">
+            <input type="${type}" name="${escapeHtml(name)}" value="${escapeHtml(value)}" ${extraAttrs}>
+            <span class="c10-choice-letter">${escapeHtml(value)}</span>
+            <span>${escapeHtml(text)}</span>
+        </label>`;
+    }
+
+    function c10MultipleSelect() {
+        const options = [
+            ["A", "the gym"],
+            ["B", "the tracks"],
+            ["C", "the indoor pool"],
+            ["D", "the outdoor pool"],
+            ["E", "the sports training for children"]
+        ].map(([letter, text]) => c10Choice("c10-q11-12", letter, text, "checkbox", 'data-sync="q11-q12"')).join("");
+
+        return `<div class="lc-multiple-select c10-choice-list" data-max-selections="2" data-question-numbers="11,12">
+            <input type="hidden" name="q11">
+            <input type="hidden" name="q12">
+            ${options}
+        </div>
+        <p class="lc-selection-message c10-selection-message" aria-live="polite"></p>`;
+    }
+
+    function renderCambridge10PaperPart(part) {
+        const partNumber = Number(part.partNumber) || 1;
+
+        if (partNumber === 1) {
+            return `
+                <div class="c10-listening-label">LISTENING</div>
+                <div class="c10-section-heading">
+                    <h2>SECTION 1</h2>
+                    <p>Questions 1–10</p>
+                </div>
+
+                <div class="c10-instructions">
+                    <p><em>Questions 1–6</em></p>
+                    <p><em>Complete the notes below.</em></p>
+                    <p><em>Write <strong>ONE WORD</strong> for each answer.</em></p>
+                </div>
+
+                <section class="c10-box c10-self-drive">
+                    <h3>SELF-DRIVE TOURS IN THE USA</h3>
+                    <div class="c10-form-row c10-example-row"><span><em>Example</em></span><span></span></div>
+                    <div class="c10-form-row"><strong>Name:</strong><span><strong>Andrea</strong> <span class="c10-example-line">Brown</span></span></div>
+                    <div class="c10-form-row"><strong>Address:</strong><span>24 ${c10Blank(1)} Road</span></div>
+                    <div class="c10-form-row"><strong>Postcode:</strong><span>BH5 2OP</span></div>
+                    <div class="c10-form-row"><strong>Phone:</strong><span>(mobile) 077 8664 3091</span></div>
+                    <div class="c10-form-row"><strong>Heard about company from:</strong><span>${c10Blank(2)}</span></div>
+                    <div class="c10-form-wide"><strong>Possible self-drive tours</strong></div>
+                    <div class="c10-form-wide">
+                        <p>Trip One:</p>
+                        <ul>
+                            <li>Los Angeles: customer wants to visit some ${c10Blank(3)} parks with her children</li>
+                            <li>Yosemite Park: customer wants to stay in a lodge, not a ${c10Blank(4)}</li>
+                        </ul>
+                        <p>Trip Two:</p>
+                        <ul>
+                            <li>Customer wants to see the ${c10Blank(5)} on the way to Cambria</li>
+                            <li>At Santa Monica: not interested in shopping</li>
+                            <li>At San Diego, wants to spend time on the ${c10Blank(6)}</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="c10-instructions c10-after-box">
+                    <p><em>Questions 7–10</em></p>
+                    <p><em>Complete the table below.</em></p>
+                    <p><em>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</em></p>
+                </div>
+
+                <div class="c10-table-wrap">
+                    <table class="c10-table">
+                        <thead>
+                            <tr><th></th><th>Number<br>of days</th><th>Total distance</th><th>Price<br>(per person)</th><th>Includes</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Trip One</th>
+                                <td>12 days</td>
+                                <td>${c10Blank(7)} km</td>
+                                <td>£525</td>
+                                <td><ul><li>accommodation</li><li>car</li><li>one ${c10Blank(8)}</li></ul></td>
+                            </tr>
+                            <tr>
+                                <th>Trip Two</th>
+                                <td>9 days</td>
+                                <td>980 km</td>
+                                <td>£ ${c10Blank(9)}</td>
+                                <td><ul><li>accommodation</li><li>car</li><li>${c10Blank(10)}</li></ul></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        if (partNumber === 2) {
+            return `
+                <div class="c10-section-heading">
+                    <h2>SECTION 2</h2>
+                    <p>Questions 11–20</p>
+                </div>
+                <div class="c10-instructions">
+                    <p><em>Questions 11–12</em></p>
+                    <p><em>Choose <strong>TWO</strong> letters <strong>A–E</strong>.</em></p>
+                </div>
+                <section class="c10-question-block">
+                    <p>Which <strong>TWO</strong> facilities at the leisure club have recently been improved?</p>
+                    ${c10MultipleSelect()}
+                </section>
+                <div class="c10-instructions c10-after-box">
+                    <p><em>Complete the notes below.</em></p>
+                    <p><em>Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</em></p>
+                </div>
+                <section class="c10-notes">
+                    <h3>Joining the leisure club</h3>
+                    <p><em>Personal Assessment</em></p>
+                    <ul>
+                        <li>New members should describe any ${c10Blank(13)}.</li>
+                        <li>The ${c10Blank(14)} will be explained to you before you use the equipment.</li>
+                        <li>You will be given a six-week ${c10Blank(15)}.</li>
+                    </ul>
+                    <p><em>Types of membership</em></p>
+                    <ul>
+                        <li>There is a compulsory £90 ${c10Blank(16)} fee for members.</li>
+                        <li>Gold members are given ${c10Blank(17)} to all the LP clubs.</li>
+                        <li>Premier members are given priority during ${c10Blank(18)} hours.</li>
+                        <li>Premier members can bring some ${c10Blank(19)} every month.</li>
+                        <li>Members should always take their ${c10Blank(20)} with them.</li>
+                    </ul>
+                </section>
+            `;
+        }
+
+        if (partNumber === 3) {
+            const questions = [
+                [21, "Students entering the design competition have to", [["A", "produce an energy-efficient design."], ["B", "adapt an existing energy-saving appliance."], ["C", "develop a new use for current technology."]]],
+                [22, "John chose a dishwasher because he wanted to make dishwashers", [["A", "more appealing."], ["B", "more common."], ["C", "more economical."]]],
+                [23, "The stone in John’s ‘Rockpool’ design is used", [["A", "for decoration."], ["B", "to switch it on."], ["C", "to stop water escaping."]]],
+                [24, "In the holding chamber, the carbon dioxide", [["A", "changes back to a gas."], ["B", "dries the dishes."], ["C", "is allowed to cool."]]],
+                [25, "At the end of the cleaning process, the carbon dioxide", [["A", "is released into the air."], ["B", "is disposed of with the waste."], ["C", "is collected ready to be re-used."]]]
+            ].map(([number, question, options]) => `
+                <div class="c10-mcq" id="question-${number}">
+                    <p><strong>${number}</strong> <span>${escapeHtml(question)}</span></p>
+                    <div class="c10-choice-list">
+                        ${options.map(([letter, text]) => c10Choice(`q${number}`, letter, text)).join("")}
+                    </div>
+                </div>
+            `).join("");
+
+            return `
+                <div class="c10-section-heading">
+                    <h2>SECTION 3</h2>
+                    <p>Questions 21–30</p>
+                </div>
+                <div class="c10-instructions">
+                    <p><em>Questions 21–25</em></p>
+                    <p><em>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.</em></p>
+                </div>
+                <section class="c10-mcq-block">
+                    <h3>Global Design Competition</h3>
+                    ${questions}
+                </section>
+                <div class="c10-instructions c10-after-box">
+                    <p><em>Questions 26–30</em></p>
+                    <p><em>Complete the notes below.</em></p>
+                    <p><em>Write <strong>ONE WORD ONLY</strong> for each answer.</em></p>
+                </div>
+                <section class="c10-box c10-simple-box">
+                    <ul>
+                        <li>John needs help preparing for his ${c10Blank(26)}.</li>
+                        <li>The professor advises John to make a ${c10Blank(27)} of his design.</li>
+                        <li>John’s main problem is getting good quality ${c10Blank(28)}.</li>
+                        <li>The professor suggests John apply for a ${c10Blank(29)}.</li>
+                        <li>The professor will check the ${c10Blank(30)} information in John’s written report.</li>
+                    </ul>
+                </section>
+            `;
+        }
+
+        return `
+            <div class="c10-section-heading">
+                <h2>SECTION 4</h2>
+                <p>Questions 31–40</p>
+            </div>
+            <div class="c10-instructions">
+                <p><em>Complete the notes below.</em></p>
+                <p><em>Write <strong>ONE WORD ONLY</strong> for each answer.</em></p>
+            </div>
+            <section class="c10-box c10-spirit-bear">
+                <h3>THE SPIRIT BEAR</h3>
+                <p><strong>General facts</strong></p>
+                <ul>
+                    <li>It is a white bear belonging to the black bear family.</li>
+                    <li>Its colour comes from an uncommon ${c10Blank(31)}.</li>
+                    <li>Local people believe that it has unusual ${c10Blank(32)}.</li>
+                    <li>They protect the bear from ${c10Blank(33)}.</li>
+                </ul>
+                <p><strong>Habitat</strong></p>
+                <ul>
+                    <li>The bear’s relationship with the forest is complex.</li>
+                    <li>Tree roots stop ${c10Blank(34)} along salmon streams.</li>
+                    <li>The bears’ feeding habits provide nutrients for forest vegetation.</li>
+                    <li>It is currently found on a small number of ${c10Blank(35)}.</li>
+                </ul>
+                <p><strong>Threats</strong></p>
+                <ul>
+                    <li>Habitat is being lost due to deforestation and construction of ${c10Blank(36)} by logging companies.</li>
+                    <li>Unrestricted ${c10Blank(37)} is also affecting the salmon supply.</li>
+                    <li>The bears’ existence is also threatened by their low rate of ${c10Blank(38)}.</li>
+                </ul>
+                <p><strong>Going forward</strong></p>
+                <ul>
+                    <li>Interested parties are working together.</li>
+                    <li>Logging companies must improve their ${c10Blank(39)} of logging.</li>
+                    <li>Maintenance and ${c10Blank(40)} of the spirit bears’ territory is needed.</li>
+                </ul>
+            </section>
+        `;
+    }
+
+    function isCambridge10PaperPart(part) {
+        return false;
+    }
+
     function ListeningPart(part) {
+        if (isCambridge10PaperPart(part)) {
+            return `<section class="lc-part lc-c10-paper lc-c10-part-${Number(part.partNumber) || 1}" data-part-number="${Number(part.partNumber) || 1}">
+                ${renderCambridge10PaperPart(part)}
+            </section>`;
+        }
+
         const importedHtml = part.html || part.listeningHtml || part.questionsHtml || "";
         const importedHtmlBlock = importedHtml
             ? `<section class="lc-question-card lc-imported-html-block">

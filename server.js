@@ -500,6 +500,16 @@ function slugify(value, fallback = "test") {
         || fallback;
 }
 
+const PUBLIC_ROUTE_SLUG_ALIASES = {
+    listening: {
+        "c10-listening-test-1-1783826761800-listening-full": "c10-listening-test-1-1783831879508",
+        "c10-listening-test-1-1783826848064": "c10-listening-test-1-1783831879508",
+        "c10-listening-test-1-1783826848064-listening-full": "c10-listening-test-1-1783831879508",
+        "c10-listening-test-1-1783830949232": "c10-listening-test-1-1783831879508",
+        "c10-listening-test-1-1783830949232-listening-full": "c10-listening-test-1-1783831879508"
+    }
+};
+
 function getReadingTestPath(id) {
     return path.join(READING_TESTS_DIR, `${safeFileName(id)}.json`);
 }
@@ -3552,12 +3562,25 @@ function resolvePublicEntry(skill, locator, source = "") {
     const entries = buildPublicRouteEntries(skill);
     const scopedEntries = source ? entries.filter((entry) => entry.source === source) : entries;
 
-    return scopedEntries.find((entry) => entry.explicitSlug && entry.explicitSlug === normalized)
-        || scopedEntries.find((entry) => entry.publicSlug === normalized)
-        || scopedEntries.find((entry) => entry.generatedSlug && entry.generatedSlug === normalized)
-        || scopedEntries.find((entry) => String(entry.id) === raw)
-        || scopedEntries.find((entry) => slugify(entry.id || "", "") === normalized)
+    const findEntry = (slug, rawId = raw) => scopedEntries.find((entry) => entry.explicitSlug && entry.explicitSlug === slug)
+        || scopedEntries.find((entry) => entry.publicSlug === slug)
+        || scopedEntries.find((entry) => entry.generatedSlug && entry.generatedSlug === slug)
+        || scopedEntries.find((entry) => String(entry.id) === rawId)
+        || scopedEntries.find((entry) => slugify(entry.id || "", "") === slug)
         || null;
+
+    const directEntry = findEntry(normalized);
+    if (directEntry) {
+        return directEntry;
+    }
+
+    const aliasTarget = PUBLIC_ROUTE_SLUG_ALIASES[skill]?.[normalized];
+    if (aliasTarget) {
+        const aliasEntry = findEntry(slugify(aliasTarget, ""), aliasTarget);
+        return aliasEntry ? { ...aliasEntry, publicSlug: normalized } : null;
+    }
+
+    return null;
 }
 
 function resolveManualReadingTest(locator) {
@@ -6764,6 +6787,18 @@ app.use((req, res, next) => {
 
 function staticCacheHeaders(res, filePath) {
     const ext = path.extname(filePath).toLowerCase();
+    const fileName = path.basename(filePath).toLowerCase();
+    const noStoreAssets = new Set([
+        "listening-template.css",
+        "listening-test-components.js",
+        "listening-template.js"
+    ]);
+
+    if (noStoreAssets.has(fileName)) {
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+        return;
+    }
+
     if (ext === ".html") {
         res.setHeader("Cache-Control", "no-store");
         return;

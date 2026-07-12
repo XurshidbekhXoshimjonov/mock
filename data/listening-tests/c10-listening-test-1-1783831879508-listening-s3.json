@@ -1,0 +1,404 @@
+{
+  "id": "c10-listening-test-1-1783831879508-listening-s3",
+  "slug": "c10-listening-test-1-1783831879508-listening-s3",
+  "title": "Cambridge 10 Test 1 Listening — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–25",
+      "instruction": "Choose the correct letter, A, B or C. Global Design Competition",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Students entering the design competition have to",
+      "options": [
+        {
+          "value": "A",
+          "label": "produce an energy-efficient design.",
+          "html": "produce an energy-efficient design."
+        },
+        {
+          "value": "B",
+          "label": "adapt an existing energy-saving appliance.",
+          "html": "adapt an existing energy-saving appliance."
+        },
+        {
+          "value": "C",
+          "label": "develop a new use for current technology.",
+          "html": "develop a new use for current technology."
+        }
+      ],
+      "answer": "C",
+      "text": "Students entering the design competition have to"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "John chose a dishwasher because he wanted to make dishwashers",
+      "options": [
+        {
+          "value": "A",
+          "label": "more appealing.",
+          "html": "more appealing."
+        },
+        {
+          "value": "B",
+          "label": "more common.",
+          "html": "more common."
+        },
+        {
+          "value": "C",
+          "label": "more economical.",
+          "html": "more economical."
+        }
+      ],
+      "answer": "A",
+      "text": "John chose a dishwasher because he wanted to make dishwashers"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "The stone in John’s ‘Rockpool’ design is used",
+      "options": [
+        {
+          "value": "A",
+          "label": "for decoration.",
+          "html": "for decoration."
+        },
+        {
+          "value": "B",
+          "label": "to switch it on.",
+          "html": "to switch it on."
+        },
+        {
+          "value": "C",
+          "label": "to stop water escaping.",
+          "html": "to stop water escaping."
+        }
+      ],
+      "answer": "B",
+      "text": "The stone in John’s ‘Rockpool’ design is used"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "In the holding chamber, the carbon dioxide",
+      "options": [
+        {
+          "value": "A",
+          "label": "changes back to a gas.",
+          "html": "changes back to a gas."
+        },
+        {
+          "value": "B",
+          "label": "dries the dishes.",
+          "html": "dries the dishes."
+        },
+        {
+          "value": "C",
+          "label": "is allowed to cool.",
+          "html": "is allowed to cool."
+        }
+      ],
+      "answer": "A",
+      "text": "In the holding chamber, the carbon dioxide"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "At the end of the cleaning process, the carbon dioxide",
+      "options": [
+        {
+          "value": "A",
+          "label": "is released into the air.",
+          "html": "is released into the air."
+        },
+        {
+          "value": "B",
+          "label": "is disposed of with the waste.",
+          "html": "is disposed of with the waste."
+        },
+        {
+          "value": "C",
+          "label": "is collected ready to be re-used.",
+          "html": "is collected ready to be re-used."
+        }
+      ],
+      "answer": "C",
+      "text": "At the end of the cleaning process, the carbon dioxide"
+    },
+    {
+      "number": 26,
+      "type": "sentence_completion",
+      "question": "John needs help preparing for his ...",
+      "options": [],
+      "answer": "presentation",
+      "text": "John needs help preparing for his ..."
+    },
+    {
+      "number": 27,
+      "type": "sentence_completion",
+      "question": "The professor advises John to make a ... of his design.",
+      "options": [],
+      "answer": "model",
+      "text": "The professor advises John to make a ... of his design."
+    },
+    {
+      "number": 28,
+      "type": "sentence_completion",
+      "question": "John’s main problem is getting good quality ...",
+      "options": [],
+      "answer": "material | materials",
+      "text": "John’s main problem is getting good quality ..."
+    },
+    {
+      "number": 29,
+      "type": "sentence_completion",
+      "question": "The professor suggests John apply for a ...",
+      "options": [],
+      "answer": "grant",
+      "text": "The professor suggests John apply for a ..."
+    },
+    {
+      "number": 30,
+      "type": "sentence_completion",
+      "question": "The professor will check the ... information in John’s written report.",
+      "options": [],
+      "answer": "technical",
+      "text": "The professor will check the ... information in John’s written report."
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "c10-listening-test-1-1783831879508",
+  "createdAt": "2026-07-12T04:51:19.657Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/c10-listening-test-1-1783831879508-s3.mp3",
+      "instruction": "",
+      "answerText": "21: C\n22: A\n23: B\n24: A\n25: C\n26: presentation\n27: model\n28: material | materials\n29: grant\n30: technical",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–25",
+          "title": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C. Global Design Competition",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Students entering the design competition have to",
+              "text": "Students entering the design competition have to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "produce an energy-efficient design."
+                },
+                {
+                  "letter": "B",
+                  "text": "adapt an existing energy-saving appliance."
+                },
+                {
+                  "letter": "C",
+                  "text": "develop a new use for current technology."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "John chose a dishwasher because he wanted to make dishwashers",
+              "text": "John chose a dishwasher because he wanted to make dishwashers",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "more appealing."
+                },
+                {
+                  "letter": "B",
+                  "text": "more common."
+                },
+                {
+                  "letter": "C",
+                  "text": "more economical."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "The stone in John’s ‘Rockpool’ design is used",
+              "text": "The stone in John’s ‘Rockpool’ design is used",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "for decoration."
+                },
+                {
+                  "letter": "B",
+                  "text": "to switch it on."
+                },
+                {
+                  "letter": "C",
+                  "text": "to stop water escaping."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "In the holding chamber, the carbon dioxide",
+              "text": "In the holding chamber, the carbon dioxide",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "changes back to a gas."
+                },
+                {
+                  "letter": "B",
+                  "text": "dries the dishes."
+                },
+                {
+                  "letter": "C",
+                  "text": "is allowed to cool."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "At the end of the cleaning process, the carbon dioxide",
+              "text": "At the end of the cleaning process, the carbon dioxide",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "is released into the air."
+                },
+                {
+                  "letter": "B",
+                  "text": "is disposed of with the waste."
+                },
+                {
+                  "letter": "C",
+                  "text": "is collected ready to be re-used."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "group-3-26",
+          "type": "note_completion",
+          "questionRange": "Questions 26–30",
+          "title": "Global Design Competition",
+          "example": "",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "• John needs help preparing for his {{26}}.",
+            "• The professor advises John to make a {{27}} of his design.",
+            "• John’s main problem is getting good quality {{28}}.",
+            "• The professor suggests John apply for a {{29}}.",
+            "• The professor will check the {{30}} information in John’s written report."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "John needs help preparing for his ...",
+              "text": "John needs help preparing for his ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "presentation"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "The professor advises John to make a ... of his design.",
+              "text": "The professor advises John to make a ... of his design.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "model"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "John’s main problem is getting good quality ...",
+              "text": "John’s main problem is getting good quality ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "material | materials"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "The professor suggests John apply for a ...",
+              "text": "The professor suggests John apply for a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "grant"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "The professor will check the ... information in John’s written report.",
+              "text": "The professor will check the ... information in John’s written report.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "technical"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

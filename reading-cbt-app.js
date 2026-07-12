@@ -844,7 +844,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=1.0.23";
+    stylesheet.href = "listening-template.css?v=20260712-full-player-v10";
     document.head.appendChild(stylesheet);
 }
 

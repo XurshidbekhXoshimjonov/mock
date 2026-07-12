@@ -1,0 +1,381 @@
+{
+  "id": "c10-listening-test-1-1783831879508-listening-s2",
+  "slug": "c10-listening-test-1-1783831879508-listening-s2",
+  "title": "Cambridge 10 Test 1 Listening — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–12",
+      "instruction": "Which TWO facilities at the leisure club have recently been improved?",
+      "rule": "Choose TWO letters, A–E.",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13–20",
+      "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "questionNumber": 11,
+      "question": "Which TWO facilities at the leisure club have recently been improved?",
+      "text": "Which TWO facilities at the leisure club have recently been improved?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the gym"
+        },
+        {
+          "letter": "B",
+          "text": "the tracks"
+        },
+        {
+          "letter": "C",
+          "text": "the indoor pool"
+        },
+        {
+          "letter": "D",
+          "text": "the outdoor pool"
+        },
+        {
+          "letter": "E",
+          "text": "the sports training for children"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "A | E"
+    },
+    {
+      "number": 12,
+      "questionNumber": 12,
+      "question": "Which TWO facilities at the leisure club have recently been improved?",
+      "text": "Which TWO facilities at the leisure club have recently been improved?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the gym"
+        },
+        {
+          "letter": "B",
+          "text": "the tracks"
+        },
+        {
+          "letter": "C",
+          "text": "the indoor pool"
+        },
+        {
+          "letter": "D",
+          "text": "the outdoor pool"
+        },
+        {
+          "letter": "E",
+          "text": "the sports training for children"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "A | E"
+    },
+    {
+      "number": 13,
+      "type": "sentence_completion",
+      "question": "New members should describe any ...",
+      "options": [],
+      "answer": "health problems",
+      "text": "New members should describe any ..."
+    },
+    {
+      "number": 14,
+      "type": "sentence_completion",
+      "question": "The ... will be explained to you before you use the equipment.",
+      "options": [],
+      "answer": "safety rules",
+      "text": "The ... will be explained to you before you use the equipment."
+    },
+    {
+      "number": 15,
+      "type": "sentence_completion",
+      "question": "You will be given a six-week ...",
+      "options": [],
+      "answer": "plan",
+      "text": "You will be given a six-week ..."
+    },
+    {
+      "number": 16,
+      "type": "sentence_completion",
+      "question": "There is a compulsory £90 ... fee for members.",
+      "options": [],
+      "answer": "joining",
+      "text": "There is a compulsory £90 ... fee for members."
+    },
+    {
+      "number": 17,
+      "type": "sentence_completion",
+      "question": "Gold members are given ... to all the LP clubs.",
+      "options": [],
+      "answer": "free entry",
+      "text": "Gold members are given ... to all the LP clubs."
+    },
+    {
+      "number": 18,
+      "type": "sentence_completion",
+      "question": "Premier members are given priority during ... hours.",
+      "options": [],
+      "answer": "peak",
+      "text": "Premier members are given priority during ... hours."
+    },
+    {
+      "number": 19,
+      "type": "sentence_completion",
+      "question": "Premier members can bring some ... every month.",
+      "options": [],
+      "answer": "guests",
+      "text": "Premier members can bring some ... every month."
+    },
+    {
+      "number": 20,
+      "type": "sentence_completion",
+      "question": "Members should always take their ... with them.",
+      "options": [],
+      "answer": "photo card | photo cards",
+      "text": "Members should always take their ... with them."
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "c10-listening-test-1-1783831879508",
+  "createdAt": "2026-07-12T04:51:19.657Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/c10-listening-test-1-1783831879508-s2.mp3",
+      "instruction": "",
+      "answerText": "11: A | E\n12: A | E\n13: health problems\n14: safety rules\n15: plan\n16: joining\n17: free entry\n18: peak\n19: guests\n20: photo card | photo cards",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_select",
+          "questionRange": "Questions 11–12",
+          "title": "",
+          "example": "",
+          "instruction": "Which TWO facilities at the leisure club have recently been improved?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the gym"
+            },
+            {
+              "letter": "B",
+              "text": "the tracks"
+            },
+            {
+              "letter": "C",
+              "text": "the indoor pool"
+            },
+            {
+              "letter": "D",
+              "text": "the outdoor pool"
+            },
+            {
+              "letter": "E",
+              "text": "the sports training for children"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Which TWO facilities at the leisure club have recently been improved?",
+              "text": "Which TWO facilities at the leisure club have recently been improved?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the gym"
+                },
+                {
+                  "letter": "B",
+                  "text": "the tracks"
+                },
+                {
+                  "letter": "C",
+                  "text": "the indoor pool"
+                },
+                {
+                  "letter": "D",
+                  "text": "the outdoor pool"
+                },
+                {
+                  "letter": "E",
+                  "text": "the sports training for children"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Which TWO facilities at the leisure club have recently been improved?",
+              "text": "Which TWO facilities at the leisure club have recently been improved?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the gym"
+                },
+                {
+                  "letter": "B",
+                  "text": "the tracks"
+                },
+                {
+                  "letter": "C",
+                  "text": "the indoor pool"
+                },
+                {
+                  "letter": "D",
+                  "text": "the outdoor pool"
+                },
+                {
+                  "letter": "E",
+                  "text": "the sports training for children"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A | E"
+            }
+          ],
+          "questionNumber": 11,
+          "answerQuestions": [
+            {
+              "questionNumber": 12
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO facilities at the leisure club have recently been improved?"
+        },
+        {
+          "id": "group-2-13",
+          "type": "note_completion",
+          "questionRange": "Questions 13–20",
+          "title": "",
+          "example": "",
+          "instruction": "Complete the notes below. Write NO MORE THAN TWO WORDS for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Joining the leisure club",
+            "Personal Assessment",
+            "• New members should describe any {{13}}.",
+            "• The {{14}} will be explained to you before you use the equipment.",
+            "• You will be given a six-week {{15}}.",
+            "Types of membership",
+            "• There is a compulsory £90 {{16}} fee for members.",
+            "• Gold members are given {{17}} to all the LP clubs.",
+            "• Premier members are given priority during {{18}} hours.",
+            "• Premier members can bring some {{19}} every month.",
+            "• Members should always take their {{20}} with them."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "New members should describe any ...",
+              "text": "New members should describe any ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "health problems"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "The ... will be explained to you before you use the equipment.",
+              "text": "The ... will be explained to you before you use the equipment.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "safety rules"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "You will be given a six-week ...",
+              "text": "You will be given a six-week ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "plan"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "There is a compulsory £90 ... fee for members.",
+              "text": "There is a compulsory £90 ... fee for members.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "joining"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Gold members are given ... to all the LP clubs.",
+              "text": "Gold members are given ... to all the LP clubs.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "free entry"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Premier members are given priority during ... hours.",
+              "text": "Premier members are given priority during ... hours.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "peak"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Premier members can bring some ... every month.",
+              "text": "Premier members can bring some ... every month.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "guests"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Members should always take their ... with them.",
+              "text": "Members should always take their ... with them.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "photo card | photo cards"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

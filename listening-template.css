@@ -2221,6 +2221,36 @@ body.fullscreen-fallback .lc-submit-status {
     text-align: center;
 }
 
+.lc-data-table ul,
+.tour-table ul {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lc-data-table li,
+.tour-table li {
+    position: relative;
+    margin: 0;
+    padding-left: 18px;
+    line-height: 1.3;
+}
+
+.lc-data-table li::before,
+.tour-table li::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #202020;
+    transform: translateY(-50%);
+}
+
 .lc-form-table th,
 .lc-note-table th {
     width: 34%;
@@ -2285,6 +2315,25 @@ body.fullscreen-fallback .lc-submit-status {
 .lc-note-table .lc-answer-input {
     width: 116px;
     min-width: 82px;
+}
+
+.lc-data-table .lc-answer-inline {
+    gap: 7px;
+    margin: 0 3px;
+}
+
+.lc-data-table .lc-answer-input {
+    width: 118px;
+    min-width: 88px;
+    height: 18px;
+    border-bottom-style: solid;
+    padding: 0 2px;
+    text-align: left;
+}
+
+.lc-data-table ul .lc-answer-input {
+    width: 96px;
+    min-width: 72px;
 }
 
 .lc-answer-input:focus,
@@ -2390,6 +2439,71 @@ body.fullscreen-fallback .lc-submit-status {
 .lc-note-line strong,
 .lc-note-list-item strong {
     font-weight: 800 !important;
+}
+
+.lc-note-completion--spirit-bear .lc-notes {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    border: 1px solid #555;
+    background: #fff;
+    padding: 8px 12px 10px;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.lc-note-completion--spirit-bear .lc-boxed-flow-title {
+    margin: 0 0 9px;
+    border: 0;
+    padding: 0;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.lc-note-completion--spirit-bear .lc-note-section-title {
+    margin: 9px 0 4px;
+    border: 0;
+    padding: 0;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.lc-note-completion--spirit-bear .lc-note-list {
+    margin: 0 0 8px;
+    padding-left: 16px;
+    list-style: disc;
+}
+
+.lc-note-completion--spirit-bear .lc-note-list-item {
+    display: list-item;
+    margin: 4px 0;
+    border: 0;
+    padding: 0 0 0 2px;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.35;
+    list-style-position: outside;
+}
+
+.lc-note-completion--spirit-bear .lc-answer-inline {
+    gap: 4px;
+    margin: 0 2px;
+}
+
+.lc-note-completion--spirit-bear .lc-answer-input {
+    width: 118px;
+    min-width: 92px;
+    height: 17px;
+    color: #111;
 }
 
 .lc-matching-options,
@@ -2533,6 +2647,513 @@ body.fullscreen-fallback .lc-submit-status {
     border-color: #8b8b8b;
 }
 
+.lc-c10-paper {
+    width: min(760px, 100%);
+    padding: 26px 34px 38px;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.lc-c10-paper,
+.lc-c10-paper * {
+    color: #111 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.c10-listening-label {
+    width: max-content;
+    margin: 0 auto 28px;
+    padding: 4px 14px;
+    background: #171717;
+    color: #fff !important;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.c10-section-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 38px;
+    margin: 0 0 18px;
+}
+
+.c10-section-heading h2,
+.c10-section-heading p {
+    margin: 0;
+}
+
+.c10-section-heading h2 {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.c10-section-heading p {
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.c10-instructions {
+    margin: 0 0 14px;
+}
+
+.c10-instructions p {
+    margin: 0 0 12px;
+}
+
+.c10-instructions em {
+    font-style: italic;
+}
+
+.c10-after-box {
+    margin-top: 32px;
+}
+
+.c10-box {
+    border: 2px solid #555;
+    background: #fff;
+}
+
+.c10-box h3 {
+    margin: 0;
+    border-bottom: 1px solid #777;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.c10-form-row {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    align-items: center;
+    min-height: 30px;
+    border-bottom: 1px solid #9a9a9a;
+    padding: 5px 10px;
+}
+
+.c10-form-row:last-of-type {
+    border-bottom: 0;
+}
+
+.c10-form-row > span:first-child,
+.c10-form-row > strong:first-child {
+    font-weight: 800;
+}
+
+.c10-example-row {
+    min-height: 26px;
+}
+
+.c10-example-line {
+    display: inline-block;
+    min-width: 72px;
+    border-bottom: 1px dotted #555;
+    text-align: center;
+}
+
+.c10-form-wide {
+    padding: 6px 10px;
+}
+
+.c10-form-wide p {
+    margin: 8px 0 5px;
+}
+
+.c10-form-wide ul,
+.c10-simple-box ul,
+.c10-spirit-bear ul,
+.c10-notes ul,
+.c10-table ul {
+    margin: 4px 0 8px;
+    padding-left: 20px;
+}
+
+.c10-form-wide li,
+.c10-simple-box li,
+.c10-spirit-bear li,
+.c10-notes li,
+.c10-table li {
+    margin: 6px 0;
+    padding-left: 2px;
+}
+
+.c10-table-wrap {
+    overflow-x: auto;
+}
+
+.c10-table {
+    width: 100%;
+    border: 2px solid #666;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.c10-table th,
+.c10-table td {
+    border: 1px solid #777;
+    padding: 8px 9px;
+    vertical-align: top;
+}
+
+.c10-table thead th {
+    font-weight: 800;
+    text-align: center;
+}
+
+.c10-table tbody th {
+    width: 88px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.c10-answer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    max-width: 100%;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.c10-qnum {
+    font-weight: 800;
+}
+
+.c10-input,
+.lc-c10-paper .lc-answer-input.c10-input {
+    width: 118px;
+    min-width: 76px;
+    height: 18px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #111;
+    padding: 0 3px;
+    text-align: center;
+}
+
+.c10-input:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.16);
+    outline-offset: 2px;
+}
+
+.c10-question-block {
+    margin-bottom: 32px;
+}
+
+.c10-question-block > p {
+    margin: 0 0 8px;
+}
+
+.c10-choice-list {
+    display: grid;
+    gap: 2px;
+    margin: 6px 0 0 26px;
+}
+
+.c10-choice {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    align-items: baseline;
+    width: max-content;
+    max-width: 100%;
+    cursor: pointer;
+    line-height: 1.18;
+}
+
+.c10-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.c10-choice-letter {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.c10-choice input:checked + .c10-choice-letter {
+    background: #111;
+    color: #fff !important;
+}
+
+.c10-selection-message {
+    margin: 8px 0 0 26px;
+    min-height: 18px;
+    font-size: 12px;
+}
+
+.c10-notes {
+    margin-top: 8px;
+}
+
+.c10-notes h3,
+.c10-mcq-block h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.c10-notes p {
+    margin: 12px 0 4px;
+}
+
+.c10-mcq {
+    margin: 0 0 12px;
+}
+
+.c10-mcq p {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    margin: 0 0 4px;
+}
+
+.c10-mcq .c10-choice-list {
+    margin-left: 30px;
+}
+
+.c10-simple-box {
+    padding: 10px 14px;
+}
+
+.c10-spirit-bear {
+    padding: 0 12px 10px;
+}
+
+.c10-spirit-bear h3 {
+    border-bottom: 0;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 20px;
+    padding: 7px 0 9px;
+}
+
+.c10-spirit-bear p {
+    margin: 8px 0 4px;
+}
+
+/* C10 imported tests use site-native CBT cards instead of scanned-paper styling. */
+.lc-c10-paper {
+    width: min(940px, 100%);
+    margin: 0 auto 24px;
+    border: 1px solid var(--lc-border);
+    border-radius: 8px;
+    background: var(--lc-card);
+    box-shadow: var(--lc-shadow);
+    padding: 24px;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.lc-c10-paper,
+.lc-c10-paper * {
+    color: var(--lc-navy) !important;
+    font-family: var(--ieltsx-font) !important;
+}
+
+.c10-listening-label {
+    display: none;
+}
+
+.c10-section-heading {
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin: -24px -24px 22px;
+    border-bottom: 1px solid var(--lc-border);
+    background: linear-gradient(135deg, #fbfdff, #f4f7fb);
+    padding: 20px 24px;
+}
+
+.c10-section-heading h2 {
+    color: var(--lc-blue) !important;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+}
+
+.c10-section-heading p {
+    color: var(--lc-navy) !important;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.c10-instructions {
+    margin: 0 0 18px;
+    color: var(--lc-muted);
+}
+
+.c10-instructions p {
+    margin: 4px 0;
+}
+
+.c10-after-box {
+    margin-top: 24px;
+}
+
+.c10-box,
+.c10-table,
+.c10-matching-options,
+.c10-simple-box,
+.c10-spirit-bear {
+    border: 1px solid var(--lc-border);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.c10-box h3,
+.c10-spirit-bear h3 {
+    border-bottom: 1px solid var(--lc-border);
+    background: #f8fafc;
+    color: var(--lc-navy) !important;
+    font-family: var(--ieltsx-font) !important;
+    font-size: 17px;
+    padding: 12px 16px;
+}
+
+.c10-form-row {
+    grid-template-columns: 260px minmax(0, 1fr);
+    border-bottom: 1px solid var(--lc-border);
+    min-height: 40px;
+    padding: 8px 12px;
+}
+
+.c10-form-wide {
+    padding: 10px 12px;
+}
+
+.c10-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.c10-table th,
+.c10-table td {
+    border: 0;
+    border-right: 1px solid var(--lc-border);
+    border-bottom: 1px solid var(--lc-border);
+    padding: 10px 12px;
+}
+
+.c10-table th:last-child,
+.c10-table td:last-child {
+    border-right: 0;
+}
+
+.c10-table tbody tr:last-child th,
+.c10-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.c10-table thead th {
+    background: #f8fafc;
+}
+
+.c10-input,
+.lc-c10-paper .lc-answer-input.c10-input {
+    width: 132px;
+    height: 28px;
+    border: 1px solid var(--lc-input);
+    border-radius: 6px;
+    background: #fff;
+    padding: 3px 8px;
+    text-align: left;
+}
+
+.c10-answer {
+    align-items: center;
+    gap: 6px;
+}
+
+.c10-qnum {
+    color: var(--lc-blue) !important;
+}
+
+.c10-question-block,
+.c10-notes,
+.c10-mcq-block {
+    border: 1px solid var(--lc-border);
+    border-radius: 8px;
+    background: #fff;
+    padding: 18px;
+}
+
+.c10-notes h3,
+.c10-mcq-block h3 {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.c10-choice-list {
+    gap: 8px;
+    margin-left: 0;
+}
+
+.c10-choice {
+    display: grid;
+    grid-template-columns: 18px 26px minmax(0, 1fr);
+    align-items: center;
+    width: 100%;
+    border: 1px solid var(--lc-border);
+    border-radius: 7px;
+    background: #fff;
+    padding: 8px 10px;
+    transition: border-color 140ms ease, background 140ms ease;
+}
+
+.c10-choice:hover {
+    border-color: #b8c4d8;
+    background: #f8fafc;
+}
+
+.c10-choice input {
+    position: static;
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.c10-choice-letter {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: var(--lc-blue) !important;
+    font-size: 12px;
+}
+
+.c10-choice input:checked + .c10-choice-letter {
+    background: var(--lc-blue);
+    color: #fff !important;
+}
+
+.c10-simple-box,
+.c10-spirit-bear {
+    padding: 14px 18px;
+}
+
+.c10-spirit-bear h3 {
+    margin: -14px -18px 12px;
+}
+
+.c10-spirit-bear p {
+    color: var(--lc-blue) !important;
+    font-weight: 800;
+}
+
 html.dark-theme .lc-part,
 html.dark-theme .lc-question-card,
 html.dark-theme .lc-form-table th,
@@ -2554,7 +3175,9 @@ html.dark-theme .lc-mcq-grid-options-box {
 html.dark-theme .lc-part *,
 html.dark-theme .lc-question-card *,
 html.dark-theme .lc-question-badge,
-html.dark-theme .lc-letter-badge {
+html.dark-theme .lc-letter-badge,
+html.dark-theme .lc-c10-paper *,
+html.dark-theme .lc-c10-paper {
     color: #333;
 }
 
@@ -2616,5 +3239,28 @@ html.dark-theme .lc-letter-badge {
     .lc-matching-block--list .lc-matching-row select {
         grid-column: auto;
         width: 56px;
+    }
+
+    .lc-c10-paper {
+        padding: 20px 14px 30px;
+        font-size: 13px;
+    }
+
+    .c10-section-heading {
+        gap: 16px;
+    }
+
+    .c10-form-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+
+    .c10-table {
+        min-width: 620px;
+    }
+
+    .c10-input,
+    .lc-c10-paper .lc-answer-input.c10-input {
+        width: 96px;
     }
 }

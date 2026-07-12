@@ -1,0 +1,740 @@
+{
+  "id": "c10-listening-test-1-1783831879508",
+  "title": "Cambridge 10 Test 1 Listening",
+  "sourceFile": "ielts_listening_test.html",
+  "status": "published",
+  "layout": "modern",
+  "metadata": {
+    "book": "",
+    "testNumber": null,
+    "label": "ielts_listening_test"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s1.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "sectionHtml": "\n<div class=\"section-head\">\n<div>\n<p class=\"section-kicker\">SECTION 1</p>\n<h2>Questions 1–10</h2>\n</div>\n<div class=\"section-range\">Everyday conversation</div>\n</div>\n<div class=\"section-body\">\n<div class=\"instruction\">\n<p><strong>Questions 1–6</strong></p>\n<p>Complete the notes below.</p>\n<p class=\"word-limit\">Write ONE WORD for each answer.</p>\n</div>\n\n<div class=\"paper-box\">\n<div class=\"paper-title\">SELF-DRIVE TOURS IN THE USA</div>\n<div class=\"paper-row\"><div class=\"paper-label\"><em>Example</em></div><div class=\"paper-content\"></div></div>\n<div class=\"paper-row\"><div class=\"paper-label\">Name:</div><div class=\"paper-content\"><strong>Andrea Brown</strong></div></div>\n<div class=\"paper-row\">\n<div class=\"paper-label\">Address:</div>\n<div class=\"paper-content\">24 <span class=\"blank-wrap\"><span class=\"qnum\">1</span></span> Road</div>\n</div>\n<div class=\"paper-row\"><div class=\"paper-label\">Postcode:</div><div class=\"paper-content\">BH5 2OP</div></div>\n<div class=\"paper-row\"><div class=\"paper-label\">Phone:</div><div class=\"paper-content\">(mobile) 077 8664 3091</div></div>\n<div class=\"paper-row\">\n<div class=\"paper-label\">Heard about company from:</div>\n<div class=\"paper-content\"><span class=\"blank-wrap\"><span class=\"qnum\">2</span></span></div>\n</div>\n<div class=\"paper-row\">\n<div class=\"paper-label\">Possible self-drive tours</div>\n<div class=\"paper-content\">\n<p><strong>Trip One:</strong></p>\n<ul class=\"prompt-list\">\n<li>Los Angeles: customer wants to visit some <span class=\"blank-wrap\"><span class=\"qnum\">3</span></span> parks with her children</li>\n<li>Yosemite Park: customer wants to stay in a lodge, not a <span class=\"blank-wrap\"><span class=\"qnum\">4</span></span></li>\n</ul>\n<p><strong>Trip Two:</strong></p>\n<ul class=\"prompt-list\">\n<li>Customer wants to see the <span class=\"blank-wrap\"><span class=\"qnum\">5</span></span> on the way to Cambria</li>\n<li>At Santa Monica: not interested in shopping</li>\n<li>At San Diego, wants to spend time on the <span class=\"blank-wrap\"><span class=\"qnum\">6</span></span></li>\n</ul>\n</div>\n</div>\n</div>\n\n<div class=\"instruction\">\n<p><strong>Questions 7–10</strong></p>\n<p>Complete the table below.</p>\n<p class=\"word-limit\">Write ONE WORD AND/OR A NUMBER for each answer.</p>\n</div>\n\n<table class=\"tour-table\">\n<thead>\n<tr><th></th><th>Number<br>of days</th><th>Total distance</th><th>Price<br>(per person)</th><th>Includes</th></tr>\n</thead>\n<tbody>\n<tr>\n<td>Trip One</td>\n<td>12 days</td>\n<td><span class=\"blank-wrap\"><span class=\"qnum\">7</span></span> km</td>\n<td>£525</td>\n<td><ul><li>accommodation</li><li>car</li><li>one <span class=\"blank-wrap\"><span class=\"qnum\">8</span></span></li></ul></td>\n</tr>\n<tr>\n<td>Trip Two</td>\n<td>9 days</td>\n<td>980 km</td>\n<td>£ <span class=\"blank-wrap\"><span class=\"qnum\">9</span></span></td>\n<td><ul><li>accommodation</li><li>car</li><li><span class=\"blank-wrap\"><span class=\"qnum\">10</span></span></li></ul></td>\n</tr>\n</tbody>\n</table>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 1–6",
+            "instructionText": "Complete the notes below. Write ONE WORD for each answer.",
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Address: 24 ... Road",
+                "options": [],
+                "answer": "ardleigh",
+                "text": "Address: 24 ... Road"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Heard about company from: ...",
+                "options": [],
+                "answer": "newspaper",
+                "text": "Heard about company from: ..."
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Los Angeles: customer wants to visit some ... parks with her children",
+                "options": [],
+                "answer": "theme",
+                "text": "Los Angeles: customer wants to visit some ... parks with her children"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Yosemite Park: customer wants to stay in a lodge, not a ...",
+                "options": [],
+                "answer": "tent",
+                "text": "Yosemite Park: customer wants to stay in a lodge, not a ..."
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Customer wants to see the ... on the way to Cambria",
+                "options": [],
+                "answer": "castle",
+                "text": "Customer wants to see the ... on the way to Cambria"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "At San Diego, wants to spend time on the ...",
+                "options": [],
+                "answer": "beach | beaches",
+                "text": "At San Diego, wants to spend time on the ..."
+              }
+            ],
+            "content": [
+              "SELF-DRIVE TOURS IN THE USA",
+              "<em>Example</em>",
+              "Name: <strong>Andrea Brown</strong>",
+              "Address: 24 {{1}} Road",
+              "Postcode: BH5 2OP",
+              "Phone: (mobile) 077 8664 3091",
+              "Heard about company from: {{2}}",
+              "Possible self-drive tours",
+              "<strong>Trip One:</strong>",
+              "• Los Angeles: customer wants to visit some {{3}} parks with her children",
+              "• Yosemite Park: customer wants to stay in a lodge, not a {{4}}",
+              "<strong>Trip Two:</strong>",
+              "• Customer wants to see the {{5}} on the way to Cambria",
+              "• At Santa Monica: not interested in shopping",
+              "• At San Diego, wants to spend time on the {{6}}"
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "table_completion",
+            "instructionTitle": "Questions 7–10",
+            "instructionText": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "questions": [
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Trip One: 12 days, ... km",
+                "options": [],
+                "answer": "2020",
+                "text": "Trip One: 12 days, ... km"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "Trip One: Includes one ...",
+                "options": [],
+                "answer": "flight",
+                "text": "Trip One: Includes one ..."
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Trip Two: Price (per person) £ ...",
+                "options": [],
+                "answer": "429",
+                "text": "Trip Two: Price (per person) £ ..."
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Trip Two: Includes ...",
+                "options": [],
+                "answer": "dinner",
+                "text": "Trip Two: Includes ..."
+              }
+            ],
+            "columns": [
+              "",
+              "Number<br>of days",
+              "Total distance",
+              "Price<br>(per person)",
+              "Includes"
+            ],
+            "rows": [
+              [
+                "",
+                "Number<br>of days",
+                "Total distance",
+                "Price<br>(per person)",
+                "Includes"
+              ],
+              [
+                "Trip One",
+                "12 days",
+                "{{7}} km",
+                "£525",
+                "<ul><li>accommodation</li><li>car</li><li>one {{8}}</li></ul>"
+              ],
+              [
+                "Trip Two",
+                "9 days",
+                "980 km",
+                "£ {{9}}",
+                "<ul><li>accommodation</li><li>car</li><li>{{10}}</li></ul>"
+              ]
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s1.mp3"
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "sectionHtml": "\n<div class=\"section-head\">\n<div>\n<p class=\"section-kicker\">SECTION 2</p>\n<h2>Questions 11–20</h2>\n</div>\n<div class=\"section-range\">Leisure club</div>\n</div>\n<div class=\"section-body\">\n<div class=\"instruction\">\n<p><strong>Questions 11–12</strong></p>\n<p class=\"word-limit\">Choose TWO letters, A–E.</p>\n<p>Which <strong>TWO</strong> facilities at the leisure club have recently been improved?</p>\n</div>\n\n<div id=\"q11-12-block\" class=\"question-block\">\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>the gym</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>the tracks</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>the indoor pool</span></label>\n<label class=\"choice\"><span class=\"letter\">D</span><span>the outdoor pool</span></label>\n<label class=\"choice\"><span class=\"letter\">E</span><span>the sports training for children</span></label>\n</div>\n<div id=\"feedback-q11-12\" class=\"feedback\"></div>\n</div>\n\n<div class=\"instruction\">\n<p><strong>Questions 13–20</strong></p>\n<p>Complete the notes below.</p>\n<p class=\"word-limit\">Write NO MORE THAN TWO WORDS for each answer.</p>\n</div>\n\n<div class=\"notes-box\">\n<h3>Joining the leisure club</h3>\n<h4>Personal Assessment</h4>\n<ul>\n<li>New members should describe any <span class=\"blank-wrap\"><span class=\"qnum\">13</span></span>.</li>\n<li>The <span class=\"blank-wrap\"><span class=\"qnum\">14</span></span> will be explained to you before you use the equipment.</li>\n<li>You will be given a six-week <span class=\"blank-wrap\"><span class=\"qnum\">15</span></span>.</li>\n</ul>\n<h4>Types of membership</h4>\n<ul>\n<li>There is a compulsory £90 <span class=\"blank-wrap\"><span class=\"qnum\">16</span></span> fee for members.</li>\n<li>Gold members are given <span class=\"blank-wrap\"><span class=\"qnum\">17</span></span> to all the LP clubs.</li>\n<li>Premier members are given priority during <span class=\"blank-wrap\"><span class=\"qnum\">18</span></span> hours.</li>\n<li>Premier members can bring some <span class=\"blank-wrap\"><span class=\"qnum\">19</span></span> every month.</li>\n<li>Members should always take their <span class=\"blank-wrap\"><span class=\"qnum\">20</span></span> with them.</li>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_select",
+            "instructionTitle": "Questions 11–12",
+            "instructionText": "Which TWO facilities at the leisure club have recently been improved?",
+            "instructionHtml": {
+              "titleHtml": "<strong>Questions 11–12</strong>",
+              "bodyHtml": "<p>Choose TWO letters, A–E.</p><p>Which <strong>TWO</strong> facilities at the leisure club have recently been improved?</p>",
+              "rulesHtml": "Choose TWO letters, A–E."
+            },
+            "rule": "Choose TWO letters, A–E.",
+            "questionRange": [
+              11,
+              12
+            ],
+            "questions": [
+              {
+                "number": 11,
+                "questionNumber": 11,
+                "question": "Which TWO facilities at the leisure club have recently been improved?",
+                "text": "Which TWO facilities at the leisure club have recently been improved?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the gym"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the tracks"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the indoor pool"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the outdoor pool"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the sports training for children"
+                  }
+                ],
+                "type": "multi_select",
+                "answer": "A | E"
+              },
+              {
+                "number": 12,
+                "questionNumber": 12,
+                "question": "Which TWO facilities at the leisure club have recently been improved?",
+                "text": "Which TWO facilities at the leisure club have recently been improved?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the gym"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the tracks"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the indoor pool"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the outdoor pool"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "the sports training for children"
+                  }
+                ],
+                "type": "multi_select",
+                "answer": "A | E"
+              }
+            ],
+            "options": [
+              {
+                "letter": "A",
+                "text": "the gym"
+              },
+              {
+                "letter": "B",
+                "text": "the tracks"
+              },
+              {
+                "letter": "C",
+                "text": "the indoor pool"
+              },
+              {
+                "letter": "D",
+                "text": "the outdoor pool"
+              },
+              {
+                "letter": "E",
+                "text": "the sports training for children"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": "<div id=\"q11-12-block\" class=\"question-block\" data-group=\"q11-12\">\n  <div class=\"choice-list\">\n    <label class=\"choice\"><span class=\"letter\">A</span><span>the gym</span></label>\n    <label class=\"choice\"><span class=\"letter\">B</span><span>the tracks</span></label>\n    <label class=\"choice\"><span class=\"letter\">C</span><span>the indoor pool</span></label>\n    <label class=\"choice\"><span class=\"letter\">D</span><span>the outdoor pool</span></label>\n    <label class=\"choice\"><span class=\"letter\">E</span><span>the sports training for children</span></label>\n  </div>\n  <div id=\"feedback-q11-12\" class=\"feedback\"></div>\n</div>"
+          },
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 13–20",
+            "instructionText": "Complete the notes below. Write NO MORE THAN TWO WORDS for each answer.",
+            "questions": [
+              {
+                "number": 13,
+                "type": "sentence_completion",
+                "question": "New members should describe any ...",
+                "options": [],
+                "answer": "health problems",
+                "text": "New members should describe any ..."
+              },
+              {
+                "number": 14,
+                "type": "sentence_completion",
+                "question": "The ... will be explained to you before you use the equipment.",
+                "options": [],
+                "answer": "safety rules",
+                "text": "The ... will be explained to you before you use the equipment."
+              },
+              {
+                "number": 15,
+                "type": "sentence_completion",
+                "question": "You will be given a six-week ...",
+                "options": [],
+                "answer": "plan",
+                "text": "You will be given a six-week ..."
+              },
+              {
+                "number": 16,
+                "type": "sentence_completion",
+                "question": "There is a compulsory £90 ... fee for members.",
+                "options": [],
+                "answer": "joining",
+                "text": "There is a compulsory £90 ... fee for members."
+              },
+              {
+                "number": 17,
+                "type": "sentence_completion",
+                "question": "Gold members are given ... to all the LP clubs.",
+                "options": [],
+                "answer": "free entry",
+                "text": "Gold members are given ... to all the LP clubs."
+              },
+              {
+                "number": 18,
+                "type": "sentence_completion",
+                "question": "Premier members are given priority during ... hours.",
+                "options": [],
+                "answer": "peak",
+                "text": "Premier members are given priority during ... hours."
+              },
+              {
+                "number": 19,
+                "type": "sentence_completion",
+                "question": "Premier members can bring some ... every month.",
+                "options": [],
+                "answer": "guests",
+                "text": "Premier members can bring some ... every month."
+              },
+              {
+                "number": 20,
+                "type": "sentence_completion",
+                "question": "Members should always take their ... with them.",
+                "options": [],
+                "answer": "photo card | photo cards",
+                "text": "Members should always take their ... with them."
+              }
+            ],
+            "content": [
+              "Joining the leisure club",
+              "Personal Assessment",
+              "• New members should describe any {{13}}.",
+              "• The {{14}} will be explained to you before you use the equipment.",
+              "• You will be given a six-week {{15}}.",
+              "Types of membership",
+              "• There is a compulsory £90 {{16}} fee for members.",
+              "• Gold members are given {{17}} to all the LP clubs.",
+              "• Premier members are given priority during {{18}} hours.",
+              "• Premier members can bring some {{19}} every month.",
+              "• Members should always take their {{20}} with them."
+            ],
+            "noteStyle": "boxed-flow",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s2.mp3"
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "sectionHtml": "\n<div class=\"section-head\">\n<div>\n<p class=\"section-kicker\">SECTION 3</p>\n<h2>Questions 21–30</h2>\n</div>\n<div class=\"section-range\">Global Design Competition</div>\n</div>\n<div class=\"section-body\">\n<div class=\"instruction\">\n<p><strong>Questions 21–25</strong></p>\n<p class=\"word-limit\">Choose the correct letter, A, B or C.</p>\n</div>\n\n<h3>Global Design Competition</h3>\n\n<div id=\"q21-block\" class=\"question-block\">\n<p class=\"question-title\"><span class=\"qnum\">21</span>Students entering the design competition have to</p>\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>produce an energy-efficient design.</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>adapt an existing energy-saving appliance.</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>develop a new use for current technology.</span></label>\n</div>\n<div id=\"feedback-q21\" class=\"feedback\"></div>\n</div>\n\n<div id=\"q22-block\" class=\"question-block\">\n<p class=\"question-title\"><span class=\"qnum\">22</span>John chose a dishwasher because he wanted to make dishwashers</p>\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>more appealing.</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>more common.</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>more economical.</span></label>\n</div>\n<div id=\"feedback-q22\" class=\"feedback\"></div>\n</div>\n\n<div id=\"q23-block\" class=\"question-block\">\n<p class=\"question-title\"><span class=\"qnum\">23</span>The stone in John’s ‘Rockpool’ design is used</p>\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>for decoration.</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>to switch it on.</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>to stop water escaping.</span></label>\n</div>\n<div id=\"feedback-q23\" class=\"feedback\"></div>\n</div>\n\n<div id=\"q24-block\" class=\"question-block\">\n<p class=\"question-title\"><span class=\"qnum\">24</span>In the holding chamber, the carbon dioxide</p>\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>changes back to a gas.</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>dries the dishes.</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>is allowed to cool.</span></label>\n</div>\n<div id=\"feedback-q24\" class=\"feedback\"></div>\n</div>\n\n<div id=\"q25-block\" class=\"question-block\">\n<p class=\"question-title\"><span class=\"qnum\">25</span>At the end of the cleaning process, the carbon dioxide</p>\n<div class=\"choice-list\">\n<label class=\"choice\"><span class=\"letter\">A</span><span>is released into the air.</span></label>\n<label class=\"choice\"><span class=\"letter\">B</span><span>is disposed of with the waste.</span></label>\n<label class=\"choice\"><span class=\"letter\">C</span><span>is collected ready to be re-used.</span></label>\n</div>\n<div id=\"feedback-q25\" class=\"feedback\"></div>\n</div>\n\n<div class=\"instruction\">\n<p><strong>Questions 26–30</strong></p>\n<p>Complete the notes below.</p>\n<p class=\"word-limit\">Write ONE WORD ONLY for each answer.</p>\n</div>\n<div class=\"notes-box\">\n<ul>\n<li>John needs help preparing for his <span class=\"blank-wrap\"><span class=\"qnum\">26</span></span>.</li>\n<li>The professor advises John to make a <span class=\"blank-wrap\"><span class=\"qnum\">27</span></span> of his design.</li>\n<li>John’s main problem is getting good quality <span class=\"blank-wrap\"><span class=\"qnum\">28</span></span>.</li>\n<li>The professor suggests John apply for a <span class=\"blank-wrap\"><span class=\"qnum\">29</span></span>.</li>\n<li>The professor will check the <span class=\"blank-wrap\"><span class=\"qnum\">30</span></span> information in John’s written report.</li>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 21–25",
+            "instructionText": "Choose the correct letter, A, B or C. Global Design Competition",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "Students entering the design competition have to",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "produce an energy-efficient design.",
+                    "html": "produce an energy-efficient design."
+                  },
+                  {
+                    "value": "B",
+                    "label": "adapt an existing energy-saving appliance.",
+                    "html": "adapt an existing energy-saving appliance."
+                  },
+                  {
+                    "value": "C",
+                    "label": "develop a new use for current technology.",
+                    "html": "develop a new use for current technology."
+                  }
+                ],
+                "answer": "C",
+                "text": "Students entering the design competition have to"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "John chose a dishwasher because he wanted to make dishwashers",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "more appealing.",
+                    "html": "more appealing."
+                  },
+                  {
+                    "value": "B",
+                    "label": "more common.",
+                    "html": "more common."
+                  },
+                  {
+                    "value": "C",
+                    "label": "more economical.",
+                    "html": "more economical."
+                  }
+                ],
+                "answer": "A",
+                "text": "John chose a dishwasher because he wanted to make dishwashers"
+              },
+              {
+                "number": 23,
+                "type": "multiple_choice",
+                "question": "The stone in John’s ‘Rockpool’ design is used",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "for decoration.",
+                    "html": "for decoration."
+                  },
+                  {
+                    "value": "B",
+                    "label": "to switch it on.",
+                    "html": "to switch it on."
+                  },
+                  {
+                    "value": "C",
+                    "label": "to stop water escaping.",
+                    "html": "to stop water escaping."
+                  }
+                ],
+                "answer": "B",
+                "text": "The stone in John’s ‘Rockpool’ design is used"
+              },
+              {
+                "number": 24,
+                "type": "multiple_choice",
+                "question": "In the holding chamber, the carbon dioxide",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "changes back to a gas.",
+                    "html": "changes back to a gas."
+                  },
+                  {
+                    "value": "B",
+                    "label": "dries the dishes.",
+                    "html": "dries the dishes."
+                  },
+                  {
+                    "value": "C",
+                    "label": "is allowed to cool.",
+                    "html": "is allowed to cool."
+                  }
+                ],
+                "answer": "A",
+                "text": "In the holding chamber, the carbon dioxide"
+              },
+              {
+                "number": 25,
+                "type": "multiple_choice",
+                "question": "At the end of the cleaning process, the carbon dioxide",
+                "options": [
+                  {
+                    "value": "A",
+                    "label": "is released into the air.",
+                    "html": "is released into the air."
+                  },
+                  {
+                    "value": "B",
+                    "label": "is disposed of with the waste.",
+                    "html": "is disposed of with the waste."
+                  },
+                  {
+                    "value": "C",
+                    "label": "is collected ready to be re-used.",
+                    "html": "is collected ready to be re-used."
+                  }
+                ],
+                "answer": "C",
+                "text": "At the end of the cleaning process, the carbon dioxide"
+              }
+            ],
+            "imageIds": [],
+            "layoutHtml": ""
+          },
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 26–30",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "questions": [
+              {
+                "number": 26,
+                "type": "sentence_completion",
+                "question": "John needs help preparing for his ...",
+                "options": [],
+                "answer": "presentation",
+                "text": "John needs help preparing for his ..."
+              },
+              {
+                "number": 27,
+                "type": "sentence_completion",
+                "question": "The professor advises John to make a ... of his design.",
+                "options": [],
+                "answer": "model",
+                "text": "The professor advises John to make a ... of his design."
+              },
+              {
+                "number": 28,
+                "type": "sentence_completion",
+                "question": "John’s main problem is getting good quality ...",
+                "options": [],
+                "answer": "material | materials",
+                "text": "John’s main problem is getting good quality ..."
+              },
+              {
+                "number": 29,
+                "type": "sentence_completion",
+                "question": "The professor suggests John apply for a ...",
+                "options": [],
+                "answer": "grant",
+                "text": "The professor suggests John apply for a ..."
+              },
+              {
+                "number": 30,
+                "type": "sentence_completion",
+                "question": "The professor will check the ... information in John’s written report.",
+                "options": [],
+                "answer": "technical",
+                "text": "The professor will check the ... information in John’s written report."
+              }
+            ],
+            "content": [
+              "• John needs help preparing for his {{26}}.",
+              "• The professor advises John to make a {{27}} of his design.",
+              "• John’s main problem is getting good quality {{28}}.",
+              "• The professor suggests John apply for a {{29}}.",
+              "• The professor will check the {{30}} information in John’s written report."
+            ],
+            "title": "Global Design Competition",
+            "noteStyle": "boxed-flow",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s3.mp3"
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "sectionHtml": "\n<div class=\"section-head\">\n<div>\n<p class=\"section-kicker\">SECTION 4</p>\n<h2>Questions 31–40</h2>\n</div>\n<div class=\"section-range\">The Spirit Bear</div>\n</div>\n<div class=\"section-body\">\n<div class=\"instruction\">\n<p>Complete the notes below.</p>\n<p class=\"word-limit\">Write ONE WORD ONLY for each answer.</p>\n</div>\n\n<div class=\"notes-box\">\n<h3>THE SPIRIT BEAR</h3>\n<h4>General facts</h4>\n<ul>\n<li>It is a white bear belonging to the black bear family.</li>\n<li>Its colour comes from an uncommon <span class=\"blank-wrap\"><span class=\"qnum\">31</span></span>.</li>\n<li>Local people believe that it has unusual <span class=\"blank-wrap\"><span class=\"qnum\">32</span></span>.</li>\n<li>They protect the bear from <span class=\"blank-wrap\"><span class=\"qnum\">33</span></span>.</li>\n</ul>\n\n<h4>Habitat</h4>\n<ul>\n<li>The bear’s relationship with the forest is complex.</li>\n<li>Tree roots stop <span class=\"blank-wrap\"><span class=\"qnum\">34</span></span> along salmon streams.</li>\n<li>The bears’ feeding habits provide nutrients for forest vegetation.</li>\n<li>It is currently found on a small number of <span class=\"blank-wrap\"><span class=\"qnum\">35</span></span>.</li>\n</ul>\n\n<h4>Threats</h4>\n<ul>\n<li>Habitat is being lost due to deforestation and construction of <span class=\"blank-wrap\"><span class=\"qnum\">36</span></span> by logging companies.</li>\n<li>Unrestricted <span class=\"blank-wrap\"><span class=\"qnum\">37</span></span> is also affecting the salmon supply.</li>\n<li>The bears’ existence is also threatened by their low rate of <span class=\"blank-wrap\"><span class=\"qnum\">38</span></span>.</li>\n</ul>\n\n<h4>Going forward</h4>\n<ul>\n<li>Interested parties are working together.</li>\n<li>Logging companies must improve their <span class=\"blank-wrap\"><span class=\"qnum\">39</span></span> of logging.</li>\n<li>Maintenance and <span class=\"blank-wrap\"><span class=\"qnum\">40</span></span> of the spirit bears’ territory is needed.</li>\n</ul>\n</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "",
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "Its colour comes from an uncommon ...",
+                "options": [],
+                "answer": "gene",
+                "text": "Its colour comes from an uncommon ..."
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "Local people believe that it has unusual ...",
+                "options": [],
+                "answer": "power | powers",
+                "text": "Local people believe that it has unusual ..."
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "They protect the bear from ...",
+                "options": [],
+                "answer": "strangers",
+                "text": "They protect the bear from ..."
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Tree roots stop ... along salmon streams.",
+                "options": [],
+                "answer": "erosion",
+                "text": "Tree roots stop ... along salmon streams."
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "It is currently found on a small number of ...",
+                "options": [],
+                "answer": "islands",
+                "text": "It is currently found on a small number of ..."
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Habitat is being lost due to deforestation and construction of ... by logging companies.",
+                "options": [],
+                "answer": "roads",
+                "text": "Habitat is being lost due to deforestation and construction of ... by logging companies."
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Unrestricted ... is also affecting the salmon supply.",
+                "options": [],
+                "answer": "fishing",
+                "text": "Unrestricted ... is also affecting the salmon supply."
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "The bears’ existence is also threatened by their low rate of ...",
+                "options": [],
+                "answer": "reproduction",
+                "text": "The bears’ existence is also threatened by their low rate of ..."
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Logging companies must improve their ... of logging.",
+                "options": [],
+                "answer": "method | methods",
+                "text": "Logging companies must improve their ... of logging."
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Maintenance and ... of the spirit bears’ territory is needed.",
+                "options": [],
+                "answer": "expansion",
+                "text": "Maintenance and ... of the spirit bears’ territory is needed."
+              }
+            ],
+            "content": [
+              "THE SPIRIT BEAR",
+              "General facts",
+              "• It is a white bear belonging to the black bear family.",
+              "• Its colour comes from an uncommon {{31}}.",
+              "• Local people believe that it has unusual {{32}}.",
+              "• They protect the bear from {{33}}.",
+              "Habitat",
+              "• The bear’s relationship with the forest is complex.",
+              "• Tree roots stop {{34}} along salmon streams.",
+              "• The bears’ feeding habits provide nutrients for forest vegetation.",
+              "• It is currently found on a small number of {{35}}.",
+              "Threats",
+              "• Habitat is being lost due to deforestation and construction of {{36}} by logging companies.",
+              "• Unrestricted {{37}} is also affecting the salmon supply.",
+              "• The bears’ existence is also threatened by their low rate of {{38}}.",
+              "Going forward",
+              "• Interested parties are working together.",
+              "• Logging companies must improve their {{39}} of logging.",
+              "• Maintenance and {{40}} of the spirit bears’ territory is needed."
+            ],
+            "noteStyle": "boxed-flow",
+            "imageIds": [],
+            "layoutHtml": ""
+          }
+        ],
+        "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s4.mp3"
+      }
+    ]
+  },
+  "answers": {
+    "1": "ardleigh",
+    "2": "newspaper",
+    "3": "theme",
+    "4": "tent",
+    "5": "castle",
+    "6": "beach | beaches",
+    "7": "2020",
+    "8": "flight",
+    "9": "429",
+    "10": "dinner",
+    "11": "A | E",
+    "12": "A | E",
+    "13": "health problems",
+    "14": "safety rules",
+    "15": "plan",
+    "16": "joining",
+    "17": "free entry",
+    "18": "peak",
+    "19": "guests",
+    "20": "photo card | photo cards",
+    "21": "C",
+    "22": "A",
+    "23": "B",
+    "24": "A",
+    "25": "C",
+    "26": "presentation",
+    "27": "model",
+    "28": "material | materials",
+    "29": "grant",
+    "30": "technical",
+    "31": "gene",
+    "32": "power | powers",
+    "33": "strangers",
+    "34": "erosion",
+    "35": "islands",
+    "36": "roads",
+    "37": "fishing",
+    "38": "reproduction",
+    "39": "method | methods",
+    "40": "expansion"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 1,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-07-12T04:51:19.657Z",
+  "publishedAt": "2026-07-12T04:51:19.671Z",
+  "skill": "listening",
+  "subtitle": "Listening full test",
+  "manualListeningTestId": "c10-listening-test-1-1783831879508-listening-full"
+}

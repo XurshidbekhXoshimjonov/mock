@@ -1,0 +1,250 @@
+{
+  "id": "c10-listening-test-1-1783831879508-listening-s4",
+  "slug": "c10-listening-test-1-1783831879508-listening-s4",
+  "title": "Cambridge 10 Test 1 Listening — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/c10-listening-test-1-1783831879508-s4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Its colour comes from an uncommon ...",
+      "options": [],
+      "answer": "gene",
+      "text": "Its colour comes from an uncommon ..."
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Local people believe that it has unusual ...",
+      "options": [],
+      "answer": "power | powers",
+      "text": "Local people believe that it has unusual ..."
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "They protect the bear from ...",
+      "options": [],
+      "answer": "strangers",
+      "text": "They protect the bear from ..."
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Tree roots stop ... along salmon streams.",
+      "options": [],
+      "answer": "erosion",
+      "text": "Tree roots stop ... along salmon streams."
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "It is currently found on a small number of ...",
+      "options": [],
+      "answer": "islands",
+      "text": "It is currently found on a small number of ..."
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Habitat is being lost due to deforestation and construction of ... by logging companies.",
+      "options": [],
+      "answer": "roads",
+      "text": "Habitat is being lost due to deforestation and construction of ... by logging companies."
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Unrestricted ... is also affecting the salmon supply.",
+      "options": [],
+      "answer": "fishing",
+      "text": "Unrestricted ... is also affecting the salmon supply."
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "The bears’ existence is also threatened by their low rate of ...",
+      "options": [],
+      "answer": "reproduction",
+      "text": "The bears’ existence is also threatened by their low rate of ..."
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Logging companies must improve their ... of logging.",
+      "options": [],
+      "answer": "method | methods",
+      "text": "Logging companies must improve their ... of logging."
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Maintenance and ... of the spirit bears’ territory is needed.",
+      "options": [],
+      "answer": "expansion",
+      "text": "Maintenance and ... of the spirit bears’ territory is needed."
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "c10-listening-test-1-1783831879508",
+  "createdAt": "2026-07-12T04:51:19.657Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/c10-listening-test-1-1783831879508-s4.mp3",
+      "instruction": "",
+      "answerText": "31: gene\n32: power | powers\n33: strangers\n34: erosion\n35: islands\n36: roads\n37: fishing\n38: reproduction\n39: method | methods\n40: expansion",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "",
+          "example": "",
+          "instruction": "",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "THE SPIRIT BEAR",
+            "General facts",
+            "• It is a white bear belonging to the black bear family.",
+            "• Its colour comes from an uncommon {{31}}.",
+            "• Local people believe that it has unusual {{32}}.",
+            "• They protect the bear from {{33}}.",
+            "Habitat",
+            "• The bear’s relationship with the forest is complex.",
+            "• Tree roots stop {{34}} along salmon streams.",
+            "• The bears’ feeding habits provide nutrients for forest vegetation.",
+            "• It is currently found on a small number of {{35}}.",
+            "Threats",
+            "• Habitat is being lost due to deforestation and construction of {{36}} by logging companies.",
+            "• Unrestricted {{37}} is also affecting the salmon supply.",
+            "• The bears’ existence is also threatened by their low rate of {{38}}.",
+            "Going forward",
+            "• Interested parties are working together.",
+            "• Logging companies must improve their {{39}} of logging.",
+            "• Maintenance and {{40}} of the spirit bears’ territory is needed."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Its colour comes from an uncommon ...",
+              "text": "Its colour comes from an uncommon ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "gene"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Local people believe that it has unusual ...",
+              "text": "Local people believe that it has unusual ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "power | powers"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "They protect the bear from ...",
+              "text": "They protect the bear from ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "strangers"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Tree roots stop ... along salmon streams.",
+              "text": "Tree roots stop ... along salmon streams.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "erosion"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "It is currently found on a small number of ...",
+              "text": "It is currently found on a small number of ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "islands"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Habitat is being lost due to deforestation and construction of ... by logging companies.",
+              "text": "Habitat is being lost due to deforestation and construction of ... by logging companies.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "roads"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Unrestricted ... is also affecting the salmon supply.",
+              "text": "Unrestricted ... is also affecting the salmon supply.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fishing"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "The bears’ existence is also threatened by their low rate of ...",
+              "text": "The bears’ existence is also threatened by their low rate of ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "reproduction"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Logging companies must improve their ... of logging.",
+              "text": "Logging companies must improve their ... of logging.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "method | methods"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Maintenance and ... of the spirit bears’ territory is needed.",
+              "text": "Maintenance and ... of the spirit bears’ territory is needed.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "expansion"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
