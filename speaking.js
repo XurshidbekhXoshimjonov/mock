@@ -64,7 +64,8 @@
     const FREE_VOICE_MAX_TURN_MS = 10 * 60 * 1000;
     const FREE_VOICE_RESTART_DELAY_MS = 250;
     const EXAM_VOICE_AUTOSTART_DELAY_MS = 500;
-    const EXAM_VOICE_SILENCE_MS = 2600;
+    const EXAM_VOICE_SILENCE_MS = 3600;
+    const EXAM_PART2_SILENCE_MS = 6200;
     const EXAM_VOICE_MIN_SPEECH_MS = 220;
     const EXAM_VOICE_LEVEL_THRESHOLD = 0.018;
 
@@ -1182,6 +1183,9 @@
             arrowRight: `<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>`,
             sliders: `<path d="M10 6h10"></path><path d="M4 6h2"></path><path d="M6 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M14 12h6"></path><path d="M4 12h6"></path><path d="M10 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path><path d="M18 18h2"></path><path d="M4 18h10"></path><path d="M14 18a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>`,
             rotate: `<path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path>`,
+            check: `<path d="m5 12 4 4L19 6"></path>`,
+            pause: `<path d="M8 5v14"></path><path d="M16 5v14"></path>`,
+            play: `<path d="m7 4 13 8-13 8Z"></path>`,
             x: `<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>`
         };
         return `<svg ${attrs}>${paths[name] || paths.mic}</svg>`;
@@ -1667,6 +1671,42 @@
         return bundled ? { ...fallback, ...bundled, parts: fallback.parts } : fallback;
     }
 
+    function generatedSpeakingTestToPlayer(data = {}) {
+        const topics = Array.isArray(data.part1?.topics) ? data.part1.topics : [];
+        const generatedPart1Questions = topics.flatMap((item) => Array.isArray(item?.questions) ? item.questions : []).map(normalizePromptText).filter(Boolean);
+        const part1Questions = ["Good morning. My name is Alex. Can you tell me your full name, please?", ...generatedPart1Questions];
+        const cueTopic = normalizePromptText(data.part2?.topic) || PLAYER_DEFAULTS.part2.topic;
+        const cueBullets = (Array.isArray(data.part2?.bulletPoints) ? data.part2.bulletPoints : []).map(normalizePromptText).filter(Boolean);
+        const part3Questions = (Array.isArray(data.part3?.questions) ? data.part3.questions : []).map(normalizePromptText).filter(Boolean);
+        if (part1Questions.length < 6 || cueBullets.length !== 4 || part3Questions.length < 5) {
+            throw new Error("Generated Speaking test is incomplete.");
+        }
+        return {
+            id: `generated-speaking-${Date.now()}`,
+            title: "IELTS Speaking Test",
+            topic: cueTopic,
+            generatedSource: data.source || "fallback",
+            part1Topics: topics,
+            parts: [
+                { part: 1, title: "Part 1: Introduction and Interview", prompt: "Answer short interview questions naturally.", questions: part1Questions },
+                { part: 2, title: "Part 2: Cue Card", prompt: cueTopic, questions: cueBullets },
+                { part: 3, title: "Part 3: Discussion", prompt: `Discuss broader ideas connected with ${cueTopic}.`, questions: part3Questions }
+            ]
+        };
+    }
+
+    async function requestGeneratedSpeakingTest() {
+        const response = await fetch("/api/speaking/generate-test", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ requestedAt: new Date().toISOString() })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Could not generate Speaking questions.");
+        return generatedSpeakingTestToPlayer(data);
+    }
+
     function prepareSpeakingPlayerState(mode = "free") {
         state.speakingMode = normalizeSpeakingMode(mode);
         state.section = "full";
@@ -2114,6 +2154,7 @@
             latestUserMessage: "",
             cueCard: isFreeMode ? null : cueSeed,
             prepRemaining: 0,
+            part2Notes: "",
             prepInterval: null,
             answerTimer: null,
             nextTimer: null,
@@ -2133,6 +2174,8 @@
             pendingExaminerResponse: null,
             roundingAsked: false,
             feedbackRequested: false,
+            paused: false,
+            pausedPhase: "",
             isComplete: false
         };
     }
@@ -2451,12 +2494,15 @@
         if (!isActiveVoiceFlowRecording(recording) || !recording.hasSpeech || recording.stopRequested) return;
         const flow = state.voiceFlow;
         if (flow.silenceTimer) return;
+        const silenceMs = Number(recording.scope?.part) === 2 && recording.scope?.examPhase === "long_turn"
+            ? EXAM_PART2_SILENCE_MS
+            : EXAM_VOICE_SILENCE_MS;
         flow.silenceTimer = window.setTimeout(() => {
             flow.silenceTimer = null;
             if (isActiveVoiceFlowRecording(recording)) {
                 stopVoiceFlowRecording("silence");
             }
-        }, EXAM_VOICE_SILENCE_MS);
+        }, silenceMs);
     }
 
     function startVoiceFlowVad(recording) {
@@ -2724,21 +2770,7 @@
     }
 
     function part3TransitionResponse(response, answer) {
-        if (!answer || Number(answer.part) !== 2 || answer.examPhase !== "long_turn") return response;
-        if (Number(response?.part || 0) !== 2 || response?.phase !== "rounding_off") return response;
-        const payload = conversationTestPayload();
-        const cueCard = normalizeCueCard(payload.part2CueCard);
-        const part3Questions = Array.isArray(payload.part3Questions)
-            ? payload.part3Questions.map(normalizePromptText).filter(Boolean)
-            : [];
-        return normalizeExaminerResponse({
-            part: 3,
-            phase: "question",
-            examinerMessage: `Let's move on to Part 3. ${part3Questions[0] || `Why do people value experiences like ${cueCard.topic.toLowerCase()}?`}`,
-            shouldRecord: true,
-            isComplete: false,
-            cueCard
-        }, response);
+        return response;
     }
 
     function handleExaminerSpeechDone(response) {
@@ -2860,6 +2892,92 @@
         handleExaminerSpeechDone(pending);
     }
 
+    function repeatCurrentQuestion() {
+        const flow = ensureVoiceFlow();
+        if (flow.cancelled || flow.paused || state.recording || flow.phase === "preparing") return;
+        const text = flow.currentExaminerMessage || flow.latestQuestion;
+        if (!text) return;
+        if (flow.autoStartTimer) {
+            clearTimeout(flow.autoStartTimer);
+            flow.autoStartTimer = null;
+        }
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        const response = {
+            part: flow.part,
+            phase: flow.examPhase || "question",
+            examinerMessage: text,
+            shouldRecord: true,
+            isComplete: false,
+            cueCard: flow.cueCard
+        };
+        flow.phase = "examiner-speaking";
+        flow.status = "Repeating question...";
+        renderCurrentTest();
+        speakVoiceText(text, () => handleExaminerSpeechDone(response));
+    }
+
+    function finishCurrentAnswer() {
+        if (state.recording?.scope?.mode === "voice-flow") stopVoiceFlowRecording("manual-finish");
+        else if (state.recording?.scope?.mode === "free-conversation") stopFreeVoiceListening({ reason: "manual-finish" });
+    }
+
+    function pauseVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        if (flow.paused || flow.cancelled || flow.isComplete) return;
+        flow.paused = true;
+        flow.pausedPhase = flow.phase;
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (flow.prepInterval) {
+            clearInterval(flow.prepInterval);
+            flow.prepInterval = null;
+        }
+        if (flow.autoStartTimer) {
+            clearTimeout(flow.autoStartTimer);
+            flow.autoStartTimer = null;
+        }
+        if (state.recording?.recorder?.state === "recording") {
+            if (flow.answerTimer) {
+                clearTimeout(flow.answerTimer);
+                flow.answerTimer = null;
+                const part = Number(state.recording.scope?.part || flow.part || 1);
+                const maxMs = (part === 2 ? SPEAKING_TIMING.part2Speaking : part === 3 ? 60 : 45) * 1000;
+                state.recording.remainingMs = Math.max(1000, maxMs - (Date.now() - state.recording.startedAt));
+            }
+            state.recording.recorder.pause();
+            clearVoiceFlowVad(flow);
+        }
+        flow.phase = "paused";
+        flow.status = "Test paused";
+        renderCurrentTest();
+    }
+
+    function resumeVoiceFlow() {
+        const flow = ensureVoiceFlow();
+        if (!flow.paused || flow.cancelled) return;
+        const previous = flow.pausedPhase || "answer-starting";
+        flow.paused = false;
+        flow.pausedPhase = "";
+        if (state.recording?.recorder?.state === "paused") {
+            state.recording.recorder.resume();
+            flow.phase = "listening";
+            flow.status = "Recording...";
+            startVoiceFlowVad(state.recording);
+            flow.answerTimer = window.setTimeout(() => {
+                if (state.recording) stopVoiceFlowRecording("time-limit");
+            }, Math.max(1000, Number(state.recording.remainingMs || 1000)));
+            renderCurrentTest();
+            return;
+        }
+        if (previous === "preparing") {
+            startVoicePreparation({ cueCard: flow.cueCard, prepSeconds: Math.max(1, flow.prepRemaining), phase: "prep" });
+            return;
+        }
+        flow.phase = previous === "examiner-speaking" ? "answer-starting" : previous;
+        flow.status = "Test resumed";
+        renderCurrentTest();
+        if (previous === "examiner-speaking") repeatCurrentQuestion();
+    }
+
     function startVoicePreparation(response) {
         const flow = ensureVoiceFlow();
         clearVoiceFlowTimers();
@@ -2926,6 +3044,18 @@
         } catch {
             return;
         }
+        flow.phase = "generating-questions";
+        flow.status = "Generating a fresh IELTS Speaking test...";
+        renderCurrentTest();
+        try {
+            state.test = await requestGeneratedSpeakingTest();
+        } catch (error) {
+            console.warn("Generated Speaking test unavailable; using bundled fallback:", error);
+            state.test = defaultFullSpeakingTest();
+            state.error = "Fresh questions were unavailable, so a fallback IELTS test was loaded.";
+        }
+        flow.cueCard = getConversationCueCard();
+        flow.currentQuestionTotal = mockPartQuestions(1).length;
         startHeaderTimer(getHeaderTotalSeconds());
         flow.phase = "thinking";
         flow.status = "Thinking...";
@@ -3250,6 +3380,9 @@
             questionIndex: Number(recording.scope.questionIndex || 0),
             questionTotal: Number(recording.scope.questionTotal || 0),
             title: flow.speakingMode === "free" ? "Free Speaking Practice" : `Part ${Number(recording.scope.part || flow.part || 1)}`,
+            topic: Number(recording.scope.part || flow.part || 1) === 1
+                ? (state.test?.part1Topics || []).find((item) => (item.questions || []).includes(recording.scope.questionText))?.topic || "Introduction and interview"
+                : (state.test?.topic || flow.cueCard?.topic || "IELTS Speaking"),
             questionText: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
             prompt: recording.scope.questionText || flow.latestQuestion || flow.currentExaminerMessage || "",
             examPhase: recording.scope.examPhase || flow.examPhase
@@ -3338,6 +3471,7 @@
             part: answer.part || defaultPartForMode(mode, index),
             questionIndex: Number(answer.questionIndex || 0),
             title: answer.title || `Part ${answer.part || index + 1}`,
+            topic: answer.topic || state.test?.topic || "",
             prompt: answer.prompt || answer.questionText || "",
             questionText: answer.questionText || answer.prompt || "",
             transcript: answer.transcript || "",
@@ -3556,6 +3690,7 @@
                 <ul>
                     ${cueCard.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
                 </ul>
+                ${flow.phase === "preparing" ? `<textarea class="ai-cue-notes" data-part2-notes placeholder="Write brief preparation notes..." aria-label="Part 2 preparation notes">${escapeHtml(flow.part2Notes || "")}</textarea>` : ""}
                 ${flow.phase === "preparing" ? `<div class="ai-prep-timer">${formatDuration(flow.prepRemaining || 0)}</div>` : ""}
             </div>
         `;
@@ -3610,6 +3745,10 @@
                     `).join("")}
                 </div>
                 <p>${escapeHtml(advice)}</p>
+                <div class="ai-feedback-actions">
+                    <a class="speaking-record-btn speaking-record-btn--primary" href="/dashboard">View result</a>
+                    <a class="speaking-record-btn speaking-record-btn--secondary" href="/speaking">Speaking dashboard</a>
+                </div>
             </div>
         `;
     }
@@ -3709,12 +3848,9 @@
             : (flow.latestQuestion || flow.currentExaminerMessage || "Tap the microphone to begin.");
         const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : (isSpeakingMockMode ? "IELTSX Mock Test Speaking" : "IELTS Speaking Test");
         const freeSessionActive = isFreeVoiceSessionActive(flow);
-        const mockAutoMicDisabled = isSpeakingMockMode
-            && flow.started
-            && !["idle", "failed", "completed", "feedback"].includes(flow.phase);
         const micDisabled = isFreeMode
             ? false
-            : (mockAutoMicDisabled || state.loading || ["mic-permission", "thinking", "feedback", "answer-saved", "moving", "preparing"].includes(flow.phase));
+            : (state.loading || ["mic-permission", "thinking", "feedback", "answer-saved", "moving", "preparing", "examiner-speaking", "paused", "generating-questions"].includes(flow.phase));
         const micLabel = isFreeMode
             ? (freeSessionActive ? "Stop voice session" : "Start voice session")
             : (!flow.started || flow.phase === "idle" || flow.phase === "failed" || flow.phase === "completed"
@@ -3766,6 +3902,25 @@
                     ${renderVoiceFeedback()}
                 </main>
                 <div class="ai-voice-controls" aria-label="Speaking controls">
+                    ${!isFreeMode ? `
+                    <div class="ai-voice-control-stack">
+                        <button class="ai-voice-mic-button" type="button" data-action="voice-repeat" aria-label="Repeat Question" title="Repeat Question" ${isRecording || flow.phase === "preparing" ? "disabled" : ""}>
+                            ${lucideIcon("rotate", "ai-voice-control-icon")}
+                        </button>
+                        <span>Repeat</span>
+                    </div>
+                    <div class="ai-voice-control-stack">
+                        <button class="ai-voice-mic-button" type="button" data-action="voice-finish-answer" aria-label="Finish Answer" title="Finish Answer" ${isRecording ? "" : "disabled"}>
+                            ${lucideIcon("check", "ai-voice-control-icon")}
+                        </button>
+                        <span>Finish Answer</span>
+                    </div>
+                    <div class="ai-voice-control-stack">
+                        <button class="ai-voice-mic-button" type="button" data-action="${flow.paused ? "voice-resume" : "voice-pause"}" aria-label="${flow.paused ? "Resume Test" : "Pause Test"}" title="${flow.paused ? "Resume Test" : "Pause Test"}">
+                            ${lucideIcon(flow.paused ? "play" : "pause", "ai-voice-control-icon")}
+                        </button>
+                        <span>${flow.paused ? "Resume" : "Pause"}</span>
+                    </div>` : ""}
                     <div class="ai-voice-control-stack">
                         <button class="ai-voice-mic-button ${isRecording ? "is-recording" : ""}" type="button" data-action="voice-mic" aria-label="${escapeHtml(micLabel)}" title="${escapeHtml(micLabel)}" ${micDisabled ? "disabled" : ""}>
                             ${micIcon}
@@ -4348,6 +4503,7 @@
             if (!response.ok) throw new Error(data.error || data.message || "AI feedback failed. Please try again.");
             console.log("Speaking evaluation result", data);
             state.feedback = data.feedback;
+            state.lastSpeakingAttempt = data.attempt || null;
             applyServerTranscripts(mode, data.attempt?.parts);
             clearAllPlayerTimers();
             if (mode === "full_test") {
@@ -4423,7 +4579,32 @@
         }
     }
 
+    function cleanupSpeakingResources() {
+        clearAllPlayerTimers();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        const recording = state.recording;
+        if (recording) {
+            recording.cancelled = true;
+            try { recording.recognition?.stop(); } catch {}
+            try { if (recording.recorder?.state !== "inactive") recording.recorder.stop(); } catch {}
+            stopTracks(recording.stream);
+            state.recording = null;
+        }
+        if (state.voiceFlow && !isFreeVoiceFlow(state.voiceFlow)) cleanupVoiceFlowMic(state.voiceFlow);
+    }
+
+    window.addEventListener("beforeunload", (event) => {
+        if (!state.voiceFlow?.started || state.voiceFlow?.isComplete) return;
+        event.preventDefault();
+        event.returnValue = "";
+    });
+    window.addEventListener("pagehide", cleanupSpeakingResources, { once: true });
+
     app.addEventListener("input", (event) => {
+        if (event.target.matches("[data-part2-notes]")) {
+            ensureVoiceFlow().part2Notes = event.target.value;
+            return;
+        }
         const key = event.target.dataset.transcript;
         if (!key) return;
         updateTranscript(key === "single" || key === "cue" ? key : Number(key), event.target.value);
@@ -4440,6 +4621,10 @@
         if (action === "select-speaking-mode") startSpeakingFromIntro(target.dataset.mode || "free");
         else if (action === "voice-mic") handleVoiceMicAction();
         else if (action === "voice-end") endVoiceFlow();
+        else if (action === "voice-repeat") repeatCurrentQuestion();
+        else if (action === "voice-finish-answer") finishCurrentAnswer();
+        else if (action === "voice-pause") pauseVoiceFlow();
+        else if (action === "voice-resume") resumeVoiceFlow();
         else if (action === "start-single-recording") startRecording({ mode: "single" });
         else if (action === "start-preparation" || action === "start-prep") startPreparationForActivePart();
         else if (action === "start-cue-recording") startRecording({ mode: "cue" });

@@ -568,7 +568,7 @@
           {
             "type": "note_completion",
             "instructionTitle": "Questions 31–40",
-            "instructionText": "",
+            "instructionText": "Complete the notes below. \nWrite ONE WORD ONLY for each answer.",
             "questions": [
               {
                 "number": 31,

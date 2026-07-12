@@ -3096,3 +3096,42 @@ body.speaking-page .ieltsx-notes-toggle-count {
         padding: 0 12px;
     }
 }
+.ai-cue-notes {
+    width: 100%;
+    min-height: 88px;
+    box-sizing: border-box;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid rgba(148, 163, 184, 0.34);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.86);
+    color: #0f172a;
+    font: inherit;
+    resize: vertical;
+}
+
+.ai-feedback-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+html.dark-theme .ai-cue-notes,
+body.dark-theme .ai-cue-notes {
+    border-color: rgba(148, 163, 184, 0.24);
+    background: rgba(15, 23, 42, 0.82);
+    color: #f8fafc;
+}
+
+@media (max-width: 700px) {
+    .ai-voice-controls {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .ai-voice-control-stack {
+        min-width: 72px;
+    }
+}
