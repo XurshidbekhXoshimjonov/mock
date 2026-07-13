@@ -1727,6 +1727,33 @@
             img.src = visualDiagramUrl;
         }
 
+        function hasPremiumWritingAccess() {
+            const user = window.authClient?.getAuth?.()?.user || window.authClient?.getAuthState?.()?.user || null;
+            if (window.IELTSXPremium?.hasPremiumAccess) {
+                return window.IELTSXPremium.hasPremiumAccess(user);
+            }
+            if (!user || user.isPremium !== true) return false;
+            const expiresAt = user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil;
+            if (!expiresAt) return true;
+            const expiry = new Date(expiresAt);
+            return !Number.isNaN(expiry.getTime()) && expiry.getTime() > Date.now();
+        }
+
+        function writingPremiumLockedHref(href) {
+            let returnPath = window.location.pathname + window.location.search;
+            try {
+                const target = new URL(href || window.location.href, window.location.href);
+                returnPath = `${target.pathname}${target.search}${target.hash}`;
+            } catch {
+                // Keep the current page as the return path.
+            }
+            return `/premium-locked.html?type=writing&return=${encodeURIComponent(returnPath)}`;
+        }
+
+        function writingHrefForAccess(href, isPremium) {
+            return isPremium && !hasPremiumWritingAccess() ? writingPremiumLockedHref(href) : href;
+        }
+
         // Load Full Tests List
         function loadFullTestsList() {
             fetch('/api/writing/full-tests')
@@ -1748,8 +1775,9 @@
                         const isPremium = item.isPremium === true;
                         const badgeClass = isPremium ? 'test-card-badge--premium' : 'test-card-badge--free';
                         const badgeLabel = isPremium ? 'PREMIUM' : 'FREE';
+                        const href = writingHrefForAccess(`?id=${encodeURIComponent(item._id)}`, isPremium);
                         return `
-                        <a class="reading-test-list-card writing-test-card" href="?id=${item._id}">
+                        <a class="reading-test-list-card writing-test-card" href="${href}" data-requires-premium="${isPremium ? 'true' : 'false'}">
                             <div class="test-card-top">
                                 <span class="test-card-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

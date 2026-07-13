@@ -32,6 +32,40 @@
         `;
     }
 
+    function currentUser() {
+        return window.authClient?.getAuth?.()?.user || window.authClient?.getAuthState?.()?.user || null;
+    }
+
+    function hasPremiumAccess() {
+        const user = currentUser();
+        if (window.IELTSXPremium?.hasPremiumAccess) {
+            return window.IELTSXPremium.hasPremiumAccess(user);
+        }
+        if (!user || user.isPremium !== true) return false;
+        const expiresAt = user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil;
+        if (!expiresAt) return true;
+        const expiry = new Date(expiresAt);
+        return !Number.isNaN(expiry.getTime()) && expiry.getTime() > Date.now();
+    }
+
+    function absoluteReturnPath(href) {
+        try {
+            const target = new URL(href || window.location.href, window.location.href);
+            return `${target.pathname}${target.search}${target.hash}`;
+        } catch {
+            return `${window.location.pathname}${window.location.search}`;
+        }
+    }
+
+    function premiumLockedHref(href) {
+        const returnPath = absoluteReturnPath(href);
+        return `/premium-locked.html?type=writing&return=${encodeURIComponent(returnPath)}`;
+    }
+
+    function hrefForAccess(href, isPremium) {
+        return isPremium && !hasPremiumAccess() ? premiumLockedHref(href) : href;
+    }
+
     function render(options) {
         const task = options?.task === "task2" ? "task2" : "task1";
         const meta = TASK_META[task];
@@ -39,10 +73,11 @@
         const title = options?.title || `Test ${index + 1}`;
         const href = options?.href || "#";
         const isPremium = options?.isPremium === true;
+        const finalHref = hrefForAccess(href, isPremium);
         const accessLabel = isPremium ? "PREMIUM" : "FREE";
 
         return `
-            <a class="writing-test-card" href="${escapeHtml(href)}">
+            <a class="writing-test-card" href="${escapeHtml(finalHref)}" data-requires-premium="${isPremium ? "true" : "false"}">
                 <div class="test-card-top">
                     <span class="test-card-icon" aria-hidden="true">
                         ${documentIcon()}
@@ -63,6 +98,9 @@
     }
 
     window.WritingTestCard = {
-        render
+        render,
+        hasPremiumAccess,
+        hrefForAccess,
+        premiumLockedHref
     };
 }());
