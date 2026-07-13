@@ -735,17 +735,17 @@
         }
 
         .ielts-account__trigger {
-            min-height: 48px;
+            min-height: 42px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            max-width: 208px;
+            gap: 8px;
+            max-width: 190px;
             border: 0;
-            border-radius: 12px;
+            border-radius: 10px;
             background: transparent;
             color: #0f172a;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 3px 7px 3px 3px;
             box-shadow: none;
             transition: background 180ms ease, color 180ms ease, transform 180ms ease;
         }
@@ -763,20 +763,20 @@
 
         .ielts-account__name {
             min-width: 0;
-            max-width: 120px;
+            max-width: 112px;
             overflow: hidden;
-            font-size: 14.5px;
-            font-weight: 700;
-            color: #0f172a;
-            line-height: 1.12;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #0b1838;
+            line-height: 1.1;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
-        .ielts-account__identity { display:grid;min-width:0;gap:4px;text-align:left; }
-        .ielts-account__premium-badge { display:inline-flex;width:max-content;align-items:center;gap:4px;padding:0;border:0;border-radius:0;background:transparent;color:#b77900;font-size:11px;font-weight:600;line-height:1;letter-spacing:0; }
-        .ielts-account__premium-icon { width:13px;height:13px;display:block;object-fit:contain;flex:0 0 13px; }
-        .ielts-account__new { margin-left:auto;padding:3px 6px;border-radius:999px;background:#eaf1ff;color:#2457f5;font-size:9px;font-weight:900;letter-spacing:.06em; }
+        .ielts-account__identity { display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:2px;text-align:left; }
+        .ielts-account__premium-badge { display:inline-flex;width:max-content;align-items:center;gap:3px;padding:0;border:0;border-radius:0;background:transparent;color:#b77900;font-size:9.5px;font-weight:600;line-height:1;letter-spacing:0; }
+        .ielts-account__premium-icon { width:11px;height:11px;display:block;object-fit:contain;flex:0 0 11px; }
+        .ielts-account__new { margin-left:auto;padding:2px 5px;border-radius:999px;background:#eef4ff;color:#2563eb;font-size:8px;font-weight:700;letter-spacing:.04em; }
 
         .navbar-user-name,
         .profile-name,
@@ -810,17 +810,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 42px;
-            height: 42px;
-            flex: 0 0 42px;
+            width: 34px;
+            height: 34px;
+            flex: 0 0 34px;
             border-radius: 999px;
-            background: linear-gradient(135deg, #06164a 0%, #0b5fff 100%);
+            background: #0a1d58;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
             line-height: 1;
             text-transform: uppercase;
-            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.72);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
             transition: transform 180ms ease, box-shadow 180ms ease;
         }
 
@@ -834,24 +834,24 @@
         .ielts-account__trigger:hover .ielts-account__avatar,
         .ielts-account.is-open .ielts-account__avatar {
             transform: scale(1.02);
-            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.82), 0 8px 18px rgba(6, 22, 74, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.78), 0 6px 14px rgba(6, 22, 74, 0.12);
         }
 
         .ielts-account__chevron {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 17px;
-            height: 17px;
-            flex: 0 0 17px;
+            width: 15px;
+            height: 15px;
+            flex: 0 0 15px;
             margin-left: 2px;
             color: #475569;
             transition: transform 180ms ease;
         }
 
         .ielts-account__chevron svg {
-            width: 17px;
-            height: 17px;
+            width: 15px;
+            height: 15px;
             display: block;
         }
 
@@ -861,16 +861,16 @@
 
         .ielts-account__dropdown {
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 8px);
             right: 0;
-            min-width: 190px;
-            width: max-content;
-            max-width: min(230px, calc(100vw - 28px));
-            padding: 8px;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
+            min-width: 0;
+            width: 216px;
+            max-width: min(216px, calc(100vw - 24px));
+            padding: 7px;
+            border: 1px solid #e3e9f3;
+            border-radius: 14px;
             background: #ffffff;
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 12px 32px rgba(15, 35, 75, 0.10), 0 2px 8px rgba(15, 35, 75, 0.05);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -897,37 +897,42 @@
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             min-height: 40px;
             border: 0;
-            border-radius: 10px;
+            border-radius: 9px;
             background: transparent;
-            color: #0f172a;
+            color: #13213d;
             cursor: pointer;
-            padding: 10px 12px;
+            padding: 6px 8px;
             text-align: left;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+            transition: background 160ms ease, color 160ms ease, transform 160ms ease;
         }
 
         .ielts-account__link:hover,
         .ielts-account__link.is-active,
         .ielts-account__logout:hover {
             transform: none;
-            background: #f8fafc;
-            color: #0f172a;
+            background: #f5f7fc;
+            color: #13213d;
         }
 
         .ielts-account__link.is-active {
-            background: #f8fafc;
-            color: #0f172a;
+            background: #f5f7fc;
+            color: #13213d;
         }
 
         .ielts-account__logout {
-            margin-top: 2px;
             color: #e11d48;
+        }
+
+        .ielts-account__divider {
+            height: 1px;
+            margin: 5px 3px;
+            background: #edf1f7;
         }
 
         .ielts-account__icon {
@@ -937,8 +942,8 @@
             align-items: center;
             justify-content: center;
             flex: 0 0 28px;
-            border: 1px solid transparent;
-            border-radius: 9px;
+            border: 0;
+            border-radius: 8px;
             font-size: 14px;
             color: currentColor;
             text-align: center;
@@ -946,10 +951,10 @@
         }
 
         .ielts-account__icon svg {
-            width: 16px;
-            height: 16px;
+            width: 15.5px;
+            height: 15.5px;
             display: block;
-            flex: 0 0 16px;
+            flex: 0 0 15.5px;
         }
 
         .ielts-account__link:hover .ielts-account__icon,
@@ -959,35 +964,25 @@
         }
 
         .ielts-account__icon--admin {
-            border-color: #bfdbfe;
-            background: #eff6ff;
+            background: #eef4ff;
             color: #2563eb;
         }
 
         .ielts-account__icon--profile {
-            border-color: #ddd6fe;
-            background: #f3efff;
-            color: #4f46e5;
+            background: #f2efff;
+            color: #6d5ce7;
         }
 
         .ielts-account__icon--results {
-            border-color: #bbf7d0;
-            background: #dcfce7;
-            color: #16a34a;
+            background: #ecfdf3;
+            color: #15925b;
         }
 
-        .ielts-account__icon--settings {
-            border-color: #fed7aa;
-            background: #fff7ed;
-            color: #ea580c;
-        }
-
-        .ielts-account__icon--subscription { border-color:#fde68a;background:#fffbeb;color:#b7791f; }
+        .ielts-account__icon--subscription { background:#fff7e5;color:#c58a00; }
 
         .ielts-account__icon--logout {
-            border-color: #dde3f5;
-            background: #eef2ff;
-            color: #252c8f;
+            background: #fff1f2;
+            color: #e11d48;
         }
 
         body.has-global-navbar > #profileRoot,
@@ -1017,15 +1012,15 @@
             }
 
             .ielts-account__trigger {
-                min-height: 48px;
+                min-height: 42px;
                 gap: 8px;
                 max-width: 190px;
             }
 
             .ielts-account__avatar {
-                width: 40px;
-                height: 40px;
-                flex-basis: 40px;
+                width: 34px;
+                height: 34px;
+                flex-basis: 34px;
             }
         }
 
@@ -1151,21 +1146,21 @@
             }
 
             .ielts-account__trigger {
-                min-height: 48px;
+                min-height: 42px;
                 min-width: 0;
                 max-width: none;
                 justify-content: space-between;
-                gap: 10px;
-                padding: 4px 8px;
+                gap: 8px;
+                padding: 3px 7px 3px 3px;
                 background: transparent;
                 box-shadow: none;
             }
 
             .ielts-account__avatar {
-                width: 42px;
-                height: 42px;
-                flex-basis: 42px;
-                font-size: 18px;
+                width: 34px;
+                height: 34px;
+                flex-basis: 34px;
+                font-size: 14px;
             }
 
             .ielts-account__identity {
@@ -1181,8 +1176,9 @@
                 display: grid;
                 width: 100%;
                 min-width: 0;
+                max-width: min(216px, calc(100vw - 24px));
                 margin-top: 8px;
-                border-radius: 12px;
+                border-radius: 14px;
                 box-shadow: none;
                 opacity: 1;
                 visibility: visible;
@@ -1376,7 +1372,7 @@
             .ielts-navbar__mobile-menu .ielts-account__link,
             .ielts-navbar__mobile-menu .ielts-account__logout {
                 width: 100%;
-                min-height: 44px;
+                min-height: 40px;
             }
         }
 
@@ -1466,7 +1462,10 @@
             body.dark-theme .ielts-account__dropdown {
                 border-color: rgba(255, 255, 255, 0.08);
                 background: #08081b;
-                box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+            }
+            body.dark-theme .ielts-account__divider {
+                background: rgba(237, 241, 247, 0.12);
             }
             body.dark-theme .ielts-navbar .profile-dropdown {
                 color: #f1f5f9;
@@ -1533,12 +1532,12 @@
 
     const MENU_ICONS = {
         menu: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>`,
-        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"></rect></svg>`,
-        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.7"></circle><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"></path></svg>`,
-        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17"></path><path d="M5.5 17.5v-5"></path><path d="M10.5 17.5v-9"></path><path d="M15.5 17.5v-4"></path><path d="M19.5 17.5V6.5"></path></svg>`,
-        subscription: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M7 15h3"></path></svg>`,
-        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 20.5h-4a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h4"></path><path d="M16 16.5 20.5 12 16 7.5"></path><path d="M20.5 12h-11"></path></svg>`,
-        chevron: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7.5 5 5 5-5"></path></svg>`
+        admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1.5"></rect><rect width="7" height="7" x="14" y="3" rx="1.5"></rect><rect width="7" height="7" x="14" y="14" rx="1.5"></rect><rect width="7" height="7" x="3" y="14" rx="1.5"></rect></svg>`,
+        profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>`,
+        results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>`,
+        subscription: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><path d="M2 10h20"></path></svg>`,
+        logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path></svg>`,
+        chevron: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7.5 5 5 5-5"></path></svg>`
     };
 
     function hasPremiumAccess(user) {
@@ -1578,6 +1577,7 @@
                     <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/dashboard"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
                     <a class="ielts-account__link ${subscriptionActive ? "is-active" : ""}" href="/premium"><span class="ielts-account__icon ielts-account__icon--subscription">${MENU_ICONS.subscription}</span>Subscription<span class="ielts-account__new">NEW</span></a>
                     <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/dashboard#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Dashboard / My Tests</a>
+                    <div class="ielts-account__divider" role="separator" aria-hidden="true"></div>
                     <button class="ielts-account__logout logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
             </div>
