@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const fs = require("fs");
 const User = require("./models/User");
+const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
 const FullSpeakingTest = require("./models/FullSpeakingTest");
 const { createAuthToken, verifyAuthToken, publicUser, isAdminEmail } = require("./lib/auth");
@@ -16,6 +17,7 @@ const { createFullTestStore } = require("./lib/full-test-store");
 const { registerFullTestRoutes } = require("./lib/full-test-routes");
 const { registerWritingRoutes } = require("./lib/writing-routes");
 const { registerSpeakingRoutes } = require("./lib/speaking-routes");
+const { premiumPlans, hasPremiumAccess, canAccessSubscriptionFeature } = require("./premium-config");
 const { createUserProgressStore } = require("./lib/user-progress-store");
 const { createMockTestStore } = require("./lib/mock-test-store");
 const ManualTestParser = require("./lib/manual-test-parser");
@@ -42,6 +44,7 @@ const USERS_FILE = path.join(DATA_DIR, "users.json");
 const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
 const userProgressStore = createUserProgressStore(USER_PROGRESS_FILE);
+const MANUAL_PAYMENT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000;
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
 const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
 const MOCK_TEST_RESULTS_FILE = path.join(DATA_DIR, "mock-test-results.json");
@@ -3206,6 +3209,8 @@ async function buildMockWritingFullTest(id) {
         id,
         title: `${mockTest.title} - Writing`,
         status: "published",
+        access: mockTest.access || (mockTest.isPremium ? "premium" : "free"),
+        isPremium: mockTest.isPremium === true || mockTest.access === "premium",
         timeLimit: Number(selected.timeLimit) || 60,
         __mockWritingTest: true,
         sourceTestId: String(selected._id || mockTest.writingTestId),
@@ -4191,6 +4196,126 @@ function requirePageAuth(req, res, next) {
     next();
 }
 
+function premiumFeatureLabel(featureKey) {
+    const labels = {
+        speaking: "Speaking practice and AI evaluation",
+        writing: "Writing practice and AI evaluation",
+        fullMockTest: "Full IELTS Mock Tests",
+        pdfResults: "PDF result downloads",
+        progressStatistics: "Progress statistics",
+        detailedBandFeedback: "Detailed IELTS band feedback"
+    };
+    return labels[featureKey] || "This feature";
+}
+
+function requirePremiumFeaturePage(featureKey) {
+    return (req, res, next) => {
+        if (canAccessSubscriptionFeature(req.user, featureKey)) {
+            return next();
+        }
+
+        setNoStorePageHeaders(res);
+        res.sendFile(path.join(ROOT_DIR, "premium-locked.html"));
+    };
+}
+
+function requirePremiumFeatureApi(featureKey) {
+    return (req, res, next) => {
+        if (canAccessSubscriptionFeature(req.user, featureKey)) {
+            return next();
+        }
+
+        return res.status(403).json({
+            error: "premium_required",
+            code: "PREMIUM_REQUIRED",
+            message: `${premiumFeatureLabel(featureKey)} requires Premium.`,
+            feature: featureKey,
+            upgradeUrl: "/premium"
+        });
+    };
+}
+
+function mockTestRequiresPremium(test) {
+    if (!test || typeof test !== "object") return false;
+    return test.isPremium === true
+        || test.requiresPremium === true
+        || String(test.access || "").trim().toLowerCase() === "premium";
+}
+
+function canAccessMockTest(req, test) {
+    return !mockTestRequiresPremium(test) || canAccessSubscriptionFeature(req.user, "fullMockTest");
+}
+
+function premiumMockTestApiResponse(res) {
+    return res.status(403).json({
+        error: "premium_required",
+        code: "PREMIUM_REQUIRED",
+        message: "Full IELTS Mock Tests require Premium.",
+        feature: "fullMockTest",
+        upgradeUrl: "/premium"
+    });
+}
+
+function requireMockTestAccessApi(req, res, next) {
+    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const test = mockTestStore.getTest(req.params.id, { includeDraft, requireComplete: false });
+    if (test && !canAccessMockTest(req, test)) {
+        return premiumMockTestApiResponse(res);
+    }
+    return next();
+}
+
+function mockTestIdFromRequest(req) {
+    const body = req.body || {};
+    const query = req.query || {};
+    const state = (() => {
+        try {
+            const parsed = typeof body.state === "string" ? JSON.parse(body.state) : body.state;
+            return parsed && typeof parsed === "object" ? parsed : {};
+        } catch {
+            return {};
+        }
+    })();
+    return String(
+        query.mockTestId
+        || query.testId
+        || body.mockTestId
+        || body.fullTestId
+        || body.testId
+        || state.mockTestId
+        || state.testId
+        || state.test?.mockTestId
+        || state.test?.testId
+        || state.test?.id
+        || ""
+    )
+        .replace(/^mock-(?:writing|speaking|listening|reading)-/i, "")
+        .trim();
+}
+
+function canAccessMockModeRequest(req) {
+    const mockTestId = mockTestIdFromRequest(req);
+    if (!mockTestId) return false;
+    const test = mockTestStore.getTest(mockTestId, { includeDraft: req.user && isAdminEmail(req.user.email), requireComplete: false });
+    return Boolean(test && canAccessMockTest(req, test));
+}
+
+function requirePremiumFeatureOrMockAccessApi(featureKey) {
+    const requireFeature = requirePremiumFeatureApi(featureKey);
+    return (req, res, next) => {
+        if (canAccessMockModeRequest(req)) return next();
+        return requireFeature(req, res, next);
+    };
+}
+
+function requirePremiumFeatureOrMockAccessPage(featureKey) {
+    const requireFeature = requirePremiumFeaturePage(featureKey);
+    return (req, res, next) => {
+        if (canAccessMockModeRequest(req)) return next();
+        return requireFeature(req, res, next);
+    };
+}
+
 function requirePageAdmin(req, res, next) {
     if (!req.user) {
         return res.redirect("/login");
@@ -4237,39 +4362,49 @@ app.get("/speaking", requirePageAuth, (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/player", requirePageAuth, (req, res) => {
+app.get("/speaking/player", requirePageAuth, (req, res, next) => {
+    const isMockRequest = req.query.mockMode === "1" || req.query.mockTestId;
+    if (isMockRequest) {
+        if (!canAccessMockModeRequest(req)) {
+            return requirePremiumFeaturePage("fullMockTest")(req, res, next);
+        }
+        return sendSpeakingPage(req, res);
+    }
+    if (!canAccessSubscriptionFeature(req.user, "speaking")) {
+        return requirePremiumFeaturePage("speaking")(req, res, next);
+    }
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part1", requirePageAuth, (req, res) => {
+app.get("/speaking/part1", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part1/:testId", requirePageAuth, (req, res) => {
+app.get("/speaking/part1/:testId", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part2", requirePageAuth, (req, res) => {
+app.get("/speaking/part2", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part2/:testId", requirePageAuth, (req, res) => {
+app.get("/speaking/part2/:testId", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part3", requirePageAuth, (req, res) => {
+app.get("/speaking/part3", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/part3/:testId", requirePageAuth, (req, res) => {
+app.get("/speaking/part3/:testId", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/full-test", requirePageAuth, (req, res) => {
+app.get("/speaking/full-test", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
-app.get("/speaking/full-test/:testId", requirePageAuth, (req, res) => {
+app.get("/speaking/full-test/:testId", requirePageAuth, requirePremiumFeaturePage("speaking"), (req, res) => {
     sendSpeakingPage(req, res);
 });
 
@@ -4353,6 +4488,12 @@ app.get("/mock-test-result/:resultId", requirePageAuth, (req, res) => {
 });
 
 app.get("/mock-test/:id", requirePageAuth, (req, res) => {
+    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const test = mockTestStore.getTest(req.params.id, { includeDraft, requireComplete: false });
+    if (test && !canAccessMockTest(req, test)) {
+        setNoStorePageHeaders(res);
+        return res.sendFile(path.join(ROOT_DIR, "premium-locked.html"));
+    }
     res.sendFile(path.join(ROOT_DIR, "mock-test.html"));
 });
 
@@ -4370,12 +4511,26 @@ app.get("/profile-settings", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile-settings.html"));
 });
 
+app.get("/profile/subscription", requirePageAuth, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "profile-subscription.html"));
+});
+
+app.get("/premium", requirePageAuth, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "premium.html"));
+});
+
 app.get("/my-results", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile.html"));
 });
 
 app.get("/full-test-player", requirePageAuth, (req, res) => {
     const isMockRequest = req.query.mockMode === "1" || req.query.mockTestId;
+    if (isMockRequest && !canAccessMockModeRequest(req)) {
+        setNoStorePageHeaders(res);
+        return res.sendFile(path.join(ROOT_DIR, "premium-locked.html"));
+    }
     if (!isMockRequest && req.query.id) {
         const preferredSkill = req.query.skill === "listening" ? "listening" : "reading";
         const test = resolveFullTest(req.query.id, preferredSkill);
@@ -4680,6 +4835,42 @@ app.put("/api/profile", requireUser, async (req, res) => {
     }
 });
 
+app.post("/api/profile/subscription/cancel", requireUser, async (req, res) => {
+    try {
+        const userId = req.user?.id || req.account?._id || req.account?.id;
+        const existingUser = await userStore.findUserById(userId);
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const now = new Date();
+        const updatedUser = await userStore.updateUser(String(userId), {
+            plan: "free",
+            isPremium: false,
+            premiumUntil: now,
+            premiumExpiresAt: now,
+            premiumCancelledAt: now,
+            subscriptionPlan: null,
+            subscriptionStatus: "cancelled",
+            subscriptionExpiresAt: now,
+            subscriptionAdminNote: String(req.body?.note || "Cancelled by user").trim().slice(0, 500)
+        });
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+        res.json({
+            success: true,
+            user: publicUser(updatedUser)
+        });
+    } catch (error) {
+        console.error("Profile subscription cancel error:", error);
+        res.status(500).json({ error: "Could not cancel subscription" });
+    }
+});
+
 app.get("/api/mock-tests", (req, res) => {
     const tests = mockTestStore
         .listTests()
@@ -4687,7 +4878,7 @@ app.get("/api/mock-tests", (req, res) => {
     res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
 });
 
-app.get("/api/mock-tests/latest", (req, res) => {
+app.get("/api/mock-tests/latest", requireAuth, (req, res) => {
     const includeDraft = req.user && isAdminEmail(req.user.email);
     const test = mockTestStore.latestActiveTest({
         includeDraft,
@@ -4700,10 +4891,14 @@ app.get("/api/mock-tests/latest", (req, res) => {
         });
     }
 
+    if (!canAccessMockTest(req, test)) {
+        return premiumMockTestApiResponse(res);
+    }
+
     res.json(test);
 });
 
-app.get("/api/mock-tests/:id", (req, res) => {
+app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
     const includeDraft = req.user && isAdminEmail(req.user.email);
     const requestedId = String(req.params.id || "").trim();
     const useLatest = !requestedId || requestedId === "undefined" || requestedId === "null";
@@ -4717,10 +4912,14 @@ app.get("/api/mock-tests/:id", (req, res) => {
         });
     }
 
+    if (!canAccessMockTest(req, test)) {
+        return premiumMockTestApiResponse(res);
+    }
+
     res.json(test);
 });
 
-app.post("/api/mock-tests/:id/progress", requireUser, (req, res) => {
+app.post("/api/mock-tests/:id/progress", requireUser, requireMockTestAccessApi, (req, res) => {
     try {
         const progress = mockTestStore.recordSectionProgress(req.user.id, req.params.id, req.body || {});
         res.json({ progress });
@@ -4731,7 +4930,7 @@ app.post("/api/mock-tests/:id/progress", requireUser, (req, res) => {
     }
 });
 
-app.delete("/api/mock-tests/:id/progress", requireUser, (req, res) => {
+app.delete("/api/mock-tests/:id/progress", requireUser, requireMockTestAccessApi, (req, res) => {
     try {
         const progress = mockTestStore.clearProgress(req.user.id, req.params.id);
         res.json({ progress });
@@ -5253,7 +5452,7 @@ async function streamMockResultCertificatePdf(req, res, result) {
     doc.end();
 }
 
-app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
+app.post("/api/mock-tests/:id/submit", requireUser, requireMockTestAccessApi, async (req, res) => {
     try {
         const mockTest = mockTestStore.getTest(req.params.id, { includeDraft: true });
         const scoringTest = mockTest ? await buildMockScoringTest(mockTest) : null;
@@ -5270,7 +5469,7 @@ app.post("/api/mock-tests/:id/submit", requireUser, async (req, res) => {
     }
 });
 
-app.get("/api/mock-tests/:id/latest-result", requireUser, async (req, res) => {
+app.get("/api/mock-tests/:id/latest-result", requireUser, requireMockTestAccessApi, async (req, res) => {
     const result = mockTestStore.latestResult(req.user.id, req.params.id);
 
     if (!result) {
@@ -5281,7 +5480,7 @@ app.get("/api/mock-tests/:id/latest-result", requireUser, async (req, res) => {
     res.json({ result: mappedResult });
 });
 
-app.get("/api/mock-test-results/:id/pdf", requireUser, async (req, res) => {
+app.get("/api/mock-test-results/:id/pdf", requireUser, requirePremiumFeatureApi("pdfResults"), async (req, res) => {
     try {
         const result = mockTestStore.resultById(req.user.id, req.params.id);
 
@@ -5310,12 +5509,101 @@ app.get("/api/mock-test-results/:id", requireUser, async (req, res) => {
         return res.status(404).json({ error: "Mock test result not found" });
     }
 
+    const test = mockTestStore.getTest(result.testId, { includeDraft: true, requireComplete: false });
+    if (test && !canAccessMockTest(req, test)) {
+        return premiumMockTestApiResponse(res);
+    }
+    if (!test && !canAccessSubscriptionFeature(req.user, "detailedBandFeedback")) {
+        return requirePremiumFeatureApi("detailedBandFeedback")(req, res, () => {});
+    }
+
     const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
     res.json({ result: mappedResult });
 });
 
 app.get("/api/profile/mock-tests", requireUser, (req, res) => {
     res.json(mockTestStore.profileSummary(req.user.id));
+});
+
+function manualPaymentResponse(request) {
+    if (!request) return null;
+    return {
+        id: String(request._id || request.id),
+        userId: String(request.userId || ""),
+        userEmail: request.userEmail || "",
+        userName: request.userName || "",
+        planId: request.planId,
+        planName: request.planName,
+        amount: request.amount,
+        currency: request.currency || "UZS",
+        paymentMethod: request.paymentMethod || "manual_card",
+        status: request.status || "pending",
+        cardLastFour: request.cardLastFour || "0011",
+        createdAt: request.createdAt || null,
+        updatedAt: request.updatedAt || null,
+        verifiedAt: request.verifiedAt || null,
+        verifiedBy: request.verifiedBy ? String(request.verifiedBy) : null,
+        rejectedAt: request.rejectedAt || null,
+        rejectedBy: request.rejectedBy ? String(request.rejectedBy) : null,
+        adminNote: request.adminNote || ""
+    };
+}
+
+app.post("/api/premium/manual-payment-requests", requireUser, async (req, res) => {
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: "Manual payment requests require the database connection" });
+        }
+
+        const userId = String(req.user?.id || "");
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ error: "A valid account is required" });
+        }
+
+        const planId = String(req.body?.planId || "").trim();
+        const plan = premiumPlans[planId];
+        if (!plan) {
+            return res.status(400).json({ error: "A valid Premium plan is required" });
+        }
+
+        const duplicateSince = new Date(Date.now() - MANUAL_PAYMENT_DUPLICATE_WINDOW_MS);
+        const existing = await ManualPaymentRequest.findOne({
+            userId,
+            planId,
+            status: "pending",
+            createdAt: { $gte: duplicateSince }
+        }).sort({ createdAt: -1 });
+
+        if (existing) {
+            return res.json({
+                success: true,
+                duplicate: true,
+                request: manualPaymentResponse(existing)
+            });
+        }
+
+        const request = await ManualPaymentRequest.create({
+            userId,
+            userEmail: String(req.user.email || "").trim().toLowerCase(),
+            userName: String(req.user.name || req.user.username || "").trim(),
+            planId,
+            planName: plan.name,
+            amount: plan.price,
+            currency: "UZS",
+            paymentMethod: "manual_card",
+            status: "pending",
+            cardLastFour: "0011"
+        });
+
+        res.status(201).json({
+            success: true,
+            duplicate: false,
+            request: manualPaymentResponse(request)
+        });
+    } catch (error) {
+        console.error("Manual payment request error:", error);
+        res.status(500).json({ error: "Could not create manual payment request" });
+    }
 });
 
 app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), (req, res) => {
@@ -5455,6 +5743,8 @@ registerFullTestRoutes(app, {
 registerWritingRoutes(app, {
     requireAuth,
     requireAdmin,
+    requirePremiumWriting: requirePremiumFeatureApi("writing"),
+    requirePremiumWritingOrMockAccess: requirePremiumFeatureOrMockAccessApi("writing"),
     listeningImageUpload,
     getMockWritingFullTest: buildMockWritingFullTest
 });
@@ -5462,6 +5752,8 @@ registerWritingRoutes(app, {
 registerSpeakingRoutes(app, {
     requireAuth,
     requireAdmin,
+    requirePremiumSpeaking: requirePremiumFeatureApi("speaking"),
+    requirePremiumSpeakingOrMockAccess: requirePremiumFeatureOrMockAccessApi("speaking"),
     uploadsRoot: UPLOAD_DIR,
     safeFileName,
     getMockSpeakingTests: buildMockSpeakingFullTests
@@ -5931,6 +6223,143 @@ app.get("/api/admin/stats", requireAdmin, async (req, res) => {
     }
 });
 
+app.get("/api/admin/manual-payments", requireAuth, adminOnly, async (req, res) => {
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.json([]);
+        }
+
+        const status = String(req.query.status || "").trim();
+        const query = {};
+        if (["pending", "verified", "rejected", "cancelled"].includes(status)) {
+            query.status = status;
+        }
+
+        const requests = await ManualPaymentRequest.find(query)
+            .sort({ createdAt: -1 })
+            .limit(100)
+            .lean();
+
+        res.json(requests.map(manualPaymentResponse));
+    } catch (error) {
+        console.error("Manual payments list error:", error);
+        res.status(500).json({ error: "Could not load manual payment requests" });
+    }
+});
+
+app.put("/api/admin/manual-payments/:id/verify", requireAuth, adminOnly, async (req, res) => {
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: "Manual payment verification requires the database connection" });
+        }
+
+        const requestId = String(req.params.id || "");
+        if (!mongoose.Types.ObjectId.isValid(requestId)) {
+            return res.status(400).json({ error: "Invalid payment request" });
+        }
+
+        const pendingRequest = await ManualPaymentRequest.findById(requestId);
+        if (!pendingRequest) {
+            return res.status(404).json({ error: "Payment request not found" });
+        }
+        if (pendingRequest.status !== "pending") {
+            return res.status(409).json({ error: "This payment request has already been processed" });
+        }
+
+        const plan = premiumPlans[pendingRequest.planId];
+        if (!plan) {
+            return res.status(400).json({ error: "Payment request plan is no longer valid" });
+        }
+
+        const user = await userStore.findUserById(String(pendingRequest.userId));
+        if (!user) {
+            return res.status(404).json({ error: "Payment request user not found" });
+        }
+
+        const verifiedRequest = await ManualPaymentRequest.findOneAndUpdate(
+            { _id: requestId, status: "pending" },
+            {
+                $set: {
+                    status: "verified",
+                    verifiedAt: new Date(),
+                    verifiedBy: req.user.id,
+                    adminNote: String(req.body?.adminNote || "").trim().slice(0, 500)
+                }
+            },
+            { new: true }
+        );
+
+        if (!verifiedRequest) {
+            return res.status(409).json({ error: "This payment request has already been processed" });
+        }
+
+        const startDate = new Date();
+        const expiryDate = new Date(startDate.getTime() + plan.durationDays * 86400000);
+        const updatedUser = await userStore.updateUser(String(pendingRequest.userId), {
+            plan: "premium",
+            isPremium: true,
+            premiumUntil: expiryDate,
+            premiumActivatedAt: startDate,
+            premiumExpiresAt: expiryDate,
+            premiumCancelledAt: null,
+            subscriptionPlan: plan.id,
+            subscriptionStatus: "active",
+            subscriptionStartedAt: startDate,
+            subscriptionExpiresAt: expiryDate,
+            subscriptionAdminNote: String(req.body?.adminNote || `Verified manual card payment ${verifiedRequest._id}`).trim().slice(0, 500)
+        });
+
+        res.json({
+            success: true,
+            request: manualPaymentResponse(verifiedRequest),
+            user: publicUser(updatedUser)
+        });
+    } catch (error) {
+        console.error("Manual payment verify error:", error);
+        res.status(500).json({ error: "Could not verify manual payment" });
+    }
+});
+
+app.put("/api/admin/manual-payments/:id/reject", requireAuth, adminOnly, async (req, res) => {
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: "Manual payment rejection requires the database connection" });
+        }
+
+        const requestId = String(req.params.id || "");
+        if (!mongoose.Types.ObjectId.isValid(requestId)) {
+            return res.status(400).json({ error: "Invalid payment request" });
+        }
+
+        const rejectedRequest = await ManualPaymentRequest.findOneAndUpdate(
+            { _id: requestId, status: "pending" },
+            {
+                $set: {
+                    status: "rejected",
+                    rejectedAt: new Date(),
+                    rejectedBy: req.user.id,
+                    adminNote: String(req.body?.adminNote || "").trim().slice(0, 500)
+                }
+            },
+            { new: true }
+        );
+
+        if (!rejectedRequest) {
+            const existing = await ManualPaymentRequest.findById(requestId);
+            if (!existing) return res.status(404).json({ error: "Payment request not found" });
+            return res.status(409).json({ error: "This payment request has already been processed" });
+        }
+
+        res.json({
+            success: true,
+            request: manualPaymentResponse(rejectedRequest)
+        });
+    } catch (error) {
+        console.error("Manual payment reject error:", error);
+        res.status(500).json({ error: "Could not reject manual payment" });
+    }
+});
+
 app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
     try {
         const pagination = paginationParams(req, { defaultLimit: 50, maxLimit: 100 });
@@ -5942,7 +6371,7 @@ app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
         const formatted = result.items.map((user) => {
             const email = String(user.email || "").trim().toLowerCase();
             const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
-            const isPremium = !!user.isPremium;
+            const isPremium = hasPremiumAccess(publicUser(user));
             return {
                 id: String(user._id || user.id),
                 memberIdNumber: user.memberIdNumber || null,
@@ -5954,6 +6383,11 @@ app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
                 plan: user.plan || "free",
                 isPremium: isPremium,
                 premiumUntil: user.premiumUntil || null,
+                subscriptionPlan: user.subscriptionPlan || null,
+                subscriptionStatus: isPremium ? "active" : (user.subscriptionStatus || "free"),
+                subscriptionStartedAt: user.subscriptionStartedAt || null,
+                subscriptionExpiresAt: user.subscriptionExpiresAt || user.premiumUntil || null,
+                subscriptionAdminNote: user.subscriptionAdminNote || "",
                 createdAt: user.createdAt || null,
                 lastLogin: user.lastLogin || null
             };
@@ -5967,6 +6401,56 @@ app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Could not load admin users" });
+    }
+});
+
+app.put("/api/admin/users/:id/subscription", requireAuth, adminOnly, async (req, res) => {
+    try {
+        const planId = String(req.body?.planId || "").trim();
+        const cancel = req.body?.status === "cancelled";
+        const plan = premiumPlans[planId];
+        if (!cancel && !plan) return res.status(400).json({ error: "A valid Premium plan is required" });
+
+        const existingUser = await userStore.findUserById(req.params.id);
+        if (!existingUser) return res.status(404).json({ error: "User not found" });
+
+        const startDate = new Date(req.body?.startDate || Date.now());
+        if (Number.isNaN(startDate.getTime())) return res.status(400).json({ error: "A valid start date is required" });
+        const now = new Date();
+        const expiryDate = cancel
+            ? now
+            : new Date(req.body?.expiryDate || (startDate.getTime() + plan.durationDays * 86400000));
+        if (Number.isNaN(expiryDate.getTime())) return res.status(400).json({ error: "A valid expiry date is required" });
+
+        const updates = cancel ? {
+            plan: "free",
+            isPremium: false,
+            premiumUntil: expiryDate,
+            premiumExpiresAt: expiryDate,
+            premiumCancelledAt: now,
+            subscriptionPlan: null,
+            subscriptionStatus: "cancelled",
+            subscriptionExpiresAt: expiryDate,
+            subscriptionAdminNote: String(req.body?.note || "").trim().slice(0, 500)
+        } : {
+            plan: "premium",
+            isPremium: true,
+            premiumUntil: expiryDate,
+            premiumActivatedAt: startDate,
+            premiumExpiresAt: expiryDate,
+            premiumCancelledAt: null,
+            subscriptionPlan: planId,
+            subscriptionStatus: "active",
+            subscriptionStartedAt: startDate,
+            subscriptionExpiresAt: expiryDate,
+            subscriptionAdminNote: String(req.body?.note || "").trim().slice(0, 500)
+        };
+        const user = await userStore.updateUser(req.params.id, updates);
+        if (!user) return res.status(404).json({ error: "User not found" });
+        res.json({ success: true, user: publicUser(user) });
+    } catch (error) {
+        console.error("Subscription management error:", error);
+        res.status(500).json({ error: "Could not update subscription" });
     }
 });
 

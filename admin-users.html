@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="dark-theme">
 
 <head>
@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/admin.css?v=20260702-plus-jakarta-sans">
-    <link rel="stylesheet" href="/admin-users.css">
+    <link rel="stylesheet" href="/admin-users.css?v=20260713-manual-payments">
+    <link rel="stylesheet" href="/premium.css?v=20260713-access-rules">
 </head>
 
 <body class="admin-page dark-theme" data-skip-global-navbar>
@@ -76,10 +77,10 @@
                     <input type="text" id="searchInput" placeholder="Search by username, name, email...">
                 </div>
                 <div class="filter-group">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="free">Free</button>
-                    <button class="filter-btn" data-filter="premium">Premium</button>
-                    <button class="filter-btn" data-filter="admin">Admin</button>
+                    <button class="filter-btn active" data-filter="all">All users</button>
+                    <button class="filter-btn" data-filter="free">Free users</button>
+                    <button class="filter-btn" data-filter="active">Active Premium</button>
+                    <button class="filter-btn" data-filter="expired">Expired Premium</button>
                 </div>
             </div>
 
@@ -92,6 +93,8 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Plan</th>
+                            <th>Subscription Status</th>
+                            <th>Expiry Date</th>
                             <th>Registered Date</th>
                             <th>Last Login</th>
                             <th>Actions</th>
@@ -99,7 +102,7 @@
                     </thead>
                     <tbody id="usersTableBody">
                         <tr>
-                            <td colspan="8" class="table-loading">Loading users...</td>
+                            <td colspan="10" class="table-loading">Loading users...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -107,11 +110,64 @@
             
             <p id="usersStatus" class="status-text" hidden></p>
         </section>
+
+        <section class="admin-card manual-payments-card">
+            <div class="users-toolbar">
+                <div>
+                    <h2 class="admin-section-title">Manual Payments</h2>
+                    <p class="admin-help">Verify local-card Premium payments after checking the Telegram receipt.</p>
+                </div>
+                <button class="btn-action" type="button" id="refreshManualPayments">Refresh</button>
+            </div>
+            <div class="table-container">
+                <table class="users-table manual-payments-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Selected plan</th>
+                            <th>Amount</th>
+                            <th>Request date</th>
+                            <th>Status</th>
+                            <th>Admin note</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manualPaymentsTableBody">
+                        <tr>
+                            <td colspan="8" class="table-loading">Loading manual payments...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="manualPaymentsStatus" class="status-text" hidden></p>
+        </section>
     </main>
 
+    <div class="subscription-admin-modal" id="subscriptionAdminModal" hidden>
+        <div class="subscription-admin-modal__backdrop" data-manage-close></div>
+        <section class="subscription-admin-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="manageSubscriptionTitle">
+            <button class="subscription-admin-modal__close" type="button" data-manage-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            <span class="admin-kicker">PREMIUM MANAGEMENT</span>
+            <h2 id="manageSubscriptionTitle">Manage Subscription</h2>
+            <p id="manageSubscriptionUser" class="manage-user-label"></p>
+            <form id="manageSubscriptionForm">
+                <input type="hidden" id="manageUserId">
+                <label>Current plan<input id="manageCurrentPlan" type="text" readonly></label>
+                <label>New plan<select id="managePlan" required></select></label>
+                <div class="manage-date-grid"><label>Start date<input id="manageStartDate" type="date" required></label><label>Expiry date<input id="manageExpiryDate" type="date" required></label></div>
+                <label>Optional admin note<textarea id="manageNote" rows="3" maxlength="500"></textarea></label>
+                <p id="manageSubscriptionStatus" class="status-text" hidden></p>
+                <div class="manage-modal-actions"><button class="btn-action btn-action--primary" type="submit">Grant Premium</button><button class="btn-action" type="button" data-manage-cancel>Cancel Subscription</button><button class="btn-action" type="button" data-manage-close>Close</button></div>
+            </form>
+        </section>
+    </div>
+
     <!-- Global Auth Script & User Panel scripts -->
-    <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
-    <script src="/admin-users.js"></script>
+    <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
+    <script src="/auth-client.js?v=20260713-header-profile-v1"></script>
+    <script src="/admin-users.js?v=20260713-premium-access-v2"></script>
 </body>
 
 </html>
+

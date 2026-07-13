@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/admin.css?v=20260702-plus-jakarta-sans">
-    <link rel="stylesheet" href="/admin-writing.css?v=20260702-plus-jakarta-sans">
+    <link rel="stylesheet" href="/admin-writing.css?v=20260713-premium-test-access-v1">
 </head>
 
 <body class="admin-page admin-writing-page" data-skip-global-navbar>
@@ -265,6 +265,11 @@
                         </select>
                     </label>
 
+                    <label class="admin-writing-field admin-writing-check-field">
+                        <input id="builderIsPremium" type="checkbox">
+                        <span>Premium test</span>
+                    </label>
+
                     <div class="admin-writing-modal-actions">
                         <button class="admin-writing-light-btn" id="cancelBuilderBtn" type="button">Cancel</button>
                         <button class="admin-writing-primary-btn" type="submit">Save Writing Test</button>
@@ -313,8 +318,10 @@
 
     <div class="admin-writing-toast is-hidden" id="writingToast" role="status" aria-live="polite"></div>
 
-    <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
-    <script src="/admin-writing.js?v=1.0.0"></script>
+    <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
+    <script src="/auth-client.js?v=20260713-header-profile-v1"></script>
+    <script src="/admin-writing.js?v=20260713-premium-test-access-v1"></script>
 </body>
 
 </html>
+

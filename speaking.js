@@ -69,6 +69,34 @@
     const EXAM_VOICE_MIN_SPEECH_MS = 220;
     const EXAM_VOICE_LEVEL_THRESHOLD = 0.018;
 
+    function hasActivePremium(user) {
+        if (window.IELTSXPremium?.hasPremiumAccess) {
+            return window.IELTSXPremium.hasPremiumAccess(user);
+        }
+        if (!user || user.isPremium !== true) return false;
+        const expiresAt = user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil;
+        if (!expiresAt) return true;
+        const expiry = new Date(expiresAt);
+        return !Number.isNaN(expiry.getTime()) && expiry.getTime() > Date.now();
+    }
+
+    async function canOpenPremiumSpeakingMode() {
+        const authClient = window.authClient;
+        const cachedUser = authClient?.getAuth?.()?.user;
+        if (hasActivePremium(cachedUser)) return true;
+
+        try {
+            const session = await authClient?.fetchAuthMe?.();
+            return hasActivePremium(session?.data?.user);
+        } catch {
+            return false;
+        }
+    }
+
+    function openSpeakingPremiumLock() {
+        window.location.href = "/speaking/player?mode=exam";
+    }
+
     const sectionMeta = {
         part1: {
             route: "/speaking/part1",
@@ -1195,7 +1223,7 @@
         const error = state.introError
             ? `<div class="speaking-landing__error">${escapeHtml(state.introError)}</div>`
             : "";
-        const freeButtonText = state.loading && state.startingSpeakingMode === "free" ? "Opening practice..." : "Free Speaking Practice";
+        const freeButtonText = state.loading && state.startingSpeakingMode === "free" ? "Opening practice..." : "Speaking Practice";
         const examButtonText = state.loading && state.startingSpeakingMode === "exam" ? "Opening simulation..." : "IELTS Exam Simulation";
         return `
             <section class="speaking-landing" aria-labelledby="speakingLandingTitle">
@@ -1214,7 +1242,7 @@
                         <div class="speaking-landing__chips" aria-label="Speaking practice features">
                             <div class="speaking-landing__chip">
                                 ${lucideIcon("mic", "speaking-landing__chip-icon")}
-                                <span><strong>Free Talk</strong><small>Default mode</small></span>
+                                <span><strong>Voice Practice</strong><small>Premium mode</small></span>
                             </div>
                             <div class="speaking-landing__chip">
                                 ${lucideIcon("sparkles", "speaking-landing__chip-icon")}
@@ -1245,6 +1273,10 @@
     async function startSpeakingFromIntro(mode = "free") {
         if (state.loading) return;
         const nextMode = normalizeSpeakingMode(mode);
+        if (!(await canOpenPremiumSpeakingMode())) {
+            openSpeakingPremiumLock();
+            return;
+        }
         state.loading = true;
         state.startingSpeakingMode = nextMode;
         state.introError = "";
@@ -2128,7 +2160,7 @@
         const cueSeed = getConversationCueCard();
         const isFreeMode = state.speakingMode !== "exam";
         const idleMessage = isFreeMode
-            ? "Tap the microphone to start Free Speaking Practice."
+            ? "Tap the microphone to start Speaking Practice."
             : (isSpeakingMockMode ? "Your IELTS Speaking test is starting." : "Click Start Speaking Test once. The examiner will guide the rest.");
         return {
             answers: [],
@@ -2194,7 +2226,7 @@
         if (phase === FREE_VOICE_STATE.USER_SPEAKING) return "Listening to you...";
         if (phase === FREE_VOICE_STATE.PROCESSING) return "Thinking...";
         if (phase === FREE_VOICE_STATE.AI_SPEAKING) return "AI is speaking...";
-        return "Tap the microphone to start Free Speaking Practice.";
+        return "Tap the microphone to start Speaking Practice.";
     }
 
     function setFreeVoicePhase(flow, phase, status = "") {
@@ -2578,7 +2610,7 @@
 
     function resetFreeVoiceFlow(flow) {
         if (!flow || !isFreeVoiceFlow(flow)) return;
-        const idleMessage = "Tap the microphone to start Free Speaking Practice.";
+        const idleMessage = "Tap the microphone to start Speaking Practice.";
         flow.answers = [];
         flow.history = [];
         flow.started = false;
@@ -3379,7 +3411,7 @@
             part: flow.speakingMode === "free" ? 0 : Number(recording.scope.part || flow.part || 1),
             questionIndex: Number(recording.scope.questionIndex || 0),
             questionTotal: Number(recording.scope.questionTotal || 0),
-            title: flow.speakingMode === "free" ? "Free Speaking Practice" : `Part ${Number(recording.scope.part || flow.part || 1)}`,
+            title: flow.speakingMode === "free" ? "Speaking Practice" : `Part ${Number(recording.scope.part || flow.part || 1)}`,
             topic: Number(recording.scope.part || flow.part || 1) === 1
                 ? (state.test?.part1Topics || []).find((item) => (item.questions || []).includes(recording.scope.questionText))?.topic || "Introduction and interview"
                 : (state.test?.topic || flow.cueCard?.topic || "IELTS Speaking"),
@@ -3603,7 +3635,7 @@
             if (flow.phase === FREE_VOICE_STATE.USER_SPEAKING) return "Listening to you...";
             if (flow.phase === FREE_VOICE_STATE.LISTENING || flow.listenStarting) return "Listening...";
             if (flow.phase === "failed") return flow.status || "Connection failed. Please try again.";
-            return flow.status || "Tap the microphone to start Free Speaking Practice.";
+            return flow.status || "Tap the microphone to start Speaking Practice.";
         }
         if (state.feedback) return isFreeVoiceFlow(flow) ? "Ready" : "Speaking test completed";
         if (state.error) return state.error;
@@ -3846,7 +3878,7 @@
         const message = !isFreeMode && Number(flow.part) === 2 && (flow.phase === "preparing" || flow.examPhase === "prep")
             ? "Prepare your cue card answer."
             : (flow.latestQuestion || flow.currentExaminerMessage || "Tap the microphone to begin.");
-        const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : (isSpeakingMockMode ? "IELTSX Mock Test Speaking" : "IELTS Speaking Test");
+        const playerBadge = flow.speakingMode === "free" ? "Speaking Practice" : (isSpeakingMockMode ? "IELTSX Mock Test Speaking" : "IELTS Speaking Test");
         const freeSessionActive = isFreeVoiceSessionActive(flow);
         const feedbackRetryAvailable = !isFreeMode && flow.phase === "feedback-failed";
         const micDisabled = isFreeMode

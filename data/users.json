@@ -8,8 +8,19 @@
     "createdAt": "2026-05-18T17:52:27.331Z",
     "role": "admin",
     "password": "$2b$10$nvPK/bapfm/CLZpugjjmJeqnf6ZwZQlPkio0ZnvUw5cQMWIx1rCJu",
-    "lastLogin": "2026-07-06T11:53:24.878Z",
+    "lastLogin": "2026-07-13T06:20:23.646Z",
     "name": "Xoshimov",
-    "testTakerId": "001"
+    "testTakerId": "001",
+    "plan": "free",
+    "isPremium": false,
+    "premiumUntil": null,
+    "premiumActivatedAt": null,
+    "premiumExpiresAt": null,
+    "premiumCancelledAt": "2026-07-13T00:00:00.000Z",
+    "subscriptionPlan": null,
+    "subscriptionStatus": "cancelled",
+    "subscriptionStartedAt": null,
+    "subscriptionExpiresAt": "2026-07-13T00:00:00.000Z",
+    "subscriptionAdminNote": ""
   }
 ]

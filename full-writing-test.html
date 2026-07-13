@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Writing Test Player - IELTSX</title>
-    <link rel="stylesheet" href="/site-modern.css?v=20260712-free-dark-v5">
+    <link rel="stylesheet" href="/site-modern.css?v=20260713-premium-test-access-v1">
     <link class="ieltsx-theme-css" rel="stylesheet" href="/reading-cbt.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/exam-navbar.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
@@ -1376,7 +1376,8 @@
         <img id="task1ModalImage" alt="Task 1 Visual Diagram">
     </div>
 
-    <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
+    <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
+    <script src="/auth-client.js?v=20260713-header-profile-v1"></script>
     <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
@@ -1743,7 +1744,11 @@
                     // Sort by createdAt descending just in case the backend sorting isn't deterministic
                     data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-                    listEl.innerHTML = data.map((item, index) => `
+                    listEl.innerHTML = data.map((item, index) => {
+                        const isPremium = item.isPremium === true;
+                        const badgeClass = isPremium ? 'test-card-badge--premium' : 'test-card-badge--free';
+                        const badgeLabel = isPremium ? 'PREMIUM' : 'FREE';
+                        return `
                         <a class="reading-test-list-card writing-test-card" href="?id=${item._id}">
                             <div class="test-card-top">
                                 <span class="test-card-icon" aria-hidden="true">
@@ -1752,7 +1757,7 @@
                                         <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>
                                     </svg>
                                 </span>
-                                <span class="test-card-badge test-card-badge--free">FREE</span>
+                                <span class="test-card-badge ${badgeClass}">${badgeLabel}</span>
                             </div>
                             <div class="test-card-content">
                                 <h2>Test ${index + 1}</h2>
@@ -1764,7 +1769,8 @@
                             </div>
                             <div class="test-card-button">Start Test <span>-&gt;</span></div>
                         </a>
-                    `).join("");
+                    `;
+                    }).join("");
                 })
                 .catch(err => {
                     console.error(err);
@@ -1793,7 +1799,14 @@
             })
                 .then(async res => {
                     const body = await res.json().catch(() => ({}));
-                    if (!res.ok) throw new Error(body.error || 'Failed to load full test');
+                    if (!res.ok) {
+                        if (body?.error === 'premium_required' || body?.code === 'PREMIUM_REQUIRED') {
+                            sessionStorage.setItem('premiumReturnPath', window.location.pathname + window.location.search);
+                            window.location.href = `/premium-locked.html?type=writing&return=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+                            return new Promise(() => {});
+                        }
+                        throw new Error(body.error || body.message || 'Failed to load full test');
+                    }
                     return body;
                 })
                 .then(test => {
@@ -2254,3 +2267,4 @@
 </body>
 
 </html>
+

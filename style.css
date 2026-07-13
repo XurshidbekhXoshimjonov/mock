@@ -252,8 +252,15 @@ body.auth-page .login-box {
     position: relative;
     z-index: 2;
     box-sizing: border-box;
-    width: min(350px, calc(100% - 32px));
-    margin: clamp(36px, 8vh, 84px) auto 48px;
+    width: min(440px, calc(100% - 40px));
+    margin: clamp(44px, 8vh, 88px) auto 52px;
+    padding: clamp(34px, 4vw, 46px);
+    gap: 22px;
+}
+
+body.auth-page .login-box form {
+    display: grid;
+    gap: 16px;
 }
 
 body.auth-page .login-box form,
@@ -271,6 +278,7 @@ body.auth-page .login-box button[type="submit"],
 body.auth-page .google-btn {
     box-sizing: border-box;
     width: 100%;
+    min-height: 54px;
     -webkit-appearance: none;
     appearance: none;
     touch-action: manipulation;
@@ -287,7 +295,7 @@ body.auth-page .google-btn {
 }
 
 .login-box input{
-    padding:15px;
+    padding:15px 18px;
 
     border:1px solid #d1d5db;
     border-radius:12px;
@@ -298,7 +306,7 @@ body.auth-page .google-btn {
 .login-btn,
 .login-box button[type="submit"],
 #loginBtn {
-    padding:15px;
+    padding:15px 18px;
 
     background:#2563eb;
     color:white;
@@ -404,7 +412,7 @@ body.auth-page .google-btn {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 14px;
+    padding: 14px 18px;
     border: 1px solid #d1d5db;
     border-radius: 12px;
     background: white;
@@ -1052,6 +1060,17 @@ form{
     letter-spacing: 0;
 }
 
+.test-card-badge.test-card-badge--premium {
+    min-height: 38px;
+    padding: 0 18px;
+    border: 0;
+    background: linear-gradient(135deg, #dbeafe, #eef2ff);
+    color: #2555ff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
 .test-card-content {
     display: grid;
     gap: 7px;
@@ -1279,8 +1298,8 @@ form{
     .login-box {
         width: auto;
         max-width: calc(100% - 28px);
-        margin: 72px auto;
-        padding: 28px 18px;
+        margin: 56px auto 36px;
+        padding: 30px 20px;
         border-radius: 20px;
     }
 

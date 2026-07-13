@@ -123,6 +123,7 @@ function bindPageEvents() {
     [
         "builderTitle",
         "builderStatus",
+        "builderIsPremium",
         "task1PromptText",
         "task1Instructions",
         "task1WordLimit",
@@ -246,6 +247,7 @@ function renderTestCard(item) {
                 <span class="admin-writing-card-icon">${getTypeIcon(item.type)}</span>
                 <div class="admin-writing-badges">
                     <span class="admin-writing-badge type">${escapeHtml(TYPE_LABELS[item.type])}</span>
+                    <span class="admin-writing-badge ${item.source?.isPremium === true ? "premium" : "free"}">${item.source?.isPremium === true ? "Premium" : "Free"}</span>
                     <span class="admin-writing-badge ${status}">${escapeHtml(status)}</span>
                 </div>
             </div>
@@ -377,6 +379,7 @@ function openBuilder(type = "task1", item = null) {
     el("builderType").value = item?.type || type;
     el("builderType").disabled = Boolean(item);
     el("builderStatus").value = item?.status || "draft";
+    el("builderIsPremium").checked = item?.source?.isPremium === true;
     el("builderTitle").value = item?.source?.title || "";
     el("builderModalTitle").textContent = item ? "Edit Writing Test" : "Create Writing Test";
 
@@ -391,6 +394,7 @@ function openBuilder(type = "task1", item = null) {
 
 function fillBuilderFromItem(item) {
     if (!item) {
+        el("builderIsPremium").checked = false;
         el("task1WordLimit").value = DEFAULTS.task1.wordLimit;
         el("task1TimeLimit").value = DEFAULTS.task1.timeLimit;
         el("task2WordLimit").value = DEFAULTS.task2.wordLimit;
@@ -487,7 +491,8 @@ async function savePrompt(type, id) {
         visualDiagramUrl,
         wordLimit: Number(isTask1 ? el("task1WordLimit").value : el("task2WordLimit").value),
         timeLimit: Number(isTask1 ? el("task1TimeLimit").value : el("task2TimeLimit").value),
-        status: el("builderStatus").value
+        status: el("builderStatus").value,
+        isPremium: el("builderIsPremium").checked
     };
 
     if (!body.title || !body.promptText) {
@@ -507,7 +512,8 @@ async function saveFullTest(id) {
         task1PromptId: el("fullTask1Select").value,
         task2PromptId: el("fullTask2Select").value,
         timeLimit: Number(el("fullTimeLimit").value),
-        status: el("builderStatus").value
+        status: el("builderStatus").value,
+        isPremium: el("builderIsPremium").checked
     };
 
     if (!body.title || !body.task1PromptId || !body.task2PromptId) {
@@ -533,7 +539,8 @@ async function duplicateItem(item) {
                     task1PromptId: getRefId(source.task1PromptId),
                     task2PromptId: getRefId(source.task2PromptId),
                     timeLimit: source.timeLimit || DEFAULTS.full.timeLimit,
-                    status: "draft"
+                    status: "draft",
+                    isPremium: source.isPremium === true
                 })
             });
         } else {
@@ -550,7 +557,8 @@ async function duplicateItem(item) {
                     visualDiagramUrl: getVisualDiagramUrl(source),
                     wordLimit: source.wordLimit || (source.taskType === "task2" ? DEFAULTS.task2.wordLimit : DEFAULTS.task1.wordLimit),
                     timeLimit: source.timeLimit || (source.taskType === "task2" ? DEFAULTS.task2.timeLimit : DEFAULTS.task1.timeLimit),
-                    status: "draft"
+                    status: "draft",
+                    isPremium: source.isPremium === true
                 })
             });
         }
@@ -643,7 +651,8 @@ function buildPreviewItemFromForm() {
             instructions: el("task1Instructions").value.trim(),
             visualDiagramUrl: el("visualDiagramUrl").value.trim(),
             wordLimit: Number(el("task1WordLimit").value) || DEFAULTS.task1.wordLimit,
-            timeLimit: Number(el("task1TimeLimit").value) || DEFAULTS.task1.timeLimit
+            timeLimit: Number(el("task1TimeLimit").value) || DEFAULTS.task1.timeLimit,
+            isPremium: el("builderIsPremium").checked
         });
     }
 
@@ -656,7 +665,8 @@ function buildPreviewItemFromForm() {
             promptText: el("task2PromptText").value.trim(),
             questionType: el("task2QuestionType").value,
             wordLimit: Number(el("task2WordLimit").value) || DEFAULTS.task2.wordLimit,
-            timeLimit: Number(el("task2TimeLimit").value) || DEFAULTS.task2.timeLimit
+            timeLimit: Number(el("task2TimeLimit").value) || DEFAULTS.task2.timeLimit,
+            isPremium: el("builderIsPremium").checked
         });
     }
 
@@ -666,7 +676,8 @@ function buildPreviewItemFromForm() {
         title,
         task1PromptId: findPromptById(el("fullTask1Select").value),
         task2PromptId: findPromptById(el("fullTask2Select").value),
-        timeLimit: Number(el("fullTimeLimit").value) || DEFAULTS.full.timeLimit
+        timeLimit: Number(el("fullTimeLimit").value) || DEFAULTS.full.timeLimit,
+        isPremium: el("builderIsPremium").checked
     });
 }
 

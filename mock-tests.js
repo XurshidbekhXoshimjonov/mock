@@ -32,7 +32,9 @@ async function loadMockTests() {
         return;
     }
 
-    mockTestsList.innerHTML = tests.map((test) => `
+    mockTestsList.innerHTML = tests.map((test) => {
+        const isPremium = test.isPremium === true || String(test.access || "").toLowerCase() === "premium";
+        return `
         <a class="test-card mock-test-card" href="${escapeHtml(mockIntroUrl(test.openUrl))}">
             <div class="test-card-top">
                 <span class="test-card-icon" aria-hidden="true">
@@ -43,7 +45,7 @@ async function loadMockTests() {
                         <path d="M18 16l2 2 3-4"></path>
                     </svg>
                 </span>
-                <span class="mock-access-pill free">FREE</span>
+                <span class="mock-access-pill ${isPremium ? "premium" : "free"}">${isPremium ? "PREMIUM" : "FREE"}</span>
             </div>
             <div class="test-card-content">
                 <h2>${escapeHtml(test.title)}</h2>
@@ -54,7 +56,8 @@ async function loadMockTests() {
             </div>
             <div class="test-card-button">Start Mock Test <span>&rarr;</span></div>
         </a>
-    `).join("");
+    `;
+    }).join("");
 }
 
 loadMockTests().catch((error) => {

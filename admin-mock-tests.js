@@ -2,6 +2,7 @@ const mockBuilderForm = document.getElementById("mockBuilderForm");
 const mockTitleInput = document.getElementById("mockTitle");
 const mockNumberInput = document.getElementById("mockNumber");
 const mockStatusInput = document.getElementById("mockStatus");
+const mockPremiumInput = document.getElementById("mockIsPremium");
 const sectionGrid = document.getElementById("sectionGrid");
 const mockAdminStatus = document.getElementById("mockAdminStatus");
 const newMockBtn = document.getElementById("newMockBtn");
@@ -149,6 +150,8 @@ function blankMockTest() {
         testNumber: 1,
         number: 1,
         status: "draft",
+        access: "free",
+        isPremium: false,
         listeningTestId: "",
         readingTestId: "",
         writingTestId: "",
@@ -175,12 +178,15 @@ function applyTestToForm(test) {
         ...test,
         testNumber: Number(test?.testNumber || test?.number) || nextMockNumber(),
         number: Number(test?.testNumber || test?.number) || nextMockNumber(),
-        status: test?.status === "active" ? "active" : "draft"
+        status: test?.status === "active" ? "active" : "draft",
+        access: test?.isPremium === true || String(test?.access || "").toLowerCase() === "premium" ? "premium" : "free",
+        isPremium: test?.isPremium === true || String(test?.access || "").toLowerCase() === "premium"
     };
     activeTest = normalized;
     mockTitleInput.value = normalized.title || "";
     mockNumberInput.value = normalized.testNumber || normalized.number || nextMockNumber();
     mockStatusInput.value = normalized.status;
+    mockPremiumInput.checked = normalized.isPremium === true;
     deleteMockBtn.classList.toggle("is-hidden", !normalized.id);
     renderSectionCards();
 }
@@ -191,7 +197,9 @@ function updateActiveFromForm() {
         title: mockTitleInput.value.trim(),
         testNumber: Number(mockNumberInput.value) || 1,
         number: Number(mockNumberInput.value) || 1,
-        status: mockStatusInput.value === "active" ? "active" : "draft"
+        status: mockStatusInput.value === "active" ? "active" : "draft",
+        access: mockPremiumInput.checked ? "premium" : "free",
+        isPremium: mockPremiumInput.checked
     };
 }
 
@@ -320,6 +328,8 @@ function collectPayload() {
         number: activeTest.number,
         testNumber: activeTest.testNumber,
         status: activeTest.status,
+        access: activeTest.isPremium ? "premium" : "free",
+        isPremium: activeTest.isPremium === true,
         listeningTestId: activeTest.listeningTestId || "",
         readingTestId: activeTest.readingTestId || "",
         writingTestId: activeTest.writingTestId || "",

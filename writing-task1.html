@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Writing Task 1 Player - IELTSX</title>
-    <link rel="stylesheet" href="/site-modern.css?v=20260712-free-dark-v5">
+    <link rel="stylesheet" href="/site-modern.css?v=20260713-premium-test-access-v1">
     <link rel="stylesheet" href="/reading-cbt.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/exam-navbar.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/annotations.css?v=20260701-mock-navbar-buttons-v1">
@@ -1098,9 +1098,10 @@
 
     </div>
 
-    <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
+    <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
+    <script src="/auth-client.js?v=20260713-header-profile-v1"></script>
     <script src="/annotations.js?v=20260701-notes-reading-listening-v1"></script>
-    <script src="/writing-test-card.js?v=20260712-free-badge-v2"></script>
+    <script src="/writing-test-card.js?v=20260713-premium-test-access-v1"></script>
     <script src="/pre-test-start.js?v=1.0.0"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -1353,7 +1354,8 @@
                     listEl.innerHTML = data.map((item, index) => window.WritingTestCard.render({
                         href: `?id=${encodeURIComponent(item._id)}`,
                         index,
-                        task: "task1"
+                        task: "task1",
+                        isPremium: item.isPremium === true
                     })).join("");
                 })
                 .catch(err => {
@@ -1365,9 +1367,17 @@
         // Load Prompt Details
         function loadPromptPlayer(id) {
             fetch(`/api/writing/task1/${id}`)
-                .then(res => {
-                    if (!res.ok) throw new Error('Failed to load prompt');
-                    return res.json();
+                .then(async res => {
+                    const body = await res.json().catch(() => ({}));
+                    if (!res.ok) {
+                        if (body?.error === 'premium_required' || body?.code === 'PREMIUM_REQUIRED') {
+                            sessionStorage.setItem('premiumReturnPath', window.location.pathname + window.location.search);
+                            window.location.href = `/premium-locked.html?type=writing&return=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+                            return new Promise(() => {});
+                        }
+                        throw new Error(body?.message || body?.error || 'Failed to load prompt');
+                    }
+                    return body;
                 })
                 .then(prompt => {
                     currentPrompt = prompt;
@@ -1642,3 +1652,4 @@
 </body>
 
 </html>
+

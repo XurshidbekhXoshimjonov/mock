@@ -410,6 +410,16 @@
     color: var(--writing-amber);
 }
 
+.admin-writing-badge.free {
+    background: #ecfdf3;
+    color: #047857;
+}
+
+.admin-writing-badge.premium {
+    background: #eaf1ff;
+    color: var(--writing-blue);
+}
+
 .admin-writing-test-card h3 {
     font-size: 24px;
 }

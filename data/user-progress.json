@@ -1,238 +1,52 @@
-﻿{
-    "users":  {
-                  "6a22ff78f2a736006bbaf1f8":  {
-                                                   "preferences":  {
-                                                                       "targetBand":  8.5
-                                                                   },
-                                                   "results":  [
-
-                                                               ],
-                                                   "accountActivities":  [
-                                                                             {
-                                                                                 "id":  "1783171147459-efa339",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-07-04T13:19:07.455Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782877812423-ca3975",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-07-01T03:50:12.415Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782823231301-1994af",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-30T12:40:31.297Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782700022672-365db4",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-29T02:27:02.638Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782605530595-65b28b",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-28T00:12:10.586Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782537676545-b8ff71",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-27T05:21:16.542Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782449114127-f66758",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-26T04:45:14.089Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782346360069-a9637c",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-25T00:12:40.067Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782260892547-bfb538",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-24T00:28:12.542Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782182950820-3b38cf",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-23T02:49:10.815Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782092746287-8ada18",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-22T01:45:46.280Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782016352494-5deeb0",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-21T04:32:32.491Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1781916709833-f63b59",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-20T00:51:49.828Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1781779507324-0dc1c0",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-18T10:45:07.290Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1781157814804-b61322",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-11T06:03:34.802Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1780683366194-1b9439",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-05T18:16:06.193Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1780678520352-5ac938",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Account created",
-                                                                                 "occurredAt":  "2026-06-05T16:55:20.351Z"
-                                                                             }
-                                                                         ]
-                                               },
-                  "6a38afb7e6985a9461df87fd":  {
-                                                   "preferences":  {
-                                                                       "targetBand":  null
-                                                                   },
-                                                   "results":  [
-
-                                                               ],
-                                                   "accountActivities":  [
-                                                                             {
-                                                                                 "id":  "1782099896128-e2f925",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-22T03:44:56.125Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782099895517-9137cd",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Account created",
-                                                                                 "occurredAt":  "2026-06-22T03:44:55.514Z"
-                                                                             }
-                                                                         ]
-                                               },
-                  "6a38afe6e6985a9461df87fe":  {
-                                                   "preferences":  {
-                                                                       "targetBand":  null
-                                                                   },
-                                                   "results":  [
-
-                                                               ],
-                                                   "accountActivities":  [
-                                                                             {
-                                                                                 "id":  "1782099943691-119855",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-06-22T03:45:43.687Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782099943035-36379b",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Account created",
-                                                                                 "occurredAt":  "2026-06-22T03:45:43.015Z"
-                                                                             }
-                                                                         ]
-                                               },
-                  "1779126747331-8f56c856":  {
-                                                 "preferences":  {
-                                                                     "targetBand":  8
-                                                                 },
-                                                 "results":  [
-
-                                                             ],
-                                                 "accountActivities":  [
-                                                                           {
-                                                                               "id":  "1783338804886-c31877",
-                                                                               "type":  "account",
-                                                                               "title":  "Signed in",
-                                                                               "occurredAt":  "2026-07-06T11:53:24.884Z"
-                                                                           },
-                                                                           {
-                                                                               "id":  "1782397632957-ab1e69",
-                                                                               "type":  "account",
-                                                                               "title":  "Signed in",
-                                                                               "occurredAt":  "2026-06-25T14:27:12.955Z"
-                                                                           },
-                                                                           {
-                                                                               "id":  "1782263173497-64042d",
-                                                                               "type":  "account",
-                                                                               "title":  "Signed in",
-                                                                               "occurredAt":  "2026-06-24T01:06:13.495Z"
-                                                                           },
-                                                                           {
-                                                                               "id":  "1782191188235-ee0124",
-                                                                               "type":  "account",
-                                                                               "title":  "Signed in",
-                                                                               "occurredAt":  "2026-06-23T05:06:28.231Z"
-                                                                           }
-                                                                       ]
-                                             },
-                  "6a45f53027b222b84255840f":  {
-                                                   "preferences":  {
-                                                                       "targetBand":  null
-                                                                   },
-                                                   "results":  [
-
-                                                               ],
-                                                   "accountActivities":  [
-                                                                             {
-                                                                                 "id":  "1782969651010-2845ef",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-07-02T05:20:51.008Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782969649071-60bc3f",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Account created",
-                                                                                 "occurredAt":  "2026-07-02T05:20:49.065Z"
-                                                                             }
-                                                                         ]
-                                               },
-                  "6a45f61a27b222b842558410":  {
-                                                   "preferences":  {
-                                                                       "targetBand":  null
-                                                                   },
-                                                   "results":  [
-
-                                                               ],
-                                                   "accountActivities":  [
-                                                                             {
-                                                                                 "id":  "1782970015142-a5398c",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Signed in",
-                                                                                 "occurredAt":  "2026-07-02T05:26:55.138Z"
-                                                                             },
-                                                                             {
-                                                                                 "id":  "1782969882320-8cf985",
-                                                                                 "type":  "account",
-                                                                                 "title":  "Account created",
-                                                                                 "occurredAt":  "2026-07-02T05:24:42.315Z"
-                                                                             }
-                                                                         ]
-                                               }
-              }
+{
+  "users": {
+    "1779126747331-8f56c856": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1783923502885-47d6b7",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-07-13T06:18:22.883Z"
+        }
+      ]
+    },
+    "6a5488b2fe2d1f7fb00139a2": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1783924959935-42917c",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-07-13T06:42:39.934Z"
+        },
+        {
+          "id": "1783924914835-8e644f",
+          "type": "account",
+          "title": "Account created",
+          "occurredAt": "2026-07-13T06:41:54.834Z"
+        }
+      ]
+    },
+    "6a22ff78f2a736006bbaf1f8": {
+      "preferences": {
+        "targetBand": null
+      },
+      "results": [],
+      "accountActivities": [
+        {
+          "id": "1783924938303-2ee7b6",
+          "type": "account",
+          "title": "Signed in",
+          "occurredAt": "2026-07-13T06:42:18.302Z"
+        }
+      ]
+    }
+  }
 }

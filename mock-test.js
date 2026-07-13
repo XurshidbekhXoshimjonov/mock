@@ -893,6 +893,11 @@
         console.log("[Full Mock Test] missing sections", diagnostics.missingSections);
 
         if (!response.ok) {
+            if (data?.error === "premium_required" || data?.code === "PREMIUM_REQUIRED") {
+                sessionStorage.setItem("premiumReturnPath", window.location.pathname + window.location.search);
+                window.location.href = `/premium-locked.html?type=mock&return=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+                return new Promise(() => {});
+            }
             const error = new Error(data.error || missingDataMessage);
             error.statusCode = response.status;
             throw error;

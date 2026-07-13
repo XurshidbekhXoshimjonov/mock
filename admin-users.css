@@ -56,6 +56,13 @@
     --btn-action-border: rgba(37, 99, 235, 0.15);
 }
 
+/* Premium subscription management */
+.subscription-status { white-space:nowrap; }
+.btn-action--primary { background:#2563eb!important;color:#fff!important;border-color:#2563eb!important; }
+.subscription-admin-modal[hidden]{display:none}.subscription-admin-modal{position:fixed;inset:0;z-index:4000;display:grid;place-items:center;padding:20px}.subscription-admin-modal__backdrop{position:absolute;inset:0;background:rgba(2,6,23,.72);backdrop-filter:blur(3px)}.subscription-admin-modal__dialog{position:relative;width:min(570px,100%);max-height:calc(100vh - 40px);overflow-y:auto;padding:28px;border:1px solid #334155;border-radius:20px;background:#111827;color:#e5e7eb;box-shadow:0 30px 90px rgba(0,0,0,.45)}.subscription-admin-modal__dialog h2{margin:8px 0 4px;color:#fff}.manage-user-label{margin:0 0 22px;color:#94a3b8;font-size:13px}.subscription-admin-modal__close{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:36px;height:36px;border:1px solid #334155;border-radius:10px;background:#1e293b;color:#fff;cursor:pointer;padding:0}.subscription-admin-modal__close svg{width:18px;height:18px;pointer-events:none}.subscription-admin-modal form{display:grid;gap:15px}.subscription-admin-modal label{display:grid;gap:7px;color:#cbd5e1;font-size:12px;font-weight:700}.subscription-admin-modal input,.subscription-admin-modal select,.subscription-admin-modal textarea{width:100%;border:1px solid #334155;border-radius:10px;background:#0f172a;color:#fff;padding:11px 12px;font:500 13px/1.3 "Plus Jakarta Sans",sans-serif}.manage-date-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.manage-modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}.manage-modal-open{overflow:hidden}.users-table{min-width:1250px}
+.manual-payments-card{margin-top:24px}.admin-section-title{margin:0 0 6px;color:var(--admin-text-primary);font-size:20px}.manual-payments-table{min-width:1120px}.manual-payment-note{width:100%;min-width:180px;border:1px solid var(--input-border);border-radius:10px;background:var(--input-bg);color:var(--input-text);padding:10px 11px;font:500 13px/1.3 "Plus Jakarta Sans",sans-serif}.manual-payment-note:disabled{opacity:.58;cursor:not-allowed}.manual-payment-actions{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.subscription-admin-modal{padding:10px}.subscription-admin-modal__dialog{max-height:calc(100vh - 20px);padding:22px 18px}.manage-date-grid{grid-template-columns:1fr}.manage-modal-actions .btn-action{width:100%}}
+
 body.dark-theme {
     --accent-blue: #3b82f6;
     --accent-indigo: #6366f1;

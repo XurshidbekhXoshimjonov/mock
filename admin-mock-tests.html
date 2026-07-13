@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,7 @@
     <title>Mock Test Builder</title>
     <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
     <link rel="stylesheet" href="/admin.css?v=20260702-plus-jakarta-sans">
-    <link rel="stylesheet" href="/admin-mock-tests.css?v=20260702-plus-jakarta-sans">
+    <link rel="stylesheet" href="/admin-mock-tests.css?v=20260713-premium-test-access-v1">
 </head>
 
 <body class="admin-page mock-builder-admin" data-skip-global-navbar>
@@ -71,6 +71,10 @@
                             <option value="active">Active</option>
                         </select>
                     </label>
+                    <label class="mock-field mock-check-field">
+                        <span>Premium test</span>
+                        <input id="mockIsPremium" type="checkbox">
+                    </label>
                 </div>
                 <p id="mockAdminStatus" class="mock-status-text" role="status" aria-live="polite"></p>
             </section>
@@ -117,8 +121,10 @@
         </div>
     </dialog>
 
-    <script src="/auth-client.js?v=20260704-mobile-navbar-v5"></script>
-    <script src="/admin-mock-tests.js?v=20260625-builder"></script>
+    <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
+    <script src="/auth-client.js?v=20260713-header-profile-v1"></script>
+    <script src="/admin-mock-tests.js?v=20260713-premium-test-access-v1"></script>
 </body>
 
 </html>
+

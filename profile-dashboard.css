@@ -1247,6 +1247,33 @@ body.dark-theme[data-profile-page] *::-webkit-scrollbar-thumb {
     border-color: #08081b !important;
 }
 
+/* Premium subscription settings */
+.candidate-subscription-link { display:inline-flex;align-items:center;gap:8px;margin-left:10px;padding:9px 13px;border:1px solid #dbe3ef;border-radius:12px;color:#2457f5;font-size:13px;font-weight:800;text-decoration:none; }
+.candidate-subscription-link:hover { background:#eef4ff; }
+.subscription-page-shell { width:min(1060px,calc(100% - 40px));min-height:calc(100vh - 72px);margin:0 auto;padding:42px 0 70px; }
+.profile-settings-tabs { display:flex;gap:8px;margin-bottom:18px;padding:6px;border:1px solid #dbe3ef;border-radius:14px;background:#fff;width:max-content;max-width:100%; }
+.profile-settings-tabs a { display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;color:#64748b;font-size:13px;font-weight:800;text-decoration:none; }
+.profile-settings-tabs a.is-active { background:#eef4ff;color:#2457f5; }
+.subscription-summary-card { padding:32px;border:1px solid #dbe3ef;border-radius:24px;background:#fff;box-shadow:0 12px 34px rgba(7,21,71,.06); }
+.subscription-summary-head { display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding-bottom:26px;border-bottom:1px solid #e8edf4; }
+.subscription-summary-icon { display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:#eef4ff;color:#2457f5; }
+.subscription-summary-head span:not(.subscription-status) { color:#2457f5;font-size:11px;font-weight:900;letter-spacing:.11em; }
+.subscription-summary-head h1 { margin:4px 0;color:#091b4f;font-size:30px; }
+.subscription-summary-head p { margin:0;color:#64748b;font-size:14px; }
+.subscription-summary-grid { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:26px 0; }
+.subscription-summary-grid>div { min-width:0;padding:16px;border:1px solid #e5eaf2;border-radius:14px;background:#f9fbfd; }
+.subscription-summary-grid span { display:block;margin-bottom:7px;color:#718096;font-size:11px;font-weight:700; }
+.subscription-summary-grid strong { color:#172554;font-size:14px;overflow-wrap:anywhere; }
+.subscription-summary-actions { display:flex;flex-wrap:wrap;gap:12px; }
+.subscription-primary-action,.subscription-secondary-action { display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:12px;padding:12px 20px;font:800 13px/1 "Plus Jakarta Sans",sans-serif;text-decoration:none;cursor:pointer; }
+.subscription-primary-action { border:1px solid #2457f5;background:#2457f5;color:#fff; }
+.subscription-secondary-action { border:1px solid #d2dae7;background:#fff;color:#334155; }
+.subscription-summary-note { margin:20px 0 0;padding:14px 16px;border-radius:12px;background:#f7f9fc;color:#64748b;font-size:13px;line-height:1.55; }
+@media(max-width:850px){.subscription-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.subscription-page-shell{width:calc(100% - 28px);padding-top:26px}.subscription-summary-card{padding:20px;border-radius:18px}.subscription-summary-head{grid-template-columns:auto 1fr}.subscription-summary-head>.subscription-status{grid-column:1/-1;width:max-content}.subscription-summary-grid{grid-template-columns:1fr}.subscription-summary-actions>*{width:100%}.candidate-subscription-link{margin:0 0 16px}}
+.dark-theme .profile-settings-tabs,.dark-theme .subscription-summary-card,.dark-theme .subscription-summary-grid>div { background:#101827;border-color:#27334b; }
+.dark-theme .subscription-summary-head h1,.dark-theme .subscription-summary-grid strong { color:#f1f5f9; }
+
 /* Candidate profile settings dark theme */
 :is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-main-card,
 :is(body.dark-theme[data-profile-page], html.dark-theme body[data-profile-page]) .candidate-profile-card {

@@ -132,7 +132,7 @@
 
 .mock-meta-grid {
     display: grid;
-    grid-template-columns: minmax(260px, 1.4fr) minmax(160px, 0.7fr) minmax(160px, 0.7fr);
+    grid-template-columns: minmax(260px, 1.4fr) minmax(150px, 0.55fr) minmax(150px, 0.55fr) minmax(150px, 0.55fr);
     gap: 14px;
 }
 
@@ -172,6 +172,18 @@
 .mock-field select:focus {
     border-color: #6366f1;
     box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+.mock-check-field {
+    align-content: end;
+}
+
+.mock-check-field input[type="checkbox"] {
+    width: 46px;
+    min-height: 46px;
+    padding: 0;
+    accent-color: #2555ff;
+    cursor: pointer;
 }
 
 .mock-status-text {

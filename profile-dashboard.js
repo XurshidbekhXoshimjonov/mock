@@ -1825,6 +1825,9 @@
                     ),
                     "Back to dashboard"
                 ),
+                e("a", { href: "/profile/subscription", className: "candidate-subscription-link" },
+                    e(Icon, { name: "settings", className: "h-4 w-4" }), "Subscription"
+                ),
                 e("div", { className: "candidate-profile-header" },
                     e("div", { className: "candidate-profile-icon-badge" },
                         e("svg", { style: { width: "24px", height: "24px" }, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2" },
@@ -2110,6 +2113,62 @@
         });
     }
 
+    function SubscriptionPage({ user }) {
+        const premium = window.IELTSXPremium;
+        const details = premium.getSubscriptionDisplayStatus(user);
+        const dateLabel = (value) => value ? value.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
+        async function cancelSubscription() {
+            if (!window.confirm("Cancel Premium access now? Premium features will be blocked immediately.")) return;
+            try {
+                const auth = window.authClient?.getAuth?.();
+                const response = await fetch("/api/profile/subscription/cancel", {
+                    method: "POST",
+                    credentials: "include",
+                    cache: "no-store",
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...(auth?.token ? { Authorization: `Bearer ${auth.token}` } : {})
+                    },
+                    body: JSON.stringify({ note: "Cancelled from profile subscription page" })
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.error || data.message || "Could not cancel subscription");
+                if (data.user && auth?.token) {
+                    window.authClient?.saveAuth?.({ token: auth.token, user: data.user });
+                }
+                window.location.reload();
+            } catch (error) {
+                window.alert(error.message || "Could not cancel subscription");
+            }
+        }
+        const rows = [
+            ["Current plan", details.planName],
+            ["Subscription status", details.statusLabel],
+            ["Start date", dateLabel(details.startedAt)],
+            ["Expiry date", dateLabel(details.expiresAt)],
+            ["Remaining days", details.remainingDays === null ? "—" : String(details.remainingDays)]
+        ];
+        return e("main", { className: "subscription-page-shell" },
+            e("nav", { className: "profile-settings-tabs", "aria-label": "Profile settings" },
+                e("a", { href: "/profile-settings" }, e(Icon, { name: "user", className: "h-4 w-4" }), "Profile"),
+                e("a", { href: "/profile/subscription", className: "is-active", "aria-current": "page" }, e(Icon, { name: "settings", className: "h-4 w-4" }), "Subscription")
+            ),
+            e("section", { className: "subscription-summary-card" },
+                e("div", { className: "subscription-summary-head" },
+                    e("div", { className: "subscription-summary-icon" }, e(Icon, { name: "award", className: "h-6 w-6" })),
+                    e("div", null, e("span", null, "IELTSX ACCOUNT"), e("h1", null, "Subscription"), e("p", null, "Manage your current IELTSX plan and Premium access.")),
+                    e("span", { className: `subscription-status subscription-status--${details.status}` }, details.statusLabel)
+                ),
+                e("div", { className: "subscription-summary-grid" }, rows.map(([label, value]) => e("div", { key: label }, e("span", null, label), e("strong", null, value)))),
+                e("div", { className: "subscription-summary-actions" },
+                    e("a", { href: "/premium", className: "subscription-primary-action" }, details.isPremium ? "Renew Plan" : "Upgrade Plan"),
+                    details.isPremium && e("button", { type: "button", className: "subscription-secondary-action", onClick: cancelSubscription }, "Cancel Subscription")
+                ),
+                !details.isPremium && e("p", { className: "subscription-summary-note" }, "You are currently on the Free plan. Upgrade to unlock unlimited AI evaluations, complete history, and Premium materials.")
+            )
+        );
+    }
+
     async function boot() {
         let user = null;
         try {
@@ -2218,7 +2277,9 @@
 
         ReactDOM.createRoot(root).render(page === "settings"
             ? e(SettingsPage, { user, stats })
-            : e(Dashboard, { user, stats }));
+            : page === "subscription"
+                ? e(SubscriptionPage, { user })
+                : e(Dashboard, { user, stats }));
         scrollToHashTarget();
     }
 

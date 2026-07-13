@@ -53,6 +53,11 @@ const writingPromptSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         index: true
+    },
+    isPremium: {
+        type: Boolean,
+        default: false,
+        index: true
     }
 }, { 
     timestamps: true 

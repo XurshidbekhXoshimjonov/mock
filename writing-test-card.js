@@ -38,6 +38,8 @@
         const index = Number.isFinite(options?.index) ? options.index : 0;
         const title = options?.title || `Test ${index + 1}`;
         const href = options?.href || "#";
+        const isPremium = options?.isPremium === true;
+        const accessLabel = isPremium ? "PREMIUM" : "FREE";
 
         return `
             <a class="writing-test-card" href="${escapeHtml(href)}">
@@ -45,7 +47,7 @@
                     <span class="test-card-icon" aria-hidden="true">
                         ${documentIcon()}
                     </span>
-                    <span class="test-card-badge test-card-badge--free">FREE</span>
+                    <span class="test-card-badge ${isPremium ? "test-card-badge--premium" : "test-card-badge--free"}">${accessLabel}</span>
                 </div>
                 <div class="test-card-content">
                     <h2>${escapeHtml(title)}</h2>

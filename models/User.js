@@ -98,10 +98,35 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    premiumActivatedAt: {
+        type: Date,
+        default: null
+    },
+    premiumExpiresAt: {
+        type: Date,
+        default: null
+    },
+    premiumCancelledAt: {
+        type: Date,
+        default: null
+    },
     premiumUntil: {
         type: Date,
         default: null
     },
+    subscriptionPlan: {
+        type: String,
+        enum: ["monthly", "threeMonths", "annual", null],
+        default: null
+    },
+    subscriptionStatus: {
+        type: String,
+        enum: ["free", "active", "expired", "cancelled"],
+        default: "free"
+    },
+    subscriptionStartedAt: { type: Date, default: null },
+    subscriptionExpiresAt: { type: Date, default: null },
+    subscriptionAdminNote: { type: String, default: "" },
     authProviders: {
         type: [String],
         default: []

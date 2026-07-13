@@ -98,13 +98,27 @@
             .replace(/'/g, "&#039;");
     }
 
-    function getDisplayName(user) {
-        const name = String(user?.name || user?.username || "").trim();
-        if (name) return name;
+    function isEmailLike(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
 
-        const email = String(user?.email || "").trim();
-        if (email) {
-            return email.split("@")[0] || "User";
+    function getDisplayName(user) {
+        const composedName = [user?.firstName, user?.familyName]
+            .map((part) => String(part || "").trim())
+            .filter(Boolean)
+            .join(" ");
+        const candidates = [
+            user?.name,
+            user?.fullName,
+            composedName,
+            user?.username
+        ];
+
+        for (const candidate of candidates) {
+            const name = String(candidate || "").trim();
+            if (name && !isEmailLike(name)) {
+                return name;
+            }
         }
 
         return "User";
@@ -288,9 +302,11 @@
             return authMeRequest;
         }
 
+        const auth = getAuth();
         authMeRequest = fetch("/api/auth/me", {
             credentials: "include",
-            cache: "no-store"
+            cache: "no-store",
+            headers: auth?.token ? { Authorization: `Bearer ${auth.token}` } : {}
         })
         .then(async (response) => {
             const text = await response.text();
@@ -570,6 +586,12 @@
             box-shadow: 0 10px 22px rgba(7, 21, 71, 0.08);
         }
 
+        .ielts-navbar__menu-toggle svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
         .ielts-navbar__menu-toggle-lines,
         .ielts-navbar__menu-toggle-lines::before,
         .ielts-navbar__menu-toggle-lines::after {
@@ -626,7 +648,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 10px;
+            gap: 8px;
             justify-self: end;
             min-width: 0;
         }
@@ -688,6 +710,18 @@
 
         .ielts-account {
             position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ielts-account::before {
+            content: "";
+            width: 1px;
+            height: 28px;
+            flex: 0 0 1px;
+            border-radius: 999px;
+            background: #e2e8f0;
         }
 
         .ielts-navbar .user-profile,
@@ -701,38 +735,48 @@
         }
 
         .ielts-account__trigger {
-            height: 44px;
-            display: flex;
+            min-height: 48px;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
             max-width: 208px;
             border: 0;
-            border-radius: 999px;
-            background: #f1f6ff;
+            border-radius: 12px;
+            background: transparent;
             color: #0f172a;
             cursor: pointer;
-            padding: 6px 14px 6px 6px;
-            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
-            transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+            padding: 4px 6px;
+            box-shadow: none;
+            transition: background 180ms ease, color 180ms ease, transform 180ms ease;
         }
 
         .ielts-account__trigger:hover {
-            background: #e8f0ff;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
-            transform: translateY(-1px);
+            background: #f6f8fc;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .ielts-account__trigger:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.24);
+            outline-offset: 3px;
         }
 
         .ielts-account__name {
             min-width: 0;
             max-width: 120px;
             overflow: hidden;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 14.5px;
+            font-weight: 700;
             color: #0f172a;
-            line-height: 1;
+            line-height: 1.12;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        .ielts-account__identity { display:grid;min-width:0;gap:4px;text-align:left; }
+        .ielts-account__premium-badge { display:inline-flex;width:max-content;align-items:center;gap:4px;padding:0;border:0;border-radius:0;background:transparent;color:#b77900;font-size:11px;font-weight:600;line-height:1;letter-spacing:0; }
+        .ielts-account__premium-icon { width:13px;height:13px;display:block;object-fit:contain;flex:0 0 13px; }
+        .ielts-account__new { margin-left:auto;padding:3px 6px;border-radius:999px;background:#eaf1ff;color:#2457f5;font-size:9px;font-weight:900;letter-spacing:.06em; }
 
         .navbar-user-name,
         .profile-name,
@@ -766,16 +810,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            flex: 0 0 36px;
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
             border-radius: 999px;
-            background: #06164a;
+            background: linear-gradient(135deg, #06164a 0%, #0b5fff 100%);
             color: #ffffff;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 700;
             line-height: 1;
             text-transform: uppercase;
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.72);
             transition: transform 180ms ease, box-shadow 180ms ease;
         }
 
@@ -789,23 +834,24 @@
         .ielts-account__trigger:hover .ielts-account__avatar,
         .ielts-account.is-open .ielts-account__avatar {
             transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(6, 22, 74, 0.22);
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.82), 0 8px 18px rgba(6, 22, 74, 0.16);
         }
 
         .ielts-account__chevron {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 14px;
-            height: 14px;
-            flex: 0 0 14px;
-            color: #334155;
+            width: 17px;
+            height: 17px;
+            flex: 0 0 17px;
+            margin-left: 2px;
+            color: #475569;
             transition: transform 180ms ease;
         }
 
         .ielts-account__chevron svg {
-            width: 14px;
-            height: 14px;
+            width: 17px;
+            height: 17px;
             display: block;
         }
 
@@ -936,6 +982,8 @@
             color: #ea580c;
         }
 
+        .ielts-account__icon--subscription { border-color:#fde68a;background:#fffbeb;color:#b7791f; }
+
         .ielts-account__icon--logout {
             border-color: #dde3f5;
             background: #eef2ff;
@@ -969,15 +1017,15 @@
             }
 
             .ielts-account__trigger {
-                height: 44px;
+                min-height: 48px;
                 gap: 8px;
-                max-width: 176px;
+                max-width: 190px;
             }
 
             .ielts-account__avatar {
-                width: 36px;
-                height: 36px;
-                flex-basis: 36px;
+                width: 40px;
+                height: 40px;
+                flex-basis: 40px;
             }
         }
 
@@ -1103,24 +1151,27 @@
             }
 
             .ielts-account__trigger {
-                height: 44px;
+                min-height: 48px;
                 min-width: 0;
                 max-width: none;
-                justify-content: flex-start;
+                justify-content: space-between;
                 gap: 10px;
-                padding: 4px 10px;
-                background: #f1f6ff;
-                box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+                padding: 4px 8px;
+                background: transparent;
+                box-shadow: none;
             }
 
             .ielts-account__avatar {
-                width: 36px;
-                height: 36px;
-                flex-basis: 36px;
-                font-size: 14px;
+                width: 42px;
+                height: 42px;
+                flex-basis: 42px;
+                font-size: 18px;
             }
 
-            .ielts-account__name,
+            .ielts-account__identity {
+                display: none;
+            }
+
             .ielts-account__chevron {
                 display: inline-flex;
             }
@@ -1145,8 +1196,8 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: 38px;
-                height: 38px;
+                width: 40px;
+                height: 40px;
                 border: 1px solid #dbe3ef;
                 border-radius: 12px;
                 background: #ffffff;
@@ -1154,7 +1205,7 @@
                 cursor: pointer;
                 transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
                 padding: 0;
-                margin-right: 12px;
+                margin-right: 0;
                 flex-shrink: 0;
             }
             .ielts-theme-toggle:hover {
@@ -1300,6 +1351,10 @@
                 align-items: stretch;
             }
 
+            .ielts-navbar__mobile-menu .ielts-account::before {
+                display: none;
+            }
+
             .ielts-navbar__mobile-menu .ielts-account__dropdown {
                 position: static;
                 display: grid;
@@ -1379,16 +1434,22 @@
                 border-color: rgba(255, 255, 255, 0.25);
             }
             body.dark-theme .ielts-account__trigger {
-                background: #111c3f;
+                background: transparent;
                 color: #f1f5f9;
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+                box-shadow: none;
             }
             body.dark-theme .ielts-account__trigger:hover {
-                background: #172554;
+                background: rgba(255, 255, 255, 0.06);
+            }
+            body.dark-theme .ielts-account::before {
+                background: rgba(226, 232, 240, 0.18);
             }
             body.dark-theme .ielts-account__name,
             body.dark-theme .ielts-account__chevron {
                 color: #f1f5f9;
+            }
+            body.dark-theme .ielts-account__premium-badge {
+                color: #f4c56a;
             }
             body.dark-theme .ielts-navbar .user-profile,
             body.dark-theme .ielts-navbar .navbar-user,
@@ -1396,7 +1457,7 @@
                 color: #f1f5f9;
             }
             body.dark-theme .ielts-account__avatar {
-                background: #06164a;
+                background: linear-gradient(135deg, #06164a 0%, #2563eb 100%);
                 color: #ffffff;
             }
             body.dark-theme .ielts-navbar .user-avatar {
@@ -1471,12 +1532,25 @@
     }
 
     const MENU_ICONS = {
+        menu: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>`,
         admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"></rect></svg>`,
         profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.7"></circle><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"></path></svg>`,
         results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17"></path><path d="M5.5 17.5v-5"></path><path d="M10.5 17.5v-9"></path><path d="M15.5 17.5v-4"></path><path d="M19.5 17.5V6.5"></path></svg>`,
+        subscription: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M7 15h3"></path></svg>`,
         logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 20.5h-4a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h4"></path><path d="M16 16.5 20.5 12 16 7.5"></path><path d="M20.5 12h-11"></path></svg>`,
         chevron: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7.5 5 5 5-5"></path></svg>`
     };
+
+    function hasPremiumAccess(user) {
+        if (window.IELTSXPremium?.hasPremiumAccess) {
+            return window.IELTSXPremium.hasPremiumAccess(user);
+        }
+        if (!user || user.isPremium !== true) return false;
+        const expiresAt = user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil;
+        if (!expiresAt) return true;
+        const expiry = new Date(expiresAt);
+        return !Number.isNaN(expiry.getTime()) && expiry.getTime() > Date.now();
+    }
 
     function renderLoggedInAuth(auth) {
         const user = auth.user || {};
@@ -1486,20 +1560,23 @@
         const hash = String(window.location.hash || "").toLowerCase();
         const profileActive = (path.includes("profile.html") || path.includes("/dashboard")) && hash !== "#results";
         const resultsActive = (path.includes("profile.html") || path.includes("/dashboard")) && hash === "#results";
+        const subscriptionActive = path.includes("/premium") || path.includes("/profile/subscription");
+        const isPremium = hasPremiumAccess(user);
         const adminLink = user.role === "admin"
             ? `<a class="ielts-account__link ielts-account__admin" href="/admin"><span class="ielts-account__icon ielts-account__icon--admin">${MENU_ICONS.admin}</span>Admin Panel</a>`
             : "";
 
         return `
             <div class="ielts-account profile-menu user-profile navbar-user auth-user" id="ieltsAccount">
-                <button class="ielts-account__trigger profile-trigger" id="ieltsAccountTrigger" type="button" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
+                <button class="ielts-account__trigger profile-trigger" id="ieltsAccountTrigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ieltsAccountDropdown" aria-label="${displayName} profile menu">
                     <span class="ielts-account__avatar profile-avatar user-avatar" aria-hidden="true">${initial}</span>
-                    <span class="ielts-account__name profile-name navbar-user-name user-name user-display-name profile-trigger-name">${displayName}</span>
+                    <span class="ielts-account__identity"><span class="ielts-account__name profile-name navbar-user-name user-name user-display-name profile-trigger-name">${displayName}</span>${isPremium ? '<span class="ielts-account__premium-badge"><img class="ielts-account__premium-icon" src="/premium-icons/profile-crown.png?v=20260713-header-profile-v1" alt="" aria-hidden="true">Premium</span>' : ""}</span>
                     <span class="ielts-account__chevron profile-chevron" aria-hidden="true">${MENU_ICONS.chevron}</span>
                 </button>
                 <div class="ielts-account__dropdown profile-dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
                     <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/dashboard"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
+                    <a class="ielts-account__link ${subscriptionActive ? "is-active" : ""}" href="/premium"><span class="ielts-account__icon ielts-account__icon--subscription">${MENU_ICONS.subscription}</span>Subscription<span class="ielts-account__new">NEW</span></a>
                     <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/dashboard#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Dashboard / My Tests</a>
                     <button class="ielts-account__logout logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>
@@ -1705,7 +1782,7 @@
                 </svg>
             </a>
             <button class="ielts-navbar__menu-toggle" id="ieltsNavbarMenuToggle" type="button" aria-expanded="false" aria-controls="ieltsNavbarMobileMenu" aria-label="Open navigation menu">
-                <span class="ielts-navbar__menu-toggle-lines" aria-hidden="true"></span>
+                ${MENU_ICONS.menu}
             </button>
             <div class="ielts-navbar__mobile-menu mobile-menu" id="ieltsNavbarMobileMenu">
                 <nav class="ielts-navbar__links" id="ieltsNavbarLinks" aria-label="Main navigation">
