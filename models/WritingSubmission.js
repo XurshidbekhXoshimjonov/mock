@@ -2,9 +2,13 @@ const mongoose = require("mongoose");
 
 const writingSubmissionSchema = new mongoose.Schema({
     userId: {
+        type: String,
+        required: true
+    },
+    userObjectId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: true
+        default: undefined
     },
     mode: {
         type: String,
@@ -101,6 +105,7 @@ const writingSubmissionSchema = new mongoose.Schema({
 });
 
 writingSubmissionSchema.index({ userId: 1, createdAt: -1 });
+writingSubmissionSchema.index({ userObjectId: 1, createdAt: -1 });
 writingSubmissionSchema.index({ mode: 1, createdAt: -1 });
 writingSubmissionSchema.index({ testType: 1, createdAt: -1 });
 writingSubmissionSchema.index({ task1PromptId: 1, createdAt: -1 });

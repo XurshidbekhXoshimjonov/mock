@@ -3773,9 +3773,9 @@
         `;
     }
 
-    function renderMockVoiceTopbar() {
+    function renderMockVoiceTopbar(isPart2 = false) {
         return `
-            <header class="ai-voice-topbar ai-voice-topbar--exam">
+            <header class="ai-voice-topbar ai-voice-topbar--exam ${isPart2 ? "speaking-part2-header" : ""}">
                 <div class="ai-voice-badge">
                     ${lucideIcon("mic", "ai-voice-badge-icon")}
                     <span>IELTS Speaking Test</span>
@@ -3848,6 +3848,7 @@
             : (flow.latestQuestion || flow.currentExaminerMessage || "Tap the microphone to begin.");
         const playerBadge = flow.speakingMode === "free" ? "Free Speaking Practice" : (isSpeakingMockMode ? "IELTSX Mock Test Speaking" : "IELTS Speaking Test");
         const freeSessionActive = isFreeVoiceSessionActive(flow);
+        const feedbackRetryAvailable = !isFreeMode && flow.phase === "feedback-failed";
         const micDisabled = isFreeMode
             ? false
             : (state.loading || ["mic-permission", "thinking", "feedback", "answer-saved", "moving", "preparing", "examiner-speaking", "paused", "generating-questions"].includes(flow.phase));
@@ -3864,12 +3865,18 @@
                             : flow.phase === "answer-starting" || flow.phase === "user-turn"
                                 ? "Mic active"
                                 : "Please wait");
-        const micIcon = flow.phase === "failed" ? lucideIcon("rotate", "ai-voice-control-icon") : lucideIcon("mic", "ai-voice-control-icon");
+        const micIcon = (flow.phase === "failed" || feedbackRetryAvailable)
+            ? lucideIcon("rotate", "ai-voice-control-icon")
+            : lucideIcon("mic", "ai-voice-control-icon");
+        const micAction = feedbackRetryAvailable ? "voice-retry-feedback" : "voice-mic";
+        const resolvedMicLabel = feedbackRetryAvailable ? "Retry AI Check" : micLabel;
         const endLabel = isFreeMode ? "End session" : "Stop Test";
+        const partNumber = Math.min(3, Math.max(1, Number(flow.part || 1)));
+        const isPart2 = partNumber === 2;
         const topbarMarkup = isSpeakingMockMode
-            ? renderMockVoiceTopbar()
+            ? renderMockVoiceTopbar(isPart2)
             : `
-                <header class="ai-voice-topbar">
+                <header class="ai-voice-topbar ${isPart2 ? "speaking-part2-header" : ""}">
                     <div class="ai-voice-badge">
                         ${lucideIcon("mic", "ai-voice-badge-icon")}
                         <span>${escapeHtml(playerBadge)}</span>
@@ -3881,10 +3888,10 @@
             `;
 
         app.innerHTML = `
-            <section class="ai-speaking-screen ${isSpeakingMockMode ? "ai-speaking-screen--mock" : ""}" data-ai-phase="${escapeHtml(visualPhase)}" aria-label="${escapeHtml(playerBadge)}">
+            <section class="ai-speaking-screen ${isSpeakingMockMode ? "ai-speaking-screen--mock" : ""} ${isPart2 ? "speaking-part2-fullscreen" : ""}" data-ai-phase="${escapeHtml(visualPhase)}" aria-label="${escapeHtml(playerBadge)}">
                 <div class="ai-speaking-bg" aria-hidden="true"></div>
                 ${topbarMarkup}
-                <main class="ai-voice-main" aria-live="polite">
+                <main class="ai-voice-main ${isPart2 ? "speaking-part2-content" : ""}" aria-live="polite">
                     ${isSpeakingMockMode ? renderVoicePartTracker(flow) : ""}
                     ${renderVoiceProgress(flow)}
                     <p class="ai-voice-status">${escapeHtml(voiceStatusText())}</p>
@@ -3901,7 +3908,7 @@
                     </div>
                     ${renderVoiceFeedback()}
                 </main>
-                <div class="ai-voice-controls" aria-label="Speaking controls">
+                <div class="ai-voice-controls ${isPart2 ? "speaking-part2-footer" : ""}" aria-label="Speaking controls">
                     ${!isFreeMode ? `
                     <div class="ai-voice-control-stack">
                         <button class="ai-voice-mic-button" type="button" data-action="voice-repeat" aria-label="Repeat Question" title="Repeat Question" ${isRecording || flow.phase === "preparing" ? "disabled" : ""}>
@@ -3922,10 +3929,10 @@
                         <span>${flow.paused ? "Resume" : "Pause"}</span>
                     </div>` : ""}
                     <div class="ai-voice-control-stack">
-                        <button class="ai-voice-mic-button ${isRecording ? "is-recording" : ""}" type="button" data-action="voice-mic" aria-label="${escapeHtml(micLabel)}" title="${escapeHtml(micLabel)}" ${micDisabled ? "disabled" : ""}>
+                        <button class="ai-voice-mic-button ${isRecording ? "is-recording" : ""}" type="button" data-action="${micAction}" aria-label="${escapeHtml(resolvedMicLabel)}" title="${escapeHtml(resolvedMicLabel)}" ${micDisabled ? "disabled" : ""}>
                             ${micIcon}
                         </button>
-                        <span>${escapeHtml(micLabel)}</span>
+                        <span>${escapeHtml(resolvedMicLabel)}</span>
                     </div>
                     <div class="ai-voice-control-stack">
                         <button class="ai-voice-end-button ${isSpeakingMockMode ? "ai-voice-end-button--mock" : ""}" type="button" data-action="voice-end" aria-label="${escapeHtml(endLabel)}" title="${escapeHtml(endLabel)}">
@@ -4526,6 +4533,11 @@
         } catch (error) {
             console.error("[Mock Speaking] evaluation failed:", error);
             state.error = error.message || "AI feedback failed. Please try again.";
+            if (state.voiceFlow && mode === "full_test") {
+                state.voiceFlow.feedbackRequested = false;
+                state.voiceFlow.phase = "feedback-failed";
+                state.voiceFlow.status = state.error;
+            }
             if (isSpeakingMockMode && mode === "full_test") {
                 const submittedParts = parts || [];
                 const mockParts = aggregateSpeakingPartsForMock(submittedParts);
@@ -4620,6 +4632,7 @@
         const action = target.dataset.action;
         if (action === "select-speaking-mode") startSpeakingFromIntro(target.dataset.mode || "free");
         else if (action === "voice-mic") handleVoiceMicAction();
+        else if (action === "voice-retry-feedback") finishVoiceFlow();
         else if (action === "voice-end") endVoiceFlow();
         else if (action === "voice-repeat") repeatCurrentQuestion();
         else if (action === "voice-finish-answer") finishCurrentAnswer();
