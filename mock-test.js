@@ -35,6 +35,7 @@
     let mockStatus = "not_started";
     let exitModal = null;
     let sectionLoadTimer = null;
+    let mockWritingEvaluationController = null;
     let mockUserProfile = {
         name: "Xurshidbek",
         testTakerId: "001"
@@ -601,9 +602,12 @@
         setLoading(true, "Preparing your final result...");
 
         try {
-            await evaluateWritingForFinalSubmit().catch((error) => {
-                console.warn("[Full Mock Test] Writing evaluation skipped:", error.message);
-            });
+            try {
+                await evaluateWritingForFinalSubmit();
+            } catch (error) {
+                console.warn("[Full Mock Test] Writing evaluation failed:", error?.name || "Error");
+                throw new Error("We could not complete the assessment. Your essay has been saved. Please try again.");
+            }
 
             const response = await fetch(`/api/mock-tests/${encodeURIComponent(mockTest.id)}/submit`, {
                 method: "POST",
@@ -692,18 +696,27 @@
         if (Number(writingPayload.band) > 0 || Number(writingPayload.result?.overallBand) > 0) return;
         if (!task1Response || !task2Response) return;
 
-        const response = await fetch("/api/writing/evaluate-full", {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                fullTestId: `mock-writing-${mockTest.id}`,
-                task1Response,
-                task2Response,
-                testType: "academic-writing-full",
-                timeSpent: Number(writingPayload.timeSpent) || 0
-            })
-        });
+        mockWritingEvaluationController = new AbortController();
+        let response;
+        try {
+            response = await fetch("/api/writing/evaluate-full", {
+                method: "POST",
+                credentials: "include",
+                signal: mockWritingEvaluationController.signal,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    evaluationRequestId: window.crypto?.randomUUID?.()
+                        || `writing_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+                    fullTestId: `mock-writing-${mockTest.id}`,
+                    task1Response,
+                    task2Response,
+                    testType: "academic-writing-full",
+                    timeSpent: Number(writingPayload.timeSpent) || 0
+                })
+            });
+        } finally {
+            mockWritingEvaluationController = null;
+        }
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
             throw new Error(result.error || result.message || "Could not evaluate Writing section");
@@ -717,6 +730,8 @@
         };
         saveLocal();
     }
+
+    window.addEventListener("beforeunload", () => mockWritingEvaluationController?.abort());
 
     function ensureExitModal() {
         if (exitModal) return exitModal;

@@ -1491,6 +1491,7 @@
         let t1WordCount = 0;
         let t2WordCount = 0;
         let isSubmitted = false;
+        let activeEvaluationController = null;
         let activeTab = 'task1';
         let hasStarted = false;
         let testReady = false;
@@ -2216,7 +2217,10 @@
             setSubmitLoading(true);
 
             const timeSpent = (60 * 60) - secondsLeft;
+            const evaluationRequestId = window.crypto?.randomUUID?.()
+                || `writing_${Date.now()}_${Math.random().toString(36).slice(2)}`;
             const payload = {
+                evaluationRequestId,
                 fullTestId,
                 task1Prompt,
                 task1VisualDiagramUrl,
@@ -2229,9 +2233,12 @@
 
             logDevelopment('Writing evaluate-full request payload:', payload);
             document.getElementById('loadingModal').style.display = 'flex';
+            activeEvaluationController = new AbortController();
 
             fetch('/api/writing/evaluate-full', {
                 method: 'POST',
+                credentials: 'include',
+                signal: activeEvaluationController.signal,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -2246,6 +2253,7 @@
                 return body;
             })
             .then(result => {
+                activeEvaluationController = null;
                 document.getElementById('loadingModal').style.display = 'none';
                 setSubmitLoading(false);
 
@@ -2256,13 +2264,16 @@
             })
             .catch(err => {
                 console.error('Writing evaluate-full request failed:', err);
+                activeEvaluationController = null;
                 document.getElementById('loadingModal').style.display = 'none';
                 setSubmitLoading(false);
-                alert(err.message || 'AI evaluation failed. Please try again.');
+                alert('We could not complete the assessment. Your essay has been saved. Please try again.');
                 isSubmitted = false;
                 if (hasStarted) startTimer();
             });
         }
+
+        window.addEventListener('beforeunload', () => activeEvaluationController?.abort());
 
         function toggleFeedbackView(task) {
             const bodyT1 = document.getElementById('fbBodyT1');

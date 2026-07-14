@@ -1129,6 +1129,7 @@
         let timerInterval;
         let wordCount = 0;
         let isSubmitted = false;
+        let activeEvaluationController = null;
         let hasStarted = false;
         let promptReady = false;
         let startRequested = false;
@@ -1568,7 +1569,10 @@
             showWritingError('');
 
             const timeSpent = (20 * 60) - secondsLeft;
+            const evaluationRequestId = window.crypto?.randomUUID?.()
+                || `writing_${Date.now()}_${Math.random().toString(36).slice(2)}`;
             const payload = {
+                evaluationRequestId,
                 taskType: 'task1',
                 promptId,
                 promptTitle: currentPrompt?.title || 'Writing Task 1',
@@ -1583,10 +1587,12 @@
 
             document.getElementById('loadingModal').style.display = 'flex';
             logDevelopment('Writing evaluate request payload:', payload);
+            activeEvaluationController = new AbortController();
 
             fetch('/api/writing/submit-task1', {
                 method: 'POST',
                 credentials: 'include',
+                signal: activeEvaluationController.signal,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -1601,6 +1607,7 @@
                 return body;
             })
             .then(sub => {
+                activeEvaluationController = null;
                 document.getElementById('loadingModal').style.display = 'none';
                 setSubmitLoading(false);
 
@@ -1630,13 +1637,16 @@
             })
             .catch(err => {
                 console.error('Writing evaluation request failed:', err);
+                activeEvaluationController = null;
                 document.getElementById('loadingModal').style.display = 'none';
                 isSubmitted = false;
                 setSubmitLoading(false);
-                showWritingError(err.message || 'AI evaluation failed. Please try again.');
+                showWritingError('We could not complete the assessment. Your essay has been saved. Please try again.');
                 if (hasStarted) startTimer();
             });
         }
+
+        window.addEventListener('beforeunload', () => activeEvaluationController?.abort());
 
         function renderBullets(elementId, items) {
             const el = document.getElementById(elementId);

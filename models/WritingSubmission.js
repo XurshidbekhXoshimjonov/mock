@@ -10,6 +10,10 @@ const writingSubmissionSchema = new mongoose.Schema({
         ref: "User",
         default: undefined
     },
+    evaluationRequestId: {
+        type: String,
+        default: undefined
+    },
     mode: {
         type: String,
         enum: ["task1", "task2", "full"],
@@ -110,5 +114,12 @@ writingSubmissionSchema.index({ mode: 1, createdAt: -1 });
 writingSubmissionSchema.index({ testType: 1, createdAt: -1 });
 writingSubmissionSchema.index({ task1PromptId: 1, createdAt: -1 });
 writingSubmissionSchema.index({ task2PromptId: 1, createdAt: -1 });
+writingSubmissionSchema.index(
+    { userId: 1, evaluationRequestId: 1 },
+    {
+        unique: true,
+        partialFilterExpression: { evaluationRequestId: { $type: "string" } }
+    }
+);
 
 module.exports = mongoose.models.WritingSubmission || mongoose.model("WritingSubmission", writingSubmissionSchema);
