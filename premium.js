@@ -3,6 +3,7 @@
     const premium = window.IELTSXPremium;
     const manualPaymentConfig = premium.manualPaymentConfig;
     const comparison = premium.subscriptionComparisonRows || [];
+    let manualModal = null;
 
     function escapeHtml(value) {
         return String(value || "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
@@ -53,12 +54,14 @@
 
     async function latestCurrentUser() {
         const auth = window.authClient?.getAuth?.();
-        if (!auth?.token) return null;
+        if (!window.authClient?.fetchAuthMe) return null;
         try {
-            const result = await window.authClient?.fetchAuthMe?.();
+            const result = await window.authClient.fetchAuthMe();
             const user = result?.data?.user || null;
             if (result?.ok && user) {
-                window.authClient?.saveAuth?.({ token: auth.token, user });
+                if (auth?.token) {
+                    window.authClient?.saveAuth?.({ token: auth.token, user });
+                }
                 return user;
             }
         } catch {
@@ -91,7 +94,9 @@
     }
 
     function pricingCard(plan, currentPlanId = "") {
+        const hasActiveSubscription = Boolean(currentPlanId);
         const isCurrentPlan = currentPlanId === plan.id;
+        const isLockedPlan = hasActiveSubscription && !isCurrentPlan;
         const display = planDisplay(plan);
         return `<article class="pricing-card${plan.bestValue ? " pricing-card--featured" : ""}${isCurrentPlan ? " pricing-card--current" : ""}" ${isCurrentPlan ? 'aria-current="true"' : ""}>
             ${display.badge && !isCurrentPlan ? `<span class="pricing-card__best">${escapeHtml(display.badge)}</span>` : ""}
@@ -99,7 +104,7 @@
             <div class="pricing-card__head"><h2>${escapeHtml(display.name)}</h2><p>${escapeHtml(display.duration)}</p></div>
             <div class="pricing-card__price"><strong>${escapeHtml(premium.formatPrice(plan.price))}</strong><span>${escapeHtml(display.description)}</span></div>
             <ul>${premium.premiumFeatures.map((feature) => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join("")}</ul>
-            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}" type="button" ${isCurrentPlan ? "disabled" : `data-plan="${escapeHtml(plan.id)}"`}>${isCurrentPlan ? "Your plan" : escapeHtml(display.buttonLabel)}</button>
+            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}${isLockedPlan ? " premium-button--locked" : ""}" type="button" ${hasActiveSubscription ? "disabled" : `data-plan="${escapeHtml(plan.id)}"`}>${isCurrentPlan ? "Your plan" : isLockedPlan ? "Subscription active" : escapeHtml(display.buttonLabel)}</button>
         </article>`;
     }
 
@@ -343,12 +348,24 @@
             ${manualPaymentModalMarkup()}`;
     }
 
-    function openPlan(planId, trigger = null) {
+    function renderPage(currentPlanId = "") {
+        render(currentPlanId);
+        manualModal = ManualPaymentModal();
+        manualModal.bind();
+    }
+
+    async function openPlan(planId, trigger = null) {
         const plan = premium.premiumPlans[planId];
         if (!plan) return;
-        if (activePlanId(currentUser()) === plan.id) return;
-        const user = currentUser();
-        if (!authToken() || !user) {
+
+        const user = await latestCurrentUser() || currentUser();
+        const currentPlanId = activePlanId(user);
+        if (currentPlanId) {
+            renderPage(currentPlanId);
+            return;
+        }
+
+        if (!user) {
             loginForPlan(plan.id);
             return;
         }
@@ -357,9 +374,7 @@
 
     async function init() {
         const user = await latestCurrentUser();
-        render(activePlanId(user));
-        const manualModal = ManualPaymentModal();
-        manualModal.bind();
+        renderPage(activePlanId(user));
 
         root.addEventListener("click", (event) => {
             const planButton = event.target.closest("[data-plan]");

@@ -34,6 +34,14 @@ body.premium-page { margin:0; min-width:0; overflow-x:hidden; background:#f7f9fc
     transform:none;
     box-shadow:none;
 }
+.premium-button--locked,
+.premium-button--locked:hover {
+    border-color:#d7deeb;
+    background:#edf1f7;
+    color:#758198;
+    cursor:not-allowed;
+    transform:none;
+}
 .premium-button:focus-visible,.premium-modal__close:focus-visible,.manual-payment__secondary:focus-visible,.manual-payment__copy-card:focus-visible { outline:3px solid rgba(36,87,245,.28); outline-offset:3px; }
 .comparison-section { margin-top:64px; }
 .section-heading { margin-bottom:22px; text-align:center; }
