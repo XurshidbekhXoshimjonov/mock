@@ -188,8 +188,20 @@
 
     function writingOverview(writing) {
         const data = writing || emptyWriting;
-        const summary = { ...emptyWriting.summary, ...(data.summary || {}) };
-        const recent = sortedByDate(Array.isArray(data.recent) ? data.recent : [], "createdAt");
+        const rawSummary = { ...emptyWriting.summary, ...(data.summary || {}) };
+        const summary = {
+            ...rawSummary,
+            averageBand: roundHalfBand(rawSummary.averageBand),
+            bestBand: roundHalfBand(rawSummary.bestBand),
+            latestBand: roundHalfBand(rawSummary.latestBand)
+        };
+        const recent = sortedByDate(Array.isArray(data.recent) ? data.recent : [], "createdAt")
+            .map((attempt) => ({
+                ...attempt,
+                overallBand: roundHalfBand(attempt.overallBand ?? attempt.estimatedBand ?? 0),
+                task1Band: roundHalfBand(attempt.task1Band),
+                task2Band: roundHalfBand(attempt.task2Band)
+            }));
         const latest = recent[0] || null;
 
         return {

@@ -10,6 +10,7 @@ const {
     normalizeBand,
     calculateTaskBand,
     calculateFinalWritingBand,
+    calculateAverageWritingBand,
     normalizeSingleEvaluation,
     normalizeFullEvaluation,
     validateWritingAssessmentInput,
@@ -180,6 +181,19 @@ test("full Writing calculation gives Task 2 twice the Task 1 weight", () => {
     assert.equal(normalizeFullEvaluation({ task1, task2 }, { task1: 180, task2: 290 }).overallBand, 7);
 });
 
+test("dashboard Writing averages are reported as IELTS half bands", () => {
+    assert.equal(calculateAverageWritingBand([6, 6.5]), 6.5);
+    assert.equal(calculateAverageWritingBand([6, 6.5, 6.5]), 6.5);
+    assert.equal(calculateAverageWritingBand([5.5, 6]), 6);
+    assert.equal(calculateAverageWritingBand([]), 0);
+});
+
+test("dashboard normalises legacy decimal Writing bands before display", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "profile-dashboard.js"), "utf8");
+    assert.match(source, /averageBand:\s*roundHalfBand\(rawSummary\.averageBand\)/);
+    assert.match(source, /overallBand:\s*roundHalfBand\(attempt\.overallBand/);
+});
+
 test("Responses API schema is strict and exposes all required canonical feedback fields", () => {
     const format = writingStructuredOutput("task2");
     assert.equal(format.type, "json_schema");
@@ -201,4 +215,18 @@ test("assessment transport uses the exact model, Responses API, medium reasoning
     assert.match(source, /attempt\s*<=\s*2/);
     assert.match(source, /REPAIR INSTRUCTION/);
     assert.doesNotMatch(source, /openai\.chat\.completions\.create/);
+});
+
+test("Writing scoring has no artificial band ceiling or special 7–8 gate", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
+    assert.match(source, /full 0–9 range is available for every criterion/i);
+    assert.match(source, /Do not impose an artificial ceiling, floor, target distribution/i);
+    assert.match(source, /including 8 or 9, whenever the complete descriptor is supported/i);
+    assert.doesNotMatch(source, /BAND 7–8 BOUNDARY/);
+    assert.doesNotMatch(source, /normally Band 7/);
+});
+
+test("Writing length guidance does not apply a fixed deduction or score cap", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
+    assert.match(source, /Do not apply a fixed deduction or automatic band ceiling/i);
 });
