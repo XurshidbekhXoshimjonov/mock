@@ -167,6 +167,10 @@
                     </label>
 
                     <div class="admin-writing-builder-fields" id="task1Fields">
+                        <div class="admin-writing-inline-task-head is-hidden">
+                            <strong>Task 1 content</strong>
+                            <span>Enter this Full Test's Task 1 directly.</span>
+                        </div>
                         <label class="admin-writing-field">
                             <span>Task prompt</span>
                             <textarea id="task1PromptText" rows="6" placeholder="Enter the Task 1 chart/table/map/diagram prompt"></textarea>
@@ -216,6 +220,10 @@
                     </div>
 
                     <div class="admin-writing-builder-fields is-hidden" id="task2Fields">
+                        <div class="admin-writing-inline-task-head is-hidden">
+                            <strong>Task 2 content</strong>
+                            <span>Enter this Full Test's Task 2 directly.</span>
+                        </div>
                         <label class="admin-writing-field">
                             <span>Essay question</span>
                             <textarea id="task2PromptText" rows="7" placeholder="Enter the Task 2 essay question"></textarea>
@@ -244,15 +252,7 @@
 
                     <div class="admin-writing-builder-fields is-hidden" id="fullFields">
                         <label class="admin-writing-field">
-                            <span>Select Task 1</span>
-                            <select id="fullTask1Select"></select>
-                        </label>
-                        <label class="admin-writing-field">
-                            <span>Select Task 2</span>
-                            <select id="fullTask2Select"></select>
-                        </label>
-                        <label class="admin-writing-field">
-                            <span>Time limit</span>
+                            <span>Full test time limit</span>
                             <input id="fullTimeLimit" type="number" min="1" value="60">
                         </label>
                     </div>
@@ -320,7 +320,7 @@
 
     <script src="/premium-config.js?v=20260713-cancel-revoke-v1"></script>
     <script src="/auth-client.js?v=20260713-compact-profile-dropdown-v1"></script>
-    <script src="/admin-writing.js?v=20260713-premium-test-access-v1"></script>
+    <script src="/admin-writing.js?v=20260714-inline-full-test-v1"></script>
 </body>
 
 </html>

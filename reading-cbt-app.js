@@ -609,7 +609,10 @@ function normalizeRichReadingPassages(source = {}, topGroups = [], topQuestions 
 
     return source.richPassages
         .map((richPassage, index) => {
-            const ownGroups = questionGroupsFromSource(richPassage, [], topQuestions);
+            // A rich passage without its own questions must inherit the already
+            // normalized top-level groups. Rebuilding groups from topQuestions
+            // loses group-only metadata such as matching sentence endings.
+            const ownGroups = questionGroupsFromSource(richPassage, [], []);
             const groups = ownGroups.length
                 ? ownGroups
                 : fallbackGroupsForPassage(topGroups, index, source.richPassages.length);
@@ -2145,7 +2148,7 @@ const injectNavigationStyles = () => {
 function QuestionNavigationPanel({ passages, answers, activeIndex, selectPassage, activeQuestionNumber, setActiveQuestionNumber }) {
     const passagesConfig = useMemo(() => {
         return passages.map((passage, pIdx) => {
-            const pNumber = pIdx + 1;
+            const pNumber = Number(passage.number) || pIdx + 1;
             const questionNumbers = [];
             (passage.questionGroups || []).forEach((group) => {
                 (group.questions || []).forEach((q) => {
@@ -2762,9 +2765,6 @@ function ReadingApp() {
         );
     }
 
-    const isMock = new URLSearchParams(window.location.search).has("mockTestId") || new URLSearchParams(window.location.search).get("mockMode") === "1";
-    const isFullTestOrMock = isFullTest || isMock;
-
     const dashboardHref = isFullTest
         ? (skill === "listening" ? "/listeningfulltest.html" : "/fulltest.html")
         : (skill === "listening" ? "/listening.html" : `/part${passage.number || 1}.html`);
@@ -2841,7 +2841,7 @@ function ReadingApp() {
                     )
                 )
             ),
-            hasStarted && isFullTestOrMock
+            hasStarted
                 ? h(QuestionNavigationPanel, {
                     passages,
                     answers,

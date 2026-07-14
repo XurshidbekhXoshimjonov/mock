@@ -61,9 +61,17 @@ function normalizeQuestionType(type) {
         .replace(/[\s-]+/g, "_");
 }
 
+function optionList(options) {
+    if (Array.isArray(options)) return options;
+    if (typeof options === "string") {
+        return options.split(/\s*;\s*/).map((option) => option.trim()).filter(Boolean);
+    }
+    return [];
+}
+
 function inferredType(question, groupType) {
     const type = normalizeQuestionType(groupType || question.type || "sentence_completion");
-    const labels = (question.options || []).map((option) => normalizeOption(option).label.toUpperCase());
+    const labels = optionList(question.options).map((option) => normalizeOption(option).label.toUpperCase());
 
     if (labels.includes("TRUE") && labels.includes("FALSE")) return "true_false_not_given";
     if (labels.includes("YES") && labels.includes("NO")) return "yes_no_not_given";
@@ -141,7 +149,8 @@ function TFNGRenderer({ question, value, onAnswer, groupType, reviewResult, read
     const defaults = type === "yes_no_not_given"
         ? ["YES", "NO", "NOT GIVEN"]
         : ["TRUE", "FALSE", "NOT GIVEN"];
-    const options = (question.options || []).length ? question.options : defaults;
+    const questionOptions = optionList(question.options);
+    const options = questionOptions.length ? questionOptions : defaults;
 
     return h(QuestionShell, { question, className: "cbt-question--tfng", reviewResult },
         h(Stem, { question }),
@@ -166,7 +175,7 @@ function MultipleChoiceRenderer({ question, value, onAnswer, reviewResult, readO
     return h(QuestionShell, { question, className: "cbt-question--choice", reviewResult },
         h(Stem, { question }),
         h("div", { className: "cbt-options cbt-options--stacked" },
-            (question.options || []).map((raw) => {
+            optionList(question.options).map((raw) => {
                 const option = normalizeOption(raw);
                 const isSelected = value === option.value;
                 return h("label", {
@@ -192,15 +201,14 @@ function MultipleChoiceRenderer({ question, value, onAnswer, reviewResult, readO
 }
 
 function uniqueOptions(options) {
-    return (options || []).map(normalizeOption).filter((option, index, list) =>
+    return optionList(options).map(normalizeOption).filter((option, index, list) =>
         option.value && list.findIndex((candidate) => candidate.value === option.value) === index
     );
 }
 
 function matchingOptions(question, group) {
-    const source = (question.options || []).length
-        ? question.options
-        : (group.options || group.headings || group.matchingOptions || group.listOfHeadings || []);
+    const groupOptions = optionList(group.options || group.headings || group.matchingOptions || group.listOfHeadings);
+    const source = groupOptions.length ? groupOptions : optionList(question.options);
     const normalized = source.map(normalizeOption);
     if (normalized.length || !group.layoutHtml || typeof DOMParser === "undefined") return normalized;
 

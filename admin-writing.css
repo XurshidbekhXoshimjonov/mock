@@ -570,6 +570,23 @@
     gap: 16px;
 }
 
+.admin-writing-inline-task-head {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--writing-line);
+}
+
+.admin-writing-inline-task-head strong {
+    color: var(--writing-ink);
+    font-size: 15px;
+}
+
+.admin-writing-inline-task-head span {
+    color: var(--writing-muted);
+    font-size: 12px;
+}
+
 .admin-writing-two-col {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

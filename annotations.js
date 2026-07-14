@@ -370,6 +370,17 @@
             } else {
                 annotationsData = { highlights: [], notes: [] };
             }
+
+            // Reading and Listening highlights belong only to the current page
+            // lifetime. Keep notes persistent, but discard highlights left by an
+            // older page load so refreshing always returns clean passage text.
+            if (currentConfig.skill === 'reading' || currentConfig.skill === 'listening') {
+                annotationsData.highlights = [];
+                localStorage.setItem(getStorageKey(), JSON.stringify({
+                    highlights: [],
+                    notes: annotationsData.notes
+                }));
+            }
         } catch (e) {
             console.error("Failed to load annotations from localStorage", e);
             annotationsData = { highlights: [], notes: [] };
@@ -378,7 +389,10 @@
 
     function saveAnnotations() {
         try {
-            localStorage.setItem(getStorageKey(), JSON.stringify(annotationsData));
+            const storedData = currentConfig.skill === 'reading' || currentConfig.skill === 'listening'
+                ? { highlights: [], notes: annotationsData.notes }
+                : annotationsData;
+            localStorage.setItem(getStorageKey(), JSON.stringify(storedData));
             updateToggleBtnBadge();
             renderDrawerNotes();
         } catch (e) {

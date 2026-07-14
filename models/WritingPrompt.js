@@ -54,6 +54,11 @@ const writingPromptSchema = new mongoose.Schema({
         default: false,
         index: true
     },
+    fullTestOnly: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
     isPremium: {
         type: Boolean,
         default: false,

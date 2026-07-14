@@ -132,8 +132,6 @@ function bindPageEvents() {
         "task2QuestionType",
         "task2WordLimit",
         "task2TimeLimit",
-        "fullTask1Select",
-        "fullTask2Select",
         "fullTimeLimit"
     ].forEach((id) => {
         const node = el(id);
@@ -151,7 +149,6 @@ async function loadAllData() {
         ]);
         state.prompts = listItems(prompts);
         state.fullTests = listItems(fullTests);
-        populateFullSelects();
         renderDashboard();
     } catch (error) {
         console.error("Error loading writing admin data:", error);
@@ -385,7 +382,6 @@ function openBuilder(type = "task1", item = null) {
 
     setVisualDiagramMode("upload");
     clearImagePreview();
-    populateFullSelects();
     fillBuilderFromItem(item);
     updateBuilderMode();
     updateLivePreview();
@@ -424,8 +420,19 @@ function fillBuilderFromItem(item) {
 
     if (item.type === "full") {
         const test = item.source;
-        el("fullTask1Select").value = getRefId(test.task1PromptId);
-        el("fullTask2Select").value = getRefId(test.task2PromptId);
+        const task1 = getPromptObject(test.task1PromptId) || {};
+        const task2 = getPromptObject(test.task2PromptId) || {};
+        el("task1PromptText").value = task1.promptText || "";
+        el("task1Instructions").value = task1.instructions || "";
+        el("task1WordLimit").value = task1.wordLimit || DEFAULTS.task1.wordLimit;
+        el("task1TimeLimit").value = task1.timeLimit || DEFAULTS.task1.timeLimit;
+        const visualDiagramUrl = getVisualDiagramUrl(task1);
+        setVisualDiagramMode(isExternalVisualDiagramUrl(visualDiagramUrl) ? "url" : "upload");
+        setImagePreview(visualDiagramUrl);
+        el("task2PromptText").value = task2.promptText || "";
+        el("task2QuestionType").value = task2.questionType || "opinion";
+        el("task2WordLimit").value = task2.wordLimit || DEFAULTS.task2.wordLimit;
+        el("task2TimeLimit").value = task2.timeLimit || DEFAULTS.task2.timeLimit;
         el("fullTimeLimit").value = test.timeLimit || DEFAULTS.full.timeLimit;
     }
 }
@@ -438,9 +445,12 @@ function closeBuilder() {
 
 function updateBuilderMode() {
     const type = el("builderType").value;
-    el("task1Fields").classList.toggle("is-hidden", type !== "task1");
-    el("task2Fields").classList.toggle("is-hidden", type !== "task2");
+    el("task1Fields").classList.toggle("is-hidden", type !== "task1" && type !== "full");
+    el("task2Fields").classList.toggle("is-hidden", type !== "task2" && type !== "full");
     el("fullFields").classList.toggle("is-hidden", type !== "full");
+    document.querySelectorAll(".admin-writing-inline-task-head").forEach((heading) => {
+        heading.classList.toggle("is-hidden", type !== "full");
+    });
 }
 
 async function saveBuilder(event) {
@@ -507,17 +517,35 @@ async function savePrompt(type, id) {
 }
 
 async function saveFullTest(id) {
+    const visualDiagramUrl = el("visualDiagramUrl").value.trim();
+    const visualDiagramError = getVisualDiagramValidationMessage(visualDiagramUrl);
+    if (visualDiagramError) throw new Error(visualDiagramError);
+
+    const title = el("builderTitle").value.trim();
     const body = {
-        title: el("builderTitle").value.trim(),
-        task1PromptId: el("fullTask1Select").value,
-        task2PromptId: el("fullTask2Select").value,
+        title,
+        task1: {
+            title: `${title} — Task 1`,
+            promptText: el("task1PromptText").value.trim(),
+            instructions: el("task1Instructions").value.trim(),
+            visualDiagramUrl,
+            wordLimit: Number(el("task1WordLimit").value),
+            timeLimit: Number(el("task1TimeLimit").value)
+        },
+        task2: {
+            title: `${title} — Task 2`,
+            promptText: el("task2PromptText").value.trim(),
+            questionType: el("task2QuestionType").value,
+            wordLimit: Number(el("task2WordLimit").value),
+            timeLimit: Number(el("task2TimeLimit").value)
+        },
         timeLimit: Number(el("fullTimeLimit").value),
         status: el("builderStatus").value,
         isPremium: el("builderIsPremium").checked
     };
 
-    if (!body.title || !body.task1PromptId || !body.task2PromptId) {
-        throw new Error("Full Writing Test requires a title, Task 1, and Task 2.");
+    if (!body.title || !body.task1.promptText || !body.task2.promptText) {
+        throw new Error("Full Writing Test requires a title, Task 1 prompt, and Task 2 question.");
     }
 
     return requestJson(id ? `/api/admin/writing/full-tests/${id}` : "/api/admin/writing/full-tests", {
@@ -531,13 +559,28 @@ async function duplicateItem(item) {
     try {
         if (item.type === "full") {
             const source = item.source;
+            const task1 = getPromptObject(source.task1PromptId) || {};
+            const task2 = getPromptObject(source.task2PromptId) || {};
             await requestJson("/api/admin/writing/full-tests", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     title: `${source.title || "Full Writing Test"} Copy`,
-                    task1PromptId: getRefId(source.task1PromptId),
-                    task2PromptId: getRefId(source.task2PromptId),
+                    task1: {
+                        title: `${source.title || "Full Writing Test"} Copy — Task 1`,
+                        promptText: task1.promptText || "",
+                        instructions: task1.instructions || "",
+                        visualDiagramUrl: getVisualDiagramUrl(task1),
+                        wordLimit: task1.wordLimit || DEFAULTS.task1.wordLimit,
+                        timeLimit: task1.timeLimit || DEFAULTS.task1.timeLimit
+                    },
+                    task2: {
+                        title: `${source.title || "Full Writing Test"} Copy — Task 2`,
+                        promptText: task2.promptText || "",
+                        questionType: task2.questionType || "opinion",
+                        wordLimit: task2.wordLimit || DEFAULTS.task2.wordLimit,
+                        timeLimit: task2.timeLimit || DEFAULTS.task2.timeLimit
+                    },
                     timeLimit: source.timeLimit || DEFAULTS.full.timeLimit,
                     status: "draft",
                     isPremium: source.isPremium === true
@@ -674,8 +717,21 @@ function buildPreviewItemFromForm() {
         _id: "preview-full",
         status,
         title,
-        task1PromptId: findPromptById(el("fullTask1Select").value),
-        task2PromptId: findPromptById(el("fullTask2Select").value),
+        task1PromptId: {
+            taskType: "task1",
+            promptText: el("task1PromptText").value.trim(),
+            instructions: el("task1Instructions").value.trim(),
+            visualDiagramUrl: el("visualDiagramUrl").value.trim(),
+            wordLimit: Number(el("task1WordLimit").value) || DEFAULTS.task1.wordLimit,
+            timeLimit: Number(el("task1TimeLimit").value) || DEFAULTS.task1.timeLimit
+        },
+        task2PromptId: {
+            taskType: "task2",
+            promptText: el("task2PromptText").value.trim(),
+            questionType: el("task2QuestionType").value,
+            wordLimit: Number(el("task2WordLimit").value) || DEFAULTS.task2.wordLimit,
+            timeLimit: Number(el("task2TimeLimit").value) || DEFAULTS.task2.timeLimit
+        },
         timeLimit: Number(el("fullTimeLimit").value) || DEFAULTS.full.timeLimit,
         isPremium: el("builderIsPremium").checked
     });
@@ -729,23 +785,6 @@ function renderPromptPreview(prompt, label) {
             <p>${escapeHtml(prompt.promptText || "The Writing prompt will appear here.")}</p>
         </section>
     `;
-}
-
-function populateFullSelects() {
-    const task1Select = el("fullTask1Select");
-    const task2Select = el("fullTask2Select");
-    if (!task1Select || !task2Select) return;
-
-    const task1Prompts = state.prompts.filter((prompt) => prompt.taskType === "task1");
-    const task2Prompts = state.prompts.filter((prompt) => prompt.taskType === "task2");
-
-    task1Select.innerHTML = `<option value="">Select Task 1 prompt</option>${task1Prompts.map((prompt, index) => {
-        return `<option value="${escapeHtml(prompt._id)}">Task 1 - Test ${index + 1}</option>`;
-    }).join("")}`;
-
-    task2Select.innerHTML = `<option value="">Select Task 2 prompt</option>${task2Prompts.map((prompt, index) => {
-        return `<option value="${escapeHtml(prompt._id)}">Task 2 - Test ${index + 1}</option>`;
-    }).join("")}`;
 }
 
 function setupDropZone() {
@@ -926,7 +965,7 @@ function getWordLimitLabel(item) {
 
 function getPromptObject(ref) {
     if (!ref) return null;
-    if (typeof ref === "object" && ref._id) return ref;
+    if (typeof ref === "object") return ref;
     return findPromptById(String(ref));
 }
 
