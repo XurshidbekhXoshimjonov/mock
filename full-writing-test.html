@@ -1495,6 +1495,7 @@
         let hasStarted = false;
         let testReady = false;
         let startRequested = false;
+        let task1VisualDiagramUrl = '';
 
         function writingAnswerKey(testId, taskNumber) {
             return `writing_answer_${testId}_${taskNumber}`;
@@ -1844,6 +1845,7 @@
                     // Task 1
                     document.getElementById('t1Title').textContent = `Task 1: ${test.task1PromptId.title}`;
                     document.getElementById('t1PromptText').innerHTML = formatTask1PromptText(test.task1PromptId.promptText);
+                    task1VisualDiagramUrl = getTaskVisualDiagramUrl(test.task1PromptId);
                     renderTask1VisualDiagram(test.task1PromptId);
 
                     // Task 2
@@ -2217,6 +2219,7 @@
             const payload = {
                 fullTestId,
                 task1Prompt,
+                task1VisualDiagramUrl,
                 task1Response,
                 task2Prompt,
                 task2Response,
@@ -2255,7 +2258,7 @@
                 console.error('Writing evaluate-full request failed:', err);
                 document.getElementById('loadingModal').style.display = 'none';
                 setSubmitLoading(false);
-                alert('AI evaluation failed. Please try again.');
+                alert(err.message || 'AI evaluation failed. Please try again.');
                 isSubmitted = false;
                 if (hasStarted) startTimer();
             });
