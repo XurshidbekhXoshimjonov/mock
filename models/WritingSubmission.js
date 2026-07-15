@@ -14,6 +14,20 @@ const writingSubmissionSchema = new mongoose.Schema({
         type: String,
         default: undefined
     },
+    evaluationHash: {
+        type: String,
+        default: undefined,
+        index: true
+    },
+    evaluatorVersion: {
+        type: String,
+        default: undefined
+    },
+    assessmentType: {
+        type: String,
+        enum: ["academic_task1", "general_task1", "task2", "full"],
+        default: undefined
+    },
     mode: {
         type: String,
         enum: ["task1", "task2", "full"],
@@ -111,6 +125,7 @@ const writingSubmissionSchema = new mongoose.Schema({
 writingSubmissionSchema.index({ userId: 1, createdAt: -1 });
 writingSubmissionSchema.index({ userObjectId: 1, createdAt: -1 });
 writingSubmissionSchema.index({ mode: 1, createdAt: -1 });
+writingSubmissionSchema.index({ userId: 1, evaluationHash: 1, evaluatorVersion: 1 });
 writingSubmissionSchema.index({ testType: 1, createdAt: -1 });
 writingSubmissionSchema.index({ task1PromptId: 1, createdAt: -1 });
 writingSubmissionSchema.index({ task2PromptId: 1, createdAt: -1 });

@@ -391,6 +391,7 @@ function openBuilder(type = "task1", item = null) {
 function fillBuilderFromItem(item) {
     if (!item) {
         el("builderIsPremium").checked = false;
+        el("task1AssessmentType").value = "academic_task1";
         el("task1WordLimit").value = DEFAULTS.task1.wordLimit;
         el("task1TimeLimit").value = DEFAULTS.task1.timeLimit;
         el("task2WordLimit").value = DEFAULTS.task2.wordLimit;
@@ -401,6 +402,7 @@ function fillBuilderFromItem(item) {
 
     if (item.type === "task1") {
         const prompt = item.source;
+        el("task1AssessmentType").value = prompt.assessmentType || "academic_task1";
         el("task1PromptText").value = prompt.promptText || "";
         el("task1Instructions").value = prompt.instructions || "";
         el("task1WordLimit").value = prompt.wordLimit || DEFAULTS.task1.wordLimit;
@@ -422,6 +424,7 @@ function fillBuilderFromItem(item) {
         const test = item.source;
         const task1 = getPromptObject(test.task1PromptId) || {};
         const task2 = getPromptObject(test.task2PromptId) || {};
+        el("task1AssessmentType").value = "academic_task1";
         el("task1PromptText").value = task1.promptText || "";
         el("task1Instructions").value = task1.instructions || "";
         el("task1WordLimit").value = task1.wordLimit || DEFAULTS.task1.wordLimit;
@@ -494,6 +497,7 @@ async function savePrompt(type, id) {
 
     const body = {
         taskType: type,
+        assessmentType: isTask1 ? el("task1AssessmentType").value : "task2",
         title: el("builderTitle").value.trim(),
         promptText: isTask1 ? el("task1PromptText").value.trim() : el("task2PromptText").value.trim(),
         instructions: isTask1 ? el("task1Instructions").value.trim() : "",
@@ -525,6 +529,7 @@ async function saveFullTest(id) {
     const body = {
         title,
         task1: {
+            assessmentType: "academic_task1",
             title: `${title} — Task 1`,
             promptText: el("task1PromptText").value.trim(),
             instructions: el("task1Instructions").value.trim(),
@@ -567,6 +572,7 @@ async function duplicateItem(item) {
                 body: JSON.stringify({
                     title: `${source.title || "Full Writing Test"} Copy`,
                     task1: {
+                        assessmentType: "academic_task1",
                         title: `${source.title || "Full Writing Test"} Copy — Task 1`,
                         promptText: task1.promptText || "",
                         instructions: task1.instructions || "",
@@ -593,6 +599,7 @@ async function duplicateItem(item) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     taskType: source.taskType,
+                    assessmentType: source.assessmentType || (source.taskType === "task2" ? "task2" : "academic_task1"),
                     title: `${source.title || "Writing Prompt"} Copy`,
                     promptText: source.promptText || "",
                     instructions: source.instructions || "",

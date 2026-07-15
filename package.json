@@ -3,6 +3,7 @@
     "start": "node server.js",
     "dev": "node server.js",
     "test": "node --test tests/*.test.js",
+    "test:writing-calibration": "node scripts/run-writing-calibration.js",
     "build": "npm run build:reading-css",
     "build:reading-css": "tailwindcss -i ./reading-tailwind.input.css -o ./reading-tailwind.generated.css --minify",
     "reset:users": "node scripts/reset-users-keep-admin.js"

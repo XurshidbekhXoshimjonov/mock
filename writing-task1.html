@@ -1574,6 +1574,7 @@
             const payload = {
                 evaluationRequestId,
                 taskType: 'task1',
+                assessmentType: currentPrompt?.assessmentType || 'academic_task1',
                 promptId,
                 promptTitle: currentPrompt?.title || 'Writing Task 1',
                 prompt: currentPromptText || document.getElementById('promptText')?.textContent || '',

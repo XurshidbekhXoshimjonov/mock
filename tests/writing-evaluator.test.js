@@ -6,243 +6,171 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
     WRITING_ASSESSMENT_MODEL,
+    WRITING_EVALUATOR_VERSION,
+    WRITING_TEMPERATURE,
     writingStructuredOutput,
+    normalizeAssessmentType,
     normalizeBand,
     calculateTaskBand,
     calculateFinalWritingBand,
     calculateAverageWritingBand,
-    normalizeSingleEvaluation,
+    normalizeCriterionAssessment,
+    mergeAssessmentPasses,
+    criterionScores,
+    normalizeFinalEvaluation,
     normalizeFullEvaluation,
     validateWritingAssessmentInput,
     classifyWritingEvaluationError
 } = require("../lib/writing-evaluator");
+const calibrationSamples = require("./fixtures/writing-calibration-samples");
 
-function criterion(summary, strengths = [], limitations = [], evidence = []) {
-    return { summary, strengths, limitations, evidence };
-}
-
-function evaluationFixture(mode, bands, options = {}) {
-    const taskCriterion = mode === "task1" ? "taskAchievement" : "taskResponse";
-    const errors = options.errors || [];
+function criterion(score, label, weaknesses = []) {
     return {
-        taskType: mode,
-        wordCount: options.modelWordCount ?? 280,
-        scores: {
-            [taskCriterion]: bands[0],
-            coherenceAndCohesion: bands[1],
-            lexicalResource: bands[2],
-            grammaticalRangeAndAccuracy: bands[3],
-            overallBand: options.modelOverall ?? 0
-        },
-        criterionFeedback: {
-            [taskCriterion]: criterion(
-                options.taskSummary || "The response addresses the task.",
-                options.taskStrengths || ["A clear position is maintained."],
-                options.taskLimitations || [],
-                options.taskEvidence || ["The position is stated and developed in the response."]
-            ),
-            coherenceAndCohesion: criterion(
-                options.coherenceSummary || "The response progresses logically.",
-                ["Paragraphs have clear purposes."],
-                options.coherenceLimitations || [],
-                ["Ideas move from cause to consequence."]
-            ),
-            lexicalResource: criterion(
-                options.lexicalSummary || "Vocabulary is relevant and sufficiently flexible.",
-                ["Topic vocabulary is used precisely."],
-                options.lexicalLimitations || [],
-                ["Relevant transport vocabulary is used."]
-            ),
-            grammaticalRangeAndAccuracy: criterion(
-                options.grammarSummary || "A range of structures is used with adequate control.",
-                ["Several complex sentences are accurate."],
-                options.grammarLimitations || [],
-                ["Subordination is used to connect reasons and outcomes."]
-            )
-        },
-        errors,
-        overallFeedback: {
-            summary: options.summary || "The response communicates its main ideas clearly.",
-            mainStrengths: options.mainStrengths || ["Relevant ideas are logically organised."],
-            priorityImprovements: options.priorityImprovements || ["Develop the least-supported point further."],
-            estimatedLevelExplanation: options.levelExplanation || "The descriptor fit is strongest at the selected adjacent band."
-        },
-        improvedEssay: options.improvedEssay || "An improved response preserving the candidate's ideas."
+        score,
+        evidence: [`Direct evidence for ${label} at Band ${score}.`],
+        weaknesses
     };
 }
 
-test("strong Band 7 response with two spelling errors is not forced down to Band 6", () => {
-    const raw = evaluationFixture("task2", [7, 7, 6.5, 6.5], {
-        modelOverall: 5,
-        errors: [
-            { original: "authroties", correction: "authorities", type: "spelling", explanation: "Spelling error.", severity: "minor" },
-            { original: "constracted", correction: "constructed", type: "spelling", explanation: "Spelling error.", severity: "minor" }
-        ]
-    });
-    const result = normalizeSingleEvaluation(raw, "task2", 311);
-    assert.equal(result.estimatedBand, 7);
-    assert.equal(result.errors.length, 2);
-    assert.equal(result.scores.overallBand, 7);
-});
+function assessment(score, weaknesses = []) {
+    return {
+        taskAchievement: criterion(score, "task", weaknesses),
+        coherenceAndCohesion: criterion(score, "coherence", weaknesses),
+        lexicalResource: criterion(score, "lexis", weaknesses),
+        grammarRangeAndAccuracy: criterion(score, "grammar", weaknesses)
+    };
+}
 
-test("Band 6 response with relevant but limited development remains Band 6", () => {
-    const raw = evaluationFixture("task2", [6, 6, 6, 6], {
-        taskLimitations: ["One main idea is only briefly developed."]
-    });
-    assert.equal(normalizeSingleEvaluation(raw, "task2", 258).estimatedBand, 6);
-});
-
-test("off-topic response can receive a low Task Response score independently", () => {
-    const raw = evaluationFixture("task2", [3, 5, 5, 5], {
-        taskSummary: "Most of the response is unrelated to the question.",
-        taskLimitations: ["The central topic is not addressed."]
-    });
-    const result = normalizeSingleEvaluation(raw, "task2", 270);
-    assert.equal(result.taskResponse, 3);
-    assert.equal(result.estimatedBand, 4.5);
-});
-
-test("underlength response keeps its actual server word count without a fixed penalty", () => {
-    const raw = evaluationFixture("task1", [5.5, 6, 6, 6], { modelWordCount: 999 });
-    const result = normalizeSingleEvaluation(raw, "task1", 92);
-    assert.equal(result.wordCount, 92);
-    assert.equal(result.estimatedBand, 6);
-});
-
-test("empty candidate response is rejected before any assessment", () => {
-    assert.throws(
-        () => validateWritingAssessmentInput("task2", "Discuss both views.", "   "),
-        /non-empty candidate response/
-    );
-});
-
-test("memorised or irrelevant response is represented through Task Response evidence", () => {
-    const raw = evaluationFixture("task2", [2.5, 4.5, 5.5, 5], {
-        taskSummary: "The response is largely memorised and irrelevant.",
-        taskLimitations: ["Stock material does not answer the question."]
-    });
-    const result = normalizeSingleEvaluation(raw, "task2", 264);
-    assert.equal(result.taskResponse, 2.5);
-    assert.match(result.criterionFeedback.taskResponse.summary, /memorised/i);
-});
-
-test("high-level response with occasional grammar errors retains strong non-grammar criteria", () => {
-    const raw = evaluationFixture("task2", [8, 7.5, 7.5, 6.5], {
-        errors: [
-            { original: "people which cycle", correction: "people who cycle", type: "grammar", explanation: "Use who for people.", severity: "minor" }
-        ]
-    });
-    const result = normalizeSingleEvaluation(raw, "task2", 302);
-    assert.equal(result.taskResponse, 8);
-    assert.equal(result.estimatedBand, 7.5);
-});
-
-test("many simple but accurate sentences do not create an invented grammar penalty", () => {
-    const raw = evaluationFixture("task2", [6.5, 6.5, 6, 6.5], {
-        grammarSummary: "Sentences are mostly simple but generally accurate."
-    });
-    const result = normalizeSingleEvaluation(raw, "task2", 265);
-    assert.equal(result.grammarRangeAccuracy, 6.5);
-    assert.equal(result.estimatedBand, 6.5);
-});
-
-test("malformed model output is rejected instead of producing a fallback score", () => {
-    const raw = evaluationFixture("task2", [7, 7, 7, 7]);
-    delete raw.scores.lexicalResource;
-    assert.throws(() => normalizeSingleEvaluation(raw, "task2", 280), /lexicalResource/);
-});
-
-test("OpenAI timeout and provider errors map to safe status codes", () => {
-    assert.deepEqual(
-        classifyWritingEvaluationError({ name: "APITimeoutError" }),
-        { status: 504, code: "WRITING_AI_TIMEOUT" }
-    );
-    assert.deepEqual(
-        classifyWritingEvaluationError({ status: 429 }),
-        { status: 503, code: "WRITING_AI_BUSY" }
-    );
-    assert.deepEqual(
-        classifyWritingEvaluationError({ status: 500 }),
-        { status: 502, code: "WRITING_AI_FAILED" }
-    );
-});
-
-test("invalid decimal bands are normalised to the nearest IELTS half band", () => {
-    assert.equal(normalizeBand(6.3), 6.5);
-    assert.equal(normalizeBand(6.74), 6.5);
-    assert.equal(normalizeBand(6.75), 7);
-    assert.equal(calculateTaskBand({ a: 6.3, b: 6.5, c: 7, d: 7.2 }), 7);
-});
-
-test("full Writing calculation gives Task 2 twice the Task 1 weight", () => {
-    assert.equal(calculateFinalWritingBand(6.5, 7.5), 7);
-    const task1 = evaluationFixture("task1", [6.5, 6.5, 6.5, 6.5]);
-    const task2 = evaluationFixture("task2", [7.5, 7.5, 7.5, 7.5]);
-    assert.equal(normalizeFullEvaluation({ task1, task2 }, { task1: 180, task2: 290 }).overallBand, 7);
-});
-
-test("dashboard Writing averages are reported as IELTS half bands", () => {
-    assert.equal(calculateAverageWritingBand([6, 6.5]), 6.5);
-    assert.equal(calculateAverageWritingBand([6, 6.5, 6.5]), 6.5);
-    assert.equal(calculateAverageWritingBand([5.5, 6]), 6);
-    assert.equal(calculateAverageWritingBand([]), 0);
-});
-
-test("dashboard normalises legacy decimal Writing bands before display", () => {
-    const source = fs.readFileSync(path.join(__dirname, "..", "profile-dashboard.js"), "utf8");
-    assert.match(source, /averageBand:\s*roundHalfBand\(rawSummary\.averageBand\)/);
-    assert.match(source, /overallBand:\s*roundHalfBand\(attempt\.overallBand/);
-});
-
-test("Responses API schema is strict and exposes all required canonical feedback fields", () => {
-    const format = writingStructuredOutput("task2");
+test("strict JSON schema contains criterion objects only and never asks AI for overall band", () => {
+    const format = writingStructuredOutput("provisional");
     assert.equal(format.type, "json_schema");
     assert.equal(format.strict, true);
-    assert.equal(format.schema.additionalProperties, false);
     assert.deepEqual(format.schema.required, [
-        "taskType", "wordCount", "scores", "criterionFeedback", "errors", "overallFeedback", "improvedEssay"
+        "taskAchievement",
+        "coherenceAndCohesion",
+        "lexicalResource",
+        "grammarRangeAndAccuracy"
     ]);
-    assert.deepEqual(format.schema.properties.scores.properties.taskResponse.enum, [
-        0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9
-    ]);
+    assert.equal(format.schema.additionalProperties, false);
+    assert.deepEqual(format.schema.properties.taskAchievement.required, ["score", "evidence", "weaknesses"]);
+    assert.equal(Object.hasOwn(format.schema.properties, "overallBand"), false);
+    assert.equal(JSON.stringify(format.schema).includes("overallBand"), false);
 });
 
-test("assessment transport uses the exact model, Responses API, medium reasoning, and one repair retry", () => {
+test("all three IELTS Writing assessment types are explicit and validated", () => {
+    assert.equal(normalizeAssessmentType("Academic Task1"), "academic_task1");
+    assert.equal(normalizeAssessmentType("general-task1"), "general_task1");
+    assert.equal(normalizeAssessmentType("task2"), "task2");
+    assert.throws(() => normalizeAssessmentType("task1"), /academic_task1/);
+    assert.throws(() => validateWritingAssessmentInput("task2", "Discuss both views.", "  "), /non-empty/);
+});
+
+test("malformed or evidence-free model output is rejected without fallback scores", () => {
+    const raw = assessment(7);
+    raw.lexicalResource.evidence = [];
+    assert.throws(() => normalizeCriterionAssessment(raw), /requires evidence/);
+    const missingCriterion = assessment(7);
+    delete missingCriterion.grammarRangeAndAccuracy;
+    assert.throws(() => normalizeCriterionAssessment(missingCriterion), /grammarRangeAndAccuracy/);
+});
+
+test("second pass can lower but can never inflate the provisional criterion score", () => {
+    const first = assessment(9);
+    const second = assessment(8, ["The response is polished but not fully natural or exceptional."]);
+    const final = mergeAssessmentPasses(first, second);
+    assert.deepEqual(criterionScores(final), {
+        taskAchievement: 8,
+        coherenceAndCohesion: 8,
+        lexicalResource: 8,
+        grammarRangeAndAccuracy: 8
+    });
+    assert.match(final.lexicalResource.weaknesses[0], /not fully natural/i);
+});
+
+test("backend alone calculates the task and full Writing bands", () => {
+    assert.equal(calculateTaskBand({ task: 8, cc: 8.5, lr: 8, gra: 8.5 }), 8.5);
+    assert.equal(calculateFinalWritingBand(7.5, 8.5), 8);
+    const task1 = normalizeFinalEvaluation(assessment(7.5), "academic_task1", 180);
+    const task2 = normalizeFinalEvaluation(assessment(8.5), "task2", 290);
+    assert.equal(normalizeFullEvaluation(task1, task2).overallBand, 8);
+});
+
+test("IELTS half-band rounding remains deterministic", () => {
+    assert.equal(normalizeBand(6.24), 6);
+    assert.equal(normalizeBand(6.25), 6.5);
+    assert.equal(normalizeBand(8.74), 8.5);
+    assert.equal(normalizeBand(8.75), 9);
+    assert.equal(calculateAverageWritingBand([6, 6.5, 7]), 6.5);
+});
+
+for (const sample of [
+    { name: "weak Band 5", score: 5, weaknesses: ["Ideas are limited and language errors sometimes impede clarity."] },
+    { name: "average Band 6", score: 6, weaknesses: ["Development and language control are uneven."] },
+    { name: "good Band 7", score: 7, weaknesses: ["Some imprecision and occasional errors remain."] },
+    { name: "strong Band 8", score: 8, weaknesses: ["Minor non-systematic weaknesses prevent fully controlled Band 9 performance."] },
+    { name: "exceptional Band 9", score: 9, weaknesses: [] }
+]) {
+    test(`calibration fixture distinguishes ${sample.name}`, () => {
+        const result = normalizeFinalEvaluation(assessment(sample.score, sample.weaknesses), "task2", 280);
+        assert.equal(result.estimatedBand, sample.score);
+        assert.equal(result.taskResponse, sample.score);
+        assert.equal(result.weaknesses.length, sample.weaknesses.length ? 1 : 0);
+    });
+}
+
+test("live calibration corpus contains complete candidate responses for Bands 5 through 9", () => {
+    assert.deepEqual(calibrationSamples.map(sample => sample.id), ["band5", "band6", "band7", "band8", "band9"]);
+    for (const sample of calibrationSamples) {
+        assert.ok(sample.taskText.length > 50);
+        assert.ok(sample.response.trim().split(/\s+/).length >= 200, `${sample.id} response is incomplete`);
+        assert.equal(sample.expected.length, 2);
+    }
+});
+
+test("Responses API uses versioned two-pass evaluator, temperature 0.1, and no legacy call", () => {
     const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
     assert.equal(WRITING_ASSESSMENT_MODEL, "gpt-5.6-terra");
-    assert.match(source, /openai\.responses\.create/);
-    assert.match(source, /reasoning:\s*\{\s*effort:\s*"medium"\s*\}/);
-    assert.match(source, /attempt\s*<=\s*2/);
-    assert.match(source, /REPAIR INSTRUCTION/);
+    assert.equal(WRITING_TEMPERATURE, 0.1);
+    assert.match(WRITING_EVALUATOR_VERSION, /two-pass/);
+    assert.match(source, /temperature:\s*WRITING_TEMPERATURE/);
+    assert.match(source, /reasoning:\s*\{\s*effort:\s*"none"\s*\}/);
+    assert.match(source, /pass:\s*"provisional"/);
+    assert.match(source, /pass:\s*"verification"/);
+    assert.doesNotMatch(source, /generateAIFeedback/);
     assert.doesNotMatch(source, /openai\.chat\.completions\.create/);
 });
 
-test("Writing scoring has no artificial band ceiling or special 7–8 gate", () => {
+test("cache is content-addressed by task identity, exact text, response, and evaluator version", () => {
     const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
-    assert.match(source, /full 0–9 range is available for every criterion/i);
-    assert.match(source, /Do not impose an artificial ceiling, floor, target distribution/i);
-    assert.match(source, /including 8 or 9, whenever the complete descriptor is supported/i);
-    assert.doesNotMatch(source, /BAND 7–8 BOUNDARY/);
-    assert.doesNotMatch(source, /normally Band 7/);
+    assert.match(source, /function writingEvaluationHash/);
+    assert.match(source, /taskId:\s*String\(task\.taskId/);
+    assert.match(source, /taskText:\s*String\(task\.taskText/);
+    assert.match(source, /candidateResponse:\s*String\(task\.candidateResponse/);
+    assert.match(source, /evaluatorVersion:\s*WRITING_EVALUATOR_VERSION/);
+    assert.match(source, /findCachedWritingEvaluation\(mongoUserId, evaluationHash\)/);
+    assert.doesNotMatch(source, /findOne\(\{\s*userId:\s*mongoUserId,\s*evaluationRequestId/);
 });
 
-test("Writing length guidance does not apply a fixed deduction or score cap", () => {
-    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
-    assert.match(source, /Do not apply a fixed deduction or automatic band ceiling/i);
+test("frontend sends exact task type, task text, response, and word count", () => {
+    const task1 = fs.readFileSync(path.join(__dirname, "..", "writing-task1.html"), "utf8");
+    const task2 = fs.readFileSync(path.join(__dirname, "..", "writing-task2.html"), "utf8");
+    const full = fs.readFileSync(path.join(__dirname, "..", "full-writing-test.html"), "utf8");
+    assert.match(task1, /assessmentType:\s*currentPrompt\?\.assessmentType\s*\|\|\s*'academic_task1'/);
+    assert.match(task1, /essay,\s*\n\s*wordCount/);
+    assert.match(task2, /assessmentType:\s*'task2'/);
+    assert.match(task2, /essay,\s*\n\s*wordCount/);
+    assert.match(full, /task1AssessmentType:\s*'academic_task1'/);
+    assert.match(full, /task1Prompt,\s*\n\s*task1VisualDiagramUrl,\s*\n\s*task1Response,\s*\n\s*task2Prompt,\s*\n\s*task2Response/);
 });
 
-test("Writing calibration uses best fit and guards against severity bias", () => {
-    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
-    assert.match(source, /Apply descriptors by best fit, not as a checklist and not by the weakest feature/i);
-    assert.match(source, /Do not select the lower band merely because you found something to criticise/i);
-    assert.match(source, /audit the provisional score for severity bias/i);
-    assert.match(source, /isolated mistakes do not disqualify it/i);
+test("mock results never invent a Writing band from response length", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "mock-test-store.js"), "utf8");
+    assert.doesNotMatch(source, /estimateWritingBand/);
+    assert.match(source, /sections\.writing\?\.result\?\.overallBand/);
 });
 
-test("Writing calibration keeps criterion penalties independent", () => {
-    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
-    assert.match(source, /Task misunderstanding primarily affects Task Achievement or Task Response/i);
-    assert.match(source, /Do not require error-free writing for Band 7/i);
-    assert.match(source, /Do not cap Task Achievement at Band 5 because of one inaccurate figure/i);
-    assert.match(source, /Do not cap Task Response at Band 5 or 6 merely because an examiner can imagine more detail/i);
+test("provider failures map to safe API status codes", () => {
+    assert.deepEqual(classifyWritingEvaluationError({ name: "APITimeoutError" }), { status: 504, code: "WRITING_AI_TIMEOUT" });
+    assert.deepEqual(classifyWritingEvaluationError({ status: 429 }), { status: 503, code: "WRITING_AI_BUSY" });
+    assert.deepEqual(classifyWritingEvaluationError({ status: 500 }), { status: 502, code: "WRITING_AI_FAILED" });
 });

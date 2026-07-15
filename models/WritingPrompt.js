@@ -6,6 +6,11 @@ const writingPromptSchema = new mongoose.Schema({
         enum: ["task1", "task2"],
         required: true
     },
+    assessmentType: {
+        type: String,
+        enum: ["academic_task1", "general_task1", "task2"],
+        default: undefined
+    },
     title: {
         type: String,
         required: true,
