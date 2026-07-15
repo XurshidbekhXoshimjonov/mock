@@ -230,3 +230,19 @@ test("Writing length guidance does not apply a fixed deduction or score cap", ()
     const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
     assert.match(source, /Do not apply a fixed deduction or automatic band ceiling/i);
 });
+
+test("Writing calibration uses best fit and guards against severity bias", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
+    assert.match(source, /Apply descriptors by best fit, not as a checklist and not by the weakest feature/i);
+    assert.match(source, /Do not select the lower band merely because you found something to criticise/i);
+    assert.match(source, /audit the provisional score for severity bias/i);
+    assert.match(source, /isolated mistakes do not disqualify it/i);
+});
+
+test("Writing calibration keeps criterion penalties independent", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
+    assert.match(source, /Task misunderstanding primarily affects Task Achievement or Task Response/i);
+    assert.match(source, /Do not require error-free writing for Band 7/i);
+    assert.match(source, /Do not cap Task Achievement at Band 5 because of one inaccurate figure/i);
+    assert.match(source, /Do not cap Task Response at Band 5 or 6 merely because an examiner can imagine more detail/i);
+});
