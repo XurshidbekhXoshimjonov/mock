@@ -764,6 +764,30 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderFutureManagement(lines, title) {
+            const body = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => {
+                    const isBullet = /^[-*•]\s+/.test(line);
+                    const content = renderPlaceholderText(line.replace(/^[-*•]\s+/, ""), block.options);
+                    if (isBullet) return `<li class="lc-management-row">${content}</li>`;
+                    return `<h5 class="lc-management-section-title">${content}</h5>`;
+                })
+                .join("");
+
+            return `
+                <div class="lc-management-notes">
+                    <h4 class="lc-management-title">${escapeHtml(title || "THE FUTURE OF MANAGEMENT")}</h4>
+                    <div class="lc-management-body">${body}</div>
+                </div>
+            `;
+        }
+
+        if (block.noteStyle === "future-management") {
+            return blockCard(block, renderFutureManagement(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--future-management");
+        }
+
         if (block.noteStyle === "transport-survey") {
             return blockCard(block, renderTransportSurvey(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--transport-survey");
         }

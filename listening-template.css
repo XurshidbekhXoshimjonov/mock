@@ -766,6 +766,69 @@ body.fullscreen-fallback .lc-fullscreen-button {
     overflow: hidden;
 }
 
+.lc-note-completion--future-management {
+    padding: 0;
+    overflow: hidden;
+}
+
+.lc-note-completion--future-management > .lc-block-heading {
+    display: block;
+    padding: 16px 20px 0;
+}
+
+.lc-management-notes {
+    margin: 0 20px 22px;
+    border: 1px solid #5f6368;
+    background: #fff;
+    color: #202124;
+    padding: 20px 24px 24px;
+}
+
+.lc-management-title {
+    margin: 0 0 30px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: .03em;
+    text-align: center;
+}
+
+.lc-management-section-title {
+    margin: 26px 0 8px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.lc-management-section-title:first-child {
+    margin-top: 0;
+}
+
+.lc-management-row {
+    margin: 0 0 8px 24px;
+    padding-left: 5px;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.lc-note-completion--future-management .lc-answer-inline {
+    margin: 0 4px;
+}
+
+@media (max-width: 620px) {
+    .lc-management-notes {
+        margin: 0 10px 14px;
+        padding: 16px 14px 18px;
+    }
+    .lc-management-title {
+        margin-bottom: 20px;
+        font-size: 21px;
+    }
+    .lc-management-section-title,
+    .lc-management-row {
+        font-size: 14px;
+    }
+}
+
 .lc-mcq-content-title {
     margin: 2px 0 20px;
     color: #111827;

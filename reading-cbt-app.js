@@ -849,7 +849,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=20260716-areas-title-v14";
+    stylesheet.href = "listening-template.css?v=20260716-management-notes-v15";
     document.head.appendChild(stylesheet);
 }
 
