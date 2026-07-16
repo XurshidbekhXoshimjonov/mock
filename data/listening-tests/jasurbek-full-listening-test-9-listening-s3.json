@@ -1,0 +1,539 @@
+{
+  "id": "jasurbek-full-listening-test-9-listening-s3",
+  "slug": "jasurbek-full-listening-test-9-listening-s3",
+  "title": "Full Listening Test 9 — Jasurbek — Listening Section 3",
+  "part": 3,
+  "audio": "https://files.catbox.moe/xnsr9r.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-26",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27-30",
+      "instruction": "What opinion is expressed about each book? Choose FOUR answers from the box.",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What does Dr Owen advise Joel to include in the title of his project?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the location of the farms"
+        },
+        {
+          "letter": "B",
+          "text": "the number of farmers"
+        },
+        {
+          "letter": "C",
+          "text": "the types of farming"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "Why has Joel decided to do face-to-face interviews?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to see the farmers' workplaces"
+        },
+        {
+          "letter": "B",
+          "text": "to limit the time he spends on the project"
+        },
+        {
+          "letter": "C",
+          "text": "to get fuller answers"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Joel agrees to investigate how farmers get information on new developments",
+      "options": [
+        {
+          "letter": "A",
+          "text": "by showing them a series of pictures."
+        },
+        {
+          "letter": "B",
+          "text": "by asking them open questions."
+        },
+        {
+          "letter": "C",
+          "text": "by sending them a checklist in advance."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Concerning government communication with farmers, the speakers agree that",
+      "options": [
+        {
+          "letter": "A",
+          "text": "much of it is irrelevant."
+        },
+        {
+          "letter": "B",
+          "text": "it is often insufficient for farmers' needs."
+        },
+        {
+          "letter": "C",
+          "text": "the wording is sometimes unclear."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "According to Joel's reading about the cost of making changes, many British farmers",
+      "options": [
+        {
+          "letter": "A",
+          "text": "leave investment decisions to their accountants."
+        },
+        {
+          "letter": "B",
+          "text": "have too little time to calculate the costs of new methods."
+        },
+        {
+          "letter": "C",
+          "text": "are reluctant to spend money on improvements."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Survey of Australian sheep farmers found that most of them",
+      "options": [
+        {
+          "letter": "A",
+          "text": "are usually reluctant to make changes."
+        },
+        {
+          "letter": "B",
+          "text": "make changes based on limited research."
+        },
+        {
+          "letter": "C",
+          "text": "want plenty of evidence before they make changes"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Contemporary Farming Manual",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It's badly organised."
+        },
+        {
+          "letter": "B",
+          "text": "It's out of date."
+        },
+        {
+          "letter": "C",
+          "text": "It's clear."
+        },
+        {
+          "letter": "D",
+          "text": "It's essential reading."
+        },
+        {
+          "letter": "E",
+          "text": "It's inaccurate."
+        },
+        {
+          "letter": "F",
+          "text": "It's well illustrated."
+        },
+        {
+          "letter": "G",
+          "text": "It's boring"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Running a Small Farm",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It's badly organised."
+        },
+        {
+          "letter": "B",
+          "text": "It's out of date."
+        },
+        {
+          "letter": "C",
+          "text": "It's clear."
+        },
+        {
+          "letter": "D",
+          "text": "It's essential reading."
+        },
+        {
+          "letter": "E",
+          "text": "It's inaccurate."
+        },
+        {
+          "letter": "F",
+          "text": "It's well illustrated."
+        },
+        {
+          "letter": "G",
+          "text": "It's boring"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Agriculture and Economics",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It's badly organised."
+        },
+        {
+          "letter": "B",
+          "text": "It's out of date."
+        },
+        {
+          "letter": "C",
+          "text": "It's clear."
+        },
+        {
+          "letter": "D",
+          "text": "It's essential reading."
+        },
+        {
+          "letter": "E",
+          "text": "It's inaccurate."
+        },
+        {
+          "letter": "F",
+          "text": "It's well illustrated."
+        },
+        {
+          "letter": "G",
+          "text": "It's boring"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "How to Survive in Farming",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It's badly organised."
+        },
+        {
+          "letter": "B",
+          "text": "It's out of date."
+        },
+        {
+          "letter": "C",
+          "text": "It's clear."
+        },
+        {
+          "letter": "D",
+          "text": "It's essential reading."
+        },
+        {
+          "letter": "E",
+          "text": "It's inaccurate."
+        },
+        {
+          "letter": "F",
+          "text": "It's well illustrated."
+        },
+        {
+          "letter": "G",
+          "text": "It's boring"
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-9",
+  "createdAt": "2026-07-16T03:30:37.894Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "https://files.catbox.moe/xnsr9r.mp3",
+      "instruction": "",
+      "answerText": "21: A\n22: C\n23: B\n24: A\n25: B\n26: B\n27: G\n28: E\n29: D\n30: B",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-9-p3-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21-26",
+          "title": "Farmers' attitudes to new developments in agriculture",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "What does Dr Owen advise Joel to include in the title of his project?",
+              "text": "What does Dr Owen advise Joel to include in the title of his project?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the location of the farms"
+                },
+                {
+                  "letter": "B",
+                  "text": "the number of farmers"
+                },
+                {
+                  "letter": "C",
+                  "text": "the types of farming"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Why has Joel decided to do face-to-face interviews?",
+              "text": "Why has Joel decided to do face-to-face interviews?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to see the farmers' workplaces"
+                },
+                {
+                  "letter": "B",
+                  "text": "to limit the time he spends on the project"
+                },
+                {
+                  "letter": "C",
+                  "text": "to get fuller answers"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Joel agrees to investigate how farmers get information on new developments",
+              "text": "Joel agrees to investigate how farmers get information on new developments",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "by showing them a series of pictures."
+                },
+                {
+                  "letter": "B",
+                  "text": "by asking them open questions."
+                },
+                {
+                  "letter": "C",
+                  "text": "by sending them a checklist in advance."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Concerning government communication with farmers, the speakers agree that",
+              "text": "Concerning government communication with farmers, the speakers agree that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "much of it is irrelevant."
+                },
+                {
+                  "letter": "B",
+                  "text": "it is often insufficient for farmers' needs."
+                },
+                {
+                  "letter": "C",
+                  "text": "the wording is sometimes unclear."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "According to Joel's reading about the cost of making changes, many British farmers",
+              "text": "According to Joel's reading about the cost of making changes, many British farmers",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "leave investment decisions to their accountants."
+                },
+                {
+                  "letter": "B",
+                  "text": "have too little time to calculate the costs of new methods."
+                },
+                {
+                  "letter": "C",
+                  "text": "are reluctant to spend money on improvements."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Survey of Australian sheep farmers found that most of them",
+              "text": "Survey of Australian sheep farmers found that most of them",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "are usually reluctant to make changes."
+                },
+                {
+                  "letter": "B",
+                  "text": "make changes based on limited research."
+                },
+                {
+                  "letter": "C",
+                  "text": "want plenty of evidence before they make changes"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "jasurbek-full-listening-test-9-p3-g2",
+          "type": "matching",
+          "questionRange": "Questions 27-30",
+          "title": "",
+          "optionsTitle": "Opinions",
+          "example": "",
+          "instruction": "What opinion is expressed about each book? Choose FOUR answers from the box.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "It's badly organised."
+            },
+            {
+              "letter": "B",
+              "text": "It's out of date."
+            },
+            {
+              "letter": "C",
+              "text": "It's clear."
+            },
+            {
+              "letter": "D",
+              "text": "It's essential reading."
+            },
+            {
+              "letter": "E",
+              "text": "It's inaccurate."
+            },
+            {
+              "letter": "F",
+              "text": "It's well illustrated."
+            },
+            {
+              "letter": "G",
+              "text": "It's boring"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Contemporary Farming Manual",
+              "text": "Contemporary Farming Manual",
+              "answer": "G"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Running a Small Farm",
+              "text": "Running a Small Farm",
+              "answer": "E"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Agriculture and Economics",
+              "text": "Agriculture and Economics",
+              "answer": "D"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "How to Survive in Farming",
+              "text": "How to Survive in Farming",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published"
+}

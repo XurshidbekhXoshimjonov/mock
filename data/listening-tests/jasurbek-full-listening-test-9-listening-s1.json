@@ -1,0 +1,240 @@
+{
+  "id": "jasurbek-full-listening-test-9-listening-s1",
+  "slug": "jasurbek-full-listening-test-9-listening-s1",
+  "title": "Full Listening Test 9 — Jasurbek — Listening Section 1",
+  "part": 1,
+  "audio": "https://files.catbox.moe/xnsr9r.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Available for week beginning 1 ...",
+      "options": [],
+      "answer": "September"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Cost for the week: $ ...",
+      "options": [],
+      "answer": "835"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Part of a building that was first used as a ...",
+      "options": [],
+      "answer": "school"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "The living room leads out to the ...",
+      "options": [],
+      "answer": "deck"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "View of the ... from the bedroom",
+      "options": [],
+      "answer": "river"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Bring our own ...",
+      "options": [],
+      "answer": "towels"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Doesn't have a ...",
+      "options": [],
+      "answer": "garage"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "The owner recommends the ... restaurant",
+      "options": [],
+      "answer": "Chinese"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Deposit: $ ...",
+      "options": [],
+      "answer": "200"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Deadline for final payment: final day of ...",
+      "options": [],
+      "answer": "July"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-9",
+  "createdAt": "2026-07-16T03:30:37.894Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "https://files.catbox.moe/xnsr9r.mp3",
+      "instruction": "",
+      "answerText": "1: September\n2: 835\n3: school\n4: deck\n5: river\n6: towels\n7: garage\n8: Chinese\n9: 200\n10: July",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-9-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Holiday rental",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Example — Owners' name: Carol and Dave Marriott",
+            "Aster cottage",
+            "- Available for week beginning 1 {{1}}",
+            "- Cost for the week: $ {{2}}",
+            "Perlwinkle Cottage",
+            "- The same price as Aster Cottage last year",
+            "- Part of a building that was first used as a {{3}}",
+            "- The living room leads out to the {{4}}",
+            "- View of the {{5}} from the bedroom",
+            "- Bring our own {{6}}",
+            "- Doesn't have a {{7}}",
+            "The town",
+            "- The owner recommends the {{8}} restaurant",
+            "- The town is well known for its antique shops",
+            "Payment",
+            "- Deposit: $ {{9}}",
+            "- Deadline for final payment: final day of {{10}}"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Available for week beginning 1 ...",
+              "text": "Available for week beginning 1 ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "September"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Cost for the week: $ ...",
+              "text": "Cost for the week: $ ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "835"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Part of a building that was first used as a ...",
+              "text": "Part of a building that was first used as a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "school"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "The living room leads out to the ...",
+              "text": "The living room leads out to the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "deck"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "View of the ... from the bedroom",
+              "text": "View of the ... from the bedroom",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "river"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Bring our own ...",
+              "text": "Bring our own ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "towels"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Doesn't have a ...",
+              "text": "Doesn't have a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "garage"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "The owner recommends the ... restaurant",
+              "text": "The owner recommends the ... restaurant",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Chinese"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Deposit: $ ...",
+              "text": "Deposit: $ ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "200"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Deadline for final payment: final day of ...",
+              "text": "Deadline for final payment: final day of ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "July"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published"
+}

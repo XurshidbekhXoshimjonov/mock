@@ -851,12 +851,15 @@ const ListeningComponents = (() => {
             </div>`
             : "";
         const hasImage = Boolean(block.imageUrl);
-        const options = (block.options || []).map((option) =>
-            `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${escapeHtml(cleanOptionText(option.text || ""))}</div>`
-        ).join("");
-        const optionTags = (block.options || []).map((option) =>
-            `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(option.letter || "")} - ${escapeHtml(cleanOptionText(option.text || ""))}</option>`
-        ).join("");
+        const options = (block.options || []).map((option) => {
+            const optionText = cleanOptionText(option.text || "");
+            return `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${optionText ? escapeHtml(optionText) : ""}</div>`;
+        }).join("");
+        const optionTags = (block.options || []).map((option) => {
+            const optionText = cleanOptionText(option.text || "");
+            const optionLabel = optionText ? `${option.letter || ""} - ${optionText}` : (option.letter || "");
+            return `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(optionLabel)}</option>`;
+        }).join("");
         const rows = (block.questions || []).map((question) => {
             const questionNumber = Number(question.questionNumber);
             const rawText = String(question.text || "").trim();
@@ -874,7 +877,8 @@ const ListeningComponents = (() => {
             </select>
         </div>`;
         }).join("");
-        const optionsTitle = options ? `<h4 class="lc-matching-options-title">${hasImage ? "Categories" : "Main theme"}</h4>` : "";
+        const optionsHeading = block.optionsTitle || (hasImage ? "Categories" : "Main theme");
+        const optionsTitle = options ? `<h4 class="lc-matching-options-title">${escapeHtml(optionsHeading)}</h4>` : "";
         const content = hasImage
             ? `<div class="lc-matching-map-layout">
                 ${image}

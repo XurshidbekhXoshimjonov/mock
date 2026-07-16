@@ -849,12 +849,12 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=20260712-full-player-v10";
+    stylesheet.href = "listening-template.css?v=20260716-matching-select-v11";
     document.head.appendChild(stylesheet);
 }
 
 async function fetchJson(url, fallbackMessage) {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "no-store" });
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {

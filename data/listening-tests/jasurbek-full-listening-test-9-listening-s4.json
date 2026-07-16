@@ -1,0 +1,240 @@
+{
+  "id": "jasurbek-full-listening-test-9-listening-s4",
+  "slug": "jasurbek-full-listening-test-9-listening-s4",
+  "title": "Full Listening Test 9 — Jasurbek — Listening Section 4",
+  "part": 4,
+  "audio": "https://files.catbox.moe/xnsr9r.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Initially, artists produced rugs made from ...",
+      "options": [],
+      "answer": "wool"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Early designs included ... images",
+      "options": [],
+      "answer": "bird"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Designs are linked to traditional beliefs, e.g. some designs are believed to bring ...",
+      "options": [],
+      "answer": "rain"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Inspired by the Australian landscape, especially the ...",
+      "options": [],
+      "answer": "desert"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Started creating art when he was in ...",
+      "options": [],
+      "answer": "prison"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "His textiles were used to make ...",
+      "options": [],
+      "answer": "clothing"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Her work is a modern look at ... and nature",
+      "options": [],
+      "answer": "family"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "1995 – painted a successful Aboriginal athlete's jeans with lizards and a ...",
+      "options": [],
+      "answer": "rainbow"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "2001 – designed a 'Journey of a Nation' parade outfit with part of a ... on it",
+      "options": [],
+      "answer": "snake"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the ... Case",
+      "options": [],
+      "answer": "carpet"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-9",
+  "createdAt": "2026-07-16T03:30:37.894Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "https://files.catbox.moe/xnsr9r.mp3",
+      "instruction": "",
+      "answerText": "31: wool\n32: bird\n33: rain\n34: desert\n35: prison\n36: clothing\n37: family\n38: rainbow\n39: snake\n40: carpet",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-9-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "Aboriginal Textile Design",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Ernabella Arts Centre",
+            "- Artists produce craft and learn new techniques",
+            "- Initially, artists produced rugs made from {{31}}",
+            "- Later artists made batik and screen-printed fabrics",
+            "Tiwi Designs",
+            "- Early designs included {{32}} images",
+            "- Designs are linked to traditional beliefs, e.g. some designs are believed to bring {{33}}",
+            "Jimmy Pike",
+            "- Inspired by the Australian landscape, especially the {{34}}",
+            "- Started creating art when he was in {{35}}",
+            "- His textiles were used to make {{36}}",
+            "Bronwyn Bancroft",
+            "- Her work is a modern look at {{37}} and nature",
+            "- 1995 – painted a successful Aboriginal athlete's jeans with lizards and a {{38}}",
+            "- 2001 – designed a 'Journey of a Nation' parade outfit with part of a {{39}} on it",
+            "Copyright Issues",
+            "- Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the {{40}} Case"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Initially, artists produced rugs made from ...",
+              "text": "Initially, artists produced rugs made from ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "wool"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Early designs included ... images",
+              "text": "Early designs included ... images",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "bird"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Designs are linked to traditional beliefs, e.g. some designs are believed to bring ...",
+              "text": "Designs are linked to traditional beliefs, e.g. some designs are believed to bring ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rain"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Inspired by the Australian landscape, especially the ...",
+              "text": "Inspired by the Australian landscape, especially the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "desert"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Started creating art when he was in ...",
+              "text": "Started creating art when he was in ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "prison"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "His textiles were used to make ...",
+              "text": "His textiles were used to make ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "clothing"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Her work is a modern look at ... and nature",
+              "text": "Her work is a modern look at ... and nature",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "family"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "1995 – painted a successful Aboriginal athlete's jeans with lizards and a ...",
+              "text": "1995 – painted a successful Aboriginal athlete's jeans with lizards and a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rainbow"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "2001 – designed a 'Journey of a Nation' parade outfit with part of a ... on it",
+              "text": "2001 – designed a 'Journey of a Nation' parade outfit with part of a ... on it",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "snake"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the ... Case",
+              "text": "Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the ... Case",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "carpet"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published"
+}

@@ -1,0 +1,1015 @@
+{
+  "id": "jasurbek-full-listening-test-9",
+  "slug": "jasurbek-full-listening-test-9",
+  "title": "Full Listening Test 9 — Jasurbek",
+  "subtitle": "Listening full test",
+  "sourceFile": "FULL LISTENING.html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "jasurbek-static-listening-v1",
+  "manualListeningTestId": "jasurbek-full-listening-test-9-listening-full",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "https://files.catbox.moe/xnsr9r.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-9-p1-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 1-10",
+            "instructionText": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+            "title": "Holiday rental",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "Example — Owners' name: Carol and Dave Marriott",
+              "Aster cottage",
+              "- Available for week beginning 1 {{1}}",
+              "- Cost for the week: $ {{2}}",
+              "Perlwinkle Cottage",
+              "- The same price as Aster Cottage last year",
+              "- Part of a building that was first used as a {{3}}",
+              "- The living room leads out to the {{4}}",
+              "- View of the {{5}} from the bedroom",
+              "- Bring our own {{6}}",
+              "- Doesn't have a {{7}}",
+              "The town",
+              "- The owner recommends the {{8}} restaurant",
+              "- The town is well known for its antique shops",
+              "Payment",
+              "- Deposit: $ {{9}}",
+              "- Deadline for final payment: final day of {{10}}"
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Available for week beginning 1 ...",
+                "options": [],
+                "answer": "September"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Cost for the week: $ ...",
+                "options": [],
+                "answer": "835"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Part of a building that was first used as a ...",
+                "options": [],
+                "answer": "school"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "The living room leads out to the ...",
+                "options": [],
+                "answer": "deck"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "View of the ... from the bedroom",
+                "options": [],
+                "answer": "river"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Bring our own ...",
+                "options": [],
+                "answer": "towels"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "Doesn't have a ...",
+                "options": [],
+                "answer": "garage"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "The owner recommends the ... restaurant",
+                "options": [],
+                "answer": "Chinese"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Deposit: $ ...",
+                "options": [],
+                "answer": "200"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Deadline for final payment: final day of ...",
+                "options": [],
+                "answer": "July"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-9-p2-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11-14",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Bridge to Brisbane Fun Run",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "On the day of the race the speaker recommends parking",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "in the sports ground."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "by the river."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "in the shopping centre."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "The timing chip should be attached to",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the shirt or singlet."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a shoe."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the wristband."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "Which group will run first?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "yellow"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "red"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "purple"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "The race organisers still need to find volunteers to help with",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "giving first aid."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "handing out water."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "starting the race."
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          },
+          {
+            "id": "jasurbek-full-listening-test-9-p2-g2",
+            "type": "matching",
+            "instructionTitle": "Questions 15-20",
+            "instructionText": "Label the map below. Write the correct letter, A-I, next to questions 15-20.",
+            "imageUrl": "https://i.ibb.co/6Jnp89RB/preview.webp",
+            "options": [
+              {
+                "letter": "A",
+                "text": ""
+              },
+              {
+                "letter": "B",
+                "text": ""
+              },
+              {
+                "letter": "C",
+                "text": ""
+              },
+              {
+                "letter": "D",
+                "text": ""
+              },
+              {
+                "letter": "E",
+                "text": ""
+              },
+              {
+                "letter": "F",
+                "text": ""
+              },
+              {
+                "letter": "G",
+                "text": ""
+              },
+              {
+                "letter": "H",
+                "text": ""
+              },
+              {
+                "letter": "I",
+                "text": ""
+              }
+            ],
+            "questions": [
+              {
+                "number": 15,
+                "type": "matching",
+                "question": "Stage",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 16,
+                "type": "matching",
+                "question": "T-shirt Stand",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "Bag Collection Area",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "Information Centre",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "question": "Prize Draw Box",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "question": "Water Station",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "I"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-9-p3-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 21-26",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Farmers' attitudes to new developments in agriculture",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "What does Dr Owen advise Joel to include in the title of his project?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the location of the farms"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the number of farmers"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the types of farming"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "Why has Joel decided to do face-to-face interviews?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "to see the farmers' workplaces"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "to limit the time he spends on the project"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "to get fuller answers"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 23,
+                "type": "multiple_choice",
+                "question": "Joel agrees to investigate how farmers get information on new developments",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "by showing them a series of pictures."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "by asking them open questions."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "by sending them a checklist in advance."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 24,
+                "type": "multiple_choice",
+                "question": "Concerning government communication with farmers, the speakers agree that",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "much of it is irrelevant."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "it is often insufficient for farmers' needs."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the wording is sometimes unclear."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 25,
+                "type": "multiple_choice",
+                "question": "According to Joel's reading about the cost of making changes, many British farmers",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "leave investment decisions to their accountants."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "have too little time to calculate the costs of new methods."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "are reluctant to spend money on improvements."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 26,
+                "type": "multiple_choice",
+                "question": "Survey of Australian sheep farmers found that most of them",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "are usually reluctant to make changes."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "make changes based on limited research."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "want plenty of evidence before they make changes"
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          },
+          {
+            "id": "jasurbek-full-listening-test-9-p3-g2",
+            "type": "matching",
+            "instructionTitle": "Questions 27-30",
+            "instructionText": "What opinion is expressed about each book? Choose FOUR answers from the box.",
+            "optionsTitle": "Opinions",
+            "options": [
+              {
+                "letter": "A",
+                "text": "It's badly organised."
+              },
+              {
+                "letter": "B",
+                "text": "It's out of date."
+              },
+              {
+                "letter": "C",
+                "text": "It's clear."
+              },
+              {
+                "letter": "D",
+                "text": "It's essential reading."
+              },
+              {
+                "letter": "E",
+                "text": "It's inaccurate."
+              },
+              {
+                "letter": "F",
+                "text": "It's well illustrated."
+              },
+              {
+                "letter": "G",
+                "text": "It's boring"
+              }
+            ],
+            "questions": [
+              {
+                "number": 27,
+                "type": "matching",
+                "question": "Contemporary Farming Manual",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It's badly organised."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It's out of date."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It's clear."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "It's essential reading."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "It's inaccurate."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "It's well illustrated."
+                  },
+                  {
+                    "letter": "G",
+                    "text": "It's boring"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 28,
+                "type": "matching",
+                "question": "Running a Small Farm",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It's badly organised."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It's out of date."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It's clear."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "It's essential reading."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "It's inaccurate."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "It's well illustrated."
+                  },
+                  {
+                    "letter": "G",
+                    "text": "It's boring"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 29,
+                "type": "matching",
+                "question": "Agriculture and Economics",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It's badly organised."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It's out of date."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It's clear."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "It's essential reading."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "It's inaccurate."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "It's well illustrated."
+                  },
+                  {
+                    "letter": "G",
+                    "text": "It's boring"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 30,
+                "type": "matching",
+                "question": "How to Survive in Farming",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It's badly organised."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It's out of date."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It's clear."
+                  },
+                  {
+                    "letter": "D",
+                    "text": "It's essential reading."
+                  },
+                  {
+                    "letter": "E",
+                    "text": "It's inaccurate."
+                  },
+                  {
+                    "letter": "F",
+                    "text": "It's well illustrated."
+                  },
+                  {
+                    "letter": "G",
+                    "text": "It's boring"
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-9-p4-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 31-40",
+            "instructionText": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "title": "Aboriginal Textile Design",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "Ernabella Arts Centre",
+              "- Artists produce craft and learn new techniques",
+              "- Initially, artists produced rugs made from {{31}}",
+              "- Later artists made batik and screen-printed fabrics",
+              "Tiwi Designs",
+              "- Early designs included {{32}} images",
+              "- Designs are linked to traditional beliefs, e.g. some designs are believed to bring {{33}}",
+              "Jimmy Pike",
+              "- Inspired by the Australian landscape, especially the {{34}}",
+              "- Started creating art when he was in {{35}}",
+              "- His textiles were used to make {{36}}",
+              "Bronwyn Bancroft",
+              "- Her work is a modern look at {{37}} and nature",
+              "- 1995 – painted a successful Aboriginal athlete's jeans with lizards and a {{38}}",
+              "- 2001 – designed a 'Journey of a Nation' parade outfit with part of a {{39}} on it",
+              "Copyright Issues",
+              "- Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the {{40}} Case"
+            ],
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "Initially, artists produced rugs made from ...",
+                "options": [],
+                "answer": "wool"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "Early designs included ... images",
+                "options": [],
+                "answer": "bird"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "Designs are linked to traditional beliefs, e.g. some designs are believed to bring ...",
+                "options": [],
+                "answer": "rain"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Inspired by the Australian landscape, especially the ...",
+                "options": [],
+                "answer": "desert"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "Started creating art when he was in ...",
+                "options": [],
+                "answer": "prison"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "His textiles were used to make ...",
+                "options": [],
+                "answer": "clothing"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Her work is a modern look at ... and nature",
+                "options": [],
+                "answer": "family"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "1995 – painted a successful Aboriginal athlete's jeans with lizards and a ...",
+                "options": [],
+                "answer": "rainbow"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "2001 – designed a 'Journey of a Nation' parade outfit with part of a ... on it",
+                "options": [],
+                "answer": "snake"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. the ... Case",
+                "options": [],
+                "answer": "carpet"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "September",
+    "2": "835",
+    "3": "school",
+    "4": "deck",
+    "5": "river",
+    "6": "towels",
+    "7": "garage",
+    "8": "Chinese",
+    "9": "200",
+    "10": "July",
+    "11": "A",
+    "12": "B",
+    "13": "A",
+    "14": "B",
+    "15": "F",
+    "16": "A",
+    "17": "B",
+    "18": "H",
+    "19": "G",
+    "20": "I",
+    "21": "A",
+    "22": "C",
+    "23": "B",
+    "24": "A",
+    "25": "B",
+    "26": "B",
+    "27": "G",
+    "28": "E",
+    "29": "D",
+    "30": "B",
+    "31": "wool",
+    "32": "bird",
+    "33": "rain",
+    "34": "desert",
+    "35": "prison",
+    "36": "clothing",
+    "37": "family",
+    "38": "rainbow",
+    "39": "snake",
+    "40": "carpet"
+  },
+  "images": [
+    {
+      "id": "jasurbek-full-listening-test-9-map-1",
+      "src": "https://i.ibb.co/6Jnp89RB/preview.webp",
+      "alt": "Map of Race Village",
+      "section": "listening",
+      "sectionNumber": 2
+    }
+  ],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 1,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-07-16T03:30:37.894Z",
+  "publishedAt": "2026-07-16T03:30:37.894Z"
+}

@@ -2550,6 +2550,18 @@ body.fullscreen-fallback .lc-submit-status {
     padding: 0 18px 1px 4px;
 }
 
+.lc-matching-block--image .lc-matching-row select {
+    height: 38px;
+    min-height: 38px;
+    border: 1px solid #c8d7ef;
+    border-radius: 9px;
+    background: #fff;
+    padding: 7px 32px 7px 10px;
+    color: #111827;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
 .lc-matching-block--list > .lc-block-heading h3 {
     margin-bottom: 8px;
     color: #000;
