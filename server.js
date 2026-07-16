@@ -427,7 +427,7 @@ function writeJsonArray(filePath, items) {
     fs.writeFileSync(filePath, JSON.stringify(items, null, 2), "utf8");
 }
 
-function readFilePrefix(filePath, maxBytes = 64 * 1024) {
+function readFilePrefix(filePath, maxBytes = 512 * 1024) {
     const fd = fs.openSync(filePath, "r");
     try {
         const buffer = Buffer.alloc(maxBytes);
@@ -501,6 +501,36 @@ function slugify(value, fallback = "test") {
         .replace(/^-+|-+$/g, "")
         .replace(/-{2,}/g, "-")
         || fallback;
+}
+
+function numberFullTestsNewestFirst(tests, fullType) {
+    let fullTestNumber = 0;
+
+    return (tests || []).map((test) => {
+        if (test.type !== fullType && test.part !== "full") {
+            return { ...test, testNumber: undefined };
+        }
+
+        fullTestNumber += 1;
+        return {
+            ...test,
+            originalTitle: test.title,
+            title: `Test ${fullTestNumber}`,
+            testNumber: fullTestNumber
+        };
+    });
+}
+
+function withCurrentFullTestNumber(skill, test) {
+    if (!test || test.part !== "full") return test;
+    const summaries = skill === "listening"
+        ? readManualListeningTestSummaries()
+        : readManualReadingTestSummaries();
+    const summary = summaries.find((item) => String(item.id) === String(test.id));
+
+    return summary
+        ? { ...test, originalTitle: test.originalTitle || test.title, title: summary.title, testNumber: summary.testNumber }
+        : test;
 }
 
 const PUBLIC_ROUTE_SLUG_ALIASES = {
@@ -1792,8 +1822,7 @@ function buildManualReadingTest(body) {
     const part = normalizePart(body.part);
     let title = String(body.title || "").trim();
     if (part === "full") {
-        const existingCount = readManualReadingTests().filter(t => t.part === "full").length;
-        title = `Test ${existingCount + 1}`;
+        title = "Test 1";
     }
 
     if (!title) {
@@ -1994,7 +2023,7 @@ function readManualReadingTestSummaries() {
         return [];
     }
 
-    return fs.readdirSync(READING_TESTS_DIR)
+    const tests = fs.readdirSync(READING_TESTS_DIR)
         .filter((file) => file.endsWith(".json"))
         .map((file) => {
             const filePath = path.join(READING_TESTS_DIR, file);
@@ -2009,7 +2038,7 @@ function readManualReadingTestSummaries() {
                 return publicListMetadata({
                     id,
                     title: jsonStringField(prefix, "title") || "Untitled Reading Test",
-                    testNumber: jsonNumberField(prefix, "testNumber") || jsonNumberField(prefix, "number"),
+                    testNumber: jsonNumberField(prefix, "testNumber"),
                     type: part === "full" ? "reading-full" : "reading",
                     status: jsonStringField(prefix, "status") || "published",
                     createdAt: jsonStringField(prefix, "createdAt") || stat.mtime.toISOString(),
@@ -2026,6 +2055,8 @@ function readManualReadingTestSummaries() {
         })
         .filter(Boolean)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    return numberFullTestsNewestFirst(tests, "reading-full");
 }
 
 function summarizeManualReadingTest(test) {
@@ -2433,8 +2464,7 @@ function buildManualListeningTest(body, audioFile) {
     const part = normalizeListeningPart(body.part);
     let title = String(body.title || "").trim();
     if (part === "full") {
-        const existingCount = readManualListeningTests().filter(t => t.part === "full").length;
-        title = `Test ${existingCount + 1}`;
+        title = "Test 1";
     }
 
     if (!title) {
@@ -3381,7 +3411,7 @@ function readManualListeningTestSummaries() {
         return [];
     }
 
-    return fs.readdirSync(LISTENING_TESTS_DIR)
+    const tests = fs.readdirSync(LISTENING_TESTS_DIR)
         .filter((file) => file.endsWith(".json"))
         .map((file) => {
             const filePath = path.join(LISTENING_TESTS_DIR, file);
@@ -3397,7 +3427,7 @@ function readManualListeningTestSummaries() {
                 return publicListMetadata({
                     id,
                     title: jsonStringField(prefix, "title") || "Untitled Listening Test",
-                    testNumber: jsonNumberField(prefix, "testNumber") || jsonNumberField(prefix, "number"),
+                    testNumber: jsonNumberField(prefix, "testNumber"),
                     type: part === "full" ? "listening-full" : "listening",
                     status: jsonStringField(prefix, "status") || "published",
                     createdAt: jsonStringField(prefix, "createdAt") || stat.mtime.toISOString(),
@@ -3417,6 +3447,8 @@ function readManualListeningTestSummaries() {
         })
         .filter(Boolean)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    return numberFullTestsNewestFirst(tests, "listening-full");
 }
 
 function summarizeManualListeningTest(test) {
@@ -5801,7 +5833,7 @@ app.get("/api/reading-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
-    res.json(test);
+    res.json(withCurrentFullTestNumber("reading", test));
 });
 
 app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
@@ -6094,7 +6126,7 @@ app.get("/api/listening-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Listening test not found" });
     }
 
-    res.json(test);
+    res.json(withCurrentFullTestNumber("listening", test));
 });
 
 app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), (req, res) => {

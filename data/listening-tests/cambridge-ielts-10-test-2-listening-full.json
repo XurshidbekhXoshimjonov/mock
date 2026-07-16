@@ -1,0 +1,1477 @@
+{
+  "id": "cambridge-ielts-10-test-2-listening-full",
+  "slug": "cambridge-ielts-10-test-2-listening-full",
+  "title": "Test 1",
+  "originalTitle": "Cambridge IELTS 10 Test 2 Listening",
+  "subtitle": "Listening full test",
+  "part": "full",
+  "audio": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-14",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+      "rule": "",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21–22",
+      "instruction": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22
+      ]
+    },
+    {
+      "title": "Questions 23–24",
+      "instruction": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+      "rule": "",
+      "questionNumbers": [
+        23,
+        24
+      ]
+    },
+    {
+      "title": "Questions 25-30",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "questionNumber": 1,
+      "question": "Name: Luisa",
+      "text": "Name: Luisa",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "HARDIE"
+    },
+    {
+      "number": 2,
+      "questionNumber": 2,
+      "question": "Address: ... White Stone Rd",
+      "text": "Address: ... White Stone Rd",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "19"
+    },
+    {
+      "number": 3,
+      "questionNumber": 3,
+      "question": "Postcode",
+      "text": "Postcode",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "GT8 2LC | GT82LC"
+    },
+    {
+      "number": 4,
+      "questionNumber": 4,
+      "question": "Occupation",
+      "text": "Occupation",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "HAIRDRESSER"
+    },
+    {
+      "number": 5,
+      "questionNumber": 5,
+      "question": "Reason for visit to town: to go to the ...",
+      "text": "Reason for visit to town: to go to the ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "DENTIST | DENTISTS"
+    },
+    {
+      "number": 6,
+      "questionNumber": 6,
+      "question": "Suggestions for improvement: better ...",
+      "text": "Suggestions for improvement: better ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "LIGHTING"
+    },
+    {
+      "number": 7,
+      "questionNumber": 7,
+      "question": "Suggestions for improvement: more frequent ...",
+      "text": "Suggestions for improvement: more frequent ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "TRAINS"
+    },
+    {
+      "number": 8,
+      "questionNumber": 8,
+      "question": "having ... parking places for bicycles",
+      "text": "having ... parking places for bicycles",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SAFE"
+    },
+    {
+      "number": 9,
+      "questionNumber": 9,
+      "question": "being able to use a ... at work",
+      "text": "being able to use a ... at work",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SHOWER"
+    },
+    {
+      "number": 10,
+      "questionNumber": 10,
+      "question": "the opportunity to have cycling ... on busy roads",
+      "text": "the opportunity to have cycling ... on busy roads",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "TRAINING"
+    },
+    {
+      "number": 11,
+      "questionNumber": 11,
+      "question": "The idea for the two new developments in the city came from",
+      "text": "The idea for the two new developments in the city came from",
+      "options": [
+        {
+          "letter": "A",
+          "text": "local people."
+        },
+        {
+          "letter": "B",
+          "text": "the City Council."
+        },
+        {
+          "letter": "C",
+          "text": "the SWRDC."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "questionNumber": 12,
+      "question": "What is unusual about Brackenside pool?",
+      "text": "What is unusual about Brackenside pool?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "its architectural style"
+        },
+        {
+          "letter": "B",
+          "text": "its heating system"
+        },
+        {
+          "letter": "C",
+          "text": "its method of water treatment"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 13,
+      "questionNumber": 13,
+      "question": "Local newspapers have raised worries about",
+      "text": "Local newspapers have raised worries about",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the late opening date."
+        },
+        {
+          "letter": "B",
+          "text": "the cost of the project."
+        },
+        {
+          "letter": "C",
+          "text": "the size of the facilities."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "questionNumber": 14,
+      "question": "What decision has not yet been made about the pool?",
+      "text": "What decision has not yet been made about the pool?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "whose statue will be at the door"
+        },
+        {
+          "letter": "B",
+          "text": "the exact opening times"
+        },
+        {
+          "letter": "C",
+          "text": "who will open it"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "questionNumber": 15,
+      "question": "Asia",
+      "text": "Asia",
+      "options": [],
+      "type": "matching",
+      "answer": "E"
+    },
+    {
+      "number": 16,
+      "questionNumber": 16,
+      "question": "Antarctica",
+      "text": "Antarctica",
+      "options": [],
+      "type": "matching",
+      "answer": "F"
+    },
+    {
+      "number": 17,
+      "questionNumber": 17,
+      "question": "South America",
+      "text": "South America",
+      "options": [],
+      "type": "matching",
+      "answer": "D"
+    },
+    {
+      "number": 18,
+      "questionNumber": 18,
+      "question": "North America",
+      "text": "North America",
+      "options": [],
+      "type": "matching",
+      "answer": "H"
+    },
+    {
+      "number": 19,
+      "questionNumber": 19,
+      "question": "Europe",
+      "text": "Europe",
+      "options": [],
+      "type": "matching",
+      "answer": "A"
+    },
+    {
+      "number": 20,
+      "questionNumber": 20,
+      "question": "Africa",
+      "text": "Africa",
+      "options": [],
+      "type": "matching",
+      "answer": "B"
+    },
+    {
+      "number": 21,
+      "questionNumber": 21,
+      "question": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "text": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "camping"
+        },
+        {
+          "letter": "B",
+          "text": "climbing"
+        },
+        {
+          "letter": "C",
+          "text": "collecting"
+        },
+        {
+          "letter": "D",
+          "text": "hunting"
+        },
+        {
+          "letter": "E",
+          "text": "reading"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "B | C"
+    },
+    {
+      "number": 22,
+      "questionNumber": 22,
+      "question": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "text": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "camping"
+        },
+        {
+          "letter": "B",
+          "text": "climbing"
+        },
+        {
+          "letter": "C",
+          "text": "collecting"
+        },
+        {
+          "letter": "D",
+          "text": "hunting"
+        },
+        {
+          "letter": "E",
+          "text": "reading"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "B | C"
+    },
+    {
+      "number": 23,
+      "questionNumber": 23,
+      "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+      "text": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to examine ancient carvings"
+        },
+        {
+          "letter": "B",
+          "text": "to experience an isolated place"
+        },
+        {
+          "letter": "C",
+          "text": "to formulate a new theory"
+        },
+        {
+          "letter": "D",
+          "text": "to learn survival skills"
+        },
+        {
+          "letter": "E",
+          "text": "to study the impact of an extreme environment"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "B | E"
+    },
+    {
+      "number": 24,
+      "questionNumber": 24,
+      "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+      "text": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to examine ancient carvings"
+        },
+        {
+          "letter": "B",
+          "text": "to experience an isolated place"
+        },
+        {
+          "letter": "C",
+          "text": "to formulate a new theory"
+        },
+        {
+          "letter": "D",
+          "text": "to learn survival skills"
+        },
+        {
+          "letter": "E",
+          "text": "to study the impact of an extreme environment"
+        }
+      ],
+      "type": "multi_select",
+      "answer": "B | E"
+    },
+    {
+      "number": 25,
+      "questionNumber": 25,
+      "question": "According to Victor and Olivia, academics thought that Polynesian migration from the east was impossible due to",
+      "text": "According to Victor and Olivia, academics thought that Polynesian migration from the east was impossible due to",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the fact that Eastern countries were far away."
+        },
+        {
+          "letter": "B",
+          "text": "the lack of materials for boat building."
+        },
+        {
+          "letter": "C",
+          "text": "the direction of the winds and currents."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 26,
+      "questionNumber": 26,
+      "question": "Which do the speakers agree was the main reason for Heyerdahl's raft journey?",
+      "text": "Which do the speakers agree was the main reason for Heyerdahl's raft journey?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to overcome a research setback"
+        },
+        {
+          "letter": "B",
+          "text": "to demonstrate a personal quality"
+        },
+        {
+          "letter": "C",
+          "text": "to test a new theory"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "questionNumber": 27,
+      "question": "What was most important to Heyerdahl about his raft journey?",
+      "text": "What was most important to Heyerdahl about his raft journey?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the fact that he was the first person to do it"
+        },
+        {
+          "letter": "B",
+          "text": "the speed of crossing the Pacific"
+        },
+        {
+          "letter": "C",
+          "text": "the use of authentic construction methods"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "questionNumber": 28,
+      "question": "Why did Heyerdahl go to Easter Island?",
+      "text": "Why did Heyerdahl go to Easter Island?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to build a stone statue"
+        },
+        {
+          "letter": "B",
+          "text": "to sail a reed boat"
+        },
+        {
+          "letter": "C",
+          "text": "to learn the local language"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "questionNumber": 29,
+      "question": "In Olivia's opinion, Heyerdahl's greatest influence was on",
+      "text": "In Olivia's opinion, Heyerdahl's greatest influence was on",
+      "options": [
+        {
+          "letter": "A",
+          "text": "theories about Polynesian origins."
+        },
+        {
+          "letter": "B",
+          "text": "the development of archaeological methodology."
+        },
+        {
+          "letter": "C",
+          "text": "establishing archaeology as an academic subject."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "B"
+    },
+    {
+      "number": 30,
+      "questionNumber": 30,
+      "question": "Which criticism do the speakers make of William Oliver's textbook?",
+      "text": "Which criticism do the speakers make of William Oliver's textbook?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Its style is out of date."
+        },
+        {
+          "letter": "B",
+          "text": "Its content is over-simplified."
+        },
+        {
+          "letter": "C",
+          "text": "Its methodology is flawed."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 31,
+      "questionNumber": 31,
+      "question": "Business markets: greater ... among companies",
+      "text": "Business markets: greater ... among companies",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "COMPETITION"
+    },
+    {
+      "number": 32,
+      "questionNumber": 32,
+      "question": "increase in power of large ... companies",
+      "text": "increase in power of large ... companies",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "GLOBAL"
+    },
+    {
+      "number": 33,
+      "questionNumber": 33,
+      "question": "rising ... in certain countries",
+      "text": "rising ... in certain countries",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "DEMAND"
+    },
+    {
+      "number": 34,
+      "questionNumber": 34,
+      "question": "External influences on businesses: more discussion with ... before making business decisions",
+      "text": "External influences on businesses: more discussion with ... before making business decisions",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "CUSTOMERS"
+    },
+    {
+      "number": 35,
+      "questionNumber": 35,
+      "question": "environmental concerns which may lead to more ...",
+      "text": "environmental concerns which may lead to more ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "REGULATION"
+    },
+    {
+      "number": 36,
+      "questionNumber": 36,
+      "question": "Business structures: more teams will be formed to work on a particular ...",
+      "text": "Business structures: more teams will be formed to work on a particular ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "PROJECT"
+    },
+    {
+      "number": 37,
+      "questionNumber": 37,
+      "question": "businesses may need to offer hours that are ..., or the chance to work remotely",
+      "text": "businesses may need to offer hours that are ..., or the chance to work remotely",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "FLEXIBLE"
+    },
+    {
+      "number": 38,
+      "questionNumber": 38,
+      "question": "Management styles: increasing need for managers to provide good ...",
+      "text": "Management styles: increasing need for managers to provide good ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "LEADERSHIP"
+    },
+    {
+      "number": 39,
+      "questionNumber": 39,
+      "question": "changes influenced by ... taking senior roles",
+      "text": "changes influenced by ... taking senior roles",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "WOMEN"
+    },
+    {
+      "number": 40,
+      "questionNumber": 40,
+      "question": "Changes in the economy: more and more ... workers",
+      "text": "Changes in the economy: more and more ... workers",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SELF EMPLOYED | SELF-EMPLOYED"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-2-listening",
+  "openUrl": "/listening/cambridge-ielts-10-test-2-listening-full",
+  "createdAt": "2026-07-16T11:37:11.348Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-1.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "answerText": "1: HARDIE\n2: 19\n3: GT8 2LC | GT82LC\n4: HAIRDRESSER\n5: DENTIST | DENTISTS\n6: LIGHTING\n7: TRAINS\n8: SAFE\n9: SHOWER\n10: TRAINING",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Transport Survey",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "content": [
+            "Name: Luisa {{1}}",
+            "Address: {{2}} White Stone Rd",
+            "Postcode: {{3}}",
+            "Occupation: {{4}}",
+            "Reason for visit to town: to go to the {{5}}",
+            "Suggestions for improvement: better {{6}}; have more footpaths; more frequent {{7}}",
+            "Things that would encourage cycling to work: having {{8}} parking places for bicycles",
+            "being able to use a {{9}} at work",
+            "the opportunity to have cycling {{10}} on busy roads"
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Name: Luisa",
+              "text": "Name: Luisa",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "HARDIE"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Address: ... White Stone Rd",
+              "text": "Address: ... White Stone Rd",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "19"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Postcode",
+              "text": "Postcode",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GT8 2LC | GT82LC"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Occupation",
+              "text": "Occupation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "HAIRDRESSER"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Reason for visit to town: to go to the ...",
+              "text": "Reason for visit to town: to go to the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DENTIST | DENTISTS"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Suggestions for improvement: better ...",
+              "text": "Suggestions for improvement: better ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LIGHTING"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Suggestions for improvement: more frequent ...",
+              "text": "Suggestions for improvement: more frequent ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "TRAINS"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "having ... parking places for bicycles",
+              "text": "having ... parking places for bicycles",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SAFE"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "being able to use a ... at work",
+              "text": "being able to use a ... at work",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SHOWER"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "the opportunity to have cycling ... on busy roads",
+              "text": "the opportunity to have cycling ... on busy roads",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "TRAINING"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-2.mp3",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "answerText": "11: A\n12: C\n13: C\n14: A\n15: E\n16: F\n17: D\n18: H\n19: A\n20: B",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-14",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "The idea for the two new developments in the city came from",
+              "text": "The idea for the two new developments in the city came from",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "local people."
+                },
+                {
+                  "letter": "B",
+                  "text": "the City Council."
+                },
+                {
+                  "letter": "C",
+                  "text": "the SWRDC."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What is unusual about Brackenside pool?",
+              "text": "What is unusual about Brackenside pool?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "its architectural style"
+                },
+                {
+                  "letter": "B",
+                  "text": "its heating system"
+                },
+                {
+                  "letter": "C",
+                  "text": "its method of water treatment"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Local newspapers have raised worries about",
+              "text": "Local newspapers have raised worries about",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the late opening date."
+                },
+                {
+                  "letter": "B",
+                  "text": "the cost of the project."
+                },
+                {
+                  "letter": "C",
+                  "text": "the size of the facilities."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What decision has not yet been made about the pool?",
+              "text": "What decision has not yet been made about the pool?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "whose statue will be at the door"
+                },
+                {
+                  "letter": "B",
+                  "text": "the exact opening times"
+                },
+                {
+                  "letter": "C",
+                  "text": "who will open it"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15-20",
+          "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "ancient forts"
+            },
+            {
+              "letter": "B",
+              "text": "waterways"
+            },
+            {
+              "letter": "C",
+              "text": "ice and snow"
+            },
+            {
+              "letter": "D",
+              "text": "jewels"
+            },
+            {
+              "letter": "E",
+              "text": "local animals"
+            },
+            {
+              "letter": "F",
+              "text": "mountains"
+            },
+            {
+              "letter": "G",
+              "text": "music and film"
+            },
+            {
+              "letter": "H",
+              "text": "space travel"
+            },
+            {
+              "letter": "I",
+              "text": "volcanoes"
+            }
+          ],
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Asia",
+              "text": "Asia",
+              "options": [],
+              "type": "matching",
+              "answer": "E"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Antarctica",
+              "text": "Antarctica",
+              "options": [],
+              "type": "matching",
+              "answer": "F"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "South America",
+              "text": "South America",
+              "options": [],
+              "type": "matching",
+              "answer": "D"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "North America",
+              "text": "North America",
+              "options": [],
+              "type": "matching",
+              "answer": "H"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Europe",
+              "text": "Europe",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Africa",
+              "text": "Africa",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-3.mp3",
+      "instruction": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+      "answerText": "21: B | C\n22: B | C\n23: B | E\n24: B | E\n25: A\n26: C\n27: C\n28: A\n29: B\n30: A",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_select",
+          "questionRange": "Questions 21–22",
+          "instruction": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "camping"
+            },
+            {
+              "letter": "B",
+              "text": "climbing"
+            },
+            {
+              "letter": "C",
+              "text": "collecting"
+            },
+            {
+              "letter": "D",
+              "text": "hunting"
+            },
+            {
+              "letter": "E",
+              "text": "reading"
+            }
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+              "text": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "camping"
+                },
+                {
+                  "letter": "B",
+                  "text": "climbing"
+                },
+                {
+                  "letter": "C",
+                  "text": "collecting"
+                },
+                {
+                  "letter": "D",
+                  "text": "hunting"
+                },
+                {
+                  "letter": "E",
+                  "text": "reading"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+              "text": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "camping"
+                },
+                {
+                  "letter": "B",
+                  "text": "climbing"
+                },
+                {
+                  "letter": "C",
+                  "text": "collecting"
+                },
+                {
+                  "letter": "D",
+                  "text": "hunting"
+                },
+                {
+                  "letter": "E",
+                  "text": "reading"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | C"
+            }
+          ],
+          "questionNumber": 21,
+          "answerQuestions": [
+            {
+              "questionNumber": 22
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO hobbies was Thor Heyerdahl very interested in as a youth?"
+        },
+        {
+          "id": "group-3-23",
+          "type": "multiple_select",
+          "questionRange": "Questions 23–24",
+          "instruction": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "to examine ancient carvings"
+            },
+            {
+              "letter": "B",
+              "text": "to experience an isolated place"
+            },
+            {
+              "letter": "C",
+              "text": "to formulate a new theory"
+            },
+            {
+              "letter": "D",
+              "text": "to learn survival skills"
+            },
+            {
+              "letter": "E",
+              "text": "to study the impact of an extreme environment"
+            }
+          ],
+          "questions": [
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+              "text": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to examine ancient carvings"
+                },
+                {
+                  "letter": "B",
+                  "text": "to experience an isolated place"
+                },
+                {
+                  "letter": "C",
+                  "text": "to formulate a new theory"
+                },
+                {
+                  "letter": "D",
+                  "text": "to learn survival skills"
+                },
+                {
+                  "letter": "E",
+                  "text": "to study the impact of an extreme environment"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+              "text": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to examine ancient carvings"
+                },
+                {
+                  "letter": "B",
+                  "text": "to experience an isolated place"
+                },
+                {
+                  "letter": "C",
+                  "text": "to formulate a new theory"
+                },
+                {
+                  "letter": "D",
+                  "text": "to learn survival skills"
+                },
+                {
+                  "letter": "E",
+                  "text": "to study the impact of an extreme environment"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B | E"
+            }
+          ],
+          "questionNumber": 23,
+          "answerQuestions": [
+            {
+              "questionNumber": 24
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?"
+        },
+        {
+          "id": "group-3-25",
+          "type": "multiple_choice",
+          "questionRange": "Questions 25-30",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "According to Victor and Olivia, academics thought that Polynesian migration from the east was impossible due to",
+              "text": "According to Victor and Olivia, academics thought that Polynesian migration from the east was impossible due to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the fact that Eastern countries were far away."
+                },
+                {
+                  "letter": "B",
+                  "text": "the lack of materials for boat building."
+                },
+                {
+                  "letter": "C",
+                  "text": "the direction of the winds and currents."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Which do the speakers agree was the main reason for Heyerdahl's raft journey?",
+              "text": "Which do the speakers agree was the main reason for Heyerdahl's raft journey?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to overcome a research setback"
+                },
+                {
+                  "letter": "B",
+                  "text": "to demonstrate a personal quality"
+                },
+                {
+                  "letter": "C",
+                  "text": "to test a new theory"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "What was most important to Heyerdahl about his raft journey?",
+              "text": "What was most important to Heyerdahl about his raft journey?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the fact that he was the first person to do it"
+                },
+                {
+                  "letter": "B",
+                  "text": "the speed of crossing the Pacific"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of authentic construction methods"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Why did Heyerdahl go to Easter Island?",
+              "text": "Why did Heyerdahl go to Easter Island?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to build a stone statue"
+                },
+                {
+                  "letter": "B",
+                  "text": "to sail a reed boat"
+                },
+                {
+                  "letter": "C",
+                  "text": "to learn the local language"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "In Olivia's opinion, Heyerdahl's greatest influence was on",
+              "text": "In Olivia's opinion, Heyerdahl's greatest influence was on",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "theories about Polynesian origins."
+                },
+                {
+                  "letter": "B",
+                  "text": "the development of archaeological methodology."
+                },
+                {
+                  "letter": "C",
+                  "text": "establishing archaeology as an academic subject."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Which criticism do the speakers make of William Oliver's textbook?",
+              "text": "Which criticism do the speakers make of William Oliver's textbook?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Its style is out of date."
+                },
+                {
+                  "letter": "B",
+                  "text": "Its content is over-simplified."
+                },
+                {
+                  "letter": "C",
+                  "text": "Its methodology is flawed."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-4.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "answerText": "31: COMPETITION\n32: GLOBAL\n33: DEMAND\n34: CUSTOMERS\n35: REGULATION\n36: PROJECT\n37: FLEXIBLE\n38: LEADERSHIP\n39: WOMEN\n40: SELF EMPLOYED | SELF-EMPLOYED",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "THE FUTURE OF MANAGEMENT",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Business markets: greater {{31}} among companies",
+            "increase in power of large {{32}} companies",
+            "rising {{33}} in certain countries",
+            "External influences on businesses: more discussion with {{34}} before making business decisions",
+            "environmental concerns which may lead to more {{35}}",
+            "Business structures: more teams will be formed to work on a particular {{36}}",
+            "businesses may need to offer hours that are {{37}}, or the chance to work remotely",
+            "Management styles: increasing need for managers to provide good {{38}}",
+            "changes influenced by {{39}} taking senior roles",
+            "Changes in the economy: more and more {{40}} workers"
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Business markets: greater ... among companies",
+              "text": "Business markets: greater ... among companies",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "COMPETITION"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "increase in power of large ... companies",
+              "text": "increase in power of large ... companies",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GLOBAL"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "rising ... in certain countries",
+              "text": "rising ... in certain countries",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DEMAND"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "External influences on businesses: more discussion with ... before making business decisions",
+              "text": "External influences on businesses: more discussion with ... before making business decisions",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "CUSTOMERS"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "environmental concerns which may lead to more ...",
+              "text": "environmental concerns which may lead to more ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "REGULATION"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Business structures: more teams will be formed to work on a particular ...",
+              "text": "Business structures: more teams will be formed to work on a particular ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PROJECT"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "businesses may need to offer hours that are ..., or the chance to work remotely",
+              "text": "businesses may need to offer hours that are ..., or the chance to work remotely",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "FLEXIBLE"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Management styles: increasing need for managers to provide good ...",
+              "text": "Management styles: increasing need for managers to provide good ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LEADERSHIP"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "changes influenced by ... taking senior roles",
+              "text": "changes influenced by ... taking senior roles",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "WOMEN"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Changes in the economy: more and more ... workers",
+              "text": "Changes in the economy: more and more ... workers",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SELF EMPLOYED | SELF-EMPLOYED"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published"
+}

@@ -1,0 +1,390 @@
+{
+  "id": "cambridge-ielts-10-test-2-listening-part-2",
+  "slug": "cambridge-ielts-10-test-2-listening-part-2",
+  "title": "Test 1 — Part 2",
+  "subtitle": "Listening Part 2",
+  "part": 2,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-2.mp3",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-2.mp3",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "answerText": "11: A\n12: C\n13: C\n14: A\n15: E\n16: F\n17: D\n18: H\n19: A\n20: B",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-14",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "The idea for the two new developments in the city came from",
+              "text": "The idea for the two new developments in the city came from",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "local people."
+                },
+                {
+                  "letter": "B",
+                  "text": "the City Council."
+                },
+                {
+                  "letter": "C",
+                  "text": "the SWRDC."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What is unusual about Brackenside pool?",
+              "text": "What is unusual about Brackenside pool?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "its architectural style"
+                },
+                {
+                  "letter": "B",
+                  "text": "its heating system"
+                },
+                {
+                  "letter": "C",
+                  "text": "its method of water treatment"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Local newspapers have raised worries about",
+              "text": "Local newspapers have raised worries about",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the late opening date."
+                },
+                {
+                  "letter": "B",
+                  "text": "the cost of the project."
+                },
+                {
+                  "letter": "C",
+                  "text": "the size of the facilities."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What decision has not yet been made about the pool?",
+              "text": "What decision has not yet been made about the pool?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "whose statue will be at the door"
+                },
+                {
+                  "letter": "B",
+                  "text": "the exact opening times"
+                },
+                {
+                  "letter": "C",
+                  "text": "who will open it"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15-20",
+          "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "ancient forts"
+            },
+            {
+              "letter": "B",
+              "text": "waterways"
+            },
+            {
+              "letter": "C",
+              "text": "ice and snow"
+            },
+            {
+              "letter": "D",
+              "text": "jewels"
+            },
+            {
+              "letter": "E",
+              "text": "local animals"
+            },
+            {
+              "letter": "F",
+              "text": "mountains"
+            },
+            {
+              "letter": "G",
+              "text": "music and film"
+            },
+            {
+              "letter": "H",
+              "text": "space travel"
+            },
+            {
+              "letter": "I",
+              "text": "volcanoes"
+            }
+          ],
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Asia",
+              "text": "Asia",
+              "options": [],
+              "type": "matching",
+              "answer": "E"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Antarctica",
+              "text": "Antarctica",
+              "options": [],
+              "type": "matching",
+              "answer": "F"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "South America",
+              "text": "South America",
+              "options": [],
+              "type": "matching",
+              "answer": "D"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "North America",
+              "text": "North America",
+              "options": [],
+              "type": "matching",
+              "answer": "H"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Europe",
+              "text": "Europe",
+              "options": [],
+              "type": "matching",
+              "answer": "A"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Africa",
+              "text": "Africa",
+              "options": [],
+              "type": "matching",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 11-14",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+      "rule": "",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "questionNumber": 11,
+      "question": "The idea for the two new developments in the city came from",
+      "text": "The idea for the two new developments in the city came from",
+      "options": [
+        {
+          "letter": "A",
+          "text": "local people."
+        },
+        {
+          "letter": "B",
+          "text": "the City Council."
+        },
+        {
+          "letter": "C",
+          "text": "the SWRDC."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "questionNumber": 12,
+      "question": "What is unusual about Brackenside pool?",
+      "text": "What is unusual about Brackenside pool?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "its architectural style"
+        },
+        {
+          "letter": "B",
+          "text": "its heating system"
+        },
+        {
+          "letter": "C",
+          "text": "its method of water treatment"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 13,
+      "questionNumber": 13,
+      "question": "Local newspapers have raised worries about",
+      "text": "Local newspapers have raised worries about",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the late opening date."
+        },
+        {
+          "letter": "B",
+          "text": "the cost of the project."
+        },
+        {
+          "letter": "C",
+          "text": "the size of the facilities."
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "questionNumber": 14,
+      "question": "What decision has not yet been made about the pool?",
+      "text": "What decision has not yet been made about the pool?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "whose statue will be at the door"
+        },
+        {
+          "letter": "B",
+          "text": "the exact opening times"
+        },
+        {
+          "letter": "C",
+          "text": "who will open it"
+        }
+      ],
+      "type": "multiple_choice",
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "questionNumber": 15,
+      "question": "Asia",
+      "text": "Asia",
+      "options": [],
+      "type": "matching",
+      "answer": "E"
+    },
+    {
+      "number": 16,
+      "questionNumber": 16,
+      "question": "Antarctica",
+      "text": "Antarctica",
+      "options": [],
+      "type": "matching",
+      "answer": "F"
+    },
+    {
+      "number": 17,
+      "questionNumber": 17,
+      "question": "South America",
+      "text": "South America",
+      "options": [],
+      "type": "matching",
+      "answer": "D"
+    },
+    {
+      "number": 18,
+      "questionNumber": 18,
+      "question": "North America",
+      "text": "North America",
+      "options": [],
+      "type": "matching",
+      "answer": "H"
+    },
+    {
+      "number": 19,
+      "questionNumber": 19,
+      "question": "Europe",
+      "text": "Europe",
+      "options": [],
+      "type": "matching",
+      "answer": "A"
+    },
+    {
+      "number": 20,
+      "questionNumber": 20,
+      "question": "Africa",
+      "text": "Africa",
+      "options": [],
+      "type": "matching",
+      "answer": "B"
+    }
+  ],
+  "sourceFullTestId": "cambridge-ielts-10-test-2-listening",
+  "createdAt": "2026-07-16T11:37:11.348Z",
+  "status": "published"
+}

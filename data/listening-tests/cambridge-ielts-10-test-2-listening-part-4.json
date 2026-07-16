@@ -1,0 +1,246 @@
+{
+  "id": "cambridge-ielts-10-test-2-listening-part-4",
+  "slug": "cambridge-ielts-10-test-2-listening-part-4",
+  "title": "Test 1 — Part 4",
+  "subtitle": "Listening Part 4",
+  "part": 4,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-4.mp3",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-4.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "answerText": "31: COMPETITION\n32: GLOBAL\n33: DEMAND\n34: CUSTOMERS\n35: REGULATION\n36: PROJECT\n37: FLEXIBLE\n38: LEADERSHIP\n39: WOMEN\n40: SELF EMPLOYED | SELF-EMPLOYED",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "THE FUTURE OF MANAGEMENT",
+          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+          "content": [
+            "Business markets: greater {{31}} among companies",
+            "increase in power of large {{32}} companies",
+            "rising {{33}} in certain countries",
+            "External influences on businesses: more discussion with {{34}} before making business decisions",
+            "environmental concerns which may lead to more {{35}}",
+            "Business structures: more teams will be formed to work on a particular {{36}}",
+            "businesses may need to offer hours that are {{37}}, or the chance to work remotely",
+            "Management styles: increasing need for managers to provide good {{38}}",
+            "changes influenced by {{39}} taking senior roles",
+            "Changes in the economy: more and more {{40}} workers"
+          ],
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Business markets: greater ... among companies",
+              "text": "Business markets: greater ... among companies",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "COMPETITION"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "increase in power of large ... companies",
+              "text": "increase in power of large ... companies",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GLOBAL"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "rising ... in certain countries",
+              "text": "rising ... in certain countries",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DEMAND"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "External influences on businesses: more discussion with ... before making business decisions",
+              "text": "External influences on businesses: more discussion with ... before making business decisions",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "CUSTOMERS"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "environmental concerns which may lead to more ...",
+              "text": "environmental concerns which may lead to more ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "REGULATION"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Business structures: more teams will be formed to work on a particular ...",
+              "text": "Business structures: more teams will be formed to work on a particular ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PROJECT"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "businesses may need to offer hours that are ..., or the chance to work remotely",
+              "text": "businesses may need to offer hours that are ..., or the chance to work remotely",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "FLEXIBLE"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Management styles: increasing need for managers to provide good ...",
+              "text": "Management styles: increasing need for managers to provide good ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LEADERSHIP"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "changes influenced by ... taking senior roles",
+              "text": "changes influenced by ... taking senior roles",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "WOMEN"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Changes in the economy: more and more ... workers",
+              "text": "Changes in the economy: more and more ... workers",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SELF EMPLOYED | SELF-EMPLOYED"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "questionNumber": 31,
+      "question": "Business markets: greater ... among companies",
+      "text": "Business markets: greater ... among companies",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "COMPETITION"
+    },
+    {
+      "number": 32,
+      "questionNumber": 32,
+      "question": "increase in power of large ... companies",
+      "text": "increase in power of large ... companies",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "GLOBAL"
+    },
+    {
+      "number": 33,
+      "questionNumber": 33,
+      "question": "rising ... in certain countries",
+      "text": "rising ... in certain countries",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "DEMAND"
+    },
+    {
+      "number": 34,
+      "questionNumber": 34,
+      "question": "External influences on businesses: more discussion with ... before making business decisions",
+      "text": "External influences on businesses: more discussion with ... before making business decisions",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "CUSTOMERS"
+    },
+    {
+      "number": 35,
+      "questionNumber": 35,
+      "question": "environmental concerns which may lead to more ...",
+      "text": "environmental concerns which may lead to more ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "REGULATION"
+    },
+    {
+      "number": 36,
+      "questionNumber": 36,
+      "question": "Business structures: more teams will be formed to work on a particular ...",
+      "text": "Business structures: more teams will be formed to work on a particular ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "PROJECT"
+    },
+    {
+      "number": 37,
+      "questionNumber": 37,
+      "question": "businesses may need to offer hours that are ..., or the chance to work remotely",
+      "text": "businesses may need to offer hours that are ..., or the chance to work remotely",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "FLEXIBLE"
+    },
+    {
+      "number": 38,
+      "questionNumber": 38,
+      "question": "Management styles: increasing need for managers to provide good ...",
+      "text": "Management styles: increasing need for managers to provide good ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "LEADERSHIP"
+    },
+    {
+      "number": 39,
+      "questionNumber": 39,
+      "question": "changes influenced by ... taking senior roles",
+      "text": "changes influenced by ... taking senior roles",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "WOMEN"
+    },
+    {
+      "number": 40,
+      "questionNumber": 40,
+      "question": "Changes in the economy: more and more ... workers",
+      "text": "Changes in the economy: more and more ... workers",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SELF EMPLOYED | SELF-EMPLOYED"
+    }
+  ],
+  "sourceFullTestId": "cambridge-ielts-10-test-2-listening",
+  "createdAt": "2026-07-16T11:37:11.348Z",
+  "status": "published"
+}

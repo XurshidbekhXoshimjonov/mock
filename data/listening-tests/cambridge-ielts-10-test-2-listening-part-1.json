@@ -1,0 +1,245 @@
+{
+  "id": "cambridge-ielts-10-test-2-listening-part-1",
+  "slug": "cambridge-ielts-10-test-2-listening-part-1",
+  "title": "Test 1 — Part 1",
+  "subtitle": "Listening Part 1",
+  "part": 1,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-1.mp3",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-1.mp3",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "answerText": "1: HARDIE\n2: 19\n3: GT8 2LC | GT82LC\n4: HAIRDRESSER\n5: DENTIST | DENTISTS\n6: LIGHTING\n7: TRAINS\n8: SAFE\n9: SHOWER\n10: TRAINING",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "Transport Survey",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "content": [
+            "Name: Luisa {{1}}",
+            "Address: {{2}} White Stone Rd",
+            "Postcode: {{3}}",
+            "Occupation: {{4}}",
+            "Reason for visit to town: to go to the {{5}}",
+            "Suggestions for improvement: better {{6}}; have more footpaths; more frequent {{7}}",
+            "Things that would encourage cycling to work: having {{8}} parking places for bicycles",
+            "being able to use a {{9}} at work",
+            "the opportunity to have cycling {{10}} on busy roads"
+          ],
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Name: Luisa",
+              "text": "Name: Luisa",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "HARDIE"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Address: ... White Stone Rd",
+              "text": "Address: ... White Stone Rd",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "19"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Postcode",
+              "text": "Postcode",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GT8 2LC | GT82LC"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Occupation",
+              "text": "Occupation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "HAIRDRESSER"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Reason for visit to town: to go to the ...",
+              "text": "Reason for visit to town: to go to the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DENTIST | DENTISTS"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Suggestions for improvement: better ...",
+              "text": "Suggestions for improvement: better ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LIGHTING"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Suggestions for improvement: more frequent ...",
+              "text": "Suggestions for improvement: more frequent ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "TRAINS"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "having ... parking places for bicycles",
+              "text": "having ... parking places for bicycles",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SAFE"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "being able to use a ... at work",
+              "text": "being able to use a ... at work",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SHOWER"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "the opportunity to have cycling ... on busy roads",
+              "text": "the opportunity to have cycling ... on busy roads",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "TRAINING"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "questionNumber": 1,
+      "question": "Name: Luisa",
+      "text": "Name: Luisa",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "HARDIE"
+    },
+    {
+      "number": 2,
+      "questionNumber": 2,
+      "question": "Address: ... White Stone Rd",
+      "text": "Address: ... White Stone Rd",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "19"
+    },
+    {
+      "number": 3,
+      "questionNumber": 3,
+      "question": "Postcode",
+      "text": "Postcode",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "GT8 2LC | GT82LC"
+    },
+    {
+      "number": 4,
+      "questionNumber": 4,
+      "question": "Occupation",
+      "text": "Occupation",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "HAIRDRESSER"
+    },
+    {
+      "number": 5,
+      "questionNumber": 5,
+      "question": "Reason for visit to town: to go to the ...",
+      "text": "Reason for visit to town: to go to the ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "DENTIST | DENTISTS"
+    },
+    {
+      "number": 6,
+      "questionNumber": 6,
+      "question": "Suggestions for improvement: better ...",
+      "text": "Suggestions for improvement: better ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "LIGHTING"
+    },
+    {
+      "number": 7,
+      "questionNumber": 7,
+      "question": "Suggestions for improvement: more frequent ...",
+      "text": "Suggestions for improvement: more frequent ...",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "TRAINS"
+    },
+    {
+      "number": 8,
+      "questionNumber": 8,
+      "question": "having ... parking places for bicycles",
+      "text": "having ... parking places for bicycles",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SAFE"
+    },
+    {
+      "number": 9,
+      "questionNumber": 9,
+      "question": "being able to use a ... at work",
+      "text": "being able to use a ... at work",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "SHOWER"
+    },
+    {
+      "number": 10,
+      "questionNumber": 10,
+      "question": "the opportunity to have cycling ... on busy roads",
+      "text": "the opportunity to have cycling ... on busy roads",
+      "options": [],
+      "type": "sentence_completion",
+      "answer": "TRAINING"
+    }
+  ],
+  "sourceFullTestId": "cambridge-ielts-10-test-2-listening",
+  "createdAt": "2026-07-16T11:37:11.348Z",
+  "status": "published"
+}
