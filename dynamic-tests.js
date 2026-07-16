@@ -243,7 +243,7 @@ async function loadManualTests(config, grid, skipIds = new Set()) {
     tests
         .slice()
         .filter((test) => !skipIds.has(test.id))
-        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .forEach((test) => {
             addManualCard(grid, test, config);
         });
@@ -281,8 +281,12 @@ async function loadDynamicTests() {
     }
 
     grid.innerHTML = "";
-    const skipManualIds = await loadFullTestCards(config, grid);
+    const storedFullTestCards = document.createElement("div");
+    const skipManualIds = await loadFullTestCards(config, storedFullTestCards);
     await loadManualTests(config, grid, skipManualIds);
+    while (storedFullTestCards.firstChild) {
+        grid.appendChild(storedFullTestCards.firstChild);
+    }
 
     const response = await fetch(`/api/tests?type=${config.type}&part=${config.part}`);
 

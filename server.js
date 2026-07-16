@@ -503,36 +503,6 @@ function slugify(value, fallback = "test") {
         || fallback;
 }
 
-function numberFullTestsNewestFirst(tests, fullType) {
-    let fullTestNumber = 0;
-
-    return (tests || []).map((test) => {
-        if (test.type !== fullType && test.part !== "full") {
-            return { ...test, testNumber: undefined };
-        }
-
-        fullTestNumber += 1;
-        return {
-            ...test,
-            originalTitle: test.title,
-            title: `Test ${fullTestNumber}`,
-            testNumber: fullTestNumber
-        };
-    });
-}
-
-function withCurrentFullTestNumber(skill, test) {
-    if (!test || test.part !== "full") return test;
-    const summaries = skill === "listening"
-        ? readManualListeningTestSummaries()
-        : readManualReadingTestSummaries();
-    const summary = summaries.find((item) => String(item.id) === String(test.id));
-
-    return summary
-        ? { ...test, originalTitle: test.originalTitle || test.title, title: summary.title, testNumber: summary.testNumber }
-        : test;
-}
-
 const PUBLIC_ROUTE_SLUG_ALIASES = {
     listening: {
         "c10-listening-test-1-1783826761800-listening-full": "c10-listening-test-1-1783831879508",
@@ -1822,7 +1792,8 @@ function buildManualReadingTest(body) {
     const part = normalizePart(body.part);
     let title = String(body.title || "").trim();
     if (part === "full") {
-        title = "Test 1";
+        const existingCount = readManualReadingTests().filter(t => t.part === "full").length;
+        title = title || `Test ${existingCount + 1}`;
     }
 
     if (!title) {
@@ -2056,7 +2027,7 @@ function readManualReadingTestSummaries() {
         .filter(Boolean)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    return numberFullTestsNewestFirst(tests, "reading-full");
+    return tests;
 }
 
 function summarizeManualReadingTest(test) {
@@ -2464,7 +2435,8 @@ function buildManualListeningTest(body, audioFile) {
     const part = normalizeListeningPart(body.part);
     let title = String(body.title || "").trim();
     if (part === "full") {
-        title = "Test 1";
+        const existingCount = readManualListeningTests().filter(t => t.part === "full").length;
+        title = title || `Test ${existingCount + 1}`;
     }
 
     if (!title) {
@@ -3448,7 +3420,7 @@ function readManualListeningTestSummaries() {
         .filter(Boolean)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    return numberFullTestsNewestFirst(tests, "listening-full");
+    return tests;
 }
 
 function summarizeManualListeningTest(test) {
@@ -5833,7 +5805,7 @@ app.get("/api/reading-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
-    res.json(withCurrentFullTestNumber("reading", test));
+    res.json(test);
 });
 
 app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
@@ -6126,7 +6098,7 @@ app.get("/api/listening-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Listening test not found" });
     }
 
-    res.json(withCurrentFullTestNumber("listening", test));
+    res.json(test);
 });
 
 app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), (req, res) => {
