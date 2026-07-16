@@ -38,7 +38,7 @@
     },
     {
       "title": "Questions 15-20",
-      "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+              "instruction": "Which feature is related to each area of the world represented in the playground? Choose SIX answers from the box and write the correct letter, A-I.",
       "rule": "",
       "questionNumbers": [
         15,
@@ -918,7 +918,7 @@
               "questionsTitle": "Areas of the world",
               "optionLetterPunctuation": "dot",
           "questionRange": "Questions 15-20",
-          "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
+          "instruction": "Which feature is related to each area of the world represented in the playground? Choose SIX answers from the box and write the correct letter, A-I.",
           "options": [
             {
               "letter": "A",

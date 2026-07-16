@@ -14,8 +14,9 @@
         "NO MORE THAN\\s+ONE\\s+WORD",
         "ONE\\s+WORD\\s+ONLY",
         "ONE\\s+WORD",
-        "CHOOSE\\s+TWO\\s+LETTERS?",
         "CHOOSE\\s+FIVE\\s+ANSWERS?",
+        "TWO",
+        "SIX",
         "A\\s+NUMBER",
         "[A-Z]\\s*[\\u2013\\u2014-]\\s*[A-Z]"
     ].join("|");

@@ -336,7 +336,7 @@ const ListeningComponents = (() => {
             
         const formattedQuestion = `<p class="lc-question-text lc-question-text--large">
             <span class="lc-question-badge-range">${rangeNumbers}</span>
-            ${questionText ? `<span>${escapeHtml(questionText)}</span>` : ""}
+            ${questionText ? `<span>${highlightInstruction(questionText)}</span>` : ""}
         </p>`;
 
         const options = (block.options || []).map((option) => `<label class="lc-choice-row">
