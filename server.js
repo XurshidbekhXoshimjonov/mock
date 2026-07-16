@@ -25,6 +25,7 @@ const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-imp
 const { stripTags } = require("./lib/ielts-import/utils");
 const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/upload-security");
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
+const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
 
 let TranslateClient = null;
 try {
@@ -38,6 +39,21 @@ app.disable("etag");
 
 const ROOT_DIR = __dirname;
 const IS_VERCEL = Boolean(process.env.VERCEL);
+const authRateLimitStore = new AuthRateLimitStore({ mongoose });
+const loginRateLimit = createAuthRateLimiter({
+    store: authRateLimitStore,
+    rules: [
+        ipRule({ scope: "login-ip", limit: 25, windowMs: 15 * 60 * 1000, trustForwardedFor: IS_VERCEL }),
+        emailRule({ scope: "login-email", limit: 8, windowMs: 15 * 60 * 1000 })
+    ]
+});
+const signupRateLimit = createAuthRateLimiter({
+    store: authRateLimitStore,
+    rules: [
+        ipRule({ scope: "signup-ip", limit: 10, windowMs: 60 * 60 * 1000, trustForwardedFor: IS_VERCEL }),
+        emailRule({ scope: "signup-email", limit: 3, windowMs: 60 * 60 * 1000 })
+    ]
+});
 const RUNTIME_WRITE_DIR = IS_VERCEL ? path.join("/tmp", "ieltsx") : ROOT_DIR;
 const BUNDLED_DATA_DIR = path.join(ROOT_DIR, "data");
 const UPLOAD_DIR = path.join(RUNTIME_WRITE_DIR, "uploads");
@@ -6578,7 +6594,7 @@ function getBearerToken(req) {
     return null;
 }
 
-app.post("/signup", async (req, res) => {
+app.post("/signup", signupRateLimit, async (req, res) => {
     try {
         const body = req.body || {};
         const username = String(body.username || "").trim();
@@ -6721,6 +6737,10 @@ async function handleLogin(req, res) {
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
+        await authRateLimitStore.reset(
+            (req.authRateLimitBuckets || []).filter((bucketId) => bucketId.startsWith("login-email:"))
+        );
+
         res.json({
             success: true,
             message: "Login successful",
@@ -6735,8 +6755,8 @@ async function handleLogin(req, res) {
     }
 }
 
-app.post("/login", handleLogin);
-app.post("/api/auth/login", handleLogin);
+app.post("/login", loginRateLimit, handleLogin);
+app.post("/api/auth/login", loginRateLimit, handleLogin);
 
 
 app.get("/auth/google", (req, res) => {
