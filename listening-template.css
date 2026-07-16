@@ -2684,6 +2684,15 @@ body.fullscreen-fallback .lc-submit-status {
     text-align: center;
 }
 
+.lc-matching-questions-title {
+    margin: 4px 0 14px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+}
+
 .lc-matching-block--list .lc-matching-option {
     display: block;
     margin: 0 0 6px;

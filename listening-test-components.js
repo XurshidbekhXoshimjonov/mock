@@ -913,6 +913,9 @@ const ListeningComponents = (() => {
         }).join("");
         const optionsHeading = block.optionsTitle || (hasImage ? "Categories" : "Main theme");
         const optionsTitle = options ? `<h4 class="lc-matching-options-title">${escapeHtml(optionsHeading)}</h4>` : "";
+        const questionsTitle = block.questionsTitle
+            ? `<h4 class="lc-matching-questions-title">${escapeHtml(block.questionsTitle)}</h4>`
+            : "";
         const content = hasImage
             ? `<div class="lc-matching-map-layout">
                 ${image}
@@ -924,7 +927,7 @@ const ListeningComponents = (() => {
             </div>`
             : `${image}
             <div class="lc-matching-options">${optionsTitle}${options}</div>
-            <div class="lc-matching-rows">${rows}</div>`;
+            <div class="lc-matching-rows">${questionsTitle}${rows}</div>`;
 
         const blockClone = {
             ...block,
