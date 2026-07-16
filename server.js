@@ -28,7 +28,8 @@ const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
 const { createSecurityHeaders } = require("./lib/security-headers");
-const { UPLOAD_LIMITS, multipartLimits, isUploadLimitError, uploadErrorResponse } = require("./lib/upload-limits");
+const { UPLOAD_LIMITS, multipartLimits, uploadErrorResponse } = require("./lib/upload-limits");
+const { validateUploadContents } = require("./lib/upload-content-validation");
 
 let TranslateClient = null;
 try {
@@ -4771,24 +4772,12 @@ function getNextTestTakerIdLocal(users = []) {
     return String(max + 1).padStart(3, "0");
 }
 
-app.post("/api/profile/photo", requireUser, (req, res) => {
-    candidatePhotoUpload.single("photo")(req, res, (err) => {
-        if (err) {
-            if (isUploadLimitError(err)) {
-                return res.status(413).json({
-                    error: "upload_limit_exceeded",
-                    code: err.code,
-                    message: "Profile photo must be 2 MB or smaller"
-                });
-            }
-            return res.status(400).json({ error: err.message });
-        }
-        if (!req.file) {
-            return res.status(400).json({ error: "Photo file is required" });
-        }
-        res.json({
-            photoUrl: `/uploads/candidate-photos/${path.basename(req.file.path)}`
-        });
+app.post("/api/profile/photo", requireUser, candidatePhotoUpload.single("photo"), validateUploadContents({ photo: "image" }), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: "Photo file is required" });
+    }
+    res.json({
+        photoUrl: `/uploads/candidate-photos/${path.basename(req.file.path)}`
     });
 });
 
@@ -5647,7 +5636,7 @@ app.post("/api/premium/manual-payment-requests", requireUser, async (req, res) =
     }
 });
 
-app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), (req, res) => {
+app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "Choose an audio file" });
     }
@@ -5658,7 +5647,7 @@ app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("au
     });
 });
 
-app.post("/api/mock-test-assets/image", requireAdmin, mockImageUpload.single("image"), (req, res) => {
+app.post("/api/mock-test-assets/image", requireAdmin, mockImageUpload.single("image"), validateUploadContents({ image: "image" }), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "Choose an image file" });
     }
@@ -6057,7 +6046,7 @@ app.get("/api/vocabulary/clicked", (req, res) => {
     res.json(words);
 });
 
-app.post("/api/listening-assets/audio", requireAdmin, audioUpload.single("audio"), (req, res) => {
+app.post("/api/listening-assets/audio", requireAdmin, audioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "Choose an audio file" });
     }
@@ -6068,7 +6057,7 @@ app.post("/api/listening-assets/audio", requireAdmin, audioUpload.single("audio"
     });
 });
 
-app.post("/api/listening-assets/image", requireAdmin, listeningImageUpload.single("image"), (req, res) => {
+app.post("/api/listening-assets/image", requireAdmin, listeningImageUpload.single("image"), validateUploadContents({ image: "image" }), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "Choose an image file" });
     }
@@ -6079,7 +6068,7 @@ app.post("/api/listening-assets/image", requireAdmin, listeningImageUpload.singl
     });
 });
 
-app.post("/api/listening-tests", requireAdmin, audioUpload.single("audio"), (req, res) => {
+app.post("/api/listening-tests", requireAdmin, audioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
     try {
         const test = buildManualListeningTest(req.body, req.file);
         saveManualListeningTest(test);
@@ -6138,7 +6127,7 @@ app.get("/api/listening-tests/:id", (req, res) => {
     res.json(test);
 });
 
-app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), (req, res) => {
+app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
     const filePath = getListeningTestPath(req.params.id);
 
     if (!fs.existsSync(filePath)) {
@@ -6572,7 +6561,7 @@ app.get("/api/admin/recent-tests", requireAdmin, (req, res) => {
     }
 });
 
-app.post("/upload", requireAdmin, upload.single("pdf"), async (req, res) => {
+app.post("/upload", requireAdmin, upload.single("pdf"), validateUploadContents({ pdf: "pdf" }), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: "PDF file is required" });
