@@ -29,6 +29,36 @@ function SafeHtml({ html, className, tag: Tag = "div", highlightInstructions = f
     return h(Tag, { className, dangerouslySetInnerHTML: { __html: renderedHtml } });
 }
 
+function stripEmbeddedParagraphLetter(html, letter) {
+    const normalizedLetter = String(letter || "").trim();
+    if (!html || !normalizedLetter) return html || "";
+
+    if (typeof DOMParser !== "undefined") {
+        const parser = new DOMParser();
+        const documentFragment = parser.parseFromString(`<body>${html}</body>`, "text/html");
+        const contentRoot = documentFragment.body.firstElementChild || documentFragment.body;
+        const embeddedLabel = contentRoot.firstElementChild;
+
+        if (
+            embeddedLabel?.matches?.("span.letter, strong.letter, .paragraph-letter") &&
+            embeddedLabel.textContent.trim().replace(/[).]$/, "") === normalizedLetter
+        ) {
+            embeddedLabel.remove();
+            return documentFragment.body.innerHTML;
+        }
+    }
+
+    const escapedLetter = normalizedLetter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const openingWrapper = "(\\s*(?:<p\\b[^>]*>\\s*)?)";
+    const strongLabel = `<strong\\b[^>]*>\\s*${escapedLetter}[\\).]?\\s*</strong>`;
+    const spanLabel = `<span\\b(?=[^>]*\\bclass\\s*=\\s*["'][^"']*\\bletter\\b[^"']*["'])[^>]*>\\s*${escapedLetter}[\\).]?\\s*</span>`;
+
+    return String(html).replace(
+        new RegExp(`^${openingWrapper}(?:${strongLabel}|${spanLabel})\\s*`, "i"),
+        "$1"
+    );
+}
+
 function normalizeOption(option) {
     if (typeof option === "object" && option !== null) {
         const value = option.value ?? option.letter ?? option.key ?? option.id ?? option.label ?? option.text ?? "";
@@ -1044,24 +1074,25 @@ function PassageRenderer({ passage, enableVocabulary = false, activeVocabularyKe
                     className: `cbt-passage-paragraph${paragraph.letter ? " lettered" : ""}`
                 },
                     paragraph.letter
-                        ? h("strong", { className: "cbt-paragraph-letter" }, paragraph.letter)
+                        ? h("strong", {
+                            className: "cbt-paragraph-letter",
+                            "data-letter": paragraph.letter,
+                            "data-letter-label": paragraph.letter,
+                            "aria-hidden": "true"
+                        })
                         : null,
                     paragraph.html
                         ? (enableVocabulary
                             ? h("div", { className: "cbt-paragraph-html" },
                             renderVocabularyHtml(
-                                paragraph.letter
-                                    ? paragraph.html.replace(new RegExp(`^\\s*<strong[^>]*>\\s*${paragraph.letter}[\\).]?\\s*</strong>\\s*`, "i"), "")
-                                    : paragraph.html,
+                                stripEmbeddedParagraphLetter(paragraph.html, paragraph.letter),
                                 `${paragraph.letter || "p"}-${index}`,
                                 enableVocabulary,
                                 activeVocabularyKey
                             )
                         )
                             : h(SafeHtml, {
-                                html: paragraph.letter
-                                    ? paragraph.html.replace(new RegExp(`^\\s*<strong[^>]*>\\s*${paragraph.letter}[\\).]?\\s*</strong>\\s*`, "i"), "")
-                                    : paragraph.html,
+                                html: stripEmbeddedParagraphLetter(paragraph.html, paragraph.letter),
                                 className: "cbt-paragraph-html"
                             }))
                         : h("p", null, renderVocabularyText(

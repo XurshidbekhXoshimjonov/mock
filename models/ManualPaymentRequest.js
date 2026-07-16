@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const manualPaymentRequestSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true,
         index: true
     },
@@ -52,8 +51,7 @@ const manualPaymentRequestSchema = new mongoose.Schema({
         default: null
     },
     verifiedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         default: null
     },
     rejectedAt: {
@@ -61,8 +59,7 @@ const manualPaymentRequestSchema = new mongoose.Schema({
         default: null
     },
     rejectedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         default: null
     },
     adminNote: {

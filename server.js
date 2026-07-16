@@ -5556,7 +5556,7 @@ app.post("/api/premium/manual-payment-requests", requireUser, async (req, res) =
         }
 
         const userId = String(req.user?.id || "");
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
+        if (!userId) {
             return res.status(400).json({ error: "A valid account is required" });
         }
 
