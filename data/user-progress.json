@@ -46,6 +46,145 @@
       },
       "results": [
         {
+          "id": "1784181743887-aa9b3326",
+          "testId": "caral-an-ancient-south-american-city-reading-p1",
+          "title": "Caral: an ancient South American city",
+          "type": "Reading",
+          "skill": "reading",
+          "part": 1,
+          "correct": 11,
+          "total": 13,
+          "accuracy": 85,
+          "band": 7.5,
+          "practiceUrl": "",
+          "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+          "vocabulary": [
+            {
+              "word": "dwellings",
+              "normalized": "dwellings",
+              "definition": "places where people live",
+              "uzbekTranslation": "ishchilar uchun joylar",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:52:25.786Z"
+            },
+            {
+              "word": "outlying",
+              "normalized": "outlying",
+              "definition": "located away from the main area",
+              "uzbekTranslation": "qishloq joylar",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:52:32.066Z"
+            },
+            {
+              "word": "necklaces",
+              "normalized": "necklaces",
+              "definition": "ornaments worn around the neck",
+              "uzbekTranslation": "qopqoqdan tayyorlangan bo'yin uzuklari",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:55:51.341Z"
+            },
+            {
+              "word": "planners",
+              "normalized": "planners",
+              "definition": "people who organize or design plans",
+              "uzbekTranslation": "reja tuzuvchilar",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:56:24.060Z"
+            },
+            {
+              "word": "squash",
+              "normalized": "squash",
+              "definition": "a type of vegetable",
+              "uzbekTranslation": "mahalliy o'simlik",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:57:22.035Z"
+            },
+            {
+              "word": "potatoes",
+              "normalized": "potatoes",
+              "definition": "a type of vegetable",
+              "uzbekTranslation": "shirin kartoshka",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:57:27.117Z"
+            },
+            {
+              "word": "diverted",
+              "normalized": "diverted",
+              "definition": "changed the direction of something",
+              "uzbekTranslation": "kanallarga yo'naltirdi",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:58:50.117Z"
+            },
+            {
+              "word": "evidence",
+              "normalized": "evidence",
+              "definition": "proof or indication",
+              "uzbekTranslation": "ishtirok etgan dalil",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:58:57.130Z"
+            },
+            {
+              "word": "irrigate",
+              "normalized": "irrigate",
+              "definition": "to supply water to land",
+              "uzbekTranslation": "dalalarni sug'orish",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:58:59.839Z"
+            },
+            {
+              "word": "traces",
+              "normalized": "traces",
+              "definition": "marks or signs of something",
+              "uzbekTranslation": "ma'lum bir narsaning izlari",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:59:44.051Z"
+            },
+            {
+              "word": "maize",
+              "normalized": "maize",
+              "definition": "a type of corn",
+              "uzbekTranslation": "savdoga chiqariladigan don",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T05:59:49.635Z"
+            },
+            {
+              "word": "flotation",
+              "normalized": "flotation",
+              "definition": "buoyancy or floating ability",
+              "uzbekTranslation": "tenglik vositalari",
+              "example": "",
+              "passageId": "caral-an-ancient-south-american-city-reading-p1-passage-1",
+              "attemptId": "reading-user:6a22ff78f2a736006bbaf1f8-caral-an-ancient-south-american-city-reading-p1-1784180330422-01fc70",
+              "timestamp": "2026-07-16T06:01:45.524Z"
+            }
+          ],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-07-16T06:02:23.887Z"
+        },
+        {
           "id": "1784164775863-cf9bc01c",
           "testId": "c10-listening-test-1-1783831879508",
           "title": "Cambridge 10 Test 1 Listening",
