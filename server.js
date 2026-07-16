@@ -4844,7 +4844,7 @@ app.put("/api/profile", requireUser, async (req, res) => {
             targetBand: (targetBand !== undefined) ? (targetBand || "") : (existingUser.targetBand || "")
         };
 
-        console.log(`[PROFILE UPDATE] Updating user ${userId} candidate settings`);
+        console.log("[PROFILE UPDATE] Updating candidate settings");
 
         const updatedUser = await userStore.updateUser(userId, updates);
 
@@ -6897,7 +6897,7 @@ app.get("/auth/google/callback", async (req, res) => {
 
         const userInfo = await userInfoResponse.json();
         if (!userInfoResponse.ok) {
-            console.error("Failed to fetch user info:", userInfo);
+            console.error("Failed to fetch Google user info", { status: userInfoResponse.status });
             return res.status(400).send("Failed to retrieve user profile from Google.");
         }
 
@@ -6911,12 +6911,12 @@ app.get("/auth/google/callback", async (req, res) => {
         if (!isEmailVerified) {
             return res.status(400).send("Login rejected: Google email is not verified.");
         }
-        console.log("[AUTH CALLBACK] Google email verified: " + email);
+        console.log("[AUTH CALLBACK] Google email verified");
 
         let user = await userStore.findUserByEmail(email);
 
         if (user) {
-            console.log("[AUTH CALLBACK] Existing user found in store with ID: " + (user._id || user.id));
+            console.log("[AUTH CALLBACK] Existing user found");
 
             if (!user.googleId) {
                 // Link Google account to existing user
@@ -6938,7 +6938,7 @@ app.get("/auth/google/callback", async (req, res) => {
                     updates.name = name;
                 }
                 user = await userStore.updateUser(user._id || user.id, updates);
-                console.log("[AUTH CALLBACK] Google account linked for user: " + user.email);
+                console.log("[AUTH CALLBACK] Google account linked");
             } else if (user.googleId !== sub) {
                 return res.status(400).send("Safe error: This email is already linked to a different Google account.");
             } else {
@@ -6961,7 +6961,7 @@ app.get("/auth/google/callback", async (req, res) => {
                 authProviders: ["google"]
             });
 
-            console.log("[AUTH CALLBACK] Google account created for new user: " + user.email);
+            console.log("[AUTH CALLBACK] Google account created");
             userProgressStore.recordAccountActivity(user._id || user.id, "Account created (Google)");
 
             sendTelegramMessage(
@@ -6971,7 +6971,7 @@ app.get("/auth/google/callback", async (req, res) => {
 
         // Generate JWT
         const token = createAuthToken(user);
-        console.log("[AUTH CALLBACK] JWT session created for user: " + user.email);
+        console.log("[AUTH CALLBACK] JWT session created");
 
         // Store JWT in a secure httpOnly cookie
         const isProduction = secureCookie;
@@ -7035,12 +7035,6 @@ app.get("/api/auth/me", async (req, res) => {
     }
 });
 
-app.post("/api/client-log", (req, res) => {
-    const { type, message } = req.body || {};
-    console.info(`[CLIENT ${String(type).toUpperCase()}]`, message);
-    res.json({ success: true });
-});
-
 app.post("/api/auth/logout", (req, res) => {
     const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
 
@@ -7074,7 +7068,7 @@ async function runUserMigration() {
                 
                 if (adminUser) {
                     await User.updateOne({ _id: adminUser._id }, { $set: { memberIdNumber: 1, memberId: "001" } });
-                    console.info(`Migrated admin user: ${adminUser.email || adminUser.username} to ID 001`);
+                    console.info("Migrated administrator account to ID 001");
                 }
                 
                 const nonAdmins = allDbUsers.filter(u => u._id.toString() !== (adminUser?._id.toString() || ""));
@@ -7084,7 +7078,7 @@ async function runUserMigration() {
                 for (const user of nonAdmins) {
                     const memberId = String(nextNum).padStart(3, "0");
                     await User.updateOne({ _id: user._id }, { $set: { memberIdNumber: nextNum, memberId } });
-                    console.info(`Migrated user: ${user.email || user.username} to ID ${memberId}`);
+                    console.info(`Migrated user account to ID ${memberId}`);
                     nextNum++;
                 }
                 
@@ -7195,7 +7189,7 @@ async function runTestTakerIdMigration() {
                             user.testTakerId = candidate;
                             assignedIds.add(candidate);
                             await User.updateOne({ _id: user._id }, { $set: { testTakerId: candidate } });
-                            console.info(`Assigned Test Taker ID ${candidate} to user: ${user.email || user.username}`);
+                            console.info(`Assigned Test Taker ID ${candidate} to database user`);
                             break;
                         }
                         currentNum++;
@@ -7238,7 +7232,7 @@ async function runTestTakerIdMigration() {
                                 user.testTakerId = candidate;
                                 assignedIds.add(candidate);
                                 changed = true;
-                                console.info(`Assigned Test Taker ID ${candidate} to local user: ${user.email || user.username}`);
+                                console.info(`Assigned Test Taker ID ${candidate} to local user`);
                                 break;
                             }
                             currentNum++;
@@ -7315,6 +7309,7 @@ function staticCacheHeaders(res, filePath) {
     const ext = path.extname(filePath).toLowerCase();
     const fileName = path.basename(filePath).toLowerCase();
     const noStoreAssets = new Set([
+        "auth-client.js",
         "listening-template.css",
         "listening-test-components.js",
         "listening-template.js"

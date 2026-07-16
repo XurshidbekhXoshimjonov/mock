@@ -1,40 +1,4 @@
 (function () {
-    // Console log forwarding for remote debugging
-    const originalLog = console.log;
-    const originalWarn = console.warn;
-    const originalError = console.error;
-    const originalWindowFetch = window.fetch ? window.fetch.bind(window) : null;
-
-    function sendLogToServer(type, args) {
-        const msg = args.map(arg => {
-            if (typeof arg === "object") {
-                try { return JSON.stringify(arg); } catch { return String(arg); }
-            }
-            return String(arg);
-        }).join(" ");
-        
-        if (!originalWindowFetch) return;
-
-        originalWindowFetch("/api/client-log", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ type, message: msg })
-        }).catch(() => {});
-    }
-
-    console.log = function (...args) {
-        originalLog.apply(console, args);
-        sendLogToServer("info", args);
-    };
-    console.warn = function (...args) {
-        originalWarn.apply(console, args);
-        sendLogToServer("warn", args);
-    };
-    console.error = function (...args) {
-        originalError.apply(console, args);
-        sendLogToServer("error", args);
-    };
-
     // Check and apply theme immediately to prevent FOUC
     const THEME_STORAGE_KEY = "ielts-theme";
     const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
@@ -1736,10 +1700,6 @@
     window.fetch = async function (url, options) {
         let modifiedOptions = options || {};
         const urlString = String(url?.url || url);
-
-        if (urlString.includes("/api/client-log")) {
-            return originalFetch(url, options);
-        }
 
         const auth = getAuth();
         if (urlString.startsWith("/api/")) {
