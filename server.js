@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const fs = require("fs");
+const crypto = require("crypto");
 const User = require("./models/User");
 const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
@@ -27,6 +28,7 @@ const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
 const { createSecurityHeaders } = require("./lib/security-headers");
+const { UPLOAD_LIMITS, multipartLimits, isUploadLimitError, uploadErrorResponse } = require("./lib/upload-limits");
 
 let TranslateClient = null;
 try {
@@ -176,7 +178,10 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage });
+const upload = multer({
+    storage,
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.pdf, fields: 2 })
+});
 
 const audioStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -189,6 +194,7 @@ const audioStorage = multer.diskStorage({
 
 const audioUpload = multer({
     storage: audioStorage,
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.audio, fields: 12 }),
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
         const accepted = [".mp3", ".wav", ".m4a"].includes(extension);
@@ -207,6 +213,7 @@ const listeningImageStorage = multer.diskStorage({
 
 const listeningImageUpload = multer({
     storage: listeningImageStorage,
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.image, fields: 8 }),
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
         const accepted = [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(extension);
@@ -225,6 +232,7 @@ const mockAssetStorage = multer.diskStorage({
 
 const mockAudioUpload = multer({
     storage: mockAssetStorage,
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.audio, fields: 4 }),
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
         const accepted = [".mp3", ".wav", ".m4a", ".webm"].includes(extension);
@@ -234,6 +242,7 @@ const mockAudioUpload = multer({
 
 const mockImageUpload = multer({
     storage: mockAssetStorage,
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.image, fields: 4 }),
     fileFilter: (req, file, cb) => {
         const extension = path.extname(file.originalname).toLowerCase();
         const accepted = [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(extension);
@@ -255,7 +264,7 @@ const candidatePhotoStorage = multer.diskStorage({
 
 const candidatePhotoUpload = multer({
     storage: candidatePhotoStorage,
-    limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+    limits: multipartLimits({ fileSize: UPLOAD_LIMITS.profilePhoto, fields: 2 }),
     fileFilter(req, file, cb) {
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
         if (allowedTypes.includes(file.mimetype)) {
@@ -4765,6 +4774,13 @@ function getNextTestTakerIdLocal(users = []) {
 app.post("/api/profile/photo", requireUser, (req, res) => {
     candidatePhotoUpload.single("photo")(req, res, (err) => {
         if (err) {
+            if (isUploadLimitError(err)) {
+                return res.status(413).json({
+                    error: "upload_limit_exceeded",
+                    code: err.code,
+                    message: "Profile photo must be 2 MB or smaller"
+                });
+            }
             return res.status(400).json({ error: err.message });
         }
         if (!req.file) {
@@ -7311,6 +7327,8 @@ app.use(express.static(ROOT_DIR, {
     maxAge: "7d",
     setHeaders: staticCacheHeaders
 }));
+
+app.use(uploadErrorResponse);
 
 const PORT = process.env.PORT || 30004;
 
