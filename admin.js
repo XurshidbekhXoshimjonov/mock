@@ -109,11 +109,7 @@ async function readJson(response) {
 }
 
 async function loadStats() {
-    const auth = window.authClient?.getAuth();
     const headers = {};
-    if (auth?.token) {
-        headers["Authorization"] = `Bearer ${auth.token}`;
-    }
     const [statsResponse, userStatsResponse] = await Promise.all([
         fetch("/api/admin/stats", { headers }),
         fetch("/api/admin/stats/users", { headers })
@@ -135,11 +131,7 @@ async function loadStats() {
 }
 
 async function loadRecent() {
-    const auth = window.authClient?.getAuth();
     const headers = {};
-    if (auth?.token) {
-        headers["Authorization"] = `Bearer ${auth.token}`;
-    }
     const response = await fetch("/api/admin/recent-tests?limit=10", { headers });
     const data = await readJson(response);
 

@@ -49,8 +49,6 @@
     applyTheme(storedTheme, { persist: false });
 
     const AUTH_STORAGE_KEY = "ieltsmock.auth";
-    const AUTH_COOKIE = "ieltsmockAuthToken";
-    const TOKEN_DAYS = 7;
     let navbarAuthSnapshot = {
         status: "unknown",
         auth: null
@@ -142,8 +140,13 @@
 
     function writeStorage(auth) {
         try {
-            localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(auth));
-            localStorage.setItem("ieltsAuth", JSON.stringify(auth));
+            const safeAuth = auth?.user ? {
+                user: auth.user,
+                savedAt: auth.savedAt || new Date().toISOString()
+            } : null;
+            if (!safeAuth) return;
+            localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(safeAuth));
+            localStorage.removeItem("ieltsAuth");
         } catch {}
     }
 
@@ -154,69 +157,17 @@
         } catch {}
     }
 
-    function decodeTokenPayload(token) {
-        if (!token || typeof token !== "string") {
-            return null;
-        }
-
-        const [, payload] = token.split(".");
-
-        if (!payload) {
-            return null;
-        }
-
-        try {
-            const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
-            const padded = base64.padEnd(base64.length + ((4 - base64.length % 4) % 4), "=");
-            return JSON.parse(atob(padded));
-        } catch {
-            return null;
-        }
-    }
-
     function normalizeStoredAuth(auth) {
-        const token = typeof auth?.token === "string" ? auth.token.trim() : "";
         const user = auth?.user && typeof auth.user === "object" ? auth.user : null;
 
-        if (!token || !user) {
-            console.log("normalizeStoredAuth: token or user is missing. Token exists:", !!token, "User exists:", !!user);
-            return null;
-        }
-
-        const payload = decodeTokenPayload(token);
-
-        if (!payload) {
-            console.log("normalizeStoredAuth: decodeTokenPayload returned null. Raw token prefix:", token.slice(0, 15));
-            return null;
-        }
-
-        if (!payload?.exp || Number(payload.exp) <= Date.now()) {
-            console.log("normalizeStoredAuth: token expired or exp missing. exp:", payload?.exp, "now:", Date.now());
-            return null;
-        }
-
-        const payloadUserId = String(payload.id || "");
-        const storedUserId = String(user.id || user._id || "");
-
-        if (payloadUserId && storedUserId && payloadUserId !== storedUserId) {
-            console.log("normalizeStoredAuth: ID mismatch. payloadUserId:", payloadUserId, "storedUserId:", storedUserId);
+        if (!user) {
             return null;
         }
 
         return {
-            token,
             user,
             savedAt: auth.savedAt
         };
-    }
-
-    function setAuthCookie(token) {
-        const maxAge = TOKEN_DAYS * 24 * 60 * 60;
-        document.cookie = `${AUTH_COOKIE}=${encodeURIComponent(token)}; path=/; max-age=${maxAge}; samesite=lax`;
-    }
-
-    function clearAuthCookie() {
-        document.cookie = `${AUTH_COOKIE}=; path=/; max-age=0; samesite=lax`;
     }
 
     function getAuthState() {
@@ -225,9 +176,6 @@
 
         if (!auth) {
             removeStorage();
-            if (storedAuth) {
-                clearAuthCookie();
-            }
             return {
                 isAuthenticated: false,
                 auth: null,
@@ -235,7 +183,7 @@
             };
         }
 
-        setAuthCookie(auth.token);
+        writeStorage(auth);
 
         return {
             isAuthenticated: true,
@@ -250,7 +198,6 @@
 
     function saveAuth(auth) {
         const saved = normalizeStoredAuth({
-            token: auth?.token,
             user: auth?.user,
             savedAt: new Date().toISOString()
         });
@@ -261,7 +208,6 @@
         }
 
         writeStorage(saved);
-        setAuthCookie(saved.token);
         renderGlobalNavbar();
         refreshNavbarAuthState();
         return saved;
@@ -269,23 +215,18 @@
 
     function clearAuth() {
         removeStorage();
-        clearAuthCookie();
     }
 
     async function apiFetch(url, options = {}) {
-        const auth = getAuth();
         const headers = {
             ...(options.body && !(options.body instanceof FormData) ? { "Content-Type": "application/json" } : {}),
             ...(options.headers || {})
         };
 
-        if (auth?.token) {
-            headers.Authorization = `Bearer ${auth.token}`;
-        }
-
         const response = await fetch(url, {
             ...options,
-            headers
+            headers,
+            credentials: options.credentials || "include"
         });
         const text = await response.text();
         const data = text ? JSON.parse(text) : {};
@@ -302,11 +243,9 @@
             return authMeRequest;
         }
 
-        const auth = getAuth();
         authMeRequest = fetch("/api/auth/me", {
             credentials: "include",
-            cache: "no-store",
-            headers: auth?.token ? { Authorization: `Bearer ${auth.token}` } : {}
+            cache: "no-store"
         })
         .then(async (response) => {
             const text = await response.text();
@@ -332,11 +271,6 @@
     }
 
     async function verifyStoredSession() {
-        const auth = getAuth();
-        if (!auth?.token) {
-            return null;
-        }
-
         try {
             const result = await fetchAuthMe();
             if (!result.ok) {
@@ -344,12 +278,11 @@
             }
             const data = result.data;
             const nextAuth = {
-                ...auth,
-                user: data.user
+                user: data.user,
+                savedAt: new Date().toISOString()
             };
 
             writeStorage(nextAuth);
-            setAuthCookie(nextAuth.token);
             navbarAuthSnapshot = {
                 status: "user",
                 auth: nextAuth
@@ -368,7 +301,7 @@
     }
 
     function redirectIfAuthenticated(target = "/dashboard") {
-        if (getAuth()?.token) {
+        if (getAuth()?.user) {
             window.location.href = target;
         }
     }
@@ -382,11 +315,6 @@
     }
 
     async function recordTestResult(result) {
-        const auth = getAuth();
-        if (!auth?.token) {
-            return null;
-        }
-
         return apiFetch("/api/profile/results", {
             method: "POST",
             body: JSON.stringify(result || {})
@@ -408,7 +336,6 @@
 
         if (response && response.user) {
             saveAuth({
-                token: getAuth()?.token,
                 user: response.user
             });
         }
@@ -1709,14 +1636,11 @@
                 
                 const storedAuth = normalizeStoredAuth(readStorage());
                 const nextAuth = {
-                    token: storedAuth?.token || "",
                     user: data.user,
                     savedAt: new Date().toISOString()
                 };
 
-                if (storedAuth?.token) {
-                    writeStorage(nextAuth);
-                }
+                writeStorage(nextAuth);
 
                 updateNavbarAuthState(true, nextAuth);
             } else {
@@ -1818,21 +1742,13 @@
         }
 
         const auth = getAuth();
-
-        // Inject Bearer token if request is to our API and token is available
-        if (urlString.startsWith("/api/") && auth?.token) {
-            modifiedOptions.headers = {
-                ...modifiedOptions.headers
-            };
-            if (!modifiedOptions.headers.Authorization && !modifiedOptions.headers.authorization) {
-                modifiedOptions.headers.Authorization = `Bearer ${auth.token}`;
-            }
+        if (urlString.startsWith("/api/")) {
+            modifiedOptions = { ...modifiedOptions, credentials: modifiedOptions.credentials || "include" };
         }
 
         try {
             console.log("--- FETCH REQUEST ---");
             console.log("Request URL:", urlString);
-            console.log("Token exists:", auth?.token ? "exists" : "missing");
             console.log("Current user role:", auth?.user?.role || "none");
 
             const response = await originalFetch(url, modifiedOptions);

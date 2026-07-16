@@ -18,14 +18,13 @@
         return includeTime ? date.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }) : date.toISOString().slice(0, 10);
     }
     function authHeaders(json = false) {
-        const token = window.authClient?.getAuth()?.token;
-        return { ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(json ? { "Content-Type": "application/json" } : {}) };
+        return json ? { "Content-Type": "application/json" } : {};
     }
     function refreshCurrentAuthUser(updatedUser) {
         if (!updatedUser) return;
         const auth = window.authClient?.getAuth?.();
-        if (!auth?.token || String(auth.user?.id || "") !== String(updatedUser.id || "")) return;
-        window.authClient.saveAuth({ token: auth.token, user: updatedUser });
+        if (String(auth?.user?.id || "") !== String(updatedUser.id || "")) return;
+        window.authClient.saveAuth({ user: updatedUser });
     }
     function setStatus(message, type = "") {
         const el = byId("usersStatus"); el.hidden = !message; el.textContent = message || ""; el.className = `status-text${type ? ` ${type}` : ""}`;

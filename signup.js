@@ -109,7 +109,6 @@
                 }
 
                 window.authClient?.saveAuth?.({
-                    token: data.token,
                     user: meData.user
                 });
 

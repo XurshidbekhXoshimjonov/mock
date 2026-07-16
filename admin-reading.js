@@ -933,12 +933,8 @@ form.addEventListener("reset", () => {
             formData.append("html", file);
             formData.append("skill", "reading");
 
-            const token = window.authClient?.getAuth()?.token;
-            const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
             const response = await fetch("/api/full-tests/import", {
                 method: "POST",
-                headers,
                 body: formData
             });
 

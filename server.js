@@ -23,6 +23,8 @@ const { createMockTestStore } = require("./lib/mock-test-store");
 const ManualTestParser = require("./lib/manual-test-parser");
 const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-import/htmlSanitizer");
 const { stripTags } = require("./lib/ielts-import/utils");
+const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/upload-security");
+const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 
 let TranslateClient = null;
 try {
@@ -4899,7 +4901,7 @@ app.get("/api/mock-tests/latest", requireAuth, (req, res) => {
         return premiumMockTestApiResponse(res);
     }
 
-    res.json(test);
+    res.json(withoutPrivateImportMetadata(test));
 });
 
 app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
@@ -5805,7 +5807,7 @@ app.get("/api/reading-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
-    res.json(test);
+    res.json(withoutPrivateImportMetadata(test));
 });
 
 app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
@@ -6622,14 +6624,14 @@ app.post("/signup", async (req, res) => {
             httpOnly: true,
             secure: secureCookie,
             sameSite: "lax",
-            path: "/"
+            path: "/",
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         res.status(201).json({
             success: true,
             message: "Account created successfully",
-            user: publicUser(newUser),
-            token
+            user: publicUser(newUser)
         });
 
         sendTelegramMessage(
@@ -6719,14 +6721,14 @@ async function handleLogin(req, res) {
             httpOnly: true,
             secure: secureCookie,
             sameSite: "lax",
-            path: "/"
+            path: "/",
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         res.json({
             success: true,
             message: "Login successful",
-            user: publicUser(user),
-            token
+            user: publicUser(user)
         });
     } catch (error) {
         console.error(error);
@@ -6744,11 +6746,20 @@ app.post("/api/auth/login", handleLogin);
 app.get("/auth/google", (req, res) => {
     const clientId = process.env.GOOGLE_CLIENT_ID;
     const callbackUrl = process.env.GOOGLE_CALLBACK_URL;
-    const redirectParam = req.query.redirect || "";
 
     if (!clientId || !callbackUrl) {
         return res.status(500).send("Google OAuth is not configured on the server. Please set GOOGLE_CLIENT_ID and GOOGLE_CALLBACK_URL in your environment.");
     }
+
+    const oauthState = createOAuthState(req.query.redirect);
+    const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+    res.cookie("ieltsxGoogleOAuthState", oauthState.cookieValue, {
+        httpOnly: true,
+        secure: secureCookie,
+        sameSite: "lax",
+        path: "/auth/google/callback",
+        maxAge: OAUTH_STATE_TTL_MS
+    });
 
     const paramsObj = {
         client_id: clientId,
@@ -6756,12 +6767,9 @@ app.get("/auth/google", (req, res) => {
         response_type: "code",
         scope: "openid email profile",
         access_type: "offline",
-        prompt: "select_account"
+        prompt: "select_account",
+        state: oauthState.state
     };
-
-    if (redirectParam) {
-        paramsObj.state = redirectParam;
-    }
 
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + 
         new URLSearchParams(paramsObj).toString();
@@ -6773,6 +6781,19 @@ app.get("/auth/google/callback", async (req, res) => {
     try {
         console.log("[AUTH CALLBACK] Google callback reached");
         const { code, state } = req.query;
+        const stateCookie = getCookieValue(req, "ieltsxGoogleOAuthState");
+        const verifiedState = verifyOAuthState(state, stateCookie);
+        const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+        res.clearCookie("ieltsxGoogleOAuthState", {
+            httpOnly: true,
+            secure: secureCookie,
+            sameSite: "lax",
+            path: "/auth/google/callback"
+        });
+
+        if (!verifiedState) {
+            return res.status(400).send("Invalid or expired OAuth state. Please start Google sign-in again.");
+        }
         if (!code) {
             return res.status(400).send("Authorization code is missing.");
         }
@@ -6904,7 +6925,7 @@ app.get("/auth/google/callback", async (req, res) => {
         console.log("[AUTH CALLBACK] JWT session created for user: " + user.email);
 
         // Store JWT in a secure httpOnly cookie
-        const isProduction = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+        const isProduction = secureCookie;
         res.cookie("ieltsmockAuthToken", token, {
             httpOnly: true,
             secure: isProduction,
@@ -6912,56 +6933,11 @@ app.get("/auth/google/callback", async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
-        // Redirect URL logic using clean paths
-        let redirectBase = process.env.FRONTEND_URL || "";
-        if (redirectBase.endsWith("/")) {
-            redirectBase = redirectBase.slice(0, -1);
-        }
         const defaultPath = user.role === "admin" ? "/admin" : "/dashboard";
-        const targetPath = state ? decodeURIComponent(state) : defaultPath;
-        const redirectUrl = `${redirectBase}${targetPath}`;
+        const redirectUrl = verifiedState.redirectPath || defaultPath;
         console.log("[AUTH CALLBACK] Redirect target: " + redirectUrl);
 
-        // Return script to write to localStorage for the frontend client-side authentication
-        res.setHeader("Content-Type", "text/html");
-        res.send(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Authenticating...</title>
-                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-                <script>
-                    const token = ${JSON.stringify(token)};
-                    const user = ${JSON.stringify(publicUser(user))};
-                    const savedAuth = {
-                        token,
-                        user,
-                        savedAt: new Date().toISOString()
-                    };
-                    localStorage.setItem("ieltsmock.auth", JSON.stringify(savedAuth));
-                    localStorage.setItem("ieltsAuth", JSON.stringify(savedAuth));
-                    
-                    // Also set the cookie client-side as fallback for existing scripts if needed
-                    document.cookie = "ieltsmockAuthToken=" + encodeURIComponent(token) + "; path=/; max-age=" + (7 * 24 * 60 * 60) + "; samesite=lax";
-                    
-                    window.location.href = ${JSON.stringify(redirectUrl)};
-                </script>
-            </head>
-            <body>
-                <div style="font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 10px;">
-                    <div style="width: 40px; height: 40px; border: 4px solid #f3f4f6; border-top: 4px solid #2563eb; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                    <p style="color: #4b5563; font-weight: 500;">Signing in with Google...</p>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            </body>
-            </html>
-        `);
+        res.redirect(302, redirectUrl);
     } catch (error) {
         console.error("Google callback error:", error);
         res.status(500).send("Authentication failed: " + (error.message || "Unknown error"));
@@ -6982,6 +6958,19 @@ app.get("/api/auth/me", async (req, res) => {
             return res.status(401).json({
                 success: false,
                 message: "Not authenticated"
+            });
+        }
+
+        const cookieToken = getCookieValue(req, "ieltsmockAuthToken");
+        const cookiePayload = verifyAuthToken(cookieToken);
+        if (cookiePayload && String(cookiePayload.id || "") === String(req.user.id || "")) {
+            const secureCookie = process.env.NODE_ENV === "production" || req.secure || req.headers["x-forwarded-proto"] === "https";
+            res.cookie("ieltsmockAuthToken", cookieToken, {
+                httpOnly: true,
+                secure: secureCookie,
+                sameSite: "lax",
+                path: "/",
+                maxAge: 7 * 24 * 60 * 60 * 1000
             });
         }
 
@@ -7296,8 +7285,11 @@ function staticCacheHeaders(res, filePath) {
     }
 }
 
+app.use("/uploads/ielts-import", protectImportedUploads);
 app.use("/uploads", express.static(UPLOAD_DIR, {
     maxAge: "7d",
+    index: false,
+    redirect: false,
     setHeaders: staticCacheHeaders
 }));
 app.get("/vendor/html2canvas.min.js", (req, res) => {

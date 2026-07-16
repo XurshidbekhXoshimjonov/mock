@@ -1869,12 +1869,8 @@ async function handleImportFileSelected(file, statusEl) {
         formData.append("html", file);
         formData.append("skill", "listening");
 
-        const token = window.authClient?.getAuth()?.token;
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
         const response = await fetch("/api/full-tests/import", {
             method: "POST",
-            headers: headers,
             body: formData
         });
 

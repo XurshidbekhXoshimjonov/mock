@@ -44,10 +44,6 @@
         };
     }
 
-    function authToken() {
-        return window.authClient?.getAuth?.()?.token || "";
-    }
-
     function currentUser() {
         return window.authClient?.getAuth?.()?.user || window.authClient?.getAuthState?.()?.user || null;
     }
@@ -59,9 +55,7 @@
             const result = await window.authClient.fetchAuthMe();
             const user = result?.data?.user || null;
             if (result?.ok && user) {
-                if (auth?.token) {
-                    window.authClient?.saveAuth?.({ token: auth.token, user });
-                }
+                window.authClient?.saveAuth?.({ user });
                 return user;
             }
         } catch {
@@ -154,8 +148,7 @@
             method: "POST",
             credentials: "include",
             headers: {
-                "Content-Type": "application/json",
-                ...(authToken() ? { Authorization: `Bearer ${authToken()}` } : {})
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ planId: plan.id })
         });
@@ -260,7 +253,7 @@
                 const telegramLink = event.target.closest("#manualPaymentTelegramLink");
                 if (telegramLink && selectedPlan) {
                     event.preventDefault();
-                    if (!authToken()) {
+                    if (!currentUser()) {
                         loginForPlan(selectedPlan.id);
                         return;
                     }
@@ -384,7 +377,7 @@
 
         window.setTimeout(() => {
             const planId = new URLSearchParams(window.location.search).get("plan");
-            if (planId && premium.premiumPlans[planId] && authToken() && activePlanId(currentUser()) !== planId) {
+            if (planId && premium.premiumPlans[planId] && currentUser() && activePlanId(currentUser()) !== planId) {
                 openPlan(planId);
             }
         }, 450);

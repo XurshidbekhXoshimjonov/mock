@@ -48,8 +48,7 @@ const guideResult = document.getElementById("guideResult");
 
 // Auth Headers Utility
 function authHeaders() {
-    const token = window.authClient?.getAuth()?.token;
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    return {};
 }
 
 // Status Display Helper

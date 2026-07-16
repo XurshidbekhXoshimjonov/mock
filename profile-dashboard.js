@@ -2138,15 +2138,14 @@
                     credentials: "include",
                     cache: "no-store",
                     headers: {
-                        "Content-Type": "application/json",
-                        ...(auth?.token ? { Authorization: `Bearer ${auth.token}` } : {})
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ note: "Cancelled from profile subscription page" })
                 });
                 const data = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(data.error || data.message || "Could not cancel subscription");
-                if (data.user && auth?.token) {
-                    window.authClient?.saveAuth?.({ token: auth.token, user: data.user });
+                if (data.user) {
+                    window.authClient?.saveAuth?.({ user: data.user });
                 }
                 window.location.reload();
             } catch (error) {
