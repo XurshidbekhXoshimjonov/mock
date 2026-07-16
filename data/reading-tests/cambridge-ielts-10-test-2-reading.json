@@ -1165,6 +1165,7 @@
         {
           "id": "c10-t2-reading-p3-g2",
           "type": "multiple_choice",
+          "optionLetterPunctuation": "dot",
           "instructionTitle": "Questions 32–35",
           "instructionText": "Choose the correct letter, A, B, C or D.",
           "rule": "",
@@ -2166,6 +2167,7 @@
     {
       "id": "c10-t2-reading-p3-g2",
       "type": "multiple_choice",
+      "optionLetterPunctuation": "dot",
       "instructionTitle": "Questions 32–35",
       "instructionText": "Choose the correct letter, A, B, C or D.",
       "rule": "",

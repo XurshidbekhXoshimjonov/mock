@@ -201,12 +201,15 @@ function TFNGRenderer({ question, value, onAnswer, groupType, reviewResult, read
     );
 }
 
-function MultipleChoiceRenderer({ question, value, onAnswer, reviewResult, readOnly }) {
+function MultipleChoiceRenderer({ question, group, value, onAnswer, reviewResult, readOnly }) {
     return h(QuestionShell, { question, className: "cbt-question--choice", reviewResult },
         h(Stem, { question }),
         h("div", { className: "cbt-options cbt-options--stacked" },
             optionList(question.options).map((raw) => {
                 const option = normalizeOption(raw);
+                const optionLabel = group?.optionLetterPunctuation === "dot"
+                    ? option.label.replace(/^([A-D])\s+/, "$1. ")
+                    : option.label;
                 const isSelected = value === option.value;
                 return h("label", {
                     key: option.value,
@@ -222,7 +225,7 @@ function MultipleChoiceRenderer({ question, value, onAnswer, reviewResult, readO
                     }),
                     option.html
                         ? h(SafeHtml, { html: option.html, tag: "span" })
-                        : h("span", null, option.label)
+                        : h("span", null, optionLabel)
                 );
             })
         ),
@@ -766,7 +769,7 @@ function QuestionRenderer({ question, group, value, onAnswer, reviewResult, read
         return h(TFNGRenderer, { question, value, onAnswer, groupType: type, reviewResult, readOnly });
     }
     if (type === "multiple_choice") {
-        return h(MultipleChoiceRenderer, { question, value, onAnswer, reviewResult, readOnly });
+        return h(MultipleChoiceRenderer, { question, group, value, onAnswer, reviewResult, readOnly });
     }
     if ([
         "matching",
