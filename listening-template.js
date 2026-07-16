@@ -377,18 +377,65 @@ function renderListeningReview(result) {
     listeningRoot.querySelector(".lc-main")?.appendChild(summary);
 }
 
-function recordListeningResult(test, options = {}) {
+function normalizeServerListeningScore(data) {
+    const questionResults = (data.results || []).map((item) => {
+        const correctAnswers = String(item.answer || "").split("|").map((answer) => answer.trim()).filter(Boolean);
+        const isUnanswered = !normalizeAnswer(item.userAnswer);
+        return {
+            number: Number(item.number),
+            userAnswer: String(item.userAnswer || "").trim(),
+            correctAnswers,
+            mainAnswer: correctAnswers[0] || "",
+            alternatives: correctAnswers.slice(1),
+            status: isUnanswered ? "unanswered" : (item.correct ? "correct" : "incorrect"),
+            isCorrect: Boolean(item.correct),
+            isUnanswered
+        };
+    });
+    return {
+        correct: Number(data.correct || 0),
+        incorrect: Number(data.incorrect ?? questionResults.filter((item) => item.status === "incorrect").length),
+        unanswered: Number(data.unanswered ?? questionResults.filter((item) => item.status === "unanswered").length),
+        total: Number(data.total ?? questionResults.length),
+        band: data.band,
+        questionResults
+    };
+}
+
+async function requestListeningScore(test, answers) {
+    const response = await fetch(`/api/listening-tests/${encodeURIComponent(test.id || listeningTestId)}/score`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Could not score this Listening test");
+    return normalizeServerListeningScore(data);
+}
+
+async function recordListeningResult(test, options = {}) {
     if (isSubmitted) return;
     isSubmitted = true;
 
-    const structuredResult = gradeStructuredListeningTest(test);
-    const result = structuredResult.total ? structuredResult : gradeLegacyListeningTest(test);
-    const answerNumbers = Object.keys(parseStructuredAnswers(test)).map(Number).filter(Number.isFinite);
+    const submittedAnswers = collectListeningAnswers(test);
     const status = listeningRoot.querySelector(".lc-submit-status");
     const isFull = test.part === "full" || (test.parts || []).length > 1;
     const resultType = isFull ? "full-test" : `part-${Number(test.part || test.parts?.[0]?.partNumber) || 1}`;
 
+    let result;
+    try {
+        result = await requestListeningScore(test, submittedAnswers);
+    } catch (error) {
+        isSubmitted = false;
+        status.textContent = error.message;
+        return;
+    }
+
+    const answerNumbers = result.questionResults.map((item) => Number(item.number)).filter(Number.isFinite);
+
     if (!result.total) {
+        isSubmitted = false;
         status.textContent = "This Listening test does not have an answer key yet.";
         return;
     }
@@ -516,7 +563,11 @@ listeningRoot.addEventListener("listening-submit", (event) => {
             });
             return;
         }
-        recordListeningResult(activeListeningTest, event.detail || {});
+        recordListeningResult(activeListeningTest, event.detail || {}).catch((error) => {
+            isSubmitted = false;
+            const status = listeningRoot.querySelector(".lc-submit-status");
+            if (status) status.textContent = error.message;
+        });
     }
 });
 

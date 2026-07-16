@@ -24,12 +24,14 @@ const { createMockTestStore } = require("./lib/mock-test-store");
 const ManualTestParser = require("./lib/manual-test-parser");
 const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-import/htmlSanitizer");
 const { stripTags } = require("./lib/ielts-import/utils");
-const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/upload-security");
+const { protectImportedUploads } = require("./lib/upload-security");
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
 const { createSecurityHeaders } = require("./lib/security-headers");
 const { UPLOAD_LIMITS, multipartLimits, uploadErrorResponse } = require("./lib/upload-limits");
 const { validateUploadContents } = require("./lib/upload-content-validation");
+const { calculateReadingBand, calculateListeningBand, scoreSkill } = require("./lib/ielts-import/bandScoring");
+const { publicTestData, collectScorableQuestions } = require("./lib/public-test-data");
 
 let TranslateClient = null;
 try {
@@ -4925,7 +4927,32 @@ app.get("/api/mock-tests/latest", requireAuth, (req, res) => {
         return premiumMockTestApiResponse(res);
     }
 
-    res.json(withoutPrivateImportMetadata(test));
+    res.json(publicTestData(test));
+});
+
+function scorePublicTest(test, answers, skill) {
+    const questions = collectScorableQuestions(test);
+    const scored = scoreSkill(questions, answers || {});
+    const band = skill === "listening"
+        ? calculateListeningBand(scored.correct, scored.total)
+        : calculateReadingBand(scored.correct, scored.total);
+    return {
+        skill,
+        correct: scored.correct,
+        incorrect: scored.results.filter((item) => String(item.userAnswer || "").trim() && !item.correct).length,
+        unanswered: scored.results.filter((item) => !String(item.userAnswer || "").trim()).length,
+        total: scored.total,
+        band,
+        results: scored.results
+    };
+}
+
+app.post("/api/reading-tests/:id/score", requireUser, (req, res) => {
+    const test = buildMockReadingTest(req.params.id) || resolveManualReadingTest(req.params.id);
+    if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-reading-"))) {
+        return res.status(404).json({ error: "Reading test not found" });
+    }
+    res.json(scorePublicTest(test, req.body?.answers, "reading"));
 });
 
 app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
@@ -4946,7 +4973,16 @@ app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
         return premiumMockTestApiResponse(res);
     }
 
-    res.json(test);
+    res.json(publicTestData(test));
+});
+
+app.post("/api/listening-tests/:id/score", requireUser, (req, res) => {
+    let test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
+    if (!test) test = resolveManualListeningTest(`${req.params.id}-listening-full`);
+    if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-listening-"))) {
+        return res.status(404).json({ error: "Listening test not found" });
+    }
+    res.json(scorePublicTest(test, req.body?.answers, "listening"));
 });
 
 app.post("/api/mock-tests/:id/progress", requireUser, requireMockTestAccessApi, (req, res) => {
@@ -5761,6 +5797,7 @@ function getListeningTestById(id) {
 
 registerFullTestRoutes(app, {
     requireAdmin,
+    requireAuth,
     fullTestStore,
     uploadsRoot: UPLOAD_DIR,
     safeFileName,
@@ -5831,7 +5868,7 @@ app.get("/api/reading-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Reading test not found" });
     }
 
-    res.json(withoutPrivateImportMetadata(test));
+    res.json(publicTestData(test));
 });
 
 app.put("/api/reading-tests/:id", requireAdmin, (req, res) => {
@@ -6124,7 +6161,7 @@ app.get("/api/listening-tests/:id", (req, res) => {
         return res.status(404).json({ error: "Listening test not found" });
     }
 
-    res.json(test);
+    res.json(publicTestData(test));
 });
 
 app.put("/api/listening-tests/:id", requireAdmin, audioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
@@ -6218,7 +6255,7 @@ app.get("/api/tests/:id", (req, res) => {
         return res.status(404).json({ error: "Test not found" });
     }
 
-    res.json(test);
+    res.json(publicTestData(test));
 });
 
 app.delete("/api/tests/:id", requireAdmin, (req, res) => {

@@ -854,7 +854,7 @@ function ensureListeningStyles() {
 }
 
 async function fetchJson(url, fallbackMessage) {
-    const response = await fetch(url, { cache: "no-store" });
+    const response = await fetch(url, { cache: "no-store", credentials: "include" });
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
@@ -862,6 +862,64 @@ async function fetchJson(url, fallbackMessage) {
     }
 
     return data;
+}
+
+function normalizeServerScore(data, resultSkill = skill) {
+    const questionResults = (data.results || []).map((item) => {
+        const correctAnswers = acceptedAnswers(item.answer);
+        const isUnanswered = !normalizeAnswer(item.userAnswer);
+        return {
+            number: Number(item.number),
+            userAnswer: String(item.userAnswer || "").trim(),
+            correctAnswers,
+            mainAnswer: correctAnswers[0] || "",
+            alternatives: correctAnswers.slice(1),
+            status: isUnanswered ? "unanswered" : (item.correct ? "correct" : "incorrect"),
+            isCorrect: Boolean(item.correct),
+            isUnanswered
+        };
+    });
+    const summarized = summarizeQuestionResults(questionResults, resultSkill);
+    return {
+        ...summarized,
+        correct: Number(data.correct ?? summarized.correct),
+        incorrect: Number(data.incorrect ?? summarized.incorrect),
+        unanswered: Number(data.unanswered ?? summarized.unanswered),
+        total: Number(data.total ?? summarized.total),
+        band: data.band ?? summarized.band,
+        questionResults
+    };
+}
+
+async function scoreTestOnServer(id, resultSkill, answers, fullTest = false) {
+    const url = fullTest
+        ? "/api/full-tests/score"
+        : `/api/${resultSkill === "listening" ? "listening" : "reading"}-tests/${encodeURIComponent(id)}/score`;
+    const body = fullTest ? { testId: id, skill: resultSkill, answers } : { answers };
+    const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Could not score this test");
+    return normalizeServerScore(data, resultSkill);
+}
+
+function collectListeningDomAnswers(root) {
+    const answers = {};
+    root.querySelectorAll('[name^="q"], [id^="q"]').forEach((field) => {
+        const match = String(field.name || field.id || "").match(/^q(\d+)$/);
+        if (!match) return;
+        answers[match[1]] = listeningAnswerValue(root, match[1]);
+    });
+    root.querySelectorAll(".lc-multiple-select").forEach((group) => {
+        const numbers = String(group.dataset.questionNumbers || "").split(",").map(Number).filter(Number.isFinite);
+        const selected = [...group.querySelectorAll('input[type="checkbox"]:checked')].map((input) => input.value);
+        numbers.forEach((number, index) => { answers[number] = selected[index] || ""; });
+    });
+    return answers;
 }
 
 function questionRangeFromQuestions(questions, fallback = "Questions") {
@@ -1334,11 +1392,11 @@ function renderFullListeningPlayer() {
             window.ListeningComponents.bindListeningTest(rootElement);
             bindFullScreenEvents(rootElement);
             let isSubmitted = false;
-            rootElement.addEventListener("listening-submit", (event) => {
+            rootElement.addEventListener("listening-submit", async (event) => {
                 if (isSubmitted) return;
                 isSubmitted = true;
 
-                const result = gradeFullListeningTest(rootElement, test);
+                const submittedAnswers = collectListeningDomAnswers(rootElement);
                 const status = rootElement.querySelector(".lc-submit-status");
                 const options = event.detail || {};
                 const autoSubmitMessage = ResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
@@ -1355,8 +1413,18 @@ function renderFullListeningPlayer() {
                     notifyMockSectionComplete("listening", {
                         testId: test?.id || testId,
                         autoSubmit: isAutoSubmit,
-                        result
+                        answers: submittedAnswers,
+                        deferred: true
                     });
+                    return;
+                }
+
+                let result;
+                try {
+                    result = await scoreTestOnServer(test?.id || testId, "listening", submittedAnswers, true);
+                } catch (error) {
+                    isSubmitted = false;
+                    if (status) status.textContent = error.message;
                     return;
                 }
 
@@ -2691,7 +2759,7 @@ function ReadingApp() {
         submit({ auto: true });
     }
 
-    function submit(options = {}) {
+    async function submit(options = {}) {
         const isAutoSubmit = Boolean(options.auto);
         if (!hasStarted && !isAutoSubmit) return;
         if (isSubmittedRef.current) return;
@@ -2714,7 +2782,14 @@ function ReadingApp() {
             ResultUtils.disableAnswerInputs?.(rootElement);
         }
 
-        const nextResult = gradeReadingQuestions(questions, answers);
+        let nextResult;
+        try {
+            nextResult = await scoreTestOnServer(test?.id || testId, skill, answers, mode === "full");
+        } catch (error) {
+            isSubmittedRef.current = false;
+            setError(error.message);
+            return;
+        }
         setResult(nextResult);
         setShowResultModal(true);
         setReviewMode(false);
