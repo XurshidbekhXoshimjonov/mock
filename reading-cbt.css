@@ -1057,6 +1057,40 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     margin: 0 0 10px;
 }
 
+.c10-t2-art-summary h4 {
+    margin: 0 0 18px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: calc(19px * var(--reading-scale));
+    text-align: center;
+}
+
+.c10-t2-art-summary > p {
+    margin: 0 0 20px;
+    text-indent: 2em;
+}
+
+.c10-t2-art-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 20px;
+    margin-top: 22px;
+    border: 1px solid var(--cbt-border);
+    background: #fff;
+    padding: 12px 14px;
+}
+
+.c10-t2-art-options span {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 6px;
+}
+
+@media (max-width: 620px) {
+    .c10-t2-art-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 .cbt-rich-completion table {
     width: 100%;
     border-collapse: collapse;

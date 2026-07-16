@@ -1023,10 +1023,11 @@
       "questionGroups": [
         {
           "id": "c10-t2-reading-p3-g1",
-          "type": "matching_features",
+          "type": "summary_completion",
           "instructionTitle": "Questions 27–31",
           "instructionText": "Complete the summary using the list of words, A–L.",
           "rule": "",
+          "contentHtml": "<div class=\"c10-t2-art-summary\"><h4>The value attached to original works of art</h4><p>People go to art museums because they accept the value of seeing an original work of art. But they do not go to museums to read original manuscripts of novels, perhaps because the availability of novels has depended on <span class=\"ielts-blank\" data-blank=\"27\"></span> for so long, and also because with novels, the <span class=\"ielts-blank\" data-blank=\"28\"></span> are the most important thing.</p><p>However, in historical times artists such as Leonardo were happy to instruct <span class=\"ielts-blank\" data-blank=\"29\"></span> to produce copies of their work and these days new methods of reproduction allow excellent replication of surface relief features as well as colour and <span class=\"ielts-blank\" data-blank=\"30\"></span>.</p><p>It is regrettable that museums still promote the superiority of original works of art, since this may not be in the interests of the <span class=\"ielts-blank\" data-blank=\"31\"></span>.</p><div class=\"c10-t2-art-options\"><span><b>A</b> institution</span><span><b>B</b> mass production</span><span><b>C</b> mechanical processes</span><span><b>D</b> public</span><span><b>E</b> paints</span><span><b>F</b> artist</span><span><b>G</b> size</span><span><b>H</b> underlying ideas</span><span><b>I</b> basic technology</span><span><b>J</b> readers</span><span><b>K</b> picture frames</span><span><b>L</b> assistants</span></div></div>",
           "options": [
             "A institution",
             "B mass production",
@@ -2023,10 +2024,11 @@
     },
     {
       "id": "c10-t2-reading-p3-g1",
-      "type": "matching_features",
+      "type": "summary_completion",
       "instructionTitle": "Questions 27–31",
       "instructionText": "Complete the summary using the list of words, A–L.",
       "rule": "",
+      "contentHtml": "<div class=\"c10-t2-art-summary\"><h4>The value attached to original works of art</h4><p>People go to art museums because they accept the value of seeing an original work of art. But they do not go to museums to read original manuscripts of novels, perhaps because the availability of novels has depended on <span class=\"ielts-blank\" data-blank=\"27\"></span> for so long, and also because with novels, the <span class=\"ielts-blank\" data-blank=\"28\"></span> are the most important thing.</p><p>However, in historical times artists such as Leonardo were happy to instruct <span class=\"ielts-blank\" data-blank=\"29\"></span> to produce copies of their work and these days new methods of reproduction allow excellent replication of surface relief features as well as colour and <span class=\"ielts-blank\" data-blank=\"30\"></span>.</p><p>It is regrettable that museums still promote the superiority of original works of art, since this may not be in the interests of the <span class=\"ielts-blank\" data-blank=\"31\"></span>.</p><div class=\"c10-t2-art-options\"><span><b>A</b> institution</span><span><b>B</b> mass production</span><span><b>C</b> mechanical processes</span><span><b>D</b> public</span><span><b>E</b> paints</span><span><b>F</b> artist</span><span><b>G</b> size</span><span><b>H</b> underlying ideas</span><span><b>I</b> basic technology</span><span><b>J</b> readers</span><span><b>K</b> picture frames</span><span><b>L</b> assistants</span></div></div>",
       "options": [
         "A institution",
         "B mass production",

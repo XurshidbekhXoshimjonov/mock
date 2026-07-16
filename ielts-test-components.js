@@ -472,11 +472,10 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
                 input.appendChild(defaultOpt);
 
                 question.options.forEach((opt) => {
+                    const normalized = normalizeOption(opt);
                     const optionEl = document.createElement("option");
-                    const val = typeof opt === "object" ? opt.value : opt;
-                    const lbl = typeof opt === "object" ? opt.label : opt;
-                    optionEl.value = val;
-                    optionEl.textContent = lbl;
+                    optionEl.value = normalized.value;
+                    optionEl.textContent = normalized.label;
                     input.appendChild(optionEl);
                 });
 
