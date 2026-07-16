@@ -735,6 +735,35 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderTransportSurvey(lines, title) {
+            const body = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => {
+                    const isBullet = /^[-*•]\s+/.test(line);
+                    const content = renderPlaceholderText(line.replace(/^[-*•]\s+/, ""), block.options);
+                    if (isBullet) return `<li class="lc-transport-row lc-transport-bullet">${content}</li>`;
+                    if (/^<strong>[\s\S]*<\/strong>$/i.test(line)) {
+                        return `<h5 class="lc-transport-section-title">${content}</h5>`;
+                    }
+                    return `<p class="lc-transport-row">${content}</p>`;
+                })
+                .join("");
+            const example = String(block.example || "").replace(/^Travelled to town today:\s*/i, "");
+
+            return `
+                <div class="lc-transport-survey">
+                    <h4 class="lc-transport-title">${escapeHtml(title || "Transport Survey")}</h4>
+                    <div class="lc-transport-example"><em>Example</em><p><strong>Travelled to town today:</strong> ${escapeHtml(example)}</p></div>
+                    <div class="lc-transport-body">${body}</div>
+                </div>
+            `;
+        }
+
+        if (block.noteStyle === "transport-survey") {
+            return blockCard(block, renderTransportSurvey(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--transport-survey");
+        }
+
         if (block.noteStyle === "job-details-form") {
             return blockCard(block, renderJobDetailsForm(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--job-details-form");
         }

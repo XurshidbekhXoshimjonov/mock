@@ -761,6 +761,87 @@ body.fullscreen-fallback .lc-fullscreen-button {
     box-shadow: 0 1px 7px rgba(7, 20, 55, 0.035);
 }
 
+.lc-note-completion--transport-survey {
+    padding: 0;
+    overflow: hidden;
+}
+
+.lc-note-completion--transport-survey > .lc-block-heading {
+    display: block;
+    padding: 16px 20px 0;
+}
+
+.lc-transport-survey {
+    margin: 0 20px 22px;
+    border: 1px solid #5f6368;
+    background: #fff;
+    color: #202124;
+}
+
+.lc-transport-title {
+    margin: 0;
+    border-bottom: 1px solid #777;
+    padding: 10px 14px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.lc-transport-example {
+    border-bottom: 1px solid #777;
+    padding: 10px 14px 12px;
+}
+
+.lc-transport-example em {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.lc-transport-example p,
+.lc-transport-row {
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.lc-transport-body {
+    padding: 5px 0 12px;
+}
+
+.lc-transport-section-title {
+    margin: 12px 0 4px;
+    padding: 8px 14px 2px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.lc-transport-bullet {
+    display: list-item;
+    margin-left: 40px;
+    padding-left: 4px;
+}
+
+.lc-note-completion--transport-survey .lc-answer-inline {
+    margin: 0 4px;
+}
+
+@media (max-width: 620px) {
+    .lc-transport-survey {
+        margin: 0 10px 14px;
+    }
+    .lc-transport-title {
+        font-size: 20px;
+    }
+    .lc-transport-example p,
+    .lc-transport-row,
+    .lc-transport-section-title {
+        font-size: 14px;
+    }
+}
+
 .lc-note-completion--job-details-form > .lc-block-heading {
     display: block;
 }
