@@ -87,19 +87,19 @@
           "options": [
             {
               "value": "A",
-              "label": "A Problems are increasing year on year."
+              "label": "A. Problems are increasing year on year."
             },
             {
               "value": "B",
-              "label": "B There are not enough top graduates to replace them."
+              "label": "B. There are not enough top graduates to replace them."
             },
             {
               "value": "C",
-              "label": "C It leads to a poor relationship with teacher unions."
+              "label": "C. It leads to a poor relationship with teacher unions."
             },
             {
               "value": "D",
-              "label": "D Replacement teachers have the same training as the dismissed ones."
+              "label": "D. Replacement teachers have the same training as the dismissed ones."
             }
           ],
           "answer": "D"
@@ -112,19 +112,19 @@
           "options": [
             {
               "value": "A",
-              "label": "A Graduating teachers are not ready for the classroom."
+              "label": "A. Graduating teachers are not ready for the classroom."
             },
             {
               "value": "B",
-              "label": "B Improving a teacher of average talent is a very difficult task."
+              "label": "B. Improving a teacher of average talent is a very difficult task."
             },
             {
               "value": "C",
-              "label": "C More theory in teacher training courses is required."
+              "label": "C. More theory in teacher training courses is required."
             },
             {
               "value": "D",
-              "label": "D Primary teacher training is not taken seriously."
+              "label": "D. Primary teacher training is not taken seriously."
             }
           ],
           "answer": "A"
@@ -137,19 +137,19 @@
           "options": [
             {
               "value": "A",
-              "label": "A are well equipped to build on the theory they learned in college."
+              "label": "A. are well equipped to build on the theory they learned in college."
             },
             {
               "value": "B",
-              "label": "B have to engage with the realities of the job."
+              "label": "B. have to engage with the realities of the job."
             },
             {
               "value": "C",
-              "label": "C have opportunities to observe and learn from their peers."
+              "label": "C. have opportunities to observe and learn from their peers."
             },
             {
               "value": "D",
-              "label": "D enjoy a high level of support from the schools that employ them."
+              "label": "D. enjoy a high level of support from the schools that employ them."
             }
           ],
           "answer": "B"
@@ -162,19 +162,19 @@
           "options": [
             {
               "value": "A",
-              "label": "A enforcing strict standards of behaviour"
+              "label": "A. enforcing strict standards of behaviour"
             },
             {
               "value": "B",
-              "label": "B setting high goals which students are aware of"
+              "label": "B. setting high goals which students are aware of"
             },
             {
               "value": "C",
-              "label": "C responding to the pupils who raise their hands to answer questions"
+              "label": "C. responding to the pupils who raise their hands to answer questions"
             },
             {
               "value": "D",
-              "label": "D ensuring that lesson time is properly scheduled and used"
+              "label": "D. ensuring that lesson time is properly scheduled and used"
             }
           ],
           "answer": "C"
@@ -187,19 +187,19 @@
           "options": [
             {
               "value": "A",
-              "label": "A personally undertaking observation."
+              "label": "A. personally undertaking observation."
             },
             {
               "value": "B",
-              "label": "B providing critical feedback."
+              "label": "B. providing critical feedback."
             },
             {
               "value": "C",
-              "label": "C welcoming union interaction."
+              "label": "C. welcoming union interaction."
             },
             {
               "value": "D",
-              "label": "D working closely with them."
+              "label": "D. working closely with them."
             }
           ],
           "answer": "D"
@@ -490,19 +490,19 @@
       "options": [
         {
           "value": "A",
-          "label": "A Problems are increasing year on year."
+          "label": "A. Problems are increasing year on year."
         },
         {
           "value": "B",
-          "label": "B There are not enough top graduates to replace them."
+          "label": "B. There are not enough top graduates to replace them."
         },
         {
           "value": "C",
-          "label": "C It leads to a poor relationship with teacher unions."
+          "label": "C. It leads to a poor relationship with teacher unions."
         },
         {
           "value": "D",
-          "label": "D Replacement teachers have the same training as the dismissed ones."
+          "label": "D. Replacement teachers have the same training as the dismissed ones."
         }
       ],
       "answer": "D"
@@ -515,19 +515,19 @@
       "options": [
         {
           "value": "A",
-          "label": "A Graduating teachers are not ready for the classroom."
+          "label": "A. Graduating teachers are not ready for the classroom."
         },
         {
           "value": "B",
-          "label": "B Improving a teacher of average talent is a very difficult task."
+          "label": "B. Improving a teacher of average talent is a very difficult task."
         },
         {
           "value": "C",
-          "label": "C More theory in teacher training courses is required."
+          "label": "C. More theory in teacher training courses is required."
         },
         {
           "value": "D",
-          "label": "D Primary teacher training is not taken seriously."
+          "label": "D. Primary teacher training is not taken seriously."
         }
       ],
       "answer": "A"
@@ -540,19 +540,19 @@
       "options": [
         {
           "value": "A",
-          "label": "A are well equipped to build on the theory they learned in college."
+          "label": "A. are well equipped to build on the theory they learned in college."
         },
         {
           "value": "B",
-          "label": "B have to engage with the realities of the job."
+          "label": "B. have to engage with the realities of the job."
         },
         {
           "value": "C",
-          "label": "C have opportunities to observe and learn from their peers."
+          "label": "C. have opportunities to observe and learn from their peers."
         },
         {
           "value": "D",
-          "label": "D enjoy a high level of support from the schools that employ them."
+          "label": "D. enjoy a high level of support from the schools that employ them."
         }
       ],
       "answer": "B"
@@ -565,19 +565,19 @@
       "options": [
         {
           "value": "A",
-          "label": "A enforcing strict standards of behaviour"
+          "label": "A. enforcing strict standards of behaviour"
         },
         {
           "value": "B",
-          "label": "B setting high goals which students are aware of"
+          "label": "B. setting high goals which students are aware of"
         },
         {
           "value": "C",
-          "label": "C responding to the pupils who raise their hands to answer questions"
+          "label": "C. responding to the pupils who raise their hands to answer questions"
         },
         {
           "value": "D",
-          "label": "D ensuring that lesson time is properly scheduled and used"
+          "label": "D. ensuring that lesson time is properly scheduled and used"
         }
       ],
       "answer": "C"
@@ -590,19 +590,19 @@
       "options": [
         {
           "value": "A",
-          "label": "A personally undertaking observation."
+          "label": "A. personally undertaking observation."
         },
         {
           "value": "B",
-          "label": "B providing critical feedback."
+          "label": "B. providing critical feedback."
         },
         {
           "value": "C",
-          "label": "C welcoming union interaction."
+          "label": "C. welcoming union interaction."
         },
         {
           "value": "D",
-          "label": "D working closely with them."
+          "label": "D. working closely with them."
         }
       ],
       "answer": "D"
