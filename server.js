@@ -26,6 +26,7 @@ const { stripTags } = require("./lib/ielts-import/utils");
 const { protectImportedUploads, withoutPrivateImportMetadata } = require("./lib/upload-security");
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
+const { createSecurityHeaders } = require("./lib/security-headers");
 
 let TranslateClient = null;
 try {
@@ -36,9 +37,11 @@ try {
 
 const app = express();
 app.disable("etag");
+app.disable("x-powered-by");
 
 const ROOT_DIR = __dirname;
 const IS_VERCEL = Boolean(process.env.VERCEL);
+app.use(createSecurityHeaders({ trustForwardedProto: IS_VERCEL }));
 const authRateLimitStore = new AuthRateLimitStore({ mongoose });
 const loginRateLimit = createAuthRateLimiter({
     store: authRateLimitStore,
