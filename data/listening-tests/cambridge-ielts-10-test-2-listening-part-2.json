@@ -18,6 +18,7 @@
         {
           "id": "group-2-11",
           "type": "multiple_choice",
+          "title": "New city developments",
           "questionRange": "Questions 11-14",
           "instruction": "Choose the correct letter, A, B or C.",
           "questions": [

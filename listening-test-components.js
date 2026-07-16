@@ -377,6 +377,10 @@ const ListeningComponents = (() => {
 
     function MultipleChoiceBlock(block) {
         if (Array.isArray(block.questions) && block.questions.length) {
+            const contentTitle = String(block.title || "").trim();
+            const contentTitleHtml = contentTitle
+                ? `<h4 class="lc-mcq-content-title">${escapeHtml(contentTitle)}</h4>`
+                : "";
             const firstQ = block.questions[0];
             const hasSameShortOptions = block.questions.every((q) => {
                 const qOpts = q.options || block.options || [];
@@ -486,7 +490,7 @@ const ListeningComponents = (() => {
                     </div>
                 `;
             }).join("");
-            return blockCard(block, html, "lc-multiple-choice-block");
+            return blockCard(block, `${contentTitleHtml}${html}`, "lc-multiple-choice-block");
         }
 
         const name = `q${Number(block.questionNumber)}`;

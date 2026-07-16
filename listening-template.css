@@ -766,6 +766,15 @@ body.fullscreen-fallback .lc-fullscreen-button {
     overflow: hidden;
 }
 
+.lc-mcq-content-title {
+    margin: 2px 0 20px;
+    color: #111827;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+}
+
 .lc-note-completion--transport-survey > .lc-block-heading {
     display: block;
     padding: 16px 20px 0;
