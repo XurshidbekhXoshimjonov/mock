@@ -376,7 +376,42 @@ function SentenceCompletionRenderer({ question, value, onAnswer, reviewResult, r
         );
     }
 
-    const parts = stem.split(blankPattern);
+    const parts = stem.split(new RegExp(blankPattern.source, "gi"));
+    const blankCount = Math.max(0, parts.length - 1);
+
+    if (blankCount > 1) {
+        const values = String(value || "").split(/\s+and\s+/i, 2);
+        const updatePart = (index, nextValue) => {
+            const next = [values[0] || "", values[1] || ""];
+            next[index] = nextValue;
+            onAnswer?.(question.number, next.every((item) => !item.trim()) ? "" : `${next[0]} and ${next[1]}`);
+        };
+
+        return h(QuestionShell, { question, className: "cbt-question--completion", reviewResult },
+            h("div", { className: "cbt-question-line" },
+                h(QuestionBadge, { number: question.number }),
+                h("div", { className: "cbt-question-copy cbt-completion-copy" },
+                    parts.map((part, index) => h(Fragment, { key: `${question.number}-${index}` },
+                        h(SafeHtml, { html: part || "", tag: "span" }),
+                        index < blankCount
+                            ? h("input", {
+                                type: "text",
+                                className: statusClass(reviewResult, "cbt-blank-input cbt-blank-input--inline"),
+                                value: values[index] || "",
+                                onChange: (event) => updatePart(index, event.target.value),
+                                readOnly,
+                                autoComplete: "off",
+                                "aria-label": `Answer ${index + 1} for question ${question.number}`
+                            })
+                            : null
+                    )),
+                    h(InlineCorrectAnswer, { result: reviewResult })
+                )
+            ),
+            h(AnswerReviewDetails, { result: reviewResult })
+        );
+    }
+
     return h(QuestionShell, { question, className: "cbt-question--completion", reviewResult },
         h("div", { className: "cbt-question-line" },
             h(QuestionBadge, { number: question.number }),

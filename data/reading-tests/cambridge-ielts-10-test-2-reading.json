@@ -745,8 +745,8 @@
             {
               "number": 23,
               "type": "sentence_completion",
-              "question": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
-              "stemHtml": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
+              "question": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
+              "stemHtml": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
               "options": [],
               "answer": "books and activities|activities and books"
             },
@@ -924,8 +924,8 @@
         {
           "number": 23,
           "type": "sentence_completion",
-          "question": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
-          "stemHtml": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
+          "question": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
+          "stemHtml": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
           "options": [],
           "answer": "books and activities|activities and books"
         },
@@ -1977,8 +1977,8 @@
         {
           "number": 23,
           "type": "sentence_completion",
-          "question": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
-          "stemHtml": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
+          "question": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
+          "stemHtml": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
           "options": [],
           "answer": "books and activities|activities and books"
         },
@@ -2646,8 +2646,8 @@
     {
       "number": 23,
       "type": "sentence_completion",
-      "question": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
-      "stemHtml": "One study found a strong connection between children’s IQ and which two things available at home? Write both answers.",
+      "question": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
+      "stemHtml": "One study found a strong connection between children’s IQ and the availability of ___ and ___ at home.",
       "options": [],
       "answer": "books and activities|activities and books"
     },
