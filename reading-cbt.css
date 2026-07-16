@@ -1080,6 +1080,10 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     margin: 0 2px !important;
 }
 
+.c10-t2-art-summary :is(#question-27, #question-28, #question-29) {
+    margin-left: -5px !important;
+}
+
 .c10-t2-art-summary .cbt-select--inline {
     width: 112px !important;
     min-width: 92px;
