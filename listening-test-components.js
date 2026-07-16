@@ -886,7 +886,8 @@ const ListeningComponents = (() => {
         const hasImage = Boolean(block.imageUrl);
         const options = (block.options || []).map((option) => {
             const optionText = cleanOptionText(option.text || "");
-            return `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(option.letter || "")}</span>${optionText ? escapeHtml(optionText) : ""}</div>`;
+            const letter = `${option.letter || ""}${block.optionLetterPunctuation === "dot" ? "." : ""}`;
+            return `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(letter)}</span>${optionText ? escapeHtml(optionText) : ""}</div>`;
         }).join("");
         const optionTags = (block.options || []).map((option) => {
             const optionText = cleanOptionText(option.text || "");

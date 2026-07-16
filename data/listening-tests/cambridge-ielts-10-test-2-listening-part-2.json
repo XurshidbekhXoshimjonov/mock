@@ -115,6 +115,8 @@
         {
           "id": "group-2-15",
           "type": "matching",
+          "optionsTitle": "Features",
+          "optionLetterPunctuation": "dot",
           "questionRange": "Questions 15-20",
           "instruction": "Which feature is related to each area of the world represented in the playground? Choose six answers from the box and write the correct letter, A-I.",
           "options": [
