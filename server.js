@@ -32,6 +32,7 @@ const { UPLOAD_LIMITS, multipartLimits, uploadErrorResponse } = require("./lib/u
 const { validateUploadContents } = require("./lib/upload-content-validation");
 const { calculateReadingBand, calculateListeningBand, scoreSkill } = require("./lib/ielts-import/bandScoring");
 const { publicTestData, collectScorableQuestions } = require("./lib/public-test-data");
+const { createCsrfProtection } = require("./lib/csrf-protection");
 
 let TranslateClient = null;
 try {
@@ -280,6 +281,13 @@ const candidatePhotoUpload = multer({
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(createCsrfProtection({
+    trustForwardedProto: IS_VERCEL,
+    pathAllowedOrigins: {
+        "/api/translate": TRANSLATE_CORS_ORIGINS,
+        "/api/translate-context": TRANSLATE_CORS_ORIGINS
+    }
+}));
 
 function responseByteSize(payload) {
     try {
