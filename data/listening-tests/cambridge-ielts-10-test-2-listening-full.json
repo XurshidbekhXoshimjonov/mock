@@ -1221,8 +1221,9 @@
           "question": "Which TWO reasons do the speakers say are why Heyerdahl went to live on an island?"
         },
         {
-          "id": "group-3-25",
-          "type": "multiple_choice",
+              "id": "group-3-25",
+              "type": "multiple_choice",
+              "title": "The later life of Thor Heyerdahl",
           "questionRange": "Questions 25-30",
           "instruction": "Choose the correct letter, A, B or C.",
           "questions": [
