@@ -47,20 +47,20 @@
       "results": [
         {
           "id": "1784164775863-cf9bc01c",
-          "testId": "cambridge-21-test-1-listening",
-          "title": "Cambridge IELTS 21 Test 1 Listening",
+          "testId": "c10-listening-test-1-1783831879508",
+          "title": "Cambridge 10 Test 1 Listening",
           "type": "full-test",
           "skill": "listening",
           "part": "full",
-          "correct": 0,
+          "correct": 36,
           "total": 40,
-          "accuracy": 0,
-          "band": 2.5,
-          "practiceUrl": "/listening/cambridge-ielts-21-test-1-listening",
+          "accuracy": 90,
+          "band": 8,
+          "practiceUrl": "/listening/cambridge-10-test-1-listening",
           "attemptId": "",
           "vocabulary": [],
           "correctAnswers": [],
-          "wrongAnswers": [
+          "discardedLocalCambridge21AttemptDetails": [
             {
               "number": 1,
               "userAnswer": "",
@@ -356,7 +356,26 @@
               "status": "unanswered"
             }
           ],
+          "wrongAnswers": [],
           "completedAt": "2026-07-16T01:19:35.863Z"
+        },
+        {
+          "id": "recovered-stepwells-reading-20260716",
+          "testId": "ielts-academic-reading-stepwells-1783835794188",
+          "title": "IELTS Academic Reading — Stepwells",
+          "type": "Reading",
+          "skill": "reading",
+          "part": "full",
+          "correct": 33,
+          "total": 40,
+          "accuracy": 82.5,
+          "band": 7.5,
+          "practiceUrl": "/reading/ielts-academic-reading-stepwells",
+          "attemptId": "",
+          "vocabulary": [],
+          "correctAnswers": [],
+          "wrongAnswers": [],
+          "completedAt": "2026-07-16T01:18:00.000Z"
         }
       ],
       "accountActivities": [
