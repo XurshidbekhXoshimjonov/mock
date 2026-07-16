@@ -256,6 +256,15 @@ function updatePageCount(grid) {
     }
 }
 
+function renumberFullTestCards(grid, config) {
+    if (config.part !== "full") return;
+
+    grid.querySelectorAll(".reading-test-card").forEach((card, index) => {
+        const title = card.querySelector(".test-card-content h2");
+        if (title) title.textContent = `Test ${index + 1}`;
+    });
+}
+
 function showEmptyState(grid, config) {
     if (grid.querySelector(".reading-test-card")) {
         return;
@@ -303,6 +312,7 @@ async function loadDynamicTests() {
         });
     }
 
+    renumberFullTestCards(grid, config);
     showEmptyState(grid, config);
     updatePageCount(grid);
 }
