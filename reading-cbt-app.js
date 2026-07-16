@@ -2400,23 +2400,12 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = skill === "reading" && !isFullTest;
+    const enableVocabulary = false;
     const canUseVocabulary = enableVocabulary && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
         collectQuestions(passage ? [passage] : []), [passage]
     );
-
-    useEffect(() => {
-        if (skill !== "reading" || isFullTest) return undefined;
-        const timer = window.setTimeout(() => {
-            console.log("Reading translation initialized");
-            if (typeof window.initializeReadingTranslation === "function") {
-                window.initializeReadingTranslation();
-            }
-        }, 0);
-        return () => window.clearTimeout(timer);
-    }, [skill, test?.id, activeIndex, hasStarted, isFullTest]);
 
     useEffect(() => {
         if (!isFullTest) return undefined;
