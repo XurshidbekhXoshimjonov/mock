@@ -125,6 +125,7 @@ const ListeningComponents = (() => {
     }
 
     function blockHeading(block) {
+        if (block.hideHeading) return "";
         return `<div class="lc-block-heading">
             <h3>${escapeHtml(block.questionRange || block.title || "Questions")}</h3>
             ${block.instruction ? `<p class="lc-instruction">${highlightInstruction(block.instruction)}</p>` : ""}

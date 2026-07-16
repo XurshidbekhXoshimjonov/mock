@@ -82,7 +82,7 @@
     },
     {
       "title": "Questions 31-40",
-      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
       "rule": "",
       "questionNumbers": [
         31,
@@ -1368,7 +1368,7 @@
       "title": "Part 4",
       "questionRange": "Questions 31-40",
       "audioUrl": "/uploads/audio/cambridge-ielts-10-test-2-listening-part-4.mp3",
-      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
       "answerText": "31: COMPETITION\n32: GLOBAL\n33: DEMAND\n34: CUSTOMERS\n35: REGULATION\n36: PROJECT\n37: FLEXIBLE\n38: LEADERSHIP\n39: WOMEN\n40: SELF EMPLOYED | SELF-EMPLOYED",
       "blocks": [
         {
@@ -1377,7 +1377,8 @@
           "questionRange": "Questions 31-40",
             "title": "THE FUTURE OF MANAGEMENT",
             "noteStyle": "future-management",
-          "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+            "hideHeading": true,
+            "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
           "content": [
               "<strong>Business markets</strong>",
               "• greater {{31}} among companies",
