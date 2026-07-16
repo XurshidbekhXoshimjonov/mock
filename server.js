@@ -10,7 +10,7 @@ const User = require("./models/User");
 const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
 const FullSpeakingTest = require("./models/FullSpeakingTest");
-const { createAuthToken, verifyAuthToken, publicUser, isAdminEmail } = require("./lib/auth");
+const { createAuthToken, verifyAuthToken, publicUser, getAdminEmails, isAdminUser } = require("./lib/auth");
 const { createUserStore } = require("./lib/user-store");
 const { sendTelegramMessage } = require("./lib/telegram");
 const { createFullTestStore } = require("./lib/full-test-store");
@@ -4263,7 +4263,7 @@ function premiumMockTestApiResponse(res) {
 }
 
 function requireMockTestAccessApi(req, res, next) {
-    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const includeDraft = isAdminUser(req.user);
     const test = mockTestStore.getTest(req.params.id, { includeDraft, requireComplete: false });
     if (test && !canAccessMockTest(req, test)) {
         return premiumMockTestApiResponse(res);
@@ -4302,7 +4302,7 @@ function mockTestIdFromRequest(req) {
 function canAccessMockModeRequest(req) {
     const mockTestId = mockTestIdFromRequest(req);
     if (!mockTestId) return false;
-    const test = mockTestStore.getTest(mockTestId, { includeDraft: req.user && isAdminEmail(req.user.email), requireComplete: false });
+    const test = mockTestStore.getTest(mockTestId, { includeDraft: isAdminUser(req.user), requireComplete: false });
     return Boolean(test && canAccessMockTest(req, test));
 }
 
@@ -4494,7 +4494,7 @@ app.get("/mock-test-result/:resultId", requirePageAuth, (req, res) => {
 });
 
 app.get("/mock-test/:id", requirePageAuth, (req, res) => {
-    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const includeDraft = isAdminUser(req.user);
     const test = mockTestStore.getTest(req.params.id, { includeDraft, requireComplete: false });
     if (test && !canAccessMockTest(req, test)) {
         setNoStorePageHeaders(res);
@@ -4885,7 +4885,7 @@ app.get("/api/mock-tests", (req, res) => {
 });
 
 app.get("/api/mock-tests/latest", requireAuth, (req, res) => {
-    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const includeDraft = isAdminUser(req.user);
     const test = mockTestStore.latestActiveTest({
         includeDraft,
         requireComplete: false
@@ -4905,7 +4905,7 @@ app.get("/api/mock-tests/latest", requireAuth, (req, res) => {
 });
 
 app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
-    const includeDraft = req.user && isAdminEmail(req.user.email);
+    const includeDraft = isAdminUser(req.user);
     const requestedId = String(req.params.id || "").trim();
     const useLatest = !requestedId || requestedId === "undefined" || requestedId === "null";
     const test = useLatest
@@ -6375,8 +6375,7 @@ app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
             role: req.query.role
         });
         const formatted = result.items.map((user) => {
-            const email = String(user.email || "").trim().toLowerCase();
-            const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
+            const uRole = publicUser(user).role;
             const isPremium = hasPremiumAccess(publicUser(user));
             return {
                 id: String(user._id || user.id),
@@ -6465,11 +6464,14 @@ app.get("/api/admin/stats/users", requireAuth, adminOnly, async (req, res) => {
         if (mongoose.connection.readyState === 1) {
             const startOfToday = new Date();
             startOfToday.setHours(0, 0, 0, 0);
+            const adminEmails = getAdminEmails();
             const [totalUsers, todayUsers, premiumUsers, adminUsers] = await Promise.all([
                 User.countDocuments(),
                 User.countDocuments({ createdAt: { $gte: startOfToday } }),
                 User.countDocuments({ isPremium: true }),
-                User.countDocuments({ role: "admin" })
+                adminEmails.length
+                    ? User.countDocuments({ role: "admin", email: { $in: adminEmails } })
+                    : Promise.resolve(0)
             ]);
 
             return res.json({
@@ -6493,8 +6495,7 @@ app.get("/api/admin/stats/users", requireAuth, adminOnly, async (req, res) => {
 
         for (const user of users) {
             totalUsers++;
-            const email = String(user.email || "").trim().toLowerCase();
-            const uRole = isAdminEmail(email) ? "admin" : (user.role === "student" ? "user" : (user.role || "user"));
+            const uRole = publicUser(user).role;
             
             if (uRole === "admin") {
                 adminUsers++;
@@ -6613,7 +6614,7 @@ app.post("/signup", async (req, res) => {
             name: username,
             email,
             passwordHash: hashedPassword,
-            role: isAdminEmail(email) ? "admin" : "user"
+            role: "user"
         });
         const token = createAuthToken(newUser);
         userProgressStore.recordAccountActivity(newUser._id || newUser.id, "Account created");
@@ -6692,11 +6693,6 @@ async function handleLogin(req, res) {
         user.lastLogin = lastLogin;
         
         const updates = { lastLogin };
-        if (isAdminEmail(email) && user.role !== "admin") {
-            updates.role = "admin";
-            user.role = "admin";
-        }
-        
         if (!user.testTakerId || !user.testTakerId.trim()) {
             const mongoose = require("mongoose");
             let generatedId;
@@ -6852,11 +6848,6 @@ app.get("/auth/google/callback", async (req, res) => {
         }
         console.log("[AUTH CALLBACK] Google email verified: " + email);
 
-        // Determine user role
-        const adminEmail = String(process.env.ADMIN_EMAIL || "").trim().toLowerCase();
-        const isAdmin = email.toLowerCase() === adminEmail;
-        const role = isAdmin ? "admin" : "user";
-
         let user = await userStore.findUserByEmail(email);
 
         if (user) {
@@ -6881,19 +6872,12 @@ app.get("/auth/google/callback", async (req, res) => {
                 if ((!user.name || user.name === user.username) && name) {
                     updates.name = name;
                 }
-                if (user.role !== role) {
-                    updates.role = role;
-                }
-
                 user = await userStore.updateUser(user._id || user.id, updates);
                 console.log("[AUTH CALLBACK] Google account linked for user: " + user.email);
             } else if (user.googleId !== sub) {
                 return res.status(400).send("Safe error: This email is already linked to a different Google account.");
             } else {
                 const updates = { lastLogin: new Date() };
-                if (user.role !== role) {
-                    updates.role = role;
-                }
                 user = await userStore.updateUser(user._id || user.id, updates);
             }
 
@@ -6906,7 +6890,7 @@ app.get("/auth/google/callback", async (req, res) => {
                 name: name || username,
                 email: email.toLowerCase(),
                 passwordHash: "",
-                role,
+                role: "user",
                 googleId: sub,
                 avatar: picture || "",
                 authProviders: ["google"]
@@ -7021,7 +7005,7 @@ async function runUserMigration() {
                 console.info(`Found ${countMissing} users without memberId. Starting migration...`);
                 
                 const allDbUsers = await User.find({});
-                let adminUser = allDbUsers.find(u => u.role === "admin" || isAdminEmail(u.email));
+                let adminUser = allDbUsers.find(isAdminUser);
                 
                 if (adminUser) {
                     await User.updateOne({ _id: adminUser._id }, { $set: { memberIdNumber: 1, memberId: "001" } });
@@ -7054,7 +7038,7 @@ async function runUserMigration() {
                 const needsMigration = users.some(u => !u.memberIdNumber);
                 if (needsMigration) {
                     console.info("Starting local users JSON ID migration...");
-                    let adminUser = users.find(u => u.role === "admin" || isAdminEmail(u.email));
+                    let adminUser = users.find(isAdminUser);
                     if (adminUser) {
                         adminUser.memberIdNumber = 1;
                         adminUser.memberId = "001";

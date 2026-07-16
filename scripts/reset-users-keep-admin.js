@@ -8,8 +8,12 @@ require('dotenv').config();
 
 const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME || "ieltsmock";
-const ADMIN_EMAIL_PRIMARY = "hoshimjonov08@gmail.com";
-const FALLBACK_ADMIN_EMAIL = "xoshimjonovxurshidbek5@gmail.com";
+const CONFIGURED_ADMIN_EMAILS = String(process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || "")
+    .split(",")
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
+const ADMIN_EMAIL_PRIMARY = CONFIGURED_ADMIN_EMAILS[0] || "";
+const FALLBACK_ADMIN_EMAIL = CONFIGURED_ADMIN_EMAILS[1] || ADMIN_EMAIL_PRIMARY;
 
 // We require User model directly
 // If the path d:/mock/models/User exists, load it, otherwise define inline schema
@@ -42,6 +46,11 @@ async function runReset() {
 
     if (!MONGO_URI) {
         console.error("CRITICAL ERROR: MONGO_URI or MONGODB_URI is not set in environment.");
+        process.exit(1);
+    }
+
+    if (!ADMIN_EMAIL_PRIMARY) {
+        console.error("CRITICAL ERROR: ADMIN_EMAIL or ADMIN_EMAILS must explicitly configure the administrator account.");
         process.exit(1);
     }
 
