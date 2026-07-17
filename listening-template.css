@@ -1404,6 +1404,7 @@ body.fullscreen-fallback .lc-fullscreen-button {
     justify-content: center;
     background: rgba(15, 23, 42, 0.5);
     padding: 20px;
+    overflow-y: auto;
 }
 
 .lc-modal-backdrop.hidden {
@@ -1412,7 +1413,9 @@ body.fullscreen-fallback .lc-fullscreen-button {
 
 .lc-result-modal {
     position: relative;
-    width: min(440px, 100%);
+    width: min(580px, 100%);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
     border-radius: 14px;
     background: #fff;
     padding: 38px 34px 34px;
@@ -1496,8 +1499,17 @@ body.fullscreen-fallback .lc-fullscreen-button {
 .lc-result-actions {
     display: flex;
     justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 18px;
+}
+
+.lc-result-actions .lc-start-button,
+.lc-result-actions .lc-secondary-button {
+    flex: 1 1 150px;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 .lc-secondary-button {
@@ -1824,6 +1836,13 @@ body.fullscreen-fallback .lc-fullscreen-button {
 
     .lc-result-actions {
         flex-direction: column;
+    }
+
+    .lc-result-actions .lc-start-button,
+    .lc-result-actions .lc-secondary-button {
+        width: 100%;
+        flex-basis: auto;
+        white-space: normal;
     }
 
     .listening-list-header,

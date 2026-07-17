@@ -59,8 +59,10 @@ function createBlankPart(partNumber) {
         questionRange: `Questions ${start}-${end}`,
         audioUrl: "",
         audioFileName: "",
+        audioDuration: null,
         html: "",
         instruction: `Listen and answer Questions ${start}-${end}.`,
+        transcriptText: "",
         answerText: "",
         blocks: []
     };
@@ -853,7 +855,7 @@ function PartEditor() {
             <div class="audio-card-details">
                 <h4>${escapeHtml(part.audioFileName || "Attached audio file")}</h4>
                 <p>Path: ${escapeHtml(part.audioUrl)}</p>
-                <audio controls preload="metadata" src="${escapeHtml(part.audioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
+                <audio data-admin-evidence-audio controls preload="metadata" src="${escapeHtml(part.audioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
             </div>
             <button class="btn btn-danger btn-sm" data-action="remove-audio" type="button">Replace</button>
         </div>
@@ -884,6 +886,10 @@ function PartEditor() {
             <div class="form-group">
                 <label for="partInstruction">Active Part Instructions</label>
                 <textarea id="partInstruction" data-part-field="instruction" placeholder="Enter test instructions for this part...">${escapeHtml(part.instruction || "")}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="partTranscript">Transcript (optional, used as review evidence)</label>
+                <textarea id="partTranscript" data-part-field="transcriptText" placeholder="Paste the transcript for this part...">${escapeHtml(part.transcriptText || "")}</textarea>
             </div>
         </div>
 
@@ -1013,6 +1019,18 @@ function AddQuestionBlockMenu() {
 
 // Block Fields Editors inside dialog popup modal
 function commonEditorFields(block) {
+    const questionNumbers = collectQuestionNumbersFromBlocks([block]);
+    const evidenceRows = questionNumbers.map((number) => {
+        const evidence = block.questionEvidence?.[String(number)] || {};
+        return `<div class="evidence-question-row">
+            <strong>Q${number}</strong>
+            <input data-question-evidence="${number}" data-evidence-key="evidenceStartTime" value="${escapeHtml(formatEvidenceTime(evidence.evidenceStartTime))}" placeholder="00:00">
+            <input data-question-evidence="${number}" data-evidence-key="evidenceEndTime" value="${escapeHtml(formatEvidenceTime(evidence.evidenceEndTime))}" placeholder="00:00">
+            <button class="btn btn-secondary btn-sm" data-evidence-action="question-start" data-question-number="${number}" type="button">Set start</button>
+            <button class="btn btn-secondary btn-sm" data-evidence-action="question-end" data-question-number="${number}" type="button">Set end</button>
+            <button class="btn btn-secondary btn-sm" data-evidence-action="question-clear" data-question-number="${number}" type="button">Clear</button>
+        </div>`;
+    }).join("");
     return `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
         <div class="form-group">
             <label>Block Title / Summary</label>
@@ -1026,7 +1044,50 @@ function commonEditorFields(block) {
     <div class="form-group" style="margin-bottom: 20px;">
         <label>Instruction</label>
         <textarea data-block-field="instruction" style="height: 80px;">${escapeHtml(block.instruction || "")}</textarea>
-    </div>`;
+    </div>
+    <section class="evidence-editor">
+        <div class="evidence-editor__heading">
+            <div>
+                <strong>Audio evidence timestamp</strong>
+                <span>Play the part audio, then capture the exact group or question range.</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" data-evidence-action="clear" type="button">Clear group</button>
+        </div>
+        ${selectedPart().audioUrl ? `<audio data-evidence-audio controls preload="metadata" src="${escapeHtml(selectedPart().audioUrl)}"></audio>` : '<p class="evidence-empty">Upload the part audio before capturing timestamps.</p>'}
+        <div class="evidence-group-row">
+            <label>Group start
+                <input data-evidence-field="evidenceStartTime" value="${escapeHtml(formatEvidenceTime(block.evidenceStartTime))}" placeholder="00:00">
+            </label>
+            <button class="btn btn-secondary btn-sm" data-evidence-action="group-start" type="button">Set current</button>
+            <label>Group end
+                <input data-evidence-field="evidenceEndTime" value="${escapeHtml(formatEvidenceTime(block.evidenceEndTime))}" placeholder="00:00">
+            </label>
+            <button class="btn btn-secondary btn-sm" data-evidence-action="group-end" type="button">Set current</button>
+        </div>
+        ${evidenceRows ? `<div class="evidence-question-list">
+            <div class="evidence-question-labels"><span>Question</span><span>Start</span><span>End</span></div>
+            ${evidenceRows}
+        </div>` : '<p class="evidence-empty">Add question numbers first to set question-level evidence.</p>'}
+    </section>`;
+}
+
+function parseEvidenceTime(value) {
+    const raw = String(value ?? "").trim();
+    if (!raw) return null;
+    const parts = raw.split(":").map(Number);
+    if (parts.some((part) => !Number.isFinite(part)) || parts.length > 3) return NaN;
+    const seconds = parts.length === 3
+        ? parts[0] * 3600 + parts[1] * 60 + parts[2]
+        : parts.length === 2 ? parts[0] * 60 + parts[1] : parts[0];
+    return seconds >= 0 ? Number(seconds.toFixed(2)) : NaN;
+}
+
+function formatEvidenceTime(value) {
+    if (value === null || value === undefined || value === "" || !Number.isFinite(Number(value))) return "";
+    const seconds = Math.max(0, Number(value));
+    const minutes = Math.floor(seconds / 60);
+    const remainder = (seconds % 60).toFixed(seconds % 1 ? 1 : 0).padStart(2, "0");
+    return `${String(minutes).padStart(2, "0")}:${remainder}`;
 }
 
 function valueDetails(value) {
@@ -1350,6 +1411,16 @@ function syncBlockEditorForm() {
         }
     });
 
+    blockEditorContent.querySelectorAll("[data-evidence-field]").forEach((field) => {
+        blockDraft[field.dataset.evidenceField] = parseEvidenceTime(field.value);
+    });
+    blockDraft.questionEvidence = blockDraft.questionEvidence || {};
+    blockEditorContent.querySelectorAll("[data-question-evidence]").forEach((field) => {
+        const number = String(field.dataset.questionEvidence);
+        blockDraft.questionEvidence[number] = blockDraft.questionEvidence[number] || {};
+        blockDraft.questionEvidence[number][field.dataset.evidenceKey] = parseEvidenceTime(field.value);
+    });
+
     if (blockDraft.type === "form_completion") {
         blockDraft.rows = [...blockEditorContent.querySelectorAll("[data-form-row]")].map((row) => {
             const read = (field) => row.querySelector(`[data-row-field="${field}"]`).value;
@@ -1565,6 +1636,27 @@ function validateListeningPayload(payload) {
         const partNumber = Number(part.partNumber) || 1;
         const numbers = collectQuestionNumbersFromBlocks(part.blocks || []);
         const answerNumbers = parseAnswerNumbers(part.answerText || "");
+        const validateEvidence = (evidence, label) => {
+            const start = evidence?.evidenceStartTime;
+            const end = evidence?.evidenceEndTime;
+            const hasEither = start !== null && start !== undefined && start !== ""
+                || end !== null && end !== undefined && end !== "";
+            if (hasEither && (!Number.isFinite(Number(start)) || Number(start) < 0
+                || !Number.isFinite(Number(end)) || Number(end) <= Number(start))) {
+                throw new Error(`Part ${partNumber} ${label}: evidence end must be after a valid start.`);
+            }
+            if (hasEither && part.audioDuration !== null && part.audioDuration !== undefined
+                && part.audioDuration !== "" && Number.isFinite(Number(part.audioDuration))
+                && Number(end) > Number(part.audioDuration) + 0.25) {
+                throw new Error(`Part ${partNumber} ${label}: evidence cannot exceed the audio duration.`);
+            }
+        };
+        (part.blocks || []).forEach((block) => {
+            validateEvidence(block, block.title || "question group");
+            Object.entries(block.questionEvidence || {}).forEach(([number, evidence]) => (
+                validateEvidence(evidence, `Question ${number}`)
+            ));
+        });
 
         if (!String(part.audioUrl || "").trim()) {
             throw new Error(`Upload audio for Listening Part ${partNumber}.`);
@@ -1661,6 +1753,11 @@ partEditorRoot.addEventListener("input", (event) => {
     updateRealtimePreview();
 });
 
+partEditorRoot.addEventListener("loadedmetadata", (event) => {
+    if (!event.target.matches("[data-admin-evidence-audio]") || !Number.isFinite(event.target.duration)) return;
+    selectedPart().audioDuration = Number(event.target.duration.toFixed(2));
+}, true);
+
 partEditorRoot.addEventListener("change", async (event) => {
     if (event.target.id !== "audioInput" || !event.target.files.length) return;
     showStatus("Uploading part audio...");
@@ -1686,6 +1783,7 @@ partEditorRoot.addEventListener("click", (event) => {
     if (action === "remove-audio") {
         selectedPart().audioUrl = "";
         selectedPart().audioFileName = "";
+        selectedPart().audioDuration = null;
         ListeningTestBuilder();
     }
     if (action === "edit-block") openBlockEditor(index);
@@ -1721,6 +1819,56 @@ addBlockMenuRoot.addEventListener("click", (event) => {
 });
 
 blockEditorContent.addEventListener("click", (event) => {
+    const evidenceButton = event.target.closest("[data-evidence-action]");
+    if (evidenceButton) {
+        syncBlockEditorForm();
+        const action = evidenceButton.dataset.evidenceAction;
+        const audio = blockEditorContent.querySelector("[data-evidence-audio]");
+        if (action === "clear") {
+            blockDraft.evidenceStartTime = null;
+            blockDraft.evidenceEndTime = null;
+            blockEditorContent.querySelectorAll("[data-evidence-field]").forEach((field) => {
+                field.value = "";
+            });
+            return;
+        }
+        if (action === "question-clear") {
+            const number = String(evidenceButton.dataset.questionNumber);
+            delete blockDraft.questionEvidence?.[number];
+            blockEditorContent.querySelectorAll(`[data-question-evidence="${number}"]`).forEach((field) => {
+                field.value = "";
+            });
+            return;
+        }
+        if (!audio || !Number.isFinite(audio.currentTime)) {
+            showStatus("Play the part audio before setting evidence time.", "error");
+            return;
+        }
+        const value = Number(audio.currentTime.toFixed(2));
+        const isQuestion = action.startsWith("question-");
+        const key = action.endsWith("start") ? "evidenceStartTime" : "evidenceEndTime";
+        if (audio.duration && Number.isFinite(audio.duration) && value > audio.duration) {
+            showStatus("Timestamp cannot be after the audio duration.", "error");
+            return;
+        }
+        if (isQuestion) {
+            const number = String(evidenceButton.dataset.questionNumber);
+            blockDraft.questionEvidence = blockDraft.questionEvidence || {};
+            blockDraft.questionEvidence[number] = blockDraft.questionEvidence[number] || {};
+            blockDraft.questionEvidence[number][key] = value;
+            const field = blockEditorContent.querySelector(
+                `[data-question-evidence="${number}"][data-evidence-key="${key}"]`
+            );
+            if (field) field.value = formatEvidenceTime(value);
+        } else {
+            blockDraft[key] = value;
+            const field = blockEditorContent.querySelector(`[data-evidence-field="${key}"]`);
+            if (field) field.value = formatEvidenceTime(value);
+        }
+        showStatus(`${key === "evidenceStartTime" ? "Start" : "End"} set to ${formatEvidenceTime(value)}.`, "success");
+        return;
+    }
+
     const actionButton = event.target.closest("[data-editor-action], [data-row-action], [data-option-action], [data-marker-action]");
     if (actionButton) {
         syncBlockEditorForm();

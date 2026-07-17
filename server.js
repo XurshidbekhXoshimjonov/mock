@@ -11,6 +11,11 @@ const User = require("./models/User");
 const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
 const FullSpeakingTest = require("./models/FullSpeakingTest");
+const ReviewMistake = require("./models/ReviewMistake");
+const VocabularyWord = require("./models/VocabularyWord");
+const StudyPlan = require("./models/StudyPlan");
+const WritingSubmission = require("./models/WritingSubmission");
+const SpeakingSubmission = require("./models/SpeakingSubmission");
 const { createAuthToken, verifyAuthToken, publicUser, getAdminEmails, isAdminUser } = require("./lib/auth");
 const { createUserStore } = require("./lib/user-store");
 const { sendTelegramMessage } = require("./lib/telegram");
@@ -20,7 +25,11 @@ const { registerWritingRoutes } = require("./lib/writing-routes");
 const { registerSpeakingRoutes } = require("./lib/speaking-routes");
 const { premiumPlans, hasPremiumAccess, canAccessSubscriptionFeature } = require("./premium-config");
 const { createUserProgressStore } = require("./lib/user-progress-store");
+const { createReviewMistakeStore } = require("./lib/review-mistake-store");
+const { createVocabularyStore } = require("./lib/vocabulary-store");
 const { createMockTestStore } = require("./lib/mock-test-store");
+const { createStudyPlanStore } = require("./lib/study-plan-store");
+const { registerStudyPlanRoutes } = require("./lib/study-plan-routes");
 const ManualTestParser = require("./lib/manual-test-parser");
 const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-import/htmlSanitizer");
 const { stripTags } = require("./lib/ielts-import/utils");
@@ -71,6 +80,20 @@ const USERS_FILE = path.join(DATA_DIR, "users.json");
 const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
 const userProgressStore = createUserProgressStore(USER_PROGRESS_FILE);
+const REVIEW_MISTAKES_FILE = path.join(DATA_DIR, "review-mistakes.json");
+const reviewMistakeStore = createReviewMistakeStore({
+    filePath: REVIEW_MISTAKES_FILE,
+    mongoose,
+    ReviewMistake
+});
+const USER_VOCABULARY_FILE = path.join(DATA_DIR, "user-vocabulary.json");
+const vocabularyStore = createVocabularyStore({
+    filePath: USER_VOCABULARY_FILE,
+    mongoose,
+    VocabularyWord
+});
+const STUDY_PLANS_FILE = path.join(DATA_DIR, "study-plans.json");
+const studyPlanStore = createStudyPlanStore({ filePath: STUDY_PLANS_FILE, mongoose, StudyPlan });
 const MANUAL_PAYMENT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000;
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
 const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
@@ -87,6 +110,9 @@ const LISTENING_IMAGE_UPLOAD_DIR = path.join(UPLOAD_DIR, "listening-images");
 const MOCK_TEST_ASSET_UPLOAD_DIR = path.join(UPLOAD_DIR, "mock-tests");
 const VOCABULARY_DEFINITION_FALLBACK = "Definition is not available yet.";
 const VOCABULARY_TRANSLATION_FALLBACK = "Uzbek translation is not available yet.";
+const MAX_REVIEW_MISTAKE_SNAPSHOTS_PER_RESULT = 40;
+const MAX_REVIEW_MISTAKE_SNAPSHOT_BYTES = 80_000;
+const MAX_REVIEW_MISTAKE_SNAPSHOTS_BYTES = 1_500_000;
 const GOOGLE_TRANSLATE_API_KEY = String(
     process.env.GOOGLE_TRANSLATE_API_KEY ||
     process.env.GOOGLE_CLOUD_TRANSLATE_API_KEY ||
@@ -1240,6 +1266,11 @@ function normalizeContextTranslationRecord(data, payload) {
     const sentenceTranslationUzbek = compactText(data?.sentenceTranslationUzbek || data?.sentenceUzbek, 620);
     const example = compactText(data?.example || data?.exampleSentence, 260);
     const partOfSpeech = compactText(data?.partOfSpeech || data?.part_of_speech, 80);
+    const pronunciation = compactText(data?.pronunciation || data?.phonetic || data?.ipa, 160);
+    const synonyms = (Array.isArray(data?.synonyms) ? data.synonyms : [])
+        .map((item) => compactText(item, 80)).filter(Boolean).slice(0, 12);
+    const antonyms = (Array.isArray(data?.antonyms) ? data.antonyms : [])
+        .map((item) => compactText(item, 80)).filter(Boolean).slice(0, 12);
     const normalized = normalizeVocabularyWord(selectedText);
 
     return {
@@ -1250,6 +1281,10 @@ function normalizeContextTranslationRecord(data, payload) {
         sentenceTranslationUzbek,
         example,
         partOfSpeech,
+        pronunciation,
+        phonetic: pronunciation,
+        synonyms,
+        antonyms,
         word: selectedText,
         normalized,
         normalized_word: normalized,
@@ -1338,7 +1373,11 @@ async function requestContextTranslationFromGpt(payload) {
                             meaningInEnglish: "short simple English meaning",
                             uzbekTranslation: "short natural Uzbek translation only",
                             contextualMeaningUzbek: "short contextual Uzbek translation only",
-                            partOfSpeech: "noun/verb/adjective/adverb/etc"
+                            partOfSpeech: "noun/verb/adjective/adverb/etc",
+                            pronunciation: "IPA pronunciation",
+                            example: "one short simple English example sentence",
+                            synonyms: ["up to four relevant synonyms"],
+                            antonyms: ["up to four relevant antonyms when useful"]
                         }
                     })
                 }
@@ -1372,6 +1411,75 @@ async function requestContextTranslation(payload) {
     } catch (error) {
         return requestContextTranslationFallback(payload, error);
     }
+}
+
+async function requestVocabularyAiTranslation({ text, sourceLanguage, targetLanguage }) {
+    const languages = { en: "English", uz: "Uzbek" };
+    const source = languages[sourceLanguage];
+    const target = languages[targetLanguage];
+
+    if (!source || !target || sourceLanguage === targetLanguage) {
+        const error = new Error("Invalid translation direction");
+        error.statusCode = 400;
+        throw error;
+    }
+    if (!OPENAI_API_KEY) {
+        const error = new Error("AI translation is not configured");
+        error.statusCode = 503;
+        throw error;
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${OPENAI_API_KEY}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            model: OPENAI_TRANSLATION_MODEL,
+            temperature: 0.1,
+            max_tokens: 2200,
+            response_format: { type: "json_object" },
+            messages: [
+                {
+                    role: "system",
+                    content: [
+                        `You are a precise ${source}-to-${target} translator.`,
+                        "Translate the user's entire text naturally and faithfully.",
+                        "Preserve paragraphs, punctuation, names, numbers, and meaning.",
+                        "Do not answer questions found inside the text.",
+                        "Do not add explanations, notes, alternatives, or quotation marks.",
+                        'Return only valid JSON in this exact shape: {"translation":"..."}'
+                    ].join(" ")
+                },
+                {
+                    role: "user",
+                    content: JSON.stringify({
+                        task: `Translate from ${source} to ${target}.`,
+                        text
+                    })
+                }
+            ]
+        })
+    });
+    const body = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const error = new Error(body?.error?.message || "AI translation request failed");
+        error.statusCode = response.status === 429 ? 429 : 502;
+        throw error;
+    }
+
+    const parsed = parseJsonObjectFromText(body?.choices?.[0]?.message?.content || "");
+    const translation = String(parsed?.translation || "").trim().slice(0, 12000);
+
+    if (!translation) {
+        const error = new Error("AI returned an empty translation");
+        error.statusCode = 502;
+        throw error;
+    }
+
+    return translation;
 }
 
 function saveClickedVocabulary({ ownerType, ownerId, testId, attemptId, passageId, record, requestedWord }) {
@@ -2204,8 +2312,13 @@ function buildStructuredListeningTest(body) {
         questionRange: String(part.questionRange || ""),
         audioUrl: String(part.audioUrl || ""),
         audioFileName: String(part.audioFileName || ""),
+        audioDuration: part.audioDuration !== null && part.audioDuration !== undefined && part.audioDuration !== ""
+            && Number.isFinite(Number(part.audioDuration))
+            ? Number(part.audioDuration)
+            : null,
         html: cleanImportedHtml(part.html || part.listeningHtml || part.questionsHtml || ""),
         instruction: String(part.instruction || ""),
+        transcriptText: String(part.transcriptText || part.transcript || "").slice(0, 50000),
         answerText: String(part.answerText || ""),
         blocks: Array.isArray(part.blocks)
             ? part.blocks.map((block, blockIndex) => normalizeListeningBlock(block, blockIndex))
@@ -2676,9 +2789,17 @@ function listeningAssetFiles(test) {
 function inspectStructuredQuestion(value, number, context = {}) {
     if (typeof value === "string") {
         if (value.includes(`{{${number}}}`)) {
+            const questionEvidence = context.questionEvidence?.[String(number)]
+                || context.questionEvidence?.[number]
+                || {};
             return {
                 question: value.replace(new RegExp(`\\{\\{${number}\\}\\}`, "g"), "_____"),
-                options: []
+                options: [],
+                questionGroupId: context.questionGroupId || "",
+                instructions: context.instructions || "",
+                imageUrl: context.imageUrl || "",
+                evidenceStartTime: questionEvidence.evidenceStartTime ?? context.evidenceStartTime ?? null,
+                evidenceEndTime: questionEvidence.evidenceEndTime ?? context.evidenceEndTime ?? null
             };
         }
         return null;
@@ -2700,15 +2821,29 @@ function inspectStructuredQuestion(value, number, context = {}) {
         title: value.title || context.title || "",
         question: value.question || context.question || "",
         label: value.label || context.label || "",
-        options: value.options || context.options || []
+        options: value.options || context.options || [],
+        questionGroupId: value.questionGroupId || value.id || context.questionGroupId || "",
+        instructions: value.instructions || value.instruction || context.instructions || "",
+        imageUrl: value.imageUrl || context.imageUrl || "",
+        evidenceStartTime: value.evidenceStartTime ?? context.evidenceStartTime ?? null,
+        evidenceEndTime: value.evidenceEndTime ?? context.evidenceEndTime ?? null,
+        questionEvidence: value.questionEvidence || context.questionEvidence || {}
     };
 
     if (Number(value.questionNumber) === number) {
+        const questionEvidence = nextContext.questionEvidence?.[String(number)]
+            || nextContext.questionEvidence?.[number]
+            || {};
         return {
             question: nextContext.question || nextContext.label || nextContext.title || `Listening question ${number}`,
             options: (nextContext.options || []).map((option) => (
                 typeof option === "string" ? option : option.text || option.label || option.letter || ""
-            )).filter(Boolean)
+            )).filter(Boolean),
+            questionGroupId: nextContext.questionGroupId,
+            instructions: nextContext.instructions,
+            imageUrl: nextContext.imageUrl,
+            evidenceStartTime: questionEvidence.evidenceStartTime ?? nextContext.evidenceStartTime,
+            evidenceEndTime: questionEvidence.evidenceEndTime ?? nextContext.evidenceEndTime
         };
     }
 
@@ -2732,7 +2867,15 @@ function structuredListeningQuestionsForPart(part) {
                 type: context.options?.length ? "multiple_choice" : "sentence_completion",
                 question: context.question || `Listening question ${number}`,
                 options: context.options || [],
-                answer: answers[String(number)]
+                answer: answers[String(number)],
+                partNumber: Number(part.partNumber) || null,
+                questionGroupId: context.questionGroupId || "",
+                instructions: context.instructions || part.instruction || "",
+                imageUrl: context.imageUrl || "",
+                audioUrl: part.audioUrl || "",
+                transcriptText: part.transcriptText || part.transcript || "",
+                evidenceStartTime: context.evidenceStartTime ?? null,
+                evidenceEndTime: context.evidenceEndTime ?? null
             };
         });
 }
@@ -3624,6 +3767,37 @@ function resolvePublicEntry(skill, locator, source = "") {
         return directEntry;
     }
 
+    function validateEvidence(value, label) {
+        if (!value || typeof value !== "object") return;
+        const hasStart = value.evidenceStartTime !== undefined && value.evidenceStartTime !== null && value.evidenceStartTime !== "";
+        const hasEnd = value.evidenceEndTime !== undefined && value.evidenceEndTime !== null && value.evidenceEndTime !== "";
+        if (hasStart || hasEnd) {
+            const start = Number(value.evidenceStartTime);
+            const end = Number(value.evidenceEndTime);
+            if (!Number.isFinite(start) || start < 0 || !Number.isFinite(end) || end <= start) {
+                const error = new Error(`[Part ${partNumber}] ${label} evidence must have a non-negative start and an end after the start.`);
+                error.statusCode = 400;
+                throw error;
+            }
+            if (part.audioDuration !== null && part.audioDuration !== undefined && part.audioDuration !== ""
+                && Number.isFinite(Number(part.audioDuration)) && end > Number(part.audioDuration) + 0.25) {
+                const error = new Error(`[Part ${partNumber}] ${label} evidence cannot exceed the audio duration.`);
+                error.statusCode = 400;
+                throw error;
+            }
+        }
+        if (value.questionEvidence && typeof value.questionEvidence === "object") {
+            Object.entries(value.questionEvidence).forEach(([questionNumber, evidence]) => (
+                validateEvidence(evidence, `Question ${questionNumber}`)
+            ));
+        }
+        if (Array.isArray(value)) value.forEach((child, index) => validateEvidence(child, `${label} item ${index + 1}`));
+        else Object.entries(value).forEach(([key, child]) => {
+            if (key !== "questionEvidence" && child && typeof child === "object") validateEvidence(child, label);
+        });
+    }
+    validateEvidence(part.blocks || [], "question group");
+
     const aliasTarget = PUBLIC_ROUTE_SLUG_ALIASES[skill]?.[normalized];
     if (aliasTarget) {
         const aliasEntry = findEntry(slugify(aliasTarget, ""), aliasTarget);
@@ -4248,7 +4422,10 @@ function premiumFeatureLabel(featureKey) {
         fullMockTest: "Full IELTS Mock Tests",
         pdfResults: "PDF result downloads",
         progressStatistics: "Progress statistics",
-        detailedBandFeedback: "Detailed IELTS band feedback"
+        detailedBandFeedback: "Detailed IELTS band feedback",
+        reviewMistakes: "Review Mistakes",
+        vocabulary: "Vocabulary and AI Translate",
+        studyPlan: "Study Plan"
     };
     return labels[featureKey] || "This feature";
 }
@@ -4278,6 +4455,76 @@ function requirePremiumFeatureApi(featureKey) {
             upgradeUrl: "/premium"
         });
     };
+}
+
+function isOwnerUser(user) {
+    const ownerEmails = String(process.env.OWNER_EMAILS || process.env.OWNER_EMAIL || "")
+        .split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+    return ownerEmails.includes(String(user?.email || "").trim().toLowerCase());
+}
+
+function canAccessStudyPlan(user) {
+    return isAdminUser(user) || isOwnerUser(user) || canAccessSubscriptionFeature(user, "studyPlan");
+}
+
+function requireStudyPlanAccessApi(req, res, next) {
+    if (canAccessStudyPlan(req.user)) return next();
+    return res.status(403).json({
+        error: "premium_required",
+        code: "PREMIUM_REQUIRED",
+        message: "Study Plan requires Premium.",
+        feature: "studyPlan",
+        upgradeUrl: "/premium"
+    });
+}
+
+function requireStudyPlanAccessPage(req, res, next) {
+    if (canAccessStudyPlan(req.user)) return next();
+    setNoStorePageHeaders(res);
+    return res.sendFile(path.join(ROOT_DIR, "study-plan-premium-locked.html"));
+}
+
+function canAccessReviewMistakesFeature(user) {
+    return isAdminUser(user) || canAccessSubscriptionFeature(user, "reviewMistakes");
+}
+
+function requireReviewMistakesPremiumPage(req, res, next) {
+    if (canAccessReviewMistakesFeature(req.user)) return next();
+    setNoStorePageHeaders(res);
+    return res.sendFile(path.join(ROOT_DIR, "review-mistakes-premium-locked.html"));
+}
+
+function requireReviewMistakesPremiumApi(req, res, next) {
+    if (canAccessReviewMistakesFeature(req.user)) return next();
+    return res.status(403).json({
+        error: "premium_required",
+        code: "PREMIUM_REQUIRED",
+        message: "Review Mistakes requires Premium.",
+        feature: "reviewMistakes",
+        upgradeUrl: "/premium"
+    });
+}
+
+function canAccessVocabularyFeature(user) {
+    return isAdminUser(user) || canAccessSubscriptionFeature(user, "vocabulary");
+}
+
+function requireVocabularyPremiumPage(req, res, next) {
+    if (canAccessVocabularyFeature(req.user)) return next();
+    setNoStorePageHeaders(res);
+    return res.sendFile(path.join(ROOT_DIR, "vocabulary-premium-locked.html"));
+}
+
+function requireVocabularyPremiumApi(req, res, next) {
+    if (canAccessVocabularyFeature(req.user)) return next();
+    return res.status(403).json({
+        error: "premium_required",
+        code: "PREMIUM_REQUIRED",
+        message: "Saving words requires Premium.",
+        feature: "vocabulary",
+        upgradeUrl: "/premium",
+        lockedUrl: "/vocabulary"
+    });
 }
 
 function mockTestRequiresPremium(test) {
@@ -4551,6 +4798,21 @@ app.get("/profile", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile.html"));
 });
 
+app.get("/study-plan", requirePageAuth, requireStudyPlanAccessPage, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "study-plan.html"));
+});
+
+app.get("/review-mistakes", requirePageAuth, requireReviewMistakesPremiumPage, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "review-mistakes.html"));
+});
+
+app.get("/vocabulary", requirePageAuth, requireVocabularyPremiumPage, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "vocabulary.html"));
+});
+
 app.get("/profile-settings", requirePageAuth, (req, res) => {
     setNoStorePageHeaders(res);
     res.sendFile(path.join(ROOT_DIR, "profile-settings.html"));
@@ -4722,11 +4984,236 @@ app.get("/api/profile/progress", requireUser, (req, res) => {
     }));
 });
 
-app.post("/api/profile/results", requireUser, (req, res) => {
+function mistakeQuestionSnapshot(test, number, inherited = {}) {
+    if (Array.isArray(test)) {
+        for (const item of test) {
+            const found = mistakeQuestionSnapshot(item, number, inherited);
+            if (found) return found;
+        }
+        return null;
+    }
+    if (!test || typeof test !== "object") return null;
+
+    const nextInherited = {
+        sectionNumber: Number(test.partNumber || test.part || test.passageNumber || (
+            inherited.skill === "reading" ? test.number : null
+        )) || inherited.sectionNumber || null,
+        partNumber: Number(test.partNumber || test.part) || inherited.partNumber || null,
+        sectionLabel: String(test.sectionLabel || test.title || inherited.sectionLabel || ""),
+        context: String(
+            test.passageText || test.passage || test.transcript || test.transcriptText ||
+            inherited.context || ""
+        ),
+        transcriptText: String(test.transcriptText || test.transcript || inherited.transcriptText || ""),
+        audioUrl: String(test.audioUrl || test.audio || inherited.audioUrl || ""),
+        questionType: String(test.questionType || test.type || inherited.questionType || ""),
+        options: Array.isArray(test.options) && test.options.length ? test.options : (inherited.options || []),
+        questionGroupId: String(test.questionGroupId || (
+            Array.isArray(test.blocks) ? "" : test.id
+        ) || inherited.questionGroupId || ""),
+        instructions: String(test.instructions || test.instruction || inherited.instructions || ""),
+        imageUrl: String(test.imageUrl || inherited.imageUrl || ""),
+        evidenceStartTime: test.evidenceStartTime ?? inherited.evidenceStartTime ?? null,
+        evidenceEndTime: test.evidenceEndTime ?? inherited.evidenceEndTime ?? null,
+        questionEvidence: test.questionEvidence || inherited.questionEvidence || {}
+    };
+    const candidateNumber = Number(test.questionNumber || test.number);
+    const hasAnswer = test.answer !== undefined || test.correctAnswer !== undefined || test.correct !== undefined;
+    if (candidateNumber === Number(number) && hasAnswer) {
+        const questionEvidence = nextInherited.questionEvidence?.[String(number)]
+            || nextInherited.questionEvidence?.[number]
+            || {};
+        return {
+            questionId: String(test.id || test.questionId || `q${number}`),
+            questionNumber: Number(number),
+            questionType: String(test.questionType || test.type || nextInherited.questionType || ""),
+            questionText: String(test.questionText || test.question || test.prompt || test.text || `Question ${number}`),
+            options: Array.isArray(test.options) && test.options.length ? test.options : nextInherited.options,
+            sectionNumber: nextInherited.sectionNumber,
+            sectionLabel: nextInherited.sectionLabel,
+            context: nextInherited.context,
+            transcriptText: nextInherited.transcriptText,
+            partNumber: nextInherited.partNumber || nextInherited.sectionNumber,
+            questionGroupId: nextInherited.questionGroupId,
+            instructions: nextInherited.instructions,
+            imageUrl: nextInherited.imageUrl,
+            transcriptStartTime: test.transcriptStartTime ?? test.startTime ?? questionEvidence.evidenceStartTime
+                ?? nextInherited.evidenceStartTime ?? null,
+            evidenceStartTime: test.evidenceStartTime ?? questionEvidence.evidenceStartTime
+                ?? nextInherited.evidenceStartTime ?? null,
+            evidenceEndTime: test.evidenceEndTime ?? questionEvidence.evidenceEndTime
+                ?? nextInherited.evidenceEndTime ?? null,
+            audioUrl: nextInherited.audioUrl
+        };
+    }
+
+    for (const [key, child] of Object.entries(test)) {
+        if (["answer", "correctAnswer", "correct", "answers", "options"].includes(key)) continue;
+        const found = mistakeQuestionSnapshot(child, number, nextInherited);
+        if (found) return found;
+    }
+    return null;
+}
+
+function snapshotsFromScore(test, skill, score, metadata = {}) {
+    return (score.results || score.questionResults || [])
+        .filter((item) => !item.correct && item.status !== "correct")
+        .map((item) => {
+            const number = Number(item.number || item.questionNumber);
+            const question = mistakeQuestionSnapshot(test, number, { skill }) || {};
+            const accepted = String(item.answer ?? item.correctAnswer ?? item.mainAnswer ?? "")
+                .split(/\s*(?:\||;|\n|\bor\b)\s*/i)
+                .filter(Boolean);
+            return {
+                ...question,
+                skill,
+                testId: String(metadata.testId || test?.id || ""),
+                testTitle: String(metadata.testTitle || test?.title || `${skill === "listening" ? "Listening" : "Reading"} Test`),
+                questionNumber: number,
+                questionId: question.questionId || `q${number}`,
+                userAnswer: item.userAnswer ?? "",
+                correctAnswer: accepted[0] || item.answer || item.correctAnswer || item.mainAnswer || "",
+                acceptedAnswers: accepted,
+                alternatives: item.alternatives || accepted.slice(1),
+                sectionNumber: question.sectionNumber || metadata.sectionNumber || null
+            };
+        });
+}
+
+function validateProfileMistakeSnapshots(body = {}) {
+    const snapshots = body.mistakeSnapshots;
+    if (snapshots === undefined || snapshots === null) return;
+    if (!Array.isArray(snapshots)) {
+        const error = new Error("mistakeSnapshots must be an array");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const correct = Math.max(0, Number(body.correct) || 0);
+    const total = Math.max(0, Number(body.total) || 0);
+    const wrongCount = total >= correct ? total - correct : 0;
+    const maxSnapshots = Math.min(MAX_REVIEW_MISTAKE_SNAPSHOTS_PER_RESULT, wrongCount);
+    if (snapshots.length > maxSnapshots) {
+        const error = new Error("Too many mistake snapshots for this result");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const payloadSize = Buffer.byteLength(JSON.stringify(snapshots), "utf8");
+    if (payloadSize > MAX_REVIEW_MISTAKE_SNAPSHOTS_BYTES) {
+        const error = new Error("Mistake snapshots payload is too large");
+        error.statusCode = 413;
+        throw error;
+    }
+
+    const oversized = snapshots.some((snapshot) => (
+        Buffer.byteLength(JSON.stringify(snapshot ?? null), "utf8") > MAX_REVIEW_MISTAKE_SNAPSHOT_BYTES
+    ));
+    if (oversized) {
+        const error = new Error("A mistake snapshot is too large");
+        error.statusCode = 413;
+        throw error;
+    }
+}
+
+app.get("/api/review-mistakes/count", requireUser, requireReviewMistakesPremiumApi, async (req, res) => {
     try {
+        const summary = await reviewMistakeStore.summary(req.user.id);
+        res.json({ count: summary.unresolved, summary });
+    } catch (error) {
+        res.status(500).json({ error: "Could not load mistake count" });
+    }
+});
+
+app.get("/api/review-mistakes", requireUser, requireReviewMistakesPremiumApi, async (req, res) => {
+    try {
+        if (String(req.query.attemptId || "").length > 200) {
+            return res.status(400).json({ error: "Invalid attempt id" });
+        }
+        const options = {
+            skill: String(req.query.skill || "").toLowerCase(),
+            status: String(req.query.status || "").toLowerCase(),
+            sort: String(req.query.sort || "newest").toLowerCase(),
+            attemptId: String(req.query.attemptId || "").trim()
+        };
+        const [items, summary] = await Promise.all([
+            reviewMistakeStore.list(req.user.id, options),
+            reviewMistakeStore.summary(req.user.id)
+        ]);
+        res.json({ items, summary });
+    } catch (error) {
+        res.status(500).json({ error: "Could not load review mistakes" });
+    }
+});
+
+app.post("/api/review-mistakes/:id/retry", requireUser, requireReviewMistakesPremiumApi, async (req, res) => {
+    try {
+        const answer = req.body?.answer;
+        const answerSize = JSON.stringify(answer ?? "").length;
+        if (!req.params.id || String(req.params.id).length > 100
+            || !Object.prototype.hasOwnProperty.call(req.body || {}, "answer")
+            || answerSize > 10000) {
+            return res.status(400).json({ error: "A mistake id and answer are required" });
+        }
+        const item = await reviewMistakeStore.retry(req.user.id, req.params.id, answer);
+        if (!item) return res.status(404).json({ error: "Mistake not found" });
+        const summary = await reviewMistakeStore.summary(req.user.id);
+        res.json({
+            item,
+            correct: Boolean(item.retryCorrect),
+            correctAnswer: item.retryCorrect ? undefined : item.correctAnswer,
+            summary
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Could not check this answer" });
+    }
+});
+
+app.patch("/api/review-mistakes/:id", requireUser, requireReviewMistakesPremiumApi, async (req, res) => {
+    try {
+        if (req.body?.status !== "mastered") {
+            return res.status(400).json({ error: "Only the mastered status can be set directly" });
+        }
+        const item = await reviewMistakeStore.markMastered(req.user.id, req.params.id);
+        if (!item) return res.status(404).json({ error: "Mistake not found" });
+        res.json({ item, summary: await reviewMistakeStore.summary(req.user.id) });
+    } catch {
+        res.status(500).json({ error: "Could not update this mistake" });
+    }
+});
+
+app.delete("/api/review-mistakes/:id", requireUser, requireReviewMistakesPremiumApi, async (req, res) => {
+    try {
+        const removed = await reviewMistakeStore.remove(req.user.id, req.params.id);
+        if (!removed) return res.status(404).json({ error: "Mistake not found" });
+        res.json({ success: true, summary: await reviewMistakeStore.summary(req.user.id) });
+    } catch {
+        res.status(500).json({ error: "Could not delete this mistake" });
+    }
+});
+
+app.post("/api/profile/results", requireUser, async (req, res) => {
+    try {
+        validateProfileMistakeSnapshots(req.body || {});
         const result = userProgressStore.recordResult(req.user.id, req.body || {});
+        const attemptId = result.attemptId || result.id;
+        let mistakeCount = 0;
+        if (["reading", "listening"].includes(result.skill) && Array.isArray(req.body?.mistakeSnapshots)) {
+            const mistakes = await reviewMistakeStore.upsertMany(
+                req.user.id,
+                attemptId,
+                req.body.mistakeSnapshots.map((item) => ({
+                    ...item,
+                    skill: result.skill,
+                    testId: result.testId,
+                    testTitle: result.title
+                }))
+            );
+            mistakeCount = mistakes.length;
+        }
         res.status(201).json({
             result,
+            mistakeCount,
             progress: userProgressStore.getProgress(req.user.id, {
                 accountCreatedAt: req.account.createdAt
             })
@@ -4955,12 +5442,16 @@ function scorePublicTest(test, answers, skill) {
     };
 }
 
-app.post("/api/reading-tests/:id/score", requireUser, (req, res) => {
+app.post("/api/reading-tests/:id/score", requireUser, async (req, res) => {
     const test = buildMockReadingTest(req.params.id) || resolveManualReadingTest(req.params.id);
     if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-reading-"))) {
         return res.status(404).json({ error: "Reading test not found" });
     }
-    res.json(scorePublicTest(test, req.body?.answers, "reading"));
+    const score = scorePublicTest(test, req.body?.answers, "reading");
+    const attemptId = String(req.body?.attemptId || `reading-${req.params.id}-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`);
+    const mistakes = snapshotsFromScore(test, "reading", score, { testId: req.params.id });
+    await reviewMistakeStore.upsertMany(req.user.id, attemptId, mistakes);
+    res.json({ ...score, attemptId, mistakeCount: mistakes.length });
 });
 
 app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
@@ -4984,13 +5475,17 @@ app.get("/api/mock-tests/:id", requireAuth, (req, res) => {
     res.json(publicTestData(test));
 });
 
-app.post("/api/listening-tests/:id/score", requireUser, (req, res) => {
+app.post("/api/listening-tests/:id/score", requireUser, async (req, res) => {
     let test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
     if (!test) test = resolveManualListeningTest(`${req.params.id}-listening-full`);
     if (!test || (isMockOnlyTest(test) && !String(req.params.id).startsWith("mock-listening-"))) {
         return res.status(404).json({ error: "Listening test not found" });
     }
-    res.json(scorePublicTest(test, req.body?.answers, "listening"));
+    const score = scorePublicTest(test, req.body?.answers, "listening");
+    const attemptId = String(req.body?.attemptId || `listening-${req.params.id}-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`);
+    const mistakes = snapshotsFromScore(test, "listening", score, { testId: req.params.id });
+    await reviewMistakeStore.upsertMany(req.user.id, attemptId, mistakes);
+    res.json({ ...score, attemptId, mistakeCount: mistakes.length });
 });
 
 app.post("/api/mock-tests/:id/progress", requireUser, requireMockTestAccessApi, (req, res) => {
@@ -5534,8 +6029,23 @@ app.post("/api/mock-tests/:id/submit", requireUser, requireMockTestAccessApi, as
             ...(req.body || {}),
             __scoringTest: scoringTest || undefined
         });
+        let mistakeCount = 0;
+        if (scoringTest) {
+            for (const skill of ["listening", "reading"]) {
+                const questions = scoringTest[`${skill}Questions`] || [];
+                const answers = req.body?.sections?.[skill]?.answers || req.body?.answers?.[skill]?.answers || {};
+                if (!questions.length) continue;
+                const scored = scorePublicTest({ questions }, answers, skill);
+                const snapshots = snapshotsFromScore({ questions, title: result.title }, skill, scored, {
+                    testId: result.testId,
+                    testTitle: result.title
+                });
+                const saved = await reviewMistakeStore.upsertMany(req.user.id, result.id, snapshots);
+                mistakeCount += saved.length;
+            }
+        }
         const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
-        res.status(201).json({ result: mappedResult });
+        res.status(201).json({ result: { ...mappedResult, mistakeCount } });
     } catch (error) {
         res.status(error.statusCode || 500).json({
             error: error.message || "Could not submit mock test"
@@ -5812,7 +6322,8 @@ registerFullTestRoutes(app, {
     getReadingTestById,
     getListeningTestById,
     resolveFullTestLocator: resolveFullTest,
-    publicUrlForFullTest: publicFullTestUrl
+    publicUrlForFullTest: publicFullTestUrl,
+    reviewMistakeStore
 });
 
 registerWritingRoutes(app, {
@@ -5832,6 +6343,22 @@ registerSpeakingRoutes(app, {
     uploadsRoot: UPLOAD_DIR,
     safeFileName,
     getMockSpeakingTests: buildMockSpeakingFullTests
+});
+
+registerStudyPlanRoutes(app, {
+    requireAuth,
+    requireStudyPlanAccessApi,
+    studyPlanStore,
+    userProgressStore,
+    mockTestStore,
+    reviewMistakeStore,
+    vocabularyStore,
+    loadWriting: async (userId) => mongoose.connection.readyState === 1
+        ? WritingSubmission.find({ userId: String(userId) }).sort({ createdAt: -1 }).limit(20).lean()
+        : [],
+    loadSpeaking: async (userId) => mongoose.connection.readyState === 1
+        ? SpeakingSubmission.find({ userId: String(userId) }).sort({ createdAt: -1 }).limit(20).lean()
+        : []
 });
 
 app.get("/login", (req, res) => {
@@ -6089,6 +6616,180 @@ app.get("/api/vocabulary/clicked", (req, res) => {
         .sort((a, b) => new Date(a.clicked_at) - new Date(b.clicked_at));
 
     res.json(words);
+});
+
+app.post("/api/vocabulary", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        const body = req.body || {};
+        if (JSON.stringify(body).length > 50000) {
+            return res.status(413).json({ error: "Vocabulary payload is too large" });
+        }
+        const contextSentence = String(body.contextSentence || "").trim();
+        let generated = {};
+        if (body.word && (!body.definition || !body.uzbekTranslation || !body.partOfSpeech)) {
+            try {
+                generated = await requestContextTranslation(normalizeContextTranslationPayload({
+                    selectedText: body.word,
+                    sentence: contextSentence || body.word,
+                    paragraph: contextSentence || body.word,
+                    testId: body.testId,
+                    passageId: body.passageNumber ? `passage-${body.passageNumber}` : `part-${body.partNumber || 1}`
+                }));
+            } catch (error) {
+                console.warn("Vocabulary enrichment failed; saving available fields:", error.message);
+            }
+        }
+        const result = await vocabularyStore.upsert(req.user.id, {
+            ...generated,
+            ...body,
+            sourceType: "reading",
+            transcriptContext: "",
+            audioUrl: "",
+            audioStartTime: null,
+            audioEndTime: null,
+            partNumber: null,
+            definition: body.definition || generated.definition || generated.meaningInEnglish || "",
+            uzbekTranslation: body.uzbekTranslation || generated.uzbekTranslation || generated.translation || "",
+            partOfSpeech: body.partOfSpeech || generated.partOfSpeech || "",
+            pronunciation: body.pronunciation || generated.pronunciation || generated.phonetic || "",
+            simpleExample: body.simpleExample || generated.example || generated.example_sentence || "",
+            synonyms: body.synonyms || generated.synonyms || [],
+            antonyms: body.antonyms || generated.antonyms || []
+        });
+        res.status(result.alreadyExists ? 200 : 201).json({
+            ...result,
+            message: result.alreadyExists
+                ? "This word is already in your vocabulary. Its source history was updated."
+                : "Word added to your vocabulary.",
+            summary: await vocabularyStore.summary(req.user.id)
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ error: error.message || "Could not save this word" });
+    }
+});
+
+app.post("/api/vocabulary/translate", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        const text = String(req.body?.text || "").trim();
+        const sourceLanguage = String(req.body?.sourceLanguage || "").toLowerCase();
+        const targetLanguage = String(req.body?.targetLanguage || "").toLowerCase();
+
+        if (!text) return res.status(400).json({ error: "Enter text to translate" });
+        if (text.length > 5000) return res.status(413).json({ error: "Text must be 5,000 characters or fewer" });
+
+        const translation = await requestVocabularyAiTranslation({ text, sourceLanguage, targetLanguage });
+        res.setHeader("Cache-Control", "no-store");
+        res.json({ translation, sourceLanguage, targetLanguage });
+    } catch (error) {
+        const statusCode = error.statusCode || 500;
+        console.warn("Vocabulary AI translation failed:", {
+            statusCode,
+            message: error.message,
+            hasOpenAIKey: Boolean(OPENAI_API_KEY)
+        });
+        res.status(statusCode).json({
+            error: statusCode === 429
+                ? "AI translator is busy. Please try again shortly."
+                : (statusCode === 400 || statusCode === 413 ? error.message : "AI translation is unavailable right now.")
+        });
+    }
+});
+
+app.get("/api/vocabulary", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        const options = {
+            search: String(req.query.search || "").slice(0, 160),
+            sourceType: String(req.query.sourceType || "").toLowerCase(),
+            status: String(req.query.status || "").toLowerCase(),
+            due: req.query.due === "1" || req.query.due === "true",
+            sort: String(req.query.sort || "newest").toLowerCase()
+        };
+        const [items, summary] = await Promise.all([
+            vocabularyStore.list(req.user.id, options),
+            vocabularyStore.summary(req.user.id, { sourceType: "reading" })
+        ]);
+        res.json({ items, summary });
+    } catch {
+        res.status(500).json({ error: "Could not load vocabulary" });
+    }
+});
+
+app.get("/api/vocabulary/review/due", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        res.json({
+            items: await vocabularyStore.list(req.user.id, { due: true, sourceType: "reading" }),
+            summary: await vocabularyStore.summary(req.user.id, { sourceType: "reading" })
+        });
+    } catch {
+        res.status(500).json({ error: "Could not load due vocabulary" });
+    }
+});
+
+app.get("/api/vocabulary/:id", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    if (!req.params.id || String(req.params.id).length > 100) return res.status(400).json({ error: "Invalid vocabulary id" });
+    const item = await vocabularyStore.get(req.user.id, req.params.id);
+    if (!item) return res.status(404).json({ error: "Vocabulary word not found" });
+    res.json({ item });
+});
+
+app.post("/api/vocabulary/:id/regenerate", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        if (!req.params.id || String(req.params.id).length > 100) return res.status(400).json({ error: "Invalid vocabulary id" });
+        const existing = await vocabularyStore.get(req.user.id, req.params.id);
+        if (!existing) return res.status(404).json({ error: "Vocabulary word not found" });
+        const source = existing.sources?.[existing.sources.length - 1] || {};
+        const context = source.contextSentence || source.transcriptContext || existing.word;
+        const generated = await requestContextTranslation(normalizeContextTranslationPayload({
+            selectedText: existing.word,
+            sentence: context,
+            paragraph: context,
+            testId: source.testId,
+            passageId: source.passageNumber ? `passage-${source.passageNumber}` : `part-${source.partNumber || 1}`
+        }));
+        const item = await vocabularyStore.update(req.user.id, req.params.id, {
+            definition: generated.definition || generated.meaningInEnglish || existing.definition,
+            uzbekTranslation: generated.uzbekTranslation || generated.translation || existing.uzbekTranslation,
+            partOfSpeech: generated.partOfSpeech || existing.partOfSpeech,
+            pronunciation: generated.pronunciation || generated.phonetic || existing.pronunciation,
+            simpleExample: generated.example || generated.example_sentence || existing.simpleExample,
+            synonyms: generated.synonyms || existing.synonyms,
+            antonyms: generated.antonyms || existing.antonyms
+        });
+        res.json({ item, message: "Vocabulary details regenerated." });
+    } catch (error) {
+        res.status(error.statusCode || 502).json({ error: error.message || "Could not regenerate vocabulary details" });
+    }
+});
+
+app.patch("/api/vocabulary/:id", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        if (!req.params.id || String(req.params.id).length > 100 || JSON.stringify(req.body || {}).length > 30000) {
+            return res.status(400).json({ error: "Invalid vocabulary update" });
+        }
+        const item = await vocabularyStore.update(req.user.id, req.params.id, req.body || {});
+        if (!item) return res.status(404).json({ error: "Vocabulary word not found" });
+        res.json({ item, summary: await vocabularyStore.summary(req.user.id) });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ error: error.message || "Could not update vocabulary" });
+    }
+});
+
+app.delete("/api/vocabulary/:id", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    if (!req.params.id || String(req.params.id).length > 100) return res.status(400).json({ error: "Invalid vocabulary id" });
+    const removed = await vocabularyStore.remove(req.user.id, req.params.id);
+    if (!removed) return res.status(404).json({ error: "Vocabulary word not found" });
+    res.json({ success: true, summary: await vocabularyStore.summary(req.user.id) });
+});
+
+app.post("/api/vocabulary/:id/review", requireUser, requireVocabularyPremiumApi, async (req, res) => {
+    try {
+        if (!req.params.id || String(req.params.id).length > 100) return res.status(400).json({ error: "Invalid vocabulary id" });
+        const item = await vocabularyStore.review(req.user.id, req.params.id, String(req.body?.difficulty || "").toLowerCase());
+        if (!item) return res.status(404).json({ error: "Vocabulary word not found" });
+        res.json({ item, summary: await vocabularyStore.summary(req.user.id) });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ error: error.message || "Could not save vocabulary review" });
+    }
 });
 
 app.post("/api/listening-assets/audio", requireAdmin, audioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
@@ -7136,6 +7837,7 @@ async function runUserMigration() {
         }
     }
 
+    await ensureReviewMistakeIndexes().catch(err => console.error("Review Mistakes index migration error:", err));
     await runTestTakerIdMigration().catch(err => console.error("Test Taker ID migration error:", err));
 }
 
@@ -7160,6 +7862,33 @@ async function ensureUserAuthIndexes(UserModel) {
             }
         );
         console.info("users.googleId index is ready.");
+    }
+}
+
+async function ensureReviewMistakeIndexes() {
+    if (mongoose.connection.readyState !== 1) return;
+    const collection = ReviewMistake.collection;
+    const indexes = await collection.indexes();
+    const legacyIndex = indexes.find((index) => (
+        index.name === "userId_1_attemptId_1_questionId_1"
+        || JSON.stringify(index.key) === JSON.stringify({ userId: 1, attemptId: 1, questionId: 1 })
+    ));
+    const currentIndex = indexes.find((index) => (
+        index.name === "userId_1_attemptId_1_skill_1_questionId_1"
+        || JSON.stringify(index.key) === JSON.stringify({ userId: 1, attemptId: 1, skill: 1, questionId: 1 })
+    ));
+
+    if (legacyIndex) {
+        console.info("Rebuilding review_mistakes unique index to include skill.");
+        await collection.dropIndex(legacyIndex.name);
+    }
+
+    if (!currentIndex) {
+        await collection.createIndex(
+            { userId: 1, attemptId: 1, skill: 1, questionId: 1 },
+            { name: "userId_1_attemptId_1_skill_1_questionId_1", unique: true }
+        );
+        console.info("review_mistakes skill-aware unique index is ready.");
     }
 }
 
@@ -7303,7 +8032,7 @@ app.use((req, res, next) => {
             }
         }
 
-        const privateHtmls = ["/profile.html", "/profile-settings.html", "/full-test-player.html"];
+        const privateHtmls = ["/profile.html", "/profile-settings.html", "/full-test-player.html", "/vocabulary.html"];
         if (privateHtmls.includes(pathLower)) {
             if (!req.user) {
                 return res.redirect("/login");
@@ -7318,6 +8047,14 @@ function staticCacheHeaders(res, filePath) {
     const fileName = path.basename(filePath).toLowerCase();
     const noStoreAssets = new Set([
         "auth-client.js",
+        "review-mistakes.js",
+        "review-mistakes.css",
+        "vocabulary.js",
+        "vocabulary.css",
+        "study-plan.js",
+        "study-plan.css",
+        "reading-cbt-app.js",
+        "reading-cbt.css",
         "listening-template.css",
         "listening-test-components.js",
         "listening-template.js"

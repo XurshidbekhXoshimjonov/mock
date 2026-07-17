@@ -345,6 +345,14 @@
                         <span>${ICONS.dashboard}</span>
                         Dashboard
                     </a>
+                    ${(Number(result.listening?.correct) < Number(result.listening?.total) || Number(result.reading?.correct) < Number(result.reading?.total)) ? `
+                        <a class="mock-result-button mock-result-button--primary" href="/review-mistakes?attemptId=${encodeURIComponent(result.id || "")}">
+                            Review Mistakes Now
+                        </a>
+                        <button class="mock-result-button mock-result-button--secondary" type="button" id="reviewMistakesLater">
+                            Review Later
+                        </button>
+                    ` : ""}
                     <button class="mock-result-button mock-result-button--primary" type="button" id="downloadResultBtn">
                         <span>${ICONS.download}</span>
                         Download Result
@@ -359,6 +367,10 @@
 
         document.getElementById("downloadResultBtn")?.addEventListener("click", () => {
             downloadResultPdf(activeResult);
+        });
+        document.getElementById("reviewMistakesLater")?.addEventListener("click", (event) => {
+            event.currentTarget.textContent = "Saved for later";
+            event.currentTarget.disabled = true;
         });
     }
 

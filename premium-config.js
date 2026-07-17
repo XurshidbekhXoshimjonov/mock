@@ -17,6 +17,9 @@
         fullMockTest: Object.freeze({ free: false, premium: true }),
         detailedBandFeedback: Object.freeze({ free: false, premium: true }),
         pdfResults: Object.freeze({ free: false, premium: true }),
+        reviewMistakes: Object.freeze({ free: false, premium: true }),
+        vocabulary: Object.freeze({ free: false, premium: true }),
+        studyPlan: Object.freeze({ free: false, premium: true }),
         resultHistory: Object.freeze({ free: "limited", premium: true }),
         progressStatistics: Object.freeze({ free: false, premium: true })
     });
@@ -29,6 +32,9 @@
         Object.freeze({ key: "fullMockTest", label: "Full IELTS Mock Tests", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "detailedBandFeedback", label: "Detailed band feedback", free: "Not available", premium: "Detailed", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "pdfResults", label: "PDF result", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
+        Object.freeze({ key: "reviewMistakes", label: "Review Mistakes", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
+        Object.freeze({ key: "vocabulary", label: "Vocabulary & AI Translate", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
+        Object.freeze({ key: "studyPlan", label: "AI Study Plan", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "resultHistory", label: "Result history", free: "Limited", premium: "Full", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "progressStatistics", label: "Progress statistics", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true })
     ]);
@@ -41,6 +47,9 @@
         "Complete IELTS Mock Tests",
         "Detailed IELTS band feedback",
         "PDF result downloads",
+        "Review Mistakes",
+        "Vocabulary and AI Translate",
+        "AI-powered Study Plan",
         "Full result history",
         "Progress statistics"
     ]);

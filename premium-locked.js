@@ -3,6 +3,13 @@
     const params = new URLSearchParams(window.location.search);
     const requestedType = String(params.get("type") || "").toLowerCase();
     const returnPath = params.get("return");
+    if (requestedType === "vocabulary" || path.includes("vocabulary")) {
+        const target = "/vocabulary" + (returnPath ? `?return=${encodeURIComponent(returnPath)}` : "");
+        if (window.location.pathname !== "/vocabulary") {
+            window.location.replace(target);
+            return;
+        }
+    }
     try {
         const currentPath = window.location.pathname + window.location.search;
         if (returnPath) {

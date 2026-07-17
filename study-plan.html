@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Your personalized AI-powered IELTSX Study Plan">
+    <title>Your AI Study Plan — IELTSX</title>
+    <script>if (localStorage.getItem("ielts-theme") === "dark") document.documentElement.classList.add("dark-theme");</script>
+    <link rel="stylesheet" href="/fonts/plus-jakarta-sans.css">
+    <link rel="stylesheet" href="/study-plan.css?v=20260717-study-plan-v1">
+</head>
+<body>
+    <header id="globalNavbar" data-global-navbar="true"></header>
+    <main class="study-plan-page">
+        <header class="study-plan-hero">
+            <div>
+                <span class="study-plan-eyebrow">AI-POWERED IELTS PLANNING</span>
+                <h1>Your AI Study Plan</h1>
+                <p>A personalized IELTS preparation plan built from your performance, target score, available time, and exam date.</p>
+            </div>
+            <button class="button button--secondary" id="editPlanSettings" type="button" hidden>Edit Plan Settings</button>
+        </header>
+        <div id="studyPlanRoot" class="study-plan-root" aria-live="polite">
+            <section class="study-plan-loading" aria-busy="true">
+                <div class="loading-orbit" aria-hidden="true"></div>
+                <h2>Creating your personalized Study Plan...</h2>
+                <ol><li>Analysing your performance</li><li>Identifying weak skills</li><li>Building your weekly schedule</li><li>Preparing daily tasks</li></ol>
+            </section>
+        </div>
+        <p class="study-plan-disclaimer">Your Study Plan is an AI recommendation based on available IELTSX data. It cannot guarantee a specific IELTS band score.</p>
+    </main>
+
+    <dialog class="study-plan-dialog" id="settingsDialog">
+        <div class="dialog-heading"><div><span class="study-plan-eyebrow">PLAN SETTINGS</span><h2>Edit Plan Settings</h2></div><button type="button" data-close-dialog aria-label="Close">×</button></div>
+        <div id="settingsDialogBody"></div>
+    </dialog>
+    <dialog class="study-plan-dialog study-plan-dialog--small" id="taskDialog">
+        <div class="dialog-heading"><div><span class="study-plan-eyebrow">MISSED TASK</span><h2 id="taskDialogTitle">Reschedule task</h2></div><button type="button" data-close-task-dialog aria-label="Close">×</button></div>
+        <div id="taskDialogBody"></div>
+    </dialog>
+    <div class="study-plan-toast" id="studyPlanToast" role="status" hidden></div>
+
+    <script src="/premium-config.js"></script>
+    <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
+    <script src="/study-plan.js?v=20260717-delete-plan-v3"></script>
+</body>
+</html>

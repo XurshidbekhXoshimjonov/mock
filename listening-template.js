@@ -256,6 +256,19 @@ function showListeningResult(result, questionNumbers = [], options = {}) {
         notice.textContent = AUTO_SUBMIT_MESSAGE;
         notice.classList.toggle("hidden", !options.autoSubmit);
     }
+    const hasMistakes = Number(result.correct) < Number(result.total);
+    const reviewMistakes = modal.querySelector("[data-listening-review-mistakes]");
+    const reviewLater = modal.querySelector("[data-listening-review-later]");
+    const close = modal.querySelector("[data-listening-result-close]:not(.lc-modal-close)");
+    if (reviewMistakes) {
+        reviewMistakes.classList.toggle("hidden", !hasMistakes);
+        const params = new URLSearchParams({ skill: "listening" });
+        if (result.attemptId) params.set("attemptId", result.attemptId);
+        reviewMistakes.href = `/review-mistakes?${params}`;
+        reviewMistakes.textContent = "Review Listening Mistakes";
+    }
+    if (reviewLater) reviewLater.classList.toggle("hidden", !hasMistakes);
+    if (close) close.classList.toggle("hidden", hasMistakes);
     modal.classList.remove("hidden");
 }
 
@@ -398,6 +411,8 @@ function normalizeServerListeningScore(data) {
         unanswered: Number(data.unanswered ?? questionResults.filter((item) => item.status === "unanswered").length),
         total: Number(data.total ?? questionResults.length),
         band: data.band,
+        attemptId: String(data.attemptId || ""),
+        mistakeCount: Number(data.mistakeCount) || 0,
         questionResults
     };
 }
@@ -411,6 +426,9 @@ async function requestListeningScore(test, answers) {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.error || "Could not score this Listening test");
+    window.dispatchEvent(new CustomEvent("ieltsx:mistakes-changed", {
+        detail: { skill: "listening", count: Number(data.mistakeCount) || 0 }
+    }));
     return normalizeServerListeningScore(data);
 }
 
@@ -456,6 +474,7 @@ async function recordListeningResult(test, options = {}) {
         total: result.total,
         band: result.band || listeningBand(result.correct, result.total),
         testId: test.id || listeningTestId,
+        attemptId: result.attemptId,
         part: isFull ? "full" : Number(test.part || test.parts?.[0]?.partNumber) || null,
         practiceUrl: window.location.pathname,
         correctAnswers: result.questionResults

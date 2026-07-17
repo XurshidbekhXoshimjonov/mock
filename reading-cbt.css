@@ -521,6 +521,37 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     border-radius: 2px;
 }
 
+.cbt-vocab-save-area {
+    padding: 12px 16px 16px;
+    border-top: 1px solid #e6ebf3;
+}
+
+.cbt-vocab-save {
+    width: 100%;
+    min-height: 40px;
+    border: 0;
+    border-radius: 10px;
+    background: #0b5fff;
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.cbt-vocab-save:disabled {
+    background: #dbe8ff;
+    color: #315b9c;
+    cursor: default;
+}
+
+.cbt-vocab-save-message {
+    margin: 8px 0 0;
+    color: #416080;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
 .cbt-vocab-loading {
     margin: 8px 0 0;
     border: 1px solid rgba(0, 87, 255, 0.12);
@@ -1487,11 +1518,14 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     place-items: center;
     background: rgba(16, 24, 40, 0.55);
     padding: 20px;
+    overflow-y: auto;
 }
 
 .cbt-result-modal {
     position: relative;
-    width: min(440px, 100%);
+    width: min(580px, 100%);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
     border-radius: 16px;
     background: #fff;
     padding: 34px;
@@ -1579,8 +1613,17 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 .cbt-result-actions {
     display: flex;
     justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 18px;
+}
+
+.cbt-result-actions .cbt-button {
+    flex: 1 1 150px;
+    min-width: 0;
+    padding-inline: 14px;
+    white-space: nowrap;
 }
 
 .cbt-question--review {
@@ -1911,6 +1954,12 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 
     .cbt-result-actions {
         flex-direction: column;
+    }
+
+    .cbt-result-actions .cbt-button {
+        width: 100%;
+        flex-basis: auto;
+        white-space: normal;
     }
 }
 

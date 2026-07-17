@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Study Plan requires IELTSX Premium">
+    <title>Study Plan Requires Premium — IELTSX</title>
+    <script>if (localStorage.getItem("ielts-theme") === "dark") document.documentElement.classList.add("dark-theme");</script>
+    <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
+    <link rel="stylesheet" href="/site-modern.css?v=20260713-premium">
+    <link rel="stylesheet" href="/premium-locked.css?v=20260717-study-plan-icon-tint-v1">
+</head>
+<body class="premium-locked-page">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+    <main class="premium-locked-shell" id="studyPlanPremiumLock" aria-busy="true"></main>
+    <script src="/premium-config.js"></script>
+    <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
+    <script src="/premium-required-page.js?v=20260717-study-plan-icon-tint-v5"></script>
+    <script>
+        PremiumRequiredPage.render(document.getElementById("studyPlanPremiumLock"), {
+            badge: "PREMIUM REQUIRED",
+            icon: "CalendarCheck2",
+            title: "Study Plan requires Premium",
+            description: "Personalized IELTS study plans are available for Premium users. Upgrade to get an adaptive daily schedule based on your target band, performance, and weak skills.",
+            features: [
+                { image: "/premium-icons/study-plan-personalized.png?v=20260717-v2", native: true, tint: true, title: "Personalized plan" },
+                { image: "/premium-icons/study-plan-ai-analysis.png?v=20260717-v3", native: true, title: "AI analysis" },
+                { image: "/premium-icons/study-plan-daily-schedule.png?v=20260717-v3", native: true, tint: true, title: "Daily schedule" }
+            ],
+            upgradeLabel: "Upgrade to Premium",
+            backLabel: "Back to Home",
+            backPath: "/",
+            footerText: "Premium access • AI-powered IELTS planning"
+        });
+    </script>
+</body>
+</html>

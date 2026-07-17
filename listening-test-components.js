@@ -1480,6 +1480,8 @@ const ListeningComponents = (() => {
                     </div>
                     <div class="lc-result-actions">
                         <button class="lc-start-button" type="button" data-listening-review>Review answers</button>
+                        <a class="lc-start-button hidden" href="/review-mistakes?skill=listening" data-listening-review-mistakes>Review Listening Mistakes</a>
+                        <button class="lc-secondary-button hidden" type="button" data-listening-review-later>Review Later</button>
                         <button class="lc-secondary-button" type="button" data-listening-result-close>Close</button>
                     </div>
                 </section>
@@ -2210,6 +2212,9 @@ const ListeningComponents = (() => {
         root.querySelector("[data-listening-review]")?.addEventListener("click", () => {
             root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
             root.dispatchEvent(new CustomEvent("listening-review", { bubbles: true }));
+        });
+        root.querySelector("[data-listening-review-later]")?.addEventListener("click", () => {
+            root.querySelector("[data-listening-result-modal]")?.classList.add("hidden");
         });
 
         // Initialize Question Navigation

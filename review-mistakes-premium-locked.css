@@ -1,0 +1,25 @@
+.review-mistakes-lock-page .premium-locked-card {
+    width: min(920px, 100%);
+}
+
+.review-mistakes-lock-description {
+    max-width: 710px;
+    margin: 0 auto;
+}
+
+.review-mistakes-lock-description p {
+    max-width: none;
+}
+
+.review-mistakes-lock-description p + p {
+    margin-top: 3px;
+}
+
+.premium-locked-benefits--four .premium-locked-benefit-img--native {
+    width: 28px;
+    height: 28px;
+}
+
+.review-mistakes-lock-page .premium-locked-actions {
+    width: min(800px, 100%);
+}

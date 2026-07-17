@@ -75,6 +75,13 @@ body.premium-locked-page {
     stroke-linejoin: round;
 }
 
+.premium-locked-top-img {
+    width: 54px;
+    height: 54px;
+    display: block;
+    object-fit: contain;
+}
+
 .premium-locked-sparkle {
     position: absolute;
     color: #9bb8ff;
@@ -148,6 +155,36 @@ body.premium-locked-page {
     overflow: hidden;
 }
 
+.premium-required-description {
+    max-width: 710px;
+    margin: 0 auto;
+}
+
+.premium-required-description p {
+    max-width: none;
+}
+
+.premium-required-description p + p {
+    margin-top: 3px;
+}
+
+.premium-locked-benefits--four {
+    width: min(800px, 100%);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.premium-locked-benefits--four .premium-locked-benefit {
+    min-width: 0;
+    padding-inline: 15px;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.premium-locked-benefits--four .premium-locked-benefit-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
 .premium-locked-benefit {
     min-height: 76px;
     padding: 14px 22px;
@@ -199,6 +236,10 @@ body.premium-locked-page {
     width: 30px;
     height: 30px;
     filter: none;
+}
+
+.premium-locked-benefit-img--tint {
+    filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(3199%) hue-rotate(223deg) brightness(97%) contrast(98%);
 }
 
 .premium-locked-benefit-img:not([hidden]) + svg {
@@ -261,6 +302,22 @@ body.premium-locked-page {
     outline-offset: 4px;
 }
 
+.premium-locked-primary:active,
+.premium-locked-secondary:active {
+    transform: translateY(0);
+}
+
+.premium-required-loading,
+.premium-required-noscript {
+    color: #667795;
+    font: 700 15px/1.5 "Plus Jakarta Sans", sans-serif;
+    text-align: center;
+}
+
+.premium-required-noscript {
+    margin: 20px;
+}
+
 .premium-locked-note {
     max-width: none !important;
     margin-top: 24px !important;
@@ -299,6 +356,30 @@ body.premium-locked-page {
     }
 }
 
+@media (max-width: 760px) {
+    .premium-locked-benefits--four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .premium-locked-benefits--four .premium-locked-benefit {
+        min-height: 68px;
+        justify-content: flex-start;
+        padding: 12px;
+    }
+
+    .premium-locked-benefits--four .premium-locked-benefit + .premium-locked-benefit {
+        border-left: 0;
+    }
+
+    .premium-locked-benefits--four .premium-locked-benefit:nth-child(even) {
+        border-left: 1px solid #e3eaf5;
+    }
+
+    .premium-locked-benefits--four .premium-locked-benefit:nth-child(n + 3) {
+        border-top: 1px solid #e3eaf5;
+    }
+}
+
 @media (max-width: 640px) {
     .premium-locked-shell {
         min-height: calc(100vh - 76px);
@@ -307,37 +388,46 @@ body.premium-locked-page {
     }
 
     .premium-locked-card {
-        padding: 30px 20px 26px;
+        padding: 24px 20px 22px;
         border-radius: 22px;
     }
 
     .premium-locked-icon-wrap {
         width: 104px;
-        height: 76px;
-        margin-bottom: 4px;
+        height: 68px;
+        margin-bottom: 2px;
     }
 
     .premium-locked-icon {
-        width: 64px;
-        height: 64px;
+        width: 58px;
+        height: 58px;
         border-width: 5px;
     }
 
+    .premium-locked-top-img {
+        width: 44px;
+        height: 44px;
+    }
+
     .premium-locked-card h1 {
-        margin-top: 18px;
-        font-size: clamp(30px, 10vw, 38px);
+        margin: 15px auto 12px;
+        font-size: clamp(30px, 9vw, 34px);
         letter-spacing: -0.035em;
     }
 
     .premium-locked-card p {
-        font-size: 15.5px;
-        line-height: 1.6;
+        font-size: 14.5px;
+        line-height: 1.55;
     }
 
     .premium-locked-benefits {
-        margin: 24px auto 22px;
+        margin: 20px auto 18px;
         grid-template-columns: 1fr;
         border-radius: 16px;
+    }
+
+    .premium-locked-benefits.premium-locked-benefits--four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .premium-locked-benefit {
@@ -346,7 +436,11 @@ body.premium-locked-page {
         padding: 13px 16px;
     }
 
-    .premium-locked-benefit + .premium-locked-benefit {
+    .premium-locked-benefits--four .premium-locked-benefit {
+        min-height: 64px;
+    }
+
+    .premium-locked-benefits:not(.premium-locked-benefits--four) .premium-locked-benefit + .premium-locked-benefit {
         border-left: 0;
         border-top: 1px solid #e3eaf5;
     }
@@ -358,9 +452,27 @@ body.premium-locked-page {
 
     .premium-locked-primary,
     .premium-locked-secondary {
-        min-height: 54px;
+        min-height: 52px;
         width: 100%;
         font-size: 16px;
+    }
+
+    .premium-locked-note {
+        margin-top: 18px !important;
+        font-size: 12.5px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .premium-locked-benefits--four .premium-locked-benefit {
+        gap: 8px;
+        font-size: 12.5px;
+    }
+
+    .premium-locked-benefits--four .premium-locked-benefit-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
     }
 }
 
@@ -392,6 +504,11 @@ html.dark-theme .premium-locked-benefit {
 }
 
 html.dark-theme .premium-locked-benefit + .premium-locked-benefit {
+    border-color: #27334b;
+}
+
+html.dark-theme .premium-locked-benefits--four .premium-locked-benefit:nth-child(even),
+html.dark-theme .premium-locked-benefits--four .premium-locked-benefit:nth-child(n + 3) {
     border-color: #27334b;
 }
 

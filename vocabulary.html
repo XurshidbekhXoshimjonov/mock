@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Vocabulary — IELTSX</title>
+    <link rel="stylesheet" href="/fonts/plus-jakarta-sans.css">
+    <link rel="stylesheet" href="/vocabulary.css">
+</head>
+<body>
+    <header id="globalNavbar" data-global-navbar></header>
+    <main class="vocab-page">
+        <section class="vocab-hero">
+            <div>
+                <span class="vocab-eyebrow">IELTSX VOCABULARY</span>
+                <h1>My Vocabulary</h1>
+                <p>Build and review vocabulary from your IELTS practice.</p>
+            </div>
+            <div class="vocab-hero__actions">
+                <button class="button button--secondary" id="startPractice" type="button">Practice</button>
+                <button class="button button--primary" id="startTranslate" type="button" aria-controls="aiTranslator" aria-expanded="false">Translate</button>
+            </div>
+        </section>
+
+        <section class="ai-translator" id="aiTranslator" data-direction="en-uz" aria-labelledby="translatorTitle" hidden>
+            <div class="ai-translator__heading">
+                <div>
+                    <span class="vocab-eyebrow">AI TRANSLATE</span>
+                    <h2 id="translatorTitle">English ↔ Uzbek Translator</h2>
+                    <p>Translate words, sentences, or short passages with AI.</p>
+                </div>
+                <div class="translator-directions" role="group" aria-label="Translation direction">
+                    <button class="is-active" data-translate-direction="en-uz" type="button">English → Uzbek</button>
+                    <button data-translate-direction="uz-en" type="button">Uzbek → English</button>
+                </div>
+            </div>
+            <form id="translatorForm">
+                <div class="translator-languages">
+                    <strong id="translatorSourceLabel">English</strong>
+                    <button class="translator-swap" id="translatorSwap" type="button" aria-label="Swap languages">⇄</button>
+                    <strong id="translatorTargetLabel">Uzbek</strong>
+                </div>
+                <div class="translator-panes">
+                    <label class="translator-pane">
+                        <span class="sr-only">Text to translate</span>
+                        <textarea id="translatorInput" maxlength="5000" placeholder="Enter English text" required></textarea>
+                        <span class="translator-count"><span id="translatorCount">0</span> / 5000</span>
+                    </label>
+                    <div class="translator-pane translator-pane--output is-placeholder">
+                        <output id="translatorOutput" aria-live="polite">Translation will appear here.</output>
+                        <button class="translator-copy" id="translatorCopy" type="button" disabled>Copy</button>
+                    </div>
+                </div>
+                <div class="translator-actions">
+                    <button class="button button--primary" id="translatorSubmit" type="submit">Translate with AI</button>
+                    <button class="button button--secondary" id="translatorClear" type="button">Clear</button>
+                    <span id="translatorStatus" role="status"></span>
+                </div>
+            </form>
+        </section>
+
+        <section class="vocab-stats" aria-label="Vocabulary summary">
+            <article><strong data-stat="total">—</strong><span>Total words</span></article>
+            <article><strong data-stat="new">—</strong><span>New</span></article>
+            <article><strong data-stat="learning">—</strong><span>Learning</span></article>
+            <article><strong data-stat="mastered">—</strong><span>Mastered</span></article>
+            <article class="vocab-stat--due"><strong data-stat="due">—</strong><span>Due for review</span></article>
+        </section>
+
+        <section class="vocab-toolbar">
+            <label class="vocab-search">
+                <span aria-hidden="true">⌕</span>
+                <input id="vocabSearch" type="search" placeholder="Search by word, meaning or translation" autocomplete="off">
+            </label>
+            <div class="vocab-filters" role="group" aria-label="Vocabulary filters">
+                <button class="is-active" data-filter="all" type="button">All words</button>
+                <button data-filter="reading" type="button">Reading</button>
+                <button data-filter="new" type="button">New</button>
+                <button data-filter="learning" type="button">Learning</button>
+                <button data-filter="mastered" type="button">Mastered</button>
+                <button data-filter="due" type="button">Due</button>
+            </div>
+            <select id="vocabSort" aria-label="Sort vocabulary">
+                <option value="newest">Recently added</option>
+                <option value="oldest">Oldest first</option>
+            </select>
+        </section>
+
+        <div class="vocab-status" id="vocabStatus" role="status">Loading vocabulary…</div>
+        <section class="vocab-grid" id="vocabGrid" aria-live="polite"></section>
+    </main>
+
+    <div class="vocab-modal" id="wordModal" hidden>
+        <div class="vocab-modal__backdrop" data-close-modal></div>
+        <section class="vocab-dialog" role="dialog" aria-modal="true" aria-labelledby="wordModalTitle">
+            <button class="vocab-dialog__close" type="button" data-close-modal aria-label="Close">×</button>
+            <div id="wordModalContent"></div>
+        </section>
+    </div>
+
+    <div class="vocab-modal" id="reviewModal" hidden>
+        <div class="vocab-modal__backdrop" data-close-review></div>
+        <section class="vocab-dialog vocab-dialog--review" role="dialog" aria-modal="true" aria-labelledby="reviewWord">
+            <button class="vocab-dialog__close" type="button" data-close-review aria-label="Close">×</button>
+            <div id="reviewContent"></div>
+        </section>
+    </div>
+
+    <div class="vocab-modal" id="practiceModal" hidden>
+        <div class="vocab-modal__backdrop" data-close-practice></div>
+        <section class="vocab-dialog vocab-dialog--review" role="dialog" aria-modal="true" aria-labelledby="practiceTitle">
+            <button class="vocab-dialog__close" type="button" data-close-practice aria-label="Close">×</button>
+            <div id="practiceContent"></div>
+        </section>
+    </div>
+
+    <script src="/premium-config.js"></script>
+    <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
+    <script src="/vocabulary.js"></script>
+</body>
+</html>

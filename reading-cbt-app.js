@@ -849,7 +849,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=20260716-management-notes-v15";
+    stylesheet.href = "listening-template.css?v=20260717-result-modal-v2";
     document.head.appendChild(stylesheet);
 }
 
@@ -887,15 +887,17 @@ function normalizeServerScore(data, resultSkill = skill) {
         unanswered: Number(data.unanswered ?? summarized.unanswered),
         total: Number(data.total ?? summarized.total),
         band: data.band ?? summarized.band,
+        attemptId: String(data.attemptId || ""),
+        mistakeCount: Number(data.mistakeCount) || 0,
         questionResults
     };
 }
 
-async function scoreTestOnServer(id, resultSkill, answers, fullTest = false) {
+async function scoreTestOnServer(id, resultSkill, answers, fullTest = false, attemptId = "") {
     const url = fullTest
         ? "/api/full-tests/score"
         : `/api/${resultSkill === "listening" ? "listening" : "reading"}-tests/${encodeURIComponent(id)}/score`;
-    const body = fullTest ? { testId: id, skill: resultSkill, answers } : { answers };
+    const body = fullTest ? { testId: id, skill: resultSkill, answers, attemptId } : { answers, attemptId };
     const response = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -1618,7 +1620,9 @@ function normalizeVocabularyLookupRecord(data, fallback) {
         word: word || fallback.word,
         normalized: normalized || fallback.normalized,
         selectedNormalized: fallback.selectedNormalized || fallback.normalized,
-        phonetic: String(data?.phonetic || "").trim(),
+        phonetic: String(data?.phonetic || data?.pronunciation || "").trim(),
+        synonyms: Array.isArray(data?.synonyms) ? data.synonyms : [],
+        antonyms: Array.isArray(data?.antonyms) ? data.antonyms : [],
         partOfSpeech: String(data?.part_of_speech || data?.partOfSpeech || "").trim(),
         definition: meaningInEnglish || "Definition is not available yet.",
         meaningInEnglish,
@@ -1925,7 +1929,15 @@ function ResultModal({ result, onClose, onReview, vocabularyCount = 0, autoSubmi
                 : null,
             h("div", { className: "cbt-result-actions" },
                 h("button", { className: "cbt-button cbt-button--primary", type: "button", onClick: onReview }, "Review answers"),
-                h("button", { className: "cbt-button cbt-button--secondary", type: "button", onClick: onClose }, "Close")
+                result.correct < result.total
+                    ? h("a", {
+                        className: "cbt-button cbt-button--primary",
+                        href: `/review-mistakes${result.attemptId ? `?attemptId=${encodeURIComponent(result.attemptId)}` : ""}`
+                    }, "Review Mistakes Now")
+                    : null,
+                result.correct < result.total
+                    ? h("button", { className: "cbt-button cbt-button--secondary", type: "button", onClick: onClose }, "Review Later")
+                    : h("button", { className: "cbt-button cbt-button--secondary", type: "button", onClick: onClose }, "Close")
             )
         )
     );
@@ -2079,7 +2091,16 @@ function VocabularyPopover({ item, onClose }) {
                     )
                 )
                 : (!item.isLoading ? h("p", { className: "cbt-vocab-fallback" }, item.errorMessage || "Definition is not available yet.") : null)
-        )
+        ),
+        !item.isLoading
+            ? h("div", { className: "cbt-vocab-save-area" },
+                h("p", { className: "cbt-vocab-save-message" },
+                    item.isSaving
+                        ? "Saving to Vocabulary..."
+                        : (item.saveMessage || (item.isSaved ? "Saved to Vocabulary." : "Preparing to save..."))
+                )
+            )
+            : null
     );
 }
 
@@ -2468,7 +2489,7 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = false;
+    const enableVocabulary = skill === "reading";
     const canUseVocabulary = enableVocabulary && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
@@ -2691,15 +2712,17 @@ function ReadingApp() {
 
         if (existing) {
             const timestamp = new Date().toISOString();
-            addCheckedVocabulary({ ...existing, selectedNormalized: normalizedWord, lastClickedAt: timestamp }, { increment: true });
-            setActiveVocabulary({
+            const existingRecord = {
                 ...existing,
                 selectedNormalized: normalizedWord,
                 count: (existing.count || 1) + 1,
                 lastClickedAt: timestamp,
                 targetRect,
                 ...position
-            });
+            };
+            addCheckedVocabulary(existingRecord, { increment: true });
+            setActiveVocabulary(existingRecord);
+            saveVocabularyWord(existingRecord);
             return;
         }
 
@@ -2721,6 +2744,7 @@ function ReadingApp() {
                         ? { ...finalRecord, targetRect, ...position }
                         : current
                 ));
+                saveVocabularyWord(finalRecord);
             })
             .catch((error) => {
                 console.error("Reading vocabulary translation failed", {
@@ -2748,7 +2772,82 @@ function ReadingApp() {
                         ? { ...fallbackRecord, targetRect, ...position }
                         : current
                 ));
+                saveVocabularyWord(fallbackRecord);
             });
+    }
+
+    async function saveVocabularyWord(item) {
+        if (!item || item.isSaving || item.isSaved) return;
+        const matchesItem = (current) => (
+            current?.attemptId === item.attemptId &&
+            current?.passageId === item.passageId &&
+            current?.selectedNormalized === item.selectedNormalized
+        );
+        addCheckedVocabulary({ ...item, isSaving: true, saveMessage: "" });
+        setActiveVocabulary((current) => matchesItem(current) ? { ...current, isSaving: true, saveMessage: "" } : current);
+        try {
+            const pendingVocabularyPayload = {
+                word: item.word,
+                normalizedWord: item.normalized,
+                definition: item.definition,
+                uzbekTranslation: item.uzbekTranslation,
+                partOfSpeech: item.partOfSpeech,
+                pronunciation: item.phonetic,
+                simpleExample: item.example,
+                synonyms: item.synonyms || [],
+                antonyms: item.antonyms || [],
+                sourceType: "reading",
+                testId: test?.id || testId,
+                testTitle: test?.title || "IELTS Reading",
+                passageNumber: item.passageNumber || passage?.number || activeIndex + 1,
+                questionNumber: activeQuestionNumber || null,
+                contextSentence: item.sentence
+            };
+            const response = await fetch("/api/vocabulary", {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(pendingVocabularyPayload)
+            });
+            const data = await response.json().catch(() => ({}));
+            if (response.status === 403 && data.code === "PREMIUM_REQUIRED") {
+                const localRecord = {
+                    ...item,
+                    isSaving: false,
+                    isSaved: false,
+                    saveMessage: "Added to this Reading review."
+                };
+                addCheckedVocabulary(localRecord);
+                setActiveVocabulary((current) => matchesItem(current) ? {
+                    ...current,
+                    isSaving: false,
+                    isSaved: false,
+                    saveMessage: localRecord.saveMessage
+                } : current);
+                return;
+            }
+            if (!response.ok) throw new Error(data.message || data.error || "Could not save this word");
+            const savedRecord = {
+                ...item,
+                isSaving: false,
+                isSaved: true,
+                saveMessage: data.message || "Saved to Vocabulary."
+            };
+            addCheckedVocabulary(savedRecord);
+            setActiveVocabulary((current) => matchesItem(current) ? {
+                ...current,
+                isSaving: false,
+                isSaved: true,
+                saveMessage: savedRecord.saveMessage
+            } : current);
+        } catch (error) {
+            addCheckedVocabulary({ ...item, isSaving: false, isSaved: false, saveMessage: error.message });
+            setActiveVocabulary((current) => matchesItem(current) ? {
+                ...current,
+                isSaving: false,
+                saveMessage: error.message
+            } : current);
+        }
     }
 
     function handleTimeExpired() {
@@ -2784,7 +2883,7 @@ function ReadingApp() {
 
         let nextResult;
         try {
-            nextResult = await scoreTestOnServer(test?.id || testId, skill, answers, mode === "full");
+            nextResult = await scoreTestOnServer(test?.id || testId, skill, answers, mode === "full", attemptIdRef.current);
         } catch (error) {
             isSubmittedRef.current = false;
             setError(error.message);
@@ -2802,7 +2901,7 @@ function ReadingApp() {
             band: nextResult.band,
             testId: test?.id || testId,
             part: isFullTest ? "full" : passage?.number,
-            attemptId: skill === "reading" ? attemptIdRef.current : undefined,
+            attemptId: nextResult.attemptId || attemptIdRef.current,
             vocabulary: skill === "reading" ? checkedVocabulary : undefined
         });
 
@@ -2916,7 +3015,10 @@ function ReadingApp() {
                 })
                 : null
         ),
-        h(VocabularyPopover, { item: activeVocabulary, onClose: () => setActiveVocabulary(null) }),
+        h(VocabularyPopover, {
+            item: activeVocabulary,
+            onClose: () => setActiveVocabulary(null)
+        }),
         showResultModal
             ? h(ResultModal, {
                 result,

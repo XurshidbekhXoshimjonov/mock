@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vocabulary requires IELTSX Premium">
+    <title>Vocabulary Requires Premium — IELTSX</title>
+    <script>if (localStorage.getItem("ielts-theme") === "dark") document.documentElement.classList.add("dark-theme");</script>
+    <link rel="stylesheet" href="/style.css?v=20260702-plus-jakarta-sans">
+    <link rel="stylesheet" href="/site-modern.css?v=20260713-premium">
+    <link rel="stylesheet" href="/premium-locked.css?v=20260717-premium-required-v4">
+</head>
+<body class="premium-locked-page vocabulary-lock-page">
+    <header id="globalNavbar" data-global-navbar="true"></header>
+    <main id="premiumRequiredRoot" class="premium-locked-shell" aria-live="polite" aria-busy="true">
+        <p class="premium-required-loading" role="status">Checking Premium access…</p>
+    </main>
+    <noscript>
+        <p class="premium-required-noscript">Vocabulary requires Premium. Enable JavaScript or return to your Profile.</p>
+    </noscript>
+    <script src="/premium-config.js?v=20260717-vocabulary-lock-v1"></script>
+    <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
+    <script src="/premium-required-page.js?v=20260717-vocabulary-lock-v1"></script>
+    <script>
+        PremiumRequiredPage.render(document.getElementById("premiumRequiredRoot"), {
+            badge: "PREMIUM REQUIRED",
+            title: "Vocabulary",
+            subtitle: "requires Premium",
+            description: "Save unfamiliar words from Reading and Listening, learn their meanings in context, and review them with intelligent flashcards.",
+            secondaryDescription: "Upgrade to Premium to build and master your personal IELTS vocabulary.",
+            icon: "BookOpenText",
+            features: [
+                { icon: "BookmarkPlus", title: "Save new words" },
+                { icon: "Languages", title: "Uzbek translations" },
+                { icon: "Brain", image: "/premium-icons/writing-ai-evaluation.png?v=20260713-icons-all-v1", title: "Smart reviews" },
+                { icon: "ChartNoAxesCombined", title: "Track progress" }
+            ],
+            footerText: "Premium access • AI-powered vocabulary learning",
+            upgradeLabel: "Upgrade to Premium",
+            upgradePath: "/premium",
+            backLabel: "Back to Home",
+            backPath: "/"
+        });
+        try {
+            sessionStorage.setItem("premiumReturnPath", "/vocabulary");
+        } catch {}
+    </script>
+</body>
+</html>

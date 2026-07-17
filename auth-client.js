@@ -667,7 +667,9 @@
         .ielts-account__identity { display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:2px;text-align:left; }
         .ielts-account__premium-badge { display:inline-flex;width:max-content;align-items:center;gap:3px;padding:0;border:0;border-radius:0;background:transparent;color:#b77900;font-size:9.5px;font-weight:600;line-height:1;letter-spacing:0; }
         .ielts-account__premium-icon { width:11px;height:11px;display:block;object-fit:contain;flex:0 0 11px; }
-        .ielts-account__new { margin-left:auto;padding:2px 5px;border-radius:999px;background:#eef4ff;color:#2563eb;font-size:8px;font-weight:700;letter-spacing:.04em; }
+        .ielts-account__icon--mistakes img,
+        .ielts-account__icon--vocabulary img,
+        .ielts-account__icon--study-plan img { display:block;width:22px;height:22px;object-fit:contain; }
 
         .navbar-user-name,
         .profile-name,
@@ -755,9 +757,9 @@
             top: calc(100% + 8px);
             right: 0;
             min-width: 0;
-            width: 216px;
-            max-width: min(216px, calc(100vw - 24px));
-            padding: 7px;
+            width: 232px;
+            max-width: min(232px, calc(100vw - 24px));
+            padding: 8px;
             border: 1px solid #e3e9f3;
             border-radius: 14px;
             background: #ffffff;
@@ -788,18 +790,18 @@
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 9px;
-            min-height: 40px;
+            gap: 10px;
+            min-height: 44px;
             border: 0;
             border-radius: 9px;
             background: transparent;
             color: #13213d;
             cursor: pointer;
-            padding: 6px 8px;
+            padding: 7px 9px;
             text-align: left;
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             transition: background 160ms ease, color 160ms ease, transform 160ms ease;
         }
 
@@ -827,14 +829,14 @@
         }
 
         .ielts-account__icon {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            flex: 0 0 28px;
+            flex: 0 0 30px;
             border: 0;
-            border-radius: 8px;
+            border-radius: 9px;
             font-size: 14px;
             color: currentColor;
             text-align: center;
@@ -842,10 +844,10 @@
         }
 
         .ielts-account__icon svg {
-            width: 15.5px;
-            height: 15.5px;
+            width: 16.5px;
+            height: 16.5px;
             display: block;
-            flex: 0 0 15.5px;
+            flex: 0 0 16.5px;
         }
 
         .ielts-account__link:hover .ielts-account__icon,
@@ -870,6 +872,18 @@
         }
 
         .ielts-account__icon--subscription { background:#fff7e5;color:#c58a00; }
+
+        .ielts-account__icon--mistakes {
+            background: #fff5e8;
+        }
+
+        .ielts-account__icon--vocabulary {
+            background: #eafaf7;
+        }
+
+        .ielts-account__icon--study-plan {
+            background: #eef0ff;
+        }
 
         .ielts-account__icon--logout {
             background: #fff1f2;
@@ -1067,7 +1081,7 @@
                 display: grid;
                 width: 100%;
                 min-width: 0;
-                max-width: min(216px, calc(100vw - 24px));
+                max-width: min(232px, calc(100vw - 24px));
                 margin-top: 8px;
                 border-radius: 14px;
                 box-shadow: none;
@@ -1263,7 +1277,7 @@
             .ielts-navbar__mobile-menu .ielts-account__link,
             .ielts-navbar__mobile-menu .ielts-account__logout {
                 width: 100%;
-                min-height: 40px;
+                min-height: 44px;
             }
         }
 
@@ -1426,6 +1440,9 @@
         admin: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1.5"></rect><rect width="7" height="7" x="14" y="3" rx="1.5"></rect><rect width="7" height="7" x="14" y="14" rx="1.5"></rect><rect width="7" height="7" x="3" y="14" rx="1.5"></rect></svg>`,
         profile: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>`,
         results: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>`,
+        mistakes: `<img src="/premium-icons/review-mistakes.png?v=20260717" alt="" aria-hidden="true">`,
+        vocabulary: `<img src="/premium-icons/vocabulary.png?v=20260717" alt="" aria-hidden="true">`,
+        studyPlan: `<img src="/premium-icons/study-plan.png?v=20260717" alt="" aria-hidden="true">`,
         subscription: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><path d="M2 10h20"></path></svg>`,
         logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path></svg>`,
         chevron: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7.5 5 5 5-5"></path></svg>`
@@ -1450,6 +1467,9 @@
         const hash = String(window.location.hash || "").toLowerCase();
         const profileActive = (path.includes("profile.html") || path.includes("/dashboard")) && hash !== "#results";
         const resultsActive = (path.includes("profile.html") || path.includes("/dashboard")) && hash === "#results";
+        const mistakesActive = path.includes("/review-mistakes");
+        const vocabularyActive = path.includes("/vocabulary");
+        const studyPlanActive = path.includes("/study-plan");
         const subscriptionActive = path.includes("/premium") || path.includes("/profile/subscription");
         const isPremium = hasPremiumAccess(user);
         const adminLink = user.role === "admin"
@@ -1466,8 +1486,11 @@
                 <div class="ielts-account__dropdown profile-dropdown" id="ieltsAccountDropdown">
                     ${adminLink}
                     <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/dashboard"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
-                    <a class="ielts-account__link ${subscriptionActive ? "is-active" : ""}" href="/premium"><span class="ielts-account__icon ielts-account__icon--subscription">${MENU_ICONS.subscription}</span>Subscription<span class="ielts-account__new">NEW</span></a>
+                    <a class="ielts-account__link ${subscriptionActive ? "is-active" : ""}" href="/premium"><span class="ielts-account__icon ielts-account__icon--subscription">${MENU_ICONS.subscription}</span>Subscription</a>
                     <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/dashboard#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Dashboard / My Tests</a>
+                    <a class="ielts-account__link ${mistakesActive ? "is-active" : ""}" href="/review-mistakes"><span class="ielts-account__icon ielts-account__icon--mistakes">${MENU_ICONS.mistakes}</span>Review Mistakes</a>
+                    <a class="ielts-account__link ${vocabularyActive ? "is-active" : ""}" href="/vocabulary"><span class="ielts-account__icon ielts-account__icon--vocabulary">${MENU_ICONS.vocabulary}</span>Vocabulary</a>
+                    <a class="ielts-account__link ${studyPlanActive ? "is-active" : ""}" href="/study-plan"><span class="ielts-account__icon ielts-account__icon--study-plan">${MENU_ICONS.studyPlan}</span>Study Plan</a>
                     <div class="ielts-account__divider" role="separator" aria-hidden="true"></div>
                     <button class="ielts-account__logout logout" type="button" id="logoutBtn"><span class="ielts-account__icon ielts-account__icon--logout">${MENU_ICONS.logout}</span>Logout</button>
                 </div>

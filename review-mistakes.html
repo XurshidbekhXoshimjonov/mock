@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Review Mistakes — IELTSX</title>
+    <link rel="stylesheet" href="/fonts/plus-jakarta-sans.css">
+    <link rel="stylesheet" href="/review-mistakes.css">
+</head>
+<body>
+    <header id="globalNavbar" data-global-navbar></header>
+    <main class="mistakes-page" id="reviewMistakesApp">
+        <section class="mistakes-hero">
+            <div>
+                <span class="mistakes-eyebrow">IELTSX PRACTICE</span>
+                <h1>Review Mistakes</h1>
+                <p>Review your incorrect answers, understand your weaknesses and retry them.</p>
+            </div>
+        </section>
+
+        <section class="mistakes-summary" aria-label="Mistake summary">
+            <article><span class="summary-icon summary-icon--new">!</span><div><strong data-summary="toReview">—</strong><span>To Review</span></div></article>
+            <article><span class="summary-icon summary-icon--learning">↗</span><div><strong data-summary="learning">—</strong><span>Learning</span></div></article>
+            <article><span class="summary-icon summary-icon--mastered">✓</span><div><strong data-summary="mastered">—</strong><span>Mastered</span></div></article>
+        </section>
+
+        <section class="mistakes-toolbar" aria-label="Mistake filters">
+            <div class="filter-chips" role="group" aria-label="Filter mistakes">
+                <button class="is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+                <button type="button" data-filter="listening" aria-pressed="false">Listening</button>
+                <button type="button" data-filter="reading" aria-pressed="false">Reading</button>
+                <button type="button" data-filter="new" aria-pressed="false">New</button>
+                <button type="button" data-filter="learning" aria-pressed="false">Learning</button>
+                <button type="button" data-filter="mastered" aria-pressed="false">Mastered</button>
+            </div>
+            <label class="sort-control">
+                <span>Sort by</span>
+                <select id="mistakeSort">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="repeated">Most repeated</option>
+                </select>
+            </label>
+        </section>
+
+        <div class="mistakes-status" id="mistakesStatus" role="status">Loading your mistakes…</div>
+        <section class="mistakes-list" id="mistakesList" aria-live="polite"></section>
+    </main>
+
+    <div class="confirm-modal" id="deleteMistakeModal" hidden>
+        <div class="confirm-backdrop" data-close-delete></div>
+        <section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteMistakeTitle">
+            <span class="confirm-warning">!</span>
+            <h2 id="deleteMistakeTitle">Delete this mistake?</h2>
+            <p>It will be removed from your review list. This action cannot be undone.</p>
+            <div>
+                <button class="button button--secondary" type="button" data-close-delete>Cancel</button>
+                <button class="button button--danger" type="button" id="confirmDeleteMistake">Delete</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="/premium-config.js"></script>
+    <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
+    <script src="/review-mistakes.js"></script>
+</body>
+</html>
