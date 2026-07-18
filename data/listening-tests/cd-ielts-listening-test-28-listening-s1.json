@@ -1,0 +1,241 @@
+{
+  "id": "cd-ielts-listening-test-28-listening-s1",
+  "slug": "cd-ielts-listening-test-28-listening-s1",
+  "title": "CD IELTS Listening Test 28 — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "... Street, near the {{2}}",
+      "options": [],
+      "answer": "ISLIP"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "{{1}} Street, near the ...",
+      "options": [],
+      "answer": "SCHOOL"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Enter number on the ... in the car",
+      "options": [],
+      "answer": "COMPUTER"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Small charge for using the ... to book",
+      "options": [],
+      "answer": "PHONE"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Maximum cost: £ ... an hour",
+      "options": [],
+      "answer": "5.96"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Cost of ... is included",
+      "options": [],
+      "answer": "FUEL"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "There is a ... for family members",
+      "options": [],
+      "answer": "DISCOUNT"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "£10 a month supplement to cover the higher price of ... for younger drivers",
+      "options": [],
+      "answer": "INSURANCE"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Members can have a 'frequent users card' for an extra £ ... a month",
+      "options": [],
+      "answer": "12.50"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Scheme is good for the ...",
+      "options": [],
+      "answer": "ENVIRONMENT"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cd-ielts-listening-test-28",
+  "createdAt": "2026-07-18T01:41:08.518Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+      "instruction": "",
+      "answerText": "1: ISLIP\n2: SCHOOL\n3: COMPUTER\n4: PHONE\n5: 5.96\n6: FUEL\n7: DISCOUNT\n8: INSURANCE\n9: 12.50\n10: ENVIRONMENT",
+      "blocks": [
+        {
+          "id": "cd-ielts-listening-test-28-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Car Club Scheme",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "• How the scheme works: Every member has access to a fleet of cars",
+            "<b>Nearest location:</b>",
+            "• {{1}} Street, near the {{2}}",
+            "<b>Using the car:</b>",
+            "• Use membership card to unlock the car",
+            "• Enter number on the {{3}} in the car",
+            "<b>Booking:</b>",
+            "• Small charge for using the {{4}} to book",
+            "<b>Cost:</b>",
+            "• Maximum cost: £ {{5}} an hour",
+            "• Cost of {{6}} is included",
+            "• There is a {{7}} for family members",
+            "• £10 a month supplement to cover the higher price of {{8}} for younger drivers",
+            "• Members can have a 'frequent users card' for an extra £ {{9}} a month",
+            "<b>Other information:</b>",
+            "• Pets are not allowed in the cars",
+            "• Scheme is good for the {{10}}"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "... Street, near the {{2}}",
+              "text": "... Street, near the {{2}}",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ISLIP"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "{{1}} Street, near the ...",
+              "text": "{{1}} Street, near the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SCHOOL"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Enter number on the ... in the car",
+              "text": "Enter number on the ... in the car",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "COMPUTER"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Small charge for using the ... to book",
+              "text": "Small charge for using the ... to book",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PHONE"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Maximum cost: £ ... an hour",
+              "text": "Maximum cost: £ ... an hour",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "5.96"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Cost of ... is included",
+              "text": "Cost of ... is included",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "FUEL"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "There is a ... for family members",
+              "text": "There is a ... for family members",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DISCOUNT"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "£10 a month supplement to cover the higher price of ... for younger drivers",
+              "text": "£10 a month supplement to cover the higher price of ... for younger drivers",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "INSURANCE"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Members can have a 'frequent users card' for an extra £ ... a month",
+              "text": "Members can have a 'frequent users card' for an extra £ ... a month",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "12.50"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Scheme is good for the ...",
+              "text": "Scheme is good for the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ENVIRONMENT"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

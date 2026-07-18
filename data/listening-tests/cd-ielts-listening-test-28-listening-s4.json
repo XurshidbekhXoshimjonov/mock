@@ -1,0 +1,238 @@
+{
+  "id": "cd-ielts-listening-test-28-listening-s4",
+  "slug": "cd-ielts-listening-test-28-listening-s4",
+  "title": "CD IELTS Listening Test 28 — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "'Ordinary people' involved in data collection include those without a ... and school children.",
+      "options": [],
+      "answer": "degree"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "Volunteers tend to share a strong sense of ... about the world.",
+      "options": [],
+      "answer": "curiosity"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Scientists do not always get enough ..., so volunteers are extremely important.",
+      "options": [],
+      "answer": "funding"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Wheel Power compared types of ... used in cars.",
+      "options": [],
+      "answer": "battery"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "The Bankside project checked the health of a ... by taking water samples.",
+      "options": [],
+      "answer": "lake"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "The Thompson Project investigated the presence of so much ... in earth where crops grew.",
+      "options": [],
+      "answer": "bacteria"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "One group measured the ... of various insects.",
+      "options": [],
+      "answer": "wings"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Insects were trapped using cheap plates that were ... in colour.",
+      "options": [],
+      "answer": "yellow"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "A hiker found a rare type of ... in the area.",
+      "options": [],
+      "answer": "mushroom"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Volunteers were required to count ... in a bird research project.",
+      "options": [],
+      "answer": "chicks"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cd-ielts-listening-test-28",
+  "createdAt": "2026-07-18T01:41:08.518Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+      "instruction": "",
+      "answerText": "31: degree\n32: curiosity\n33: funding\n34: battery\n35: lake\n36: bacteria\n37: wings\n38: yellow\n39: mushroom\n40: chicks",
+      "blocks": [
+        {
+          "id": "cd-ielts-listening-test-28-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "How Ordinary People Assist in Scientific Research",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [
+            "Collecting data",
+            "• 'Ordinary people' involved in data collection include those without a {{31}} and school children.",
+            "• Volunteers tend to share a strong sense of {{32}} about the world.",
+            "• Scientists do not always get enough {{33}}, so volunteers are extremely important.",
+            "Previous projects",
+            "• Wheel Power compared types of {{34}} used in cars.",
+            "• The Bankside project checked the health of a {{35}} by taking water samples.",
+            "• The Thompson Project investigated the presence of so much {{36}} in earth where crops grew.",
+            "Insect study",
+            "• One group measured the {{37}} of various insects.",
+            "• Insects were trapped using cheap plates that were {{38}} in colour.",
+            "Newton Park",
+            "• A hiker found a rare type of {{39}} in the area.",
+            "• Volunteers were required to count {{40}} in a bird research project."
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "'Ordinary people' involved in data collection include those without a ... and school children.",
+              "text": "'Ordinary people' involved in data collection include those without a ... and school children.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "degree"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "Volunteers tend to share a strong sense of ... about the world.",
+              "text": "Volunteers tend to share a strong sense of ... about the world.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "curiosity"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Scientists do not always get enough ..., so volunteers are extremely important.",
+              "text": "Scientists do not always get enough ..., so volunteers are extremely important.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "funding"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Wheel Power compared types of ... used in cars.",
+              "text": "Wheel Power compared types of ... used in cars.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "battery"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "The Bankside project checked the health of a ... by taking water samples.",
+              "text": "The Bankside project checked the health of a ... by taking water samples.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "lake"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "The Thompson Project investigated the presence of so much ... in earth where crops grew.",
+              "text": "The Thompson Project investigated the presence of so much ... in earth where crops grew.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "bacteria"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "One group measured the ... of various insects.",
+              "text": "One group measured the ... of various insects.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "wings"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Insects were trapped using cheap plates that were ... in colour.",
+              "text": "Insects were trapped using cheap plates that were ... in colour.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "yellow"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "A hiker found a rare type of ... in the area.",
+              "text": "A hiker found a rare type of ... in the area.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "mushroom"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Volunteers were required to count ... in a bird research project.",
+              "text": "Volunteers were required to count ... in a bird research project.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "chicks"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

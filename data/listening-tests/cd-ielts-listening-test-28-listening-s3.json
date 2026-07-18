@@ -1,0 +1,948 @@
+{
+  "id": "cd-ielts-listening-test-28-listening-s3",
+  "slug": "cd-ielts-listening-test-28-listening-s3",
+  "title": "CD IELTS Listening Test 28 — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–27",
+      "instruction": "Label the plan. Write the correct letter, A–J, next to questions 21–27.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "title": "Questions 28–30",
+      "instruction": "Who do Lindy and Baz agree should do each job? Choose A, B or C.",
+      "questionNumbers": [
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "map_labelling",
+      "question": "Coffee lounge",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 22,
+      "type": "map_labelling",
+      "question": "Technology room",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "I"
+    },
+    {
+      "number": 23,
+      "type": "map_labelling",
+      "question": "Music room",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "J"
+    },
+    {
+      "number": 24,
+      "type": "map_labelling",
+      "question": "TV room",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 25,
+      "type": "map_labelling",
+      "question": "Reading room",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 26,
+      "type": "map_labelling",
+      "question": "Meeting room",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "map_labelling",
+      "question": "Office",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        },
+        {
+          "letter": "J",
+          "text": ""
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Investigate other community centres",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lindy"
+        },
+        {
+          "letter": "B",
+          "text": "Baz"
+        },
+        {
+          "letter": "C",
+          "text": "both Lindy and Baz"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Find out about planning regulations",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lindy"
+        },
+        {
+          "letter": "B",
+          "text": "Baz"
+        },
+        {
+          "letter": "C",
+          "text": "both Lindy and Baz"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Research the history of the house",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lindy"
+        },
+        {
+          "letter": "B",
+          "text": "Baz"
+        },
+        {
+          "letter": "C",
+          "text": "both Lindy and Baz"
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [
+    {
+      "id": "cd-ielts-listening-test-28-map-1",
+      "src": "/uploads/ielts-import/cd-ielts-listening-test-28/potential-community-centre.png",
+      "alt": "Potential Community Centre plan",
+      "section": "listening",
+      "sectionNumber": 3
+    }
+  ],
+  "sourceFullTestId": "cd-ielts-listening-test-28",
+  "createdAt": "2026-07-18T01:41:08.518Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+      "instruction": "",
+      "answerText": "21: F\n22: I\n23: J\n24: D\n25: A\n26: E\n27: G\n28: B\n29: A\n30: C",
+      "blocks": [
+        {
+          "id": "cd-ielts-listening-test-28-p3-g1",
+          "type": "map_labelling",
+          "questionRange": "Questions 21–27",
+          "title": "Potential Community Centre",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Label the plan. Write the correct letter, A–J, next to questions 21–27.",
+          "options": [
+            {
+              "letter": "A",
+              "text": ""
+            },
+            {
+              "letter": "B",
+              "text": ""
+            },
+            {
+              "letter": "C",
+              "text": ""
+            },
+            {
+              "letter": "D",
+              "text": ""
+            },
+            {
+              "letter": "E",
+              "text": ""
+            },
+            {
+              "letter": "F",
+              "text": ""
+            },
+            {
+              "letter": "G",
+              "text": ""
+            },
+            {
+              "letter": "H",
+              "text": ""
+            },
+            {
+              "letter": "I",
+              "text": ""
+            },
+            {
+              "letter": "J",
+              "text": ""
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "/uploads/ielts-import/cd-ielts-listening-test-28/potential-community-centre.png",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Coffee lounge",
+              "text": "Coffee lounge",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "F"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Technology room",
+              "text": "Technology room",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "I"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Music room",
+              "text": "Music room",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "J"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "TV room",
+              "text": "TV room",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "D"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Reading room",
+              "text": "Reading room",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "A"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Meeting room",
+              "text": "Meeting room",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "E"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Office",
+              "text": "Office",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": ""
+                },
+                {
+                  "letter": "B",
+                  "text": ""
+                },
+                {
+                  "letter": "C",
+                  "text": ""
+                },
+                {
+                  "letter": "D",
+                  "text": ""
+                },
+                {
+                  "letter": "E",
+                  "text": ""
+                },
+                {
+                  "letter": "F",
+                  "text": ""
+                },
+                {
+                  "letter": "G",
+                  "text": ""
+                },
+                {
+                  "letter": "H",
+                  "text": ""
+                },
+                {
+                  "letter": "I",
+                  "text": ""
+                },
+                {
+                  "letter": "J",
+                  "text": ""
+                }
+              ],
+              "type": "map_labelling",
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "cd-ielts-listening-test-28-p3-g2",
+          "type": "multiple_choice",
+          "questionRange": "Questions 28–30",
+          "title": "",
+          "optionsTitle": "A Lindy · B Baz · C both Lindy and Baz",
+          "example": "",
+          "instruction": "Who do Lindy and Baz agree should do each job? Choose A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Investigate other community centres",
+              "text": "Investigate other community centres",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Lindy"
+                },
+                {
+                  "letter": "B",
+                  "text": "Baz"
+                },
+                {
+                  "letter": "C",
+                  "text": "both Lindy and Baz"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Find out about planning regulations",
+              "text": "Find out about planning regulations",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Lindy"
+                },
+                {
+                  "letter": "B",
+                  "text": "Baz"
+                },
+                {
+                  "letter": "C",
+                  "text": "both Lindy and Baz"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Research the history of the house",
+              "text": "Research the history of the house",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Lindy"
+                },
+                {
+                  "letter": "B",
+                  "text": "Baz"
+                },
+                {
+                  "letter": "C",
+                  "text": "both Lindy and Baz"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

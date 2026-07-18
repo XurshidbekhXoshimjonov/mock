@@ -2607,6 +2607,24 @@ body.fullscreen-fallback .lc-submit-status {
     list-style-position: inside;
 }
 
+.lc-note-completion--boxed-flow .lc-note-list {
+    list-style: none;
+}
+
+.lc-note-completion--boxed-flow .lc-note-list > .lc-note-list-item {
+    position: relative;
+    padding-left: 28px;
+}
+
+.lc-note-completion--boxed-flow .lc-note-list > .lc-note-list-item::before {
+    content: "•";
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    color: currentColor;
+    font-weight: 800;
+}
+
 .lc-note-section-title strong,
 .lc-note-line strong,
 .lc-note-list-item strong {

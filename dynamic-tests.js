@@ -292,9 +292,19 @@ async function loadDynamicTests() {
     grid.innerHTML = "";
     const storedFullTestCards = document.createElement("div");
     const skipManualIds = await loadFullTestCards(config, storedFullTestCards);
+
+    if (config.part === "full") {
+        while (storedFullTestCards.firstChild) {
+            grid.appendChild(storedFullTestCards.firstChild);
+        }
+    }
+
     await loadManualTests(config, grid, skipManualIds);
-    while (storedFullTestCards.firstChild) {
-        grid.appendChild(storedFullTestCards.firstChild);
+
+    if (config.part !== "full") {
+        while (storedFullTestCards.firstChild) {
+            grid.appendChild(storedFullTestCards.firstChild);
+        }
     }
 
     const response = await fetch(`/api/tests?type=${config.type}&part=${config.part}`);

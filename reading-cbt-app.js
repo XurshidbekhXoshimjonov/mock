@@ -2489,8 +2489,8 @@ function ReadingApp() {
     const passages = test?.passages || [];
     const passage = passages[activeIndex] || passages[0];
     const isFullTest = mode === "full" || test?.part === "full" || passages.length > 1;
-    const enableVocabulary = skill === "reading";
-    const canUseVocabulary = enableVocabulary && !result;
+    const isPracticeReading = skill === "reading" && !isFullTest && !isMockMode;
+    const canUseVocabulary = isPracticeReading && !result;
     const questions = useMemo(() => collectQuestions(passages), [passages]);
     const currentQuestions = useMemo(() =>
         collectQuestions(passage ? [passage] : []), [passage]
@@ -2657,7 +2657,7 @@ function ReadingApp() {
     }
 
     function handleVocabularyWord({ word, normalized, target }) {
-        if (!canUseVocabulary || !target) {
+        if (!canUseVocabulary || isFullTest || isMockMode || !target) {
             return;
         }
 

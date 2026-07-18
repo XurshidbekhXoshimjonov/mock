@@ -1,0 +1,1069 @@
+{
+  "id": "cd-ielts-listening-test-28",
+  "slug": "cd-ielts-listening-test-28",
+  "title": "CD IELTS Listening Test 28",
+  "subtitle": "Listening full test",
+  "sourceFile": "FULL LISTENING (2).html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "cd-listening-static-v1",
+  "manualListeningTestId": "cd-ielts-listening-test-28-listening-full",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+        "questionGroups": [
+          {
+            "id": "cd-ielts-listening-test-28-p1-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 1–10",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+            "title": "Car Club Scheme",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "• How the scheme works: Every member has access to a fleet of cars",
+              "<b>Nearest location:</b>",
+              "• {{1}} Street, near the {{2}}",
+              "<b>Using the car:</b>",
+              "• Use membership card to unlock the car",
+              "• Enter number on the {{3}} in the car",
+              "<b>Booking:</b>",
+              "• Small charge for using the {{4}} to book",
+              "<b>Cost:</b>",
+              "• Maximum cost: £ {{5}} an hour",
+              "• Cost of {{6}} is included",
+              "• There is a {{7}} for family members",
+              "• £10 a month supplement to cover the higher price of {{8}} for younger drivers",
+              "• Members can have a 'frequent users card' for an extra £ {{9}} a month",
+              "<b>Other information:</b>",
+              "• Pets are not allowed in the cars",
+              "• Scheme is good for the {{10}}"
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "... Street, near the {{2}}",
+                "options": [],
+                "answer": "ISLIP"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "{{1}} Street, near the ...",
+                "options": [],
+                "answer": "SCHOOL"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Enter number on the ... in the car",
+                "options": [],
+                "answer": "COMPUTER"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Small charge for using the ... to book",
+                "options": [],
+                "answer": "PHONE"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Maximum cost: £ ... an hour",
+                "options": [],
+                "answer": "5.96"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Cost of ... is included",
+                "options": [],
+                "answer": "FUEL"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "There is a ... for family members",
+                "options": [],
+                "answer": "DISCOUNT"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "£10 a month supplement to cover the higher price of ... for younger drivers",
+                "options": [],
+                "answer": "INSURANCE"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Members can have a 'frequent users card' for an extra £ ... a month",
+                "options": [],
+                "answer": "12.50"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "Scheme is good for the ...",
+                "options": [],
+                "answer": "ENVIRONMENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+        "questionGroups": [
+          {
+            "id": "cd-ielts-listening-test-28-p2-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11–16",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Market manager",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "How did Tracy first get involved in Mahana Market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "She set up the website"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "She had a stall there"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "She made things to be sold there"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "Tracy became the market manager when",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the previous managers had an argument"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the market was threatened with closure"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the existing manager asked her to take the job"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "What new focus did Tracy give the market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "locally produced crafts"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "fresh fruit and vegetables"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "a greater variety of products"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "What does Tracy say about entertainment at the market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Anyone is welcome to provide entertainment"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Entertainers need to be able to do a variety of things"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Some entertainers have gone on to become famous"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "How did Tracy get the idea of setting up a second market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "from members of the public"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "from traders at Mahana Market"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "from the local authorities"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "What happens at the Kids' Market?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Children make toys to be sold"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Children sell their own possessions"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Children raise money for the local school"
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          },
+          {
+            "id": "cd-ielts-listening-test-28-p2-g2",
+            "type": "multi_select",
+            "instructionTitle": "Questions 17 and 18",
+            "instructionText": "Choose TWO letters, A–E.",
+            "title": "Which TWO things does Tracy find most difficult about her job?",
+            "question": "Which TWO things does Tracy find most difficult about her job?",
+            "options": [
+              {
+                "letter": "A",
+                "text": "ensuring regulations are followed"
+              },
+              {
+                "letter": "B",
+                "text": "the amount of administration involved"
+              },
+              {
+                "letter": "C",
+                "text": "dealing with conflict between stallholders"
+              },
+              {
+                "letter": "D",
+                "text": "the early start and long hours"
+              },
+              {
+                "letter": "E",
+                "text": "introducing changes to existing systems"
+              }
+            ],
+            "maxSelections": 2,
+            "questions": [
+              {
+                "number": 17,
+                "type": "multi_select",
+                "question": "Which TWO things does Tracy find most difficult about her job?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "ensuring regulations are followed"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the amount of administration involved"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "dealing with conflict between stallholders"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the early start and long hours"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "introducing changes to existing systems"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 18,
+                "type": "multi_select",
+                "question": "Which TWO things does Tracy find most difficult about her job?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "ensuring regulations are followed"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the amount of administration involved"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "dealing with conflict between stallholders"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the early start and long hours"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "introducing changes to existing systems"
+                  }
+                ],
+                "answer": "D"
+              }
+            ]
+          },
+          {
+            "id": "cd-ielts-listening-test-28-p2-g3",
+            "type": "multi_select",
+            "instructionTitle": "Questions 19 and 20",
+            "instructionText": "Choose TWO letters, A–E.",
+            "title": "Which TWO pieces of advice does Tracy give people thinking of having a market stall?",
+            "question": "Which TWO pieces of advice does Tracy give people thinking of having a market stall?",
+            "options": [
+              {
+                "letter": "A",
+                "text": "Try to vary your stock regularly"
+              },
+              {
+                "letter": "B",
+                "text": "Don't be discouraged if you don't sell much at first"
+              },
+              {
+                "letter": "C",
+                "text": "Make sure you choose the right type of market"
+              },
+              {
+                "letter": "D",
+                "text": "Offer goods at low prices for the first few weeks"
+              },
+              {
+                "letter": "E",
+                "text": "Take care with the presentation of objects on the stall"
+              }
+            ],
+            "maxSelections": 2,
+            "questions": [
+              {
+                "number": 19,
+                "type": "multi_select",
+                "question": "Which TWO pieces of advice does Tracy give people thinking of having a market stall?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Try to vary your stock regularly"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Don't be discouraged if you don't sell much at first"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Make sure you choose the right type of market"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Offer goods at low prices for the first few weeks"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Take care with the presentation of objects on the stall"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 20,
+                "type": "multi_select",
+                "question": "Which TWO pieces of advice does Tracy give people thinking of having a market stall?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Try to vary your stock regularly"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Don't be discouraged if you don't sell much at first"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Make sure you choose the right type of market"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Offer goods at low prices for the first few weeks"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "Take care with the presentation of objects on the stall"
+                  }
+                ],
+                "answer": "E"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+        "questionGroups": [
+          {
+            "id": "cd-ielts-listening-test-28-p3-g1",
+            "type": "map_labelling",
+            "instructionTitle": "Questions 21–27",
+            "instructionText": "Label the plan. Write the correct letter, A–J, next to questions 21–27.",
+            "title": "Potential Community Centre",
+            "imageUrl": "/uploads/ielts-import/cd-ielts-listening-test-28/potential-community-centre.png",
+            "options": [
+              {
+                "letter": "A",
+                "text": ""
+              },
+              {
+                "letter": "B",
+                "text": ""
+              },
+              {
+                "letter": "C",
+                "text": ""
+              },
+              {
+                "letter": "D",
+                "text": ""
+              },
+              {
+                "letter": "E",
+                "text": ""
+              },
+              {
+                "letter": "F",
+                "text": ""
+              },
+              {
+                "letter": "G",
+                "text": ""
+              },
+              {
+                "letter": "H",
+                "text": ""
+              },
+              {
+                "letter": "I",
+                "text": ""
+              },
+              {
+                "letter": "J",
+                "text": ""
+              }
+            ],
+            "questions": [
+              {
+                "number": 21,
+                "type": "map_labelling",
+                "question": "Coffee lounge",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 22,
+                "type": "map_labelling",
+                "question": "Technology room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "I"
+              },
+              {
+                "number": 23,
+                "type": "map_labelling",
+                "question": "Music room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "J"
+              },
+              {
+                "number": 24,
+                "type": "map_labelling",
+                "question": "TV room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 25,
+                "type": "map_labelling",
+                "question": "Reading room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 26,
+                "type": "map_labelling",
+                "question": "Meeting room",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 27,
+                "type": "map_labelling",
+                "question": "Office",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  },
+                  {
+                    "letter": "J",
+                    "text": ""
+                  }
+                ],
+                "answer": "G"
+              }
+            ]
+          },
+          {
+            "id": "cd-ielts-listening-test-28-p3-g2",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 28–30",
+            "instructionText": "Who do Lindy and Baz agree should do each job? Choose A, B or C.",
+            "optionsTitle": "A Lindy · B Baz · C both Lindy and Baz",
+            "questions": [
+              {
+                "number": 28,
+                "type": "multiple_choice",
+                "question": "Investigate other community centres",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Lindy"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Baz"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "both Lindy and Baz"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 29,
+                "type": "multiple_choice",
+                "question": "Find out about planning regulations",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Lindy"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Baz"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "both Lindy and Baz"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 30,
+                "type": "multiple_choice",
+                "question": "Research the history of the house",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Lindy"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Baz"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "both Lindy and Baz"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "audio": "/uploads/audio/cd-ielts-listening-test-28.mp3",
+        "questionGroups": [
+          {
+            "id": "cd-ielts-listening-test-28-p4-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+            "title": "How Ordinary People Assist in Scientific Research",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "Collecting data",
+              "• 'Ordinary people' involved in data collection include those without a {{31}} and school children.",
+              "• Volunteers tend to share a strong sense of {{32}} about the world.",
+              "• Scientists do not always get enough {{33}}, so volunteers are extremely important.",
+              "Previous projects",
+              "• Wheel Power compared types of {{34}} used in cars.",
+              "• The Bankside project checked the health of a {{35}} by taking water samples.",
+              "• The Thompson Project investigated the presence of so much {{36}} in earth where crops grew.",
+              "Insect study",
+              "• One group measured the {{37}} of various insects.",
+              "• Insects were trapped using cheap plates that were {{38}} in colour.",
+              "Newton Park",
+              "• A hiker found a rare type of {{39}} in the area.",
+              "• Volunteers were required to count {{40}} in a bird research project."
+            ],
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "'Ordinary people' involved in data collection include those without a ... and school children.",
+                "options": [],
+                "answer": "degree"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "Volunteers tend to share a strong sense of ... about the world.",
+                "options": [],
+                "answer": "curiosity"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "Scientists do not always get enough ..., so volunteers are extremely important.",
+                "options": [],
+                "answer": "funding"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Wheel Power compared types of ... used in cars.",
+                "options": [],
+                "answer": "battery"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "The Bankside project checked the health of a ... by taking water samples.",
+                "options": [],
+                "answer": "lake"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "The Thompson Project investigated the presence of so much ... in earth where crops grew.",
+                "options": [],
+                "answer": "bacteria"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "One group measured the ... of various insects.",
+                "options": [],
+                "answer": "wings"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Insects were trapped using cheap plates that were ... in colour.",
+                "options": [],
+                "answer": "yellow"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "A hiker found a rare type of ... in the area.",
+                "options": [],
+                "answer": "mushroom"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Volunteers were required to count ... in a bird research project.",
+                "options": [],
+                "answer": "chicks"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "ISLIP",
+    "2": "SCHOOL",
+    "3": "COMPUTER",
+    "4": "PHONE",
+    "5": "5.96",
+    "6": "FUEL",
+    "7": "DISCOUNT",
+    "8": "INSURANCE",
+    "9": "12.50",
+    "10": "ENVIRONMENT",
+    "11": "C",
+    "12": "B",
+    "13": "A",
+    "14": "A",
+    "15": "A",
+    "16": "B",
+    "17": "A",
+    "18": "D",
+    "19": "B",
+    "20": "E",
+    "21": "F",
+    "22": "I",
+    "23": "J",
+    "24": "D",
+    "25": "A",
+    "26": "E",
+    "27": "G",
+    "28": "B",
+    "29": "A",
+    "30": "C",
+    "31": "degree",
+    "32": "curiosity",
+    "33": "funding",
+    "34": "battery",
+    "35": "lake",
+    "36": "bacteria",
+    "37": "wings",
+    "38": "yellow",
+    "39": "mushroom",
+    "40": "chicks"
+  },
+  "images": [
+    {
+      "id": "cd-ielts-listening-test-28-map-1",
+      "src": "/uploads/ielts-import/cd-ielts-listening-test-28/potential-community-centre.png",
+      "alt": "Potential Community Centre plan",
+      "section": "listening",
+      "sectionNumber": 3
+    }
+  ],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 1,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-07-18T01:41:08.518Z",
+  "publishedAt": "2026-07-18T01:41:08.518Z",
+  "openUrl": "/full-test-player?id=cd-ielts-listening-test-28&skill=listening"
+}

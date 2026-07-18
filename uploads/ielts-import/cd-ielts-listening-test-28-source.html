@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Full Listening — Jasurbek</title>
+<style>
+  :root{
+    --ielts-red:#d2122e;--border:#c9c9c9;--text:#1a1a1a;--muted:#6b6b6b;
+    --bg-panel:#f0f0f0;--focus-blue:#2b6fd6;--highlight:#ffe066;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;font-family:Arial, Helvetica, sans-serif;color:var(--text);background:#fff;}
+  #app{height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+
+  .brand-badge{position:relative;width:60px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;}
+  .brand-badge .ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(from 0deg,#d2122e,#ff8a3d,#ffd23f,#2b6fd6,#d2122e);animation:spin 4s linear infinite;}
+  .brand-badge .photo{position:relative;width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #fff;z-index:2;animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(210,18,46,0.35);}50%{box-shadow:0 0 0 6px rgba(210,18,46,0);}}
+
+  .gate-screen{height:100%;display:flex;align-items:center;justify-content:center;background:#f5f5f5;}
+  .gate-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:40px 44px;width:380px;box-shadow:0 2px 10px rgba(0,0,0,0.08);text-align:center;}
+  .gate-brand-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;}
+  .gate-logo{font-size:26px;font-weight:800;color:var(--ielts-red);letter-spacing:1px;}
+  .gate-sub{font-size:13px;color:var(--muted);margin-bottom:26px;}
+  .gate-card label{display:block;text-align:left;font-size:13px;font-weight:bold;margin-bottom:6px;}
+  .gate-card input[type=text],.gate-card input[type=password]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:3px;font-size:15px;margin-bottom:18px;}
+  .gate-card input:focus{outline:2px solid var(--focus-blue);border-color:var(--focus-blue);}
+  .gate-btn{width:100%;padding:11px;background:#111;color:#fff;border:none;border-radius:3px;font-size:15px;cursor:pointer;}
+  .gate-btn:hover{background:#000;}
+  .gate-error{color:var(--ielts-red);font-size:13px;margin:-10px 0 14px;min-height:16px;text-align:left;}
+  .gate-footer{margin-top:16px;font-size:11px;color:#999;}
+  .gate-footer a{color:var(--focus-blue);text-decoration:none;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid var(--border);flex-shrink:0;background:#fff;min-height:72px;}
+  .topbar-left{display:flex;align-items:center;gap:14px;}
+  .ielts-logo{font-size:20px;font-weight:800;color:var(--ielts-red);letter-spacing:0.5px;}
+  .taker-id-block{font-size:12px;line-height:1.3;}
+  .status-line{color:#333;font-size:12px;font-weight:bold;}
+  .status-line.low{color:var(--ielts-red);}
+  .topbar-right{display:flex;align-items:center;gap:16px;font-size:18px;color:#222;}
+  .topbar-right .icon-btn{cursor:pointer;background:none;border:none;font-size:18px;color:#222;padding:4px;display:flex;align-items:center;}
+
+  .main-wrap{flex:1;overflow:hidden;position:relative;display:flex;}
+  .content{flex:1;overflow-y:auto;padding:22px 26px 40px;}
+  .part-banner{background:var(--bg-panel);border:1px solid #ddd;border-radius:2px;padding:12px 16px;margin-bottom:18px;}
+  .part-banner b{font-size:14px;}
+  .part-banner div.instr{font-size:13px;margin-top:2px;}
+  .card-title{font-weight:bold;font-size:16px;text-align:center;margin:6px 0 16px;text-decoration:underline;}
+  .notes-block{font-size:14px;line-height:2.3;}
+  .notes-row{margin:2px 0;}
+  .section-title{font-weight:bold;margin:16px 0 6px;font-size:14px;}
+  .indent{padding-left:22px;}
+
+  input.blank{border:1px solid var(--focus-blue);border-radius:2px;padding:5px 8px;font-size:14px;width:150px;text-align:center;font-family:inherit;}
+  input.blank:focus{outline:none;border-color:var(--focus-blue);box-shadow:0 0 0 1px var(--focus-blue);}
+  select.blank-select{border:1px solid var(--focus-blue);border-radius:2px;padding:5px 6px;font-size:13px;font-family:inherit;background:#fafcff;width:150px;}
+
+  .mc-question{margin-bottom:20px;}
+  .mc-question .qnum{display:inline-block;border:1px solid #333;padding:1px 7px;font-size:12px;font-weight:bold;margin-right:6px;}
+  .mc-opts label{display:block;font-size:13px;margin:6px 0 0 22px;cursor:pointer;}
+  .mc-opts input{margin-right:8px;}
+
+  .help-select-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:13px;}
+  .help-select-row .qnum{border:1px solid #333;padding:1px 7px;font-size:12px;font-weight:bold;}
+  .map-ref-wrap{margin-top:14px;text-align:left;}
+  .map-ref-wrap img{max-width:520px;width:100%;border:1px solid #999;border-radius:2px;}
+  .map-caption{font-size:11px;color:#777;margin-top:4px;}
+
+  .audio-gate-overlay{position:absolute;inset:0;background:rgba(120,120,120,0.55);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:30;color:#fff;text-align:center;}
+  .audio-gate-overlay.show{display:flex;}
+  .headphone-icon{font-size:70px;margin-bottom:10px;}
+  .audio-gate-overlay p{max-width:600px;font-size:14px;margin:6px 0 4px;}
+  .play-btn{margin-top:16px;background:#111;color:#fff;border:none;padding:10px 24px;font-size:15px;border-radius:3px;cursor:pointer;}
+  .play-btn:hover{background:#000;}
+  .play-btn:disabled{background:#555;cursor:wait;}
+
+  .nav-arrows{position:absolute;right:20px;bottom:70px;display:flex;gap:4px;}
+  .nav-arrows button{width:44px;height:36px;background:#111;color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+  .nav-arrows button:disabled{background:#ccc;cursor:not-allowed;color:#888;}
+  .nav-arrows button:hover:not(:disabled){background:#000;}
+
+  .selection-menu{position:absolute;background:#fff;border:1px solid #999;box-shadow:0 2px 8px rgba(0,0,0,0.2);display:flex;z-index:50;border-radius:2px;}
+  .selection-menu button{border:none;background:none;padding:8px 12px;font-size:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .selection-menu button:hover{background:#f0f0f0;}
+  .selection-menu button + button{border-left:1px solid #ddd;}
+  mark.hl{background:var(--highlight);cursor:pointer;}
+
+  .notes-panel{width:250px;border-left:1px solid var(--border);background:#f0f0f0;padding:16px;flex-shrink:0;display:none;overflow-y:auto;}
+  .notes-panel.open{display:block;}
+  .notes-panel-title{font-weight:bold;font-size:13px;margin-bottom:14px;color:var(--ielts-red);}
+  .notes-panel-empty{color:#555;font-size:13px;text-align:center;margin-top:40px;line-height:1.6;}
+  .note-entry{background:#fff;border:1px solid #ccc;border-radius:3px;padding:8px 10px;margin-bottom:10px;font-size:12px;}
+  .note-entry .quoted{font-style:italic;color:#333;}
+
+  .bottombar{border-top:1px solid var(--border);display:flex;align-items:center;padding:0 20px;height:52px;flex-shrink:0;background:#fff;font-size:13px;justify-content:space-between;overflow-x:auto;}
+  .part-nav-group{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+  .part-nav-group .part-label{font-weight:bold;color:#333;white-space:nowrap;cursor:pointer;padding:4px 10px;border-radius:3px;}
+  .part-nav-group .part-label.active-part{color:#fff;background:var(--ielts-red);}
+  .qnum-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;border:1px solid transparent;color:#333;cursor:pointer;background:none;border-radius:2px;}
+  .qnum-btn.answered{color:var(--focus-blue);}
+  .part-count{color:#999;font-size:12px;white-space:nowrap;}
+  .submit-check{width:36px;height:36px;background:#f0f0f0;border:none;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:#333;flex-shrink:0;}
+  .submit-check:hover{background:#e2e2e2;}
+
+  .menu-overlay{position:absolute;inset:0;background:#fff;z-index:40;display:none;flex-direction:column;}
+  .menu-overlay.open{display:flex;}
+  .menu-header{display:grid;grid-template-columns:96px 1fr 40px;align-items:center;padding:14px 16px;border-bottom:1px solid #eee;font-size:15px;font-weight:600;background:#fff;color:#111;}
+  .menu-header .back-btn{grid-column:1;justify-self:start;background:none;border:none;cursor:pointer;font-size:14px;color:#111;display:none;align-items:center;gap:2px;padding:4px 0;white-space:nowrap;}
+  .menu-header .back-btn.show{display:flex;}
+  .menu-header .title-text{grid-column:2;text-align:center;font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .menu-header .close-btn{grid-column:3;justify-self:end;background:none;border:none;cursor:pointer;font-size:18px;color:#111;}
+  .menu-body{padding:20px;max-width:440px;margin:0 auto;width:100%;background:#fff;}
+  .menu-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid #ddd;cursor:pointer;font-size:14px;background:#fff;color:#111;}
+  .menu-item + .menu-item{border-top:none;}
+  .menu-item.danger{background:var(--ielts-red);color:#fff;border-color:var(--ielts-red);font-weight:600;}
+  .menu-item .chev{font-size:15px;}
+  .option-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid #ddd;font-size:13px;cursor:pointer;background:#fff;color:#111;}
+  .option-row + .option-row{border-top:none;}
+  .option-row .check{width:16px;color:#111;display:inline-block;}
+  .swatch{width:60px;height:22px;border:1px solid #999;display:flex;align-items:center;justify-content:center;gap:2px;}
+  .swatch .bar{width:3px;height:12px;}
+  .sw-bw .bar{background:#333;}
+  .sw-bw{background:#eee;}
+  .sw-wb{background:#111;}
+  .sw-wb .bar{background:#eee;}
+  .sw-yb{background:#111;}
+  .sw-yb .bar{background:#e8c400;}
+
+  #app.textsize-large .content{font-size:16px;}
+  #app.textsize-extralarge .content{font-size:19px;}
+
+  .results-wrap{padding:26px 34px;overflow-y:auto;height:100%;}
+  .results-wrap h1{color:var(--ielts-red);font-size:22px;margin-bottom:4px;}
+  .score-box{display:inline-block;border:1px solid #ddd;border-radius:4px;padding:14px 26px;text-align:center;margin:14px 12px 22px 0;}
+  .score-box .num{font-size:28px;font-weight:800;color:var(--ielts-red);}
+  .score-box .lbl{font-size:11px;color:#666;}
+  table.review-table{width:100%;border-collapse:collapse;font-size:13px;}
+  table.review-table th, table.review-table td{border:1px solid #ddd;padding:7px 10px;text-align:left;}
+  table.review-table th{background:var(--bg-panel);}
+  .ok{color:#1a8a3d;font-weight:bold;}
+  .no{color:var(--ielts-red);font-weight:bold;}
+  .restart-btn{margin-top:20px;background:#111;color:#fff;border:none;padding:9px 20px;border-radius:3px;cursor:pointer;font-size:14px;}
+  .brand-footer{margin-top:24px;padding-top:16px;border-top:1px solid #eee;font-size:12px;color:#666;}
+  .brand-footer a{color:var(--focus-blue);text-decoration:none;font-weight:bold;}
+
+  /* Contrast modes — cover topbar, main-wrap, content, bottombar, menu overlay */
+  body.contrast-wb #app,
+  body.contrast-wb .content,.body.contrast-wb .main-wrap,
+  body.contrast-wb .topbar,body.contrast-wb .bottombar,
+  body.contrast-wb .menu-overlay,body.contrast-wb .menu-header,body.contrast-wb .menu-body{
+    background:#000 !important;color:#fff !important;
+  }
+  body.contrast-wb .part-banner{background:#1a1a1a;border-color:#444;}
+  body.contrast-wb input.blank,body.contrast-wb select{background:#111;color:#fff;border-color:#666;}
+  body.contrast-wb .menu-item,body.contrast-wb .option-row{background:#111;color:#fff;border-color:#444;}
+  body.contrast-wb .menu-item.danger{background:var(--ielts-red);color:#fff;}
+  body.contrast-wb .menu-header .close-btn,body.contrast-wb .menu-header .back-btn{color:#fff;}
+  body.contrast-wb .qnum-btn{color:#fff;}
+  body.contrast-wb .submit-check{background:#222;color:#fff;}
+  body.contrast-wb .notes-panel{background:#111;color:#fff;}
+  body.contrast-wb .note-entry{background:#1a1a1a;color:#fff;border-color:#444;}
+
+  body.contrast-yb #app,
+  body.contrast-yb .content,body.contrast-yb .main-wrap,
+  body.contrast-yb .topbar,body.contrast-yb .bottombar,
+  body.contrast-yb .menu-overlay,body.contrast-yb .menu-header,body.contrast-yb .menu-body{
+    background:#000 !important;color:#f2d70a !important;
+  }
+  body.contrast-yb .part-banner{background:#1a1a1a;border-color:#555;}
+  body.contrast-yb input.blank,body.contrast-yb select{background:#111;color:#f2d70a;border-color:#f2d70a;}
+  body.contrast-yb .menu-item,body.contrast-yb .option-row{background:#111;color:#f2d70a;border-color:#555;}
+  body.contrast-yb .menu-item.danger{background:var(--ielts-red);color:#fff;}
+  body.contrast-yb .menu-header .close-btn,body.contrast-yb .menu-header .back-btn{color:#f2d70a;}
+  body.contrast-yb .qnum-btn{color:#f2d70a;}
+  body.contrast-yb .submit-check{background:#222;color:#f2d70a;}
+  body.contrast-yb .notes-panel{background:#111;color:#f2d70a;}
+  body.contrast-yb .note-entry{background:#1a1a1a;color:#f2d70a;border-color:#555;}
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- PASSWORD -->
+  <div class="gate-screen" id="screen-password">
+    <div class="gate-card">
+      <div class="gate-brand-row">
+        <a class="brand-badge" href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">
+          <span class="ring"></span><img class="photo" src="https://i.ibb.co/XfQJVFnW/photo-2026-01-19-20-15-29-2.jpg" alt="Jasurbek">
+        </a>
+        <div class="gate-logo">IELTS</div>
+      </div>
+      <div class="gate-sub">Full Listening Test Access</div>
+      <label for="pwd-input">Enter Password</label>
+      <input type="password" id="pwd-input" placeholder="Password" autocomplete="off">
+      <div class="gate-error" id="pwd-error"></div>
+      <button class="gate-btn" id="pwd-submit">Continue</button>
+      <div class="gate-footer">Full Listening Test — <a href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">Jasurbek's blog</a></div>
+    </div>
+  </div>
+
+  <!-- ID -->
+  <div class="gate-screen hidden" id="screen-id">
+    <div class="gate-card">
+      <div class="gate-brand-row">
+        <a class="brand-badge" href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">
+          <span class="ring"></span><img class="photo" src="https://i.ibb.co/XfQJVFnW/photo-2026-01-19-20-15-29-2.jpg" alt="Jasurbek">
+        </a>
+        <div class="gate-logo">IELTS</div>
+      </div>
+      <div class="gate-sub">Enter your Test Taker ID</div>
+      <label for="id-input">Test Taker ID</label>
+      <input type="text" id="id-input" placeholder="e.g. 123456789" autocomplete="off">
+      <div class="gate-error" id="id-error"></div>
+      <button class="gate-btn" id="id-submit">Start Test</button>
+      <div class="gate-footer">Full Listening Test — <a href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">Jasurbek's blog</a></div>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="hidden" id="screen-test" style="height:100%;display:flex;flex-direction:column;">
+    <div class="topbar">
+      <div class="topbar-left">
+        <a class="brand-badge" href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">
+          <span class="ring"></span><img class="photo" src="https://i.ibb.co/XfQJVFnW/photo-2026-01-19-20-15-29-2.jpg" alt="Jasurbek">
+        </a>
+        <div class="ielts-logo">IELTS</div>
+        <div class="taker-id-block">
+          <div><span style="font-weight:bold;">Test taker ID:</span> <span id="taker-id-display"></span></div>
+          <div class="status-line" id="status-line">—</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span>📶</span><span>🔔</span>
+        <button class="icon-btn" id="hamburger-btn" title="Menu">☰</button>
+        <button class="icon-btn" id="notes-toggle-btn" title="Notes">✏️</button>
+      </div>
+    </div>
+
+    <div class="main-wrap">
+      <div class="content" id="content"></div>
+
+      <div class="notes-panel" id="notes-panel">
+        <div class="notes-panel-title">Notes</div>
+        <div id="notes-list"></div>
+      </div>
+
+      <div class="audio-gate-overlay" id="audio-gate-overlay">
+        <div class="headphone-icon">🎧</div>
+        <p>You will be listening to an audio clip during this test. You will not be permitted to pause or rewind the audio while answering the questions.</p>
+        <p><b>To continue, click Play.</b></p>
+        <button class="play-btn" id="play-audio-btn">▶ Play</button>
+      </div>
+
+      <div class="menu-overlay" id="menu-overlay">
+        <div class="menu-header">
+          <button class="back-btn" id="menu-back-btn">‹ Options</button>
+          <span id="menu-header-title" class="title-text">Options</span>
+          <button class="close-btn" id="menu-close-btn">✕</button>
+        </div>
+        <div class="menu-body">
+          <div id="menu-root-view">
+            <div class="menu-item danger" id="menu-submit-btn" style="margin-bottom:16px;"><span>🚀 Go to submission page</span><span class="chev">›</span></div>
+            <div class="menu-item" id="menu-contrast-btn"><span>◐ Contrast</span><span class="chev">›</span></div>
+            <div class="menu-item" id="menu-textsize-btn"><span>🔍 Text size</span><span class="chev">›</span></div>
+          </div>
+          <div id="menu-contrast-view" class="hidden">
+            <div class="option-row" data-contrast="bw"><span><span class="check">✔</span> Black on white</span><span class="swatch sw-bw"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></div>
+            <div class="option-row" data-contrast="wb"><span><span class="check"></span> White on black</span><span class="swatch sw-wb"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></div>
+            <div class="option-row" data-contrast="yb"><span><span class="check"></span> Yellow on black</span><span class="swatch sw-yb"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></div>
+          </div>
+          <div id="menu-textsize-view" class="hidden">
+            <div class="option-row" data-textsize="regular"><span><span class="check">✔</span> Regular</span></div>
+            <div class="option-row" data-textsize="large"><span><span class="check"></span> Large</span></div>
+            <div class="option-row" data-textsize="extralarge"><span><span class="check"></span> Extra large</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-arrows"><button id="prev-btn">←</button><button id="next-btn">→</button></div>
+    </div>
+
+    <div class="bottombar" id="bottombar"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="hidden results-wrap" id="screen-results">
+    <h1>Listening Test — Result</h1>
+    <div style="font-size:13px;color:#666;">Test taker ID: <span id="results-taker-id"></span></div>
+    <div>
+      <div class="score-box"><div class="num" id="score-correct">0</div><div class="lbl">Correct</div></div>
+      <div class="score-box"><div class="num">40</div><div class="lbl">Total</div></div>
+      <div class="score-box"><div class="num" id="score-band">0.0</div><div class="lbl">Est. Band</div></div>
+    </div>
+    <table class="review-table">
+      <thead><tr><th style="width:50px;">Q#</th><th>Your Answer</th><th>Correct Answer</th><th style="width:70px;">Result</th></tr></thead>
+      <tbody id="review-body"></tbody>
+    </table>
+    <button class="restart-btn" id="restart-btn">Restart</button>
+    <div class="brand-footer">📢 Full Listening Test — <a href="https://t.me/+1meJNfCKsg85ODQ6" target="_blank" rel="noopener">Jasurbek's blog (Telegram)</a></div>
+  </div>
+
+</div>
+
+<audio id="test-audio" preload="none" src="https://mp3tourl.com/audio/1784186726806-e8d7decd-768d-4f2f-96ce-ee351b43a5c4.mp3"></audio>
+
+<script>
+(() => {
+  const REQUIRED_PASSWORD = "jasurbekisaev";
+  const MAP_IMAGE_SRC = "https://i.ibb.co/k6WVkGrG/5f9cda4b-638b-47f4-99d6-f55c3378924e.png";
+
+  const answerKey = {
+    1:"ISLIP",2:"SCHOOL",3:"COMPUTER",4:"PHONE",5:"5.96",6:"FUEL",7:"DISCOUNT",8:"INSURANCE",9:"12.50",10:"ENVIRONMENT",
+    11:"C",12:"B",13:"A",14:"A",15:"A",16:"B",17:"A",18:"D",19:"B",20:"E",
+    21:"F",22:"I",23:"J",24:"D",25:"A",26:"E",27:"G",28:"B",29:"A",30:"C",
+    31:"degree",32:"curiosity",33:"funding",34:"battery",35:"lake",36:"bacteria",37:"wings",38:"yellow",39:"mushroom",40:"chicks"
+  };
+
+  const state = { answers:{}, currentPart:1, takerId:"", notes:[] };
+  const $ = (id) => document.getElementById(id);
+  const show = (el) => el.classList.remove("hidden");
+  const hide = (el) => el.classList.add("hidden");
+
+  function partBanner(title, range){
+    return `<div class="part-banner"><b>${title}</b><div class="instr">Answer questions ${range}.</div></div>`;
+  }
+  function inputBlank(qnum){
+    const val = state.answers[qnum] || "";
+    return `<input class="blank" data-q="${qnum}" value="${val}" placeholder="${qnum}">`;
+  }
+  function mcQuestion(qnum, text, options){
+    const selected = state.answers[qnum];
+    return `<div class="mc-question"><span class="qnum">${qnum}</span> ${text}
+      <div class="mc-opts">${options.map((opt,i)=>{
+        const val = String.fromCharCode(65+i);
+        return `<label><input type="radio" name="q${qnum}" value="${val}" ${selected===val?'checked':''}> ${val}) ${opt}</label>`;
+      }).join("")}</div></div>`;
+  }
+  function choiceSelect(qnum, letters){
+    const val = state.answers[qnum] || "";
+    return `<select class="blank-select" data-q="${qnum}"><option value="">--</option>${letters.map(l => `<option value="${l}" ${val===l?'selected':''}>${l}</option>`).join("")}</select>`;
+  }
+  function choiceRow(qnum, text, letters){
+    return `<div class="help-select-row"><span class="qnum">${qnum}</span><span style="flex:1;">${text}</span>${choiceSelect(qnum, letters)}</div>`;
+  }
+  function multiChoiceQuestion(qnums, text, options){
+    const group = qnums.join("-");
+    const selected = qnums.map(q => state.answers[q]).filter(Boolean);
+    return `<div class="mc-question"><span class="qnum">${qnums[0]}–${qnums[qnums.length-1]}</span> ${text}
+      <div class="mc-opts">${options.map((opt,i)=>{
+        const val = String.fromCharCode(65+i);
+        return `<label><input type="checkbox" data-multi-group="${group}" value="${val}" ${selected.includes(val)?'checked':''}> ${val}) ${opt}</label>`;
+      }).join("")}</div></div>`;
+  }
+
+  function renderPart1(){
+    return `
+      ${partBanner("Part 1","1–10")}
+      <div style="font-size:13px;margin-bottom:10px;"><b>Questions 1–10</b><br>Complete the notes below. Write <b>ONE WORD AND/OR A NUMBER</b> for each answer.</div>
+      <div class="card-title">Car Club Scheme</div>
+      <div class="notes-block">
+        <div class="notes-row">• <b>How the scheme works:</b> Every member has access to a fleet of cars</div>
+        <div class="section-title">Nearest location:</div>
+        <div class="notes-row">• ${inputBlank(1)} Street, near the ${inputBlank(2)}</div>
+        <div class="section-title">Using the car:</div>
+        <div class="notes-row">• Use membership card to unlock the car</div>
+        <div class="notes-row">• Enter number on the ${inputBlank(3)} in the car</div>
+        <div class="section-title">Booking:</div>
+        <div class="notes-row">• Small charge for using the ${inputBlank(4)} to book</div>
+        <div class="section-title">Cost:</div>
+        <div class="notes-row">• Maximum cost: £ ${inputBlank(5)} an hour</div>
+        <div class="notes-row">• Cost of ${inputBlank(6)} is included</div>
+        <div class="notes-row">• There is a ${inputBlank(7)} for family members</div>
+        <div class="notes-row">• £10 a month supplement to cover the higher price of ${inputBlank(8)} for younger drivers</div>
+        <div class="notes-row">• Members can have a 'frequent users card' for an extra £ ${inputBlank(9)} a month</div>
+        <div class="section-title">Other information:</div>
+        <div class="notes-row">• Pets are not allowed in the cars</div>
+        <div class="notes-row">• Scheme is good for the ${inputBlank(10)}</div>
+      </div>
+    `;
+  }
+
+  function renderPart2(){
+    return `
+      ${partBanner("Part 2","11–20")}
+      <div style="font-size:13px;margin-bottom:14px;"><b>Questions 11–16</b><br>Choose the correct letter, <b>A, B or C</b>.</div>
+      <div class="card-title" style="text-decoration:none;">Market manager</div>
+      ${mcQuestion(11,"How did Tracy first get involved in Mahana Market?",["She set up the website","She had a stall there","She made things to be sold there"])}
+      ${mcQuestion(12,"Tracy became the market manager when",["the previous managers had an argument","the market was threatened with closure","the existing manager asked her to take the job"])}
+      ${mcQuestion(13,"What new focus did Tracy give the market?",["locally produced crafts","fresh fruit and vegetables","a greater variety of products"])}
+      ${mcQuestion(14,"What does Tracy say about entertainment at the market?",["Anyone is welcome to provide entertainment","Entertainers need to be able to do a variety of things","Some entertainers have gone on to become famous"])}
+      ${mcQuestion(15,"How did Tracy get the idea of setting up a second market?",["from members of the public","from traders at Mahana Market","from the local authorities"])}
+      ${mcQuestion(16,"What happens at the Kids' Market?",["Children make toys to be sold","Children sell their own possessions","Children raise money for the local school"])}
+      <div style="font-size:13px;margin:22px 0 10px;"><b>Questions 17 and 18</b><br>Choose <b>TWO</b> letters, A–E.<br>Which TWO things does Tracy find most difficult about her job?</div>
+      ${multiChoiceQuestion([17,18],"",["ensuring regulations are followed","the amount of administration involved","dealing with conflict between stallholders","the early start and long hours","introducing changes to existing systems"])}
+      <div style="font-size:13px;margin:22px 0 10px;"><b>Questions 19 and 20</b><br>Choose <b>TWO</b> letters, A–E.<br>Which TWO pieces of advice does Tracy give people thinking of having a market stall?</div>
+      ${multiChoiceQuestion([19,20],"",["Try to vary your stock regularly","Don't be discouraged if you don't sell much at first","Make sure you choose the right type of market","Offer goods at low prices for the first few weeks","Take care with the presentation of objects on the stall"])}
+    `;
+  }
+
+  function renderPart3(){
+    const lettersAJ = ["A","B","C","D","E","F","G","H","I","J"];
+    return `
+      ${partBanner("Part 3","21–30")}
+      <div style="font-size:13px;margin-bottom:10px;"><b>Questions 21–27</b><br>Label the plan. Write the correct letter, <b>A–J</b>, next to questions 21–27.</div>
+      <div class="map-ref-wrap"><img src="${MAP_IMAGE_SRC}" alt="Potential Community Centre plan"><div class="map-caption">Potential Community Centre</div></div>
+      ${choiceRow(21,"Coffee lounge",lettersAJ)}
+      ${choiceRow(22,"Technology room",lettersAJ)}
+      ${choiceRow(23,"Music room",lettersAJ)}
+      ${choiceRow(24,"TV room",lettersAJ)}
+      ${choiceRow(25,"Reading room",lettersAJ)}
+      ${choiceRow(26,"Meeting room",lettersAJ)}
+      ${choiceRow(27,"Office",lettersAJ)}
+      <div style="font-size:13px;margin:22px 0 10px;"><b>Questions 28–30</b><br>Write the correct letter, <b>A, B or C</b>, next to questions 28–30.<br><br><b>Who do Lindy and Baz agree should do each job?</b><br>A Lindy &nbsp;&nbsp; B Baz &nbsp;&nbsp; C both Lindy and Baz</div>
+      ${mcQuestion(28,"Investigate other community centres",["Lindy","Baz","both Lindy and Baz"])}
+      ${mcQuestion(29,"Find out about planning regulations",["Lindy","Baz","both Lindy and Baz"])}
+      ${mcQuestion(30,"Research the history of the house",["Lindy","Baz","both Lindy and Baz"])}
+    `;
+  }
+
+  function renderPart4(){
+    return `
+      ${partBanner("Part 4","31–40")}
+      <div style="font-size:13px;margin-bottom:10px;"><b>Questions 31–40</b><br>Complete the notes below. Write <b>ONE WORD AND/OR A NUMBER</b> for each answer.</div>
+      <div class="card-title">How Ordinary People Assist in Scientific Research</div>
+      <div class="notes-block">
+        <div class="section-title">Collecting data</div>
+        <div class="notes-row">• 'Ordinary people' involved in data collection include those without a ${inputBlank(31)} and school children.</div>
+        <div class="notes-row">• Volunteers tend to share a strong sense of ${inputBlank(32)} about the world.</div>
+        <div class="notes-row">• Scientists do not always get enough ${inputBlank(33)}, so volunteers are extremely important.</div>
+        <div class="section-title">Previous projects</div>
+        <div class="notes-row">• Wheel Power compared types of ${inputBlank(34)} used in cars.</div>
+        <div class="notes-row">• The Bankside project checked the health of a ${inputBlank(35)} by taking water samples.</div>
+        <div class="notes-row">• The Thompson Project investigated the presence of so much ${inputBlank(36)} in earth where crops grew.</div>
+        <div class="section-title">Insect study</div>
+        <div class="notes-row">• One group measured the ${inputBlank(37)} of various insects.</div>
+        <div class="notes-row">• Insects were trapped using cheap plates that were ${inputBlank(38)} in colour.</div>
+        <div class="section-title">Newton Park</div>
+        <div class="notes-row">• A hiker found a rare type of ${inputBlank(39)} in the area.</div>
+        <div class="notes-row">• Volunteers were required to count ${inputBlank(40)} in a bird research project.</div>
+      </div>
+    `;
+  }
+
+  const partRenderers = {1:renderPart1,2:renderPart2,3:renderPart3,4:renderPart4};
+  const partRanges = {1:[1,10],2:[11,20],3:[21,30],4:[31,40]};
+  const multiGroups = [[17,18],[19,20]];
+  function groupFor(q){ return multiGroups.find(g => g.includes(q)); }
+
+  function renderPart(part){
+    state.currentPart = part;
+    $("content").innerHTML = partRenderers[part]();
+    attachListeners();
+    $("content").scrollTop = 0;
+    $("prev-btn").disabled = (part===1);
+    $("next-btn").disabled = (part===4);
+    renderBottomBar();
+  }
+  function attachListeners(){
+    document.querySelectorAll("#content input.blank").forEach(inp => {
+      inp.addEventListener("input", (e) => { state.answers[e.target.dataset.q] = e.target.value; renderBottomBar(); });
+    });
+    document.querySelectorAll("#content select").forEach(sel => {
+      sel.addEventListener("change", (e) => { state.answers[e.target.dataset.q] = e.target.value; renderBottomBar(); });
+    });
+    document.querySelectorAll("#content input[type=radio]").forEach(r => {
+      r.addEventListener("change", (e) => { state.answers[e.target.name.replace("q","")] = e.target.value; renderBottomBar(); });
+    });
+    document.querySelectorAll("#content input[type=checkbox][data-multi-group]").forEach(box => {
+      box.addEventListener("change", (e) => {
+        const group = e.target.dataset.multiGroup;
+        const qnums = group.split("-").map(Number);
+        let checked = [...document.querySelectorAll(`#content input[data-multi-group="${group}"]:checked`)];
+        if (checked.length > qnums.length){ e.target.checked = false; checked = [...document.querySelectorAll(`#content input[data-multi-group="${group}"]:checked`)]; }
+        const values = checked.map(el => el.value);
+        qnums.forEach((q,i) => { if (values[i]) state.answers[q] = values[i]; else delete state.answers[q]; });
+        renderBottomBar();
+      });
+    });
+    $("content").addEventListener("mouseup", handleTextSelection);
+  }
+
+  function renderBottomBar(){
+    let html = "";
+    for (let p=1;p<=4;p++){
+      const [start,end] = partRanges[p];
+      if (p === state.currentPart){
+        html += `<div class="part-nav-group"><span class="part-label active-part">Part ${p}</span>`;
+        for (let q=start;q<=end;q++){
+          const answered = state.answers[q] && String(state.answers[q]).trim()!=="";
+          html += `<button class="qnum-btn ${answered?'answered':''}" data-jump="${q}">${q}</button>`;
+        }
+        html += `</div>`;
+      } else {
+        let c=0; for (let i=start;i<=end;i++){ if (state.answers[i] && String(state.answers[i]).trim()!=="") c++; }
+        html += `<div class="part-nav-group"><span class="part-label" data-partjump="${p}">Part ${p}</span><span class="part-count">${c} of ${end-start+1}</span></div>`;
+      }
+    }
+    html += `<button class="submit-check" id="submit-check-btn">✔</button>`;
+    $("bottombar").innerHTML = html;
+    document.querySelectorAll("#bottombar [data-partjump]").forEach(el => el.addEventListener("click", () => renderPart(parseInt(el.dataset.partjump))));
+    $("submit-check-btn").addEventListener("click", submitTest);
+  }
+
+  $("prev-btn").addEventListener("click", () => { if (state.currentPart>1) renderPart(state.currentPart-1); });
+  $("next-btn").addEventListener("click", () => { if (state.currentPart<4) renderPart(state.currentPart+1); else submitTest(); });
+
+  // ---------------- PASSWORD / ID ----------------
+  $("pwd-submit").addEventListener("click", () => {
+    const val = $("pwd-input").value.trim();
+    if (val === REQUIRED_PASSWORD){ hide($("screen-password")); show($("screen-id")); $("id-input").focus(); }
+    else { $("pwd-error").textContent = "Incorrect password. Please try again."; }
+  });
+  $("pwd-input").addEventListener("keydown", (e) => { if (e.key==="Enter") $("pwd-submit").click(); });
+
+  $("id-submit").addEventListener("click", () => {
+    const val = $("id-input").value.trim();
+    if (!val){ $("id-error").textContent = "Please enter your Test Taker ID."; return; }
+    state.takerId = val;
+    $("taker-id-display").textContent = val;
+    $("results-taker-id").textContent = val;
+    hide($("screen-id")); show($("screen-test"));
+    renderPart(1);
+    show($("audio-gate-overlay"));
+    enterFullscreen();
+  });
+  $("id-input").addEventListener("keydown", (e) => { if (e.key==="Enter") $("id-submit").click(); });
+
+  function enterFullscreen(){
+    const el = document.documentElement;
+    const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if (req) { try { req.call(el); } catch(e){} }
+  }
+
+  // ---------------- AUDIO ----------------
+  const audioEl = $("test-audio");
+  $("play-audio-btn").addEventListener("click", (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; btn.textContent = "Loading…";
+    audioEl.currentTime = 0;
+    const p = audioEl.play();
+    const proceed = () => { hide($("audio-gate-overlay")); $("status-line").textContent = "🔊 Audio is Playing"; };
+    if (p && p.then) { p.then(proceed).catch(proceed); } else { proceed(); }
+  });
+  audioEl.addEventListener("play", () => { $("status-line").textContent = "🔊 Audio is Playing"; });
+  audioEl.addEventListener("pause", () => { if (!audioEl.ended) $("status-line").textContent = "⏸ Audio paused"; });
+  audioEl.addEventListener("ended", () => { $("status-line").textContent = "Audio finished"; });
+
+  // ---------------- HAMBURGER MENU ----------------
+  $("hamburger-btn").addEventListener("click", () => { $("menu-overlay").classList.add("open"); showMenuRoot(); });
+  $("menu-close-btn").addEventListener("click", () => $("menu-overlay").classList.remove("open"));
+  $("menu-back-btn").addEventListener("click", () => showMenuRoot());
+  function showMenuRoot(){
+    $("menu-header-title").textContent = "Options";
+    $("menu-back-btn").classList.remove("show");
+    $("menu-root-view").classList.remove("hidden");
+    $("menu-contrast-view").classList.add("hidden");
+    $("menu-textsize-view").classList.add("hidden");
+  }
+  $("menu-submit-btn").addEventListener("click", () => { $("menu-overlay").classList.remove("open"); submitTest(); });
+  $("menu-contrast-btn").addEventListener("click", () => {
+    $("menu-header-title").textContent = "Contrast"; $("menu-back-btn").classList.add("show");
+    $("menu-root-view").classList.add("hidden"); $("menu-contrast-view").classList.remove("hidden");
+  });
+  $("menu-textsize-btn").addEventListener("click", () => {
+    $("menu-header-title").textContent = "Text size"; $("menu-back-btn").classList.add("show");
+    $("menu-root-view").classList.add("hidden"); $("menu-textsize-view").classList.remove("hidden");
+  });
+  document.querySelectorAll('[data-contrast]').forEach(row => {
+    row.addEventListener("click", () => {
+      document.body.classList.remove("contrast-wb","contrast-yb");
+      if (row.dataset.contrast==="wb") document.body.classList.add("contrast-wb");
+      if (row.dataset.contrast==="yb") document.body.classList.add("contrast-yb");
+      document.querySelectorAll('[data-contrast] .check').forEach(c=>c.textContent="");
+      row.querySelector(".check").textContent="✔";
+    });
+  });
+  document.querySelectorAll('[data-textsize]').forEach(row => {
+    row.addEventListener("click", () => {
+      $("app").classList.remove("textsize-regular","textsize-large","textsize-extralarge");
+      $("app").classList.add("textsize-"+row.dataset.textsize);
+      document.querySelectorAll('[data-textsize] .check').forEach(c=>c.textContent="");
+      row.querySelector(".check").textContent="✔";
+    });
+  });
+
+  // ---------------- NOTES / HIGHLIGHT WITH CLEAR ----------------
+  let activeSelectionMenu = null;
+  function removeSelectionMenu(){ if (activeSelectionMenu){ activeSelectionMenu.remove(); activeSelectionMenu = null; } }
+  function renderNotesPanel(){
+    const list = $("notes-list");
+    if (state.notes.length === 0){ list.innerHTML = `<div class="notes-panel-empty">Your private notes will show here<br><br>Select text to highlight or create a note.</div>`; return; }
+    list.innerHTML = state.notes.map(n => `<div class="note-entry"><div class="quoted">"${n}"</div></div>`).join("");
+  }
+  renderNotesPanel();
+  $("notes-toggle-btn").addEventListener("click", () => { $("notes-panel").classList.toggle("open"); });
+
+  function showHighlightMenu(rect, onNote, onHighlight, onClear){
+    removeSelectionMenu();
+    const menu = document.createElement("div");
+    menu.className = "selection-menu";
+    menu.style.left = (rect.left + window.scrollX) + "px";
+    menu.style.top = (rect.bottom + window.scrollY + 4) + "px";
+    let html = "";
+    if (onNote) html += `<button data-action="note">📝<span>Note</span></button>`;
+    if (onHighlight) html += `<button data-action="highlight">🖊<span>Highlight</span></button>`;
+    if (onClear) html += `<button data-action="clear">🧹<span>Clear</span></button>`;
+    menu.innerHTML = html;
+    document.body.appendChild(menu);
+    activeSelectionMenu = menu;
+    if (onNote) menu.querySelector('[data-action="note"]').addEventListener("click", () => { onNote(); removeSelectionMenu(); });
+    if (onHighlight) menu.querySelector('[data-action="highlight"]').addEventListener("click", () => { onHighlight(); removeSelectionMenu(); });
+    if (onClear) menu.querySelector('[data-action="clear"]').addEventListener("click", () => { onClear(); removeSelectionMenu(); });
+  }
+
+  function handleTextSelection(e){
+    // If the click landed on an existing highlight, offer to clear it
+    if (e.target && e.target.tagName === "MARK" && e.target.classList.contains("hl")){
+      const markEl = e.target;
+      const rect = markEl.getBoundingClientRect();
+      showHighlightMenu(rect, null, null, () => {
+        const parent = markEl.parentNode;
+        while (markEl.firstChild) parent.insertBefore(markEl.firstChild, markEl);
+        parent.removeChild(markEl);
+        parent.normalize();
+      });
+      return;
+    }
+    removeSelectionMenu();
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.toString().trim().length === 0) return;
+    if (!$("content").contains(sel.anchorNode)) return;
+    const range = sel.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    const selectedText = sel.toString();
+    showHighlightMenu(
+      rect,
+      () => { state.notes.push(selectedText); renderNotesPanel(); show($("notes-panel")); },
+      () => { try { const mark = document.createElement("mark"); mark.className = "hl"; range.surroundContents(mark); } catch(err){} },
+      null
+    );
+  }
+  document.addEventListener("mousedown", (e) => { if (activeSelectionMenu && !activeSelectionMenu.contains(e.target)) removeSelectionMenu(); });
+
+  // ---------------- SUBMIT / RESULTS ----------------
+  function normalize(str){ return String(str||"").trim().toLowerCase().replace(/\s+/g," "); }
+
+  function submitTest(){
+    let correct = 0, rows = "";
+    for (let q=1;q<=40;q++){
+      const userAns = state.answers[q] || "";
+      const correctAns = answerKey[q];
+      let isCorrect;
+      const group = groupFor(q);
+      if (group){
+        const userVal = normalize(userAns);
+        const groupCorrect = group.map(n => normalize(answerKey[n]));
+        const selectedVals = group.map(n => normalize(state.answers[n])).filter(Boolean);
+        const duplicate = selectedVals.filter(v => v === userVal).length > 1;
+        isCorrect = !!userVal && !duplicate && groupCorrect.includes(userVal);
+      } else {
+        isCorrect = normalize(userAns) === normalize(correctAns);
+      }
+      if (isCorrect) correct++;
+      rows += `<tr><td>${q}</td><td>${userAns || '<i style="color:#999;">(no answer)</i>'}</td><td>${correctAns}</td><td>${isCorrect?'<span class="ok">✔</span>':'<span class="no">✘</span>'}</td></tr>`;
+    }
+    $("score-correct").textContent = correct;
+    $("score-band").textContent = estimateBand(correct);
+    $("review-body").innerHTML = rows;
+    hide($("screen-test")); show($("screen-results"));
+  }
+  function estimateBand(correct){
+    const table = [[39,9.0],[37,8.5],[35,8.0],[32,7.5],[30,7.0],[26,6.5],[23,6.0],[18,5.5],[16,5.0],[13,4.5],[10,4.0],[7,3.5],[5,3.0]];
+    for (const [minC,band] of table){ if (correct>=minC) return band.toFixed(1); }
+    return "2.5";
+  }
+
+  $("restart-btn").addEventListener("click", () => {
+    state.answers = {}; state.currentPart = 1; state.notes = []; state.takerId = "";
+    document.body.className = ""; $("app").className = "";
+    hide($("screen-results")); show($("screen-password"));
+    $("pwd-input").value=""; $("id-input").value="";
+    $("pwd-error").textContent=""; $("id-error").textContent="";
+  });
+
+})();
+</script>
+</body>
+</html>
