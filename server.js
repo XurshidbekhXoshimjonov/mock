@@ -3767,37 +3767,6 @@ function resolvePublicEntry(skill, locator, source = "") {
         return directEntry;
     }
 
-    function validateEvidence(value, label) {
-        if (!value || typeof value !== "object") return;
-        const hasStart = value.evidenceStartTime !== undefined && value.evidenceStartTime !== null && value.evidenceStartTime !== "";
-        const hasEnd = value.evidenceEndTime !== undefined && value.evidenceEndTime !== null && value.evidenceEndTime !== "";
-        if (hasStart || hasEnd) {
-            const start = Number(value.evidenceStartTime);
-            const end = Number(value.evidenceEndTime);
-            if (!Number.isFinite(start) || start < 0 || !Number.isFinite(end) || end <= start) {
-                const error = new Error(`[Part ${partNumber}] ${label} evidence must have a non-negative start and an end after the start.`);
-                error.statusCode = 400;
-                throw error;
-            }
-            if (part.audioDuration !== null && part.audioDuration !== undefined && part.audioDuration !== ""
-                && Number.isFinite(Number(part.audioDuration)) && end > Number(part.audioDuration) + 0.25) {
-                const error = new Error(`[Part ${partNumber}] ${label} evidence cannot exceed the audio duration.`);
-                error.statusCode = 400;
-                throw error;
-            }
-        }
-        if (value.questionEvidence && typeof value.questionEvidence === "object") {
-            Object.entries(value.questionEvidence).forEach(([questionNumber, evidence]) => (
-                validateEvidence(evidence, `Question ${questionNumber}`)
-            ));
-        }
-        if (Array.isArray(value)) value.forEach((child, index) => validateEvidence(child, `${label} item ${index + 1}`));
-        else Object.entries(value).forEach(([key, child]) => {
-            if (key !== "questionEvidence" && child && typeof child === "object") validateEvidence(child, label);
-        });
-    }
-    validateEvidence(part.blocks || [], "question group");
-
     const aliasTarget = PUBLIC_ROUTE_SLUG_ALIASES[skill]?.[normalized];
     if (aliasTarget) {
         const aliasEntry = findEntry(slugify(aliasTarget, ""), aliasTarget);

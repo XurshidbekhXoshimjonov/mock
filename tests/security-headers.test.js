@@ -27,7 +27,7 @@ test("global responses receive framing, MIME, referrer and browser-permission pr
 
     assert.equal(nextCalled, true);
     assert.equal(headers["X-Content-Type-Options"], "nosniff");
-    assert.equal(headers["X-Frame-Options"], "DENY");
+    assert.equal(headers["X-Frame-Options"], "SAMEORIGIN");
     assert.equal(headers["Referrer-Policy"], "strict-origin-when-cross-origin");
     assert.equal(headers["Cross-Origin-Opener-Policy"], "same-origin-allow-popups");
     assert.equal(headers["Cross-Origin-Resource-Policy"], "same-origin");
@@ -36,9 +36,9 @@ test("global responses receive framing, MIME, referrer and browser-permission pr
     assert.equal(headers["Strict-Transport-Security"], undefined);
 });
 
-test("CSP blocks framing and plugins while preserving current site resources", () => {
+test("CSP permits same-origin mock players while blocking external framing and plugins", () => {
     assert.match(CONTENT_SECURITY_POLICY, /default-src 'self'/);
-    assert.match(CONTENT_SECURITY_POLICY, /frame-ancestors 'none'/);
+    assert.match(CONTENT_SECURITY_POLICY, /frame-ancestors 'self'/);
     assert.match(CONTENT_SECURITY_POLICY, /object-src 'none'/);
     assert.match(CONTENT_SECURITY_POLICY, /form-action 'self'/);
     assert.match(CONTENT_SECURITY_POLICY, /fonts\.googleapis\.com/);
