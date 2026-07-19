@@ -116,6 +116,7 @@
               "A small {{10}} is also desirable"
             ],
             "title": "The London Relocation Services",
+            "noteStyle": "structured-outline",
             "imageIds": [],
             "layoutHtml": ""
           }
@@ -1022,6 +1023,7 @@
               "- Importance of education: as with benefits of exercise, many children can influence their {{40}}"
             ],
             "title": "Food Safety Standards",
+            "noteStyle": "structured-outline",
             "imageIds": [],
             "layoutHtml": ""
           }
@@ -1080,8 +1082,8 @@
     "imageCount": 0,
     "answerKeyCount": 40
   },
-  "createdAt": "2026-07-19T12:21:41.006Z",
-  "publishedAt": "2026-07-19T12:21:41.011Z",
+  "createdAt": "2026-07-19T12:25:44.856Z",
+  "publishedAt": "2026-07-19T12:25:44.861Z",
   "skill": "listening",
   "subtitle": "Listening full test",
   "manualListeningTestId": "full-listening-test-1-listening-full"

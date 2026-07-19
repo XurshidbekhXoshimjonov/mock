@@ -905,7 +905,7 @@
   "images": [],
   "sourceFullTestId": "full-listening-test-1",
   "openUrl": "/full-test-player?id=full-listening-test-1&skill=listening",
-  "createdAt": "2026-07-19T12:21:41.006Z",
+  "createdAt": "2026-07-19T12:25:44.856Z",
   "parts": [
     {
       "partNumber": 1,
@@ -946,7 +946,7 @@
             "She would prefer {{9}} bedrooms",
             "A small {{10}} is also desirable"
           ],
-          "noteStyle": "",
+          "noteStyle": "structured-outline",
           "questions": [
             {
               "number": 1,
@@ -1526,7 +1526,7 @@
             "<strong>Personal opinion</strong>",
             "- Importance of education: as with benefits of exercise, many children can influence their {{40}}"
           ],
-          "noteStyle": "",
+          "noteStyle": "structured-outline",
           "questions": [
             {
               "number": 31,

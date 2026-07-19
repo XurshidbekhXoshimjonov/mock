@@ -107,6 +107,7 @@ test("standalone Listening imports preserve note-card bullets and indentation", 
 
     assert.equal(group.type, "note_completion");
     assert.equal(group.title, "Food Safety Standards");
+    assert.equal(group.noteStyle, "structured-outline");
     assert.deepEqual(group.content.slice(0, 5), [
         "<strong>Risk assessment</strong>",
         "- the product's {{31}}",

@@ -97,7 +97,7 @@
   ],
   "images": [],
   "sourceFullTestId": "full-listening-test-1",
-  "createdAt": "2026-07-19T12:21:41.006Z",
+  "createdAt": "2026-07-19T12:25:44.856Z",
   "parts": [
     {
       "partNumber": 4,
@@ -143,7 +143,7 @@
             "<strong>Personal opinion</strong>",
             "- Importance of education: as with benefits of exercise, many children can influence their {{40}}"
           ],
-          "noteStyle": "",
+          "noteStyle": "structured-outline",
           "questions": [
             {
               "number": 31,

@@ -803,7 +803,9 @@ const ListeningComponents = (() => {
             isSpiritBear ? "lc-note-completion--spirit-bear" : ""
         ].filter(Boolean).join(" ");
         const items = renderNoteFlow(noteLines);
-        const tableItems = shouldRenderNoteTable(noteLines) ? renderNoteTable(noteLines) : "";
+        const tableItems = block.noteStyle !== "structured-outline" && shouldRenderNoteTable(noteLines)
+            ? renderNoteTable(noteLines)
+            : "";
         const titleHtml = displayTitle ? `<h4 class="${isBoxedFlow ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : "";
 
         const exampleBox = block.example ? `
