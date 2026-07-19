@@ -905,7 +905,7 @@
   "images": [],
   "sourceFullTestId": "full-listening-test-1",
   "openUrl": "/full-test-player?id=full-listening-test-1&skill=listening",
-  "createdAt": "2026-07-19T12:17:50.847Z",
+  "createdAt": "2026-07-19T12:21:41.006Z",
   "parts": [
     {
       "partNumber": 1,
@@ -931,20 +931,20 @@
           "content": [
             "<strong>Customer’s personal details</strong>",
             "Customer’s name: Anna Woods",
-            "1 Current address: 118 {{1}}",
+            "Current address: 118 {{1}}",
             "Postcode: BT149BJ",
-            "2 Phone No: {{2}} (Mobile)",
+            "Phone No: {{2}} (Mobile)",
             "<strong>Other information</strong>",
-            "3 Anna is hoping to find work as a {{3}}",
-            "4 She needs to find a {{4}} school for her son.",
+            "Anna is hoping to find work as a {{3}}",
+            "She needs to find a {{4}} school for her son.",
             "<strong>Requirements for the new property</strong>",
-            "5 Location: Her preferred location is in the {{5}} of the city.",
-            "6 Her husband would like to be near a {{6}}",
-            "7 Her son would prefer to be close to a {{7}}",
+            "Location: Her preferred location is in the {{5}} of the city.",
+            "Her husband would like to be near a {{6}}",
+            "Her son would prefer to be close to a {{7}}",
             "<strong>Property details</strong>",
-            "8 She would like to live in a {{8}}",
-            "9 She would prefer {{9}} bedrooms",
-            "10 A small {{10}} is also desirable"
+            "She would like to live in a {{8}}",
+            "She would prefer {{9}} bedrooms",
+            "A small {{10}} is also desirable"
           ],
           "noteStyle": "",
           "questions": [

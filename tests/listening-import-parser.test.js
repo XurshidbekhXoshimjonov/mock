@@ -61,7 +61,7 @@ test("standalone Listening imports preserve adjacent MCQ and select-matching ran
 test("standalone Listening imports recognize inp-number completion fields", () => {
     const fields = Array.from({ length: 10 }, (_, index) => {
         const number = index + 1;
-        return `<p>${number} Detail ${number}: <span class="qn">${number}</span><input id="inp${number}" type="text" placeholder="word"></p>`;
+        return `<div class="nc-line">${number} Detail ${number}: <span class="qn">${number}</span><input id="inp${number}" type="text" placeholder="word"></div>`;
     }).join("");
     const html = `
         <div class="part-section" id="part1">
