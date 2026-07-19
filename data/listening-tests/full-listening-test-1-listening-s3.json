@@ -1,0 +1,560 @@
+{
+  "id": "full-listening-test-1-listening-s3",
+  "slug": "full-listening-test-1-listening-s3",
+  "title": "Test 15 — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/full-listening-test-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–26",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27–30",
+      "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30. Benefits A a broader practical experience of the field B chance to publicise own work C effective way of keeping up-to-date D looks good on a CV E provides useful access to resources F way to make useful contacts",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What part of Kathy’s dissertation has the tutor just read?",
+      "options": [
+        {
+          "value": "A",
+          "label": "her results section",
+          "html": "her results section"
+        },
+        {
+          "value": "B",
+          "label": "her introductory chapter",
+          "html": "her introductory chapter"
+        },
+        {
+          "value": "C",
+          "label": "her review of the literature",
+          "html": "her review of the literature"
+        }
+      ],
+      "answer": "What part of Kathy’s dissertation has the tutor just read?"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "What did the tutor like about Kathy’s work?",
+      "options": [
+        {
+          "value": "A",
+          "label": "the organisation",
+          "html": "the organisation"
+        },
+        {
+          "value": "B",
+          "label": "the style of writing",
+          "html": "the style of writing"
+        },
+        {
+          "value": "C",
+          "label": "the use of resources",
+          "html": "the use of resources"
+        }
+      ],
+      "answer": "What did the tutor like about Kathy’s work?"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Kathy and the tutor agree she needs to",
+      "options": [
+        {
+          "value": "A",
+          "label": "do some more library research.",
+          "html": "do some more library research."
+        },
+        {
+          "value": "B",
+          "label": "record more data",
+          "html": "record more data"
+        },
+        {
+          "value": "C",
+          "label": "narrow down her topic.",
+          "html": "narrow down her topic."
+        }
+      ],
+      "answer": "Kathy and the tutor agree she needs to"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Why does the tutor give an example from his own experience?",
+      "options": [
+        {
+          "value": "A",
+          "label": "to show how successful he has become",
+          "html": "to show how successful he has become"
+        },
+        {
+          "value": "B",
+          "label": "to illustrate how times have changed",
+          "html": "to illustrate how times have changed"
+        },
+        {
+          "value": "C",
+          "label": "to encourage Kathy to do something similar",
+          "html": "to encourage Kathy to do something similar"
+        }
+      ],
+      "answer": "Why does the tutor give an example from his own experience?"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "Kathy would like the tutor to advise her on her",
+      "options": [
+        {
+          "value": "A",
+          "label": "layout.",
+          "html": "layout."
+        },
+        {
+          "value": "B",
+          "label": "bibliography.",
+          "html": "bibliography."
+        },
+        {
+          "value": "C",
+          "label": "appendices.",
+          "html": "appendices."
+        }
+      ],
+      "answer": "Kathy would like the tutor to advise her on her"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "What is Kathy going to do next?",
+      "options": [
+        {
+          "value": "A",
+          "label": "try out some software",
+          "html": "try out some software"
+        },
+        {
+          "value": "B",
+          "label": "go to a seminar",
+          "html": "go to a seminar"
+        },
+        {
+          "value": "C",
+          "label": "design a new type of pump",
+          "html": "design a new type of pump"
+        }
+      ],
+      "answer": "What is Kathy going to do next?"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "going to Mechanical Engineers’ Society meetings...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - a broader practical experience of the field",
+          "html": "a broader practical experience of the field"
+        },
+        {
+          "value": "B",
+          "label": "B - chance to publicise own work",
+          "html": "chance to publicise own work"
+        },
+        {
+          "value": "C",
+          "label": "C - effective way of keeping up-to-date",
+          "html": "effective way of keeping up-to-date"
+        },
+        {
+          "value": "D",
+          "label": "D - looks good on a CV",
+          "html": "looks good on a CV"
+        },
+        {
+          "value": "E",
+          "label": "E - provides useful access to resources",
+          "html": "provides useful access to resources"
+        },
+        {
+          "value": "F",
+          "label": "F - way to make useful contacts",
+          "html": "way to make useful contacts"
+        }
+      ],
+      "answer": "going to Mechanical Engineers’ Society meetings"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Visiting different workplaces...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - a broader practical experience of the field",
+          "html": "a broader practical experience of the field"
+        },
+        {
+          "value": "B",
+          "label": "B - chance to publicise own work",
+          "html": "chance to publicise own work"
+        },
+        {
+          "value": "C",
+          "label": "C - effective way of keeping up-to-date",
+          "html": "effective way of keeping up-to-date"
+        },
+        {
+          "value": "D",
+          "label": "D - looks good on a CV",
+          "html": "looks good on a CV"
+        },
+        {
+          "value": "E",
+          "label": "E - provides useful access to resources",
+          "html": "provides useful access to resources"
+        },
+        {
+          "value": "F",
+          "label": "F - way to make useful contacts",
+          "html": "way to make useful contacts"
+        }
+      ],
+      "answer": "Visiting different workplaces"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "getting some work experience abroad...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - a broader practical experience of the field",
+          "html": "a broader practical experience of the field"
+        },
+        {
+          "value": "B",
+          "label": "B - chance to publicise own work",
+          "html": "chance to publicise own work"
+        },
+        {
+          "value": "C",
+          "label": "C - effective way of keeping up-to-date",
+          "html": "effective way of keeping up-to-date"
+        },
+        {
+          "value": "D",
+          "label": "D - looks good on a CV",
+          "html": "looks good on a CV"
+        },
+        {
+          "value": "E",
+          "label": "E - provides useful access to resources",
+          "html": "provides useful access to resources"
+        },
+        {
+          "value": "F",
+          "label": "F - way to make useful contacts",
+          "html": "way to make useful contacts"
+        }
+      ],
+      "answer": "getting some work experience abroad"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "attending an international conference...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - a broader practical experience of the field",
+          "html": "a broader practical experience of the field"
+        },
+        {
+          "value": "B",
+          "label": "B - chance to publicise own work",
+          "html": "chance to publicise own work"
+        },
+        {
+          "value": "C",
+          "label": "C - effective way of keeping up-to-date",
+          "html": "effective way of keeping up-to-date"
+        },
+        {
+          "value": "D",
+          "label": "D - looks good on a CV",
+          "html": "looks good on a CV"
+        },
+        {
+          "value": "E",
+          "label": "E - provides useful access to resources",
+          "html": "provides useful access to resources"
+        },
+        {
+          "value": "F",
+          "label": "F - way to make useful contacts",
+          "html": "way to make useful contacts"
+        }
+      ],
+      "answer": "attending an international conference"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-test-1",
+  "createdAt": "2026-07-19T11:55:07.138Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/full-listening-test-1.mp3",
+      "instruction": "",
+      "answerText": "21: What part of Kathy’s dissertation has the tutor just read?\n22: What did the tutor like about Kathy’s work?\n23: Kathy and the tutor agree she needs to\n24: Why does the tutor give an example from his own experience?\n25: Kathy would like the tutor to advise her on her\n26: What is Kathy going to do next?\n27: going to Mechanical Engineers’ Society meetings\n28: Visiting different workplaces\n29: getting some work experience abroad\n30: attending an international conference",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–26",
+          "title": "",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "What part of Kathy’s dissertation has the tutor just read?",
+              "text": "What part of Kathy’s dissertation has the tutor just read?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "her results section"
+                },
+                {
+                  "letter": "B",
+                  "text": "her introductory chapter"
+                },
+                {
+                  "letter": "C",
+                  "text": "her review of the literature"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "What part of Kathy’s dissertation has the tutor just read?"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "What did the tutor like about Kathy’s work?",
+              "text": "What did the tutor like about Kathy’s work?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the organisation"
+                },
+                {
+                  "letter": "B",
+                  "text": "the style of writing"
+                },
+                {
+                  "letter": "C",
+                  "text": "the use of resources"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "What did the tutor like about Kathy’s work?"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Kathy and the tutor agree she needs to",
+              "text": "Kathy and the tutor agree she needs to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "do some more library research."
+                },
+                {
+                  "letter": "B",
+                  "text": "record more data"
+                },
+                {
+                  "letter": "C",
+                  "text": "narrow down her topic."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Kathy and the tutor agree she needs to"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Why does the tutor give an example from his own experience?",
+              "text": "Why does the tutor give an example from his own experience?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to show how successful he has become"
+                },
+                {
+                  "letter": "B",
+                  "text": "to illustrate how times have changed"
+                },
+                {
+                  "letter": "C",
+                  "text": "to encourage Kathy to do something similar"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Why does the tutor give an example from his own experience?"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Kathy would like the tutor to advise her on her",
+              "text": "Kathy would like the tutor to advise her on her",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "layout."
+                },
+                {
+                  "letter": "B",
+                  "text": "bibliography."
+                },
+                {
+                  "letter": "C",
+                  "text": "appendices."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Kathy would like the tutor to advise her on her"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "What is Kathy going to do next?",
+              "text": "What is Kathy going to do next?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "try out some software"
+                },
+                {
+                  "letter": "B",
+                  "text": "go to a seminar"
+                },
+                {
+                  "letter": "C",
+                  "text": "design a new type of pump"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "What is Kathy going to do next?"
+            }
+          ]
+        },
+        {
+          "id": "group-3-27",
+          "type": "matching",
+          "questionRange": "Questions 27–30",
+          "title": "",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30. Benefits A a broader practical experience of the field B chance to publicise own work C effective way of keeping up-to-date D looks good on a CV E provides useful access to resources F way to make useful contacts",
+          "options": [
+            {
+              "letter": "A",
+              "text": "A"
+            },
+            {
+              "letter": "B",
+              "text": "B"
+            },
+            {
+              "letter": "C",
+              "text": "C"
+            },
+            {
+              "letter": "D",
+              "text": "D"
+            },
+            {
+              "letter": "E",
+              "text": "E"
+            },
+            {
+              "letter": "F",
+              "text": "F"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "going to Mechanical Engineers’ Society meetings...",
+              "text": "going to Mechanical Engineers’ Society meetings...",
+              "answer": "going to Mechanical Engineers’ Society meetings"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Visiting different workplaces...",
+              "text": "Visiting different workplaces...",
+              "answer": "Visiting different workplaces"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "getting some work experience abroad...",
+              "text": "getting some work experience abroad...",
+              "answer": "getting some work experience abroad"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "attending an international conference...",
+              "text": "attending an international conference...",
+              "answer": "attending an international conference"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

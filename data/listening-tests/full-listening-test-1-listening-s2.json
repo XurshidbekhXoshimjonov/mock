@@ -1,0 +1,628 @@
+{
+  "id": "full-listening-test-1-listening-s2",
+  "slug": "full-listening-test-1-listening-s2",
+  "title": "Test 15 — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/full-listening-test-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–14",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15–20",
+      "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20. Main theme A living in a different century B managing to achieve success C ageing slowly D growing up E experiencing disappointment F living in a magical place G overcoming poverty H handling conflict",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What special offer is there for regular theatre-goers in this season?",
+      "options": [
+        {
+          "value": "A",
+          "label": "They can see a second play at a reduced price.",
+          "html": "They can see a second play at a reduced price."
+        },
+        {
+          "value": "B",
+          "label": "They can buy two tickets and get two free.",
+          "html": "They can buy two tickets and get two free."
+        },
+        {
+          "value": "C",
+          "label": "They can get a discount on Mondays.",
+          "html": "They can get a discount on Mondays."
+        }
+      ],
+      "answer": "Special offer for regular theatre-goers"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What information is given about the study guides?",
+      "options": [
+        {
+          "value": "A",
+          "label": "They are handed out at the theatre.",
+          "html": "They are handed out at the theatre."
+        },
+        {
+          "value": "B",
+          "label": "They provide information on the actors.",
+          "html": "They provide information on the actors."
+        },
+        {
+          "value": "C",
+          "label": "They give ideas for discussion.",
+          "html": "They give ideas for discussion."
+        }
+      ],
+      "answer": "Information about study guides"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "What information is given about the 'Bring a friend' special?",
+      "options": [
+        {
+          "value": "A",
+          "label": "It is only for those over 65.",
+          "html": "It is only for those over 65."
+        },
+        {
+          "value": "B",
+          "label": "It applies to a number of productions.",
+          "html": "It applies to a number of productions."
+        },
+        {
+          "value": "C",
+          "label": "It includes a 5% reduction on gifts.",
+          "html": "It includes a 5% reduction on gifts."
+        }
+      ],
+      "answer": "Information about Bring a friend special"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What does Michael say about the actor Christopher Plunket?",
+      "options": [
+        {
+          "value": "A",
+          "label": "He may retire from acting soon.",
+          "html": "He may retire from acting soon."
+        },
+        {
+          "value": "B",
+          "label": "He writes his own plays.",
+          "html": "He writes his own plays."
+        },
+        {
+          "value": "C",
+          "label": "He prefers acting in films to performing live.",
+          "html": "He prefers acting in films to performing live."
+        }
+      ],
+      "answer": "Michael about actor Christopher Plunket"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "The Climb...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "The Climb — main theme"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "The Voyagers...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "The Voyagers — main theme"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Joey Brown...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "Joey Brown — main theme"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Main Street...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "Main Street — main theme"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "Millie and Mike...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "Millie and Mike — main theme"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Windswept...",
+      "options": [
+        {
+          "value": "A",
+          "label": "A - living in a different century",
+          "html": "living in a different century"
+        },
+        {
+          "value": "B",
+          "label": "B - managing to achieve success",
+          "html": "managing to achieve success"
+        },
+        {
+          "value": "C",
+          "label": "C - ageing slowly",
+          "html": "ageing slowly"
+        },
+        {
+          "value": "D",
+          "label": "D - growing up",
+          "html": "growing up"
+        },
+        {
+          "value": "E",
+          "label": "E - experiencing disappointment",
+          "html": "experiencing disappointment"
+        },
+        {
+          "value": "F",
+          "label": "F - living in a magical place",
+          "html": "living in a magical place"
+        },
+        {
+          "value": "G",
+          "label": "G - overcoming poverty",
+          "html": "overcoming poverty"
+        },
+        {
+          "value": "H",
+          "label": "H - handling conflict",
+          "html": "handling conflict"
+        }
+      ],
+      "answer": "Windswept — main theme"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "full-listening-test-1",
+  "createdAt": "2026-07-19T11:55:07.138Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/full-listening-test-1.mp3",
+      "instruction": "",
+      "answerText": "11: Special offer for regular theatre-goers\n12: Information about study guides\n13: Information about Bring a friend special\n14: Michael about actor Christopher Plunket\n15: The Climb — main theme\n16: The Voyagers — main theme\n17: Joey Brown — main theme\n18: Main Street — main theme\n19: Millie and Mike — main theme\n20: Windswept — main theme",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11–14",
+          "title": "",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What special offer is there for regular theatre-goers in this season?",
+              "text": "What special offer is there for regular theatre-goers in this season?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They can see a second play at a reduced price."
+                },
+                {
+                  "letter": "B",
+                  "text": "They can buy two tickets and get two free."
+                },
+                {
+                  "letter": "C",
+                  "text": "They can get a discount on Mondays."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Special offer for regular theatre-goers"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What information is given about the study guides?",
+              "text": "What information is given about the study guides?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They are handed out at the theatre."
+                },
+                {
+                  "letter": "B",
+                  "text": "They provide information on the actors."
+                },
+                {
+                  "letter": "C",
+                  "text": "They give ideas for discussion."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Information about study guides"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "What information is given about the 'Bring a friend' special?",
+              "text": "What information is given about the 'Bring a friend' special?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It is only for those over 65."
+                },
+                {
+                  "letter": "B",
+                  "text": "It applies to a number of productions."
+                },
+                {
+                  "letter": "C",
+                  "text": "It includes a 5% reduction on gifts."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Information about Bring a friend special"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What does Michael say about the actor Christopher Plunket?",
+              "text": "What does Michael say about the actor Christopher Plunket?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "He may retire from acting soon."
+                },
+                {
+                  "letter": "B",
+                  "text": "He writes his own plays."
+                },
+                {
+                  "letter": "C",
+                  "text": "He prefers acting in films to performing live."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "Michael about actor Christopher Plunket"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15–20",
+          "title": "",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20. Main theme A living in a different century B managing to achieve success C ageing slowly D growing up E experiencing disappointment F living in a magical place G overcoming poverty H handling conflict",
+          "options": [
+            {
+              "letter": "A",
+              "text": "A"
+            },
+            {
+              "letter": "B",
+              "text": "B"
+            },
+            {
+              "letter": "C",
+              "text": "C"
+            },
+            {
+              "letter": "D",
+              "text": "D"
+            },
+            {
+              "letter": "E",
+              "text": "E"
+            },
+            {
+              "letter": "F",
+              "text": "F"
+            },
+            {
+              "letter": "G",
+              "text": "G"
+            },
+            {
+              "letter": "H",
+              "text": "H"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "The Climb...",
+              "text": "The Climb...",
+              "answer": "The Climb — main theme"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "The Voyagers...",
+              "text": "The Voyagers...",
+              "answer": "The Voyagers — main theme"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Joey Brown...",
+              "text": "Joey Brown...",
+              "answer": "Joey Brown — main theme"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Main Street...",
+              "text": "Main Street...",
+              "answer": "Main Street — main theme"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Millie and Mike...",
+              "text": "Millie and Mike...",
+              "answer": "Millie and Mike — main theme"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Windswept...",
+              "text": "Windswept...",
+              "answer": "Windswept — main theme"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
