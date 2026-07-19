@@ -313,6 +313,7 @@
         const testType = String(params.get("type") || "").toLowerCase();
         if (testType === "listening") return "listening";
         if (testType === "reading") return "reading";
+        if (path.includes("ai-coach")) return "ai-coach";
         if (path.includes("mock-test") || path.includes("mock-tests")) return "mock";
         if (path.includes("speaking")) return "speaking";
         if (path.includes("writing")) return "writing";
@@ -447,6 +448,9 @@
         }
 
         .ielts-navbar__links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             border-radius: 999px;
             color: #475569;
             padding: 9px 13px;
@@ -454,6 +458,14 @@
             font-weight: 600;
             text-decoration: none;
             transition: background 160ms ease, color 160ms ease;
+        }
+
+        .ielts-navbar__links .ielts-navbar__ai-coach img {
+            display: block;
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            filter: invert(32%) sepia(92%) saturate(2232%) hue-rotate(213deg) brightness(96%) contrast(91%);
         }
 
         .ielts-navbar__menu-toggle {
@@ -883,6 +895,45 @@
 
         .ielts-account__icon--study-plan {
             background: #eef0ff;
+        }
+
+        .ielts-account__link--ai-coach {
+            color: #2563eb;
+        }
+
+        .ielts-account__link--ai-coach:hover,
+        .ielts-account__link--ai-coach.is-active {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .ielts-account__icon--ai-coach {
+            background: #eaf2ff;
+            color: #2563eb;
+        }
+
+        .ielts-account__icon--ai-coach img {
+            display: block;
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            filter: invert(32%) sepia(92%) saturate(2232%) hue-rotate(213deg) brightness(96%) contrast(91%);
+        }
+
+        .ielts-account__new-badge {
+            display: inline-flex;
+            align-items: center;
+            min-height: 19px;
+            margin-left: auto;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: .04em;
+            text-transform: uppercase;
         }
 
         .ielts-account__icon--logout {
@@ -1443,6 +1494,7 @@
         mistakes: `<img src="/premium-icons/review-mistakes.png?v=20260717" alt="" aria-hidden="true">`,
         vocabulary: `<img src="/premium-icons/vocabulary.png?v=20260717" alt="" aria-hidden="true">`,
         studyPlan: `<img src="/premium-icons/study-plan.png?v=20260717" alt="" aria-hidden="true">`,
+        aiCoach: `<img src="/premium-icons/ai-coach-chip.webp?v=20260719" alt="" aria-hidden="true">`,
         subscription: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><path d="M2 10h20"></path></svg>`,
         logout: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path></svg>`,
         chevron: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7.5 5 5 5-5"></path></svg>`
@@ -1470,6 +1522,7 @@
         const mistakesActive = path.includes("/review-mistakes");
         const vocabularyActive = path.includes("/vocabulary");
         const studyPlanActive = path.includes("/study-plan");
+        const aiCoachActive = path.includes("/ai-coach");
         const subscriptionActive = path.includes("/premium") || path.includes("/profile/subscription");
         const isPremium = hasPremiumAccess(user);
         const adminLink = user.role === "admin"
@@ -1488,6 +1541,7 @@
                     <a class="ielts-account__link ${profileActive ? "is-active" : ""}" href="/dashboard"><span class="ielts-account__icon ielts-account__icon--profile">${MENU_ICONS.profile}</span>Profile</a>
                     <a class="ielts-account__link ${subscriptionActive ? "is-active" : ""}" href="/premium"><span class="ielts-account__icon ielts-account__icon--subscription">${MENU_ICONS.subscription}</span>Subscription</a>
                     <a class="ielts-account__link ${resultsActive ? "is-active" : ""}" href="/dashboard#results"><span class="ielts-account__icon ielts-account__icon--results">${MENU_ICONS.results}</span>Dashboard / My Tests</a>
+                    <a class="ielts-account__link ielts-account__link--ai-coach ${aiCoachActive ? "is-active" : ""}" href="/ai-coach"><span class="ielts-account__icon ielts-account__icon--ai-coach">${MENU_ICONS.aiCoach}</span><span>AI Coach</span><span class="ielts-account__new-badge">New</span></a>
                     <a class="ielts-account__link ${mistakesActive ? "is-active" : ""}" href="/review-mistakes"><span class="ielts-account__icon ielts-account__icon--mistakes">${MENU_ICONS.mistakes}</span>Review Mistakes</a>
                     <a class="ielts-account__link ${vocabularyActive ? "is-active" : ""}" href="/vocabulary"><span class="ielts-account__icon ielts-account__icon--vocabulary">${MENU_ICONS.vocabulary}</span>Vocabulary</a>
                     <a class="ielts-account__link ${studyPlanActive ? "is-active" : ""}" href="/study-plan"><span class="ielts-account__icon ielts-account__icon--study-plan">${MENU_ICONS.studyPlan}</span>Study Plan</a>
@@ -1703,6 +1757,7 @@
                     <a class="${active === "speaking" ? "is-active" : ""}" href="/speaking">Speaking</a>
                     <a class="${active === "writing" ? "is-active" : ""}" href="/writing">Writing</a>
                     <a class="${active === "mock" ? "is-active" : ""}" href="/mock-tests">Mock Test</a>
+                    <a class="ielts-navbar__ai-coach ${active === "ai-coach" ? "is-active" : ""}" href="/ai-coach"><img src="/premium-icons/ai-coach-chip.webp?v=20260719" alt="" aria-hidden="true">AI Coach</a>
                 </nav>
                 <div class="ielts-navbar__auth">
                     ${renderThemeToggle()}

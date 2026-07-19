@@ -20,6 +20,7 @@
         reviewMistakes: Object.freeze({ free: false, premium: true }),
         vocabulary: Object.freeze({ free: false, premium: true }),
         studyPlan: Object.freeze({ free: false, premium: true }),
+        aiCoach: Object.freeze({ free: false, premium: true }),
         resultHistory: Object.freeze({ free: "limited", premium: true }),
         progressStatistics: Object.freeze({ free: false, premium: true })
     });
@@ -35,6 +36,7 @@
         Object.freeze({ key: "reviewMistakes", label: "Review Mistakes", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "vocabulary", label: "Vocabulary & AI Translate", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "studyPlan", label: "AI Study Plan", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true }),
+        Object.freeze({ key: "aiCoach", label: "IELTSX AI Coach", free: "Not available", premium: "Unlimited", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "resultHistory", label: "Result history", free: "Limited", premium: "Full", freeAvailable: false, premiumAvailable: true }),
         Object.freeze({ key: "progressStatistics", label: "Progress statistics", free: "Not available", premium: "Available", freeAvailable: false, premiumAvailable: true })
     ]);
@@ -50,6 +52,7 @@
         "Review Mistakes",
         "Vocabulary and AI Translate",
         "AI-powered Study Plan",
+        "Unlimited IELTSX AI Coach",
         "Full result history",
         "Progress statistics"
     ]);

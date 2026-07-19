@@ -5,6 +5,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
+const compression = require("compression");
 const fs = require("fs");
 const crypto = require("crypto");
 const User = require("./models/User");
@@ -16,6 +17,10 @@ const VocabularyWord = require("./models/VocabularyWord");
 const StudyPlan = require("./models/StudyPlan");
 const WritingSubmission = require("./models/WritingSubmission");
 const SpeakingSubmission = require("./models/SpeakingSubmission");
+const AIConversation = require("./models/AIConversation");
+const AIMessage = require("./models/AIMessage");
+const AIMemory = require("./models/AIMemory");
+const AIActionLog = require("./models/AIActionLog");
 const { createAuthToken, verifyAuthToken, publicUser, getAdminEmails, isAdminUser } = require("./lib/auth");
 const { createUserStore } = require("./lib/user-store");
 const { sendTelegramMessage } = require("./lib/telegram");
@@ -30,6 +35,8 @@ const { createVocabularyStore } = require("./lib/vocabulary-store");
 const { createMockTestStore } = require("./lib/mock-test-store");
 const { createStudyPlanStore } = require("./lib/study-plan-store");
 const { registerStudyPlanRoutes } = require("./lib/study-plan-routes");
+const { createAICoachStore } = require("./lib/ai-coach-store");
+const { registerAICoachRoutes } = require("./lib/ai-coach-routes");
 const ManualTestParser = require("./lib/manual-test-parser");
 const { sanitizeHtml, replaceInputsWithBlankMarkers } = require("./lib/ielts-import/htmlSanitizer");
 const { stripTags } = require("./lib/ielts-import/utils");
@@ -57,6 +64,13 @@ app.disable("x-powered-by");
 const ROOT_DIR = __dirname;
 const TRUST_PROXY_HEADERS = String(process.env.TRUST_PROXY_HEADERS || "").trim().toLowerCase() === "true";
 app.use(createSecurityHeaders({ trustForwardedProto: TRUST_PROXY_HEADERS }));
+app.use(compression({
+    threshold: 1024,
+    filter(req, res) {
+        if (req.headers["x-no-compression"]) return false;
+        return compression.filter(req, res);
+    }
+}));
 const authRateLimitStore = new AuthRateLimitStore({ mongoose });
 const loginRateLimit = createAuthRateLimiter({
     store: authRateLimitStore,
@@ -94,6 +108,15 @@ const vocabularyStore = createVocabularyStore({
 });
 const STUDY_PLANS_FILE = path.join(DATA_DIR, "study-plans.json");
 const studyPlanStore = createStudyPlanStore({ filePath: STUDY_PLANS_FILE, mongoose, StudyPlan });
+const AI_COACH_FILE = path.join(DATA_DIR, "ai-coach.json");
+const aiCoachStore = createAICoachStore({
+    filePath: AI_COACH_FILE,
+    mongoose,
+    AIConversation,
+    AIMessage,
+    AIMemory,
+    AIActionLog
+});
 const MANUAL_PAYMENT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000;
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
 const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
@@ -385,6 +408,10 @@ app.use((req, res, next) => {
 
 app.use(async (req, res, next) => {
     try {
+        const extension = path.extname(req.path).toLowerCase();
+        if (extension && extension !== ".html") {
+            return next();
+        }
         const token = getRequestAuthToken(req);
         if (token) {
             const payload = verifyAuthToken(token);
@@ -3505,8 +3532,8 @@ async function validateMockTestPayload(payload) {
 
     const isActive = ["active", "published"].includes(String(payload?.status || "").trim().toLowerCase());
 
-    if (isActive && (!filled(payload?.listeningTestId) || !filled(payload?.readingTestId) || !filled(payload?.writingTestId) || !filled(payload?.speakingTestId))) {
-        errors.push("Please select Listening, Reading, Writing, and Speaking tests.");
+    if (isActive && (!filled(payload?.listeningTestId) || !filled(payload?.readingTestId) || !filled(payload?.writingTestId))) {
+        errors.push("Please select Listening, Reading, and Writing tests. Speaking is generated automatically by AI.");
         return errors;
     }
 
@@ -4380,7 +4407,8 @@ function premiumFeatureLabel(featureKey) {
         detailedBandFeedback: "Detailed IELTS band feedback",
         reviewMistakes: "Review Mistakes",
         vocabulary: "Vocabulary and AI Translate",
-        studyPlan: "Study Plan"
+        studyPlan: "Study Plan",
+        aiCoach: "AI Coach"
     };
     return labels[featureKey] || "This feature";
 }
@@ -4751,6 +4779,11 @@ app.get("/dashboard", requirePageAuth, (req, res) => {
 
 app.get("/profile", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile.html"));
+});
+
+app.get("/ai-coach", requirePageAuth, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "ai-coach.html"));
 });
 
 app.get("/study-plan", requirePageAuth, requireStudyPlanAccessPage, (req, res) => {
@@ -6308,6 +6341,24 @@ registerStudyPlanRoutes(app, {
     mockTestStore,
     reviewMistakeStore,
     vocabularyStore,
+    loadWriting: async (userId) => mongoose.connection.readyState === 1
+        ? WritingSubmission.find({ userId: String(userId) }).sort({ createdAt: -1 }).limit(20).lean()
+        : [],
+    loadSpeaking: async (userId) => mongoose.connection.readyState === 1
+        ? SpeakingSubmission.find({ userId: String(userId) }).sort({ createdAt: -1 }).limit(20).lean()
+        : []
+});
+
+registerAICoachRoutes(app, {
+    requireAuth,
+    aiCoachStore,
+    hasPremiumAccess,
+    userProgressStore,
+    mockTestStore,
+    reviewMistakeStore,
+    vocabularyStore,
+    studyPlanStore,
+    userStore,
     loadWriting: async (userId) => mongoose.connection.readyState === 1
         ? WritingSubmission.find({ userId: String(userId) }).sort({ createdAt: -1 }).limit(20).lean()
         : [],
@@ -7993,7 +8044,7 @@ app.use((req, res, next) => {
             }
         }
 
-        const privateHtmls = ["/profile.html", "/profile-settings.html", "/full-test-player.html", "/vocabulary.html"];
+        const privateHtmls = ["/profile.html", "/profile-settings.html", "/full-test-player.html", "/vocabulary.html", "/ai-coach.html"];
         if (privateHtmls.includes(pathLower)) {
             if (!req.user) {
                 return res.redirect("/login");

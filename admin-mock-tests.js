@@ -53,8 +53,8 @@ const SECTION_CONFIG = {
         idField: "speakingTestId",
         endpoint: "/api/admin/speaking/full",
         adminUrl: "/admin-speaking/full?mockBuilder=1&section=full",
-        createLabel: "Create Speaking Test",
-        description: "Create Part 1, cue-card Part 2, Part 3, and publish a Full Speaking Test.",
+        createLabel: "Create Optional Fallback",
+        description: "AI generates a fresh linked Part 1, Part 2, and Part 3 for every attempt. An admin test is optional fallback content.",
         accent: "purple",
         icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path></svg>`
     }
@@ -136,7 +136,8 @@ function uniqueById(items) {
 }
 
 function hasAllSectionIds(test) {
-    return sectionOrder.every((section) => String(test?.[SECTION_CONFIG[section].idField] || "").trim());
+    return ["listening", "reading", "writing"]
+        .every((section) => String(test?.[SECTION_CONFIG[section].idField] || "").trim());
 }
 
 function nextMockNumber() {
@@ -226,9 +227,9 @@ function renderSectionCards() {
                     </div>
                 </div>
                 <label class="mock-field">
-                    <span>Select existing test</span>
+                    <span>${section === "speaking" ? "Optional admin fallback" : "Select existing test"}</span>
                     <select data-section-select="${escapeHtml(section)}">
-                        <option value="">Select ${escapeHtml(config.label)} test</option>
+                        <option value="">${section === "speaking" ? "AI generates fresh questions automatically" : `Select ${escapeHtml(config.label)} test`}</option>
                         ${options}
                     </select>
                 </label>
@@ -247,8 +248,8 @@ function renderPreview(section) {
     if (!item) {
         return `
             <div class="mock-preview-empty">
-                <strong>No ${escapeHtml(config.label)} test selected</strong>
-                <span>Create a new test or choose one from the dropdown.</span>
+                <strong>${section === "speaking" ? "AI-generated Speaking enabled" : `No ${escapeHtml(config.label)} test selected`}</strong>
+                <span>${section === "speaking" ? "Fresh questions will be generated when the candidate starts Speaking." : "Create a new test or choose one from the dropdown."}</span>
             </div>
         `;
     }
@@ -315,7 +316,7 @@ function validatePayload(payload) {
         return false;
     }
     if (payload.status === "active" && !hasAllSectionIds(payload)) {
-        setStatus("Active Mock Test requires Listening, Reading, Writing, and Speaking tests.", "error");
+        setStatus("Active Mock Test requires Listening, Reading, and Writing tests. Speaking is generated automatically.", "error");
         return false;
     }
     return true;
@@ -356,7 +357,10 @@ async function saveMockTest() {
     const savedUrl = new URL(window.location.href);
     savedUrl.searchParams.set("id", data.test.id);
     history.replaceState({}, "", savedUrl.toString());
-    setStatus(`Mock Test saved. ${selectedCount()} of 4 sections selected.`, "success");
+    const speakingStatus = sectionValue("speaking")
+        ? "Admin Speaking fallback selected."
+        : "AI-generated Speaking enabled.";
+    setStatus(`Mock Test saved. 3 required sections ready. ${speakingStatus}`, "success");
 }
 
 function openCreateModal(section) {

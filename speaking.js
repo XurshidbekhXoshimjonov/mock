@@ -853,7 +853,16 @@
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), SPEAKING_LOAD_TIMEOUT_MS);
         try {
-            const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}`, {
+            const detailParams = new URLSearchParams();
+            if (isSpeakingMockMode) {
+                const mockTestId = String(speakingParams.get("mockTestId") || speakingParams.get("testId") || "").trim();
+                if (mockTestId) {
+                    detailParams.set("mockMode", "1");
+                    detailParams.set("mockTestId", mockTestId);
+                }
+            }
+            const detailQuery = detailParams.size ? `?${detailParams.toString()}` : "";
+            const response = await fetch(`/api/speaking/${encodeURIComponent(sectionKey)}/${encodeURIComponent(testId)}${detailQuery}`, {
                 credentials: "include",
                 cache: "no-store",
                 signal: controller.signal
@@ -1728,11 +1737,18 @@
     }
 
     async function requestGeneratedSpeakingTest() {
+        const mockTestId = isSpeakingMockMode
+            ? String(speakingParams.get("mockTestId") || speakingParams.get("testId") || "").trim()
+            : "";
         const response = await fetch("/api/speaking/generate-test", {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ requestedAt: new Date().toISOString() })
+            body: JSON.stringify({
+                requestedAt: new Date().toISOString(),
+                mockMode: isSpeakingMockMode ? "1" : "0",
+                mockTestId
+            })
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.error || "Could not generate Speaking questions.");
@@ -1759,10 +1775,8 @@
     }
 
     async function prepareMockSpeakingSimulation(routeTestId = "") {
-        const resolvedTestId = resolveMockSpeakingTestId(routeTestId);
-        if (!resolvedTestId) {
-            throw new Error("Speaking mock test id is missing.");
-        }
+        const mockTestId = String(speakingParams.get("mockTestId") || speakingParams.get("testId") || "").trim();
+        if (!mockTestId) throw new Error("Speaking mock test id is missing.");
 
         state.speakingMode = "exam";
         state.section = "full";
@@ -1781,18 +1795,27 @@
             </section>
         `;
 
-        const test = await loadSpeakingTestDetail("full", resolvedTestId);
-        if (!Array.isArray(test.parts) || test.parts.length < 3) {
-            throw new Error("Speaking mock test must include Parts 1, 2, and 3.");
+        let test = defaultFullSpeakingTest();
+        const optionalAdminFallbackId = String(speakingParams.get("sourceTestId") || "").trim();
+        if (optionalAdminFallbackId) {
+            try {
+                const adminFallback = await loadSpeakingTestDetail("full", optionalAdminFallbackId);
+                if (Array.isArray(adminFallback.parts) && adminFallback.parts.length >= 3) {
+                    test = adminFallback;
+                }
+            } catch (error) {
+                console.warn("Optional admin Speaking fallback could not be loaded:", error.message);
+            }
         }
 
         state.test = test;
         state.loading = false;
         state.hasStarted = false;
         state.voiceFlow = createVoiceFlow();
-        logMockSpeakingTransition("mock speaking simulation loaded", {
+        logMockSpeakingTransition("mock speaking simulation ready for fresh AI questions", {
             part1Total: mockPartQuestions(1).length,
-            part3Total: mockPartQuestions(3).length
+            part3Total: mockPartQuestions(3).length,
+            hasAdminFallback: Boolean(optionalAdminFallbackId)
         });
         renderCurrentTest();
         notifyMockSpeakingReady();
@@ -1935,7 +1958,8 @@
             shouldRecord: isFreeMode ? true : (safe.shouldRecord === false ? false : !["prep", "complete"].includes(phase)),
             isComplete,
             prepSeconds: Math.max(5, Number(safe.prepSeconds || fallback.prepSeconds || SPEAKING_TIMING.part2Prep)),
-            latestTranscript: String(safe.latestTranscript || fallback.latestTranscript || "").trim()
+            latestTranscript: String(safe.latestTranscript || fallback.latestTranscript || "").trim(),
+            audioUrl: String(safe.audioUrl || fallback.audioUrl || "").trim()
         };
     }
 
@@ -3445,6 +3469,7 @@
 
         const finalTranscript = response.latestTranscript || transcript;
         answer.transcript = finalTranscript;
+        if (response.audioUrl) answer.audioUrl = response.audioUrl;
         flow.latestTranscript = finalTranscript || "Transcript unavailable. Your audio was recorded.";
         flow.partTurns = nextPartTurns(flow, answer.part);
         flow.answers.push(answer);
@@ -4516,7 +4541,10 @@
             form.append("userAnswer", userAnswer);
             form.append("transcript", userAnswer);
             form.append("audioUrls", JSON.stringify((records || []).map((record) => record?.audioUrl || "")));
-            records.forEach((record, index) => {
+            const recordsToUpload = mode === "full_test"
+                ? []
+                : (records || []).filter((record) => record?.blob);
+            recordsToUpload.forEach((record, index) => {
                 form.append("audio", new File([record.blob], `${mode}-${index + 1}.webm`, { type: record.blob.type || "audio/webm" }));
             });
 
@@ -4539,7 +4567,7 @@
                 body: form
             });
             const data = await response.json().catch(() => ({}));
-            if (!response.ok) throw new Error(data.error || data.message || "AI feedback failed. Please try again.");
+            if (!response.ok) throw new Error(data.message || data.error || "AI feedback failed. Please try again.");
             console.log("Speaking evaluation result", data);
             state.feedback = data.feedback;
             state.lastSpeakingAttempt = data.attempt || null;

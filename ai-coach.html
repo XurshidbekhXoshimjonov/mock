@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f8fafc">
+    <title>IELTSX AI Coach</title>
+    <link rel="stylesheet" href="/fonts/plus-jakarta-sans.css">
+    <link rel="stylesheet" href="/ai-coach.css?v=20260719-performance-v1">
+</head>
+<body data-skip-global-navbar>
+    <div class="coach-shell" id="coachApp">
+        <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+        <aside class="coach-sidebar" id="coachSidebar" aria-label="AI Coach navigation">
+            <div class="sidebar-top">
+                <a class="coach-logo" href="/" aria-label="IELTSX home">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 979 324" role="img" aria-label="ieltsx.org logo">
+                        <path d="M 818 194 L 816 196 L 816 200 L 821 203 L 825 200 L 824 195 Z M 887 157 L 887 202 L 897 202 L 897 191 L 899 189 L 905 189 L 909 193 L 914 202 L 924 202 L 924 200 L 917 190 L 917 188 L 923 182 L 925 177 L 925 170 L 922 163 L 914 158 L 909 157 Z M 897 167 L 899 165 L 909 165 L 914 169 L 915 176 L 910 181 L 897 180 Z M 948 157 L 941 160 L 933 170 L 931 178 L 933 190 L 938 197 L 950 203 L 960 203 L 971 199 L 972 180 L 963 180 L 963 192 L 961 194 L 955 195 L 949 193 L 944 189 L 942 185 L 942 174 L 949 166 L 959 165 L 968 169 L 972 165 L 972 163 L 969 160 L 958 156 Z M 843 159 L 835 166 L 831 177 L 831 184 L 835 194 L 842 200 L 850 203 L 859 203 L 866 201 L 873 196 L 878 186 L 878 173 L 875 167 L 871 162 L 861 157 L 855 156 Z M 851 165 L 861 166 L 868 175 L 867 187 L 863 192 L 857 195 L 848 193 L 844 189 L 841 182 L 843 172 Z M 698 157 L 734 202 L 806 202 L 736 118 L 725 126 L 711 140 Z M 296 49 L 296 83 L 335 84 L 335 204 L 373 204 L 374 83 L 406 82 L 412 83 L 413 49 Z M 207 49 L 207 204 L 309 204 L 309 171 L 245 170 L 245 49 Z M 71 49 L 71 204 L 186 204 L 185 171 L 108 170 L 109 143 L 169 142 L 169 110 L 108 108 L 108 84 L 110 82 L 184 82 L 184 49 Z M 6 49 L 6 204 L 44 204 L 44 49 Z M 476 46 L 458 51 L 450 55 L 442 61 L 436 68 L 431 77 L 428 90 L 430 108 L 436 120 L 449 131 L 472 140 L 492 145 L 502 150 L 507 156 L 508 159 L 507 165 L 503 170 L 496 173 L 476 174 L 459 170 L 440 160 L 424 187 L 434 195 L 446 201 L 458 205 L 479 208 L 499 207 L 514 203 L 524 198 L 534 190 L 539 183 L 544 171 L 545 164 L 544 148 L 536 132 L 527 124 L 509 115 L 489 110 L 471 103 L 466 97 L 466 90 L 467 87 L 471 83 L 480 79 L 502 80 L 514 84 L 524 90 L 527 89 L 540 62 L 533 57 L 515 49 L 501 46 Z M 727 97 L 719 89 L 713 89 L 710 87 L 649 21 L 566 20 L 573 28 L 650 99 L 654 99 L 662 102 L 668 106 L 673 112 L 652 127 L 630 146 L 564 211 L 523 248 L 476 285 L 426 318 L 461 306 L 508 284 L 547 262 L 593 231 L 624 207 L 641 192 L 676 157 Z M 846 9 L 844 7 L 839 6 L 824 9 L 816 13 L 798 28 L 756 28 L 743 38 L 769 45 L 773 48 L 752 66 L 724 66 L 718 71 L 719 73 L 730 79 L 742 88 L 771 75 L 784 65 L 792 61 L 795 66 L 796 74 L 801 90 L 811 83 L 811 75 L 815 55 L 816 42 L 840 22 L 846 13 Z" fill="currentColor" fill-rule="evenodd"/>
+                    </svg>
+                </a>
+                <button class="icon-button sidebar-close" id="sidebarClose" type="button" aria-label="Close sidebar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+                </button>
+            </div>
+            <a class="back-home-link" href="/" aria-label="Back to IELTSX home">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+                Back to home
+            </a>
+
+            <button class="new-chat-button" id="newChatButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                New chat
+            </button>
+
+            <label class="history-search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+                <input id="historySearch" type="search" placeholder="Search chats" autocomplete="off">
+            </label>
+
+            <div class="conversation-groups" id="conversationGroups" aria-live="polite"></div>
+
+            <nav class="sidebar-nav" aria-label="Learning tools">
+                <a class="is-active" href="/ai-coach"><span><img class="ai-chip-nav-icon" src="/premium-icons/ai-coach-chip.webp?v=20260719" alt="" aria-hidden="true"></span>AI Coach</a>
+                <a href="/study-plan"><span data-icon="calendar"></span>Study Plan</a>
+                <a href="/review-mistakes"><span data-icon="rotate"></span>Mistake Review</a>
+                <a href="/vocabulary"><span data-icon="book"></span>Vocabulary</a>
+                <a href="/dashboard"><span data-icon="chart"></span>Progress</a>
+            </nav>
+
+            <button class="user-card" id="memoryButton" type="button">
+                <span class="user-avatar" id="userAvatar">U</span>
+                <span class="user-copy"><strong id="userName">IELTSX Student</strong><small id="userStatus">Free plan</small></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+            </button>
+        </aside>
+
+        <main class="coach-main">
+            <header class="chat-header">
+                <button class="icon-button mobile-menu" id="mobileMenu" type="button" aria-label="Open sidebar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="ai-mark" aria-hidden="true"><img src="/premium-icons/ai-coach-chip.webp?v=20260719" alt=""></div>
+                <div class="header-copy">
+                    <div class="header-title-line"><h1>IELTSX AI Coach</h1><span class="status-dot" title="Connected"></span></div>
+                    <p>Connected to your IELTSX progress</p>
+                </div>
+                <button class="icon-button" id="chatOptions" type="button" aria-label="Conversation options">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg>
+                </button>
+                <div class="options-menu" id="optionsMenu" hidden>
+                    <button type="button" data-action="rename">Rename conversation</button>
+                    <button type="button" class="danger" data-action="delete">Delete conversation</button>
+                </div>
+            </header>
+
+            <section class="messages-scroll" id="messagesScroll">
+                <div class="welcome-state" id="welcomeState">
+                    <div class="welcome-icon"><img src="/premium-icons/ai-coach-chip.webp?v=20260719" alt="" aria-hidden="true"></div>
+                    <h2>How can I help you improve today?</h2>
+                    <p>I can analyse your IELTSX progress, review saved mistakes, create realistic plans, and help manage your learning data—with your confirmation.</p>
+                    <div class="quick-prompts" id="quickPrompts">
+                        <button type="button">Analyse my progress</button>
+                        <button type="button">Create today’s plan</button>
+                        <button type="button">Review my mistakes</button>
+                        <button type="button">Estimate my current band</button>
+                        <button type="button">Suggest vocabulary</button>
+                        <button type="button">What should I study next?</button>
+                    </div>
+                </div>
+                <div class="message-list" id="messageList"></div>
+                <div class="typing-card" id="typingCard" hidden>
+                    <div class="ai-avatar">AI</div>
+                    <div class="typing-bubble"><span></span><span></span><span></span></div>
+                </div>
+            </section>
+
+            <footer class="composer-wrap">
+                <form class="composer" id="composer">
+                    <button type="button" class="composer-icon" aria-label="Attach a file" title="Attachments coming soon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21.4 11.6-8.9 8.9a6 6 0 0 1-8.5-8.5l9.6-9.6a4 4 0 0 1 5.7 5.7l-9.6 9.6a2 2 0 0 1-2.8-2.8l8.9-8.9"></path></svg>
+                    </button>
+                    <textarea id="messageInput" rows="1" maxlength="6000" placeholder="Message IELTSX AI Coach…" aria-label="Message IELTSX AI Coach"></textarea>
+                    <button type="button" class="composer-icon" id="micButton" aria-label="Use microphone">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg>
+                    </button>
+                    <button type="submit" class="send-button" id="sendButton" aria-label="Send message" disabled>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                    </button>
+                </form>
+                <p class="ai-note">AI can make mistakes. Please double-check important information.</p>
+            </footer>
+        </main>
+
+        <aside class="context-panel" aria-label="IELTSX learning context">
+            <section class="context-card" id="progressCard">
+                <div class="context-heading"><h2>Your progress</h2><a href="/dashboard">View all</a></div>
+                <div class="band-overview"><strong id="overallBand">—</strong><span>Overall band<br>estimate</span></div>
+                <div class="mini-chart" id="miniChart" aria-label="Recent band trend"></div>
+                <div class="metric-grid">
+                    <div><strong id="testsTaken">0</strong><span>Tests taken</span></div>
+                    <div><strong id="improvement">—</strong><span>Improvement</span></div>
+                    <div><strong id="studyStreak">0</strong><span>Day streak</span></div>
+                </div>
+                <p class="empty-data" id="progressEmpty" hidden>No progress data is available yet.</p>
+            </section>
+
+            <section class="context-card">
+                <div class="context-heading"><h2>Today’s plan</h2><a href="/study-plan">View full plan</a></div>
+                <div class="plan-summary"><strong id="planPercent">0%</strong><span id="planCount">0 of 0 completed</span></div>
+                <div class="progress-track"><span id="planProgress"></span></div>
+                <div class="today-tasks" id="todayTasks"><p>No tasks scheduled for today.</p></div>
+            </section>
+
+            <section class="context-card">
+                <div class="context-heading"><h2>Quick actions</h2></div>
+                <div class="quick-actions" id="quickActions">
+                    <button type="button">Analyse my progress</button>
+                    <button type="button">Review my mistakes</button>
+                    <button type="button">Create study plan</button>
+                    <button type="button">Vocabulary suggestions</button>
+                    <button type="button">Estimate my band</button>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <dialog class="memory-dialog" id="memoryDialog">
+        <div class="dialog-head"><div><span>Learning preferences</span><h2>AI memory</h2></div><button type="button" id="memoryClose" aria-label="Close">×</button></div>
+        <p>Only long-term preferences you explicitly save appear here. Dashboard scores and tasks always come from IELTSX data.</p>
+        <div class="memory-list" id="memoryList"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/ai-coach.js?v=20260719-performance-v1" defer></script>
+</body>
+</html>
