@@ -44,3 +44,26 @@ test("standalone Listening imports preserve adjacent MCQ and select-matching ran
     assert.equal(questions.find((question) => question.number === 15).options.length, 2);
     assert.match(questions.find((question) => question.number === 15).question, /Item 15/);
 });
+
+test("standalone Listening imports recognize inp-number completion fields", () => {
+    const fields = Array.from({ length: 10 }, (_, index) => {
+        const number = index + 1;
+        return `<p>Detail ${number}: <input id="inp${number}" type="text"></p>`;
+    }).join("");
+    const html = `
+        <div class="part-section" id="part1">
+            <div class="stitle">Questions 1–10</div>
+            <p class="instr">Complete the notes below.</p>
+            <div class="notes">${fields}</div>
+        </div>
+    `;
+
+    const [section] = parseStandaloneListeningHtml(html, {});
+    const [group] = section.questionGroups;
+
+    assert.equal(group.type, "note_completion");
+    assert.deepEqual(group.questions.map((question) => question.number), [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    ]);
+    assert.match(group.content.join("\n"), /\{\{10\}\}/);
+});
