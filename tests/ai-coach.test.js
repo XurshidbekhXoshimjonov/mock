@@ -102,6 +102,7 @@ test("AI Coach sends the exact message and the latest 20 conversation messages t
 
     assert.equal(reply.content, "Odamlar avtomobillarga tobora ko‘proq qaram bo‘lib bormoqda.");
     assert.equal(requestBody.messages.at(-1).content, message);
+    assert.equal(requestBody.reasoning_effort, "none");
     assert.equal(requestBody.messages.filter((item) => item.role === "user" || item.role === "assistant").length, 21);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-3")), false);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-4")), true);
