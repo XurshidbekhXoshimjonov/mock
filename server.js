@@ -55,27 +55,27 @@ app.disable("etag");
 app.disable("x-powered-by");
 
 const ROOT_DIR = __dirname;
-const IS_VERCEL = Boolean(process.env.VERCEL);
-app.use(createSecurityHeaders({ trustForwardedProto: IS_VERCEL }));
+const TRUST_PROXY_HEADERS = String(process.env.TRUST_PROXY_HEADERS || "").trim().toLowerCase() === "true";
+app.use(createSecurityHeaders({ trustForwardedProto: TRUST_PROXY_HEADERS }));
 const authRateLimitStore = new AuthRateLimitStore({ mongoose });
 const loginRateLimit = createAuthRateLimiter({
     store: authRateLimitStore,
     rules: [
-        ipRule({ scope: "login-ip", limit: 25, windowMs: 15 * 60 * 1000, trustForwardedFor: IS_VERCEL }),
+        ipRule({ scope: "login-ip", limit: 25, windowMs: 15 * 60 * 1000, trustForwardedFor: TRUST_PROXY_HEADERS }),
         emailRule({ scope: "login-email", limit: 8, windowMs: 15 * 60 * 1000 })
     ]
 });
 const signupRateLimit = createAuthRateLimiter({
     store: authRateLimitStore,
     rules: [
-        ipRule({ scope: "signup-ip", limit: 10, windowMs: 60 * 60 * 1000, trustForwardedFor: IS_VERCEL }),
+        ipRule({ scope: "signup-ip", limit: 10, windowMs: 60 * 60 * 1000, trustForwardedFor: TRUST_PROXY_HEADERS }),
         emailRule({ scope: "signup-email", limit: 3, windowMs: 60 * 60 * 1000 })
     ]
 });
-const RUNTIME_WRITE_DIR = IS_VERCEL ? path.join("/tmp", "ieltsx") : ROOT_DIR;
+const RUNTIME_WRITE_DIR = ROOT_DIR;
 const BUNDLED_DATA_DIR = path.join(ROOT_DIR, "data");
 const UPLOAD_DIR = path.join(RUNTIME_WRITE_DIR, "uploads");
-const DATA_DIR = IS_VERCEL ? path.join(RUNTIME_WRITE_DIR, "data") : BUNDLED_DATA_DIR;
+const DATA_DIR = BUNDLED_DATA_DIR;
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const userStore = createUserStore({ User, usersFile: USERS_FILE });
 const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
@@ -170,21 +170,8 @@ function ensureRuntimeDir(dirPath) {
     }
 }
 
-function bootstrapRuntimeDataDir() {
-    if (!IS_VERCEL || !fs.existsSync(BUNDLED_DATA_DIR) || fs.existsSync(USERS_FILE)) {
-        return;
-    }
-
-    try {
-        fs.cpSync(BUNDLED_DATA_DIR, DATA_DIR, { recursive: true });
-    } catch (error) {
-        console.warn("Could not copy bundled data to runtime storage:", error.message);
-    }
-}
-
 ensureRuntimeDir(UPLOAD_DIR);
 ensureRuntimeDir(DATA_DIR);
-bootstrapRuntimeDataDir();
 ensureRuntimeDir(READING_TESTS_DIR);
 ensureRuntimeDir(LISTENING_TESTS_DIR);
 ensureRuntimeDir(FULL_TESTS_DIR);
@@ -308,7 +295,7 @@ const candidatePhotoUpload = multer({
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(createCsrfProtection({
-    trustForwardedProto: IS_VERCEL,
+    trustForwardedProto: TRUST_PROXY_HEADERS,
     pathAllowedOrigins: {
         "/api/translate": TRANSLATE_CORS_ORIGINS,
         "/api/translate-context": TRANSLATE_CORS_ORIGINS
@@ -1223,8 +1210,7 @@ async function requestContextTranslationFallback(payload, cause) {
         statusCode: cause?.statusCode || null,
         provider: "openai",
         hasOpenAIKey: Boolean(OPENAI_API_KEY),
-        hasGoogleTranslateKey: Boolean(GOOGLE_TRANSLATE_API_KEY),
-        isVercel: IS_VERCEL
+        hasGoogleTranslateKey: Boolean(GOOGLE_TRANSLATE_API_KEY)
     });
 
     const normalized = normalizeVocabularyWord(payload.selectedText);
@@ -8073,14 +8059,12 @@ app.use(uploadErrorResponse);
 
 const PORT = process.env.PORT || 30004;
 
-if (!IS_VERCEL) {
-    app.listen(PORT, () => {
-        console.info(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, () => {
+    console.info(`Server running on http://localhost:${PORT}`);
 
-        if (process.env.BOT_TOKEN && process.env.ADMIN_ID) {
-            sendTelegramMessage("IELTSX server started").catch(() => {});
-        }
-    });
-}
+    if (process.env.BOT_TOKEN && process.env.ADMIN_ID) {
+        sendTelegramMessage("IELTSX server started").catch(() => {});
+    }
+});
 
 module.exports = app;

@@ -140,4 +140,4 @@ dist
 google-credentials*.json
 *google-application-credentials*.json
 service-account*.json
-.vercel
+.env*
