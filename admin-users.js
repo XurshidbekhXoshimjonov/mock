@@ -17,6 +17,12 @@
         if (Number.isNaN(date.getTime())) return "—";
         return includeTime ? date.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }) : date.toISOString().slice(0, 10);
     }
+    function dateInputValue(date = new Date()) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
     function authHeaders(json = false) {
         return json ? { "Content-Type": "application/json" } : {};
     }
@@ -121,7 +127,11 @@
     function calculateExpiry() {
         const plan = premium.premiumPlans[byId("managePlan").value];
         const start = new Date(`${byId("manageStartDate").value}T00:00:00`);
-        if (plan && !Number.isNaN(start.getTime())) byId("manageExpiryDate").value = new Date(start.getTime() + plan.durationDays * 86400000).toISOString().slice(0, 10);
+        if (plan && !Number.isNaN(start.getTime())) {
+            const expiry = new Date(start);
+            expiry.setDate(expiry.getDate() + plan.durationDays);
+            byId("manageExpiryDate").value = dateInputValue(expiry);
+        }
     }
     function openManage(user) {
         managedUser = user;
@@ -130,21 +140,37 @@
         byId("manageCurrentPlan").value = `${details.planName} — ${details.statusLabel}`;
         byId("managePlan").innerHTML = Object.values(premium.premiumPlans).map((plan) => `<option value="${plan.id}">${escapeHtml(plan.name)} — ${plan.durationDays} days</option>`).join("");
         byId("managePlan").value = details.planId !== "free" && premium.premiumPlans[details.planId] ? details.planId : "monthly";
-        byId("manageStartDate").value = details.startedAt ? formatDate(details.startedAt, false) : new Date().toISOString().slice(0, 10);
+        // A new grant must begin now. Reusing an expired subscription's original
+        // start date produces another already-expired subscription.
+        byId("manageStartDate").value = dateInputValue();
         byId("manageNote").value = user.subscriptionAdminNote || ""; calculateExpiry();
         byId("manageSubscriptionStatus").hidden = true; modal.hidden = false; document.body.classList.add("manage-modal-open");
     }
     function closeManage() { modal.hidden = true; document.body.classList.remove("manage-modal-open"); managedUser = null; }
     async function saveSubscription(status = "active") {
         if (!managedUser) return;
-        const statusEl = byId("manageSubscriptionStatus"); statusEl.hidden = false; statusEl.textContent = "Saving…";
-        const response = await fetch(`/api/admin/users/${encodeURIComponent(managedUser.id)}/subscription`, {
-            method: "PUT", credentials: "include", headers: authHeaders(true), body: JSON.stringify({ planId: byId("managePlan").value, status, startDate: byId("manageStartDate").value, expiryDate: byId("manageExpiryDate").value, note: byId("manageNote").value })
-        });
-        const data = await response.json();
-        if (!response.ok) { statusEl.textContent = data.error || "Could not update subscription"; statusEl.className = "status-text error"; return; }
-        refreshCurrentAuthUser(data.user);
-        closeManage(); await Promise.all([loadUsers(), loadStats()]); setStatus(status === "cancelled" ? "Subscription cancelled." : "Premium access granted.", "success");
+        const statusEl = byId("manageSubscriptionStatus");
+        const actionButtons = Array.from(form.querySelectorAll("button"));
+        statusEl.hidden = false;
+        statusEl.textContent = "Saving…";
+        statusEl.className = "status-text";
+        actionButtons.forEach((button) => { button.disabled = true; });
+        try {
+            const response = await fetch(`/api/admin/users/${encodeURIComponent(managedUser.id)}/subscription`, {
+                method: "PUT", credentials: "include", headers: authHeaders(true), body: JSON.stringify({ planId: byId("managePlan").value, status, startDate: byId("manageStartDate").value, expiryDate: byId("manageExpiryDate").value, note: byId("manageNote").value })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || data.message || "Could not update subscription");
+            refreshCurrentAuthUser(data.user);
+            closeManage();
+            await Promise.all([loadUsers(), loadStats()]);
+            setStatus(status === "cancelled" ? "Subscription cancelled." : "Premium access granted.", "success");
+        } catch (error) {
+            statusEl.textContent = error.message || "Could not update subscription";
+            statusEl.className = "status-text error";
+        } finally {
+            actionButtons.forEach((button) => { button.disabled = false; });
+        }
     }
     async function updateManualPayment(id, action) {
         const note = byId("manualPaymentsTableBody").querySelector(`[data-payment-note="${CSS.escape(id)}"]`)?.value || "";

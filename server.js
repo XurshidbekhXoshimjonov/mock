@@ -7165,6 +7165,12 @@ app.put("/api/admin/users/:id/subscription", requireAuth, adminOnly, async (req,
             ? now
             : new Date(req.body?.expiryDate || (startDate.getTime() + plan.durationDays * 86400000));
         if (Number.isNaN(expiryDate.getTime())) return res.status(400).json({ error: "A valid expiry date is required" });
+        if (!cancel && expiryDate <= startDate) {
+            return res.status(400).json({ error: "Expiry date must be after the start date" });
+        }
+        if (!cancel && expiryDate <= now) {
+            return res.status(400).json({ error: "Expiry date must be in the future" });
+        }
 
         const updates = cancel ? {
             plan: "free",
