@@ -12,11 +12,11 @@ test("standalone Listening imports preserve adjacent MCQ and select-matching ran
     `).join("");
     const matching = [15, 16, 17, 18, 19, 20].map((number) => `
         <div class="match-row">
-            <span class="qnum">${number}</span> Item ${number}
+            <span class="ml">${number}</span><span class="mt">Item ${number}</span>
             <select data-q="${number}">
                 <option value=""></option>
-                <option value="A">A — Alpha</option>
-                <option value="B">B — Beta</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
             </select>
         </div>
     `).join("");
@@ -27,7 +27,14 @@ test("standalone Listening imports preserve adjacent MCQ and select-matching ran
             ${radios}
             <div class="stitle">Questions 15–20</div>
             <p class="instr">Choose answers from the box.</p>
-            ${matching}
+            <div class="match-box">
+                <div class="match-box-title">Main theme</div>
+                <div class="match-opts">
+                    <div>A Alpha</div>
+                    <div>B Beta</div>
+                </div>
+            </div>
+            <div class="match-rows">${matching}</div>
         </div>
     `;
 
@@ -41,8 +48,14 @@ test("standalone Listening imports preserve adjacent MCQ and select-matching ran
         section.questionGroups.map((group) => group.type),
         ["multiple_choice", "matching"]
     );
-    assert.equal(questions.find((question) => question.number === 15).options.length, 2);
-    assert.match(questions.find((question) => question.number === 15).question, /Item 15/);
+    const matchingGroup = section.questionGroups[1];
+    const question15 = questions.find((question) => question.number === 15);
+    assert.equal(question15.options.length, 2);
+    assert.equal(question15.options[0].html, "Alpha");
+    assert.equal(question15.question, "Item 15");
+    assert.equal(matchingGroup.optionsTitle, "Main theme");
+    assert.equal(matchingGroup.instructionText, "Choose answers from the box.");
+    assert.equal(matchingGroup.options[1].html, "Beta");
 });
 
 test("standalone Listening imports recognize inp-number completion fields", () => {

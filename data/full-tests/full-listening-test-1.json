@@ -230,12 +230,12 @@
           {
             "type": "matching",
             "instructionTitle": "Questions 15–20",
-            "instructionText": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20. Main theme A living in a different century B managing to achieve success C ageing slowly D growing up E experiencing disappointment F living in a magical place G overcoming poverty H handling conflict",
+            "instructionText": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20.",
             "questions": [
               {
                 "number": 15,
                 "type": "matching",
-                "question": "The Climb...",
+                "question": "The Climb",
                 "options": [
                   {
                     "value": "A",
@@ -283,7 +283,7 @@
               {
                 "number": 16,
                 "type": "matching",
-                "question": "The Voyagers...",
+                "question": "The Voyagers",
                 "options": [
                   {
                     "value": "A",
@@ -331,7 +331,7 @@
               {
                 "number": 17,
                 "type": "matching",
-                "question": "Joey Brown...",
+                "question": "Joey Brown",
                 "options": [
                   {
                     "value": "A",
@@ -379,7 +379,7 @@
               {
                 "number": 18,
                 "type": "matching",
-                "question": "Main Street...",
+                "question": "Main Street",
                 "options": [
                   {
                     "value": "A",
@@ -427,7 +427,7 @@
               {
                 "number": 19,
                 "type": "matching",
-                "question": "Millie and Mike...",
+                "question": "Millie and Mike",
                 "options": [
                   {
                     "value": "A",
@@ -475,7 +475,7 @@
               {
                 "number": 20,
                 "type": "matching",
-                "question": "Windswept...",
+                "question": "Windswept",
                 "options": [
                   {
                     "value": "A",
@@ -523,38 +523,47 @@
             ],
             "options": [
               {
-                "letter": "A",
-                "text": "A"
+                "value": "A",
+                "label": "A - living in a different century",
+                "html": "living in a different century"
               },
               {
-                "letter": "B",
-                "text": "B"
+                "value": "B",
+                "label": "B - managing to achieve success",
+                "html": "managing to achieve success"
               },
               {
-                "letter": "C",
-                "text": "C"
+                "value": "C",
+                "label": "C - ageing slowly",
+                "html": "ageing slowly"
               },
               {
-                "letter": "D",
-                "text": "D"
+                "value": "D",
+                "label": "D - growing up",
+                "html": "growing up"
               },
               {
-                "letter": "E",
-                "text": "E"
+                "value": "E",
+                "label": "E - experiencing disappointment",
+                "html": "experiencing disappointment"
               },
               {
-                "letter": "F",
-                "text": "F"
+                "value": "F",
+                "label": "F - living in a magical place",
+                "html": "living in a magical place"
               },
               {
-                "letter": "G",
-                "text": "G"
+                "value": "G",
+                "label": "G - overcoming poverty",
+                "html": "overcoming poverty"
               },
               {
-                "letter": "H",
-                "text": "H"
+                "value": "H",
+                "label": "H - handling conflict",
+                "html": "handling conflict"
               }
             ],
+            "optionsTitle": "Main theme",
             "imageIds": [],
             "layoutHtml": ""
           }
@@ -715,12 +724,12 @@
           {
             "type": "matching",
             "instructionTitle": "Questions 27–30",
-            "instructionText": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30. Benefits A a broader practical experience of the field B chance to publicise own work C effective way of keeping up-to-date D looks good on a CV E provides useful access to resources F way to make useful contacts",
+            "instructionText": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30.",
             "questions": [
               {
                 "number": 27,
                 "type": "matching",
-                "question": "going to Mechanical Engineers’ Society meetings...",
+                "question": "going to Mechanical Engineers’ Society meetings",
                 "options": [
                   {
                     "value": "A",
@@ -758,7 +767,7 @@
               {
                 "number": 28,
                 "type": "matching",
-                "question": "Visiting different workplaces...",
+                "question": "Visiting different workplaces",
                 "options": [
                   {
                     "value": "A",
@@ -796,7 +805,7 @@
               {
                 "number": 29,
                 "type": "matching",
-                "question": "getting some work experience abroad...",
+                "question": "getting some work experience abroad",
                 "options": [
                   {
                     "value": "A",
@@ -834,7 +843,7 @@
               {
                 "number": 30,
                 "type": "matching",
-                "question": "attending an international conference...",
+                "question": "attending an international conference",
                 "options": [
                   {
                     "value": "A",
@@ -872,30 +881,37 @@
             ],
             "options": [
               {
-                "letter": "A",
-                "text": "A"
+                "value": "A",
+                "label": "A - a broader practical experience of the field",
+                "html": "a broader practical experience of the field"
               },
               {
-                "letter": "B",
-                "text": "B"
+                "value": "B",
+                "label": "B - chance to publicise own work",
+                "html": "chance to publicise own work"
               },
               {
-                "letter": "C",
-                "text": "C"
+                "value": "C",
+                "label": "C - effective way of keeping up-to-date",
+                "html": "effective way of keeping up-to-date"
               },
               {
-                "letter": "D",
-                "text": "D"
+                "value": "D",
+                "label": "D - looks good on a CV",
+                "html": "looks good on a CV"
               },
               {
-                "letter": "E",
-                "text": "E"
+                "value": "E",
+                "label": "E - provides useful access to resources",
+                "html": "provides useful access to resources"
               },
               {
-                "letter": "F",
-                "text": "F"
+                "value": "F",
+                "label": "F - way to make useful contacts",
+                "html": "way to make useful contacts"
               }
             ],
+            "optionsTitle": "Benefits",
             "imageIds": [],
             "layoutHtml": ""
           }
@@ -1063,8 +1079,8 @@
     "imageCount": 0,
     "answerKeyCount": 40
   },
-  "createdAt": "2026-07-19T12:04:14.135Z",
-  "publishedAt": "2026-07-19T12:04:14.144Z",
+  "createdAt": "2026-07-19T12:10:22.620Z",
+  "publishedAt": "2026-07-19T12:10:22.627Z",
   "skill": "listening",
   "subtitle": "Listening full test",
   "manualListeningTestId": "full-listening-test-1-listening-full"

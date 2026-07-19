@@ -18,7 +18,7 @@
     },
     {
       "title": "Questions 15–20",
-      "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20. Main theme A living in a different century B managing to achieve success C ageing slowly D growing up E experiencing disappointment F living in a magical place G overcoming poverty H handling conflict",
+      "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20.",
       "questionNumbers": [
         15,
         16,
@@ -125,7 +125,7 @@
     {
       "number": 15,
       "type": "matching",
-      "question": "The Climb...",
+      "question": "The Climb",
       "options": [
         {
           "value": "A",
@@ -173,7 +173,7 @@
     {
       "number": 16,
       "type": "matching",
-      "question": "The Voyagers...",
+      "question": "The Voyagers",
       "options": [
         {
           "value": "A",
@@ -221,7 +221,7 @@
     {
       "number": 17,
       "type": "matching",
-      "question": "Joey Brown...",
+      "question": "Joey Brown",
       "options": [
         {
           "value": "A",
@@ -269,7 +269,7 @@
     {
       "number": 18,
       "type": "matching",
-      "question": "Main Street...",
+      "question": "Main Street",
       "options": [
         {
           "value": "A",
@@ -317,7 +317,7 @@
     {
       "number": 19,
       "type": "matching",
-      "question": "Millie and Mike...",
+      "question": "Millie and Mike",
       "options": [
         {
           "value": "A",
@@ -365,7 +365,7 @@
     {
       "number": 20,
       "type": "matching",
-      "question": "Windswept...",
+      "question": "Windswept",
       "options": [
         {
           "value": "A",
@@ -413,7 +413,7 @@
   ],
   "images": [],
   "sourceFullTestId": "full-listening-test-1",
-  "createdAt": "2026-07-19T12:04:14.135Z",
+  "createdAt": "2026-07-19T12:10:22.620Z",
   "parts": [
     {
       "partNumber": 2,
@@ -534,41 +534,41 @@
           "type": "matching",
           "questionRange": "Questions 15–20",
           "title": "",
-          "optionsTitle": "",
+          "optionsTitle": "Main theme",
           "example": "",
-          "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20. Main theme A living in a different century B managing to achieve success C ageing slowly D growing up E experiencing disappointment F living in a magical place G overcoming poverty H handling conflict",
+          "instruction": "What is the main theme of each of the following musicals?Choose SIX answers from the box and write the correct letter, A–H, next to questions 15–20.",
           "options": [
             {
               "letter": "A",
-              "text": "A"
+              "text": "living in a different century"
             },
             {
               "letter": "B",
-              "text": "B"
+              "text": "managing to achieve success"
             },
             {
               "letter": "C",
-              "text": "C"
+              "text": "ageing slowly"
             },
             {
               "letter": "D",
-              "text": "D"
+              "text": "growing up"
             },
             {
               "letter": "E",
-              "text": "E"
+              "text": "experiencing disappointment"
             },
             {
               "letter": "F",
-              "text": "F"
+              "text": "living in a magical place"
             },
             {
               "letter": "G",
-              "text": "G"
+              "text": "overcoming poverty"
             },
             {
               "letter": "H",
-              "text": "H"
+              "text": "handling conflict"
             }
           ],
           "rows": [],
@@ -581,43 +581,43 @@
             {
               "number": 15,
               "questionNumber": 15,
-              "question": "The Climb...",
-              "text": "The Climb...",
+              "question": "The Climb",
+              "text": "The Climb",
               "answer": "The Climb — main theme"
             },
             {
               "number": 16,
               "questionNumber": 16,
-              "question": "The Voyagers...",
-              "text": "The Voyagers...",
+              "question": "The Voyagers",
+              "text": "The Voyagers",
               "answer": "The Voyagers — main theme"
             },
             {
               "number": 17,
               "questionNumber": 17,
-              "question": "Joey Brown...",
-              "text": "Joey Brown...",
+              "question": "Joey Brown",
+              "text": "Joey Brown",
               "answer": "Joey Brown — main theme"
             },
             {
               "number": 18,
               "questionNumber": 18,
-              "question": "Main Street...",
-              "text": "Main Street...",
+              "question": "Main Street",
+              "text": "Main Street",
               "answer": "Main Street — main theme"
             },
             {
               "number": 19,
               "questionNumber": 19,
-              "question": "Millie and Mike...",
-              "text": "Millie and Mike...",
+              "question": "Millie and Mike",
+              "text": "Millie and Mike",
               "answer": "Millie and Mike — main theme"
             },
             {
               "number": 20,
               "questionNumber": 20,
-              "question": "Windswept...",
-              "text": "Windswept...",
+              "question": "Windswept",
+              "text": "Windswept",
               "answer": "Windswept — main theme"
             }
           ]

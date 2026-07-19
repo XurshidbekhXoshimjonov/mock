@@ -20,7 +20,7 @@
     },
     {
       "title": "Questions 27–30",
-      "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30. Benefits A a broader practical experience of the field B chance to publicise own work C effective way of keeping up-to-date D looks good on a CV E provides useful access to resources F way to make useful contacts",
+      "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30.",
       "questionNumbers": [
         27,
         28,
@@ -171,7 +171,7 @@
     {
       "number": 27,
       "type": "matching",
-      "question": "going to Mechanical Engineers’ Society meetings...",
+      "question": "going to Mechanical Engineers’ Society meetings",
       "options": [
         {
           "value": "A",
@@ -209,7 +209,7 @@
     {
       "number": 28,
       "type": "matching",
-      "question": "Visiting different workplaces...",
+      "question": "Visiting different workplaces",
       "options": [
         {
           "value": "A",
@@ -247,7 +247,7 @@
     {
       "number": 29,
       "type": "matching",
-      "question": "getting some work experience abroad...",
+      "question": "getting some work experience abroad",
       "options": [
         {
           "value": "A",
@@ -285,7 +285,7 @@
     {
       "number": 30,
       "type": "matching",
-      "question": "attending an international conference...",
+      "question": "attending an international conference",
       "options": [
         {
           "value": "A",
@@ -323,7 +323,7 @@
   ],
   "images": [],
   "sourceFullTestId": "full-listening-test-1",
-  "createdAt": "2026-07-19T12:04:14.135Z",
+  "createdAt": "2026-07-19T12:10:22.620Z",
   "parts": [
     {
       "partNumber": 3,
@@ -488,33 +488,33 @@
           "type": "matching",
           "questionRange": "Questions 27–30",
           "title": "",
-          "optionsTitle": "",
+          "optionsTitle": "Benefits",
           "example": "",
-          "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30. Benefits A a broader practical experience of the field B chance to publicise own work C effective way of keeping up-to-date D looks good on a CV E provides useful access to resources F way to make useful contacts",
+          "instruction": "How will Kathy benefit from doing each of the following activities?Choose FOUR answers from the box and write the correct letter, A–F, next to questions 27–30.",
           "options": [
             {
               "letter": "A",
-              "text": "A"
+              "text": "a broader practical experience of the field"
             },
             {
               "letter": "B",
-              "text": "B"
+              "text": "chance to publicise own work"
             },
             {
               "letter": "C",
-              "text": "C"
+              "text": "effective way of keeping up-to-date"
             },
             {
               "letter": "D",
-              "text": "D"
+              "text": "looks good on a CV"
             },
             {
               "letter": "E",
-              "text": "E"
+              "text": "provides useful access to resources"
             },
             {
               "letter": "F",
-              "text": "F"
+              "text": "way to make useful contacts"
             }
           ],
           "rows": [],
@@ -527,29 +527,29 @@
             {
               "number": 27,
               "questionNumber": 27,
-              "question": "going to Mechanical Engineers’ Society meetings...",
-              "text": "going to Mechanical Engineers’ Society meetings...",
+              "question": "going to Mechanical Engineers’ Society meetings",
+              "text": "going to Mechanical Engineers’ Society meetings",
               "answer": "going to Mechanical Engineers’ Society meetings"
             },
             {
               "number": 28,
               "questionNumber": 28,
-              "question": "Visiting different workplaces...",
-              "text": "Visiting different workplaces...",
+              "question": "Visiting different workplaces",
+              "text": "Visiting different workplaces",
               "answer": "Visiting different workplaces"
             },
             {
               "number": 29,
               "questionNumber": 29,
-              "question": "getting some work experience abroad...",
-              "text": "getting some work experience abroad...",
+              "question": "getting some work experience abroad",
+              "text": "getting some work experience abroad",
               "answer": "getting some work experience abroad"
             },
             {
               "number": 30,
               "questionNumber": 30,
-              "question": "attending an international conference...",
-              "text": "attending an international conference...",
+              "question": "attending an international conference",
+              "text": "attending an international conference",
               "answer": "attending an international conference"
             }
           ]
