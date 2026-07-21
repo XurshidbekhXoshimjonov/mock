@@ -905,6 +905,7 @@ const ListeningComponents = (() => {
             `, "lc-matching-block lc-flowchart-block");
         }
 
+        const isStackedImage = block.imageLayout === "stacked";
         const image = block.imageUrl
             ? `<div class="lc-map-stage lc-matching-image">
                 <img loading="lazy" decoding="async" src="${escapeHtml(block.imageUrl)}" alt="${escapeHtml(block.title || "Listening question image")}">
@@ -944,7 +945,7 @@ const ListeningComponents = (() => {
             ? `<h4 class="lc-matching-questions-title">${escapeHtml(block.questionsTitle)}</h4>`
             : "";
         const content = hasImage
-            ? `<div class="lc-matching-map-layout">
+            ? `<div class="lc-matching-map-layout"${isStackedImage ? ' style="grid-template-columns:1fr"' : ""}>
                 ${image}
                 <div class="lc-matching-answer-panel">
                     ${optionsTitle}

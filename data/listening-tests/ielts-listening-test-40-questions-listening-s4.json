@@ -1,0 +1,239 @@
+{
+  "id": "ielts-listening-test-40-questions-listening-s4",
+  "slug": "ielts-listening-test-40-questions-listening-s4",
+  "title": "Listening Test — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/ielts-listening-test-40-questions-part-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Its main diet is dead or decaying ...",
+      "options": [],
+      "answer": "plants"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "To obtain necessary minerals, it also eats ...",
+      "options": [],
+      "answer": "soil"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "Via the internet, volunteers were recruited for the ... of snails",
+      "options": [],
+      "answer": "collection"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Natural migration is ruled out as these snails do not like ...",
+      "options": [],
+      "answer": "salt"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "In the Pyrenees, large piles of shells have been found in ...",
+      "options": [],
+      "answer": "caves"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "This indicates the snails were used as ...",
+      "options": [],
+      "answer": "food"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "There is archaeological evidence of ... between the two areas",
+      "options": [],
+      "answer": "trade"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "The conclusion is that snails were most likely carried in ...",
+      "options": [],
+      "answer": "boats"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "A wider ... of the snails is required for the study",
+      "options": [],
+      "answer": "sample"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "One other organism will be investigated: a particular type of ...",
+      "options": [],
+      "answer": "tree"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-test-40-questions",
+  "createdAt": "2026-07-21T14:10:47.683Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/ielts-listening-test-40-questions-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: plants\n32: soil\n33: collection\n34: salt\n35: caves\n36: food\n37: trade\n38: boats\n39: sample\n40: tree",
+      "blocks": [
+        {
+          "id": "ielts-listening-test-40-questions-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "The White-lipped Grove Snail",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<b>Background information</b>",
+            "• Its main diet is dead or decaying {{31}}",
+            "• To obtain necessary minerals, it also eats {{32}}",
+            "<b>Research at the University of Nottingham</b>",
+            "• Via the internet, volunteers were recruited for the {{33}} of snails",
+            "<b>Theories</b>",
+            "• Natural migration is ruled out as these snails do not like {{34}}",
+            "• In the Pyrenees, large piles of shells have been found in {{35}}",
+            "• This indicates the snails were used as {{36}}",
+            "• There is archaeological evidence of {{37}} between the two areas",
+            "• The conclusion is that snails were most likely carried in {{38}}",
+            "<b>Further work</b>",
+            "• A wider {{39}} of the snails is required for the study",
+            "• One other organism will be investigated: a particular type of {{40}}"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Its main diet is dead or decaying ...",
+              "text": "Its main diet is dead or decaying ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "plants"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "To obtain necessary minerals, it also eats ...",
+              "text": "To obtain necessary minerals, it also eats ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "soil"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "Via the internet, volunteers were recruited for the ... of snails",
+              "text": "Via the internet, volunteers were recruited for the ... of snails",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "collection"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Natural migration is ruled out as these snails do not like ...",
+              "text": "Natural migration is ruled out as these snails do not like ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "salt"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "In the Pyrenees, large piles of shells have been found in ...",
+              "text": "In the Pyrenees, large piles of shells have been found in ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "caves"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "This indicates the snails were used as ...",
+              "text": "This indicates the snails were used as ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "food"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "There is archaeological evidence of ... between the two areas",
+              "text": "There is archaeological evidence of ... between the two areas",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "trade"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "The conclusion is that snails were most likely carried in ...",
+              "text": "The conclusion is that snails were most likely carried in ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "boats"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "A wider ... of the snails is required for the study",
+              "text": "A wider ... of the snails is required for the study",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sample"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "One other organism will be investigated: a particular type of ...",
+              "text": "One other organism will be investigated: a particular type of ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "tree"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

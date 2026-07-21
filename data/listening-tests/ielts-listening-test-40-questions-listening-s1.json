@@ -1,0 +1,244 @@
+{
+  "id": "ielts-listening-test-40-questions-listening-s1",
+  "slug": "ielts-listening-test-40-questions-listening-s1",
+  "title": "Listening Test — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/ielts-listening-test-40-questions-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "<b>Current address:</b> 42 ... Road, Kew, London",
+      "options": [],
+      "answer": "Station"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "<b>Telephone:</b> ...",
+      "options": [],
+      "answer": "02079460385"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "<b>Will move in:</b> early ...",
+      "options": [],
+      "answer": "August"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "type of accommodation required at first: a central ...",
+      "options": [],
+      "answer": "apartment"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "preferred location: near a ...",
+      "options": [],
+      "answer": "park"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "client will need ... for the accommodation",
+      "options": [],
+      "answer": "furniture"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "client’s son: to go into grade ...",
+      "options": [],
+      "answer": "8"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "type of school: high school (preferably ... )",
+      "options": [],
+      "answer": "private"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "client to send the child’s ...",
+      "options": [],
+      "answer": "report"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "to play the flute in a ...",
+      "options": [],
+      "answer": "band"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-test-40-questions",
+  "createdAt": "2026-07-21T14:10:47.683Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/ielts-listening-test-40-questions-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: Station\n2: 02079460385\n3: August\n4: apartment\n5: park\n6: furniture\n7: 8\n8: private\n9: report\n10: band",
+      "blocks": [
+        {
+          "id": "ielts-listening-test-40-questions-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Australian Overseas Relocation Agency",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<b>Personal information</b>",
+            "• <b>Name:</b> Helen Green",
+            "• <b>Current address:</b> 42 {{1}} Road, Kew, London",
+            "• <b>Telephone:</b> {{2}}",
+            "• <b>Relocation to:</b> Brisbane",
+            "• <b>Employer:</b> Kirkby Technology",
+            "• <b>Will move in:</b> early {{3}}",
+            "<b>Accommodation</b>",
+            "• type of accommodation required at first: a central {{4}}",
+            "• preferred location: near a {{5}}",
+            "• client will need {{6}} for the accommodation",
+            "<b>School</b>",
+            "• client’s son: to go into grade {{7}}",
+            "• type of school: high school (preferably {{8}} )",
+            "• client to send the child’s {{9}}",
+            "<b>Leisure interests (son)</b>",
+            "• chess — find a club for him",
+            "<b>Leisure interests (client)</b>",
+            "• to play the flute in a {{10}}"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "<b>Current address:</b> 42 ... Road, Kew, London",
+              "text": "<b>Current address:</b> 42 ... Road, Kew, London",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Station"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "<b>Telephone:</b> ...",
+              "text": "<b>Telephone:</b> ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "02079460385"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "<b>Will move in:</b> early ...",
+              "text": "<b>Will move in:</b> early ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "August"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "type of accommodation required at first: a central ...",
+              "text": "type of accommodation required at first: a central ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "apartment"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "preferred location: near a ...",
+              "text": "preferred location: near a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "park"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "client will need ... for the accommodation",
+              "text": "client will need ... for the accommodation",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "furniture"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "client’s son: to go into grade ...",
+              "text": "client’s son: to go into grade ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "8"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "type of school: high school (preferably ... )",
+              "text": "type of school: high school (preferably ... )",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "private"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "client to send the child’s ...",
+              "text": "client to send the child’s ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "report"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "to play the flute in a ...",
+              "text": "to play the flute in a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "band"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

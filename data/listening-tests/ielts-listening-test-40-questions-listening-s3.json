@@ -1,0 +1,484 @@
+{
+  "id": "ielts-listening-test-40-questions-listening-s3",
+  "slug": "ielts-listening-test-40-questions-listening-s3",
+  "title": "Listening Test — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/ielts-listening-test-40-questions-part-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–30",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Where has Professor Anderson recently been?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Physics conferences"
+        },
+        {
+          "letter": "B",
+          "text": "Physics classes"
+        },
+        {
+          "letter": "C",
+          "text": "Mechanics conferences"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "What grade did Rangy get on his classical mechanics exam?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "C plus"
+        },
+        {
+          "letter": "B",
+          "text": "A plus"
+        },
+        {
+          "letter": "C",
+          "text": "B plus"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "After his Edinburgh proposal was rejected, which subject area did Rangy get approval to study abroad in?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Maths and Physics"
+        },
+        {
+          "letter": "B",
+          "text": "Science"
+        },
+        {
+          "letter": "C",
+          "text": "Arts"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "What do Rangy and the professor say about the Science Faculty?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It gives a quick response to students’ queries."
+        },
+        {
+          "letter": "B",
+          "text": "Its regulations are unclear to students."
+        },
+        {
+          "letter": "C",
+          "text": "It has a comprehensive website."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "By dropping arts, Rangy believes he will",
+      "options": [
+        {
+          "letter": "A",
+          "text": "finish his degree earlier."
+        },
+        {
+          "letter": "B",
+          "text": "receive higher marks."
+        },
+        {
+          "letter": "C",
+          "text": "improve his writing style."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Rangy’s attitude to some lecturers’ claims about a rounded education is",
+      "options": [
+        {
+          "letter": "A",
+          "text": "critical."
+        },
+        {
+          "letter": "B",
+          "text": "doubtful."
+        },
+        {
+          "letter": "C",
+          "text": "boastful."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "Rangy is also disappointed that he",
+      "options": [
+        {
+          "letter": "A",
+          "text": "will have to work in a bar again."
+        },
+        {
+          "letter": "B",
+          "text": "cannot afford to study abroad."
+        },
+        {
+          "letter": "C",
+          "text": "will not be going to Europe."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Professor Anderson offers Rangy",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a part-time job in his lab."
+        },
+        {
+          "letter": "B",
+          "text": "supervision of his master’s degree."
+        },
+        {
+          "letter": "C",
+          "text": "help with his laser experiments."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "The professor says Rangy is",
+      "options": [
+        {
+          "letter": "A",
+          "text": "quite likely to win a scholarship."
+        },
+        {
+          "letter": "B",
+          "text": "not so likely to win a scholarship."
+        },
+        {
+          "letter": "C",
+          "text": "highly likely to win a scholarship."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "At the end of the conversation, Rangy sounds",
+      "options": [
+        {
+          "letter": "A",
+          "text": "thrilled but nervous."
+        },
+        {
+          "letter": "B",
+          "text": "relieved and grateful."
+        },
+        {
+          "letter": "C",
+          "text": "a little apprehensive."
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-test-40-questions",
+  "createdAt": "2026-07-21T14:10:47.683Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/ielts-listening-test-40-questions-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: A\n22: B\n23: C\n24: B\n25: A\n26: B\n27: C\n28: A\n29: C\n30: B",
+      "blocks": [
+        {
+          "id": "ielts-listening-test-40-questions-p3-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–30",
+          "title": "Professor Anderson",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Where has Professor Anderson recently been?",
+              "text": "Where has Professor Anderson recently been?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Physics conferences"
+                },
+                {
+                  "letter": "B",
+                  "text": "Physics classes"
+                },
+                {
+                  "letter": "C",
+                  "text": "Mechanics conferences"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "What grade did Rangy get on his classical mechanics exam?",
+              "text": "What grade did Rangy get on his classical mechanics exam?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "C plus"
+                },
+                {
+                  "letter": "B",
+                  "text": "A plus"
+                },
+                {
+                  "letter": "C",
+                  "text": "B plus"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "After his Edinburgh proposal was rejected, which subject area did Rangy get approval to study abroad in?",
+              "text": "After his Edinburgh proposal was rejected, which subject area did Rangy get approval to study abroad in?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Maths and Physics"
+                },
+                {
+                  "letter": "B",
+                  "text": "Science"
+                },
+                {
+                  "letter": "C",
+                  "text": "Arts"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "What do Rangy and the professor say about the Science Faculty?",
+              "text": "What do Rangy and the professor say about the Science Faculty?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It gives a quick response to students’ queries."
+                },
+                {
+                  "letter": "B",
+                  "text": "Its regulations are unclear to students."
+                },
+                {
+                  "letter": "C",
+                  "text": "It has a comprehensive website."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "By dropping arts, Rangy believes he will",
+              "text": "By dropping arts, Rangy believes he will",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "finish his degree earlier."
+                },
+                {
+                  "letter": "B",
+                  "text": "receive higher marks."
+                },
+                {
+                  "letter": "C",
+                  "text": "improve his writing style."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Rangy’s attitude to some lecturers’ claims about a rounded education is",
+              "text": "Rangy’s attitude to some lecturers’ claims about a rounded education is",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "critical."
+                },
+                {
+                  "letter": "B",
+                  "text": "doubtful."
+                },
+                {
+                  "letter": "C",
+                  "text": "boastful."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Rangy is also disappointed that he",
+              "text": "Rangy is also disappointed that he",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "will have to work in a bar again."
+                },
+                {
+                  "letter": "B",
+                  "text": "cannot afford to study abroad."
+                },
+                {
+                  "letter": "C",
+                  "text": "will not be going to Europe."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Professor Anderson offers Rangy",
+              "text": "Professor Anderson offers Rangy",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "a part-time job in his lab."
+                },
+                {
+                  "letter": "B",
+                  "text": "supervision of his master’s degree."
+                },
+                {
+                  "letter": "C",
+                  "text": "help with his laser experiments."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "The professor says Rangy is",
+              "text": "The professor says Rangy is",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "quite likely to win a scholarship."
+                },
+                {
+                  "letter": "B",
+                  "text": "not so likely to win a scholarship."
+                },
+                {
+                  "letter": "C",
+                  "text": "highly likely to win a scholarship."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "At the end of the conversation, Rangy sounds",
+              "text": "At the end of the conversation, Rangy sounds",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "thrilled but nervous."
+                },
+                {
+                  "letter": "B",
+                  "text": "relieved and grateful."
+                },
+                {
+                  "letter": "C",
+                  "text": "a little apprehensive."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

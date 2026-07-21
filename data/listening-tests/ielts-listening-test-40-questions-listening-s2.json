@@ -1,0 +1,590 @@
+{
+  "id": "ielts-listening-test-40-questions-listening-s2",
+  "slug": "ielts-listening-test-40-questions-listening-s2",
+  "title": "Listening Test — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/ielts-listening-test-40-questions-part-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–16",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "title": "Questions 17–20",
+      "instruction": "Label the map below. Choose the correct letter, A–I, next to questions 17–20.",
+      "questionNumbers": [
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What problem did Sir Michael Grayson have with the original site?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The ground was sandy."
+        },
+        {
+          "letter": "B",
+          "text": "The sea caused damage."
+        },
+        {
+          "letter": "C",
+          "text": "The water was polluted."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "In 1915, the land in this area became more valuable because",
+      "options": [
+        {
+          "letter": "A",
+          "text": "transport links were improved."
+        },
+        {
+          "letter": "B",
+          "text": "more people moved to the area."
+        },
+        {
+          "letter": "C",
+          "text": "the national economy expanded quickly."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "The first boat harbour was built in the 1920s for",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the military."
+        },
+        {
+          "letter": "B",
+          "text": "passenger ships."
+        },
+        {
+          "letter": "C",
+          "text": "the fishing industry."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Why were warehouses built in the 1930s?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to store wood for export"
+        },
+        {
+          "letter": "B",
+          "text": "to store imported goods"
+        },
+        {
+          "letter": "C",
+          "text": "to store wool for sale locally"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "How long after the start of the project was the new waterfront area opened?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ten years"
+        },
+        {
+          "letter": "B",
+          "text": "fourteen years"
+        },
+        {
+          "letter": "C",
+          "text": "twenty-five years"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "The hardest part of the redevelopment involved",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the old bridge."
+        },
+        {
+          "letter": "B",
+          "text": "the steam boat."
+        },
+        {
+          "letter": "C",
+          "text": "the traditional trams."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Playground",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Open Air Cinema",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "Aquarium",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Maritime Museum",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        },
+        {
+          "letter": "F",
+          "text": ""
+        },
+        {
+          "letter": "G",
+          "text": ""
+        },
+        {
+          "letter": "H",
+          "text": ""
+        },
+        {
+          "letter": "I",
+          "text": ""
+        }
+      ],
+      "answer": "B"
+    }
+  ],
+  "images": [
+    {
+      "id": "ielts-listening-test-40-questions-map-1",
+      "src": "/uploads/ielts-import/ielts-listening-test-40-questions/north-wharf-map.png",
+      "alt": "North Wharf and Boat Harbour map",
+      "section": "listening",
+      "sectionNumber": 2
+    }
+  ],
+  "sourceFullTestId": "ielts-listening-test-40-questions",
+  "createdAt": "2026-07-21T14:10:47.683Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/ielts-listening-test-40-questions-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: B\n12: A\n13: C\n14: A\n15: B\n16: C\n17: C\n18: A\n19: G\n20: B",
+      "blocks": [
+        {
+          "id": "ielts-listening-test-40-questions-p2-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11–16",
+          "title": "Sir Michael Grayson",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What problem did Sir Michael Grayson have with the original site?",
+              "text": "What problem did Sir Michael Grayson have with the original site?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The ground was sandy."
+                },
+                {
+                  "letter": "B",
+                  "text": "The sea caused damage."
+                },
+                {
+                  "letter": "C",
+                  "text": "The water was polluted."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "In 1915, the land in this area became more valuable because",
+              "text": "In 1915, the land in this area became more valuable because",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "transport links were improved."
+                },
+                {
+                  "letter": "B",
+                  "text": "more people moved to the area."
+                },
+                {
+                  "letter": "C",
+                  "text": "the national economy expanded quickly."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "The first boat harbour was built in the 1920s for",
+              "text": "The first boat harbour was built in the 1920s for",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the military."
+                },
+                {
+                  "letter": "B",
+                  "text": "passenger ships."
+                },
+                {
+                  "letter": "C",
+                  "text": "the fishing industry."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Why were warehouses built in the 1930s?",
+              "text": "Why were warehouses built in the 1930s?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to store wood for export"
+                },
+                {
+                  "letter": "B",
+                  "text": "to store imported goods"
+                },
+                {
+                  "letter": "C",
+                  "text": "to store wool for sale locally"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "How long after the start of the project was the new waterfront area opened?",
+              "text": "How long after the start of the project was the new waterfront area opened?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "ten years"
+                },
+                {
+                  "letter": "B",
+                  "text": "fourteen years"
+                },
+                {
+                  "letter": "C",
+                  "text": "twenty-five years"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "The hardest part of the redevelopment involved",
+              "text": "The hardest part of the redevelopment involved",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the old bridge."
+                },
+                {
+                  "letter": "B",
+                  "text": "the steam boat."
+                },
+                {
+                  "letter": "C",
+                  "text": "the traditional trams."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "ielts-listening-test-40-questions-p2-g2",
+          "type": "matching",
+          "questionRange": "Questions 17–20",
+          "title": "North Wharf and Boat Harbour",
+          "optionsTitle": "",
+          "example": "",
+          "instruction": "Label the map below. Choose the correct letter, A–I, next to questions 17–20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": ""
+            },
+            {
+              "letter": "B",
+              "text": ""
+            },
+            {
+              "letter": "C",
+              "text": ""
+            },
+            {
+              "letter": "D",
+              "text": ""
+            },
+            {
+              "letter": "E",
+              "text": ""
+            },
+            {
+              "letter": "F",
+              "text": ""
+            },
+            {
+              "letter": "G",
+              "text": ""
+            },
+            {
+              "letter": "H",
+              "text": ""
+            },
+            {
+              "letter": "I",
+              "text": ""
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "/uploads/ielts-import/ielts-listening-test-40-questions/north-wharf-map.png",
+          "imageLayout": "stacked",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Playground",
+              "text": "Playground",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Open Air Cinema",
+              "text": "Open Air Cinema",
+              "answer": "A"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Aquarium",
+              "text": "Aquarium",
+              "answer": "G"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Maritime Museum",
+              "text": "Maritime Museum",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

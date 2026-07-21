@@ -149,11 +149,12 @@ function extractChoiceRows(source, answers, imageUrl) {
 
     return {
         id: `${TEST_ID}-p3-g1`,
-        type: "map_labelling",
+        type: "matching",
         instructionTitle: "Questions 21–27",
         instructionText: "Label the plan. Write the correct letter, A–J, next to questions 21–27.",
         title: "Potential Community Centre",
         imageUrl,
+        imageLayout: "stacked",
         options,
         questions
     };

@@ -1,0 +1,870 @@
+{
+  "id": "ielts-listening-test-40-questions",
+  "slug": "ielts-listening-test-40-questions",
+  "title": "Listening Test",
+  "subtitle": "Listening full test",
+  "sourceFile": "IELTS_Listening_Test_40_Questions.html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "cd-listening-static-v1",
+  "manualListeningTestId": "ielts-listening-test-40-questions-listening-full",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/ielts-listening-test-40-questions-part-1.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "audio": "/uploads/audio/ielts-listening-test-40-questions-part-1.mp3",
+        "questionGroups": [
+          {
+            "id": "ielts-listening-test-40-questions-p1-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 1–10",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+            "title": "Australian Overseas Relocation Agency",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "<b>Personal information</b>",
+              "• <b>Name:</b> Helen Green",
+              "• <b>Current address:</b> 42 {{1}} Road, Kew, London",
+              "• <b>Telephone:</b> {{2}}",
+              "• <b>Relocation to:</b> Brisbane",
+              "• <b>Employer:</b> Kirkby Technology",
+              "• <b>Will move in:</b> early {{3}}",
+              "<b>Accommodation</b>",
+              "• type of accommodation required at first: a central {{4}}",
+              "• preferred location: near a {{5}}",
+              "• client will need {{6}} for the accommodation",
+              "<b>School</b>",
+              "• client’s son: to go into grade {{7}}",
+              "• type of school: high school (preferably {{8}} )",
+              "• client to send the child’s {{9}}",
+              "<b>Leisure interests (son)</b>",
+              "• chess — find a club for him",
+              "<b>Leisure interests (client)</b>",
+              "• to play the flute in a {{10}}"
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "<b>Current address:</b> 42 ... Road, Kew, London",
+                "options": [],
+                "answer": "Station"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "<b>Telephone:</b> ...",
+                "options": [],
+                "answer": "02079460385"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "<b>Will move in:</b> early ...",
+                "options": [],
+                "answer": "August"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "type of accommodation required at first: a central ...",
+                "options": [],
+                "answer": "apartment"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "preferred location: near a ...",
+                "options": [],
+                "answer": "park"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "client will need ... for the accommodation",
+                "options": [],
+                "answer": "furniture"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "client’s son: to go into grade ...",
+                "options": [],
+                "answer": "8"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "type of school: high school (preferably ... )",
+                "options": [],
+                "answer": "private"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "client to send the child’s ...",
+                "options": [],
+                "answer": "report"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "to play the flute in a ...",
+                "options": [],
+                "answer": "band"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "audio": "/uploads/audio/ielts-listening-test-40-questions-part-2.mp3",
+        "questionGroups": [
+          {
+            "id": "ielts-listening-test-40-questions-p2-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11–16",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Sir Michael Grayson",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What problem did Sir Michael Grayson have with the original site?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "The ground was sandy."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "The sea caused damage."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "The water was polluted."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "In 1915, the land in this area became more valuable because",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "transport links were improved."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "more people moved to the area."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the national economy expanded quickly."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "The first boat harbour was built in the 1920s for",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the military."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "passenger ships."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the fishing industry."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "Why were warehouses built in the 1930s?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "to store wood for export"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "to store imported goods"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "to store wool for sale locally"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "How long after the start of the project was the new waterfront area opened?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "ten years"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "fourteen years"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "twenty-five years"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 16,
+                "type": "multiple_choice",
+                "question": "The hardest part of the redevelopment involved",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the old bridge."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the steam boat."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the traditional trams."
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "ielts-listening-test-40-questions-p2-g2",
+            "type": "matching",
+            "instructionTitle": "Questions 17–20",
+            "instructionText": "Label the map below. Choose the correct letter, A–I, next to questions 17–20.",
+            "title": "North Wharf and Boat Harbour",
+            "imageUrl": "/uploads/ielts-import/ielts-listening-test-40-questions/north-wharf-map.png",
+            "imageLayout": "stacked",
+            "options": [
+              {
+                "letter": "A",
+                "text": ""
+              },
+              {
+                "letter": "B",
+                "text": ""
+              },
+              {
+                "letter": "C",
+                "text": ""
+              },
+              {
+                "letter": "D",
+                "text": ""
+              },
+              {
+                "letter": "E",
+                "text": ""
+              },
+              {
+                "letter": "F",
+                "text": ""
+              },
+              {
+                "letter": "G",
+                "text": ""
+              },
+              {
+                "letter": "H",
+                "text": ""
+              },
+              {
+                "letter": "I",
+                "text": ""
+              }
+            ],
+            "questions": [
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "Playground",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "Open Air Cinema",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "question": "Aquarium",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "question": "Maritime Museum",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": ""
+                  },
+                  {
+                    "letter": "B",
+                    "text": ""
+                  },
+                  {
+                    "letter": "C",
+                    "text": ""
+                  },
+                  {
+                    "letter": "D",
+                    "text": ""
+                  },
+                  {
+                    "letter": "E",
+                    "text": ""
+                  },
+                  {
+                    "letter": "F",
+                    "text": ""
+                  },
+                  {
+                    "letter": "G",
+                    "text": ""
+                  },
+                  {
+                    "letter": "H",
+                    "text": ""
+                  },
+                  {
+                    "letter": "I",
+                    "text": ""
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "audio": "/uploads/audio/ielts-listening-test-40-questions-part-3.mp3",
+        "questionGroups": [
+          {
+            "id": "ielts-listening-test-40-questions-p3-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 21–30",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Professor Anderson",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "Where has Professor Anderson recently been?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Physics conferences"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Physics classes"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Mechanics conferences"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "What grade did Rangy get on his classical mechanics exam?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "C plus"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "A plus"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "B plus"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 23,
+                "type": "multiple_choice",
+                "question": "After his Edinburgh proposal was rejected, which subject area did Rangy get approval to study abroad in?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Maths and Physics"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Science"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Arts"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 24,
+                "type": "multiple_choice",
+                "question": "What do Rangy and the professor say about the Science Faculty?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It gives a quick response to students’ queries."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Its regulations are unclear to students."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It has a comprehensive website."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 25,
+                "type": "multiple_choice",
+                "question": "By dropping arts, Rangy believes he will",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "finish his degree earlier."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "receive higher marks."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "improve his writing style."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 26,
+                "type": "multiple_choice",
+                "question": "Rangy’s attitude to some lecturers’ claims about a rounded education is",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "critical."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "doubtful."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "boastful."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 27,
+                "type": "multiple_choice",
+                "question": "Rangy is also disappointed that he",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "will have to work in a bar again."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "cannot afford to study abroad."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "will not be going to Europe."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 28,
+                "type": "multiple_choice",
+                "question": "Professor Anderson offers Rangy",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "a part-time job in his lab."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "supervision of his master’s degree."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "help with his laser experiments."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 29,
+                "type": "multiple_choice",
+                "question": "The professor says Rangy is",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "quite likely to win a scholarship."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "not so likely to win a scholarship."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "highly likely to win a scholarship."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 30,
+                "type": "multiple_choice",
+                "question": "At the end of the conversation, Rangy sounds",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "thrilled but nervous."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "relieved and grateful."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "a little apprehensive."
+                  }
+                ],
+                "answer": "B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "audio": "/uploads/audio/ielts-listening-test-40-questions-part-4.mp3",
+        "questionGroups": [
+          {
+            "id": "ielts-listening-test-40-questions-p4-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "The White-lipped Grove Snail",
+            "noteStyle": "boxed-flow",
+            "content": [
+              "<b>Background information</b>",
+              "• Its main diet is dead or decaying {{31}}",
+              "• To obtain necessary minerals, it also eats {{32}}",
+              "<b>Research at the University of Nottingham</b>",
+              "• Via the internet, volunteers were recruited for the {{33}} of snails",
+              "<b>Theories</b>",
+              "• Natural migration is ruled out as these snails do not like {{34}}",
+              "• In the Pyrenees, large piles of shells have been found in {{35}}",
+              "• This indicates the snails were used as {{36}}",
+              "• There is archaeological evidence of {{37}} between the two areas",
+              "• The conclusion is that snails were most likely carried in {{38}}",
+              "<b>Further work</b>",
+              "• A wider {{39}} of the snails is required for the study",
+              "• One other organism will be investigated: a particular type of {{40}}"
+            ],
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "Its main diet is dead or decaying ...",
+                "options": [],
+                "answer": "plants"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "To obtain necessary minerals, it also eats ...",
+                "options": [],
+                "answer": "soil"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "Via the internet, volunteers were recruited for the ... of snails",
+                "options": [],
+                "answer": "collection"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Natural migration is ruled out as these snails do not like ...",
+                "options": [],
+                "answer": "salt"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "In the Pyrenees, large piles of shells have been found in ...",
+                "options": [],
+                "answer": "caves"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "This indicates the snails were used as ...",
+                "options": [],
+                "answer": "food"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "There is archaeological evidence of ... between the two areas",
+                "options": [],
+                "answer": "trade"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "The conclusion is that snails were most likely carried in ...",
+                "options": [],
+                "answer": "boats"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "A wider ... of the snails is required for the study",
+                "options": [],
+                "answer": "sample"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "One other organism will be investigated: a particular type of ...",
+                "options": [],
+                "answer": "tree"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "Station",
+    "2": "02079460385",
+    "3": "August",
+    "4": "apartment",
+    "5": "park",
+    "6": "furniture",
+    "7": "8",
+    "8": "private",
+    "9": "report",
+    "10": "band",
+    "11": "B",
+    "12": "A",
+    "13": "C",
+    "14": "A",
+    "15": "B",
+    "16": "C",
+    "17": "C",
+    "18": "A",
+    "19": "G",
+    "20": "B",
+    "21": "A",
+    "22": "B",
+    "23": "C",
+    "24": "B",
+    "25": "A",
+    "26": "B",
+    "27": "C",
+    "28": "A",
+    "29": "C",
+    "30": "B",
+    "31": "plants",
+    "32": "soil",
+    "33": "collection",
+    "34": "salt",
+    "35": "caves",
+    "36": "food",
+    "37": "trade",
+    "38": "boats",
+    "39": "sample",
+    "40": "tree"
+  },
+  "images": [
+    {
+      "id": "ielts-listening-test-40-questions-map-1",
+      "src": "/uploads/ielts-import/ielts-listening-test-40-questions/north-wharf-map.png",
+      "alt": "North Wharf and Boat Harbour map",
+      "section": "listening",
+      "sectionNumber": 2
+    }
+  ],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 1,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-07-21T14:10:47.683Z",
+  "publishedAt": "2026-07-21T14:10:47.683Z",
+  "openUrl": "/full-test-player?id=ielts-listening-test-40-questions&skill=listening"
+}

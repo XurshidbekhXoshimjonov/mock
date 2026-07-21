@@ -449,7 +449,7 @@
       "blocks": [
         {
           "id": "cd-ielts-listening-test-28-p3-g1",
-          "type": "map_labelling",
+          "type": "matching",
           "questionRange": "Questions 21–27",
           "title": "Potential Community Centre",
           "optionsTitle": "",
@@ -501,6 +501,7 @@
           "columns": [],
           "labels": [],
           "imageUrl": "/uploads/ielts-import/cd-ielts-listening-test-28/potential-community-centre.png",
+          "imageLayout": "stacked",
           "content": [],
           "noteStyle": "",
           "questions": [
