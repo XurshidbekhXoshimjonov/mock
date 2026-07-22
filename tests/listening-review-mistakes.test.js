@@ -46,9 +46,12 @@ test("Review page uses one shared bounded audio player and listening-specific re
 
 test("Listening results deep-link only the current listening attempt", () => {
     const template = read("listening-template.js");
+    const styles = read("listening-template.css");
     assert.match(template, /new URLSearchParams\(\{ skill: "listening" \}\)/);
     assert.match(template, /Review Listening Mistakes/);
     assert.match(template, /ieltsx:mistakes-changed/);
+    assert.match(styles, /\.lc-result-actions > \.hidden\s*\{\s*display: none;/);
+    assert.match(styles, /\[data-listening-review-mistakes\][^{]*\{[^}]*flex-basis: 210px;/s);
 });
 
 test("Reading matching headings keep heading labels in cards and retry selects", () => {

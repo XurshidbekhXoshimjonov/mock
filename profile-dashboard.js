@@ -730,7 +730,44 @@
         );
     }
 
-    function WritingDashboard({ writing, onViewFeedback }) {
+    function DeleteResultButton({ kind, resultId, isAdmin }) {
+        const [deleting, setDeleting] = useState(false);
+        if (!isAdmin || !resultId) return null;
+
+        const endpoints = {
+            objective: `/api/profile/results/${encodeURIComponent(resultId)}`,
+            writing: `/api/profile/writing/${encodeURIComponent(resultId)}`,
+            speaking: `/api/profile/speaking/${encodeURIComponent(resultId)}`,
+            mock: `/api/mock-test-results/${encodeURIComponent(resultId)}`
+        };
+
+        async function deleteResult() {
+            if (deleting || !endpoints[kind] || !window.confirm("Delete this result permanently?")) return;
+            setDeleting(true);
+            try {
+                const response = await fetch(endpoints[kind], {
+                    method: "DELETE",
+                    credentials: "include",
+                    headers: { Accept: "application/json" }
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.error || "Could not delete result");
+                window.location.reload();
+            } catch (error) {
+                window.alert(error.message || "Could not delete result");
+                setDeleting(false);
+            }
+        }
+
+        return e("button", {
+            type: "button",
+            className: "performance-delete-result-btn",
+            disabled: deleting,
+            onClick: deleteResult
+        }, deleting ? "Deleting..." : "Delete Result");
+    }
+
+    function WritingDashboard({ writing, onViewFeedback, isAdmin }) {
         const data = writing || emptyWriting;
         const summary = { ...emptyWriting.summary, ...(data.summary || {}) };
         const recent = Array.isArray(data.recent) ? data.recent : [];
@@ -777,7 +814,10 @@
                                     e("td", null, e("strong", null, attempt.taskTitle || `Writing Test ${index + 1}`)),
                                     e("td", null, formatDate(attempt.createdAt)),
                                     e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand)}`)),
-                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => onViewFeedback(attempt) }, "View Feedback"))
+                                    e("td", null, e("div", { className: "performance-result-actions" },
+                                        e("button", { type: "button", className: "writing-feedback-btn", onClick: () => onViewFeedback(attempt) }, "View Feedback"),
+                                        e(DeleteResultButton, { kind: "writing", resultId: attempt.id, isAdmin })
+                                    ))
                                 ))
                             )
                         )
@@ -963,7 +1003,7 @@
         );
     }
 
-    function ObjectiveSkillDetail({ skill, stats }) {
+    function ObjectiveSkillDetail({ skill, stats, isAdmin }) {
         const [selectedResult, setSelectedResult] = useState(null);
         const data = summarizeObjectiveSkill(stats, skill);
         const isListening = skill === "listening";
@@ -1011,7 +1051,10 @@
                                     e("td", null, formatDate(result.completedAt)),
                                     e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(result.band)}`)),
                                     e("td", null, `${result.correct || 0}/${result.total || 0}`),
-                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => setSelectedResult(result) }, "View Result"))
+                                    e("td", null, e("div", { className: "performance-result-actions" },
+                                        e("button", { type: "button", className: "writing-feedback-btn", onClick: () => setSelectedResult(result) }, "View Result"),
+                                        e(DeleteResultButton, { kind: "objective", resultId: result.id, isAdmin })
+                                    ))
                                 ))
                             )
                         )
@@ -1038,7 +1081,7 @@
         return Number(value) > 0 ? formatBand(value) : "No result";
     }
 
-    function MockTestDetail({ stats }) {
+    function MockTestDetail({ stats, isAdmin }) {
         const data = { ...emptyMockTests, ...(stats.mockTests || {}) };
         const completedMockTests = Number(data.completedMockTests || 0);
         const recent = Array.isArray(data.recent) ? data.recent : [];
@@ -1086,7 +1129,10 @@
                                     e("td", null, mockSectionBand(result, "reading")),
                                     e("td", null, mockSectionBand(result, "writing")),
                                     e("td", null, mockSectionBand(result, "speaking")),
-                                    e("td", null, e("a", { className: "writing-feedback-btn", href: mockResultLink(result) }, "View Result"))
+                                    e("td", null, e("div", { className: "performance-result-actions" },
+                                        e("a", { className: "writing-feedback-btn", href: mockResultLink(result) }, "View Result"),
+                                        e(DeleteResultButton, { kind: "mock", resultId: result.id, isAdmin })
+                                    ))
                                 ))
                             )
                         )
@@ -1153,7 +1199,7 @@
         );
     }
 
-    function SpeakingDashboard({ stats }) {
+    function SpeakingDashboard({ stats, isAdmin }) {
         const [selectedAttempt, setSelectedAttempt] = useState(null);
         const data = speakingOverview(stats);
 
@@ -1199,7 +1245,10 @@
                                     e("td", null, e("strong", null, attempt.title || attempt.taskTitle || `Speaking attempt ${index + 1}`)),
                                     e("td", null, formatDate(attempt.createdAt || attempt.completedAt)),
                                     e("td", null, e("span", { className: "writing-band-pill" }, `Band ${formatBand(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand)}`)),
-                                    e("td", null, e("button", { type: "button", className: "writing-feedback-btn", onClick: () => openSpeakingFeedback(attempt) }, "View Feedback"))
+                                    e("td", null, e("div", { className: "performance-result-actions" },
+                                        e("button", { type: "button", className: "writing-feedback-btn", onClick: () => openSpeakingFeedback(attempt) }, "View Feedback"),
+                                        e(DeleteResultButton, { kind: "speaking", resultId: attempt.id, isAdmin })
+                                    ))
                                 ))
                             )
                         )
@@ -1215,16 +1264,16 @@
         );
     }
 
-    function PerformanceDetailView({ skill, stats, onBack, onViewWritingFeedback }) {
+    function PerformanceDetailView({ skill, stats, onBack, onViewWritingFeedback, isAdmin }) {
         return e("section", { className: "performance-detail-shell" },
             e(BackToPerformanceCenter, { onBack }),
             skill === "writing"
-                ? e("div", { className: "writing-dashboard-wrap" }, e(WritingDashboard, { writing: stats.writing, onViewFeedback: onViewWritingFeedback }))
+                ? e("div", { className: "writing-dashboard-wrap" }, e(WritingDashboard, { writing: stats.writing, onViewFeedback: onViewWritingFeedback, isAdmin }))
                 : skill === "speaking"
-                    ? e("div", { className: "writing-dashboard-wrap" }, e(SpeakingDashboard, { stats }))
+                    ? e("div", { className: "writing-dashboard-wrap" }, e(SpeakingDashboard, { stats, isAdmin }))
                     : skill === "mock"
-                        ? e("div", { className: "writing-dashboard-wrap" }, e(MockTestDetail, { stats }))
-                        : e("div", { className: "writing-dashboard-wrap" }, e(ObjectiveSkillDetail, { skill, stats }))
+                        ? e("div", { className: "writing-dashboard-wrap" }, e(MockTestDetail, { stats, isAdmin }))
+                        : e("div", { className: "writing-dashboard-wrap" }, e(ObjectiveSkillDetail, { skill, stats, isAdmin }))
         );
     }
 
@@ -1334,7 +1383,8 @@
                     skill: selectedSkill,
                     stats,
                     onBack: () => setSelectedSkill(null),
-                    onViewWritingFeedback: openWritingFeedback
+                    onViewWritingFeedback: openWritingFeedback,
+                    isAdmin: user.role === "admin"
                 })
                 : e("section", { className: "performance-center-shell" },
                     e(PerformanceCardGrid, { stats, onOpen: openSkill })

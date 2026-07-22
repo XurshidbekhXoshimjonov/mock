@@ -5266,6 +5266,17 @@ app.post("/api/profile/photo", requireUser, candidatePhotoUpload.single("photo")
     });
 });
 
+app.delete("/api/profile/results/:id", requireUser, requireAdmin, async (req, res) => {
+    try {
+        const removed = userProgressStore.removeResult(req.user.id, req.params.id);
+        if (!removed) return res.status(404).json({ error: "Result not found" });
+        await reviewMistakeStore.removeAttempt(req.user.id, removed.attemptId || removed.id);
+        return res.json({ success: true });
+    } catch (error) {
+        return res.status(500).json({ error: "Could not delete result" });
+    }
+});
+
 app.put("/api/profile", requireUser, async (req, res) => {
     try {
         const {
@@ -6091,6 +6102,16 @@ app.get("/api/mock-test-results/:id", requireUser, async (req, res) => {
 
     const mappedResult = await mapProfileFieldsToResult(req.user.id, result);
     res.json({ result: mappedResult });
+});
+
+app.delete("/api/mock-test-results/:id", requireUser, requireAdmin, (req, res) => {
+    try {
+        const removed = mockTestStore.removeResult(req.user.id, req.params.id);
+        if (!removed) return res.status(404).json({ error: "Mock test result not found" });
+        return res.json({ success: true });
+    } catch (error) {
+        return res.status(500).json({ error: "Could not delete mock test result" });
+    }
 });
 
 app.get("/api/profile/mock-tests", requireUser, (req, res) => {

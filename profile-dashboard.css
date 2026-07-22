@@ -725,6 +725,37 @@ body[data-profile-page] #profileRoot li {
     transform: translateY(-1px);
 }
 
+.performance-result-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.performance-delete-result-btn {
+    min-height: 36px;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    background: #fff1f2;
+    color: #be123c;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 11px;
+    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.performance-delete-result-btn:hover:not(:disabled) {
+    border-color: #fda4af;
+    background: #ffe4e6;
+    transform: translateY(-1px);
+}
+
+.performance-delete-result-btn:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
 .writing-empty-state {
     display: grid;
     place-items: center;
@@ -1455,6 +1486,17 @@ body.dark-theme[data-profile-page] .writing-results-table td,
 body.dark-theme[data-profile-page] .writing-feedback-modal,
 body.dark-theme[data-profile-page] .writing-feedback-modal-head {
     border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme[data-profile-page] .performance-delete-result-btn {
+    border-color: rgba(251, 113, 133, 0.3);
+    background: rgba(225, 29, 72, 0.14);
+    color: #fda4af;
+}
+
+body.dark-theme[data-profile-page] .performance-delete-result-btn:hover:not(:disabled) {
+    border-color: rgba(251, 113, 133, 0.5);
+    background: rgba(225, 29, 72, 0.24);
 }
 
 body.dark-theme[data-profile-page] .writing-results-head h3,

@@ -1413,7 +1413,7 @@ body.fullscreen-fallback .lc-fullscreen-button {
 
 .lc-result-modal {
     position: relative;
-    width: min(580px, 100%);
+    width: min(640px, 100%);
     max-height: calc(100dvh - 40px);
     overflow-y: auto;
     border-radius: 14px;
@@ -1507,9 +1507,18 @@ body.fullscreen-fallback .lc-fullscreen-button {
 
 .lc-result-actions .lc-start-button,
 .lc-result-actions .lc-secondary-button {
-    flex: 1 1 150px;
+    flex: 1 1 140px;
     min-width: 0;
     white-space: nowrap;
+}
+
+.lc-result-actions [data-listening-review-mistakes] {
+    flex-grow: 1.45;
+    flex-basis: 210px;
+}
+
+.lc-result-actions > .hidden {
+    display: none;
 }
 
 .lc-secondary-button {
