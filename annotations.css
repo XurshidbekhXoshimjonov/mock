@@ -623,3 +623,25 @@ body.fullscreen-fallback > .ieltsx-modal-overlay {
         right: 16px !important;
     }
 }
+
+
+/* Keep Reading and Listening annotation controls above the full-screen exam shell. */
+body.exam-fullscreen-active > .ieltsx-toolbar,
+body.fullscreen-fallback > .ieltsx-toolbar {
+    z-index: 100010;
+}
+
+body.exam-fullscreen-active > .ieltsx-drawer-overlay,
+body.fullscreen-fallback > .ieltsx-drawer-overlay {
+    z-index: 100020;
+}
+
+body.exam-fullscreen-active > .ieltsx-drawer,
+body.fullscreen-fallback > .ieltsx-drawer {
+    z-index: 100021;
+}
+
+body.exam-fullscreen-active > .ieltsx-modal-overlay,
+body.fullscreen-fallback > .ieltsx-modal-overlay {
+    z-index: 100030;
+}
