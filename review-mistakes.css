@@ -139,6 +139,23 @@ summary:focus-visible {
 .dark-theme .retry-test-row { border-color: #32415a; background: #111b2d; }
 .dark-theme .retry-test-content > p { color: #e5eefc; }
 .dark-theme .mistake-context mark { background: #785d08; color: #fff5c2; }
+.dark-theme body { color: #e5eefc; }
+.dark-theme .mistake-question,
+.dark-theme .answer-box strong,
+.dark-theme .retry-panel label,
+.dark-theme .retry-test-number,
+.dark-theme .retry-inline-answer strong { color: #e5eefc; }
+.dark-theme .answer-box,
+.dark-theme .question-options,
+.dark-theme .audio-evidence--missing { border-color: #32415a; background: #0e1829; }
+.dark-theme .retry-test-number,
+.dark-theme .retry-inline-answer strong,
+.dark-theme .empty-state__icon { background: #182844; color: #bfdbfe; }
+.dark-theme .mistake-card__actions { border-color: #293750; }
+.dark-theme .audio-evidence__head span,
+.dark-theme .audio-evidence__timeline,
+.dark-theme .audio-evidence--missing,
+.dark-theme .audio-evidence--missing strong { color: #aab9cd; }
 
 @media (max-width: 760px) {
     .mistakes-page { width: min(100% - 24px, 1160px); padding-top: 30px; }

@@ -16,6 +16,95 @@ html, body { height: 100%; }
 body { margin: 0; overflow: hidden; background: #fff; color: var(--ink); }
 button, textarea, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
+
+html.dark-theme {
+    color-scheme: dark;
+    --ink: #edf5ff;
+    --muted: #9cabc0;
+    --line: #293750;
+    --soft: #18243a;
+    --sidebar: #0e1829;
+}
+
+html.dark-theme body,
+html.dark-theme .coach-main { background: #0b1322; color: var(--ink); }
+html.dark-theme .coach-logo { color: #f8fafc; }
+html.dark-theme .coach-sidebar,
+html.dark-theme .context-panel { background: #0e1829; }
+html.dark-theme .chat-header { background: rgba(14, 24, 41, .96); }
+html.dark-theme .composer-wrap { background: linear-gradient(180deg, rgba(11, 19, 34, 0), #0b1322 22%); }
+html.dark-theme .history-search,
+html.dark-theme .history-load-more,
+html.dark-theme .messages-load-older,
+html.dark-theme .user-card,
+html.dark-theme .options-menu,
+html.dark-theme .quick-prompts button,
+html.dark-theme .message-bubble,
+html.dark-theme .score-card,
+html.dark-theme .task-card,
+html.dark-theme .message-actions button,
+html.dark-theme .message-actions a,
+html.dark-theme .composer,
+html.dark-theme .context-card,
+html.dark-theme .memory-dialog,
+html.dark-theme .memory-item {
+    border-color: #32415a;
+    background: #111b2d;
+    color: #dce7f5;
+    box-shadow: none;
+}
+html.dark-theme .history-item,
+html.dark-theme .sidebar-nav a,
+html.dark-theme .icon-button,
+html.dark-theme .options-menu button,
+html.dark-theme .quick-actions button { color: #aab9cd; }
+html.dark-theme .history-item:hover,
+html.dark-theme .history-item.is-active,
+html.dark-theme .sidebar-nav a:hover,
+html.dark-theme .sidebar-nav a.is-active,
+html.dark-theme .icon-button:hover,
+html.dark-theme .options-menu button:hover,
+html.dark-theme .quick-actions button:hover,
+html.dark-theme .composer-icon:hover { background: #182844; color: #bfdbfe; }
+html.dark-theme .history-search:focus-within,
+html.dark-theme .composer:focus-within { border-color: #5276b7; box-shadow: 0 0 0 3px rgba(59, 130, 246, .16); }
+html.dark-theme .history-search:has(input:disabled),
+html.dark-theme .data-notice,
+html.dark-theme .task-row,
+html.dark-theme .empty-data,
+html.dark-theme .memory-empty,
+html.dark-theme .message-bubble blockquote { background: #0e1829; color: #aab9cd; }
+html.dark-theme .history-premium-lock { border-color: #324d78; background: #101c30; color: #bfdbfe; }
+html.dark-theme .history-premium-lock span,
+html.dark-theme .user-copy small,
+html.dark-theme .score-card span,
+html.dark-theme .band-overview span,
+html.dark-theme .task-row small,
+html.dark-theme .memory-dialog > p,
+html.dark-theme .memory-item span { color: #9cabc0; }
+html.dark-theme .user-copy strong,
+html.dark-theme .message-bubble h3,
+html.dark-theme .message-bubble h4,
+html.dark-theme .message-bubble h5,
+html.dark-theme .task-row strong { color: #edf5ff; }
+html.dark-theme .user .message-bubble { background: #17325c; color: #dbeafe; }
+html.dark-theme .message-bubble th { background: #172a47; color: #dbeafe; }
+html.dark-theme .message-bubble th,
+html.dark-theme .message-bubble td,
+html.dark-theme .mistake-item { border-color: #32415a; }
+html.dark-theme .mistake-item { color: #b8c5d8; }
+html.dark-theme .score-card { background: linear-gradient(180deg, #111b2d, #0e1829); }
+html.dark-theme .composer textarea { color: #edf5ff; }
+html.dark-theme .send-button:disabled { background: #334155; color: #94a3b8; }
+html.dark-theme .band-overview strong { background: linear-gradient(135deg, #17325c, #272a5c); color: #bfdbfe; }
+html.dark-theme .progress-track { background: #26344b; }
+html.dark-theme .memory-item button { background: #3b1722; color: #fda4af; }
+html.dark-theme .context-card.is-loading::after,
+html.dark-theme .history-skeleton span,
+html.dark-theme .message-skeleton span {
+    background: linear-gradient(90deg, #17243a 25%, #22314a 50%, #17243a 75%);
+    background-size: 200% 100%;
+}
 svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
 .coach-shell { display: grid; grid-template-columns: 264px minmax(0, 1fr) 306px; height: 100dvh; min-height: 0; }

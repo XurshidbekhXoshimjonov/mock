@@ -135,6 +135,27 @@ button, input, select, textarea { font: inherit; }
 .dark-theme .translator-directions button.is-active, .dark-theme .translator-pane, .dark-theme .translator-copy { background: #111b2d; color: #dce7f5; }
 .dark-theme .translator-languages, .dark-theme .translator-panes, .dark-theme .translator-languages strong:last-child, .dark-theme .translator-pane:first-child { border-color: #32415a; }
 .dark-theme .translator-pane textarea, .dark-theme .translator-pane--output output { color: #e4edf8; }
+.dark-theme body { color: #e4edf8; }
+.dark-theme .vocab-stat--due { border-color: #324d78 !important; background: #101c30 !important; }
+.dark-theme .vocab-search,
+.dark-theme .vocab-speak,
+.dark-theme .word-edit input,
+.dark-theme .word-edit textarea { border-color: #32415a; background: #0e1829; color: #e4edf8; }
+.dark-theme .vocab-filters button,
+.dark-theme .vocab-pronunciation,
+.dark-theme .vocab-definition,
+.dark-theme .vocab-context,
+.dark-theme .detail-section p,
+.dark-theme .detail-section li,
+.dark-theme .word-edit label,
+.dark-theme .review-card__back p { color: #aab9cd; }
+.dark-theme .vocab-filters button.is-active,
+.dark-theme .vocab-speak { background: #182844; color: #bfdbfe; }
+.dark-theme .vocab-tag { background: #26344b; color: #cbd5e1; }
+.dark-theme .vocab-context { background: #0e1829; }
+.dark-theme .vocab-card__actions { border-color: #293750; }
+.dark-theme .vocab-dialog__close { background: #26344b; color: #dce7f5; }
+.dark-theme .detail-section h3 { color: #dbeafe; }
 
 @media (max-width: 920px) {
     .vocab-stats { grid-template-columns: repeat(3, 1fr); }

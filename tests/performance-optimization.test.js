@@ -18,7 +18,7 @@ test("AI Coach assets remain route-local and receive versioned cacheable URLs", 
     const coachHtml = fs.readFileSync(path.join(root, "ai-coach.html"), "utf8");
     const otherPages = ["ieltsmock.html", "reading.html", "listening.html", "speaking.html", "writing.html", "mock-test.html"];
 
-    assert.match(coachHtml, /ai-coach\.css\?v=20260719-performance-v1/);
+    assert.match(coachHtml, /ai-coach\.css\?v=20260723-dark-theme-v1/);
     assert.match(coachHtml, /ai-coach\.js\?v=20260719-performance-v1/);
     otherPages.forEach((file) => {
         const source = fs.readFileSync(path.join(root, file), "utf8");
