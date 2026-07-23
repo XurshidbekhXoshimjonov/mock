@@ -843,8 +843,8 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 }
 
 .cbt-group-options-box {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
     margin: 0 0 18px;
     border: 1px solid #dce3ec;
@@ -854,13 +854,21 @@ body.fullscreen-fallback .cbt-button--fullscreen {
 }
 
 .cbt-group-option-chip {
+    width: 100%;
     min-width: 34px;
     border: 1px solid #cdd7e5;
     border-radius: 6px;
     background: #fff;
     padding: 6px 10px;
-    text-align: center;
+    text-align: left;
     font-weight: 700;
+}
+
+.cbt-group-options-title {
+    margin-bottom: 2px;
+    color: var(--cbt-text);
+    font-size: 15px;
+    font-weight: 800;
 }
 
 .cbt-multi-select-task {
@@ -2432,6 +2440,37 @@ html.dark-theme .cbt-nav-bubble.is-answered {
     font-weight: 700;
     position: absolute;
     left: 0;
+}
+
+.reading-practice-test-7-notes .nb-ul > li::before {
+    color: #111;
+}
+
+.reading-practice-test-7-word-options .cbt-group-option-chip {
+    color: #111;
+}
+
+.reading-practice-test-7-word-list-title {
+    margin: 18px 0 8px;
+    color: #111;
+    font-weight: 800;
+}
+
+.reading-practice-test-7-word-options {
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: wrap;
+    overflow-x: visible;
+}
+
+.reading-practice-test-7-word-options .cbt-group-option-chip {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.reading-practice-test-7-word-options .ielts-instruction-limit {
+    color: #111 !important;
 }
 .nb-ul2 {
     list-style: none;

@@ -323,7 +323,9 @@ const IeltsRenderer = (() => {
         const options = groupOptions(group, questions);
         if (!options.length) return "";
 
-        return '<div class="ielts-group-options-box">' + options.map((option) =>
+        return '<div class="ielts-group-options-box">' +
+            (group.optionsTitle ? '<div class="ielts-group-options-title">' + escapeHtml(group.optionsTitle) + "</div>" : "") +
+            options.map((option) =>
             '<span class="ielts-group-option-chip">' + escapeHtml(option) + "</span>"
         ).join("") + "</div>";
     }

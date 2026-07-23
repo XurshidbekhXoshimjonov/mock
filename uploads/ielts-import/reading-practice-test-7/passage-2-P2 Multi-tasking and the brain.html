@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IELTS Reading – Multi-tasking and the brain</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        /* ===== Base / Reset ===== */
+        :root {
+            --bg1: #eaf3ff;
+            --bg2: #c6ddff;
+            --card: #ffffff;
+            --text: #2d3748;
+            --muted: #4a5568;
+            --brand: #2b6cb0;
+            --brand-2: #2c5282;
+            --ring: #63b3ed;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: radial-gradient(1000px 600px at 10% 10%, var(--bg2), transparent), 
+                        radial-gradient(900px 600px at 90% 20%, #d7ecff, transparent), 
+                        linear-gradient(145deg, var(--bg1), var(--bg2));
+            color: var(--text);
+            overflow: hidden;
+        }
+        .test-wrapper { display: flex; flex-direction: column; height: 100vh; }
+        .test-container { display: flex; flex: 1; overflow: hidden; backdrop-filter: saturate(1.05); }
+
+        /* ===== Telegram Mark Banner ===== */
+        .telegram-banner {
+            background: linear-gradient(135deg, #0088cc, #00a8e8);
+            color: #ffffff;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-bottom: 2px solid #0077b3;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 2px 8px rgba(0, 136, 204, 0.3);
+        }
+        .telegram-banner i { font-size: 1.2rem; }
+        .telegram-banner a { color: #ffffff; text-decoration: none; transition: opacity 0.2s ease; }
+        .telegram-banner a:hover { opacity: 0.8; text-decoration: underline; }
+
+        /* ===== Header ===== */
+        .header {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #d6e3f5;
+            padding: 12px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 10;
+            backdrop-filter: blur(6px);
+        }
+        .header__logo { display: flex; align-items: center; gap: 12px; }
+        .header__logo img { height: 44px; transition: transform .25s ease; }
+        .header__logo img:hover { transform: scale(1.1) rotate(-2deg); }
+        .header__title { font-weight: 800; letter-spacing: .3px; color: var(--brand-2); }
+        .header__timer {
+            font-size: 1.25rem; font-weight: 800; color: var(--brand);
+            background: #edf2ff; padding: 8px 18px; border-radius: 999px;
+            border: 1px solid var(--ring); box-shadow: var(--shadow);
+        }
+        .header__icons { display: flex; gap: 16px; }
+        .header__icon { font-size: 1.2rem; color: var(--muted); cursor: pointer; transition: .2s ease; }
+        .header__icon:hover { color: var(--brand); transform: translateY(-1px); }
+
+        /* ===== Panels ===== */
+        .passage-container, .questions-container {
+            padding: 28px; overflow: auto; background: #edf2ff; position: relative;
+        }
+        .passage-container { width: 48%; border-right: 1px dashed #cbd5e0; }
+        .questions-container { flex: 1; }
+
+        /* ===== Cards / Sections ===== */
+        .sectionRubric, .question {
+            background: var(--card); border: 1px solid #d6e3f5;
+            border-radius: 14px; box-shadow: var(--shadow);
+        }
+        .sectionRubric { margin: 1.2rem; padding: 1.1rem 1.2rem; }
+        .sectionRubric h2 { margin: 0 0 .4rem; color: var(--brand-2); font-size: 1.15rem; }
+        .sectionRubric p { margin: 0; color: var(--muted); }
+
+        #passageContent {
+            background: var(--card); border: 1px solid #d6e3f5;
+            border-radius: 14px; padding: 22px; margin: 18px 0;
+            box-shadow: var(--shadow);
+        }
+        #passageContent h2 { text-align: center; margin: 0 0 6px; color: var(--brand-2); }
+        #passageContent h3 { text-align: left; margin: 20px 0 10px; color: var(--brand); border-bottom: 2px solid #edf2f7; padding-bottom: 5px; }
+        #passageContent p { line-height: 1.75; margin: 12px 0; }
+        
+        .question { margin: 18px 0; padding: 20px; transition: transform .15s ease; }
+        .question:hover { transform: translateY(-2px); }
+        .question-rubric { margin-bottom: 14px; }
+        .question-rubric h3 { margin: 0 0 6px; color: var(--brand-2); }
+        .question-rubric p { margin: 4px 0; color: var(--muted); }
+
+        .question-item { margin: 16px 0 26px; }
+        .question-number { font-weight: 800; color: var(--brand-2); margin-right: 6px; }
+        
+        /* ===== Inputs (Gap Fills) ===== */
+        .gap-input {
+            border: none; border-bottom: 2px solid #a0aec0; background: transparent;
+            width: 140px; text-align: center; font-weight: 700; color: var(--brand-2);
+            padding: 2px 5px; transition: all 0.2s; font-size: 1rem;
+        }
+        .gap-input:focus { outline: none; border-bottom-color: var(--brand); background: rgba(235, 248, 255, 0.5); }
+        .gap-input.correct { border-bottom-color: var(--success); color: #2f855a; background: #f0fff4; }
+        .gap-input.incorrect { border-bottom-color: var(--error); color: #c53030; background: #fff5f5; }
+
+        /* ===== Selects (Matching) ===== */
+        .dropdown-question-row {
+            display: flex; align-items: center; gap: 12px; margin: 14px 0;
+            justify-content: space-between;
+        }
+        .dropdown-question-row p { margin: 0; flex: 1; line-height: 1.5; }
+        .dropdown-question-row select {
+            min-width: 160px; padding: 10px; border: 1px solid #cbd5e0;
+            border-radius: 10px; background: #fff; font-weight: 600;
+            transition: border-color .2s ease; cursor: pointer;
+        }
+        .dropdown-question-row select:focus { outline: none; border-color: var(--brand); }
+
+        /* ===== Summary Box ===== */
+        .summary-box {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px;
+            line-height: 2.2;
+        }
+        .summary-title { text-align: center; font-weight: 800; color: var(--brand-2); margin-bottom: 15px; }
+
+        /* ===== Helper Lists (Headings/Researchers) ===== */
+        .helper-list-box {
+            background: #edf2ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+            border: 1px dashed #cbd5e0;
+        }
+        .helper-list { list-style: none; padding: 0; margin: 0; }
+        .helper-list li { font-size: 0.9rem; color: #4a5568; margin-bottom: 6px; display: flex; gap: 8px;}
+        .helper-list strong { color: var(--brand); min-width: 25px; }
+
+        /* ===== Divider ===== */
+        .divider {
+            width: 14px; background: #d7e3f3; cursor: col-resize; position: relative;
+        }
+        .divider-handle {
+            width: 6px; height: 64px; background: #8aa0bb;
+            border-radius: 5px; position: absolute; top: 50%; left: 4px;
+            transform: translateY(-50%);
+        }
+
+        /* ===== Footer / Nav ===== */
+        .footer {
+            background: rgba(255, 255, 255, 0.9); border-top: 1px solid #d6e3f5;
+            padding: 16px; box-shadow: 0 -8px 18px rgba(0,0,0,.05);
+        }
+        .nav-row { display: flex; align-items: center; justify-content: space-between; }
+        .footer__questionWrapper { display: flex; align-items: center; }
+        .footer__questionNo {
+            background: none; border: none; padding: 10px 18px;
+            font-weight: 800; color: var(--brand-2); cursor: pointer;
+        }
+        .footer__subquestionWrapper { display: flex; flex-wrap: wrap; gap: 8px; margin-left: 8px; }
+        .subQuestion {
+            width: 40px; height: 40px; border-radius: 50%; border: 1px solid #cbd5e0;
+            background: #edf2f7; color: #334155; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: .2s ease;
+        }
+        .subQuestion:hover { transform: translateY(-1px); }
+        .subQuestion.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+        .subQuestion.attempted { background: #63b3ed; color: #fff; }
+        
+        .footer__deliverButton {
+            background: var(--brand); color: #fff; border: none; padding: 12px 22px;
+            border-radius: 10px; font-weight: 800; cursor: pointer; transition: .2s ease;
+        }
+        .footer__deliverButton:hover { background: var(--brand-2); transform: translateY(-2px); }
+
+        /* ===== Toolbar for highlights ===== */
+        .highlight { position: relative; border-radius: 4px; padding: 0 3px; margin: 0 -3px; }
+        .highlight.yellow { background: rgba(255,234,0,.4); }
+        .highlight.green { background: rgba(72,187,120,.35); }
+        .highlight.pink { background: rgba(255,99,132,.35); }
+        .highlight.blue { background: rgba(66,153,225,.35); }
+        .highlight-toolbar {
+            position: fixed; background: #fff; border: 1px solid #cbd5e0;
+            border-radius: 10px; box-shadow: var(--shadow); display: none;
+            z-index: 1000; padding: 8px; transform: translate(-50%, -100%); margin-top: -8px;
+        }
+        .highlight-toolbar button {
+            background: none; border: none; width: 28px; height: 28px; cursor: pointer;
+            margin: 0 4px; border-radius: 7px; transition: .2s ease;
+        }
+        .highlight-toolbar button:hover { background: #e6f0ff; transform: scale(1.08); }
+        .highlight-toolbar .remove { color: #f56565; }
+        .highlight-color {
+            width: 26px; height: 26px; border-radius: 50%; display: inline-block;
+            border: 1px solid #cbd5e0; cursor: pointer;
+        }
+        .highlight-color.yellow { background: #ffea00; }
+        .highlight-color.green { background: #48bb78; }
+        .highlight-color.pink { background: #ff6390; }
+        .highlight-color.blue { background: #4299e1; }
+
+        /* ===== Modals ===== */
+        .settings-modal, .submission-modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.75); z-index: 2000;
+            align-items: center; justify-content: center;
+        }
+        .settings-content, .submission-content {
+            background: #fff; border-radius: 16px; box-shadow: var(--shadow);
+            animation: slideIn .35s ease-out;
+        }
+        .settings-content { width: 90%; max-width: 560px; overflow: hidden; }
+        .settings-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 22px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #fff;
+        }
+        .settings-body { padding: 18px 20px; background: #f7fafc; }
+        .settings-option {
+            display: flex; align-items: center; gap: 12px; padding: 12px;
+            border-bottom: 1px solid #edf2f7; cursor: pointer; border-radius: 10px;
+        }
+        .settings-option:hover { background: #ecf5ff; }
+        .settings-close { background: none; border: none; font-size: 2rem; color: #fff; cursor: pointer; }
+
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .submission-content { width: 92%; max-width: 980px; padding: 34px; max-height: 90vh; overflow: auto; }
+        .submission-content h2 { margin: 0; color: var(--brand-2); border-bottom: 2px solid var(--brand-2); padding-bottom: 12px; }
+        .score-display {
+            text-align: center; margin: 18px 0 14px; padding: 18px;
+            background: #eaf2ff; border-radius: 12px;
+        }
+        .score-number { font-size: 3.4rem; font-weight: 900; color: var(--brand); margin: 10px 0; }
+        .score-total { font-size: 1.1rem; color: var(--muted); }
+        .band-score { font-size: 2rem; font-weight: 900; color: var(--brand-2); margin: 10px 0; }
+        .performance-rating {
+            font-size: 1.2rem; font-weight: 800; padding: 10px 14px;
+            border-radius: 10px; display: inline-block;
+        }
+        .excellent { color: #2f855a; background: #f0fff4; }
+        .very-good { color: #2d6a4f; background: #ecfff5; }
+        .good { color: #1c7c54; background: #e9fff6; }
+        .fair { color: #b7791f; background: #fff7ed; }
+        .poor { color: #c53030; background: #fff5f5; }
+
+        .answers-section h3 { color: var(--brand-2); margin-bottom: 10px; }
+        .answer-item {
+            background: #f7fafc; border-left: 6px solid #cbd5e0;
+            border-radius: 10px; padding: 12px; margin: 10px 0;
+        }
+        .answer-item.correct { border-left-color: var(--success); background: #f0fff4; }
+        .answer-item.incorrect { border-left-color: var(--error); background: #fff5f5; }
+        .answer-status { float: right; margin-left: 12px; }
+        .correct-status { color: var(--success); }
+        .incorrect-status { color: var(--error); }
+        .submission-buttons { text-align: right; margin-top: 14px; }
+        .submission-buttons .confirm {
+            background: var(--brand); color: #fff; border: none;
+            padding: 10px 18px; border-radius: 10px; font-weight: 800; cursor: pointer;
+        }
+
+        .answer-comparison {
+            margin: 14px 0 18px; padding: 16px; background: #f6fbff;
+            border-radius: 12px; border: 1px dashed #cbd5e0; display: none;
+        }
+        .dropdown-answer { display: inline-block; margin-left: 10px; }
+        .dropdown-answer.correct { color: var(--success); }
+        .dropdown-answer.incorrect { color: var(--error); }
+        .text-feedback { display: block; font-size: 0.85rem; margin-top: 4px; }
+        .text-feedback.correct { color: var(--success); }
+        .text-feedback.incorrect { color: var(--error); }
+        
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    </style>
+</head>
+<body>
+
+<div class="test-wrapper">
+    <div class="telegram-banner">
+        <i class="fab fa-telegram"></i>
+        <a href="https://t.me/jonibeksielts9" target="_blank" rel="noopener noreferrer">@jonibeksielts9</a>
+    </div>
+
+    <header class="header">
+        <div class="header__logo">
+            <img src="https://d2snzxottmona5.cloudfront.net/releases/3.46.0/images/logo/ielts.svg" alt="IELTS Logo" />
+            <div class="header__title">Reading – Part 2: <span style="font-weight:700">Multi-tasking</span></div>
+        </div>
+        <div class="header__timer" id="testTimer">00:00</div>
+        <div class="header__icons">
+            <i class="fas fa-wifi header__icon" title="Connection"></i>
+            <i class="fas fa-bell header__icon" title="Notifications"></i>
+            <i class="fas fa-cog header__icon" id="settingsButton" title="Options"></i>
+        </div>
+    </header>
+
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>Options</h2>
+                <button class="settings-close" id="settingsClose">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-option"><i class="fas fa-paper-plane"></i><span>Go to submission page</span></div>
+                <div class="settings-option" id="contrastOption"><i class="fas fa-adjust"></i><span>Contrast</span></div>
+                <div class="settings-option" id="textSizeOption"><i class="fas fa-search-plus"></i><span>Text size</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <div class="passage-container" id="passage-container">
+            <div class="sectionRubric" id="sectionRubric">
+                <h2>Part 2</h2>
+                <p>You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2.</p>
+            </div>
+
+            <div class="highlight-toolbar" id="highlightToolbar">
+                <button class="highlight-color yellow" data-color="yellow" title="Yellow highlight"></button>
+                <button class="highlight-color green" data-color="green" title="Green highlight"></button>
+                <button class="highlight-color pink" data-color="pink" title="Pink highlight"></button>
+                <button class="highlight-color blue" data-color="blue" title="Blue highlight"></button>
+                <button class="remove" title="Remove highlight"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div id="passageContent">
+                <h2>Multi-tasking and the brain</h2>
+                
+                <h3>Section A</h3>
+                <p>Do you think you’re a master of multi-tasking? Think again. Unless you are one of the three percent of super-taskers in the population, research shows that your brain isn’t capable of paying close attention to more than one complex task at a time. Researchers who study attention say that effective multi-tasking is beyond most of us. Psychiatrist Edward M Hallowell even describes multi-tasking as ‘a mythical activity in which people believe they can perform two or more tasks simultaneously as effectively as they can perform one.’</p>
+                
+                <h3>Section B</h3>
+                <p>It is true that you can check your email while eating your lunch, or listen to music while walking. But innate activities like walking, chewing, and breathing do not require you to pay attention, whereas activities such as reading, tapping out a text message, or driving a car do require attention. Why is paying attention to two things at once difficult? ‘The brain can perform simultaneous tasks but attention has capacity limitations,’ says Associate Professor Paul E Dux, a cognitive neuroscientist at the University of Queensland in Australia. When you do only one thing at a time. you’re better at that task than when you’re doing multiple things concurrently.</p>
+                <p>Take the classic multi-tasking scenario of talking on a mobile phone while driving – an ill-advised activity that many people believe they have mastered. When David Strayer Professor of Psychology at the University of Utah in the US, and his team observed 56,000 drivers as they approached an intersection, the majority of drivers who were talking on their phone failed to stop in accordance with traffic laws. And it did not matter if the driver was using a handheld or hands-free device. Even with both eyes on the road and both hands on the wheel, drivers’ performance was impaired. Strayer’s research shows that performance deteriorates drastically when attention is split between tasks. more mistakes are made and it takes longer to complete each activity.</p>
+                
+                <h3>Section C</h3>
+                
+
+[Image of prefrontal cortex anatomy]
+
+                <p>The prefrontal cortex is the brain region responsible for choosing what to pay attention to, and for coordinating inputs from other brain areas. By scanning the prefrontal cortex of people while they multi-tasked, scientists at the French Institute of Health and Medical Research in Paris (INSERM) found that when people focused on a single thing, the right and left sides of the prefrontal cortex work together. But when people attempt to perform two things at once, the sides work independently. Neuroscientist Etienne Koechlin says his study demonstrates that while the brain can switch pack and forth between two tasks, we might be in great trouble when we try to juggle more than two tasks, simply because we have only two frontal lobes.</p>
+                
+                <h3>Section D</h3>
+                <p>To the question of whether there is a difference between the sexes. Koechlin’s imaging studies uncovered no differences in the ability to switch between tasks in the prefrontal cortices of men or women. But other researchers studying real life scenarios such as finding lost keys, believe there might be some truth to the claim that women are superior multi-taskers. Women have a much better strategy for finding the keys, whereas men tend to jump to it and be far less organised and thorough. ‘It’s as if they don’t stop to reflect and plan for a moment,’ says Professor Keith Laws from the University of Hertfordshire in England. But while the ability to develop strategies for coping with the numerous tasks in everyday life could give women an advantage, ‘nobody can juggle two, never mind three, ‘complex’ tasks at the same time.’</p>
+                
+                <h3>Section E</h3>
+                <p>However, David Strayer’s research uncovered that some rare people possess extraordinary multi-tasking ability. These so-called ‘super-taskers’ exhibit different patterns of brain activity when multi-tasking compared to ordinary people: they show less activity in the prefrontal cortex during multi-tasking, suggesting their brains are functioning with a high level of efficiency. Strayer thinks that pilots of high-performance aircraft, high-end chefs who can cook several meals at the same time to perfection, and elite doctors in hospital emergency rooms might all be more likely to be super-taskers. ‘All other things being equal, we suspect that super-taskers will rise to a top position in any occupation that places a high demand on juggling various tasks that demand attention at the same time.’</p>
+                
+                <h3>Section F</h3>
+                <p>The ability to multi-task probably comes down to the DNA you inherit from your parents to a large extent, says Strayer. ‘You are either born with the neural structure that allows you to overcome the usual multi-tasking challenges, or you aren’t. Super-taskers’ brains are doing something we can’t do.’ All in all, these findings may have very real consequences on our lives.</p>
+            </div>
+        </div>
+        
+        <div class="divider" id="divider"><div class="divider-handle"></div></div>
+
+        <div class="questions-container" id="questions-container">
+            
+            <div class="question">
+                <div class="question-rubric">
+                    <h3>Questions 14–19</h3>
+                    <p>Reading Passage 2 has six sections, <strong>A–F</strong>.</p>
+                    <p>Choose the correct heading for each section from the list of headings below.</p>
+                    <p>Write the correct number, <strong>i–viii</strong>, in boxes <strong>14–19</strong> on your answer sheet.</p>
+                </div>
+                <div class="question-content">
+                    <div class="helper-list-box">
+                        <ul class="helper-list">
+                            <li><strong>i</strong> Professions in which super-taskers are likely to be found</li>
+                            <li><strong>ii</strong> The effects of multi-tasking on neurological structure</li>
+                            <li><strong>iii</strong> A distinction between situations when people can and can't multi-task</li>
+                            <li><strong>iv</strong> Real multi-tasking is nearly impossible</li>
+                            <li><strong>v</strong> Multi-tasking and gender</li>
+                            <li><strong>vi</strong> The neurological reasons for struggling to manage more things</li>
+                            <li><strong>vii</strong> The ability to multi-task is determined by people's genes</li>
+                            <li><strong>viii</strong> Gender and the structure of the brain</li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">14</span> Section A</p>
+                        <select name="q14" id="q14">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">15</span> Section B</p>
+                        <select name="q15" id="q15">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">16</span> Section C</p>
+                        <select name="q16" id="q16">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">17</span> Section D</p>
+                        <select name="q17" id="q17">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">18</span> Section E</p>
+                        <select name="q18" id="q18">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">19</span> Section F</p>
+                        <select name="q19" id="q19">
+                            <option value="">--</option>
+                            <option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option>
+                            <option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-rubric">
+                    <h3>Questions 20–23</h3>
+                    <p>Look at the following statements (Questions 20-23) and the list of researchers below.</p>
+                    <p>Match each statement with the correct researcher, <strong>A–E</strong>.</p>
+                    <p>Write the correct letter, <strong>A–E</strong>, in boxes <strong>20–23</strong> on your answer sheet.</p>
+                    <p><em>NB You may use any letter more than once.</em></p>
+                </div>
+                <div class="question-content">
+                    <div class="helper-list-box">
+                        <div style="font-weight:700; color:var(--brand-2); margin-bottom:8px;">List of Researchers</div>
+                        <ul class="helper-list">
+                            <li><strong>A</strong> Edward M Hallowell</li>
+                            <li><strong>B</strong> Paul E Dux</li>
+                            <li><strong>C</strong> David Strayer</li>
+                            <li><strong>D</strong> Etienne Koechlin</li>
+                            <li><strong>E</strong> Keith Laws</li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">20</span> The brain of a good multi-tasker works differently from other people's.</p>
+                        <select name="q20" id="q20">
+                            <option value="">--</option>
+                            <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">21</span> The rate of error is considerably higher when people multi-task.</p>
+                        <select name="q21" id="q21">
+                            <option value="">--</option>
+                            <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">22</span> People are mistaken in their assumption that they can multi-task.</p>
+                        <select name="q22" id="q22">
+                            <option value="">--</option>
+                            <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-question-row">
+                        <p><span class="question-number">23</span> One gender does not seem to pause to consider before taking action.</p>
+                        <select name="q23" id="q23">
+                            <option value="">--</option>
+                            <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-rubric">
+                    <h3>Questions 24–26</h3>
+                    <p>Complete the summary below.</p>
+                    <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                    <p>Write your answer in boxes <strong>24–26</strong> on your answer sheet.</p>
+                </div>
+                <div class="question-content">
+                    <div class="summary-box">
+                        <div class="summary-title">Super-taskers</div>
+                        <p>
+                            Super-taskers are those of us who possess special multi-tasking ability. They can be found in all professions. People who are pilots, chefs and doctors are often super-taskers, and super-taskers are most likely to achieve a
+                            <span class="question-number">24</span> 
+                            <input type="text" class="gap-input" name="q24" data-q="24" autocomplete="off">
+                            that is high on the career ladder. Super-taskers typically have to undertake many tasks simultaneously that need their
+                            <span class="question-number">25</span> 
+                            <input type="text" class="gap-input" name="q25" data-q="25" autocomplete="off">.
+                            Genes play an important role in having this capability: these people have a special brain
+                            <span class="question-number">26</span> 
+                            <input type="text" class="gap-input" name="q26" data-q="26" autocomplete="off">
+                            which helps them do what we cannot.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <nav class="nav-row perScorableItem" aria-label="Questions">
+            <div class="footer__questionWrapper selected multiple" role="tablist">
+                <button role="tab" class="footer__questionNo" data-sectionid="sec1" tabindex="-1">
+                    <span><span aria-hidden="true" class="section-prefix">Part </span><span class="sectionNr" aria-hidden="true">2</span></span>
+                </button>
+                <div class="footer__subquestionWrapper">
+                    <button class="subQuestion" data-ordernumber="14" tabindex="0"><span class="sr-only">Question 14</span><span aria-hidden="true">14</span></button>
+                    <button class="subQuestion" data-ordernumber="15" tabindex="0"><span class="sr-only">Question 15</span><span aria-hidden="true">15</span></button>
+                    <button class="subQuestion" data-ordernumber="16" tabindex="0"><span class="sr-only">Question 16</span><span aria-hidden="true">16</span></button>
+                    <button class="subQuestion" data-ordernumber="17" tabindex="0"><span class="sr-only">Question 17</span><span aria-hidden="true">17</span></button>
+                    <button class="subQuestion" data-ordernumber="18" tabindex="0"><span class="sr-only">Question 18</span><span aria-hidden="true">18</span></button>
+                    <button class="subQuestion" data-ordernumber="19" tabindex="0"><span class="sr-only">Question 19</span><span aria-hidden="true">19</span></button>
+                    <button class="subQuestion" data-ordernumber="20" tabindex="0"><span class="sr-only">Question 20</span><span aria-hidden="true">20</span></button>
+                    <button class="subQuestion" data-ordernumber="21" tabindex="0"><span class="sr-only">Question 21</span><span aria-hidden="true">21</span></button>
+                    <button class="subQuestion" data-ordernumber="22" tabindex="0"><span class="sr-only">Question 22</span><span aria-hidden="true">22</span></button>
+                    <button class="subQuestion" data-ordernumber="23" tabindex="0"><span class="sr-only">Question 23</span><span aria-hidden="true">23</span></button>
+                    <button class="subQuestion" data-ordernumber="24" tabindex="0"><span class="sr-only">Question 24</span><span aria-hidden="true">24</span></button>
+                    <button class="subQuestion" data-ordernumber="25" tabindex="0"><span class="sr-only">Question 25</span><span aria-hidden="true">25</span></button>
+                    <button class="subQuestion" data-ordernumber="26" tabindex="0"><span class="sr-only">Question 26</span><span aria-hidden="true">26</span></button>
+                </div>
+            </div>
+            <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton"><i class="fas fa-check"></i> Submit</button>
+        </nav>
+    </footer>
+
+</div>
+
+<div class="submission-modal" id="submissionModal">
+    <div class="submission-content">
+        <h2 id="submissionTitle">Test Results</h2>
+        <div class="score-display">
+            <div>Your Score:</div>
+            <div class="score-number" id="userScore">0</div>
+            <div class="score-total">out of <span id="totalQuestions">13</span></div>
+            <div class="band-score" id="bandScore">Band: 0.0</div>
+            <div class="performance-rating" id="performanceRating">Poor – Needs Improvement</div>
+        </div>
+        <div class="time-spent" id="timeSpent"></div>
+        <p id="submissionMessage">Here are your answers with the correct solutions:</p>
+        
+        <div class="answers-section">
+            <h3>Your Answers:</h3>
+            <div id="answersList"></div>
+        </div>
+        <div class="submission-buttons"><button class="confirm" id="closeSubmission">Close</button></div>
+    </div>
+</div>
+
+<div class="answer-comparison" id="answerComparison">
+    <h3>Answer Comparison</h3>
+    <p>Your answers are marked below. Correct answers are <span class="dropdown-answer correct">green</span>, incorrect are <span class="dropdown-answer incorrect">red</span>.</p>
+</div>
+
+<script>
+    // ===== Correct Answers (Multi-tasking and the brain) =====
+    const correctAnswers = {
+        14: "iv",  // Section A: Real multi-tasking is nearly impossible
+        15: "iii", // Section B: A distinction between situations...
+        16: "vi",  // Section C: Neurological reasons for struggling
+        17: "v",   // Section D: Multi-tasking and gender
+        18: "i",   // Section E: Professions...
+        19: "vii", // Section F: DNA/genes
+        20: "C", // Strayer (super-taskers different patterns)
+        21: "C", // Strayer (driving study, mistakes)
+        22: "A", // Hallowell (mythical activity)
+        23: "D", // Koechlin (men
+        24: "position",
+        25: "attention",
+        26: "structure"
+    };
+
+    // ===== Timer (count up) =====
+    let totalSeconds = 0;
+    const timerElement = document.getElementById('testTimer');
+    let testSubmitted = false;
+    let userAnswers = {};
+    let startTime = new Date();
+    let resultsShown = false;
+
+    function updateTimer() {
+        if (testSubmitted) return;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        timerElement.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        totalSeconds++;
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // ===== Input Handling =====
+    document.querySelectorAll('select, input[type="text"]').forEach(input => {
+        const eventType = (input.tagName === 'SELECT') ? 'change' : 'input';
+        input.addEventListener(eventType, function() {
+            let qn = null;
+            if (this.dataset.q) qn = this.dataset.q;
+            else if (this.name.startsWith('q')) qn = this.name.replace('q','');
+
+            if (qn) {
+                const btn = document.querySelector(`.subQuestion[data-ordernumber="${qn}"]`);
+                if (btn) {
+                    if (this.type === 'text') {
+                        if (this.value.trim().length > 0) btn.classList.add('attempted');
+                        else btn.classList.remove('attempted');
+                    } else {
+                        if (this.value) btn.classList.add('attempted');
+                    }
+                }
+            }
+        });
+    });
+
+    // ===== Submission / Scoring =====
+    function calculateBandScore(score) {
+        // Approximate Academic Reading Band Score for 13 items
+        if (score >= 12) return 9.0;
+        if (score >= 11) return 8.5;
+        if (score >= 10) return 8.0;
+        if (score >= 9) return 7.5;
+        if (score >= 8) return 7.0;
+        if (score >= 7) return 6.5;
+        if (score >= 6) return 6.0;
+        if (score >= 5) return 5.5;
+        if (score >= 4) return 5.0;
+        return 0.0;
+    }
+
+    function highlightAnswers(correctAnswers) {
+        // Highlight Dropdowns (14-23)
+        for (let i = 14; i <= 23; i++) {
+            const select = document.querySelector(`select[name="q${i}"]`);
+            if(!select) continue;
+            const userAnswer = userAnswers[i];
+            const correctAnswer = correctAnswers[i];
+            
+            select.classList.remove('correct', 'incorrect');
+            select.disabled = true;
+
+            if (userAnswer && userAnswer !== 'Not answered') {
+                select.classList.add(userAnswer === correctAnswer ? 'correct' : 'incorrect');
+                const existingFeedback = select.nextElementSibling;
+                if(existingFeedback && existingFeedback.classList.contains('dropdown-answer')) existingFeedback.remove();
+
+                const feedback = document.createElement('span');
+                feedback.className = `dropdown-answer ${userAnswer === correctAnswer ? 'correct' : 'incorrect'}`;
+                feedback.textContent = userAnswer === correctAnswer ? '✓ Correct' : `✗ Correct: ${correctAnswer}`;
+                select.parentNode.appendChild(feedback);
+            }
+        }
+
+        // Highlight Text Inputs (24-26)
+        for (let i = 24; i <= 26; i++) {
+            const input = document.querySelector(`input[name="q${i}"]`);
+            const userAnswer = userAnswers[i];
+            const correctAnswer = correctAnswers[i];
+            input.classList.remove('correct', 'incorrect');
+            input.disabled = true;
+
+            const normUser = (userAnswer || '').trim().toLowerCase();
+            const normCorrect = correctAnswer.toLowerCase();
+            const isCorrect = normUser === normCorrect;
+
+            if (normUser.length > 0) {
+                input.classList.add(isCorrect ? 'correct' : 'incorrect');
+            }
+            
+            const existingFeedback = input.parentNode.querySelector('.text-feedback');
+            if(existingFeedback) existingFeedback.remove();
+
+            if (!isCorrect) {
+                const feedback = document.createElement('div');
+                feedback.className = `text-feedback incorrect`;
+                feedback.textContent = `Correct: ${correctAnswer}`;
+                input.parentNode.insertBefore(feedback, input.nextSibling);
+            }
+        }
+
+        document.getElementById('answerComparison').style.display = 'block';
+    }
+
+    function showSubmissionModal(title, message) {
+        const modal = document.getElementById('submissionModal');
+        document.getElementById('submissionTitle').textContent = title;
+        document.getElementById('submissionMessage').textContent = message;
+        
+        const endTime = new Date();
+        const diff = endTime - startTime;
+        const m = Math.floor(diff / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('timeSpent').textContent = `Time spent: ${m}m ${s}s`;
+
+        const answersList = document.getElementById('answersList');
+        answersList.innerHTML = '';
+        let score = 0;
+        userAnswers = {};
+
+        // Loop through all questions
+        for (let i = 14; i <= 26; i++) {
+            let ans = 'Not answered';
+            const select = document.querySelector(`select[name="q${i}"]`);
+            
+            if (select) {
+                ans = select.value || 'Not answered';
+            } else {
+                const textInput = document.querySelector(`input[name="q${i}"]`);
+                if (textInput) ans = textInput.value.trim() || 'Not answered';
+            }
+
+            userAnswers[i] = ans;
+            let ok = false;
+            
+            if (i >= 24) {
+                 const normAns = ans.toLowerCase();
+                 const normCorr = correctAnswers[i].toLowerCase();
+                 ok = normAns === normCorr;
+            } else {
+                 ok = ans === correctAnswers[i];
+            }
+
+            if (ok) score++;
+
+            const el = document.createElement('div');
+            el.className = `answer-item ${ok ? 'correct' : 'incorrect'}`;
+            el.innerHTML = `<div class="answer-text">Q${i}: ${ans}</div><span class="${ok ? 'correct-status' : 'incorrect-status'}">(${ok ? 'Correct' : `Correct: ${correctAnswers[i]}`})</span>`;
+            answersList.appendChild(el);
+        }
+
+        // Totals
+        document.getElementById('userScore').textContent = score;
+        document.getElementById('totalQuestions').textContent = '13';
+        const band = calculateBandScore(score);
+        document.getElementById('bandScore').textContent = `Band: ${band.toFixed(1)}`;
+        
+        let rating = 'Poor – Needs Improvement', cls = 'poor';
+        if (score >= 12) { rating = 'Excellent!'; cls = 'excellent'; }
+        else if (score >= 10) { rating = 'Very Good'; cls = 'very-good'; }
+        else if (score >= 8) { rating = 'Good'; cls = 'good'; }
+        else if (score >= 6) { rating = 'Fair'; cls = 'fair'; }
+        
+        const pr = document.getElementById('performanceRating');
+        pr.textContent = rating;
+        pr.className = `performance-rating ${cls}`;
+
+        if (testSubmitted) highlightAnswers(correctAnswers);
+        
+        modal.style.display = 'flex';
+        resultsShown = true;
+        const submitBtn = document.getElementById('deliver-button');
+        submitBtn.innerHTML = '<i class="fas fa-eye"></i> Show My Results';
+        submitBtn.disabled = false;
+    }
+
+    document.getElementById('deliver-button').addEventListener('click', function() {
+        if (resultsShown) {
+            document.getElementById('submissionModal').style.display = 'flex';
+            return;
+        }
+        if (testSubmitted) return;
+        if (confirm("Are you sure you want to submit your test?")) {
+            clearInterval(timerInterval);
+            testSubmitted = true;
+            showSubmissionModal('Test Submitted', 'Thank you for completing the test.');
+        }
+    });
+
+    document.getElementById('closeSubmission').addEventListener('click', function() {
+        document.getElementById('submissionModal').style.display = 'none';
+    });
+
+    // ===== Utils (Settings, Divider, Nav) =====
+    const settingsButton = document.getElementById('settingsButton');
+    const settingsModal = document.getElementById('settingsModal');
+    const settingsClose = document.getElementById('settingsClose');
+
+    settingsButton.addEventListener('click', () => settingsModal.style.display = 'flex');
+    settingsClose.addEventListener('click', () => settingsModal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === settingsModal) settingsModal.style.display = 'none';
+        if (e.target === document.getElementById('submissionModal')) document.getElementById('submissionModal').style.display = 'none';
+    });
+
+    const divider = document.getElementById('divider');
+    const passageContainer = document.getElementById('passage-container');
+    let isDragging = false, startX = 0, startWidth = 0;
+
+    divider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startWidth = parseInt(getComputedStyle(passageContainer).width, 10);
+        document.body.style.cursor = 'col-resize';
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+        e.preventDefault();
+    });
+
+    function onMouseMove(e) {
+        if (!isDragging) return;
+        const containerWidth = document.querySelector('.test-container').offsetWidth;
+        const newWidth = startWidth + e.clientX - startX;
+        if (newWidth >= containerWidth * 0.3 && newWidth <= containerWidth * 0.7)
+            passageContainer.style.width = `${newWidth}px`;
+    }
+
+    function onMouseUp() {
+        isDragging = false;
+        document.body.style.cursor = '';
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    document.querySelectorAll('.subQuestion').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.subQuestion').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const n = parseInt(this.dataset.ordernumber, 10);
+            let qIndex = 0;
+            if (n >= 14 && n <= 19) qIndex = 0;
+            else if (n >= 20 && n <= 23) qIndex = 1;
+            else if (n >= 24 && n <= 26) qIndex = 2;
+            
+            document.querySelectorAll('.question')[qIndex].scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // ===== Highlighting Logic =====
+    const highlightToolbar = document.getElementById('highlightToolbar');
+    let selectedText = '', selectedRange = null, currentHighlightColor = null;
+
+    function handleTextSelection() {
+        if(testSubmitted) return;
+        const sel = window.getSelection();
+        selectedText = sel.toString().trim();
+        
+        if (selectedText.length > 0 && sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const rect = range.getBoundingClientRect();
+            if(rect.width === 0) return;
+            
+            selectedRange = range;
+            highlightToolbar.style.display = 'block';
+            highlightToolbar.style.top = `${rect.top + window.scrollY - 40}px`;
+            highlightToolbar.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
+        } else {
+            highlightToolbar.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('mouseup', handleTextSelection);
+    document.addEventListener('mousedown', (e) => {
+        if (!highlightToolbar.contains(e.target)) highlightToolbar.style.display = 'none';
+    });
+
+    document.querySelectorAll('.highlight-color').forEach(btn => btn.addEventListener('click', function() {
+        currentHighlightColor = this.dataset.color;
+        if (selectedText.length > 0 && selectedRange) {
+            const span = document.createElement('span');
+            span.className = `highlight ${currentHighlightColor}`;
+            selectedRange.surroundContents(span);
+            window.getSelection().removeAllRanges();
+            highlightToolbar.style.display = 'none';
+        }
+    }));
+
+    document.querySelector('.highlight-toolbar .remove').addEventListener('click', function(){
+        if (selectedText.length > 0 && selectedRange) {
+            document.execCommand('removeFormat');
+            highlightToolbar.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -285,7 +285,10 @@ function GroupOptionsBox({ group }) {
     );
     if (!options.length) return null;
 
-    return h("div", { className: "cbt-group-options-box", "aria-label": "Available options" },
+    return h("div", { className: "cbt-group-options-box", "aria-label": group.optionsTitle || "Available options" },
+        group.optionsTitle
+            ? h("div", { className: "cbt-group-options-title" }, group.optionsTitle)
+            : null,
         options.map((option) =>
             h("span", { key: option.value, className: "cbt-group-option-chip" }, option.label)
         )
