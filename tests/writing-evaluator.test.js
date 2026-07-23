@@ -140,6 +140,14 @@ test("Responses API uses versioned two-pass evaluator, temperature 0.1, and no l
     assert.doesNotMatch(source, /openai\.chat\.completions\.create/);
 });
 
+test("examiner calibration is holistic and does not over-penalize isolated minor errors", () => {
+    const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
+    assert.match(source, /Judge the writer's overall control of English rather than counting errors mechanically/);
+    assert.match(source, /Three or four minor mistakes[\s\S]*?minimal effect/);
+    assert.match(source, /may still merit Band 7 or 7\.5 despite several minor errors/);
+    assert.match(source, /identify only the most important score-limiting or repeated problems/);
+});
+
 test("cache is content-addressed by task identity, exact text, response, and evaluator version", () => {
     const source = fs.readFileSync(path.join(__dirname, "..", "lib", "writing-routes.js"), "utf8");
     assert.match(source, /function writingEvaluationHash/);
