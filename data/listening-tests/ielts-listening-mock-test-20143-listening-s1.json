@@ -1,0 +1,238 @@
+{
+  "id": "ielts-listening-mock-test-20143-listening-s1",
+  "slug": "ielts-listening-mock-test-20143-listening-s1",
+  "title": "Listening test July — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/listening-test-july-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below.\nWrite ONE WORD OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Members' details are on a...",
+      "options": [],
+      "answer": "database"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Type of music represented: modern music (... and jazz)",
+      "options": [],
+      "answer": "rock"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Newsletter comes out once a...",
+      "options": [],
+      "answer": "month"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Cost of adult membership: £...",
+      "options": [],
+      "answer": "45"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Current number of members:...",
+      "options": [],
+      "answer": "750"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Facilities include: rehearsal rooms and a...",
+      "options": [],
+      "answer": "studio"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "There is no charge for... advice",
+      "options": [],
+      "answer": "legal"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "a recent...",
+      "options": [],
+      "answer": "recording"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Address: 707,... Street, Marbury",
+      "options": [],
+      "answer": "KIPPAX"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Contact email: music.... @bsu.co.uk",
+      "options": [],
+      "answer": "talent"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-mock-test-20143",
+  "createdAt": "2026-07-23T01:12:32.267Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/listening-test-july-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: database\n2: rock\n3: month\n4: 45\n5: 750\n6: studio\n7: legal\n8: recording\n9: KIPPAX\n10: talent",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "Music Alive Agency",
+            "<em>Example</em> Contact person: Jim <strong>Granley</strong>",
+            "• Members' details are on a {{1}}",
+            "• Type of music represented: modern music ({{2}} and jazz)",
+            "• Newsletter comes out once a {{3}}",
+            "• Cost of adult membership: £{{4}}",
+            "• Current number of members: {{5}}",
+            "• Facilities include: rehearsal rooms and a {{6}}",
+            "• There is no charge for {{7}} advice",
+            "<strong>To become a member, send:</strong>",
+            "• a letter with contact details",
+            "• a recent {{8}}",
+            "• Address: 707, {{9}} Street, Marbury",
+            "• Contact email: music.{{10}} @bsu.co.uk"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Members' details are on a...",
+              "text": "Members' details are on a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "database"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Type of music represented: modern music (... and jazz)",
+              "text": "Type of music represented: modern music (... and jazz)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rock"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Newsletter comes out once a...",
+              "text": "Newsletter comes out once a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "month"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Cost of adult membership: £...",
+              "text": "Cost of adult membership: £...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "45"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Current number of members:...",
+              "text": "Current number of members:...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "750"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Facilities include: rehearsal rooms and a...",
+              "text": "Facilities include: rehearsal rooms and a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "studio"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "There is no charge for... advice",
+              "text": "There is no charge for... advice",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "legal"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "a recent...",
+              "text": "a recent...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "recording"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Address: 707,... Street, Marbury",
+              "text": "Address: 707,... Street, Marbury",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "KIPPAX"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Contact email: music.... @bsu.co.uk",
+              "text": "Contact email: music.... @bsu.co.uk",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "talent"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

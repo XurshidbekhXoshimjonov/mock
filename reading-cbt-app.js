@@ -849,7 +849,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=20260717-result-modal-v2";
+    stylesheet.href = "listening-template.css?v=20260723-mangrove-project-v5";
     document.head.appendChild(stylesheet);
 }
 
@@ -1014,6 +1014,9 @@ function listeningBlocksFromQuestionGroup(group, index, images = []) {
             questionRange,
             instruction,
             imageUrl: listeningGroupImageUrl(group, images),
+            imageLayout: group.imageLayout || "",
+            optionsTitle: group.optionsTitle || "",
+            questionsTitle: group.questionsTitle || "",
             options: uniqueListeningOptions(group.options || group.matchingOptions || questionOptions),
             content: group.content || group.flowchartContent || [],
             questions: questions.map((question) => ({

@@ -1,0 +1,440 @@
+{
+  "id": "ielts-listening-mock-test-20143-listening-s3",
+  "slug": "ielts-listening-mock-test-20143-listening-s3",
+  "title": "Listening test July — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/listening-test-july-part-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21-26",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27-30",
+      "instruction": "Which feature do the speakers identify as particularly interesting for each of the following exhibitions they saw?\nChoose FOUR answers from the box and drag the correct letter, A-F, next to questions 27-30.",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Max and Abby agree that in the art exhibition they are looking forward to",
+      "options": [
+        {
+          "value": "A",
+          "label": "showing people their work.",
+          "html": "showing people their work."
+        },
+        {
+          "value": "B",
+          "label": "getting feedback from their tutor.",
+          "html": "getting feedback from their tutor."
+        },
+        {
+          "value": "C",
+          "label": "talking to other students about their displays.",
+          "html": "talking to other students about their displays."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "In last year's exhibition, both students were impressed by",
+      "options": [
+        {
+          "value": "A",
+          "label": "set of metal sculptures.",
+          "html": "set of metal sculptures."
+        },
+        {
+          "value": "B",
+          "label": "a series of wooden models.",
+          "html": "a series of wooden models."
+        },
+        {
+          "value": "C",
+          "label": "a collection of textile designs.",
+          "html": "a collection of textile designs."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "What has Max decided to call his display?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Mother Nature",
+          "html": "Mother Nature"
+        },
+        {
+          "value": "B",
+          "label": "Views of Farmland",
+          "html": "Views of Farmland"
+        },
+        {
+          "value": "C",
+          "label": "Seasons",
+          "html": "Seasons"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "What does Abby think will be difficult about preparing for their displays?",
+      "options": [
+        {
+          "value": "A",
+          "label": "having enough time to set it up.",
+          "html": "having enough time to set it up."
+        },
+        {
+          "value": "B",
+          "label": "choosing which pieces to show.",
+          "html": "choosing which pieces to show."
+        },
+        {
+          "value": "C",
+          "label": "filling up all the available space.",
+          "html": "filling up all the available space."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "What does Abby say about the summary they have to write?",
+      "options": [
+        {
+          "value": "A",
+          "label": "She isn't sure whether people will read it.",
+          "html": "She isn't sure whether people will read it."
+        },
+        {
+          "value": "B",
+          "label": "It will be difficult to keep it short enough.",
+          "html": "It will be difficult to keep it short enough."
+        },
+        {
+          "value": "C",
+          "label": "It will be hard to clarify the reasons for her work.",
+          "html": "It will be hard to clarify the reasons for her work."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "What aspect of the display will the students organise themselves?",
+      "options": [
+        {
+          "value": "A",
+          "label": "ranging the lighting.",
+          "html": "ranging the lighting."
+        },
+        {
+          "value": "B",
+          "label": "inviting local journalists.",
+          "html": "inviting local journalists."
+        },
+        {
+          "value": "C",
+          "label": "providing comment forms.",
+          "html": "providing comment forms."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "On the Water",
+      "options": [],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "City Life",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Faces",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Moods",
+      "options": [],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-mock-test-20143",
+  "createdAt": "2026-07-23T01:12:32.267Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/listening-test-july-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: A\n22: B\n23: A\n24: A\n25: B\n26: C\n27: D\n28: B\n29: A\n30: C",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21-26",
+          "title": "Preparing for the end-of-year art exhibition",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Max and Abby agree that in the art exhibition they are looking forward to",
+              "text": "Max and Abby agree that in the art exhibition they are looking forward to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "showing people their work."
+                },
+                {
+                  "letter": "B",
+                  "text": "getting feedback from their tutor."
+                },
+                {
+                  "letter": "C",
+                  "text": "talking to other students about their displays."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "In last year's exhibition, both students were impressed by",
+              "text": "In last year's exhibition, both students were impressed by",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "set of metal sculptures."
+                },
+                {
+                  "letter": "B",
+                  "text": "a series of wooden models."
+                },
+                {
+                  "letter": "C",
+                  "text": "a collection of textile designs."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "What has Max decided to call his display?",
+              "text": "What has Max decided to call his display?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Mother Nature"
+                },
+                {
+                  "letter": "B",
+                  "text": "Views of Farmland"
+                },
+                {
+                  "letter": "C",
+                  "text": "Seasons"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "What does Abby think will be difficult about preparing for their displays?",
+              "text": "What does Abby think will be difficult about preparing for their displays?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "having enough time to set it up."
+                },
+                {
+                  "letter": "B",
+                  "text": "choosing which pieces to show."
+                },
+                {
+                  "letter": "C",
+                  "text": "filling up all the available space."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "What does Abby say about the summary they have to write?",
+              "text": "What does Abby say about the summary they have to write?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "She isn't sure whether people will read it."
+                },
+                {
+                  "letter": "B",
+                  "text": "It will be difficult to keep it short enough."
+                },
+                {
+                  "letter": "C",
+                  "text": "It will be hard to clarify the reasons for her work."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "What aspect of the display will the students organise themselves?",
+              "text": "What aspect of the display will the students organise themselves?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "ranging the lighting."
+                },
+                {
+                  "letter": "B",
+                  "text": "inviting local journalists."
+                },
+                {
+                  "letter": "C",
+                  "text": "providing comment forms."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "group-3-27",
+          "type": "matching",
+          "questionRange": "Questions 27-30",
+          "title": "",
+          "optionsTitle": "Interesting features",
+          "questionsTitle": "Exhibitions",
+          "example": "",
+          "instruction": "Which feature do the speakers identify as particularly interesting for each of the following exhibitions they saw?\nChoose FOUR answers from the box and drag the correct letter, A-F, next to questions 27-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the realistic colors"
+            },
+            {
+              "letter": "B",
+              "text": "the sense of space"
+            },
+            {
+              "letter": "C",
+              "text": "the unusual interpretation of the theme"
+            },
+            {
+              "letter": "D",
+              "text": "the painting technique"
+            },
+            {
+              "letter": "E",
+              "text": "the variety of materials used"
+            },
+            {
+              "letter": "F",
+              "text": "the use of light and shade"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "On the Water",
+              "text": "On the Water",
+              "answer": "D"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "City Life",
+              "text": "City Life",
+              "answer": "B"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Faces",
+              "text": "Faces",
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Moods",
+              "text": "Moods",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

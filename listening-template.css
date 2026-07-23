@@ -2705,6 +2705,99 @@ body.fullscreen-fallback .lc-submit-status {
     color: #111;
 }
 
+.lc-note-completion--mangrove-project .lc-notes {
+    width: min(720px, 100%);
+    margin: 0 auto;
+    border: 1px solid #1f2937;
+    background: #ffffff;
+    padding: 0 12px 14px;
+    color: #050505;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.lc-note-completion--mangrove-project .lc-boxed-flow-title {
+    margin: 0 0 10px;
+    border: 0;
+    padding: 0;
+    color: #050505;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.lc-note-completion--mangrove-project .lc-note-section-title,
+.lc-note-completion--mangrove-project .lc-note-line {
+    margin: 8px 0 5px;
+    color: #050505;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.lc-note-completion--mangrove-project .lc-note-section-title,
+.lc-note-completion--mangrove-project .lc-note-line strong {
+    font-weight: 800 !important;
+}
+
+.lc-note-completion--mangrove-project .lc-note-list {
+    margin: 5px 0 8px;
+    padding-left: 42px;
+    list-style: disc outside;
+}
+
+.lc-note-completion--mangrove-project .lc-note-list-item {
+    display: list-item;
+    margin: 7px 0;
+    color: #050505;
+    font-size: 16px;
+    line-height: 1.4;
+    list-style: disc outside;
+}
+
+.lc-note-completion--mangrove-project .lc-note-list-item::marker {
+    color: #050505;
+    font-size: 0.9em;
+}
+
+.lc-note-completion--mangrove-project .lc-question-badge {
+    color: #050505;
+}
+
+.lc-note-completion--mangrove-project .lc-answer-input {
+    width: 96px;
+    min-width: 76px;
+    border-bottom: 2px dotted #202020;
+    color: #050505;
+}
+
+html.dark-theme .lc-note-completion--mangrove-project .lc-notes,
+html.dark-theme .lc-note-completion--mangrove-project .lc-boxed-flow-title,
+html.dark-theme .lc-note-completion--mangrove-project .lc-note-section-title,
+html.dark-theme .lc-note-completion--mangrove-project .lc-note-line,
+html.dark-theme .lc-note-completion--mangrove-project .lc-note-list-item,
+html.dark-theme .lc-note-completion--mangrove-project .lc-question-badge {
+    color: #050505;
+}
+
+@media (max-width: 640px) {
+    .lc-note-completion--mangrove-project .lc-notes {
+        padding: 0 10px 12px;
+        font-size: 14px;
+    }
+
+    .lc-note-completion--mangrove-project .lc-note-section-title,
+    .lc-note-completion--mangrove-project .lc-note-line,
+    .lc-note-completion--mangrove-project .lc-note-list-item {
+        font-size: 14px;
+    }
+
+    .lc-note-completion--mangrove-project .lc-note-list {
+        padding-left: 28px;
+    }
+}
+
 .lc-matching-options,
 .lc-flowchart-options-box,
 .lc-flowchart-panel,

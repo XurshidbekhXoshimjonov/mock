@@ -99,7 +99,7 @@ test("Vocabulary UI exposes real API actions, Reading-only filters and practice 
     assert.match(reading, /Added to this Reading review\./);
     assert.doesNotMatch(reading, /window\.location\.assign\("\/vocabulary\?source=add-word"\)/);
     assert.match(readingTemplate, /reading-cbt-app\.js\?v=20260718-vocabulary-practice-only-v2/);
-    assert.match(fullReadingTemplate, /reading-cbt-app\.js\?v=20260718-vocabulary-practice-only-v2/);
+    assert.match(fullReadingTemplate, /reading-cbt-app\.js\?v=20260723-listening-matching-headings-v3/);
     ["word-uzbek", "uzbek-word", "context", "definition"].forEach((mode) => assert.match(page, new RegExp(mode)));
     assert.doesNotMatch(page, /data-practice-mode="listening"/);
     assert.doesNotMatch(page, /Start Listening/);

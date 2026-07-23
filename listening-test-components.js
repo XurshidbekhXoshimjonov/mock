@@ -798,15 +798,19 @@ const ListeningComponents = (() => {
         }
 
         const isSpiritBear = isBoxedFlow && /^the spirit bear$/i.test(plainText(displayTitle));
+        const isMangroveProject = block.noteStyle === "mangrove-project";
         const noteStyleClass = [
             isBoxedFlow ? "lc-note-completion--boxed-flow" : "",
-            isSpiritBear ? "lc-note-completion--spirit-bear" : ""
+            isSpiritBear ? "lc-note-completion--spirit-bear" : "",
+            isMangroveProject ? "lc-note-completion--mangrove-project" : ""
         ].filter(Boolean).join(" ");
         const items = renderNoteFlow(noteLines);
-        const tableItems = block.noteStyle !== "structured-outline" && shouldRenderNoteTable(noteLines)
+        const tableItems = block.noteStyle !== "structured-outline"
+            && block.noteStyle !== "mangrove-project"
+            && shouldRenderNoteTable(noteLines)
             ? renderNoteTable(noteLines)
             : "";
-        const titleHtml = displayTitle ? `<h4 class="${isBoxedFlow ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : "";
+        const titleHtml = displayTitle ? `<h4 class="${isBoxedFlow || isMangroveProject ? "lc-boxed-flow-title" : "lc-form-title"}">${renderPlaceholderText(displayTitle, block.options)}</h4>` : "";
 
         const exampleBox = block.example ? `
             <div class="lc-notes-example">
@@ -816,9 +820,9 @@ const ListeningComponents = (() => {
         ` : "";
 
         return blockCard(block, `
-            ${!isSpiritBear ? titleHtml : ""}
+            ${!isSpiritBear && !isMangroveProject ? titleHtml : ""}
             ${exampleBox}
-            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${isSpiritBear ? titleHtml : ""}${tableItems || items}</div>
+            <div class="lc-notes ${tableItems ? "lc-notes--table" : ""}">${isSpiritBear || isMangroveProject ? titleHtml : ""}${tableItems || items}</div>
         `, `lc-note-completion ${noteStyleClass}`);
     }
 
@@ -944,8 +948,12 @@ const ListeningComponents = (() => {
         const questionsTitle = block.questionsTitle
             ? `<h4 class="lc-matching-questions-title">${escapeHtml(block.questionsTitle)}</h4>`
             : "";
+        const contentTitle = String(block.title || "").trim();
+        const contentTitleHtml = contentTitle
+            ? `<h4 class="lc-mcq-content-title">${escapeHtml(contentTitle)}</h4>`
+            : "";
         const content = hasImage
-            ? `<div class="lc-matching-map-layout"${isStackedImage ? ' style="grid-template-columns:1fr"' : ""}>
+            ? `${contentTitleHtml}<div class="lc-matching-map-layout"${isStackedImage ? ' style="grid-template-columns:1fr"' : ""}>
                 ${image}
                 <div class="lc-matching-answer-panel">
                     ${optionsTitle}
@@ -953,7 +961,7 @@ const ListeningComponents = (() => {
                     <div class="lc-matching-rows">${rows}</div>
                 </div>
             </div>`
-            : `${image}
+            : `${contentTitleHtml}${image}
             <div class="lc-matching-options">${optionsTitle}${options}</div>
             <div class="lc-matching-rows">${questionsTitle}${rows}</div>`;
 

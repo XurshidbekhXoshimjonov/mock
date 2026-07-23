@@ -1,0 +1,399 @@
+{
+  "id": "ielts-listening-mock-test-20143-listening-s2",
+  "slug": "ielts-listening-mock-test-20143-listening-s2",
+  "title": "Listening test July — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/listening-test-july-part-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11-14",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Label the map below.\nWrite the correct letter, A-I, next to questions 15-20.",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What do participants need to take to the registration desk?",
+      "options": [
+        {
+          "value": "A",
+          "label": "form of identification.",
+          "html": "form of identification."
+        },
+        {
+          "value": "B",
+          "label": "a competitor number.",
+          "html": "a competitor number."
+        },
+        {
+          "value": "C",
+          "label": "ash for the entrance fee.",
+          "html": "ash for the entrance fee."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What does the entrance fee to the competition include?",
+      "options": [
+        {
+          "value": "A",
+          "label": "equipment for fishing.",
+          "html": "equipment for fishing."
+        },
+        {
+          "value": "B",
+          "label": "all food for both days.",
+          "html": "all food for both days."
+        },
+        {
+          "value": "C",
+          "label": "fuel for the fishing.",
+          "html": "fuel for the fishing."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Participants without a fishing licence are recommended to apply for one",
+      "options": [
+        {
+          "value": "A",
+          "label": "t the registration desk.",
+          "html": "t the registration desk."
+        },
+        {
+          "value": "B",
+          "label": "over the phone.",
+          "html": "over the phone."
+        },
+        {
+          "value": "C",
+          "label": "on the internet.",
+          "html": "on the internet."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What will happen at 6 pm on Sunday?",
+      "options": [
+        {
+          "value": "A",
+          "label": "The time allocated for fishing will end.",
+          "html": "The time allocated for fishing will end."
+        },
+        {
+          "value": "B",
+          "label": "The fish caught will be judged.",
+          "html": "The fish caught will be judged."
+        },
+        {
+          "value": "C",
+          "label": "The prizes will be awarded to the winners.",
+          "html": "The prizes will be awarded to the winners."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Registration area",
+      "options": [],
+      "answer": "G"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "Shore fishing area",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Boat launching area",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Judging area",
+      "options": [],
+      "answer": "H"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "Dining area",
+      "options": [],
+      "answer": "D"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Prize-giving area",
+      "options": [],
+      "answer": "B"
+    }
+  ],
+  "images": [
+    {
+      "id": "img-4",
+      "src": "https://raw.githubusercontent.com/jasurrkham1dov-blip/picture/main/ChatGPT%20Image%20Jul%2023%2C%202026%2C%2001_01_29%20AM.png",
+      "alt": "Albany Fishing Competition Map",
+      "section": "listening",
+      "sectionNumber": 2,
+      "questionGroupIndex": null
+    }
+  ],
+  "sourceFullTestId": "ielts-listening-mock-test-20143",
+  "createdAt": "2026-07-23T01:12:32.267Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/listening-test-july-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: A\n12: B\n13: C\n14: B\n15: G\n16: A\n17: C\n18: H\n19: D\n20: B",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-14",
+          "title": "Information for participants in the Albany fishing competition",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What do participants need to take to the registration desk?",
+              "text": "What do participants need to take to the registration desk?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "form of identification."
+                },
+                {
+                  "letter": "B",
+                  "text": "a competitor number."
+                },
+                {
+                  "letter": "C",
+                  "text": "ash for the entrance fee."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What does the entrance fee to the competition include?",
+              "text": "What does the entrance fee to the competition include?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "equipment for fishing."
+                },
+                {
+                  "letter": "B",
+                  "text": "all food for both days."
+                },
+                {
+                  "letter": "C",
+                  "text": "fuel for the fishing."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Participants without a fishing licence are recommended to apply for one",
+              "text": "Participants without a fishing licence are recommended to apply for one",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "t the registration desk."
+                },
+                {
+                  "letter": "B",
+                  "text": "over the phone."
+                },
+                {
+                  "letter": "C",
+                  "text": "on the internet."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What will happen at 6 pm on Sunday?",
+              "text": "What will happen at 6 pm on Sunday?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The time allocated for fishing will end."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fish caught will be judged."
+                },
+                {
+                  "letter": "C",
+                  "text": "The prizes will be awarded to the winners."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15-20",
+          "title": "Albany Fishing Competition Map",
+          "optionsTitle": "Map labels",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Label the map below.\nWrite the correct letter, A-I, next to questions 15-20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": ""
+            },
+            {
+              "letter": "B",
+              "text": ""
+            },
+            {
+              "letter": "C",
+              "text": ""
+            },
+            {
+              "letter": "D",
+              "text": ""
+            },
+            {
+              "letter": "E",
+              "text": ""
+            },
+            {
+              "letter": "F",
+              "text": ""
+            },
+            {
+              "letter": "G",
+              "text": ""
+            },
+            {
+              "letter": "H",
+              "text": ""
+            },
+            {
+              "letter": "I",
+              "text": ""
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "https://raw.githubusercontent.com/jasurrkham1dov-blip/picture/main/ChatGPT%20Image%20Jul%2023%2C%202026%2C%2001_01_29%20AM.png",
+          "imageLayout": "stacked",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Registration area",
+              "text": "Registration area",
+              "answer": "G"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Shore fishing area",
+              "text": "Shore fishing area",
+              "answer": "A"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Boat launching area",
+              "text": "Boat launching area",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Judging area",
+              "text": "Judging area",
+              "answer": "H"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Dining area",
+              "text": "Dining area",
+              "answer": "D"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Prize-giving area",
+              "text": "Prize-giving area",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

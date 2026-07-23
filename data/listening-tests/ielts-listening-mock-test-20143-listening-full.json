@@ -1,0 +1,1279 @@
+{
+  "id": "ielts-listening-mock-test-20143-listening-full",
+  "slug": "ielts-listening-mock-test-20143-listening-full",
+  "title": "Listening test July",
+  "subtitle": "Listening full test",
+  "part": "full",
+  "audio": "/uploads/audio/listening-test-july-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "Complete the notes below.\nWrite ONE WORD OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-14",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15-20",
+      "instruction": "Label the map below.\nWrite the correct letter, A-I, next to questions 15-20.",
+      "rule": "",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21-26",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "title": "Questions 27-30",
+      "instruction": "Which feature do the speakers identify as particularly interesting for each of the following exhibitions they saw?\nChoose FOUR answers from the box and drag the correct letter, A-F, next to questions 27-30.",
+      "rule": "",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Members' details are on a...",
+      "options": [],
+      "answer": "database"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Type of music represented: modern music (... and jazz)",
+      "options": [],
+      "answer": "rock"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Newsletter comes out once a...",
+      "options": [],
+      "answer": "month"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Cost of adult membership: £...",
+      "options": [],
+      "answer": "45"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Current number of members:...",
+      "options": [],
+      "answer": "750"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Facilities include: rehearsal rooms and a...",
+      "options": [],
+      "answer": "studio"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "There is no charge for... advice",
+      "options": [],
+      "answer": "legal"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "a recent...",
+      "options": [],
+      "answer": "recording"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Address: 707,... Street, Marbury",
+      "options": [],
+      "answer": "KIPPAX"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Contact email: music.... @bsu.co.uk",
+      "options": [],
+      "answer": "talent"
+    },
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What do participants need to take to the registration desk?",
+      "options": [
+        {
+          "value": "A",
+          "label": "form of identification.",
+          "html": "form of identification."
+        },
+        {
+          "value": "B",
+          "label": "a competitor number.",
+          "html": "a competitor number."
+        },
+        {
+          "value": "C",
+          "label": "ash for the entrance fee.",
+          "html": "ash for the entrance fee."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What does the entrance fee to the competition include?",
+      "options": [
+        {
+          "value": "A",
+          "label": "equipment for fishing.",
+          "html": "equipment for fishing."
+        },
+        {
+          "value": "B",
+          "label": "all food for both days.",
+          "html": "all food for both days."
+        },
+        {
+          "value": "C",
+          "label": "fuel for the fishing.",
+          "html": "fuel for the fishing."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Participants without a fishing licence are recommended to apply for one",
+      "options": [
+        {
+          "value": "A",
+          "label": "t the registration desk.",
+          "html": "t the registration desk."
+        },
+        {
+          "value": "B",
+          "label": "over the phone.",
+          "html": "over the phone."
+        },
+        {
+          "value": "C",
+          "label": "on the internet.",
+          "html": "on the internet."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What will happen at 6 pm on Sunday?",
+      "options": [
+        {
+          "value": "A",
+          "label": "The time allocated for fishing will end.",
+          "html": "The time allocated for fishing will end."
+        },
+        {
+          "value": "B",
+          "label": "The fish caught will be judged.",
+          "html": "The fish caught will be judged."
+        },
+        {
+          "value": "C",
+          "label": "The prizes will be awarded to the winners.",
+          "html": "The prizes will be awarded to the winners."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Registration area",
+      "options": [],
+      "answer": "G"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "Shore fishing area",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Boat launching area",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Judging area",
+      "options": [],
+      "answer": "H"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "Dining area",
+      "options": [],
+      "answer": "D"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Prize-giving area",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Max and Abby agree that in the art exhibition they are looking forward to",
+      "options": [
+        {
+          "value": "A",
+          "label": "showing people their work.",
+          "html": "showing people their work."
+        },
+        {
+          "value": "B",
+          "label": "getting feedback from their tutor.",
+          "html": "getting feedback from their tutor."
+        },
+        {
+          "value": "C",
+          "label": "talking to other students about their displays.",
+          "html": "talking to other students about their displays."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "In last year's exhibition, both students were impressed by",
+      "options": [
+        {
+          "value": "A",
+          "label": "set of metal sculptures.",
+          "html": "set of metal sculptures."
+        },
+        {
+          "value": "B",
+          "label": "a series of wooden models.",
+          "html": "a series of wooden models."
+        },
+        {
+          "value": "C",
+          "label": "a collection of textile designs.",
+          "html": "a collection of textile designs."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "What has Max decided to call his display?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Mother Nature",
+          "html": "Mother Nature"
+        },
+        {
+          "value": "B",
+          "label": "Views of Farmland",
+          "html": "Views of Farmland"
+        },
+        {
+          "value": "C",
+          "label": "Seasons",
+          "html": "Seasons"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "What does Abby think will be difficult about preparing for their displays?",
+      "options": [
+        {
+          "value": "A",
+          "label": "having enough time to set it up.",
+          "html": "having enough time to set it up."
+        },
+        {
+          "value": "B",
+          "label": "choosing which pieces to show.",
+          "html": "choosing which pieces to show."
+        },
+        {
+          "value": "C",
+          "label": "filling up all the available space.",
+          "html": "filling up all the available space."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "What does Abby say about the summary they have to write?",
+      "options": [
+        {
+          "value": "A",
+          "label": "She isn't sure whether people will read it.",
+          "html": "She isn't sure whether people will read it."
+        },
+        {
+          "value": "B",
+          "label": "It will be difficult to keep it short enough.",
+          "html": "It will be difficult to keep it short enough."
+        },
+        {
+          "value": "C",
+          "label": "It will be hard to clarify the reasons for her work.",
+          "html": "It will be hard to clarify the reasons for her work."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "What aspect of the display will the students organise themselves?",
+      "options": [
+        {
+          "value": "A",
+          "label": "ranging the lighting.",
+          "html": "ranging the lighting."
+        },
+        {
+          "value": "B",
+          "label": "inviting local journalists.",
+          "html": "inviting local journalists."
+        },
+        {
+          "value": "C",
+          "label": "providing comment forms.",
+          "html": "providing comment forms."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "On the Water",
+      "options": [],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "City Life",
+      "options": [],
+      "answer": "B"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Faces",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Moods",
+      "options": [],
+      "answer": "C"
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "protect coastal areas from... by the sea",
+      "options": [],
+      "answer": "flooding"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "mangroves had been used by farmers as...",
+      "options": [],
+      "answer": "firewood"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "mangroves were poisoned by the use of...",
+      "options": [],
+      "answer": "fertilizer"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "local people used the mangroves as a place to put their...",
+      "options": [],
+      "answer": "trash"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "a barrier which was made of... was constructed - but it failed",
+      "options": [],
+      "answer": "sand"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "the seeds of the... mangrove were used",
+      "options": [],
+      "answer": "grey/gray"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "kept in small pots in a...",
+      "options": [],
+      "answer": "hot house"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "watered with... water",
+      "options": [],
+      "answer": "rain"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "at risk from the large... population",
+      "options": [],
+      "answer": "rabbit"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "the young plants were destroyed in a...",
+      "options": [],
+      "answer": "storm"
+    }
+  ],
+  "images": [
+    {
+      "id": "img-4",
+      "src": "https://raw.githubusercontent.com/jasurrkham1dov-blip/picture/main/ChatGPT%20Image%20Jul%2023%2C%202026%2C%2001_01_29%20AM.png",
+      "alt": "Albany Fishing Competition Map",
+      "section": "listening",
+      "sectionNumber": 2,
+      "questionGroupIndex": null
+    }
+  ],
+  "sourceFullTestId": "ielts-listening-mock-test-20143",
+  "openUrl": "/full-test-player?id=ielts-listening-mock-test-20143&skill=listening",
+  "createdAt": "2026-07-23T01:12:32.267Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/listening-test-july-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: database\n2: rock\n3: month\n4: 45\n5: 750\n6: studio\n7: legal\n8: recording\n9: KIPPAX\n10: talent",
+      "blocks": [
+        {
+          "id": "group-1-1",
+          "type": "note_completion",
+          "questionRange": "Questions 1-10",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "Music Alive Agency",
+            "<em>Example</em> Contact person: Jim <strong>Granley</strong>",
+            "• Members' details are on a {{1}}",
+            "• Type of music represented: modern music ({{2}} and jazz)",
+            "• Newsletter comes out once a {{3}}",
+            "• Cost of adult membership: £{{4}}",
+            "• Current number of members: {{5}}",
+            "• Facilities include: rehearsal rooms and a {{6}}",
+            "• There is no charge for {{7}} advice",
+            "<strong>To become a member, send:</strong>",
+            "• a letter with contact details",
+            "• a recent {{8}}",
+            "• Address: 707, {{9}} Street, Marbury",
+            "• Contact email: music.{{10}} @bsu.co.uk"
+          ],
+          "noteStyle": "boxed-flow",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Members' details are on a...",
+              "text": "Members' details are on a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "database"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Type of music represented: modern music (... and jazz)",
+              "text": "Type of music represented: modern music (... and jazz)",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rock"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Newsletter comes out once a...",
+              "text": "Newsletter comes out once a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "month"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Cost of adult membership: £...",
+              "text": "Cost of adult membership: £...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "45"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Current number of members:...",
+              "text": "Current number of members:...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "750"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Facilities include: rehearsal rooms and a...",
+              "text": "Facilities include: rehearsal rooms and a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "studio"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "There is no charge for... advice",
+              "text": "There is no charge for... advice",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "legal"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "a recent...",
+              "text": "a recent...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "recording"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Address: 707,... Street, Marbury",
+              "text": "Address: 707,... Street, Marbury",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "KIPPAX"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Contact email: music.... @bsu.co.uk",
+              "text": "Contact email: music.... @bsu.co.uk",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "talent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/listening-test-july-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: A\n12: B\n13: C\n14: B\n15: G\n16: A\n17: C\n18: H\n19: D\n20: B",
+      "blocks": [
+        {
+          "id": "group-2-11",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11-14",
+          "title": "Information for participants in the Albany fishing competition",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What do participants need to take to the registration desk?",
+              "text": "What do participants need to take to the registration desk?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "form of identification."
+                },
+                {
+                  "letter": "B",
+                  "text": "a competitor number."
+                },
+                {
+                  "letter": "C",
+                  "text": "ash for the entrance fee."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What does the entrance fee to the competition include?",
+              "text": "What does the entrance fee to the competition include?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "equipment for fishing."
+                },
+                {
+                  "letter": "B",
+                  "text": "all food for both days."
+                },
+                {
+                  "letter": "C",
+                  "text": "fuel for the fishing."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Participants without a fishing licence are recommended to apply for one",
+              "text": "Participants without a fishing licence are recommended to apply for one",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "t the registration desk."
+                },
+                {
+                  "letter": "B",
+                  "text": "over the phone."
+                },
+                {
+                  "letter": "C",
+                  "text": "on the internet."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What will happen at 6 pm on Sunday?",
+              "text": "What will happen at 6 pm on Sunday?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The time allocated for fishing will end."
+                },
+                {
+                  "letter": "B",
+                  "text": "The fish caught will be judged."
+                },
+                {
+                  "letter": "C",
+                  "text": "The prizes will be awarded to the winners."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "group-2-15",
+          "type": "matching",
+          "questionRange": "Questions 15-20",
+          "title": "Albany Fishing Competition Map",
+          "optionsTitle": "Map labels",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Label the map below.\nWrite the correct letter, A-I, next to questions 15-20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": ""
+            },
+            {
+              "letter": "B",
+              "text": ""
+            },
+            {
+              "letter": "C",
+              "text": ""
+            },
+            {
+              "letter": "D",
+              "text": ""
+            },
+            {
+              "letter": "E",
+              "text": ""
+            },
+            {
+              "letter": "F",
+              "text": ""
+            },
+            {
+              "letter": "G",
+              "text": ""
+            },
+            {
+              "letter": "H",
+              "text": ""
+            },
+            {
+              "letter": "I",
+              "text": ""
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "https://raw.githubusercontent.com/jasurrkham1dov-blip/picture/main/ChatGPT%20Image%20Jul%2023%2C%202026%2C%2001_01_29%20AM.png",
+          "imageLayout": "stacked",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Registration area",
+              "text": "Registration area",
+              "answer": "G"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Shore fishing area",
+              "text": "Shore fishing area",
+              "answer": "A"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Boat launching area",
+              "text": "Boat launching area",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Judging area",
+              "text": "Judging area",
+              "answer": "H"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Dining area",
+              "text": "Dining area",
+              "answer": "D"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Prize-giving area",
+              "text": "Prize-giving area",
+              "answer": "B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/listening-test-july-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: A\n22: B\n23: A\n24: A\n25: B\n26: C\n27: D\n28: B\n29: A\n30: C",
+      "blocks": [
+        {
+          "id": "group-3-21",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21-26",
+          "title": "Preparing for the end-of-year art exhibition",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Max and Abby agree that in the art exhibition they are looking forward to",
+              "text": "Max and Abby agree that in the art exhibition they are looking forward to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "showing people their work."
+                },
+                {
+                  "letter": "B",
+                  "text": "getting feedback from their tutor."
+                },
+                {
+                  "letter": "C",
+                  "text": "talking to other students about their displays."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "In last year's exhibition, both students were impressed by",
+              "text": "In last year's exhibition, both students were impressed by",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "set of metal sculptures."
+                },
+                {
+                  "letter": "B",
+                  "text": "a series of wooden models."
+                },
+                {
+                  "letter": "C",
+                  "text": "a collection of textile designs."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "What has Max decided to call his display?",
+              "text": "What has Max decided to call his display?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Mother Nature"
+                },
+                {
+                  "letter": "B",
+                  "text": "Views of Farmland"
+                },
+                {
+                  "letter": "C",
+                  "text": "Seasons"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "What does Abby think will be difficult about preparing for their displays?",
+              "text": "What does Abby think will be difficult about preparing for their displays?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "having enough time to set it up."
+                },
+                {
+                  "letter": "B",
+                  "text": "choosing which pieces to show."
+                },
+                {
+                  "letter": "C",
+                  "text": "filling up all the available space."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "What does Abby say about the summary they have to write?",
+              "text": "What does Abby say about the summary they have to write?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "She isn't sure whether people will read it."
+                },
+                {
+                  "letter": "B",
+                  "text": "It will be difficult to keep it short enough."
+                },
+                {
+                  "letter": "C",
+                  "text": "It will be hard to clarify the reasons for her work."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "What aspect of the display will the students organise themselves?",
+              "text": "What aspect of the display will the students organise themselves?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "ranging the lighting."
+                },
+                {
+                  "letter": "B",
+                  "text": "inviting local journalists."
+                },
+                {
+                  "letter": "C",
+                  "text": "providing comment forms."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "group-3-27",
+          "type": "matching",
+          "questionRange": "Questions 27-30",
+          "title": "",
+          "optionsTitle": "Interesting features",
+          "questionsTitle": "Exhibitions",
+          "example": "",
+          "instruction": "Which feature do the speakers identify as particularly interesting for each of the following exhibitions they saw?\nChoose FOUR answers from the box and drag the correct letter, A-F, next to questions 27-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the realistic colors"
+            },
+            {
+              "letter": "B",
+              "text": "the sense of space"
+            },
+            {
+              "letter": "C",
+              "text": "the unusual interpretation of the theme"
+            },
+            {
+              "letter": "D",
+              "text": "the painting technique"
+            },
+            {
+              "letter": "E",
+              "text": "the variety of materials used"
+            },
+            {
+              "letter": "F",
+              "text": "the use of light and shade"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "On the Water",
+              "text": "On the Water",
+              "answer": "D"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "City Life",
+              "text": "City Life",
+              "answer": "B"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Faces",
+              "text": "Faces",
+              "answer": "A"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Moods",
+              "text": "Moods",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/listening-test-july-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: flooding\n32: firewood\n33: fertilizer\n34: trash\n35: sand\n36: grey/gray\n37: hot house\n38: rain\n39: rabbit\n40: storm",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "The Mangrove Regeneration Project",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Background</strong>",
+            "<strong>Mangrove forests:</strong>",
+            "• protect coastal areas from {{31}} by the sea",
+            "• are an important habitat for wildlife",
+            "<strong>Problems:</strong>",
+            "• mangroves had been used by farmers as {{32}}",
+            "• mangroves were poisoned by the use of {{33}}",
+            "• local people used the mangroves as a place to put their {{34}}",
+            "<strong>Actions taken to protect the mangroves:</strong>",
+            "• a barrier which was made of {{35}} was constructed - but it failed",
+            "• new mangroves had to be grown from seed",
+            "• the seeds of the {{36}} mangrove were used",
+            "<strong>First set of seedlings:</strong>",
+            "• kept in small pots in a {{37}}",
+            "• watered with {{38}} water",
+            "• planted out on south side of a small island",
+            "• at risk from the large {{39}} population",
+            "<strong>Second set of seedlings:</strong>",
+            "• planted in the seabed near established mangrove roots",
+            "• the young plants were destroyed in a {{40}}",
+            "<strong>Results:</strong> The first set of seedlings was successful."
+          ],
+          "noteStyle": "mangrove-project",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "protect coastal areas from... by the sea",
+              "text": "protect coastal areas from... by the sea",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "flooding"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "mangroves had been used by farmers as...",
+              "text": "mangroves had been used by farmers as...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "firewood"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "mangroves were poisoned by the use of...",
+              "text": "mangroves were poisoned by the use of...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fertilizer"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "local people used the mangroves as a place to put their...",
+              "text": "local people used the mangroves as a place to put their...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "trash"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "a barrier which was made of... was constructed - but it failed",
+              "text": "a barrier which was made of... was constructed - but it failed",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sand"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "the seeds of the... mangrove were used",
+              "text": "the seeds of the... mangrove were used",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "grey/gray"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "kept in small pots in a...",
+              "text": "kept in small pots in a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "hot house"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "watered with... water",
+              "text": "watered with... water",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rain"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "at risk from the large... population",
+              "text": "at risk from the large... population",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rabbit"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "the young plants were destroyed in a...",
+              "text": "the young plants were destroyed in a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "storm"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

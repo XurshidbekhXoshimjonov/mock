@@ -1,0 +1,245 @@
+{
+  "id": "ielts-listening-mock-test-20143-listening-s4",
+  "slug": "ielts-listening-mock-test-20143-listening-s4",
+  "title": "Listening test July — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/listening-test-july-part-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31-40",
+      "instruction": "Complete the notes below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "protect coastal areas from... by the sea",
+      "options": [],
+      "answer": "flooding"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "mangroves had been used by farmers as...",
+      "options": [],
+      "answer": "firewood"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "mangroves were poisoned by the use of...",
+      "options": [],
+      "answer": "fertilizer"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "local people used the mangroves as a place to put their...",
+      "options": [],
+      "answer": "trash"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "a barrier which was made of... was constructed - but it failed",
+      "options": [],
+      "answer": "sand"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "the seeds of the... mangrove were used",
+      "options": [],
+      "answer": "grey/gray"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "kept in small pots in a...",
+      "options": [],
+      "answer": "hot house"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "watered with... water",
+      "options": [],
+      "answer": "rain"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "at risk from the large... population",
+      "options": [],
+      "answer": "rabbit"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "the young plants were destroyed in a...",
+      "options": [],
+      "answer": "storm"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "ielts-listening-mock-test-20143",
+  "createdAt": "2026-07-23T01:12:32.267Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/listening-test-july-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: flooding\n32: firewood\n33: fertilizer\n34: trash\n35: sand\n36: grey/gray\n37: hot house\n38: rain\n39: rabbit\n40: storm",
+      "blocks": [
+        {
+          "id": "group-4-31",
+          "type": "note_completion",
+          "questionRange": "Questions 31-40",
+          "title": "The Mangrove Regeneration Project",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Background</strong>",
+            "<strong>Mangrove forests:</strong>",
+            "• protect coastal areas from {{31}} by the sea",
+            "• are an important habitat for wildlife",
+            "<strong>Problems:</strong>",
+            "• mangroves had been used by farmers as {{32}}",
+            "• mangroves were poisoned by the use of {{33}}",
+            "• local people used the mangroves as a place to put their {{34}}",
+            "<strong>Actions taken to protect the mangroves:</strong>",
+            "• a barrier which was made of {{35}} was constructed - but it failed",
+            "• new mangroves had to be grown from seed",
+            "• the seeds of the {{36}} mangrove were used",
+            "<strong>First set of seedlings:</strong>",
+            "• kept in small pots in a {{37}}",
+            "• watered with {{38}} water",
+            "• planted out on south side of a small island",
+            "• at risk from the large {{39}} population",
+            "<strong>Second set of seedlings:</strong>",
+            "• planted in the seabed near established mangrove roots",
+            "• the young plants were destroyed in a {{40}}",
+            "<strong>Results:</strong> The first set of seedlings was successful."
+          ],
+          "noteStyle": "mangrove-project",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "protect coastal areas from... by the sea",
+              "text": "protect coastal areas from... by the sea",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "flooding"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "mangroves had been used by farmers as...",
+              "text": "mangroves had been used by farmers as...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "firewood"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "mangroves were poisoned by the use of...",
+              "text": "mangroves were poisoned by the use of...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "fertilizer"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "local people used the mangroves as a place to put their...",
+              "text": "local people used the mangroves as a place to put their...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "trash"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "a barrier which was made of... was constructed - but it failed",
+              "text": "a barrier which was made of... was constructed - but it failed",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "sand"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "the seeds of the... mangrove were used",
+              "text": "the seeds of the... mangrove were used",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "grey/gray"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "kept in small pots in a...",
+              "text": "kept in small pots in a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "hot house"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "watered with... water",
+              "text": "watered with... water",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rain"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "at risk from the large... population",
+              "text": "at risk from the large... population",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rabbit"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "the young plants were destroyed in a...",
+              "text": "the young plants were destroyed in a...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "storm"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
