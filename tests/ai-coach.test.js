@@ -79,12 +79,16 @@ test("AI Coach prompt supports free conversation and limits tools to real data o
 test("AI Coach sends the exact message and the latest 20 conversation messages to the model", async (t) => {
     const originalFetch = global.fetch;
     const originalKey = process.env.OPENAI_API_KEY;
+    const originalModel = process.env.AI_COACH_MODEL;
     t.after(() => {
         global.fetch = originalFetch;
         if (originalKey === undefined) delete process.env.OPENAI_API_KEY;
         else process.env.OPENAI_API_KEY = originalKey;
+        if (originalModel === undefined) delete process.env.AI_COACH_MODEL;
+        else process.env.AI_COACH_MODEL = originalModel;
     });
     process.env.OPENAI_API_KEY = "test-key";
+    process.env.AI_COACH_MODEL = "gpt-5.6-terra";
     let requestBody;
     global.fetch = async (_url, options) => {
         requestBody = JSON.parse(options.body);
@@ -103,8 +107,10 @@ test("AI Coach sends the exact message and the latest 20 conversation messages t
     });
 
     assert.equal(reply.content, "Odamlar avtomobillarga tobora ko‘proq qaram bo‘lib bormoqda.");
+    assert.equal(requestBody.model, "gpt-5.6-terra");
     assert.equal(requestBody.messages.at(-1).content, message);
-    assert.equal(Object.hasOwn(requestBody, "reasoning_effort"), false);
+    assert.equal(requestBody.reasoning_effort, "none");
+    assert.equal(Object.hasOwn(requestBody, "temperature"), false);
     assert.equal(requestBody.messages.filter((item) => item.role === "user" || item.role === "assistant").length, 21);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-3")), false);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-4")), true);
