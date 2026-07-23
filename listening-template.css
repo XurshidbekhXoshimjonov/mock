@@ -761,6 +761,227 @@ body.fullscreen-fallback .lc-fullscreen-button {
     box-shadow: 0 1px 7px rgba(7, 20, 55, 0.035);
 }
 
+.lc-note-completion--childcare-enrolment {
+    padding: 0;
+    overflow: hidden;
+}
+
+.lc-note-completion--self-regulatory-focus {
+    padding: 0;
+    overflow: hidden;
+}
+
+.lc-childcare-form {
+    width: min(720px, 100%);
+    margin: 0 auto;
+    border: 1px solid #555;
+    background: #fff;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.lc-childcare-title {
+    margin: 0;
+    border-bottom: 1px solid #777;
+    padding: 9px 16px 8px;
+    color: #222;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.lc-childcare-example {
+    border-bottom: 1px solid #777;
+    padding: 8px 12px 7px;
+}
+
+.lc-childcare-example em {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.lc-childcare-example p {
+    margin: 0;
+}
+
+.lc-childcare-example p span {
+    display: inline-block;
+    min-width: 88px;
+    border-bottom: 1px dotted #555;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+}
+
+.lc-childcare-body {
+    padding: 7px 12px 10px;
+}
+
+.lc-childcare-section-title {
+    margin: 8px 0 4px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-childcare-section-title:first-child {
+    margin-top: 0;
+}
+
+.lc-childcare-line {
+    margin: 3px 0;
+    color: #222;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.lc-childcare-answer {
+    gap: 4px;
+    margin: 0 3px;
+}
+
+.lc-childcare-number {
+    color: #111;
+    font-weight: 800;
+}
+
+.lc-childcare-input {
+    width: 142px;
+    min-width: 90px;
+    height: 23px;
+    border: 0;
+    border-bottom: 1px dotted #444;
+    border-radius: 0;
+    padding: 1px 3px;
+    color: #222;
+}
+
+.lc-childcare-input:focus {
+    border-bottom-color: var(--lc-blue);
+    outline: 0;
+    box-shadow: 0 1px 0 var(--lc-blue);
+}
+
+html.dark-theme .lc-childcare-form {
+    border-color: #858b95;
+    background: #fff;
+    color: #222;
+}
+
+.lc-focus-form {
+    width: min(720px, 100%);
+    margin: 0 auto;
+    border: 1px solid #555;
+    background: #fff;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.lc-focus-title {
+    margin: 0;
+    padding: 17px 20px 8px;
+    color: #000;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.lc-focus-body {
+    padding: 3px 20px 18px;
+}
+
+.lc-focus-section-title {
+    margin: 15px 0 8px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-focus-section-title:first-child {
+    margin-top: 5px;
+}
+
+.lc-focus-subtitle,
+.lc-focus-line,
+.lc-focus-bullet {
+    margin: 4px 0;
+    color: #222;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.lc-focus-subtitle {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.lc-focus-bullet {
+    position: relative;
+    padding-left: 21px;
+}
+
+.lc-focus-bullet::before {
+    content: "•";
+    position: absolute;
+    left: 1px;
+    top: 0;
+    color: #111;
+}
+
+.lc-note-completion--self-regulatory-focus .lc-childcare-answer {
+    margin: 0 2px;
+}
+
+.lc-note-completion--self-regulatory-focus .lc-childcare-input {
+    width: 135px;
+}
+
+html.dark-theme .lc-focus-form {
+    border-color: #858b95;
+    background: #fff;
+    color: #222;
+}
+
+@media (max-width: 640px) {
+    .lc-childcare-form {
+        font-size: 13px;
+    }
+
+    .lc-childcare-title {
+        font-size: 15px;
+    }
+
+    .lc-childcare-body,
+    .lc-childcare-example {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .lc-childcare-input {
+        width: min(125px, 32vw);
+    }
+
+    .lc-focus-title {
+        padding: 14px 12px 7px;
+        font-size: 18px;
+    }
+
+    .lc-focus-body {
+        padding: 3px 12px 14px;
+    }
+
+    .lc-note-completion--self-regulatory-focus .lc-childcare-input {
+        width: min(118px, 30vw);
+    }
+}
+
 .lc-note-completion--transport-survey {
     padding: 0;
     overflow: hidden;

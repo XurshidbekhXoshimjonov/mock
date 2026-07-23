@@ -1,0 +1,241 @@
+{
+  "id": "cambridge-ielts-10-test-3-listening-s1",
+  "slug": "cambridge-ielts-10-test-3-listening-s1",
+  "title": "Cambridge IELTS 10 Test 3 Listening — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-3-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the form below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Age: ...",
+      "options": [],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Address: ... Road, Woodside, 4032",
+      "options": [],
+      "answer": "46 WOMBAT"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Days enrolled for: Monday and ...",
+      "options": [],
+      "answer": "THURSDAY"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Start time: ... am",
+      "options": [],
+      "answer": "8.30 | 8:30 | 8 30 | 830"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Childcare group: the ... group",
+      "options": [],
+      "answer": "RED"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Which meal/s are required each day? ...",
+      "options": [],
+      "answer": "LUNCH"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Medical conditions: needs ...",
+      "options": [],
+      "answer": "GLASSES"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Emergency contact: Jenny ...; Phone: 3346 7523",
+      "options": [],
+      "answer": "BALL"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Relationship to child: ...",
+      "options": [],
+      "answer": "AUNT"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Will pay each ...",
+      "options": [],
+      "answer": "MONTH"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-3",
+  "createdAt": "2026-07-23T14:56:47.211Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: 4\n2: 46 WOMBAT\n3: THURSDAY\n4: 8.30 | 8:30 | 8 30 | 830\n5: RED\n6: LUNCH\n7: GLASSES\n8: BALL\n9: AUNT\n10: MONTH",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Early Learning Childcare Centre — Enrolment Form",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "Parent or guardian: Caroll Smith",
+          "instruction": "Complete the form below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Personal Details</strong>",
+            "Child's name: Kate",
+            "Age: {{1}}",
+            "Address: {{2}} Road, Woodside, 4032",
+            "Phone: 3345 9865",
+            "<strong>Childcare Information</strong>",
+            "Days enrolled for: Monday and {{3}}",
+            "Start time: {{4}} am",
+            "Childcare group: the {{5}} group",
+            "Which meal/s are required each day? {{6}}",
+            "Medical conditions: needs {{7}}",
+            "Emergency contact: Jenny {{8}} Phone: 3346 7523",
+            "Relationship to child: {{9}}",
+            "<strong>Fees</strong>",
+            "Will pay each {{10}}"
+          ],
+          "noteStyle": "childcare-enrolment",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Age: ...",
+              "text": "Age: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "4"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Address: ... Road, Woodside, 4032",
+              "text": "Address: ... Road, Woodside, 4032",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "46 WOMBAT"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Days enrolled for: Monday and ...",
+              "text": "Days enrolled for: Monday and ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "THURSDAY"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Start time: ... am",
+              "text": "Start time: ... am",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "8.30 | 8:30 | 8 30 | 830"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Childcare group: the ... group",
+              "text": "Childcare group: the ... group",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "RED"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Which meal/s are required each day? ...",
+              "text": "Which meal/s are required each day? ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LUNCH"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Medical conditions: needs ...",
+              "text": "Medical conditions: needs ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GLASSES"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Emergency contact: Jenny ...; Phone: 3346 7523",
+              "text": "Emergency contact: Jenny ...; Phone: 3346 7523",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "BALL"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Relationship to child: ...",
+              "text": "Relationship to child: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "AUNT"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Will pay each ...",
+              "text": "Will pay each ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "MONTH"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

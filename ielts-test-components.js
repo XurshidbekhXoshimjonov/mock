@@ -271,7 +271,7 @@ function MatchingRenderer({ question, group, value, onAnswer, reviewResult, read
         },
             h("option", { value: "" }, "Select answer"),
             options.map((option) =>
-                h("option", { key: option.value, value: option.value }, option.label)
+                h("option", { key: option.value, value: option.value }, option.value)
             )
         ),
         h(AnswerReviewDetails, { result: reviewResult })
@@ -445,6 +445,8 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
             ...root.querySelectorAll("[data-blank]"),
             ...root.querySelectorAll(".ielts-blank")
         ])];
+        const hasVisibleOptionList = /\bWord List\b/i.test(root.textContent || "")
+            || Boolean(root.querySelector(".matching-list, .cbt-group-options-box"));
 
         markers.forEach((marker, index) => {
             if (marker.matches("input") || marker.matches("select")) return;
@@ -481,7 +483,7 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
                     const normalized = normalizeOption(opt);
                     const optionEl = document.createElement("option");
                     optionEl.value = normalized.value;
-                    optionEl.textContent = normalized.label;
+                    optionEl.textContent = hasVisibleOptionList ? normalized.value : normalized.label;
                     input.appendChild(optionEl);
                 });
 
@@ -795,7 +797,7 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
     const questions = group.questions || [];
     const isDiagram = type === "diagram_labeling";
     const isMultiSelect = type === "multi_select";
-    const showGroupOptions = [
+    const showGroupOptions = !group.hideOptionsList && [
         "matching",
         "matching_headings",
         "matching_information",
@@ -811,6 +813,11 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
         "flow_chart_completion",
         "sentence_completion"
     ].includes(type);
+    const headingExample = type === "matching_headings" && group.example
+        ? h("div", { className: "cbt-heading-example", "aria-label": "Example answer" },
+            group.example.text || [group.example.label, group.example.value].filter(Boolean).join(" ")
+        )
+        : null;
 
     return h("section", { className: `cbt-question-group cbt-question-group--${type}` },
         h(InstructionRenderer, { group: effectiveGroup }),
@@ -820,6 +827,7 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
                 ? h(SafeHtml, { html: group.contentHtml, className: "cbt-group-content-html" })
                 : h(GroupOptionsBox, { group: effectiveGroup }))
             : null,
+        headingExample,
         isDiagram
             ? h(DiagramLabelingRenderer, { group: effectiveGroup, images, answers, onAnswer, reviewByNumber, readOnly })
             : (isMultiSelect

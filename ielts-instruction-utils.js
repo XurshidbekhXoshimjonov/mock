@@ -14,7 +14,7 @@
         "NO MORE THAN\\s+ONE\\s+WORD",
         "ONE\\s+WORD\\s+ONLY",
         "ONE\\s+WORD",
-        "CHOOSE\\s+FIVE\\s+ANSWERS?",
+        "FIVE",
         "TWO",
         "SIX",
         "A\\s+NUMBER",

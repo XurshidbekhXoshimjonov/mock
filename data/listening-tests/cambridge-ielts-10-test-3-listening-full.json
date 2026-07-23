@@ -1,0 +1,1551 @@
+{
+  "id": "cambridge-ielts-10-test-3-listening-full",
+  "slug": "cambridge-ielts-10-test-3-listening-full",
+  "title": "Cambridge IELTS 10 Test 3 Listening",
+  "subtitle": "Listening full test",
+  "part": "full",
+  "audio": "/uploads/audio/cambridge-ielts-10-test-3-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the form below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11–12",
+      "instruction": "Choose TWO letters, A–E.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13–15",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Questions 16–20",
+      "instruction": "Which dolphin does Alice make each comment about?\nWrite the correct letter, A, B, C or D.",
+      "rule": "",
+      "questionNumbers": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21–25",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Choose FIVE answers from the box and write the correct letter, A–G.",
+      "rule": "",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Age: ...",
+      "options": [],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Address: ... Road, Woodside, 4032",
+      "options": [],
+      "answer": "46 WOMBAT"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Days enrolled for: Monday and ...",
+      "options": [],
+      "answer": "THURSDAY"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Start time: ... am",
+      "options": [],
+      "answer": "8.30 | 8:30 | 8 30 | 830"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Childcare group: the ... group",
+      "options": [],
+      "answer": "RED"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Which meal/s are required each day? ...",
+      "options": [],
+      "answer": "LUNCH"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Medical conditions: needs ...",
+      "options": [],
+      "answer": "GLASSES"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Emergency contact: Jenny ...; Phone: 3346 7523",
+      "options": [],
+      "answer": "BALL"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Relationship to child: ...",
+      "options": [],
+      "answer": "AUNT"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Will pay each ...",
+      "options": [],
+      "answer": "MONTH"
+    },
+    {
+      "number": 11,
+      "type": "multi_select",
+      "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Children make up most of the membership."
+        },
+        {
+          "letter": "B",
+          "text": "It's the country's largest conservation organisation."
+        },
+        {
+          "letter": "C",
+          "text": "It helps finance campaigns for changes in fishing practices."
+        },
+        {
+          "letter": "D",
+          "text": "It employs several dolphin experts full-time."
+        },
+        {
+          "letter": "E",
+          "text": "Volunteers help in various ways."
+        }
+      ],
+      "answer": "C | E"
+    },
+    {
+      "number": 12,
+      "type": "multi_select",
+      "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Children make up most of the membership."
+        },
+        {
+          "letter": "B",
+          "text": "It's the country's largest conservation organisation."
+        },
+        {
+          "letter": "C",
+          "text": "It helps finance campaigns for changes in fishing practices."
+        },
+        {
+          "letter": "D",
+          "text": "It employs several dolphin experts full-time."
+        },
+        {
+          "letter": "E",
+          "text": "Volunteers help in various ways."
+        }
+      ],
+      "answer": "C | E"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It has brought in extra money."
+        },
+        {
+          "letter": "B",
+          "text": "It made the work of the trust better known."
+        },
+        {
+          "letter": "C",
+          "text": "It has attracted more members."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Alice says oil exploration causes problems to dolphins because of",
+      "options": [
+        {
+          "letter": "A",
+          "text": "noise."
+        },
+        {
+          "letter": "B",
+          "text": "oil leaks."
+        },
+        {
+          "letter": "C",
+          "text": "movement of ships."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "Alice became interested in dolphins when",
+      "options": [
+        {
+          "letter": "A",
+          "text": "she saw one swimming near her home."
+        },
+        {
+          "letter": "B",
+          "text": "she heard a speaker at her school."
+        },
+        {
+          "letter": "C",
+          "text": "she read a book about them."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "It has not been seen this year.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "It is photographed more than the others.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "It is always very energetic.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "It is the newest one in the scheme.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "It has an unusual shape.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What helped Rob to prepare to play the character of a doctor?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the stories his grandfather told him"
+        },
+        {
+          "letter": "B",
+          "text": "the times when he watched his grandfather working"
+        },
+        {
+          "letter": "C",
+          "text": "the way he imagined his grandfather at work"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "In the play's first scene, the boredom of village life was suggested by",
+      "options": [
+        {
+          "letter": "A",
+          "text": "repetition of words and phrases."
+        },
+        {
+          "letter": "B",
+          "text": "scenery painted in dull colours."
+        },
+        {
+          "letter": "C",
+          "text": "long pauses within conversations."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "What has Rob learned about himself through working in a group?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "He likes to have clear guidelines."
+        },
+        {
+          "letter": "B",
+          "text": "He copes well with stress."
+        },
+        {
+          "letter": "C",
+          "text": "He thinks he is a good leader."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "To support the production, research material was used which described",
+      "options": [
+        {
+          "letter": "A",
+          "text": "political developments."
+        },
+        {
+          "letter": "B",
+          "text": "changing social attitudes."
+        },
+        {
+          "letter": "C",
+          "text": "economic transformations."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "What problem did the students overcome in the final rehearsal?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "one person forgetting their words"
+        },
+        {
+          "letter": "B",
+          "text": "an equipment failure"
+        },
+        {
+          "letter": "C",
+          "text": "the injury of one character"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "in the second year of the course",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "when first choosing where to go",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "when sending in your choices",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "when writing your personal statement",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "when doing the year abroad",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Promotion goals focus on ...",
+      "options": [],
+      "answer": "ACHIEVEMENT | ACHIEVEMENTS"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "The Chronic Factor comes from one's ...",
+      "options": [],
+      "answer": "PERSONALITY | CHARACTER"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "The ... Factor",
+      "options": [],
+      "answer": "SITUATIONAL"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "We are more likely to focus on promotion goals when with a ...",
+      "options": [],
+      "answer": "FRIEND"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+      "options": [],
+      "answer": "ASPIRATIONS | AMBITIONS"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Leadership behaviour and ... affects people's focus.",
+      "options": [],
+      "answer": "STYLE"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Transformational leaders pay special attention to the ... of their followers.",
+      "options": [],
+      "answer": "DEVELOPMENT"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Transformational leaders passionately communicate a clear ...",
+      "options": [],
+      "answer": "VISION"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Transactional leaders create ... to make expectations clear.",
+      "options": [],
+      "answer": "STRUCTURES"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Promotion Focus is good for jobs requiring ...",
+      "options": [],
+      "answer": "INNOVATION | INNOVATIONS"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-3",
+  "openUrl": "/full-test-player?id=cambridge-ielts-10-test-3&skill=listening",
+  "createdAt": "2026-07-23T14:56:47.211Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: 4\n2: 46 WOMBAT\n3: THURSDAY\n4: 8.30 | 8:30 | 8 30 | 830\n5: RED\n6: LUNCH\n7: GLASSES\n8: BALL\n9: AUNT\n10: MONTH",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Early Learning Childcare Centre — Enrolment Form",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "Parent or guardian: Caroll Smith",
+          "instruction": "Complete the form below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Personal Details</strong>",
+            "Child's name: Kate",
+            "Age: {{1}}",
+            "Address: {{2}} Road, Woodside, 4032",
+            "Phone: 3345 9865",
+            "<strong>Childcare Information</strong>",
+            "Days enrolled for: Monday and {{3}}",
+            "Start time: {{4}} am",
+            "Childcare group: the {{5}} group",
+            "Which meal/s are required each day? {{6}}",
+            "Medical conditions: needs {{7}}",
+            "Emergency contact: Jenny {{8}} Phone: 3346 7523",
+            "Relationship to child: {{9}}",
+            "<strong>Fees</strong>",
+            "Will pay each {{10}}"
+          ],
+          "noteStyle": "childcare-enrolment",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Age: ...",
+              "text": "Age: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "4"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Address: ... Road, Woodside, 4032",
+              "text": "Address: ... Road, Woodside, 4032",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "46 WOMBAT"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Days enrolled for: Monday and ...",
+              "text": "Days enrolled for: Monday and ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "THURSDAY"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Start time: ... am",
+              "text": "Start time: ... am",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "8.30 | 8:30 | 8 30 | 830"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Childcare group: the ... group",
+              "text": "Childcare group: the ... group",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "RED"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Which meal/s are required each day? ...",
+              "text": "Which meal/s are required each day? ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LUNCH"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Medical conditions: needs ...",
+              "text": "Medical conditions: needs ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "GLASSES"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Emergency contact: Jenny ...; Phone: 3346 7523",
+              "text": "Emergency contact: Jenny ...; Phone: 3346 7523",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "BALL"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Relationship to child: ...",
+              "text": "Relationship to child: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "AUNT"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "Will pay each ...",
+              "text": "Will pay each ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "MONTH"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: C | E\n12: C | E\n13: B\n14: A\n15: C\n16: B\n17: C\n18: D\n19: D\n20: A",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g1",
+          "type": "multiple_select",
+          "questionRange": "Questions 11–12",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Children make up most of the membership."
+            },
+            {
+              "letter": "B",
+              "text": "It's the country's largest conservation organisation."
+            },
+            {
+              "letter": "C",
+              "text": "It helps finance campaigns for changes in fishing practices."
+            },
+            {
+              "letter": "D",
+              "text": "It employs several dolphin experts full-time."
+            },
+            {
+              "letter": "E",
+              "text": "Volunteers help in various ways."
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "text": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Children make up most of the membership."
+                },
+                {
+                  "letter": "B",
+                  "text": "It's the country's largest conservation organisation."
+                },
+                {
+                  "letter": "C",
+                  "text": "It helps finance campaigns for changes in fishing practices."
+                },
+                {
+                  "letter": "D",
+                  "text": "It employs several dolphin experts full-time."
+                },
+                {
+                  "letter": "E",
+                  "text": "Volunteers help in various ways."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "text": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Children make up most of the membership."
+                },
+                {
+                  "letter": "B",
+                  "text": "It's the country's largest conservation organisation."
+                },
+                {
+                  "letter": "C",
+                  "text": "It helps finance campaigns for changes in fishing practices."
+                },
+                {
+                  "letter": "D",
+                  "text": "It employs several dolphin experts full-time."
+                },
+                {
+                  "letter": "E",
+                  "text": "Volunteers help in various ways."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            }
+          ],
+          "questionNumber": 11,
+          "answerQuestions": [
+            {
+              "questionNumber": 12
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?"
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g2",
+          "type": "multiple_choice",
+          "questionRange": "Questions 13–15",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+              "text": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It has brought in extra money."
+                },
+                {
+                  "letter": "B",
+                  "text": "It made the work of the trust better known."
+                },
+                {
+                  "letter": "C",
+                  "text": "It has attracted more members."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Alice says oil exploration causes problems to dolphins because of",
+              "text": "Alice says oil exploration causes problems to dolphins because of",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "noise."
+                },
+                {
+                  "letter": "B",
+                  "text": "oil leaks."
+                },
+                {
+                  "letter": "C",
+                  "text": "movement of ships."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Alice became interested in dolphins when",
+              "text": "Alice became interested in dolphins when",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "she saw one swimming near her home."
+                },
+                {
+                  "letter": "B",
+                  "text": "she heard a speaker at her school."
+                },
+                {
+                  "letter": "C",
+                  "text": "she read a book about them."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g3",
+          "type": "matching",
+          "questionRange": "Questions 16–20",
+          "title": "",
+          "optionsTitle": "Dolphins",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Which dolphin does Alice make each comment about?\nWrite the correct letter, A, B, C or D.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Moondancer"
+            },
+            {
+              "letter": "B",
+              "text": "Echo"
+            },
+            {
+              "letter": "C",
+              "text": "Kiwi"
+            },
+            {
+              "letter": "D",
+              "text": "Samson"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "It has not been seen this year.",
+              "text": "It has not been seen this year.",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "It is photographed more than the others.",
+              "text": "It is photographed more than the others.",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "It is always very energetic.",
+              "text": "It is always very energetic.",
+              "answer": "D"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "It is the newest one in the scheme.",
+              "text": "It is the newest one in the scheme.",
+              "answer": "D"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "It has an unusual shape.",
+              "text": "It has an unusual shape.",
+              "answer": "A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: C\n22: A\n23: A\n24: B\n25: B\n26: E\n27: D\n28: A\n29: G\n30: C",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p3-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–25",
+          "title": "Theatre Studies Course",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "What helped Rob to prepare to play the character of a doctor?",
+              "text": "What helped Rob to prepare to play the character of a doctor?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the stories his grandfather told him"
+                },
+                {
+                  "letter": "B",
+                  "text": "the times when he watched his grandfather working"
+                },
+                {
+                  "letter": "C",
+                  "text": "the way he imagined his grandfather at work"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "In the play's first scene, the boredom of village life was suggested by",
+              "text": "In the play's first scene, the boredom of village life was suggested by",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "repetition of words and phrases."
+                },
+                {
+                  "letter": "B",
+                  "text": "scenery painted in dull colours."
+                },
+                {
+                  "letter": "C",
+                  "text": "long pauses within conversations."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "What has Rob learned about himself through working in a group?",
+              "text": "What has Rob learned about himself through working in a group?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "He likes to have clear guidelines."
+                },
+                {
+                  "letter": "B",
+                  "text": "He copes well with stress."
+                },
+                {
+                  "letter": "C",
+                  "text": "He thinks he is a good leader."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "To support the production, research material was used which described",
+              "text": "To support the production, research material was used which described",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "political developments."
+                },
+                {
+                  "letter": "B",
+                  "text": "changing social attitudes."
+                },
+                {
+                  "letter": "C",
+                  "text": "economic transformations."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "What problem did the students overcome in the final rehearsal?",
+              "text": "What problem did the students overcome in the final rehearsal?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "one person forgetting their words"
+                },
+                {
+                  "letter": "B",
+                  "text": "an equipment failure"
+                },
+                {
+                  "letter": "C",
+                  "text": "the injury of one character"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p3-g2",
+          "type": "matching",
+          "questionRange": "Questions 26–30",
+          "title": "",
+          "optionsTitle": "Stages in doing the ‘year abroad’ option",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose FIVE answers from the box and write the correct letter, A–G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "be on time"
+            },
+            {
+              "letter": "B",
+              "text": "get a letter of recommendation"
+            },
+            {
+              "letter": "C",
+              "text": "plan for the final year"
+            },
+            {
+              "letter": "D",
+              "text": "make sure the institution's focus is relevant"
+            },
+            {
+              "letter": "E",
+              "text": "show ability in Theatre Studies"
+            },
+            {
+              "letter": "F",
+              "text": "make travel arrangements and bookings"
+            },
+            {
+              "letter": "G",
+              "text": "ask for help"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "in the second year of the course",
+              "text": "in the second year of the course",
+              "answer": "E"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "when first choosing where to go",
+              "text": "when first choosing where to go",
+              "answer": "D"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "when sending in your choices",
+              "text": "when sending in your choices",
+              "answer": "A"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "when writing your personal statement",
+              "text": "when writing your personal statement",
+              "answer": "G"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "when doing the year abroad",
+              "text": "when doing the year abroad",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: ACHIEVEMENT | ACHIEVEMENTS\n32: PERSONALITY | CHARACTER\n33: SITUATIONAL\n34: FRIEND\n35: ASPIRATIONS | AMBITIONS\n36: STYLE\n37: DEVELOPMENT\n38: VISION\n39: STRUCTURES\n40: INNOVATION | INNOVATIONS",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "‘Self-regulatory focus theory’ and leadership",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Self-regulatory focus theory</strong>",
+            "People's focus is to approach pleasure or avoid pain",
+            "Promotion goals focus on {{31}}",
+            "Prevention goals emphasise avoiding punishment",
+            "<strong>Factors that affect people's focus</strong>",
+            "<em>The Chronic Factor</em>",
+            "• comes from one's {{32}}",
+            "<em>The {{33}} Factor</em>",
+            "• we are more likely to focus on promotion goals when with a {{34}}",
+            "• we are more likely to focus on prevention goals with our boss",
+            "<strong>How people's focus affects them</strong>",
+            "Promotion Focus: People think about an ideal version of themselves, their {{35}} and their gains.",
+            "Prevention Focus: People think about their ‘ought’ self and their obligations",
+            "<strong>Leaders</strong>",
+            "Leadership behaviour and {{36}} affects people's focus",
+            "<em>Transformational Leaders</em>",
+            "• pay special attention to the {{37}} of their followers",
+            "• passionately communicate a clear {{38}}",
+            "• inspire promotion focus in followers",
+            "<em>Transactional Leaders</em>",
+            "• create {{39}} to make expectations clear",
+            "• emphasise the results of a mistake",
+            "• inspire prevention focus in followers",
+            "<strong>Conclusion</strong>",
+            "Promotion Focus is good for jobs requiring {{40}}",
+            "Prevention Focus is good for work such as a surgeon",
+            "Leaders' actions affect which focus people use"
+          ],
+          "noteStyle": "self-regulatory-focus",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Promotion goals focus on ...",
+              "text": "Promotion goals focus on ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ACHIEVEMENT | ACHIEVEMENTS"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "The Chronic Factor comes from one's ...",
+              "text": "The Chronic Factor comes from one's ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PERSONALITY | CHARACTER"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "The ... Factor",
+              "text": "The ... Factor",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SITUATIONAL"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "We are more likely to focus on promotion goals when with a ...",
+              "text": "We are more likely to focus on promotion goals when with a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "FRIEND"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+              "text": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ASPIRATIONS | AMBITIONS"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Leadership behaviour and ... affects people's focus.",
+              "text": "Leadership behaviour and ... affects people's focus.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "STYLE"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Transformational leaders pay special attention to the ... of their followers.",
+              "text": "Transformational leaders pay special attention to the ... of their followers.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DEVELOPMENT"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Transformational leaders passionately communicate a clear ...",
+              "text": "Transformational leaders passionately communicate a clear ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "VISION"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Transactional leaders create ... to make expectations clear.",
+              "text": "Transactional leaders create ... to make expectations clear.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "STRUCTURES"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Promotion Focus is good for jobs requiring ...",
+              "text": "Promotion Focus is good for jobs requiring ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "INNOVATION | INNOVATIONS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 40
+}

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Listening Test 3</title>
+  <style>
+    :root{
+      --red:#b51f2e;
+      --dark:#1f2937;
+      --muted:#6b7280;
+      --line:#d8dde5;
+      --paper:#ffffff;
+      --bg:#eef1f5;
+      --ok:#167c3a;
+      --bad:#b42318;
+      --soft-red:#fff1f2;
+      --soft-green:#edf9f0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:#171717;
+      background:var(--bg);
+      line-height:1.45;
+    }
+    button, input, select{font:inherit}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+    }
+    .topbar-inner{
+      max-width:1180px;
+      margin:auto;
+      min-height:68px;
+      padding:10px 18px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.12em;
+      color:var(--red);
+      white-space:nowrap;
+    }
+    .test-name{
+      font-weight:700;
+      color:var(--dark);
+      margin-right:auto;
+    }
+    .timer{
+      min-width:112px;
+      text-align:center;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      font-weight:700;
+      background:#fafafa;
+    }
+    .btn{
+      border:0;
+      border-radius:8px;
+      padding:10px 16px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn-primary{background:var(--red);color:white}
+    .btn-secondary{background:#f3f4f6;color:#222;border:1px solid var(--line)}
+    .layout{
+      max-width:1180px;
+      margin:22px auto;
+      padding:0 18px 40px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 270px;
+      gap:20px;
+    }
+    .paper{
+      background:var(--paper);
+      border:1px solid #dfe3e8;
+      border-radius:12px;
+      box-shadow:0 7px 28px rgba(20,30,50,.07);
+      overflow:hidden;
+    }
+    .audio-panel{
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:#fafafa;
+    }
+    .audio-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    audio{width:min(100%,520px)}
+    .file-label{
+      display:inline-flex;
+      align-items:center;
+      padding:9px 13px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:white;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .file-label input{display:none}
+    .audio-note{color:var(--muted);font-size:13px}
+    .section{
+      display:none;
+      padding:28px 34px 38px;
+    }
+    .section.active{display:block}
+    .section-heading{
+      display:flex;
+      gap:28px;
+      align-items:baseline;
+      border-bottom:2px solid #222;
+      padding-bottom:9px;
+      margin-bottom:12px;
+    }
+    .section-heading h2{
+      font-size:19px;
+      letter-spacing:.06em;
+      margin:0;
+    }
+    .section-heading strong{font-style:italic}
+    .instruction{
+      font-style:italic;
+      margin:7px 0;
+    }
+    .instruction strong{font-weight:800}
+    .form-box,.notes-box,.option-box{
+      border:1.5px solid #555;
+      margin-top:18px;
+      padding:0 14px 18px;
+    }
+    .form-title{
+      text-align:center;
+      font-weight:800;
+      font-size:18px;
+      line-height:1.15;
+      padding:8px;
+      margin:0 -14px 12px;
+      border-bottom:1px solid #777;
+    }
+    .subhead{
+      font-weight:800;
+      margin:14px 0 5px;
+    }
+    .line{
+      margin:7px 0;
+    }
+    .blank{
+      width:175px;
+      max-width:100%;
+      border:0;
+      border-bottom:1px dotted #333;
+      padding:2px 4px;
+      outline:none;
+      background:#fff;
+    }
+    .blank:focus{border-bottom:2px solid var(--red)}
+    .question{
+      padding:12px 12px;
+      margin:10px -12px;
+      border-left:4px solid transparent;
+      border-radius:6px;
+      transition:.2s;
+    }
+    .question.correct{
+      background:var(--soft-green);
+      border-left-color:var(--ok);
+    }
+    .question.incorrect{
+      background:var(--soft-red);
+      border-left-color:var(--bad);
+    }
+    .qrow{
+      display:grid;
+      grid-template-columns:32px 1fr;
+      gap:8px;
+      margin:18px 0;
+    }
+    .qnum{font-weight:800}
+    .answers{
+      margin-top:8px;
+      display:grid;
+      gap:5px;
+    }
+    .answers label{
+      display:grid;
+      grid-template-columns:24px 20px 1fr;
+      align-items:start;
+      cursor:pointer;
+    }
+    .answers input{margin-top:4px}
+    .choice-letter{font-weight:700}
+    .inline-select{
+      min-width:95px;
+      border:1px solid #9aa1aa;
+      border-radius:6px;
+      padding:7px 9px;
+      background:white;
+    }
+    .feedback{
+      display:none;
+      margin-top:7px;
+      font-size:13px;
+      font-weight:700;
+    }
+    .correct .feedback,.incorrect .feedback{display:block}
+    .correct .feedback{color:var(--ok)}
+    .incorrect .feedback{color:var(--bad)}
+    .dolphin-box,.action-box{
+      width:min(100%,390px);
+      margin:20px auto;
+      border:1.5px solid #555;
+      padding:12px 20px;
+    }
+    .box-title{text-align:center;font-weight:800;margin-bottom:8px}
+    .key-grid{
+      display:grid;
+      grid-template-columns:30px 1fr;
+      gap:6px 8px;
+    }
+    .comment-row,.stage-row{
+      display:grid;
+      grid-template-columns:34px 1fr 110px;
+      gap:9px;
+      align-items:center;
+      margin:12px 0;
+    }
+    .notes-box h3{
+      font-size:24px;
+      font-weight:500;
+      margin:8px 0 18px;
+    }
+    .notes-box ul{padding-left:22px}
+    .notes-box li{margin:10px 0}
+    .side{
+      position:sticky;
+      top:90px;
+      align-self:start;
+      background:white;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 7px 28px rgba(20,30,50,.06);
+    }
+    .side h3{margin:0 0 12px}
+    .tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .tab{
+      border:1px solid var(--line);
+      background:#f8f9fa;
+      padding:10px 7px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .tab.active{
+      color:white;
+      border-color:var(--red);
+      background:var(--red);
+    }
+    .number-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+      margin-top:14px;
+    }
+    .nav-num{
+      aspect-ratio:1;
+      border:1px solid var(--line);
+      border-radius:6px;
+      background:#fff;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .nav-num.answered{background:#e8edf4}
+    .nav-num.correct{background:#d9f2df;border-color:#70b981;color:#0d642b}
+    .nav-num.incorrect{background:#ffe0e0;border-color:#ef9090;color:#a00}
+    .result{
+      margin-top:16px;
+      padding:14px;
+      border-radius:9px;
+      background:#f5f6f8;
+      display:none;
+    }
+    .result.show{display:block}
+    .score{font-size:26px;font-weight:800;color:var(--red)}
+    .band{font-size:15px;color:var(--muted)}
+    .side .btn{width:100%;margin-top:10px}
+    .footer-nav{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:24px;
+    }
+    .error-note{
+      color:var(--bad);
+      font-size:13px;
+      font-weight:700;
+      margin-top:8px;
+      display:none;
+    }
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr}
+      .side{position:static;order:-1}
+      .topbar-inner{flex-wrap:wrap}
+      .test-name{display:none}
+      .section{padding:22px 18px 30px}
+    }
+    @media(max-width:600px){
+      .comment-row,.stage-row{grid-template-columns:30px 1fr}
+      .comment-row select,.stage-row select{grid-column:2}
+      .section-heading{gap:12px;flex-wrap:wrap}
+      .topbar-inner{gap:8px}
+      .timer{margin-left:auto}
+    }
+    @media print{
+      .topbar,.side,.audio-panel,.footer-nav{display:none!important}
+      body{background:white}
+      .layout{display:block;margin:0;padding:0}
+      .paper{box-shadow:none;border:0}
+      .section{display:block!important;page-break-after:always}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">IELTS LISTENING</div>
+      <div class="test-name">Test 3 · Questions 1–40</div>
+      <div class="timer" id="timer">30:00</div>
+      <button class="btn btn-secondary" id="fullscreenBtn">Full Screen</button>
+      <button class="btn btn-primary" id="submitTop">Submit</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <article class="paper">
+      <div class="audio-panel">
+        <div class="audio-row">
+          <label class="file-label">Choose audio
+            <input type="file" id="audioFile" accept="audio/*">
+          </label>
+          <audio id="audioPlayer" controls></audio>
+        </div>
+        <div class="audio-note">The audio is not embedded. Choose an audio file from your device to play it here.</div>
+      </div>
+
+      <section class="section active" id="section-1" data-section="1">
+        <div class="section-heading">
+          <h2>SECTION 1</h2>
+          <strong>Questions 1–10</strong>
+        </div>
+        <p class="instruction">Complete the form below.</p>
+        <p class="instruction">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+        <div class="form-box">
+          <div class="form-title">Early Learning Childcare Centre<br>Enrolment Form</div>
+          <div><em>Example</em></div>
+          <div class="line">Parent or guardian: Caroll <span style="display:inline-block;min-width:120px;border-bottom:1px dotted #555;text-align:center;color:#777">Smith</span></div>
+
+          <div class="subhead">Personal Details</div>
+          <div class="line">Child's name: Kate</div>
+          <div class="line question" data-q="1">Age: <strong>1</strong> <input class="blank" id="q1" autocomplete="off"><div class="feedback"></div></div>
+          <div class="line question" data-q="2">Address: <strong>2</strong> <input class="blank" id="q2" autocomplete="off"> Road, Woodside, 4032<div class="feedback"></div></div>
+          <div class="line">Phone: 3345 9865</div>
+
+          <div class="subhead">Childcare Information</div>
+          <div class="line question" data-q="3">Days enrolled for: Monday and <strong>3</strong> <input class="blank" id="q3" autocomplete="off"><div class="feedback"></div></div>
+          <div class="line question" data-q="4">Start time: <strong>4</strong> <input class="blank" id="q4" autocomplete="off"> am<div class="feedback"></div></div>
+          <div class="line question" data-q="5">Childcare group: the <strong>5</strong> <input class="blank" id="q5" autocomplete="off"> group<div class="feedback"></div></div>
+          <div class="line question" data-q="6">Which meal/s are required each day? <strong>6</strong> <input class="blank" id="q6" autocomplete="off"><div class="feedback"></div></div>
+          <div class="line question" data-q="7">Medical conditions: needs <strong>7</strong> <input class="blank" id="q7" autocomplete="off"><div class="feedback"></div></div>
+          <div class="line question" data-q="8">Emergency contact: Jenny <strong>8</strong> <input class="blank" id="q8" autocomplete="off"> &nbsp; Phone: 3346 7523<div class="feedback"></div></div>
+          <div class="line question" data-q="9">Relationship to child: <strong>9</strong> <input class="blank" id="q9" autocomplete="off"><div class="feedback"></div></div>
+
+          <div class="subhead">Fees</div>
+          <div class="line question" data-q="10">Will pay each <strong>10</strong> <input class="blank" id="q10" autocomplete="off"><div class="feedback"></div></div>
+        </div>
+        <div class="footer-nav">
+          <span></span>
+          <button class="btn btn-primary next-btn" data-next="2">Next Section</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-2" data-section="2">
+        <div class="section-heading">
+          <h2>SECTION 2</h2>
+          <strong>Questions 11–20</strong>
+        </div>
+
+        <p><em>Questions 11 and 12</em></p>
+        <p class="instruction">Choose <strong>TWO</strong> letters, A–E.</p>
+        <div class="question" data-group="11-12">
+          <p><strong>Which TWO things does Alice say about the Dolphin Conservation Trust?</strong></p>
+          <div class="answers">
+            <label><span></span><span class="choice-letter">A</span><span>Children make up most of the membership.</span></label>
+            <label><span></span><span class="choice-letter">B</span><span>It's the country's largest conservation organisation.</span></label>
+            <label><span></span><span class="choice-letter">C</span><span>It helps finance campaigns for changes in fishing practices.</span></label>
+            <label><span></span><span class="choice-letter">D</span><span>It employs several dolphin experts full-time.</span></label>
+            <label><span></span><span class="choice-letter">E</span><span>Volunteers help in various ways.</span></label>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap">
+            <strong>11</strong>
+            <select id="q11" class="inline-select">
+              <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+            </select>
+            <strong>12</strong>
+            <select id="q12" class="inline-select">
+              <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+            </select>
+          </div>
+          <div class="error-note" id="duplicateWarning">Choose two different letters.</div>
+          <div class="feedback"></div>
+        </div>
+
+        <p><em>Questions 13–15</em></p>
+        <p class="instruction">Choose the correct letter, A, B or C.</p>
+
+        <div class="qrow question" data-q="13">
+          <div class="qnum">13</div>
+          <div>
+            <strong>Why is Alice so pleased that the Trust has won the Charity Commission award?</strong>
+            <div class="answers">
+              <label><input type="radio" name="q13" value="A"><span class="choice-letter">A</span><span>It has brought in extra money.</span></label>
+              <label><input type="radio" name="q13" value="B"><span class="choice-letter">B</span><span>It made the work of the trust better known.</span></label>
+              <label><input type="radio" name="q13" value="C"><span class="choice-letter">C</span><span>It has attracted more members.</span></label>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="14">
+          <div class="qnum">14</div>
+          <div>
+            <strong>Alice says oil exploration causes problems to dolphins because of</strong>
+            <div class="answers">
+              <label><input type="radio" name="q14" value="A"><span class="choice-letter">A</span><span>noise.</span></label>
+              <label><input type="radio" name="q14" value="B"><span class="choice-letter">B</span><span>oil leaks.</span></label>
+              <label><input type="radio" name="q14" value="C"><span class="choice-letter">C</span><span>movement of ships.</span></label>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="15">
+          <div class="qnum">15</div>
+          <div>
+            <strong>Alice became interested in dolphins when</strong>
+            <div class="answers">
+              <label><input type="radio" name="q15" value="A"><span class="choice-letter">A</span><span>she saw one swimming near her home.</span></label>
+              <label><input type="radio" name="q15" value="B"><span class="choice-letter">B</span><span>she heard a speaker at her school.</span></label>
+              <label><input type="radio" name="q15" value="C"><span class="choice-letter">C</span><span>she read a book about them.</span></label>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+
+        <p><em>Questions 16–20</em></p>
+        <p>Which dolphin does Alice make each of the following comments about?</p>
+        <p class="instruction">Write the correct letter, A, B, C or D, next to questions 16–20.</p>
+
+        <div class="dolphin-box">
+          <div class="box-title">Dolphins</div>
+          <div class="key-grid">
+            <strong>A</strong><span>Moondancer</span>
+            <strong>B</strong><span>Echo</span>
+            <strong>C</strong><span>Kiwi</span>
+            <strong>D</strong><span>Samson</span>
+          </div>
+        </div>
+
+        <div class="comment-row question" data-q="16"><strong>16</strong><span>It has not been seen this year.</span><select id="q16" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="comment-row question" data-q="17"><strong>17</strong><span>It is photographed more than the others.</span><select id="q17" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="comment-row question" data-q="18"><strong>18</strong><span>It is always very energetic.</span><select id="q18" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="comment-row question" data-q="19"><strong>19</strong><span>It is the newest one in the scheme.</span><select id="q19" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="comment-row question" data-q="20"><strong>20</strong><span>It has an unusual shape.</span><select id="q20" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+
+        <div class="footer-nav">
+          <button class="btn btn-secondary prev-btn" data-prev="1">Previous</button>
+          <button class="btn btn-primary next-btn" data-next="3">Next Section</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-3" data-section="3">
+        <div class="section-heading">
+          <h2>SECTION 3</h2>
+          <strong>Questions 21–30</strong>
+        </div>
+        <p><em>Questions 21–25</em></p>
+        <p class="instruction">Choose the correct letter, A, B or C.</p>
+        <h2 style="text-align:center;margin-top:18px">Theatre Studies Course</h2>
+
+        <div class="qrow question" data-q="21">
+          <div class="qnum">21</div>
+          <div><strong>What helped Rob to prepare to play the character of a doctor?</strong>
+            <div class="answers">
+              <label><input type="radio" name="q21" value="A"><span class="choice-letter">A</span><span>the stories his grandfather told him</span></label>
+              <label><input type="radio" name="q21" value="B"><span class="choice-letter">B</span><span>the times when he watched his grandfather working</span></label>
+              <label><input type="radio" name="q21" value="C"><span class="choice-letter">C</span><span>the way he imagined his grandfather at work</span></label>
+            </div><div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="22">
+          <div class="qnum">22</div>
+          <div><strong>In the play's first scene, the boredom of village life was suggested by</strong>
+            <div class="answers">
+              <label><input type="radio" name="q22" value="A"><span class="choice-letter">A</span><span>repetition of words and phrases.</span></label>
+              <label><input type="radio" name="q22" value="B"><span class="choice-letter">B</span><span>scenery painted in dull colours.</span></label>
+              <label><input type="radio" name="q22" value="C"><span class="choice-letter">C</span><span>long pauses within conversations.</span></label>
+            </div><div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="23">
+          <div class="qnum">23</div>
+          <div><strong>What has Rob learned about himself through working in a group?</strong>
+            <div class="answers">
+              <label><input type="radio" name="q23" value="A"><span class="choice-letter">A</span><span>He likes to have clear guidelines.</span></label>
+              <label><input type="radio" name="q23" value="B"><span class="choice-letter">B</span><span>He copes well with stress.</span></label>
+              <label><input type="radio" name="q23" value="C"><span class="choice-letter">C</span><span>He thinks he is a good leader.</span></label>
+            </div><div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="24">
+          <div class="qnum">24</div>
+          <div><strong>To support the production, research material was used which described</strong>
+            <div class="answers">
+              <label><input type="radio" name="q24" value="A"><span class="choice-letter">A</span><span>political developments.</span></label>
+              <label><input type="radio" name="q24" value="B"><span class="choice-letter">B</span><span>changing social attitudes.</span></label>
+              <label><input type="radio" name="q24" value="C"><span class="choice-letter">C</span><span>economic transformations.</span></label>
+            </div><div class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="qrow question" data-q="25">
+          <div class="qnum">25</div>
+          <div><strong>What problem did the students overcome in the final rehearsal?</strong>
+            <div class="answers">
+              <label><input type="radio" name="q25" value="A"><span class="choice-letter">A</span><span>one person forgetting their words</span></label>
+              <label><input type="radio" name="q25" value="B"><span class="choice-letter">B</span><span>an equipment failure</span></label>
+              <label><input type="radio" name="q25" value="C"><span class="choice-letter">C</span><span>the injury of one character</span></label>
+            </div><div class="feedback"></div>
+          </div>
+        </div>
+
+        <p><em>Questions 26–30</em></p>
+        <p>What action is needed for the following stages in doing the ‘year abroad’ option?</p>
+        <p class="instruction">Choose <strong>FIVE</strong> answers from the box and write the correct letter, A–G, next to questions 26–30.</p>
+
+        <div class="action-box">
+          <div class="box-title">Action</div>
+          <div class="key-grid">
+            <strong>A</strong><span>be on time</span>
+            <strong>B</strong><span>get a letter of recommendation</span>
+            <strong>C</strong><span>plan for the final year</span>
+            <strong>D</strong><span>make sure the institution's focus is relevant</span>
+            <strong>E</strong><span>show ability in Theatre Studies</span>
+            <strong>F</strong><span>make travel arrangements and bookings</span>
+            <strong>G</strong><span>ask for help</span>
+          </div>
+        </div>
+
+        <h3>Stages in doing the ‘year abroad’ option</h3>
+        <div class="stage-row question" data-q="26"><strong>26</strong><span>in the second year of the course</span><select id="q26" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="stage-row question" data-q="27"><strong>27</strong><span>when first choosing where to go</span><select id="q27" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="stage-row question" data-q="28"><strong>28</strong><span>when sending in your choices</span><select id="q28" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="stage-row question" data-q="29"><strong>29</strong><span>when writing your personal statement</span><select id="q29" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+        <div class="stage-row question" data-q="30"><strong>30</strong><span>when doing the year abroad</span><select id="q30" class="inline-select"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select><div class="feedback" style="grid-column:2/-1"></div></div>
+
+        <div class="footer-nav">
+          <button class="btn btn-secondary prev-btn" data-prev="2">Previous</button>
+          <button class="btn btn-primary next-btn" data-next="4">Next Section</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-4" data-section="4">
+        <div class="section-heading">
+          <h2>SECTION 4</h2>
+          <strong>Questions 31–40</strong>
+        </div>
+        <p class="instruction">Complete the notes below.</p>
+        <p class="instruction">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+        <div class="notes-box">
+          <h3>‘Self-regulatory focus theory’ and leadership</h3>
+
+          <div class="subhead">Self-regulatory focus theory</div>
+          <div>People's focus is to approach pleasure or avoid pain</div>
+          <div class="question" data-q="31">Promotion goals focus on <strong>31</strong> <input class="blank" id="q31" autocomplete="off"><div class="feedback"></div></div>
+          <div>Prevention goals emphasise avoiding punishment</div>
+
+          <div class="subhead">Factors that affect people's focus</div>
+          <p>The Chronic Factor</p>
+          <ul>
+            <li class="question" data-q="32">comes from one's <strong>32</strong> <input class="blank" id="q32" autocomplete="off"><div class="feedback"></div></li>
+          </ul>
+          <p>The <span class="question" data-q="33" style="display:inline-block;margin:0;padding:5px"><strong>33</strong> <input class="blank" id="q33" autocomplete="off"><div class="feedback"></div></span> Factor</p>
+          <ul>
+            <li class="question" data-q="34">we are more likely to focus on promotion goals when with a <strong>34</strong> <input class="blank" id="q34" autocomplete="off"><div class="feedback"></div></li>
+            <li>we are more likely to focus on prevention goals with our boss</li>
+          </ul>
+
+          <div class="subhead">How people's focus affects them</div>
+          <div class="question" data-q="35">Promotion Focus: People think about an ideal version of themselves, their <strong>35</strong> <input class="blank" id="q35" autocomplete="off"> and their gains.<div class="feedback"></div></div>
+          <div>Prevention Focus: People think about their ‘ought’ self and their obligations</div>
+
+          <div class="subhead">Leaders</div>
+          <div class="question" data-q="36">Leadership behaviour and <strong>36</strong> <input class="blank" id="q36" autocomplete="off"> affects people's focus<div class="feedback"></div></div>
+
+          <p><em>Transformational Leaders:</em></p>
+          <ul>
+            <li class="question" data-q="37">pay special attention to the <strong>37</strong> <input class="blank" id="q37" autocomplete="off"> of their followers<div class="feedback"></div></li>
+            <li class="question" data-q="38">passionately communicate a clear <strong>38</strong> <input class="blank" id="q38" autocomplete="off"><div class="feedback"></div></li>
+            <li>inspire promotion focus in followers</li>
+          </ul>
+
+          <p><em>Transactional Leaders:</em></p>
+          <ul>
+            <li class="question" data-q="39">create <strong>39</strong> <input class="blank" id="q39" autocomplete="off"> to make expectations clear<div class="feedback"></div></li>
+            <li>emphasise the results of a mistake</li>
+            <li>inspire prevention focus in followers</li>
+          </ul>
+
+          <div class="subhead">Conclusion</div>
+          <div class="question" data-q="40">Promotion Focus is good for jobs requiring <strong>40</strong> <input class="blank" id="q40" autocomplete="off"><div class="feedback"></div></div>
+          <div>Prevention Focus is good for work such as a surgeon</div>
+          <div>Leaders' actions affect which focus people use</div>
+        </div>
+
+        <div class="footer-nav">
+          <button class="btn btn-secondary prev-btn" data-prev="3">Previous</button>
+          <button class="btn btn-primary" id="submitBottom">Submit Test</button>
+        </div>
+      </section>
+    </article>
+
+    <aside class="side">
+      <h3>Sections</h3>
+      <div class="tabs">
+        <button class="tab active" data-section-target="1">Section 1</button>
+        <button class="tab" data-section-target="2">Section 2</button>
+        <button class="tab" data-section-target="3">Section 3</button>
+        <button class="tab" data-section-target="4">Section 4</button>
+      </div>
+      <div class="number-grid" id="numberGrid"></div>
+      <div class="result" id="resultBox">
+        <div>Your result</div>
+        <div class="score" id="scoreText">0 / 40</div>
+        <div class="band" id="bandText"></div>
+      </div>
+      <button class="btn btn-primary" id="submitSide">Submit Test</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset Answers</button>
+    </aside>
+  </main>
+
+<script>
+  const accepted = {
+    1:["4"],
+    2:["46 wombat"],
+    3:["thursday"],
+    4:["8.30","8:30","8 30","830"],
+    5:["red"],
+    6:["lunch"],
+    7:["glasses"],
+    8:["ball"],
+    9:["aunt"],
+    10:["month"],
+    13:["b"],14:["a"],15:["c"],
+    16:["b"],17:["c"],18:["d"],19:["d"],20:["a"],
+    21:["c"],22:["a"],23:["a"],24:["b"],25:["b"],
+    26:["e"],27:["d"],28:["a"],29:["g"],30:["c"],
+    31:["achievement","achievements"],
+    32:["personality","character"],
+    33:["situational"],
+    34:["friend"],
+    35:["aspirations","ambitions"],
+    36:["style"],
+    37:["development"],
+    38:["vision"],
+    39:["structures"],
+    40:["innovation","innovations"]
+  };
+
+  const numberGrid = document.getElementById("numberGrid");
+  for(let i=1;i<=40;i++){
+    const b=document.createElement("button");
+    b.className="nav-num";
+    b.textContent=i;
+    b.dataset.q=i;
+    b.addEventListener("click",()=>goToQuestion(i));
+    numberGrid.appendChild(b);
+  }
+
+  function normalize(value){
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[.,;!?]+$/g,"")
+      .replace(/\s+/g," ");
+  }
+
+  function getValue(q){
+    const direct=document.getElementById("q"+q);
+    if(direct) return direct.value;
+    const radio=document.querySelector('input[name="q'+q+'"]:checked');
+    return radio ? radio.value : "";
+  }
+
+  function getSectionForQuestion(q){
+    if(q<=10) return 1;
+    if(q<=20) return 2;
+    if(q<=30) return 3;
+    return 4;
+  }
+
+  function showSection(n){
+    document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active", Number(s.dataset.section)===Number(n)));
+    document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", Number(t.dataset.sectionTarget)===Number(n)));
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function goToQuestion(q){
+    showSection(getSectionForQuestion(q));
+    setTimeout(()=>{
+      let el=document.querySelector('[data-q="'+q+'"]');
+      if(!el && (q===11||q===12)) el=document.querySelector('[data-group="11-12"]');
+      if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
+    },150);
+  }
+
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showSection(t.dataset.sectionTarget)));
+  document.querySelectorAll(".next-btn").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.next)));
+  document.querySelectorAll(".prev-btn").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.prev)));
+
+  function updateAnswered(){
+    for(let q=1;q<=40;q++){
+      const btn=document.querySelector('.nav-num[data-q="'+q+'"]');
+      btn.classList.toggle("answered", Boolean(normalize(getValue(q))));
+    }
+  }
+  document.addEventListener("input",updateAnswered);
+  document.addEventListener("change",updateAnswered);
+
+  const q11=document.getElementById("q11");
+  const q12=document.getElementById("q12");
+  function duplicateCheck(){
+    document.getElementById("duplicateWarning").style.display =
+      q11.value && q11.value===q12.value ? "block" : "none";
+  }
+  q11.addEventListener("change",duplicateCheck);
+  q12.addEventListener("change",duplicateCheck);
+
+  function setFeedback(q, ok, expected){
+    const container=document.querySelector('[data-q="'+q+'"]');
+    if(!container) return;
+    container.classList.remove("correct","incorrect");
+    container.classList.add(ok ? "correct" : "incorrect");
+    const fb=container.querySelector(".feedback");
+    if(fb) fb.textContent=ok ? "Correct" : "Correct answer: "+expected;
+    const nav=document.querySelector('.nav-num[data-q="'+q+'"]');
+    nav.classList.remove("correct","incorrect");
+    nav.classList.add(ok ? "correct" : "incorrect");
+  }
+
+  function estimatedBand(score){
+    if(score>=39) return "Estimated band: 9.0";
+    if(score>=37) return "Estimated band: 8.5";
+    if(score>=35) return "Estimated band: 8.0";
+    if(score>=32) return "Estimated band: 7.5";
+    if(score>=30) return "Estimated band: 7.0";
+    if(score>=26) return "Estimated band: 6.5";
+    if(score>=23) return "Estimated band: 6.0";
+    if(score>=18) return "Estimated band: 5.5";
+    if(score>=16) return "Estimated band: 5.0";
+    if(score>=13) return "Estimated band: 4.5";
+    if(score>=10) return "Estimated band: 4.0";
+    return "Estimated band: below 4.0";
+  }
+
+  function submitTest(){
+    let score=0;
+
+    // Questions 1–10 and 13–40
+    for(let q=1;q<=40;q++){
+      if(q===11 || q===12) continue;
+      const value=normalize(getValue(q));
+      const ok=(accepted[q]||[]).includes(value);
+      if(ok) score++;
+      setFeedback(q,ok,(accepted[q]||[]).join(" / "));
+    }
+
+    // Questions 11–12: two answers in either order
+    const selected=[normalize(q11.value),normalize(q12.value)];
+    const correctSet=new Set(["c","e"]);
+    const credited=new Set();
+    let groupScore=0;
+    selected.forEach(v=>{
+      if(correctSet.has(v) && !credited.has(v)){
+        credited.add(v);
+        groupScore++;
+      }
+    });
+    score+=groupScore;
+
+    const group=document.querySelector('[data-group="11-12"]');
+    group.classList.remove("correct","incorrect");
+    group.classList.add(groupScore===2 ? "correct" : "incorrect");
+    group.querySelector(".feedback").textContent =
+      groupScore===2 ? "Correct" : "Correct answers: C and E (in either order)";
+
+    [11,12].forEach((q,index)=>{
+      const nav=document.querySelector('.nav-num[data-q="'+q+'"]');
+      nav.classList.remove("correct","incorrect");
+      const v=selected[index];
+      const uniqueCorrect=correctSet.has(v) && selected.indexOf(v)===index;
+      nav.classList.add(uniqueCorrect ? "correct" : "incorrect");
+    });
+
+    document.getElementById("scoreText").textContent=score+" / 40";
+    document.getElementById("bandText").textContent=estimatedBand(score);
+    document.getElementById("resultBox").classList.add("show");
+    document.getElementById("resultBox").scrollIntoView({behavior:"smooth",block:"center"});
+  }
+
+  ["submitTop","submitBottom","submitSide"].forEach(id=>{
+    document.getElementById(id).addEventListener("click",submitTest);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click",()=>{
+    if(!confirm("Reset all answers and the timer?")) return;
+    document.querySelectorAll("input[type=text], input:not([type]), select").forEach(el=>el.value="");
+    document.querySelectorAll('input[type="radio"]').forEach(el=>el.checked=false);
+    document.querySelectorAll(".question").forEach(el=>el.classList.remove("correct","incorrect"));
+    document.querySelectorAll(".nav-num").forEach(el=>el.className="nav-num");
+    document.getElementById("resultBox").classList.remove("show");
+    document.getElementById("duplicateWarning").style.display="none";
+    remaining=30*60;
+    timerStopped=false;
+    renderTimer();
+    showSection(1);
+  });
+
+  document.getElementById("audioFile").addEventListener("change",e=>{
+    const file=e.target.files[0];
+    if(!file) return;
+    const player=document.getElementById("audioPlayer");
+    player.src=URL.createObjectURL(file);
+    player.load();
+  });
+
+  document.getElementById("fullscreenBtn").addEventListener("click",()=>{
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen?.();
+    }else{
+      document.exitFullscreen?.();
+    }
+  });
+
+  let remaining=30*60;
+  let timerStopped=false;
+  const timerEl=document.getElementById("timer");
+  function renderTimer(){
+    const m=String(Math.floor(remaining/60)).padStart(2,"0");
+    const s=String(remaining%60).padStart(2,"0");
+    timerEl.textContent=m+":"+s;
+    if(remaining<=300) timerEl.style.color="#b42318";
+  }
+  renderTimer();
+  setInterval(()=>{
+    if(timerStopped) return;
+    if(remaining>0){
+      remaining--;
+      renderTimer();
+    }else{
+      timerStopped=true;
+      submitTest();
+      alert("Time is over. Your test has been submitted.");
+    }
+  },1000);
+
+  updateAnswered();
+</script>
+</body>
+</html>

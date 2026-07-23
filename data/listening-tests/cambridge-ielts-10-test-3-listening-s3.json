@@ -1,0 +1,545 @@
+{
+  "id": "cambridge-ielts-10-test-3-listening-s3",
+  "slug": "cambridge-ielts-10-test-3-listening-s3",
+  "title": "Cambridge IELTS 10 Test 3 Listening — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-3-part-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–25",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Choose FIVE answers from the box and write the correct letter, A–G.",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "What helped Rob to prepare to play the character of a doctor?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the stories his grandfather told him"
+        },
+        {
+          "letter": "B",
+          "text": "the times when he watched his grandfather working"
+        },
+        {
+          "letter": "C",
+          "text": "the way he imagined his grandfather at work"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "In the play's first scene, the boredom of village life was suggested by",
+      "options": [
+        {
+          "letter": "A",
+          "text": "repetition of words and phrases."
+        },
+        {
+          "letter": "B",
+          "text": "scenery painted in dull colours."
+        },
+        {
+          "letter": "C",
+          "text": "long pauses within conversations."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "What has Rob learned about himself through working in a group?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "He likes to have clear guidelines."
+        },
+        {
+          "letter": "B",
+          "text": "He copes well with stress."
+        },
+        {
+          "letter": "C",
+          "text": "He thinks he is a good leader."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "To support the production, research material was used which described",
+      "options": [
+        {
+          "letter": "A",
+          "text": "political developments."
+        },
+        {
+          "letter": "B",
+          "text": "changing social attitudes."
+        },
+        {
+          "letter": "C",
+          "text": "economic transformations."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "What problem did the students overcome in the final rehearsal?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "one person forgetting their words"
+        },
+        {
+          "letter": "B",
+          "text": "an equipment failure"
+        },
+        {
+          "letter": "C",
+          "text": "the injury of one character"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "in the second year of the course",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "when first choosing where to go",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "when sending in your choices",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "when writing your personal statement",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "when doing the year abroad",
+      "options": [
+        {
+          "letter": "A",
+          "text": "be on time"
+        },
+        {
+          "letter": "B",
+          "text": "get a letter of recommendation"
+        },
+        {
+          "letter": "C",
+          "text": "plan for the final year"
+        },
+        {
+          "letter": "D",
+          "text": "make sure the institution's focus is relevant"
+        },
+        {
+          "letter": "E",
+          "text": "show ability in Theatre Studies"
+        },
+        {
+          "letter": "F",
+          "text": "make travel arrangements and bookings"
+        },
+        {
+          "letter": "G",
+          "text": "ask for help"
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-3",
+  "createdAt": "2026-07-23T14:56:47.211Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: C\n22: A\n23: A\n24: B\n25: B\n26: E\n27: D\n28: A\n29: G\n30: C",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p3-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–25",
+          "title": "Theatre Studies Course",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "What helped Rob to prepare to play the character of a doctor?",
+              "text": "What helped Rob to prepare to play the character of a doctor?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the stories his grandfather told him"
+                },
+                {
+                  "letter": "B",
+                  "text": "the times when he watched his grandfather working"
+                },
+                {
+                  "letter": "C",
+                  "text": "the way he imagined his grandfather at work"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "In the play's first scene, the boredom of village life was suggested by",
+              "text": "In the play's first scene, the boredom of village life was suggested by",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "repetition of words and phrases."
+                },
+                {
+                  "letter": "B",
+                  "text": "scenery painted in dull colours."
+                },
+                {
+                  "letter": "C",
+                  "text": "long pauses within conversations."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "What has Rob learned about himself through working in a group?",
+              "text": "What has Rob learned about himself through working in a group?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "He likes to have clear guidelines."
+                },
+                {
+                  "letter": "B",
+                  "text": "He copes well with stress."
+                },
+                {
+                  "letter": "C",
+                  "text": "He thinks he is a good leader."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "To support the production, research material was used which described",
+              "text": "To support the production, research material was used which described",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "political developments."
+                },
+                {
+                  "letter": "B",
+                  "text": "changing social attitudes."
+                },
+                {
+                  "letter": "C",
+                  "text": "economic transformations."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "What problem did the students overcome in the final rehearsal?",
+              "text": "What problem did the students overcome in the final rehearsal?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "one person forgetting their words"
+                },
+                {
+                  "letter": "B",
+                  "text": "an equipment failure"
+                },
+                {
+                  "letter": "C",
+                  "text": "the injury of one character"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p3-g2",
+          "type": "matching",
+          "questionRange": "Questions 26–30",
+          "title": "",
+          "optionsTitle": "Stages in doing the ‘year abroad’ option",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose FIVE answers from the box and write the correct letter, A–G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "be on time"
+            },
+            {
+              "letter": "B",
+              "text": "get a letter of recommendation"
+            },
+            {
+              "letter": "C",
+              "text": "plan for the final year"
+            },
+            {
+              "letter": "D",
+              "text": "make sure the institution's focus is relevant"
+            },
+            {
+              "letter": "E",
+              "text": "show ability in Theatre Studies"
+            },
+            {
+              "letter": "F",
+              "text": "make travel arrangements and bookings"
+            },
+            {
+              "letter": "G",
+              "text": "ask for help"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "in the second year of the course",
+              "text": "in the second year of the course",
+              "answer": "E"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "when first choosing where to go",
+              "text": "when first choosing where to go",
+              "answer": "D"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "when sending in your choices",
+              "text": "when sending in your choices",
+              "answer": "A"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "when writing your personal statement",
+              "text": "when writing your personal statement",
+              "answer": "G"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "when doing the year abroad",
+              "text": "when doing the year abroad",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

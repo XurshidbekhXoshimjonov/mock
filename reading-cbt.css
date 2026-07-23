@@ -2526,14 +2526,14 @@ html.dark-theme .cbt-nav-bubble.is-answered {
 }
 
 .cbt-question-group--matching_headings .cbt-heading-example {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 96px;
-    gap: 18px;
-    max-width: 360px;
-    margin: -8px auto 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    width: fit-content;
+    margin: 2px 0 14px;
     line-height: 1.6;
 }
 
 .cbt-question-group--matching_headings .cbt-heading-example span:last-child {
-    text-align: center;
+    text-align: left;
 }

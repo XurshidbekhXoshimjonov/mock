@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Reading Test 3</title>
+<style>
+:root{
+  --red:#b42332;
+  --dark:#1f2937;
+  --line:#d8dde5;
+  --muted:#667085;
+  --bg:#eef1f5;
+  --paper:#fff;
+  --ok:#157f3b;
+  --bad:#b42318;
+  --soft-ok:#edf9f0;
+  --soft-bad:#fff0f0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#171717;
+  background:var(--bg);
+  line-height:1.55;
+}
+button,input,select{font:inherit}
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.topbar-inner{
+  max-width:1500px;margin:auto;min-height:68px;
+  padding:10px 18px;display:flex;align-items:center;gap:14px;
+}
+.brand{font-weight:900;letter-spacing:.12em;color:var(--red);white-space:nowrap}
+.test-title{font-weight:700;margin-right:auto}
+.timer{
+  min-width:105px;text-align:center;padding:8px 12px;
+  border:1px solid var(--line);border-radius:8px;font-weight:800;background:#fafafa
+}
+.btn{
+  border:0;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:800
+}
+.btn-primary{background:var(--red);color:#fff}
+.btn-secondary{background:#f7f7f8;border:1px solid var(--line);color:#222}
+.workspace{
+  max-width:1500px;margin:18px auto;padding:0 18px 40px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(380px,.85fr);gap:18px;
+}
+.panel{
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 8px 28px rgba(20,30,50,.06);overflow:hidden
+}
+.panel-head{
+  padding:14px 18px;border-bottom:1px solid var(--line);
+  background:#fafafa;display:flex;align-items:center;gap:10px;flex-wrap:wrap
+}
+.panel-head strong{margin-right:auto}
+.passage-tabs,.question-tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tab{
+  border:1px solid var(--line);border-radius:7px;background:#fff;
+  padding:8px 12px;cursor:pointer;font-weight:800
+}
+.tab.active{background:var(--red);border-color:var(--red);color:#fff}
+.passage-wrap,.questions-wrap{
+  height:calc(100vh - 125px);min-height:620px;overflow:auto;padding:28px 34px 45px
+}
+.passage{display:none}
+.passage.active{display:block}
+.questions-page{display:none}
+.questions-page.active{display:block}
+.passage-kicker{font-weight:800;letter-spacing:.07em}
+.passage-title{text-align:center;font-family:Georgia,serif;font-size:35px;line-height:1.1;margin:18px 0 8px}
+.passage-subtitle{text-align:center;font-style:italic;font-size:18px;margin-bottom:22px}
+.para{
+  display:grid;grid-template-columns:28px 1fr;gap:8px;margin:15px 0
+}
+.para-label{font-weight:900}
+.para p{margin:0;text-align:justify}
+.instructions{font-style:italic;color:#333}
+.question-block{
+  border-left:4px solid transparent;padding:12px 12px;margin:12px -12px;border-radius:7px
+}
+.question-block.correct{background:var(--soft-ok);border-left-color:var(--ok)}
+.question-block.incorrect{background:var(--soft-bad);border-left-color:var(--bad)}
+.qline{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start}
+.qnum{font-weight:900}
+.answer-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.select,.text-answer{
+  border:1px solid #9aa1aa;border-radius:6px;background:#fff;padding:8px 10px
+}
+.select{min-width:155px}
+.text-answer{width:230px;max-width:100%}
+.options{display:grid;gap:7px;margin-top:9px}
+.options label{
+  display:grid;grid-template-columns:22px 24px 1fr;align-items:start;cursor:pointer
+}
+.options input{margin-top:5px}
+.letter{font-weight:800}
+.heading-box,.word-box{
+  border:1.5px solid #555;padding:14px 18px;margin:18px auto;width:min(100%,590px)
+}
+.box-title{text-align:center;font-weight:900;margin-bottom:8px}
+.key-grid{display:grid;grid-template-columns:42px 1fr;gap:7px}
+.feedback{display:none;margin-top:7px;font-size:13px;font-weight:800}
+.correct .feedback,.incorrect .feedback{display:block}
+.correct .feedback{color:var(--ok)}
+.incorrect .feedback{color:var(--bad)}
+.summary-title{text-align:center;font-family:Georgia,serif;font-size:24px;margin:14px 0}
+.summary-text{line-height:2}
+.navigator{
+  position:fixed;right:20px;bottom:18px;z-index:80;
+  width:320px;max-width:calc(100vw - 40px);
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 12px 35px rgba(0,0,0,.15);padding:13px
+}
+.navigator-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.navigator h3{margin:0;font-size:16px}
+.number-grid{
+  display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin:10px 0
+}
+.nav-num{
+  aspect-ratio:1;border:1px solid var(--line);border-radius:5px;background:#fff;
+  cursor:pointer;font-size:12px;font-weight:800;padding:0
+}
+.nav-num.answered{background:#e9edf4}
+.nav-num.correct{background:#d9f2df;border-color:#6fbd82;color:#0c652a}
+.nav-num.incorrect{background:#ffe0e0;border-color:#ef8d8d;color:#a00}
+.result{
+  display:none;background:#f4f5f7;border-radius:8px;padding:10px;margin-top:8px
+}
+.result.show{display:block}
+.score{font-size:25px;font-weight:900;color:var(--red)}
+.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.note{color:var(--muted);font-size:13px}
+.highlight-note{font-size:12px;color:var(--muted)}
+@media(max-width:1050px){
+  .workspace{grid-template-columns:1fr}
+  .passage-wrap,.questions-wrap{height:auto;min-height:0;max-height:none}
+  .navigator{position:static;width:auto;max-width:none;margin:0 18px 30px}
+}
+@media(max-width:650px){
+  .topbar-inner{gap:8px;flex-wrap:wrap}
+  .test-title{display:none}
+  .workspace{padding:0 8px}
+  .passage-wrap,.questions-wrap{padding:22px 17px 35px}
+  .passage-title{font-size:29px}
+  .number-grid{grid-template-columns:repeat(8,1fr)}
+  .para p{text-align:left}
+}
+@media print{
+  .topbar,.navigator,.panel-head{display:none!important}
+  body{background:#fff}
+  .workspace{display:block;margin:0;padding:0}
+  .panel{box-shadow:none;border:0}
+  .passage-wrap,.questions-wrap{height:auto;overflow:visible;padding:20px}
+  .passage,.questions-page{display:block!important;page-break-after:always}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">IELTS READING</div>
+    <div class="test-title">Academic Reading · Test 3 · Questions 1–40</div>
+    <div class="timer" id="timer">60:00</div>
+    <button class="btn btn-secondary" id="fullscreenBtn">Full Screen</button>
+    <button class="btn btn-primary" id="submitTop">Submit</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="panel">
+    <div class="panel-head">
+      <strong>Reading Passage</strong>
+      <span class="highlight-note">Select text to use your browser's highlight/copy tools.</span>
+      <div class="passage-tabs">
+        <button class="tab active" data-passage-tab="1">Passage 1</button>
+        <button class="tab" data-passage-tab="2">Passage 2</button>
+        <button class="tab" data-passage-tab="3">Passage 3</button>
+      </div>
+    </div>
+    <div class="passage-wrap">
+      <article class="passage active" id="passage-1">
+        <div class="passage-kicker">READING PASSAGE 1</div>
+        <h1 class="passage-title">The Context, Meaning<br>and Scope of Tourism</h1>
+
+        <div class="para"><div class="para-label">A</div><p>
+          Travel has existed since the beginning of time, when primitive man set out, often traversing great distances in search of game, which provided the food and clothing necessary for his survival. Throughout the course of history, people have travelled for purposes of trade, religious conviction, economic gain, war, migration and other equally compelling motivations. In the Roman era, wealthy aristocrats and high government officials also travelled for pleasure. Seaside resorts located at Pompeii and Herculaneum afforded citizens the opportunity to escape to their vacation villas in order to avoid the summer heat of Rome. Travel, except during the Dark Ages, has continued to grow and, throughout recorded history, has played a vital role in the development of civilisations and their economies.
+        </p></div>
+
+        <div class="para"><div class="para-label">B</div><p>
+          Tourism in the mass form as we know it today is a distinctly twentieth-century phenomenon. Historians suggest that the advent of mass tourism began in England during the industrial revolution with the rise of the middle class and the availability of relatively inexpensive transportation. The creation of the commercial airline industry following the Second World War and the subsequent development of the jet aircraft in the 1950s signalled the rapid growth and expansion of international travel. This growth led to the development of a major new industry: tourism. In turn, international tourism became the concern of a number of world governments since it not only provided new employment opportunities but also produced a means of earning foreign exchange.
+        </p></div>
+
+        <div class="para"><div class="para-label">C</div><p>
+          Tourism today has grown significantly in both economic and social importance. In most industrialised countries over the past few years the fastest growth has been seen in the area of services. One of the largest segments of the service industry, although largely unrecognised as an entity in some of these countries, is travel and tourism. According to the World Travel and Tourism Council (1992), “Travel and tourism is the largest industry in the world on virtually any economic measure including value-added capital investment, employment and tax contributions”. In 1992, the industry's gross output was estimated to be $3.5 trillion, over 12 per cent of all consumer spending. The travel and tourism industry is the world's largest employer with almost 130 million jobs, or almost 7 per cent of all employees. This industry is the world's leading industrial contributor, producing over 6 per cent of the world's gross national product and accounting for capital investment in excess of $422 billion in direct, indirect and personal taxes each year. Thus, tourism has a profound impact both on the world economy and, because of the educative effect of travel and the effects on employment, on society itself.
+        </p></div>
+
+        <div class="para"><div class="para-label">D</div><p>
+          However, the major problems of the travel and tourism industry that have hidden, or obscured, its economic impact are the diversity and fragmentation of the industry itself. The travel industry includes: hotels, motels and other types of accommodation; restaurants and other food services; transportation services and facilities; amusements, attractions and other leisure facilities; gift shops and a large number of other enterprises. Since many of these businesses also serve local residents, the impact of spending by visitors can easily be overlooked or underestimated. In addition, Meis (1992) points out that the tourism industry involves concepts that have remained amorphous to both analysts and decision makers. Moreover, in all nations this problem has made it difficult for the industry to develop any type of reliable or credible tourism information base in order to estimate the contribution it makes to regional, national and global economies. However, the nature of this very diversity makes travel and tourism ideal vehicles for economic development in a wide variety of countries, regions or communities.
+        </p></div>
+
+        <div class="para"><div class="para-label">E</div><p>
+          Once the exclusive province of the wealthy, travel and tourism have become an institutionalised way of life for most of the population. In fact, McIntosh and Goeldner (1990) suggest that tourism has become the largest commodity in international trade for many nations and, for a significant number of other countries, it ranks second or third. For example, tourism is the major source of income in Bermuda, Greece, Italy, Spain, Switzerland and most Caribbean countries. In addition, Hawkins and Ritchie, quoting from data published by the American Express Company, suggest that the travel and tourism industry is the number one ranked employer in the Bahamas, Brazil, Canada, France, the former West Germany, Hong Kong, Italy, Jamaica, Japan, Singapore, the United Kingdom and the United States. However, because of problems of definition, which directly affect statistical measurement, it is not possible with any degree of certainty to provide precise, valid or reliable data about the extent of world-wide tourism participation or its economic impact. In many cases, similar difficulties arise when attempts are made to measure domestic tourism.
+        </p></div>
+      </article>
+
+      <article class="passage" id="passage-2">
+        <div class="passage-kicker">READING PASSAGE 2</div>
+        <h1 class="passage-title">Autumn leaves</h1>
+        <div class="passage-subtitle">Canadian writer Jay Ingram investigates the<br>mystery of why leaves turn red in the fall</div>
+
+        <div class="para"><div class="para-label">A</div><p>
+          One of the most captivating natural events of the year in many areas throughout North America is the turning of the leaves in the fall. The colours are magnificent, but the question of exactly why some trees turn yellow or orange, and others red or purple, is something which has long puzzled scientists.
+        </p></div>
+        <div class="para"><div class="para-label">B</div><p>
+          Summer leaves are green because they are full of chlorophyll, the molecule that captures sunlight and converts that energy into new building materials for the tree. As fall approaches in the northern hemisphere, the amount of solar energy available declines considerably. For many trees – evergreen conifers being an exception – the best strategy is to abandon photosynthesis until the spring. So rather than maintaining the now redundant leaves throughout the winter, the tree saves its precious resources and discards them. But before letting its leaves go, the tree dismantles their chlorophyll molecules and ships their valuable nitrogen back into the twigs. As chlorophyll is depleted, other colours that have been dominated by it throughout the summer begin to be revealed. This unmasking explains the autumn colours of yellow and orange, but not the brilliant reds and purples of trees such as the maple or sumac.
+        </p></div>
+        <div class="para"><div class="para-label">C</div><p>
+          The source of the red is widely known: it is created by anthocyanins, water-soluble plant pigments reflecting the red to blue range of the visible spectrum. They belong to a class of sugar-based chemical compounds also known as flavonoids. What's puzzling is that anthocyanins are actually newly minted, made in the leaves at the same time as the tree is preparing to drop them. But it is hard to make sense of the manufacture of anthocyanins – why should a tree bother making new chemicals in its leaves when it's already scrambling to withdraw and preserve the ones already there?
+        </p></div>
+        <div class="para"><div class="para-label">D</div><p>
+          Some theories about anthocyanins have argued that they might act as a chemical defence against attacks by insects or fungi, or that they might attract fruit-eating birds or increase a leaf's tolerance to freezing. However there are problems with each of these theories, including the fact that leaves are red for such a relatively short period that the expense of energy needed to manufacture the anthocyanins would outweigh any anti-fungal or anti-herbivore activity achieved.
+        </p></div>
+        <div class="para"><div class="para-label">E</div><p>
+          It has also been proposed that trees may produce vivid red colours to convince herbivorous insects that they are healthy and robust and would be easily able to mount chemical defences against infestation. If insects paid attention to such advertisements, they might be prompted to lay their eggs on a duller, presumably less resistant host. The flaw in this theory lies in the lack of proof to support it. No one has as yet ascertained whether more robust trees sport the brightest leaves, or whether insects make choices according to colour intensity.
+        </p></div>
+        <div class="para"><div class="para-label">F</div><p>
+          Perhaps the most plausible suggestion as to why leaves would go to the trouble of making anthocyanins when they're busy packing up for the winter is the theory known as the ‘light screen’ hypothesis. It sounds paradoxical, because the idea behind this hypothesis is that the red pigment is made in autumn leaves to protect chlorophyll, the light-absorbing chemical, from too much light. Why does chlorophyll need protection when it is the natural world's supreme light absorber? Why protect chlorophyll at a time when the tree is breaking it down to salvage as much of it as possible?
+        </p></div>
+        <div class="para"><div class="para-label">G</div><p>
+          Chlorophyll, although exquisitely evolved to capture the energy of sunlight, can sometimes be overwhelmed by it, especially in situations of drought, low temperatures, or nutrient deficiency. Moreover, the problem of oversensitivity to light is even more acute in the fall, when the leaf is busy preparing for winter by dismantling its internal machinery. The energy absorbed by the chlorophyll molecules of the unstable autumn leaf is not immediately channelled into useful products and processes, as it would be in an intact summer leaf. The weakened fall leaf then becomes vulnerable to the highly destructive effects of the oxygen created by the excited chlorophyll molecules.
+        </p></div>
+        <div class="para"><div class="para-label">H</div><p>
+          Even if you had never suspected that this is what was going on when leaves turn red, there are clues out there. One is straightforward: on many trees, the leaves that are the reddest are those on the side of the tree which gets most sun. Not only that, but the red is brighter on the upper side of the leaf. It has also been recognised for decades that the best conditions for intense red colours are dry, sunny days and cool nights, conditions that nicely match those that make leaves susceptible to excess light. And finally, trees such as maples usually get much redder the more north you travel in the northern hemisphere. It's colder there, they're more stressed, their chlorophyll is more sensitive and it needs more sunblock.
+        </p></div>
+        <div class="para"><div class="para-label">I</div><p>
+          What is still not fully understood, however, is why some trees resort to producing red pigments while others don't bother, and simply reveal their orange or yellow hues. Do these trees have other means at their disposal to prevent overexposure to light in autumn? Their story, though not as spectacular to the eye, will surely turn out to be as subtle and as complex.
+        </p></div>
+      </article>
+
+      <article class="passage" id="passage-3">
+        <div class="passage-kicker">READING PASSAGE 3</div>
+        <h1 class="passage-title">Beyond the blue horizon</h1>
+        <div class="passage-subtitle">Ancient voyagers who settled the far-flung islands of the<br>Pacific Ocean</div>
+
+        <p>
+          An important archaeological discovery on the island of Éfaté in the Pacific archipelago of Vanuatu has revealed traces of an ancient seafaring people, the distant ancestors of today's Polynesians. The site came to light only by chance. An agricultural worker, digging in the grounds of a derelict plantation, scraped open a grave – the first of dozens in a burial ground some 3,000 years old. It is the oldest cemetery ever found in the Pacific islands, and it harbours the remains of an ancient people archaeologists call the Lapita.
+        </p>
+        <p>
+          They were daring blue-water adventurers who used basic canoes to rove across the ocean. But they were not just explorers. They were also pioneers who carried with them everything they would need to build new lives – their livestock, taro seedlings and stone tools. Within the span of several centuries, the Lapita stretched the boundaries of their world from the jungle-clad volcanoes of Papua New Guinea to the loneliest coral outliers of Tonga.
+        </p>
+        <p>
+          The Lapita left precious few clues about themselves, but Éfaté expands the volume of data available to researchers dramatically. The remains of 62 individuals have been uncovered so far, and archaeologists were also thrilled to find six complete Lapita pots. Other items included a Lapita burial urn with modelled birds arranged on the rim as though peering down at the human remains sealed inside. “It's an important discovery,” says Matthew Spriggs, professor of archaeology at the Australian National University and head of the international team digging up the site, “for it conclusively identifies the remains as Lapita.”
+        </p>
+        <p>
+          DNA teased from these human remains may help answer one of the most puzzling questions in Pacific anthropology: did all Pacific islanders spring from one source or many? Was there only one outward migration from a single point in Asia, or several from different points? “This represents the best opportunity we've had yet,” says Spriggs, “to find out who the Lapita actually were, where they came from, and who their closest descendants are today.”
+        </p>
+        <p>
+          There is one stubborn question for which archaeology has yet to provide any answers: how did the Lapita accomplish the ancient equivalent of a moon landing, many times over? No-one has found one of their canoes or any rigging, which could reveal how the canoes were sailed. Nor do the oral histories and traditions of later Polynesians offer any insights, for they turn into myths long before they reach as far back in time as the Lapita.
+        </p>
+        <p>
+          “All we can say for certain is that the Lapita had canoes that were capable of ocean voyages, and they had the ability to sail them,” says Geoff Irwin, a professor of archaeology at the University of Auckland. Those sailing skills, he says, were developed and passed down over thousands of years by earlier mariners who worked their way through the archipelagoes of the western Pacific, making short crossings to nearby islands. The real adventure didn't begin, however, until their Lapita descendants sailed out of sight of land, with empty horizons on every side. This must have been as difficult for them as landing on the moon is for us today. Certainly it distinguished them from their ancestors, but what gave them the courage to launch out on such risky voyages?
+        </p>
+        <p>
+          The Lapita's thrust into the Pacific was eastward, against the prevailing trade winds, Irwin notes. Those nagging headwinds, he argues, may have been the key to their success. “They could sail out for days into the unknown and assess the area, secure in the knowledge that if they didn't find anything, they could turn about and catch a swift ride back on the trade winds. This is what would have made the whole thing work.” Once out there, skilled seafarers would have detected abundant leads to follow to land: seabirds, coconuts and twigs carried out to sea by the tides, and the afternoon pile-up of clouds on the horizon which often indicates an island in the distance.
+        </p>
+        <p>
+          For returning explorers, successful or not, the geography of their own archipelagoes would have provided a safety net. Without this to go by, overshooting their home ports, getting lost and sailing off into eternity would have been all too easy. Vanuatu, for example, stretches more than 500 miles in a northwest-southeast trend, its scores of intervisible islands forming a backdrop for mariners riding the trade winds home.
+        </p>
+        <p>
+          All this presupposes one essential detail, says Atholl Anderson, professor of prehistory at the Australian National University: the Lapita had mastered the advanced art of sailing against the wind. “And there's no proof they could do any such thing,” Anderson says. “There has been this assumption they did, and people have built canoes to re-create those early voyages based on that assumption. But nobody has any idea what their canoes looked like or how they were rigged.”
+        </p>
+        <p>
+          Rather than give all the credit to human skill, Anderson invokes the winds of chance. El Niño, the same climate disruption that affects the Pacific today, may have helped scatter the Lapita, Anderson suggests. He points out that climate data obtained from slow-growing corals around the Pacific indicate a series of unusually frequent El Niños around the time of the Lapita expansion. By reversing the regular east-to-west flow of the trade winds for weeks at a time, these “super El Niños” might have taken the Lapita on long unplanned voyages.
+        </p>
+        <p>
+          However they did it, the Lapita spread themselves a third of the way across the Pacific, then called it quits for reasons known only to them. Ahead lay the vast emptiness of the central Pacific and perhaps they were too thinly stretched to venture farther. They probably never numbered more than a few thousand in total, and in their rapid migration eastward they encountered hundreds of islands – more than 300 in Fiji alone.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <strong>Questions</strong>
+      <div class="question-tabs">
+        <button class="tab active" data-question-tab="1">1–13</button>
+        <button class="tab" data-question-tab="2">14–26</button>
+        <button class="tab" data-question-tab="3">27–40</button>
+      </div>
+    </div>
+    <div class="questions-wrap">
+
+      <div class="questions-page active" id="questions-1">
+        <h2>READING PASSAGE 1</h2>
+        <p>You should spend about 20 minutes on <strong>Questions 1–13</strong>.</p>
+
+        <h3>Questions 1–4</h3>
+        <p>Reading Passage 1 has five paragraphs, A–E.</p>
+        <p class="instructions">Choose the correct heading for paragraphs B–E from the list of headings below.</p>
+        <div class="heading-box">
+          <div class="box-title">List of Headings</div>
+          <div class="key-grid">
+            <strong>i</strong><span>Economic and social significance of tourism</span>
+            <strong>ii</strong><span>The development of mass tourism</span>
+            <strong>iii</strong><span>Travel for the wealthy</span>
+            <strong>iv</strong><span>Earning foreign exchange through tourism</span>
+            <strong>v</strong><span>Difficulty in recognising the economic effects of tourism</span>
+            <strong>vi</strong><span>The contribution of air travel to tourism</span>
+            <strong>vii</strong><span>The world impact of tourism</span>
+            <strong>viii</strong><span>The history of travel</span>
+          </div>
+        </div>
+        <p><em>Example: Paragraph A — viii</em></p>
+
+        <div class="question-block" data-q="1"><div class="qline"><div class="qnum">1</div><div>Paragraph B
+          <div class="answer-row"><select class="select" id="q1"><option value="">Select heading</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select></div><div class="feedback"></div>
+        </div></div></div>
+        <div class="question-block" data-q="2"><div class="qline"><div class="qnum">2</div><div>Paragraph C
+          <div class="answer-row"><select class="select" id="q2"><option value="">Select heading</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select></div><div class="feedback"></div>
+        </div></div></div>
+        <div class="question-block" data-q="3"><div class="qline"><div class="qnum">3</div><div>Paragraph D
+          <div class="answer-row"><select class="select" id="q3"><option value="">Select heading</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select></div><div class="feedback"></div>
+        </div></div></div>
+        <div class="question-block" data-q="4"><div class="qline"><div class="qnum">4</div><div>Paragraph E
+          <div class="answer-row"><select class="select" id="q4"><option value="">Select heading</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select></div><div class="feedback"></div>
+        </div></div></div>
+
+        <h3>Questions 5–10</h3>
+        <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+        <p class="instructions">Choose TRUE, FALSE or NOT GIVEN.</p>
+
+        <div class="question-block" data-q="5"><div class="qline"><div class="qnum">5</div><div>The largest employment figures in the world are found in the travel and tourism industry.<div class="answer-row"><select class="select" id="q5"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="6"><div class="qline"><div class="qnum">6</div><div>Tourism contributes over six per cent of the Australian gross national product.<div class="answer-row"><select class="select" id="q6"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="7"><div class="qline"><div class="qnum">7</div><div>Tourism has a social impact because it promotes recreation.<div class="answer-row"><select class="select" id="q7"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="8"><div class="qline"><div class="qnum">8</div><div>Two main features of the travel and tourism industry make its economic significance difficult to ascertain.<div class="answer-row"><select class="select" id="q8"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="9"><div class="qline"><div class="qnum">9</div><div>Visitor spending is always greater than the spending of residents in tourist areas.<div class="answer-row"><select class="select" id="q9"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="10"><div class="qline"><div class="qnum">10</div><div>It is easy to show statistically how tourism affects individual economies.<div class="answer-row"><select class="select" id="q10"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+
+        <h3>Questions 11–13</h3>
+        <p class="instructions">Complete the sentences. Choose NO MORE THAN THREE WORDS from the passage for each answer.</p>
+        <div class="question-block" data-q="11"><div class="qline"><div class="qnum">11</div><div>In Greece, tourism is the most important <input class="text-answer" id="q11" autocomplete="off">.<div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="12"><div class="qline"><div class="qnum">12</div><div>The travel and tourism industry in Jamaica is the major <input class="text-answer" id="q12" autocomplete="off">.<div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="13"><div class="qline"><div class="qnum">13</div><div>The problems associated with measuring international tourism are often reflected in the measurement of <input class="text-answer" id="q13" autocomplete="off">.<div class="feedback"></div></div></div></div>
+      </div>
+
+      <div class="questions-page" id="questions-2">
+        <h2>READING PASSAGE 2</h2>
+        <p>You should spend about 20 minutes on <strong>Questions 14–26</strong>.</p>
+
+        <h3>Questions 14–18</h3>
+        <p>Reading Passage 2 has nine paragraphs, A–I.</p>
+        <p class="instructions">Which paragraph contains the following information? You may use any letter more than once.</p>
+        <div class="question-block" data-q="14"><div class="qline"><div class="qnum">14</div><div>a description of the substance responsible for the red colouration of leaves<div class="answer-row"><select class="select letter-select" id="q14"></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="15"><div class="qline"><div class="qnum">15</div><div>the reason why trees drop their leaves in autumn<div class="answer-row"><select class="select letter-select" id="q15"></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="16"><div class="qline"><div class="qnum">16</div><div>some evidence to confirm a theory about the purpose of the red leaves<div class="answer-row"><select class="select letter-select" id="q16"></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="17"><div class="qline"><div class="qnum">17</div><div>an explanation of the function of chlorophyll<div class="answer-row"><select class="select letter-select" id="q17"></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="18"><div class="qline"><div class="qnum">18</div><div>a suggestion that the red colouration in leaves could serve as a warning signal<div class="answer-row"><select class="select letter-select" id="q18"></select></div><div class="feedback"></div></div></div></div>
+
+        <h3>Questions 19–22</h3>
+        <p class="instructions">Complete the notes. Choose ONE WORD ONLY from the passage for each answer.</p>
+        <h3 class="summary-title">Why believe the ‘light screen’ hypothesis?</h3>
+        <div class="question-block" data-q="19"><div class="qline"><div class="qnum">19</div><div>The most vividly coloured red leaves are found on the side of the tree facing the <input class="text-answer" id="q19" autocomplete="off">.<div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="20"><div class="qline"><div class="qnum">20</div><div>The <input class="text-answer" id="q20" autocomplete="off"> surfaces of leaves contain the most red pigment.<div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="21"><div class="qline"><div class="qnum">21</div><div>Red leaves are most abundant when daytime weather conditions are <input class="text-answer" id="q21" autocomplete="off"> and sunny.<div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="22"><div class="qline"><div class="qnum">22</div><div>The intensity of the red colour of leaves increases as you go further <input class="text-answer" id="q22" autocomplete="off">.<div class="feedback"></div></div></div></div>
+
+        <h3>Questions 23–25</h3>
+        <p class="instructions">Choose TRUE, FALSE or NOT GIVEN.</p>
+        <div class="question-block" data-q="23"><div class="qline"><div class="qnum">23</div><div>It is likely that the red pigments help to protect the leaf from freezing temperatures.<div class="answer-row"><select class="select" id="q23"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="24"><div class="qline"><div class="qnum">24</div><div>The ‘light screen’ hypothesis would initially seem to contradict what is known about chlorophyll.<div class="answer-row"><select class="select" id="q24"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="25"><div class="qline"><div class="qnum">25</div><div>Leaves which turn colours other than red are more likely to be damaged by sunlight.<div class="answer-row"><select class="select" id="q25"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+
+        <h3>Question 26</h3>
+        <div class="question-block" data-q="26"><div class="qline"><div class="qnum">26</div><div><strong>For which of the following questions does the writer offer an explanation?</strong>
+          <div class="options">
+            <label><input type="radio" name="q26" value="A"><span class="letter">A</span><span>why conifers remain green in winter</span></label>
+            <label><input type="radio" name="q26" value="B"><span class="letter">B</span><span>how leaves turn orange and yellow in autumn</span></label>
+            <label><input type="radio" name="q26" value="C"><span class="letter">C</span><span>how herbivorous insects choose which trees to lay their eggs in</span></label>
+            <label><input type="radio" name="q26" value="D"><span class="letter">D</span><span>why anthocyanins are restricted to certain trees</span></label>
+          </div><div class="feedback"></div>
+        </div></div></div>
+      </div>
+
+      <div class="questions-page" id="questions-3">
+        <h2>READING PASSAGE 3</h2>
+        <p>You should spend about 20 minutes on <strong>Questions 27–40</strong>.</p>
+
+        <h3>Questions 27–31</h3>
+        <p class="instructions">Complete the summary using the list of words and phrases, A–J, below.</p>
+        <h3 class="summary-title">The Éfaté burial site</h3>
+        <p class="summary-text">
+          A 3,000-year-old burial ground of a seafaring people called the Lapita has been found on an abandoned
+          <span class="question-block" data-q="27" style="display:inline-block;margin:0;padding:3px"><strong>27</strong>
+          <select class="select word-select" id="q27"></select><span class="feedback"></span></span>
+          in the Pacific island of Éfaté. The cemetery, which is a significant
+          <span class="question-block" data-q="28" style="display:inline-block;margin:0;padding:3px"><strong>28</strong>
+          <select class="select word-select" id="q28"></select><span class="feedback"></span></span>,
+          was uncovered accidentally by an agricultural worker.
+        </p>
+        <p class="summary-text">
+          The Lapita explored and colonised many Pacific islands over several centuries. They took many things with them on their voyages including
+          <span class="question-block" data-q="29" style="display:inline-block;margin:0;padding:3px"><strong>29</strong>
+          <select class="select word-select" id="q29"></select><span class="feedback"></span></span>
+          and tools.
+        </p>
+        <p class="summary-text">
+          The burial ground increases the amount of information about the Lapita available to scientists. A team of researchers, led by Matthew Spriggs from the Australian National University, are helping with the excavation of the site. Spriggs believes the
+          <span class="question-block" data-q="30" style="display:inline-block;margin:0;padding:3px"><strong>30</strong>
+          <select class="select word-select" id="q30"></select><span class="feedback"></span></span>
+          which was found at the site is very important since it confirms that the
+          <span class="question-block" data-q="31" style="display:inline-block;margin:0;padding:3px"><strong>31</strong>
+          <select class="select word-select" id="q31"></select><span class="feedback"></span></span>
+          found inside are Lapita.
+        </p>
+
+        <div class="word-box">
+          <div class="key-grid">
+            <strong>A</strong><span>proof</span>
+            <strong>B</strong><span>plantation</span>
+            <strong>C</strong><span>harbour</span>
+            <strong>D</strong><span>bones</span>
+            <strong>E</strong><span>data</span>
+            <strong>F</strong><span>archaeological discovery</span>
+            <strong>G</strong><span>burial urn</span>
+            <strong>H</strong><span>source</span>
+            <strong>I</strong><span>animals</span>
+            <strong>J</strong><span>maps</span>
+          </div>
+        </div>
+
+        <h3>Questions 32–35</h3>
+        <p class="instructions">Choose the correct letter, A, B, C or D.</p>
+
+        <div class="question-block" data-q="32"><div class="qline"><div class="qnum">32</div><div><strong>According to the writer, there are difficulties explaining how the Lapita accomplished their journeys because</strong>
+          <div class="options">
+            <label><input type="radio" name="q32" value="A"><span class="letter">A</span><span>the canoes that have been discovered offer relatively few clues.</span></label>
+            <label><input type="radio" name="q32" value="B"><span class="letter">B</span><span>archaeologists have shown limited interest in this area of research.</span></label>
+            <label><input type="radio" name="q32" value="C"><span class="letter">C</span><span>little information relating to this period can be relied upon for accuracy.</span></label>
+            <label><input type="radio" name="q32" value="D"><span class="letter">D</span><span>technological advances have altered the way such achievements are viewed.</span></label>
+          </div><div class="feedback"></div>
+        </div></div></div>
+
+        <div class="question-block" data-q="33"><div class="qline"><div class="qnum">33</div><div><strong>According to the sixth paragraph, what was extraordinary about the Lapita?</strong>
+          <div class="options">
+            <label><input type="radio" name="q33" value="A"><span class="letter">A</span><span>They sailed beyond the point where land was visible.</span></label>
+            <label><input type="radio" name="q33" value="B"><span class="letter">B</span><span>Their cultural heritage discouraged the expression of fear.</span></label>
+            <label><input type="radio" name="q33" value="C"><span class="letter">C</span><span>They were able to build canoes that withstood ocean voyages.</span></label>
+            <label><input type="radio" name="q33" value="D"><span class="letter">D</span><span>Their navigational skills were passed on from one generation to the next.</span></label>
+          </div><div class="feedback"></div>
+        </div></div></div>
+
+        <div class="question-block" data-q="34"><div class="qline"><div class="qnum">34</div><div><strong>What does ‘This’ refer to in the seventh paragraph?</strong>
+          <div class="options">
+            <label><input type="radio" name="q34" value="A"><span class="letter">A</span><span>the Lapita's seafaring talent</span></label>
+            <label><input type="radio" name="q34" value="B"><span class="letter">B</span><span>the Lapita's ability to detect signs of land</span></label>
+            <label><input type="radio" name="q34" value="C"><span class="letter">C</span><span>the Lapita's extensive knowledge of the region</span></label>
+            <label><input type="radio" name="q34" value="D"><span class="letter">D</span><span>the Lapita's belief they would be able to return home</span></label>
+          </div><div class="feedback"></div>
+        </div></div></div>
+
+        <div class="question-block" data-q="35"><div class="qline"><div class="qnum">35</div><div><strong>According to the eighth paragraph, how was the geography of the region significant?</strong>
+          <div class="options">
+            <label><input type="radio" name="q35" value="A"><span class="letter">A</span><span>It played an important role in Lapita culture.</span></label>
+            <label><input type="radio" name="q35" value="B"><span class="letter">B</span><span>It meant there were relatively few storms at sea.</span></label>
+            <label><input type="radio" name="q35" value="C"><span class="letter">C</span><span>It provided a navigational aid for the Lapita.</span></label>
+            <label><input type="radio" name="q35" value="D"><span class="letter">D</span><span>It made a large number of islands habitable.</span></label>
+          </div><div class="feedback"></div>
+        </div></div></div>
+
+        <h3>Questions 36–40</h3>
+        <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+        <p class="instructions">Choose YES, NO or NOT GIVEN.</p>
+        <div class="question-block" data-q="36"><div class="qline"><div class="qnum">36</div><div>It is now clear that the Lapita could sail into a prevailing wind.<div class="answer-row"><select class="select" id="q36"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="37"><div class="qline"><div class="qnum">37</div><div>Extreme climate conditions may have played a role in Lapita migration.<div class="answer-row"><select class="select" id="q37"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="38"><div class="qline"><div class="qnum">38</div><div>The Lapita learnt to predict the duration of El Niños.<div class="answer-row"><select class="select" id="q38"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="39"><div class="qline"><div class="qnum">39</div><div>It remains unclear why the Lapita halted their expansion across the Pacific.<div class="answer-row"><select class="select" id="q39"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+        <div class="question-block" data-q="40"><div class="qline"><div class="qnum">40</div><div>It is likely that the majority of Lapita settled on Fiji.<div class="answer-row"><select class="select" id="q40"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div><div class="feedback"></div></div></div></div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<aside class="navigator">
+  <div class="navigator-top"><h3>Question navigator</h3><span class="note" id="answeredCount">0/40 answered</span></div>
+  <div class="number-grid" id="numberGrid"></div>
+  <div class="result" id="resultBox">
+    <div class="score" id="scoreText">0 / 40</div>
+    <div id="bandText"></div>
+    <div class="result-actions">
+      <button class="btn btn-primary" id="submitSide">Submit</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+    </div>
+  </div>
+  <button class="btn btn-primary" id="submitInitial" style="width:100%">Submit Test</button>
+</aside>
+
+<script>
+const answers = {
+  1:["ii"], 2:["i"], 3:["v"], 4:["vii"],
+  5:["true"], 6:["not given"], 7:["not given"], 8:["true"], 9:["not given"], 10:["false"],
+  11:["source of income","industry"], 12:["employer"], 13:["domestic tourism"],
+  14:["c"], 15:["b"], 16:["h"], 17:["b"], 18:["e"],
+  19:["sun","sunlight"], 20:["upper"], 21:["dry"], 22:["north"],
+  23:["false"], 24:["true"], 25:["not given"], 26:["b"],
+  27:["b"], 28:["f"], 29:["i"], 30:["g"], 31:["d"],
+  32:["c"], 33:["a"], 34:["d"], 35:["c"],
+  36:["no"], 37:["yes"], 38:["not given"], 39:["yes"], 40:["not given"]
+};
+
+const numberGrid = document.getElementById("numberGrid");
+for(let i=1;i<=40;i++){
+  const b=document.createElement("button");
+  b.className="nav-num"; b.textContent=i; b.dataset.q=i;
+  b.addEventListener("click",()=>goToQuestion(i));
+  numberGrid.appendChild(b);
+}
+
+document.querySelectorAll(".letter-select").forEach(sel=>{
+  sel.innerHTML='<option value="">Select paragraph</option>'+
+    ["A","B","C","D","E","F","G","H","I"].map(x=>`<option>${x}</option>`).join("");
+});
+document.querySelectorAll(".word-select").forEach(sel=>{
+  sel.innerHTML='<option value="">Select</option>'+
+    ["A","B","C","D","E","F","G","H","I","J"].map(x=>`<option>${x}</option>`).join("");
+});
+
+function norm(v){
+  return String(v||"").toLowerCase().trim()
+    .replace(/[.,;:!?]+$/g,"")
+    .replace(/\s+/g," ");
+}
+function getValue(q){
+  const direct=document.getElementById("q"+q);
+  if(direct) return direct.value;
+  const radio=document.querySelector(`input[name="q${q}"]:checked`);
+  return radio ? radio.value : "";
+}
+function pageFor(q){return q<=13?1:q<=26?2:3}
+function showPair(n){
+  document.querySelectorAll(".passage").forEach((x,i)=>x.classList.toggle("active",i===n-1));
+  document.querySelectorAll(".questions-page").forEach((x,i)=>x.classList.toggle("active",i===n-1));
+  document.querySelectorAll("[data-passage-tab]").forEach(x=>x.classList.toggle("active",Number(x.dataset.passageTab)===n));
+  document.querySelectorAll("[data-question-tab]").forEach(x=>x.classList.toggle("active",Number(x.dataset.questionTab)===n));
+  document.querySelector(".passage-wrap").scrollTop=0;
+  document.querySelector(".questions-wrap").scrollTop=0;
+}
+document.querySelectorAll("[data-passage-tab]").forEach(x=>x.addEventListener("click",()=>showPair(Number(x.dataset.passageTab))));
+document.querySelectorAll("[data-question-tab]").forEach(x=>x.addEventListener("click",()=>showPair(Number(x.dataset.questionTab))));
+
+function goToQuestion(q){
+  showPair(pageFor(q));
+  setTimeout(()=>{
+    const el=document.querySelector(`[data-q="${q}"]`);
+    if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
+  },100);
+}
+function updateAnswered(){
+  let count=0;
+  for(let q=1;q<=40;q++){
+    const has=Boolean(norm(getValue(q)));
+    document.querySelector(`.nav-num[data-q="${q}"]`).classList.toggle("answered",has);
+    if(has) count++;
+  }
+  document.getElementById("answeredCount").textContent=`${count}/40 answered`;
+}
+document.addEventListener("input",updateAnswered);
+document.addEventListener("change",updateAnswered);
+
+function setFeedback(q,ok){
+  const box=document.querySelector(`[data-q="${q}"]`);
+  if(!box) return;
+  box.classList.remove("correct","incorrect");
+  box.classList.add(ok?"correct":"incorrect");
+  const fb=box.querySelector(".feedback");
+  if(fb) fb.textContent=ok ? "Correct" : "Correct answer: "+answers[q].join(" / ");
+  const nav=document.querySelector(`.nav-num[data-q="${q}"]`);
+  nav.classList.remove("correct","incorrect");
+  nav.classList.add(ok?"correct":"incorrect");
+}
+function band(score){
+  if(score>=39)return "Estimated Academic Reading band: 9.0";
+  if(score>=37)return "Estimated Academic Reading band: 8.5";
+  if(score>=35)return "Estimated Academic Reading band: 8.0";
+  if(score>=33)return "Estimated Academic Reading band: 7.5";
+  if(score>=30)return "Estimated Academic Reading band: 7.0";
+  if(score>=27)return "Estimated Academic Reading band: 6.5";
+  if(score>=23)return "Estimated Academic Reading band: 6.0";
+  if(score>=19)return "Estimated Academic Reading band: 5.5";
+  if(score>=15)return "Estimated Academic Reading band: 5.0";
+  if(score>=13)return "Estimated Academic Reading band: 4.5";
+  if(score>=10)return "Estimated Academic Reading band: 4.0";
+  return "Estimated Academic Reading band: below 4.0";
+}
+function submitTest(){
+  let score=0;
+  for(let q=1;q<=40;q++){
+    const ok=answers[q].includes(norm(getValue(q)));
+    if(ok) score++;
+    setFeedback(q,ok);
+  }
+  document.getElementById("scoreText").textContent=`${score} / 40`;
+  document.getElementById("bandText").textContent=band(score);
+  document.getElementById("resultBox").classList.add("show");
+  document.getElementById("submitInitial").style.display="none";
+}
+["submitTop","submitSide","submitInitial"].forEach(id=>document.getElementById(id).addEventListener("click",submitTest));
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(!confirm("Reset all answers and restart the timer?"))return;
+  document.querySelectorAll("input[type=text], input:not([type]), select").forEach(x=>x.value="");
+  document.querySelectorAll('input[type="radio"]').forEach(x=>x.checked=false);
+  document.querySelectorAll(".question-block").forEach(x=>x.classList.remove("correct","incorrect"));
+  document.querySelectorAll(".nav-num").forEach(x=>x.className="nav-num");
+  document.getElementById("resultBox").classList.remove("show");
+  document.getElementById("submitInitial").style.display="block";
+  remaining=60*60; stopped=false; renderTimer(); updateAnswered(); showPair(1);
+});
+
+document.getElementById("fullscreenBtn").addEventListener("click",()=>{
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+});
+
+let remaining=60*60, stopped=false;
+const timer=document.getElementById("timer");
+function renderTimer(){
+  const m=String(Math.floor(remaining/60)).padStart(2,"0");
+  const s=String(remaining%60).padStart(2,"0");
+  timer.textContent=`${m}:${s}`;
+  timer.style.color=remaining<=600?"#b42318":"";
+}
+renderTimer();
+setInterval(()=>{
+  if(stopped)return;
+  if(remaining>0){remaining--;renderTimer()}
+  else{stopped=true;submitTest();alert("Time is over. Your test has been submitted.")}
+},1000);
+
+updateAnswered();
+</script>
+</body>
+</html>

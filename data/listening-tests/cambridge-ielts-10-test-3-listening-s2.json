@@ -1,0 +1,560 @@
+{
+  "id": "cambridge-ielts-10-test-3-listening-s2",
+  "slug": "cambridge-ielts-10-test-3-listening-s2",
+  "title": "Cambridge IELTS 10 Test 3 Listening — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-3-part-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–12",
+      "instruction": "Choose TWO letters, A–E.",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13–15",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Questions 16–20",
+      "instruction": "Which dolphin does Alice make each comment about?\nWrite the correct letter, A, B, C or D.",
+      "questionNumbers": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multi_select",
+      "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Children make up most of the membership."
+        },
+        {
+          "letter": "B",
+          "text": "It's the country's largest conservation organisation."
+        },
+        {
+          "letter": "C",
+          "text": "It helps finance campaigns for changes in fishing practices."
+        },
+        {
+          "letter": "D",
+          "text": "It employs several dolphin experts full-time."
+        },
+        {
+          "letter": "E",
+          "text": "Volunteers help in various ways."
+        }
+      ],
+      "answer": "C | E"
+    },
+    {
+      "number": 12,
+      "type": "multi_select",
+      "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Children make up most of the membership."
+        },
+        {
+          "letter": "B",
+          "text": "It's the country's largest conservation organisation."
+        },
+        {
+          "letter": "C",
+          "text": "It helps finance campaigns for changes in fishing practices."
+        },
+        {
+          "letter": "D",
+          "text": "It employs several dolphin experts full-time."
+        },
+        {
+          "letter": "E",
+          "text": "Volunteers help in various ways."
+        }
+      ],
+      "answer": "C | E"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It has brought in extra money."
+        },
+        {
+          "letter": "B",
+          "text": "It made the work of the trust better known."
+        },
+        {
+          "letter": "C",
+          "text": "It has attracted more members."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Alice says oil exploration causes problems to dolphins because of",
+      "options": [
+        {
+          "letter": "A",
+          "text": "noise."
+        },
+        {
+          "letter": "B",
+          "text": "oil leaks."
+        },
+        {
+          "letter": "C",
+          "text": "movement of ships."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "Alice became interested in dolphins when",
+      "options": [
+        {
+          "letter": "A",
+          "text": "she saw one swimming near her home."
+        },
+        {
+          "letter": "B",
+          "text": "she heard a speaker at her school."
+        },
+        {
+          "letter": "C",
+          "text": "she read a book about them."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "It has not been seen this year.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "It is photographed more than the others.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "It is always very energetic.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "It is the newest one in the scheme.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "It has an unusual shape.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moondancer"
+        },
+        {
+          "letter": "B",
+          "text": "Echo"
+        },
+        {
+          "letter": "C",
+          "text": "Kiwi"
+        },
+        {
+          "letter": "D",
+          "text": "Samson"
+        }
+      ],
+      "answer": "A"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-3",
+  "createdAt": "2026-07-23T14:56:47.211Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: C | E\n12: C | E\n13: B\n14: A\n15: C\n16: B\n17: C\n18: D\n19: D\n20: A",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g1",
+          "type": "multiple_select",
+          "questionRange": "Questions 11–12",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Children make up most of the membership."
+            },
+            {
+              "letter": "B",
+              "text": "It's the country's largest conservation organisation."
+            },
+            {
+              "letter": "C",
+              "text": "It helps finance campaigns for changes in fishing practices."
+            },
+            {
+              "letter": "D",
+              "text": "It employs several dolphin experts full-time."
+            },
+            {
+              "letter": "E",
+              "text": "Volunteers help in various ways."
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "text": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Children make up most of the membership."
+                },
+                {
+                  "letter": "B",
+                  "text": "It's the country's largest conservation organisation."
+                },
+                {
+                  "letter": "C",
+                  "text": "It helps finance campaigns for changes in fishing practices."
+                },
+                {
+                  "letter": "D",
+                  "text": "It employs several dolphin experts full-time."
+                },
+                {
+                  "letter": "E",
+                  "text": "Volunteers help in various ways."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "text": "Which TWO things does Alice say about the Dolphin Conservation Trust?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Children make up most of the membership."
+                },
+                {
+                  "letter": "B",
+                  "text": "It's the country's largest conservation organisation."
+                },
+                {
+                  "letter": "C",
+                  "text": "It helps finance campaigns for changes in fishing practices."
+                },
+                {
+                  "letter": "D",
+                  "text": "It employs several dolphin experts full-time."
+                },
+                {
+                  "letter": "E",
+                  "text": "Volunteers help in various ways."
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C | E"
+            }
+          ],
+          "questionNumber": 11,
+          "answerQuestions": [
+            {
+              "questionNumber": 12
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO things does Alice say about the Dolphin Conservation Trust?"
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g2",
+          "type": "multiple_choice",
+          "questionRange": "Questions 13–15",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+              "text": "Why is Alice so pleased that the Trust has won the Charity Commission award?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It has brought in extra money."
+                },
+                {
+                  "letter": "B",
+                  "text": "It made the work of the trust better known."
+                },
+                {
+                  "letter": "C",
+                  "text": "It has attracted more members."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "Alice says oil exploration causes problems to dolphins because of",
+              "text": "Alice says oil exploration causes problems to dolphins because of",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "noise."
+                },
+                {
+                  "letter": "B",
+                  "text": "oil leaks."
+                },
+                {
+                  "letter": "C",
+                  "text": "movement of ships."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Alice became interested in dolphins when",
+              "text": "Alice became interested in dolphins when",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "she saw one swimming near her home."
+                },
+                {
+                  "letter": "B",
+                  "text": "she heard a speaker at her school."
+                },
+                {
+                  "letter": "C",
+                  "text": "she read a book about them."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-3-p2-g3",
+          "type": "matching",
+          "questionRange": "Questions 16–20",
+          "title": "",
+          "optionsTitle": "Dolphins",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Which dolphin does Alice make each comment about?\nWrite the correct letter, A, B, C or D.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Moondancer"
+            },
+            {
+              "letter": "B",
+              "text": "Echo"
+            },
+            {
+              "letter": "C",
+              "text": "Kiwi"
+            },
+            {
+              "letter": "D",
+              "text": "Samson"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "It has not been seen this year.",
+              "text": "It has not been seen this year.",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "It is photographed more than the others.",
+              "text": "It is photographed more than the others.",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "It is always very energetic.",
+              "text": "It is always very energetic.",
+              "answer": "D"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "It is the newest one in the scheme.",
+              "text": "It is the newest one in the scheme.",
+              "answer": "D"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "It has an unusual shape.",
+              "text": "It has an unusual shape.",
+              "answer": "A"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

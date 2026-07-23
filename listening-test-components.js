@@ -740,6 +740,93 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderChildcareLine(line) {
+            const text = String(line || "")
+                .replace(/&amp;/g, "&")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&quot;/g, '"')
+                .replace(/&#039;/g, "'");
+            const parts = [];
+            let lastIndex = 0;
+
+            for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+                const number = Number(match[1]);
+                parts.push(escapeHtml(text.slice(lastIndex, match.index)));
+                parts.push(`<span class="lc-answer-inline lc-childcare-answer" id="question-${number}" data-question="${number}">
+                    <span class="lc-childcare-number">${number}</span>
+                    <input class="lc-answer-input lc-childcare-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+                </span>`);
+                lastIndex = match.index + match[0].length;
+            }
+
+            parts.push(escapeHtml(text.slice(lastIndex)));
+            return parts.join("")
+                .replace(/&lt;strong&gt;/gi, "<strong>")
+                .replace(/&lt;\/strong&gt;/gi, "</strong>")
+                .replace(/&lt;em&gt;/gi, "<em>")
+                .replace(/&lt;\/em&gt;/gi, "</em>");
+        }
+
+        function renderChildcareEnrolment(lines, title) {
+            const titleParts = String(title || "Early Learning Childcare Centre — Enrolment Form")
+                .split(/\s+[—–-]\s+/)
+                .map((part) => escapeHtml(part.trim()))
+                .filter(Boolean);
+            const titleHtml = titleParts.join("<br>");
+            const example = String(block.example || "Parent or guardian: Caroll Smith").trim();
+            const exampleMatch = example.match(/^(.*?\bCaroll)\s+(.+)$/i);
+            const exampleLabel = exampleMatch ? exampleMatch[1] : example;
+            const exampleAnswer = exampleMatch ? exampleMatch[2] : "";
+            const body = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => {
+                    if (/^<strong>[\s\S]*<\/strong>$/i.test(line)) {
+                        return `<h5 class="lc-childcare-section-title">${renderChildcareLine(line)}</h5>`;
+                    }
+                    return `<p class="lc-childcare-line">${renderChildcareLine(line)}</p>`;
+                })
+                .join("");
+
+            return `
+                <div class="lc-childcare-form">
+                    <h4 class="lc-childcare-title">${titleHtml}</h4>
+                    <div class="lc-childcare-example">
+                        <em>Example</em>
+                        <p>${escapeHtml(exampleLabel)}${exampleAnswer ? ` <span>${escapeHtml(exampleAnswer)}</span>` : ""}</p>
+                    </div>
+                    <div class="lc-childcare-body">${body}</div>
+                </div>
+            `;
+        }
+
+        function renderSelfRegulatoryFocus(lines, title) {
+            const body = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => {
+                    if (/^<strong>[\s\S]*<\/strong>$/i.test(line)) {
+                        return `<h5 class="lc-focus-section-title">${renderChildcareLine(line)}</h5>`;
+                    }
+                    if (/^<em>[\s\S]*<\/em>$/i.test(line)) {
+                        return `<p class="lc-focus-subtitle">${renderChildcareLine(line)}</p>`;
+                    }
+                    if (/^[-*•]\s+/.test(line)) {
+                        return `<p class="lc-focus-bullet">${renderChildcareLine(line.replace(/^[-*•]\s+/, ""))}</p>`;
+                    }
+                    return `<p class="lc-focus-line">${renderChildcareLine(line)}</p>`;
+                })
+                .join("");
+
+            return `
+                <div class="lc-focus-form">
+                    <h4 class="lc-focus-title">${escapeHtml(title || "‘Self-regulatory focus theory’ and leadership")}</h4>
+                    <div class="lc-focus-body">${body}</div>
+                </div>
+            `;
+        }
+
         function renderTransportSurvey(lines, title) {
             const body = (lines || [])
                 .map((line) => String(line || "").trim())
@@ -795,6 +882,14 @@ const ListeningComponents = (() => {
 
         if (block.noteStyle === "job-details-form") {
             return blockCard(block, renderJobDetailsForm(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--job-details-form");
+        }
+
+        if (block.noteStyle === "childcare-enrolment") {
+            return blockCard(block, renderChildcareEnrolment(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--childcare-enrolment");
+        }
+
+        if (block.noteStyle === "self-regulatory-focus") {
+            return blockCard(block, renderSelfRegulatoryFocus(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--self-regulatory-focus");
         }
 
         const isSpiritBear = isBoxedFlow && /^the spirit bear$/i.test(plainText(displayTitle));
@@ -922,8 +1017,7 @@ const ListeningComponents = (() => {
             return `<div class="lc-matching-option"><span class="lc-letter-badge">${escapeHtml(letter)}</span>${optionText ? escapeHtml(optionText) : ""}</div>`;
         }).join("");
         const optionTags = (block.options || []).map((option) => {
-            const optionText = cleanOptionText(option.text || "");
-            const optionLabel = optionText ? `${option.letter || ""} - ${optionText}` : (option.letter || "");
+            const optionLabel = option.letter || "";
             return `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(optionLabel)}</option>`;
         }).join("");
         const rows = (block.questions || []).map((question) => {

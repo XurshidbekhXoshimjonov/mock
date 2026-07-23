@@ -1,0 +1,253 @@
+{
+  "id": "cambridge-ielts-10-test-3-listening-s4",
+  "slug": "cambridge-ielts-10-test-3-listening-s4",
+  "title": "Cambridge IELTS 10 Test 3 Listening — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-3-part-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "Promotion goals focus on ...",
+      "options": [],
+      "answer": "ACHIEVEMENT | ACHIEVEMENTS"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "The Chronic Factor comes from one's ...",
+      "options": [],
+      "answer": "PERSONALITY | CHARACTER"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "The ... Factor",
+      "options": [],
+      "answer": "SITUATIONAL"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "We are more likely to focus on promotion goals when with a ...",
+      "options": [],
+      "answer": "FRIEND"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+      "options": [],
+      "answer": "ASPIRATIONS | AMBITIONS"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Leadership behaviour and ... affects people's focus.",
+      "options": [],
+      "answer": "STYLE"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Transformational leaders pay special attention to the ... of their followers.",
+      "options": [],
+      "answer": "DEVELOPMENT"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Transformational leaders passionately communicate a clear ...",
+      "options": [],
+      "answer": "VISION"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Transactional leaders create ... to make expectations clear.",
+      "options": [],
+      "answer": "STRUCTURES"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Promotion Focus is good for jobs requiring ...",
+      "options": [],
+      "answer": "INNOVATION | INNOVATIONS"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-3",
+  "createdAt": "2026-07-23T14:56:47.211Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-3-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: ACHIEVEMENT | ACHIEVEMENTS\n32: PERSONALITY | CHARACTER\n33: SITUATIONAL\n34: FRIEND\n35: ASPIRATIONS | AMBITIONS\n36: STYLE\n37: DEVELOPMENT\n38: VISION\n39: STRUCTURES\n40: INNOVATION | INNOVATIONS",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-3-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "‘Self-regulatory focus theory’ and leadership",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Self-regulatory focus theory</strong>",
+            "People's focus is to approach pleasure or avoid pain",
+            "Promotion goals focus on {{31}}",
+            "Prevention goals emphasise avoiding punishment",
+            "<strong>Factors that affect people's focus</strong>",
+            "<em>The Chronic Factor</em>",
+            "• comes from one's {{32}}",
+            "<em>The {{33}} Factor</em>",
+            "• we are more likely to focus on promotion goals when with a {{34}}",
+            "• we are more likely to focus on prevention goals with our boss",
+            "<strong>How people's focus affects them</strong>",
+            "Promotion Focus: People think about an ideal version of themselves, their {{35}} and their gains.",
+            "Prevention Focus: People think about their ‘ought’ self and their obligations",
+            "<strong>Leaders</strong>",
+            "Leadership behaviour and {{36}} affects people's focus",
+            "<em>Transformational Leaders</em>",
+            "• pay special attention to the {{37}} of their followers",
+            "• passionately communicate a clear {{38}}",
+            "• inspire promotion focus in followers",
+            "<em>Transactional Leaders</em>",
+            "• create {{39}} to make expectations clear",
+            "• emphasise the results of a mistake",
+            "• inspire prevention focus in followers",
+            "<strong>Conclusion</strong>",
+            "Promotion Focus is good for jobs requiring {{40}}",
+            "Prevention Focus is good for work such as a surgeon",
+            "Leaders' actions affect which focus people use"
+          ],
+          "noteStyle": "self-regulatory-focus",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "Promotion goals focus on ...",
+              "text": "Promotion goals focus on ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ACHIEVEMENT | ACHIEVEMENTS"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "The Chronic Factor comes from one's ...",
+              "text": "The Chronic Factor comes from one's ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PERSONALITY | CHARACTER"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "The ... Factor",
+              "text": "The ... Factor",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SITUATIONAL"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "We are more likely to focus on promotion goals when with a ...",
+              "text": "We are more likely to focus on promotion goals when with a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "FRIEND"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+              "text": "Promotion Focus: People think about an ideal version of themselves, their ... and their gains.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "ASPIRATIONS | AMBITIONS"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Leadership behaviour and ... affects people's focus.",
+              "text": "Leadership behaviour and ... affects people's focus.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "STYLE"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Transformational leaders pay special attention to the ... of their followers.",
+              "text": "Transformational leaders pay special attention to the ... of their followers.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "DEVELOPMENT"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Transformational leaders passionately communicate a clear ...",
+              "text": "Transformational leaders passionately communicate a clear ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "VISION"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Transactional leaders create ... to make expectations clear.",
+              "text": "Transactional leaders create ... to make expectations clear.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "STRUCTURES"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Promotion Focus is good for jobs requiring ...",
+              "text": "Promotion Focus is good for jobs requiring ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "INNOVATION | INNOVATIONS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

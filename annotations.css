@@ -385,6 +385,31 @@ mark.ieltsx-highlight:hover {
     left: 0;
 }
 
+/*
+ * Full-screen Reading and Listening players use a fixed shell at z-index 99999.
+ * Annotation controls are body-level siblings of that shell, so they must sit
+ * above it while full-screen mode is active.
+ */
+body.exam-fullscreen-active > .ieltsx-toolbar,
+body.fullscreen-fallback > .ieltsx-toolbar {
+    z-index: 100010;
+}
+
+body.exam-fullscreen-active > .ieltsx-drawer-overlay,
+body.fullscreen-fallback > .ieltsx-drawer-overlay {
+    z-index: 100020;
+}
+
+body.exam-fullscreen-active > .ieltsx-drawer,
+body.fullscreen-fallback > .ieltsx-drawer {
+    z-index: 100021;
+}
+
+body.exam-fullscreen-active > .ieltsx-modal-overlay,
+body.fullscreen-fallback > .ieltsx-modal-overlay {
+    z-index: 100030;
+}
+
 .ieltsx-drawer-header {
     display: flex;
     align-items: center;
