@@ -9,7 +9,9 @@ const {
     DEMO_MESSAGE_LIMIT,
     AI_COACH_SYSTEM_PROMPT,
     AI_COACH_TOOLS,
-    generalAiReply
+    generalAiReply,
+    normalizeCoachImage,
+    AI_COACH_IMAGE_LIMIT
 } = require("../lib/ai-coach-routes");
 
 function emptyDashboardInput() {
@@ -102,10 +104,61 @@ test("AI Coach sends the exact message and the latest 20 conversation messages t
 
     assert.equal(reply.content, "Odamlar avtomobillarga tobora ko‘proq qaram bo‘lib bormoqda.");
     assert.equal(requestBody.messages.at(-1).content, message);
-    assert.equal(requestBody.reasoning_effort, "none");
+    assert.equal(Object.hasOwn(requestBody, "reasoning_effort"), false);
     assert.equal(requestBody.messages.filter((item) => item.role === "user" || item.role === "assistant").length, 21);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-3")), false);
     assert.equal(requestBody.messages.some((item) => String(item.content).includes("history-4")), true);
+});
+
+test("AI Coach validates image attachments and sends them as multimodal model input", async (t) => {
+    const originalFetch = global.fetch;
+    const originalKey = process.env.OPENAI_API_KEY;
+    t.after(() => {
+        global.fetch = originalFetch;
+        if (originalKey === undefined) delete process.env.OPENAI_API_KEY;
+        else process.env.OPENAI_API_KEY = originalKey;
+    });
+    process.env.OPENAI_API_KEY = "test-key";
+    const png = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0]);
+    const attachment = normalizeCoachImage({
+        name: "essay.png",
+        dataUrl: `data:image/png;base64,${png.toString("base64")}`
+    });
+    let requestBody;
+    global.fetch = async (_url, options) => {
+        requestBody = JSON.parse(options.body);
+        return {
+            ok: true,
+            json: async () => ({ choices: [{ message: { role: "assistant", content: "I can see the essay image." } }] })
+        };
+    };
+
+    const reply = await generalAiReply("Check this essay.", [], [], async () => ({}), attachment);
+    const content = requestBody.messages.at(-1).content;
+    assert.equal(reply.content, "I can see the essay image.");
+    assert.equal(content[0].type, "text");
+    assert.equal(content[1].type, "image_url");
+    assert.equal(content[1].image_url.url, attachment.dataUrl);
+    assert.equal(content[1].image_url.detail, "auto");
+    assert.ok(attachment.size <= AI_COACH_IMAGE_LIMIT);
+    assert.throws(() => normalizeCoachImage({ dataUrl: "data:image/png;base64,bm90LWFuLWltYWdl" }), /not a valid image/);
+});
+
+test("AI Coach frontend exposes image selection, preview, and message payload", () => {
+    const root = path.join(__dirname, "..");
+    const html = fs.readFileSync(path.join(root, "ai-coach.html"), "utf8");
+    const script = fs.readFileSync(path.join(root, "ai-coach.js"), "utf8");
+    assert.match(html, /id="imageAttachmentInput"[^>]+accept="image\/png,image\/jpeg,image\/gif,image\/webp"/);
+    assert.match(html, /id="imageAttachmentPreview"/);
+    assert.match(script, /body:\s*JSON\.stringify\(\{ message, image: attachment \}\)/);
+    assert.match(script, /file\.size > 3 \* 1024 \* 1024/);
+});
+
+test("AI Coach archived chats expose a right-click delete action", () => {
+    const script = fs.readFileSync(path.join(__dirname, "..", "ai-coach.js"), "utf8");
+    assert.match(script, /addEventListener\("contextmenu",[\s\S]*?openHistoryContextMenu/);
+    assert.match(script, /remove\.textContent = "Delete chat"/);
+    assert.match(script, /deleteConversation\(conversation\.id\)/);
 });
 
 test("AI Coach returns tool results to the model before producing a natural final response", async (t) => {

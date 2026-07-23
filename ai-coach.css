@@ -105,6 +105,8 @@ html.dark-theme .message-skeleton span {
     background: linear-gradient(90deg, #17243a 25%, #22314a 50%, #17243a 75%);
     background-size: 200% 100%;
 }
+html.dark-theme .image-attachment { border-color: #32415a; background: #111b2d; color: #dce7f5; }
+html.dark-theme .image-attachment button { background: #26344b; color: #dce7f5; }
 svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
 .coach-shell { display: grid; grid-template-columns: 264px minmax(0, 1fr) 306px; height: 100dvh; min-height: 0; }
@@ -150,6 +152,12 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round
 .message-skeleton span:nth-child(3) { width: 64%; }
 @keyframes coach-skeleton { to { background-position: -200% 0; } }
 .history-item:hover, .history-item.is-active { background: #eef4ff; color: #1e40af; }
+.history-context-menu { position: fixed; min-width: 142px; padding: 5px; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 14px 36px rgba(15,23,42,.18); z-index: 120; }
+.history-context-menu button { display: block; width: 100%; min-height: 34px; padding: 0 10px; border: 0; border-radius: 7px; background: transparent; color: #dc2626; cursor: pointer; text-align: left; font-size: 10.5px; font-weight: 700; }
+.history-context-menu button:hover, .history-context-menu button:focus-visible { outline: 0; background: #fff1f2; }
+html.dark-theme .history-context-menu { border-color: #32415a; background: #111b2d; }
+html.dark-theme .history-context-menu button { color: #fda4af; }
+html.dark-theme .history-context-menu button:hover, html.dark-theme .history-context-menu button:focus-visible { background: #3b1722; }
 .history-empty { margin: 8px 10px; color: #94a3b8; font-size: 11px; line-height: 1.6; }
 .history-premium-lock { display: grid; justify-items: start; gap: 7px; margin: 6px 4px; padding: 14px; border: 1px solid #dbeafe; border-radius: 12px; background: #eff6ff; color: #1e40af; }
 .history-premium-lock svg { width: 20px; height: 20px; }
@@ -249,6 +257,14 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round
 @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
 
 .composer-wrap { padding: 10px 24px max(10px, env(safe-area-inset-bottom)); background: linear-gradient(180deg,rgba(255,255,255,0),#fff 22%); z-index: 8; }
+.image-attachment { display: flex; align-items: center; gap: 9px; width: min(760px, 100%); margin: 0 auto 7px; padding: 7px; border: 1px solid #dbe3ef; border-radius: 13px; background: #fff; color: #475569; font-size: 10px; }
+.image-attachment[hidden] { display: none; }
+.image-attachment img { width: 46px; height: 46px; flex: none; border-radius: 9px; object-fit: cover; }
+.image-attachment span { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 650; }
+.image-attachment button { position: relative; width: 28px; height: 28px; flex: none; padding: 0; border: 0; border-radius: 8px; background: #eef2f7; color: #64748b; cursor: pointer; font-size: 0; }
+.image-attachment button::before, .image-attachment button::after { content: ""; position: absolute; top: 50%; left: 50%; width: 11px; height: 1.5px; border-radius: 2px; background: currentColor; transform: translate(-50%, -50%) rotate(45deg); }
+.image-attachment button::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.message-attachment { display: block; width: min(320px, 100%); max-height: 320px; margin: 0 0 9px; border-radius: 11px; object-fit: contain; background: #0f172a; }
 .composer { display: flex; align-items: flex-end; gap: 7px; width: min(760px, 100%); margin: auto; padding: 7px; border: 1px solid #dbe3ef; border-radius: 17px; background: #fff; box-shadow: 0 8px 30px rgba(15,23,42,.08); }
 .composer:focus-within { border-color: #a9c5ff; box-shadow: 0 8px 30px rgba(37,99,235,.10), 0 0 0 3px #eff6ff; }
 .composer textarea { width: 100%; max-height: 120px; min-height: 34px; padding: 8px 4px 5px; resize: none; border: 0; outline: 0; color: #1e293b; background: transparent; font-size: 11.5px; line-height: 1.5; }

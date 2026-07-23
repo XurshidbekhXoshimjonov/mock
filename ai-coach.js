@@ -13,7 +13,8 @@
         messagesPagination: { hasMore: false, nextCursor: null },
         conversationRequest: null,
         messageRequest: null,
-        searchRequest: null
+        searchRequest: null,
+        attachment: null
     };
 
     const $ = (selector) => document.querySelector(selector);
@@ -32,6 +33,12 @@
         composer: $("#composer"),
         input: $("#messageInput"),
         send: $("#sendButton"),
+        attach: $("#attachImageButton"),
+        attachmentInput: $("#imageAttachmentInput"),
+        attachmentBox: $("#imageAttachment"),
+        attachmentPreview: $("#imageAttachmentPreview"),
+        attachmentName: $("#imageAttachmentName"),
+        attachmentRemove: $("#removeImageAttachment"),
         optionsButton: $("#chatOptions"),
         optionsMenu: $("#optionsMenu"),
         memoryButton: $("#memoryButton"),
@@ -107,6 +114,37 @@
         "This week": ["Speaking feedback", "Target band update"]
     };
 
+    let historyContextMenu = null;
+
+    function closeHistoryContextMenu() {
+        historyContextMenu?.remove();
+        historyContextMenu = null;
+    }
+
+    function openHistoryContextMenu(event, conversation) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeHistoryContextMenu();
+        const menu = document.createElement("div");
+        menu.className = "history-context-menu";
+        menu.setAttribute("role", "menu");
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.setAttribute("role", "menuitem");
+        remove.textContent = "Delete chat";
+        remove.addEventListener("click", () => {
+            closeHistoryContextMenu();
+            deleteConversation(conversation.id);
+        });
+        menu.append(remove);
+        document.body.append(menu);
+        const bounds = menu.getBoundingClientRect();
+        menu.style.left = `${Math.max(8, Math.min(event.clientX, window.innerWidth - bounds.width - 8))}px`;
+        menu.style.top = `${Math.max(8, Math.min(event.clientY, window.innerHeight - bounds.height - 8))}px`;
+        historyContextMenu = menu;
+        remove.focus();
+    }
+
     function renderConversations() {
         els.groups.replaceChildren();
         if (state.context?.access?.premium !== true) {
@@ -140,6 +178,7 @@
                 button.textContent = conversation.title;
                 button.title = conversation.title;
                 button.addEventListener("click", () => selectConversation(conversation.id));
+                button.addEventListener("contextmenu", (event) => openHistoryContextMenu(event, conversation));
                 section.append(button);
             });
             exampleItems.forEach((text) => {
@@ -482,8 +521,16 @@
         content.className = "message-content";
         const bubble = document.createElement("div");
         bubble.className = "message-bubble";
+        const attachment = message.payload?.attachment;
+        if (attachment?.type === "image" && attachment.dataUrl) {
+            const image = document.createElement("img");
+            image.className = "message-attachment";
+            image.src = attachment.dataUrl;
+            image.alt = attachment.name || "Attached image";
+            bubble.append(image);
+        }
         if (message.role === "assistant") bubble.append(renderRichText(message.content));
-        else bubble.textContent = message.content;
+        else bubble.append(document.createTextNode(message.content));
         content.append(bubble);
         const payload = message.payload || {};
         if ((payload.cards || []).length) {
@@ -507,7 +554,7 @@
             retry.addEventListener("click", () => {
                 const messageIndex = state.messages.findIndex((item) => item.id === message.id);
                 const previousUserMessage = state.messages.slice(0, messageIndex).reverse().find((item) => item.role === "user");
-                if (previousUserMessage) sendPrompt(previousUserMessage.content);
+                if (previousUserMessage) sendPrompt(previousUserMessage.content, previousUserMessage.payload?.attachment || null);
             });
             retryWrap.append(retry);
             content.append(retryWrap);
@@ -603,29 +650,38 @@
         state.generating = value;
         const premium = state.context?.access?.premium === true;
         els.input.disabled = value || !premium;
-        els.send.disabled = value || !premium || !els.input.value.trim();
+        els.attach.disabled = value || !premium;
+        els.attachmentRemove.disabled = value;
+        els.send.disabled = value || !premium || (!els.input.value.trim() && !state.attachment);
         els.typing.hidden = !value;
         if (value) requestAnimationFrame(scrollLatest);
     }
 
-    async function sendPrompt(text) {
-        if (state.generating || !String(text).trim()) return;
+    async function sendPrompt(text, suppliedAttachment = state.attachment) {
+        if (state.generating || (!String(text).trim() && !suppliedAttachment)) return;
         if (state.context?.access?.premium !== true) {
             showToast("AI Coach requires Premium.");
             return;
         }
         const message = String(text).trim();
+        const attachment = suppliedAttachment;
         els.input.value = "";
         resizeInput();
         try {
             const conversationId = await ensureConversation();
-            const optimistic = { id: `temp-${Date.now()}`, role: "user", content: message, payload: {}, createdAt: new Date().toISOString() };
+            const optimistic = {
+                id: `temp-${Date.now()}`,
+                role: "user",
+                content: message || `Image: ${attachment.name || "image"}`,
+                payload: attachment ? { attachment } : {},
+                createdAt: new Date().toISOString()
+            };
             state.messages.push(optimistic);
             renderMessages();
             setGenerating(true);
             const data = await api(`/api/ai-coach/conversations/${encodeURIComponent(conversationId)}/messages`, {
                 method: "POST",
-                body: JSON.stringify({ message })
+                body: JSON.stringify({ message, image: attachment })
             });
             state.messages[state.messages.length - 1] = data.userMessage;
             state.messages.push(data.assistantMessage);
@@ -639,10 +695,13 @@
             renderMessages();
             renderAccess();
             renderConversations();
+            if (attachment === state.attachment) clearAttachment();
         } catch (error) {
             const index = state.messages.findIndex((item) => String(item.id).startsWith("temp-"));
             if (index >= 0) state.messages.splice(index, 1);
             renderMessages();
+            if (!els.input.value) els.input.value = message;
+            resizeInput();
             if (error.data?.code === "AI_COACH_DEMO_LIMIT") {
                 showToast("Your 3-message demo is complete. Upgrade to Premium for unlimited AI Coach access.");
             } else {
@@ -678,7 +737,47 @@
     function resizeInput() {
         els.input.style.height = "auto";
         els.input.style.height = `${Math.min(els.input.scrollHeight, 120)}px`;
-        els.send.disabled = state.generating || state.context?.access?.premium !== true || !els.input.value.trim();
+        els.send.disabled = state.generating || state.context?.access?.premium !== true || (!els.input.value.trim() && !state.attachment);
+    }
+
+    function clearAttachment() {
+        state.attachment = null;
+        els.attachmentInput.value = "";
+        els.attachmentPreview.removeAttribute("src");
+        els.attachmentName.textContent = "";
+        els.attachmentBox.hidden = true;
+        resizeInput();
+    }
+
+    function selectAttachment(file) {
+        if (!file) return;
+        const allowed = new Set(["image/png", "image/jpeg", "image/gif", "image/webp"]);
+        if (!allowed.has(file.type)) {
+            showToast("Please choose a PNG, JPEG, GIF, or WebP image.");
+            els.attachmentInput.value = "";
+            return;
+        }
+        if (file.size > 3 * 1024 * 1024) {
+            showToast("The image must be 3 MB or smaller.");
+            els.attachmentInput.value = "";
+            return;
+        }
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            state.attachment = {
+                type: "image",
+                name: file.name || "image",
+                mimeType: file.type,
+                size: file.size,
+                dataUrl: String(reader.result || "")
+            };
+            els.attachmentPreview.src = state.attachment.dataUrl;
+            els.attachmentName.textContent = `${state.attachment.name} · ${(file.size / 1024).toFixed(0)} KB`;
+            els.attachmentBox.hidden = false;
+            resizeInput();
+        });
+        reader.addEventListener("error", () => showToast("The image could not be read."));
+        reader.readAsDataURL(file);
     }
 
     function openDrawer() {
@@ -745,35 +844,19 @@
         } catch (error) { showToast(error.message); }
     }
 
-    async function deleteConversation() {
-        if (!state.activeConversationId || !window.confirm("Delete this conversation and all of its messages?")) return;
+    async function deleteConversation(conversationId = state.activeConversationId) {
+        if (!conversationId || !window.confirm("Delete this conversation and all of its messages?")) return;
         try {
-            await api(`/api/ai-coach/conversations/${encodeURIComponent(state.activeConversationId)}`, { method: "DELETE" });
-            state.conversations = state.conversations.filter((item) => item.id !== state.activeConversationId);
-            state.activeConversationId = null;
-            state.messages = [];
-            state.messagesPagination = { hasMore: false, nextCursor: null };
+            await api(`/api/ai-coach/conversations/${encodeURIComponent(conversationId)}`, { method: "DELETE" });
+            state.conversations = state.conversations.filter((item) => item.id !== conversationId);
+            if (state.activeConversationId === conversationId) {
+                state.activeConversationId = null;
+                state.messages = [];
+                state.messagesPagination = { hasMore: false, nextCursor: null };
+            }
             renderConversations();
             renderMessages();
         } catch (error) { showToast(error.message); }
-    }
-
-    function setupSpeech() {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const mic = $("#micButton");
-        if (!SpeechRecognition) {
-            mic.addEventListener("click", () => showToast("Voice input is not supported in this browser."));
-            return;
-        }
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = false;
-        recognition.lang = "en-US";
-        recognition.addEventListener("result", (event) => {
-            els.input.value = `${els.input.value}${els.input.value ? " " : ""}${event.results[0][0].transcript}`;
-            resizeInput();
-        });
-        recognition.addEventListener("error", () => showToast("Voice input could not start."));
-        mic.addEventListener("click", () => recognition.start());
     }
 
     async function init() {
@@ -812,6 +895,9 @@
         event.preventDefault();
         sendPrompt(els.input.value);
     });
+    els.attach.addEventListener("click", () => els.attachmentInput.click());
+    els.attachmentInput.addEventListener("change", () => selectAttachment(els.attachmentInput.files?.[0]));
+    els.attachmentRemove.addEventListener("click", clearAttachment);
     els.input.addEventListener("input", resizeInput);
     els.input.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
@@ -857,7 +943,14 @@
         if (action === "rename") renameConversation();
         if (action === "delete") deleteConversation();
     });
-    document.addEventListener("click", () => { els.optionsMenu.hidden = true; });
+    document.addEventListener("click", () => {
+        els.optionsMenu.hidden = true;
+        closeHistoryContextMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeHistoryContextMenu();
+    });
+    window.addEventListener("blur", closeHistoryContextMenu);
     els.memoryButton.addEventListener("click", async () => {
         try {
             const data = await api("/api/ai-coach/memories");
@@ -877,7 +970,6 @@
         requestAnimationFrame(scrollLatest);
     });
 
-    setupSpeech();
     resizeInput();
     init();
 })();
