@@ -177,9 +177,9 @@
         return {
             attempts,
             totalAttempts: attempts.length,
-            averageBand: bands.length ? averageValue(bands) : 0,
-            bestBand: bands.length ? Math.max(...bands) : 0,
-            latestBand: latest ? Number(latest.band || 0) : 0,
+            averageBand: bands.length ? roundHalfBand(averageValue(bands)) : 0,
+            bestBand: bands.length ? roundHalfBand(Math.max(...bands)) : 0,
+            latestBand: latest ? roundHalfBand(latest.band) : 0,
             latestResult: latest ? `Band ${formatBand(latest.band)}` : "No result",
             lastActivityDate: latest?.completedAt || null,
             averageScore: attempts.length ? Math.round(averageValue(attempts.map((attempt) => attempt.accuracy))) : null
@@ -234,7 +234,9 @@
             .map((attempt) => Number(attempt.overallBand ?? attempt.band ?? attempt.estimatedBand))
             .filter(Number.isFinite);
         const latest = recent[0] || null;
-        const latestBand = Number(summary.latestBand || latest?.overallBand || latest?.band || latest?.estimatedBand || 0);
+        const averageBand = roundHalfBand(summary.averageBand || (bands.length ? averageValue(bands) : 0));
+        const bestBand = roundHalfBand(summary.bestBand || (bands.length ? Math.max(...bands) : 0));
+        const latestBand = roundHalfBand(summary.latestBand || latest?.overallBand || latest?.band || latest?.estimatedBand || 0);
 
         return {
             summary: {
@@ -242,14 +244,14 @@
                 totalAttempts: summary.totalAttempts || recent.length,
                 cueCardAttempts,
                 fullAttempts,
-                averageBand: summary.averageBand || (bands.length ? averageValue(bands) : 0),
-                bestBand: summary.bestBand || (bands.length ? Math.max(...bands) : 0),
+                averageBand,
+                bestBand,
                 latestBand
             },
             recent,
             totalAttempts: summary.totalAttempts || recent.length,
-            averageBand: summary.averageBand || (bands.length ? averageValue(bands) : 0),
-            bestBand: summary.bestBand || (bands.length ? Math.max(...bands) : 0),
+            averageBand,
+            bestBand,
             latestBand,
             latestResult: (summary.totalAttempts || recent.length) ? `Band ${formatBand(latestBand)}` : "No result",
             lastActivityDate: latest?.createdAt || latest?.completedAt || null
