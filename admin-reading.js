@@ -27,6 +27,7 @@ let editingVocabularyIndex = null;
 let importedReadingHtml = "";
 let importedReadingPassageHtml = "";
 let importedReadingRichPassages = [];
+let importedReadingAutoNumber = false;
 
 const mockBuilderParams = new URLSearchParams(window.location.search);
 const isMockBuilderEmbed = mockBuilderParams.get("mockBuilder") === "1";
@@ -81,6 +82,7 @@ function clearImportedReadingHtml() {
     importedReadingHtml = "";
     importedReadingPassageHtml = "";
     importedReadingRichPassages = [];
+    importedReadingAutoNumber = false;
 }
 
 function normalizeVocabularyWord(value) {
@@ -430,6 +432,7 @@ form.addEventListener("submit", async (event) => {
                 readingHtml: importedReadingHtml,
                 passageHtml: importedReadingPassageHtml,
                 richPassages: testPart.value === "full" ? importedReadingRichPassages : [],
+                autoNumberNewest: importedReadingAutoNumber && testPart.value === "full",
                 questionText: getCombinedQuestionText(),
                 answerText: answerText.value,
                 vocabulary: testPart.value === "full" ? [] : vocabularyEntries
@@ -932,6 +935,7 @@ form.addEventListener("reset", () => {
             const formData = new FormData();
             formData.append("html", file);
             formData.append("skill", "reading");
+            formData.append("parseOnly", "1");
 
             const response = await fetch("/api/full-tests/import", {
                 method: "POST",
@@ -949,6 +953,7 @@ form.addEventListener("reset", () => {
             }
 
             importedReadingHtml = htmlContent;
+            importedReadingAutoNumber = true;
 
             // Fill Form Details
             testTitle.value = parsed.title || "";

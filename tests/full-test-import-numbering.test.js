@@ -54,3 +54,12 @@ test("an explicitly entered import title remains unchanged", () => {
         skill: "reading"
     }), "Cambridge 21 Test 2");
 });
+
+test("Reading builder requests parse-only import before its final save", () => {
+    const fs = require("node:fs");
+    const path = require("node:path");
+    const source = fs.readFileSync(path.join(__dirname, "..", "admin-reading.js"), "utf8");
+
+    assert.match(source, /formData\.append\("parseOnly", "1"\)/);
+    assert.match(source, /autoNumberNewest:\s*importedReadingAutoNumber/);
+});

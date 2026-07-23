@@ -2132,6 +2132,28 @@ function saveManualReadingTest(test) {
     fs.writeFileSync(getReadingTestPath(test.id), JSON.stringify(test, null, 2), "utf8");
 }
 
+function shiftNewestManualReadingTitles() {
+    readManualReadingTests()
+        .map((test) => ({
+            test,
+            match: String(test?.title || "").match(/^Test\s+(\d+)$/i)
+        }))
+        .filter(({ test, match }) => test?.part === "full" && match)
+        .sort((a, b) => Number(b.match[1]) - Number(a.match[1]))
+        .forEach(({ test, match }) => {
+            test.title = `Test ${Number(match[1]) + 1}`;
+            saveManualReadingTest(test);
+
+            if (test.sourceFullTestId) {
+                const sourceFullTest = fullTestStore.read(test.sourceFullTestId);
+                if (sourceFullTest) {
+                    sourceFullTest.title = test.title;
+                    fullTestStore.save(sourceFullTest);
+                }
+            }
+        });
+}
+
 function readManualReadingTests() {
     if (!fs.existsSync(READING_TESTS_DIR)) {
         return [];
@@ -6398,7 +6420,12 @@ app.get("/signup", (req, res) => {
 
 app.post("/api/reading-tests", requireAdmin, (req, res) => {
     try {
-        const test = buildManualReadingTest(req.body);
+        const body = { ...req.body };
+        if (body.autoNumberNewest === true && normalizePart(body.part) === "full") {
+            shiftNewestManualReadingTitles();
+            body.title = "Test 1";
+        }
+        const test = buildManualReadingTest(body);
         saveManualReadingTest(test);
 
         res.status(201).json({
