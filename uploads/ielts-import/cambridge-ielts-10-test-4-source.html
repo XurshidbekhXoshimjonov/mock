@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambridge IELTS 10 — Test 4 Listening</title>
+<style>
+  :root{
+    --red:#c62828;
+    --red-dark:#991b1b;
+    --ink:#172033;
+    --muted:#667085;
+    --line:#d8dee8;
+    --soft:#f5f7fa;
+    --white:#fff;
+    --green:#16803d;
+    --green-soft:#ecfdf3;
+    --bad:#b42318;
+    --bad-soft:#fff1f0;
+    --blue:#175cd3;
+    --shadow:0 10px 30px rgba(16,24,40,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    background:#eef1f5;
+    line-height:1.5;
+  }
+  button,input,select{font:inherit}
+  button{cursor:pointer}
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    height:70px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:16px;
+    padding:0 22px;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    box-shadow:0 3px 12px rgba(16,24,40,.06);
+  }
+  .brand{display:flex;align-items:center;gap:14px;min-width:0}
+  .logo{
+    width:46px;height:46px;border-radius:12px;
+    display:grid;place-items:center;
+    color:#fff;background:var(--red);
+    font-weight:900;letter-spacing:.5px;
+  }
+  .brand-text{min-width:0}
+  .brand-text strong{display:block;font-size:16px;white-space:nowrap}
+  .brand-text span{display:block;color:var(--muted);font-size:12px}
+  .timer-wrap{
+    display:flex;align-items:center;gap:10px;
+    border:1px solid var(--line);
+    border-radius:12px;padding:8px 14px;
+    font-weight:800;background:var(--soft);
+  }
+  #timer{font-variant-numeric:tabular-nums;font-size:18px;letter-spacing:.5px}
+  .top-actions{justify-self:end;display:flex;align-items:center;gap:8px}
+  .btn{
+    border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:10px 14px;border-radius:10px;font-weight:700;
+  }
+  .btn:hover{background:var(--soft)}
+  .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.primary:hover{background:var(--red-dark)}
+  .btn.icon{padding:10px 12px}
+  .layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 260px;
+    gap:18px;
+    width:min(1280px, calc(100% - 28px));
+    margin:18px auto 96px;
+  }
+  main{min-width:0}
+  .audio-card,.paper,.side-card,.result-card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+  }
+  .audio-card{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 16px;margin-bottom:16px;
+  }
+  .audio-card strong{white-space:nowrap}
+  audio{width:100%;min-width:180px}
+  .upload-label{
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    border:1px dashed #98a2b3;border-radius:9px;padding:8px 10px;font-weight:700;
+  }
+  .upload-label input{display:none}
+  .paper{padding:34px 38px}
+  .section{display:none}
+  .section.active{display:block}
+  .test-kicker{color:var(--muted);font-size:14px;margin-bottom:4px}
+  .section-title{
+    display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+    margin:0 0 22px;
+    border-bottom:3px solid var(--ink);padding-bottom:12px;
+  }
+  .section-title h1{font-size:25px;letter-spacing:1.2px;margin:0}
+  .section-title strong{font-size:18px}
+  .instruction{font-style:italic;margin:7px 0}
+  .instruction strong{font-style:normal}
+  .block{
+    margin:24px 0;padding:22px;border:1px solid #98a2b3;border-radius:8px;background:#fff;
+  }
+  .block h2{text-align:center;margin:0 0 18px;font-size:23px}
+  .question-row{margin:14px 0}
+  .qnum{
+    display:inline-grid;place-items:center;
+    width:30px;height:30px;border-radius:50%;
+    background:var(--ink);color:#fff;font-weight:800;margin-right:7px;
+    vertical-align:middle;flex:0 0 auto;
+  }
+  .inline-input{
+    width:180px;max-width:100%;
+    border:0;border-bottom:2px dotted #697386;
+    padding:4px 8px;outline:none;background:#fff7cc;
+  }
+  .inline-input:focus{border-bottom-style:solid;border-color:var(--blue)}
+  .notes-grid{display:grid;grid-template-columns:150px 1fr;gap:10px 14px;align-items:center}
+  .notes-grid .label{font-weight:800}
+  table{width:100%;border-collapse:collapse;margin:18px 0}
+  th,td{border:1px solid #697386;padding:14px;vertical-align:top}
+  th{background:#f2f4f7;text-align:left}
+  .mcq{margin:24px 0;padding-bottom:18px;border-bottom:1px solid #e4e7ec}
+  .mcq:last-child{border-bottom:0}
+  .question-title{display:flex;align-items:flex-start;gap:8px;font-size:17px;margin-bottom:10px}
+  .options{display:grid;gap:8px;margin-left:40px}
+  .option{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:9px 11px;border:1px solid transparent;border-radius:9px;
+  }
+  .option:hover{background:var(--soft);border-color:var(--line)}
+  .option input{margin-top:4px}
+  .letter{font-weight:800;min-width:22px}
+  .pair-box{
+    padding:20px;border:1px solid var(--line);border-radius:12px;margin:22px 0;background:#fafbfc;
+  }
+  .pair-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+  .pair-option{
+    display:flex;align-items:center;gap:10px;padding:10px 12px;
+    border:1px solid var(--line);border-radius:9px;background:#fff;
+  }
+  .pair-option:has(input:checked){border-color:var(--blue);background:#eff6ff}
+  .source-box{
+    width:min(500px,100%);margin:18px auto;border:1px solid #697386;padding:18px 24px;
+  }
+  .source-box h3{text-align:center;margin:0 0 10px}
+  .source-list{display:grid;grid-template-columns:35px 1fr;gap:7px}
+  .matching-row{
+    display:grid;grid-template-columns:42px 1fr 110px;gap:10px;
+    align-items:center;margin:11px 0;
+  }
+  select{
+    border:1px solid #98a2b3;border-radius:8px;background:#fff;padding:8px 9px;min-width:80px;
+  }
+  .side{position:sticky;top:88px;height:fit-content}
+  .side-card{padding:16px}
+  .side-card h3{margin:0 0 12px}
+  .progress-line{height:8px;background:#e4e7ec;border-radius:999px;overflow:hidden;margin:10px 0}
+  .progress-line span{display:block;height:100%;background:var(--red);width:0}
+  .q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:14px}
+  .qnav{
+    height:36px;border:1px solid var(--line);border-radius:7px;background:#fff;font-weight:700;
+  }
+  .qnav.answered{background:#eef4ff;border-color:#84adff;color:#1849a9}
+  .qnav.current{outline:2px solid var(--red)}
+  .qnav.correct{background:var(--green-soft);border-color:#6ce9a6;color:var(--green)}
+  .qnav.wrong{background:var(--bad-soft);border-color:#fda29b;color:var(--bad)}
+  .bottom-nav{
+    position:fixed;z-index:90;left:0;right:0;bottom:0;
+    display:flex;justify-content:center;gap:8px;padding:12px 16px;
+    background:rgba(255,255,255,.96);border-top:1px solid var(--line);
+    backdrop-filter:blur(8px);
+  }
+  .part-btn{
+    min-width:130px;border:1px solid var(--line);border-radius:10px;background:#fff;
+    padding:10px 14px;font-weight:800;
+  }
+  .part-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .result-card{display:none;padding:22px;margin-bottom:16px}
+  .result-card.show{display:block}
+  .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .metric{padding:14px;border-radius:10px;background:var(--soft);text-align:center}
+  .metric strong{display:block;font-size:26px}
+  .review-note{
+    display:none;margin-top:8px;padding:8px 10px;border-radius:8px;font-size:14px;font-weight:700;
+  }
+  .review-note.show{display:block}
+  .review-note.correct{background:var(--green-soft);color:var(--green)}
+  .review-note.wrong{background:var(--bad-soft);color:var(--bad)}
+  .marked-correct{outline:2px solid #32d583!important;background:var(--green-soft)!important}
+  .marked-wrong{outline:2px solid #f97066!important;background:var(--bad-soft)!important}
+  .modal{
+    position:fixed;inset:0;z-index:200;
+    display:none;place-items:center;padding:20px;background:rgba(16,24,40,.58);
+  }
+  .modal.show{display:grid}
+  .modal-card{
+    width:min(520px,100%);background:#fff;border-radius:18px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.25)
+  }
+  .modal-card h2{margin:0 0 8px}
+  .modal-card p{color:var(--muted)}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+  .warning{color:#b54708;background:#fffaeb;border:1px solid #fedf89;padding:10px 12px;border-radius:9px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:900px){
+    .topbar{grid-template-columns:1fr auto;padding:0 12px}
+    .timer-wrap{grid-column:2;grid-row:1}
+    .top-actions{display:none}
+    .layout{grid-template-columns:1fr;width:min(100% - 16px,900px)}
+    .side{position:static}
+    .paper{padding:24px 18px}
+    .audio-card{flex-wrap:wrap}
+    .notes-grid{grid-template-columns:1fr}
+    .pair-options{grid-template-columns:1fr}
+    .result-grid{grid-template-columns:1fr}
+    .part-btn{min-width:0;flex:1;padding:10px 6px}
+  }
+  @media(max-width:560px){
+    .brand-text span{display:none}
+    .brand-text strong{font-size:13px}
+    .logo{width:40px;height:40px}
+    .timer-wrap{padding:7px 9px}
+    #timer{font-size:16px}
+    .matching-row{grid-template-columns:38px 1fr}
+    .matching-row select{grid-column:2}
+    th,td{padding:9px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">IX</div>
+    <div class="brand-text">
+      <strong>Cambridge IELTS 10 — Test 4</strong>
+      <span>Listening · Questions 1–40</span>
+    </div>
+  </div>
+  <div class="timer-wrap" title="Time remaining">
+    <span>⏱</span><span id="timer">40:00</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn icon" id="fullscreenBtn" type="button" title="Full screen">⛶</button>
+    <button class="btn" id="resetBtn" type="button">Reset</button>
+    <button class="btn primary" id="submitBtn" type="button">Submit test</button>
+  </div>
+</header>
+
+<div class="layout">
+<main>
+  <section class="audio-card">
+    <strong>Listening audio</strong>
+    <audio id="audioPlayer" controls preload="metadata"></audio>
+    <label class="upload-label">📁 Choose audio
+      <input id="audioFile" type="file" accept="audio/*">
+    </label>
+  </section>
+
+  <section id="resultCard" class="result-card">
+    <h2 style="margin-top:0">Test result</h2>
+    <div class="result-grid">
+      <div class="metric"><span>Correct</span><strong id="scoreOut">0/40</strong></div>
+      <div class="metric"><span>Estimated band</span><strong id="bandOut">0</strong></div>
+      <div class="metric"><span>Answered</span><strong id="answeredOut">0/40</strong></div>
+    </div>
+    <p id="resultMessage" style="margin-bottom:0;color:var(--muted)"></p>
+  </section>
+
+  <article class="paper">
+
+    <!-- SECTION 1 -->
+    <section class="section active" data-section="1">
+      <div class="test-kicker">Test 4</div>
+      <div class="section-title"><h1>SECTION 1</h1><strong>Questions 1–10</strong></div>
+
+      <p><em>Questions 1–6</em></p>
+      <p class="instruction">Complete the notes below.</p>
+      <p class="instruction">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+      <div class="block">
+        <h2>THORNDYKE’S BUILDERS</h2>
+        <p><em>Example</em></p>
+        <p>Customer heard about Thorndyke’s from a <u>friend</u>.</p>
+        <hr>
+        <div class="notes-grid">
+          <div class="label">Name:</div>
+          <div>Edith <span id="q1"><span class="qnum">1</span><input class="inline-input" data-q="1" aria-label="Question 1"></span></div>
+
+          <div class="label">Address:</div>
+          <div>Flat 4,</div>
+
+          <div></div>
+          <div><span id="q2"><span class="qnum">2</span><input class="inline-input" data-q="2" aria-label="Question 2"></span> Park Flats</div>
+
+          <div></div>
+          <div>(Behind the <span id="q3"><span class="qnum">3</span><input class="inline-input" data-q="3" aria-label="Question 3"></span>)</div>
+
+          <div class="label">Phone number:</div>
+          <div>875934</div>
+
+          <div class="label">Best time to contact customer:</div>
+          <div>during the <span id="q4"><span class="qnum">4</span><input class="inline-input" data-q="4" aria-label="Question 4"></span></div>
+
+          <div class="label">Where to park:</div>
+          <div>opposite entrance next to the <span id="q5"><span class="qnum">5</span><input class="inline-input" data-q="5" aria-label="Question 5"></span></div>
+        </div>
+        <p>Needs full quote showing all the jobs and the <span id="q6"><span class="qnum">6</span><input class="inline-input" data-q="6" aria-label="Question 6"></span>.</p>
+      </div>
+
+      <p><em>Questions 7–10</em></p>
+      <p class="instruction">Complete the table below.</p>
+      <p class="instruction">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+      <table>
+        <thead><tr><th>Area</th><th>Work to be done</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td rowspan="2"><strong>Kitchen</strong></td>
+            <td>Replace the <span id="q7"><span class="qnum">7</span><input class="inline-input" data-q="7" aria-label="Question 7"></span> in the door</td>
+            <td>Fix tomorrow</td>
+          </tr>
+          <tr>
+            <td>Paint wall above the <span id="q8"><span class="qnum">8</span><input class="inline-input" data-q="8" aria-label="Question 8"></span></td>
+            <td>Strip paint and plaster approximately one <span id="q9"><span class="qnum">9</span><input class="inline-input" data-q="9" aria-label="Question 9"></span> in advance</td>
+          </tr>
+          <tr>
+            <td><strong>Garden</strong></td>
+            <td>One <span id="q10"><span class="qnum">10</span><input class="inline-input" data-q="10" aria-label="Question 10"></span> needs replacing (end of garden)</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="section" data-section="2">
+      <div class="test-kicker">Test 4</div>
+      <div class="section-title"><h1>SECTION 2</h1><strong>Questions 11–20</strong></div>
+
+      <p><em>Questions 11–15</em></p>
+      <p class="instruction">Choose the correct letter, <strong>A, B or C.</strong></p>
+      <h2 style="text-align:center">MANHAM PORT</h2>
+
+      <div class="mcq" id="q11">
+        <div class="question-title"><span class="qnum">11</span><span>Why did a port originally develop at Manham?</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q11" value="A"><span class="letter">A</span><span>It was safe from enemy attack.</span></label>
+          <label class="option"><input type="radio" name="q11" value="B"><span class="letter">B</span><span>It was convenient for river transport.</span></label>
+          <label class="option"><input type="radio" name="q11" value="C"><span class="letter">C</span><span>It had a good position on the sea coast.</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q12">
+        <div class="question-title"><span class="qnum">12</span><span>What caused Manham’s sudden expansion during the Industrial Revolution?</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q12" value="A"><span class="letter">A</span><span>the improvement in mining techniques</span></label>
+          <label class="option"><input type="radio" name="q12" value="B"><span class="letter">B</span><span>the increase in demand for metals</span></label>
+          <label class="option"><input type="radio" name="q12" value="C"><span class="letter">C</span><span>the discovery of tin in the area</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q13">
+        <div class="question-title"><span class="qnum">13</span><span>Why did rocks have to be sent away from Manham to be processed?</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q13" value="A"><span class="letter">A</span><span>shortage of fuel</span></label>
+          <label class="option"><input type="radio" name="q13" value="B"><span class="letter">B</span><span>poor transport systems</span></label>
+          <label class="option"><input type="radio" name="q13" value="C"><span class="letter">C</span><span>lack of skills among local people</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q14">
+        <div class="question-title"><span class="qnum">14</span><span>What happened when the port declined in the twentieth century?</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q14" value="A"><span class="letter">A</span><span>The workers went away.</span></label>
+          <label class="option"><input type="radio" name="q14" value="B"><span class="letter">B</span><span>Traditional skills were lost.</span></label>
+          <label class="option"><input type="radio" name="q14" value="C"><span class="letter">C</span><span>Buildings were used for new purposes.</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q15">
+        <div class="question-title"><span class="qnum">15</span><span>What did the Manham Trust hope to do?</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q15" value="A"><span class="letter">A</span><span>discover the location of the original port</span></label>
+          <label class="option"><input type="radio" name="q15" value="B"><span class="letter">B</span><span>provide jobs for the unemployed</span></label>
+          <label class="option"><input type="radio" name="q15" value="C"><span class="letter">C</span><span>rebuild the port complex</span></label>
+        </div>
+      </div>
+
+      <p><em>Questions 16–20</em></p>
+      <p class="instruction">Complete the table below.</p>
+      <p class="instruction">Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+
+      <table>
+        <thead><tr><th colspan="3" style="text-align:center;font-size:21px">Tourist attractions in Manham</th></tr>
+        <tr><th>Place</th><th>Features and activities</th><th>Advice</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>copper mine</td>
+            <td>specially adapted miners’ <span id="q16"><span class="qnum">16</span><input class="inline-input" data-q="16" aria-label="Question 16"></span> take visitors into the mountain</td>
+            <td>the mine is <span id="q17"><span class="qnum">17</span><input class="inline-input" data-q="17" aria-label="Question 17"></span> and enclosed — unsuitable for children and animals</td>
+          </tr>
+          <tr>
+            <td>village school</td>
+            <td>classrooms and a special exhibition of <span id="q18"><span class="qnum">18</span><input class="inline-input" data-q="18" aria-label="Question 18"></span></td>
+            <td>a <span id="q19"><span class="qnum">19</span><input class="inline-input" data-q="19" aria-label="Question 19"></span> is recommended</td>
+          </tr>
+          <tr>
+            <td>‘The George’<br>(old sailing ship)</td>
+            <td>the ship’s wheel (was lost but has now been restored)</td>
+            <td>children shouldn’t use the <span id="q20"><span class="qnum">20</span><input class="inline-input" data-q="20" aria-label="Question 20"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="section" data-section="3">
+      <div class="test-kicker">Test 4</div>
+      <div class="section-title"><h1>SECTION 3</h1><strong>Questions 21–30</strong></div>
+
+      <div class="pair-box" id="q21">
+        <p><em>Questions 21 and 22</em></p>
+        <p class="instruction">Choose <strong>TWO</strong> letters, A–E.</p>
+        <h3>Which TWO skills did Laura improve as a result of her work placement?</h3>
+        <div class="pair-options" data-pair="21-22" data-max="2">
+          <label class="pair-option"><input type="checkbox" value="A"><strong>A</strong> communication</label>
+          <label class="pair-option"><input type="checkbox" value="B"><strong>B</strong> design</label>
+          <label class="pair-option"><input type="checkbox" value="C"><strong>C</strong> IT</label>
+          <label class="pair-option"><input type="checkbox" value="D"><strong>D</strong> marketing</label>
+          <label class="pair-option"><input type="checkbox" value="E"><strong>E</strong> organisation</label>
+        </div>
+        <div class="review-note" data-review="21-22"></div>
+      </div>
+
+      <div class="pair-box" id="q23">
+        <p><em>Questions 23 and 24</em></p>
+        <p class="instruction">Choose <strong>TWO</strong> letters, A–E.</p>
+        <h3>Which TWO immediate benefits did the company get from Laura’s work placement?</h3>
+        <div class="pair-options" data-pair="23-24" data-max="2">
+          <label class="pair-option"><input type="checkbox" value="A"><strong>A</strong> updates for its software</label>
+          <label class="pair-option"><input type="checkbox" value="B"><strong>B</strong> cost savings</label>
+          <label class="pair-option"><input type="checkbox" value="C"><strong>C</strong> an improved image</label>
+          <label class="pair-option"><input type="checkbox" value="D"><strong>D</strong> new clients</label>
+          <label class="pair-option"><input type="checkbox" value="E"><strong>E</strong> a growth in sales</label>
+        </div>
+        <div class="review-note" data-review="23-24"></div>
+      </div>
+
+      <p><em>Questions 25–30</em></p>
+      <p>What source of information should Tim use at each of the following stages of the work placement?</p>
+      <p class="instruction">Choose <strong>SIX</strong> answers from the box and write the correct letter, A–G, next to questions 25–30.</p>
+
+      <div class="source-box">
+        <h3>Sources of information</h3>
+        <div class="source-list">
+          <strong>A</strong><span>company manager</span>
+          <strong>B</strong><span>company’s personnel department</span>
+          <strong>C</strong><span>personal tutor</span>
+          <strong>D</strong><span>psychology department</span>
+          <strong>E</strong><span>mentor</span>
+          <strong>F</strong><span>university careers officer</span>
+          <strong>G</strong><span>internet</span>
+        </div>
+      </div>
+
+      <h3>Stages of the work placement procedure</h3>
+      <div id="q25" class="matching-row"><span class="qnum">25</span><span>obtaining booklet</span><select data-q="25"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+      <div id="q26" class="matching-row"><span class="qnum">26</span><span>discussing options</span><select data-q="26"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+      <div id="q27" class="matching-row"><span class="qnum">27</span><span>getting updates</span><select data-q="27"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+      <div id="q28" class="matching-row"><span class="qnum">28</span><span>responding to invitation for interview</span><select data-q="28"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+      <div id="q29" class="matching-row"><span class="qnum">29</span><span>informing about outcome of interview</span><select data-q="29"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+      <div id="q30" class="matching-row"><span class="qnum">30</span><span>requesting a reference</span><select data-q="30"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="section" data-section="4">
+      <div class="test-kicker">Test 4</div>
+      <div class="section-title"><h1>SECTION 4</h1><strong>Questions 31–40</strong></div>
+
+      <p><em>Questions 31–33</em></p>
+      <p class="instruction">Choose the correct letter, <strong>A, B or C.</strong></p>
+      <h2 style="text-align:center">Nanotechnology: technology on a small scale</h2>
+
+      <div class="mcq" id="q31">
+        <div class="question-title"><span class="qnum">31</span><span>The speaker says that one problem with nanotechnology is that</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q31" value="A"><span class="letter">A</span><span>it could threaten our way of life.</span></label>
+          <label class="option"><input type="radio" name="q31" value="B"><span class="letter">B</span><span>it could be used to spy on people.</span></label>
+          <label class="option"><input type="radio" name="q31" value="C"><span class="letter">C</span><span>it is misunderstood by the public.</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q32">
+        <div class="question-title"><span class="qnum">32</span><span>According to the speaker, some scientists believe that nano-particles</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q32" value="A"><span class="letter">A</span><span>should be restricted to secure environments.</span></label>
+          <label class="option"><input type="radio" name="q32" value="B"><span class="letter">B</span><span>should be used with more caution.</span></label>
+          <label class="option"><input type="radio" name="q32" value="C"><span class="letter">C</span><span>should only be developed for essential products.</span></label>
+        </div>
+      </div>
+
+      <div class="mcq" id="q33">
+        <div class="question-title"><span class="qnum">33</span><span>In the speaker’s opinion, research into nanotechnology</span></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q33" value="A"><span class="letter">A</span><span>has yet to win popular support.</span></label>
+          <label class="option"><input type="radio" name="q33" value="B"><span class="letter">B</span><span>could be seen as unethical.</span></label>
+          <label class="option"><input type="radio" name="q33" value="C"><span class="letter">C</span><span>ought to be continued.</span></label>
+        </div>
+      </div>
+
+      <p><em>Questions 34–40</em></p>
+      <p class="instruction">Complete the notes below.</p>
+      <p class="instruction">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+      <div class="block">
+        <h2>Uses of Nanotechnology</h2>
+        <h3>Transport</h3>
+        <ul>
+          <li class="question-row">Nanotechnology could allow the development of stronger <span id="q34"><span class="qnum">34</span><input class="inline-input" data-q="34" aria-label="Question 34"></span>.</li>
+          <li class="question-row">Planes would be much lighter in weight.</li>
+          <li class="question-row"><span id="q35"><span class="qnum">35</span><input class="inline-input" data-q="35" aria-label="Question 35"></span> travel will be made available to the masses.</li>
+        </ul>
+
+        <h3>Technology</h3>
+        <ul>
+          <li class="question-row">Computers will be even smaller, faster, and will have a greater <span id="q36"><span class="qnum">36</span><input class="inline-input" data-q="36" aria-label="Question 36"></span>.</li>
+          <li class="question-row"><span id="q37"><span class="qnum">37</span><input class="inline-input" data-q="37" aria-label="Question 37"></span> energy will become more affordable.</li>
+        </ul>
+
+        <h3>The Environment</h3>
+        <ul>
+          <li class="question-row">Nano-robots could rebuild the ozone layer.</li>
+          <li class="question-row">Pollutants such as <span id="q38"><span class="qnum">38</span><input class="inline-input" data-q="38" aria-label="Question 38"></span> could be removed from water more easily.</li>
+          <li class="question-row">There will be no <span id="q39"><span class="qnum">39</span><input class="inline-input" data-q="39" aria-label="Question 39"></span> from manufacturing.</li>
+        </ul>
+
+        <h3>Health and Medicine</h3>
+        <ul>
+          <li class="question-row">New methods of food production could eradicate famine.</li>
+          <li class="question-row">Analysis of medical <span id="q40"><span class="qnum">40</span><input class="inline-input" data-q="40" aria-label="Question 40"></span> will be speeded up.</li>
+          <li class="question-row">Life expectancy could be increased.</li>
+        </ul>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<aside class="side">
+  <div class="side-card">
+    <h3>Question navigator</h3>
+    <div><strong id="progressText">0</strong> of 40 answered</div>
+    <div class="progress-line"><span id="progressBar"></span></div>
+    <div class="q-grid" id="qGrid"></div>
+    <button class="btn primary" id="sideSubmit" type="button" style="width:100%;margin-top:16px">Submit test</button>
+  </div>
+</aside>
+</div>
+
+<nav class="bottom-nav" aria-label="Sections">
+  <button class="part-btn active" type="button" data-go="1">Part 1</button>
+  <button class="part-btn" type="button" data-go="2">Part 2</button>
+  <button class="part-btn" type="button" data-go="3">Part 3</button>
+  <button class="part-btn" type="button" data-go="4">Part 4</button>
+  <button class="part-btn" id="bottomSubmit" type="button" style="background:var(--red);border-color:var(--red);color:#fff">Submit</button>
+</nav>
+
+<div class="modal show" id="startModal">
+  <div class="modal-card">
+    <h2>Cambridge IELTS 10 — Test 4 Listening</h2>
+    <p>You have 40 minutes to answer 40 questions. Your answers are saved automatically in this browser.</p>
+    <div class="warning">Audio is not embedded. Use <strong>Choose audio</strong> to load the Test 4 recording from your device.</div>
+    <div class="modal-actions">
+      <button class="btn primary" id="startBtn" type="button">Start test</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="confirmModal">
+  <div class="modal-card">
+    <h2>Submit your answers?</h2>
+    <p id="confirmText"></p>
+    <div class="modal-actions">
+      <button class="btn" id="cancelSubmit" type="button">Continue test</button>
+      <button class="btn primary" id="confirmSubmit" type="button">Submit now</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const STORAGE_KEY = 'cambridge10_test4_listening_v1';
+  const textAnswers = {
+    1:['pargetter'], 2:['east'], 3:['library'], 4:['morning','mornings'],
+    5:['postbox'], 6:['prices'], 7:['glass'], 8:['cooker'], 9:['week'], 10:['fence'],
+    11:['B'], 12:['B'], 13:['A'], 14:['A'], 15:['C'],
+    16:['trains'], 17:['dark'], 18:['games'], 19:['guided tour'],
+    20:['ladder','ladders'],
+    25:['D'], 26:['F'], 27:['G'], 28:['B'], 29:['E'], 30:['C'],
+    31:['C'], 32:['B'], 33:['C'],
+    34:['metal','metals'], 35:['space'], 36:['memory'], 37:['solar'],
+    38:['oil'], 39:['waste'], 40:['tests']
+  };
+  const pairAnswers = {'21-22':['A','E'], '23-24':['B','C']};
+  const sections = {1:[1,10],2:[11,20],3:[21,30],4:[31,40]};
+  let currentSection = 1;
+  let secondsLeft = 40 * 60;
+  let timerHandle = null;
+  let submitted = false;
+
+  const $ = s => document.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+
+  function normalise(v){
+    return String(v ?? '')
+      .toLowerCase()
+      .trim()
+      .replace(/[’']/g,"'")
+      .replace(/[.,;:!?]+$/g,'')
+      .replace(/\s+/g,' ');
+  }
+
+  function createNavigator(){
+    const grid = $('#qGrid');
+    for(let q=1;q<=40;q++){
+      const b=document.createElement('button');
+      b.type='button'; b.className='qnav'; b.textContent=q; b.dataset.q=q;
+      b.addEventListener('click',()=>goToQuestion(q));
+      grid.appendChild(b);
+    }
+  }
+
+  function goToQuestion(q){
+    let s=1;
+    for(const [part,[a,b]] of Object.entries(sections)){
+      if(q>=a && q<=b){s=Number(part);break;}
+    }
+    showSection(s);
+    setTimeout(()=>{
+      let target = document.getElementById('q'+q);
+      if(!target && q===22) target=document.getElementById('q21');
+      if(!target && q===24) target=document.getElementById('q23');
+      if(target) target.scrollIntoView({behavior:'smooth',block:'center'});
+      $$('.qnav').forEach(x=>x.classList.toggle('current',Number(x.dataset.q)===q));
+    },50);
+  }
+
+  function showSection(n){
+    currentSection=n;
+    $$('.section').forEach(s=>s.classList.toggle('active',Number(s.dataset.section)===n));
+    $$('.part-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.go)===n));
+    const first=sections[n][0];
+    $$('.qnav').forEach(x=>x.classList.toggle('current',Number(x.dataset.q)===first));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function limitPair(e){
+    const wrap=e.currentTarget;
+    const checked=$$('input[type=checkbox]', wrap).filter(x=>x.checked);
+    if(checked.length>Number(wrap.dataset.max || 2)){
+      e.target.checked=false;
+    }
+    saveState(); updateProgress();
+  }
+
+  function collectAnswers(){
+    const data={};
+    $$('[data-q]').forEach(el=>{
+      const q=el.dataset.q;
+      if(el.matches('input,select')) data[q]=el.value;
+    });
+    $$('input[type=radio]:checked').forEach(el=>data[el.name.replace('q','')]=el.value);
+    $$('.pair-options').forEach(wrap=>{
+      data[wrap.dataset.pair]=$$('input:checked',wrap).map(x=>x.value);
+    });
+    return data;
+  }
+
+  function answeredCount(){
+    const data=collectAnswers();
+    let count=0;
+    Object.entries(data).forEach(([k,v])=>{
+      if(k.includes('-')){
+        count += Math.min(2, Array.isArray(v) ? v.length : 0);
+      } else if(String(v||'').trim()!=='') count++;
+    });
+    return count;
+  }
+
+  function updateProgress(){
+    const data=collectAnswers();
+    const count=answeredCount();
+    $('#progressText').textContent=count;
+    $('#progressBar').style.width=(count/40*100)+'%';
+
+    for(let q=1;q<=40;q++){
+      let answered=false;
+      if(q===21 || q===22) answered=(data['21-22']||[]).length >= (q===21?1:2);
+      else if(q===23 || q===24) answered=(data['23-24']||[]).length >= (q===23?1:2);
+      else answered=String(data[q]||'').trim()!=='';
+      const b=$(`.qnav[data-q="${q}"]`);
+      if(b && !submitted) b.classList.toggle('answered',answered);
+    }
+  }
+
+  function saveState(){
+    if(submitted) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectAnswers()));
+  }
+
+  function restoreState(){
+    let data={};
+    try{data=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch(e){}
+    $$('[data-q]').forEach(el=>{
+      if(data[el.dataset.q] != null) el.value=data[el.dataset.q];
+    });
+    $$('input[type=radio]').forEach(el=>{
+      const q=el.name.replace('q','');
+      el.checked=data[q]===el.value;
+    });
+    $$('.pair-options').forEach(wrap=>{
+      const selected=data[wrap.dataset.pair]||[];
+      $$('input[type=checkbox]',wrap).forEach(x=>x.checked=selected.includes(x.value));
+    });
+    updateProgress();
+  }
+
+  function scorePair(selected, correct){
+    const remaining=[...correct];
+    let points=0;
+    selected.forEach(v=>{
+      const i=remaining.indexOf(v);
+      if(i!==-1){points++;remaining.splice(i,1);}
+    });
+    return points;
+  }
+
+  function bandFromScore(score){
+    if(score>=39) return 9;
+    if(score>=37) return 8.5;
+    if(score>=35) return 8;
+    if(score>=32) return 7.5;
+    if(score>=30) return 7;
+    if(score>=26) return 6.5;
+    if(score>=23) return 6;
+    if(score>=18) return 5.5;
+    if(score>=16) return 5;
+    if(score>=13) return 4.5;
+    if(score>=10) return 4;
+    if(score>=8) return 3.5;
+    if(score>=6) return 3;
+    if(score>=4) return 2.5;
+    if(score>=3) return 2;
+    if(score>=2) return 1.5;
+    if(score>=1) return 1;
+    return 0;
+  }
+
+  function clearMarks(){
+    $$('.marked-correct,.marked-wrong').forEach(x=>x.classList.remove('marked-correct','marked-wrong'));
+    $$('.review-note').forEach(x=>{
+      x.textContent='';
+      x.classList.remove('show','correct','wrong');
+    });
+    $$('.qnav').forEach(x=>x.classList.remove('correct','wrong'));
+  }
+
+  function addReview(q, correct, ok){
+    let host=document.getElementById('q'+q);
+    if(!host) return;
+    let note=host.querySelector(`.review-note[data-single="${q}"]`);
+    if(!note){
+      note=document.createElement('span');
+      note.className='review-note';
+      note.dataset.single=q;
+      host.appendChild(note);
+    }
+    note.textContent=ok ? 'Correct' : 'Correct answer: '+correct;
+    note.classList.add('show',ok?'correct':'wrong');
+  }
+
+  function markSingle(q, ok, correct){
+    const radio=$(`input[name="q${q}"]:checked`);
+    const control=$(`[data-q="${q}"]`);
+    const target=radio ? radio.closest('.option') : control;
+    if(target) target.classList.add(ok?'marked-correct':'marked-wrong');
+    addReview(q,correct,ok);
+    const nav=$(`.qnav[data-q="${q}"]`);
+    if(nav) nav.classList.add(ok?'correct':'wrong');
+  }
+
+  function submitTest(){
+    submitted=true;
+    clearInterval(timerHandle);
+    $('#confirmModal').classList.remove('show');
+    const data=collectAnswers();
+    let score=0;
+
+    Object.entries(textAnswers).forEach(([q,accepted])=>{
+      const value=normalise(data[q]);
+      const ok=accepted.some(a=>normalise(a)===value);
+      if(ok) score++;
+      markSingle(Number(q),ok,accepted.join(' / '));
+    });
+
+    for(const [pair,correct] of Object.entries(pairAnswers)){
+      const selected=data[pair]||[];
+      const points=scorePair(selected,correct);
+      score += points;
+      const [a,b]=pair.split('-').map(Number);
+      const wholeOk=points===2 && selected.length===2;
+      const host=document.getElementById('q'+a);
+      const note=host.querySelector(`[data-review="${pair}"]`);
+      note.textContent=wholeOk ? 'Correct' : `Correct answers: ${correct.join(' and ')} (${points}/2 marks)`;
+      note.classList.add('show',wholeOk?'correct':'wrong');
+      host.classList.add(wholeOk?'marked-correct':'marked-wrong');
+      for(let q=a;q<=b;q++){
+        const nav=$(`.qnav[data-q="${q}"]`);
+        nav.classList.add(wholeOk?'correct':'wrong');
+      }
+    }
+
+    const answered=answeredCount();
+    $('#scoreOut').textContent=`${score}/40`;
+    $('#bandOut').textContent=bandFromScore(score);
+    $('#answeredOut').textContent=`${answered}/40`;
+    $('#resultMessage').textContent =
+      score>=35 ? 'Excellent listening performance.' :
+      score>=30 ? 'Strong result. Review the highlighted mistakes.' :
+      score>=23 ? 'Good foundation. Focus on spelling and distractors.' :
+      'Review the incorrect answers and repeat the recording section by section.';
+    $('#resultCard').classList.add('show');
+    $('#resultCard').scrollIntoView({behavior:'smooth',block:'start'});
+    localStorage.removeItem(STORAGE_KEY);
+    $$('input,select').forEach(x=>x.disabled=true);
+  }
+
+  function requestSubmit(){
+    const count=answeredCount();
+    $('#confirmText').textContent =
+      count===40 ? 'All 40 questions are answered.' :
+      `${40-count} question${40-count===1?' is':'s are'} unanswered. You can still submit now.`;
+    $('#confirmModal').classList.add('show');
+  }
+
+  function resetTest(){
+    if(!confirm('Clear every answer and restart the test?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  function tick(){
+    secondsLeft--;
+    if(secondsLeft<0){
+      secondsLeft=0;
+      $('#timer').textContent='00:00';
+      submitTest();
+      return;
+    }
+    const m=String(Math.floor(secondsLeft/60)).padStart(2,'0');
+    const s=String(secondsLeft%60).padStart(2,'0');
+    $('#timer').textContent=`${m}:${s}`;
+    if(secondsLeft<=300) $('#timer').style.color='#b42318';
+  }
+
+  createNavigator();
+  restoreState();
+
+  $$('[data-q]').forEach(el=>el.addEventListener('input',()=>{saveState();updateProgress();}));
+  $$('input[type=radio]').forEach(el=>el.addEventListener('change',()=>{saveState();updateProgress();}));
+  $$('.pair-options').forEach(w=>w.addEventListener('change',limitPair));
+  $$('.part-btn').forEach(b=>b.addEventListener('click',()=>showSection(Number(b.dataset.go))));
+  $('#submitBtn').addEventListener('click',requestSubmit);
+  $('#sideSubmit').addEventListener('click',requestSubmit);
+  $('#bottomSubmit').addEventListener('click',requestSubmit);
+  $('#cancelSubmit').addEventListener('click',()=>$('#confirmModal').classList.remove('show'));
+  $('#confirmSubmit').addEventListener('click',submitTest);
+  $('#resetBtn').addEventListener('click',resetTest);
+
+  $('#startBtn').addEventListener('click',()=>{
+    $('#startModal').classList.remove('show');
+    timerHandle=setInterval(tick,1000);
+  });
+
+  $('#audioFile').addEventListener('change',e=>{
+    const file=e.target.files[0];
+    if(file) $('#audioPlayer').src=URL.createObjectURL(file);
+  });
+
+  $('#fullscreenBtn').addEventListener('click',()=>{
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(e.altKey && ['1','2','3','4'].includes(e.key)) showSection(Number(e.key));
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+{
+  "id": "cambridge-ielts-10-test-4-listening-s2",
+  "slug": "cambridge-ielts-10-test-4-listening-s2",
+  "title": "Cambridge IELTS 10 Test 4 Listening — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–15",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Questions 16–20",
+      "instruction": "Complete the table below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+      "questionNumbers": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Why did a port originally develop at Manham?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It was safe from enemy attack."
+        },
+        {
+          "letter": "B",
+          "text": "It was convenient for river transport."
+        },
+        {
+          "letter": "C",
+          "text": "It had a good position on the sea coast."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What caused Manham’s sudden expansion during the Industrial Revolution?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the improvement in mining techniques"
+        },
+        {
+          "letter": "B",
+          "text": "the increase in demand for metals"
+        },
+        {
+          "letter": "C",
+          "text": "the discovery of tin in the area"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Why did rocks have to be sent away from Manham to be processed?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "shortage of fuel"
+        },
+        {
+          "letter": "B",
+          "text": "poor transport systems"
+        },
+        {
+          "letter": "C",
+          "text": "lack of skills among local people"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What happened when the port declined in the twentieth century?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The workers went away."
+        },
+        {
+          "letter": "B",
+          "text": "Traditional skills were lost."
+        },
+        {
+          "letter": "C",
+          "text": "Buildings were used for new purposes."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What did the Manham Trust hope to do?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "discover the location of the original port"
+        },
+        {
+          "letter": "B",
+          "text": "provide jobs for the unemployed"
+        },
+        {
+          "letter": "C",
+          "text": "rebuild the port complex"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "table_completion",
+      "question": "Specially adapted miners' ... take visitors into the mountain",
+      "options": [],
+      "answer": "TRAINS"
+    },
+    {
+      "number": 17,
+      "type": "table_completion",
+      "question": "The mine is ... and enclosed",
+      "options": [],
+      "answer": "DARK"
+    },
+    {
+      "number": 18,
+      "type": "table_completion",
+      "question": "A special exhibition of ...",
+      "options": [],
+      "answer": "GAMES"
+    },
+    {
+      "number": 19,
+      "type": "table_completion",
+      "question": "A ... is recommended",
+      "options": [],
+      "answer": "GUIDED TOUR"
+    },
+    {
+      "number": 20,
+      "type": "table_completion",
+      "question": "Children shouldn't use the ...",
+      "options": [],
+      "answer": "LADDER | LADDERS"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-4",
+  "createdAt": "2026-07-24T03:25:34.235Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-4-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: B\n12: B\n13: A\n14: A\n15: C\n16: TRAINS\n17: DARK\n18: GAMES\n19: GUIDED TOUR\n20: LADDER | LADDERS",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-4-p2-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11–15",
+          "title": "MANHAM PORT",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "Why did a port originally develop at Manham?",
+              "text": "Why did a port originally develop at Manham?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It was safe from enemy attack."
+                },
+                {
+                  "letter": "B",
+                  "text": "It was convenient for river transport."
+                },
+                {
+                  "letter": "C",
+                  "text": "It had a good position on the sea coast."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "What caused Manham’s sudden expansion during the Industrial Revolution?",
+              "text": "What caused Manham’s sudden expansion during the Industrial Revolution?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "the improvement in mining techniques"
+                },
+                {
+                  "letter": "B",
+                  "text": "the increase in demand for metals"
+                },
+                {
+                  "letter": "C",
+                  "text": "the discovery of tin in the area"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "Why did rocks have to be sent away from Manham to be processed?",
+              "text": "Why did rocks have to be sent away from Manham to be processed?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "shortage of fuel"
+                },
+                {
+                  "letter": "B",
+                  "text": "poor transport systems"
+                },
+                {
+                  "letter": "C",
+                  "text": "lack of skills among local people"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "What happened when the port declined in the twentieth century?",
+              "text": "What happened when the port declined in the twentieth century?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The workers went away."
+                },
+                {
+                  "letter": "B",
+                  "text": "Traditional skills were lost."
+                },
+                {
+                  "letter": "C",
+                  "text": "Buildings were used for new purposes."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "What did the Manham Trust hope to do?",
+              "text": "What did the Manham Trust hope to do?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "discover the location of the original port"
+                },
+                {
+                  "letter": "B",
+                  "text": "provide jobs for the unemployed"
+                },
+                {
+                  "letter": "C",
+                  "text": "rebuild the port complex"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-4-p2-g2",
+          "type": "table_completion",
+          "questionRange": "Questions 16–20",
+          "title": "Tourist attractions in Manham",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the table below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+          "options": [],
+          "rows": [
+            [
+              "copper mine",
+              "specially adapted miners' {{16}} take visitors into the mountain",
+              "the mine is {{17}} and enclosed — unsuitable for children and animals"
+            ],
+            [
+              "village school",
+              "classrooms and a special exhibition of {{18}}",
+              "a {{19}} is recommended"
+            ],
+            [
+              "'The George' (old sailing ship)",
+              "the ship's wheel (was lost but has now been restored)",
+              "children shouldn't use the {{20}}"
+            ]
+          ],
+          "columns": [
+            "Place",
+            "Features and activities",
+            "Advice"
+          ],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Specially adapted miners' ... take visitors into the mountain",
+              "text": "Specially adapted miners' ... take visitors into the mountain",
+              "options": [],
+              "type": "table_completion",
+              "answer": "TRAINS"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "The mine is ... and enclosed",
+              "text": "The mine is ... and enclosed",
+              "options": [],
+              "type": "table_completion",
+              "answer": "DARK"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "A special exhibition of ...",
+              "text": "A special exhibition of ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "GAMES"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "A ... is recommended",
+              "text": "A ... is recommended",
+              "options": [],
+              "type": "table_completion",
+              "answer": "GUIDED TOUR"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Children shouldn't use the ...",
+              "text": "Children shouldn't use the ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "LADDER | LADDERS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

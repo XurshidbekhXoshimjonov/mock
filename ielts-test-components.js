@@ -818,43 +818,47 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
             group.example.text || [group.example.label, group.example.value].filter(Boolean).join(" ")
         )
         : null;
+    const groupClassName = String(group.className || "").replace(/[^a-z0-9_-]+/gi, " ").trim();
+    const renderGroupOptions = () => showGroupOptions
+        ? (group.contentHtml
+            ? h(SafeHtml, { html: group.contentHtml, className: "cbt-group-content-html" })
+            : h(GroupOptionsBox, { group: effectiveGroup }))
+        : null;
+    const questionContent = isDiagram
+        ? h(DiagramLabelingRenderer, { group: effectiveGroup, images, answers, onAnswer, reviewByNumber, readOnly })
+        : (isMultiSelect
+            ? h(MultiSelectGroupRenderer, { group: effectiveGroup, answers, onAnswer, reviewByNumber, readOnly })
+            : (isRichCompletion
+            ? h(RichCompletionRenderer, {
+                contentHtml: group.contentHtml,
+                questions,
+                answers,
+                onAnswer,
+                className: type === "table_completion" ? "cbt-rich-completion--table" : "",
+                reviewByNumber,
+                readOnly
+            })
+            : h("div", { className: "cbt-question-list" },
+                questions.map((question) =>
+                    h(QuestionRenderer, {
+                        key: question.number,
+                        question,
+                        group: effectiveGroup,
+                        value: answers[question.number],
+                        onAnswer,
+                        reviewResult: reviewByNumber?.[question.number],
+                        readOnly
+                    })
+                )
+            )));
 
-    return h("section", { className: `cbt-question-group cbt-question-group--${type}` },
+    return h("section", { className: `cbt-question-group cbt-question-group--${type} ${groupClassName}`.trim() },
         h(InstructionRenderer, { group: effectiveGroup }),
         !isDiagram ? h(GroupMedia, { group: effectiveGroup, images }) : null,
-        showGroupOptions
-            ? (group.contentHtml
-                ? h(SafeHtml, { html: group.contentHtml, className: "cbt-group-content-html" })
-                : h(GroupOptionsBox, { group: effectiveGroup }))
-            : null,
+        !group.optionsAfterQuestions ? renderGroupOptions() : null,
         headingExample,
-        isDiagram
-            ? h(DiagramLabelingRenderer, { group: effectiveGroup, images, answers, onAnswer, reviewByNumber, readOnly })
-            : (isMultiSelect
-                ? h(MultiSelectGroupRenderer, { group: effectiveGroup, answers, onAnswer, reviewByNumber, readOnly })
-                : (isRichCompletion
-                ? h(RichCompletionRenderer, {
-                    contentHtml: group.contentHtml,
-                    questions,
-                    answers,
-                    onAnswer,
-                    className: type === "table_completion" ? "cbt-rich-completion--table" : "",
-                    reviewByNumber,
-                    readOnly
-                })
-                : h("div", { className: "cbt-question-list" },
-                    questions.map((question) =>
-                        h(QuestionRenderer, {
-                            key: question.number,
-                            question,
-                            group: effectiveGroup,
-                            value: answers[question.number],
-                            onAnswer,
-                            reviewResult: reviewByNumber?.[question.number],
-                            readOnly
-                        })
-                    )
-                )))
+        questionContent,
+        group.optionsAfterQuestions ? renderGroupOptions() : null
     );
 }
 

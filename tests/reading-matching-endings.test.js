@@ -27,6 +27,12 @@ test("Matching questions prefer descriptive group endings over letter-only choic
     assert.match(source, /const source = groupOptions\.length \? groupOptions : optionList\(question\.options\)/);
 });
 
+test("Matching groups can place their reference options after the questions", () => {
+    const source = fs.readFileSync(path.join(root, "ielts-test-components.js"), "utf8");
+    assert.match(source, /!group\.optionsAfterQuestions \? renderGroupOptions\(\) : null/);
+    assert.match(source, /group\.optionsAfterQuestions \? renderGroupOptions\(\) : null/);
+});
+
 test("Rich Reading passages inherit normalized top-level question groups", () => {
     const source = fs.readFileSync(path.join(root, "reading-cbt-app.js"), "utf8");
     assert.match(source, /questionGroupsFromSource\(richPassage, \[\], \[\]\)/);

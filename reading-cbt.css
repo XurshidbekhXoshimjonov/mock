@@ -1294,9 +1294,447 @@ body.fullscreen-fallback .cbt-button--fullscreen {
     min-width: 14px;
 }
 
+.cambridge10-test4-wildfires {
+    border: 2px solid #555;
+    background: #fff;
+    color: #171717;
+    padding: 10px 18px 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.cbt-rich-completion:has(.cambridge10-test4-wildfires) {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    line-height: 1.45;
+}
+
+.cambridge10-test4-wildfires .ielts-summary-title {
+    margin: 0 0 8px;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.cambridge10-test4-wildfires ul {
+    margin: 0;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-main {
+    padding-left: 18px;
+    list-style: disc outside;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-main > li {
+    display: list-item;
+    margin: 0 0 13px;
+    padding-left: 3px;
+    list-style: disc outside !important;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-main > li:last-child {
+    margin-bottom: 0;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-main > li::marker {
+    color: #171717;
+    font-size: 0.8em;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-main p {
+    margin: 0 0 8px;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-details {
+    display: grid;
+    gap: 7px;
+    padding-left: 16px;
+    list-style: none;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-details > li {
+    position: relative;
+    display: list-item;
+    padding-left: 14px;
+    list-style: none !important;
+}
+
+.cambridge10-test4-wildfires .c10t4-wildfires-details > li::before {
+    position: absolute;
+    left: 0;
+    content: "–";
+    color: #171717;
+}
+
+.cambridge10-test4-wildfires .cbt-blank-wrapper {
+    align-items: baseline !important;
+    min-width: 116px;
+    gap: 4px !important;
+    margin: 0 3px !important;
+    vertical-align: baseline;
+}
+
+.cambridge10-test4-wildfires .cbt-blank-number {
+    color: #171717 !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+.cambridge10-test4-wildfires .cbt-blank-input--inline {
+    width: 92px !important;
+    min-width: 92px;
+    min-height: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px dotted #555 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 0 2px !important;
+    box-shadow: none !important;
+    color: #171717 !important;
+    font-size: 14px;
+    line-height: 18px;
+    vertical-align: baseline;
+}
+
+.cambridge10-test4-wildfires .cbt-blank-input--inline:focus {
+    border-bottom-style: solid !important;
+    outline: none;
+}
+
+.cambridge10-test4-personality-summary {
+    border: 2px solid #555;
+    background: #fff;
+    color: #171717;
+    padding: 18px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.cbt-rich-completion:has(.cambridge10-test4-personality-summary) {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    line-height: 1.7;
+}
+
+.cambridge10-test4-personality-summary p {
+    margin: 0;
+}
+
+.cambridge10-test4-personality-summary .cbt-blank-wrapper {
+    align-items: baseline !important;
+    min-width: 116px;
+    gap: 4px !important;
+    margin: 0 3px !important;
+    vertical-align: baseline;
+}
+
+.cambridge10-test4-personality-summary .cbt-blank-number {
+    color: #171717 !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+.cambridge10-test4-personality-summary .cbt-blank-input--inline {
+    width: 92px !important;
+    min-width: 92px;
+    min-height: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px dotted #555 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 0 2px !important;
+    box-shadow: none !important;
+    color: #171717 !important;
+    font-size: 14px;
+    line-height: 18px;
+    vertical-align: baseline;
+}
+
+.cambridge10-test4-personality-summary .cbt-blank-input--inline:focus {
+    border-bottom-style: solid !important;
+    outline: none;
+}
+
+.cambridge10-test4-people .cbt-question-list {
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.cambridge10-test4-people .cbt-question--matching {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 58px;
+    align-items: center;
+    gap: 10px;
+}
+
+.cambridge10-test4-people .cbt-question-line {
+    gap: 8px;
+}
+
+.cambridge10-test4-people .cbt-question-badge {
+    width: 24px;
+    height: auto;
+    flex-basis: 24px;
+    border-radius: 0;
+    background: transparent;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.cambridge10-test4-people .cbt-question-copy {
+    padding-top: 0;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.cambridge10-test4-people .cbt-question--matching > .cbt-select {
+    width: 56px;
+    min-width: 56px;
+    min-height: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 2px 6px;
+}
+
+.cambridge10-test4-people .cbt-group-content-html {
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.cambridge10-test4-people-box {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 460px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #d7dfeb;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #171717;
+    padding: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.cambridge10-test4-people-box h4 {
+    margin: 0 0 12px;
+    color: #171717;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.c10t4-person-list {
+    display: grid;
+    gap: 8px;
+}
+
+.c10t4-person-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 4px;
+    min-height: 36px;
+    border: 1px solid #cbd7e6;
+    border-radius: 6px;
+    background: #fff;
+    padding: 8px 10px;
+    font-weight: 700;
+}
+
+.c10t4-person-row strong {
+    color: #171717;
+}
+
+.c10t4-person-row strong::after {
+    content: ".";
+}
+
+html.dark-theme .cambridge10-test4-wildfires,
+html.dark-theme .cambridge10-test4-wildfires *,
+html.dark-theme .cambridge10-test4-personality-summary,
+html.dark-theme .cambridge10-test4-personality-summary * {
+    background-color: #fff;
+    color: #171717;
+}
+
+html.dark-theme .cambridge10-test4-people-box {
+    background: #f8fafc;
+    color: #171717;
+}
+
+html.dark-theme .cambridge10-test4-people-box h4,
+html.dark-theme .c10t4-person-row,
+html.dark-theme .c10t4-person-row * {
+    color: #171717;
+}
+
+html.dark-theme .c10t4-person-row {
+    background: #fff;
+}
+
+.cambridge10-test4-endings .cbt-question-list {
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.cambridge10-test4-endings .cbt-question--matching {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 58px;
+    align-items: center;
+    gap: 10px;
+}
+
+.cambridge10-test4-endings .cbt-question-line {
+    gap: 8px;
+}
+
+.cambridge10-test4-endings .cbt-question-badge {
+    width: 24px;
+    height: auto;
+    flex-basis: 24px;
+    border-radius: 0;
+    background: transparent;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.cambridge10-test4-endings .cbt-question-copy {
+    padding-top: 0;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.cambridge10-test4-endings .cbt-question--matching > .cbt-select {
+    width: 56px;
+    min-width: 56px;
+    min-height: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 2px 6px;
+}
+
+.cambridge10-test4-endings .cbt-group-content-html {
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.cambridge10-test4-endings-box {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 620px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #d7dfeb;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #171717;
+    padding: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.c10t4-ending-list {
+    display: grid;
+    gap: 8px;
+}
+
+.c10t4-ending-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 5px;
+    border: 1px solid #cbd7e6;
+    border-radius: 6px;
+    background: #fff;
+    padding: 8px 10px;
+    font-weight: 600;
+}
+
+.c10t4-ending-row strong {
+    color: #171717;
+}
+
+.c10t4-ending-row strong::after {
+    content: ".";
+}
+
+html.dark-theme .cambridge10-test4-endings-box {
+    background: #f8fafc;
+    color: #171717;
+}
+
+html.dark-theme .c10t4-ending-row,
+html.dark-theme .c10t4-ending-row * {
+    color: #171717;
+}
+
+html.dark-theme .c10t4-ending-row {
+    background: #fff;
+}
+
 @media (max-width: 760px) {
     .ielts-import-summary .word-box {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cambridge10-test4-wildfires {
+        padding: 10px 12px 12px;
+    }
+
+    .cambridge10-test4-wildfires .cbt-blank-wrapper {
+        min-width: min(116px, 34vw);
+    }
+
+    .cambridge10-test4-wildfires .cbt-blank-input--inline {
+        width: min(92px, 25vw) !important;
+        min-width: min(92px, 25vw);
+    }
+
+    .cambridge10-test4-personality-summary {
+        padding: 14px;
+    }
+
+    .cambridge10-test4-personality-summary .cbt-blank-wrapper {
+        min-width: min(116px, 34vw);
+    }
+
+    .cambridge10-test4-personality-summary .cbt-blank-input--inline {
+        width: min(92px, 25vw) !important;
+        min-width: min(92px, 25vw);
+    }
+
+    .cambridge10-test4-people .cbt-question--matching {
+        grid-template-columns: minmax(0, 1fr) 56px;
+        gap: 4px;
+    }
+
+    .cambridge10-test4-endings .cbt-question--matching {
+        grid-template-columns: minmax(0, 1fr) 56px;
+        gap: 4px;
     }
 }
 

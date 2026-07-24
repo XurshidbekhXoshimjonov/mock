@@ -3260,6 +3260,416 @@ html.dark-theme .lc-note-completion--mangrove-project .lc-question-badge {
     text-align: center;
 }
 
+.lc-note-completion--thorndykes-builders {
+    background: #fff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.lc-note-completion--thorndykes-builders > .lc-block-heading {
+    margin-bottom: 18px;
+}
+
+.lc-thorndykes-form {
+    border: 2px solid #555;
+    background: #fff;
+    color: #171717;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.lc-thorndykes-title {
+    margin: 0;
+    border-bottom: 1px solid #777;
+    padding: 5px 12px;
+    color: #171717;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.lc-thorndykes-example {
+    border-bottom: 1px solid #777;
+    padding: 10px 14px 8px;
+}
+
+.lc-thorndykes-example em {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.lc-thorndykes-example p,
+.lc-thorndykes-details p,
+.lc-thorndykes-quote {
+    margin: 0;
+}
+
+.lc-thorndykes-example span {
+    display: inline-block;
+    min-width: 74px;
+    border-bottom: 1px dotted #555;
+    text-align: center;
+}
+
+.lc-thorndykes-details {
+    display: grid;
+    grid-template-columns: 195px minmax(0, 1fr);
+    gap: 11px 14px;
+    padding: 12px 14px 8px;
+}
+
+.lc-thorndykes-details > strong {
+    color: #171717;
+    font-weight: 800;
+}
+
+.lc-thorndykes-address {
+    display: grid;
+    gap: 10px;
+}
+
+.lc-thorndykes-answer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    max-width: 100%;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.lc-thorndykes-number {
+    color: #171717;
+    font-weight: 800;
+}
+
+.lc-thorndykes-input,
+.lc-note-completion--thorndykes-builders .lc-answer-input.lc-thorndykes-input {
+    width: 150px;
+    min-width: 80px;
+    height: 20px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #171717;
+    padding: 0 3px;
+    text-align: center;
+}
+
+.lc-thorndykes-input:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.16);
+    outline-offset: 2px;
+}
+
+.lc-thorndykes-quote {
+    padding: 2px 14px 12px;
+}
+
+.lc-table-completion--thorndykes-work {
+    background: #fff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.lc-thorndykes-table-wrap {
+    overflow-x: auto;
+}
+
+.lc-thorndykes-work-table {
+    width: 100%;
+    min-width: 560px;
+    border: 2px solid #666;
+    border-collapse: collapse;
+    background: #fff;
+    color: #171717;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.lc-thorndykes-work-table th,
+.lc-thorndykes-work-table td {
+    border: 1px solid #777;
+    padding: 10px 14px;
+    color: #171717;
+    text-align: left;
+    vertical-align: top;
+}
+
+.lc-thorndykes-work-table thead th {
+    padding: 7px 14px;
+    font-weight: 800;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.lc-thorndykes-work-table tbody th {
+    width: 22%;
+    font-weight: 800;
+}
+
+.lc-thorndykes-work-table tbody td:nth-child(2) {
+    width: 39%;
+}
+
+.lc-thorndykes-table-answer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.lc-thorndykes-table-number {
+    color: #171717;
+    font-weight: 800;
+}
+
+.lc-thorndykes-table-input,
+.lc-table-completion--thorndykes-work .lc-answer-input.lc-thorndykes-table-input {
+    width: 92px;
+    min-width: 66px;
+    height: 20px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #171717;
+    padding: 0 3px;
+    text-align: center;
+}
+
+.lc-thorndykes-table-input:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.16);
+    outline-offset: 2px;
+}
+
+.lc-matching-block--work-placement {
+    background: #fff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.lc-matching-block--work-placement > .lc-block-heading {
+    margin-bottom: 20px;
+}
+
+.lc-matching-block--work-placement > .lc-block-heading .lc-instruction {
+    max-width: 760px;
+    white-space: pre-line;
+}
+
+.lc-work-sources-box {
+    width: min(330px, 100%);
+    margin: 0 auto 22px;
+    border: 1px solid #777;
+    background: #fff;
+    padding: 10px 16px 12px;
+}
+
+.lc-work-sources-box h4,
+.lc-work-stages h4 {
+    margin: 0;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-work-sources-box h4 {
+    margin-bottom: 9px;
+    text-align: center;
+}
+
+.lc-work-source-options {
+    display: grid;
+    gap: 6px;
+}
+
+.lc-work-source-option {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    color: #171717;
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.lc-work-source-option strong {
+    color: #171717;
+}
+
+.lc-work-stages {
+    width: min(620px, 100%);
+}
+
+.lc-work-stages h4 {
+    margin: 0 0 9px 34px;
+}
+
+.lc-work-stage-row {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 56px;
+    align-items: center;
+    min-height: 31px;
+    color: #171717;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.lc-work-stage-row > strong {
+    color: #171717;
+}
+
+.lc-work-stage-row select {
+    width: 56px;
+    min-width: 56px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    background: #fff;
+    color: #171717;
+    padding: 2px 6px;
+}
+
+.lc-work-stage-row select:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.16);
+    outline-offset: 2px;
+}
+
+.lc-note-completion--nanotechnology-uses {
+    background: #fff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.lc-note-completion--nanotechnology-uses > .lc-block-heading {
+    margin-bottom: 18px;
+}
+
+.lc-nanotech-notes {
+    border: 2px solid #555;
+    background: #fff;
+    color: #171717;
+    padding: 10px 20px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.lc-nanotech-notes h4 {
+    margin: 0 0 8px;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.lc-nanotech-notes h5 {
+    margin: 12px 0 5px;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lc-nanotech-notes ul {
+    margin: 0;
+    padding-left: 22px;
+    list-style: disc outside;
+}
+
+.lc-nanotech-notes li {
+    display: list-item;
+    margin: 0 0 9px;
+    padding-left: 4px;
+    list-style: disc outside !important;
+}
+
+.lc-nanotech-notes li::marker {
+    color: #171717;
+    font-size: 0.8em;
+}
+
+.lc-nanotech-answer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    max-width: 100%;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.lc-nanotech-number {
+    color: #171717;
+    font-weight: 800;
+}
+
+.lc-nanotech-input,
+.lc-note-completion--nanotechnology-uses .lc-answer-input.lc-nanotech-input {
+    width: 132px;
+    min-width: 76px;
+    height: 20px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    color: #171717;
+    padding: 0 3px;
+    text-align: center;
+}
+
+.lc-nanotech-input:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.16);
+    outline-offset: 2px;
+}
+
+html.dark-theme .lc-note-completion--thorndykes-builders,
+html.dark-theme .lc-thorndykes-form,
+html.dark-theme .lc-table-completion--thorndykes-work,
+html.dark-theme .lc-thorndykes-work-table,
+html.dark-theme .lc-matching-block--work-placement,
+html.dark-theme .lc-work-sources-box,
+html.dark-theme .lc-work-stage-row select,
+html.dark-theme .lc-note-completion--nanotechnology-uses,
+html.dark-theme .lc-nanotech-notes {
+    background: #fff;
+    color: #171717;
+}
+
+@media (max-width: 680px) {
+    .lc-thorndykes-details {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .lc-thorndykes-details > p,
+    .lc-thorndykes-address {
+        margin-bottom: 8px;
+    }
+
+    .lc-thorndykes-input,
+    .lc-note-completion--thorndykes-builders .lc-answer-input.lc-thorndykes-input {
+        width: min(150px, 38vw);
+    }
+
+    .lc-work-stages h4 {
+        margin-left: 0;
+    }
+
+    .lc-work-stage-row {
+        grid-template-columns: 30px minmax(0, 1fr) 56px;
+        gap: 4px;
+    }
+
+    .lc-nanotech-notes {
+        padding: 10px 14px 12px;
+    }
+
+    .lc-nanotech-input,
+    .lc-note-completion--nanotechnology-uses .lc-answer-input.lc-nanotech-input {
+        width: min(116px, 31vw);
+    }
+}
+
 .c10-form-row {
     display: grid;
     grid-template-columns: 250px minmax(0, 1fr);

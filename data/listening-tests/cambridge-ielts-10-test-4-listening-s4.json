@@ -1,0 +1,345 @@
+{
+  "id": "cambridge-ielts-10-test-4-listening-s4",
+  "slug": "cambridge-ielts-10-test-4-listening-s4",
+  "title": "Cambridge IELTS 10 Test 4 Listening — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–33",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "questionNumbers": [
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "title": "Questions 34–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "multiple_choice",
+      "question": "The speaker says that one problem with nanotechnology is that",
+      "options": [
+        {
+          "letter": "A",
+          "text": "it could threaten our way of life."
+        },
+        {
+          "letter": "B",
+          "text": "it could be used to spy on people."
+        },
+        {
+          "letter": "C",
+          "text": "it is misunderstood by the public."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 32,
+      "type": "multiple_choice",
+      "question": "According to the speaker, some scientists believe that nano-particles",
+      "options": [
+        {
+          "letter": "A",
+          "text": "should be restricted to secure environments."
+        },
+        {
+          "letter": "B",
+          "text": "should be used with more caution."
+        },
+        {
+          "letter": "C",
+          "text": "should only be developed for essential products."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 33,
+      "type": "multiple_choice",
+      "question": "In the speaker’s opinion, research into nanotechnology",
+      "options": [
+        {
+          "letter": "A",
+          "text": "has yet to win popular support."
+        },
+        {
+          "letter": "B",
+          "text": "could be seen as unethical."
+        },
+        {
+          "letter": "C",
+          "text": "ought to be continued."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "Nanotechnology could allow the development of stronger ...",
+      "options": [],
+      "answer": "METAL | METALS"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "... travel will be made available to the masses",
+      "options": [],
+      "answer": "SPACE"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Computers will have a greater ...",
+      "options": [],
+      "answer": "MEMORY"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "... energy will become more affordable",
+      "options": [],
+      "answer": "SOLAR"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Pollutants such as ... could be removed from water more easily",
+      "options": [],
+      "answer": "OIL"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "There will be no ... from manufacturing",
+      "options": [],
+      "answer": "WASTE"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "Analysis of medical ... will be speeded up",
+      "options": [],
+      "answer": "TESTS"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-4",
+  "createdAt": "2026-07-24T03:25:34.235Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-4-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: C\n32: B\n33: C\n34: METAL | METALS\n35: SPACE\n36: MEMORY\n37: SOLAR\n38: OIL\n39: WASTE\n40: TESTS",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-4-p4-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 31–33",
+          "title": "Nanotechnology: technology on a small scale",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "The speaker says that one problem with nanotechnology is that",
+              "text": "The speaker says that one problem with nanotechnology is that",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "it could threaten our way of life."
+                },
+                {
+                  "letter": "B",
+                  "text": "it could be used to spy on people."
+                },
+                {
+                  "letter": "C",
+                  "text": "it is misunderstood by the public."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "According to the speaker, some scientists believe that nano-particles",
+              "text": "According to the speaker, some scientists believe that nano-particles",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "should be restricted to secure environments."
+                },
+                {
+                  "letter": "B",
+                  "text": "should be used with more caution."
+                },
+                {
+                  "letter": "C",
+                  "text": "should only be developed for essential products."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "In the speaker’s opinion, research into nanotechnology",
+              "text": "In the speaker’s opinion, research into nanotechnology",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "has yet to win popular support."
+                },
+                {
+                  "letter": "B",
+                  "text": "could be seen as unethical."
+                },
+                {
+                  "letter": "C",
+                  "text": "ought to be continued."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-4-p4-g2",
+          "type": "note_completion",
+          "questionRange": "Questions 34–40",
+          "title": "Uses of Nanotechnology",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Transport</strong>",
+            "• Nanotechnology could allow the development of stronger {{34}}.",
+            "• Planes would be much lighter in weight.",
+            "• {{35}} travel will be made available to the masses.",
+            "<strong>Technology</strong>",
+            "• Computers will be even smaller, faster, and will have a greater {{36}}.",
+            "• {{37}} energy will become more affordable.",
+            "<strong>The Environment</strong>",
+            "• Nano-robots could rebuild the ozone layer.",
+            "• Pollutants such as {{38}} could be removed from water more easily.",
+            "• There will be no {{39}} from manufacturing.",
+            "<strong>Health and Medicine</strong>",
+            "• New methods of food production could eradicate famine.",
+            "• Analysis of medical {{40}} will be speeded up.",
+            "• Life expectancy could be increased."
+          ],
+          "noteStyle": "nanotechnology-uses",
+          "questions": [
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "Nanotechnology could allow the development of stronger ...",
+              "text": "Nanotechnology could allow the development of stronger ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "METAL | METALS"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "... travel will be made available to the masses",
+              "text": "... travel will be made available to the masses",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SPACE"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Computers will have a greater ...",
+              "text": "Computers will have a greater ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "MEMORY"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "... energy will become more affordable",
+              "text": "... energy will become more affordable",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "SOLAR"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Pollutants such as ... could be removed from water more easily",
+              "text": "Pollutants such as ... could be removed from water more easily",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "OIL"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "There will be no ... from manufacturing",
+              "text": "There will be no ... from manufacturing",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "WASTE"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "Analysis of medical ... will be speeded up",
+              "text": "Analysis of medical ... will be speeded up",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "TESTS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

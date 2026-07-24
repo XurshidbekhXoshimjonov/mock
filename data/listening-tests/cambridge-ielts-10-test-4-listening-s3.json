@@ -1,0 +1,694 @@
+{
+  "id": "cambridge-ielts-10-test-4-listening-s3",
+  "slug": "cambridge-ielts-10-test-4-listening-s3",
+  "title": "Cambridge IELTS 10 Test 4 Listening — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–22",
+      "instruction": "Choose TWO letters, A–E.",
+      "questionNumbers": [
+        21,
+        22
+      ]
+    },
+    {
+      "title": "Questions 23–24",
+      "instruction": "Choose TWO letters, A–E.",
+      "questionNumbers": [
+        23,
+        24
+      ]
+    },
+    {
+      "title": "Questions 25–30",
+      "instruction": "What source of information should Tim use at each of the following stages of the work placement?\nChoose SIX answers from the box and write the correct letter, A–G, next to questions 25–30.",
+      "questionNumbers": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multi_select",
+      "question": "Which TWO skills did Laura improve as a result of her work placement?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "communication"
+        },
+        {
+          "letter": "B",
+          "text": "design"
+        },
+        {
+          "letter": "C",
+          "text": "IT"
+        },
+        {
+          "letter": "D",
+          "text": "marketing"
+        },
+        {
+          "letter": "E",
+          "text": "organisation"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 22,
+      "type": "multi_select",
+      "question": "Which TWO skills did Laura improve as a result of her work placement?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "communication"
+        },
+        {
+          "letter": "B",
+          "text": "design"
+        },
+        {
+          "letter": "C",
+          "text": "IT"
+        },
+        {
+          "letter": "D",
+          "text": "marketing"
+        },
+        {
+          "letter": "E",
+          "text": "organisation"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 23,
+      "type": "multi_select",
+      "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "updates for its software"
+        },
+        {
+          "letter": "B",
+          "text": "cost savings"
+        },
+        {
+          "letter": "C",
+          "text": "an improved image"
+        },
+        {
+          "letter": "D",
+          "text": "new clients"
+        },
+        {
+          "letter": "E",
+          "text": "a growth in sales"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 24,
+      "type": "multi_select",
+      "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "updates for its software"
+        },
+        {
+          "letter": "B",
+          "text": "cost savings"
+        },
+        {
+          "letter": "C",
+          "text": "an improved image"
+        },
+        {
+          "letter": "D",
+          "text": "new clients"
+        },
+        {
+          "letter": "E",
+          "text": "a growth in sales"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "obtaining booklet",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "discussing options",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "getting updates",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "responding to invitation for interview",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "informing about outcome of interview",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "requesting a reference",
+      "options": [
+        {
+          "letter": "A",
+          "text": "company manager"
+        },
+        {
+          "letter": "B",
+          "text": "company's personnel department"
+        },
+        {
+          "letter": "C",
+          "text": "personal tutor"
+        },
+        {
+          "letter": "D",
+          "text": "psychology department"
+        },
+        {
+          "letter": "E",
+          "text": "mentor"
+        },
+        {
+          "letter": "F",
+          "text": "university careers officer"
+        },
+        {
+          "letter": "G",
+          "text": "internet"
+        }
+      ],
+      "answer": "C"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-4",
+  "createdAt": "2026-07-24T03:25:34.235Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-4-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: A\n22: E\n23: B\n24: C\n25: D\n26: F\n27: G\n28: B\n29: E\n30: C",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-4-p3-g1",
+          "type": "multiple_select",
+          "questionRange": "Questions 21–22",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "communication"
+            },
+            {
+              "letter": "B",
+              "text": "design"
+            },
+            {
+              "letter": "C",
+              "text": "IT"
+            },
+            {
+              "letter": "D",
+              "text": "marketing"
+            },
+            {
+              "letter": "E",
+              "text": "organisation"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Which TWO skills did Laura improve as a result of her work placement?",
+              "text": "Which TWO skills did Laura improve as a result of her work placement?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "communication"
+                },
+                {
+                  "letter": "B",
+                  "text": "design"
+                },
+                {
+                  "letter": "C",
+                  "text": "IT"
+                },
+                {
+                  "letter": "D",
+                  "text": "marketing"
+                },
+                {
+                  "letter": "E",
+                  "text": "organisation"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "A"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "Which TWO skills did Laura improve as a result of her work placement?",
+              "text": "Which TWO skills did Laura improve as a result of her work placement?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "communication"
+                },
+                {
+                  "letter": "B",
+                  "text": "design"
+                },
+                {
+                  "letter": "C",
+                  "text": "IT"
+                },
+                {
+                  "letter": "D",
+                  "text": "marketing"
+                },
+                {
+                  "letter": "E",
+                  "text": "organisation"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "E"
+            }
+          ],
+          "questionNumber": 21,
+          "answerQuestions": [
+            {
+              "questionNumber": 22
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO skills did Laura improve as a result of her work placement?"
+        },
+        {
+          "id": "cambridge-ielts-10-test-4-p3-g2",
+          "type": "multiple_select",
+          "questionRange": "Questions 23–24",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "updates for its software"
+            },
+            {
+              "letter": "B",
+              "text": "cost savings"
+            },
+            {
+              "letter": "C",
+              "text": "an improved image"
+            },
+            {
+              "letter": "D",
+              "text": "new clients"
+            },
+            {
+              "letter": "E",
+              "text": "a growth in sales"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+              "text": "Which TWO immediate benefits did the company get from Laura's work placement?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "updates for its software"
+                },
+                {
+                  "letter": "B",
+                  "text": "cost savings"
+                },
+                {
+                  "letter": "C",
+                  "text": "an improved image"
+                },
+                {
+                  "letter": "D",
+                  "text": "new clients"
+                },
+                {
+                  "letter": "E",
+                  "text": "a growth in sales"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "B"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+              "text": "Which TWO immediate benefits did the company get from Laura's work placement?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "updates for its software"
+                },
+                {
+                  "letter": "B",
+                  "text": "cost savings"
+                },
+                {
+                  "letter": "C",
+                  "text": "an improved image"
+                },
+                {
+                  "letter": "D",
+                  "text": "new clients"
+                },
+                {
+                  "letter": "E",
+                  "text": "a growth in sales"
+                }
+              ],
+              "type": "multi_select",
+              "answer": "C"
+            }
+          ],
+          "questionNumber": 23,
+          "answerQuestions": [
+            {
+              "questionNumber": 24
+            }
+          ],
+          "maxSelections": 2,
+          "question": "Which TWO immediate benefits did the company get from Laura's work placement?"
+        },
+        {
+          "id": "cambridge-ielts-10-test-4-p3-g3",
+          "type": "matching",
+          "questionRange": "Questions 25–30",
+          "title": "Stages of the work placement procedure",
+          "optionsTitle": "Sources of information",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "What source of information should Tim use at each of the following stages of the work placement?\nChoose SIX answers from the box and write the correct letter, A–G, next to questions 25–30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "company manager"
+            },
+            {
+              "letter": "B",
+              "text": "company's personnel department"
+            },
+            {
+              "letter": "C",
+              "text": "personal tutor"
+            },
+            {
+              "letter": "D",
+              "text": "psychology department"
+            },
+            {
+              "letter": "E",
+              "text": "mentor"
+            },
+            {
+              "letter": "F",
+              "text": "university careers officer"
+            },
+            {
+              "letter": "G",
+              "text": "internet"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "work-placement-sources",
+          "questions": [
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "obtaining booklet",
+              "text": "obtaining booklet",
+              "answer": "D"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "discussing options",
+              "text": "discussing options",
+              "answer": "F"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "getting updates",
+              "text": "getting updates",
+              "answer": "G"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "responding to invitation for interview",
+              "text": "responding to invitation for interview",
+              "answer": "B"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "informing about outcome of interview",
+              "text": "informing about outcome of interview",
+              "answer": "E"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "requesting a reference",
+              "text": "requesting a reference",
+              "answer": "C"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

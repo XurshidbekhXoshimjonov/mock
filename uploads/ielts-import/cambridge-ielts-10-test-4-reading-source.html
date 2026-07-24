@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambridge IELTS 10 — Test 4 Academic Reading</title>
+<style>
+:root{
+  --red:#c62828;--red-dark:#991b1b;--ink:#182230;--muted:#667085;
+  --line:#d0d5dd;--soft:#f2f4f7;--white:#fff;--blue:#175cd3;
+  --green:#067647;--green-soft:#ecfdf3;--bad:#b42318;--bad-soft:#fff1f0;
+  --yellow:#fff3a3;--shadow:0 10px 30px rgba(16,24,40,.10);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#e9edf2}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.topbar{
+  height:68px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:14px;padding:0 18px;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 3px 12px rgba(16,24,40,.06);position:relative;z-index:20
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:var(--red);color:#fff;font-weight:900}
+.brand strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{color:var(--muted)}
+.timer{
+  display:flex;gap:9px;align-items:center;padding:8px 14px;border:1px solid var(--line);
+  border-radius:11px;background:var(--soft);font-weight:900;font-variant-numeric:tabular-nums
+}
+.actions{justify-self:end;display:flex;gap:8px}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 13px;border-radius:9px;font-weight:700}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--red);color:#fff;border-color:var(--red)}
+.btn.primary:hover{background:var(--red-dark)}
+.workspace{
+  height:calc(100vh - 126px);display:grid;grid-template-columns:minmax(0,1.12fr) minmax(420px,.88fr);
+  gap:12px;padding:12px
+}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.panel-head{
+  height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 15px;
+  border-bottom:1px solid var(--line);background:#fafbfc
+}
+.panel-head h2{font-size:16px;margin:0}
+.panel-tools{display:flex;gap:7px}
+.tool{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px;font-size:13px;font-weight:700}
+.scroll{height:calc(100% - 52px);overflow:auto;padding:30px 34px;scroll-behavior:smooth}
+.passage{display:none;max-width:850px;margin:auto}
+.passage.active{display:block}
+.passage-kicker{font-weight:900;letter-spacing:1.3px;margin-bottom:8px}
+.passage h1{text-align:center;font-family:Georgia,serif;font-size:30px;margin:18px 0 5px}
+.subtitle{text-align:center;font-family:Georgia,serif;font-style:italic;font-size:18px;margin:0 0 24px}
+.passage p{font-family:Georgia,serif;font-size:17px;line-height:1.58;margin:0 0 15px}
+.section-paragraph{display:grid;grid-template-columns:32px 1fr;gap:7px}
+.section-letter{font-family:Arial,sans-serif;font-weight:900;font-size:18px;padding-top:2px}
+mark.user-highlight{background:var(--yellow);padding:0}
+.questions-wrap{height:calc(100% - 52px);overflow:auto;padding:24px 25px;scroll-behavior:smooth}
+.q-section{display:none;max-width:760px;margin:auto}
+.q-section.active{display:block}
+.q-section h1{font-size:25px;margin:0 0 16px}
+.instructions{font-style:italic;color:#344054;margin:6px 0}
+.instructions strong{font-style:normal;color:#101828}
+.question-card{border-bottom:1px solid #e4e7ec;padding:15px 0}
+.question-card:last-child{border-bottom:0}
+.qline{display:flex;gap:10px;align-items:flex-start}
+.qnum{
+  flex:0 0 31px;height:31px;border-radius:50%;display:grid;place-items:center;
+  background:var(--ink);color:#fff;font-weight:900
+}
+.answer-input{
+  width:210px;max-width:100%;border:1px solid #98a2b3;border-radius:8px;
+  padding:8px 10px;background:#fffbea;outline:none
+}
+.answer-input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #d1e0ff}
+select{min-width:150px;border:1px solid #98a2b3;border-radius:8px;padding:8px 10px;background:#fff}
+.inline-answer{display:inline-flex;align-items:center;gap:7px;margin:3px 4px;vertical-align:middle}
+.summary-box,.list-box,.ending-box{
+  border:1px solid #98a2b3;border-radius:9px;padding:18px 20px;margin:18px 0;background:#fff
+}
+.summary-box h3,.list-box h3,.ending-box h3{text-align:center;margin:0 0 14px}
+.match-grid{display:grid;grid-template-columns:36px 1fr;gap:8px 12px}
+.option-list{display:grid;gap:7px;margin:10px 0 0 41px}
+.option{
+  display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid transparent;border-radius:8px
+}
+.option:hover{background:var(--soft);border-color:var(--line)}
+.option:has(input:checked){background:#eff6ff;border-color:#84adff}
+.option input{margin-top:4px}
+.letter{font-weight:900;min-width:21px}
+.review{
+  display:none;margin:9px 0 0 41px;padding:8px 10px;border-radius:8px;font-size:14px;font-weight:800
+}
+.review.show{display:block}
+.review.correct{background:var(--green-soft);color:var(--green)}
+.review.wrong{background:var(--bad-soft);color:var(--bad)}
+.correct-control{outline:2px solid #32d583!important;background:var(--green-soft)!important}
+.wrong-control{outline:2px solid #f97066!important;background:var(--bad-soft)!important}
+.bottom{
+  height:58px;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;
+  background:#fff;border-top:1px solid var(--line)
+}
+.part-btn{min-width:150px;border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:9px;font-weight:800}
+.part-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.progress-area{margin-left:12px;display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px}
+.progress-track{width:120px;height:8px;border-radius:999px;background:#e4e7ec;overflow:hidden}
+.progress-track span{display:block;height:100%;width:0;background:var(--red)}
+.navigator{
+  position:fixed;right:18px;bottom:72px;z-index:30;width:250px;display:none;
+  background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;box-shadow:0 18px 45px rgba(16,24,40,.2)
+}
+.navigator.show{display:block}
+.navigator h3{margin:0 0 10px}
+.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.qnav{height:35px;border:1px solid var(--line);border-radius:7px;background:#fff;font-weight:800}
+.qnav.answered{background:#eef4ff;border-color:#84adff;color:#1849a9}
+.qnav.correct{background:var(--green-soft);border-color:#6ce9a6;color:var(--green)}
+.qnav.wrong{background:var(--bad-soft);border-color:#fda29b;color:var(--bad)}
+.result-card{
+  display:none;margin-bottom:18px;padding:18px;border:1px solid var(--line);
+  border-radius:12px;background:#fff;box-shadow:var(--shadow)
+}
+.result-card.show{display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.metric{text-align:center;background:var(--soft);border-radius:10px;padding:13px}
+.metric strong{display:block;font-size:25px}
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(16,24,40,.58)}
+.modal.show{display:grid}
+.modal-card{width:min(540px,100%);background:#fff;border-radius:17px;padding:27px;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.modal-card h2{margin:0 0 9px}
+.modal-card p{color:var(--muted)}
+.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}
+.warning{background:#fffaeb;border:1px solid #fedf89;color:#93370d;padding:10px 12px;border-radius:9px}
+@media(max-width:950px){
+  .workspace{height:auto;min-height:calc(100vh - 126px);grid-template-columns:1fr;padding:8px}
+  .panel{height:70vh}
+  .actions .hide-mobile{display:none}
+  .part-btn{min-width:0;flex:1;padding:10px 5px}
+  .progress-area{display:none}
+}
+@media(max-width:600px){
+  .topbar{grid-template-columns:1fr auto;padding:0 10px}
+  .actions{display:none}
+  .brand small{display:none}
+  .brand strong{font-size:13px}
+  .timer{padding:7px 9px}
+  .workspace{padding:6px;gap:8px}
+  .panel{height:72vh}
+  .scroll,.questions-wrap{padding:20px 16px}
+  .passage h1{font-size:25px}
+  .passage p{font-size:16px}
+  .bottom{gap:5px}
+  .part-btn{font-size:12px}
+  .navigator{right:8px;bottom:66px;width:238px}
+  .metrics{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">IX</div>
+    <div>
+      <strong>Cambridge IELTS 10 — Test 4</strong>
+      <small>Academic Reading · Questions 1–40</small>
+    </div>
+  </div>
+  <div class="timer"><span>⏱</span><span id="timer">60:00</span></div>
+  <div class="actions">
+    <button class="btn hide-mobile" id="navToggle" type="button">Questions</button>
+    <button class="btn hide-mobile" id="fullscreenBtn" type="button">⛶</button>
+    <button class="btn primary" id="submitTop" type="button">Submit</button>
+  </div>
+</header>
+
+<div class="workspace">
+  <section class="panel">
+    <div class="panel-head">
+      <h2 id="passageLabel">Reading Passage 1</h2>
+      <div class="panel-tools">
+        <button class="tool" id="highlightBtn" type="button">Highlight</button>
+        <button class="tool" id="clearHighlights" type="button">Clear</button>
+      </div>
+    </div>
+    <div class="scroll" id="passageScroll">
+
+      <article class="passage active" data-passage="1">
+        <div class="passage-kicker">READING PASSAGE 1</div>
+        <p><em>You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1 below.</em></p>
+        <h1>The megafires of California</h1>
+        <div class="subtitle">Drought, housing expansion, and oversupply of tinder make for bigger, hotter fires in the western United States</div>
+
+        <p>Wildfires are becoming an increasing menace in the western United States, with Southern California being the hardest hit area. There’s a reason fire squads battling more frequent blazes in Southern California are having such difficulty containing the flames, despite better preparedness than ever and decades of experience fighting fires fanned by the ‘Santa Ana Winds’. The wildfires themselves, experts say, are generally hotter, faster, and spread more erratically than in the past.</p>
+
+        <p>Megafires, also called ‘siege fires’, are the increasingly frequent blazes that burn 500,000 acres or more – 10 times the size of the average forest fire of 20 years ago. Some recent wildfires are among the biggest ever in California in terms of acreage burned, according to state figures and news reports.</p>
+
+        <p>One explanation for the trend to more superhot fires is that the region, which usually has dry summers, has had significantly below normal precipitation in many recent years. Another reason, experts say, is related to the century-long policy of the US Forest Service to stop wildfires as quickly as possible. The unintentional consequence has been to halt the natural eradication of underbrush, now the primary fuel for megafires.</p>
+
+        <p>Three other factors contribute to the trend, they add. First is climate change, marked by a 1-degree Fahrenheit rise in average yearly temperature across the western states. Second is fire seasons that on average are 78 days longer than they were 20 years ago. Third is increased construction of homes in wooded areas.</p>
+
+        <p>‘We are increasingly building our homes in fire-prone ecosystems,’ says Dominik Kulakowski, adjunct professor of biology at Clark University Graduate School of Geography in Worcester, Massachusetts. ‘Doing that in many of the forests of the western US is like building homes on the side of an active volcano.’</p>
+
+        <p>In California, where population growth has averaged more than 600,000 a year for at least a decade, more residential housing is being built. ‘What once was open space is now residential homes providing fuel to make fires burn with greater intensity,’ says Terry McHale of the California Department of Forestry firefighters’ union. ‘With so much dryness, so many communities to catch fire, so many fronts to fight, it becomes an almost incredible job.’</p>
+
+        <p>That said, many experts give California high marks for making progress on preparedness in recent years, after some of the largest fires in state history scorched thousands of acres, burned thousands of homes, and killed numerous people. Stung in the past by criticism of bungling that allowed fires to spread when they might have been contained, personnel are meeting the peculiar challenges of neighborhood- and canyon-hopping fires better than previously, observers say.</p>
+
+        <p>State promises to provide more up-to-date engines, planes, and helicopters to fight fires have been fulfilled. Firefighters’ unions that in the past complained of dilapidated equipment, old fire engines, and insufficient blueprints for fire safety are now praising the state’s commitment, noting that funding for firefighting has increased, despite huge cuts in many other programs. ‘We are pleased that the current state administration has been very proactive in its support of us, and [has] come through with budgetary support of the infrastructure needs we have long sought,’ says Mr. McHale of the firefighters’ union.</p>
+
+        <p>Besides providing money to upgrade the fire engines that must traverse the mammoth state and wind along serpentine canyon roads, the state has invested in better command-and-control facilities as well as in the strategies to run them. ‘In the fire sieges of earlier years, we found that other jurisdictions and states were willing to offer mutual-aid help, but we were not able to communicate adequately with them,’ says Kim Zagaris, chief of the state’s Office of Emergency Services Fire and Rescue Branch. After a commission examined and revamped communications procedures, the statewide response ‘has become far more professional and responsive,’ he says. There is a sense among both government officials and residents that the speed, dedication, and coordination of firefighters from several states and jurisdictions are resulting in greater efficiency than in past ‘siege fire’ situations.</p>
+
+        <p>In recent years, the Southern California region has improved building codes, evacuation procedures, and procurement of new technology. ‘I am extraordinarily impressed by the improvements we have witnessed,’ says Randy Jacobs, a Southern California-based lawyer who has had to evacuate both his home and business to escape wildfires. ‘Notwithstanding all the damage that will continue to be caused by wildfires, we will no longer suffer the loss of life endured in the past because of the fire prevention and firefighting measures that have been put in place,’ he says.</p>
+      </article>
+
+      <article class="passage" data-passage="2">
+        <div class="passage-kicker">READING PASSAGE 2</div>
+        <p><em>You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2 below.</em></p>
+        <h1>Second nature</h1>
+        <div class="subtitle">Your personality isn’t necessarily set in stone. With a little experimentation, people can reshape their temperaments and inject passion, optimism, joy and courage into their lives</div>
+
+        <div class="section-paragraph"><div class="section-letter">A</div><div>
+          <p>Psychologists have long held that a person’s character cannot undergo a transformation in any meaningful way and that the key traits of personality are determined at a very young age. However, researchers have begun looking more closely at ways we can change. Positive psychologists have identified 24 qualities we admire, such as loyalty and kindness, and are studying them to find out why they come so naturally to some people. What they’re discovering is that many of these qualities amount to habitual behaviour that determines the way we respond to the world. The good news is that all this can be learned.</p>
+          <p>Some qualities are less challenging to develop than others, optimism being one of them. However, developing qualities requires mastering a range of skills which are diverse and sometimes surprising. For example, to bring more joy and passion into your life, you must be open to experiencing negative emotions. Cultivating such qualities will help you realise your full potential.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">B</div><div>
+          <p>‘The evidence is good that most personality traits can be altered,’ says Christopher Peterson, professor of psychology at the University of Michigan, who cites himself as an example. Inherently introverted, he realised early on that as an academic, his reticence would prove disastrous in the lecture hall. So he learned to be more outgoing and to entertain his classes. ‘Now my extroverted behaviour is spontaneous,’ he says.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">C</div><div>
+          <p>David Fajgenbaum had to make a similar transition. He was preparing for university, when he had an accident that put an end to his sports career. On campus, he quickly found that beyond ordinary counselling, the university had no services for students who were undergoing physical rehabilitation and suffering from depression like him. He therefore launched a support group to help others in similar situations. He took action despite his own pain – a typical response of an optimist.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">D</div><div>
+          <p>Suzanne Segerstrom, professor of psychology at the University of Kentucky, believes that the key to increasing optimism is through cultivating optimistic behaviour, rather than positive thinking. She recommends you train yourself to pay attention to good fortune by writing down three positive things that come about each day. This will help you convince yourself that favourable outcomes actually happen all the time, making it easier to begin taking action.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">E</div><div>
+          <p>You can recognise a person who is passionate about a pursuit by the way they are so strongly involved in it. Tanya Streeter’s passion is freediving – the sport of plunging deep into the water without tanks or other breathing equipment. Beginning in 1998, she set nine world records and can hold her breath for six minutes. The physical stamina required for this sport is intense but the psychological demands are even more overwhelming. Streeter learned to untangle her fears from her judgment of what her body and mind could do. ‘In my career as a competitive freediver, there was a limit to what I could do – but it wasn’t anywhere near what I thought it was,’ she says.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">F</div><div>
+          <p>Finding a pursuit that excites you can improve anyone’s life. The secret about consuming passions, though, according to psychologist Paul Silvia of the University of North Carolina, is that ‘they require discipline, hard work and ability, which is why they are so rewarding.’ Psychologist Todd Kashdan has this advice for those people taking up a new passion: ‘As a newcomer, you also have to tolerate and laugh at your own ignorance. You must be willing to accept the negative feelings that come your way,’ he says.</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">G</div><div>
+          <p>In 2004, physician-scientist Mauro Zappaterra began his PhD research at Harvard Medical School. Unfortunately, he was miserable as his research wasn’t compatible with his curiosity about healing. He finally took a break and during eight months in Santa Fe, Zappaterra learned about alternative healing techniques not taught at Harvard. When he got back, he switched labs to study how cerebrospinal fluid nourishes the developing nervous system. He also vowed to look for the joy in everything, including failure, as this could help him learn about his research and himself.</p>
+          <p>One thing that can hold joy back is a person’s concentration on avoiding failure rather than their looking forward to doing something well. ‘Focusing on being safe might get in the way of your reaching your goals,’ explains Kashdan. For example, are you hoping to get through a business lunch without embarrassing yourself, or are you thinking about how fascinating the conversation might be?</p>
+        </div></div>
+
+        <div class="section-paragraph"><div class="section-letter">H</div><div>
+          <p>Usually, we think of courage in physical terms but ordinary life demands something else. For marketing executive Kenneth Pedeleose, it meant speaking out against something he thought was ethically wrong. The new manager was intimidating staff so Pedeleose carefully recorded each instance of bullying and eventually took the evidence to a senior director, knowing his own job security would be threatened. Eventually the manager was the one to go. According to Cynthia Pury, a psychologist at Clemson University, Pedeleose’s story proves the point that courage is not motivated by fearlessness, but by moral obligation. Pury also believes that people can acquire courage. Many of her students said that faced with a risky situation, they first tried to calm themselves down, then looked for a way to mitigate the danger, just as Pedeleose did by documenting his allegations.</p>
+          <p>Over the long term, picking up a new character trait may help you move toward being the person you want to be. And in the short term, the effort itself could be surprisingly rewarding, a kind of internal adventure.</p>
+        </div></div>
+      </article>
+
+      <article class="passage" data-passage="3">
+        <div class="passage-kicker">READING PASSAGE 3</div>
+        <p><em>You should spend about 20 minutes on Questions 27–40, which are based on Reading Passage 3 below.</em></p>
+        <h1>When evolution runs backwards</h1>
+        <div class="subtitle">Evolution isn’t supposed to run backwards – yet an increasing number of examples show that it does and that it can sometimes represent the future of a species</div>
+
+        <p>The description of any animal as an ‘evolutionary throwback’ is controversial. For the better part of a century, most biologists have been reluctant to use those words, mindful of a principle of evolution that says ‘evolution cannot run backwards’. But as more and more examples come to light and modern genetics enters the scene, that principle is having to be rewritten. Not only are evolutionary throwbacks possible, they sometimes play an important role in the forward march of evolution.</p>
+
+        <p>The technical term for an evolutionary throwback is an ‘atavism’, from the Latin <em>atavus</em>, meaning forefather. The word has ugly connotations thanks largely to Cesare Lombroso, a 19th-century Italian medic who argued that criminals were born not made and could be identified by certain physical features that were throwbacks to a primitive, sub-human state.</p>
+
+        <p>While Lombroso was measuring criminals, a Belgian palaeontologist called Louis Dollo was studying fossil records and coming to the opposite conclusion. In 1890 he proposed that evolution was irreversible: that ‘an organism is unable to return, even partially, to a previous stage already realised in the ranks of its ancestors’. Early 20th-century biologists came to a similar conclusion, though they qualified it in terms of probability, stating that there is no reason why evolution cannot run backwards – it is just very unlikely. And so the idea of irreversibility in evolution stuck and came to be known as ‘Dollo’s law’.</p>
+
+        <p>If Dollo’s law is right, atavisms should occur only very rarely, if at all. Yet almost since the idea took root, exceptions have been cropping up. In 1919, for example, a humpback whale with a pair of leg-like appendages over a metre long, complete with a full set of limb bones, was caught off Vancouver Island in Canada. Explorer Roy Chapman Andrews argued at the time that the whale must be a throwback to a land-living ancestor. ‘I can see no other explanation,’ he wrote in 1921.</p>
+
+        <p>Since then, so many other examples have been discovered that it no longer makes sense to say that evolution is as good as irreversible. And this poses a puzzle: how can characteristics that disappeared millions of years ago suddenly reappear? In 1994, Rudolf Raff and colleagues at Indiana University in the USA decided to use genetics to put a number on the probability of evolution going into reverse. They reasoned that while some evolutionary changes involve the loss of genes and are therefore irreversible, others may be the result of genes being switched off. If these silent genes are somehow switched back on, they argued, long-lost traits could reappear.</p>
+
+        <p>Raff’s team went on to calculate the likelihood of it happening. Silent genes accumulate random mutations, they reasoned, eventually rendering them useless. So how long can a gene survive in a species if it is no longer used? The team calculated that there is a good chance of silent genes surviving for up to 6 million years in at least a few individuals in a population, and that some might survive as long as 10 million years. In other words, throwbacks are possible, but only to the relatively recent evolutionary past.</p>
+
+        <p>As a possible example, the team pointed to the mole salamanders of Mexico and California. Like most amphibians these begin life in a juvenile ‘tadpole’ state, then metamorphose into the adult form – except for one species, the axolotl, which famously lives its entire life as a juvenile. The simplest explanation for this is that the axolotl lineage alone lost the ability to metamorphose, while others retained it. From a detailed analysis of the salamanders’ family tree, however, it is clear that the other lineages evolved from an ancestor that itself had lost the ability to metamorphose. In other words, metamorphosis in mole salamanders is an atavism. The salamander example fits with Raff’s 10-million-year time frame.</p>
+
+        <p>More recently, however, examples have been reported that break the time limit, suggesting that silent genes may not be the whole story. In a paper published last year, biologist Gunter Wagner of Yale University reported some work on the evolutionary history of a group of South American lizards called Bachia. Many of these have minuscule limbs; some look more like snakes than lizards and a few have completely lost the toes on their hind limbs. Other species, however, sport up to four toes on their hind legs. The simplest explanation is that the toed lineages never lost their toes, but Wagner begs to differ. According to his analysis of the Bachia family tree, the toed species re-evolved toes from toeless ancestors and, what is more, digit loss and gain has occurred on more than one occasion over tens of millions of years.</p>
+
+        <p>So what’s going on? One possibility is that these traits are lost and then simply reappear, in much the same way that similar structures can independently arise in unrelated species, such as the dorsal fins of sharks and killer whales. Another more intriguing possibility is that the genetic information needed to make toes somehow survived for tens or perhaps hundreds of millions of years in the lizards and was reactivated. These atavistic traits provided an advantage and spread through the population, effectively reversing evolution.</p>
+
+        <p>But if silent genes degrade within 6 to 10 million years, how can long-lost traits be reactivated over longer timescales? The answer may lie in the womb. Early embryos of many species develop ancestral features. Snake embryos, for example, sprout hind limb buds. Later in development these features disappear thanks to developmental programs that say ‘lose the leg’. If for any reason this does not happen, the ancestral feature may not disappear, leading to an atavism.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 id="questionLabel">Questions 1–13</h2>
+      <button class="tool" id="navToggle2" type="button">1–40</button>
+    </div>
+    <div class="questions-wrap" id="questionScroll">
+      <div id="resultCard" class="result-card">
+        <h2 style="margin-top:0">Reading result</h2>
+        <div class="metrics">
+          <div class="metric"><span>Correct</span><strong id="scoreOut">0/40</strong></div>
+          <div class="metric"><span>Estimated band</span><strong id="bandOut">0</strong></div>
+          <div class="metric"><span>Answered</span><strong id="answeredOut">0/40</strong></div>
+        </div>
+        <p id="resultMessage" style="margin-bottom:0;color:var(--muted)"></p>
+      </div>
+
+      <!-- QUESTIONS 1–13 -->
+      <section class="q-section active" data-qsection="1">
+        <h1>Reading Passage 1 — Questions 1–13</h1>
+
+        <p><em>Questions 1–6</em></p>
+        <p class="instructions">Complete the notes below.</p>
+        <p class="instructions">Choose <strong>ONE WORD AND/OR A NUMBER</strong> from the passage for each answer.</p>
+
+        <div class="summary-box">
+          <h3>Wildfires</h3>
+          <p><strong>Characteristics of wildfires and wildfire conditions today compared to the past:</strong></p>
+          <p>– occurrence: more frequent</p>
+          <p>– temperature: hotter</p>
+          <p>– speed: faster</p>
+          <p>– movement: <span class="inline-answer"><span class="qnum">1</span><input class="answer-input" data-q="1" aria-label="Question 1"></span> more unpredictably</p>
+          <p>– size of fires: <span class="inline-answer"><span class="qnum">2</span><input class="answer-input" data-q="2" aria-label="Question 2"></span> greater on average than two decades ago</p>
+          <p><strong>Reasons wildfires cause more damage today compared to the past:</strong></p>
+          <p>– rainfall: <span class="inline-answer"><span class="qnum">3</span><input class="answer-input" data-q="3" aria-label="Question 3"></span> average</p>
+          <p>– more brush to act as <span class="inline-answer"><span class="qnum">4</span><input class="answer-input" data-q="4" aria-label="Question 4"></span></p>
+          <p>– increase in yearly temperature</p>
+          <p>– extended fire <span class="inline-answer"><span class="qnum">5</span><input class="answer-input" data-q="5" aria-label="Question 5"></span></p>
+          <p>– more building of <span class="inline-answer"><span class="qnum">6</span><input class="answer-input" data-q="6" aria-label="Question 6"></span> in vulnerable places</p>
+        </div>
+
+        <p><em>Questions 7–13</em></p>
+        <p class="instructions">Do the following statements agree with the information given in Reading Passage 1?</p>
+        <p class="instructions">Choose <strong>TRUE, FALSE</strong> or <strong>NOT GIVEN</strong>.</p>
+
+        <div class="question-card" id="q7"><div class="qline"><span class="qnum">7</span><div>The amount of open space in California has diminished over the last ten years.<br><select data-q="7"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q8"><div class="qline"><span class="qnum">8</span><div>Many experts believe California has made little progress in readying itself to fight fires.<br><select data-q="8"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q9"><div class="qline"><span class="qnum">9</span><div>Personnel in the past have been criticised for mishandling fire containment.<br><select data-q="9"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q10"><div class="qline"><span class="qnum">10</span><div>California has replaced a range of firefighting tools.<br><select data-q="10"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q11"><div class="qline"><span class="qnum">11</span><div>More firefighters have been hired to improve fire-fighting capacity.<br><select data-q="11"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q12"><div class="qline"><span class="qnum">12</span><div>Citizens and government groups disapprove of the efforts of different states and agencies working together.<br><select data-q="12"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q13"><div class="qline"><span class="qnum">13</span><div>Randy Jacobs believes that loss of life from fires will continue at the same levels, despite changes made.<br><select data-q="13"><option value="">Select</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></div></div></div>
+      </section>
+
+      <!-- QUESTIONS 14–26 -->
+      <section class="q-section" data-qsection="2">
+        <h1>Reading Passage 2 — Questions 14–26</h1>
+
+        <p><em>Questions 14–18</em></p>
+        <p class="instructions">Complete the summary below.</p>
+        <p class="instructions">Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+
+        <div class="summary-box">
+          <p>Psychologists have traditionally believed that a personality
+          <span class="inline-answer"><span class="qnum">14</span><input class="answer-input" data-q="14" aria-label="Question 14"></span>
+          was impossible and that by a
+          <span class="inline-answer"><span class="qnum">15</span><input class="answer-input" data-q="15" aria-label="Question 15"></span>,
+          a person’s character tends to be fixed. This is not true according to positive psychologists, who say that our personal qualities can be seen as habitual behaviour. One of the easiest qualities to acquire is
+          <span class="inline-answer"><span class="qnum">16</span><input class="answer-input" data-q="16" aria-label="Question 16"></span>.
+          However, regardless of the quality, it is necessary to learn a wide variety of different
+          <span class="inline-answer"><span class="qnum">17</span><input class="answer-input" data-q="17" aria-label="Question 17"></span>
+          in order for a new quality to develop; for example, a person must understand and feel some
+          <span class="inline-answer"><span class="qnum">18</span><input class="answer-input" data-q="18" aria-label="Question 18"></span>
+          in order to increase their happiness.</p>
+        </div>
+
+        <p><em>Questions 19–22</em></p>
+        <p class="instructions">Match each statement with the correct person, <strong>A–G</strong>.</p>
+
+        <div class="list-box">
+          <h3>List of People</h3>
+          <div class="match-grid">
+            <strong>A</strong><span>Christopher Peterson</span>
+            <strong>B</strong><span>David Fajgenbaum</span>
+            <strong>C</strong><span>Suzanne Segerstrom</span>
+            <strong>D</strong><span>Tanya Streeter</span>
+            <strong>E</strong><span>Todd Kashdan</span>
+            <strong>F</strong><span>Kenneth Pedeleose</span>
+            <strong>G</strong><span>Cynthia Pury</span>
+          </div>
+        </div>
+
+        <div class="question-card" id="q19"><div class="qline"><span class="qnum">19</span><div>People must accept that they do not know much when first trying something new.<br><select data-q="19"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q20"><div class="qline"><span class="qnum">20</span><div>It is important for people to actively notice when good things happen.<br><select data-q="20"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q21"><div class="qline"><span class="qnum">21</span><div>Courage can be learned once its origins in a sense of responsibility are understood.<br><select data-q="21"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q22"><div class="qline"><span class="qnum">22</span><div>It is possible to overcome shyness when faced with the need to speak in public.<br><select data-q="22"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+
+        <p><em>Questions 23–26</em></p>
+        <p class="instructions">Reading Passage 2 has eight sections, <strong>A–H</strong>.</p>
+        <p class="instructions">Which section contains the following information?</p>
+
+        <div class="question-card" id="q23"><div class="qline"><span class="qnum">23</span><div>a mention of how rational thinking enabled someone to achieve physical goals<br><select data-q="23"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></div></div></div>
+        <div class="question-card" id="q24"><div class="qline"><span class="qnum">24</span><div>an account of how someone overcame a sad experience<br><select data-q="24"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></div></div></div>
+        <div class="question-card" id="q25"><div class="qline"><span class="qnum">25</span><div>a description of how someone decided to rethink their academic career path<br><select data-q="25"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></div></div></div>
+        <div class="question-card" id="q26"><div class="qline"><span class="qnum">26</span><div>an example of how someone risked his career out of a sense of duty<br><select data-q="26"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></div></div></div>
+      </section>
+
+      <!-- QUESTIONS 27–40 -->
+      <section class="q-section" data-qsection="3">
+        <h1>Reading Passage 3 — Questions 27–40</h1>
+
+        <p><em>Questions 27–31</em></p>
+        <p class="instructions">Choose the correct letter, <strong>A, B, C or D</strong>.</p>
+
+        <div class="question-card" id="q27">
+          <div class="qline"><span class="qnum">27</span><div>When discussing the theory developed by Louis Dollo, the writer says that</div></div>
+          <div class="option-list">
+            <label class="option"><input type="radio" name="q27" value="A"><span class="letter">A</span><span>it was immediately referred to as Dollo’s law.</span></label>
+            <label class="option"><input type="radio" name="q27" value="B"><span class="letter">B</span><span>it supported the possibility of evolutionary throwbacks.</span></label>
+            <label class="option"><input type="radio" name="q27" value="C"><span class="letter">C</span><span>it was modified by biologists in the early twentieth century.</span></label>
+            <label class="option"><input type="radio" name="q27" value="D"><span class="letter">D</span><span>it was based on many years of research.</span></label>
+          </div>
+        </div>
+
+        <div class="question-card" id="q28">
+          <div class="qline"><span class="qnum">28</span><div>The humpback whale caught off Vancouver Island is mentioned because of</div></div>
+          <div class="option-list">
+            <label class="option"><input type="radio" name="q28" value="A"><span class="letter">A</span><span>the exceptional size of its body.</span></label>
+            <label class="option"><input type="radio" name="q28" value="B"><span class="letter">B</span><span>the way it exemplifies Dollo’s law.</span></label>
+            <label class="option"><input type="radio" name="q28" value="C"><span class="letter">C</span><span>the amount of local controversy it caused.</span></label>
+            <label class="option"><input type="radio" name="q28" value="D"><span class="letter">D</span><span>the reason given for its unusual features.</span></label>
+          </div>
+        </div>
+
+        <div class="question-card" id="q29">
+          <div class="qline"><span class="qnum">29</span><div>What is said about ‘silent genes’?</div></div>
+          <div class="option-list">
+            <label class="option"><input type="radio" name="q29" value="A"><span class="letter">A</span><span>Their numbers vary according to species.</span></label>
+            <label class="option"><input type="radio" name="q29" value="B"><span class="letter">B</span><span>Raff disagreed with the use of the term.</span></label>
+            <label class="option"><input type="radio" name="q29" value="C"><span class="letter">C</span><span>They could lead to the re-emergence of certain characteristics.</span></label>
+            <label class="option"><input type="radio" name="q29" value="D"><span class="letter">D</span><span>They can have an unlimited life span.</span></label>
+          </div>
+        </div>
+
+        <div class="question-card" id="q30">
+          <div class="qline"><span class="qnum">30</span><div>The writer mentions the mole salamander because</div></div>
+          <div class="option-list">
+            <label class="option"><input type="radio" name="q30" value="A"><span class="letter">A</span><span>it exemplifies what happens in the development of most amphibians.</span></label>
+            <label class="option"><input type="radio" name="q30" value="B"><span class="letter">B</span><span>it suggests that Raff’s theory is correct.</span></label>
+            <label class="option"><input type="radio" name="q30" value="C"><span class="letter">C</span><span>it has lost and regained more than one ability.</span></label>
+            <label class="option"><input type="radio" name="q30" value="D"><span class="letter">D</span><span>its ancestors have become the subject of extensive research.</span></label>
+          </div>
+        </div>
+
+        <div class="question-card" id="q31">
+          <div class="qline"><span class="qnum">31</span><div>Which of the following does Wagner claim?</div></div>
+          <div class="option-list">
+            <label class="option"><input type="radio" name="q31" value="A"><span class="letter">A</span><span>Members of the Bachia lizard family have lost and regained certain features several times.</span></label>
+            <label class="option"><input type="radio" name="q31" value="B"><span class="letter">B</span><span>Evidence shows that the evolution of the Bachia lizard is due to the environment.</span></label>
+            <label class="option"><input type="radio" name="q31" value="C"><span class="letter">C</span><span>His research into South American lizards supports Raff’s assertions.</span></label>
+            <label class="option"><input type="radio" name="q31" value="D"><span class="letter">D</span><span>His findings will apply to other species of South American lizards.</span></label>
+          </div>
+        </div>
+
+        <p><em>Questions 32–36</em></p>
+        <p class="instructions">Complete each sentence with the correct ending, <strong>A–G</strong>, below.</p>
+
+        <div class="ending-box">
+          <div class="match-grid">
+            <strong>A</strong><span>the question of how certain long-lost traits could reappear.</span>
+            <strong>B</strong><span>the occurrence of a particular feature in different species.</span>
+            <strong>C</strong><span>parallels drawn between behaviour and appearance.</span>
+            <strong>D</strong><span>the continued existence of certain genetic information.</span>
+            <strong>E</strong><span>the doubts felt about evolutionary throwbacks.</span>
+            <strong>F</strong><span>the possibility of evolution being reversible.</span>
+            <strong>G</strong><span>Dollo’s findings and the convictions held by Lombroso.</span>
+          </div>
+        </div>
+
+        <div class="question-card" id="q32"><div class="qline"><span class="qnum">32</span><div>For a long time biologists rejected<br><select data-q="32"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q33"><div class="qline"><span class="qnum">33</span><div>Opposing views on evolutionary throwbacks are represented by<br><select data-q="33"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q34"><div class="qline"><span class="qnum">34</span><div>Examples of evolutionary throwbacks have led to<br><select data-q="34"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q35"><div class="qline"><span class="qnum">35</span><div>The shark and killer whale are mentioned to exemplify<br><select data-q="35"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+        <div class="question-card" id="q36"><div class="qline"><span class="qnum">36</span><div>One explanation for the findings of Wagner’s research is<br><select data-q="36"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></div></div></div>
+
+        <p><em>Questions 37–40</em></p>
+        <p class="instructions">Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
+        <p class="instructions">Choose <strong>YES, NO</strong> or <strong>NOT GIVEN</strong>.</p>
+
+        <div class="question-card" id="q37"><div class="qline"><span class="qnum">37</span><div>Wagner was the first person to do research on South American lizards.<br><select data-q="37"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q38"><div class="qline"><span class="qnum">38</span><div>Wagner believes that Bachia lizards with toes had toeless ancestors.<br><select data-q="38"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q39"><div class="qline"><span class="qnum">39</span><div>The temporary occurrence of long-lost traits in embryos is rare.<br><select data-q="39"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div></div></div>
+        <div class="question-card" id="q40"><div class="qline"><span class="qnum">40</span><div>Evolutionary throwbacks might be caused by developmental problems in the womb.<br><select data-q="40"><option value="">Select</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></div></div></div>
+      </section>
+
+    </div>
+  </section>
+</div>
+
+<nav class="bottom">
+  <button class="part-btn active" type="button" data-go="1">Passage 1 · Q1–13</button>
+  <button class="part-btn" type="button" data-go="2">Passage 2 · Q14–26</button>
+  <button class="part-btn" type="button" data-go="3">Passage 3 · Q27–40</button>
+  <div class="progress-area"><span><strong id="answeredText">0</strong>/40</span><div class="progress-track"><span id="progressBar"></span></div></div>
+  <button class="part-btn" id="submitBottom" type="button" style="background:var(--red);border-color:var(--red);color:#fff;min-width:100px">Submit</button>
+</nav>
+
+<div class="navigator" id="navigator">
+  <h3>Questions</h3>
+  <div class="qgrid" id="qgrid"></div>
+</div>
+
+<div class="modal show" id="startModal">
+  <div class="modal-card">
+    <h2>Academic Reading — Test 4</h2>
+    <p>You have 60 minutes to answer 40 questions. Select text in a passage and press <strong>Highlight</strong> to mark it.</p>
+    <div class="warning">Your answers are saved automatically in this browser until you submit or reset the test.</div>
+    <div class="modal-actions"><button class="btn primary" id="startBtn" type="button">Start test</button></div>
+  </div>
+</div>
+
+<div class="modal" id="confirmModal">
+  <div class="modal-card">
+    <h2>Submit your test?</h2>
+    <p id="confirmText"></p>
+    <div class="modal-actions">
+      <button class="btn" id="cancelSubmit" type="button">Continue</button>
+      <button class="btn primary" id="confirmSubmit" type="button">Submit now</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const STORAGE_KEY='cambridge10_test4_reading_v1';
+  const answers={
+    1:['spread'],2:['10 times','ten times'],3:['below'],4:['fuel'],5:['seasons'],6:['homes','housing'],
+    7:['TRUE'],8:['FALSE'],9:['TRUE'],10:['TRUE'],11:['NOT GIVEN'],12:['FALSE'],13:['FALSE'],
+    14:['transformation','change'],15:['young age'],16:['optimism'],17:['skills','techniques'],
+    18:['negative emotions','negative feelings'],19:['E'],20:['C'],21:['G'],22:['A'],
+    23:['E'],24:['C'],25:['G'],26:['H'],27:['C'],28:['D'],29:['C'],30:['B'],31:['A'],
+    32:['F'],33:['G'],34:['A'],35:['B'],36:['D'],37:['NOT GIVEN'],38:['YES'],39:['NO'],40:['YES']
+  };
+  const ranges={1:[1,13],2:[14,26],3:[27,40]};
+  let current=1,seconds=60*60,timerHandle=null,submitted=false;
+  const $=(s,r=document)=>r.querySelector(s);
+  const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  function normalise(v){
+    return String(v||'').toLowerCase().trim().replace(/[’']/g,"'")
+      .replace(/[.,;:!?]+$/g,'').replace(/\s+/g,' ');
+  }
+
+  function makeNavigator(){
+    for(let q=1;q<=40;q++){
+      const b=document.createElement('button');
+      b.type='button';b.className='qnav';b.textContent=q;b.dataset.q=q;
+      b.addEventListener('click',()=>goQuestion(q));
+      $('#qgrid').appendChild(b);
+    }
+  }
+
+  function sectionFor(q){return q<=13?1:q<=26?2:3}
+
+  function showPart(n){
+    current=n;
+    $$('.passage').forEach(x=>x.classList.toggle('active',Number(x.dataset.passage)===n));
+    $$('.q-section').forEach(x=>x.classList.toggle('active',Number(x.dataset.qsection)===n));
+    $$('.part-btn[data-go]').forEach(x=>x.classList.toggle('active',Number(x.dataset.go)===n));
+    $('#passageLabel').textContent='Reading Passage '+n;
+    $('#questionLabel').textContent=n===1?'Questions 1–13':n===2?'Questions 14–26':'Questions 27–40';
+    $('#passageScroll').scrollTop=0;$('#questionScroll').scrollTop=0;
+  }
+
+  function goQuestion(q){
+    const s=sectionFor(q);showPart(s);
+    setTimeout(()=>{
+      let target=$(`#q${q}`);
+      if(!target){
+        const control=$(`[data-q="${q}"]`);
+        target=control?.closest('.summary-box') || control;
+      }
+      target?.scrollIntoView({behavior:'smooth',block:'center'});
+      $('#navigator').classList.remove('show');
+    },60);
+  }
+
+  function collect(){
+    const data={};
+    $$('[data-q]').forEach(el=>{
+      if(el.matches('input,select')) data[el.dataset.q]=el.value;
+    });
+    $$('input[type=radio]:checked').forEach(el=>data[el.name.slice(1)]=el.value);
+    return data;
+  }
+
+  function countAnswered(){
+    const data=collect();let n=0;
+    for(let q=1;q<=40;q++) if(String(data[q]||'').trim()) n++;
+    return n;
+  }
+
+  function updateProgress(){
+    const data=collect(),n=countAnswered();
+    $('#answeredText').textContent=n;$('#progressBar').style.width=(n/40*100)+'%';
+    for(let q=1;q<=40;q++){
+      const b=$(`.qnav[data-q="${q}"]`);
+      if(b&&!submitted)b.classList.toggle('answered',String(data[q]||'').trim()!=='');
+    }
+  }
+
+  function save(){
+    if(!submitted)localStorage.setItem(STORAGE_KEY,JSON.stringify(collect()));
+  }
+
+  function restore(){
+    let data={};try{data=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch(e){}
+    $$('[data-q]').forEach(el=>{if(data[el.dataset.q]!=null)el.value=data[el.dataset.q]});
+    $$('input[type=radio]').forEach(el=>el.checked=data[el.name.slice(1)]===el.value);
+    updateProgress();
+  }
+
+  function band(score){
+    if(score>=39)return 9;
+    if(score>=37)return 8.5;
+    if(score>=35)return 8;
+    if(score>=33)return 7.5;
+    if(score>=30)return 7;
+    if(score>=27)return 6.5;
+    if(score>=23)return 6;
+    if(score>=19)return 5.5;
+    if(score>=15)return 5;
+    if(score>=13)return 4.5;
+    if(score>=10)return 4;
+    if(score>=8)return 3.5;
+    if(score>=6)return 3;
+    if(score>=4)return 2.5;
+    if(score>=3)return 2;
+    if(score>=2)return 1.5;
+    if(score>=1)return 1;
+    return 0;
+  }
+
+  function addReview(q,ok,correct){
+    let host=$(`#q${q}`) || $(`[data-q="${q}"]`)?.closest('.summary-box');
+    if(!host)return;
+    let note=host.querySelector(`.review[data-review="${q}"]`);
+    if(!note){
+      note=document.createElement('div');note.className='review';note.dataset.review=q;
+      const control=$(`[data-q="${q}"]`);
+      if(control&&control.closest('.inline-answer')) control.closest('.inline-answer').insertAdjacentElement('afterend',note);
+      else host.appendChild(note);
+    }
+    note.textContent=ok?'Correct':'Correct answer: '+correct;
+    note.classList.add('show',ok?'correct':'wrong');
+  }
+
+  function submit(){
+    submitted=true;clearInterval(timerHandle);$('#confirmModal').classList.remove('show');
+    const data=collect();let score=0;
+    for(let q=1;q<=40;q++){
+      const accepted=answers[q];
+      const ok=accepted.some(x=>normalise(x)===normalise(data[q]));
+      if(ok)score++;
+      const control=$(`[data-q="${q}"]`) || $(`input[name="q${q}"]:checked`);
+      if(control){
+        const target=control.type==='radio'?control.closest('.option'):control;
+        target.classList.add(ok?'correct-control':'wrong-control');
+      }
+      addReview(q,ok,accepted.join(' / '));
+      const nav=$(`.qnav[data-q="${q}"]`);
+      nav.classList.remove('answered');nav.classList.add(ok?'correct':'wrong');
+    }
+    const done=countAnswered();
+    $('#scoreOut').textContent=score+'/40';
+    $('#bandOut').textContent=band(score);
+    $('#answeredOut').textContent=done+'/40';
+    $('#resultMessage').textContent=score>=35?'Excellent result.':score>=30?'Strong Academic Reading performance.':score>=23?'Good foundation. Review the highlighted mistakes.':'Review the passage evidence and repeat the question types you missed.';
+    $('#resultCard').classList.add('show');
+    $('#questionScroll').scrollTo({top:0,behavior:'smooth'});
+    $$('input,select').forEach(x=>x.disabled=true);
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function askSubmit(){
+    const missing=40-countAnswered();
+    $('#confirmText').textContent=missing?`${missing} question${missing===1?' is':'s are'} unanswered. You can still submit now.`:'All 40 questions are answered.';
+    $('#confirmModal').classList.add('show');
+  }
+
+  function highlightSelection(){
+    const sel=window.getSelection();
+    if(!sel||sel.rangeCount===0||sel.isCollapsed)return;
+    const range=sel.getRangeAt(0);
+    const activePassage=$('.passage.active');
+    if(!activePassage.contains(range.commonAncestorContainer))return;
+    const mark=document.createElement('mark');mark.className='user-highlight';
+    try{
+      mark.appendChild(range.extractContents());
+      range.insertNode(mark);
+      sel.removeAllRanges();
+    }catch(e){}
+  }
+
+  function clearHighlights(){
+    $$('mark.user-highlight').forEach(mark=>{
+      const p=mark.parentNode;
+      while(mark.firstChild)p.insertBefore(mark.firstChild,mark);
+      p.removeChild(mark);p.normalize();
+    });
+  }
+
+  function tick(){
+    seconds--;
+    if(seconds<=0){seconds=0;$('#timer').textContent='00:00';submit();return}
+    const m=String(Math.floor(seconds/60)).padStart(2,'0');
+    const s=String(seconds%60).padStart(2,'0');
+    $('#timer').textContent=m+':'+s;
+    if(seconds<=300)$('#timer').style.color='#b42318';
+  }
+
+  makeNavigator();restore();
+
+  $$('[data-q]').forEach(el=>el.addEventListener('input',()=>{save();updateProgress()}));
+  $$('input[type=radio]').forEach(el=>el.addEventListener('change',()=>{save();updateProgress()}));
+  $$('.part-btn[data-go]').forEach(b=>b.addEventListener('click',()=>showPart(Number(b.dataset.go))));
+  $('#navToggle').addEventListener('click',()=>$('#navigator').classList.toggle('show'));
+  $('#navToggle2').addEventListener('click',()=>$('#navigator').classList.toggle('show'));
+  $('#highlightBtn').addEventListener('mousedown',e=>e.preventDefault());
+  $('#highlightBtn').addEventListener('click',highlightSelection);
+  $('#clearHighlights').addEventListener('click',clearHighlights);
+  $('#submitTop').addEventListener('click',askSubmit);
+  $('#submitBottom').addEventListener('click',askSubmit);
+  $('#cancelSubmit').addEventListener('click',()=>$('#confirmModal').classList.remove('show'));
+  $('#confirmSubmit').addEventListener('click',submit);
+  $('#startBtn').addEventListener('click',()=>{$('#startModal').classList.remove('show');timerHandle=setInterval(tick,1000)});
+  $('#fullscreenBtn').addEventListener('click',()=>{
+    if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  });
+})();
+</script>
+</body>
+</html>

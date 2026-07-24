@@ -1,0 +1,978 @@
+{
+  "id": "cambridge-ielts-10-test-4",
+  "slug": "cambridge-ielts-10-test-4",
+  "title": "Cambridge IELTS 10 Test 4 Listening",
+  "subtitle": "Listening full test",
+  "sourceFile": "Cambridge_IELTS_10_Test_4_Listening.html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "generic",
+  "manualListeningTestId": "cambridge-ielts-10-test-4-listening-full",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-1.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-1.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-ielts-10-test-4-p1-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 1–6",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "THORNDYKE'S BUILDERS",
+            "example": "Customer heard about Thorndyke's from a friend.",
+            "noteStyle": "thorndykes-builders",
+            "content": [
+              "<strong>Name:</strong> Edith {{1}}",
+              "<strong>Address:</strong> Flat 4, {{2}} Park Flats",
+              "• Behind the {{3}}",
+              "<strong>Phone number:</strong> 875934",
+              "<strong>Best time to contact customer:</strong> during the {{4}}",
+              "<strong>Where to park:</strong> opposite entrance next to the {{5}}",
+              "Needs full quote showing all the jobs and the {{6}}."
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "Name: Edith ...",
+                "options": [],
+                "answer": "PARGETTER"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Address: Flat 4, ... Park Flats",
+                "options": [],
+                "answer": "EAST"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Behind the ...",
+                "options": [],
+                "answer": "LIBRARY"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Best time to contact customer: during the ...",
+                "options": [],
+                "answer": "MORNING | MORNINGS"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Where to park: opposite entrance next to the ...",
+                "options": [],
+                "answer": "POSTBOX"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "Needs full quote showing all the jobs and the ...",
+                "options": [],
+                "answer": "PRICES"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-ielts-10-test-4-p1-g2",
+            "type": "table_completion",
+            "instructionTitle": "Questions 7–10",
+            "instructionText": "Complete the table below.\nWrite ONE WORD ONLY for each answer.",
+            "noteStyle": "thorndykes-work-table",
+            "columns": [
+              "Area",
+              "Work to be done",
+              "Notes"
+            ],
+            "rows": [
+              [
+                "Kitchen",
+                "Replace the {{7}} in the door",
+                "Fix tomorrow"
+              ],
+              [
+                "Kitchen",
+                "Paint wall above the {{8}}",
+                "Strip paint and plaster approximately one {{9}} in advance"
+              ],
+              [
+                "Garden",
+                "One {{10}} needs replacing (end of garden)",
+                ""
+              ]
+            ],
+            "questions": [
+              {
+                "number": 7,
+                "type": "table_completion",
+                "question": "Replace the ... in the door",
+                "options": [],
+                "answer": "GLASS"
+              },
+              {
+                "number": 8,
+                "type": "table_completion",
+                "question": "Paint wall above the ...",
+                "options": [],
+                "answer": "COOKER"
+              },
+              {
+                "number": 9,
+                "type": "table_completion",
+                "question": "Strip paint and plaster approximately one ... in advance",
+                "options": [],
+                "answer": "WEEK"
+              },
+              {
+                "number": 10,
+                "type": "table_completion",
+                "question": "One ... needs replacing (end of garden)",
+                "options": [],
+                "answer": "FENCE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-2.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-ielts-10-test-4-p2-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11–15",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "MANHAM PORT",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "Why did a port originally develop at Manham?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It was safe from enemy attack."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It was convenient for river transport."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It had a good position on the sea coast."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "What caused Manham’s sudden expansion during the Industrial Revolution?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the improvement in mining techniques"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "the increase in demand for metals"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the discovery of tin in the area"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "Why did rocks have to be sent away from Manham to be processed?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "shortage of fuel"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "poor transport systems"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "lack of skills among local people"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "What happened when the port declined in the twentieth century?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "The workers went away."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Traditional skills were lost."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Buildings were used for new purposes."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "What did the Manham Trust hope to do?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "discover the location of the original port"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "provide jobs for the unemployed"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "rebuild the port complex"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-ielts-10-test-4-p2-g2",
+            "type": "table_completion",
+            "instructionTitle": "Questions 16–20",
+            "instructionText": "Complete the table below.\nWrite NO MORE THAN TWO WORDS for each answer.",
+            "title": "Tourist attractions in Manham",
+            "columns": [
+              "Place",
+              "Features and activities",
+              "Advice"
+            ],
+            "rows": [
+              [
+                "copper mine",
+                "specially adapted miners' {{16}} take visitors into the mountain",
+                "the mine is {{17}} and enclosed — unsuitable for children and animals"
+              ],
+              [
+                "village school",
+                "classrooms and a special exhibition of {{18}}",
+                "a {{19}} is recommended"
+              ],
+              [
+                "'The George' (old sailing ship)",
+                "the ship's wheel (was lost but has now been restored)",
+                "children shouldn't use the {{20}}"
+              ]
+            ],
+            "questions": [
+              {
+                "number": 16,
+                "type": "table_completion",
+                "question": "Specially adapted miners' ... take visitors into the mountain",
+                "options": [],
+                "answer": "TRAINS"
+              },
+              {
+                "number": 17,
+                "type": "table_completion",
+                "question": "The mine is ... and enclosed",
+                "options": [],
+                "answer": "DARK"
+              },
+              {
+                "number": 18,
+                "type": "table_completion",
+                "question": "A special exhibition of ...",
+                "options": [],
+                "answer": "GAMES"
+              },
+              {
+                "number": 19,
+                "type": "table_completion",
+                "question": "A ... is recommended",
+                "options": [],
+                "answer": "GUIDED TOUR"
+              },
+              {
+                "number": 20,
+                "type": "table_completion",
+                "question": "Children shouldn't use the ...",
+                "options": [],
+                "answer": "LADDER | LADDERS"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-3.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-ielts-10-test-4-p3-g1",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 21–22",
+            "instructionText": "Choose TWO letters, A–E.",
+            "question": "Which TWO skills did Laura improve as a result of her work placement?",
+            "options": [
+              {
+                "letter": "A",
+                "text": "communication"
+              },
+              {
+                "letter": "B",
+                "text": "design"
+              },
+              {
+                "letter": "C",
+                "text": "IT"
+              },
+              {
+                "letter": "D",
+                "text": "marketing"
+              },
+              {
+                "letter": "E",
+                "text": "organisation"
+              }
+            ],
+            "questions": [
+              {
+                "number": 21,
+                "type": "multi_select",
+                "question": "Which TWO skills did Laura improve as a result of her work placement?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "communication"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "design"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "IT"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "marketing"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "organisation"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 22,
+                "type": "multi_select",
+                "question": "Which TWO skills did Laura improve as a result of her work placement?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "communication"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "design"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "IT"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "marketing"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "organisation"
+                  }
+                ],
+                "answer": "E"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-ielts-10-test-4-p3-g2",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 23–24",
+            "instructionText": "Choose TWO letters, A–E.",
+            "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+            "options": [
+              {
+                "letter": "A",
+                "text": "updates for its software"
+              },
+              {
+                "letter": "B",
+                "text": "cost savings"
+              },
+              {
+                "letter": "C",
+                "text": "an improved image"
+              },
+              {
+                "letter": "D",
+                "text": "new clients"
+              },
+              {
+                "letter": "E",
+                "text": "a growth in sales"
+              }
+            ],
+            "questions": [
+              {
+                "number": 23,
+                "type": "multi_select",
+                "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "updates for its software"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "cost savings"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "an improved image"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "new clients"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a growth in sales"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 24,
+                "type": "multi_select",
+                "question": "Which TWO immediate benefits did the company get from Laura's work placement?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "updates for its software"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "cost savings"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "an improved image"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "new clients"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a growth in sales"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-ielts-10-test-4-p3-g3",
+            "type": "matching",
+            "instructionTitle": "Questions 25–30",
+            "instructionText": "What source of information should Tim use at each of the following stages of the work placement?\nChoose SIX answers from the box and write the correct letter, A–G, next to questions 25–30.",
+            "title": "Stages of the work placement procedure",
+            "optionsTitle": "Sources of information",
+            "noteStyle": "work-placement-sources",
+            "options": [
+              {
+                "letter": "A",
+                "text": "company manager"
+              },
+              {
+                "letter": "B",
+                "text": "company's personnel department"
+              },
+              {
+                "letter": "C",
+                "text": "personal tutor"
+              },
+              {
+                "letter": "D",
+                "text": "psychology department"
+              },
+              {
+                "letter": "E",
+                "text": "mentor"
+              },
+              {
+                "letter": "F",
+                "text": "university careers officer"
+              },
+              {
+                "letter": "G",
+                "text": "internet"
+              }
+            ],
+            "questions": [
+              {
+                "number": 25,
+                "type": "matching",
+                "question": "obtaining booklet",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 26,
+                "type": "matching",
+                "question": "discussing options",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 27,
+                "type": "matching",
+                "question": "getting updates",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 28,
+                "type": "matching",
+                "question": "responding to invitation for interview",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 29,
+                "type": "matching",
+                "question": "informing about outcome of interview",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 30,
+                "type": "matching",
+                "question": "requesting a reference",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "company manager"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "company's personnel department"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "personal tutor"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "psychology department"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "mentor"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "university careers officer"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "internet"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-4.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "cambridge-ielts-10-test-4-p4-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 31–33",
+            "instructionText": "Choose the correct letter, A, B or C.",
+            "title": "Nanotechnology: technology on a small scale",
+            "questions": [
+              {
+                "number": 31,
+                "type": "multiple_choice",
+                "question": "The speaker says that one problem with nanotechnology is that",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "it could threaten our way of life."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "it could be used to spy on people."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "it is misunderstood by the public."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 32,
+                "type": "multiple_choice",
+                "question": "According to the speaker, some scientists believe that nano-particles",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "should be restricted to secure environments."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "should be used with more caution."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "should only be developed for essential products."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 33,
+                "type": "multiple_choice",
+                "question": "In the speaker’s opinion, research into nanotechnology",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "has yet to win popular support."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "could be seen as unethical."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "ought to be continued."
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "cambridge-ielts-10-test-4-p4-g2",
+            "type": "note_completion",
+            "instructionTitle": "Questions 34–40",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "Uses of Nanotechnology",
+            "noteStyle": "nanotechnology-uses",
+            "content": [
+              "<strong>Transport</strong>",
+              "• Nanotechnology could allow the development of stronger {{34}}.",
+              "• Planes would be much lighter in weight.",
+              "• {{35}} travel will be made available to the masses.",
+              "<strong>Technology</strong>",
+              "• Computers will be even smaller, faster, and will have a greater {{36}}.",
+              "• {{37}} energy will become more affordable.",
+              "<strong>The Environment</strong>",
+              "• Nano-robots could rebuild the ozone layer.",
+              "• Pollutants such as {{38}} could be removed from water more easily.",
+              "• There will be no {{39}} from manufacturing.",
+              "<strong>Health and Medicine</strong>",
+              "• New methods of food production could eradicate famine.",
+              "• Analysis of medical {{40}} will be speeded up.",
+              "• Life expectancy could be increased."
+            ],
+            "questions": [
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "Nanotechnology could allow the development of stronger ...",
+                "options": [],
+                "answer": "METAL | METALS"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "... travel will be made available to the masses",
+                "options": [],
+                "answer": "SPACE"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Computers will have a greater ...",
+                "options": [],
+                "answer": "MEMORY"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "... energy will become more affordable",
+                "options": [],
+                "answer": "SOLAR"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Pollutants such as ... could be removed from water more easily",
+                "options": [],
+                "answer": "OIL"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "There will be no ... from manufacturing",
+                "options": [],
+                "answer": "WASTE"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "Analysis of medical ... will be speeded up",
+                "options": [],
+                "answer": "TESTS"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "PARGETTER",
+    "2": "EAST",
+    "3": "LIBRARY",
+    "4": "MORNING | MORNINGS",
+    "5": "POSTBOX",
+    "6": "PRICES",
+    "7": "GLASS",
+    "8": "COOKER",
+    "9": "WEEK",
+    "10": "FENCE",
+    "11": "B",
+    "12": "B",
+    "13": "A",
+    "14": "A",
+    "15": "C",
+    "16": "TRAINS",
+    "17": "DARK",
+    "18": "GAMES",
+    "19": "GUIDED TOUR",
+    "20": "LADDER | LADDERS",
+    "21": "A",
+    "22": "E",
+    "23": "B",
+    "24": "C",
+    "25": "D",
+    "26": "F",
+    "27": "G",
+    "28": "B",
+    "29": "E",
+    "30": "C",
+    "31": "C",
+    "32": "B",
+    "33": "C",
+    "34": "METAL | METALS",
+    "35": "SPACE",
+    "36": "MEMORY",
+    "37": "SOLAR",
+    "38": "OIL",
+    "39": "WASTE",
+    "40": "TESTS"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-07-24T03:25:34.235Z",
+  "publishedAt": "2026-07-24T03:25:34.235Z",
+  "openUrl": "/full-test-player?id=cambridge-ielts-10-test-4&skill=listening"
+}

@@ -1,0 +1,279 @@
+{
+  "id": "cambridge-ielts-10-test-4-listening-s1",
+  "slug": "cambridge-ielts-10-test-4-listening-s1",
+  "title": "Cambridge IELTS 10 Test 4 Listening — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/cambridge-ielts-10-test-4-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–6",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "title": "Questions 7–10",
+      "instruction": "Complete the table below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Name: Edith ...",
+      "options": [],
+      "answer": "PARGETTER"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Address: Flat 4, ... Park Flats",
+      "options": [],
+      "answer": "EAST"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Behind the ...",
+      "options": [],
+      "answer": "LIBRARY"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Best time to contact customer: during the ...",
+      "options": [],
+      "answer": "MORNING | MORNINGS"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Where to park: opposite entrance next to the ...",
+      "options": [],
+      "answer": "POSTBOX"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Needs full quote showing all the jobs and the ...",
+      "options": [],
+      "answer": "PRICES"
+    },
+    {
+      "number": 7,
+      "type": "table_completion",
+      "question": "Replace the ... in the door",
+      "options": [],
+      "answer": "GLASS"
+    },
+    {
+      "number": 8,
+      "type": "table_completion",
+      "question": "Paint wall above the ...",
+      "options": [],
+      "answer": "COOKER"
+    },
+    {
+      "number": 9,
+      "type": "table_completion",
+      "question": "Strip paint and plaster approximately one ... in advance",
+      "options": [],
+      "answer": "WEEK"
+    },
+    {
+      "number": 10,
+      "type": "table_completion",
+      "question": "One ... needs replacing (end of garden)",
+      "options": [],
+      "answer": "FENCE"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "cambridge-ielts-10-test-4",
+  "createdAt": "2026-07-24T03:25:34.235Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/cambridge-ielts-10-test-4-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: PARGETTER\n2: EAST\n3: LIBRARY\n4: MORNING | MORNINGS\n5: POSTBOX\n6: PRICES\n7: GLASS\n8: COOKER\n9: WEEK\n10: FENCE",
+      "blocks": [
+        {
+          "id": "cambridge-ielts-10-test-4-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–6",
+          "title": "THORNDYKE'S BUILDERS",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "Customer heard about Thorndyke's from a friend.",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>Name:</strong> Edith {{1}}",
+            "<strong>Address:</strong> Flat 4, {{2}} Park Flats",
+            "• Behind the {{3}}",
+            "<strong>Phone number:</strong> 875934",
+            "<strong>Best time to contact customer:</strong> during the {{4}}",
+            "<strong>Where to park:</strong> opposite entrance next to the {{5}}",
+            "Needs full quote showing all the jobs and the {{6}}."
+          ],
+          "noteStyle": "thorndykes-builders",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "Name: Edith ...",
+              "text": "Name: Edith ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PARGETTER"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Address: Flat 4, ... Park Flats",
+              "text": "Address: Flat 4, ... Park Flats",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "EAST"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Behind the ...",
+              "text": "Behind the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "LIBRARY"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Best time to contact customer: during the ...",
+              "text": "Best time to contact customer: during the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "MORNING | MORNINGS"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Where to park: opposite entrance next to the ...",
+              "text": "Where to park: opposite entrance next to the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "POSTBOX"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "Needs full quote showing all the jobs and the ...",
+              "text": "Needs full quote showing all the jobs and the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "PRICES"
+            }
+          ]
+        },
+        {
+          "id": "cambridge-ielts-10-test-4-p1-g2",
+          "type": "table_completion",
+          "questionRange": "Questions 7–10",
+          "title": "",
+          "optionsTitle": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the table below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [
+            [
+              "Kitchen",
+              "Replace the {{7}} in the door",
+              "Fix tomorrow"
+            ],
+            [
+              "Kitchen",
+              "Paint wall above the {{8}}",
+              "Strip paint and plaster approximately one {{9}} in advance"
+            ],
+            [
+              "Garden",
+              "One {{10}} needs replacing (end of garden)",
+              ""
+            ]
+          ],
+          "columns": [
+            "Area",
+            "Work to be done",
+            "Notes"
+          ],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "thorndykes-work-table",
+          "questions": [
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "Replace the ... in the door",
+              "text": "Replace the ... in the door",
+              "options": [],
+              "type": "table_completion",
+              "answer": "GLASS"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "Paint wall above the ...",
+              "text": "Paint wall above the ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "COOKER"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Strip paint and plaster approximately one ... in advance",
+              "text": "Strip paint and plaster approximately one ... in advance",
+              "options": [],
+              "type": "table_completion",
+              "answer": "WEEK"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "One ... needs replacing (end of garden)",
+              "text": "One ... needs replacing (end of garden)",
+              "options": [],
+              "type": "table_completion",
+              "answer": "FENCE"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

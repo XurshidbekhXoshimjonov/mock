@@ -827,6 +827,86 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderThorndykesInput(questionNumber) {
+            const number = Number(questionNumber);
+            return `<span class="lc-thorndykes-answer" id="question-${number}" data-question="${number}">
+                <span class="lc-thorndykes-number">${number}</span>
+                <input class="lc-answer-input lc-thorndykes-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderThorndykesBuilders(title) {
+            return `
+                <div class="lc-thorndykes-form">
+                    <h4 class="lc-thorndykes-title">${escapeHtml(title || "THORNDYKE'S BUILDERS")}</h4>
+                    <div class="lc-thorndykes-example">
+                        <em>Example</em>
+                        <p>Customer heard about Thorndyke's from a <span>friend</span>.</p>
+                    </div>
+                    <div class="lc-thorndykes-details">
+                        <strong>Name:</strong>
+                        <p>Edith ${renderThorndykesInput(1)}</p>
+
+                        <strong class="lc-thorndykes-address-label">Address:</strong>
+                        <div class="lc-thorndykes-address">
+                            <p>Flat 4,</p>
+                            <p>${renderThorndykesInput(2)} Park Flats</p>
+                            <p>(Behind the ${renderThorndykesInput(3)})</p>
+                        </div>
+
+                        <strong>Phone number:</strong>
+                        <p>875934</p>
+
+                        <strong>Best time to contact customer:</strong>
+                        <p>during the ${renderThorndykesInput(4)}</p>
+
+                        <strong>Where to park:</strong>
+                        <p>opposite entrance next to the ${renderThorndykesInput(5)}</p>
+                    </div>
+                    <p class="lc-thorndykes-quote">Needs full quote showing all the jobs and the ${renderThorndykesInput(6)}.</p>
+                </div>
+            `;
+        }
+
+        function renderNanotechnologyInput(questionNumber) {
+            const number = Number(questionNumber);
+            return `<span class="lc-nanotech-answer" id="question-${number}" data-question="${number}">
+                <span class="lc-nanotech-number">${number}</span>
+                <input class="lc-answer-input lc-nanotech-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderNanotechnologyUses(title) {
+            return `
+                <div class="lc-nanotech-notes">
+                    <h4>${escapeHtml(title || "Uses of Nanotechnology")}</h4>
+                    <h5>Transport</h5>
+                    <ul>
+                        <li>Nanotechnology could allow the development of stronger ${renderNanotechnologyInput(34)}.</li>
+                        <li>Planes would be much lighter in weight.</li>
+                        <li>${renderNanotechnologyInput(35)} travel will be made available to the masses.</li>
+                    </ul>
+                    <h5>Technology</h5>
+                    <ul>
+                        <li>Computers will be even smaller, faster, and will have a greater ${renderNanotechnologyInput(36)}.</li>
+                        <li>${renderNanotechnologyInput(37)} energy will become more affordable.</li>
+                    </ul>
+                    <h5>The Environment</h5>
+                    <ul>
+                        <li>Nano-robots could rebuild the ozone layer.</li>
+                        <li>Pollutants such as ${renderNanotechnologyInput(38)} could be removed from water more easily.</li>
+                        <li>There will be no ${renderNanotechnologyInput(39)} from manufacturing.</li>
+                    </ul>
+                    <h5>Health and Medicine</h5>
+                    <ul>
+                        <li>New methods of food production could eradicate famine.</li>
+                        <li>Analysis of medical ${renderNanotechnologyInput(40)} will be speeded up.</li>
+                        <li>Life expectancy could be increased.</li>
+                    </ul>
+                </div>
+            `;
+        }
+
         function renderTransportSurvey(lines, title) {
             const body = (lines || [])
                 .map((line) => String(line || "").trim())
@@ -892,6 +972,14 @@ const ListeningComponents = (() => {
             return blockCard(block, renderSelfRegulatoryFocus(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--self-regulatory-focus");
         }
 
+        if (block.noteStyle === "thorndykes-builders") {
+            return blockCard(block, renderThorndykesBuilders(displayTitle || block.title), "lc-note-completion lc-note-completion--thorndykes-builders");
+        }
+
+        if (block.noteStyle === "nanotechnology-uses") {
+            return blockCard(block, renderNanotechnologyUses(displayTitle || block.title), "lc-note-completion lc-note-completion--nanotechnology-uses");
+        }
+
         const isSpiritBear = isBoxedFlow && /^the spirit bear$/i.test(plainText(displayTitle));
         const isMangroveProject = block.noteStyle === "mangrove-project";
         const noteStyleClass = [
@@ -945,6 +1033,43 @@ const ListeningComponents = (() => {
     }
 
     function TableCompletionBlock(block) {
+        if (block.noteStyle === "thorndykes-work-table") {
+            const answer = (number) => `<span class="lc-thorndykes-table-answer" id="question-${number}" data-question="${number}">
+                <span class="lc-thorndykes-table-number">${number}</span>
+                <input class="lc-answer-input lc-thorndykes-table-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+
+            return blockCard(block, `
+                <div class="lc-thorndykes-table-wrap">
+                    <table class="lc-thorndykes-work-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Area</th>
+                                <th scope="col">Work to be done</th>
+                                <th scope="col">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="rowgroup" rowspan="2">Kitchen</th>
+                                <td>Replace the ${answer(7)}<br>in the door</td>
+                                <td>Fix tomorrow</td>
+                            </tr>
+                            <tr>
+                                <td>Paint wall above<br>the ${answer(8)}</td>
+                                <td>Strip paint and plaster<br>approximately one<br>${answer(9)} in advance</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Garden</th>
+                                <td>One ${answer(10)} needs<br>replacing (end of garden)</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `, "lc-table-completion lc-table-completion--thorndykes-work");
+        }
+
         const rawColumns = block.columns || [];
         const hasRowHeaders = rawColumns.length > 0 && !normalizedTableCell(rawColumns[0]);
         const columns = rawColumns.map((column) => `<th scope="col">${renderTableHeaderCell(column)}</th>`).join("");
@@ -971,6 +1096,40 @@ const ListeningComponents = (() => {
     }
 
     function MatchingBlock(block) {
+        if (block.noteStyle === "work-placement-sources") {
+            const optionItems = (block.options || []).map((option) => `
+                <div class="lc-work-source-option">
+                    <strong>${escapeHtml(option.letter || "")}</strong>
+                    <span>${escapeHtml(cleanOptionText(option.text || ""))}</span>
+                </div>
+            `).join("");
+            const optionTags = (block.options || []).map((option) =>
+                `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(option.letter || "")}</option>`
+            ).join("");
+            const questionRows = (block.questions || []).map((question) => {
+                const number = Number(question.questionNumber);
+                return `<div class="lc-work-stage-row">
+                    <strong>${number}</strong>
+                    <span>${escapeHtml(question.text || question.question || "")}</span>
+                    <select name="q${number}" aria-label="Answer ${number}">
+                        <option value="">&ndash;</option>
+                        ${optionTags}
+                    </select>
+                </div>`;
+            }).join("");
+
+            return blockCard(block, `
+                <div class="lc-work-sources-box">
+                    <h4>${escapeHtml(block.optionsTitle || "Sources of information")}</h4>
+                    <div class="lc-work-source-options">${optionItems}</div>
+                </div>
+                <div class="lc-work-stages">
+                    <h4>${escapeHtml(block.title || "Stages of the work placement procedure")}</h4>
+                    ${questionRows}
+                </div>
+            `, "lc-matching-block lc-matching-block--work-placement");
+        }
+
         if (isFlowChartMatchingBlock(block)) {
             const optionItems = (block.options || []).map((option) =>
                 `<div class="lc-flowchart-option"><strong>${escapeHtml(option.letter || "")}</strong> ${escapeHtml(cleanOptionText(option.text || ""))}</div>`

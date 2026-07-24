@@ -1247,6 +1247,19 @@ function showFullListeningResult(root, result, options = {}) {
         notice.textContent = autoSubmitMessage;
         notice.classList.toggle("hidden", !options.autoSubmit);
     }
+    const hasMistakes = Number(result.correct) < Number(result.total);
+    const reviewMistakes = modal.querySelector("[data-listening-review-mistakes]");
+    const reviewLater = modal.querySelector("[data-listening-review-later]");
+    const close = modal.querySelector("[data-listening-result-close]:not(.lc-modal-close)");
+    if (reviewMistakes) {
+        const params = new URLSearchParams({ skill: "listening" });
+        if (result.attemptId) params.set("attemptId", result.attemptId);
+        reviewMistakes.href = `/review-mistakes?${params}`;
+        reviewMistakes.textContent = "Review Listening Mistakes";
+        reviewMistakes.classList.toggle("hidden", !hasMistakes);
+    }
+    if (reviewLater) reviewLater.classList.toggle("hidden", !hasMistakes);
+    if (close) close.classList.toggle("hidden", hasMistakes);
     modal.classList.remove("hidden");
 }
 
@@ -1447,6 +1460,9 @@ function renderFullListeningPlayer() {
                 }
                 rootElement._listeningResult = result;
                 showFullListeningResult(rootElement, result, options);
+                window.dispatchEvent(new CustomEvent("ieltsx:mistakes-changed", {
+                    detail: { skill: "listening", count: Number(result.mistakeCount) || 0 }
+                }));
                 window.authClient?.recordTestResult({
                     type: "full-test",
                     skill: "listening",
@@ -1455,6 +1471,7 @@ function renderFullListeningPlayer() {
                     total: result.total,
                     band: result.band,
                     testId: test.id || testId,
+                    attemptId: result.attemptId,
                     part: "full",
                     practiceUrl: window.location.pathname,
                     correctAnswers: result.questionResults
