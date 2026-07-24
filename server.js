@@ -49,6 +49,11 @@ const { validateUploadContents } = require("./lib/upload-content-validation");
 const { calculateReadingBand, calculateListeningBand, scoreSkill } = require("./lib/ielts-import/bandScoring");
 const { publicTestData, collectScorableQuestions } = require("./lib/public-test-data");
 const { createCsrfProtection } = require("./lib/csrf-protection");
+const {
+    runtimeNamespace,
+    resolveRuntimeDataDir,
+    resolveMongoDbName
+} = require("./lib/runtime-environment");
 
 let TranslateClient = null;
 try {
@@ -88,27 +93,42 @@ const signupRateLimit = createAuthRateLimiter({
 });
 const RUNTIME_WRITE_DIR = ROOT_DIR;
 const BUNDLED_DATA_DIR = path.join(ROOT_DIR, "data");
+const RUNTIME_NAMESPACE = runtimeNamespace();
+const RUNTIME_DATA_DIR = resolveRuntimeDataDir(ROOT_DIR);
 const UPLOAD_DIR = path.join(RUNTIME_WRITE_DIR, "uploads");
 const DATA_DIR = BUNDLED_DATA_DIR;
-const USERS_FILE = path.join(DATA_DIR, "users.json");
+
+function runtimeDataFile(fileName) {
+    const target = path.join(RUNTIME_DATA_DIR, fileName);
+    const legacy = path.join(BUNDLED_DATA_DIR, fileName);
+
+    fs.mkdirSync(RUNTIME_DATA_DIR, { recursive: true });
+    if (RUNTIME_NAMESPACE !== "production" && !fs.existsSync(target) && fs.existsSync(legacy)) {
+        fs.copyFileSync(legacy, target);
+    }
+
+    return target;
+}
+
+const USERS_FILE = runtimeDataFile("users.json");
 const userStore = createUserStore({ User, usersFile: USERS_FILE });
-const USER_PROGRESS_FILE = path.join(DATA_DIR, "user-progress.json");
+const USER_PROGRESS_FILE = runtimeDataFile("user-progress.json");
 const userProgressStore = createUserProgressStore(USER_PROGRESS_FILE);
-const REVIEW_MISTAKES_FILE = path.join(DATA_DIR, "review-mistakes.json");
+const REVIEW_MISTAKES_FILE = runtimeDataFile("review-mistakes.json");
 const reviewMistakeStore = createReviewMistakeStore({
     filePath: REVIEW_MISTAKES_FILE,
     mongoose,
     ReviewMistake
 });
-const USER_VOCABULARY_FILE = path.join(DATA_DIR, "user-vocabulary.json");
+const USER_VOCABULARY_FILE = runtimeDataFile("user-vocabulary.json");
 const vocabularyStore = createVocabularyStore({
     filePath: USER_VOCABULARY_FILE,
     mongoose,
     VocabularyWord
 });
-const STUDY_PLANS_FILE = path.join(DATA_DIR, "study-plans.json");
+const STUDY_PLANS_FILE = runtimeDataFile("study-plans.json");
 const studyPlanStore = createStudyPlanStore({ filePath: STUDY_PLANS_FILE, mongoose, StudyPlan });
-const AI_COACH_FILE = path.join(DATA_DIR, "ai-coach.json");
+const AI_COACH_FILE = runtimeDataFile("ai-coach.json");
 const aiCoachStore = createAICoachStore({
     filePath: AI_COACH_FILE,
     mongoose,
@@ -120,9 +140,9 @@ const aiCoachStore = createAICoachStore({
 const MANUAL_PAYMENT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000;
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
 const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
-const MOCK_TEST_RESULTS_FILE = path.join(DATA_DIR, "mock-test-results.json");
-const VOCABULARY_CACHE_FILE = path.join(DATA_DIR, "vocabulary-cache.json");
-const READING_VOCABULARY_CLICKS_FILE = path.join(DATA_DIR, "reading-vocabulary-clicks.json");
+const MOCK_TEST_RESULTS_FILE = runtimeDataFile("mock-test-results.json");
+const VOCABULARY_CACHE_FILE = runtimeDataFile("vocabulary-cache.json");
+const READING_VOCABULARY_CLICKS_FILE = runtimeDataFile("reading-vocabulary-clicks.json");
 const OUTPUT_FILE = path.join(ROOT_DIR, "output.txt");
 const READING_JSON_FILE = path.join(ROOT_DIR, "reading.json");
 const READING_TESTS_DIR = path.join(DATA_DIR, "reading-tests");
@@ -7859,7 +7879,7 @@ async function runUserMigration() {
             console.error("MongoDB migration failed:", err);
         }
     } else {
-        const usersFile = path.join(ROOT_DIR, "data", "users.json");
+        const usersFile = USERS_FILE;
         if (fs.existsSync(usersFile)) {
             try {
                 const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
@@ -7998,7 +8018,7 @@ async function runTestTakerIdMigration() {
             console.error("MongoDB Test Taker ID migration failed:", err);
         }
     } else {
-        const usersFile = path.join(ROOT_DIR, "data", "users.json");
+        const usersFile = USERS_FILE;
         if (fs.existsSync(usersFile)) {
             try {
                 const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
@@ -8053,7 +8073,7 @@ function connectMongooseOnce() {
     if (mongoose.connection.readyState === 1) return Promise.resolve(mongoose.connection);
     if (!global.__ieltsxMongooseConnectionPromise) {
         global.__ieltsxMongooseConnectionPromise = mongoose.connect(process.env.MONGO_URI, {
-            dbName: process.env.MONGO_DB_NAME || "ieltsmock",
+            dbName: resolveMongoDbName(),
             serverSelectionTimeoutMS: 8000,
             maxPoolSize: Number(process.env.MONGO_MAX_POOL_SIZE) || 10
         });
@@ -8064,18 +8084,18 @@ function connectMongooseOnce() {
 if (process.env.MONGO_URI) {
     connectMongooseOnce()
         .then(() => {
-            console.info("MongoDB connected — using Atlas for accounts");
+            console.info(`MongoDB connected — environment: ${RUNTIME_NAMESPACE}, database: ${resolveMongoDbName()}`);
             runUserMigration().catch(err => console.error("Migration error:", err));
         })
         .catch((error) => {
             global.__ieltsxMongooseConnectionPromise = null;
             console.warn("MongoDB connection error:", error.message);
-            console.info("Using local file storage for accounts: data/users.json");
+            console.info(`Using ${RUNTIME_NAMESPACE} file storage for accounts: ${USERS_FILE}`);
             console.info("Atlas fix: Network Access -> Add IP Address -> Allow Access from Anywhere (0.0.0.0/0) for development");
             runUserMigration().catch(err => console.error("Migration error:", err));
         });
 } else {
-    console.info("MONGO_URI is not set - using local file storage: data/users.json");
+    console.info(`MONGO_URI is not set - using ${RUNTIME_NAMESPACE} file storage: ${USERS_FILE}`);
     runUserMigration().catch(err => console.error("Migration error:", err));
 }
 
