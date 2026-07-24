@@ -3059,7 +3059,16 @@
                 beginPart2LongTurn();
                 return;
             }
-            renderCurrentTest();
+            // Keep the Part 2 scroll position stable while the preparation
+            // countdown is running. Re-rendering the whole player here used
+            // to replace the scroll container every second and jump it back
+            // to the top before users could reach the cue-card notes.
+            const prepTimer = app.querySelector(".ai-prep-timer");
+            if (prepTimer) {
+                prepTimer.textContent = formatDuration(flow.prepRemaining);
+            } else {
+                renderCurrentTest();
+            }
         }, 1000);
     }
 
