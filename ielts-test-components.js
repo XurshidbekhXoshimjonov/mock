@@ -303,49 +303,55 @@ function MultiSelectGroupRenderer({ group, answers, onAnswer, reviewByNumber, re
         .map((question) => String(answers[question.number] || ""))
         .filter(Boolean);
     const selectedSet = new Set(selected);
+    const firstNumber = Number(questions[0]?.number);
+    const lastNumber = Number(questions[questions.length - 1]?.number);
+    const rangeText = firstNumber === lastNumber ? String(firstNumber) : `${firstNumber}–${lastNumber}`;
+    const prompt = group.question || questions.find((question) => question.question)?.question || "";
+
+    const toggleOption = (value, checked) => {
+        if (checked) {
+            const target = questions.find((question) => !answers[question.number]);
+            if (target) onAnswer?.(target.number, value);
+            return;
+        }
+
+        const target = questions.find((question) => String(answers[question.number] || "") === value);
+        if (target) onAnswer?.(target.number, "");
+    };
 
     return h("div", { className: "cbt-multi-select-task" },
+        prompt
+            ? h("div", { className: "cbt-multi-select-prompt" },
+                h("span", { className: "cbt-multi-select-range" }, rangeText),
+                h("strong", null, prompt)
+            )
+            : null,
         h("div", { className: "cbt-multi-select-options", role: "group", "aria-label": "Select answers" },
-            options.map((option) =>
-                h("div", {
+            options.map((option) => {
+                const checked = selectedSet.has(option.value);
+                const disabled = Boolean(readOnly) || (!checked && selected.length >= questions.length);
+                return h("label", {
                     key: option.value,
-                    className: `cbt-option-card cbt-option-card--checkbox${selectedSet.has(option.value) ? " selected" : ""}`
+                    className: `cbt-option-card cbt-option-card--checkbox${checked ? " selected" : ""}${disabled ? " disabled" : ""}`
                 },
+                    h("input", {
+                        type: "checkbox",
+                        checked,
+                        disabled,
+                        onChange: (event) => toggleOption(option.value, event.target.checked),
+                        "aria-label": `${option.value} ${option.label || ""}`.trim()
+                    }),
+                    h("strong", { className: "cbt-multi-select-letter" }, option.value),
                     option.html
                         ? h(SafeHtml, { html: option.html, tag: "span" })
                         : h("span", null, option.label)
-                )
-            )
+                );
+            })
         ),
-        h("div", { className: "cbt-multi-select-slots" },
-            questions.map((question) =>
-                h("div", {
-                    key: question.number,
-                    className: `cbt-multi-select-slot${reviewByNumber?.[question.number] ? ` cbt-multi-select-slot--${reviewByNumber[question.number].status}` : ""}`,
-                    "data-number": question.number
-                },
-                    h(QuestionBadge, { number: question.number }),
-                    h("select", {
-                        className: "cbt-multi-select-select",
-                        value: answers[question.number] || "",
-                        disabled: readOnly,
-                        onChange: (event) => onAnswer?.(question.number, event.target.value),
-                        "aria-label": `Select answer for question ${question.number}`
-                    },
-                        h("option", { value: "" }, "Select an option"),
-                        options.map((opt) => {
-                            const isChosenElsewhere = selectedSet.has(opt.value) && answers[question.number] !== opt.value;
-                            return h("option", {
-                                key: opt.value,
-                                value: opt.value,
-                                disabled: isChosenElsewhere
-                            }, opt.value);
-                        })
-                    ),
-                    h(AnswerReviewDetails, { result: reviewByNumber?.[question.number] })
-                )
-            )
-        ),
+        questions.map((question) => h(AnswerReviewDetails, {
+            key: `review-${question.number}`,
+            result: reviewByNumber?.[question.number]
+        })),
         h("p", { className: "cbt-multi-select-count" }, `${selected.length} of ${questions.length} selected`)
     );
 }
@@ -432,10 +438,15 @@ function SentenceCompletionRenderer({ question, value, onAnswer, reviewResult, r
     );
 }
 
-function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, className = "", reviewByNumber, readOnly }) {
+function RichCompletionRenderer({ contentHtml, contentTitle, options = [], optionsVisible = false, questions, answers, onAnswer, className = "", reviewByNumber, readOnly }) {
     const ref = useRef(null);
     const numberKey = (questions || []).map((question) => question.number).join(",");
-    const renderedHtml = useMemo(() => highlightInstructionHtml(contentHtml || ""), [contentHtml]);
+    const renderedHtml = useMemo(() => {
+        const cleanedHtml = String(contentHtml || "")
+            .replace(/<(div|p)\b[^>]*class=["'][^"']*\binstructions?\b[^"']*["'][^>]*>[\s\S]*?<\/\1>/gi, "")
+            .replace(/<span\b[^>]*class=["'][^"']*\bqnum\b[^"']*["'][^>]*>[\s\S]*?<\/span>/gi, "");
+        return highlightInstructionHtml(cleanedHtml);
+    }, [contentHtml]);
 
     useEffect(() => {
         const root = ref.current;
@@ -445,7 +456,8 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
             ...root.querySelectorAll("[data-blank]"),
             ...root.querySelectorAll(".ielts-blank")
         ])];
-        const hasVisibleOptionList = /\bWord List\b/i.test(root.textContent || "")
+        const hasVisibleOptionList = optionsVisible
+            || /\bWord List\b/i.test(root.textContent || "")
             || Boolean(root.querySelector(".matching-list, .cbt-group-options-box"));
 
         markers.forEach((marker, index) => {
@@ -470,7 +482,8 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
             numberSpan.style.fontWeight = "700";
 
             let input;
-            if (question.options && question.options.length > 0) {
+            const fieldOptions = question.options && question.options.length > 0 ? question.options : options;
+            if (fieldOptions.length > 0) {
                 input = document.createElement("select");
                 input.className = "cbt-select cbt-select--inline";
                 
@@ -479,7 +492,7 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
                 defaultOpt.textContent = "Select";
                 input.appendChild(defaultOpt);
 
-                question.options.forEach((opt) => {
+                fieldOptions.forEach((opt) => {
                     const normalized = normalizeOption(opt);
                     const optionEl = document.createElement("option");
                     optionEl.value = normalized.value;
@@ -504,6 +517,21 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
             wrapper.appendChild(numberSpan);
             wrapper.appendChild(input);
             marker.replaceWith(wrapper);
+
+            if (root.closest(".potato-sentence-group")) {
+                const paragraph = wrapper.closest("p");
+                if (paragraph) {
+                    wrapper.removeChild(numberSpan);
+                    const copy = document.createElement("span");
+                    copy.className = "potato-question-copy";
+                    while (paragraph.firstChild) {
+                        copy.appendChild(paragraph.firstChild);
+                    }
+                    paragraph.classList.add("potato-question-row");
+                    paragraph.appendChild(numberSpan);
+                    paragraph.appendChild(copy);
+                }
+            }
         });
 
         return undefined;
@@ -542,9 +570,14 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
 
     return h("div", {
         ref,
-        className: `cbt-rich-completion ${className}`.trim(),
-        dangerouslySetInnerHTML: { __html: renderedHtml }
-    });
+        className: `cbt-rich-completion ${className}`.trim()
+    },
+        contentTitle ? h("h3", { className: "cbt-rich-completion-title" }, contentTitle) : null,
+        h("div", {
+            className: "cbt-rich-completion-body",
+            dangerouslySetInnerHTML: { __html: renderedHtml }
+        })
+    );
 }
 
 function DiagramLabelingRenderer({ group, images, answers, onAnswer, reviewByNumber, readOnly }) {
@@ -797,13 +830,13 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
     const questions = group.questions || [];
     const isDiagram = type === "diagram_labeling";
     const isMultiSelect = type === "multi_select";
-    const showGroupOptions = !group.hideOptionsList && [
+    const showGroupOptions = !group.hideOptionsList && (group.showOptionsList || [
         "matching",
         "matching_headings",
         "matching_information",
         "matching_features",
         "matching_sentence_endings"
-    ].includes(type);
+    ].includes(type));
     const isRichCompletion = Boolean(group.contentHtml) && [
         "summary_completion",
         "table_completion",
@@ -819,11 +852,17 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
         )
         : null;
     const groupClassName = String(group.className || "").replace(/[^a-z0-9_-]+/gi, " ").trim();
-    const renderGroupOptions = () => showGroupOptions
-        ? (group.contentHtml
+    const renderGroupOptions = () => {
+        if (!showGroupOptions) return null;
+
+        if (group.showOptionsList && Array.isArray(group.options) && group.options.length > 0) {
+            return h(GroupOptionsBox, { group: effectiveGroup });
+        }
+
+        return group.contentHtml
             ? h(SafeHtml, { html: group.contentHtml, className: "cbt-group-content-html" })
-            : h(GroupOptionsBox, { group: effectiveGroup }))
-        : null;
+            : h(GroupOptionsBox, { group: effectiveGroup });
+    };
     const questionContent = isDiagram
         ? h(DiagramLabelingRenderer, { group: effectiveGroup, images, answers, onAnswer, reviewByNumber, readOnly })
         : (isMultiSelect
@@ -831,6 +870,9 @@ function QuestionGroupRenderer({ group, images, answers, onAnswer, reviewByNumbe
             : (isRichCompletion
             ? h(RichCompletionRenderer, {
                 contentHtml: group.contentHtml,
+                contentTitle: group.contentTitle,
+                options: group.options || [],
+                optionsVisible: Boolean(group.showOptionsList),
                 questions,
                 answers,
                 onAnswer,

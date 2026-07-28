@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading Test</title>
+<style>
+:root{--red:#c8102e;--blue:#2563eb;--ink:#202124;--muted:#667085;--line:#d0d5dd;--soft:#f5f6f7;--ok:#14804a;--bad:#c62828;}
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}button,input,select{font:inherit}
+.hidden{display:none!important}
+#start-screen{position:fixed;inset:0;display:grid;place-items:center;background:#f2f3f5;z-index:1000;padding:20px}
+.start-card{width:min(410px,100%);background:#fff;border:1px solid var(--line);box-shadow:0 12px 38px rgba(0,0,0,.13);padding:36px;border-radius:8px;text-align:center}
+.logo-large,.logo{font-weight:900;letter-spacing:3px;color:#fff;background:var(--red);display:inline-block}.logo-large{font-size:28px;padding:7px 15px;margin-bottom:20px}.logo{font-size:18px;padding:5px 10px}
+.start-card h1{font-size:21px;margin:0 0 8px}.start-card p{font-size:13px;color:var(--muted);margin:0 0 24px}.start-card label{display:block;text-align:left;font-size:13px;font-weight:700;margin-bottom:7px}.start-card input{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:4px;outline:none}.start-card input:focus{border-color:var(--blue)}.start-card button{width:100%;margin-top:14px;padding:12px;border:0;border-radius:4px;background:#111;color:#fff;font-weight:700;cursor:pointer}.start-error{height:18px;color:var(--red);font-size:12px;text-align:left;margin-top:5px}
+#app{height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:#fff;flex-shrink:0}.top-left,.top-right{display:flex;align-items:center;gap:14px}.candidate{font-size:12px;line-height:1.35}.candidate b{display:block}.timer{font-size:17px;font-weight:800;border:1px solid var(--line);background:#fafafa;padding:8px 15px;border-radius:4px;min-width:92px;text-align:center}.timer.low{color:var(--red);border-color:var(--red);background:#fff4f5}.tool-btn,.submit-btn{border:1px solid #aaa;background:#fff;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:700;font-size:13px}.submit-btn{background:var(--red);color:#fff;border-color:var(--red)}.locked-badge{font-size:12px;color:var(--red);font-weight:700}
+.part-banner{padding:10px 18px;background:#f3f4f6;border-bottom:1px solid var(--line);font-size:13px;flex-shrink:0}.part-banner b{display:block;font-size:14px;margin-bottom:2px}
+.workspace{flex:1;display:flex;min-height:0}.pane{overflow-y:auto;padding:24px 28px}.passage-pane{width:50%;border-right:1px solid var(--line);line-height:1.73;font-size:14px}.questions-pane{width:50%;padding-bottom:90px}.passage-kicker{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.4px;margin-bottom:7px}.passage-title{font-size:19px;margin:0 0 8px}.passage-intro{font-style:italic;color:#50565f;margin:0 0 18px}.passage-paragraph{margin:0 0 15px;text-align:justify}.para-label{color:var(--red);display:inline-block;min-width:24px}
+.question-section{margin-bottom:28px}.question-section h2{font-size:17px;margin:0 0 10px}.question-section h3{font-size:14px;margin:18px 0 10px}.instructions{font-size:13px;line-height:1.55;background:#fafafa;border-left:4px solid var(--red);padding:11px 14px;margin-bottom:16px}.question-row{display:flex;align-items:flex-start;gap:10px;margin:0 0 13px;scroll-margin-top:18px}.question-text{flex:1;font-size:14px;line-height:1.5;padding-top:4px}.question-row select,.inline-answer select{border:1.5px solid #9aa0a6;border-radius:3px;padding:6px 8px;background:#fff;min-width:145px}.qnum{min-width:28px;height:28px;border:1.5px solid #777;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}.qnum.small{min-width:24px;width:24px;height:24px;margin-right:4px;vertical-align:middle}.qnum.wide{min-width:48px;padding:0 5px}.completion-line,.summary-text{font-size:14px;line-height:2.05;margin:10px 0;scroll-margin-top:18px}.inline-answer{display:inline-flex;align-items:center;vertical-align:middle;margin:0 4px;scroll-margin-top:18px}.inline-answer input{width:145px;border:none;border-bottom:1.5px solid #777;padding:4px 6px;outline:none;text-align:center;font-weight:700}.inline-answer input:focus{border-bottom-color:var(--red)}
+.question-card{border:1px solid #e0e0e0;border-radius:5px;padding:13px 14px;margin:0 0 15px;scroll-margin-top:18px}.question-heading,.pair-title{display:flex;align-items:flex-start;gap:10px;line-height:1.45}.option-list{display:flex;flex-direction:column;gap:7px;margin:10px 0 0 37px}.option-list label{font-size:14px;line-height:1.4;cursor:pointer}.option-list input{margin-right:8px;accent-color:var(--red)}.pair-hint{font-size:12px;color:var(--muted);margin:8px 0 0 37px}.word-list{display:grid;grid-template-columns:repeat(3,minmax(100px,1fr));gap:6px 14px;background:#f7f7f7;border:1px solid #ddd;padding:12px;margin:10px 0 18px;font-size:13px}
+.bottom-bar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:7px 16px;border-top:1px solid var(--line);background:#fff;flex-shrink:0}.passage-tabs{display:flex;gap:6px;flex-shrink:0}.passage-tab{border:1px solid #aaa;background:#fff;padding:8px 12px;border-radius:3px;cursor:pointer;font-weight:700;font-size:12px}.passage-tab.active{background:#222;color:#fff;border-color:#222}.qnav{display:flex;gap:4px;align-items:center;overflow-x:auto;flex:1}.qnav button{width:28px;height:28px;border:1px solid #aaa;background:#fff;border-radius:2px;cursor:pointer;font-size:11px;font-weight:700;flex-shrink:0}.qnav button.answered{background:#555;color:#fff;border-color:#555}.qnav button.current{outline:2px solid var(--red);outline-offset:1px;color:var(--red);background:#fff}.bottom-submit{background:var(--red);color:#fff;border:0;padding:9px 18px;border-radius:4px;font-weight:800;cursor:pointer;flex-shrink:0}
+.selection-pop{position:fixed;z-index:500;background:#fff;border:1px solid #aaa;box-shadow:0 5px 20px rgba(0,0,0,.18);border-radius:4px;display:none;overflow:hidden}.selection-pop button{border:0;background:#fff;padding:9px 12px;font-size:12px;cursor:pointer}.selection-pop button+button{border-left:1px solid #ddd}mark.user-highlight{background:#ffe66d}.notes-drawer{position:fixed;right:0;top:62px;bottom:58px;width:300px;background:#f4f4f4;border-left:1px solid var(--line);z-index:450;padding:16px;overflow:auto;box-shadow:-5px 0 18px rgba(0,0,0,.08)}.notes-drawer h3{margin:0 0 12px}.note-item{background:#fff;border:1px solid #ddd;padding:10px;border-radius:4px;margin-bottom:9px;font-size:12px;line-height:1.45}.note-item b{display:block;margin-bottom:4px}.empty-note{color:var(--muted);font-size:13px}
+#results-screen{height:100%;overflow:auto;padding:30px 38px;background:#fff}.results-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.results-head h1{margin:0;color:var(--red);font-size:25px}.results-message{color:var(--muted);margin-top:6px}.score-grid{display:flex;gap:16px;flex-wrap:wrap;margin:23px 0}.score-card{border:1px solid #ddd;border-radius:6px;padding:15px 24px;text-align:center;min-width:145px}.score-card strong{display:block;font-size:31px;color:var(--red)}.score-card span{font-size:12px;color:var(--muted)}.result-actions{display:flex;gap:8px;flex-wrap:wrap}.result-actions button{padding:9px 14px;border:1px solid #222;background:#fff;border-radius:4px;cursor:pointer;font-weight:700}.result-actions .primary{background:#111;color:#fff}.review-table{width:100%;border-collapse:collapse;font-size:13px}.review-table th,.review-table td{border:1px solid #ddd;padding:8px 10px;text-align:left;vertical-align:top}.review-table th{background:#f3f4f6}.status-ok{color:var(--ok);font-weight:800}.status-bad{color:var(--bad);font-weight:800}.lock-banner{background:#fff1f2;color:#9f1239;border:1px solid #fecdd3;padding:9px 16px;font-size:13px;font-weight:700;text-align:center}
+body.large-text .passage-pane,body.large-text .questions-pane{font-size:17px}body.dark .topbar,body.dark .bottom-bar,body.dark .pane,body.dark .part-banner{background:#111;color:#f5f5f5}body.dark .passage-pane{border-color:#444}body.dark .question-card,body.dark .instructions,body.dark .word-list{background:#1d1d1d;border-color:#444}body.dark input,body.dark select{background:#191919;color:#fff;border-color:#777}body.dark .passage-tab,body.dark .qnav button,body.dark .tool-btn{background:#1d1d1d;color:#fff;border-color:#666}
+@media(max-width:850px){.workspace{flex-direction:column}.passage-pane,.questions-pane{width:100%}.passage-pane{height:43%;border-right:0;border-bottom:1px solid var(--line)}.questions-pane{height:57%}.candidate{display:none}.tool-btn{padding:7px}.word-list{grid-template-columns:repeat(2,minmax(100px,1fr))}}
+</style>
+</head>
+<body>
+<div id="start-screen">
+  <div class="start-card">
+    <div class="logo-large">IELTS</div>
+    <h1>Academic Reading Test</h1>
+    <p>3 passages · 40 questions · 60 minutes</p>
+    <label for="candidate-id">Test Taker ID</label>
+    <input id="candidate-id" type="text" placeholder="Enter your ID" autocomplete="off">
+    <div id="start-error" class="start-error"></div>
+    <button id="start-btn">Start Test</button>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div id="test-screen" style="height:100%;display:flex;flex-direction:column;">
+    <header class="topbar">
+      <div class="top-left"><div class="logo">IELTS</div><div class="candidate"><b>Test Taker ID</b><span id="candidate-display"></span></div></div>
+      <div class="top-right"><span id="locked-badge" class="locked-badge hidden">SUBMITTED — ANSWERS LOCKED</span><button class="tool-btn hidden" id="results-btn">Results</button><button class="tool-btn" id="notes-btn">Notes</button><button class="tool-btn" id="text-btn">Text size</button><button class="tool-btn" id="contrast-btn">Contrast</button><div class="timer" id="timer">60:00</div><button class="submit-btn" id="top-submit">Submit</button></div>
+    </header>
+    <div id="lock-banner" class="lock-banner hidden">This test has been submitted. Answers are locked and cannot be changed.</div>
+    <div class="part-banner" id="part-banner"></div>
+    <main class="workspace">
+      <section class="pane passage-pane" id="passage-pane"></section>
+      <section class="pane questions-pane" id="questions-pane"></section>
+    </main>
+    <footer class="bottom-bar"><div class="passage-tabs" id="passage-tabs"></div><div class="qnav" id="qnav"></div><button class="bottom-submit" id="bottom-submit">Submit Test</button></footer>
+  </div>
+  <section id="results-screen" class="hidden"></section>
+</div>
+
+<div id="selection-pop" class="selection-pop"><button id="highlight-btn">Highlight</button><button id="add-note-btn">Add note</button></div>
+<aside id="notes-drawer" class="notes-drawer hidden"><h3>Notes</h3><div id="notes-list" class="empty-note">No notes yet.</div></aside>
+
+<template id="passage-1"><h1 class="passage-title">The Impact of the Potato</h1>
+<p class="passage-intro">Jeff Chapman relates the story of history the most important vegetable</p>
+<p class="passage-paragraph"><b class="para-label">A</b>The potato was first cultivated in South America between three and seven thousand years ago, though scientists believe they may have grown wild in the region as long as 13,000 years ago. The genetic patterns of potato distribution indicate that the potato probably originated in the mountainous west-central region of the continent.</p>
+<p class="passage-paragraph"><b class="para-label">B</b>Early Spanish chroniclers who misused the Indian word batata (sweet potato) as the name for the potato noted the importance of the tuber to the Incan Empire. The Incas had learned to preserve the potato for storage by dehydrating and mashing potatoes into a substance called Chuchu could be stored in a room for up to 10 years, providing excellent insurance against possible crop failures. As well as using the food as a staple crop, the Incas thought potatoes made childbirth easier and used it to treat injuries.</p>
+<p class="passage-paragraph"><b class="para-label">C</b>The Spanish conquistadors first encountered the potato when they arrived in Peru in 1532 in search of gold, and noted Inca miners eating chuchu. At the time the Spaniards failed to realize that the potato represented a far more important treasure than either silver or gold, but they did gradually begin to use potatoes as basic rations aboard their ships. After the arrival of the potato in Spain in 1570a few Spanish farmers began to cultivate them on a small scale, mostly as food for livestock.</p>
+<p class="passage-paragraph"><b class="para-label">D</b>Throughout Europe, potatoes were regarded with suspicion, distaste and fear. Generally considered to be unfit for human consumption, they were used only as animal fodder and sustenance for the starving. In northern Europe, potatoes were primarily grown in botanical gardens as an exotic novelty. Even peasants refused to eat from a plant that produced ugly, misshapen tubers and that had come from a heathen civilization. Some felt that the potato plant&#x27;s resemblance to plants in the nightshade family hinted that it was the creation of witches or devils.</p>
+<p class="passage-paragraph"><b class="para-label">E</b>In meat-loving England, farmers and urban workers regarded potatoes with extreme distaste. In 1662, the Royal Society recommended the cultivation of the tuber to the English government and the nation, but this recommendation had little impact. Potatoes did not become a staple until, during the food shortages associated with the Revolutionary Wars, the English government began to officially encourage potato cultivation. In 1795, the Board of Agriculture issued a pamphlet entitled &quot;Hints Respecting the Culture and Use of Potatoes&quot; this was followed shortly by pro-potato editorials and potato recipes in The Times. Gradually, the lower classes began to follow the lead of the upper classes.</p>
+<p class="passage-paragraph"><b class="para-label">F</b>A similar pattern emerged across the English Channel in the Netherlands, Belgium and France. While the potato slowly gained ground in eastern France (where it was often the only crop remaining after marauding soldiers plundered wheat fields and vineyards), it did not achieve widespread acceptance until the late 1700s. The peasants remained suspicious, in spite of a 1771 paper from the Facult de Paris testifying that the potato was not harmful but beneficial. The people began to overcome their distaste when the plant received the royal seal of approval: Louis XVI began to sport a potato flower in his buttonhole, and Marie-Antoinette wore the purple potato blossom in her hair.</p>
+<p class="passage-paragraph"><b class="para-label">G</b>Frederick the Great of Prussia saw the potato&#x27;s potential to help feed his nation and lower the price of bread, but faced the challenge of overcoming the people&#x27;s prejudice against the plant. When he issued a 1774 order for his subjects to grow potatoes as protection against famine, the town of Kolberg replied: &quot;The things have neither smell nor taste, not even the dogs will eat them, so what use are they to us?&quot; Trying a less direct approach to encourage his subjects to begin planting potatoes, Frederick used a bit of reverse psychology: he planted a royal field of potato plants and stationed a heavy guard to protect this field from thieves. Nearby peasants naturally assumed that anything worth guarding was worth stealing, and so snuck into the field and snatched the plants for their home gardens. Of course, this was entirely in line with Frederick&#x27;s wishes.</p>
+<p class="passage-paragraph"><b class="para-label">H</b>Historians debate whether the potato was primarily a cause or an effect of the huge population boom in industrial-era England and Wales. Prior to 1800the English diet had consisted primarily of meat, supplemented by bread, butter and cheese. Few vegetables were consumed, most vegetables being regarded as nutritionally worthless and potentially harmful. This view began to change gradually in the late 1700s. The Industrial Revolution was drawing an ever increasing percentage of the populace into crowded cities, where only the richest could afford homes with ovens or coal storage rooms, and people were working 12-16 hour days which left them with little time or energy to prepare food. High yielding, easily prepared potato crops were the obvious solution to England&#x27;s food problems.</p>
+<p class="passage-paragraph"><b class="para-label">I</b>Whereas most of their neighbors regarded the potato with suspicion and had to be persuaded to use it by the upper classes, the Irish peasantry embraced the tuber more passionately than anyone since the Incas. The potato was well suited to the Irish the soil and climate, and its high yield suited the most important concern of most Irish farmers: to feed their families.</p>
+<p class="passage-paragraph"><b class="para-label">J</b>The most dramatic example of the potato&#x27;s potential to alter population patterns occurred in Ireland, where the potato had become a staple by 1800. The Irish population doubled to eight million between 1780 and 1841this without any significant expansion of industry or reform of agricultural techniques beyond the widespread cultivation of the potato. Though Irish landholding practices were primitive in comparison with those of England, the potato&#x27;s high yields allowed even the poorest farmers to produce more healthy food than they needed with scarcely any investment or hard labor. Even children could easily plant, harvest and cook potatoes, which of course required no threshing, curing or grinding. The abundance provided by potatoes greatly decreased infant mortality and encouraged early marriage.</p></template>
+<template id="passage-2"><div class="passage-kicker">READING PASSAGE 2</div>
+<h1 class="passage-title">From Princes to Paupers: How Goya’s Portraits Tell the Story of Spain</h1>
+<p class="passage-paragraph"><b class="para-label">A</b>There are, according to current scholarship, 160 existing portraits by Francisco de Goya – about a third of his painted output. The real number, though, is much greater since there are no pure landscapes in Goya’s work, in that everything he ever painted deals with people. In the work of no other great portraitist are a nation’s people, history, traumas, folk traditions, and superstitions so comprehensively and relentlessly captured. His subject was a good one since Goya lived in interesting times: his lifetime was a period that saw Spain pass through the effects of the French Revolution, the Napoleonic wars, and the restoration of the monarchy; it was ruled by a succession of authoritarian and liberal governments; and was simultaneously marked by the Enlightenment. Put his work together – the public and private paintings, the personal drawings and sketches, and the unsettling and sinister etching series – and what you have is a portrait in the round of Spain itself.</p>
+<p class="passage-paragraph"><b class="para-label">B</b>His work as a portraitist has its origins in the 45 tapestry cartoons he painted after he moved to Madrid in 1775. Although his designs don’t show portraits, they do show types – the majos and majas who gave Madrid its street swagger, peasants and rich men, courting couples, singers, hunters, children, and young men and women playing blind man’s buff or tossing a mannequin into the air. The pictures have a light, rococo palette and the faces are individualised without being those of individuals. But in them, Goya practised poses and groupings and a way of handling light on and around figures that was to be invaluable.</p>
+<p class="passage-paragraph"><b class="para-label">C</b>The tapestry designs also show social roles rather than the people inhabiting them, but when it came to painting portraits proper, Goya would turn this on its head. His greatest strength as a portraitist is that regardless of the status of the sitter, be they a king and queen, the Duke of Wellington, or a doctor or writer, it was the person he showed first and their position second. It was this trait, most apparent in his royal portraiture, that has led him to be seen as satirising the Bourbon monarchy rather than as a painter who depicted what he saw without showing obeisance to the usual flattering conventions. In Robert Hughes’s phrase, he did not ‘pay reflexive homage to authority’ but instead walked a fine line between respect and truth.</p>
+<p class="passage-paragraph"><b class="para-label">D</b>Goya’s success was rapid; in 1785 he was made deputy director of painting at the Royal Academy (his main message to his students was subversive – ‘there are no rules in painting’) and in 1786 became pintor de cámara, required to paint ‘works required for royal service’. He immediately spent some of his 15,000-reales salary on a two-wheeled gig (one of only three in Madrid) which he promptly crashed on his first outing. His amour propre untouched, he wrote to his childhood friend Martín Zapater: ‘I have now established an enviable way of living: I do not wait on anyone in antechambers, and if anyone wants anything from me they must come to me; I have made myself more in demand and unless it is a person of rank or at the request of a friend I would do nothing for anyone...’</p>
+<p class="passage-paragraph"><b class="para-label">E</b>Part of the reason for his success was that, unlike Gainsborough, for example, he did not resent portraiture as an economically necessary chore that ate away at the time he could devote to higher art. Portraiture fascinated him; it was, after all, part of that ‘sacred science which requires so much study’ and his portraits reveal a fully engaged artist. There is hardly any repetition in his poses (to help, he drew on prints of English portraits as well as classical statuary), he worked hard to give his sitters in repose a sense of latent movement, and he defined them by the careful depiction of the space around them. When it came to clothing he allowed himself extraordinary freedom, the frogging on uniforms or lace on a dress sketched in thick impasto rather than being laboriously defined. From close up such three-dimensional scumblings look out of focus but from a distance, they coalesce into silks, braiding, and gauze. Such varieties of technique within a painting keep the eye entertained and moving.</p>
+<p class="passage-paragraph"><b class="para-label">F</b>‘My work is very simple. My art reveals idealism and truth,’ Goya claimed. The truth though is always more apparent than the idealism. In the most important commission of his career, for example, the portrait of Charles IV and the royal family of 1800, he eschewed entirely the grandeur of majesty to portray the assembled Bourbons as they appeared – a motley grouping (a French visitor had likened Charles and his queen Maria Luisa to a butcher and his wife) in fancy clothes. Goya may have been a political liberal but he wouldn’t have jeopardised his hard-won new position as first court painter – the first Spaniard since Velázquez to hold the role – in order to score political points at the expense of his patrons. That his sitters didn’t regard the portrait as unflattering was evidenced by succeeding royal commissions, not least his 1815 portrait of Ferdinand VII. Ferdinand himself was physically unprepossessing, tyrannical, vicious, and small-minded and that is exactly how Goya shows him. The king, however, looking in Goya’s particular mirror, saw no such characteristics staring back at him.</p>
+<p class="passage-paragraph"><b class="para-label">G</b>The private side of Goya’s portraiture was a world away from the public. The contrast between the Ferdinand portrait and the remarkable 1820 double portrait showing Goya with Dr Arrieta, represents a moral version of the three ages of man – the 73-year-old painter in the throes of a debilitating illness being tended by his doctor. If Ferdinand represents human malignity and Goya its frailty, then Arrieta stands for man’s innate kindness. While not all his portraits are successful (some have a doll-like stiffness), this is what Goya at his best could do: in the guise of representing individuals he showed, without judging, man as a universal being.</p></template>
+<template id="passage-3"><div class="passage-kicker">READING PASSAGE 3</div>
+<h1 class="passage-title">Science and filmmaking</h1>
+<p class="passage-intro">Academics are now working more with filmmakers who are impressed by the results of their research in computer-generated imagery (CGI)</p>
+<p class="passage-paragraph">Every year the film academy in the USA celebrates the outstanding achievements of the year in a ceremony known as the Oscars. An increasingly important component of the ceremony is the presentation of the Scientific and Technical awards. In 2004 a notable event took place: the academic world met the cinematographic world when researchers from Stanford University in the USA were awarded an Oscar. These researchers, led by Steve Marschner, were from the field of Computer Graphics at Stanford. They were part of a growing cohort of computer scientists that has become fundamental to moviemaking.</p>
+<p class="passage-paragraph">Films have shown that it is possible to use CGI to make actors look younger, older, weaker or stronger than they actually are in a surprisingly realistic manner. At least, it is possible if the altered actors are not filmed too closely. This is because the difficulty of recreating the textures of both skin and fabric means that the effect is less convincing when seen close up. The work of Marschner and his colleagues has greatly improved the accurate and realistic modeling of both skin and fabric. They recognized that one of the difficulties of creating lifelike characters in the computer world is that in CGI the characters’ skin is opaque (two-dimensional), whereas real skin is in fact translucent (three-dimensional); that is to say, it is semi-transparent.</p>
+<p class="passage-paragraph">Marschner and his colleagues received the Oscar for their work in successfully producing a CGI model that simulates translucency. This is when light penetrates skin and then scatters below the skin’s surface before re-emerging. This is called subsurface scattering, and the mathematics for the model goes back many decades to the time when it was used in astrophysics. Because human skin is naturally translucent, it was necessary to be able to create this artificially in order to simulate the soft appearance of real skin. Previous CGI models, which assumed that skin was entirely opaque, resulted in characters with a plastic appearance. The scientists’ new model of CGI was so important in bringing digital characters to life that, within two years of their original research paper, all the major special-effects studios had incorporated it into their digital rendering systems.</p>
+<p class="passage-paragraph">However, despite their award, the scientists, with admirable tenacity, continued their search for perfection, as they still did not feel that they had yet satisfactorily recreated the subtle ways light is reflected. To do this, they began to look in detail at the way skins and fabrics reflect light differently according to their make-up: the exact arrangement of fibers in fabric and the network of fibers in skin. Marschner and his team did this by using computerized tomography, which is most familiar as a medical technique for examining people’s internal organs. Like classical radiology, it uses X-rays, but because the image is constructed inside a computer using exposures taken from many different positions, rather than a single exposure on photographic film, it can capture fine details that are invisible in classical radiography.</p>
+<p class="passage-paragraph">Unfortunately, the scientists understood that at this point in time they could not use computerized tomography on skin, because a very high-intensity X-ray is needed to show the kind of detail they wanted and this would be very dangerous for human skin. They have, however, had some success with fabric. Using this new method of imaging, they are able to accurately record the three-dimensional structure of all the fibers in a number of small pieces of fabric. These same pieces of fabric, through the use of CGI, can then be patched together to form an entire garment inside a computer, in the same way that a small group of actors can be made to look like hundreds of people gathered together. A garment created through CGI is therefore made up of pieces of fabric whose internal structure has been pre-recorded. This means that the way light is reflected by the garment can be calculated far more realistically than if the scientists just made a computer model of what they thought the interior of the fabric looked like.</p>
+<p class="passage-paragraph">Cinematography will benefit from this because, although it may take some years to be able to use computerized tomographic imaging of skin, for the moment the movement of a virtual cloak or the lifting of a computerized hat should look far more realistic.</p>
+<p class="passage-paragraph">In the meantime, according to Marschner’s colleague Kavita Bala, the technology might have an application in online retailing. At the moment people buying clothes over the internet have only a standard photograph to help them choose their purchases. It is hoped that if online shoppers can view items which have been presented through the use of computerized tomography graphics, they will have a much better understanding of what the material the item is made of is really like.</p>
+<p class="passage-paragraph">Marschner is now working on the way light is scattered from individual hairs. He says, ‘I feel lucky to be working in this niche. I’m a visual person and to be able to spend my time scrutinizing the world around me, trying to understand why it looks the way it does, is very rewarding.’</p></template>
+<template id="questions-1">
+    <section class="question-section">
+      <h2>Questions 1–5</h2>
+      <div class="instructions">Do the following statements agree with the information given in Reading Passage 1?<br><b>TRUE</b> if the statement agrees with the information<br><b>FALSE</b> if the statement contradicts the information<br><b>NOT GIVEN</b> if there is no information on this</div>
+      <div class="question-row" data-qblock="1">
+      <span class="qnum">1</span><div class="question-text">The early Spanish called potato as the Incan name &#x27;Chuchu&#x27;.</div>
+      <select data-q="1" aria-label="Question 1"><option value="">Select</option><option value="TRUE">TRUE</option><option value="FALSE">FALSE</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="2">
+      <span class="qnum">2</span><div class="question-text">The purposes of Spanish coming to Peru were to find out potatoes.</div>
+      <select data-q="2" aria-label="Question 2"><option value="">Select</option><option value="TRUE">TRUE</option><option value="FALSE">FALSE</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="3">
+      <span class="qnum">3</span><div class="question-text">The Spanish believed that the potato has the same nutrients as other vegetables.</div>
+      <select data-q="3" aria-label="Question 3"><option value="">Select</option><option value="TRUE">TRUE</option><option value="FALSE">FALSE</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="4">
+      <span class="qnum">4</span><div class="question-text">Peasants at that time did not like to eat potatoes because they were ugly.</div>
+      <select data-q="4" aria-label="Question 4"><option value="">Select</option><option value="TRUE">TRUE</option><option value="FALSE">FALSE</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="5">
+      <span class="qnum">5</span><div class="question-text">The popularity of potatoes in the UK was due to food shortages during the war.</div>
+      <select data-q="5" aria-label="Question 5"><option value="">Select</option><option value="TRUE">TRUE</option><option value="FALSE">FALSE</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div>
+    </section>
+    <section class="question-section">
+      <h2>Questions 6–13</h2>
+      <div class="instructions">Complete the sentences below with <b>NO MORE THAN ONE WORD</b> from the passage for each answer.</div>
+      <p class="completion-line" data-qblock="6">In France, people started to overcome their disgusting about potatoes because the King put a potato <span class="inline-answer"><span class="qnum small">6</span><input type="text" data-q="6" aria-label="Question 6" autocomplete="off"></span> in his button hole.</p><p class="completion-line" data-qblock="7">Frederick realized the potential of potato but he had to handle the <span class="inline-answer"><span class="qnum small">7</span><input type="text" data-q="7" aria-label="Question 7" autocomplete="off"></span> against potatoes from ordinary people.</p><p class="completion-line" data-qblock="8">The King of Prussia adopted some <span class="inline-answer"><span class="qnum small">8</span><input type="text" data-q="8" aria-label="Question 8" autocomplete="off"></span> psychology to make people accept potatoes.</p><p class="completion-line" data-qblock="9">Before 1800, the English people preferred eating <span class="inline-answer"><span class="qnum small">9</span><input type="text" data-q="9" aria-label="Question 9" autocomplete="off"></span> with bread, butter and cheese.</p><p class="completion-line" data-qblock="10">The obvious way to deal with England food problems were high yielding potato <span class="inline-answer"><span class="qnum small">10</span><input type="text" data-q="10" aria-label="Question 10" autocomplete="off"></span>.</p><p class="completion-line" data-qblock="11">The Irish <span class="inline-answer"><span class="qnum small">11</span><input type="text" data-q="11" aria-label="Question 11" autocomplete="off"></span> and climate suited potatoes well.</p><p class="completion-line" data-qblock="12">Between 1780 and 1841, based on the <span class="inline-answer"><span class="qnum small">12</span><input type="text" data-q="12" aria-label="Question 12" autocomplete="off"></span> of the potatoes, the Irish population doubled to eight million.</p><p class="completion-line" data-qblock="13">The potato&#x27;s high yields help the poorest farmers to produce more healthy food almost without <span class="inline-answer"><span class="qnum small">13</span><input type="text" data-q="13" aria-label="Question 13" autocomplete="off"></span>.</p>
+    </section></template>
+<template id="questions-2">
+    <section class="question-section">
+      <h2>Questions 14–18</h2>
+      <div class="instructions">Reading Passage 2 has seven paragraphs, <b>A–G</b>.<br>Which paragraph contains the following information?<br>Write the correct letter, <b>A–G</b>.<br><b>NB</b> You may use any letter more than once.</div>
+      <div class="question-row" data-qblock="14">
+      <span class="qnum">14</span><div class="question-text">a weakness in some of Goya’s paintings</div>
+      <select data-q="14" aria-label="Question 14"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+    </div><div class="question-row" data-qblock="15">
+      <span class="qnum">15</span><div class="question-text">a reason that might explain why some artists did not enjoy painting portraits</div>
+      <select data-q="15" aria-label="Question 15"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+    </div><div class="question-row" data-qblock="16">
+      <span class="qnum">16</span><div class="question-text">a genre Goya did not paint</div>
+      <select data-q="16" aria-label="Question 16"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+    </div><div class="question-row" data-qblock="17">
+      <span class="qnum">17</span><div class="question-text">description of a reaction to a promotion</div>
+      <select data-q="17" aria-label="Question 17"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+    </div><div class="question-row" data-qblock="18">
+      <span class="qnum">18</span><div class="question-text">a summary of the historical significance of Goya’s works</div>
+      <select data-q="18" aria-label="Question 18"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+    </div>
+    </section>
+    <section class="question-section">
+      <h2>Questions 19–22</h2>
+      <div class="instructions">Choose the correct letters, <b>A–E</b>.</div>
+      <h3>Questions 19–20</h3>
+      <div class="question-card pair-card" data-qblock="19" data-pair-block="19">
+      <div class="pair-title"><span class="qnum wide">19–20</span><b>Which TWO statements are true about Goya’s tapestry cartoons?</b></div>
+      <div class="option-list"><label><input type="checkbox" data-pair="19" value="A"><b>A</b> They featured lively civilians and labourers that he observed.</label><label><input type="checkbox" data-pair="19" value="B"><b>B</b> Individuals were portrayed without faces.</label><label><input type="checkbox" data-pair="19" value="C"><b>C</b> They were used to develop techniques for his future works.</label><label><input type="checkbox" data-pair="19" value="D"><b>D</b> People’s social standings were a secondary focus.</label><label><input type="checkbox" data-pair="19" value="E"><b>E</b> He avoided painting political controversies.</label></div>
+      <div class="pair-hint">Choose exactly two answers.</div>
+    </div>
+      <h3>Questions 21–22</h3>
+      <div class="question-card pair-card" data-qblock="21" data-pair-block="21">
+      <div class="pair-title"><span class="qnum wide">21–22</span><b>Which TWO statements are true about Goya’s portraits?</b></div>
+      <div class="option-list"><label><input type="checkbox" data-pair="21" value="A"><b>A</b> His depiction of royalty was typical of the time.</label><label><input type="checkbox" data-pair="21" value="B"><b>B</b> He was meticulous about the details when painting clothes.</label><label><input type="checkbox" data-pair="21" value="C"><b>C</b> He generally avoided using the same pose.</label><label><input type="checkbox" data-pair="21" value="D"><b>D</b> He paid very close attention to the background in his paintings.</label><label><input type="checkbox" data-pair="21" value="E"><b>E</b> He did not believe in using the works of other artists as inspiration.</label></div>
+      <div class="pair-hint">Choose exactly two answers.</div>
+    </div>
+    </section>
+    <section class="question-section">
+      <h2>Questions 23–26</h2>
+      <div class="instructions">Complete the summary below.<br>Choose <b>ONE WORD ONLY</b> from the passage for each answer.</div>
+      <h3>Goya’s Artistic Duality</h3>
+      <div class="summary-text">
+        Francisco Goya, in embracing the simplicity and truth in his art, masterfully navigated the delicate balance between idealism and reality. Among the many royal portraits of his career, his most significant <span class="inline-answer" data-qblock="23"><span class="qnum small">23</span><input type="text" data-q="23" aria-label="Question 23" autocomplete="off"></span> was from Charles IV, in which he abandoned conventional majesty to faithfully reveal the monarch, whose depiction was later likened to a <span class="inline-answer" data-qblock="24"><span class="qnum small">24</span><input type="text" data-q="24" aria-label="Question 24" autocomplete="off"></span>.
+        <br><br>His subsequent royal paintings, including the 1815 unflattering portrait of Ferdinand VII, show that he was able to depict truth without jeopardising his position.
+        <br><br>However, Goya’s private portraiture revealed a different narrative, as exemplified by his 1820 double portrait with Dr Arrieta, in which an ailing Goya is seen in the care of the good <span class="inline-answer" data-qblock="25"><span class="qnum small">25</span><input type="text" data-q="25" aria-label="Question 25" autocomplete="off"></span>. It serves as a testament to Goya’s pinnacle ability to portray humanity in both its finest and darkest moments, all while refraining from passing judgment; in the latter scenario, individuals may have to be dependent on the <span class="inline-answer" data-qblock="26"><span class="qnum small">26</span><input type="text" data-q="26" aria-label="Question 26" autocomplete="off"></span> of their fellow men.
+      </div>
+    </section></template>
+<template id="questions-3">
+    <section class="question-section">
+      <h2>Questions 27–32</h2>
+      <div class="instructions">Choose the correct letter, <b>A, B, C or D</b>.</div>
+      <div class="question-card" data-qblock="27"><div class="question-heading"><span class="qnum">27</span><b>What is the writer’s main point in the first paragraph?</b></div><div class="option-list"><label><input type="radio" name="q27" data-q="27" value="A"><b>A</b> Computer scientists are rarely represented at the Oscars.</label><label><input type="radio" name="q27" data-q="27" value="B"><b>B</b> Film industry awards hold little interest for computer scientists.</label><label><input type="radio" name="q27" data-q="27" value="C"><b>C</b> The USA rewards film actors more than computer scientists.</label><label><input type="radio" name="q27" data-q="27" value="D"><b>D</b> Computer scientists are becoming a vital part of the film industry.</label></div></div><div class="question-card" data-qblock="28"><div class="question-heading"><span class="qnum">28</span><b>When describing the way CGI changes actors’ appearance, what does the writer suggest?</b></div><div class="option-list"><label><input type="radio" name="q28" data-q="28" value="A"><b>A</b> CGI looks best from a distance.</label><label><input type="radio" name="q28" data-q="28" value="B"><b>B</b> CGI interferes with actors’ facial expressions.</label><label><input type="radio" name="q28" data-q="28" value="C"><b>C</b> Audiences expect too much of CGI.</label><label><input type="radio" name="q28" data-q="28" value="D"><b>D</b> The scientists had hoped for more convincing results.</label></div></div><div class="question-card" data-qblock="29"><div class="question-heading"><span class="qnum">29</span><b>What does the writer suggest about the scientists’ attitude to their work in the fourth paragraph?</b></div><div class="option-list"><label><input type="radio" name="q29" data-q="29" value="A"><b>A</b> They were motivated to get as near to reality as possible.</label><label><input type="radio" name="q29" data-q="29" value="B"><b>B</b> They were interested in gaining recognition for their work.</label><label><input type="radio" name="q29" data-q="29" value="C"><b>C</b> They thought it could have medical applications.</label><label><input type="radio" name="q29" data-q="29" value="D"><b>D</b> They hoped to receive further funding for their research.</label></div></div><div class="question-card" data-qblock="30"><div class="question-heading"><span class="qnum">30</span><b>What are we told about computerized tomography?</b></div><div class="option-list"><label><input type="radio" name="q30" data-q="30" value="A"><b>A</b> It has only recently been used by doctors.</label><label><input type="radio" name="q30" data-q="30" value="B"><b>B</b> It is similar to X-rays in the way it works.</label><label><input type="radio" name="q30" data-q="30" value="C"><b>C</b> Filmmakers have used it for many years for special lighting effects.</label><label><input type="radio" name="q30" data-q="30" value="D"><b>D</b> It can be administered using traditional radiography machines.</label></div></div><div class="question-card" data-qblock="31"><div class="question-heading"><span class="qnum">31</span><b>Which of these advantages does the writer attribute to the current use of computerized tomography?</b></div><div class="option-list"><label><input type="radio" name="q31" data-q="31" value="A"><b>A</b> It is most effective when used to create images of skin.</label><label><input type="radio" name="q31" data-q="31" value="B"><b>B</b> It can make a few people seem like a crowd.</label><label><input type="radio" name="q31" data-q="31" value="C"><b>C</b> It allows clothes designers to create new designs.</label><label><input type="radio" name="q31" data-q="31" value="D"><b>D</b> It is practical because of the time it takes.</label></div></div><div class="question-card" data-qblock="32"><div class="question-heading"><span class="qnum">32</span><b>The writer mentions Kavita Bala in order to</b></div><div class="option-list"><label><input type="radio" name="q32" data-q="32" value="A"><b>A</b> comment on the success of CGI in commercial contexts.</label><label><input type="radio" name="q32" data-q="32" value="B"><b>B</b> highlight the link between CGI and photography.</label><label><input type="radio" name="q32" data-q="32" value="C"><b>C</b> show that Marschner’s team are uncertain about the future of CGI.</label><label><input type="radio" name="q32" data-q="32" value="D"><b>D</b> demonstrate a use for CGI outside the film industry.</label></div></div>
+    </section>
+    <section class="question-section">
+      <h2>Questions 33–36</h2>
+      <div class="instructions">Do the following statements agree with the claims of the writer in Reading Passage 3?<br><b>YES</b> if the statement agrees with the claims of the writer<br><b>NO</b> if the statement contradicts the claims of the writer<br><b>NOT GIVEN</b> if it is impossible to say what the writer thinks about this</div>
+      <div class="question-row" data-qblock="33">
+      <span class="qnum">33</span><div class="question-text">It used to be unusual for university researchers to receive a cinematography award.</div>
+      <select data-q="33" aria-label="Question 33"><option value="">Select</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="34">
+      <span class="qnum">34</span><div class="question-text">CGI is popular among ageing actors.</div>
+      <select data-q="34" aria-label="Question 34"><option value="">Select</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="35">
+      <span class="qnum">35</span><div class="question-text">The scientists’ success in generating images of complete CGI garments has won them many awards.</div>
+      <select data-q="35" aria-label="Question 35"><option value="">Select</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div><div class="question-row" data-qblock="36">
+      <span class="qnum">36</span><div class="question-text">It will be a long time before computerised tomographic fabric is used by filmmakers.</div>
+      <select data-q="36" aria-label="Question 36"><option value="">Select</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+    </div>
+    </section>
+    <section class="question-section">
+      <h2>Questions 37–40</h2>
+      <div class="instructions">Complete the summary using the list of words, <b>A–I</b>, below.<br>Write the correct letter, A–I.</div>
+      <div class="word-list"><span><b>A</b> light</span><span><b>B</b> transparency</span><span><b>C</b> age</span><span><b>D</b> use</span><span><b>E</b> astrophysics</span><span><b>F</b> mathematics</span><span><b>G</b> improvement</span><span><b>H</b> colour</span><span><b>I</b> translucency</span></div>
+      <h3>The work of Marschner and his colleagues</h3>
+      <div class="summary-text">For many years, CGI characters did not appear entirely lifelike as their skin appeared plastic. Marschner and his colleagues were the first to apply an understanding of how <span class="inline-answer" data-qblock="37"><span class="qnum small">37</span><select data-q="37" aria-label="Question 37"><option value="">Select</option><option value="A">A — light</option><option value="B">B — transparency</option><option value="C">C — age</option><option value="D">D — use</option><option value="E">E — astrophysics</option><option value="F">F — mathematics</option><option value="G">G — improvement</option><option value="H">H — colour</option><option value="I">I — translucency</option></select></span> interacts with human skin. Their CGI model is based on a novel application of principles of <span class="inline-answer" data-qblock="38"><span class="qnum small">38</span><select data-q="38" aria-label="Question 38"><option value="">Select</option><option value="A">A — light</option><option value="B">B — transparency</option><option value="C">C — age</option><option value="D">D — use</option><option value="E">E — astrophysics</option><option value="F">F — mathematics</option><option value="G">G — improvement</option><option value="H">H — colour</option><option value="I">I — translucency</option></select></span>, which had previously been applied in other scientific research. The importance of CGI to the film industry has led to the <span class="inline-answer" data-qblock="39"><span class="qnum small">39</span><select data-q="39" aria-label="Question 39"><option value="">Select</option><option value="A">A — light</option><option value="B">B — transparency</option><option value="C">C — age</option><option value="D">D — use</option><option value="E">E — astrophysics</option><option value="F">F — mathematics</option><option value="G">G — improvement</option><option value="H">H — colour</option><option value="I">I — translucency</option></select></span> of Marschner’s model by special-effects studios. Marschner’s model has led to the <span class="inline-answer" data-qblock="40"><span class="qnum small">40</span><select data-q="40" aria-label="Question 40"><option value="">Select</option><option value="A">A — light</option><option value="B">B — transparency</option><option value="C">C — age</option><option value="D">D — use</option><option value="E">E — astrophysics</option><option value="F">F — mathematics</option><option value="G">G — improvement</option><option value="H">H — colour</option><option value="I">I — translucency</option></select></span> of cinematography.</div>
+    </section></template>
+
+<script>
+(() => {
+const ranges = {1:[1,13],2:[14,26],3:[27,40]};
+const answerKey = {"1": "FALSE", "2": "FALSE", "3": "NOT GIVEN", "4": "TRUE", "5": "TRUE", "6": "flower", "7": "prejudice", "8": "reverse", "9": "meat", "10": "crops", "11": "soil", "12": "cultivation", "13": "investment", "14": "G", "15": "E", "16": "A", "17": "D", "18": "A", "23": "commission", "24": "butcher", "25": "doctor", "26": "kindness", "27": "D", "28": "A", "29": "A", "30": "B", "31": "B", "32": "D", "33": "YES", "34": "NOT GIVEN", "35": "NO", "36": "NO", "37": "A", "38": "E", "39": "D", "40": "G"};
+const pairKeys = {"19": ["A", "C"], "21": ["C", "D"]};
+const state = {currentPart:1, answers:{}, pairs:{19:[],21:[]}, notes:[], passageMarkup:{}, submitted:false, deadline:0, timerId:null, selectedRange:null, selectedText:'', submitReason:'manual'};
+const $ = id => document.getElementById(id);
+const normalize = value => String(value ?? '').trim().toLowerCase().replace(/\s+/g,' ');
+const esc = value => String(value ?? '').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function startTest(){
+  const id = $('candidate-id').value.trim();
+  if(!id){$('start-error').textContent='Please enter your Test Taker ID.';return;}
+  $('candidate-display').textContent=id;
+  $('start-screen').classList.add('hidden');$('app').classList.remove('hidden');
+  state.deadline=Date.now()+60*60*1000;
+  renderPart(1);updateTimer();state.timerId=setInterval(updateTimer,250);
+}
+function updateTimer(){
+  if(state.submitted)return;
+  const remaining=Math.max(0,state.deadline-Date.now());
+  const total=Math.ceil(remaining/1000);const m=Math.floor(total/60),s=total%60;
+  $('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  $('timer').classList.toggle('low',total<=300);
+  if(remaining<=0){state.submitReason='timeout';submitTest(true);}
+}
+function renderPart(part){
+  if($('passage-pane').innerHTML.trim()) state.passageMarkup[state.currentPart]=$('passage-pane').innerHTML;
+  state.currentPart=part;
+  $('passage-pane').innerHTML=state.passageMarkup[part]||$('passage-'+part).innerHTML;
+  $('questions-pane').innerHTML=$('questions-'+part).innerHTML;
+  const [a,b]=ranges[part];
+  $('part-banner').innerHTML='<b>Reading Passage '+part+'</b><span>You should spend about 20 minutes on Questions '+a+'–'+b+', which are based on Reading Passage '+part+'.</span>';
+  restoreAnswers();attachAnswerListeners();renderNavigation();
+  $('passage-pane').scrollTop=0;$('questions-pane').scrollTop=0;
+  if(state.submitted)lockControls();
+}
+function restoreAnswers(){
+  document.querySelectorAll('#questions-pane [data-q]').forEach(el=>{
+    const q=Number(el.dataset.q),v=state.answers[q]??'';
+    if(el.type==='radio')el.checked=String(el.value)===String(v);else el.value=v;
+  });
+  document.querySelectorAll('#questions-pane input[data-pair]').forEach(el=>{const start=Number(el.dataset.pair);el.checked=(state.pairs[start]||[]).includes(el.value);});
+}
+function attachAnswerListeners(){
+  document.querySelectorAll('#questions-pane [data-q]').forEach(el=>{
+    const evt=el.type==='text'?'input':'change';el.addEventListener(evt,()=>{if(state.submitted)return;state.answers[Number(el.dataset.q)]=el.value;renderNavigation();});
+  });
+  document.querySelectorAll('#questions-pane input[data-pair]').forEach(el=>el.addEventListener('change',()=>{
+    if(state.submitted)return;const start=Number(el.dataset.pair);const boxes=[...document.querySelectorAll(`#questions-pane input[data-pair="${start}"]`)];let selected=boxes.filter(x=>x.checked);
+    if(selected.length>2){el.checked=false;selected=boxes.filter(x=>x.checked);}
+    state.pairs[start]=selected.map(x=>x.value);renderNavigation();
+  }));
+}
+function isAnswered(q){
+  if(q===19||q===20)return (state.pairs[19]||[]).length===2;
+  if(q===21||q===22)return (state.pairs[21]||[]).length===2;
+  return normalize(state.answers[q])!=='';
+}
+function renderNavigation(){
+  $('passage-tabs').innerHTML=[1,2,3].map(p=>`<button class="passage-tab ${p===state.currentPart?'active':''}" data-part="${p}">Passage ${p}</button>`).join('');
+  document.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>renderPart(Number(b.dataset.part)));
+  const [a,b]=ranges[state.currentPart];let nav='';for(let q=a;q<=b;q++)nav+=`<button data-jump="${q}" class="${isAnswered(q)?'answered':''}">${q}</button>`;
+  $('qnav').innerHTML=nav;document.querySelectorAll('[data-jump]').forEach(btn=>btn.onclick=()=>jumpTo(Number(btn.dataset.jump)));
+}
+function jumpTo(q){
+  const target=document.querySelector(`#questions-pane [data-qblock="${q}"]`) || document.querySelector(`#questions-pane [data-pair-block="${q===20?19:q===22?21:q}"]`);
+  if(target){target.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('[data-jump]').forEach(b=>b.classList.toggle('current',Number(b.dataset.jump)===q));}
+}
+function lockControls(){
+  document.querySelectorAll('#questions-pane input,#questions-pane select').forEach(el=>el.disabled=true);
+  $('top-submit').classList.add('hidden');$('bottom-submit').classList.add('hidden');$('locked-badge').classList.remove('hidden');$('results-btn').classList.remove('hidden');$('lock-banner').classList.remove('hidden');
+}
+function scoreTest(){
+  let score=0;const rows=[];
+  for(let q=1;q<=40;q++){
+    if([19,20,21,22].includes(q))continue;
+    const user=state.answers[q]??'',correct=answerKey[q];const ok=normalize(user)===normalize(correct);if(ok)score++;
+    rows.push({q:String(q),user:user||'(no answer)',correct:String(correct),ok,points:ok?1:0});
+  }
+  for(const start of [19,21]){
+    const user=state.pairs[start]||[],correct=pairKeys[start];const points=user.filter(x=>correct.includes(x)).length;score+=points;
+    rows.push({q:start+'–'+(start+1),user:user.length?user.join(', '):'(no answer)',correct:correct.join(', '),ok:points===2,points:points+' / 2'});
+  }
+  rows.sort((x,y)=>parseInt(x.q)-parseInt(y.q));return {score,rows};
+}
+function band(score){if(score>=39)return 9;if(score>=37)return 8.5;if(score>=35)return 8;if(score>=33)return 7.5;if(score>=30)return 7;if(score>=27)return 6.5;if(score>=23)return 6;if(score>=19)return 5.5;if(score>=15)return 5;if(score>=13)return 4.5;if(score>=10)return 4;if(score>=8)return 3.5;if(score>=6)return 3;if(score>=4)return 2.5;if(score===3)return 2;if(score===2)return 1.5;if(score===1)return 1;return 0;}
+function submitTest(auto=false){
+  if(state.submitted)return;if(!auto&&!confirm('Submit the test now? You will not be able to change your answers.'))return;
+  state.submitted=true;clearInterval(state.timerId);lockControls();showResults();
+}
+function showResults(){
+  const result=scoreTest(),b=band(result.score);$('test-screen').classList.add('hidden');$('results-screen').classList.remove('hidden');
+  const msg=state.submitReason==='timeout'?'Time expired. Your test was submitted automatically and all answers are locked.':'Your test has been submitted. All answers are locked.';
+  $('results-screen').innerHTML=`<div class="results-head"><div><h1>Reading Test Results</h1><div class="results-message">${msg}</div></div><div class="result-actions"><button id="review-locked">Review locked test</button><button class="primary" id="restart-test">Restart test</button></div></div><div class="score-grid"><div class="score-card"><strong>${result.score}/40</strong><span>Correct answers</span></div><div class="score-card"><strong>${b.toFixed(1)}</strong><span>Estimated IELTS band</span></div></div><table class="review-table"><thead><tr><th>Question</th><th>Your answer</th><th>Correct answer</th><th>Result</th></tr></thead><tbody>${result.rows.map(r=>`<tr><td>${r.q}</td><td>${esc(r.user)}</td><td>${esc(r.correct)}</td><td class="${r.ok?'status-ok':'status-bad'}">${r.ok?'Correct':(typeof r.points==='string'&&r.points!=='0 / 2'?r.points+' correct':'Incorrect')}</td></tr>`).join('')}</tbody></table>`;
+  $('review-locked').onclick=()=>{$('results-screen').classList.add('hidden');$('test-screen').classList.remove('hidden');renderPart(state.currentPart);lockControls();};
+  $('restart-test').onclick=()=>location.reload();
+}
+
+// Text selection tools: highlight and notes
+function selectionHandler(e){
+  if(state.submitted)return;const sel=window.getSelection();if(!sel||sel.isCollapsed)return;const text=sel.toString().trim();if(!text)return;
+  const anchor=sel.anchorNode&&sel.anchorNode.parentElement;if(!anchor||!anchor.closest('#passage-pane'))return;
+  state.selectedRange=sel.getRangeAt(0).cloneRange();state.selectedText=text;
+  const pop=$('selection-pop');pop.style.left=Math.min(e.clientX,window.innerWidth-170)+'px';pop.style.top=Math.max(65,e.clientY-44)+'px';pop.style.display='block';
+}
+$('passage-pane').addEventListener('mouseup',selectionHandler);
+document.addEventListener('mousedown',e=>{if(!e.target.closest('#selection-pop'))$('selection-pop').style.display='none';});
+$('highlight-btn').onclick=()=>{if(!state.selectedRange)return;try{const mark=document.createElement('mark');mark.className='user-highlight';state.selectedRange.surroundContents(mark);}catch{}window.getSelection().removeAllRanges();$('selection-pop').style.display='none';};
+$('add-note-btn').onclick=()=>{if(!state.selectedText)return;const note=prompt('Add a note for:\n“'+state.selectedText+'”');if(note&&note.trim()){state.notes.push({quote:state.selectedText,note:note.trim()});renderNotes();}$('selection-pop').style.display='none';};
+function renderNotes(){$('notes-list').className='';$('notes-list').innerHTML=state.notes.length?state.notes.map(n=>`<div class="note-item"><b>“${esc(n.quote)}”</b>${esc(n.note)}</div>`).join(''):'<div class="empty-note">No notes yet.</div>';}
+$('results-btn').onclick=showResults;
+$('notes-btn').onclick=()=>{$('notes-drawer').classList.toggle('hidden');renderNotes();};
+$('text-btn').onclick=()=>document.body.classList.toggle('large-text');$('contrast-btn').onclick=()=>document.body.classList.toggle('dark');
+$('start-btn').onclick=startTest;$('candidate-id').addEventListener('keydown',e=>{if(e.key==='Enter')startTest();});$('top-submit').onclick=()=>{state.submitReason='manual';submitTest(false)};$('bottom-submit').onclick=()=>{state.submitReason='manual';submitTest(false)};
+})();
+</script>
+</body>
+</html>

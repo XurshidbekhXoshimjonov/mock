@@ -1,0 +1,753 @@
+{
+  "id": "1785237659991-IELTS_Reading_Full_Test_2_-reading-p3",
+  "slug": "1785237659991-IELTS_Reading_Full_Test_2_-reading-p3",
+  "title": "Science and filmmaking",
+  "subtitle": "Academics are now working more with filmmakers who are impressed by the results of their research in computer-generated imagery (CGI)",
+  "part": 3,
+  "passage": "Academics are now working more with filmmakers who are impressed by the results of their research in computer-generated imagery (CGI)\n\nEvery year the film academy in the USA celebrates the outstanding achievements of the year in a ceremony known as the Oscars. An increasingly important component of the ceremony is the presentation of the Scientific and Technical awards. In 2004 a notable event took place: the academic world met the cinematographic world when researchers from Stanford University in the USA were awarded an Oscar. These researchers, led by Steve Marschner, were from the field of Computer Graphics at Stanford. They were part of a growing cohort of computer scientists that has become fundamental to moviemaking.\n\nFilms have shown that it is possible to use CGI to make actors look younger, older, weaker or stronger than they actually are in a surprisingly realistic manner. At least, it is possible if the altered actors are not filmed too closely. This is because the difficulty of recreating the textures of both skin and fabric means that the effect is less convincing when seen close up. The work of Marschner and his colleagues has greatly improved the accurate and realistic modeling of both skin and fabric. They recognized that one of the difficulties of creating lifelike characters in the computer world is that in CGI the characters’ skin is opaque (two-dimensional), whereas real skin is in fact translucent (three-dimensional); that is to say, it is semi-transparent.\n\nMarschner and his colleagues received the Oscar for their work in successfully producing a CGI model that simulates translucency. This is when light penetrates skin and then scatters below the skin’s surface before re-emerging. This is called subsurface scattering, and the mathematics for the model goes back many decades to the time when it was used in astrophysics. Because human skin is naturally translucent, it was necessary to be able to create this artificially in order to simulate the soft appearance of real skin. Previous CGI models, which assumed that skin was entirely opaque, resulted in characters with a plastic appearance. The scientists’ new model of CGI was so important in bringing digital characters to life that, within two years of their original research paper, all the major special-effects studios had incorporated it into their digital rendering systems.\n\nHowever, despite their award, the scientists, with admirable tenacity, continued their search for perfection, as they still did not feel that they had yet satisfactorily recreated the subtle ways light is reflected. To do this, they began to look in detail at the way skins and fabrics reflect light differently according to their make-up: the exact arrangement of fibers in fabric and the network of fibers in skin. Marschner and his team did this by using computerized tomography, which is most familiar as a medical technique for examining people’s internal organs. Like classical radiology, it uses X-rays, but because the image is constructed inside a computer using exposures taken from many different positions, rather than a single exposure on photographic film, it can capture fine details that are invisible in classical radiography.\n\nUnfortunately, the scientists understood that at this point in time they could not use computerized tomography on skin, because a very high-intensity X-ray is needed to show the kind of detail they wanted and this would be very dangerous for human skin. They have, however, had some success with fabric. Using this new method of imaging, they are able to accurately record the three-dimensional structure of all the fibers in a number of small pieces of fabric. These same pieces of fabric, through the use of CGI, can then be patched together to form an entire garment inside a computer, in the same way that a small group of actors can be made to look like hundreds of people gathered together. A garment created through CGI is therefore made up of pieces of fabric whose internal structure has been pre-recorded. This means that the way light is reflected by the garment can be calculated far more realistically than if the scientists just made a computer model of what they thought the interior of the fabric looked like.\n\nCinematography will benefit from this because, although it may take some years to be able to use computerized tomographic imaging of skin, for the moment the movement of a virtual cloak or the lifting of a computerized hat should look far more realistic.\n\nIn the meantime, according to Marschner’s colleague Kavita Bala, the technology might have an application in online retailing. At the moment people buying clothes over the internet have only a standard photograph to help them choose their purchases. It is hoped that if online shoppers can view items which have been presented through the use of computerized tomography graphics, they will have a much better understanding of what the material the item is made of is really like.\n\nMarschner is now working on the way light is scattered from individual hairs. He says, ‘I feel lucky to be working in this niche. I’m a visual person and to be able to spend my time scrutinizing the world around me, trying to understand why it looks the way it does, is very rewarding.’",
+  "passageHtml": "<div class=\"passage-kicker\">READING PASSAGE 3</div>\n<h1 class=\"passage-title\">Science and filmmaking</h1>\n<p class=\"passage-intro\">Academics are now working more with filmmakers who are impressed by the results of their research in computer-generated imagery (CGI)</p>\n<p class=\"passage-paragraph\">Every year the film academy in the USA celebrates the outstanding achievements of the year in a ceremony known as the Oscars. An increasingly important component of the ceremony is the presentation of the Scientific and Technical awards. In 2004 a notable event took place: the academic world met the cinematographic world when researchers from Stanford University in the USA were awarded an Oscar. These researchers, led by Steve Marschner, were from the field of Computer Graphics at Stanford. They were part of a growing cohort of computer scientists that has become fundamental to moviemaking.</p>\n<p class=\"passage-paragraph\">Films have shown that it is possible to use CGI to make actors look younger, older, weaker or stronger than they actually are in a surprisingly realistic manner. At least, it is possible if the altered actors are not filmed too closely. This is because the difficulty of recreating the textures of both skin and fabric means that the effect is less convincing when seen close up. The work of Marschner and his colleagues has greatly improved the accurate and realistic modeling of both skin and fabric. They recognized that one of the difficulties of creating lifelike characters in the computer world is that in CGI the characters’ skin is opaque (two-dimensional), whereas real skin is in fact translucent (three-dimensional); that is to say, it is semi-transparent.</p>\n<p class=\"passage-paragraph\">Marschner and his colleagues received the Oscar for their work in successfully producing a CGI model that simulates translucency. This is when light penetrates skin and then scatters below the skin’s surface before re-emerging. This is called subsurface scattering, and the mathematics for the model goes back many decades to the time when it was used in astrophysics. Because human skin is naturally translucent, it was necessary to be able to create this artificially in order to simulate the soft appearance of real skin. Previous CGI models, which assumed that skin was entirely opaque, resulted in characters with a plastic appearance. The scientists’ new model of CGI was so important in bringing digital characters to life that, within two years of their original research paper, all the major special-effects studios had incorporated it into their digital rendering systems.</p>\n<p class=\"passage-paragraph\">However, despite their award, the scientists, with admirable tenacity, continued their search for perfection, as they still did not feel that they had yet satisfactorily recreated the subtle ways light is reflected. To do this, they began to look in detail at the way skins and fabrics reflect light differently according to their make-up: the exact arrangement of fibers in fabric and the network of fibers in skin. Marschner and his team did this by using computerized tomography, which is most familiar as a medical technique for examining people’s internal organs. Like classical radiology, it uses X-rays, but because the image is constructed inside a computer using exposures taken from many different positions, rather than a single exposure on photographic film, it can capture fine details that are invisible in classical radiography.</p>\n<p class=\"passage-paragraph\">Unfortunately, the scientists understood that at this point in time they could not use computerized tomography on skin, because a very high-intensity X-ray is needed to show the kind of detail they wanted and this would be very dangerous for human skin. They have, however, had some success with fabric. Using this new method of imaging, they are able to accurately record the three-dimensional structure of all the fibers in a number of small pieces of fabric. These same pieces of fabric, through the use of CGI, can then be patched together to form an entire garment inside a computer, in the same way that a small group of actors can be made to look like hundreds of people gathered together. A garment created through CGI is therefore made up of pieces of fabric whose internal structure has been pre-recorded. This means that the way light is reflected by the garment can be calculated far more realistically than if the scientists just made a computer model of what they thought the interior of the fabric looked like.</p>\n<p class=\"passage-paragraph\">Cinematography will benefit from this because, although it may take some years to be able to use computerized tomographic imaging of skin, for the moment the movement of a virtual cloak or the lifting of a computerized hat should look far more realistic.</p>\n<p class=\"passage-paragraph\">In the meantime, according to Marschner’s colleague Kavita Bala, the technology might have an application in online retailing. At the moment people buying clothes over the internet have only a standard photograph to help them choose their purchases. It is hoped that if online shoppers can view items which have been presented through the use of computerized tomography graphics, they will have a much better understanding of what the material the item is made of is really like.</p>\n<p class=\"passage-paragraph\">Marschner is now working on the way light is scattered from individual hairs. He says, ‘I feel lucky to be working in this niche. I’m a visual person and to be able to spend my time scrutinizing the world around me, trying to understand why it looks the way it does, is very rewarding.’</p>",
+  "paragraphs": [
+    {
+      "letter": null,
+      "html": "Every year the film academy in the USA celebrates the outstanding achievements of the year in a ceremony known as the Oscars. An increasingly important component of the ceremony is the presentation of the Scientific and Technical awards. In 2004 a notable event took place: the academic world met the cinematographic world when researchers from Stanford University in the USA were awarded an Oscar. These researchers, led by Steve Marschner, were from the field of Computer Graphics at Stanford. They were part of a growing cohort of computer scientists that has become fundamental to moviemaking.",
+      "text": "Every year the film academy in the USA celebrates the outstanding achievements of the year in a ceremony known as the Oscars. An increasingly important component of the ceremony is the presentation of the Scientific and Technical awards. In 2004 a notable event took place: the academic world met the cinematographic world when researchers from Stanford University in the USA were awarded an Oscar. These researchers, led by Steve Marschner, were from the field of Computer Graphics at Stanford. They were part of a growing cohort of computer scientists that has become fundamental to moviemaking."
+    },
+    {
+      "letter": null,
+      "html": "Films have shown that it is possible to use CGI to make actors look younger, older, weaker or stronger than they actually are in a surprisingly realistic manner. At least, it is possible if the altered actors are not filmed too closely. This is because the difficulty of recreating the textures of both skin and fabric means that the effect is less convincing when seen close up. The work of Marschner and his colleagues has greatly improved the accurate and realistic modeling of both skin and fabric. They recognized that one of the difficulties of creating lifelike characters in the computer world is that in CGI the characters’ skin is opaque (two-dimensional), whereas real skin is in fact translucent (three-dimensional); that is to say, it is semi-transparent.",
+      "text": "Films have shown that it is possible to use CGI to make actors look younger, older, weaker or stronger than they actually are in a surprisingly realistic manner. At least, it is possible if the altered actors are not filmed too closely. This is because the difficulty of recreating the textures of both skin and fabric means that the effect is less convincing when seen close up. The work of Marschner and his colleagues has greatly improved the accurate and realistic modeling of both skin and fabric. They recognized that one of the difficulties of creating lifelike characters in the computer world is that in CGI the characters’ skin is opaque (two-dimensional), whereas real skin is in fact translucent (three-dimensional); that is to say, it is semi-transparent."
+    },
+    {
+      "letter": null,
+      "html": "Marschner and his colleagues received the Oscar for their work in successfully producing a CGI model that simulates translucency. This is when light penetrates skin and then scatters below the skin’s surface before re-emerging. This is called subsurface scattering, and the mathematics for the model goes back many decades to the time when it was used in astrophysics. Because human skin is naturally translucent, it was necessary to be able to create this artificially in order to simulate the soft appearance of real skin. Previous CGI models, which assumed that skin was entirely opaque, resulted in characters with a plastic appearance. The scientists’ new model of CGI was so important in bringing digital characters to life that, within two years of their original research paper, all the major special-effects studios had incorporated it into their digital rendering systems.",
+      "text": "Marschner and his colleagues received the Oscar for their work in successfully producing a CGI model that simulates translucency. This is when light penetrates skin and then scatters below the skin’s surface before re-emerging. This is called subsurface scattering, and the mathematics for the model goes back many decades to the time when it was used in astrophysics. Because human skin is naturally translucent, it was necessary to be able to create this artificially in order to simulate the soft appearance of real skin. Previous CGI models, which assumed that skin was entirely opaque, resulted in characters with a plastic appearance. The scientists’ new model of CGI was so important in bringing digital characters to life that, within two years of their original research paper, all the major special-effects studios had incorporated it into their digital rendering systems."
+    },
+    {
+      "letter": null,
+      "html": "However, despite their award, the scientists, with admirable tenacity, continued their search for perfection, as they still did not feel that they had yet satisfactorily recreated the subtle ways light is reflected. To do this, they began to look in detail at the way skins and fabrics reflect light differently according to their make-up: the exact arrangement of fibers in fabric and the network of fibers in skin. Marschner and his team did this by using computerized tomography, which is most familiar as a medical technique for examining people’s internal organs. Like classical radiology, it uses X-rays, but because the image is constructed inside a computer using exposures taken from many different positions, rather than a single exposure on photographic film, it can capture fine details that are invisible in classical radiography.",
+      "text": "However, despite their award, the scientists, with admirable tenacity, continued their search for perfection, as they still did not feel that they had yet satisfactorily recreated the subtle ways light is reflected. To do this, they began to look in detail at the way skins and fabrics reflect light differently according to their make-up: the exact arrangement of fibers in fabric and the network of fibers in skin. Marschner and his team did this by using computerized tomography, which is most familiar as a medical technique for examining people’s internal organs. Like classical radiology, it uses X-rays, but because the image is constructed inside a computer using exposures taken from many different positions, rather than a single exposure on photographic film, it can capture fine details that are invisible in classical radiography."
+    },
+    {
+      "letter": null,
+      "html": "Unfortunately, the scientists understood that at this point in time they could not use computerized tomography on skin, because a very high-intensity X-ray is needed to show the kind of detail they wanted and this would be very dangerous for human skin. They have, however, had some success with fabric. Using this new method of imaging, they are able to accurately record the three-dimensional structure of all the fibers in a number of small pieces of fabric. These same pieces of fabric, through the use of CGI, can then be patched together to form an entire garment inside a computer, in the same way that a small group of actors can be made to look like hundreds of people gathered together. A garment created through CGI is therefore made up of pieces of fabric whose internal structure has been pre-recorded. This means that the way light is reflected by the garment can be calculated far more realistically than if the scientists just made a computer model of what they thought the interior of the fabric looked like.",
+      "text": "Unfortunately, the scientists understood that at this point in time they could not use computerized tomography on skin, because a very high-intensity X-ray is needed to show the kind of detail they wanted and this would be very dangerous for human skin. They have, however, had some success with fabric. Using this new method of imaging, they are able to accurately record the three-dimensional structure of all the fibers in a number of small pieces of fabric. These same pieces of fabric, through the use of CGI, can then be patched together to form an entire garment inside a computer, in the same way that a small group of actors can be made to look like hundreds of people gathered together. A garment created through CGI is therefore made up of pieces of fabric whose internal structure has been pre-recorded. This means that the way light is reflected by the garment can be calculated far more realistically than if the scientists just made a computer model of what they thought the interior of the fabric looked like."
+    },
+    {
+      "letter": null,
+      "html": "Cinematography will benefit from this because, although it may take some years to be able to use computerized tomographic imaging of skin, for the moment the movement of a virtual cloak or the lifting of a computerized hat should look far more realistic.",
+      "text": "Cinematography will benefit from this because, although it may take some years to be able to use computerized tomographic imaging of skin, for the moment the movement of a virtual cloak or the lifting of a computerized hat should look far more realistic."
+    },
+    {
+      "letter": null,
+      "html": "In the meantime, according to Marschner’s colleague Kavita Bala, the technology might have an application in online retailing. At the moment people buying clothes over the internet have only a standard photograph to help them choose their purchases. It is hoped that if online shoppers can view items which have been presented through the use of computerized tomography graphics, they will have a much better understanding of what the material the item is made of is really like.",
+      "text": "In the meantime, according to Marschner’s colleague Kavita Bala, the technology might have an application in online retailing. At the moment people buying clothes over the internet have only a standard photograph to help them choose their purchases. It is hoped that if online shoppers can view items which have been presented through the use of computerized tomography graphics, they will have a much better understanding of what the material the item is made of is really like."
+    },
+    {
+      "letter": null,
+      "html": "Marschner is now working on the way light is scattered from individual hairs. He says, ‘I feel lucky to be working in this niche. I’m a visual person and to be able to spend my time scrutinizing the world around me, trying to understand why it looks the way it does, is very rewarding.’",
+      "text": "Marschner is now working on the way light is scattered from individual hairs. He says, ‘I feel lucky to be working in this niche. I’m a visual person and to be able to spend my time scrutinizing the world around me, trying to understand why it looks the way it does, is very rewarding.’"
+    }
+  ],
+  "passageLabel": "PASSAGE 3",
+  "questionGroups": [
+    {
+      "type": "multiple_choice",
+      "instruction": {
+        "title": "Questions 27–32",
+        "titleHtml": "<h2>Questions 27–32</h2>",
+        "bodyHtml": "<div class=\"instructions\">Choose the correct letter, <b>A, B, C or D</b>.</div>",
+        "rulesHtml": "",
+        "questionRange": [
+          27,
+          32
+        ]
+      },
+      "instructionTitle": "Questions 27–32",
+      "instructionText": "Choose the correct letter, A, B, C or D.",
+      "instructionHtml": {
+        "titleHtml": "<h2>Questions 27–32</h2>",
+        "bodyHtml": "<div class=\"instructions\">Choose the correct letter, <b>A, B, C or D</b>.</div>",
+        "rulesHtml": ""
+      },
+      "rule": "",
+      "questionRange": [
+        27,
+        32
+      ],
+      "contentHtml": "",
+      "layoutHtml": "\n<h2>Questions 27–32</h2>\n<div class=\"instructions\">Choose the correct letter, <b>A, B, C or D</b>.</div>\n<div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">27</span><b>What is the writer’s main point in the first paragraph?</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q27\" data-q=\"27\" value=\"A\"><b>A</b> Computer scientists are rarely represented at the Oscars.</label><label><input type=\"radio\" name=\"q27\" data-q=\"27\" value=\"B\"><b>B</b> Film industry awards hold little interest for computer scientists.</label><label><input type=\"radio\" name=\"q27\" data-q=\"27\" value=\"C\"><b>C</b> The USA rewards film actors more than computer scientists.</label><label><input type=\"radio\" name=\"q27\" data-q=\"27\" value=\"D\"><b>D</b> Computer scientists are becoming a vital part of the film industry.</label></div></div><div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">28</span><b>When describing the way CGI changes actors’ appearance, what does the writer suggest?</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q28\" data-q=\"28\" value=\"A\"><b>A</b> CGI looks best from a distance.</label><label><input type=\"radio\" name=\"q28\" data-q=\"28\" value=\"B\"><b>B</b> CGI interferes with actors’ facial expressions.</label><label><input type=\"radio\" name=\"q28\" data-q=\"28\" value=\"C\"><b>C</b> Audiences expect too much of CGI.</label><label><input type=\"radio\" name=\"q28\" data-q=\"28\" value=\"D\"><b>D</b> The scientists had hoped for more convincing results.</label></div></div><div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">29</span><b>What does the writer suggest about the scientists’ attitude to their work in the fourth paragraph?</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q29\" data-q=\"29\" value=\"A\"><b>A</b> They were motivated to get as near to reality as possible.</label><label><input type=\"radio\" name=\"q29\" data-q=\"29\" value=\"B\"><b>B</b> They were interested in gaining recognition for their work.</label><label><input type=\"radio\" name=\"q29\" data-q=\"29\" value=\"C\"><b>C</b> They thought it could have medical applications.</label><label><input type=\"radio\" name=\"q29\" data-q=\"29\" value=\"D\"><b>D</b> They hoped to receive further funding for their research.</label></div></div><div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">30</span><b>What are we told about computerized tomography?</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q30\" data-q=\"30\" value=\"A\"><b>A</b> It has only recently been used by doctors.</label><label><input type=\"radio\" name=\"q30\" data-q=\"30\" value=\"B\"><b>B</b> It is similar to X-rays in the way it works.</label><label><input type=\"radio\" name=\"q30\" data-q=\"30\" value=\"C\"><b>C</b> Filmmakers have used it for many years for special lighting effects.</label><label><input type=\"radio\" name=\"q30\" data-q=\"30\" value=\"D\"><b>D</b> It can be administered using traditional radiography machines.</label></div></div><div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">31</span><b>Which of these advantages does the writer attribute to the current use of computerized tomography?</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q31\" data-q=\"31\" value=\"A\"><b>A</b> It is most effective when used to create images of skin.</label><label><input type=\"radio\" name=\"q31\" data-q=\"31\" value=\"B\"><b>B</b> It can make a few people seem like a crowd.</label><label><input type=\"radio\" name=\"q31\" data-q=\"31\" value=\"C\"><b>C</b> It allows clothes designers to create new designs.</label><label><input type=\"radio\" name=\"q31\" data-q=\"31\" value=\"D\"><b>D</b> It is practical because of the time it takes.</label></div></div><div class=\"question-card\"><div class=\"question-heading\"><span class=\"qnum\">32</span><b>The writer mentions Kavita Bala in order to</b></div><div class=\"option-list\"><label><input type=\"radio\" name=\"q32\" data-q=\"32\" value=\"A\"><b>A</b> comment on the success of CGI in commercial contexts.</label><label><input type=\"radio\" name=\"q32\" data-q=\"32\" value=\"B\"><b>B</b> highlight the link between CGI and photography.</label><label><input type=\"radio\" name=\"q32\" data-q=\"32\" value=\"C\"><b>C</b> show that Marschner’s team are uncertain about the future of CGI.</label><label><input type=\"radio\" name=\"q32\" data-q=\"32\" value=\"D\"><b>D</b> demonstrate a use for CGI outside the film industry.</label></div></div>\n",
+      "questions": [
+        {
+          "number": 27,
+          "type": "multiple_choice",
+          "stemHtml": "<b>What is the writer’s main point in the first paragraph?</b>",
+          "question": "What is the writer’s main point in the first paragraph?",
+          "options": [
+            {
+              "value": "A",
+              "label": "Computer scientists are rarely represented at the Oscars.",
+              "html": " Computer scientists are rarely represented at the Oscars."
+            },
+            {
+              "value": "B",
+              "label": "Film industry awards hold little interest for computer scientists.",
+              "html": " Film industry awards hold little interest for computer scientists."
+            },
+            {
+              "value": "C",
+              "label": "The USA rewards film actors more than computer scientists.",
+              "html": " The USA rewards film actors more than computer scientists."
+            },
+            {
+              "value": "D",
+              "label": "Computer scientists are becoming a vital part of the film industry.",
+              "html": " Computer scientists are becoming a vital part of the film industry."
+            }
+          ],
+          "answer": "D"
+        },
+        {
+          "number": 28,
+          "type": "multiple_choice",
+          "stemHtml": "<b>When describing the way CGI changes actors’ appearance, what does the writer suggest?</b>",
+          "question": "When describing the way CGI changes actors’ appearance, what does the writer suggest?",
+          "options": [
+            {
+              "value": "A",
+              "label": "CGI looks best from a distance.",
+              "html": " CGI looks best from a distance."
+            },
+            {
+              "value": "B",
+              "label": "CGI interferes with actors’ facial expressions.",
+              "html": " CGI interferes with actors’ facial expressions."
+            },
+            {
+              "value": "C",
+              "label": "Audiences expect too much of CGI.",
+              "html": " Audiences expect too much of CGI."
+            },
+            {
+              "value": "D",
+              "label": "The scientists had hoped for more convincing results.",
+              "html": " The scientists had hoped for more convincing results."
+            }
+          ],
+          "answer": "A"
+        },
+        {
+          "number": 29,
+          "type": "multiple_choice",
+          "stemHtml": "<b>What does the writer suggest about the scientists’ attitude to their work in the fourth paragraph?</b>",
+          "question": "What does the writer suggest about the scientists’ attitude to their work in the fourth paragraph?",
+          "options": [
+            {
+              "value": "A",
+              "label": "They were motivated to get as near to reality as possible.",
+              "html": " They were motivated to get as near to reality as possible."
+            },
+            {
+              "value": "B",
+              "label": "They were interested in gaining recognition for their work.",
+              "html": " They were interested in gaining recognition for their work."
+            },
+            {
+              "value": "C",
+              "label": "They thought it could have medical applications.",
+              "html": " They thought it could have medical applications."
+            },
+            {
+              "value": "D",
+              "label": "They hoped to receive further funding for their research.",
+              "html": " They hoped to receive further funding for their research."
+            }
+          ],
+          "answer": "A"
+        },
+        {
+          "number": 30,
+          "type": "multiple_choice",
+          "stemHtml": "<b>What are we told about computerized tomography?</b>",
+          "question": "What are we told about computerized tomography?",
+          "options": [
+            {
+              "value": "A",
+              "label": "It has only recently been used by doctors.",
+              "html": " It has only recently been used by doctors."
+            },
+            {
+              "value": "B",
+              "label": "It is similar to X-rays in the way it works.",
+              "html": " It is similar to X-rays in the way it works."
+            },
+            {
+              "value": "C",
+              "label": "Filmmakers have used it for many years for special lighting effects.",
+              "html": " Filmmakers have used it for many years for special lighting effects."
+            },
+            {
+              "value": "D",
+              "label": "It can be administered using traditional radiography machines.",
+              "html": " It can be administered using traditional radiography machines."
+            }
+          ],
+          "answer": "B"
+        },
+        {
+          "number": 31,
+          "type": "multiple_choice",
+          "stemHtml": "<b>Which of these advantages does the writer attribute to the current use of computerized tomography?</b>",
+          "question": "Which of these advantages does the writer attribute to the current use of computerized tomography?",
+          "options": [
+            {
+              "value": "A",
+              "label": "It is most effective when used to create images of skin.",
+              "html": " It is most effective when used to create images of skin."
+            },
+            {
+              "value": "B",
+              "label": "It can make a few people seem like a crowd.",
+              "html": " It can make a few people seem like a crowd."
+            },
+            {
+              "value": "C",
+              "label": "It allows clothes designers to create new designs.",
+              "html": " It allows clothes designers to create new designs."
+            },
+            {
+              "value": "D",
+              "label": "It is practical because of the time it takes.",
+              "html": " It is practical because of the time it takes."
+            }
+          ],
+          "answer": "B"
+        },
+        {
+          "number": 32,
+          "type": "multiple_choice",
+          "stemHtml": "<b>The writer mentions Kavita Bala in order to</b>",
+          "question": "The writer mentions Kavita Bala in order to",
+          "options": [
+            {
+              "value": "A",
+              "label": "comment on the success of CGI in commercial contexts.",
+              "html": " comment on the success of CGI in commercial contexts."
+            },
+            {
+              "value": "B",
+              "label": "highlight the link between CGI and photography.",
+              "html": " highlight the link between CGI and photography."
+            },
+            {
+              "value": "C",
+              "label": "show that Marschner’s team are uncertain about the future of CGI.",
+              "html": " show that Marschner’s team are uncertain about the future of CGI."
+            },
+            {
+              "value": "D",
+              "label": "demonstrate a use for CGI outside the film industry.",
+              "html": " demonstrate a use for CGI outside the film industry."
+            }
+          ],
+          "answer": "D"
+        }
+      ],
+      "imageIds": []
+    },
+    {
+      "type": "yes_no_not_given",
+      "instruction": {
+        "title": "Questions 33–36",
+        "titleHtml": "<h2>Questions 33–36</h2>",
+        "bodyHtml": "<div class=\"instructions\">Do the following statements agree with the claims of the writer in Reading Passage 3?<br><b>YES</b> if the statement agrees with the claims of the writer<br><b>NO</b> if the statement contradicts the claims of the writer<br><b>NOT GIVEN</b> if it is impossible to say what the writer thinks about this</div>",
+        "rulesHtml": "",
+        "questionRange": [
+          33,
+          36
+        ]
+      },
+      "instructionTitle": "Questions 33–36",
+      "instructionText": "Do the following statements agree with the claims of the writer in Reading Passage 3?YES if the statement agrees with the claims of the writerNO if the statement contradicts the claims of the writerNOT GIVEN if it is impossible to say what the writer thinks about this",
+      "instructionHtml": {
+        "titleHtml": "<h2>Questions 33–36</h2>",
+        "bodyHtml": "<div class=\"instructions\">Do the following statements agree with the claims of the writer in Reading Passage 3?<br><b>YES</b> if the statement agrees with the claims of the writer<br><b>NO</b> if the statement contradicts the claims of the writer<br><b>NOT GIVEN</b> if it is impossible to say what the writer thinks about this</div>",
+        "rulesHtml": ""
+      },
+      "rule": "",
+      "questionRange": [
+        33,
+        36
+      ],
+      "contentHtml": "",
+      "layoutHtml": "\n<h2>Questions 33–36</h2>\n<div class=\"instructions\">Do the following statements agree with the claims of the writer in Reading Passage 3?<br><b>YES</b> if the statement agrees with the claims of the writer<br><b>NO</b> if the statement contradicts the claims of the writer<br><b>NOT GIVEN</b> if it is impossible to say what the writer thinks about this</div>\n<div class=\"question-row\">\n<span class=\"qnum\">33</span><div class=\"question-text\">It used to be unusual for university researchers to receive a cinematography award.</div>\n<select data-q=\"33\" aria-label=\"Question 33\"><option value=\"\">Select</option><option value=\"YES\">YES</option><option value=\"NO\">NO</option><option value=\"NOT GIVEN\">NOT GIVEN</option></select>\n</div><div class=\"question-row\">\n<span class=\"qnum\">34</span><div class=\"question-text\">CGI is popular among ageing actors.</div>\n<select data-q=\"34\" aria-label=\"Question 34\"><option value=\"\">Select</option><option value=\"YES\">YES</option><option value=\"NO\">NO</option><option value=\"NOT GIVEN\">NOT GIVEN</option></select>\n</div><div class=\"question-row\">\n<span class=\"qnum\">35</span><div class=\"question-text\">The scientists’ success in generating images of complete CGI garments has won them many awards.</div>\n<select data-q=\"35\" aria-label=\"Question 35\"><option value=\"\">Select</option><option value=\"YES\">YES</option><option value=\"NO\">NO</option><option value=\"NOT GIVEN\">NOT GIVEN</option></select>\n</div><div class=\"question-row\">\n<span class=\"qnum\">36</span><div class=\"question-text\">It will be a long time before computerised tomographic fabric is used by filmmakers.</div>\n<select data-q=\"36\" aria-label=\"Question 36\"><option value=\"\">Select</option><option value=\"YES\">YES</option><option value=\"NO\">NO</option><option value=\"NOT GIVEN\">NOT GIVEN</option></select>\n</div>\n",
+      "questions": [
+        {
+          "number": 33,
+          "type": "yes_no_not_given",
+          "stemHtml": "\n<div class=\"question-text\">It used to be unusual for university researchers to receive a cinematography award.</div>\n\n",
+          "question": "It used to be unusual for university researchers to receive a cinematography award.",
+          "options": [
+            {
+              "value": "YES",
+              "label": "YES",
+              "html": "YES"
+            },
+            {
+              "value": "NO",
+              "label": "NO",
+              "html": "NO"
+            },
+            {
+              "value": "NOT GIVEN",
+              "label": "NOT GIVEN",
+              "html": "NOT GIVEN"
+            }
+          ],
+          "answer": "YES"
+        },
+        {
+          "number": 34,
+          "type": "yes_no_not_given",
+          "stemHtml": "\n<div class=\"question-text\">CGI is popular among ageing actors.</div>\n\n",
+          "question": "CGI is popular among ageing actors.",
+          "options": [
+            {
+              "value": "YES",
+              "label": "YES",
+              "html": "YES"
+            },
+            {
+              "value": "NO",
+              "label": "NO",
+              "html": "NO"
+            },
+            {
+              "value": "NOT GIVEN",
+              "label": "NOT GIVEN",
+              "html": "NOT GIVEN"
+            }
+          ],
+          "answer": "NOT GIVEN"
+        },
+        {
+          "number": 35,
+          "type": "yes_no_not_given",
+          "stemHtml": "\n<div class=\"question-text\">The scientists’ success in generating images of complete CGI garments has won them many awards.</div>\n\n",
+          "question": "The scientists’ success in generating images of complete CGI garments has won them many awards.",
+          "options": [
+            {
+              "value": "YES",
+              "label": "YES",
+              "html": "YES"
+            },
+            {
+              "value": "NO",
+              "label": "NO",
+              "html": "NO"
+            },
+            {
+              "value": "NOT GIVEN",
+              "label": "NOT GIVEN",
+              "html": "NOT GIVEN"
+            }
+          ],
+          "answer": "NO"
+        },
+        {
+          "number": 36,
+          "type": "yes_no_not_given",
+          "stemHtml": "\n<div class=\"question-text\">It will be a long time before computerised tomographic fabric is used by filmmakers.</div>\n\n",
+          "question": "It will be a long time before computerised tomographic fabric is used by filmmakers.",
+          "options": [
+            {
+              "value": "YES",
+              "label": "YES",
+              "html": "YES"
+            },
+            {
+              "value": "NO",
+              "label": "NO",
+              "html": "NO"
+            },
+            {
+              "value": "NOT GIVEN",
+              "label": "NOT GIVEN",
+              "html": "NOT GIVEN"
+            }
+          ],
+          "answer": "NO"
+        }
+      ],
+      "imageIds": []
+    },
+    {
+      "type": "summary_completion",
+      "className": "cgi-summary-group",
+      "showOptionsList": true,
+      "optionsAfterQuestions": false,
+      "contentTitle": "The work of Marschner and his colleagues",
+      "options": [
+        { "value": "A", "label": "A  light", "html": "A  light" },
+        { "value": "B", "label": "B  transparency", "html": "B  transparency" },
+        { "value": "C", "label": "C  age", "html": "C  age" },
+        { "value": "D", "label": "D  use", "html": "D  use" },
+        { "value": "E", "label": "E  astrophysics", "html": "E  astrophysics" },
+        { "value": "F", "label": "F  mathematics", "html": "F  mathematics" },
+        { "value": "G", "label": "G  improvement", "html": "G  improvement" },
+        { "value": "H", "label": "H  colour", "html": "H  colour" },
+        { "value": "I", "label": "I  translucency", "html": "I  translucency" }
+      ],
+      "instruction": {
+        "title": "Questions 37–40",
+        "titleHtml": "<h2>Questions 37–40</h2>",
+        "bodyHtml": "<div class=\"instructions\">Complete the summary using the list of words, <b>A–I</b>, below.<br>Write the correct letter, A–I.</div>",
+        "rulesHtml": "",
+        "questionRange": [
+          37,
+          40
+        ]
+      },
+      "instructionTitle": "Questions 37–40",
+      "instructionText": "Complete the summary using the list of words, A–I, below.Write the correct letter, A–I.",
+      "instructionHtml": {
+        "titleHtml": "<h2>Questions 37–40</h2>",
+        "bodyHtml": "<div class=\"instructions\">Complete the summary using the list of words, <b>A–I</b>, below.<br>Write the correct letter, A–I.</div>",
+        "rulesHtml": ""
+      },
+      "rule": "",
+      "questionRange": [
+        37,
+        40
+      ],
+      "contentHtml": "<div class=\"summary-text\">For many years, CGI characters did not appear entirely lifelike as their skin appeared plastic. Marschner and his colleagues were the first to apply an understanding of how <span class=\"inline-answer\"><span class=\"qnum small\">37</span><span class=\"ielts-blank\" data-blank=\"37\">______</span></span> interacts with human skin. Their CGI model is based on a novel application of principles of <span class=\"inline-answer\"><span class=\"qnum small\">38</span><span class=\"ielts-blank\" data-blank=\"38\">______</span></span>, which had previously been applied in other scientific research. The importance of CGI to the film industry has led to the <span class=\"inline-answer\"><span class=\"qnum small\">39</span><span class=\"ielts-blank\" data-blank=\"39\">______</span></span> of Marschner’s model by special-effects studios. Marschner’s model has led to the <span class=\"inline-answer\"><span class=\"qnum small\">40</span><span class=\"ielts-blank\" data-blank=\"40\">______</span></span> of cinematography.</div>",
+      "layoutHtml": "\n<h2>Questions 37–40</h2>\n<div class=\"instructions\">Complete the summary using the list of words, <b>A–I</b>, below.<br>Write the correct letter, A–I.</div>\n<div class=\"word-list\"><span><b>A</b> light</span><span><b>B</b> transparency</span><span><b>C</b> age</span><span><b>D</b> use</span><span><b>E</b> astrophysics</span><span><b>F</b> mathematics</span><span><b>G</b> improvement</span><span><b>H</b> colour</span><span><b>I</b> translucency</span></div>\n<h3>The work of Marschner and his colleagues</h3>\n<div class=\"summary-text\">For many years, CGI characters did not appear entirely lifelike as their skin appeared plastic. Marschner and his colleagues were the first to apply an understanding of how <span class=\"inline-answer\" data-qblock=\"37\"><span class=\"qnum small\">37</span><select data-q=\"37\" aria-label=\"Question 37\"><option value=\"\">Select</option><option value=\"A\">A — light</option><option value=\"B\">B — transparency</option><option value=\"C\">C — age</option><option value=\"D\">D — use</option><option value=\"E\">E — astrophysics</option><option value=\"F\">F — mathematics</option><option value=\"G\">G — improvement</option><option value=\"H\">H — colour</option><option value=\"I\">I — translucency</option></select></span> interacts with human skin. Their CGI model is based on a novel application of principles of <span class=\"inline-answer\" data-qblock=\"38\"><span class=\"qnum small\">38</span><select data-q=\"38\" aria-label=\"Question 38\"><option value=\"\">Select</option><option value=\"A\">A — light</option><option value=\"B\">B — transparency</option><option value=\"C\">C — age</option><option value=\"D\">D — use</option><option value=\"E\">E — astrophysics</option><option value=\"F\">F — mathematics</option><option value=\"G\">G — improvement</option><option value=\"H\">H — colour</option><option value=\"I\">I — translucency</option></select></span>, which had previously been applied in other scientific research. The importance of CGI to the film industry has led to the <span class=\"inline-answer\" data-qblock=\"39\"><span class=\"qnum small\">39</span><select data-q=\"39\" aria-label=\"Question 39\"><option value=\"\">Select</option><option value=\"A\">A — light</option><option value=\"B\">B — transparency</option><option value=\"C\">C — age</option><option value=\"D\">D — use</option><option value=\"E\">E — astrophysics</option><option value=\"F\">F — mathematics</option><option value=\"G\">G — improvement</option><option value=\"H\">H — colour</option><option value=\"I\">I — translucency</option></select></span> of Marschner’s model by special-effects studios. Marschner’s model has led to the <span class=\"inline-answer\" data-qblock=\"40\"><span class=\"qnum small\">40</span><select data-q=\"40\" aria-label=\"Question 40\"><option value=\"\">Select</option><option value=\"A\">A — light</option><option value=\"B\">B — transparency</option><option value=\"C\">C — age</option><option value=\"D\">D — use</option><option value=\"E\">E — astrophysics</option><option value=\"F\">F — mathematics</option><option value=\"G\">G — improvement</option><option value=\"H\">H — colour</option><option value=\"I\">I — translucency</option></select></span> of cinematography.</div>\n",
+      "questions": [
+        {
+          "number": 37,
+          "type": "summary_completion",
+          "stemHtml": "",
+          "question": "",
+          "options": [],
+          "answer": "A"
+        },
+        {
+          "number": 38,
+          "type": "summary_completion",
+          "stemHtml": "",
+          "question": "",
+          "options": [],
+          "answer": "E"
+        },
+        {
+          "number": 39,
+          "type": "summary_completion",
+          "stemHtml": "",
+          "question": "",
+          "options": [],
+          "answer": "D"
+        },
+        {
+          "number": 40,
+          "type": "summary_completion",
+          "stemHtml": "",
+          "question": "",
+          "options": [],
+          "answer": "G"
+        }
+      ],
+      "imageIds": []
+    }
+  ],
+  "questions": [
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "What is the writer’s main point in the first paragraph?",
+      "options": [
+        {
+          "value": "A",
+          "label": "Computer scientists are rarely represented at the Oscars.",
+          "html": " Computer scientists are rarely represented at the Oscars."
+        },
+        {
+          "value": "B",
+          "label": "Film industry awards hold little interest for computer scientists.",
+          "html": " Film industry awards hold little interest for computer scientists."
+        },
+        {
+          "value": "C",
+          "label": "The USA rewards film actors more than computer scientists.",
+          "html": " The USA rewards film actors more than computer scientists."
+        },
+        {
+          "value": "D",
+          "label": "Computer scientists are becoming a vital part of the film industry.",
+          "html": " Computer scientists are becoming a vital part of the film industry."
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "When describing the way CGI changes actors’ appearance, what does the writer suggest?",
+      "options": [
+        {
+          "value": "A",
+          "label": "CGI looks best from a distance.",
+          "html": " CGI looks best from a distance."
+        },
+        {
+          "value": "B",
+          "label": "CGI interferes with actors’ facial expressions.",
+          "html": " CGI interferes with actors’ facial expressions."
+        },
+        {
+          "value": "C",
+          "label": "Audiences expect too much of CGI.",
+          "html": " Audiences expect too much of CGI."
+        },
+        {
+          "value": "D",
+          "label": "The scientists had hoped for more convincing results.",
+          "html": " The scientists had hoped for more convincing results."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "What does the writer suggest about the scientists’ attitude to their work in the fourth paragraph?",
+      "options": [
+        {
+          "value": "A",
+          "label": "They were motivated to get as near to reality as possible.",
+          "html": " They were motivated to get as near to reality as possible."
+        },
+        {
+          "value": "B",
+          "label": "They were interested in gaining recognition for their work.",
+          "html": " They were interested in gaining recognition for their work."
+        },
+        {
+          "value": "C",
+          "label": "They thought it could have medical applications.",
+          "html": " They thought it could have medical applications."
+        },
+        {
+          "value": "D",
+          "label": "They hoped to receive further funding for their research.",
+          "html": " They hoped to receive further funding for their research."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "What are we told about computerized tomography?",
+      "options": [
+        {
+          "value": "A",
+          "label": "It has only recently been used by doctors.",
+          "html": " It has only recently been used by doctors."
+        },
+        {
+          "value": "B",
+          "label": "It is similar to X-rays in the way it works.",
+          "html": " It is similar to X-rays in the way it works."
+        },
+        {
+          "value": "C",
+          "label": "Filmmakers have used it for many years for special lighting effects.",
+          "html": " Filmmakers have used it for many years for special lighting effects."
+        },
+        {
+          "value": "D",
+          "label": "It can be administered using traditional radiography machines.",
+          "html": " It can be administered using traditional radiography machines."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 31,
+      "type": "multiple_choice",
+      "question": "Which of these advantages does the writer attribute to the current use of computerized tomography?",
+      "options": [
+        {
+          "value": "A",
+          "label": "It is most effective when used to create images of skin.",
+          "html": " It is most effective when used to create images of skin."
+        },
+        {
+          "value": "B",
+          "label": "It can make a few people seem like a crowd.",
+          "html": " It can make a few people seem like a crowd."
+        },
+        {
+          "value": "C",
+          "label": "It allows clothes designers to create new designs.",
+          "html": " It allows clothes designers to create new designs."
+        },
+        {
+          "value": "D",
+          "label": "It is practical because of the time it takes.",
+          "html": " It is practical because of the time it takes."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 32,
+      "type": "multiple_choice",
+      "question": "The writer mentions Kavita Bala in order to",
+      "options": [
+        {
+          "value": "A",
+          "label": "comment on the success of CGI in commercial contexts.",
+          "html": " comment on the success of CGI in commercial contexts."
+        },
+        {
+          "value": "B",
+          "label": "highlight the link between CGI and photography.",
+          "html": " highlight the link between CGI and photography."
+        },
+        {
+          "value": "C",
+          "label": "show that Marschner’s team are uncertain about the future of CGI.",
+          "html": " show that Marschner’s team are uncertain about the future of CGI."
+        },
+        {
+          "value": "D",
+          "label": "demonstrate a use for CGI outside the film industry.",
+          "html": " demonstrate a use for CGI outside the film industry."
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 33,
+      "type": "yes_no_not_given",
+      "question": "It used to be unusual for university researchers to receive a cinematography award.",
+      "options": [
+        {
+          "value": "YES",
+          "label": "YES",
+          "html": "YES"
+        },
+        {
+          "value": "NO",
+          "label": "NO",
+          "html": "NO"
+        },
+        {
+          "value": "NOT GIVEN",
+          "label": "NOT GIVEN",
+          "html": "NOT GIVEN"
+        }
+      ],
+      "answer": "YES"
+    },
+    {
+      "number": 34,
+      "type": "yes_no_not_given",
+      "question": "CGI is popular among ageing actors.",
+      "options": [
+        {
+          "value": "YES",
+          "label": "YES",
+          "html": "YES"
+        },
+        {
+          "value": "NO",
+          "label": "NO",
+          "html": "NO"
+        },
+        {
+          "value": "NOT GIVEN",
+          "label": "NOT GIVEN",
+          "html": "NOT GIVEN"
+        }
+      ],
+      "answer": "NOT GIVEN"
+    },
+    {
+      "number": 35,
+      "type": "yes_no_not_given",
+      "question": "The scientists’ success in generating images of complete CGI garments has won them many awards.",
+      "options": [
+        {
+          "value": "YES",
+          "label": "YES",
+          "html": "YES"
+        },
+        {
+          "value": "NO",
+          "label": "NO",
+          "html": "NO"
+        },
+        {
+          "value": "NOT GIVEN",
+          "label": "NOT GIVEN",
+          "html": "NOT GIVEN"
+        }
+      ],
+      "answer": "NO"
+    },
+    {
+      "number": 36,
+      "type": "yes_no_not_given",
+      "question": "It will be a long time before computerised tomographic fabric is used by filmmakers.",
+      "options": [
+        {
+          "value": "YES",
+          "label": "YES",
+          "html": "YES"
+        },
+        {
+          "value": "NO",
+          "label": "NO",
+          "html": "NO"
+        },
+        {
+          "value": "NOT GIVEN",
+          "label": "NOT GIVEN",
+          "html": "NOT GIVEN"
+        }
+      ],
+      "answer": "NO"
+    },
+    {
+      "number": 37,
+      "type": "summary_completion",
+      "question": "",
+      "options": [],
+      "answer": "A"
+    },
+    {
+      "number": 38,
+      "type": "summary_completion",
+      "question": "",
+      "options": [],
+      "answer": "E"
+    },
+    {
+      "number": 39,
+      "type": "summary_completion",
+      "question": "",
+      "options": [],
+      "answer": "D"
+    },
+    {
+      "number": 40,
+      "type": "summary_completion",
+      "question": "",
+      "options": [],
+      "answer": "G"
+    }
+  ],
+  "sourceFullTestId": "1785237659991-IELTS_Reading_Full_Test_2_",
+  "createdAt": "2026-07-28T11:21:00.975Z"
+}
