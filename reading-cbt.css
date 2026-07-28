@@ -2593,6 +2593,555 @@ body.fullscreen-fallback .cbt-bottom-bar {
     color: var(--cbt-muted);
     font-weight: 700;
 }
+
+/* July exam: Questions 1–6 notes layout */
+.cbt-question-group.july-notes-group {
+    margin-bottom: 28px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.july-notes-group .cbt-group-instructions {
+    margin-bottom: 18px;
+}
+
+.july-notes-group .cbt-group-title,
+.july-notes-group .cbt-group-title h3 {
+    margin-bottom: 10px;
+}
+
+.july-notes-group .cbt-instruction-copy {
+    margin: 0;
+    border-left: 3px solid var(--cbt-accent);
+    background: var(--cbt-soft);
+    padding: 11px 15px;
+    line-height: 1.5;
+}
+
+.july-notes-group .cbt-instruction-copy p {
+    margin: 0;
+}
+
+.july-notes-group .cbt-rich-completion {
+    border: 1px solid #d5d8dc;
+    border-radius: 4px;
+    background: #fff;
+    padding: 16px;
+    line-height: 1.65;
+}
+
+.july-notes-group .notes-title {
+    margin: 0 0 10px;
+    border: 0;
+    padding: 0;
+    color: var(--cbt-text);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.july-notes-group .note-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+.july-notes-group .notes-wrap > div > .note-item {
+    margin-left: 20px;
+}
+
+.july-notes-group .note-bullet {
+    flex: 0 0 auto;
+    color: var(--cbt-accent);
+}
+
+.july-notes-group .ielts-instruction-limit {
+    color: var(--cbt-ielts-red);
+}
+
+.july-notes-group .cbt-blank-wrapper {
+    gap: 4px !important;
+    margin: 0 3px !important;
+}
+
+.july-notes-group .cbt-blank-number {
+    display: inline-grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    border: 0;
+    border-radius: 4px;
+    background: #f2f4f7;
+    color: var(--cbt-text) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1;
+}
+
+.july-notes-group .cbt-blank-input--inline {
+    width: 145px !important;
+    min-width: 110px;
+    height: 29px;
+    margin: 0 !important;
+    border: 0;
+    border-bottom: 1px dotted #777;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 7px;
+    color: var(--cbt-text);
+    font-weight: 600;
+    text-align: center;
+}
+
+.july-notes-group .cbt-blank-input--inline::placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+/* July exam: Questions 14–20 sentence completion layout */
+.cbt-question-group.july-sentence-group {
+    margin-bottom: 28px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.july-sentence-group .cbt-group-instructions {
+    margin-bottom: 18px;
+}
+
+.july-sentence-group .cbt-instruction-copy,
+.july-sentence-group .cbt-instruction-copy p {
+    margin: 0;
+}
+
+.july-sentence-group .cbt-instruction-copy p + p {
+    margin-top: 16px;
+}
+
+.july-sentence-group .cbt-group-instructions .ielts-instruction-limit {
+    color: var(--cbt-ielts-red);
+}
+
+.july-sentence-group .cbt-rich-completion .ielts-instruction-limit {
+    color: inherit;
+    font-weight: inherit;
+}
+
+.july-sentence-group .july-answer-sheet-note {
+    font-style: italic;
+}
+
+.july-sentence-group .cbt-rich-completion {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    line-height: 1.65;
+}
+
+.july-sentence-group .july-sentence-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.july-sentence-group .july-sentence-number {
+    display: inline-grid;
+    flex: 0 0 29px;
+    height: 29px;
+    place-items: center;
+    border-radius: 4px;
+    background: #f2f4f7;
+    color: var(--cbt-text);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.july-sentence-group .july-sentence-copy {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding-top: 3px;
+}
+
+.july-sentence-group .cbt-blank-number {
+    display: none;
+}
+
+.july-sentence-group .cbt-blank-wrapper {
+    gap: 0 !important;
+    margin: 0 4px !important;
+    vertical-align: baseline;
+}
+
+.july-sentence-group .cbt-blank-input--inline {
+    width: 155px !important;
+    min-width: 120px;
+    height: 25px;
+    margin: 0 !important;
+    border: 0;
+    border-bottom: 2px dotted var(--cbt-muted);
+    border-radius: 0;
+    background: transparent;
+    padding: 0 6px;
+    color: var(--cbt-text);
+    font-weight: 600;
+    text-align: center;
+}
+
+.july-sentence-group .cbt-blank-input--inline::placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+/* July exam: Questions 21–25 plant-defences diagram */
+.cbt-question-group.july-diagram-group {
+    margin-bottom: 28px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.july-diagram-group .cbt-group-instructions {
+    margin-bottom: 22px;
+}
+
+.july-diagram-group .cbt-instruction-copy,
+.july-diagram-group .cbt-instruction-copy p {
+    margin: 0;
+}
+
+.july-diagram-group .cbt-instruction-copy p + p {
+    margin-top: 16px;
+}
+
+.july-diagram-group .cbt-group-instructions .ielts-instruction-limit {
+    color: var(--cbt-ielts-red);
+}
+
+.july-diagram-group .cbt-rich-completion {
+    overflow-x: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 4px 8px;
+    line-height: 1.45;
+}
+
+.july-defence-tree {
+    min-width: 690px;
+    padding: 2px 4px 0;
+    color: var(--cbt-text);
+}
+
+.july-defence-parent {
+    position: relative;
+    width: 238px;
+    margin: 0 auto;
+    border: 2px solid #303030;
+    padding: 31px 16px;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.july-defence-parent::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 31px;
+    border-left: 2px solid #303030;
+    content: "";
+}
+
+.july-defence-children {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+    margin-top: 60px;
+}
+
+.july-defence-children::before {
+    position: absolute;
+    top: -31px;
+    left: calc((100% - 52px) / 6);
+    right: calc((100% - 52px) / 6);
+    border-top: 2px solid #303030;
+    content: "";
+}
+
+.july-defence-card {
+    position: relative;
+    min-height: 238px;
+    border: 2px solid #303030;
+    padding: 16px 13px 18px;
+    background: #fff;
+}
+
+.july-defence-card::before {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 31px;
+    border-left: 2px solid #303030;
+    content: "";
+}
+
+.july-defence-card h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.july-defence-card ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style-type: square;
+}
+
+.july-defence-card li {
+    margin: 8px 0;
+}
+
+.july-diagram-group .cbt-blank-wrapper {
+    gap: 4px !important;
+    margin: 0 2px !important;
+}
+
+.july-diagram-group .cbt-blank-number {
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--cbt-text) !important;
+    font-size: inherit !important;
+    font-weight: 800 !important;
+}
+
+.july-diagram-group .cbt-blank-input--inline {
+    width: 104px !important;
+    min-width: 82px;
+    height: 25px;
+    margin: 0 !important;
+    border: 0;
+    border-bottom: 2px dotted var(--cbt-muted);
+    border-radius: 0;
+    background: transparent;
+    padding: 0 4px;
+    color: var(--cbt-text);
+    font-weight: 600;
+    text-align: center;
+}
+
+.july-diagram-group .cbt-blank-input--inline::placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
+.july-part3-lead {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    color: var(--cbt-text);
+    font-style: italic;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* July exam: Questions 27–33 split instruction */
+.july-headings-group .cbt-instruction-copy {
+    margin: 0 0 18px;
+}
+
+.july-headings-group .july-headings-preface {
+    margin: 0 0 12px;
+}
+
+.july-headings-group .july-headings-prompt {
+    border-left: 3px solid var(--cbt-accent);
+    background: var(--cbt-soft);
+    padding: 11px 15px;
+    line-height: 1.5;
+}
+
+.july-headings-group .july-headings-prompt p {
+    margin: 0;
+}
+
+.july-headings-group .july-headings-prompt p + p {
+    margin-top: 4px;
+}
+
+.july-headings-group .july-heading-range {
+    color: var(--cbt-ielts-red);
+}
+
+/* July exam: Questions 34–37 termite mound diagram */
+.cbt-question-group.july-mound-group {
+    margin-bottom: 28px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.july-mound-group .cbt-group-instructions {
+    margin-bottom: 18px;
+}
+
+.july-mound-group .cbt-instruction-copy,
+.july-mound-group .cbt-instruction-copy p {
+    margin: 0;
+}
+
+.july-mound-group .cbt-instruction-copy p + p {
+    margin-top: 12px;
+}
+
+.july-mound-group .cbt-group-instructions .ielts-instruction-limit {
+    color: var(--cbt-ielts-red);
+}
+
+.july-mound-group .cbt-rich-completion {
+    overflow-x: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.july-mound-diagram {
+    position: relative;
+    min-width: 680px;
+    aspect-ratio: 695 / 299;
+    margin: 0 auto;
+}
+
+.july-mound-diagram > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.july-mound-question-list {
+    min-width: 680px;
+    margin: 18px 0 0;
+    padding: 0;
+    color: var(--cbt-text);
+    line-height: 1.7;
+}
+
+.july-mound-question-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.july-mound-list-number {
+    display: inline-grid;
+    flex: 0 0 29px;
+    height: 29px;
+    place-items: center;
+    border-radius: 4px;
+    background: #f2f4f7;
+    color: var(--cbt-text);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.july-mound-question-copy {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding-top: 2px;
+}
+
+.july-mound-answer {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    background: #fff;
+}
+
+.july-mound-answer--37 {
+    top: 7.7%;
+    left: 5.9%;
+    width: 28.4%;
+    height: 20.7%;
+}
+
+.july-mound-answer--34 {
+    top: 16.7%;
+    left: 71.9%;
+    width: 25.2%;
+    height: 20.4%;
+}
+
+.july-mound-answer--35 {
+    top: 47.8%;
+    left: 71.9%;
+    width: 25.2%;
+    height: 20.4%;
+}
+
+.july-mound-answer--36 {
+    top: 74.9%;
+    left: 5.2%;
+    width: 25.2%;
+    height: 20.4%;
+}
+
+.july-mound-group .cbt-blank-wrapper {
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.july-mound-group .cbt-blank-number {
+    display: none;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--cbt-text) !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+}
+
+.july-mound-group .cbt-blank-input--inline {
+    width: 132px !important;
+    min-width: 105px;
+    height: 28px;
+    margin: 0 !important;
+    border: 0;
+    border-bottom: 2px dotted var(--cbt-muted);
+    border-radius: 0;
+    background: transparent;
+    padding: 0 5px;
+    color: var(--cbt-text);
+    font-weight: 600;
+    text-align: center;
+}
+
+.july-mound-group .cbt-blank-input--inline::placeholder {
+    color: transparent;
+    opacity: 0;
+}
+
 .summary-block {
     margin-bottom: 20px;
 }

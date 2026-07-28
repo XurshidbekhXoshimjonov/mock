@@ -492,7 +492,7 @@ function RichCompletionRenderer({ contentHtml, questions, answers, onAnswer, cla
                 input = document.createElement("input");
                 input.type = "text";
                 input.className = "cbt-blank-input cbt-blank-input--inline";
-                input.placeholder = "";
+                input.placeholder = question.placeholder || "";
                 input.setAttribute("autocomplete", "off");
                 input.addEventListener("input", (event) => onAnswer?.(question.number, event.target.value));
             }

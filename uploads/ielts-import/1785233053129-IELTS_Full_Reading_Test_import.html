@@ -1,0 +1,837 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading — Full Test</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }html, body { height:100%; font-family:Arial,sans-serif; font-size:14px; color:#222; background:#fff; overflow:hidden; }body { display:flex; flex-direction:column; }#idScreen { position:fixed; inset:0; background:#f0f0ec; display:flex; align-items:center; justify-content:center; z-index:9000; }.id-card { background:#fff; border-radius:6px; padding:40px 44px; box-shadow:0 8px 40px rgba(0,0,0,.18); width:380px; text-align:center; }.id-card .logo-big { background:#c8102e; color:#fff; font-weight:900; font-size:28px; padding:6px 14px; letter-spacing:3px; display:inline-block; margin-bottom:22px; }.id-card h2 { font-size:17px; font-weight:700; margin-bottom:6px; }.id-card p { font-size:13px; color:#666; margin-bottom:22px; }.id-card input { width:100%; border:1.5px solid #ccc; border-radius:3px; padding:10px 14px; font-size:15px; outline:none; margin-bottom:6px; font-family:Arial,sans-serif; text-align:center; letter-spacing:1px; }.id-card input:focus { border-color:#c8102e; }.id-err { color:#c8102e; font-size:12px; min-height:16px; margin-bottom:10px; }.id-card button { width:100%; background:#c8102e; color:#fff; border:none; padding:12px; font-size:15px; font-weight:700; cursor:pointer; border-radius:3px; }.id-card button:hover { background:#a80e26; }
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:50px;border-bottom:2px solid #ddd;background:#fff;flex-shrink:0;}.logo{background:#c8102e;color:#fff;font-weight:900;font-size:19px;padding:4px 9px;letter-spacing:2px;}.tid{font-size:13px;color:#444;margin-left:12px;font-weight:600;}.topbar-right{display:flex;align-items:center;gap:12px;}.timer{display:flex;align-items:center;gap:7px;border:1px solid #ccc;border-radius:3px;padding:5px 14px;font-size:15px;font-weight:700;color:#222;background:#f7f7f7;}.timer.warn{color:#c8102e;border-color:#c8102e;background:#fff4f4;animation:pulse 1s infinite;}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}.tg-btn{display:flex;align-items:center;gap:7px;background:#229ED9;color:#fff;border:none;padding:7px 14px;border-radius:3px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;}.tg-btn:hover{background:#1a8ec2;}.tg-btn svg{width:18px;height:18px;flex-shrink:0;}.submit-btn{background:#c8102e;color:#fff;border:none;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;border-radius:2px;}.submit-btn:hover{background:#a80e26;}
+.part-hdr{background:#f5f5f5;padding:10px 18px;border-bottom:1px solid #ccc;flex-shrink:0;}.part-hdr strong{display:block;font-size:14px;}.part-hdr span{font-size:13px;color:#555;}
+.split{display:flex;flex:1;overflow:hidden;}.left{width:52%;min-width:280px;overflow-y:auto;padding:26px 32px;line-height:1.78;font-size:14px;flex-shrink:0;}.left h2{font-size:17px;font-weight:700;margin-bottom:14px;text-align:center;}.left p{margin-bottom:12px;text-align:justify;}.hl-yellow{background:#fff176;border-radius:2px;}.hl-note{background:#b3e5fc;border-radius:2px;position:relative;cursor:help;}.hl-note::after{content:attr(data-note);display:none;position:absolute;bottom:calc(100% + 8px);left:0;background:#333;color:#fff;font-size:12px;line-height:1.45;padding:6px 10px;border-radius:4px;white-space:pre-wrap;max-width:240px;z-index:600;pointer-events:none;box-shadow:0 3px 10px rgba(0,0,0,.3);}.hl-note:hover::after{display:block;}
+.handle{width:9px;flex-shrink:0;background:#e0e0e0;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;display:flex;align-items:center;justify-content:center;}.handle::after{content:'⋮';font-size:18px;color:#bbb;pointer-events:none;}.handle:hover,.handle.active{background:#c8102e;}.handle:hover::after,.handle.active::after{color:#fff;}
+.right{flex:1;min-width:300px;overflow-y:auto;padding:22px 26px;}.right h3{font-size:15px;font-weight:700;margin-bottom:10px;}.instr{font-size:13px;color:#333;line-height:1.55;margin-bottom:14px;padding:10px 14px;background:#fafaf8;border-left:3px solid #c8102e;}
+.qblock{margin-bottom:16px;scroll-margin-top:20px;}.qrow{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px;}.qnum{min-width:28px;height:28px;border:1.5px solid #888;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}.qtext{font-size:14px;line-height:1.55;padding-top:3px;}
+.drop-sel{width:100%;padding:8px;border:1.5px solid #ccc;border-radius:3px;font-size:13px;outline:none;margin-top:5px;}.drop-sel:focus{border-color:#c8102e;}
+.opts{display:flex;flex-direction:column;gap:5px;padding-left:4px;}.opt{display:flex;align-items:center;gap:10px;font-size:14px;padding:5px 8px;border-radius:3px;cursor:pointer;transition:background .15s;user-select:none;}.opt:hover{background:#f0f0f0;}.opt input{accent-color:#c8102e;width:15px;height:15px;cursor:pointer;flex-shrink:0;}.opt.sel{background:#e8f0fe;}
+.notes-wrap{background:#f9f9f6;border:1px solid #ddd;border-radius:4px;padding:18px 16px;margin-bottom:8px;}.notes-title{font-size:13px;font-weight:700;text-align:center;margin-bottom:14px;color:#c8102e;}.notes-section{font-size:13px;font-weight:700;margin:10px 0 6px 0;}.note-item{font-size:13px;line-height:1.7;margin-bottom:6px;display:flex;align-items:flex-start;gap:6px;}.note-bullet{color:#c8102e;font-weight:700;flex-shrink:0;}.qnum-sm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1.5px solid #888;font-size:12px;font-weight:700;flex-shrink:0;vertical-align:middle;margin-right:3px;}.fill-inp{display:inline-block;width:110px;padding:4px 7px;border:1.5px solid #ccc;border-radius:3px;font-size:13px;font-family:Arial,sans-serif;outline:none;vertical-align:middle;}.fill-inp:focus{border-color:#c8102e;}
+.bot{display:flex;align-items:center;justify-content:space-between;padding:8px 18px;border-top:1px solid #ccc;background:#fff;flex-shrink:0;}.bot-left{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}.plabel{font-size:13px;font-weight:700;color:#333;margin-right:6px;}.dot{width:28px;height:28px;border:1.5px solid #aaa;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;cursor:pointer;border-radius:2px;color:#555;background:#fff;transition:all .15s;}.dot:hover{background:#f0f0f0;border-color:#888;}.dot.ans{background:#555;color:#fff;border-color:#555;}.dot.cur{border:2.5px solid #c8102e !important;color:#c8102e !important;background:#fff !important;}.navbtns{display:flex;gap:8px;}.nav{width:44px;height:38px;background:#555;color:#fff;border:none;font-size:20px;cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center;}.nav:hover{background:#333;}
+.ctx-menu{position:fixed;background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 4px 18px rgba(0,0,0,.18);z-index:8999;min-width:140px;overflow:hidden;display:none;}.ctx-item{padding:10px 16px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;user-select:none;transition:background .12s;}.ctx-item:hover{background:#f5f5f5;}.ctx-sep{height:1px;background:#eee;}
+.note-dialog{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9500;display:none;align-items:center;justify-content:center;}.note-dialog.show{display:flex;}.note-box{background:#fff;border-radius:4px;padding:22px 24px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.22);}.note-box h4{font-size:14px;font-weight:700;margin-bottom:10px;}.note-box textarea{width:100%;height:90px;border:1px solid #ccc;border-radius:3px;padding:8px;font-size:13px;font-family:Arial,sans-serif;resize:none;outline:none;}.note-box textarea:focus{border-color:#c8102e;}.note-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;}.note-btns button{padding:7px 18px;border:none;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600;}.note-save{background:#c8102e;color:#fff;}.note-save:hover{background:#a80e26;}.note-cancel{background:#eee;color:#333;}.note-cancel:hover{background:#ddd;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:7000;align-items:center;justify-content:center;}.overlay.on{display:flex;}.revbox{background:#fff;border-radius:4px;padding:28px 32px;max-width:680px;width:93%;max-height:86vh;overflow-y:auto;}.revbox h2{font-size:18px;font-weight:700;color:#c8102e;margin-bottom:18px;}.scorecard{background:#f9f9f6;border:1px solid #ccc;padding:16px 20px;border-radius:3px;margin-bottom:20px;text-align:center;}.band{font-size:44px;font-weight:900;color:#c8102e;}.ritem{margin-bottom:12px;padding:10px 14px;border:1px solid #e0e0e0;border-radius:3px;font-size:13px;}.ok-lbl{color:#28a745;font-weight:700;}.bad-lbl{color:#c8102e;font-weight:700;}.close-btn{background:#c8102e;color:#fff;border:none;padding:10px 28px;font-size:14px;cursor:pointer;border-radius:2px;margin-top:16px;font-weight:700;}.close-btn:hover{background:#a80e26;}
+
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:Arial,sans-serif;font-size:14px;color:#222;background:#fff;overflow:hidden}
+body{display:flex;flex-direction:column}
+#idScreen{position:fixed;inset:0;background:#f0f0ec;display:flex;align-items:center;justify-content:center;z-index:9000}
+.id-card{background:#fff;border-radius:6px;padding:40px 44px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:380px;text-align:center}
+.id-card .logo-big{background:#c8102e;color:#fff;font-weight:900;font-size:28px;padding:6px 14px;letter-spacing:3px;display:inline-block;margin-bottom:22px}
+.id-card h2{font-size:17px;font-weight:700;margin-bottom:6px}.id-card p{font-size:13px;color:#666;margin-bottom:22px}
+.id-card input{width:100%;border:1.5px solid #ccc;border-radius:3px;padding:10px 14px;font-size:15px;outline:none;margin-bottom:6px;font-family:Arial,sans-serif;text-align:center;letter-spacing:1px}
+.id-card input:focus{border-color:#c8102e}.id-err{color:#c8102e;font-size:12px;min-height:16px;margin-bottom:10px}
+.id-card button{width:100%;background:#c8102e;color:#fff;border:none;padding:12px;font-size:15px;font-weight:700;cursor:pointer;border-radius:3px}.id-card button:hover{background:#a80e26}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:50px;border-bottom:2px solid #ddd;background:#fff;flex-shrink:0}
+.logo{background:#c8102e;color:#fff;font-weight:900;font-size:19px;padding:4px 9px;letter-spacing:2px}.tid{font-size:13px;color:#444;margin-left:12px;font-weight:600}
+.topbar-right{display:flex;align-items:center;gap:12px}.timer{display:flex;align-items:center;gap:7px;border:1px solid #ccc;border-radius:3px;padding:5px 14px;font-size:15px;font-weight:700;color:#222;background:#f7f7f7}
+.timer.warn{color:#c8102e;border-color:#c8102e;background:#fff4f4;animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.tg-btn{display:flex;align-items:center;gap:7px;background:#229ED9;color:#fff;border:none;padding:7px 14px;border-radius:3px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap}.tg-btn:hover{background:#1a8ec2}.tg-btn svg{width:18px;height:18px;flex-shrink:0}
+.submit-btn{background:#c8102e;color:#fff;border:none;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;border-radius:2px}.submit-btn:hover{background:#a80e26}
+.part-hdr{background:#f5f5f5;padding:10px 18px;border-bottom:1px solid #ccc;flex-shrink:0}.part-hdr strong{display:block;font-size:14px}.part-hdr span{font-size:13px;color:#555}
+.split{display:flex;flex:1;overflow:hidden}.left{width:52%;min-width:280px;overflow-y:auto;padding:26px 32px;line-height:1.78;font-size:14px;flex-shrink:0}.left h2{font-size:17px;font-weight:700;margin-bottom:14px;text-align:center}.left p{margin-bottom:12px;text-align:justify}
+.hl-yellow{background:#fff176;border-radius:2px}.hl-note{background:#b3e5fc;border-radius:2px;position:relative;cursor:help}.hl-note::after{content:attr(data-note);display:none;position:absolute;bottom:calc(100% + 8px);left:0;background:#333;color:#fff;font-size:12px;line-height:1.45;padding:6px 10px;border-radius:4px;white-space:pre-wrap;max-width:240px;z-index:600;pointer-events:none;box-shadow:0 3px 10px rgba(0,0,0,.3)}.hl-note:hover::after{display:block}
+.handle{width:9px;flex-shrink:0;background:#e0e0e0;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;display:flex;align-items:center;justify-content:center}.handle::after{content:'⋮';font-size:18px;color:#bbb;pointer-events:none}.handle:hover,.handle.active{background:#c8102e}.handle:hover::after,.handle.active::after{color:#fff}
+.right{flex:1;min-width:300px;overflow-y:auto;padding:22px 26px}.right h3{font-size:15px;font-weight:700;margin-bottom:10px}.instr{font-size:13px;color:#333;line-height:1.55;margin-bottom:16px;padding:10px 14px;background:#fafaf8;border-left:3px solid #c8102e}
+.qblock{margin-bottom:16px;scroll-margin-top:20px}.qrow{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px}.qnum{min-width:28px;height:28px;border:1.5px solid #888;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}.qtext{font-size:14px;line-height:1.65;padding-top:2px;flex:1}
+.fill-inp{display:inline-block;width:170px;padding:3px 7px;border:none;border-bottom:1.5px dotted #555;font-size:14px;font-family:Arial,sans-serif;outline:none;vertical-align:baseline;text-align:center;font-weight:600;background:transparent}.fill-inp:focus{border-bottom-color:#c8102e;background:#fff9f9}
+.opts{display:flex;flex-direction:column;gap:5px;padding-left:37px}.opt{display:flex;align-items:center;gap:10px;font-size:14px;padding:5px 8px;border-radius:3px;cursor:pointer;transition:background .15s;user-select:none}.opt:hover{background:#f0f0f0}.opt input{accent-color:#c8102e;width:15px;height:15px;cursor:pointer;flex-shrink:0}.opt.sel{background:#e8f0fe}
+.diagram-scroll{overflow-x:auto;margin:2px 0 20px}.defence-tree{min-width:720px;padding:6px 8px 10px}.tree-parent{width:250px;margin:0 auto 28px;border:1.5px solid #333;padding:20px 12px;text-align:center;font-size:16px;font-weight:800;line-height:1.25;position:relative;background:#fff}.tree-parent::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:28px;background:#333}.tree-children{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;padding-top:0}.tree-children::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:1.5px;background:#333}.tree-card{border:1.5px solid #333;min-height:250px;padding:16px 18px;position:relative;background:#fff}.tree-card::before{content:"";position:absolute;left:50%;bottom:100%;width:1.5px;height:28px;background:#333}.tree-card h4{text-align:center;font-size:16px;margin-bottom:10px}.tree-card ul{padding-left:18px}.tree-card li{margin-bottom:12px;line-height:1.45}.tree-card .fill-inp{width:120px}.tree-card .wide{width:155px}
+.bot{display:flex;align-items:center;justify-content:space-between;padding:8px 18px;border-top:1px solid #ccc;background:#fff;flex-shrink:0}.bot-left{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.plabel{font-size:13px;font-weight:700;color:#333;margin-right:6px}.dot{width:28px;height:28px;border:1.5px solid #aaa;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;cursor:pointer;border-radius:2px;color:#555;background:#fff;transition:all .15s}.dot:hover{background:#f0f0f0;border-color:#888}.dot.ans{background:#555;color:#fff;border-color:#555}.dot.cur{border:2.5px solid #c8102e!important;color:#c8102e!important;background:#fff!important}.navbtns{display:flex;gap:8px}.nav{width:44px;height:38px;background:#555;color:#fff;border:none;font-size:20px;cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center}.nav:hover{background:#333}
+.ctx-menu{position:fixed;background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 4px 18px rgba(0,0,0,.18);z-index:8999;min-width:140px;overflow:hidden;display:none}.ctx-item{padding:10px 16px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:9px;user-select:none;transition:background .12s}.ctx-item:hover{background:#f5f5f5}.ctx-sep{height:1px;background:#eee}
+.note-dialog{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9500;display:none;align-items:center;justify-content:center}.note-dialog.show{display:flex}.note-box{background:#fff;border-radius:4px;padding:22px 24px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.22)}.note-box h4{font-size:14px;font-weight:700;margin-bottom:10px}.note-box textarea{width:100%;height:90px;border:1px solid #ccc;border-radius:3px;padding:8px;font-size:13px;font-family:Arial,sans-serif;resize:none;outline:none}.note-box textarea:focus{border-color:#c8102e}.note-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}.note-btns button{padding:7px 18px;border:none;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600}.note-save{background:#c8102e;color:#fff}.note-cancel{background:#eee;color:#333}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:7000;align-items:center;justify-content:center}.overlay.on{display:flex}.revbox{background:#fff;border-radius:4px;padding:28px 32px;max-width:680px;width:93%;max-height:86vh;overflow-y:auto}.revbox h2{font-size:18px;font-weight:700;color:#c8102e;margin-bottom:18px}.scorecard{background:#f9f9f6;border:1px solid #ccc;padding:16px 20px;border-radius:3px;margin-bottom:20px;text-align:center}.band{font-size:44px;font-weight:900;color:#c8102e}.ritem{margin-bottom:12px;padding:10px 14px;border:1px solid #e0e0e0;border-radius:3px;font-size:13px}.ok-lbl{color:#28a745;font-weight:700}.bad-lbl{color:#c8102e;font-weight:700}.close-btn{background:#c8102e;color:#fff;border:none;padding:10px 28px;font-size:14px;cursor:pointer;border-radius:2px;margin-top:16px;font-weight:700}
+@media(max-width:760px){.tg-btn{display:none}.left{padding:20px}.right{padding:18px}.fill-inp{width:130px}}
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; font-family:Arial,sans-serif; font-size:14px; color:#222; background:#fff; overflow:hidden; }
+body { display:flex; flex-direction:column; }
+
+#idScreen { position:fixed; inset:0; background:#f0f0ec; display:flex; align-items:center; justify-content:center; z-index:9000; }
+.id-card { background:#fff; border-radius:6px; padding:40px 44px; box-shadow:0 8px 40px rgba(0,0,0,.18); width:380px; text-align:center; }
+.id-card .logo-big { background:#c8102e; color:#fff; font-weight:900; font-size:28px; padding:6px 14px; letter-spacing:3px; display:inline-block; margin-bottom:22px; }
+.id-card h2 { font-size:17px; font-weight:700; margin-bottom:6px; }
+.id-card p  { font-size:13px; color:#666; margin-bottom:22px; }
+.id-card input { width:100%; border:1.5px solid #ccc; border-radius:3px; padding:10px 14px; font-size:15px; outline:none; margin-bottom:6px; font-family:Arial,sans-serif; text-align:center; letter-spacing:1px; }
+.id-card input:focus { border-color:#c8102e; }
+.id-err { color:#c8102e; font-size:12px; min-height:16px; margin-bottom:10px; }
+.id-card button { width:100%; background:#c8102e; color:#fff; border:none; padding:12px; font-size:15px; font-weight:700; cursor:pointer; border-radius:3px; }
+.id-card button:hover { background:#a80e26; }
+
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:0 18px; height:50px; border-bottom:2px solid #ddd; background:#fff; flex-shrink:0; }
+.logo { background:#c8102e; color:#fff; font-weight:900; font-size:19px; padding:4px 9px; letter-spacing:2px; }
+.tid  { font-size:13px; color:#444; margin-left:12px; font-weight:600; }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+.timer { display:flex; align-items:center; gap:7px; border:1px solid #ccc; border-radius:3px; padding:5px 14px; font-size:15px; font-weight:700; color:#222; background:#f7f7f7; }
+.timer svg { width:17px; height:17px; }
+.timer.warn { color:#c8102e; border-color:#c8102e; background:#fff4f4; animation:pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.5} }
+.tg-btn { display:flex; align-items:center; gap:7px; background:#229ED9; color:#fff; border:none; padding:7px 14px; border-radius:3px; font-size:12px; font-weight:700; cursor:pointer; text-decoration:none; white-space:nowrap; }
+.tg-btn:hover { background:#1a8ec2; }
+.tg-btn svg { width:18px; height:18px; flex-shrink:0; }
+.submit-btn { background:#c8102e; color:#fff; border:none; padding:8px 20px; font-size:13px; font-weight:700; cursor:pointer; border-radius:2px; }
+.submit-btn:hover { background:#a80e26; }
+
+.part-hdr { background:#f5f5f5; padding:10px 18px; border-bottom:1px solid #ccc; flex-shrink:0; }
+.part-hdr strong { display:block; font-size:14px; }
+.part-hdr span { font-size:13px; color:#555; }
+
+.split { display:flex; flex:1; overflow:hidden; }
+
+.left { width:52%; min-width:280px; overflow-y:auto; padding:26px 32px; line-height:1.78; font-size:14px; flex-shrink:0; }
+.left h2 { font-size:16px; font-weight:700; margin-bottom:4px; line-height:1.4; }
+.left p  { margin-bottom:12px; text-align:justify; }
+
+.hl-yellow { background:#fff176; border-radius:2px; }
+.hl-note   { background:#b3e5fc; border-radius:2px; position:relative; }
+.hl-note::after { content:attr(data-note); display:none; position:absolute; bottom:calc(100% + 8px); left:0; background:#333; color:#fff; font-size:12px; line-height:1.45; padding:6px 10px; border-radius:4px; white-space:pre-wrap; max-width:240px; z-index:600; pointer-events:none; box-shadow:0 3px 10px rgba(0,0,0,.3); }
+.hl-note:hover::after { display:block; }
+
+.handle { width:9px; flex-shrink:0; background:#e0e0e0; border-left:1px solid #ccc; border-right:1px solid #ccc; cursor:col-resize; display:flex; align-items:center; justify-content:center; }
+.handle::after { content:'⋮'; font-size:18px; color:#bbb; pointer-events:none; }
+.handle:hover, .handle.active { background:#c8102e; }
+.handle:hover::after, .handle.active::after { color:#fff; }
+
+.right { flex:1; min-width:300px; overflow-y:auto; padding:22px 26px; }
+.right h3 { font-size:15px; font-weight:700; margin-bottom:10px; }
+.instr { font-size:13px; color:#333; line-height:1.55; margin-bottom:18px; padding:10px 14px; background:#fafaf8; border-left:3px solid #c8102e; }
+.headings-list { font-size:13px; line-height:1.6; margin-bottom:18px; padding:10px 14px; background:#f9f9f9; border:1px solid #e0e0e0; border-radius:3px; }
+.headings-list b { display:block; margin-bottom:4px; }
+
+.qblock { margin-bottom:18px; scroll-margin-top:20px; }
+.qrow   { display:flex; gap:9px; align-items:flex-start; margin-bottom:8px; }
+.qnum   { min-width:28px; height:28px; border:1.5px solid #888; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+.qtext  { font-size:14px; line-height:1.55; padding-top:3px; }
+.opts   { display:flex; flex-direction:column; gap:5px; padding-left:4px; }
+.opt    { display:flex; align-items:flex-start; gap:10px; font-size:14px; padding:5px 8px; border-radius:3px; cursor:pointer; transition:background .15s; user-select:none; }
+.opt:hover { background:#f0f0f0; }
+.opt input { accent-color:#c8102e; width:15px; height:15px; cursor:pointer; flex-shrink:0; margin-top:2px; }
+.opt.sel { background:#e8f0fe; }
+
+.q-select { font-size:14px; border:1.5px solid #ccc; border-radius:3px; padding:4px 8px; outline:none; cursor:pointer; background:#fff; flex-shrink:0; }
+.q-select:focus { border-color:#c8102e; }
+
+.q-input { font-size:14px; border:none; border-bottom:1.5px solid #888; outline:none; width:160px; text-align:center; font-weight:600; padding:2px 4px; background:transparent; font-family:Arial,sans-serif; }
+.q-input:focus { border-bottom-color:#c8102e; }
+
+.diagram-box { border:1px solid #ddd; border-radius:4px; background:#fbfbfb; padding:15px; margin-bottom:18px; }
+.diagram-inner { display:flex; gap:18px; align-items:center; justify-content:space-between; }
+.diagram-left { width:52%; min-height:230px; position:relative; border:1px dashed #ccc; background:#fff; border-radius:4px; padding:8px; }
+.mound { position:absolute; left:50%; bottom:28px; transform:translateX(-50%); width:150px; height:165px; background:#ded2b1; border:2px solid #555; clip-path:polygon(50% 0,69% 23%,83% 55%,94% 100%,6% 100%,17% 55%,31% 23%); }
+.base { position:absolute; bottom:0; left:10px; right:10px; height:30px; background:#c7b78d; border-top:2px solid #555; }
+.dlabel { position:absolute; font-size:12px; line-height:1.3; background:rgba(255,255,255,.9); padding:3px 5px; border-radius:3px; }
+.top-label { top:8px; left:8px; }
+.nest-label { top:88px; left:10px; }
+.cellar-label { bottom:37px; left:10px; }
+.diagram-right { flex:1; font-size:14px; line-height:1.8; }
+
+.bot { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; border-top:1px solid #ccc; background:#fff; flex-shrink:0; }
+.bot-left { display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+.plabel { font-size:13px; font-weight:700; color:#333; margin-right:6px; }
+.dot { width:28px; height:28px; border:1.5px solid #aaa; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600; cursor:pointer; border-radius:2px; color:#555; background:#fff; transition:all .15s; }
+.dot:hover { background:#f0f0f0; border-color:#888; }
+.dot.ans  { background:#555; color:#fff; border-color:#555; }
+.dot.cur  { border:2.5px solid #c8102e !important; color:#c8102e !important; background:#fff !important; }
+.navbtns  { display:flex; gap:8px; }
+.nav { width:44px; height:38px; background:#555; color:#fff; border:none; font-size:20px; cursor:pointer; border-radius:2px; display:flex; align-items:center; justify-content:center; }
+.nav:hover { background:#333; }
+.nav:disabled { background:#ccc; cursor:not-allowed; }
+
+.ctx-menu { position:fixed; background:#fff; border:1px solid #ccc; border-radius:4px; box-shadow:0 4px 18px rgba(0,0,0,.18); z-index:8999; min-width:140px; overflow:hidden; display:none; }
+.ctx-menu.show { display:block; }
+.ctx-item { padding:10px 16px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:9px; user-select:none; transition:background .12s; }
+.ctx-item:hover { background:#f5f5f5; }
+.ctx-sep { height:1px; background:#eee; }
+
+.note-dialog { position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:9500; display:none; align-items:center; justify-content:center; }
+.note-dialog.show { display:flex; }
+.note-box { background:#fff; border-radius:4px; padding:22px 24px; width:340px; box-shadow:0 8px 32px rgba(0,0,0,.22); }
+.note-box h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+.note-box textarea { width:100%; height:90px; border:1px solid #ccc; border-radius:3px; padding:8px; font-size:13px; font-family:Arial,sans-serif; resize:none; outline:none; }
+.note-box textarea:focus { border-color:#c8102e; }
+.note-btns { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
+.note-btns button { padding:7px 18px; border:none; border-radius:2px; font-size:13px; cursor:pointer; font-weight:600; }
+.note-save { background:#c8102e; color:#fff; } .note-save:hover { background:#a80e26; }
+.note-cancel { background:#eee; color:#333; } .note-cancel:hover { background:#ddd; }
+
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:7000; align-items:center; justify-content:center; }
+.overlay.on { display:flex; }
+.revbox { background:#fff; border-radius:4px; padding:28px 32px; max-width:680px; width:93%; max-height:86vh; overflow-y:auto; }
+.revbox h2 { font-size:18px; font-weight:700; color:#c8102e; margin-bottom:18px; }
+.scorecard { background:#f9f9f6; border:1px solid #ccc; padding:16px 20px; border-radius:3px; margin-bottom:20px; }
+.band { font-size:44px; font-weight:900; color:#c8102e; }
+.ritem { margin-bottom:12px; padding:10px 14px; border:1px solid #e0e0e0; border-radius:3px; font-size:13px; }
+.ritem .rlabel { font-size:11px; font-weight:700; text-transform:uppercase; color:#999; margin-bottom:4px; }
+.ok-lbl  { color:#28a745; font-weight:700; }
+.bad-lbl { color:#c8102e; font-weight:700; }
+.close-btn { background:#c8102e; color:#fff; border:none; padding:10px 28px; font-size:14px; cursor:pointer; border-radius:2px; margin-top:16px; font-weight:700; }
+.close-btn:hover { background:#a80e26; }
+
+
+/* Combined full-test shell */
+html, body { height:100%; overflow:hidden; }
+body { display:flex; flex-direction:column; background:#fff; }
+.topbar { height:54px; }
+.brand-wrap { display:flex; align-items:center; gap:12px; }
+.test-title { font-weight:700; font-size:14px; color:#333; }
+.passage-tabs { display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 18px; background:#fafafa; border-bottom:1px solid #d8d8d8; flex-shrink:0; }
+.passage-tab { border:1px solid #bbb; background:#fff; color:#333; padding:7px 18px; border-radius:3px; font-size:13px; font-weight:700; cursor:pointer; }
+.passage-tab:hover { background:#f2f2f2; }
+.passage-tab.active { color:#fff; background:#c8102e; border-color:#c8102e; }
+.passage-section { display:none; flex:1; min-height:0; flex-direction:column; overflow:hidden; }
+.passage-section.active { display:flex; }
+.passage-section .split { min-height:0; }
+.left h2 { text-align:center; margin-bottom:14px; font-size:18px; }
+.left, .right { scrollbar-width:thin; }
+.fill-inp, .q-input { min-width:105px; max-width:240px; }
+.bot { min-height:55px; }
+.bot-left { flex-wrap:nowrap; overflow-x:auto; max-width:calc(100vw - 155px); padding-bottom:2px; }
+.dot { flex:0 0 auto; }
+.dot.duplicate::after { content:'P'; font-size:7px; position:absolute; margin-top:-22px; margin-left:20px; color:#777; }
+.dot { position:relative; }
+.section-score { display:inline-block; margin-left:8px; font-size:12px; color:#666; }
+.review-group { margin-top:18px; }
+.review-group h3 { font-size:15px; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #ddd; }
+.ritem .your-answer { color:#444; margin-top:3px; }
+.ritem .correct-answer { color:#176b2c; margin-top:3px; }
+.warning-note { background:#fff8e8; border:1px solid #ead49b; padding:9px 12px; border-radius:3px; font-size:12px; line-height:1.45; margin-top:10px; }
+.ctx-menu { z-index:10000; }
+.note-dialog { z-index:10001; }
+#idScreen { z-index:11000; }
+@media (max-width:780px) {
+  .test-title { display:none; }
+  .topbar { padding:0 10px; }
+  .timer { padding:5px 9px; }
+  .submit-btn { padding:8px 11px; }
+  .passage-tab { padding:7px 11px; }
+  .left { width:48%; padding:20px 18px; }
+  .right { padding:18px 16px; }
+}
+
+</style>
+</head>
+<body>
+<div id="idScreen">
+  <div class="id-card">
+    <div class="logo-big">IELTS</div>
+    <h2>Enter Your Test Taker ID</h2>
+    <p>Please type your ID to begin the full reading test</p>
+    <input type="text" id="idInput" value="STUDENT" maxlength="30" onkeydown="if(event.key==='Enter') startTest()">
+    <div class="id-err" id="idErr"></div>
+    <button onclick="startTest()">Start Test &rarr;</button>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="brand-wrap">
+    <div class="logo">IELTS</div>
+    <span class="test-title">Academic Reading — Full Test</span>
+    <span class="tid" id="tidDisplay">Test taker ID: —</span>
+  </div>
+  <div class="topbar-right">
+    <div class="timer" id="timerBox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span id="timerTxt">60:00</span>
+    </div>
+    <button class="submit-btn" onclick="openReview()">Submit Test</button>
+  </div>
+</div>
+
+<div class="passage-tabs">
+  <button class="passage-tab active" data-passage="1" onclick="switchPassage(1)">Passage 1</button>
+  <button class="passage-tab" data-passage="2" onclick="switchPassage(2)">Passage 2</button>
+  <button class="passage-tab" data-passage="3" onclick="switchPassage(3)">Passage 3</button>
+</div>
+
+
+<section class="passage-section active" data-passage="1">
+  <div class="part-hdr">
+    <strong>Reading Passage 1</strong>
+    <span>Questions 1–13 — The history of the pencil</span>
+  </div>
+  <div class="split" id="splitWrap1">
+    <div class="passage-text left" id="passagePane1">
+<h2>The history of the pencil</h2>
+<p>The history of the pencil starts with a violent thunderstorm. When some particularly ferocious weather struck the Lake District in North West England in the sixteenth century, locals in the village of Borrowdale discovered a large uprooted tree. Underneath the tree lay an unknown black substance which, as we now know, was slightly shiny and smooth to the touch. And it left a black smear on the hands of all who touched it.</p>
+<p>Initially, the local farmers used the newly discovered material as a handy way to identify their sheep. However, others quickly realised the potential for using this intriguing substance to write on paper. When it was untreated, the material was very soft, which meant that it was messy to handle. To make it fit for use with paper, people enclosed a thin core of the substance in stiff sheep hides or rope. At this time chemistry was still in its infancy. People searched for a word to describe this increasingly useful substance and came up with "plumbago," which, in Latin, means "acts or writes like lead". Later the name was changed to graphite. But because words have remarkable staying power, we still call graphite the "lead" of a pencil even though it is now known that there is no trace of real lead in graphite.</p>
+<p>Graphite has a very high melting point, at around 3,500 degrees Celsius. This made it invaluable to the British army and navy as a secret ingredient in the manufacture of cannon balls. The Royal Ordnance, or weaponry section of the British armed forces, used graphite as a lining inside the moulds for cannon balls, as a result of which the British could turn them out faster and more cheaply than their European rivals. In addition to its value to the armed forces, the government quickly realised the commercial potential of the graphite at Borrowdale and assumed control of all the mines there during the sixteenth century. Armed guards accompanied the precious graphite all the way down to the metal foundries by the naval shipyards in the south of England. The graphite was so valuable that the locals, who called it wadd, started to steal it. As a deterrent, an act of parliament in 1752 made this offence punishable by time in prison.</p>
+<p>The Italians originally invented the wooden casing to hold a thin rod of plumbago firmly in place for ease of writing. Italian craftsmen hollowed out two small sections of cedar wood, into one of which they laid the lead. They then glued the other section over the top and left the two halves to set. When dry, the whole apparatus formed what today we know as a pencil. The Germans took this technique and developed it further by applying mass-production techniques to pencils. At the same time Nicolas-Jacques Conte, a French officer in Napoleon Bonaparte's army during the late 1700s, developed a method of mixing powdered graphite and clay together for firing in a kiln. Adding more clay to the mixture helped make the pencil harder, sharper, and more precise in its mark. More graphite helped make a pencil mark that was softer, thicker and darker.</p>
+<p>The varying quality of pencil leads eventually gave rise to a system for categorizing the fineness of the pencil mark. Pencil manufacturers all over the world still use this so-called HB grading system today. The H stands for the hardness of the pencil while the B stands for its blackness. An HB pencil is a standard pencil and a variety of letters and numbers are used to designate different types of lead.</p>
+<p>Significant seams of graphite exist in parts of China, which now produces most of the world's pencils. Interestingly, the Borrowdale mine in the Lake District remains the only significant source of graphite in its near-pure form in the world. Nowadays the highest grade of graphite at Borrowdale is totally exhausted, although other grades can still be found, and England's pencil industry continues to thrive in the nearby town of Keswick.</p>
+<p>The pencil has turned out to be a remarkably resilient and valuable tool whose use has survived well into our high-tech times, as a well-known story shows. It is sometimes said that the American space programme spent millions of dollars to invent a pen capable of writing in the zero gravity of space. The Russians, by contrast, simply equipped their astronauts with good old-fashioned pencils that never let them down. It should be pointed out though, that the popular myth about Americans overlooking the practical advantages of pencils in zero gravity is merely fiction. In actual fact, both American and Russian astronauts were equipped with pencils in their respective country's first space flights. A private company later developed pens for writing in zero gravity. In fact, astronauts of every nation now use pens. But no matter – pencils remain in use in every classroom, every planning, building and drawing office, and in every art studio in the world. And there is nothing to suggest that we are likely to invent anything better than graphite to use in our pencils.</p>
+</div>
+    <div class="handle" data-handle="1" title="Drag to resize"></div>
+    <div class="right question-pane questions-section" id="qPane1">
+<!-- Q1–6: Note completion (fill in) -->
+<div class="qblock">
+<h3>Questions 1–6</h3>
+<p class="instr">Complete the notes below.<br/>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+<div class="notes-wrap">
+<div class="notes-title">The early history of graphite in Britain</div>
+<div class="note-item">
+<span class="note-bullet">•</span>
+<span>Graphite was first found below a <span class="qnum-sm">1</span><input class="fill-inp" data-display="1" data-key="p1q1" id="p1q1" placeholder="Answer…" type="text"/> blown down in a storm.</span>
+</div>
+<div class="note-item">
+<span class="note-bullet">•</span>
+<span>The first use of graphite was to make marks on <span class="qnum-sm">2</span><input class="fill-inp" data-display="2" data-key="p1q2" id="p1q2" placeholder="Answer…" type="text"/></span>
+</div>
+<div class="note-item">
+<span class="note-bullet">•</span>
+<span>The characteristics of raw graphite:</span>
+</div>
+<div style="padding-left:20px;">
+<div class="note-item">
+<span class="note-bullet">–</span>
+<span>dirty to use because it is so <span class="qnum-sm">3</span><input class="fill-inp" data-display="3" data-key="p1q3" id="p1q3" placeholder="Answer…" type="text"/></span>
+</div>
+<div class="note-item">
+<span class="note-bullet">–</span>
+<span>originally wrapped in <span class="qnum-sm">4</span><input class="fill-inp" data-display="4" data-key="p1q4" id="p1q4" placeholder="Answer…" type="text"/> or animal skin to make it useable as a pencil.</span>
+</div>
+</div>
+<div class="note-item" style="margin-top:8px;">
+<span class="note-bullet">•</span>
+<span>Graphite came to the notice of the government for military and commercial purposes.</span>
+</div>
+<div style="padding-left:20px;">
+<div class="note-item">
+<span class="note-bullet">–</span>
+<span>The government completely took over the <span class="qnum-sm">5</span><input class="fill-inp" data-display="5" data-key="p1q5" id="p1q5" placeholder="Answer…" type="text"/> at Borrowdale.</span>
+</div>
+<div class="note-item">
+<span class="note-bullet">–</span>
+<span>They employed guards to protect the graphite on its journey south.</span>
+</div>
+</div>
+<div class="note-item" style="margin-top:8px;">
+<span class="note-bullet">•</span>
+<span>Local people began to <span class="qnum-sm">6</span><input class="fill-inp" data-display="6" data-key="p1q6" id="p1q6" placeholder="Answer…" type="text"/> graphite for the money involved.</span>
+</div>
+<div style="padding-left:20px;">
+<div class="note-item">
+<span class="note-bullet">–</span>
+<span>The government passed a law to protect the graphite industry.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Q7–13: TRUE / FALSE / NOT GIVEN -->
+<div class="qblock">
+<h3>Questions 7–13</h3>
+<p class="instr">Do the following statements agree with the information given in Reading Passage 1?<br/>
+        Write <strong>TRUE</strong> if the statement agrees with the information<br/>
+        Write <strong>FALSE</strong> if the statement contradicts the information<br/>
+        Write <strong>NOT GIVEN</strong> if there is no information on this
+      </p>
+<div class="qblock" data-question-key="p1q7" id="p1-qb-7">
+<div class="qrow"><span class="qnum">7</span><div class="qtext">The Italians were the first to make pencils out of wood.</div></div>
+<select class="drop-sel" data-display="7" data-key="p1q7" id="p1q7"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q8" id="p1-qb-8">
+<div class="qrow"><span class="qnum">8</span><div class="qtext">The Germans used different types of wood to produce pencils.</div></div>
+<select class="drop-sel" data-display="8" data-key="p1q8" id="p1q8"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q9" id="p1-qb-9">
+<div class="qrow"><span class="qnum">9</span><div class="qtext">More clay in a pencil makes it write more darkly.</div></div>
+<select class="drop-sel" data-display="9" data-key="p1q9" id="p1q9"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q10" id="p1-qb-10">
+<div class="qrow"><span class="qnum">10</span><div class="qtext">After the HB code was introduced, it very quickly became used by all manufacturers.</div></div>
+<select class="drop-sel" data-display="10" data-key="p1q10" id="p1q10"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q11" id="p1-qb-11">
+<div class="qrow"><span class="qnum">11</span><div class="qtext">English pencil factories have now all closed down.</div></div>
+<select class="drop-sel" data-display="11" data-key="p1q11" id="p1q11"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q12" id="p1-qb-12">
+<div class="qrow"><span class="qnum">12</span><div class="qtext">American astronauts used pencils on their early journeys into space.</div></div>
+<select class="drop-sel" data-display="12" data-key="p1q12" id="p1q12"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+<div class="qblock" data-question-key="p1q13" id="p1-qb-13">
+<div class="qrow"><span class="qnum">13</span><div class="qtext">The use of graphite pencils is unlikely to continue into the future.</div></div>
+<select class="drop-sel" data-display="13" data-key="p1q13" id="p1q13"><option value="">- Select -</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select>
+</div>
+</div>
+</div>
+  </div>
+</section>
+
+<section class="passage-section " data-passage="2">
+  <div class="part-hdr">
+    <strong>Reading Passage 2</strong>
+    <span>Questions 14–27 — Plant Wars</span>
+  </div>
+  <div class="split" id="splitWrap2">
+    <div class="passage-text left" id="passagePane2">
+<h2>Plant Wars</h2>
+<p>Mention the words “chemical warfare” or “deployed armies” in any conversation, and your interlocutor might immediately assume you're talking about wars between humans. In reality, however, there are other kinds of wars out there where these techniques are employed far more frequently and in a far more intricate manner: those waged in the plant kingdom.</p>
+<p>We might not normally think of plants this way, but much like humans and animals, they too have to fight for survival on a daily basis. Nutrients, light and water are the three things any plant needs in order to grow; unfortunately, none of these is ample in supply, which means that the competition between plants can grow fierce. Some plants and trees are at an architectural advantage: taller trees have greater access to natural light, while plants with deeper roots have the ability to absorb more water and nutrients. Others, though, manage to defend their territory through “allelopathy”, or chemical warfare.</p>
+<p>So how does this chemical warfare work exactly? As Dr Robin Andrews explains, plants convert the nutrients they absorb from the ground to energy with the aid of a type of organic compound known as metabolites. These metabolites can be divided into two categories: primary and secondary. Primary metabolites are what allows a plant to live, playing a direct role in its growth and development, and are thus present in every plant. Secondary metabolites, on the other hand, can vary from plant to plant and often play the role of a defence mechanism against neighbouring competitors.</p>
+<p>Out of these secondary metabolites, there are two that are incredibly interesting: DIBOA and DIMBOA. These two cyclic hydroxamic acids were at the forefront of a study conducted by Sascha Venturelli and colleagues in 2015, which found that once they are released into the soil by the plants that produce them, they degenerate into toxic substances that have the power to inhibit growth in nearby plants once they soak them up. As Dr Claude Becker notes, “the phenomenon” itself “has been known for years”, but we now finally understand the “molecular mechanism” behind it—and its supreme intricacy would put to shame any chemical bombs created by humans.</p>
+<p>But plants do not just fight wars against other plants; chemical warfare also comes into play in their defence against herbivores. As Brent Mortensen of Iowa State University describes, plants “actively resist” attacks made by herbivores through qualitative and quantitative chemical defences. What's the difference? Qualitative defences can be lethal even in small doses, and are often employed to protect “young” or “tender leaves or seeds”. They can also be recycled when no longer necessary. Quantitative defences, in contrast, are only effective “in larger doses”, but unlike qualitative defences, can protect the plant against all herbivores. Quantitative defences are also not as immediately lethal, as they usually lead to indigestion, pain, irritation of the mouth and throat, and inflammation or swelling in the skin.</p>
+<p>And what about the “deployed armies” I mentioned before? Well, chemical attacks are not the only way plants elect to defend themselves against herbivores. Some plants, such as the African acacia, also recruit armies to assist them in their war. As Angela White of the University of Sheffield explains, the acacia tree has “hollowed-out structures” which invite ant colonies to build a home in them by providing not just shelter, but also food in the form of special nectar. In return, ants protect them against herbivores—and this includes not just the small ones like bugs, but also the ones as big as giraffes.</p>
+<p>At this point, of course, you might be wondering what all this has to do with you. The territorial nature of plants might be fascinating in its own right, but what is its application in real life? Well, Dr Venturelli of the 2015 study mentioned before has an answer for you: apparently, certain allelochemicals—the aforementioned chemical compounds that are responsible for stunting growth in the plants—have been fund to have an effect on human cancer cells, too. According to Michael Bitzer and Ulrich Lauer of the same study, “clinical trials at the University Clinics Tübingen currently assess the efficacy of these plant toxins in cancer patients”. This means that comprehending the way plants defend themselves against the enemies in their environment might not just be of interest to plant biologists alone, but to medical researchers as well.</p>
+</div>
+    <div class="handle" data-handle="2" title="Drag to resize"></div>
+    <div class="right question-pane questions-section" id="qPane2">
+<h3>Questions 14–20</h3>
+<p class="instr">Complete the sentences below.<br/><br/>Choose <strong>NO MORE THAN THREE WORDS</strong> from Reading Passage 2 for each answer.</p>
+<div class="qblock" data-question-key="p2q14" id="p2-qb-14"><div class="qrow"><span class="qnum">14</span><div class="qtext">Plants are very similar to <input class="fill-inp" data-display="14" data-key="p2q14" id="p2q14" type="text"/> as they also struggle to stay alive every day.</div></div></div>
+<div class="qblock" data-question-key="p2q15" id="p2-qb-15"><div class="qrow"><span class="qnum">15</span><div class="qtext">The height of a tree or plant can affect how much <input class="fill-inp" data-display="15" data-key="p2q15" id="p2q15" type="text"/> it receives.</div></div></div>
+<div class="qblock" data-question-key="p2q16" id="p2-qb-16"><div class="qrow"><span class="qnum">16</span><div class="qtext">Chemical warfare in plants also goes by the name of <input class="fill-inp" data-display="16" data-key="p2q16" id="p2q16" type="text"/>.</div></div></div>
+<div class="qblock" data-question-key="p2q17" id="p2-qb-17"><div class="qrow"><span class="qnum">17</span><div class="qtext">Water and nutrients are both taken from the soil, and the latter is later turned into <input class="fill-inp" data-display="17" data-key="p2q17" id="p2q17" type="text"/>.</div></div></div>
+<div class="qblock" data-question-key="p2q18" id="p2-qb-18"><div class="qrow"><span class="qnum">18</span><div class="qtext">Secondary metabolites are an <input class="fill-inp" data-display="18" data-key="p2q18" id="p2q18" type="text"/> that functions as a defence mechanism for plants.</div></div></div>
+<div class="qblock" data-question-key="p2q19" id="p2-qb-19"><div class="qrow"><span class="qnum">19</span><div class="qtext">DIBOA and DIMBOA are two types of secondary metabolites that can <input class="fill-inp" data-display="19" data-key="p2q19" id="p2q19" type="text"/> once absorbed by a plant.</div></div></div>
+<div class="qblock" data-question-key="p2q20" id="p2-qb-20"><div class="qrow"><span class="qnum">20</span><div class="qtext">The 2015 study by Sascha Venturelli and colleagues examined the <input class="fill-inp" data-display="20" data-key="p2q20" id="p2q20" type="text"/> of chemical warfare in plants.</div></div></div>
+<h3 style="margin-top:8px">Questions 21–25</h3>
+<p class="instr">Complete the diagram below.<br/><br/>Choose <strong>NO MORE THAN TWO WORDS</strong> from Reading Passage 2 for each answer.</p>
+<div class="diagram-scroll">
+<div class="defence-tree">
+<div class="tree-parent">Plant Defences Against<br/>Herbivores</div>
+<div class="tree-children">
+<div class="tree-card" data-question-key="p2q21" id="p2-qb-21">
+<h4>Qualitative</h4>
+<ul>
+<li>can kill a herbivore in <span class="qnum" style="display:inline-flex;min-width:24px;height:24px;font-size:11px">21</span> <input class="fill-inp" data-display="21" data-key="p2q21" id="p2q21" type="text"/></li>
+<li>can be recycled when no longer necessary</li>
+</ul>
+</div>
+<div class="tree-card" data-question-key="p2q22" id="p2-qb-22">
+<h4>Secondary</h4>
+<ul>
+<li>only works in larger doses</li>
+<li>effective against <span class="qnum" style="display:inline-flex;min-width:24px;height:24px;font-size:11px">22</span> <input class="fill-inp" data-display="22" data-key="p2q22" id="p2q22" type="text"/></li>
+<li data-question-key="p2q23" id="p2-qb-23">causes a variety of symptoms, none <span class="qnum" style="display:inline-flex;min-width:24px;height:24px;font-size:11px">23</span> <input class="fill-inp wide" data-display="23" data-key="p2q23" id="p2q23" type="text"/></li>
+</ul>
+</div>
+<div class="tree-card" data-question-key="p2q24" id="p2-qb-24">
+<h4>Indirect</h4>
+<ul>
+<li>uses the help of ant colonies that reside in its <span class="qnum" style="display:inline-flex;min-width:24px;height:24px;font-size:11px">24</span> <input class="fill-inp wide" data-display="24" data-key="p2q24" id="p2q24" type="text"/></li>
+<li data-question-key="p2q25" id="p2-qb-25">ants can protect it against herbivores of all sizes, even <span class="qnum" style="display:inline-flex;min-width:24px;height:24px;font-size:11px">25</span> <input class="fill-inp" data-display="25" data-key="p2q25" id="p2q25" type="text"/></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h3 style="margin-top:8px">Questions 26–27</h3>
+<p class="instr">Do the following statements agree with the information given in Reading Passage 2?<br/><br/>Choose <strong>TRUE</strong> if the statement is true according to the passage, <strong>FALSE</strong> if it is false, or <strong>NOT GIVEN</strong> if the information is not given.</p>
+<div class="qblock" data-question-key="p2q26" id="p2-qb-26">
+<div class="qrow"><span class="qnum">26</span><div class="qtext">Allelochemicals are secondary metabolites.</div></div>
+<div class="opts">
+<label class="opt"><input data-display="26" data-key="p2q26" name="p2q26" type="radio" value="TRUE"/>TRUE</label>
+<label class="opt"><input data-display="26" data-key="p2q26" name="p2q26" type="radio" value="FALSE"/>FALSE</label>
+<label class="opt"><input data-display="26" data-key="p2q26" name="p2q26" type="radio" value="NOT GIVEN"/>NOT GIVEN</label>
+</div>
+</div>
+<div class="qblock" data-question-key="p2q27" id="p2-qb-27">
+<div class="qrow"><span class="qnum">27</span><div class="qtext">Plant biologists and medical researchers are currently cooperating to assess the efficacy of plant toxins in preventing the growth of cancer cells.</div></div>
+<div class="opts">
+<label class="opt"><input data-display="27" data-key="p2q27" name="p2q27" type="radio" value="TRUE"/>TRUE</label>
+<label class="opt"><input data-display="27" data-key="p2q27" name="p2q27" type="radio" value="FALSE"/>FALSE</label>
+<label class="opt"><input data-display="27" data-key="p2q27" name="p2q27" type="radio" value="NOT GIVEN"/>NOT GIVEN</label>
+</div>
+</div>
+</div>
+  </div>
+</section>
+
+<section class="passage-section " data-passage="3">
+  <div class="part-hdr">
+    <strong>Reading Passage 3</strong>
+    <span>Questions 27–40 — Termite Mounds</span>
+  </div>
+  <div class="split" id="splitWrap3">
+    <div class="passage-text left" id="passagePane3">
+<h2>Termite Mounds</h2>
+<p><i>Could the vast towers of mud constructed by insects in sub-Saharan Africa hold the key to our energy-efficient building of the future?</i></p>
+<p><b>1</b> To most of us, termites are destructive insects which can cause damage on a devastating scale. But according to Dr Rupert Soar of Loughborough University's School of Mechanical and Manufacturing Engineering, these pests may serve a useful purpose for us after all. His multi-disciplinary team of British and American engineers and biologists have set out to investigate the giant mounds built by termites in Namibia, in sub-Saharan Africa, as part of the most extensive study of these structures ever taken.</p>
+<p><b>2</b> Termite mounds are impressive for their size alone; typically they are three metres high, and some as tall as eight metres by found. They also reach far into the earth, where the insects 'mine' their building materials, carefully selecting each grain of sand they use. The termite's nest is contained in the central cavity of the mound, safely protected from the harsh environment outside. The mound itself is formed of an intricate lattice of tunnels, which split into smaller and smaller tunnels, much like a person's blood vessels.</p>
+<p><b>3</b> This complex system of tunnels draws in air from the outside, capturing wind energy to drive it through the mound. It also serves to expel spent respiratory gases from the nest to prevent the termites from suffocating. So ensuring them a continuous provision of fresh, breathable air. So detailed is the design that the nest stays within three degrees of a constant temperature, despite variations on the outside of up to 50 °C, from blistering heat in the daytime to below freezing on the coldest nights. The mound also automatically regulates moisture in the air, by means of best its underground 'cellar', and evaporation from the top of the mound. Some colonies even had 'chimneys' at a height of 20m to control moisture loss in the hottest regions of sub-Saharan Africa.</p>
+<p><b>4</b> Furthermore, the termites have evolved in such a way as to outsource some of their biological functions. Part of their digestive process is carried out by a fungus, which they farm inside the mound. This fungus, which is found nowhere else on earth, thrives in the constant and optimum environment of the mound. The termites feed the fungus with slightly chewed wood pulp, which the fungus then breaks down into a digestible sugary food to provide the insects with energy, and cellulose which they use for building. And, although the termites must generate waste, none ever leaves the structure, indicating that there is also some kind of internal waste-recycling system.</p>
+<p><b>5</b> Scientists are so excited by the mounds that they have labelled them a 'super organism' because, in Soar's word. 'They dance on the edge of what we would perceive to cool down, or if you're too cold you need to thrive: that's called homeostasis. What the termites have done is to move homeostatic function away from their body, into the structure in which they live.' As more information comes to light about the unique features of termite mounds, we may ultimately need to redefine our understanding of what constitutes a 'living' organism.</p>
+<p><b>6</b> To reveal the structure of the mounds, Soar's team begins by filling and covering their plaster of Paris, a chalky white paste based on the mineral gypsum, which becomes rock-solid when dry. The researcher's team carves the plaster of Paris into half-millimetre-thick slices, and photograph them sequentially. Once the pictures are digitally scanned, computer technology is able to recreate complex three-dimensional images of the mounds. These models have enabled the team to map termite architecture at a level of detail never before attained.</p>
+<p><b>7</b> Soar hopes that the models will explain how termite mounds create a self-regulating living environment which manages to respond to changing internal and external conditions without drawing on any outside source of power. If they do, the findings could be invaluable in informing future architectural design, and could inspire buildings that are self-sufficient, environmentally, and cheap to run. 'As we approach a world of climate change, we need temperatures to rise,' he explains. 'There will not be enough fuel to drive air conditioners around the world.' 'It is hoped,' says Soar, 'that the findings will provide clues that aid the ultimate development of new kinds of human habitats, suitable for a variety of arid, hostile environments not only on the earth but maybe one day on the moon and beyond.'</p>
+</div>
+    <div class="handle" data-handle="3" title="Drag to resize"></div>
+    <div class="right question-pane questions-section" id="qPane3">
+<h3>Questions 27–33</h3>
+<p class="instr">Reading Passage 3 has seven paragraphs.<br/>
+    Choose the correct heading for each paragraph from the list of headings below.<br/>
+    Choose the correct number, <b>i–ix</b>, in boxes 27–33.</p>
+<div class="headings-list">
+<b>List of Headings</b>
+<span><b>i</b> methods used to investigate termite mound formation</span><br/>
+<span><b>ii</b> challenging our assumptions about the nature of life</span><br/>
+<span><b>iii</b> reconsidering the termite's reputation</span><br/>
+<span><b>iv</b> principal functions of the termite mound</span><br/>
+<span><b>ix</b> a mutually beneficial relationship</span><br/>
+<span><b>v</b> distribution of termite mounds in sub-Saharan Africa</span><br/>
+<span><b>vi</b> some potential benefits of understanding termite architecture</span><br/>
+<span><b>vii</b> the astonishing physical dimensions of the termite mound</span><br/>
+<span><b>viii</b> termite mounds under threat from global climate change</span>
+</div>
+<div class="qblock" data-question-key="p3q27" id="p3-qb-27">
+<div class="qrow">
+<span class="qnum">27</span>
+<span class="qtext">Paragraph 1 
+        <select class="q-select" data-display="27" data-key="p3q27" id="p3q27" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q28" id="p3-qb-28">
+<div class="qrow">
+<span class="qnum">28</span>
+<span class="qtext">Paragraph 2 
+        <select class="q-select" data-display="28" data-key="p3q28" id="p3q28" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q29" id="p3-qb-29">
+<div class="qrow">
+<span class="qnum">29</span>
+<span class="qtext">Paragraph 3 
+        <select class="q-select" data-display="29" data-key="p3q29" id="p3q29" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q30" id="p3-qb-30">
+<div class="qrow">
+<span class="qnum">30</span>
+<span class="qtext">Paragraph 4 
+        <select class="q-select" data-display="30" data-key="p3q30" id="p3q30" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q31" id="p3-qb-31">
+<div class="qrow">
+<span class="qnum">31</span>
+<span class="qtext">Paragraph 5 
+        <select class="q-select" data-display="31" data-key="p3q31" id="p3q31" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q32" id="p3-qb-32">
+<div class="qrow">
+<span class="qnum">32</span>
+<span class="qtext">Paragraph 6 
+        <select class="q-select" data-display="32" data-key="p3q32" id="p3q32" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q33" id="p3-qb-33">
+<div class="qrow">
+<span class="qnum">33</span>
+<span class="qtext">Paragraph 7 
+        <select class="q-select" data-display="33" data-key="p3q33" id="p3q33" style="width:65px; margin-left:8px; flex-shrink:0;">
+<option value="">—</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="ix">ix</option>
+</select></span>
+</div>
+</div>
+<h3 style="margin-top:8px;">Questions 34–37</h3>
+<p class="instr">Complete the diagram below.<br/>
+    Write <b>ONE WORD ONLY</b> from the passage for each answer.</p>
+<div class="diagram-box">
+<div class="diagram-inner">
+<div class="diagram-left">
+<div class="dlabel top-label">Top of the mound<br/>permits <span class="qnum" style="display:inline-flex;min-width:22px;height:22px;font-size:11px;">37</span> <input class="q-input" data-display="37" data-key="p3q37" id="p3q37" style="width:95px;" type="text"/></div>
+<div class="dlabel nest-label">Innermost chamber<br/>containing termites' nest</div>
+<div class="dlabel cellar-label">Cellar to aid control<br/>of <span class="qnum" style="display:inline-flex;min-width:22px;height:22px;font-size:11px;">36</span> <input class="q-input" data-display="36" data-key="p3q36" id="p3q36" style="width:95px;" type="text"/> levels</div>
+<div class="mound"></div>
+<div class="base"></div>
+</div>
+<div class="diagram-right">
+<p>Network of <span class="qnum" style="display:inline-flex;min-width:22px;height:22px;font-size:11px;">34</span> <input class="q-input" data-display="34" data-key="p3q34" id="p3q34" style="width:105px;" type="text"/> helps to give the termites a constant <span class="qnum" style="display:inline-flex;min-width:22px;height:22px;font-size:11px;">35</span> <input class="q-input" data-display="35" data-key="p3q35" id="p3q35" style="width:105px;" type="text"/> supply and maintain a limited temperature range.</p>
+</div>
+</div>
+</div>
+<h3 style="margin-top:8px;">Questions 38–40</h3>
+<p class="instr">Choose <b>YES</b> if the statement agrees with the claims of the writer, choose <b>NO</b> if the statement contradicts the claims of the writer, or <b>NOT GIVEN</b> if it is impossible to say what the writer thinks about this.</p>
+<div class="qblock" data-question-key="p3q38" id="p3-qb-38">
+<div class="qrow">
+<span class="qnum">38</span>
+<span class="qtext">The termite mound appears to process its refuse material internally.</span>
+</div>
+<div class="opts">
+<label class="opt"><input data-display="38" data-key="p3q38" name="p3q38" type="radio" value="YES"/>YES</label>
+<label class="opt"><input data-display="38" data-key="p3q38" name="p3q38" type="radio" value="NO"/>NO</label>
+<label class="opt"><input data-display="38" data-key="p3q38" name="p3q38" type="radio" value="NOT GIVEN"/>NOT GIVEN</label>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q39" id="p3-qb-39">
+<div class="qrow">
+<span class="qnum">39</span>
+<span class="qtext">Dr Soar's reconstruction involves scanning a single photograph of a complete mound into a computer.</span>
+</div>
+<div class="opts">
+<label class="opt"><input data-display="39" data-key="p3q39" name="p3q39" type="radio" value="YES"/>YES</label>
+<label class="opt"><input data-display="39" data-key="p3q39" name="p3q39" type="radio" value="NO"/>NO</label>
+<label class="opt"><input data-display="39" data-key="p3q39" name="p3q39" type="radio" value="NOT GIVEN"/>NOT GIVEN</label>
+</div>
+</div>
+<div class="qblock" data-question-key="p3q40" id="p3-qb-40">
+<div class="qrow">
+<span class="qnum">40</span>
+<span class="qtext">New information about termite architecture could help people deal with future energy crises.</span>
+</div>
+<div class="opts">
+<label class="opt"><input data-display="40" data-key="p3q40" name="p3q40" type="radio" value="YES"/>YES</label>
+<label class="opt"><input data-display="40" data-key="p3q40" name="p3q40" type="radio" value="NO"/>NO</label>
+<label class="opt"><input data-display="40" data-key="p3q40" name="p3q40" type="radio" value="NOT GIVEN"/>NOT GIVEN</label>
+</div>
+</div>
+</div>
+  </div>
+</section>
+
+<div class="bot">
+  <div class="bot-left" id="dotsBar"></div>
+  <div class="navbtns">
+    <button class="nav" id="btnPrev" onclick="navQ(-1)">&#8592;</button>
+    <button class="nav" id="btnNext" onclick="navQ(1)">&#8594;</button>
+  </div>
+</div>
+
+<div class="ctx-menu" id="ctxMenu">
+  <div class="ctx-item" onclick="doHighlight()">🖊 Highlight</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" onclick="openNoteDialog()">📝 Note</div>
+</div>
+<div class="note-dialog" id="noteDialog">
+  <div class="note-box">
+    <h4>📝 Add Note</h4>
+    <textarea id="noteText" placeholder="Type your note here…"></textarea>
+    <div class="note-btns">
+      <button class="note-cancel" onclick="closeNote()">Cancel</button>
+      <button class="note-save" onclick="saveNote()">Save Note</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="revbox">
+    <h2>Test Results &amp; Review</h2>
+    <div class="scorecard" id="scoreCard"></div>
+    <div id="revItems"></div>
+    <button class="close-btn" onclick="closeReview()">Close</button>
+  </div>
+</div>
+
+<script>
+
+const QUESTION_GROUPS = [[{"key": "p1q1", "display": "1", "passage": 1, "answer": ["tree"]}, {"key": "p1q2", "display": "2", "passage": 1, "answer": ["sheep"]}, {"key": "p1q3", "display": "3", "passage": 1, "answer": ["soft"]}, {"key": "p1q4", "display": "4", "passage": 1, "answer": ["rope"]}, {"key": "p1q5", "display": "5", "passage": 1, "answer": ["mines"]}, {"key": "p1q6", "display": "6", "passage": 1, "answer": ["steal"]}, {"key": "p1q7", "display": "7", "passage": 1, "answer": ["TRUE"]}, {"key": "p1q8", "display": "8", "passage": 1, "answer": ["NOT GIVEN"]}, {"key": "p1q9", "display": "9", "passage": 1, "answer": ["FALSE"]}, {"key": "p1q10", "display": "10", "passage": 1, "answer": ["NOT GIVEN"]}, {"key": "p1q11", "display": "11", "passage": 1, "answer": ["FALSE"]}, {"key": "p1q12", "display": "12", "passage": 1, "answer": ["TRUE"]}, {"key": "p1q13", "display": "13", "passage": 1, "answer": ["FALSE"]}], [{"key": "p2q14", "display": "14", "passage": 2, "answer": ["humans and animals"]}, {"key": "p2q15", "display": "15", "passage": 2, "answer": ["natural light"]}, {"key": "p2q16", "display": "16", "passage": 2, "answer": ["allelopathy"]}, {"key": "p2q17", "display": "17", "passage": 2, "answer": ["energy"]}, {"key": "p2q18", "display": "18", "passage": 2, "answer": ["organic compound"]}, {"key": "p2q19", "display": "19", "passage": 2, "answer": ["inhibit growth"]}, {"key": "p2q20", "display": "20", "passage": 2, "answer": ["molecular mechanism"]}, {"key": "p2q21", "display": "21", "passage": 2, "answer": ["small doses"]}, {"key": "p2q22", "display": "22", "passage": 2, "answer": ["all herbivores"]}, {"key": "p2q23", "display": "23", "passage": 2, "answer": ["immediately lethal"]}, {"key": "p2q24", "display": "24", "passage": 2, "answer": ["hollowed-out structures", "hollowed out structures"]}, {"key": "p2q25", "display": "25", "passage": 2, "answer": ["giraffes"]}, {"key": "p2q26", "display": "26", "passage": 2, "answer": ["TRUE"]}, {"key": "p2q27", "display": "27", "passage": 2, "answer": ["NOT GIVEN"]}], [{"key": "p3q27", "display": "27", "passage": 3, "answer": ["iii"]}, {"key": "p3q28", "display": "28", "passage": 3, "answer": ["vii"]}, {"key": "p3q29", "display": "29", "passage": 3, "answer": ["iv"]}, {"key": "p3q30", "display": "30", "passage": 3, "answer": ["ix"]}, {"key": "p3q31", "display": "31", "passage": 3, "answer": ["ii"]}, {"key": "p3q32", "display": "32", "passage": 3, "answer": ["i"]}, {"key": "p3q33", "display": "33", "passage": 3, "answer": ["vi"]}, {"key": "p3q34", "display": "34", "passage": 3, "answer": ["tunnels"]}, {"key": "p3q35", "display": "35", "passage": 3, "answer": ["air"]}, {"key": "p3q36", "display": "36", "passage": 3, "answer": ["moisture"]}, {"key": "p3q37", "display": "37", "passage": 3, "answer": ["evaporation"]}, {"key": "p3q38", "display": "38", "passage": 3, "answer": ["YES"]}, {"key": "p3q39", "display": "39", "passage": 3, "answer": ["NO"]}, {"key": "p3q40", "display": "40", "passage": 3, "answer": ["NOT GIVEN"]}]];
+const correctAnswers = {"p1q1": ["tree"], "p1q2": ["sheep"], "p1q3": ["soft"], "p1q4": ["rope"], "p1q5": ["mines"], "p1q6": ["steal"], "p1q7": ["TRUE"], "p1q8": ["NOT GIVEN"], "p1q9": ["FALSE"], "p1q10": ["NOT GIVEN"], "p1q11": ["FALSE"], "p1q12": ["TRUE"], "p1q13": ["FALSE"], "p2q14": ["humans and animals"], "p2q15": ["natural light"], "p2q16": ["allelopathy"], "p2q17": ["energy"], "p2q18": ["organic compound"], "p2q19": ["inhibit growth"], "p2q20": ["molecular mechanism"], "p2q21": ["small doses"], "p2q22": ["all herbivores"], "p2q23": ["immediately lethal"], "p2q24": ["hollowed-out structures", "hollowed out structures"], "p2q25": ["giraffes"], "p2q26": ["TRUE"], "p2q27": ["NOT GIVEN"], "p3q27": ["iii"], "p3q28": ["vii"], "p3q29": ["iv"], "p3q30": ["ix"], "p3q31": ["ii"], "p3q32": ["i"], "p3q33": ["vi"], "p3q34": ["tunnels"], "p3q35": ["air"], "p3q36": ["moisture"], "p3q37": ["evaporation"], "p3q38": ["YES"], "p3q39": ["NO"], "p3q40": ["NOT GIVEN"]};
+const userAnswers = {};
+const passageState = {1:0, 2:0, 3:0};
+let activePassage = 1;
+let secondsLeft = 60 * 60;
+let timerHandle = null;
+let savedRange = null;
+let noteTargetRange = null;
+
+function normalize(v) {
+  return String(v ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/[–—]/g, '-')
+    .replace(/\s+/g, ' ');
+}
+function isCorrect(key, value) {
+  return (correctAnswers[key] || []).some(a => normalize(a) === normalize(value));
+}
+function startTest() {
+  const id = document.getElementById('idInput').value.trim();
+  if (!id) { document.getElementById('idErr').textContent = 'Please enter your Test Taker ID.'; return; }
+  document.getElementById('tidDisplay').textContent = 'Test taker ID: ' + id;
+  document.getElementById('idScreen').style.display = 'none';
+  if (!timerHandle) timerHandle = setInterval(tick, 1000);
+  document.querySelector('#qPane1 input, #qPane1 select')?.focus();
+}
+function tick() {
+  secondsLeft = Math.max(0, secondsLeft - 1);
+  renderTimer();
+  if (secondsLeft === 0) { clearInterval(timerHandle); timerHandle = null; openReview(); }
+}
+function renderTimer() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  document.getElementById('timerTxt').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  document.getElementById('timerBox').classList.toggle('warn', secondsLeft <= 300);
+}
+function switchPassage(n, focusQuestion = true) {
+  activePassage = Number(n);
+  document.querySelectorAll('.passage-section').forEach(s => s.classList.toggle('active', Number(s.dataset.passage) === activePassage));
+  document.querySelectorAll('.passage-tab').forEach(b => b.classList.toggle('active', Number(b.dataset.passage) === activePassage));
+  renderDots();
+  if (focusQuestion) goToIndex(passageState[activePassage] || 0, false);
+}
+function renderDots() {
+  const wrap = document.getElementById('dotsBar');
+  const group = QUESTION_GROUPS[activePassage - 1];
+  wrap.innerHTML = '<span class="plabel">Passage ' + activePassage + '</span>';
+  group.forEach((q, idx) => {
+    const b = document.createElement('button');
+    b.className = 'dot' + (userAnswers[q.key] ? ' ans' : '') + (idx === passageState[activePassage] ? ' cur' : '');
+    b.textContent = q.display;
+    b.title = 'Passage ' + activePassage + ', Question ' + q.display;
+    b.onclick = () => goToIndex(idx, true);
+    wrap.appendChild(b);
+  });
+  document.getElementById('btnPrev').disabled = activePassage === 1 && passageState[1] === 0;
+  const g = QUESTION_GROUPS[activePassage - 1];
+  document.getElementById('btnNext').disabled = activePassage === 3 && passageState[3] === g.length - 1;
+}
+function findQuestionTarget(key) {
+  const control = document.querySelector('[data-key="' + key + '"]');
+  if (!control) return null;
+  return control.closest('[data-question-key], .qblock, .tree-card, li') || control;
+}
+function goToIndex(idx, scroll = true) {
+  const group = QUESTION_GROUPS[activePassage - 1];
+  idx = Math.max(0, Math.min(group.length - 1, idx));
+  passageState[activePassage] = idx;
+  renderDots();
+  if (scroll) {
+    const target = findQuestionTarget(group[idx].key);
+    target?.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+function navQ(dir) {
+  const group = QUESTION_GROUPS[activePassage - 1];
+  let idx = passageState[activePassage] + dir;
+  if (idx < 0 && activePassage > 1) {
+    switchPassage(activePassage - 1, false);
+    goToIndex(QUESTION_GROUPS[activePassage - 1].length - 1, true);
+    return;
+  }
+  if (idx >= group.length && activePassage < 3) {
+    switchPassage(activePassage + 1, false);
+    goToIndex(0, true);
+    return;
+  }
+  goToIndex(idx, true);
+}
+function recordAnswer(control) {
+  const key = control.dataset.key;
+  if (!key) return;
+  if (control.type === 'radio' && !control.checked) return;
+  userAnswers[key] = control.value.trim();
+  if (control.type === 'radio') {
+    document.querySelectorAll('input[type="radio"][name="' + control.name + '"]').forEach(r => r.closest('label')?.classList.toggle('sel', r.checked));
+  }
+  const group = QUESTION_GROUPS[activePassage - 1];
+  const idx = group.findIndex(q => q.key === key);
+  if (idx >= 0) passageState[activePassage] = idx;
+  renderDots();
+}
+document.addEventListener('input', e => { if (e.target.matches('[data-key]') && e.target.type !== 'radio') recordAnswer(e.target); });
+document.addEventListener('change', e => { if (e.target.matches('[data-key]')) recordAnswer(e.target); });
+
+function openReview() {
+  if (timerHandle) { clearInterval(timerHandle); timerHandle = null; }
+  let correctCount = 0;
+  const rev = document.getElementById('revItems');
+  rev.innerHTML = '';
+  QUESTION_GROUPS.forEach((group, gi) => {
+    let sectionCorrect = 0;
+    const block = document.createElement('div');
+    block.className = 'review-group';
+    group.forEach(q => {
+      const val = userAnswers[q.key] || '';
+      const ok = isCorrect(q.key, val);
+      if (ok) { correctCount++; sectionCorrect++; }
+      const item = document.createElement('div');
+      item.className = 'ritem';
+      item.innerHTML = '<div class="rlabel">Passage ' + (gi+1) + ' — Question ' + q.display + '</div>' +
+        '<div class="' + (ok ? 'ok-lbl' : 'bad-lbl') + '">' + (ok ? '✓ Correct' : '✗ Incorrect') + '</div>' +
+        '<div class="your-answer"><b>Your answer:</b> ' + escapeHtml(val || 'Not answered') + '</div>' +
+        (!ok ? '<div class="correct-answer"><b>Correct answer:</b> ' + escapeHtml(correctAnswers[q.key][0]) + '</div>' : '');
+      block.appendChild(item);
+    });
+    const h = document.createElement('h3');
+    h.textContent = 'Reading Passage ' + (gi+1) + ' — ' + sectionCorrect + '/' + group.length;
+    block.prepend(h);
+    rev.appendChild(block);
+  });
+  const total = Object.keys(CORRECT).length;
+  const pct = Math.round(correctCount / total * 100);
+  document.getElementById('scoreCard').innerHTML =
+    '<div class="band">' + correctCount + '/' + total + '</div>' +
+    '<div><b>' + pct + '% correct</b></div>' +
+    '<div class="warning-note">The supplied passages contain Question 27 in both Passage 2 and Passage 3, so this combined file preserves all source questions and contains 41 answer items.</div>';
+  document.getElementById('overlay').classList.add('on');
+}
+function closeReview() { document.getElementById('overlay').classList.remove('on'); }
+function escapeHtml(text) { return String(text).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c])); }
+
+// Resizable passage/question panes
+for (const handle of document.querySelectorAll('.handle')) {
+  handle.addEventListener('mousedown', e => {
+    e.preventDefault();
+    handle.classList.add('active');
+    const split = handle.parentElement;
+    const left = split.querySelector('.left');
+    const move = ev => {
+      const rect = split.getBoundingClientRect();
+      const pct = Math.max(28, Math.min(72, ((ev.clientX - rect.left) / rect.width) * 100));
+      left.style.width = pct + '%';
+    };
+    const up = () => {
+      handle.classList.remove('active');
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+  });
+}
+
+// Highlight and notes
+const ctxMenu = document.getElementById('ctxMenu');
+document.addEventListener('contextmenu', e => {
+  const pane = e.target.closest('.passage-text');
+  const sel = window.getSelection();
+  if (!pane || !sel || sel.rangeCount === 0 || sel.isCollapsed || !pane.contains(sel.anchorNode) || !pane.contains(sel.focusNode)) return;
+  e.preventDefault();
+  savedRange = sel.getRangeAt(0).cloneRange();
+  ctxMenu.style.left = Math.min(e.clientX, window.innerWidth - 165) + 'px';
+  ctxMenu.style.top = Math.min(e.clientY, window.innerHeight - 125) + 'px';
+  ctxMenu.classList.add('show');
+});
+document.addEventListener('click', e => { if (!ctxMenu.contains(e.target)) ctxMenu.classList.remove('show'); });
+function wrapRange(range, className, note='') {
+  if (!range) return;
+  const span = document.createElement('span');
+  span.className = className;
+  if (note) span.dataset.note = note;
+  try { range.surroundContents(span); }
+  catch (_) { const frag = range.extractContents(); span.appendChild(frag); range.insertNode(span); }
+  window.getSelection()?.removeAllRanges();
+}
+function doHighlight() { wrapRange(savedRange, 'hl-yellow'); savedRange = null; ctxMenu.classList.remove('show'); }
+function openNoteDialog() { noteTargetRange = savedRange; document.getElementById('noteText').value=''; document.getElementById('noteDialog').classList.add('show'); ctxMenu.classList.remove('show'); }
+function closeNote() { document.getElementById('noteDialog').classList.remove('show'); noteTargetRange=null; }
+function saveNote() { const note=document.getElementById('noteText').value.trim(); if(note) wrapRange(noteTargetRange,'hl-note',note); closeNote(); }
+
+renderTimer();
+renderDots();
+
+</script>
+</body>
+</html>
