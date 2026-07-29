@@ -48,10 +48,13 @@ const ListeningComponents = (() => {
             </span>`;
         }
 
-        return `<span class="lc-answer-inline ${className}" id="question-${number}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"></span>`;
+        const placeholder = String(className).split(/\s+/).includes("lc-mangrove-answer")
+            ? ` placeholder="${number}"`
+            : "";
+        return `<span class="lc-answer-inline ${className}" id="question-${number}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"${placeholder}></span>`;
     }
 
-    function renderPlaceholderText(value, options = []) {
+    function renderPlaceholderText(value, options = [], inputClassName = "") {
         let text = String(value || "");
         
         // Unescape common HTML entities first to avoid double-escaping bugs
@@ -67,7 +70,7 @@ const ListeningComponents = (() => {
 
         for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
             parts.push(escapeHtml(text.slice(lastIndex, match.index)));
-            parts.push(answerInput(match[1], options));
+            parts.push(answerInput(match[1], options, inputClassName));
             lastIndex = match.index + match[0].length;
         }
 
@@ -122,6 +125,28 @@ const ListeningComponents = (() => {
         }
 
         return "";
+    }
+
+    function ohopeAnswerInput(questionNumber) {
+        const number = Number(questionNumber);
+        return `<span class="lc-ohope-answer" id="question-${number}" data-question="${number}">
+            <input class="lc-answer-input lc-ohope-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}" placeholder="${number}">
+        </span>`;
+    }
+
+    function renderOhopeValue(value) {
+        const text = String(value || "");
+        const parts = [];
+        let lastIndex = 0;
+
+        for (const match of text.matchAll(/\{\{(\d{1,2})\}\}/g)) {
+            parts.push(renderPlaceholderText(text.slice(lastIndex, match.index)));
+            parts.push(ohopeAnswerInput(match[1]));
+            lastIndex = match.index + match[0].length;
+        }
+
+        parts.push(renderPlaceholderText(text.slice(lastIndex)));
+        return parts.join("");
     }
 
     function blockHeading(block) {
@@ -382,6 +407,26 @@ const ListeningComponents = (() => {
             const contentTitleHtml = contentTitle
                 ? `<h4 class="lc-mcq-content-title">${escapeHtml(contentTitle)}</h4>`
                 : "";
+
+            if (block.noteStyle === "ohope-mufs-mcq") {
+                const questions = block.questions.map((question) => {
+                    const questionNumber = Number(question.questionNumber || question.number);
+                    const name = `q${questionNumber}`;
+                    const options = (question.options || block.options || []).map((option) => `<label class="lc-ohope-mufs-option">
+                        <input type="radio" name="${name}" value="${escapeHtml(option.letter || "")}">
+                        <span class="lc-ohope-mufs-letter">${escapeHtml(option.letter || "")}</span>
+                        <span>${escapeHtml(option.text || "")}</span>
+                    </label>`).join("");
+
+                    return `<div class="lc-ohope-mufs-question" id="question-${questionNumber}">
+                        <p><strong>${questionNumber}.</strong> ${escapeHtml(question.question || question.text || "")}</p>
+                        <div class="lc-ohope-mufs-options">${options}</div>
+                    </div>`;
+                }).join("");
+
+                return blockCard(block, `${contentTitleHtml}${questions}`, "lc-multiple-choice-block lc-multiple-choice-block--ohope-mufs");
+            }
+
             const firstQ = block.questions[0];
             const hasSameShortOptions = block.questions.every((q) => {
                 const qOpts = q.options || block.options || [];
@@ -521,6 +566,8 @@ const ListeningComponents = (() => {
         const blockTitle = String(block.title || "").trim();
         let displayTitle = looksLikeInstructionTitle(blockTitle) ? "" : blockTitle;
         const isBoxedFlow = block.noteStyle === "boxed-flow";
+        const isMangroveProject = block.noteStyle === "mangrove-project";
+        const noteInputClass = isMangroveProject ? "lc-mangrove-answer" : "";
 
         if (!displayTitle && canUseAsNoteTitle(noteLines[0])) {
             displayTitle = String(noteLines.shift()).trim();
@@ -599,7 +646,7 @@ const ListeningComponents = (() => {
             if (!trimmed) return "<br>";
 
             if (isBulletLine(trimmed)) {
-                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.replace(/^\s*[-*•]\s+/, ""), block.options)}</li>`;
+                return `<li class="lc-note-list-item">${renderPlaceholderText(trimmed.replace(/^\s*[-*•]\s+/, ""), block.options, noteInputClass)}</li>`;
             }
 
             const strongOnly = /^<strong>[\s\S]*<\/strong>$/i.test(trimmed);
@@ -612,7 +659,7 @@ const ListeningComponents = (() => {
                 && !/^\d{1,2}\b/.test(plain)
                 && !/:/.test(plain);
             const className = (strongOnly && !labelOnly) || plainSectionHeading ? "lc-note-section-title" : "lc-note-line";
-            return `<p class="${className}">${renderPlaceholderText(trimmed, block.options)}</p>`;
+            return `<p class="${className}">${renderPlaceholderText(trimmed, block.options, noteInputClass)}</p>`;
         }
 
         function listItem(line) {
@@ -677,12 +724,12 @@ const ListeningComponents = (() => {
                         html.push('<ul class="lc-note-nested-list">');
                         nestedOpen = true;
                     }
-                    html.push(`<li class="lc-note-list-item lc-note-list-item--nested">${renderPlaceholderText(item.text, block.options)}</li>`);
+                    html.push(`<li class="lc-note-list-item lc-note-list-item--nested">${renderPlaceholderText(item.text, block.options, noteInputClass)}</li>`);
                     return;
                 }
 
                 closeTopItem();
-                html.push(`<li class="lc-note-list-item">${renderPlaceholderText(item.text, block.options)}`);
+                html.push(`<li class="lc-note-list-item">${renderPlaceholderText(item.text, block.options, noteInputClass)}`);
                 topItemOpen = true;
             });
 
@@ -952,6 +999,23 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderOhopeHolidayNotes(lines, title) {
+            const items = (lines || [])
+                .map((line) => String(line || "").trim())
+                .filter(Boolean)
+                .map((line) => `<li>${renderOhopeValue(line.replace(/^[-*•]\s+/, ""))}</li>`)
+                .join("");
+
+            return `
+                <h4 class="lc-ohope-notes-title">${escapeHtml(title || "General information about the holiday park and the Ohope area")}</h4>
+                <ul class="lc-ohope-notes-list">${items}</ul>
+            `;
+        }
+
+        if (block.noteStyle === "ohope-holiday-notes") {
+            return blockCard(block, renderOhopeHolidayNotes(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--ohope-holiday");
+        }
+
         if (block.noteStyle === "future-management") {
             return blockCard(block, renderFutureManagement(noteLines, displayTitle || block.title), "lc-note-completion lc-note-completion--future-management");
         }
@@ -981,7 +1045,6 @@ const ListeningComponents = (() => {
         }
 
         const isSpiritBear = isBoxedFlow && /^the spirit bear$/i.test(plainText(displayTitle));
-        const isMangroveProject = block.noteStyle === "mangrove-project";
         const noteStyleClass = [
             isBoxedFlow ? "lc-note-completion--boxed-flow" : "",
             isSpiritBear ? "lc-note-completion--spirit-bear" : "",
@@ -1033,6 +1096,22 @@ const ListeningComponents = (() => {
     }
 
     function TableCompletionBlock(block) {
+        if (block.noteStyle === "ohope-cabins-table") {
+            const rawColumns = block.columns || [];
+            const bodyRows = (block.rows || []).filter((row, index) => index !== 0 || !isRepeatedTableHeaderRow(row, rawColumns));
+            const columns = rawColumns.map((column) => `<th scope="col">${renderOhopeValue(column)}</th>`).join("");
+            const rows = bodyRows.map((row) => `<tr>${rowCells(row).map((cell) => `<td>${renderOhopeValue(cell)}</td>`).join("")}</tr>`).join("");
+
+            return blockCard(block, `
+                <div class="lc-table-scroll">
+                    <table class="lc-data-table lc-ohope-cabins-table">
+                        <thead><tr>${columns}</tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+            `, "lc-table-completion lc-table-completion--ohope-cabins");
+        }
+
         if (block.noteStyle === "thorndykes-work-table") {
             const answer = (number) => `<span class="lc-thorndykes-table-answer" id="question-${number}" data-question="${number}">
                 <span class="lc-thorndykes-table-number">${number}</span>
@@ -1323,6 +1402,13 @@ const ListeningComponents = (() => {
     }
 
     function AudioPlayerCard(part) {
+        const audioParams = new URLSearchParams(window.location.search);
+        const isMockMode = audioParams.get("mockMode") === "1"
+            || audioParams.has("mockTestId")
+            || String(audioParams.get("id") || "").includes("mock");
+        if (isMockMode) {
+            return `<div class="lc-mock-audio-anchor" data-mock-audio-part="${Number(part.partNumber) || 1}" aria-hidden="true"></div>`;
+        }
         const playlist = Array.isArray(part.audioUrls)
             ? part.audioUrls.map((item) => String(item || "").trim()).filter(Boolean)
             : [];
@@ -2240,9 +2326,11 @@ const ListeningComponents = (() => {
     }
 
     function bindListeningTest(root, test) {
-        root.querySelectorAll("[data-audio-card]").forEach(bindAudioCard);
         const listeningParams = new URLSearchParams(window.location.search);
         const isMockMode = listeningParams.get("mockMode") === "1" || listeningParams.has("mockTestId") || String(listeningParams.get("id") || "").includes("mock");
+        if (!isMockMode) {
+            root.querySelectorAll("[data-audio-card]").forEach(bindAudioCard);
+        }
         root.querySelector("[data-mock-exit]")?.addEventListener("click", () => {
             if (window.parent !== window) {
                 window.parent.postMessage({ type: "ieltsx-mock-exit-request" }, window.location.origin);
@@ -2267,12 +2355,18 @@ const ListeningComponents = (() => {
         let resetListeningTimer = () => {};
         let shouldResetListeningTimer = false;
         let timerInterval = null;
+        let mockAudioMode = "none";
+        let mockAudioPartNumber = Number(sections[0]?.dataset.listeningPart) || 1;
 
         function activePartIndex() {
             return Math.max(0, sections.findIndex((section) => !section.classList.contains("hidden")));
         }
 
-        function showListeningPart(partNumber) {
+        function showListeningPart(partNumber, options = {}) {
+            const requestedPart = Number(partNumber);
+            if (isMockMode && mockAudioMode === "parts" && !options.fromAudio && requestedPart !== mockAudioPartNumber) {
+                return;
+            }
             const targetIndex = sections.findIndex((section) => Number(section.dataset.listeningPart) === Number(partNumber));
             const nextIndex = targetIndex >= 0 ? targetIndex : 0;
 
@@ -2304,15 +2398,20 @@ const ListeningComponents = (() => {
             if (hasStarted && shouldResetListeningTimer) {
                 resetListeningTimer();
             }
-            if (isMockMode) {
-                const activeSection = sections[nextIndex];
-                if (activeSection) {
-                    activeSection.querySelectorAll("[data-audio-card]").forEach((card) => {
-                        card._startListeningAudio?.();
-                    });
-                }
-            }
         }
+
+        const handleMockAudioMessage = (event) => {
+            if (!isMockMode || event.origin !== window.location.origin) return;
+            const data = event.data || {};
+            if (data.type !== "ieltsx-mock-listening-audio-part") return;
+            mockAudioMode = data.mode === "parts" ? "parts" : "full";
+            mockAudioPartNumber = Number(data.partNumber) || 1;
+            if (mockAudioMode === "parts") {
+                showListeningPart(mockAudioPartNumber, { fromAudio: true });
+            }
+        };
+        window.addEventListener("message", handleMockAudioMessage);
+        root._cleanupMockListeningAudioSync = () => window.removeEventListener("message", handleMockAudioMessage);
 
         partTabs.forEach((button) => {
             button.addEventListener("click", () => showListeningPart(button.dataset.listeningPartSelect));
@@ -2404,12 +2503,6 @@ const ListeningComponents = (() => {
             resetListeningTimer();
             startListeningTimer();
 
-            if (isMockMode) {
-                const activeSection = root.querySelector(".lc-listening-section:not(.hidden)") || root;
-                activeSection.querySelectorAll("[data-audio-card]").forEach((card) => {
-                    card._startListeningAudio?.();
-                });
-            }
         }
 
         root.querySelector("[data-pretest-start]")?.addEventListener("click", startListeningAttempt);
@@ -2442,6 +2535,10 @@ const ListeningComponents = (() => {
             isSubmitted = true;
 
             stopListeningTimer();
+            root._cleanupMockListeningAudioSync?.();
+            if (isMockMode && window.parent !== window) {
+                window.parent.postMessage({ type: "ieltsx-mock-listening-stop-audio" }, window.location.origin);
+            }
             window.IeltsResultUtils?.stopAudioPlayers?.(root);
             window.IeltsResultUtils?.disableAnswerInputs?.(root);
             root.querySelector(".lc-submit-button")?.setAttribute("disabled", "true");

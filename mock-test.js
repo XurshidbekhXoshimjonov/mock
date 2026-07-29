@@ -36,6 +36,15 @@
     let exitModal = null;
     let sectionLoadTimer = null;
     let mockWritingEvaluationController = null;
+    let mockListeningAudio = null;
+    let mockListeningAudioMode = "none";
+    let mockListeningAudioQueue = [];
+    let mockListeningAudioIndex = 0;
+    let mockListeningAudioExpected = false;
+    let mockListeningAudioTransitioning = false;
+    let mockListeningAudioCleanup = [];
+    let mockListeningPreloadLink = null;
+    let audioBlockedModal = null;
     let mockUserProfile = {
         name: "Xurshidbek",
         testTakerId: "001"
@@ -48,6 +57,196 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+    }
+
+    function listeningAudioUrl(value) {
+        return String(value || "").trim();
+    }
+
+    function currentListeningAudioItem() {
+        return mockListeningAudioQueue[mockListeningAudioIndex] || null;
+    }
+
+    function listeningFrame() {
+        return root.querySelector('.mock-player-frame[title="Listening player"]');
+    }
+
+    function notifyListeningAudioPart() {
+        const item = currentListeningAudioItem();
+        if (!item || mockListeningAudioMode !== "parts") return;
+        listeningFrame()?.contentWindow?.postMessage({
+            type: "ieltsx-mock-listening-audio-part",
+            mode: mockListeningAudioMode,
+            partNumber: item.partNumber
+        }, window.location.origin);
+    }
+
+    function ensureAudioBlockedModal() {
+        if (audioBlockedModal) return audioBlockedModal;
+        audioBlockedModal = document.createElement("div");
+        audioBlockedModal.className = "mock-audio-blocked-modal hidden";
+        audioBlockedModal.innerHTML = `
+            <section class="mock-audio-blocked-dialog" role="dialog" aria-modal="true" aria-labelledby="mockAudioBlockedTitle">
+                <h2 id="mockAudioBlockedTitle">Listening audio</h2>
+                <p>Audio could not start automatically. Click Continue to begin the Listening test.</p>
+                <button class="mock-intro-primary" type="button" data-continue-listening-audio>Continue</button>
+            </section>
+        `;
+        audioBlockedModal.querySelector("[data-continue-listening-audio]").addEventListener("click", () => {
+            playMockListeningAudio({ showFallback: true });
+        });
+        document.body.appendChild(audioBlockedModal);
+        return audioBlockedModal;
+    }
+
+    function showAudioBlockedModal() {
+        ensureAudioBlockedModal().classList.remove("hidden");
+    }
+
+    function hideAudioBlockedModal() {
+        audioBlockedModal?.classList.add("hidden");
+    }
+
+    function preloadNextListeningAudio() {
+        mockListeningPreloadLink?.remove();
+        mockListeningPreloadLink = null;
+        const next = mockListeningAudioQueue[mockListeningAudioIndex + 1];
+        if (!next?.url) return;
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "audio";
+        link.href = next.url;
+        document.head.appendChild(link);
+        mockListeningPreloadLink = link;
+    }
+
+    async function playMockListeningAudio(options = {}) {
+        if (!mockListeningAudio || !currentListeningAudioItem()) return false;
+        mockListeningAudioExpected = true;
+        mockListeningAudio.playbackRate = 1;
+        try {
+            await mockListeningAudio.play();
+            hideAudioBlockedModal();
+            notifyListeningAudioPart();
+            return true;
+        } catch (error) {
+            console.warn("[Full Mock Test] Listening autoplay was blocked:", error?.name || "Error");
+            if (options.showFallback !== false) showAudioBlockedModal();
+            return false;
+        }
+    }
+
+    function loadMockListeningAudioItem(index, autoplay = false) {
+        const item = mockListeningAudioQueue[index];
+        if (!mockListeningAudio || !item?.url) return false;
+        mockListeningAudioIndex = index;
+        mockListeningAudioTransitioning = true;
+        mockListeningAudio.src = item.url;
+        mockListeningAudio.load();
+        mockListeningAudioTransitioning = false;
+        preloadNextListeningAudio();
+        if (autoplay) playMockListeningAudio({ showFallback: true });
+        return true;
+    }
+
+    function cleanupMockListeningAudio() {
+        mockListeningAudioExpected = false;
+        mockListeningAudioTransitioning = true;
+        mockListeningAudioCleanup.splice(0).forEach((cleanup) => cleanup());
+        if (mockListeningAudio) {
+            mockListeningAudio.pause();
+            mockListeningAudio.removeAttribute("src");
+            mockListeningAudio.load();
+            mockListeningAudio.remove();
+        }
+        mockListeningAudio = null;
+        mockListeningAudioMode = "none";
+        mockListeningAudioQueue = [];
+        mockListeningAudioIndex = 0;
+        mockListeningAudioTransitioning = false;
+        mockListeningPreloadLink?.remove();
+        mockListeningPreloadLink = null;
+        hideAudioBlockedModal();
+    }
+
+    async function prepareMockListeningAudio() {
+        cleanupMockListeningAudio();
+        const mockId = cleanId(mockTest?.id || mockIdFromPath());
+        if (!mockId) return;
+
+        const response = await fetch(`/api/listening-tests/${encodeURIComponent(`mock-listening-${mockId}`)}`, {
+            credentials: "include",
+            cache: "no-store"
+        });
+        const test = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            console.error("[Full Mock Test] Listening audio data could not be loaded:", test.error || response.status);
+            return;
+        }
+
+        const parts = (Array.isArray(test.parts) ? test.parts : [])
+            .slice()
+            .sort((a, b) => Number(a.partNumber || a.part) - Number(b.partNumber || b.part));
+        const fullAudioUrl = listeningAudioUrl(test.fullAudioUrl)
+            || (!parts.some((part) => listeningAudioUrl(part.audioUrl) || (part.audioUrls || []).length)
+                ? listeningAudioUrl(test.audio)
+                : "");
+
+        if (fullAudioUrl) {
+            mockListeningAudioMode = "full";
+            mockListeningAudioQueue = [{ partNumber: 1, url: fullAudioUrl }];
+        } else {
+            mockListeningAudioMode = "parts";
+            mockListeningAudioQueue = parts.flatMap((part, index) => {
+                const partNumber = Number(part.partNumber || part.part) || index + 1;
+                const urls = Array.isArray(part.audioUrls) && part.audioUrls.length
+                    ? part.audioUrls.map(listeningAudioUrl).filter(Boolean)
+                    : [listeningAudioUrl(part.audioUrl)].filter(Boolean);
+                if (!urls.length) {
+                    console.error(`[Full Mock Test] Missing Listening audio URL for Part ${partNumber}.`);
+                }
+                return urls.map((url) => ({ partNumber, url }));
+            });
+        }
+
+        if (!mockListeningAudioQueue.length) {
+            console.error("[Full Mock Test] No Listening audio URL is configured. The exam will continue without audio.");
+            mockListeningAudioMode = "none";
+            return;
+        }
+
+        const audio = document.createElement("audio");
+        audio.className = "mock-listening-audio-internal";
+        audio.preload = "auto";
+        audio.controls = false;
+        audio.playsInline = true;
+        audio.setAttribute("aria-hidden", "true");
+        document.body.appendChild(audio);
+        mockListeningAudio = audio;
+
+        const onEnded = () => {
+            if (!mockListeningAudioExpected || mockListeningAudioMode !== "parts") return;
+            const nextIndex = mockListeningAudioIndex + 1;
+            if (nextIndex >= mockListeningAudioQueue.length) {
+                mockListeningAudioExpected = false;
+                return;
+            }
+            loadMockListeningAudioItem(nextIndex, true);
+        };
+        const onRateChange = () => {
+            if (audio.playbackRate !== 1) audio.playbackRate = 1;
+        };
+        const onPause = () => {
+            if (!mockListeningAudioExpected || mockListeningAudioTransitioning || audio.ended) return;
+            queueMicrotask(() => playMockListeningAudio({ showFallback: false }));
+        };
+        audio.addEventListener("ended", onEnded);
+        audio.addEventListener("ratechange", onRateChange);
+        audio.addEventListener("pause", onPause);
+        mockListeningAudioCleanup.push(() => audio.removeEventListener("ended", onEnded));
+        mockListeningAudioCleanup.push(() => audio.removeEventListener("ratechange", onRateChange));
+        mockListeningAudioCleanup.push(() => audio.removeEventListener("pause", onPause));
+        loadMockListeningAudioItem(0, false);
     }
 
     function cleanId(value) {
@@ -428,6 +627,7 @@
     function renderPlayer(section) {
         clearSpeakingPrepTimer();
         clearSectionLoadTimer();
+        if (section !== "listening") cleanupMockListeningAudio();
         document.body.classList.remove("mock-intro-active");
         setMockStatus(section);
         activeIndex = sections.indexOf(section);
@@ -445,6 +645,7 @@
             </main>
         `;
         startSectionLoadTimer(section);
+        if (section === "listening") playMockListeningAudio({ showFallback: true });
     }
 
     function answersFromQuestionResults(result) {
@@ -505,6 +706,8 @@
         if (isFinalSubmitRunning) return;
         if (finishedSections.has(section)) return;
         if (section !== currentSection()) return;
+
+        if (section === "listening") cleanupMockListeningAudio();
 
         clearSectionLoadTimer();
         const payload = normalizeSectionPayload(section, data || {});
@@ -821,6 +1024,7 @@
         }
 
         clearSpeakingPrepTimer();
+        cleanupMockListeningAudio();
         await exitMockFullscreen();
         clearMockExamProgress();
 
@@ -848,6 +1052,8 @@
             button.textContent = "Starting...";
         }
 
+        playMockListeningAudio({ showFallback: true });
+
         await enterMockFullscreen().catch((error) => {
             console.warn("[Full Mock Test] Fullscreen request failed:", error.message);
         });
@@ -872,6 +1078,7 @@
         console.error("[Full Mock Test] load error:", error);
         clearSpeakingPrepTimer();
         clearSectionLoadTimer();
+        cleanupMockListeningAudio();
         setMockStatus("error");
         document.body.classList.remove("mock-intro-active");
         root.innerHTML = `
@@ -930,6 +1137,7 @@
         try {
             mockTest = await fetchMockTest(controller.signal);
             validateMockSetup(mockTest);
+            await prepareMockListeningAudio();
 
             loadLocal();
             mockUserProfile = await loadMockUserProfile();
@@ -1006,6 +1214,11 @@
         if (data.type === "ieltsx-mock-section-ready") {
             const section = String(data.section || "").toLowerCase();
             if (section === currentSection()) clearSectionLoadTimer();
+            if (section === "listening") notifyListeningAudioPart();
+            return;
+        }
+        if (data.type === "ieltsx-mock-listening-stop-audio") {
+            cleanupMockListeningAudio();
             return;
         }
         if (data.type === "ieltsx-mock-section-error") {
@@ -1019,6 +1232,9 @@
         if (!sections.includes(section)) return;
         handleSectionComplete(section, data).catch(showFatalError);
     });
+
+    window.addEventListener("pagehide", cleanupMockListeningAudio);
+    window.addEventListener("beforeunload", cleanupMockListeningAudio);
 
     boot().catch(showFatalError);
 }());

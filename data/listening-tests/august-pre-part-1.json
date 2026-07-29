@@ -1,0 +1,264 @@
+{
+  "id": "august-pre-part-1",
+  "slug": "august-pre-part-1",
+  "title": "August Pre - Part 1",
+  "part": 1,
+  "audio": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1–10",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "audioFileName": "a1.mp3?t=1739242942&id=4239630",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "answerText": "1 | microwave\n2 | reception\n3 | shower\n4 | lake\n5 | 18\n6 | tennis\n7 | fishing\n8 | farm\n9 | forest\n10 | Arataki / Aritaki",
+      "blocks": [
+        {
+          "id": "block-1-1",
+          "type": "table_completion",
+          "questionNumbers": [1, 2, 3, 4, 5],
+          "noteStyle": "ohope-cabins-table",
+          "questionRange": "Questions 1–5",
+          "title": "",
+          "instruction": "Complete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "columns": [
+            "Type of cabin",
+            "Location",
+            "Facilities",
+            "Cost and charges"
+          ],
+          "rows": [
+            [
+              "Type of cabin",
+              "Location",
+              "Facilities",
+              "Cost and charges"
+            ],
+            [
+              "Basic",
+              "next to the pool",
+              "kitchen has a fridge and a {{1}}",
+              "$ 35 per night"
+            ],
+            [
+              "Standard",
+              "close to {{2}}",
+              "fully-equipped kitchen and a {{3}}",
+              ""
+            ],
+            [
+              "Standard Plus",
+              "facing the {{4}}",
+              "comes with own spa",
+              "$55 per night<br>discount of {{5}}% for bookings over ten nights"
+            ]
+          ]
+        },
+        {
+          "id": "block-1-2",
+          "type": "note_completion",
+          "questionNumbers": [6, 7, 8, 9, 10],
+          "noteStyle": "ohope-holiday-notes",
+          "questionRange": "Questions 6–10",
+          "title": "General information about the holiday park and the Ohope area",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "content": [
+            "• The children can play {{6}} for free.",
+            "• It's possible to hire equipment for {{7}} for an afternoon.",
+            "• The children could visit the local {{8}} on Saturday and Sunday.",
+            "• There are guided tours of the {{9}} every evening to see the birds.",
+            "• Contact {{10}} to confirm the booking."
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1–5",
+      "instruction": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "partNumber": 1
+    },
+    {
+      "title": "Questions 6–10",
+      "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "partNumber": 1
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Questions 1-5\nComplete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.\n\nType of cabin\nLocation\nFacilities\nCost and charges\n\nBasic\nnext to the pool\nkitchen has a fridge and a...\n$ 35 per night\n\nStandard\nclose to...\nfully-equipped kitchen and a...\n\nStandard Plus\nfacing the...\ncomes with own spa\n$55 per nightdiscount of...% for bookings over ten nights",
+      "options": [],
+      "answer": "microwave",
+      "partNumber": 1,
+      "questionGroupId": "block-1-1",
+      "instructions": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Questions 1-5\nComplete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.\n\nType of cabin\nLocation\nFacilities\nCost and charges\n\nBasic\nnext to the pool\nkitchen has a fridge and a...\n$ 35 per night\n\nStandard\nclose to...\nfully-equipped kitchen and a...\n\nStandard Plus\nfacing the...\ncomes with own spa\n$55 per nightdiscount of...% for bookings over ten nights",
+      "options": [],
+      "answer": "reception",
+      "partNumber": 1,
+      "questionGroupId": "block-1-1",
+      "instructions": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Questions 1-5\nComplete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.\n\nType of cabin\nLocation\nFacilities\nCost and charges\n\nBasic\nnext to the pool\nkitchen has a fridge and a...\n$ 35 per night\n\nStandard\nclose to...\nfully-equipped kitchen and a...\n\nStandard Plus\nfacing the...\ncomes with own spa\n$55 per nightdiscount of...% for bookings over ten nights",
+      "options": [],
+      "answer": "shower",
+      "partNumber": 1,
+      "questionGroupId": "block-1-1",
+      "instructions": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Questions 1-5\nComplete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.\n\nType of cabin\nLocation\nFacilities\nCost and charges\n\nBasic\nnext to the pool\nkitchen has a fridge and a...\n$ 35 per night\n\nStandard\nclose to...\nfully-equipped kitchen and a...\n\nStandard Plus\nfacing the...\ncomes with own spa\n$55 per nightdiscount of...% for bookings over ten nights",
+      "options": [],
+      "answer": "lake",
+      "partNumber": 1,
+      "questionGroupId": "block-1-1",
+      "instructions": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Questions 1-5\nComplete the table below.\nWrite ONE WORD AND/OR A NUMBER for each answer.\n\nType of cabin\nLocation\nFacilities\nCost and charges\n\nBasic\nnext to the pool\nkitchen has a fridge and a...\n$ 35 per night\n\nStandard\nclose to...\nfully-equipped kitchen and a...\n\nStandard Plus\nfacing the...\ncomes with own spa\n$55 per nightdiscount of...% for bookings over ten nights",
+      "options": [],
+      "answer": "18",
+      "partNumber": 1,
+      "questionGroupId": "block-1-1",
+      "instructions": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "The children can play... for free.",
+      "options": [],
+      "answer": "tennis",
+      "partNumber": 1,
+      "questionGroupId": "block-1-2",
+      "instructions": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "It's possible to hire equipment for... for an afternoon.",
+      "options": [],
+      "answer": "fishing",
+      "partNumber": 1,
+      "questionGroupId": "block-1-2",
+      "instructions": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "The children could visit the local... on Saturday and Sunday.",
+      "options": [],
+      "answer": "farm",
+      "partNumber": 1,
+      "questionGroupId": "block-1-2",
+      "instructions": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "There are guided tours of the... every evening to see the birds.",
+      "options": [],
+      "answer": "forest",
+      "partNumber": 1,
+      "questionGroupId": "block-1-2",
+      "instructions": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Contact... to confirm the booking.",
+      "options": [],
+      "answer": "Arataki | Aritaki",
+      "partNumber": 1,
+      "questionGroupId": "block-1-2",
+      "instructions": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/8ffa6ed5-e545-49c4-a362-cc753f50984f/a1.mp3?t=1739242942&id=4239630",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    }
+  ],
+  "sourceFullTestId": "august-pre",
+  "createdAt": "2026-07-29T08:41:59.420Z",
+  "updatedAt": "2026-07-29T08:41:59.420Z"
+}

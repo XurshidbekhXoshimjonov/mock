@@ -849,7 +849,7 @@ function ensureListeningStyles() {
 
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "listening-template.css?v=20260723-focus-title-bold-v6";
+    stylesheet.href = "listening-template.css?v=20260729-ohope-p2-v3";
     document.head.appendChild(stylesheet);
 }
 

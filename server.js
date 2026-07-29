@@ -148,6 +148,7 @@ const READING_JSON_FILE = path.join(ROOT_DIR, "reading.json");
 const READING_TESTS_DIR = path.join(DATA_DIR, "reading-tests");
 const LISTENING_TESTS_DIR = path.join(DATA_DIR, "listening-tests");
 const FULL_TESTS_DIR = path.join(DATA_DIR, "full-tests");
+const PUBLIC_DIR = path.join(ROOT_DIR, "public");
 const AUDIO_UPLOAD_DIR = path.join(UPLOAD_DIR, "audio");
 const LISTENING_IMAGE_UPLOAD_DIR = path.join(UPLOAD_DIR, "listening-images");
 const MOCK_TEST_ASSET_UPLOAD_DIR = path.join(UPLOAD_DIR, "mock-tests");
@@ -2348,6 +2349,7 @@ function buildStructuredListeningTest(body) {
         ? normalizeListeningPart(source.part)
         : "full";
     const duration = listeningDurationForPart(requestedPart);
+    const fullAudioUrl = String(source.fullAudioUrl || "").trim();
 
     if (!title) {
         const error = new Error("Test title is required");
@@ -2366,6 +2368,9 @@ function buildStructuredListeningTest(body) {
         title: String(part.title || `Part ${partIndex + 1}`),
         questionRange: String(part.questionRange || ""),
         audioUrl: String(part.audioUrl || ""),
+        audioUrls: Array.isArray(part.audioUrls)
+            ? part.audioUrls.map((audioUrl) => String(audioUrl || "").trim()).filter(Boolean)
+            : [],
         audioFileName: String(part.audioFileName || ""),
         audioDuration: part.audioDuration !== null && part.audioDuration !== undefined && part.audioDuration !== ""
             && Number.isFinite(Number(part.audioDuration))
@@ -2395,7 +2400,9 @@ function buildStructuredListeningTest(body) {
         throw error;
     }
 
-    savedParts.forEach(validateStructuredListeningPart);
+    savedParts.forEach((part) => validateStructuredListeningPart(part, {
+        allowMissingAudio: requestedPart === "full" && Boolean(fullAudioUrl)
+    }));
     const questions = savedParts.flatMap(structuredListeningQuestionsForPart);
 
     return {
@@ -2403,11 +2410,13 @@ function buildStructuredListeningTest(body) {
         title,
         duration,
         part: requestedPart,
-        audio: savedParts[0]?.audioUrl || "",
+        fullAudioUrl,
+        fullAudioFileName: String(source.fullAudioFileName || ""),
+        audio: fullAudioUrl || savedParts[0]?.audioUrl || "",
         listeningHtml,
         questionsHtml: listeningHtml,
-        assetFiles: savedParts
-            .map((part) => part.audioUrl)
+        assetFiles: [fullAudioUrl, ...savedParts
+            .flatMap((part) => [part.audioUrl, ...(part.audioUrls || [])])]
             .filter((audioUrl) => String(audioUrl || "").startsWith("/uploads/")),
         parts: savedParts,
         questions,
@@ -2829,11 +2838,15 @@ function listeningAssetFiles(test) {
     if (test.audio) {
         assets.add(test.audio);
     }
+    if (test.fullAudioUrl) {
+        assets.add(test.fullAudioUrl);
+    }
 
     (Array.isArray(test.parts) ? test.parts : []).forEach((part) => {
         if (part.audioUrl) {
             assets.add(part.audioUrl);
         }
+        (Array.isArray(part.audioUrls) ? part.audioUrls : []).forEach((audioUrl) => assets.add(audioUrl));
     });
 
     return [...assets]
@@ -2935,11 +2948,12 @@ function structuredListeningQuestionsForPart(part) {
         });
 }
 
-function validateStructuredListeningPart(part) {
+function validateStructuredListeningPart(part, options = {}) {
     const partNumber = Number(part.partNumber) || 1;
     const answers = parseAnswerLines(part.answerText || part.answersText || "");
 
-    if (!String(part.audioUrl || "").trim()) {
+    const partAudioUrls = Array.isArray(part.audioUrls) ? part.audioUrls.filter(Boolean) : [];
+    if (!options.allowMissingAudio && !String(part.audioUrl || "").trim() && !partAudioUrls.length) {
         const error = new Error(`[Part ${partNumber}] Audio is required.`);
         error.statusCode = 400;
         throw error;
@@ -3311,7 +3325,7 @@ function buildMockListeningTest(id) {
         dashboardHref: `/mock-test/${encodeURIComponent(mockTest.id)}`,
         duration: Number(selected.duration) || listeningDurationForPart(selected.part || "full"),
         part: selected.part || "full",
-        audio: selected.audio || parts.find((part) => part.audioUrl)?.audioUrl || "",
+        audio: selected.fullAudioUrl || selected.audio || parts.find((part) => part.audioUrl)?.audioUrl || "",
         parts,
         questions,
         sections,
@@ -3670,7 +3684,7 @@ function summarizeManualListeningTest(test) {
         title: test.title,
         subtitle: test.subtitle || (part === "full" ? "Listening full test" : "Academic Listening practice"),
         part,
-        audio: test.audio || test.parts?.[0]?.audioUrl || "",
+        audio: test.fullAudioUrl || test.audio || test.parts?.[0]?.audioUrl || "",
         duration: listeningDurationForPart(part),
         questionCount: Number(test.questionCount) || listeningQuestionCount(test),
         createdAt: test.createdAt,
@@ -8169,6 +8183,12 @@ app.get("/vendor/jspdf.umd.min.js", (req, res) => {
     res.setHeader("Cache-Control", "public, max-age=604800");
     res.sendFile(path.join(ROOT_DIR, "node_modules", "jspdf", "dist", "jspdf.umd.min.js"));
 });
+app.use(express.static(PUBLIC_DIR, {
+    maxAge: "7d",
+    index: false,
+    redirect: false,
+    setHeaders: staticCacheHeaders
+}));
 app.use(express.static(ROOT_DIR, {
     maxAge: "7d",
     setHeaders: staticCacheHeaders

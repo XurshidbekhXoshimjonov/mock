@@ -894,6 +894,51 @@ body.dark-theme .mock-test-card:hover .test-card-button {
     background: #ffffff;
 }
 
+.mock-listening-audio-internal {
+    position: fixed;
+    left: -10000px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mock-audio-blocked-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.62);
+}
+
+.mock-audio-blocked-modal.hidden {
+    display: none;
+}
+
+.mock-audio-blocked-dialog {
+    width: min(440px, 100%);
+    border-radius: 14px;
+    background: #fff;
+    padding: 28px;
+    color: #0f172a;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(15, 23, 42, 0.24);
+}
+
+.mock-audio-blocked-dialog h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+}
+
+.mock-audio-blocked-dialog p {
+    margin: 0 0 20px;
+    line-height: 1.55;
+}
+
 .mock-prep-panel {
     width: min(620px, 100%);
     border: 1px solid rgba(148, 163, 184, 0.34);

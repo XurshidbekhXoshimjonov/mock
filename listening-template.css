@@ -2738,6 +2738,166 @@ body.fullscreen-fallback .lc-submit-status {
     min-width: 72px;
 }
 
+.lc-table-completion--ohope-cabins .lc-block-heading h3 {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.lc-table-completion--ohope-cabins .lc-instruction {
+    margin-bottom: 20px;
+    color: #111;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.45;
+}
+
+.lc-ohope-cabins-table {
+    table-layout: fixed;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.lc-ohope-cabins-table thead th {
+    background: #f4f4f4;
+    padding: 12px 13px;
+    text-align: left;
+}
+
+.lc-ohope-cabins-table td {
+    height: 76px;
+    padding: 12px;
+    vertical-align: top;
+}
+
+.lc-ohope-answer {
+    display: inline-block;
+    margin: 4px 4px 0;
+    vertical-align: middle;
+}
+
+.lc-ohope-cabins-table .lc-answer-input.lc-ohope-input,
+.lc-note-completion--ohope-holiday .lc-answer-input.lc-ohope-input {
+    width: 150px;
+    min-width: 0;
+    height: 30px;
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+    background: #fff;
+    padding: 3px 8px;
+    color: #111827;
+    text-align: center;
+}
+
+.lc-ohope-cabins-table .lc-answer-input.lc-ohope-input::placeholder,
+.lc-note-completion--ohope-holiday .lc-answer-input.lc-ohope-input::placeholder {
+    color: #8b8b8b;
+    font-weight: 700;
+    opacity: 1;
+}
+
+.lc-ohope-cabins-table .lc-answer-input.lc-ohope-input:focus,
+.lc-note-completion--ohope-holiday .lc-answer-input.lc-ohope-input:focus {
+    border-color: #2454f4;
+    outline: 2px solid rgba(36, 84, 244, 0.22);
+    outline-offset: 0;
+}
+
+.lc-note-completion--ohope-holiday .lc-block-heading h3 {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.lc-note-completion--ohope-holiday .lc-instruction {
+    margin-bottom: 20px;
+    color: #111;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.45;
+}
+
+.lc-ohope-notes-title {
+    margin: 0 0 14px;
+    color: #111;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.lc-ohope-notes-list {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding-left: 25px;
+    color: #111;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.lc-ohope-notes-list li {
+    padding-left: 1px;
+}
+
+.lc-note-completion--ohope-holiday .lc-ohope-answer {
+    margin: 0 5px;
+}
+
+.lc-multiple-choice-block--ohope-mufs .lc-block-heading h3 {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.lc-multiple-choice-block--ohope-mufs .lc-instruction {
+    margin-bottom: 20px;
+    color: #111;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.45;
+}
+
+.lc-ohope-mufs-question {
+    margin-bottom: 26px;
+    color: #111;
+    font-size: 16px;
+}
+
+.lc-ohope-mufs-question > p {
+    margin: 0 0 10px;
+    line-height: 1.45;
+}
+
+.lc-ohope-mufs-options {
+    display: grid;
+    gap: 7px;
+}
+
+.lc-ohope-mufs-option {
+    display: grid;
+    grid-template-columns: 18px 24px minmax(0, 1fr);
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.lc-ohope-mufs-option input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #2454f4;
+}
+
+.lc-ohope-mufs-letter {
+    font-weight: 700;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .lc-ohope-cabins-table {
+        min-width: 900px;
+    }
+}
+
 .lc-answer-input:focus,
 .lc-job-answer-input:focus,
 .lc-inline-select:focus,
@@ -2931,7 +3091,7 @@ body.fullscreen-fallback .lc-submit-status {
     margin: 0 auto;
     border: 1px solid #1f2937;
     background: #ffffff;
-    padding: 0 12px 14px;
+    padding: 18px 24px 22px;
     color: #050505;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -2939,7 +3099,7 @@ body.fullscreen-fallback .lc-submit-status {
 }
 
 .lc-note-completion--mangrove-project .lc-boxed-flow-title {
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     border: 0;
     padding: 0;
     color: #050505;
@@ -2951,7 +3111,7 @@ body.fullscreen-fallback .lc-submit-status {
 
 .lc-note-completion--mangrove-project .lc-note-section-title,
 .lc-note-completion--mangrove-project .lc-note-line {
-    margin: 8px 0 5px;
+    margin: 10px 0 5px;
     color: #050505;
     font-size: 16px;
     line-height: 1.35;
@@ -2960,17 +3120,18 @@ body.fullscreen-fallback .lc-submit-status {
 .lc-note-completion--mangrove-project .lc-note-section-title,
 .lc-note-completion--mangrove-project .lc-note-line strong {
     font-weight: 800 !important;
+    color: #050505;
 }
 
 .lc-note-completion--mangrove-project .lc-note-list {
-    margin: 5px 0 8px;
-    padding-left: 42px;
+    margin: 5px 0 10px;
+    padding-left: 22px;
     list-style: disc outside;
 }
 
 .lc-note-completion--mangrove-project .lc-note-list-item {
     display: list-item;
-    margin: 7px 0;
+    margin: 8px 0;
     color: #050505;
     font-size: 16px;
     line-height: 1.4;
@@ -2982,15 +3143,29 @@ body.fullscreen-fallback .lc-submit-status {
     font-size: 0.9em;
 }
 
-.lc-note-completion--mangrove-project .lc-question-badge {
-    color: #050505;
+.lc-note-completion--mangrove-project .lc-mangrove-answer {
+    margin: 1px 5px;
+    gap: 0;
 }
 
-.lc-note-completion--mangrove-project .lc-answer-input {
-    width: 96px;
-    min-width: 76px;
-    border-bottom: 2px dotted #202020;
+.lc-note-completion--mangrove-project .lc-mangrove-answer .lc-question-badge {
+    display: none;
+}
+
+.lc-note-completion--mangrove-project .lc-mangrove-answer .lc-answer-input {
+    width: 112px;
+    min-width: 112px;
+    height: 27px;
+    border: 1px solid #94a3b8;
+    border-radius: 3px;
+    padding: 2px 8px;
     color: #050505;
+    text-align: center;
+}
+
+.lc-note-completion--mangrove-project .lc-mangrove-answer .lc-answer-input::placeholder {
+    color: #7a7f87;
+    opacity: 1;
 }
 
 html.dark-theme .lc-note-completion--mangrove-project .lc-notes,
@@ -3004,18 +3179,18 @@ html.dark-theme .lc-note-completion--mangrove-project .lc-question-badge {
 
 @media (max-width: 640px) {
     .lc-note-completion--mangrove-project .lc-notes {
-        padding: 0 10px 12px;
+        padding: 12px 14px 16px;
         font-size: 14px;
     }
 
     .lc-note-completion--mangrove-project .lc-note-section-title,
     .lc-note-completion--mangrove-project .lc-note-line,
     .lc-note-completion--mangrove-project .lc-note-list-item {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .lc-note-completion--mangrove-project .lc-note-list {
-        padding-left: 28px;
+        padding-left: 22px;
     }
 }
 

@@ -71,6 +71,8 @@ function createBlankPart(partNumber) {
 function createBlankTest() {
     return {
         title: "",
+        fullAudioUrl: "",
+        fullAudioFileName: "",
         listeningHtml: "",
         questionsHtml: "",
         parts: LISTENING_PART_NUMBERS.map(createBlankPart)
@@ -823,7 +825,7 @@ function PartSidebar() {
         let statusClass = "warning";
         let statusText = "No Questions";
         if (qCount > 0) {
-            if (part.audioUrl) {
+            if (part.audioUrl || builderState.fullAudioUrl) {
                 statusClass = "complete";
                 statusText = `${qCount} Questions`;
             } else {
@@ -849,6 +851,33 @@ function PartSidebar() {
 // Part Editor UI
 function PartEditor() {
     const part = selectedPart();
+    const fullAudioCardHtml = saveScope === "full" ? (builderState.fullAudioUrl ? `
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="form-group">
+                <label>Complete Listening Test Audio <small>(takes priority over part tracks)</small></label>
+                <div class="audio-card">
+                    <div class="audio-icon-badge">🎵</div>
+                    <div class="audio-card-details">
+                        <h4>${escapeHtml(builderState.fullAudioFileName || "Attached full test audio")}</h4>
+                        <p>Path: ${escapeHtml(builderState.fullAudioUrl)}</p>
+                        <audio controls preload="metadata" src="${escapeHtml(builderState.fullAudioUrl)}" style="margin-top: 8px; width: 100%; height: 32px;"></audio>
+                    </div>
+                    <button class="btn btn-danger btn-sm" data-action="remove-full-audio" type="button">Replace</button>
+                </div>
+            </div>
+        </div>
+    ` : `
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="form-group">
+                <label>Complete Listening Test Audio <small>(optional; takes priority over part tracks)</small></label>
+                <div class="drop-zone" data-audio-scope="full" onclick="document.getElementById('fullAudioInput').click();">
+                    <div class="drop-zone-icon">🎙️</div>
+                    <span class="drop-zone__prompt">Drag & drop one complete Listening audio file here or <span class="browse-link">browse</span></span>
+                    <input type="file" id="fullAudioInput" accept=".mp3,.wav,.m4a" style="display: none;">
+                </div>
+            </div>
+        </div>
+    `) : "";
     const audioCardHtml = part.audioUrl ? `
         <div class="audio-card">
             <div class="audio-icon-badge">🎵</div>
@@ -860,7 +889,7 @@ function PartEditor() {
             <button class="btn btn-danger btn-sm" data-action="remove-audio" type="button">Replace</button>
         </div>
     ` : `
-        <div class="drop-zone" onclick="document.getElementById('audioInput').click();">
+        <div class="drop-zone" data-audio-scope="part" onclick="document.getElementById('audioInput').click();">
             <div class="drop-zone-icon">🎙️</div>
             <span class="drop-zone__prompt">Drag & drop part audio track (.mp3) here or <span class="browse-link">browse</span></span>
             <input type="file" id="audioInput" accept=".mp3,.wav,.m4a" style="display: none;">
@@ -868,6 +897,7 @@ function PartEditor() {
     `;
     
     return `
+        ${fullAudioCardHtml}
         <div class="card" style="margin-bottom: 24px;">
             <div class="part-settings-grid">
                 <div class="form-group">
@@ -1658,7 +1688,8 @@ function validateListeningPayload(payload) {
             ));
         });
 
-        if (!String(part.audioUrl || "").trim()) {
+        const usesFullAudio = payload.part === "full" && String(payload.fullAudioUrl || "").trim();
+        if (!usesFullAudio && !String(part.audioUrl || "").trim() && !(part.audioUrls || []).filter(Boolean).length) {
             throw new Error(`Upload audio for Listening Part ${partNumber}.`);
         }
         if (!numbers.length) {
@@ -1759,14 +1790,20 @@ partEditorRoot.addEventListener("loadedmetadata", (event) => {
 }, true);
 
 partEditorRoot.addEventListener("change", async (event) => {
-    if (event.target.id !== "audioInput" || !event.target.files.length) return;
-    showStatus("Uploading part audio...");
+    if (!["audioInput", "fullAudioInput"].includes(event.target.id) || !event.target.files.length) return;
+    const isFullAudio = event.target.id === "fullAudioInput";
+    showStatus(isFullAudio ? "Uploading complete Listening audio..." : "Uploading part audio...");
     try {
         const result = await uploadAudio(event.target.files[0]);
-        selectedPart().audioUrl = result.audioUrl;
-        selectedPart().audioFileName = result.fileName;
+        if (isFullAudio) {
+            builderState.fullAudioUrl = result.audioUrl;
+            builderState.fullAudioFileName = result.fileName;
+        } else {
+            selectedPart().audioUrl = result.audioUrl;
+            selectedPart().audioFileName = result.fileName;
+        }
         ListeningTestBuilder();
-        showStatus("Audio uploaded.", "success");
+        showStatus(isFullAudio ? "Complete Listening audio uploaded." : "Audio uploaded.", "success");
     } catch (error) {
         showStatus(error.message, "error");
     }
@@ -1784,6 +1821,11 @@ partEditorRoot.addEventListener("click", (event) => {
         selectedPart().audioUrl = "";
         selectedPart().audioFileName = "";
         selectedPart().audioDuration = null;
+        ListeningTestBuilder();
+    }
+    if (action === "remove-full-audio") {
+        builderState.fullAudioUrl = "";
+        builderState.fullAudioFileName = "";
         ListeningTestBuilder();
     }
     if (action === "edit-block") openBlockEditor(index);
@@ -2076,13 +2118,19 @@ partEditorRoot.addEventListener("drop", async (e) => {
             showStatus("Only MP3, WAV, or M4A audio files are allowed.", "error");
             return;
         }
-        showStatus("Uploading part audio...");
+        const isFullAudio = zone.dataset.audioScope === "full";
+        showStatus(isFullAudio ? "Uploading complete Listening audio..." : "Uploading part audio...");
         try {
             const result = await uploadAudio(file);
-            selectedPart().audioUrl = result.audioUrl;
-            selectedPart().audioFileName = result.fileName;
+            if (isFullAudio) {
+                builderState.fullAudioUrl = result.audioUrl;
+                builderState.fullAudioFileName = result.fileName;
+            } else {
+                selectedPart().audioUrl = result.audioUrl;
+                selectedPart().audioFileName = result.fileName;
+            }
             ListeningTestBuilder();
-            showStatus("Audio uploaded.", "success");
+            showStatus(isFullAudio ? "Complete Listening audio uploaded." : "Audio uploaded.", "success");
         } catch (error) {
             showStatus(error.message, "error");
         }

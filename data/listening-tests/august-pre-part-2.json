@@ -1,0 +1,558 @@
+{
+  "id": "august-pre-part-2",
+  "slug": "august-pre-part-2",
+  "title": "August Pre - Part 2",
+  "part": 2,
+  "audio": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11–20",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "audioFileName": "02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "answerText": "11 | B\n12 | A\n13 | C\n14 | A\n15 | B\n16 | C\n17 | B\n18 | E\n19 | C\n20 | D",
+      "blocks": [
+        {
+          "id": "block-2-1-q11-15",
+          "type": "multiple_choice",
+          "noteStyle": "ohope-mufs-mcq",
+          "questionRange": "Questions 11–15",
+          "title": "",
+          "instruction": "Choose the correct letter A, B or C.",
+          "questions": [
+            {
+              "questionNumber": 11,
+              "question": "Who founded the Middletown Urban Farming Scheme?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "university specialists"
+                },
+                {
+                  "letter": "B",
+                  "text": "business people"
+                },
+                {
+                  "letter": "C",
+                  "text": "town planners"
+                }
+              ]
+            },
+            {
+              "questionNumber": 12,
+              "question": "What was the original reason for starting the MUFS?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "to encourage more efficient land use"
+                },
+                {
+                  "letter": "B",
+                  "text": "to help lessen CO2 emissions"
+                },
+                {
+                  "letter": "C",
+                  "text": "to improve people's eating habits"
+                }
+              ]
+            },
+            {
+              "questionNumber": 13,
+              "question": "For the coming year, the MUFS will focus on recruiting members from",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "schools"
+                },
+                {
+                  "letter": "B",
+                  "text": "companies"
+                },
+                {
+                  "letter": "C",
+                  "text": "community centres"
+                }
+              ]
+            },
+            {
+              "questionNumber": 14,
+              "question": "What kind of information is available from members of the MUFS committee?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "practical gardening tips"
+                },
+                {
+                  "letter": "B",
+                  "text": "plant science"
+                },
+                {
+                  "letter": "C",
+                  "text": "location of local garden sites"
+                }
+              ]
+            },
+            {
+              "questionNumber": 15,
+              "question": "What are provided by the MUFS for the physically disabled?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "soil and compost"
+                },
+                {
+                  "letter": "B",
+                  "text": "containers for plants"
+                },
+                {
+                  "letter": "C",
+                  "text": "gardening tools"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "block-2-1-6",
+          "type": "multiple_choice",
+          "questionRange": "Question 16",
+          "questionNumber": 16,
+          "question": "According to school teachers, what has been an unexpected advantage of the MUFS?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "its usefulness as an aid for teaching science"
+            },
+            {
+              "letter": "B",
+              "text": "its contribution to reducing costs of school meals"
+            },
+            {
+              "letter": "C",
+              "text": "its help in encouraging community pride among students"
+            }
+          ]
+        },
+        {
+          "id": "block-2-2",
+          "type": "matching",
+          "questionRange": "Questions 17–20",
+          "title": "",
+          "optionsTitle": "Free goods or services:",
+          "instruction": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "fertilisers"
+            },
+            {
+              "letter": "B",
+              "text": "cooking lessons"
+            },
+            {
+              "letter": "C",
+              "text": "advice on soil"
+            },
+            {
+              "letter": "D",
+              "text": "eat-to-keep-fit course"
+            },
+            {
+              "letter": "E",
+              "text": "use of a greenhouse"
+            },
+            {
+              "letter": "F",
+              "text": "market stalls"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 17,
+              "text": "city hospital"
+            },
+            {
+              "questionNumber": 18,
+              "text": "local government"
+            },
+            {
+              "questionNumber": 19,
+              "text": "university"
+            },
+            {
+              "questionNumber": 20,
+              "text": "supermarket"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 11–16",
+      "instruction": "Choose the correct letter A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "partNumber": 2
+    },
+    {
+      "title": "Questions 17–20",
+      "instruction": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+      "rule": "",
+      "questionNumbers": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "partNumber": 2
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Who founded the Middletown Urban Farming Scheme?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "university specialists"
+        },
+        {
+          "letter": "B",
+          "text": "business people"
+        },
+        {
+          "letter": "C",
+          "text": "town planners"
+        }
+      ],
+      "answer": "B",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "What was the original reason for starting the MUFS?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "to encourage more efficient land use"
+        },
+        {
+          "letter": "B",
+          "text": "to help lessen CO2 emissions"
+        },
+        {
+          "letter": "C",
+          "text": "to improve people's eating habits"
+        }
+      ],
+      "answer": "A",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "For the coming year, the MUFS will focus on recruiting members from",
+      "options": [
+        {
+          "letter": "A",
+          "text": "schools"
+        },
+        {
+          "letter": "B",
+          "text": "companies"
+        },
+        {
+          "letter": "C",
+          "text": "community centres"
+        }
+      ],
+      "answer": "C",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "What kind of information is available from members of the MUFS committee?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "practical gardening tips"
+        },
+        {
+          "letter": "B",
+          "text": "plant science"
+        },
+        {
+          "letter": "C",
+          "text": "location of local garden sites"
+        }
+      ],
+      "answer": "A",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What are provided by the MUFS for the physically disabled?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "soil and compost"
+        },
+        {
+          "letter": "B",
+          "text": "containers for plants"
+        },
+        {
+          "letter": "C",
+          "text": "gardening tools"
+        }
+      ],
+      "answer": "B",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "According to school teachers, what has been an unexpected advantage of the MUFS?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "its usefulness as an aid for teaching science"
+        },
+        {
+          "letter": "B",
+          "text": "its contribution to reducing costs of school meals"
+        },
+        {
+          "letter": "C",
+          "text": "its help in encouraging community pride among students"
+        }
+      ],
+      "answer": "C",
+      "partNumber": 2,
+      "questionGroupId": "block-2-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "city hospital",
+      "options": [
+        {
+          "letter": "A",
+          "text": "fertilisers"
+        },
+        {
+          "letter": "B",
+          "text": "cooking lessons"
+        },
+        {
+          "letter": "C",
+          "text": "advice on soil"
+        },
+        {
+          "letter": "D",
+          "text": "eat-to-keep-fit course"
+        },
+        {
+          "letter": "E",
+          "text": "use of a greenhouse"
+        },
+        {
+          "letter": "F",
+          "text": "market stalls"
+        }
+      ],
+      "answer": "B",
+      "partNumber": 2,
+      "questionGroupId": "block-2-2",
+      "instructions": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "local government",
+      "options": [
+        {
+          "letter": "A",
+          "text": "fertilisers"
+        },
+        {
+          "letter": "B",
+          "text": "cooking lessons"
+        },
+        {
+          "letter": "C",
+          "text": "advice on soil"
+        },
+        {
+          "letter": "D",
+          "text": "eat-to-keep-fit course"
+        },
+        {
+          "letter": "E",
+          "text": "use of a greenhouse"
+        },
+        {
+          "letter": "F",
+          "text": "market stalls"
+        }
+      ],
+      "answer": "E",
+      "partNumber": 2,
+      "questionGroupId": "block-2-2",
+      "instructions": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "university",
+      "options": [
+        {
+          "letter": "A",
+          "text": "fertilisers"
+        },
+        {
+          "letter": "B",
+          "text": "cooking lessons"
+        },
+        {
+          "letter": "C",
+          "text": "advice on soil"
+        },
+        {
+          "letter": "D",
+          "text": "eat-to-keep-fit course"
+        },
+        {
+          "letter": "E",
+          "text": "use of a greenhouse"
+        },
+        {
+          "letter": "F",
+          "text": "market stalls"
+        }
+      ],
+      "answer": "C",
+      "partNumber": 2,
+      "questionGroupId": "block-2-2",
+      "instructions": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "supermarket",
+      "options": [
+        {
+          "letter": "A",
+          "text": "fertilisers"
+        },
+        {
+          "letter": "B",
+          "text": "cooking lessons"
+        },
+        {
+          "letter": "C",
+          "text": "advice on soil"
+        },
+        {
+          "letter": "D",
+          "text": "eat-to-keep-fit course"
+        },
+        {
+          "letter": "E",
+          "text": "use of a greenhouse"
+        },
+        {
+          "letter": "F",
+          "text": "market stalls"
+        }
+      ],
+      "answer": "D",
+      "partNumber": 2,
+      "questionGroupId": "block-2-2",
+      "instructions": "What free goods or services are offered by each of the following providers? Choose FOUR answers from the box and write the correct letter A-F next to questions 17-20.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/a518a49d-1b99-4e0b-aae9-6b0c6bbce022/02-Track-2-_11_.mp3?t=1717652471&id=4149579",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    }
+  ],
+  "sourceFullTestId": "august-pre",
+  "createdAt": "2026-07-29T08:41:59.420Z",
+  "updatedAt": "2026-07-29T08:41:59.420Z"
+}

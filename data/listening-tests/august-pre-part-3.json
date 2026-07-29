@@ -1,0 +1,575 @@
+{
+  "id": "august-pre-part-3",
+  "slug": "august-pre-part-3",
+  "title": "August Pre - Part 3",
+  "part": 3,
+  "audio": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21–30",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "audioFileName": "03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "answerText": "21 | B\n22 | A\n23 | B\n24 | A\n25 | C\n26 | B\n27 | F\n28 | C\n29 | E\n30 | B",
+      "blocks": [
+        {
+          "id": "block-3-1-q21-26",
+          "type": "multiple_choice",
+          "noteStyle": "ohope-mufs-mcq",
+          "questionRange": "Questions 21–26",
+          "title": "",
+          "instruction": "Choose the correct letter A, B or C.",
+          "questions": [
+            {
+              "questionNumber": 21,
+              "question": "Daniel mentions the research about walking and creativity to Katie because",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "she has read it too."
+                },
+                {
+                  "letter": "B",
+                  "text": "what she says reminds him of it."
+                },
+                {
+                  "letter": "C",
+                  "text": "he thinks she might like to do similar research."
+                }
+              ]
+            },
+            {
+              "questionNumber": 22,
+              "question": "In the experiments, researchers compared participants' creativity when walking and when",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "sitting."
+                },
+                {
+                  "letter": "B",
+                  "text": "running."
+                },
+                {
+                  "letter": "C",
+                  "text": "listening to music."
+                }
+              ]
+            },
+            {
+              "questionNumber": 23,
+              "question": "Daniel says that in each experiment, there was a different",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "type of control group."
+                },
+                {
+                  "letter": "B",
+                  "text": "pattern of activities."
+                },
+                {
+                  "letter": "C",
+                  "text": "way of selecting participants."
+                }
+              ]
+            },
+            {
+              "questionNumber": 24,
+              "question": "Daniel thinks the experiment with words is",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "biased in favour of certain people."
+                },
+                {
+                  "letter": "B",
+                  "text": "a good indicator of creativity."
+                },
+                {
+                  "letter": "C",
+                  "text": "open to personal interpretation."
+                }
+              ]
+            },
+            {
+              "questionNumber": 25,
+              "question": "What is Katie and Daniel's attitude to the experiment on focused thinking?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "they are doubtful about its aims."
+                },
+                {
+                  "letter": "B",
+                  "text": "they are confused by its methods."
+                },
+                {
+                  "letter": "C",
+                  "text": "they are cautious about its conclusions."
+                }
+              ]
+            },
+            {
+              "questionNumber": 26,
+              "question": "Katie thinks that the best way forward is to consider",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "whether other types of exercise affect creativity."
+                },
+                {
+                  "letter": "B",
+                  "text": "the cause of the improvement in creativity."
+                },
+                {
+                  "letter": "C",
+                  "text": "how the results can be applied to creativity in real life."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "block-3-2",
+          "type": "matching",
+          "questionRange": "Questions 27–30",
+          "title": "",
+          "optionsTitle": "Physical benefits:",
+          "instruction": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "improved balance"
+            },
+            {
+              "letter": "B",
+              "text": "greater stamina"
+            },
+            {
+              "letter": "C",
+              "text": "better eyesight"
+            },
+            {
+              "letter": "D",
+              "text": "lower blood pressure"
+            },
+            {
+              "letter": "E",
+              "text": "regular sleeping pattern"
+            },
+            {
+              "letter": "F",
+              "text": "stronger bones"
+            },
+            {
+              "letter": "G",
+              "text": "weight reduction"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 27,
+              "text": "walking with thin-soled footwear"
+            },
+            {
+              "questionNumber": 28,
+              "text": "walking in the mountains"
+            },
+            {
+              "questionNumber": 29,
+              "text": "walking for the elderly"
+            },
+            {
+              "questionNumber": 30,
+              "text": "walking long distances"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 21–26",
+      "instruction": "Choose the correct letter A, B or C.",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "partNumber": 3
+    },
+    {
+      "title": "Questions 27–30",
+      "instruction": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+      "rule": "",
+      "questionNumbers": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "partNumber": 3
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Daniel mentions the research about walking and creativity to Katie because",
+      "options": [
+        {
+          "letter": "A",
+          "text": "she has read it too."
+        },
+        {
+          "letter": "B",
+          "text": "what she says reminds him of it."
+        },
+        {
+          "letter": "C",
+          "text": "he thinks she might like to do similar research."
+        }
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "In the experiments, researchers compared participants' creativity when walking and when",
+      "options": [
+        {
+          "letter": "A",
+          "text": "sitting."
+        },
+        {
+          "letter": "B",
+          "text": "running."
+        },
+        {
+          "letter": "C",
+          "text": "listening to music."
+        }
+      ],
+      "answer": "A",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "Daniel says that in each experiment, there was a different",
+      "options": [
+        {
+          "letter": "A",
+          "text": "type of control group."
+        },
+        {
+          "letter": "B",
+          "text": "pattern of activities."
+        },
+        {
+          "letter": "C",
+          "text": "way of selecting participants."
+        }
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 24,
+      "type": "multiple_choice",
+      "question": "Daniel thinks the experiment with words is",
+      "options": [
+        {
+          "letter": "A",
+          "text": "biased in favour of certain people."
+        },
+        {
+          "letter": "B",
+          "text": "a good indicator of creativity."
+        },
+        {
+          "letter": "C",
+          "text": "open to personal interpretation."
+        }
+      ],
+      "answer": "A",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 25,
+      "type": "multiple_choice",
+      "question": "What is Katie and Daniel's attitude to the experiment on focused thinking?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "they are doubtful about its aims."
+        },
+        {
+          "letter": "B",
+          "text": "they are confused by its methods."
+        },
+        {
+          "letter": "C",
+          "text": "they are cautious about its conclusions."
+        }
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "Katie thinks that the best way forward is to consider",
+      "options": [
+        {
+          "letter": "A",
+          "text": "whether other types of exercise affect creativity."
+        },
+        {
+          "letter": "B",
+          "text": "the cause of the improvement in creativity."
+        },
+        {
+          "letter": "C",
+          "text": "how the results can be applied to creativity in real life."
+        }
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "block-3-1",
+      "instructions": "Choose the correct letter A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "walking with thin-soled footwear",
+      "options": [
+        {
+          "letter": "A",
+          "text": "improved balance"
+        },
+        {
+          "letter": "B",
+          "text": "greater stamina"
+        },
+        {
+          "letter": "C",
+          "text": "better eyesight"
+        },
+        {
+          "letter": "D",
+          "text": "lower blood pressure"
+        },
+        {
+          "letter": "E",
+          "text": "regular sleeping pattern"
+        },
+        {
+          "letter": "F",
+          "text": "stronger bones"
+        },
+        {
+          "letter": "G",
+          "text": "weight reduction"
+        }
+      ],
+      "answer": "F",
+      "partNumber": 3,
+      "questionGroupId": "block-3-2",
+      "instructions": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "walking in the mountains",
+      "options": [
+        {
+          "letter": "A",
+          "text": "improved balance"
+        },
+        {
+          "letter": "B",
+          "text": "greater stamina"
+        },
+        {
+          "letter": "C",
+          "text": "better eyesight"
+        },
+        {
+          "letter": "D",
+          "text": "lower blood pressure"
+        },
+        {
+          "letter": "E",
+          "text": "regular sleeping pattern"
+        },
+        {
+          "letter": "F",
+          "text": "stronger bones"
+        },
+        {
+          "letter": "G",
+          "text": "weight reduction"
+        }
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "block-3-2",
+      "instructions": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "walking for the elderly",
+      "options": [
+        {
+          "letter": "A",
+          "text": "improved balance"
+        },
+        {
+          "letter": "B",
+          "text": "greater stamina"
+        },
+        {
+          "letter": "C",
+          "text": "better eyesight"
+        },
+        {
+          "letter": "D",
+          "text": "lower blood pressure"
+        },
+        {
+          "letter": "E",
+          "text": "regular sleeping pattern"
+        },
+        {
+          "letter": "F",
+          "text": "stronger bones"
+        },
+        {
+          "letter": "G",
+          "text": "weight reduction"
+        }
+      ],
+      "answer": "E",
+      "partNumber": 3,
+      "questionGroupId": "block-3-2",
+      "instructions": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "walking long distances",
+      "options": [
+        {
+          "letter": "A",
+          "text": "improved balance"
+        },
+        {
+          "letter": "B",
+          "text": "greater stamina"
+        },
+        {
+          "letter": "C",
+          "text": "better eyesight"
+        },
+        {
+          "letter": "D",
+          "text": "lower blood pressure"
+        },
+        {
+          "letter": "E",
+          "text": "regular sleeping pattern"
+        },
+        {
+          "letter": "F",
+          "text": "stronger bones"
+        },
+        {
+          "letter": "G",
+          "text": "weight reduction"
+        }
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "block-3-2",
+      "instructions": "What is the main physical benefit of each of the following walking situations? Choose FOUR answers from the box and write the correct letter, A-G, next to questions 27-30.",
+      "imageUrl": "",
+      "audioUrl": "https://uploads.strikinglycdn.com/files/d9a4c7a0-8dde-4920-be35-84be600755ab/03-Track-3-_13_.mp3?t=1717664029&id=4149638",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    }
+  ],
+  "sourceFullTestId": "august-pre",
+  "createdAt": "2026-07-29T08:41:59.420Z",
+  "updatedAt": "2026-07-29T08:41:59.420Z"
+}
