@@ -22,10 +22,11 @@ def circular_crop(source: Image.Image) -> Image.Image:
     width, height = source.size
 
     # The uploaded 1024px artwork's ring is centered slightly above the canvas
-    # center. These ratios preserve the complete glow while removing empty edges.
+    # center. Crop to the ring itself so the source glow cannot bleed into the
+    # browser tab background at 16px.
     center_x = round(width * 0.5)
     center_y = round(height * 0.476)
-    crop_size = round(min(width, height) * 0.801)
+    crop_size = round(min(width, height) * 0.748)
     left = center_x - crop_size // 2
     top = center_y - crop_size // 2
     cropped = source.crop((left, top, left + crop_size, top + crop_size))
@@ -35,7 +36,7 @@ def circular_crop(source: Image.Image) -> Image.Image:
     scale = 4
     mask = Image.new("L", (crop_size * scale, crop_size * scale), 0)
     draw = ImageDraw.Draw(mask)
-    inset = round(crop_size * 0.006 * scale)
+    inset = round(crop_size * 0.009 * scale)
     draw.ellipse(
         (inset, inset, crop_size * scale - inset - 1, crop_size * scale - inset - 1),
         fill=255,
@@ -48,9 +49,16 @@ def circular_crop(source: Image.Image) -> Image.Image:
 
 
 def render_icon(master: Image.Image, size: int) -> Image.Image:
-    icon = master.resize((size, size), Image.Resampling.LANCZOS)
+    # Keep a small white safety edge. It prevents antialiased blue pixels from
+    # appearing smeared against dark browser chrome while retaining a tight crop.
+    coverage = 0.82 if size <= 16 else (0.86 if size <= 48 else 0.9)
+    mark_size = max(1, round(size * coverage))
+    mark = master.resize((mark_size, mark_size), Image.Resampling.LANCZOS)
+    icon = Image.new("RGB", (size, size), "white")
+    offset = (size - mark_size) // 2
+    icon.paste(mark, (offset, offset))
     if size <= 48:
-        icon = icon.filter(ImageFilter.UnsharpMask(radius=0.65, percent=135, threshold=2))
+        icon = icon.filter(ImageFilter.UnsharpMask(radius=0.5, percent=115, threshold=3))
     return icon
 
 
