@@ -499,7 +499,7 @@ function updateMockTest(writingTestId, speakingTestId, parsed) {
     const now = new Date().toISOString();
     const mock = {
         id: MOCK_TEST_ID, title: MOCK_TITLE, testNumber: TEST_NUMBER, number: TEST_NUMBER,
-        description: `Imported from ${path.basename(SOURCE_FILE)}.`, status: "active", access: "free",
+        description: `Imported from ${path.basename(SOURCE_FILE)}.`, status: "active", access: "premium",
         listeningTestId: LISTENING_TEST_ID, readingTestId: READING_TEST_ID,
         writingTestId: String(writingTestId), speakingTestId: String(speakingTestId),
         writing: {
