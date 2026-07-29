@@ -536,7 +536,10 @@ const ListeningComponents = (() => {
                     </div>
                 `;
             }).join("");
-            return blockCard(block, `${contentTitleHtml}${html}`, "lc-multiple-choice-block");
+            const styleClass = block.noteStyle === "video-game-company-mcq"
+                ? " lc-multiple-choice-block--video-game-company"
+                : "";
+            return blockCard(block, `${contentTitleHtml}${html}`, `lc-multiple-choice-block${styleClass}`);
         }
 
         const name = `q${Number(block.questionNumber)}`;
@@ -1010,6 +1013,136 @@ const ListeningComponents = (() => {
                 <h4 class="lc-ohope-notes-title">${escapeHtml(title || "General information about the holiday park and the Ohope area")}</h4>
                 <ul class="lc-ohope-notes-list">${items}</ul>
             `;
+        }
+
+        function renderCapitalOneInput(questionNumber, width) {
+            const number = Number(questionNumber);
+            return `<span class="lc-capital-one-answer" id="question-${number}" data-question="${number}" style="--capital-one-width:${Number(width) || 170}px">
+                <span class="lc-question-badge">${number}</span>
+                <input class="lc-answer-input lc-capital-one-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderCapitalOneBank() {
+            return `
+                <div class="lc-capital-one-form">
+                    <h4>CAPITAL ONE BANK</h4>
+
+                    <section class="lc-capital-one-section">
+                        <h5>Guardian's information</h5>
+                        <p><strong>Name:</strong> Julia Thomas</p>
+                        <p><strong>Account:</strong> ${renderCapitalOneInput(1, 190)}</p>
+                    </section>
+
+                    <section class="lc-capital-one-section">
+                        <h5>Minor's information</h5>
+                        <p><strong>Name:</strong> ${renderCapitalOneInput(2, 170)} <span>Rose</span></p>
+                        <p><strong>Age:</strong> ${renderCapitalOneInput(3, 120)}</p>
+                        <p><strong>Date of Birth:</strong> ${renderCapitalOneInput(4, 190)}</p>
+                        <p><strong>Address:</strong> ${renderCapitalOneInput(5, 190)} <span>Boulevard, Kansas City</span></p>
+                        <p><strong>Shipping date:</strong> After 5–7 days</p>
+                    </section>
+
+                    <section class="lc-capital-one-section">
+                        <h5>Account's information</h5>
+                        <p><strong>Minimum balance:</strong> $${renderCapitalOneInput(6, 120)}</p>
+                        <p><strong>Spending limit:</strong> no more than $${renderCapitalOneInput(7, 120)} <span>per day</span></p>
+                        <p><strong>Card design:</strong> picture of ${renderCapitalOneInput(8, 170)}</p>
+                        <p><strong>Method of communication:</strong> notifications via ${renderCapitalOneInput(9, 180)}</p>
+                    </section>
+
+                    <section class="lc-capital-one-section lc-capital-one-notice">
+                        <h5>Notice</h5>
+                        <ul>
+                            <li>When the card is shipped, go to the closest ATM and change the old password, found in an ${renderCapitalOneInput(10, 180)}.</li>
+                            <li>At the age of 18, the account will no longer work.</li>
+                        </ul>
+                    </section>
+                </div>
+            `;
+        }
+
+        function renderCanterburyStaffNotice() {
+            return `
+                <div class="lc-canterbury-notice">
+                    <h4>STAFF NOTICE AT CANTERBURY ROCK FESTIVAL</h4>
+                    <ul>
+                        <li>The concert will be organized at a ${renderCapitalOneInput(11, 190)}.</li>
+                        <li>All staff must arrive at ${renderCapitalOneInput(12, 120)} <span>o'clock.</span></li>
+                        <li>Staff must show an arm band and a ${renderCapitalOneInput(13, 180)} <span>to enter.</span></li>
+                        <li>Staff must leave their belongings at the lockers near the ${renderCapitalOneInput(14, 180)}.</li>
+                        <li>The ${renderCapitalOneInput(15, 190)} <span>has already been installed.</span></li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function renderGlobalWarmingInput(questionNumber, width = 180) {
+            const number = Number(questionNumber);
+            return `<span class="lc-global-warming-answer" id="question-${number}" data-question="${number}" style="--global-warming-width:${Number(width) || 180}px">
+                <span class="lc-question-badge">${number}</span>
+                <input class="lc-answer-input lc-global-warming-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderGlobalWarmingAgriculture() {
+            return `
+                <div class="lc-global-warming-notes">
+                    <h4>IMPACT OF GLOBAL WARMING ON AGRICULTURE</h4>
+
+                    <section>
+                        <h5>Overview</h5>
+                        <ul>
+                            <li>Crops, livestock and fisheries made up $300 billion each year.</li>
+                            <li>Agriculture is ${renderGlobalWarmingInput(31)} on the climate.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h5>Effects on crops</h5>
+                        <ul>
+                            <li>Higher CO2 levels
+                                <ul>
+                                    <li>increase plant growth</li>
+                                    <li>create bad effects if combined with changing temperature and ${renderGlobalWarmingInput(32)}</li>
+                                    <li>${renderGlobalWarmingInput(33)} of some crops might be reduced</li>
+                                </ul>
+                            </li>
+                            <li>Faster growth of weeds and pests</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h5>Effects on livestock</h5>
+                        <ul>
+                            <li>Heat waves cause heat stress: animals produce less milk, become less ${renderGlobalWarmingInput(34)} and are more vulnerable to diseases.</li>
+                            <li>Drought or increased atmospheric carbon dioxide levels cause food ${renderGlobalWarmingInput(35)}.</li>
+                            <li>The growth of parasites, pests and microbes leads to increased use of pesticides and animal ${renderGlobalWarmingInput(36)}, which may poison the food chain and cause pesticide ${renderGlobalWarmingInput(37)}.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h5>Effects on fisheries</h5>
+                        <ul>
+                            <li>Before climate change, there were already serious issues, such as ${renderGlobalWarmingInput(38)} and water pollution.</li>
+                            <li>${renderGlobalWarmingInput(39, 210)} species moved north because of warmer temperatures, increasing competition for food and other resources.</li>
+                            <li>Disease outbreaks and higher ${renderGlobalWarmingInput(40)} content due to increased CO2 levels seriously threaten ocean species and their living environment.</li>
+                        </ul>
+                    </section>
+                </div>
+            `;
+        }
+
+        if (block.noteStyle === "capital-one-bank") {
+            return blockCard(block, renderCapitalOneBank(), "lc-note-completion lc-note-completion--capital-one");
+        }
+
+        if (block.noteStyle === "canterbury-staff-notice") {
+            return blockCard(block, renderCanterburyStaffNotice(), "lc-note-completion lc-note-completion--canterbury");
+        }
+
+        if (block.noteStyle === "global-warming-agriculture") {
+            return blockCard(block, renderGlobalWarmingAgriculture(), "lc-note-completion lc-note-completion--global-warming");
         }
 
         if (block.noteStyle === "ohope-holiday-notes") {

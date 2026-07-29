@@ -1,14 +1,21 @@
 (function () {
     const LIMIT_CLASS = "ielts-instruction-limit";
     const LIMIT_PATTERN_SOURCE = [
+        "NO MORE THAN\\s+FOUR\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+NUMBERS?",
         "NO MORE THAN\\s+THREE\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+NUMBERS?",
         "NO MORE THAN\\s+TWO\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+NUMBERS?",
         "NO MORE THAN\\s+ONE\\s+WORD\\s+AND\\s*\\/\\s*OR\\s+NUMBERS?",
+        "NO MORE THAN\\s+FOUR\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+A\\s+NUMBER",
         "NO MORE THAN\\s+THREE\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+A\\s+NUMBER",
         "NO MORE THAN\\s+TWO\\s+WORDS\\s+AND\\s*\\/\\s*OR\\s+A\\s+NUMBER",
         "NO MORE THAN\\s+ONE\\s+WORD\\s+AND\\s*\\/\\s*OR\\s+A\\s+NUMBER",
+        "NO MORE THAN\\s+FOUR\\s+WORDS\\s+OR\\s+A\\s+NUMBER",
+        "NO MORE THAN\\s+THREE\\s+WORDS\\s+OR\\s+A\\s+NUMBER",
+        "NO MORE THAN\\s+TWO\\s+WORDS\\s+OR\\s+A\\s+NUMBER",
+        "NO MORE THAN\\s+ONE\\s+WORD\\s+OR\\s+A\\s+NUMBER",
         "ONE\\s+WORD\\s+AND\\s*\\/\\s*OR\\s+A\\s+NUMBER",
         "ONE\\s+WORD\\s+AND\\s+A\\s+NUMBER",
+        "NO MORE THAN\\s+FOUR\\s+WORDS",
         "NO MORE THAN\\s+THREE\\s+WORDS",
         "NO MORE THAN\\s+TWO\\s+WORDS",
         "NO MORE THAN\\s+ONE\\s+WORD",

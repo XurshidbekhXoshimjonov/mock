@@ -1488,6 +1488,7 @@
         }
 
         const writingMockTestId = cleanWritingId(urlParams.get('mockTestId') || urlParams.get('testId'));
+        const writingSourceTestId = cleanWritingId(urlParams.get('sourceTestId'));
         const fullTestId = cleanWritingId(urlParams.get('id')) || (writingMockTestId ? `mock-writing-${writingMockTestId}` : '');
         const isMockWritingMode = urlParams.get('mockMode') === '1' || urlParams.has('mockTestId') || String(fullTestId || '').includes('mock');
         const WRITING_LOAD_TIMEOUT_MS = 10000;
@@ -1833,7 +1834,11 @@
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), WRITING_LOAD_TIMEOUT_MS);
 
-            fetch(`/api/writing/full-tests/${encodeURIComponent(id)}`, {
+            const requestParams = new URLSearchParams();
+            if (writingMockTestId) requestParams.set('mockTestId', writingMockTestId);
+            if (writingSourceTestId) requestParams.set('sourceTestId', writingSourceTestId);
+            const requestQuery = requestParams.toString();
+            fetch(`/api/writing/full-tests/${encodeURIComponent(id)}${requestQuery ? `?${requestQuery}` : ''}`, {
                 credentials: 'include',
                 cache: 'no-store',
                 signal: controller.signal

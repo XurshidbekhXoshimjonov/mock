@@ -63,9 +63,16 @@ function normalizeOption(option) {
     if (typeof option === "object" && option !== null) {
         const value = option.value ?? option.letter ?? option.key ?? option.id ?? option.label ?? option.text ?? "";
         const text = option.label ?? option.text ?? option.value ?? option.letter ?? "";
-        const letter = String(option.letter ?? "").trim();
-        const label = letter && String(text).trim() && !String(text).trim().toUpperCase().startsWith(`${letter.toUpperCase()} `)
-            ? `${letter} ${String(text).trim()}`
+        const explicitLetter = String(option.letter ?? "").trim();
+        const inferredLetter = /^[A-Z]$/.test(String(value).trim())
+            && String(text).trim() !== String(value).trim()
+            ? String(value).trim()
+            : "";
+        const letter = explicitLetter || inferredLetter;
+        const hasLetterPrefix = letter
+            && new RegExp(`^${letter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:[.):-])?\\s+`, "i").test(String(text).trim());
+        const label = letter && String(text).trim() && !hasLetterPrefix
+            ? `${letter}. ${String(text).trim()}`
             : String(text || value);
         return {
             value: String(value),

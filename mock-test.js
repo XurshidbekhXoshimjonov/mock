@@ -489,6 +489,7 @@
 
         if (section === "writing") {
             params.set("id", `mock-writing-${mockId}`);
+            params.set("v", "20260729-mock-writing-adapter-v1");
             return `/full-writing-test.html?${params.toString()}`;
         }
 
@@ -544,7 +545,7 @@
                     <h1>No active mock test</h1>
                     <p>${escapeHtml(message || missingDataMessage)}</p>
                     <button class="mock-btn" type="button" data-retry-mock-test>Retry</button>
-                    <a class="mock-btn secondary" href="/dashboard">Dashboard</a>
+                    <a class="mock-btn secondary" href="/mock-tests">Mock Tests</a>
                 </section>
             </main>
         `;
@@ -1087,7 +1088,7 @@
                     <h1>Mock test unavailable</h1>
                     <p>${escapeHtml(error.message || "Mock test could not be loaded.")}</p>
                     <button class="mock-btn" type="button" data-retry-mock-test>Retry</button>
-                    <a class="mock-btn secondary" href="/dashboard">Dashboard</a>
+                    <a class="mock-btn secondary" href="/mock-tests">Mock Tests</a>
                 </section>
             </main>
         `;
@@ -1199,7 +1200,7 @@
 
         if (event.target.closest("#exitResultMock")) {
             exitMockFullscreen().then(() => {
-                window.location.href = "/dashboard";
+                window.location.href = "/mock-tests";
             });
         }
     });

@@ -222,223 +222,38 @@
     },
     {
       "id": "mock-test-2",
-      "number": 2,
       "title": "Mock Test 2",
-      "status": "published",
+      "testNumber": 2,
+      "number": 2,
+      "description": "Imported from FULL MOCK 10 [@jasurbekisaev].html.",
+      "status": "active",
       "access": "free",
-      "createdAt": "2026-06-24T16:22:33.789Z",
-      "updatedAt": "2026-06-24T16:22:33.789Z",
-      "listening": {
-        "durationMinutes": 40,
-        "parts": [
-          {
-            "partNumber": 1,
-            "title": "Part 1",
-            "audioUrl": "",
-            "imageUrl": "",
-            "transcript": "",
-            "instruction": "Listen and answer Questions 1-10.",
-            "questions": [
-              {
-                "id": "q-1-d980",
-                "number": 1,
-                "type": "fill_in_the_blank",
-                "prompt": "Write the missing word from the recording.",
-                "options": [],
-                "answer": "library"
-              }
-            ]
-          },
-          {
-            "partNumber": 2,
-            "title": "Part 2",
-            "audioUrl": "",
-            "imageUrl": "",
-            "transcript": "",
-            "instruction": "Listen and answer Questions 11-20.",
-            "questions": [
-              {
-                "id": "q-11-3764",
-                "number": 11,
-                "type": "map_diagram_labeling",
-                "prompt": "Label the main entrance on the map.",
-                "options": [
-                  {
-                    "value": "A",
-                    "text": "A"
-                  },
-                  {
-                    "value": "B",
-                    "text": "B"
-                  },
-                  {
-                    "value": "C",
-                    "text": "C"
-                  }
-                ],
-                "answer": "A"
-              }
-            ]
-          },
-          {
-            "partNumber": 3,
-            "title": "Part 3",
-            "audioUrl": "",
-            "imageUrl": "",
-            "transcript": "",
-            "instruction": "Listen and answer Questions 21-30.",
-            "questions": [
-              {
-                "id": "q-21-5f1b",
-                "number": 21,
-                "type": "fill_in_the_blank",
-                "prompt": "Write the missing word from the recording.",
-                "options": [],
-                "answer": "library"
-              }
-            ]
-          },
-          {
-            "partNumber": 4,
-            "title": "Part 4",
-            "audioUrl": "",
-            "imageUrl": "",
-            "transcript": "",
-            "instruction": "Listen and answer Questions 31-40.",
-            "questions": [
-              {
-                "id": "q-31-b5f0",
-                "number": 31,
-                "type": "fill_in_the_blank",
-                "prompt": "Write the missing word from the recording.",
-                "options": [],
-                "answer": "library"
-              }
-            ]
-          }
-        ]
-      },
-      "reading": {
-        "durationMinutes": 60,
-        "passages": [
-          {
-            "number": 1,
-            "title": "Reading Passage 1",
-            "text": "This IELTSX mock passage is a starter text. Replace it with the complete passage in the admin editor before publishing a production test.",
-            "questions": [
-              {
-                "id": "q-1-3bf2",
-                "number": 1,
-                "type": "true_false_not_given",
-                "prompt": "The passage is a starter text.",
-                "options": [
-                  {
-                    "value": "A",
-                    "text": "TRUE"
-                  },
-                  {
-                    "value": "B",
-                    "text": "FALSE"
-                  },
-                  {
-                    "value": "C",
-                    "text": "NOT GIVEN"
-                  }
-                ],
-                "answer": "TRUE"
-              }
-            ]
-          },
-          {
-            "number": 2,
-            "title": "Reading Passage 2",
-            "text": "This IELTSX mock passage is a starter text. Replace it with the complete passage in the admin editor before publishing a production test.",
-            "questions": [
-              {
-                "id": "q-14-0d8b",
-                "number": 14,
-                "type": "multiple_choice",
-                "prompt": "What should the admin replace?",
-                "options": [
-                  {
-                    "value": "A",
-                    "text": "The passage"
-                  },
-                  {
-                    "value": "B",
-                    "text": "The navbar"
-                  },
-                  {
-                    "value": "C",
-                    "text": "The footer"
-                  }
-                ],
-                "answer": "A"
-              }
-            ]
-          },
-          {
-            "number": 3,
-            "title": "Reading Passage 3",
-            "text": "This IELTSX mock passage is a starter text. Replace it with the complete passage in the admin editor before publishing a production test.",
-            "questions": [
-              {
-                "id": "q-27-0a5d",
-                "number": 27,
-                "type": "multiple_choice",
-                "prompt": "What should the admin replace?",
-                "options": [
-                  {
-                    "value": "A",
-                    "text": "The passage"
-                  },
-                  {
-                    "value": "B",
-                    "text": "The navbar"
-                  },
-                  {
-                    "value": "C",
-                    "text": "The footer"
-                  }
-                ],
-                "answer": "A"
-              }
-            ]
-          }
-        ]
-      },
+      "listeningTestId": "full-mock-10-test-2-listening-full",
+      "readingTestId": "full-mock-10-test-2-reading-full",
+      "writingTestId": "6a69d637552ddfea5b9c7e26",
+      "speakingTestId": "6a69d639552ddfea5b9c7e2a",
       "writing": {
-        "durationMinutes": 60,
-        "task1": {
-          "question": "The chart below shows sample IELTSX data. Summarise the information by selecting and reporting the main features.",
-          "imageUrl": ""
+        "timeLimit": 60,
+        "task1Prompt": {
+          "taskType": "task1",
+          "title": "Mock Test 2 - Writing Task 1",
+          "promptText": "The charts below show employment rates of males and females of different ages and the average age of their youngest child.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+          "visualDiagramUrl": "https://engnovatewebsitestorage.blob.core.windows.net/ielts-writing-task-1-images/da1e85e0a385a081",
+          "imageUrl": "https://engnovatewebsitestorage.blob.core.windows.net/ielts-writing-task-1-images/da1e85e0a385a081",
+          "wordLimit": 150,
+          "timeLimit": 20
         },
-        "task2": {
-          "question": "Some people believe online practice tests are the best way to prepare for IELTS. To what extent do you agree or disagree?",
-          "topic": "IELTS preparation and online practice"
+        "task2Prompt": {
+          "taskType": "task2",
+          "title": "Mock Test 2 - Writing Task 2",
+          "promptText": "Some people say that printed books are not necessary for the digital era. Others think printed books play an important role.\n\nDiscuss both views and give your own opinion.\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.",
+          "questionType": "discussion",
+          "wordLimit": 250,
+          "timeLimit": 40
         }
       },
-      "speaking": {
-        "part1": {
-          "questions": [
-            "What do you do?",
-            "Why are you taking IELTS?",
-            "How do you usually study English?"
-          ]
-        },
-        "part2": {
-          "cueCard": "Describe a useful website you use for studying. You should say what it is, how often you use it, why it is useful, and explain how it helps you learn.",
-          "preparationTimeSeconds": 60,
-          "speakingTimeSeconds": 120
-        },
-        "part3": {
-          "questions": [
-            "How has online learning changed education?",
-            "Do people need teachers if they have good online resources?",
-            "What makes a practice test reliable?"
-          ]
-        }
-      }
+      "createdAt": "2026-06-24T16:22:33.789Z",
+      "updatedAt": "2026-07-29T11:22:58.158Z"
     },
     {
       "id": "mock-test-3",

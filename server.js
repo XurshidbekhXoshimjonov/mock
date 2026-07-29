@@ -3455,7 +3455,38 @@ async function buildMockWritingFullTest(id) {
         sourceTest = null;
     }
 
-    if (!sourceTest) return null;
+    if (!sourceTest) {
+        const inlineWriting = mockTest.writing && typeof mockTest.writing === "object"
+            ? mockTest.writing
+            : null;
+        const task1Prompt = inlineWriting?.task1Prompt || inlineWriting?.task1;
+        const task2Prompt = inlineWriting?.task2Prompt || inlineWriting?.task2;
+        if (!task1Prompt?.promptText || !task2Prompt?.promptText) return null;
+
+        return {
+            _id: id,
+            id,
+            title: `${mockTest.title} - Writing`,
+            status: "published",
+            access: mockTest.access || (mockTest.isPremium ? "premium" : "free"),
+            isPremium: mockTest.isPremium === true || mockTest.access === "premium",
+            timeLimit: Number(inlineWriting.timeLimit) || 60,
+            __mockWritingTest: true,
+            sourceTestId: String(mockTest.writingTestId || id),
+            task1PromptId: {
+                ...task1Prompt,
+                _id: `${id}-task1`,
+                status: "published",
+                mockOnly: true
+            },
+            task2PromptId: {
+                ...task2Prompt,
+                _id: `${id}-task2`,
+                status: "published",
+                mockOnly: true
+            }
+        };
+    }
 
     const selected = documentObject(sourceTest);
 
