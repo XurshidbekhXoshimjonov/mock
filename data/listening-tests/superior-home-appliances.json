@@ -1,0 +1,441 @@
+{
+  "id": "superior-home-appliances",
+  "slug": "superior-home-appliances",
+  "title": "Superior Home Appliances",
+  "part": 1,
+  "audio": "/uploads/audio/superior-home-appliances.mp3",
+  "assetFiles": [
+    "/uploads/audio/superior-home-appliances.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1–10",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "audioFileName": "superior-home-appliances.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "Listen and answer Questions 1–10.",
+      "transcriptText": "",
+      "answerText": "1 | top\n2 | silver\n3 | 12th january | 12 january | january 12th | january 12 | 12/01 | 12-01\n4 | alarm\n5 | 10 | ten\n6 | station\n7 | stock\n8 | 180 | $180\n9 | manager\n10 | door",
+      "blocks": [
+        {
+          "id": "superior-home-appliances-form",
+          "type": "form_completion",
+          "noteStyle": "superior-home-appliances-form",
+          "questionNumbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "title": "Superior Home Appliances — Customer Complaint Form",
+          "questionRange": "Questions 1–10",
+          "instruction": "Complete the form below. Write ONE WORD AND/OR NUMBER for each answer.",
+          "rows": [
+            {
+              "label": "Example — Type of appliance",
+              "value": {
+                "type": "text",
+                "text": "fridge"
+              }
+            },
+            {
+              "label": "Name",
+              "value": {
+                "type": "text",
+                "text": "Jessica Brown"
+              }
+            },
+            {
+              "label": "Tel",
+              "value": {
+                "type": "text",
+                "text": "5823 2210"
+              }
+            },
+            {
+              "label": "Under warranty",
+              "value": {
+                "type": "text",
+                "text": "yes"
+              }
+            },
+            {
+              "label": "Model type",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "a "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 1,
+                    "answerKey": "q1"
+                  },
+                  {
+                    "type": "text",
+                    "text": " mount"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Model number",
+              "value": {
+                "type": "text",
+                "text": "S 654 391 X"
+              }
+            },
+            {
+              "label": "Colour",
+              "value": {
+                "type": "input",
+                "questionNumber": 2,
+                "answerKey": "q2"
+              }
+            },
+            {
+              "label": "Date of purchase",
+              "value": {
+                "type": "input",
+                "questionNumber": 3,
+                "answerKey": "q3"
+              }
+            },
+            {
+              "label": "Problem 1",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "the "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 4,
+                    "answerKey": "q4"
+                  },
+                  {
+                    "type": "text",
+                    "text": " in the fridge sounded"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Problem 2",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "freezer temperature is "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 5,
+                    "answerKey": "q5"
+                  },
+                  {
+                    "type": "text",
+                    "text": " degrees"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Problem 3",
+              "value": {
+                "type": "text",
+                "text": "main fridge not working"
+              }
+            },
+            {
+              "label": "Nearest service centre",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "Ken's Appliances (near the "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 6,
+                    "answerKey": "q6"
+                  },
+                  {
+                    "type": "text",
+                    "text": ")"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Customer note 1",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "customer needs the fridge to store her "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 7,
+                    "answerKey": "q7"
+                  },
+                  {
+                    "type": "text",
+                    "text": " for the shop"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Customer note 2",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "value of food in fridge: $ "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 8,
+                    "answerKey": "q8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action 1",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "get the "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 9,
+                    "answerKey": "q9"
+                  },
+                  {
+                    "type": "text",
+                    "text": " to call her today"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action 2",
+              "value": {
+                "type": "mixed",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "replace damaged "
+                  },
+                  {
+                    "type": "input",
+                    "questionNumber": 10,
+                    "answerKey": "q10"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the form below. Write ONE WORD AND/OR NUMBER for each answer.",
+      "rule": "ONE WORD AND/OR NUMBER",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "partNumber": 1
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "Model type: a _____ mount",
+      "options": [],
+      "answer": "top",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Colour: _____",
+      "options": [],
+      "answer": "silver",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Date of purchase: _____",
+      "options": [],
+      "answer": "12th january | 12 january | january 12th | january 12 | 12/01 | 12-01",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "The _____ in the fridge sounded.",
+      "options": [],
+      "answer": "alarm",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Freezer temperature is _____ degrees.",
+      "options": [],
+      "answer": "10 | ten",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "Nearest service centre: Ken's Appliances (near the _____).",
+      "options": [],
+      "answer": "station",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "Customer needs the fridge to store her _____ for the shop.",
+      "options": [],
+      "answer": "stock",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "Value of food in fridge: $ _____",
+      "options": [],
+      "answer": "180 | $180",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Get the _____ to call her today.",
+      "options": [],
+      "answer": "manager",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "Replace damaged _____.",
+      "options": [],
+      "answer": "door",
+      "partNumber": 1,
+      "questionGroupId": "superior-home-appliances-form",
+      "instructions": "Write ONE WORD AND/OR NUMBER.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/superior-home-appliances.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    }
+  ],
+  "sourceFile": "part 1 (2).html",
+  "createdAt": "2026-08-01T16:01:57.000Z"
+}

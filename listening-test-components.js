@@ -332,6 +332,48 @@ const ListeningComponents = (() => {
     }
 
     function FormCompletionBlock(block) {
+        if (block.noteStyle === "superior-home-appliances-form") {
+            const input = (number) => `<span class="lc-superior-answer" id="question-${number}" data-question="${number}">
+                <input class="lc-answer-input lc-superior-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}" placeholder="${number}">
+            </span>`;
+            const section = (title) => `<tr class="lc-superior-section"><th colspan="2">${escapeHtml(title)}</th></tr>`;
+            const bullet = (content) => `<li>${content}</li>`;
+            const blockClone = { ...block, title: "" };
+
+            return blockCard(blockClone, `
+                <h4 class="lc-form-title lc-superior-title">${escapeHtml(block.title || "Superior Home Appliances — Customer Complaint Form")}</h4>
+                <div class="lc-table-scroll lc-superior-scroll">
+                    <table class="lc-form-table lc-superior-form"><tbody>
+                        <tr><th><span>Example</span><br>Type of appliance:</th><td><strong>fridge</strong></td></tr>
+                        <tr><th>Name:</th><td>Jessica Brown</td></tr>
+                        <tr><th>Tel:</th><td>5823 2210</td></tr>
+                        <tr><th>Under warranty:</th><td>yes</td></tr>
+                        <tr><th>Model type:</th><td>a ${input(1)} mount</td></tr>
+                        <tr><th>Model number:</th><td>S 654 391 X</td></tr>
+                        <tr><th>Colour:</th><td>${input(2)}</td></tr>
+                        <tr><th>Date of purchase:</th><td>${input(3)}</td></tr>
+                        ${section("Problems")}
+                        <tr class="lc-superior-list-row"><th>Details:</th><td><ul>
+                            ${bullet(`the ${input(4)} in the fridge sounded`)}
+                            ${bullet(`freezer temperature is ${input(5)} degrees`)}
+                            ${bullet("main fridge not working")}
+                        </ul></td></tr>
+                        <tr><th>Nearest service centre:</th><td>Ken's Appliances (near the ${input(6)})</td></tr>
+                        ${section("Comments")}
+                        <tr class="lc-superior-list-row"><th>Customer notes:</th><td><ul>
+                            ${bullet(`customer needs the fridge to store her ${input(7)} for the shop`)}
+                            ${bullet(`value of food in fridge: $ ${input(8)}`)}
+                        </ul></td></tr>
+                        ${section("To do")}
+                        <tr class="lc-superior-list-row"><th>Actions:</th><td><ul>
+                            ${bullet(`get the ${input(9)} to call her today`)}
+                            ${bullet(`replace damaged ${input(10)}`)}
+                        </ul></td></tr>
+                    </tbody></table>
+                </div>
+            `, "lc-form-completion lc-form-completion--superior");
+        }
+
         const rows = (block.rows || []).map((row) => `<tr>
             <th scope="row">${escapeHtml(row.label || "")}</th>
             <td>${renderValue(row.value)}</td>

@@ -1,0 +1,478 @@
+{
+  "id": "volcanoes-presentation",
+  "slug": "volcanoes-presentation",
+  "title": "Volcanoes Presentation",
+  "part": 3,
+  "audio": "/uploads/audio/volcanoes-presentation.mp3",
+  "assetFiles": [
+    "/uploads/audio/volcanoes-presentation.mp3"
+  ],
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21–30",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "audioFileName": "volcanoes-presentation.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "Listen and answer Questions 21–30.",
+      "transcriptText": "",
+      "answerText": "21 | B\n22 | E\n23 | C\n24 | G\n25 | F\n26 | B\n27 | C\n28 | A\n29 | C\n30 | C",
+      "blocks": [
+        {
+          "id": "volcanoes-comments-matching",
+          "type": "matching",
+          "questionNumbers": [
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "questionRange": "Questions 21–25",
+          "title": "Types of volcanoes",
+          "optionsTitle": "Comment",
+          "optionLetterPunctuation": "dot",
+          "instruction": "What did the students say about each of the following volcanoes for their presentation? Choose FIVE answers from the box and write the correct letter, A–G, next to Questions 21–25.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "need more photos to support"
+            },
+            {
+              "letter": "B",
+              "text": "repeat other people's studies"
+            },
+            {
+              "letter": "C",
+              "text": "inaccurate information"
+            },
+            {
+              "letter": "D",
+              "text": "need first-hand material"
+            },
+            {
+              "letter": "E",
+              "text": "need more details"
+            },
+            {
+              "letter": "F",
+              "text": "no need to talk about it"
+            },
+            {
+              "letter": "G",
+              "text": "check again"
+            }
+          ],
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "shield volcanoes",
+              "text": "shield volcanoes",
+              "answer": "B"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "stratovolcanoes",
+              "text": "stratovolcanoes",
+              "answer": "E"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "rhyolite caldera complexes",
+              "text": "rhyolite caldera complexes",
+              "answer": "C"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "monogenetic fields",
+              "text": "monogenetic fields",
+              "answer": "G"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "cinder cones",
+              "text": "cinder cones",
+              "answer": "F"
+            }
+          ]
+        },
+        {
+          "id": "volcanoes-presentation-mcq",
+          "type": "multiple_choice",
+          "noteStyle": "ohope-mufs-mcq",
+          "questionNumbers": [
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "questionRange": "Questions 26–30",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "In Erica's view, what is wrong with Ian's last presentation?",
+              "text": "In Erica's view, what is wrong with Ian's last presentation?",
+              "type": "multiple_choice",
+              "answer": "B",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "He did not read loud enough."
+                },
+                {
+                  "letter": "B",
+                  "text": "He did not understand the main reason."
+                },
+                {
+                  "letter": "C",
+                  "text": "He did not provide enough evidence."
+                }
+              ]
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "What materials do the students agree to add to their presentation?",
+              "text": "What materials do the students agree to add to their presentation?",
+              "type": "multiple_choice",
+              "answer": "C",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "a complete documentary"
+                },
+                {
+                  "letter": "B",
+                  "text": "photographs included in the handouts"
+                },
+                {
+                  "letter": "C",
+                  "text": "internet video clips"
+                }
+              ]
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "By using extinct and dormant volcanoes, the students try to",
+              "text": "By using extinct and dormant volcanoes, the students try to",
+              "type": "multiple_choice",
+              "answer": "A",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "distinguish between scientific and popular terms."
+                },
+                {
+                  "letter": "B",
+                  "text": "distinguish between two different types of volcanoes."
+                },
+                {
+                  "letter": "C",
+                  "text": "distinguish whether an eruption is about to happen."
+                }
+              ]
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "What did the professor say about Erica's last presentation?",
+              "text": "What did the professor say about Erica's last presentation?",
+              "type": "multiple_choice",
+              "answer": "C",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "She carried out an in-depth discussion with other students."
+                },
+                {
+                  "letter": "B",
+                  "text": "She did not provide sufficient data."
+                },
+                {
+                  "letter": "C",
+                  "text": "She did not fully develop a personal point."
+                }
+              ]
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "The students both agree that volcanoes",
+              "text": "The students both agree that volcanoes",
+              "type": "multiple_choice",
+              "answer": "C",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "haven't caused disastrous outcomes."
+                },
+                {
+                  "letter": "B",
+                  "text": "cannot help to reshape the landscape."
+                },
+                {
+                  "letter": "C",
+                  "text": "are not fully recognised for their values."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 21–25",
+      "instruction": "Match each type of volcano with the correct comment, A–G.",
+      "rule": "A–G",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "partNumber": 3
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Choose the correct letter, A, B or C.",
+      "rule": "A–C",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "partNumber": 3
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "matching",
+      "question": "shield volcanoes",
+      "options": [
+        "A — need more photos to support",
+        "B — repeat other people's studies",
+        "C — inaccurate information",
+        "D — need first-hand material",
+        "E — need more details",
+        "F — no need to talk about it",
+        "G — check again"
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-comments-matching",
+      "instructions": "Choose the correct letter, A–G.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 22,
+      "type": "matching",
+      "question": "stratovolcanoes",
+      "options": [
+        "A — need more photos to support",
+        "B — repeat other people's studies",
+        "C — inaccurate information",
+        "D — need first-hand material",
+        "E — need more details",
+        "F — no need to talk about it",
+        "G — check again"
+      ],
+      "answer": "E",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-comments-matching",
+      "instructions": "Choose the correct letter, A–G.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 23,
+      "type": "matching",
+      "question": "rhyolite caldera complexes",
+      "options": [
+        "A — need more photos to support",
+        "B — repeat other people's studies",
+        "C — inaccurate information",
+        "D — need first-hand material",
+        "E — need more details",
+        "F — no need to talk about it",
+        "G — check again"
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-comments-matching",
+      "instructions": "Choose the correct letter, A–G.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 24,
+      "type": "matching",
+      "question": "monogenetic fields",
+      "options": [
+        "A — need more photos to support",
+        "B — repeat other people's studies",
+        "C — inaccurate information",
+        "D — need first-hand material",
+        "E — need more details",
+        "F — no need to talk about it",
+        "G — check again"
+      ],
+      "answer": "G",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-comments-matching",
+      "instructions": "Choose the correct letter, A–G.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "cinder cones",
+      "options": [
+        "A — need more photos to support",
+        "B — repeat other people's studies",
+        "C — inaccurate information",
+        "D — need first-hand material",
+        "E — need more details",
+        "F — no need to talk about it",
+        "G — check again"
+      ],
+      "answer": "F",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-comments-matching",
+      "instructions": "Choose the correct letter, A–G.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 26,
+      "type": "multiple_choice",
+      "question": "In Erica's view, what is wrong with Ian's last presentation?",
+      "options": [
+        "A — He did not read loud enough.",
+        "B — He did not understand the main reason.",
+        "C — He did not provide enough evidence."
+      ],
+      "answer": "B",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-presentation-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 27,
+      "type": "multiple_choice",
+      "question": "What materials do the students agree to add to their presentation?",
+      "options": [
+        "A — a complete documentary",
+        "B — photographs included in the handouts",
+        "C — internet video clips"
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-presentation-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "By using extinct and dormant volcanoes, the students try to",
+      "options": [
+        "A — distinguish between scientific and popular terms.",
+        "B — distinguish between two different types of volcanoes.",
+        "C — distinguish whether an eruption is about to happen."
+      ],
+      "answer": "A",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-presentation-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "What did the professor say about Erica's last presentation?",
+      "options": [
+        "A — She carried out an in-depth discussion with other students.",
+        "B — She did not provide sufficient data.",
+        "C — She did not fully develop a personal point."
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-presentation-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "The students both agree that volcanoes",
+      "options": [
+        "A — haven't caused disastrous outcomes.",
+        "B — cannot help to reshape the landscape.",
+        "C — are not fully recognised for their values."
+      ],
+      "answer": "C",
+      "partNumber": 3,
+      "questionGroupId": "volcanoes-presentation-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/volcanoes-presentation.mp3",
+      "transcriptText": "",
+      "evidenceStartTime": null,
+      "evidenceEndTime": null
+    }
+  ],
+  "sourceFile": "part 3 (2).html",
+  "createdAt": "2026-08-01T16:16:28.000Z"
+}
