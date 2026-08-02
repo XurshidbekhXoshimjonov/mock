@@ -19,7 +19,7 @@
       "audioDuration": null,
       "html": "",
       "instruction": "",
-      "transcriptText": "",
+      "transcriptText": "Test Presenter\nPart 4. You will hear part of a lecture about a marine creature called the Red Sea Urchin. First, you have some time to look at questions 31 to 40. Now, listen carefully and answer questions 31 to 40.\n\nLecturer\nGood morning. Last week, I talked about various research methods in the natural sciences, and you did some background reading on that topic. Today, I want to take up that theme again and look at a specific example of how data gained using newer techniques has really pushed our knowledge forward, more or less overturning existing theories. So, I'm going to look at the case of the Red Sea Urchin.\n\nLecturer\nFirst of all, some background. As the name suggests, this is a marine animal, and it's found in shallow coastal waters. Q31It grazes on plants. It's an herbivore, in other words. Here in North America, we can find it all along our west coast, from Alaska down to California. So, many of you will be familiar with it. And it survives very well because it's Q32covered in spines, which are very sharp, and these deter most predators.\n\nLecturer\nNow, in the 1960s, in this country, the sea urchin was thought to be partly responsible for the sudden decline in kelp, a plant which supports an extensive ecosystem. So, in fact, Q33it was considered to be a pest. Incidentally, since the 1960s, the thinking on that has changed, and humans are now thought to be to blame. But anyway, Red Sea Urchins weren't popular, and people even tried to poison them to get rid of them in any way possible.\n\nLecturer\nBut then, in the 1970s, attitudes changed. Interestingly, this had nothing to do with science. There were no new insights into the biology of the sea urchin. It was, in fact, a purely economic development. It became apparent that there was a Q34demand for the Red Sea Urchin in Asia, where certain parts of the animal were considered to be a great delicacy.\n\nLecturer\nAnd so, a commercial fishery was established based on sea urchins. They brought high prices. In fact, at one point during the 1990s, they were one of the most valuable marine resources in the state of California. So, people began to look at the sea urchin in a different light.\n\nLecturer\nAnd just at this time, people noticed an apparent Q35decline in the numbers of sea urchins. This prompted a wave of scientific studies with the purpose of getting more information about the species, its life cycle, its biology, survival rate, growth patterns, and so on. So, what did research uncover?\n\nLecturer\nWell, the most significant findings came from research based on biochemical techniques. Basically, individual sea urchins were tagged and injected with tetracycline, which allowed researchers to track their growth rates. And it quickly became apparent that the sea urchins grew a lot more slowly and lived a lot longer than had previously been thought.\n\nLecturer\nAstonishingly, they can have a vast lifespan, greater than that of almost any other terrestrial or marine species. They can Q36live to be 100 years old, and some may even reach 200. Just imagine, an individual red sea urchin that hatched early in the 19th century may still be thriving and even breeding. It was found that this animal does grow fairly quickly when it's young.\n\nLecturer\nAt the age of 2, it can grow from 2 to 4 centimeters in just one year. But even then, according to scientists who conducted the research, it still takes 6 or 7 years before it's big enough to be harvested. By the time the red sea urchin is a teenager, its growth slows quite dramatically, and Q37from the age of 22, when it's about 12 centimeters long, it grows at just 0.1 of a centimeter a year.\n\nLecturer\nBut somehow, the animal never really stops growing, it just grows incredibly slowly. Some of the largest and probably the oldest sea urchins were found off the coast of British Columbia, between Vancouver Island and the mainland. And now another very recent study, one using an entirely different technique, has produced independent evidence for these findings.\n\nLecturer\nThe study measured levels of radiocarbon, and it has shown that even very old sea urchins show Q38almost no sign of aging when something finally kills them. Unlike when someone looks at you or me, you can't look at a sea urchin and say whether it's young or middle-aged. And in addition to that, Q39even when they're incredibly ancient, they are still able to breed.\n\nLecturer\nSo, by now, you may be wondering how, with this phenomenal lifespan, there aren't a lot more sea urchins around than there actually are. Well, there is a suggestion that reproduction rates for the species are low, because not many red sea urchins are able to survive the first year of life. The study also confirmed the finding that in older sea urchins, there is a very steady, very consistent rate of growth, and Q40this growth is independent of ocean conditions and other variables. So, what are the implications of these findings?\n\nTest Presenter\nThat is the end of Part 4. You now have one minute to check your answers to Part 4.",
       "answerText": "31 | plants\n32 | spines\n33 | pest\n34 | Asia\n35 | decline\n36 | 200 / 200 years\n37 | 0.1 centimeter / 0.1 centimetre / 0.1 cm\n38 | aging / ageing\n39 | breed\n40 | ocean conditions",
       "blocks": [
         {
@@ -30,6 +30,72 @@
           "questionRange": "Questions 31–40",
           "title": "The Red Sea Urchin",
           "instruction": "Complete the notes.\nWrite THREE WORDS AND/OR A NUMBER for each answer.",
+          "questionEvidence": {
+            "31": {
+              "correctAnswer": "plants",
+              "acceptedAnswers": [
+                "plants"
+              ],
+              "relevantText": "It grazes on plants.",
+              "explanation": "The notes ask what the red sea urchin feeds on. The lecturer says it grazes on plants. 'Grazes on' means 'feeds on'.",
+              "transcriptStartTime": 194,
+              "transcriptEndTime": 199
+            },
+            "32": {
+              "correctAnswer": "spines",
+              "acceptedAnswers": ["spines"],
+              "relevantText": "And it survives very well because it's covered in spines, which are very sharp, and these deter most predators.",
+              "explanation": "The notes ask what covers and protects the red sea urchin. The lecturer says it is covered in spines and that the sharp spines deter predators. 'Deter predators' means the spines protect it."
+            },
+            "33": {
+              "correctAnswer": "pest",
+              "acceptedAnswers": ["pest"],
+              "relevantText": "So, in fact, it was considered to be a pest.",
+              "explanation": "The notes say 'used to be regarded as'. The lecturer says it 'was considered to be a pest'. 'Considered to be' paraphrases 'regarded as'."
+            },
+            "34": {
+              "correctAnswer": "Asia",
+              "acceptedAnswers": ["Asia"],
+              "relevantText": "It became apparent that there was a demand for the Red Sea Urchin in Asia, where certain parts of the animal were considered to be a great delicacy.",
+              "explanation": "The notes ask which place became an important market. The lecturer describes demand for red sea urchins in Asia, so the answer is Asia."
+            },
+            "35": {
+              "correctAnswer": "decline",
+              "acceptedAnswers": ["decline"],
+              "relevantText": "And just at this time, people noticed an apparent decline in the numbers of sea urchins.",
+              "explanation": "The lecturer says people noticed a decline in sea urchin numbers. 'Numbers' refers to the population, so decline completes the note."
+            },
+            "36": {
+              "correctAnswer": "200 years",
+              "acceptedAnswers": ["200 years", "200"],
+              "relevantText": "They can live to be 100 years old, and some may even reach 200.",
+              "explanation": "The notes ask for the maximum lifespan. The lecturer says some red sea urchins may reach 200 years, so 200 or 200 years is accepted."
+            },
+            "37": {
+              "correctAnswer": "0.1 centimeter",
+              "acceptedAnswers": ["0.1 centimeter", "0.1 centimetre", "0.1 cm"],
+              "relevantText": "From the age of 22, when it's about 12 centimeters long, it grows at just 0.1 of a centimeter a year.",
+              "explanation": "The notes ask how much it grows per year after age 22. The lecturer gives the rate as 0.1 of a centimeter a year."
+            },
+            "38": {
+              "correctAnswer": "aging",
+              "acceptedAnswers": ["aging", "ageing"],
+              "relevantText": "The study measured levels of radiocarbon, and it has shown that even very old sea urchins show almost no sign of aging when something finally kills them.",
+              "explanation": "The notes ask what there is no evidence of when sea urchins die. 'Almost no sign of aging' gives the answer aging; the British spelling ageing is also accepted."
+            },
+            "39": {
+              "correctAnswer": "breed",
+              "acceptedAnswers": ["breed"],
+              "relevantText": "And in addition to that, even when they're incredibly ancient, they are still able to breed.",
+              "explanation": "The lecturer says very old sea urchins are still able to breed. 'Still able to' matches 'can still' in the notes."
+            },
+            "40": {
+              "correctAnswer": "ocean conditions",
+              "acceptedAnswers": ["ocean conditions"],
+              "relevantText": "This growth is independent of ocean conditions and other variables.",
+              "explanation": "The notes say growth is not connected to something. The lecturer says growth is independent of ocean conditions. 'Independent of' means 'not connected to'."
+            }
+          },
           "content": [
             "<strong>Background</strong>",
             "<strong>The red sea urchin:</strong>",
@@ -71,6 +137,14 @@
       "question": "feeds on ...",
       "options": [],
       "answer": "plants",
+      "correctAnswer": "plants",
+      "acceptedAnswers": [
+        "plants"
+      ],
+      "relevantText": "It grazes on plants.",
+      "explanation": "The notes ask what the red sea urchin feeds on. The lecturer says it grazes on plants. 'Grazes on' means 'feeds on'.",
+      "transcriptStartTime": 194,
+      "transcriptEndTime": 199,
       "partNumber": 4,
       "questionGroupId": "red-sea-urchin-notes",
       "instructions": "Write THREE WORDS AND/OR A NUMBER.",

@@ -12,6 +12,53 @@ test("Listening builder captures group and question evidence with transcript met
     assert.match(admin, /data-evidence-action="question-start"/);
     assert.match(admin, /data-part-field="transcriptText"/);
     assert.match(admin, /evidence cannot exceed the audio duration/);
+    assert.match(admin, /data-evidence-key="correctAnswer"/);
+    assert.match(admin, /data-evidence-key="acceptedAnswers"/);
+    assert.match(admin, /data-evidence-key="relevantText"/);
+    assert.match(admin, /data-evidence-key="explanation"/);
+    assert.match(admin, /data-evidence-key="transcriptStartTime"/);
+    assert.match(admin, /Generate Transcript/);
+    assert.match(admin, /transcriptFileInput/);
+    assert.match(admin, /data-question-transcript-segment/);
+    assert.match(admin, /split-segment/);
+    assert.match(admin, /merge-segment/);
+    assert.match(admin, /data-evidence-key="transcriptEndTime"/);
+});
+
+test("Listening review uses reusable split-screen transcript and explanation components", () => {
+    const template = read("listening-template.js");
+    const styles = read("listening-template.css");
+    [
+        "ListeningReviewQuestion",
+        "QuestionExplanationModal",
+        "TranscriptPanel",
+        "ReviewAudioPlayer"
+    ].forEach((component) => assert.match(template, new RegExp(`function ${component}\\(`)));
+    assert.match(template, /data-explain-question/);
+    assert.match(template, /data-review-audio-action="back"/);
+    assert.match(template, /data-review-audio-action="forward"/);
+    assert.match(template, /data-review-audio-seek/);
+    assert.match(template, /data-review-audio-speed/);
+    assert.match(template, /scrollIntoView\(\{ behavior: "smooth", block: "center" \}\)/);
+    assert.match(template, /hasExplanation/);
+    assert.match(template, /transcriptStartTime/);
+    assert.match(template, /transcriptSegmentIds/);
+    assert.match(template, /transcriptEndTime/);
+    assert.match(template, /function QuestionsReviewPanel\(/);
+    assert.match(template, /data-inline-questions-review-slot/);
+    assert.match(template, /lc-inline-review-correct/);
+    assert.match(template, /sourceContent\.cloneNode\(true\)/);
+    assert.match(template, /function isListeningPracticeTest\(/);
+    assert.match(template, /function renderFullListeningReview\(/);
+    assert.match(template, /if \(!isListeningPracticeTest\(activeListeningTest\)\)/);
+    assert.doesNotMatch(template, /data-review-question-focus/);
+    assert.match(template, /lc-inline-review-explain[\s\S]*<svg/);
+    assert.match(template, /matchAll\(\/Q\(\\d\{1,2\}\)/);
+    assert.match(styles, /\.lc-inline-review-result/);
+    assert.match(styles, /\.lc-review-workspace\s*\{[\s\S]*grid-template-columns:/);
+    assert.match(styles, /@media \(max-width: 900px\)[\s\S]*\.lc-review-workspace/);
+    const redSea = JSON.parse(read("data/listening-tests/red-sea-urchin-part-4.json"));
+    assert.deepEqual(Object.keys(redSea.parts[0].blocks[0].questionEvidence).map(Number), [31, 32, 33, 34, 35, 36, 37, 38, 39, 40]);
 });
 
 test("Listening scoring snapshots exact evidence fields", () => {
@@ -23,6 +70,10 @@ test("Listening scoring snapshots exact evidence fields", () => {
         "instructions",
         "imageUrl",
         "transcriptText",
+        "relevantText",
+        "explanation",
+        "transcriptStartTime",
+        "transcriptEndTime",
         "evidenceStartTime",
         "evidenceEndTime",
         "audioUrl"

@@ -8,6 +8,7 @@ const multer = require("multer");
 const compression = require("compression");
 const fs = require("fs");
 const crypto = require("crypto");
+const OpenAI = require("openai");
 const User = require("./models/User");
 const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
@@ -48,6 +49,11 @@ const { UPLOAD_LIMITS, multipartLimits, uploadErrorResponse } = require("./lib/u
 const { validateUploadContents } = require("./lib/upload-content-validation");
 const { calculateReadingBand, calculateListeningBand, scoreSkill } = require("./lib/ielts-import/bandScoring");
 const { publicTestData, collectScorableQuestions } = require("./lib/public-test-data");
+const {
+    normalizeTranscriptSegments,
+    normalizeTranscriptSegmentIds,
+    transcriptEvidence
+} = require("./lib/listening-transcript");
 const { createCsrfProtection } = require("./lib/csrf-protection");
 const {
     runtimeNamespace,
@@ -182,6 +188,8 @@ const OPENAI_TRANSLATION_MODEL = String(
     process.env.OPENAI_MODEL ||
     "gpt-4o-mini"
 ).trim();
+const OPENAI_TRANSCRIPTION_MODEL = String(process.env.OPENAI_TRANSCRIPTION_MODEL || "whisper-1").trim();
+let listeningTranscriptionClient = null;
 const CONTEXT_TRANSLATION_ERROR_MESSAGE = "Translation is unavailable right now. Please try again.";
 const CONTEXT_TRANSLATION_CACHE_LIMIT = 500;
 const TRANSLATE_CORS_ORIGINS = new Set([
@@ -2378,7 +2386,8 @@ function buildStructuredListeningTest(body) {
             : null,
         html: cleanImportedHtml(part.html || part.listeningHtml || part.questionsHtml || ""),
         instruction: String(part.instruction || ""),
-        transcriptText: String(part.transcriptText || part.transcript || "").slice(0, 50000),
+        transcriptText: String(part.transcriptText || part.transcript || "").slice(0, 100000),
+        transcriptSegments: normalizeTranscriptSegments(part.transcriptSegments),
         answerText: String(part.answerText || ""),
         blocks: Array.isArray(part.blocks)
             ? part.blocks.map((block, blockIndex) => normalizeListeningBlock(block, blockIndex))
@@ -2458,13 +2467,28 @@ function normalizeListeningQuestion(rawQuestion, answers) {
     const answerFromMap = answers[String(number)];
     const answer = rawQuestion.answer !== undefined ? rawQuestion.answer : answerFromMap;
 
+    const acceptedAnswers = normalizeListeningAcceptedAnswers(
+        rawQuestion.acceptedAnswers || rawQuestion.alternativeAcceptedAnswers || answer
+    );
+
     return {
         number,
         type,
         question: String(rawQuestion.question || rawQuestion.text || "").trim(),
         options: optionsForListeningType(type, rawQuestion.options),
-        answer: Array.isArray(answer) ? answer.join(" | ") : String(answer || "").trim()
+        answer: acceptedAnswers.join(" | ") || (Array.isArray(answer) ? answer.join(" | ") : String(answer || "").trim()),
+        correctAnswer: String(rawQuestion.correctAnswer || acceptedAnswers[0] || "").trim(),
+        acceptedAnswers,
+        relevantText: String(rawQuestion.relevantText || "").trim(),
+        explanation: String(rawQuestion.explanation || "").trim(),
+        transcriptStartTime: rawQuestion.transcriptStartTime ?? rawQuestion.evidenceStartTime ?? null,
+        transcriptEndTime: rawQuestion.transcriptEndTime ?? rawQuestion.evidenceEndTime ?? null
     };
+}
+
+function normalizeListeningAcceptedAnswers(value) {
+    const values = Array.isArray(value) ? value : String(value || "").split(/\s*(?:\||;|\n)\s*|\s+\/\s+/);
+    return [...new Set(values.map((item) => String(item || "").trim()).filter(Boolean))];
 }
 
 function isListeningSectionLine(line) {
@@ -2860,6 +2884,11 @@ function inspectStructuredQuestion(value, number, context = {}) {
             const questionEvidence = context.questionEvidence?.[String(number)]
                 || context.questionEvidence?.[number]
                 || {};
+            const linkedEvidence = transcriptEvidence(
+                context.transcriptSegments,
+                questionEvidence.transcriptSegmentIds,
+                questionEvidence
+            );
             return {
                 question: value.replace(new RegExp(`\\{\\{${number}\\}\\}`, "g"), "_____"),
                 options: [],
@@ -2867,7 +2896,16 @@ function inspectStructuredQuestion(value, number, context = {}) {
                 instructions: context.instructions || "",
                 imageUrl: context.imageUrl || "",
                 evidenceStartTime: questionEvidence.evidenceStartTime ?? context.evidenceStartTime ?? null,
-                evidenceEndTime: questionEvidence.evidenceEndTime ?? context.evidenceEndTime ?? null
+                evidenceEndTime: questionEvidence.evidenceEndTime ?? context.evidenceEndTime ?? null,
+                transcriptStartTime: linkedEvidence.transcriptStartTime ?? questionEvidence.evidenceStartTime
+                    ?? context.transcriptStartTime ?? context.evidenceStartTime ?? null,
+                transcriptEndTime: linkedEvidence.transcriptEndTime ?? questionEvidence.evidenceEndTime
+                    ?? context.transcriptEndTime ?? context.evidenceEndTime ?? null,
+                correctAnswer: String(questionEvidence.correctAnswer || "").trim(),
+                acceptedAnswers: normalizeListeningAcceptedAnswers(questionEvidence.acceptedAnswers),
+                relevantText: linkedEvidence.relevantText,
+                transcriptSegmentIds: linkedEvidence.transcriptSegmentIds,
+                explanation: String(questionEvidence.explanation || "").trim()
             };
         }
         return null;
@@ -2895,6 +2933,13 @@ function inspectStructuredQuestion(value, number, context = {}) {
         imageUrl: value.imageUrl || context.imageUrl || "",
         evidenceStartTime: value.evidenceStartTime ?? context.evidenceStartTime ?? null,
         evidenceEndTime: value.evidenceEndTime ?? context.evidenceEndTime ?? null,
+        transcriptStartTime: value.transcriptStartTime ?? context.transcriptStartTime ?? null,
+        transcriptEndTime: value.transcriptEndTime ?? context.transcriptEndTime ?? null,
+        correctAnswer: value.correctAnswer || context.correctAnswer || "",
+        acceptedAnswers: value.acceptedAnswers || context.acceptedAnswers || [],
+        relevantText: value.relevantText || context.relevantText || "",
+        explanation: value.explanation || context.explanation || "",
+        transcriptSegments: value.transcriptSegments || context.transcriptSegments || [],
         questionEvidence: value.questionEvidence || context.questionEvidence || {}
     };
 
@@ -2902,6 +2947,11 @@ function inspectStructuredQuestion(value, number, context = {}) {
         const questionEvidence = nextContext.questionEvidence?.[String(number)]
             || nextContext.questionEvidence?.[number]
             || {};
+        const linkedEvidence = transcriptEvidence(
+            nextContext.transcriptSegments,
+            questionEvidence.transcriptSegmentIds,
+            questionEvidence
+        );
         return {
             question: nextContext.question || nextContext.label || nextContext.title || `Listening question ${number}`,
             options: (nextContext.options || []).map((option) => (
@@ -2911,7 +2961,18 @@ function inspectStructuredQuestion(value, number, context = {}) {
             instructions: nextContext.instructions,
             imageUrl: nextContext.imageUrl,
             evidenceStartTime: questionEvidence.evidenceStartTime ?? nextContext.evidenceStartTime,
-            evidenceEndTime: questionEvidence.evidenceEndTime ?? nextContext.evidenceEndTime
+            evidenceEndTime: questionEvidence.evidenceEndTime ?? nextContext.evidenceEndTime,
+            transcriptStartTime: linkedEvidence.transcriptStartTime ?? questionEvidence.evidenceStartTime
+                ?? nextContext.transcriptStartTime ?? nextContext.evidenceStartTime ?? null,
+            transcriptEndTime: linkedEvidence.transcriptEndTime ?? questionEvidence.evidenceEndTime
+                ?? nextContext.transcriptEndTime ?? nextContext.evidenceEndTime ?? null,
+            correctAnswer: String(questionEvidence.correctAnswer || nextContext.correctAnswer || "").trim(),
+            acceptedAnswers: normalizeListeningAcceptedAnswers(
+                questionEvidence.acceptedAnswers || nextContext.acceptedAnswers
+            ),
+            relevantText: linkedEvidence.relevantText || String(nextContext.relevantText || "").trim(),
+            transcriptSegmentIds: linkedEvidence.transcriptSegmentIds,
+            explanation: String(questionEvidence.explanation || nextContext.explanation || "").trim()
         };
     }
 
@@ -2927,23 +2988,44 @@ function structuredListeningQuestionsForPart(part) {
     const answers = parseAnswerLines(part.answerText || part.answersText || "");
 
     return collectStructuredListeningNumbers(part.blocks || [])
-        .filter((number) => answers[String(number)])
+        .filter((number) => {
+            const context = inspectStructuredQuestion(part.blocks || [], number, {
+                transcriptSegments: part.transcriptSegments || []
+            }) || {};
+            return Boolean(answers[String(number)] || context.correctAnswer || (context.acceptedAnswers || []).length);
+        })
         .map((number) => {
-            const context = inspectStructuredQuestion(part.blocks || [], number) || {};
+            const context = inspectStructuredQuestion(part.blocks || [], number, {
+                transcriptSegments: part.transcriptSegments || []
+            }) || {};
+            const storedAnswers = normalizeListeningAcceptedAnswers(answers[String(number)]);
+            const acceptedAnswers = normalizeListeningAcceptedAnswers([
+                context.correctAnswer,
+                ...(context.acceptedAnswers || []),
+                ...storedAnswers
+            ]);
             return {
                 number,
                 type: context.options?.length ? "multiple_choice" : "sentence_completion",
                 question: context.question || `Listening question ${number}`,
                 options: context.options || [],
-                answer: answers[String(number)],
+                answer: acceptedAnswers.join(" | "),
+                correctAnswer: context.correctAnswer || acceptedAnswers[0] || "",
+                acceptedAnswers,
+                relevantText: context.relevantText || "",
+                explanation: context.explanation || "",
                 partNumber: Number(part.partNumber) || null,
                 questionGroupId: context.questionGroupId || "",
                 instructions: context.instructions || part.instruction || "",
                 imageUrl: context.imageUrl || "",
                 audioUrl: part.audioUrl || "",
                 transcriptText: part.transcriptText || part.transcript || "",
+                transcriptSegments: normalizeTranscriptSegments(part.transcriptSegments),
+                transcriptSegmentIds: normalizeTranscriptSegmentIds(context.transcriptSegmentIds),
                 evidenceStartTime: context.evidenceStartTime ?? null,
-                evidenceEndTime: context.evidenceEndTime ?? null
+                evidenceEndTime: context.evidenceEndTime ?? null,
+                transcriptStartTime: context.transcriptStartTime ?? context.evidenceStartTime ?? null,
+                transcriptEndTime: context.transcriptEndTime ?? context.evidenceEndTime ?? null
             };
         });
 }
@@ -2995,7 +3077,10 @@ function validateStructuredListeningPart(part, options = {}) {
     }
 
     // 2. Check missing answers
-    const missingAnswers = numbers.filter((number) => !answers[String(number)]);
+    const missingAnswers = numbers.filter((number) => {
+        const context = inspectStructuredQuestion(part.blocks || [], number) || {};
+        return !answers[String(number)] && !context.correctAnswer && !(context.acceptedAnswers || []).length;
+    });
     if (missingAnswers.length) {
         const error = new Error(`[Part ${partNumber}] Question ${missingAnswers[0]} is missing a correct answer.`);
         error.statusCode = 400;
@@ -5080,6 +5165,7 @@ function mistakeQuestionSnapshot(test, number, inherited = {}) {
             inherited.context || ""
         ),
         transcriptText: String(test.transcriptText || test.transcript || inherited.transcriptText || ""),
+        transcriptSegments: normalizeTranscriptSegments(test.transcriptSegments || inherited.transcriptSegments),
         audioUrl: String(test.audioUrl || test.audio || inherited.audioUrl || ""),
         questionType: String(test.questionType || test.type || inherited.questionType || ""),
         options: Array.isArray(test.options) && test.options.length ? test.options : (inherited.options || []),
@@ -5090,6 +5176,12 @@ function mistakeQuestionSnapshot(test, number, inherited = {}) {
         imageUrl: String(test.imageUrl || inherited.imageUrl || ""),
         evidenceStartTime: test.evidenceStartTime ?? inherited.evidenceStartTime ?? null,
         evidenceEndTime: test.evidenceEndTime ?? inherited.evidenceEndTime ?? null,
+        transcriptStartTime: test.transcriptStartTime ?? inherited.transcriptStartTime ?? null,
+        transcriptEndTime: test.transcriptEndTime ?? inherited.transcriptEndTime ?? null,
+        correctAnswer: String(test.correctAnswer || inherited.correctAnswer || ""),
+        acceptedAnswers: normalizeListeningAcceptedAnswers(test.acceptedAnswers || inherited.acceptedAnswers),
+        relevantText: String(test.relevantText || inherited.relevantText || ""),
+        explanation: String(test.explanation || inherited.explanation || ""),
         questionEvidence: test.questionEvidence || inherited.questionEvidence || {}
     };
     const candidateNumber = Number(test.questionNumber || test.number);
@@ -5098,6 +5190,15 @@ function mistakeQuestionSnapshot(test, number, inherited = {}) {
         const questionEvidence = nextInherited.questionEvidence?.[String(number)]
             || nextInherited.questionEvidence?.[number]
             || {};
+        const linkedEvidence = transcriptEvidence(
+            nextInherited.transcriptSegments,
+            test.transcriptSegmentIds || questionEvidence.transcriptSegmentIds,
+            {
+                relevantText: test.relevantText || questionEvidence.relevantText,
+                transcriptStartTime: test.transcriptStartTime ?? test.startTime ?? questionEvidence.transcriptStartTime,
+                transcriptEndTime: test.transcriptEndTime ?? test.endTime ?? questionEvidence.transcriptEndTime
+            }
+        );
         return {
             questionId: String(test.id || test.questionId || `q${number}`),
             questionNumber: Number(number),
@@ -5108,16 +5209,28 @@ function mistakeQuestionSnapshot(test, number, inherited = {}) {
             sectionLabel: nextInherited.sectionLabel,
             context: nextInherited.context,
             transcriptText: nextInherited.transcriptText,
+            transcriptSegments: nextInherited.transcriptSegments,
+            transcriptSegmentIds: linkedEvidence.transcriptSegmentIds,
             partNumber: nextInherited.partNumber || nextInherited.sectionNumber,
             questionGroupId: nextInherited.questionGroupId,
             instructions: nextInherited.instructions,
             imageUrl: nextInherited.imageUrl,
-            transcriptStartTime: test.transcriptStartTime ?? test.startTime ?? questionEvidence.evidenceStartTime
+            transcriptStartTime: linkedEvidence.transcriptStartTime
+                ?? questionEvidence.evidenceStartTime ?? nextInherited.transcriptStartTime
                 ?? nextInherited.evidenceStartTime ?? null,
+            transcriptEndTime: linkedEvidence.transcriptEndTime
+                ?? questionEvidence.evidenceEndTime ?? nextInherited.transcriptEndTime
+                ?? nextInherited.evidenceEndTime ?? null,
             evidenceStartTime: test.evidenceStartTime ?? questionEvidence.evidenceStartTime
                 ?? nextInherited.evidenceStartTime ?? null,
             evidenceEndTime: test.evidenceEndTime ?? questionEvidence.evidenceEndTime
                 ?? nextInherited.evidenceEndTime ?? null,
+            correctAnswer: String(test.correctAnswer || questionEvidence.correctAnswer || nextInherited.correctAnswer || ""),
+            acceptedAnswers: normalizeListeningAcceptedAnswers(
+                test.acceptedAnswers || questionEvidence.acceptedAnswers || nextInherited.acceptedAnswers
+            ),
+            relevantText: linkedEvidence.relevantText || String(nextInherited.relevantText || ""),
+            explanation: String(test.explanation || questionEvidence.explanation || nextInherited.explanation || ""),
             audioUrl: nextInherited.audioUrl
         };
     }
@@ -5517,15 +5630,56 @@ function scorePublicTest(test, answers, skill) {
     const band = skill === "listening"
         ? calculateListeningBand(scored.correct, scored.total)
         : calculateReadingBand(scored.correct, scored.total);
+    const results = skill === "listening"
+        ? scored.results.map((item) => {
+            const question = mistakeQuestionSnapshot(test, item.number, { skill }) || {};
+            const nestedEvidence = findNestedListeningQuestionEvidence(test, item.number);
+            const acceptedAnswers = normalizeListeningAcceptedAnswers(item.answer);
+            return {
+                ...item,
+                questionNumber: Number(item.number),
+                questionText: question.questionText || `Question ${item.number}`,
+                partNumber: question.partNumber || null,
+                correctAnswer: question.correctAnswer || acceptedAnswers[0] || "",
+                acceptedAnswers: question.acceptedAnswers?.length ? question.acceptedAnswers : acceptedAnswers,
+                relevantText: question.relevantText || String(nestedEvidence.relevantText || ""),
+                explanation: question.explanation || String(nestedEvidence.explanation || ""),
+                transcriptText: question.transcriptText || "",
+                transcriptSegments: question.transcriptSegments || [],
+                transcriptSegmentIds: question.transcriptSegmentIds || [],
+                transcriptStartTime: question.transcriptStartTime ?? question.evidenceStartTime ?? null,
+                transcriptEndTime: question.transcriptEndTime ?? question.evidenceEndTime ?? null,
+                audioUrl: question.audioUrl || ""
+            };
+        })
+        : scored.results;
     return {
         skill,
         correct: scored.correct,
-        incorrect: scored.results.filter((item) => String(item.userAnswer || "").trim() && !item.correct).length,
-        unanswered: scored.results.filter((item) => !String(item.userAnswer || "").trim()).length,
+        incorrect: results.filter((item) => String(item.userAnswer || "").trim() && !item.correct).length,
+        unanswered: results.filter((item) => !String(item.userAnswer || "").trim()).length,
         total: scored.total,
         band,
-        results: scored.results
+        results
     };
+}
+
+function findNestedListeningQuestionEvidence(value, number) {
+    if (Array.isArray(value)) {
+        for (const child of value) {
+            const found = findNestedListeningQuestionEvidence(child, number);
+            if (found) return found;
+        }
+        return {};
+    }
+    if (!value || typeof value !== "object") return {};
+    const evidence = value.questionEvidence?.[String(number)] || value.questionEvidence?.[number];
+    if (evidence && typeof evidence === "object") return evidence;
+    for (const child of Object.values(value)) {
+        const found = findNestedListeningQuestionEvidence(child, number);
+        if (Object.keys(found).length) return found;
+    }
+    return {};
 }
 
 app.post("/api/reading-tests/:id/score", requireUser, async (req, res) => {
@@ -6968,6 +7122,53 @@ app.get("/api/listening-tests", (req, res) => {
     }
 
     res.json(paginateArray(req, res, tests, { defaultLimit: 50, maxLimit: 100 }));
+});
+
+app.post("/api/listening-assets/transcript", requireAdmin, async (req, res) => {
+    try {
+        if (!OPENAI_API_KEY) {
+            return res.status(503).json({ error: "Automatic transcription is not configured. Add OPENAI_API_KEY or use manual transcript import." });
+        }
+        const audioPath = resolveUploadedAssetPath(req.body?.audioUrl);
+        const resolvedAudioDir = path.resolve(AUDIO_UPLOAD_DIR);
+        if (!audioPath || !fs.existsSync(audioPath) || !audioPath.startsWith(`${resolvedAudioDir}${path.sep}`)) {
+            return res.status(400).json({ error: "Upload the Listening part audio before generating a transcript." });
+        }
+        if (!listeningTranscriptionClient) {
+            listeningTranscriptionClient = new OpenAI({ apiKey: OPENAI_API_KEY, timeout: 10 * 60 * 1000 });
+        }
+        const transcription = await listeningTranscriptionClient.audio.transcriptions.create({
+            file: fs.createReadStream(audioPath),
+            model: OPENAI_TRANSCRIPTION_MODEL,
+            response_format: "verbose_json",
+            timestamp_granularities: ["segment"]
+        });
+        const transcriptSegments = normalizeTranscriptSegments(
+            (transcription.segments || []).map((segment, index) => ({
+                id: `segment-${index + 1}`,
+                start: segment.start,
+                end: segment.end,
+                text: segment.text
+            }))
+        );
+        res.json({
+            transcriptText: String(transcription.text || transcriptSegments.map((segment) => segment.text).join(" ")).trim(),
+            transcriptSegments
+        });
+    } catch (error) {
+        console.error("Listening transcript generation error:", error.message);
+        res.status(error.status || error.statusCode || 502).json({
+            error: error.message || "Could not generate transcript"
+        });
+    }
+});
+
+app.get("/api/admin/listening-tests/:id", requireAdmin, (req, res) => {
+    let test = buildMockListeningTest(req.params.id) || resolveManualListeningTest(req.params.id);
+    if (!test) test = resolveManualListeningTest(`${req.params.id}-listening-full`);
+    if (!test) return res.status(404).json({ error: "Listening test not found" });
+    res.setHeader("Cache-Control", "no-store");
+    res.json(test);
 });
 
 app.get("/api/listening-tests/:id", (req, res) => {

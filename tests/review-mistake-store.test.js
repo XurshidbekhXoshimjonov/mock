@@ -112,6 +112,10 @@ test("listening evidence metadata is persisted and invalid ranges fall back safe
         instructions: "Choose one answer.",
         audioUrl: "/uploads/audio/test.mp3",
         transcriptText: "The relevant transcript.",
+        relevantText: "The exact sentence.",
+        explanation: "The wording is paraphrased.",
+        transcriptStartTime: 61.5,
+        transcriptEndTime: 74,
         evidenceStartTime: 61.5,
         evidenceEndTime: 74,
         imageUrl: "/uploads/images/map.png"
@@ -119,6 +123,9 @@ test("listening evidence metadata is persisted and invalid ranges fall back safe
     assert.equal(created.partNumber, 2);
     assert.equal(created.evidenceStartTime, 61.5);
     assert.equal(created.evidenceEndTime, 74);
+    assert.equal(created.transcriptEndTime, 74);
+    assert.equal(created.relevantText, "The exact sentence.");
+    assert.equal(created.explanation, "The wording is paraphrased.");
     assert.equal(created.questionGroupId, "group-11-15");
 
     const [invalid] = await store.upsertMany("listener", "attempt-invalid", [snapshot({

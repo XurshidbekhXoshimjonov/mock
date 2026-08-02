@@ -63,6 +63,7 @@ function createBlankPart(partNumber) {
         html: "",
         instruction: `Listen and answer Questions ${start}-${end}.`,
         transcriptText: "",
+        transcriptSegments: [],
         answerText: "",
         blocks: []
     };
@@ -561,6 +562,32 @@ async function uploadImage(file) {
     return readResponse(await fetch("/api/listening-assets/image", { method: "POST", body: formData }));
 }
 
+async function generateTranscript(audioUrl) {
+    return readResponse(await fetch("/api/listening-assets/transcript", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ audioUrl })
+    }));
+}
+
+function transcriptSegmentEditor(part) {
+    const segments = Array.isArray(part.transcriptSegments) ? part.transcriptSegments : [];
+    if (!segments.length) return '<p class="transcript-segments-empty">No timestamped segments yet. Generate a transcript or keep using the manual transcript editor.</p>';
+    return `<div class="transcript-segments" data-transcript-segments>
+        ${segments.map((segment, index) => `<article class="transcript-segment-row" data-segment-index="${index}">
+            <strong>${escapeHtml(segment.id || `segment-${index + 1}`)}</strong>
+            <label>Start <input type="number" min="0" step="0.01" data-segment-field="start" value="${escapeHtml(segment.start ?? 0)}"></label>
+            <label>End <input type="number" min="0" step="0.01" data-segment-field="end" value="${escapeHtml(segment.end ?? 0)}"></label>
+            <textarea data-segment-field="text" aria-label="Segment text">${escapeHtml(segment.text || "")}</textarea>
+            <div class="transcript-segment-actions">
+                <button class="btn btn-secondary btn-sm" type="button" data-action="split-segment" data-segment-index="${index}">Split</button>
+                <button class="btn btn-secondary btn-sm" type="button" data-action="merge-segment" data-segment-index="${index}" ${index ? "" : "disabled"}>Merge previous</button>
+                <button class="btn btn-danger btn-sm" type="button" data-action="delete-segment" data-segment-index="${index}">Delete</button>
+            </div>
+        </article>`).join("")}
+    </div>`;
+}
+
 // Elements markup generators
 // 0-Error Auto-Numbering Engine
 function autoCalculateQuestionRanges() {
@@ -756,6 +783,30 @@ function parseAnswerLinesMap(text) {
     return map;
 }
 
+function normalizeBuilderAnswer(value) {
+    return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function syncPartAnswersFromQuestionEvidence(block) {
+    const part = selectedPart();
+    const answers = parseAnswerLinesMap(part.answerText);
+    Object.entries(block.questionEvidence || {}).forEach(([number, evidence]) => {
+        const correctAnswer = String(evidence.correctAnswer || "").trim();
+        if (!correctAnswer) return;
+        const acceptedAnswers = [correctAnswer, ...(evidence.acceptedAnswers || [])]
+            .map((answer) => String(answer || "").trim())
+            .filter(Boolean)
+            .filter((answer, index, values) => values.findIndex(
+                (candidate) => normalizeBuilderAnswer(candidate) === normalizeBuilderAnswer(answer)
+            ) === index);
+        answers.set(Number(number), acceptedAnswers.join(" | "));
+    });
+    part.answerText = [...answers.entries()]
+        .sort(([left], [right]) => left - right)
+        .map(([number, answer]) => `${number} | ${answer}`)
+        .join("\n");
+}
+
 // Real-Time Student CBT Preview compiler
 function updateRealtimePreview() {
     const previewContainer = document.getElementById("realtimePreviewContainer");
@@ -920,6 +971,13 @@ function PartEditor() {
             <div class="form-group">
                 <label for="partTranscript">Transcript (optional, used as review evidence)</label>
                 <textarea id="partTranscript" data-part-field="transcriptText" placeholder="Paste the transcript for this part...">${escapeHtml(part.transcriptText || "")}</textarea>
+                <div class="transcript-toolbar">
+                    <button class="btn btn-secondary btn-sm" data-action="import-transcript" type="button">Upload .txt</button>
+                    <input id="transcriptFileInput" type="file" accept=".txt,text/plain" hidden>
+                    <button class="btn btn-primary btn-sm" data-action="generate-transcript" type="button" ${part.audioUrl ? "" : "disabled"}>Generate Transcript</button>
+                    <span>Generated segments can be corrected before saving.</span>
+                </div>
+                ${transcriptSegmentEditor(part)}
             </div>
         </div>
 
@@ -1050,15 +1108,58 @@ function AddQuestionBlockMenu() {
 // Block Fields Editors inside dialog popup modal
 function commonEditorFields(block) {
     const questionNumbers = collectQuestionNumbersFromBlocks([block]);
+    const answerMap = parseAnswerLinesMap(selectedPart().answerText);
+    const transcriptSegments = Array.isArray(selectedPart().transcriptSegments) ? selectedPart().transcriptSegments : [];
     const evidenceRows = questionNumbers.map((number) => {
         const evidence = block.questionEvidence?.[String(number)] || {};
-        return `<div class="evidence-question-row">
-            <strong>Q${number}</strong>
-            <input data-question-evidence="${number}" data-evidence-key="evidenceStartTime" value="${escapeHtml(formatEvidenceTime(evidence.evidenceStartTime))}" placeholder="00:00">
-            <input data-question-evidence="${number}" data-evidence-key="evidenceEndTime" value="${escapeHtml(formatEvidenceTime(evidence.evidenceEndTime))}" placeholder="00:00">
-            <button class="btn btn-secondary btn-sm" data-evidence-action="question-start" data-question-number="${number}" type="button">Set start</button>
-            <button class="btn btn-secondary btn-sm" data-evidence-action="question-end" data-question-number="${number}" type="button">Set end</button>
-            <button class="btn btn-secondary btn-sm" data-evidence-action="question-clear" data-question-number="${number}" type="button">Clear</button>
+        const storedAnswers = String(answerMap.get(Number(number)) || "")
+            .split(/\||\s+\/\s+/).map((answer) => answer.trim()).filter(Boolean);
+        const correctAnswer = String(evidence.correctAnswer || storedAnswers[0] || "").trim();
+        const acceptedAnswers = Array.isArray(evidence.acceptedAnswers)
+            ? evidence.acceptedAnswers
+            : String(evidence.acceptedAnswers || "").split(/\n|\|/).map((answer) => answer.trim()).filter(Boolean);
+        const alternatives = acceptedAnswers.length
+            ? acceptedAnswers.filter((answer) => normalizeBuilderAnswer(answer) !== normalizeBuilderAnswer(correctAnswer))
+            : storedAnswers.slice(1);
+        const selectedSegmentIds = new Set(Array.isArray(evidence.transcriptSegmentIds) ? evidence.transcriptSegmentIds : []);
+        const segmentPicker = transcriptSegments.length ? `<fieldset class="evidence-question-fields__wide transcript-segment-picker">
+            <legend>Relevant transcript segments</legend>
+            <p>Select the exact segment(s); text and playback times update automatically.</p>
+            ${transcriptSegments.map((segment) => `<label>
+                <input type="checkbox" data-question-transcript-segment="${number}" value="${escapeHtml(segment.id)}" ${selectedSegmentIds.has(segment.id) ? "checked" : ""}>
+                <span>${escapeHtml(formatEvidenceTime(segment.start))}–${escapeHtml(formatEvidenceTime(segment.end))} ${escapeHtml(segment.text)}</span>
+            </label>`).join("")}
+        </fieldset>` : "";
+        return `<div class="evidence-question-row" data-question-review-editor="${number}">
+            <div class="evidence-question-row__heading">
+                <strong>Question ${number}</strong>
+                <button class="btn btn-secondary btn-sm" data-evidence-action="question-clear" data-question-number="${number}" type="button">Clear review data</button>
+            </div>
+            <div class="evidence-question-fields">
+                <label>Correct answer
+                    <input data-question-evidence="${number}" data-evidence-key="correctAnswer" value="${escapeHtml(correctAnswer)}" placeholder="Correct answer">
+                </label>
+                <label>Alternative accepted answers
+                    <textarea data-question-evidence="${number}" data-evidence-key="acceptedAnswers" placeholder="One alternative per line">${escapeHtml(alternatives.join("\n"))}</textarea>
+                </label>
+                ${segmentPicker}
+                <label class="evidence-question-fields__wide">Relevant transcript text
+                    <textarea data-question-evidence="${number}" data-evidence-key="relevantText" placeholder="Exact sentence containing the answer">${escapeHtml(evidence.relevantText || "")}</textarea>
+                </label>
+                <label class="evidence-question-fields__wide">Explanation
+                    <textarea data-question-evidence="${number}" data-evidence-key="explanation" placeholder="Explain the answer and the paraphrase or synonym">${escapeHtml(evidence.explanation || "")}</textarea>
+                </label>
+                <label>Transcript start time
+                    <input data-question-evidence="${number}" data-evidence-key="transcriptStartTime" value="${escapeHtml(formatEvidenceTime(evidence.transcriptStartTime ?? evidence.evidenceStartTime))}" placeholder="00:00">
+                </label>
+                <label>Transcript end time
+                    <input data-question-evidence="${number}" data-evidence-key="transcriptEndTime" value="${escapeHtml(formatEvidenceTime(evidence.transcriptEndTime ?? evidence.evidenceEndTime))}" placeholder="00:00">
+                </label>
+            </div>
+            <div class="evidence-question-actions">
+                <button class="btn btn-secondary btn-sm" data-evidence-action="question-start" data-question-number="${number}" type="button">Set start</button>
+                <button class="btn btn-secondary btn-sm" data-evidence-action="question-end" data-question-number="${number}" type="button">Set end</button>
+            </div>
         </div>`;
     }).join("");
     return `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
@@ -1095,7 +1196,7 @@ function commonEditorFields(block) {
             <button class="btn btn-secondary btn-sm" data-evidence-action="group-end" type="button">Set current</button>
         </div>
         ${evidenceRows ? `<div class="evidence-question-list">
-            <div class="evidence-question-labels"><span>Question</span><span>Start</span><span>End</span></div>
+            <div class="evidence-question-list__heading">Question answer and review data</div>
             ${evidenceRows}
         </div>` : '<p class="evidence-empty">Add question numbers first to set question-level evidence.</p>'}
     </section>`;
@@ -1447,8 +1548,35 @@ function syncBlockEditorForm() {
     blockDraft.questionEvidence = blockDraft.questionEvidence || {};
     blockEditorContent.querySelectorAll("[data-question-evidence]").forEach((field) => {
         const number = String(field.dataset.questionEvidence);
+        const key = field.dataset.evidenceKey;
         blockDraft.questionEvidence[number] = blockDraft.questionEvidence[number] || {};
-        blockDraft.questionEvidence[number][field.dataset.evidenceKey] = parseEvidenceTime(field.value);
+        if (["transcriptStartTime", "transcriptEndTime", "evidenceStartTime", "evidenceEndTime"].includes(key)) {
+            blockDraft.questionEvidence[number][key] = parseEvidenceTime(field.value);
+        } else if (key === "acceptedAnswers") {
+            blockDraft.questionEvidence[number][key] = String(field.value || "")
+                .split(/\n|\|/).map((answer) => answer.trim()).filter(Boolean);
+        } else {
+            blockDraft.questionEvidence[number][key] = String(field.value || "").trim();
+        }
+    });
+    const segmentIdsByQuestion = new Map();
+    blockEditorContent.querySelectorAll("[data-question-transcript-segment]:checked").forEach((field) => {
+        const number = String(field.dataset.questionTranscriptSegment);
+        if (!segmentIdsByQuestion.has(number)) segmentIdsByQuestion.set(number, []);
+        segmentIdsByQuestion.get(number).push(String(field.value));
+    });
+    blockEditorContent.querySelectorAll("[data-question-review-editor]").forEach((row) => {
+        const number = String(row.dataset.questionReviewEditor);
+        blockDraft.questionEvidence[number] = blockDraft.questionEvidence[number] || {};
+        blockDraft.questionEvidence[number].transcriptSegmentIds = segmentIdsByQuestion.get(number) || [];
+    });
+    Object.values(blockDraft.questionEvidence).forEach((evidence) => {
+        const correctAnswer = String(evidence.correctAnswer || "").trim();
+        evidence.acceptedAnswers = [correctAnswer, ...(evidence.acceptedAnswers || [])]
+            .filter(Boolean)
+            .filter((answer, index, values) => values.findIndex(
+                (candidate) => normalizeBuilderAnswer(candidate) === normalizeBuilderAnswer(answer)
+            ) === index);
     });
 
     if (blockDraft.type === "form_completion") {
@@ -1667,8 +1795,8 @@ function validateListeningPayload(payload) {
         const numbers = collectQuestionNumbersFromBlocks(part.blocks || []);
         const answerNumbers = parseAnswerNumbers(part.answerText || "");
         const validateEvidence = (evidence, label) => {
-            const start = evidence?.evidenceStartTime;
-            const end = evidence?.evidenceEndTime;
+            const start = evidence?.transcriptStartTime ?? evidence?.evidenceStartTime;
+            const end = evidence?.transcriptEndTime ?? evidence?.evidenceEndTime;
             const hasEither = start !== null && start !== undefined && start !== ""
                 || end !== null && end !== undefined && end !== "";
             if (hasEither && (!Number.isFinite(Number(start)) || Number(start) < 0
@@ -1727,7 +1855,10 @@ async function saveTest() {
 
 async function loadTest(id) {
     showStatus("Loading Listening test...");
-    const response = await fetch(`/api/listening-tests/${encodeURIComponent(id)}`);
+    const response = await fetch(`/api/admin/listening-tests/${encodeURIComponent(id)}`, {
+        credentials: "include",
+        cache: "no-store"
+    });
     const data = await readResponse(response);
     hydrateBuilderState(data);
     editingTestId = data.id;
@@ -1775,6 +1906,17 @@ partSidebarRoot.addEventListener("click", (event) => {
 });
 
 partEditorRoot.addEventListener("input", (event) => {
+    const segmentField = event.target.closest("[data-segment-field]");
+    if (segmentField) {
+        const row = segmentField.closest("[data-segment-index]");
+        const segment = selectedPart().transcriptSegments?.[Number(row?.dataset.segmentIndex)];
+        if (!segment) return;
+        segment[segmentField.dataset.segmentField] = segmentField.dataset.segmentField === "text"
+            ? segmentField.value
+            : Math.max(0, Number(segmentField.value) || 0);
+        selectedPart().transcriptText = selectedPart().transcriptSegments.map((item) => item.text).join(" ").trim();
+        return;
+    }
     const field = event.target.closest("[data-part-field]");
     if (!field) return;
     selectedPart()[field.dataset.partField] = field.value;
@@ -1790,6 +1932,17 @@ partEditorRoot.addEventListener("loadedmetadata", (event) => {
 }, true);
 
 partEditorRoot.addEventListener("change", async (event) => {
+    if (event.target.id === "transcriptFileInput" && event.target.files.length) {
+        try {
+            selectedPart().transcriptText = await readFileAsText(event.target.files[0]);
+            selectedPart().transcriptSegments = [];
+            ListeningTestBuilder();
+            showStatus("Transcript text imported. Save the test to store it.", "success");
+        } catch (error) {
+            showStatus(error.message, "error");
+        }
+        return;
+    }
     if (!["audioInput", "fullAudioInput"].includes(event.target.id) || !event.target.files.length) return;
     const isFullAudio = event.target.id === "fullAudioInput";
     showStatus(isFullAudio ? "Uploading complete Listening audio..." : "Uploading part audio...");
@@ -1809,7 +1962,7 @@ partEditorRoot.addEventListener("change", async (event) => {
     }
 });
 
-partEditorRoot.addEventListener("click", (event) => {
+partEditorRoot.addEventListener("click", async (event) => {
     const button = event.target.closest("[data-action]");
     if (!button) return;
     const action = button.dataset.action;
@@ -1817,6 +1970,56 @@ partEditorRoot.addEventListener("click", (event) => {
     const blocks = selectedPart().blocks;
 
     if (action === "add-block") addBlockModal.showModal();
+    if (action === "import-transcript") partEditorRoot.querySelector("#transcriptFileInput")?.click();
+    if (action === "generate-transcript") {
+        if (!selectedPart().audioUrl) return;
+        button.disabled = true;
+        showStatus("Generating timestamped transcript...");
+        try {
+            const result = await generateTranscript(selectedPart().audioUrl);
+            selectedPart().transcriptText = result.transcriptText || "";
+            selectedPart().transcriptSegments = (result.transcriptSegments || []).map((segment, index) => ({
+                ...segment,
+                id: `part-${selectedPart().partNumber}-segment-${index + 1}`
+            }));
+            ListeningTestBuilder();
+            showStatus("Transcript generated. Review and correct the segments before saving.", "success");
+        } catch (error) {
+            button.disabled = false;
+            showStatus(error.message, "error");
+        }
+        return;
+    }
+    if (["split-segment", "merge-segment", "delete-segment"].includes(action)) {
+        const segments = selectedPart().transcriptSegments || [];
+        const segmentIndex = Number(button.dataset.segmentIndex);
+        const segment = segments[segmentIndex];
+        if (!segment) return;
+        if (action === "split-segment") {
+            const words = String(segment.text || "").trim().split(/\s+/);
+            const wordIndex = Math.max(1, Math.ceil(words.length / 2));
+            const midpoint = Number(((Number(segment.start) + Number(segment.end)) / 2).toFixed(2));
+            const newId = `segment-${Date.now().toString(36)}`;
+            segments.splice(segmentIndex, 1,
+                { ...segment, end: midpoint, text: words.slice(0, wordIndex).join(" ") },
+                { id: newId, start: midpoint, end: Number(segment.end), text: words.slice(wordIndex).join(" ") || "New segment" }
+            );
+        }
+        if (action === "merge-segment" && segmentIndex > 0) {
+            const previous = segments[segmentIndex - 1];
+            previous.end = segment.end;
+            previous.text = `${previous.text} ${segment.text}`.trim();
+            segments.splice(segmentIndex, 1);
+        }
+        if (action === "delete-segment") segments.splice(segmentIndex, 1);
+        selectedPart().transcriptText = segments.map((item) => item.text).join(" ").trim();
+        const validIds = new Set(segments.map((item) => item.id));
+        selectedPart().blocks.forEach((block) => Object.values(block.questionEvidence || {}).forEach((evidence) => {
+            evidence.transcriptSegmentIds = (evidence.transcriptSegmentIds || []).filter((id) => validIds.has(id));
+        }));
+        ListeningTestBuilder();
+        return;
+    }
     if (action === "remove-audio") {
         selectedPart().audioUrl = "";
         selectedPart().audioFileName = "";
@@ -1888,7 +2091,9 @@ blockEditorContent.addEventListener("click", (event) => {
         }
         const value = Number(audio.currentTime.toFixed(2));
         const isQuestion = action.startsWith("question-");
-        const key = action.endsWith("start") ? "evidenceStartTime" : "evidenceEndTime";
+        const key = isQuestion
+            ? (action.endsWith("start") ? "transcriptStartTime" : "transcriptEndTime")
+            : (action.endsWith("start") ? "evidenceStartTime" : "evidenceEndTime");
         if (audio.duration && Number.isFinite(audio.duration) && value > audio.duration) {
             showStatus("Timestamp cannot be after the audio duration.", "error");
             return;
@@ -1907,7 +2112,7 @@ blockEditorContent.addEventListener("click", (event) => {
             const field = blockEditorContent.querySelector(`[data-evidence-field="${key}"]`);
             if (field) field.value = formatEvidenceTime(value);
         }
-        showStatus(`${key === "evidenceStartTime" ? "Start" : "End"} set to ${formatEvidenceTime(value)}.`, "success");
+        showStatus(`${key.endsWith("StartTime") || key === "evidenceStartTime" ? "Start" : "End"} set to ${formatEvidenceTime(value)}.`, "success");
         return;
     }
 
@@ -1941,6 +2146,21 @@ blockEditorContent.addEventListener("click", (event) => {
 });
 
 blockEditorContent.addEventListener("change", async (event) => {
+    if (event.target.matches("[data-question-transcript-segment]")) {
+        const number = String(event.target.dataset.questionTranscriptSegment);
+        const selectedIds = [...blockEditorContent.querySelectorAll(`[data-question-transcript-segment="${number}"]:checked`)]
+            .map((field) => String(field.value));
+        const selected = (selectedPart().transcriptSegments || []).filter((segment) => selectedIds.includes(String(segment.id)));
+        const setField = (key, value) => {
+            const field = blockEditorContent.querySelector(`[data-question-evidence="${number}"][data-evidence-key="${key}"]`);
+            if (field) field.value = value;
+        };
+        setField("relevantText", selected.map((segment) => segment.text).join(" "));
+        setField("transcriptStartTime", selected.length ? formatEvidenceTime(Math.min(...selected.map((segment) => Number(segment.start) || 0))) : "");
+        setField("transcriptEndTime", selected.length ? formatEvidenceTime(Math.max(...selected.map((segment) => Number(segment.end) || 0))) : "");
+        syncBlockEditorForm();
+        return;
+    }
     if (event.target.id !== "mapImageInput" || !event.target.files.length) return;
     syncBlockEditorForm();
     try {
@@ -1956,6 +2176,7 @@ blockEditorContent.addEventListener("change", async (event) => {
 blockEditorForm.addEventListener("submit", (event) => {
     event.preventDefault();
     syncBlockEditorForm();
+    syncPartAnswersFromQuestionEvidence(blockDraft);
     selectedPart().blocks[editingBlockIndex] = blockDraft;
     blockEditorModal.close();
     ListeningTestBuilder();

@@ -20,6 +20,9 @@ test("public test data recursively removes answer keys and source metadata", () 
                     question: "Complete the sentence",
                     answer: "alpha|an alpha",
                     correctAnswer: "alpha",
+                    acceptedAnswers: ["alpha", "an alpha"],
+                    relevantText: "The passage says alpha.",
+                    explanation: "Alpha is stated directly.",
                     options: ["alpha", "beta"]
                 }]
             }]
@@ -71,6 +74,7 @@ test("public detail routes sanitize payloads and scoring routes require login", 
 
     assert.match(server, /app\.post\("\/api\/reading-tests\/:id\/score", requireUser,/);
     assert.match(server, /app\.post\("\/api\/listening-tests\/:id\/score", requireUser,/);
+    assert.match(server, /app\.get\("\/api\/admin\/listening-tests\/:id", requireAdmin,/);
     assert.match(server, /app\.get\("\/api\/tests\/:id"[\s\S]*?res\.json\(publicTestData\(test\)\)/);
     assert.match(fullRoutes, /app\.post\("\/api\/full-tests\/score", requireAuth,/);
     assert.match(fullRoutes, /app\.get\("\/api\/full-tests\/:id"[\s\S]*?res\.json\(publicTestData\(test\)\)/);
