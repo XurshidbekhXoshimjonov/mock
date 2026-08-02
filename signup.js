@@ -20,8 +20,12 @@
         const usernameInput = document.getElementById("username");
         const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("password");
+        const legalAcceptance = document.getElementById("legalAcceptance");
+        const legalAcceptanceError = document.getElementById("legalAcceptanceError");
+        const signupSubmitWrap = document.getElementById("signupSubmitWrap");
 
-        if (!signupForm || !authMessage || !signupBtn || !usernameInput || !emailInput || !passwordInput) {
+        if (!signupForm || !authMessage || !signupBtn || !usernameInput || !emailInput || !passwordInput
+            || !legalAcceptance || !legalAcceptanceError || !signupSubmitWrap) {
             return;
         }
 
@@ -34,9 +38,31 @@
         }
 
         function resetButton() {
-            signupBtn.disabled = false;
+            signupBtn.disabled = !legalAcceptance.checked;
             signupBtn.textContent = originalButtonText;
         }
+
+        function showLegalAcceptanceError() {
+            legalAcceptanceError.hidden = false;
+            legalAcceptance.setAttribute("aria-invalid", "true");
+        }
+
+        function syncLegalAcceptance() {
+            signupBtn.disabled = !legalAcceptance.checked;
+            if (legalAcceptance.checked) {
+                legalAcceptanceError.hidden = true;
+                legalAcceptance.removeAttribute("aria-invalid");
+            }
+        }
+
+        legalAcceptance.addEventListener("change", syncLegalAcceptance);
+        signupSubmitWrap.addEventListener("click", () => {
+            if (!legalAcceptance.checked) {
+                showLegalAcceptanceError();
+                legalAcceptance.focus();
+            }
+        });
+        syncLegalAcceptance();
 
         if (window.authClient?.verifyStoredSession) {
             window.authClient.verifyStoredSession().then((user) => {
@@ -50,6 +76,12 @@
         signupForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             event.stopPropagation();
+
+            if (!legalAcceptance.checked) {
+                showLegalAcceptanceError();
+                legalAcceptance.focus();
+                return;
+            }
 
             const username = usernameInput.value.trim();
             const email = emailInput.value.trim();

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const paddleSubscriptionSchema = new mongoose.Schema({
     subscriptionId: { type: String, required: true, unique: true, index: true },
+    environment: { type: String, enum: ["sandbox", "production"], default: "sandbox", index: true },
     customerId: { type: String, required: true, index: true },
     userId: { type: String, default: null, index: true },
     status: { type: String, required: true, index: true },

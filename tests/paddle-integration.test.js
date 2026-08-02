@@ -48,7 +48,7 @@ test("currency switch aligns to the top-right of the Mastery column while the he
     assert.match(styles, /\.pricing-controls \{ position:absolute; top:0; right:0;/);
 });
 
-test("checkout opens one sandbox price with the required overlay settings and trusted metadata", () => {
+test("checkout opens one environment-scoped price with the required overlay settings and trusted metadata", () => {
     assert.match(client, /items: \[\{ priceId, quantity: 1 \}\]/);
     assert.match(client, /displayMode: "overlay"/);
     assert.match(client, /variant: "one-page"/);
@@ -68,23 +68,34 @@ test("plan buttons open a payment-method chooser before Paddle checkout", () => 
     assert.match(client, /openPaddleCheckout\(planId\)/);
 });
 
-test("credit-card transfer opens the detailed manual payment dialog", () => {
+test("local UZS card payment remains available without exposing an owner name", () => {
     assert.match(client, /Pay by card, then send the receipt/);
     assert.match(client, /UZCARD \/ HUMO/);
     assert.match(client, /data-copy-card/);
     assert.match(client, /data-copy-payment-details/);
     assert.match(client, /Continue on Telegram/);
     assert.match(client, /openManualPaymentModal\(planId\)/);
+    assert.doesNotMatch(client, /Cardholder/);
+    assert.equal(config.manualPaymentConfig.cardType, "UZCARD / HUMO");
+    assert.ok(config.manualPaymentConfig.cardNumber);
+    assert.ok(config.manualPaymentConfig.telegramUsername);
     assert.match(server, /MANUAL_PAYMENT_STARTER_UZS/);
     assert.match(server, /MANUAL_PAYMENT_ACCELERATOR_UZS/);
     assert.match(server, /MANUAL_PAYMENT_MASTERY_UZS/);
 });
 
-test("server rejects missing or non-sandbox Paddle configuration and validates country headers", () => {
-    assert.match(server, /NEXT_PUBLIC_PADDLE_ENV must be sandbox/);
+test("server validates live or sandbox Paddle configuration and country headers", () => {
+    assert.match(server, /NEXT_PUBLIC_PADDLE_ENV must be sandbox or production/);
     assert.match(server, /NEXT_PUBLIC_PADDLE_CLIENT_TOKEN is required/);
-    assert.match(server, /clientToken\.startsWith\("test_"\)/);
+    assert.match(server, /sandbox requires a test_ client token/);
+    assert.match(server, /production requires a live_ client token/);
     assert.match(server, /req\.get\("x-vercel-ip-country"\)/);
     assert.match(server, /\^\[A-Z\]\{2\}\$/);
     assert.doesNotMatch(server, /PADDLE_SANDBOX_API_KEY/);
+});
+
+test("live Paddle initialization includes the authenticated Paddle customer for Retain", () => {
+    assert.match(client, /pwCustomer: \{ id: paddleConfig\.pwCustomerId \}/);
+    assert.match(server, /environment,/);
+    assert.match(server, /pwCustomerId/);
 });

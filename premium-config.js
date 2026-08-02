@@ -60,7 +60,6 @@
     const manualPaymentConfig = Object.freeze({
         cardType: "UZCARD / HUMO",
         cardNumber: "5614681076000011",
-        cardholder: "XOSHIMJONOV XURSHIDBEK",
         telegramUsername: "ieltsxuz_admin",
         currency: "UZS"
     });

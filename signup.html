@@ -17,7 +17,7 @@
             document.documentElement.classList.add("dark-theme");
         }
     </script>
-    <link rel="stylesheet" href="/style.css?v=20260713-auth-width-v1">
+    <link rel="stylesheet" href="/style.css?v=20260803-auth-legal-v1">
 </head>
 
 <body class="auth-page">
@@ -29,7 +29,22 @@
             <input type="text" id="username" placeholder="Username" autocomplete="username" required>
             <input type="email" id="email" placeholder="Email" autocomplete="email" required>
             <input type="password" id="password" placeholder="Create password (min 6 characters)" autocomplete="new-password" minlength="6" required>
-            <button type="submit" class="login-btn" id="signupBtn">Create Account</button>
+            <div class="auth-legal-consent">
+                <input class="auth-legal-checkbox" type="checkbox" id="legalAcceptance" required
+                    aria-describedby="legalAcceptanceError">
+                <div>
+                    <label for="legalAcceptance">
+                        I agree to the <a href="/terms">Terms of Service</a> and acknowledge the
+                        <a href="/privacy">Privacy Policy</a>.
+                    </label>
+                    <p class="auth-legal-error" id="legalAcceptanceError" role="alert" hidden>
+                        Please accept the Terms of Service and acknowledge the Privacy Policy to create an account.
+                    </p>
+                </div>
+            </div>
+            <div class="auth-submit-wrap" id="signupSubmitWrap">
+                <button type="submit" class="login-btn" id="signupBtn" disabled>Create Account</button>
+            </div>
         </form>
 
         <div class="auth-divider">
@@ -52,7 +67,7 @@
     </div>
 
 <script src="/auth-client.js?v=20260716-log-privacy-v2"></script>
-    <script src="/signup.js?v=20260702-auth-macbook-v1"></script>
+    <script src="/signup.js?v=20260803-auth-legal-v1"></script>
     <script>
         (function() {
             const BACKEND_URL = window.IELTSX_API_URL || window.location.origin;
@@ -67,5 +82,3 @@
 </body>
 
 </html>
-
-

@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Environment, Paddle } = require("@paddle/paddle-node-sdk");
 const { subscriptionGrantsPaidAccess } = require("../lib/paddle-access");
+const { normalizeIp, requestIp } = require("../lib/paddle-ip-allowlist");
 
 const root = path.resolve(__dirname, "..");
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
@@ -48,11 +49,27 @@ test("Paddle SDK verifies the unchanged raw request body", async () => {
     await assert.rejects(() => paddle.webhooks.unmarshal(`${rawBody} `, secret, signature));
 });
 
+test("Paddle IP matching normalizes IPv4 and trusts proxy headers only when configured", () => {
+    const original = process.env.TRUST_PROXY_HEADERS;
+    const req = {
+        get(name) { return name === "x-forwarded-for" ? "34.237.3.244, 10.0.0.1" : ""; },
+        socket: { remoteAddress: "::ffff:127.0.0.1" }
+    };
+    process.env.TRUST_PROXY_HEADERS = "false";
+    assert.equal(requestIp(req), "127.0.0.1");
+    process.env.TRUST_PROXY_HEADERS = "true";
+    assert.equal(requestIp(req), "34.237.3.244");
+    assert.equal(normalizeIp("::ffff:34.195.105.136"), "34.195.105.136");
+    if (original === undefined) delete process.env.TRUST_PROXY_HEADERS;
+    else process.env.TRUST_PROXY_HEADERS = original;
+});
+
 test("webhook route is raw, verified first, retry-safe, and mounted before JSON parsing", () => {
     const server = read("server.js");
     const webhook = read("lib/paddle-webhooks.js");
     assert.ok(server.indexOf("registerPaddleWebhookRoute(app)") < server.indexOf("app.use(express.json"));
     assert.match(webhook, /express\.raw\(\{ type: "application\/json"/);
+    assert.match(webhook, /requirePaddleWebhookIp/);
     assert.doesNotMatch(webhook, /JSON\.parse\(req\.body/);
     assert.ok(webhook.indexOf("webhooks.unmarshal(rawBody, secret, signature)") < webhook.lastIndexOf("routePaddleEvent(event)"));
     assert.match(webhook, /res\.status\(500\)/);

@@ -10,6 +10,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 const OpenAI = require("openai");
 const User = require("./models/User");
+const PaddleCustomer = require("./models/PaddleCustomer");
 const ManualPaymentRequest = require("./models/ManualPaymentRequest");
 const WritingFullTest = require("./models/WritingFullTest");
 const FullSpeakingTest = require("./models/FullSpeakingTest");
@@ -45,6 +46,8 @@ const { protectImportedUploads } = require("./lib/upload-security");
 const { OAUTH_STATE_TTL_MS, createOAuthState, verifyOAuthState } = require("./lib/oauth-state");
 const { AuthRateLimitStore, createAuthRateLimiter, ipRule, emailRule } = require("./lib/auth-rate-limit");
 const { createSecurityHeaders } = require("./lib/security-headers");
+const { renderLegalPage } = require("./lib/legal-page-layout");
+const { legalPages } = require("./lib/legal-pages");
 const { UPLOAD_LIMITS, multipartLimits, uploadErrorResponse } = require("./lib/upload-limits");
 const { validateUploadContents } = require("./lib/upload-content-validation");
 const { calculateReadingBand, calculateListeningBand, scoreSkill } = require("./lib/ielts-import/bandScoring");
@@ -4791,6 +4794,21 @@ app.get("/listening", (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "listening.html"));
 });
 
+for (const [slug, page] of Object.entries(legalPages)) {
+    app.get(`/${slug}`, (req, res) => {
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
+        res.status(200).type("html").send(renderLegalPage(page));
+    });
+}
+
+app.get("/sitemap.xml", (req, res) => {
+    const paths = ["/", "/premium", "/terms", "/privacy", "/refund-policy"];
+    const urls = paths.map((routePath) => `<url><loc>https://ieltsx.org${routePath}</loc></url>`).join("");
+    res.status(200).type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`);
+});
+
 function setNoStorePageHeaders(res) {
     res.set({
         "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
@@ -4987,12 +5005,12 @@ app.get("/profile/subscription", requirePageAuth, (req, res) => {
     res.sendFile(path.join(ROOT_DIR, "profile-subscription.html"));
 });
 
-app.get("/premium", requirePageAuth, (req, res) => {
+app.get("/premium", (req, res) => {
     setNoStorePageHeaders(res);
     res.sendFile(path.join(ROOT_DIR, "premium.html"));
 });
 
-function getPaddleSandboxClientConfig(req) {
+async function getPaddleClientConfig(req) {
     const environment = String(process.env.NEXT_PUBLIC_PADDLE_ENV || "").trim();
     const clientToken = String(process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || "").trim();
     const priceIds = {
@@ -5001,16 +5019,17 @@ function getPaddleSandboxClientConfig(req) {
         annual: String(process.env.NEXT_PUBLIC_PADDLE_MASTERY_PRICE_ID || "").trim()
     };
     if (!environment) throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV is required.");
-    if (environment !== "sandbox") throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV must be sandbox.");
+    if (!["sandbox", "production"].includes(environment)) throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV must be sandbox or production.");
     if (!clientToken) throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_CLIENT_TOKEN is required.");
-    if (!clientToken.startsWith("test_")) throw new Error("Paddle configuration error: the client token must be a sandbox test token.");
+    if (environment === "sandbox" && !clientToken.startsWith("test_")) throw new Error("Paddle configuration error: sandbox requires a test_ client token.");
+    if (environment === "production" && !clientToken.startsWith("live_")) throw new Error("Paddle configuration error: production requires a live_ client token.");
     const priceEnvironmentNames = {
         monthly: "NEXT_PUBLIC_PADDLE_STARTER_PRICE_ID",
         threeMonths: "NEXT_PUBLIC_PADDLE_ACCELERATOR_PRICE_ID",
         annual: "NEXT_PUBLIC_PADDLE_MASTERY_PRICE_ID"
     };
     for (const [planId, priceId] of Object.entries(priceIds)) {
-        if (!/^pri_[a-z\d]{26}$/.test(priceId)) throw new Error(`Paddle configuration error: ${priceEnvironmentNames[planId]} must be a valid sandbox price ID.`);
+        if (!/^pri_[a-z\d]{26}$/.test(priceId)) throw new Error(`Paddle configuration error: ${priceEnvironmentNames[planId]} must be a valid price ID.`);
     }
     const manualPlanAmounts = {
         monthly: String(process.env.MANUAL_PAYMENT_STARTER_UZS || "").trim(),
@@ -5021,19 +5040,33 @@ function getPaddleSandboxClientConfig(req) {
         if (!/^\d+$/.test(amount) || Number(amount) <= 0) throw new Error(`Manual payment configuration error: a positive UZS amount is required for ${planId}.`);
     }
     const headerCountry = String(req.get("x-vercel-ip-country") || "").trim().toUpperCase();
+    let pwCustomerId = "";
+    if (req.user && mongoose.connection.readyState === 1) {
+        const authenticatedUserId = String(req.user.id || req.account?._id || "").trim();
+        const authenticatedEmail = String(req.user.email || req.account?.email || "").trim().toLowerCase();
+        const customer = await PaddleCustomer.findOne({
+            environment,
+            $or: [
+                ...(authenticatedUserId ? [{ userId: authenticatedUserId }] : []),
+                ...(authenticatedEmail ? [{ email: authenticatedEmail }] : [])
+            ]
+        }).select("customerId -_id").lean();
+        pwCustomerId = customer?.customerId || "";
+    }
     return {
         environment,
         clientToken,
         priceIds,
+        ...(pwCustomerId ? { pwCustomerId } : {}),
         manualPayment: { ...manualPaymentConfig, planAmounts: manualPlanAmounts },
         ...(/^[A-Z]{2}$/.test(headerCountry) ? { countryCode: headerCountry } : {})
     };
 }
 
-app.get("/api/paddle/config", requireUser, (req, res) => {
+app.get("/api/paddle/config", async (req, res) => {
     res.setHeader("Cache-Control", "no-store");
     try {
-        res.json(getPaddleSandboxClientConfig(req));
+        res.json(await getPaddleClientConfig(req));
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

@@ -29,12 +29,12 @@ async function runTests() {
         }
 
         // Setup mock users and tokens
-        let adminUser = await User.findOne({ email: "hoshimjonov08@gmail.com" });
+        let adminUser = await User.findOne({ email: "admin-test@example.test" });
         if (!adminUser) {
             adminUser = await User.create({
                 username: "adminTest",
                 name: "Admin Test",
-                email: "hoshimjonov08@gmail.com",
+                email: "admin-test@example.test",
                 role: "admin"
             });
         }

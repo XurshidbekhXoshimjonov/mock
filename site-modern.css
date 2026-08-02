@@ -1324,6 +1324,21 @@ body.public-page .home-footer__bottom {
     line-height: 1.4;
 }
 
+body.public-page .home-footer__legal {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:8px 18px;
+}
+
+body.public-page .home-footer__legal a {
+    color:inherit;
+    font-weight:650;
+    text-decoration:none;
+}
+
+body.public-page .home-footer__legal a:hover { color:var(--home-footer-blue); }
+
 body.speaking-coming-soon {
     --speaking-bg: #f8fafc;
     --speaking-navy: #f1f5f9;

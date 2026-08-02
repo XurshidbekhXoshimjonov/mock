@@ -46,7 +46,7 @@
     let mockListeningPreloadLink = null;
     let audioBlockedModal = null;
     let mockUserProfile = {
-        name: "Xurshidbek",
+        name: "Candidate",
         testTakerId: "001"
     };
 
@@ -402,7 +402,7 @@
         if (name) return name;
 
         const email = compactText(user.email);
-        return email ? email.split("@")[0] : "Xurshidbek";
+        return email ? email.split("@")[0] : "Candidate";
     }
 
     function profileTestTakerId(user = {}) {
@@ -442,7 +442,7 @@
             };
         } catch {
             return {
-                name: "Xurshidbek",
+                name: "Candidate",
                 testTakerId: "001"
             };
         }

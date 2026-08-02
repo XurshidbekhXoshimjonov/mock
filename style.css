@@ -267,7 +267,9 @@ body.auth-page .login-box form,
 body.auth-page .login-box input,
 body.auth-page .login-box button,
 body.auth-page .google-btn,
-body.auth-page .auth-switch a {
+body.auth-page .auth-switch a,
+body.auth-page .auth-legal-copy a,
+body.auth-page .auth-legal-consent a {
     position: relative;
     z-index: 3;
     pointer-events: auto;
@@ -323,6 +325,76 @@ body.auth-page .google-btn {
 .login-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+.auth-submit-wrap {
+    width: 100%;
+}
+
+.auth-submit-wrap .login-btn:disabled {
+    pointer-events: none;
+}
+
+.auth-legal-copy {
+    margin: -4px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.65;
+    text-align: center;
+}
+
+.auth-legal-copy a,
+.auth-legal-consent a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    text-underline-offset: 3px;
+}
+
+.auth-legal-copy a:hover,
+.auth-legal-consent a:hover {
+    text-decoration: underline;
+}
+
+.auth-legal-copy a:focus-visible,
+.auth-legal-consent a:focus-visible {
+    border-radius: 3px;
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 3px;
+}
+
+.auth-legal-consent {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+body.auth-page .login-box .auth-legal-checkbox {
+    width: 18px;
+    height: 18px;
+    min-height: 18px;
+    margin: 2px 0 0;
+    padding: 0;
+    accent-color: #2563eb;
+    appearance: auto;
+    -webkit-appearance: checkbox;
+}
+
+.auth-legal-checkbox:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 2px;
+}
+
+.auth-legal-error {
+    margin: 7px 0 0;
+    color: #b91c1c;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.45;
 }
 
 .auth-subtitle {
@@ -1391,6 +1463,20 @@ body.dark-theme .auth-switch {
 
 body.dark-theme .auth-switch a {
     color: #60a5fa;
+}
+
+body.dark-theme .auth-legal-copy,
+body.dark-theme .auth-legal-consent {
+    color: #94a3b8;
+}
+
+body.dark-theme .auth-legal-copy a,
+body.dark-theme .auth-legal-consent a {
+    color: #60a5fa;
+}
+
+body.dark-theme .auth-legal-error {
+    color: #fca5a5;
 }
 
 body.dark-theme *::-webkit-scrollbar-track {

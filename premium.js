@@ -6,9 +6,9 @@ import { initializePaddle } from "@paddle/paddle-js";
     const comparison = premium.subscriptionComparisonRows || [];
     const planIds = ["monthly", "threeMonths", "annual"];
     const planContent = {
-        monthly: { name: "Starter", description: "A simple way to begin", duration: "30 days" },
-        threeMonths: { name: "Accelerator", description: "Build faster IELTS progress", duration: "90 days", badge: "Most Popular" },
-        annual: { name: "Mastery", description: "Long-term access for serious preparation", duration: "365 days" }
+        monthly: { name: "Starter", description: "A simple way to begin", duration: "30 days", renewal: "Renews automatically every month" },
+        threeMonths: { name: "Accelerator", description: "Build faster IELTS progress", duration: "90 days", renewal: "Renews automatically every three months", badge: "Most Popular" },
+        annual: { name: "Mastery", description: "Long-term access for serious preparation", duration: "365 days", renewal: "Renews automatically every year" }
     };
 
     let paddle = null;
@@ -44,23 +44,8 @@ import { initializePaddle } from "@paddle/paddle-js";
         return currentUser();
     }
 
-    function activePlanId(user) {
-        if (!premium.hasPremiumAccess?.(user)) return "";
-        const planId = String(premium.inferSubscriptionPlanId?.(user) || user?.subscriptionPlan || "").trim();
-        return premium.premiumPlans?.[planId] ? planId : "";
-    }
-
-    function loginForPlan(planId) {
-        const redirect = encodeURIComponent(`/premium?plan=${encodeURIComponent(planId)}`);
-        window.location.href = `/login?redirect=${redirect}`;
-    }
-
     function formatCardNumber(value) {
         return String(value || "").replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
-    }
-
-    function formatManualPrice(amount) {
-        return `${Number(amount || 0).toLocaleString("en-US")} UZS`;
     }
 
     async function copyText(value) {
@@ -79,6 +64,21 @@ import { initializePaddle } from "@paddle/paddle-js";
         textArea.remove();
     }
 
+    function activePlanId(user) {
+        if (!premium.hasPremiumAccess?.(user)) return "";
+        const planId = String(premium.inferSubscriptionPlanId?.(user) || user?.subscriptionPlan || "").trim();
+        return premium.premiumPlans?.[planId] ? planId : "";
+    }
+
+    function loginForPlan(planId) {
+        const redirect = encodeURIComponent(`/premium?plan=${encodeURIComponent(planId)}`);
+        window.location.href = `/login?redirect=${redirect}`;
+    }
+
+    function formatManualPrice(amount) {
+        return `${Number(amount || 0).toLocaleString("en-US")} UZS`;
+    }
+
     async function fetchPaddleConfig() {
         const response = await fetch("/api/paddle/config", { credentials: "include", cache: "no-store" });
         const data = await response.json().catch(() => ({}));
@@ -86,8 +86,8 @@ import { initializePaddle } from "@paddle/paddle-js";
         if (!data.environment || !data.clientToken) {
             throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV and NEXT_PUBLIC_PADDLE_CLIENT_TOKEN are required.");
         }
-        if (data.environment !== "sandbox") {
-            throw new Error("Paddle configuration error: this checkout is restricted to sandbox mode.");
+        if (!["sandbox", "production"].includes(data.environment)) {
+            throw new Error("Paddle configuration error: environment must be sandbox or production.");
         }
         return data;
     }
@@ -144,9 +144,10 @@ import { initializePaddle } from "@paddle/paddle-js";
             ${display.badge ? `<span class="pricing-card__best">${escapeHtml(display.badge)}</span>` : ""}
             ${isCurrentPlan ? '<span class="pricing-card__current">YOUR PLAN</span>' : ""}
             <div class="pricing-card__head"><h2>${escapeHtml(display.name)}</h2><p>${escapeHtml(display.duration)}</p></div>
-            <div class="pricing-card__price"><strong>${escapeHtml(formattedPrice)}</strong><span>${escapeHtml(display.description)} · ${selectedCurrency}</span></div>
+            <div class="pricing-card__price"><strong>${escapeHtml(formattedPrice)}</strong><span>${escapeHtml(display.description)} · ${selectedCurrency}</span><small>${escapeHtml(display.renewal)} · Cancel before renewal</small></div>
             <ul>${premium.premiumFeatures.map((feature) => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join("")}</ul>
             <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}" type="button" data-plan="${escapeHtml(plan.id)}" ${disabled ? "disabled" : ""}>${escapeHtml(buttonLabel(plan.id))}</button>
+            <p class="pricing-card__consent">By subscribing, you agree to the <a href="/terms">Terms of Service</a> and <a href="/refund-policy">Refund Policy</a>.</p>
         </article>`;
     }
 
@@ -184,7 +185,7 @@ import { initializePaddle } from "@paddle/paddle-js";
                         ${globalPaymentIcon()}
                     </button>
                     <button class="payment-method__option" type="button" data-payment-method="manual">
-                        <span class="payment-method__copy"><strong>Transfer to Credit Card</strong><span>Transfer directly to our card and send the receipt via Telegram</span><small class="payment-method__manual"><span aria-hidden="true">↗</span> Manual activation · <b id="manualPaymentAmount"></b></small></span>
+                        <span class="payment-method__copy"><strong>Transfer to Credit Card</strong><span>Transfer directly to the local card and send the receipt via Telegram</span><small class="payment-method__manual"><span aria-hidden="true">↗</span> Manual activation · <b id="manualPaymentAmount"></b></small></span>
                         ${cardTransferIcon()}
                     </button>
                 </div>
@@ -199,7 +200,7 @@ import { initializePaddle } from "@paddle/paddle-js";
                 <button class="premium-modal__close" type="button" data-close-manual-payment aria-label="Close manual payment">${closeIcon()}</button>
                 <span class="premium-eyebrow">PAY WITH A LOCAL CARD</span>
                 <h2 id="manualPaymentTitle">Pay by card, then send the receipt</h2>
-                <p class="manual-payment__description">Pay the amount below to this UZCARD / HUMO card, then send the payment receipt to our Telegram administrator. Your Premium plan will be activated manually after payment verification.</p>
+                <p class="manual-payment__description">Pay the amount below to the local UZCARD / HUMO card, then send the payment receipt to IELTSX Support on Telegram. Your Premium plan will be activated manually after payment verification.</p>
                 <div class="manual-payment__selected">
                     <div><strong id="manualPaymentPlanName"></strong><span id="manualPaymentPlanDuration"></span></div>
                     <strong id="manualPaymentPlanPrice"></strong>
@@ -207,19 +208,18 @@ import { initializePaddle } from "@paddle/paddle-js";
                 <div class="manual-payment__card">
                     <div class="manual-payment__card-row"><span>Card type</span><strong id="manualPaymentCardType"></strong></div>
                     <div class="manual-payment__card-row"><span>Card number</span><button class="manual-payment__copy-card" type="button" data-copy-card><strong id="manualPaymentCardNumber"></strong><span>Copy</span></button></div>
-                    <div class="manual-payment__card-row"><span>Cardholder</span><strong id="manualPaymentCardholder"></strong></div>
                     <div class="manual-payment__summary"><span id="manualPaymentSummaryPlan"></span><strong id="manualPaymentSummaryPrice"></strong></div>
                 </div>
                 <ol class="manual-payment__steps">
                     <li>Transfer the exact amount to the card.</li>
                     <li>Save the payment receipt or screenshot.</li>
-                    <li>Send the receipt to @ieltsxuz_admin.</li>
-                    <li>Premium will be activated after administrator verification.</li>
+                    <li>Send the receipt to IELTSX Support on Telegram.</li>
+                    <li>Premium will be activated after payment verification.</li>
                 </ol>
                 <p class="manual-payment__manual-note">Payment verification is performed manually.</p>
                 <p class="manual-payment__status" id="manualPaymentStatus" hidden aria-live="polite"></p>
                 <div class="manual-payment__actions">
-                    <a class="premium-button manual-payment__telegram" id="manualPaymentTelegramLink" href="https://t.me/ieltsxuz_admin" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">➤</span><span>Continue on Telegram @ieltsxuz_admin</span></a>
+                    <a class="premium-button manual-payment__telegram" id="manualPaymentTelegramLink" href="https://t.me/ieltsxuz_admin" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">➤</span><span>Continue on Telegram</span></a>
                     <button class="manual-payment__secondary" type="button" data-copy-payment-details>Copy payment details</button>
                 </div>
             </section>
@@ -258,16 +258,15 @@ import { initializePaddle } from "@paddle/paddle-js";
     }
 
     function manualPaymentDetails(planId) {
-        const plan = planContent[planId];
+        const display = planContent[planId];
         const manual = paddleConfig.manualPayment;
         const price = formatManualPrice(manual.planAmounts[planId]);
         return [
-            "Hello, I paid for IELTSX Premium.",
+            "Hello IELTSX Support, I paid for IELTSX Premium.",
             "",
-            `Plan: ${plan.name}`,
+            `Plan: ${display.name}`,
             `Price: ${price}`,
             `Account email: ${loggedInUser?.email || "Not available"}`,
-            `Account name: ${loggedInUser?.name || loggedInUser?.username || "Not available"}`,
             `Account ID: ${loggedInUser?.id || "Not available"}`,
             "",
             "I will send the payment receipt below."
@@ -296,13 +295,8 @@ import { initializePaddle } from "@paddle/paddle-js";
         document.getElementById("manualPaymentSummaryPrice").textContent = price;
         document.getElementById("manualPaymentCardType").textContent = manual.cardType;
         document.getElementById("manualPaymentCardNumber").textContent = formatCardNumber(manual.cardNumber);
-        document.getElementById("manualPaymentCardholder").textContent = manual.cardholder;
         const telegramLink = document.getElementById("manualPaymentTelegramLink");
-        if (telegramLink instanceof HTMLAnchorElement) {
-            telegramLink.href = `https://t.me/${manual.telegramUsername}`;
-            const telegramLabel = telegramLink.querySelector("span:last-child");
-            if (telegramLabel) telegramLabel.textContent = `Continue on Telegram @${manual.telegramUsername}`;
-        }
+        if (telegramLink instanceof HTMLAnchorElement) telegramLink.href = `https://t.me/${manual.telegramUsername}`;
         setManualPaymentStatus("");
         modal.hidden = false;
         document.body.classList.add("premium-modal-open");
@@ -431,7 +425,8 @@ import { initializePaddle } from "@paddle/paddle-js";
             render();
             paddle = await initializePaddle({
                 token: paddleConfig.clientToken,
-                environment: paddleConfig.environment
+                environment: paddleConfig.environment,
+                ...(paddleConfig.pwCustomerId ? { pwCustomer: { id: paddleConfig.pwCustomerId } } : {})
             });
             if (!paddle) throw new Error("Paddle initialization failed.");
             await loadLocalizedPrices();
