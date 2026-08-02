@@ -1,47 +1,28 @@
+import { initializePaddle } from "@paddle/paddle-js";
+
 (function () {
     const root = document.getElementById("premiumRoot");
     const premium = window.IELTSXPremium;
-    const manualPaymentConfig = premium.manualPaymentConfig;
     const comparison = premium.subscriptionComparisonRows || [];
-    let manualModal = null;
-
-    function escapeHtml(value) {
-        return String(value || "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
-    }
-
-    const planDisplayContent = {
-        monthly: {
-            name: "Starter",
-            description: "A simple way to begin",
-            duration: "30 days",
-            badge: null,
-            buttonLabel: "Choose Starter"
-        },
-        threeMonths: {
-            name: "Accelerator",
-            description: "Build faster IELTS progress",
-            duration: "90 days",
-            badge: "Most Popular",
-            buttonLabel: "Choose Accelerator"
-        },
-        annual: {
-            name: "Mastery",
-            description: "Long-term access for serious preparation",
-            duration: "365 days",
-            badge: "Best Value",
-            buttonLabel: "Choose Mastery"
-        }
+    const planIds = ["monthly", "threeMonths", "annual"];
+    const planContent = {
+        monthly: { name: "Starter", description: "A simple way to begin", duration: "30 days" },
+        threeMonths: { name: "Accelerator", description: "Build faster IELTS progress", duration: "90 days", badge: "Most Popular" },
+        annual: { name: "Mastery", description: "Long-term access for serious preparation", duration: "365 days" }
     };
 
-    function planDisplay(plan) {
-        const display = planDisplayContent[plan?.id] || {};
-        return {
-            name: display.name || plan?.name || "",
-            description: display.description || plan?.billing || "",
-            duration: display.duration || `${plan?.durationDays || ""} days`.trim(),
-            badge: display.badge || null,
-            buttonLabel: display.buttonLabel || "Select Plan"
-        };
+    let paddle = null;
+    let paddleConfig = null;
+    let localizedPrices = {};
+    let loggedInUser = null;
+    let currentPlanId = "";
+    let initializationError = "";
+    let selectedPaymentPlanId = "";
+    let selectedManualPlanId = "";
+    let selectedCurrency = localStorage.getItem("ieltsx-pricing-currency") === "UZS" ? "UZS" : "USD";
+
+    function escapeHtml(value) {
+        return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
     }
 
     function currentUser() {
@@ -49,8 +30,7 @@
     }
 
     async function latestCurrentUser() {
-        const auth = window.authClient?.getAuth?.();
-        if (!window.authClient?.fetchAuthMe) return null;
+        if (!window.authClient?.fetchAuthMe) return currentUser();
         try {
             const result = await window.authClient.fetchAuthMe();
             const user = result?.data?.user || null;
@@ -59,9 +39,9 @@
                 return user;
             }
         } catch {
-            // Do not use stale cached Premium data to mark a plan as current.
+            // The authenticated page route will send signed-out visitors to login.
         }
-        return null;
+        return currentUser();
     }
 
     function activePlanId(user) {
@@ -79,35 +59,8 @@
         return String(value || "").replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
     }
 
-    function telegramIcon() {
-        return `<img class="manual-payment__telegram-icon" src="/premium-icons/telegram-logo.webp?v=20260713-plan-current-v1" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
-    }
-
-    function closeIcon() {
-        return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>`;
-    }
-
-    function pricingCard(plan, currentPlanId = "") {
-        const hasActiveSubscription = Boolean(currentPlanId);
-        const isCurrentPlan = currentPlanId === plan.id;
-        const isLockedPlan = hasActiveSubscription && !isCurrentPlan;
-        const display = planDisplay(plan);
-        return `<article class="pricing-card${plan.bestValue ? " pricing-card--featured" : ""}${isCurrentPlan ? " pricing-card--current" : ""}" ${isCurrentPlan ? 'aria-current="true"' : ""}>
-            ${display.badge && !isCurrentPlan ? `<span class="pricing-card__best">${escapeHtml(display.badge)}</span>` : ""}
-            ${isCurrentPlan ? '<span class="pricing-card__current">Your plan</span>' : ""}
-            <div class="pricing-card__head"><h2>${escapeHtml(display.name)}</h2><p>${escapeHtml(display.duration)}</p></div>
-            <div class="pricing-card__price"><strong>${escapeHtml(premium.formatPrice(plan.price))}</strong><span>${escapeHtml(display.description)}</span></div>
-            <ul>${premium.premiumFeatures.map((feature) => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join("")}</ul>
-            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}${isLockedPlan ? " premium-button--locked" : ""}" type="button" ${hasActiveSubscription ? "disabled" : `data-plan="${escapeHtml(plan.id)}"`}>${isCurrentPlan ? "Your plan" : isLockedPlan ? "Subscription active" : escapeHtml(display.buttonLabel)}</button>
-        </article>`;
-    }
-
-    function comparisonIcon(isAvailable) {
-        return `<span class="${isAvailable ? "comparison-check" : "comparison-minus"}" aria-hidden="true">${isAvailable ? "✓" : "−"}</span>`;
-    }
-
-    function comparisonCell(label, isAvailable) {
-        return `${comparisonIcon(isAvailable)}${escapeHtml(label)}`;
+    function formatManualPrice(amount) {
+        return `${Number(amount || 0).toLocaleString("en-US")} UZS`;
     }
 
     async function copyText(value) {
@@ -115,7 +68,6 @@
             await navigator.clipboard.writeText(value);
             return;
         }
-
         const textArea = document.createElement("textarea");
         textArea.value = value;
         textArea.setAttribute("readonly", "");
@@ -127,191 +79,135 @@
         textArea.remove();
     }
 
-    function paymentDetails(plan, user) {
-        const accountId = user?.memberId || user?.testTakerId || user?.id || "Not available";
-        const display = planDisplay(plan);
-        return [
-            "Hello, I paid for IELTSX Premium.",
-            "",
-            `Plan: ${display.name}`,
-            `Price: ${premium.formatPrice(plan.price)}`,
-            `Account email: ${user?.email || "Not available"}`,
-            `Account name: ${user?.name || user?.username || "Not available"}`,
-            `Account ID: ${accountId}`,
-            "",
-            "I will send the payment receipt below."
-        ].join("\n");
-    }
-
-    async function createManualPaymentRequest(plan) {
-        const response = await fetch("/api/premium/manual-payment-requests", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ planId: plan.id })
-        });
+    async function fetchPaddleConfig() {
+        const response = await fetch("/api/paddle/config", { credentials: "include", cache: "no-store" });
         const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.error || "Could not create manual payment request");
+        if (!response.ok) throw new Error(data.error || "Paddle configuration could not be loaded.");
+        if (!data.environment || !data.clientToken) {
+            throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV and NEXT_PUBLIC_PADDLE_CLIENT_TOKEN are required.");
+        }
+        if (data.environment !== "sandbox") {
+            throw new Error("Paddle configuration error: this checkout is restricted to sandbox mode.");
+        }
         return data;
     }
 
-    function ManualPaymentModal() {
-        let selectedPlan = null;
-        let selectedUser = null;
-        let lastTrigger = null;
-        let statusTimer = null;
+    async function loadLocalizedPrices() {
+        const items = planIds.map((planId) => ({
+            priceId: paddleConfig.priceIds[planId],
+            quantity: 1
+        }));
+        const params = {
+            items,
+            currencyCode: "USD"
+        };
+        const response = await paddle.PricePreview(params);
+        localizedPrices = response.data.details.lineItems.reduce((prices, item) => {
+            prices[item.price.id] = item.formattedTotals.total;
+            return prices;
+        }, {});
+    }
 
-        function rootEl() { return document.getElementById("manualPaymentModal"); }
-        function dialogEl() { return rootEl()?.querySelector(".manual-payment__dialog"); }
-        function statusEl() { return document.getElementById("manualPaymentStatus"); }
-
-        function setStatus(message, type = "success") {
-            const element = statusEl();
-            if (!element) return;
-            window.clearTimeout(statusTimer);
-            element.hidden = !message;
-            element.textContent = message || "";
-            element.className = `manual-payment__status manual-payment__status--${type}`;
-            if (message && type === "success") {
-                statusTimer = window.setTimeout(() => setStatus(""), 2200);
-            }
+    function displayedPlanPrice(planId) {
+        if (selectedCurrency === "UZS") {
+            return formatManualPrice(paddleConfig?.manualPayment?.planAmounts?.[planId]);
         }
+        const priceId = paddleConfig?.priceIds?.[planId] || "";
+        return localizedPrices[priceId] || (initializationError ? "Unavailable" : "Loading…");
+    }
 
-        function focusableElements() {
-            return [...dialogEl().querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
-                .filter((element) => element.offsetParent !== null);
-        }
+    function currencyToggleMarkup() {
+        return `<div class="pricing-controls">
+            <div class="currency-switch" role="group" aria-label="Display currency">
+                <button type="button" data-currency="USD" aria-pressed="${selectedCurrency === "USD"}"><img src="/premium-icons/currency-earth.png" alt="" aria-hidden="true"> USD</button>
+                <button type="button" data-currency="UZS" aria-pressed="${selectedCurrency === "UZS"}"><img src="/premium-icons/currency-uzs.png" alt="" aria-hidden="true"> UZS</button>
+            </div>
+        </div>`;
+    }
 
-        function update() {
-            if (!selectedPlan) return;
-            const planPrice = premium.formatPrice(selectedPlan.price);
-            const display = planDisplay(selectedPlan);
-            document.getElementById("manualPaymentPlanName").textContent = display.name;
-            document.getElementById("manualPaymentPlanDuration").textContent = display.duration;
-            document.getElementById("manualPaymentPlanPrice").textContent = planPrice;
-            document.getElementById("manualPaymentSummaryPlan").textContent = display.name;
-            document.getElementById("manualPaymentSummaryPrice").textContent = planPrice;
-            document.getElementById("manualPaymentCardType").textContent = manualPaymentConfig.cardType;
-            document.getElementById("manualPaymentCardNumber").textContent = formatCardNumber(manualPaymentConfig.cardNumber);
-            document.getElementById("manualPaymentCardholder").textContent = manualPaymentConfig.cardholder;
-            document.getElementById("manualPaymentTelegramLink").href = `https://t.me/${manualPaymentConfig.telegramUsername}`;
-            document.getElementById("manualPaymentTelegramLink").innerHTML = `${telegramIcon()}<span>Continue on Telegram @${escapeHtml(manualPaymentConfig.telegramUsername)}</span>`;
-            setStatus("");
-        }
+    function buttonLabel(planId) {
+        const name = planContent[planId].name;
+        if (!currentPlanId) return `Choose ${name}`;
+        if (currentPlanId === planId) return "Your plan";
+        const currentRank = premium.premiumPlans[currentPlanId]?.rank ?? 0;
+        const selectedRank = premium.premiumPlans[planId]?.rank ?? 0;
+        return selectedRank > currentRank ? `Upgrade to ${name}` : `Switch to ${name}`;
+    }
 
-        function open(plan, user, trigger) {
-            selectedPlan = plan;
-            selectedUser = user;
-            lastTrigger = trigger || null;
-            const modal = rootEl();
-            modal.hidden = false;
-            update();
-            document.body.classList.add("premium-modal-open");
-            window.requestAnimationFrame(() => modal.classList.add("is-visible"));
-            modal.querySelector("[data-close-modal]").focus();
-        }
+    function pricingCard(plan) {
+        const display = planContent[plan.id];
+        const isCurrentPlan = currentPlanId === plan.id;
+        const priceId = paddleConfig?.priceIds?.[plan.id] || "";
+        const formattedPrice = displayedPlanPrice(plan.id);
+        const disabled = isCurrentPlan || !paddle || !localizedPrices[priceId];
+        return `<article class="pricing-card${plan.bestValue ? " pricing-card--featured" : ""}${isCurrentPlan ? " pricing-card--current" : ""}" ${isCurrentPlan ? 'aria-current="true"' : ""}>
+            ${display.badge ? `<span class="pricing-card__best">${escapeHtml(display.badge)}</span>` : ""}
+            ${isCurrentPlan ? '<span class="pricing-card__current">YOUR PLAN</span>' : ""}
+            <div class="pricing-card__head"><h2>${escapeHtml(display.name)}</h2><p>${escapeHtml(display.duration)}</p></div>
+            <div class="pricing-card__price"><strong>${escapeHtml(formattedPrice)}</strong><span>${escapeHtml(display.description)} · ${selectedCurrency}</span></div>
+            <ul>${premium.premiumFeatures.map((feature) => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join("")}</ul>
+            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}" type="button" data-plan="${escapeHtml(plan.id)}" ${disabled ? "disabled" : ""}>${escapeHtml(buttonLabel(plan.id))}</button>
+        </article>`;
+    }
 
-        function close() {
-            const modal = rootEl();
-            if (!modal || modal.hidden) return;
-            modal.classList.remove("is-visible");
-            document.body.classList.remove("premium-modal-open");
-            window.setTimeout(() => {
-                modal.hidden = true;
-                selectedPlan = null;
-                selectedUser = null;
-                setStatus("");
-                lastTrigger?.focus();
-                lastTrigger = null;
-            }, 140);
-        }
+    function comparisonIcon(isAvailable) {
+        return `<span class="${isAvailable ? "comparison-check" : "comparison-minus"}" aria-hidden="true">${isAvailable ? "✓" : "−"}</span>`;
+    }
 
-        function bind() {
-            const modal = rootEl();
-            modal.addEventListener("click", async (event) => {
-                if (event.target.closest("[data-close-modal]")) {
-                    close();
-                    return;
-                }
+    function comparisonCell(label, isAvailable) {
+        return `${comparisonIcon(isAvailable)}${escapeHtml(label)}`;
+    }
 
-                const copyCard = event.target.closest("[data-copy-card]");
-                if (copyCard) {
-                    await copyText(manualPaymentConfig.cardNumber);
-                    setStatus("Card number copied");
-                    return;
-                }
+    function closeIcon() {
+        return `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>`;
+    }
 
-                const copyDetails = event.target.closest("[data-copy-payment-details]");
-                if (copyDetails && selectedPlan) {
-                    await copyText(paymentDetails(selectedPlan, selectedUser));
-                    setStatus("Payment details copied");
-                    return;
-                }
+    function globalPaymentIcon() {
+        return `<span class="payment-method__global-mark"><img src="/premium-icons/currency-earth.png" alt="" aria-hidden="true"><strong>GLOBAL</strong></span>`;
+    }
 
-                const telegramLink = event.target.closest("#manualPaymentTelegramLink");
-                if (telegramLink && selectedPlan) {
-                    event.preventDefault();
-                    if (!currentUser()) {
-                        loginForPlan(selectedPlan.id);
-                        return;
-                    }
-                    try {
-                        setStatus("Creating payment request...", "info");
-                        await createManualPaymentRequest(selectedPlan);
-                        setStatus("Payment request created. Opening Telegram...", "success");
-                        window.open(telegramLink.href, "_blank", "noopener,noreferrer");
-                    } catch (error) {
-                        setStatus(error.message || "Could not create payment request", "error");
-                    }
-                }
-            });
+    function cardTransferIcon() {
+        return `<span class="payment-method__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3 10h18M7 15h4"></path></svg></span>`;
+    }
 
-            document.addEventListener("keydown", (event) => {
-                const modal = rootEl();
-                if (!modal || modal.hidden) return;
-                if (event.key === "Escape") {
-                    close();
-                    return;
-                }
-                if (event.key !== "Tab") return;
-                const focusable = focusableElements();
-                const first = focusable[0];
-                const last = focusable[focusable.length - 1];
-                if (!first || !last) return;
-                if (event.shiftKey && document.activeElement === first) {
-                    event.preventDefault();
-                    last.focus();
-                } else if (!event.shiftKey && document.activeElement === last) {
-                    event.preventDefault();
-                    first.focus();
-                }
-            });
-        }
-
-        return { bind, open, close };
+    function paymentMethodModalMarkup() {
+        return `<div class="premium-modal payment-method-modal" id="paymentMethodModal" hidden>
+            <div class="premium-modal__backdrop" data-close-payment-method></div>
+            <section class="payment-method__dialog" role="dialog" aria-modal="true" aria-labelledby="paymentMethodTitle">
+                <button class="premium-modal__close" type="button" data-close-payment-method aria-label="Close payment methods">${closeIcon()}</button>
+                <span class="premium-eyebrow">SELECT PAYMENT</span>
+                <h2 id="paymentMethodTitle">Payment Method</h2>
+                <p class="payment-method__intro">Choose how you would like to pay for <strong id="paymentMethodPlanName">your plan</strong>.</p>
+                <div class="payment-method__options">
+                    <button class="payment-method__option payment-method__option--global" type="button" data-payment-method="global">
+                        <span class="payment-method__copy"><strong>Global Payment System</strong><span>Pay securely with an international card via Paddle</span><small><span aria-hidden="true">⚡</span> Secure checkout · <b id="globalPaymentAmount"></b></small></span>
+                        ${globalPaymentIcon()}
+                    </button>
+                    <button class="payment-method__option" type="button" data-payment-method="manual">
+                        <span class="payment-method__copy"><strong>Transfer to Credit Card</strong><span>Transfer directly to our card and send the receipt via Telegram</span><small class="payment-method__manual"><span aria-hidden="true">↗</span> Manual activation · <b id="manualPaymentAmount"></b></small></span>
+                        ${cardTransferIcon()}
+                    </button>
+                </div>
+            </section>
+        </div>`;
     }
 
     function manualPaymentModalMarkup() {
         return `<div class="premium-modal manual-payment" id="manualPaymentModal" hidden>
-            <div class="premium-modal__backdrop manual-payment__backdrop" data-close-modal></div>
+            <div class="premium-modal__backdrop manual-payment__backdrop" data-close-manual-payment></div>
             <section class="manual-payment__dialog" role="dialog" aria-modal="true" aria-labelledby="manualPaymentTitle">
-                <button type="button" class="premium-modal__close manual-payment__close" data-close-modal aria-label="Close">${closeIcon()}</button>
+                <button class="premium-modal__close" type="button" data-close-manual-payment aria-label="Close manual payment">${closeIcon()}</button>
                 <span class="premium-eyebrow">PAY WITH A LOCAL CARD</span>
                 <h2 id="manualPaymentTitle">Pay by card, then send the receipt</h2>
                 <p class="manual-payment__description">Pay the amount below to this UZCARD / HUMO card, then send the payment receipt to our Telegram administrator. Your Premium plan will be activated manually after payment verification.</p>
-                <div class="manual-payment__selected" aria-label="Selected Premium plan">
+                <div class="manual-payment__selected">
                     <div><strong id="manualPaymentPlanName"></strong><span id="manualPaymentPlanDuration"></span></div>
                     <strong id="manualPaymentPlanPrice"></strong>
                 </div>
                 <div class="manual-payment__card">
-                    <div class="manual-payment__card-row"><span>Card type</span><strong id="manualPaymentCardType">UZCARD / HUMO</strong></div>
-                    <div class="manual-payment__card-row manual-payment__card-row--number">
-                        <span>Card number</span>
-                        <button type="button" class="manual-payment__copy-card" data-copy-card aria-label="Copy card number"><strong id="manualPaymentCardNumber">5614 6810 7600 0011</strong><span>Copy</span></button>
-                    </div>
-                    <div class="manual-payment__card-row"><span>Cardholder</span><strong id="manualPaymentCardholder">XOSHIMJONOV XURSHIDBEK</strong></div>
+                    <div class="manual-payment__card-row"><span>Card type</span><strong id="manualPaymentCardType"></strong></div>
+                    <div class="manual-payment__card-row"><span>Card number</span><button class="manual-payment__copy-card" type="button" data-copy-card><strong id="manualPaymentCardNumber"></strong><span>Copy</span></button></div>
+                    <div class="manual-payment__card-row"><span>Cardholder</span><strong id="manualPaymentCardholder"></strong></div>
                     <div class="manual-payment__summary"><span id="manualPaymentSummaryPlan"></span><strong id="manualPaymentSummaryPrice"></strong></div>
                 </div>
                 <ol class="manual-payment__steps">
@@ -321,66 +217,233 @@
                     <li>Premium will be activated after administrator verification.</li>
                 </ol>
                 <p class="manual-payment__manual-note">Payment verification is performed manually.</p>
-                <p id="manualPaymentStatus" class="manual-payment__status" hidden aria-live="polite"></p>
+                <p class="manual-payment__status" id="manualPaymentStatus" hidden aria-live="polite"></p>
                 <div class="manual-payment__actions">
-                    <a id="manualPaymentTelegramLink" class="premium-button manual-payment__telegram" href="https://t.me/ieltsxuz_admin" target="_blank" rel="noopener noreferrer">${telegramIcon()}<span>Continue on Telegram @ieltsxuz_admin</span></a>
+                    <a class="premium-button manual-payment__telegram" id="manualPaymentTelegramLink" href="https://t.me/ieltsxuz_admin" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">➤</span><span>Continue on Telegram @ieltsxuz_admin</span></a>
                     <button class="manual-payment__secondary" type="button" data-copy-payment-details>Copy payment details</button>
                 </div>
             </section>
         </div>`;
     }
 
-    function render(currentPlanId = "") {
+    function openPaymentMethodModal(planId) {
+        selectedPaymentPlanId = planId;
+        const modal = document.getElementById("paymentMethodModal");
+        const planName = document.getElementById("paymentMethodPlanName");
+        if (!modal || !planName) return;
+        planName.textContent = planContent[planId].name;
+        const globalAmount = document.getElementById("globalPaymentAmount");
+        const manualAmount = document.getElementById("manualPaymentAmount");
+        const priceId = paddleConfig?.priceIds?.[planId] || "";
+        if (globalAmount) globalAmount.textContent = localizedPrices[priceId] || "USD";
+        if (manualAmount) manualAmount.textContent = formatManualPrice(paddleConfig?.manualPayment?.planAmounts?.[planId]);
+        modal.hidden = false;
+        document.body.classList.add("premium-modal-open");
+        window.requestAnimationFrame(() => {
+            modal.classList.add("is-visible");
+            const firstPaymentMethod = modal.querySelector("[data-payment-method]");
+            if (firstPaymentMethod instanceof HTMLElement) firstPaymentMethod.focus();
+        });
+    }
+
+    function closePaymentMethodModal() {
+        const modal = document.getElementById("paymentMethodModal");
+        if (!modal || modal.hidden) return;
+        modal.classList.remove("is-visible");
+        document.body.classList.remove("premium-modal-open");
+        window.setTimeout(() => {
+            modal.hidden = true;
+            selectedPaymentPlanId = "";
+        }, 160);
+    }
+
+    function manualPaymentDetails(planId) {
+        const plan = planContent[planId];
+        const manual = paddleConfig.manualPayment;
+        const price = formatManualPrice(manual.planAmounts[planId]);
+        return [
+            "Hello, I paid for IELTSX Premium.",
+            "",
+            `Plan: ${plan.name}`,
+            `Price: ${price}`,
+            `Account email: ${loggedInUser?.email || "Not available"}`,
+            `Account name: ${loggedInUser?.name || loggedInUser?.username || "Not available"}`,
+            `Account ID: ${loggedInUser?.id || "Not available"}`,
+            "",
+            "I will send the payment receipt below."
+        ].join("\n");
+    }
+
+    function setManualPaymentStatus(message) {
+        const status = document.getElementById("manualPaymentStatus");
+        if (!status) return;
+        status.hidden = !message;
+        status.textContent = message;
+        status.className = "manual-payment__status manual-payment__status--success";
+    }
+
+    function openManualPaymentModal(planId) {
+        const modal = document.getElementById("manualPaymentModal");
+        const manual = paddleConfig?.manualPayment;
+        if (!modal || !manual) return;
+        selectedManualPlanId = planId;
+        const display = planContent[planId];
+        const price = formatManualPrice(manual.planAmounts[planId]);
+        document.getElementById("manualPaymentPlanName").textContent = display.name;
+        document.getElementById("manualPaymentPlanDuration").textContent = display.duration;
+        document.getElementById("manualPaymentPlanPrice").textContent = price;
+        document.getElementById("manualPaymentSummaryPlan").textContent = display.name;
+        document.getElementById("manualPaymentSummaryPrice").textContent = price;
+        document.getElementById("manualPaymentCardType").textContent = manual.cardType;
+        document.getElementById("manualPaymentCardNumber").textContent = formatCardNumber(manual.cardNumber);
+        document.getElementById("manualPaymentCardholder").textContent = manual.cardholder;
+        const telegramLink = document.getElementById("manualPaymentTelegramLink");
+        if (telegramLink instanceof HTMLAnchorElement) {
+            telegramLink.href = `https://t.me/${manual.telegramUsername}`;
+            const telegramLabel = telegramLink.querySelector("span:last-child");
+            if (telegramLabel) telegramLabel.textContent = `Continue on Telegram @${manual.telegramUsername}`;
+        }
+        setManualPaymentStatus("");
+        modal.hidden = false;
+        document.body.classList.add("premium-modal-open");
+        window.requestAnimationFrame(() => modal.classList.add("is-visible"));
+    }
+
+    function closeManualPaymentModal() {
+        const modal = document.getElementById("manualPaymentModal");
+        if (!modal || modal.hidden) return;
+        modal.classList.remove("is-visible");
+        document.body.classList.remove("premium-modal-open");
+        window.setTimeout(() => {
+            modal.hidden = true;
+            selectedManualPlanId = "";
+            setManualPaymentStatus("");
+        }, 160);
+    }
+
+    function render() {
         root.innerHTML = `
             <section class="premium-hero"><span class="premium-eyebrow">IELTSX PREMIUM</span><h1>Go Premium</h1><h2>Unlimited practice. Stronger results.</h2><p>Get full, unrestricted access to every IELTSX Premium feature.</p></section>
-            <section class="pricing-grid" aria-label="Premium pricing plans">${Object.values(premium.premiumPlans).map((plan) => pricingCard(plan, currentPlanId)).join("")}</section>
+            ${initializationError ? `<p class="paddle-error" role="alert">${escapeHtml(initializationError)}</p>` : ""}
+            <div class="pricing-stage">
+                ${currencyToggleMarkup()}
+                <section class="pricing-grid" aria-label="Premium pricing plans">${planIds.map((planId) => pricingCard(premium.premiumPlans[planId])).join("")}</section>
+            </div>
             <section class="comparison-section"><div class="section-heading"><span>PLAN COMPARISON</span><h2>Free and Premium features</h2></div>
                 <div class="comparison-table-wrap"><table class="comparison-table"><thead><tr><th>Feature</th><th>Free</th><th>Premium</th></tr></thead><tbody>${comparison.map((row) => `<tr><th>${escapeHtml(row.label)}</th><td>${comparisonCell(row.free, row.freeAvailable)}</td><td>${comparisonCell(row.premium, row.premiumAvailable)}</td></tr>`).join("")}</tbody></table></div>
                 <div class="comparison-cards">${comparison.map((row) => `<article><h3>${escapeHtml(row.label)}</h3><p class="${row.freeAvailable ? "is-available" : ""}"><strong>Free</strong>${comparisonCell(row.free, row.freeAvailable)}</p><p class="is-premium"><strong>Premium</strong>${comparisonCell(row.premium, row.premiumAvailable)}</p></article>`).join("")}</div>
             </section>
+            ${paymentMethodModalMarkup()}
             ${manualPaymentModalMarkup()}`;
     }
 
-    function renderPage(currentPlanId = "") {
-        render(currentPlanId);
-        manualModal = ManualPaymentModal();
-        manualModal.bind();
+    async function choosePlan(planId) {
+        const selectedPlan = premium.premiumPlans[planId];
+        if (!selectedPlan || currentPlanId === planId) return;
+        loggedInUser = await latestCurrentUser();
+        if (!loggedInUser) {
+            loginForPlan(planId);
+            return;
+        }
+        if (!paddle) throw new Error("Paddle checkout is not initialized.");
+        openPaymentMethodModal(planId);
     }
 
-    async function openPlan(planId, trigger = null) {
-        const plan = premium.premiumPlans[planId];
-        if (!plan) return;
-
-        const user = await latestCurrentUser() || currentUser();
-        const currentPlanId = activePlanId(user);
-        if (currentPlanId) {
-            renderPage(currentPlanId);
-            return;
-        }
-
-        if (!user) {
-            loginForPlan(plan.id);
-            return;
-        }
-        manualModal.open(plan, user, trigger);
+    function openPaddleCheckout(planId) {
+        const selectedPlan = premium.premiumPlans[planId];
+        if (!selectedPlan || !loggedInUser || !paddle) throw new Error("Paddle checkout is not initialized.");
+        const priceId = paddleConfig.priceIds[planId];
+        paddle.Checkout.open({
+            items: [{ priceId, quantity: 1 }],
+            settings: {
+                displayMode: "overlay",
+                variant: "one-page",
+                successUrl: `${window.location.origin}/welcome`
+            },
+            ...(loggedInUser.email ? { customer: { email: loggedInUser.email } } : {}),
+            customData: {
+                userId: loggedInUser.id,
+                plan: selectedPlan.name.toLowerCase()
+            }
+        });
     }
 
     async function init() {
-        const user = await latestCurrentUser();
-        renderPage(activePlanId(user));
-
         root.addEventListener("click", (event) => {
-            const planButton = event.target.closest("[data-plan]");
-            if (!planButton) return;
-            openPlan(planButton.dataset.plan, planButton);
+            if (!(event.target instanceof Element)) return;
+            const currencyButton = event.target.closest("[data-currency]");
+            if (currencyButton instanceof HTMLButtonElement) {
+                selectedCurrency = currencyButton.dataset.currency === "UZS" ? "UZS" : "USD";
+                localStorage.setItem("ieltsx-pricing-currency", selectedCurrency);
+                render();
+                return;
+            }
+            const button = event.target.closest("[data-plan]");
+            if (button instanceof HTMLButtonElement && !button.disabled) {
+                choosePlan(button.dataset.plan).catch((error) => {
+                    initializationError = error.message || "Checkout could not be opened.";
+                    render();
+                });
+                return;
+            }
+
+            if (event.target.closest("[data-close-payment-method]")) {
+                closePaymentMethodModal();
+                return;
+            }
+
+            if (event.target.closest("[data-close-manual-payment]")) {
+                closeManualPaymentModal();
+                return;
+            }
+
+            if (event.target.closest("[data-copy-card]")) {
+                copyText(paddleConfig.manualPayment.cardNumber).then(() => setManualPaymentStatus("Card number copied."));
+                return;
+            }
+
+            if (event.target.closest("[data-copy-payment-details]") && selectedManualPlanId) {
+                copyText(manualPaymentDetails(selectedManualPlanId)).then(() => setManualPaymentStatus("Payment details copied."));
+                return;
+            }
+
+            const paymentMethod = event.target.closest("[data-payment-method]");
+            if (!(paymentMethod instanceof HTMLButtonElement) || !selectedPaymentPlanId) return;
+            const planId = selectedPaymentPlanId;
+            closePaymentMethodModal();
+            if (paymentMethod.dataset.paymentMethod === "global") {
+                openPaddleCheckout(planId);
+            } else if (paymentMethod.dataset.paymentMethod === "manual") {
+                window.setTimeout(() => openManualPaymentModal(planId), 170);
+            }
         });
 
-        window.setTimeout(() => {
-            const planId = new URLSearchParams(window.location.search).get("plan");
-            if (planId && premium.premiumPlans[planId] && currentUser() && activePlanId(currentUser()) !== planId) {
-                openPlan(planId);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closePaymentMethodModal();
+                closeManualPaymentModal();
             }
-        }, 450);
+        });
+
+        try {
+            [loggedInUser, paddleConfig] = await Promise.all([latestCurrentUser(), fetchPaddleConfig()]);
+            currentPlanId = activePlanId(loggedInUser);
+            render();
+            paddle = await initializePaddle({
+                token: paddleConfig.clientToken,
+                environment: paddleConfig.environment
+            });
+            if (!paddle) throw new Error("Paddle initialization failed.");
+            await loadLocalizedPrices();
+        } catch (error) {
+            initializationError = error.message || "Paddle initialization failed.";
+        }
+        render();
+
+        const requestedPlanId = new URLSearchParams(window.location.search).get("plan");
+        if (requestedPlanId && planIds.includes(requestedPlanId) && loggedInUser && currentPlanId !== requestedPlanId && paddle) {
+            choosePlan(requestedPlanId).catch(() => {});
+        }
     }
 
     init();

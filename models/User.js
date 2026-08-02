@@ -121,12 +121,14 @@ const userSchema = new mongoose.Schema({
     },
     subscriptionStatus: {
         type: String,
-        enum: ["free", "active", "expired", "cancelled"],
+        enum: ["free", "active", "trialing", "past_due", "paused", "canceled", "cancelled", "expired"],
         default: "free"
     },
     subscriptionStartedAt: { type: Date, default: null },
     subscriptionExpiresAt: { type: Date, default: null },
     subscriptionAdminNote: { type: String, default: "" },
+    paddleCustomerId: { type: String, default: null, index: true, sparse: true },
+    paddleSubscriptionId: { type: String, default: null, index: true, sparse: true },
     authProviders: {
         type: [String],
         default: []

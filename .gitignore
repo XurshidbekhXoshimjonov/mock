@@ -142,3 +142,4 @@ google-credentials*.json
 *google-application-credentials*.json
 service-account*.json
 .env*
+!.env.example

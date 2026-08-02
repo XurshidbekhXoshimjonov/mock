@@ -4,9 +4,9 @@
     if (root) root.IELTSXPremium = api;
 }(typeof window !== "undefined" ? window : null, function () {
     const premiumPlans = Object.freeze({
-        monthly: Object.freeze({ id: "monthly", name: "Monthly Premium", durationDays: 30, price: 50000, billing: "30 days of Premium access" }),
-        threeMonths: Object.freeze({ id: "threeMonths", name: "Three-Month Premium", durationDays: 90, price: 120000, billing: "90 days of Premium access" }),
-        annual: Object.freeze({ id: "annual", name: "Annual Premium", durationDays: 365, price: 500000, billing: "365 days of Premium access", bestValue: true })
+        monthly: Object.freeze({ id: "monthly", name: "Starter", durationDays: 30, billing: "30 days of Premium access", rank: 0 }),
+        threeMonths: Object.freeze({ id: "threeMonths", name: "Accelerator", durationDays: 90, billing: "90 days of Premium access", rank: 1, bestValue: true }),
+        annual: Object.freeze({ id: "annual", name: "Mastery", durationDays: 365, billing: "365 days of Premium access", rank: 2 })
     });
 
     const subscriptionFeatures = Object.freeze({
@@ -101,7 +101,7 @@
         const source = user || {};
         if (source.isPremium !== true) return false;
         const status = String(source.subscriptionStatus || "").trim().toLowerCase();
-        if (status === "cancelled" || status === "free" || status === "expired") return false;
+        if (["cancelled", "canceled", "paused", "past_due", "free", "expired"].includes(status)) return false;
 
         const expiresAt = safeDate(source.premiumExpiresAt || source.subscriptionExpiresAt || source.premiumUntil);
         if (!expiresAt) return true;
@@ -116,7 +116,7 @@
         const markedPremium = source.isPremium === true;
         const hasAccess = hasPremiumAccess(source);
         let status = hasAccess ? "active" : (markedPremium && expiresAt && expiresAt.getTime() <= Date.now() ? "expired" : rawStatus || "free");
-        if (!["free", "active", "expired", "cancelled"].includes(status)) status = hasAccess ? "active" : "free";
+        if (!["free", "active", "trialing", "past_due", "paused", "canceled", "cancelled", "expired"].includes(status)) status = hasAccess ? "active" : "free";
         const remainingDays = status === "active" && expiresAt
             ? Math.max(0, Math.ceil((expiresAt.getTime() - Date.now()) / 86400000))
             : null;
@@ -126,7 +126,7 @@
         return {
             isPremium: hasAccess,
             status,
-            statusLabel: status === "free" ? "Free" : status.charAt(0).toUpperCase() + status.slice(1),
+            statusLabel: status === "free" ? "Free" : status.replace("_", " ").replace(/^./, (letter) => letter.toUpperCase()),
             planId,
             planName: plan ? plan.name : (hasAccess ? "Premium" : "Free"),
             startedAt,
@@ -156,8 +156,8 @@
     }
 
     function subscriptionStatusBadge(status) {
-        const normalized = ["free", "active", "expired", "cancelled"].includes(status) ? status : "free";
-        const label = normalized === "free" ? "Free" : normalized.charAt(0).toUpperCase() + normalized.slice(1);
+        const normalized = ["free", "active", "trialing", "past_due", "paused", "canceled", "cancelled", "expired"].includes(status) ? status : "free";
+        const label = normalized === "free" ? "Free" : normalized.replace("_", " ").replace(/^./, (letter) => letter.toUpperCase());
         return `<span class="subscription-status subscription-status--${normalized}">${label}</span>`;
     }
 

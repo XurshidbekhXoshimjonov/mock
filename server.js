@@ -29,7 +29,7 @@ const { createFullTestStore } = require("./lib/full-test-store");
 const { registerFullTestRoutes } = require("./lib/full-test-routes");
 const { registerWritingRoutes } = require("./lib/writing-routes");
 const { registerSpeakingRoutes } = require("./lib/speaking-routes");
-const { premiumPlans, hasPremiumAccess, canAccessSubscriptionFeature } = require("./premium-config");
+const { premiumPlans, manualPaymentConfig, hasPremiumAccess, canAccessSubscriptionFeature } = require("./premium-config");
 const { createUserProgressStore } = require("./lib/user-progress-store");
 const { createReviewMistakeStore } = require("./lib/review-mistake-store");
 const { createVocabularyStore } = require("./lib/vocabulary-store");
@@ -55,6 +55,8 @@ const {
     transcriptEvidence
 } = require("./lib/listening-transcript");
 const { createCsrfProtection } = require("./lib/csrf-protection");
+const { registerPaddleWebhookRoute } = require("./lib/paddle-webhooks");
+const { registerPaddlePortalRoutes } = require("./lib/paddle-portal-routes");
 const {
     runtimeNamespace,
     resolveRuntimeDataDir,
@@ -143,7 +145,6 @@ const aiCoachStore = createAICoachStore({
     AIMemory,
     AIActionLog
 });
-const MANUAL_PAYMENT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000;
 const TESTS_FILE = path.join(DATA_DIR, "tests.json");
 const MOCK_TESTS_FILE = path.join(DATA_DIR, "mock-tests.json");
 const MOCK_TEST_RESULTS_FILE = runtimeDataFile("mock-test-results.json");
@@ -344,6 +345,8 @@ const candidatePhotoUpload = multer({
     }
 });
 
+// Paddle must receive the exact bytes it signed. Register this before JSON and CSRF middleware.
+registerPaddleWebhookRoute(app);
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(createCsrfProtection({
@@ -4560,6 +4563,7 @@ function requireAdmin(req, res, next) {
 }
 
 const requireUser = requireAuth;
+registerPaddlePortalRoutes(app, requireUser);
 
 function requirePageAuth(req, res, next) {
     if (!req.user) {
@@ -4986,6 +4990,62 @@ app.get("/profile/subscription", requirePageAuth, (req, res) => {
 app.get("/premium", requirePageAuth, (req, res) => {
     setNoStorePageHeaders(res);
     res.sendFile(path.join(ROOT_DIR, "premium.html"));
+});
+
+function getPaddleSandboxClientConfig(req) {
+    const environment = String(process.env.NEXT_PUBLIC_PADDLE_ENV || "").trim();
+    const clientToken = String(process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || "").trim();
+    const priceIds = {
+        monthly: String(process.env.NEXT_PUBLIC_PADDLE_STARTER_PRICE_ID || "").trim(),
+        threeMonths: String(process.env.NEXT_PUBLIC_PADDLE_ACCELERATOR_PRICE_ID || "").trim(),
+        annual: String(process.env.NEXT_PUBLIC_PADDLE_MASTERY_PRICE_ID || "").trim()
+    };
+    if (!environment) throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV is required.");
+    if (environment !== "sandbox") throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV must be sandbox.");
+    if (!clientToken) throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_CLIENT_TOKEN is required.");
+    if (!clientToken.startsWith("test_")) throw new Error("Paddle configuration error: the client token must be a sandbox test token.");
+    const priceEnvironmentNames = {
+        monthly: "NEXT_PUBLIC_PADDLE_STARTER_PRICE_ID",
+        threeMonths: "NEXT_PUBLIC_PADDLE_ACCELERATOR_PRICE_ID",
+        annual: "NEXT_PUBLIC_PADDLE_MASTERY_PRICE_ID"
+    };
+    for (const [planId, priceId] of Object.entries(priceIds)) {
+        if (!/^pri_[a-z\d]{26}$/.test(priceId)) throw new Error(`Paddle configuration error: ${priceEnvironmentNames[planId]} must be a valid sandbox price ID.`);
+    }
+    const manualPlanAmounts = {
+        monthly: String(process.env.MANUAL_PAYMENT_STARTER_UZS || "").trim(),
+        threeMonths: String(process.env.MANUAL_PAYMENT_ACCELERATOR_UZS || "").trim(),
+        annual: String(process.env.MANUAL_PAYMENT_MASTERY_UZS || "").trim()
+    };
+    for (const [planId, amount] of Object.entries(manualPlanAmounts)) {
+        if (!/^\d+$/.test(amount) || Number(amount) <= 0) throw new Error(`Manual payment configuration error: a positive UZS amount is required for ${planId}.`);
+    }
+    const headerCountry = String(req.get("x-vercel-ip-country") || "").trim().toUpperCase();
+    return {
+        environment,
+        clientToken,
+        priceIds,
+        manualPayment: { ...manualPaymentConfig, planAmounts: manualPlanAmounts },
+        ...(/^[A-Z]{2}$/.test(headerCountry) ? { countryCode: headerCountry } : {})
+    };
+}
+
+app.get("/api/paddle/config", requireUser, (req, res) => {
+    res.setHeader("Cache-Control", "no-store");
+    try {
+        res.json(getPaddleSandboxClientConfig(req));
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get("/vendor/paddle.js", (req, res) => {
+    res.sendFile(path.join(ROOT_DIR, "node_modules", "@paddle", "paddle-js", "dist", "index.esm.js"));
+});
+
+app.get("/welcome", requirePageAuth, (req, res) => {
+    setNoStorePageHeaders(res);
+    res.sendFile(path.join(ROOT_DIR, "welcome.html"));
 });
 
 app.get("/my-results", requirePageAuth, (req, res) => {
@@ -6384,60 +6444,7 @@ function manualPaymentResponse(request) {
 }
 
 app.post("/api/premium/manual-payment-requests", requireUser, async (req, res) => {
-    try {
-        if (mongoose.connection.readyState !== 1) {
-            return res.status(503).json({ error: "Manual payment requests require the database connection" });
-        }
-
-        const userId = String(req.user?.id || "");
-        if (!userId) {
-            return res.status(400).json({ error: "A valid account is required" });
-        }
-
-        const planId = String(req.body?.planId || "").trim();
-        const plan = premiumPlans[planId];
-        if (!plan) {
-            return res.status(400).json({ error: "A valid Premium plan is required" });
-        }
-
-        const duplicateSince = new Date(Date.now() - MANUAL_PAYMENT_DUPLICATE_WINDOW_MS);
-        const existing = await ManualPaymentRequest.findOne({
-            userId,
-            planId,
-            status: "pending",
-            createdAt: { $gte: duplicateSince }
-        }).sort({ createdAt: -1 });
-
-        if (existing) {
-            return res.json({
-                success: true,
-                duplicate: true,
-                request: manualPaymentResponse(existing)
-            });
-        }
-
-        const request = await ManualPaymentRequest.create({
-            userId,
-            userEmail: String(req.user.email || "").trim().toLowerCase(),
-            userName: String(req.user.name || req.user.username || "").trim(),
-            planId,
-            planName: plan.name,
-            amount: plan.price,
-            currency: "UZS",
-            paymentMethod: "manual_card",
-            status: "pending",
-            cardLastFour: "0011"
-        });
-
-        res.status(201).json({
-            success: true,
-            duplicate: false,
-            request: manualPaymentResponse(request)
-        });
-    } catch (error) {
-        console.error("Manual payment request error:", error);
-        res.status(500).json({ error: "Could not create manual payment request" });
-    }
+    res.status(410).json({ error: "Manual Premium payments are no longer available. Use Paddle Sandbox checkout." });
 });
 
 app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
