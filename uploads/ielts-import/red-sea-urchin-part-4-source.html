@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Red Sea Urchin — Questions 31–40</title>
+  <style>
+    :root {
+      --text: #111827;
+      --border: #8a94a6;
+      --focus: #2563eb;
+      --correct: #00a43b;
+      --incorrect: #ef4444;
+      --soft-correct: #ecfdf3;
+      --soft-incorrect: #fff1f2;
+      --bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    main {
+      width: 100%;
+      padding: 10px 20px 44px;
+    }
+
+    .questions-title {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .instructions { margin: 0 0 14px; }
+    .instructions strong { font-weight: 700; }
+
+    .topic-title {
+      margin: 10px 0 24px;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    section { margin-top: 20px; }
+
+    section h2 {
+      margin: 0 0 14px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .lead { margin: 0 0 10px; }
+
+    ul {
+      margin: 0;
+      padding-left: 42px;
+    }
+
+    li {
+      margin: 12px 0;
+      padding-left: 1px;
+    }
+
+    .answer {
+      display: inline-block;
+      width: 200px;
+      height: 30px;
+      margin: 0 7px;
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #fff;
+      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+      outline: none;
+    }
+
+    .answer:focus {
+      border-color: var(--focus);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
+    }
+
+    .answer.correct {
+      border-color: var(--correct);
+      background: var(--soft-correct);
+    }
+
+    .answer.incorrect {
+      border-color: var(--incorrect);
+      background: var(--soft-incorrect);
+    }
+
+    .feedback {
+      display: none;
+      margin-left: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .feedback.show { display: inline; }
+    .feedback.correct { color: var(--correct); }
+    .feedback.incorrect { color: var(--incorrect); }
+
+    .study-heading { margin: 8px 0 12px; }
+    .group-label { margin: 0 0 7px; }
+    .research { margin-top: 25px; }
+    .radio-carbon { margin-top: 24px; }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 11px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .check-btn {
+      background: #111827;
+      color: #fff;
+    }
+
+    .reset-btn {
+      background: #eef2f7;
+      color: #111827;
+    }
+
+    #score {
+      margin-left: 4px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      main { padding: 12px 14px 28px; }
+      .topic-title { margin-bottom: 18px; }
+      ul { padding-left: 28px; }
+      li { margin: 15px 0; }
+
+      .answer {
+        width: min(200px, 65vw);
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+
+      .feedback {
+        display: block;
+        margin: 5px 0 0 7px;
+      }
+
+      .feedback:not(.show) { display: none; }
+
+      .actions {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="questions-title">Questions 31–40</p>
+
+    <p class="instructions">
+      Complete the notes. Write <strong>THREE WORDS AND/OR A NUMBER</strong> for each answer.
+    </p>
+
+    <h1 class="topic-title">The Red Sea Urchin</h1>
+
+    <section aria-labelledby="background-heading">
+      <h2 id="background-heading">Background</h2>
+      <p class="lead">The red sea urchin:</p>
+
+      <ul>
+        <li>
+          feeds on
+          <input class="answer" type="text" name="q31" aria-label="Question 31" placeholder="31" autocomplete="off" />
+          <span class="feedback" id="feedback-q31"></span>
+        </li>
+
+        <li>
+          is covered in
+          <input class="answer" type="text" name="q32" aria-label="Question 32" placeholder="32" autocomplete="off" />
+          that protect it.
+          <span class="feedback" id="feedback-q32"></span>
+        </li>
+
+        <li>
+          used to be regarded as a
+          <input class="answer" type="text" name="q33" aria-label="Question 33" placeholder="33" autocomplete="off" />
+          <span class="feedback" id="feedback-q33"></span>
+        </li>
+      </ul>
+
+      <p class="lead" style="margin-top: 8px;">From 1970s onwards:</p>
+
+      <ul>
+        <li>
+          it became clear that
+          <input class="answer" type="text" name="q34" aria-label="Question 34" placeholder="34" autocomplete="off" />
+          was an important market for red sea urchins
+          <span class="feedback" id="feedback-q34"></span>
+        </li>
+
+        <li>
+          scientific interest increased because of a
+          <input class="answer" type="text" name="q35" aria-label="Question 35" placeholder="35" autocomplete="off" />
+          in red sea urchin population
+          <span class="feedback" id="feedback-q35"></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="research" aria-labelledby="research-heading">
+      <h2 id="research-heading">Research findings</h2>
+
+      <p class="study-heading">Study based on biochemical techniques</p>
+      <p class="group-label">Red sea urchins :</p>
+
+      <ul>
+        <li>grow very slowly</li>
+
+        <li>
+          live a very long time (maximum life span: up to
+          <input class="answer" type="text" name="q36" aria-label="Question 36" placeholder="36" autocomplete="off" />
+          )
+          <span class="feedback" id="feedback-q36"></span>
+        </li>
+
+        <li>can be harvested only after 6-7 years</li>
+
+        <li>
+          after 22 years, only grow
+          <input class="answer" type="text" name="q37" aria-label="Question 37" placeholder="37" autocomplete="off" />
+          per year
+          <span class="feedback" id="feedback-q37"></span>
+        </li>
+      </ul>
+
+      <p class="study-heading radio-carbon">Study measuring radio carbon</p>
+
+      <ul>
+        <li>
+          no evidence of
+          <input class="answer" type="text" name="q38" aria-label="Question 38" placeholder="38" autocomplete="off" />
+          when sea urchins die
+          <span class="feedback" id="feedback-q38"></span>
+        </li>
+
+        <li>
+          they can still
+          <input class="answer" type="text" name="q39" aria-label="Question 39" placeholder="39" autocomplete="off" />
+          and grow when very old
+          <span class="feedback" id="feedback-q39"></span>
+        </li>
+
+        <li>
+          growth not connected to
+          <input class="answer" type="text" name="q40" aria-label="Question 40" placeholder="40" autocomplete="off" />
+          or other external factors
+          <span class="feedback" id="feedback-q40"></span>
+        </li>
+      </ul>
+    </section>
+
+    <div class="actions">
+      <button class="check-btn" type="button" onclick="checkAnswers()">Check answers</button>
+      <button class="reset-btn" type="button" onclick="resetTest()">Reset</button>
+      <span id="score" aria-live="polite"></span>
+    </div>
+  </main>
+
+  <script>
+    const answerKey = {
+      q31: ["plants"],
+      q32: ["spines"],
+      q33: ["pest"],
+      q34: ["asia"],
+      q35: ["decline"],
+      q36: ["200", "200 years"],
+      q37: ["0.1 centimeter", "0.1 centimetre", "0.1 cm"],
+      q38: ["aging", "ageing"],
+      q39: ["breed"],
+      q40: ["ocean conditions"]
+    };
+
+    function normalize(value) {
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(/[.,!?;:]+$/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function displayAnswer(answers) {
+      return answers.join(" / ");
+    }
+
+    function checkAnswers() {
+      let score = 0;
+
+      Object.entries(answerKey).forEach(([name, accepted]) => {
+        const input = document.querySelector(`[name="${name}"]`);
+        const feedback = document.getElementById(`feedback-${name}`);
+        const userAnswer = normalize(input.value);
+        const isCorrect = accepted.some(answer => normalize(answer) === userAnswer);
+
+        input.classList.remove("correct", "incorrect");
+        feedback.classList.remove("correct", "incorrect", "show");
+
+        if (isCorrect) {
+          score++;
+          input.classList.add("correct");
+          feedback.textContent = "✓ Correct";
+          feedback.classList.add("correct", "show");
+        } else {
+          input.classList.add("incorrect");
+          feedback.textContent = `✗ Correct answer: ${displayAnswer(accepted)}`;
+          feedback.classList.add("incorrect", "show");
+        }
+      });
+
+      document.getElementById("score").textContent = `Score: ${score}/10`;
+    }
+
+    function resetTest() {
+      document.querySelectorAll(".answer").forEach(input => {
+        input.value = "";
+        input.classList.remove("correct", "incorrect");
+      });
+
+      document.querySelectorAll(".feedback").forEach(feedback => {
+        feedback.textContent = "";
+        feedback.classList.remove("correct", "incorrect", "show");
+      });
+
+      document.getElementById("score").textContent = "";
+      document.querySelector('[name="q31"]').focus();
+    }
+  </script>
+</body>
+</html>
