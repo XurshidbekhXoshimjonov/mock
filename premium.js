@@ -8,6 +8,11 @@
         threeMonths: { name: "Accelerator", description: "Build faster IELTS progress", duration: "90 days", renewal: "Renews automatically every three months", badge: "Most Popular" },
         annual: { name: "Mastery", description: "Long-term access for serious preparation", duration: "365 days", renewal: "Renews automatically every year" }
     };
+    const checkoutPlanValues = Object.freeze({
+        monthly: "monthly",
+        threeMonths: "three_months",
+        annual: "yearly"
+    });
 
     let loggedInUser = null;
     let currentPlanId = "";
@@ -78,6 +83,16 @@
             return formatManualPrice(premium.manualPaymentConfig?.planAmounts?.[planId]);
         }
         return premium.checkoutPrices?.[planId] || "USD";
+    }
+
+    function identifiedCheckoutUrl(planId, user) {
+        const checkoutUrl = premium.checkoutUrls?.[planId];
+        if (!checkoutUrl || !user?.id || !user?.email || !checkoutPlanValues[planId]) return "";
+        const url = new URL(checkoutUrl);
+        url.searchParams.set("checkout[email]", String(user.email));
+        url.searchParams.set("checkout[custom][user_id]", String(user.id));
+        url.searchParams.set("checkout[custom][plan]", checkoutPlanValues[planId]);
+        return url.toString();
     }
 
     function currencyToggleMarkup() {
@@ -199,7 +214,9 @@
         const globalPaymentLink = document.getElementById("globalPaymentLink");
         if (globalAmount) globalAmount.textContent = premium.checkoutPrices?.[planId] || "USD";
         if (manualAmount) manualAmount.textContent = formatManualPrice(premium.manualPaymentConfig?.planAmounts?.[planId]);
-        if (globalPaymentLink instanceof HTMLAnchorElement) globalPaymentLink.href = premium.checkoutUrls?.[planId] || "/premium";
+        if (globalPaymentLink instanceof HTMLAnchorElement) {
+            globalPaymentLink.href = identifiedCheckoutUrl(planId, loggedInUser) || "/premium";
+        }
         modal.hidden = false;
         document.body.classList.add("premium-modal-open");
         window.requestAnimationFrame(() => {

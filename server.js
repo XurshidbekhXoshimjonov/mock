@@ -57,8 +57,8 @@ const {
     transcriptEvidence
 } = require("./lib/listening-transcript");
 const { createCsrfProtection } = require("./lib/csrf-protection");
-const { registerPaddleWebhookRoute } = require("./lib/paddle-webhooks");
-const { registerPaddlePortalRoutes } = require("./lib/paddle-portal-routes");
+const { registerLemonSqueezyWebhookRoute } = require("./lib/lemonsqueezy-webhook");
+const { isLemonSqueezyPremiumActive, effectivePremiumDates } = require("./lib/subscription-access");
 const {
     runtimeNamespace,
     resolveRuntimeDataDir,
@@ -347,8 +347,8 @@ const candidatePhotoUpload = multer({
     }
 });
 
-// Paddle must receive the exact bytes it signed. Register this before JSON and CSRF middleware.
-registerPaddleWebhookRoute(app);
+// Lemon Squeezy signs the exact request bytes, so this route must precede JSON and CSRF middleware.
+registerLemonSqueezyWebhookRoute(app, { userStore });
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(createCsrfProtection({
@@ -4565,7 +4565,6 @@ function requireAdmin(req, res, next) {
 }
 
 const requireUser = requireAuth;
-registerPaddlePortalRoutes(app, requireUser);
 
 function requirePageAuth(req, res, next) {
     if (!req.user) {
@@ -5595,6 +5594,12 @@ app.post("/api/profile/subscription/cancel", requireUser, async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
+        if (existingUser.lemonSqueezySubscriptionId) {
+            return res.status(409).json({
+                error: "Cancel this subscription from your Lemon Squeezy receipt or subscription management link. Premium remains active until Lemon Squeezy confirms the cancellation."
+            });
+        }
+
         const now = new Date();
         const updatedUser = await userStore.updateUser(String(userId), {
             plan: "free",
@@ -5602,9 +5607,8 @@ app.post("/api/profile/subscription/cancel", requireUser, async (req, res) => {
             premiumUntil: now,
             premiumExpiresAt: now,
             premiumCancelledAt: now,
-            subscriptionPlan: null,
-            subscriptionStatus: "cancelled",
-            subscriptionExpiresAt: now,
+            manualPremiumActive: false,
+            manualPremiumEndsAt: now,
             subscriptionAdminNote: String(req.body?.note || "Cancelled by user").trim().slice(0, 500)
         });
 
@@ -6410,7 +6414,7 @@ function manualPaymentResponse(request) {
 }
 
 app.post("/api/premium/manual-payment-requests", requireUser, async (req, res) => {
-    res.status(410).json({ error: "Manual Premium payments are no longer available. Use Paddle Sandbox checkout." });
+    res.status(410).json({ error: "Manual Premium payment requests are no longer accepted through this endpoint." });
 });
 
 app.post("/api/mock-test-assets/audio", requireAdmin, mockAudioUpload.single("audio"), validateUploadContents({ audio: "audio" }), (req, res) => {
@@ -7364,17 +7368,24 @@ app.put("/api/admin/manual-payments/:id/verify", requireAuth, adminOnly, async (
 
         const startDate = new Date();
         const expiryDate = new Date(startDate.getTime() + plan.durationDays * 86400000);
+        const manualGrantDates = effectivePremiumDates({
+            ...(typeof user.toObject === "function" ? user.toObject() : user),
+            manualPremiumActive: true,
+            manualPremiumStartsAt: startDate,
+            manualPremiumEndsAt: expiryDate
+        });
         const updatedUser = await userStore.updateUser(String(pendingRequest.userId), {
             plan: "premium",
             isPremium: true,
-            premiumUntil: expiryDate,
-            premiumActivatedAt: startDate,
-            premiumExpiresAt: expiryDate,
+            premiumUntil: manualGrantDates.expiresAt,
+            premiumActivatedAt: manualGrantDates.activatedAt || startDate,
+            premiumExpiresAt: manualGrantDates.expiresAt,
             premiumCancelledAt: null,
-            subscriptionPlan: plan.id,
-            subscriptionStatus: "active",
-            subscriptionStartedAt: startDate,
-            subscriptionExpiresAt: expiryDate,
+            manualPremiumActive: true,
+            manualPremiumPlan: plan.id,
+            manualPremiumStartsAt: startDate,
+            manualPremiumEndsAt: expiryDate,
+            manualPremiumNote: String(req.body?.adminNote || `Verified manual card payment ${verifiedRequest._id}`).trim().slice(0, 500),
             subscriptionAdminNote: String(req.body?.adminNote || `Verified manual card payment ${verifiedRequest._id}`).trim().slice(0, 500)
         });
 
@@ -7451,10 +7462,10 @@ app.get("/api/admin/users", requireAuth, adminOnly, async (req, res) => {
                 plan: user.plan || "free",
                 isPremium: isPremium,
                 premiumUntil: user.premiumUntil || null,
-                subscriptionPlan: user.subscriptionPlan || null,
+                subscriptionPlan: user.subscriptionPlan || user.manualPremiumPlan || null,
                 subscriptionStatus: isPremium ? "active" : (user.subscriptionStatus || "free"),
-                subscriptionStartedAt: user.subscriptionStartedAt || null,
-                subscriptionExpiresAt: user.subscriptionExpiresAt || user.premiumUntil || null,
+                subscriptionStartedAt: user.subscriptionStartedAt || user.manualPremiumStartsAt || null,
+                subscriptionExpiresAt: user.subscriptionEndsAt || user.subscriptionExpiresAt || user.manualPremiumEndsAt || user.premiumUntil || null,
                 subscriptionAdminNote: user.subscriptionAdminNote || "",
                 createdAt: user.createdAt || null,
                 lastLogin: user.lastLogin || null
@@ -7496,28 +7507,39 @@ app.put("/api/admin/users/:id/subscription", requireAuth, adminOnly, async (req,
             return res.status(400).json({ error: "Expiry date must be in the future" });
         }
 
+        const note = String(req.body?.note || "").trim().slice(0, 500);
+        const existingSource = typeof existingUser.toObject === "function" ? existingUser.toObject() : existingUser;
+        const lemonAccess = isLemonSqueezyPremiumActive(existingSource, now);
+        const sourceAfterManualChange = {
+            ...existingSource,
+            manualPremiumActive: !cancel,
+            manualPremiumStartsAt: cancel ? existingSource.manualPremiumStartsAt : startDate,
+            manualPremiumEndsAt: expiryDate
+        };
+        const combinedDates = effectivePremiumDates(sourceAfterManualChange);
         const updates = cancel ? {
-            plan: "free",
-            isPremium: false,
-            premiumUntil: expiryDate,
-            premiumExpiresAt: expiryDate,
+            plan: lemonAccess ? "premium" : "free",
+            isPremium: lemonAccess,
+            premiumUntil: combinedDates.expiresAt || (lemonAccess ? null : expiryDate),
+            premiumExpiresAt: combinedDates.expiresAt || (lemonAccess ? null : expiryDate),
             premiumCancelledAt: now,
-            subscriptionPlan: null,
-            subscriptionStatus: "cancelled",
-            subscriptionExpiresAt: expiryDate,
-            subscriptionAdminNote: String(req.body?.note || "").trim().slice(0, 500)
+            manualPremiumActive: false,
+            manualPremiumEndsAt: expiryDate,
+            manualPremiumNote: note,
+            subscriptionAdminNote: note
         } : {
             plan: "premium",
             isPremium: true,
-            premiumUntil: expiryDate,
-            premiumActivatedAt: startDate,
-            premiumExpiresAt: expiryDate,
+            premiumUntil: combinedDates.expiresAt,
+            premiumActivatedAt: combinedDates.activatedAt || startDate,
+            premiumExpiresAt: combinedDates.expiresAt,
             premiumCancelledAt: null,
-            subscriptionPlan: planId,
-            subscriptionStatus: "active",
-            subscriptionStartedAt: startDate,
-            subscriptionExpiresAt: expiryDate,
-            subscriptionAdminNote: String(req.body?.note || "").trim().slice(0, 500)
+            manualPremiumActive: true,
+            manualPremiumPlan: planId,
+            manualPremiumStartsAt: startDate,
+            manualPremiumEndsAt: expiryDate,
+            manualPremiumNote: note,
+            subscriptionAdminNote: note
         };
         const user = await userStore.updateUser(req.params.id, updates);
         if (!user) return res.status(404).json({ error: "User not found" });
@@ -8136,8 +8158,47 @@ async function runUserMigration() {
         }
     }
 
+    await runSubscriptionSourceMigration().catch(err => console.error("Premium source migration error:", err));
     await ensureReviewMistakeIndexes().catch(err => console.error("Review Mistakes index migration error:", err));
     await runTestTakerIdMigration().catch(err => console.error("Test Taker ID migration error:", err));
+}
+
+async function runSubscriptionSourceMigration() {
+    if (mongoose.connection.readyState === 1) {
+        const legacyPremiumUsers = await User.find({
+            isPremium: true,
+            lemonSqueezySubscriptionId: { $in: [null, ""] },
+            manualPremiumActive: { $ne: true }
+        });
+        for (const user of legacyPremiumUsers) {
+            await User.updateOne({ _id: user._id }, {
+                $set: {
+                    manualPremiumActive: true,
+                    manualPremiumPlan: user.subscriptionPlan || null,
+                    manualPremiumStartsAt: user.premiumActivatedAt || user.subscriptionStartedAt || null,
+                    manualPremiumEndsAt: user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil || null,
+                    manualPremiumNote: user.subscriptionAdminNote || "Migrated legacy Premium grant"
+                }
+            });
+        }
+        if (legacyPremiumUsers.length) console.info(`Separated ${legacyPremiumUsers.length} legacy manual Premium grants.`);
+        return;
+    }
+
+    if (!fs.existsSync(USERS_FILE)) return;
+    const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
+    let changed = false;
+    for (const user of users) {
+        if (user.isPremium === true && !user.lemonSqueezySubscriptionId && user.manualPremiumActive !== true) {
+            user.manualPremiumActive = true;
+            user.manualPremiumPlan = user.subscriptionPlan || null;
+            user.manualPremiumStartsAt = user.premiumActivatedAt || user.subscriptionStartedAt || null;
+            user.manualPremiumEndsAt = user.premiumExpiresAt || user.subscriptionExpiresAt || user.premiumUntil || null;
+            user.manualPremiumNote = user.subscriptionAdminNote || "Migrated legacy Premium grant";
+            changed = true;
+        }
+    }
+    if (changed) fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), "utf8");
 }
 
 async function ensureUserAuthIndexes(UserModel) {

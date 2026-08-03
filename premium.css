@@ -27,7 +27,6 @@ body.premium-page { margin:0; min-width:0; overflow-x:hidden; background:#f7f9fc
 .pricing-card__price { display:grid; gap:6px; padding:22px 0; }
 .pricing-card__price strong { color:var(--premium-navy); font-size:28px; letter-spacing:-.035em; }
 .pricing-card__price small { color:#4f607d; font-size:11px; line-height:1.5; }
-.paddle-error { margin:0 0 24px; padding:14px 16px; border:1px solid #fecaca; border-radius:14px; background:#fef2f2; color:#b42318; font-size:14px; font-weight:700; }
 .pricing-card ul { display:grid; gap:11px; margin:0 0 26px; padding:0; list-style:none; color:#34425e; font-size:13px; line-height:1.45; }
 .pricing-card li { display:flex; align-items:flex-start; gap:9px; }
 .pricing-card li span,.comparison-check { color:#16875c; font-weight:900; }

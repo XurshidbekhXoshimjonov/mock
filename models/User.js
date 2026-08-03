@@ -116,19 +116,29 @@ const userSchema = new mongoose.Schema({
     },
     subscriptionPlan: {
         type: String,
-        enum: ["monthly", "threeMonths", "annual", null],
+        enum: ["monthly", "threeMonths", "annual", "three_months", "yearly", null],
         default: null
     },
     subscriptionStatus: {
         type: String,
-        enum: ["free", "active", "trialing", "past_due", "paused", "canceled", "cancelled", "expired"],
         default: "free"
     },
     subscriptionStartedAt: { type: Date, default: null },
     subscriptionExpiresAt: { type: Date, default: null },
+    subscriptionRenewsAt: { type: Date, default: null },
+    subscriptionEndsAt: { type: Date, default: null },
     subscriptionAdminNote: { type: String, default: "" },
-    paddleCustomerId: { type: String, default: null, index: true, sparse: true },
-    paddleSubscriptionId: { type: String, default: null, index: true, sparse: true },
+    lemonSqueezySubscriptionId: { type: String, default: null, index: true, sparse: true },
+    lemonSqueezyCustomerId: { type: String, default: null, index: true, sparse: true },
+    lemonSqueezyVariantId: { type: String, default: null },
+    lemonSqueezyActivatedAt: { type: Date, default: null },
+    lemonSqueezyLastEventHash: { type: String, default: null },
+    lemonSqueezyLastEventAt: { type: Date, default: null },
+    manualPremiumActive: { type: Boolean, default: false },
+    manualPremiumPlan: { type: String, default: null },
+    manualPremiumStartsAt: { type: Date, default: null },
+    manualPremiumEndsAt: { type: Date, default: null },
+    manualPremiumNote: { type: String, default: "" },
     authProviders: {
         type: [String],
         default: []

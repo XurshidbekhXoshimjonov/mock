@@ -2204,24 +2204,6 @@
                 window.alert(error.message || "Could not cancel subscription");
             }
         }
-        async function openPaddlePortal() {
-            try {
-                const response = await fetch("/api/paddle/customer-portal", {
-                    method: "POST",
-                    credentials: "include",
-                    cache: "no-store",
-                    headers: { "Content-Type": "application/json" },
-                    body: "{}"
-                });
-                const data = await response.json().catch(() => ({}));
-                if (!response.ok || !data.url) {
-                    throw new Error(data.error || "Could not open the billing portal");
-                }
-                window.location.assign(data.url);
-            } catch (error) {
-                window.alert(error.message || "Could not open the billing portal");
-            }
-        }
         const rows = [
             ["Current plan", details.planName],
             ["Subscription status", details.statusLabel],
@@ -2243,9 +2225,7 @@
                 e("div", { className: "subscription-summary-grid" }, rows.map(([label, value]) => e("div", { key: label }, e("span", null, label), e("strong", null, value)))),
                 e("div", { className: "subscription-summary-actions" },
                     e("a", { href: "/premium", className: "subscription-primary-action" }, details.isPremium ? "Renew Plan" : "Upgrade Plan"),
-                    user.hasPaddleCustomer
-                        ? e("button", { type: "button", className: "subscription-secondary-action", onClick: openPaddlePortal }, "Manage billing in Paddle")
-                        : details.isPremium && e("button", { type: "button", className: "subscription-secondary-action", onClick: cancelSubscription }, "Cancel Subscription")
+                    details.isPremium && e("button", { type: "button", className: "subscription-secondary-action", onClick: cancelSubscription }, "Cancel Subscription")
                 ),
                 !details.isPremium && e("p", { className: "subscription-summary-note" }, "You are currently on the Free plan. Upgrade to unlock unlimited AI evaluations, complete history, and Premium materials.")
             )

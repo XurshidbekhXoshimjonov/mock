@@ -15,7 +15,8 @@ test("Review Mistakes and Vocabulary are Premium-only subscription features", ()
     assert.equal(premium.canAccessSubscriptionFeature({ isPremium: false }, "vocabulary"), false);
     assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true }, "reviewMistakes"), true);
     assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true }, "vocabulary"), true);
-    assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true, subscriptionStatus: "cancelled" }, "reviewMistakes"), false);
+    assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true, subscriptionStatus: "cancelled", subscriptionEndsAt: "2999-01-01T00:00:00.000Z" }, "reviewMistakes"), true);
+    assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true, subscriptionStatus: "expired" }, "reviewMistakes"), false);
     assert.equal(premium.canAccessSubscriptionFeature({ isPremium: true, premiumExpiresAt: "2020-01-01T00:00:00.000Z" }, "reviewMistakes"), false);
 });
 

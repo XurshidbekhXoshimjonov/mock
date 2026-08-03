@@ -7,9 +7,6 @@ const path = require("node:path");
 
 const root = path.join(__dirname, "..");
 const client = fs.readFileSync(path.join(root, "premium.js"), "utf8");
-const html = fs.readFileSync(path.join(root, "premium.html"), "utf8");
-const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
-const packageJson = require("../package.json");
 const config = require("../premium-config");
 
 test("Global Payment uses the selected plan's centralized Lemon Squeezy checkout URL", () => {
@@ -20,14 +17,12 @@ test("Global Payment uses the selected plan's centralized Lemon Squeezy checkout
     });
     assert.deepEqual(config.checkoutPrices, { monthly: "$5.99", threeMonths: "$15", annual: "$59.99" });
     assert.match(client, /<a class="payment-method__option payment-method__option--global" id="globalPaymentLink" href=""/);
-    assert.match(client, /globalPaymentLink\.href = premium\.checkoutUrls\?\.\[planId\]/);
+    assert.match(client, /globalPaymentLink\.href = identifiedCheckoutUrl\(planId, loggedInUser\)/);
+    assert.match(client, /url\.searchParams\.set\("checkout\[email\]"/);
+    assert.match(client, /url\.searchParams\.set\("checkout\[custom\]\[user_id\]"/);
+    assert.match(client, /url\.searchParams\.set\("checkout\[custom\]\[plan\]"/);
+    assert.match(client, /threeMonths: "three_months"/);
+    assert.match(client, /annual: "yearly"/);
     assert.match(client, /Pay securely with an international card via Visa\/Mastercard/);
     assert.doesNotMatch(client, /via Lemon Squeezy/);
-});
-
-test("Premium purchase UI no longer loads Paddle", () => {
-    assert.doesNotMatch(client, /Paddle|paddle|initializePaddle/);
-    assert.doesNotMatch(html, /paddle|@paddle\/paddle-js/i);
-    assert.doesNotMatch(server, /\/api\/paddle\/config|\/vendor\/paddle\.js/);
-    assert.equal(packageJson.dependencies["@paddle/paddle-js"], undefined);
 });

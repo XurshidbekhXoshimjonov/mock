@@ -44,8 +44,8 @@ test("CSP permits same-origin mock players while blocking external framing and p
     assert.match(CONTENT_SECURITY_POLICY, /fonts\.googleapis\.com/);
     assert.match(CONTENT_SECURITY_POLICY, /fonts\.gstatic\.com/);
     assert.match(CONTENT_SECURITY_POLICY, /media-src 'self' blob: https:/);
-    assert.match(CONTENT_SECURITY_POLICY, /script-src[^;]+cdn\.paddle\.com/);
-    assert.match(CONTENT_SECURITY_POLICY, /frame-src[^;]+\*\.paddle\.com/);
+    assert.match(CONTENT_SECURITY_POLICY, /script-src 'self' 'unsafe-inline'/);
+    assert.match(CONTENT_SECURITY_POLICY, /frame-src 'self'/);
     assert.doesNotMatch(CONTENT_SECURITY_POLICY, /default-src \*/);
 });
 
@@ -53,7 +53,7 @@ test("permissions policy keeps IELTS microphone and camera flows but denies unre
     assert.match(PERMISSIONS_POLICY, /microphone=\(self\)/);
     assert.match(PERMISSIONS_POLICY, /camera=\(self\)/);
     assert.match(PERMISSIONS_POLICY, /geolocation=\(\)/);
-    assert.match(PERMISSIONS_POLICY, /payment=\(self "https:\/\/\*\.paddle\.com"\)/);
+    assert.match(PERMISSIONS_POLICY, /payment=\(self\)/);
     assert.match(PERMISSIONS_POLICY, /usb=\(\)/);
 });
 

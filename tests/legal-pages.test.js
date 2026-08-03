@@ -34,17 +34,17 @@ test("terms use the required pricing and independent-platform language", () => {
     assert.match(html, /These Terms of Service govern your access to and use of IELTSX, including its website, user accounts/);
     assert.match(html, /Contact IELTSX/);
     assert.match(html, /not affiliated with, endorsed by, sponsored by, or operated by the British Council/);
-    assert.match(html, /Starter: USD \$5, billed every month/);
-    assert.match(html, /Accelerator: USD \$12, billed every three months/);
-    assert.match(html, /Mastery: USD \$50, billed every year/);
+    assert.match(html, /Starter: USD \$5\.99, billed every month/);
+    assert.match(html, /Accelerator: USD \$15, billed every three months/);
+    assert.match(html, /Mastery: USD \$59\.99, billed every year/);
     assert.match(html, /Subscriptions automatically renew until canceled/);
 });
 
-test("privacy uses provider-neutral wording except for Paddle payments", () => {
+test("privacy uses provider-neutral wording except for Lemon Squeezy payments", () => {
     const html = renderLegalPage(legalPages.privacy);
     assert.match(html, /This Privacy Policy explains how IELTSX collects, uses, stores, and protects personal information when you use the IELTSX website, accounts/);
     assert.match(html, /trusted service providers/);
-    assert.match(html, /Paddle processes payments made through Paddle Checkout/);
+    assert.match(html, /Lemon Squeezy processes payments made through Lemon Squeezy Checkout/);
     for (const provider of ["Google", "Render", "MongoDB", "OpenAI"]) {
         assert.ok(!html.includes(provider), `privacy unexpectedly names ${provider}`);
     }

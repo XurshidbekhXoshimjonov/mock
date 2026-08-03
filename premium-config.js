@@ -85,7 +85,9 @@
 
     function inferSubscriptionPlanId(user) {
         const source = user || {};
-        const explicitPlanId = String(source.subscriptionPlan || "").trim();
+        const explicitPlanAliases = { three_months: "threeMonths", yearly: "annual" };
+        const rawPlanId = String(source.subscriptionPlan || source.manualPremiumPlan || "").trim();
+        const explicitPlanId = explicitPlanAliases[rawPlanId] || rawPlanId;
         if (premiumPlans[explicitPlanId]) {
             const startedAt = safeDate(source.premiumActivatedAt || source.subscriptionStartedAt);
             const expiresAt = safeDate(source.premiumExpiresAt || source.subscriptionExpiresAt || source.premiumUntil);
@@ -111,9 +113,15 @@
 
     function hasPremiumAccess(user) {
         const source = user || {};
+        const manualEndsAt = safeDate(source.manualPremiumEndsAt);
+        if (source.manualPremiumActive === true && (!manualEndsAt || manualEndsAt.getTime() > Date.now())) return true;
         if (source.isPremium !== true) return false;
         const status = String(source.subscriptionStatus || "").trim().toLowerCase();
-        if (["cancelled", "canceled", "paused", "past_due", "free", "expired"].includes(status)) return false;
+        if (status === "expired") return false;
+        if (["cancelled", "canceled"].includes(status)) {
+            const endsAt = safeDate(source.subscriptionEndsAt || source.subscriptionExpiresAt || source.premiumExpiresAt || source.premiumUntil);
+            return !endsAt || endsAt.getTime() > Date.now();
+        }
 
         const expiresAt = safeDate(source.premiumExpiresAt || source.subscriptionExpiresAt || source.premiumUntil);
         if (!expiresAt) return true;
