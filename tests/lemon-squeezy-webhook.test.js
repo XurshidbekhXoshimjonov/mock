@@ -126,6 +126,11 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
             async findUserById(id) {
                 return id === "user-1" ? { id, email: "student@example.com" } : null;
             },
+            async findUserByLemonSqueezySubscriptionId(subscriptionId) {
+                return subscriptionId === "sub_123"
+                    ? { id: "user-1", lemonSqueezySubscriptionId: "sub_123", subscriptionStatus: "active" }
+                    : null;
+            },
             async updateUser(id, updates) {
                 saved.push({ id, updates });
                 return { id, ...updates };
@@ -160,6 +165,43 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
         assert.equal(saved.length, 1);
         assert.equal(saved[0].id, "user-1");
         assert.equal(saved[0].updates.isPremium, true);
+
+        const laterPayload = payload("subscription_updated");
+        delete laterPayload.meta.custom_data.user_id;
+        const laterBody = JSON.stringify(laterPayload);
+        const laterSignature = crypto.createHmac("sha256", "webhook-secret").update(Buffer.from(laterBody)).digest("hex");
+        const linkedBySubscription = await fetch(baseUrl, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-signature": laterSignature },
+            body: laterBody
+        });
+        assert.equal(linkedBySubscription.status, 200);
+        assert.equal(saved.length, 2);
+
+        laterPayload.data.id = "unlinked_old_subscription";
+        const oldBody = JSON.stringify(laterPayload);
+        const oldSignature = crypto.createHmac("sha256", "webhook-secret").update(Buffer.from(oldBody)).digest("hex");
+        const ignored = await fetch(baseUrl, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-signature": oldSignature },
+            body: oldBody
+        });
+        assert.equal(ignored.status, 200);
+        assert.equal((await ignored.json()).ignored, true);
+        assert.equal(saved.length, 2);
+
+        const unlinkedCreatedPayload = payload("subscription_created");
+        delete unlinkedCreatedPayload.meta.custom_data.user_id;
+        const unlinkedCreatedBody = JSON.stringify(unlinkedCreatedPayload);
+        const unlinkedCreatedSignature = crypto.createHmac("sha256", "webhook-secret").update(Buffer.from(unlinkedCreatedBody)).digest("hex");
+        const ignoredCreated = await fetch(baseUrl, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-signature": unlinkedCreatedSignature },
+            body: unlinkedCreatedBody
+        });
+        assert.equal(ignoredCreated.status, 200);
+        assert.equal((await ignoredCreated.json()).ignored, true);
+        assert.equal(saved.length, 2);
     } finally {
         await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
     }

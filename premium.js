@@ -43,6 +43,19 @@
         return currentUser();
     }
 
+    async function authenticatedCheckoutUser() {
+        if (!window.authClient?.fetchAuthMe) return currentUser();
+        try {
+            const result = await window.authClient.fetchAuthMe();
+            const user = result?.data?.user || null;
+            if (!result?.ok || !user) return null;
+            window.authClient?.saveAuth?.({ user });
+            return user;
+        } catch {
+            return null;
+        }
+    }
+
     function formatCardNumber(value) {
         return String(value || "").replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
     }
@@ -87,12 +100,28 @@
 
     function identifiedCheckoutUrl(planId, user) {
         const checkoutUrl = premium.checkoutUrls?.[planId];
-        if (!checkoutUrl || !user?.id || !user?.email || !checkoutPlanValues[planId]) return "";
+        const userId = String(user?._id || user?.id || user?.userId || "").trim();
+        const email = String(user?.email || "").trim();
+        if (!checkoutUrl || !userId || !email || !checkoutPlanValues[planId]) return "";
         const url = new URL(checkoutUrl);
-        url.searchParams.set("checkout[email]", String(user.email));
-        url.searchParams.set("checkout[custom][user_id]", String(user.id));
+        url.searchParams.set("checkout[email]", email);
+        url.searchParams.set("checkout[custom][user_id]", userId);
         url.searchParams.set("checkout[custom][plan]", checkoutPlanValues[planId]);
         return url.toString();
+    }
+
+    async function redirectToGlobalCheckout(planId) {
+        loggedInUser = await authenticatedCheckoutUser();
+        if (!loggedInUser) {
+            loginForPlan(planId);
+            return;
+        }
+        const checkoutUrl = identifiedCheckoutUrl(planId, loggedInUser);
+        if (!checkoutUrl) {
+            window.alert("Your account ID or email is unavailable. Please sign in again before checkout.");
+            return;
+        }
+        window.location.href = checkoutUrl;
     }
 
     function currencyToggleMarkup() {
@@ -214,9 +243,7 @@
         const globalPaymentLink = document.getElementById("globalPaymentLink");
         if (globalAmount) globalAmount.textContent = premium.checkoutPrices?.[planId] || "USD";
         if (manualAmount) manualAmount.textContent = formatManualPrice(premium.manualPaymentConfig?.planAmounts?.[planId]);
-        if (globalPaymentLink instanceof HTMLAnchorElement) {
-            globalPaymentLink.href = identifiedCheckoutUrl(planId, loggedInUser) || "/premium";
-        }
+        if (globalPaymentLink instanceof HTMLAnchorElement) globalPaymentLink.href = "/premium";
         modal.hidden = false;
         document.body.classList.add("premium-modal-open");
         window.requestAnimationFrame(() => {
@@ -354,6 +381,15 @@
 
             if (event.target.closest("[data-copy-payment-details]") && selectedManualPlanId) {
                 copyText(manualPaymentDetails(selectedManualPlanId)).then(() => setManualPaymentStatus("Payment details copied."));
+                return;
+            }
+
+            const globalPaymentMethod = event.target.closest('[data-payment-method="global"]');
+            if (globalPaymentMethod instanceof HTMLAnchorElement && selectedPaymentPlanId) {
+                event.preventDefault();
+                redirectToGlobalCheckout(selectedPaymentPlanId).catch(() => {
+                    window.alert("Checkout could not be opened. Please try again.");
+                });
                 return;
             }
 

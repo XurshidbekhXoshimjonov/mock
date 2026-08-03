@@ -17,7 +17,11 @@ test("Global Payment uses the selected plan's centralized Lemon Squeezy checkout
     });
     assert.deepEqual(config.checkoutPrices, { monthly: "$5.99", threeMonths: "$15", annual: "$59.99" });
     assert.match(client, /<a class="payment-method__option payment-method__option--global" id="globalPaymentLink" href=""/);
-    assert.match(client, /globalPaymentLink\.href = identifiedCheckoutUrl\(planId, loggedInUser\)/);
+    assert.match(client, /const userId = String\(user\?\._id \|\| user\?\.id \|\| user\?\.userId/);
+    assert.match(client, /const checkoutUrl = identifiedCheckoutUrl\(planId, loggedInUser\)/);
+    assert.match(client, /loggedInUser = await authenticatedCheckoutUser\(\)/);
+    assert.match(client, /window\.location\.href = checkoutUrl/);
+    assert.match(client, /event\.preventDefault\(\)/);
     assert.match(client, /url\.searchParams\.set\("checkout\[email\]"/);
     assert.match(client, /url\.searchParams\.set\("checkout\[custom\]\[user_id\]"/);
     assert.match(client, /url\.searchParams\.set\("checkout\[custom\]\[plan\]"/);
