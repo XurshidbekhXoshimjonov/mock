@@ -16,7 +16,6 @@
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^5.2.8",
     "@google-cloud/translate": "^9.4.2",
-    "@paddle/paddle-js": "^1.6.4",
     "@paddle/paddle-node-sdk": "^3.8.0",
     "bcryptjs": "^3.0.3",
     "cheerio": "^1.2.0",

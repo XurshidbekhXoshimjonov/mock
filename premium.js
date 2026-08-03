@@ -1,5 +1,3 @@
-import { initializePaddle } from "@paddle/paddle-js";
-
 (function () {
     const root = document.getElementById("premiumRoot");
     const premium = window.IELTSXPremium;
@@ -11,12 +9,8 @@ import { initializePaddle } from "@paddle/paddle-js";
         annual: { name: "Mastery", description: "Long-term access for serious preparation", duration: "365 days", renewal: "Renews automatically every year" }
     };
 
-    let paddle = null;
-    let paddleConfig = null;
-    let localizedPrices = {};
     let loggedInUser = null;
     let currentPlanId = "";
-    let initializationError = "";
     let selectedPaymentPlanId = "";
     let selectedManualPlanId = "";
     let selectedCurrency = localStorage.getItem("ieltsx-pricing-currency") === "UZS" ? "UZS" : "USD";
@@ -79,41 +73,11 @@ import { initializePaddle } from "@paddle/paddle-js";
         return `${Number(amount || 0).toLocaleString("en-US")} UZS`;
     }
 
-    async function fetchPaddleConfig() {
-        const response = await fetch("/api/paddle/config", { credentials: "include", cache: "no-store" });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.error || "Paddle configuration could not be loaded.");
-        if (!data.environment || !data.clientToken) {
-            throw new Error("Paddle configuration error: NEXT_PUBLIC_PADDLE_ENV and NEXT_PUBLIC_PADDLE_CLIENT_TOKEN are required.");
-        }
-        if (!["sandbox", "production"].includes(data.environment)) {
-            throw new Error("Paddle configuration error: environment must be sandbox or production.");
-        }
-        return data;
-    }
-
-    async function loadLocalizedPrices() {
-        const items = planIds.map((planId) => ({
-            priceId: paddleConfig.priceIds[planId],
-            quantity: 1
-        }));
-        const params = {
-            items,
-            currencyCode: "USD"
-        };
-        const response = await paddle.PricePreview(params);
-        localizedPrices = response.data.details.lineItems.reduce((prices, item) => {
-            prices[item.price.id] = item.formattedTotals.total;
-            return prices;
-        }, {});
-    }
-
     function displayedPlanPrice(planId) {
         if (selectedCurrency === "UZS") {
-            return formatManualPrice(paddleConfig?.manualPayment?.planAmounts?.[planId]);
+            return formatManualPrice(premium.manualPaymentConfig?.planAmounts?.[planId]);
         }
-        const priceId = paddleConfig?.priceIds?.[planId] || "";
-        return localizedPrices[priceId] || (initializationError ? "Unavailable" : "Loading…");
+        return premium.checkoutPrices?.[planId] || "USD";
     }
 
     function currencyToggleMarkup() {
@@ -137,17 +101,15 @@ import { initializePaddle } from "@paddle/paddle-js";
     function pricingCard(plan) {
         const display = planContent[plan.id];
         const isCurrentPlan = currentPlanId === plan.id;
-        const priceId = paddleConfig?.priceIds?.[plan.id] || "";
         const formattedPrice = displayedPlanPrice(plan.id);
-        const disabled = isCurrentPlan || !paddle || !localizedPrices[priceId];
         return `<article class="pricing-card${plan.bestValue ? " pricing-card--featured" : ""}${isCurrentPlan ? " pricing-card--current" : ""}" ${isCurrentPlan ? 'aria-current="true"' : ""}>
             ${display.badge ? `<span class="pricing-card__best">${escapeHtml(display.badge)}</span>` : ""}
             ${isCurrentPlan ? '<span class="pricing-card__current">YOUR PLAN</span>' : ""}
             <div class="pricing-card__head"><h2>${escapeHtml(display.name)}</h2><p>${escapeHtml(display.duration)}</p></div>
             <div class="pricing-card__price"><strong>${escapeHtml(formattedPrice)}</strong><span>${escapeHtml(display.description)} · ${selectedCurrency}</span><small>${escapeHtml(display.renewal)} · Cancel before renewal</small></div>
             <ul>${premium.premiumFeatures.map((feature) => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join("")}</ul>
-            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}" type="button" data-plan="${escapeHtml(plan.id)}" ${disabled ? "disabled" : ""}>${escapeHtml(buttonLabel(plan.id))}</button>
-            <p class="pricing-card__consent">By subscribing, you agree to the <a href="/terms">Terms of Service</a> and <a href="/refund-policy">Refund Policy</a>.</p>
+            <button class="premium-button${isCurrentPlan ? " premium-button--current" : ""}" type="button" data-plan="${escapeHtml(plan.id)}" ${isCurrentPlan ? "disabled" : ""}>${escapeHtml(buttonLabel(plan.id))}</button>
+            <p class="pricing-card__consent">By subscribing, you agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</p>
         </article>`;
     }
 
@@ -180,10 +142,10 @@ import { initializePaddle } from "@paddle/paddle-js";
                 <h2 id="paymentMethodTitle">Payment Method</h2>
                 <p class="payment-method__intro">Choose how you would like to pay for <strong id="paymentMethodPlanName">your plan</strong>.</p>
                 <div class="payment-method__options">
-                    <button class="payment-method__option payment-method__option--global" type="button" data-payment-method="global">
-                        <span class="payment-method__copy"><strong>Global Payment System</strong><span>Pay securely with an international card via Paddle</span><small><span aria-hidden="true">⚡</span> Secure checkout · <b id="globalPaymentAmount"></b></small></span>
+                    <a class="payment-method__option payment-method__option--global" id="globalPaymentLink" href="" data-payment-method="global">
+                        <span class="payment-method__copy"><strong>Global Payment System</strong><span>Pay securely with an international card via Visa/Mastercard</span><small><span aria-hidden="true">⚡</span> Secure checkout · <b id="globalPaymentAmount"></b></small></span>
                         ${globalPaymentIcon()}
-                    </button>
+                    </a>
                     <button class="payment-method__option" type="button" data-payment-method="manual">
                         <span class="payment-method__copy"><strong>Transfer to Credit Card</strong><span>Transfer directly to the local card and send the receipt via Telegram</span><small class="payment-method__manual"><span aria-hidden="true">↗</span> Manual activation · <b id="manualPaymentAmount"></b></small></span>
                         ${cardTransferIcon()}
@@ -234,9 +196,10 @@ import { initializePaddle } from "@paddle/paddle-js";
         planName.textContent = planContent[planId].name;
         const globalAmount = document.getElementById("globalPaymentAmount");
         const manualAmount = document.getElementById("manualPaymentAmount");
-        const priceId = paddleConfig?.priceIds?.[planId] || "";
-        if (globalAmount) globalAmount.textContent = localizedPrices[priceId] || "USD";
-        if (manualAmount) manualAmount.textContent = formatManualPrice(paddleConfig?.manualPayment?.planAmounts?.[planId]);
+        const globalPaymentLink = document.getElementById("globalPaymentLink");
+        if (globalAmount) globalAmount.textContent = premium.checkoutPrices?.[planId] || "USD";
+        if (manualAmount) manualAmount.textContent = formatManualPrice(premium.manualPaymentConfig?.planAmounts?.[planId]);
+        if (globalPaymentLink instanceof HTMLAnchorElement) globalPaymentLink.href = premium.checkoutUrls?.[planId] || "/premium";
         modal.hidden = false;
         document.body.classList.add("premium-modal-open");
         window.requestAnimationFrame(() => {
@@ -259,7 +222,7 @@ import { initializePaddle } from "@paddle/paddle-js";
 
     function manualPaymentDetails(planId) {
         const display = planContent[planId];
-        const manual = paddleConfig.manualPayment;
+        const manual = premium.manualPaymentConfig;
         const price = formatManualPrice(manual.planAmounts[planId]);
         return [
             "Hello IELTSX Support, I paid for IELTSX Premium.",
@@ -283,7 +246,7 @@ import { initializePaddle } from "@paddle/paddle-js";
 
     function openManualPaymentModal(planId) {
         const modal = document.getElementById("manualPaymentModal");
-        const manual = paddleConfig?.manualPayment;
+        const manual = premium.manualPaymentConfig;
         if (!modal || !manual) return;
         selectedManualPlanId = planId;
         const display = planContent[planId];
@@ -318,7 +281,6 @@ import { initializePaddle } from "@paddle/paddle-js";
     function render() {
         root.innerHTML = `
             <section class="premium-hero"><span class="premium-eyebrow">IELTSX PREMIUM</span><h1>Go Premium</h1><h2>Unlimited practice. Stronger results.</h2><p>Get full, unrestricted access to every IELTSX Premium feature.</p></section>
-            ${initializationError ? `<p class="paddle-error" role="alert">${escapeHtml(initializationError)}</p>` : ""}
             <div class="pricing-stage">
                 ${currencyToggleMarkup()}
                 <section class="pricing-grid" aria-label="Premium pricing plans">${planIds.map((planId) => pricingCard(premium.premiumPlans[planId])).join("")}</section>
@@ -339,27 +301,7 @@ import { initializePaddle } from "@paddle/paddle-js";
             loginForPlan(planId);
             return;
         }
-        if (!paddle) throw new Error("Paddle checkout is not initialized.");
         openPaymentMethodModal(planId);
-    }
-
-    function openPaddleCheckout(planId) {
-        const selectedPlan = premium.premiumPlans[planId];
-        if (!selectedPlan || !loggedInUser || !paddle) throw new Error("Paddle checkout is not initialized.");
-        const priceId = paddleConfig.priceIds[planId];
-        paddle.Checkout.open({
-            items: [{ priceId, quantity: 1 }],
-            settings: {
-                displayMode: "overlay",
-                variant: "one-page",
-                successUrl: `${window.location.origin}/welcome`
-            },
-            ...(loggedInUser.email ? { customer: { email: loggedInUser.email } } : {}),
-            customData: {
-                userId: loggedInUser.id,
-                plan: selectedPlan.name.toLowerCase()
-            }
-        });
     }
 
     async function init() {
@@ -374,10 +316,7 @@ import { initializePaddle } from "@paddle/paddle-js";
             }
             const button = event.target.closest("[data-plan]");
             if (button instanceof HTMLButtonElement && !button.disabled) {
-                choosePlan(button.dataset.plan).catch((error) => {
-                    initializationError = error.message || "Checkout could not be opened.";
-                    render();
-                });
+                choosePlan(button.dataset.plan).catch(() => {});
                 return;
             }
 
@@ -392,7 +331,7 @@ import { initializePaddle } from "@paddle/paddle-js";
             }
 
             if (event.target.closest("[data-copy-card]")) {
-                copyText(paddleConfig.manualPayment.cardNumber).then(() => setManualPaymentStatus("Card number copied."));
+                copyText(premium.manualPaymentConfig.cardNumber).then(() => setManualPaymentStatus("Card number copied."));
                 return;
             }
 
@@ -401,15 +340,11 @@ import { initializePaddle } from "@paddle/paddle-js";
                 return;
             }
 
-            const paymentMethod = event.target.closest("[data-payment-method]");
+            const paymentMethod = event.target.closest('[data-payment-method="manual"]');
             if (!(paymentMethod instanceof HTMLButtonElement) || !selectedPaymentPlanId) return;
             const planId = selectedPaymentPlanId;
             closePaymentMethodModal();
-            if (paymentMethod.dataset.paymentMethod === "global") {
-                openPaddleCheckout(planId);
-            } else if (paymentMethod.dataset.paymentMethod === "manual") {
-                window.setTimeout(() => openManualPaymentModal(planId), 170);
-            }
+            window.setTimeout(() => openManualPaymentModal(planId), 170);
         });
 
         document.addEventListener("keydown", (event) => {
@@ -419,24 +354,12 @@ import { initializePaddle } from "@paddle/paddle-js";
             }
         });
 
-        try {
-            [loggedInUser, paddleConfig] = await Promise.all([latestCurrentUser(), fetchPaddleConfig()]);
-            currentPlanId = activePlanId(loggedInUser);
-            render();
-            paddle = await initializePaddle({
-                token: paddleConfig.clientToken,
-                environment: paddleConfig.environment,
-                ...(paddleConfig.pwCustomerId ? { pwCustomer: { id: paddleConfig.pwCustomerId } } : {})
-            });
-            if (!paddle) throw new Error("Paddle initialization failed.");
-            await loadLocalizedPrices();
-        } catch (error) {
-            initializationError = error.message || "Paddle initialization failed.";
-        }
+        loggedInUser = await latestCurrentUser();
+        currentPlanId = activePlanId(loggedInUser);
         render();
 
         const requestedPlanId = new URLSearchParams(window.location.search).get("plan");
-        if (requestedPlanId && planIds.includes(requestedPlanId) && loggedInUser && currentPlanId !== requestedPlanId && paddle) {
+        if (requestedPlanId && planIds.includes(requestedPlanId) && loggedInUser && currentPlanId !== requestedPlanId) {
             choosePlan(requestedPlanId).catch(() => {});
         }
     }

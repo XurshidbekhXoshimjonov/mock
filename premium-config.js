@@ -9,6 +9,18 @@
         annual: Object.freeze({ id: "annual", name: "Mastery", durationDays: 365, billing: "365 days of Premium access", rank: 2 })
     });
 
+    const checkoutUrls = Object.freeze({
+        monthly: "https://ieltsxorg.lemonsqueezy.com/checkout/buy/a36fb9e7-a6f4-42de-af5c-d58fbd9a7131",
+        threeMonths: "https://ieltsxorg.lemonsqueezy.com/checkout/buy/f58d698f-65ad-4b35-98c8-6d2730e0f4a5",
+        annual: "https://ieltsxorg.lemonsqueezy.com/checkout/buy/fd29752d-b721-469b-94ff-790de892757a"
+    });
+
+    const checkoutPrices = Object.freeze({
+        monthly: "$5.99",
+        threeMonths: "$15",
+        annual: "$59.99"
+    });
+
     const subscriptionFeatures = Object.freeze({
         listening: Object.freeze({ free: true, premium: true }),
         reading: Object.freeze({ free: true, premium: true }),
@@ -61,7 +73,8 @@
         cardType: "UZCARD / HUMO",
         cardNumber: "5614681076000011",
         telegramUsername: "ieltsxuz_admin",
-        currency: "UZS"
+        currency: "UZS",
+        planAmounts: Object.freeze({ monthly: 50000, threeMonths: 120000, annual: 500000 })
     });
 
     function safeDate(value) {
@@ -160,5 +173,5 @@
         return `<span class="subscription-status subscription-status--${normalized}">${label}</span>`;
     }
 
-    return { premiumPlans, premiumFeatures, subscriptionFeatures, subscriptionComparisonRows, manualPaymentConfig, hasPremiumAccess, inferSubscriptionPlanId, getSubscriptionDisplayStatus, isPremiumUser, canAccessSubscriptionFeature, formatPrice, premiumBadge, subscriptionStatusBadge };
+    return { premiumPlans, checkoutUrls, checkoutPrices, premiumFeatures, subscriptionFeatures, subscriptionComparisonRows, manualPaymentConfig, hasPremiumAccess, inferSubscriptionPlanId, getSubscriptionDisplayStatus, isPremiumUser, canAccessSubscriptionFeature, formatPrice, premiumBadge, subscriptionStatusBadge };
 }));

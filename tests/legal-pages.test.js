@@ -63,16 +63,22 @@ test("public route registrations return rendered HTML without auth middleware", 
     assert.match(server, /app\.get\(`\/\$\{slug\}`,[\s\S]*?res\.status\(200\)\.type\("html"\)/);
     assert.match(server, /app\.get\(`\/\$\{slug\}`,[\s\S]*?Cache-Control", "no-store, no-cache, must-revalidate"/);
     assert.match(server, /app\.get\("\/sitemap\.xml"/);
-    for (const route of ["/terms", "/privacy", "/refund-policy"]) assert.ok(server.includes(`"${route}"`));
+    for (const route of ["/terms", "/privacy"]) assert.ok(server.includes(`"${route}"`));
+    assert.ok(!server.includes('"/refund-policy"'));
 });
 
 test("site footers and Premium consent expose legal links", () => {
     const pages = ["ieltsmock.html", "reading.html", "reading-tests.html", "listening.html", "listening-tests.html", "mock-tests.html", "premium.html", "profile.html", "speaking.html", "writing.html"];
     for (const file of pages) {
         const html = fs.readFileSync(path.join(root, file), "utf8");
-        for (const href of ["/terms", "/privacy", "/refund-policy", "mailto:support@ieltsx.org"]) {
+        for (const href of ["/terms", "/privacy"]) {
             assert.ok(html.includes(`href="${href}"`), `${file} is missing ${href}`);
         }
+        assert.ok(html.includes('href="mailto:support@ieltsx.org'), `${file} is missing the support email link`);
+        assert.ok(!html.includes('href="/refund-policy"'), `${file} still links to the removed Refund Policy`);
+        assert.match(html, /<h2 id="footerPrivacyTitle">Privacy<\/h2>/);
+        assert.match(html, /home-footer__section--privacy[\s\S]*?href="\/privacy">Privacy Policy<\/a>[\s\S]*?href="\/terms">Terms of Service<\/a>/);
+        assert.doesNotMatch(html, /class="home-footer__legal"/);
     }
     const premium = fs.readFileSync(path.join(root, "premium.js"), "utf8");
     assert.match(premium, /By subscribing, you agree to the/);
