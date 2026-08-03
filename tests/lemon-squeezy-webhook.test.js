@@ -207,7 +207,9 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
             body: oldBody
         });
         assert.equal(ignored.status, 200);
-        assert.equal((await ignored.json()).ignored, true);
+        const ignoredBody = await ignored.json();
+        assert.equal(ignoredBody.ignored, true);
+        assert.equal(ignoredBody.reason, "user_not_found");
         assert.equal(saved.length, 3);
 
         const unlinkedCreatedPayload = payload("subscription_created");
@@ -220,8 +222,23 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
             body: unlinkedCreatedBody
         });
         assert.equal(ignoredCreated.status, 200);
-        assert.equal((await ignoredCreated.json()).ignored, true);
+        const ignoredCreatedBody = await ignoredCreated.json();
+        assert.equal(ignoredCreatedBody.ignored, true);
+        assert.equal(ignoredCreatedBody.reason, "missing_user_id");
         assert.equal(saved.length, 3);
+
+        const unsupportedPayload = payload("order_created");
+        const unsupportedBody = JSON.stringify(unsupportedPayload);
+        const unsupportedSignature = crypto.createHmac("sha256", "webhook-secret").update(Buffer.from(unsupportedBody)).digest("hex");
+        const ignoredUnsupported = await fetch(baseUrl, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-signature": unsupportedSignature },
+            body: unsupportedBody
+        });
+        assert.equal(ignoredUnsupported.status, 200);
+        const ignoredUnsupportedBody = await ignoredUnsupported.json();
+        assert.equal(ignoredUnsupportedBody.ignored, true);
+        assert.equal(ignoredUnsupportedBody.reason, "unsupported_event");
     } finally {
         await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
     }
