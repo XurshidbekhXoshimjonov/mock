@@ -123,8 +123,10 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
     registerLemonSqueezyWebhookRoute(app, {
         secret: "webhook-secret",
         userStore: {
-            async findUserById(id) {
-                return id === "user-1" ? { id, email: "student@example.com" } : null;
+            async findUserByWebhookIdentifier(id) {
+                if (id === "user-1") return { id, email: "student@example.com" };
+                if (id === "001") return { _id: "database-user-001", memberId: "001", email: "admin@example.com" };
+                return null;
             },
             async findUserByLemonSqueezySubscriptionId(subscriptionId) {
                 return subscriptionId === "sub_123"
@@ -162,9 +164,27 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
             body
         });
         assert.equal(accepted.status, 200);
+        assert.equal((await accepted.json()).updated, true);
         assert.equal(saved.length, 1);
         assert.equal(saved[0].id, "user-1");
         assert.equal(saved[0].updates.isPremium, true);
+
+        const publicIdPayload = payload("subscription_created");
+        publicIdPayload.meta.custom_data.user_id = "001";
+        publicIdPayload.data.id = "public_id_subscription";
+        const publicIdBody = JSON.stringify(publicIdPayload);
+        const publicIdSignature = crypto.createHmac("sha256", "webhook-secret").update(Buffer.from(publicIdBody)).digest("hex");
+        const publicIdAccepted = await fetch(baseUrl, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-signature": publicIdSignature },
+            body: publicIdBody
+        });
+        assert.equal(publicIdAccepted.status, 200);
+        assert.equal((await publicIdAccepted.json()).updated, true);
+        assert.equal(saved.length, 2);
+        assert.equal(saved[1].id, "database-user-001");
+        assert.equal(saved[1].updates.lemonSqueezySubscriptionId, "public_id_subscription");
+        assert.equal(saved[1].updates.isPremium, true);
 
         const laterPayload = payload("subscription_updated");
         delete laterPayload.meta.custom_data.user_id;
@@ -176,7 +196,7 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
             body: laterBody
         });
         assert.equal(linkedBySubscription.status, 200);
-        assert.equal(saved.length, 2);
+        assert.equal(saved.length, 3);
 
         laterPayload.data.id = "unlinked_old_subscription";
         const oldBody = JSON.stringify(laterPayload);
@@ -188,7 +208,7 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
         });
         assert.equal(ignored.status, 200);
         assert.equal((await ignored.json()).ignored, true);
-        assert.equal(saved.length, 2);
+        assert.equal(saved.length, 3);
 
         const unlinkedCreatedPayload = payload("subscription_created");
         delete unlinkedCreatedPayload.meta.custom_data.user_id;
@@ -201,7 +221,7 @@ test("the HTTP endpoint rejects bad signatures and processes signed raw JSON", a
         });
         assert.equal(ignoredCreated.status, 200);
         assert.equal((await ignoredCreated.json()).ignored, true);
-        assert.equal(saved.length, 2);
+        assert.equal(saved.length, 3);
     } finally {
         await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
     }
