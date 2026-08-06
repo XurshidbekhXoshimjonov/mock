@@ -66,7 +66,7 @@ function passageOne() {
         .filter((element) => !$(element).find("em").length)
         .map((element) => ({
             letter: null,
-            html: $(element).html(),
+            html: String($(element).html() || "").replace(/<\/?strong\b[^>]*>/gi, ""),
             text: cleanText($(element).text())
         }));
 
