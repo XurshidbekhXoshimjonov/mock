@@ -34,7 +34,7 @@ function question(number, type, prompt, answer, options = []) {
     };
 }
 
-function group({ suffix, type, start, end, instructionText, instructionBodyHtml = "", rule = "", options = [], questions, contentHtml = "", question: prompt = "", hideOptionsList = false }) {
+function group({ suffix, type, start, end, instructionText, instructionBodyHtml = "", rule = "", options = [], questions, contentHtml = "", contentTitle = "", question: prompt = "", hideOptionsList = false }) {
     return {
         id: `${id}-${suffix}`,
         type,
@@ -49,6 +49,7 @@ function group({ suffix, type, start, end, instructionText, instructionBodyHtml 
         options,
         hideOptionsList,
         contentHtml,
+        contentTitle,
         question: prompt,
         questionNumbers: questions.map((item) => item.number),
         questions,
@@ -89,7 +90,10 @@ function passageOne() {
         [13, "Shells from beach not suitable as they do not keep their ______ and break easily.", "colour"]
     ];
     const noteQuestions = noteData.map(([number, prompt, answer]) => question(number, "notes_completion", prompt, answer));
-    const notesHtml = noteQuestions.map((item) => `<p>${item.question.replace("______", `<span class="ielts-blank" data-blank="${item.number}"></span>`)}</p>`).join("\n");
+    const notesHtml = [
+        "<p>Shell-stringers must have patience and an understanding of resources available near the sea.</p>",
+        ...noteQuestions.map((item) => `<p>${item.question.replace("______", `<span class="ielts-blank" data-blank="${item.number}"></span>`)}</p>`)
+    ].join("\n");
     const groups = [
         group({
             suffix: "p1-g1",
@@ -108,7 +112,8 @@ function passageOne() {
             instructionText: "Complete the notes below.",
             rule: "Choose ONE WORD ONLY from the passage for each answer.",
             questions: noteQuestions,
-            contentHtml: notesHtml
+            contentHtml: notesHtml,
+            contentTitle: "The process of shell-stringing"
         })
     ];
 

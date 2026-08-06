@@ -104,6 +104,7 @@
             ],
             "hideOptionsList": false,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               1,
@@ -259,7 +260,8 @@
             "rule": "Choose ONE WORD ONLY from the passage for each answer.",
             "options": [],
             "hideOptionsList": false,
-            "contentHtml": "<p>The traditional procedure: hole put in shell with an instrument made of animal's bone and <span class=\"ielts-blank\" data-blank=\"7\"></span>.</p>\n<p>Shells wiped with <span class=\"ielts-blank\" data-blank=\"8\"></span> to achieve a pearly surface.</p>\n<p>Animal <span class=\"ielts-blank\" data-blank=\"9\"></span> applied.</p>\n<p>Changes after Europeans arrived: cleaning substances like <span class=\"ielts-blank\" data-blank=\"10\"></span> were used.</p>\n<p>Furneaux Islands: shells need to be gathered in the right <span class=\"ielts-blank\" data-blank=\"11\"></span>.</p>\n<p>Shell collectors walk along the beach then <span class=\"ielts-blank\" data-blank=\"12\"></span> in order to pick up shells.</p>\n<p>Shells from beach not suitable as they do not keep their <span class=\"ielts-blank\" data-blank=\"13\"></span> and break easily.</p>",
+            "contentHtml": "<p>Shell-stringers must have patience and an understanding of resources available near the sea.</p>\n<p>The traditional procedure: hole put in shell with an instrument made of animal's bone and <span class=\"ielts-blank\" data-blank=\"7\"></span>.</p>\n<p>Shells wiped with <span class=\"ielts-blank\" data-blank=\"8\"></span> to achieve a pearly surface.</p>\n<p>Animal <span class=\"ielts-blank\" data-blank=\"9\"></span> applied.</p>\n<p>Changes after Europeans arrived: cleaning substances like <span class=\"ielts-blank\" data-blank=\"10\"></span> were used.</p>\n<p>Furneaux Islands: shells need to be gathered in the right <span class=\"ielts-blank\" data-blank=\"11\"></span>.</p>\n<p>Shell collectors walk along the beach then <span class=\"ielts-blank\" data-blank=\"12\"></span> in order to pick up shells.</p>\n<p>Shells from beach not suitable as they do not keep their <span class=\"ielts-blank\" data-blank=\"13\"></span> and break easily.</p>",
+            "contentTitle": "The process of shell-stringing",
             "question": "",
             "questionNumbers": [
               7,
@@ -612,6 +614,7 @@
             ],
             "hideOptionsList": false,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               14,
@@ -925,6 +928,7 @@
             ],
             "hideOptionsList": false,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               20,
@@ -1037,6 +1041,7 @@
             "options": [],
             "hideOptionsList": false,
             "contentHtml": "<h4>Producing spider silk in the lab</h4>\n<p>Both scientists and manufacturers are interested in producing silk for many different purposes. Some researchers have tried to grow silk by introducing genetic material into <span class=\"ielts-blank\" data-blank=\"24\"></span> and some animals. But these experiments have been somewhat disappointing.</p>\n<p>It is difficult to make spider silk in a lab setting because the silk comes from a liquid protein made in a <span class=\"ielts-blank\" data-blank=\"25\"></span> inside the spider's body. When a spider spins silk, it causes a <span class=\"ielts-blank\" data-blank=\"26\"></span> that turns this liquid into solid silk. Scientists cannot replicate this yet.</p>",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               24,
@@ -1535,6 +1540,7 @@
             ],
             "hideOptionsList": false,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               27,
@@ -1669,6 +1675,7 @@
             "options": [],
             "hideOptionsList": false,
             "contentHtml": "<p>It has been observed that resident killer whales invariably live in fixed family groups, known as <span class=\"ielts-blank\" data-blank=\"32\"></span>. Each of these has its own unique set of calls, despite close contact with other family groups. As the same areas of ocean contain many different groups with widely varying dialects, it is clear that these differences could not have emerged as a result of the whales' <span class=\"ielts-blank\" data-blank=\"33\"></span>.</p>\n<p>According to tests conducted by Lance Barrett-Lennard, a calf communicates exclusively with the dialect of the group to which its <span class=\"ielts-blank\" data-blank=\"34\"></span> belongs. Barrett-Lennard also rejects the idea that the call patterns are inherited.</p>",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               32,
@@ -1745,6 +1752,7 @@
             ],
             "hideOptionsList": false,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               35,
@@ -1904,6 +1912,7 @@
             ],
             "hideOptionsList": true,
             "contentHtml": "",
+            "contentTitle": "",
             "question": "",
             "questionNumbers": [
               38,
@@ -2453,7 +2462,7 @@
     "imageCount": 0,
     "answerKeyCount": 40
   },
-  "createdAt": "2026-08-06T05:20:53.575Z",
-  "publishedAt": "2026-08-06T05:20:53.575Z",
+  "createdAt": "2026-08-06T05:26:39.472Z",
+  "publishedAt": "2026-08-06T05:26:39.472Z",
   "openUrl": "/full-test-player?id=jewels-golden-textile-whale-culture-20260806&skill=reading"
 }

@@ -77,6 +77,7 @@
       ],
       "hideOptionsList": false,
       "contentHtml": "",
+      "contentTitle": "",
       "question": "",
       "questionNumbers": [
         27,
@@ -211,6 +212,7 @@
       "options": [],
       "hideOptionsList": false,
       "contentHtml": "<p>It has been observed that resident killer whales invariably live in fixed family groups, known as <span class=\"ielts-blank\" data-blank=\"32\"></span>. Each of these has its own unique set of calls, despite close contact with other family groups. As the same areas of ocean contain many different groups with widely varying dialects, it is clear that these differences could not have emerged as a result of the whales' <span class=\"ielts-blank\" data-blank=\"33\"></span>.</p>\n<p>According to tests conducted by Lance Barrett-Lennard, a calf communicates exclusively with the dialect of the group to which its <span class=\"ielts-blank\" data-blank=\"34\"></span> belongs. Barrett-Lennard also rejects the idea that the call patterns are inherited.</p>",
+      "contentTitle": "",
       "question": "",
       "questionNumbers": [
         32,
@@ -287,6 +289,7 @@
       ],
       "hideOptionsList": false,
       "contentHtml": "",
+      "contentTitle": "",
       "question": "",
       "questionNumbers": [
         35,
@@ -446,6 +449,7 @@
       ],
       "hideOptionsList": true,
       "contentHtml": "",
+      "contentTitle": "",
       "question": "",
       "questionNumbers": [
         38,
@@ -923,5 +927,5 @@
     }
   ],
   "sourceFullTestId": "jewels-golden-textile-whale-culture-20260806",
-  "createdAt": "2026-08-06T05:20:53.575Z"
+  "createdAt": "2026-08-06T05:26:39.472Z"
 }

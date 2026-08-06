@@ -87,6 +87,7 @@
       ],
       "hideOptionsList": false,
       "contentHtml": "",
+      "contentTitle": "",
       "question": "",
       "questionNumbers": [
         1,
@@ -242,7 +243,8 @@
       "rule": "Choose ONE WORD ONLY from the passage for each answer.",
       "options": [],
       "hideOptionsList": false,
-      "contentHtml": "<p>The traditional procedure: hole put in shell with an instrument made of animal's bone and <span class=\"ielts-blank\" data-blank=\"7\"></span>.</p>\n<p>Shells wiped with <span class=\"ielts-blank\" data-blank=\"8\"></span> to achieve a pearly surface.</p>\n<p>Animal <span class=\"ielts-blank\" data-blank=\"9\"></span> applied.</p>\n<p>Changes after Europeans arrived: cleaning substances like <span class=\"ielts-blank\" data-blank=\"10\"></span> were used.</p>\n<p>Furneaux Islands: shells need to be gathered in the right <span class=\"ielts-blank\" data-blank=\"11\"></span>.</p>\n<p>Shell collectors walk along the beach then <span class=\"ielts-blank\" data-blank=\"12\"></span> in order to pick up shells.</p>\n<p>Shells from beach not suitable as they do not keep their <span class=\"ielts-blank\" data-blank=\"13\"></span> and break easily.</p>",
+      "contentHtml": "<p>Shell-stringers must have patience and an understanding of resources available near the sea.</p>\n<p>The traditional procedure: hole put in shell with an instrument made of animal's bone and <span class=\"ielts-blank\" data-blank=\"7\"></span>.</p>\n<p>Shells wiped with <span class=\"ielts-blank\" data-blank=\"8\"></span> to achieve a pearly surface.</p>\n<p>Animal <span class=\"ielts-blank\" data-blank=\"9\"></span> applied.</p>\n<p>Changes after Europeans arrived: cleaning substances like <span class=\"ielts-blank\" data-blank=\"10\"></span> were used.</p>\n<p>Furneaux Islands: shells need to be gathered in the right <span class=\"ielts-blank\" data-blank=\"11\"></span>.</p>\n<p>Shell collectors walk along the beach then <span class=\"ielts-blank\" data-blank=\"12\"></span> in order to pick up shells.</p>\n<p>Shells from beach not suitable as they do not keep their <span class=\"ielts-blank\" data-blank=\"13\"></span> and break easily.</p>",
+      "contentTitle": "The process of shell-stringing",
       "question": "",
       "questionNumbers": [
         7,
@@ -489,5 +491,5 @@
     }
   ],
   "sourceFullTestId": "jewels-golden-textile-whale-culture-20260806",
-  "createdAt": "2026-08-06T05:20:53.575Z"
+  "createdAt": "2026-08-06T05:26:39.472Z"
 }
