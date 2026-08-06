@@ -1,0 +1,469 @@
+{
+  "id": "august-06-part-2",
+  "title": "August 06 - Part 2",
+  "part": 2,
+  "audio": "/uploads/audio/1786028290546-Members.mp3",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "audioUrls": [],
+      "audioFileName": "Members.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "11|A\n12|C\n13|A\n14|C\n15|B\n16|C\n17|G\n18|C\n19|A\n20|E",
+      "blocks": [
+        {
+          "id": "p2-tasks",
+          "type": "matching",
+          "questionRange": "Questions 11-16",
+          "title": "",
+          "optionsTitle": "Members",
+          "optionLetterPunctuation": "dot",
+          "instruction": "What does the organiser tell the members about who should do each task?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "all the members must do it"
+            },
+            {
+              "letter": "B",
+              "text": "members have the option of doing it"
+            },
+            {
+              "letter": "C",
+              "text": "the organiser is responsible for doing it"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 11,
+              "text": "Taking tents"
+            },
+            {
+              "questionNumber": 12,
+              "text": "Booking campsites"
+            },
+            {
+              "questionNumber": 13,
+              "text": "Taking bicycles"
+            },
+            {
+              "questionNumber": 14,
+              "text": "Buying train tickets"
+            },
+            {
+              "questionNumber": 15,
+              "text": "Buying tickets for a football match"
+            },
+            {
+              "questionNumber": 16,
+              "text": "Collecting information about the area of the tour"
+            }
+          ]
+        },
+        {
+          "id": "p2-attractions",
+          "type": "matching",
+          "questionRange": "Questions 17-20",
+          "title": "",
+          "optionsTitle": "Attractions",
+          "optionLetterPunctuation": "dot",
+          "instruction": "Which location has the following attractions?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "locally produced food"
+            },
+            {
+              "letter": "B",
+              "text": "steam railway"
+            },
+            {
+              "letter": "C",
+              "text": "farming museum"
+            },
+            {
+              "letter": "D",
+              "text": "water sports"
+            },
+            {
+              "letter": "E",
+              "text": "transport museum"
+            },
+            {
+              "letter": "F",
+              "text": "horse riding"
+            },
+            {
+              "letter": "G",
+              "text": "old ruins"
+            },
+            {
+              "letter": "H",
+              "text": "market selling clothes"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 17,
+              "text": "Westbury"
+            },
+            {
+              "questionNumber": 18,
+              "text": "Cluny"
+            },
+            {
+              "questionNumber": 19,
+              "text": "Pennerley"
+            },
+            {
+              "questionNumber": 20,
+              "text": "Farlow"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 11-20",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Listening question 11",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Listening question 12",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Listening question 13",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Listening question 14",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "Listening question 15",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "B",
+      "correctAnswer": "B",
+      "acceptedAnswers": [
+        "B"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "Listening question 16",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "Listening question 17",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "G",
+      "correctAnswer": "G",
+      "acceptedAnswers": [
+        "G"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "Listening question 18",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "Listening question 19",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "Listening question 20",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "E",
+      "correctAnswer": "E",
+      "acceptedAnswers": [
+        "E"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    }
+  ],
+  "sourceFullTestId": "august-06",
+  "createdAt": "2026-08-06T13:19:42.253Z",
+  "updatedAt": "2026-08-06T14:58:11.785Z"
+}

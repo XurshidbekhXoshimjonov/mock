@@ -1,0 +1,406 @@
+{
+  "id": "august-06-part-3",
+  "title": "August 06 - Part 3",
+  "part": 3,
+  "audio": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+  "duration": 10,
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "audioUrls": [],
+      "audioFileName": "Assignment Notes.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "21|references\n22|examples\n23|next seminar\n24|the experiment | experiment\n25|26 November | 26th November | November 26 | November 26th\n26|Chemistry Lab | Chemistry Laboratory\n27|professor\n28|A | C | F\n29|A | C | F\n30|A | C | F",
+      "blocks": [
+        {
+          "id": "p3-notes",
+          "type": "note_completion",
+          "title": "Assignment Notes",
+          "questionRange": "Questions 21-27",
+          "questionNumbers": [
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27
+          ],
+          "instruction": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "content": [
+            "<strong>Things to do:</strong>",
+            "• check accuracy of the {{21}} in the last section",
+            "• try to give more {{22}}",
+            "<strong>Karen's tasks:</strong>",
+            "• she will give her presentation at {{23}}",
+            "• she must provide explanation of {{24}} during the presentation",
+            "• the abstract due date is on {{25}}",
+            "• the presentation will take place in {{26}}",
+            "• her presentation will be graded by {{27}}"
+          ]
+        },
+        {
+          "id": "p3-modules",
+          "type": "multiple_select",
+          "questionRange": "Questions 28-30",
+          "instruction": "Choose THREE letters, A-F.",
+          "question": "Which THREE modules will Karen study next year?",
+          "questionNumber": 28,
+          "questionNumbers": [
+            28,
+            29,
+            30
+          ],
+          "answerQuestions": [
+            {
+              "questionNumber": 29
+            },
+            {
+              "questionNumber": 30
+            }
+          ],
+          "maxSelections": 3,
+          "options": [
+            {
+              "letter": "A",
+              "text": "Psycholinguistics"
+            },
+            {
+              "letter": "B",
+              "text": "Phonology"
+            },
+            {
+              "letter": "C",
+              "text": "Communication skills"
+            },
+            {
+              "letter": "D",
+              "text": "Data collection"
+            },
+            {
+              "letter": "E",
+              "text": "Social interaction"
+            },
+            {
+              "letter": "F",
+              "text": "Discourse analysis"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 21-30",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "sentence_completion",
+      "question": "• check accuracy of the _____ in the last section",
+      "options": [],
+      "answer": "references",
+      "correctAnswer": "references",
+      "acceptedAnswers": [
+        "references"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 22,
+      "type": "sentence_completion",
+      "question": "• try to give more _____",
+      "options": [],
+      "answer": "examples",
+      "correctAnswer": "examples",
+      "acceptedAnswers": [
+        "examples"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 23,
+      "type": "sentence_completion",
+      "question": "• she will give her presentation at _____",
+      "options": [],
+      "answer": "next seminar",
+      "correctAnswer": "next seminar",
+      "acceptedAnswers": [
+        "next seminar"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 24,
+      "type": "sentence_completion",
+      "question": "• she must provide explanation of _____ during the presentation",
+      "options": [],
+      "answer": "the experiment | experiment",
+      "correctAnswer": "the experiment",
+      "acceptedAnswers": [
+        "the experiment",
+        "experiment"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 25,
+      "type": "sentence_completion",
+      "question": "• the abstract due date is on _____",
+      "options": [],
+      "answer": "26 November | 26th November | November 26 | November 26th",
+      "correctAnswer": "26 November",
+      "acceptedAnswers": [
+        "26 November",
+        "26th November",
+        "November 26",
+        "November 26th"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 26,
+      "type": "sentence_completion",
+      "question": "• the presentation will take place in _____",
+      "options": [],
+      "answer": "Chemistry Lab | Chemistry Laboratory",
+      "correctAnswer": "Chemistry Lab",
+      "acceptedAnswers": [
+        "Chemistry Lab",
+        "Chemistry Laboratory"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 27,
+      "type": "sentence_completion",
+      "question": "• her presentation will be graded by _____",
+      "options": [],
+      "answer": "professor",
+      "correctAnswer": "professor",
+      "acceptedAnswers": [
+        "professor"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    }
+  ],
+  "sourceFullTestId": "august-06",
+  "createdAt": "2026-08-06T13:19:42.253Z",
+  "updatedAt": "2026-08-06T14:58:11.786Z"
+}

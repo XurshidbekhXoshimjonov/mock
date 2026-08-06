@@ -1,0 +1,1636 @@
+{
+  "id": "august-06",
+  "title": "August 06",
+  "duration": 40,
+  "part": "full",
+  "fullAudioUrl": "",
+  "fullAudioFileName": "",
+  "audio": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+  "listeningHtml": "",
+  "questionsHtml": "",
+  "assetFiles": [
+    "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+    "/uploads/audio/1786028290546-Members.mp3",
+    "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+    "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3"
+  ],
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "audioUrls": [],
+      "audioFileName": "Joining Social Club Form.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "1|Malaysian\n2|13 Anglesea | 13 Anglesea Rd | 13 Anglesea Road\n3|040 4229160 | 0404229160\n4|economist\n5|dancing\n6|A\n7|B\n8|B\n9|C\n10|C",
+      "blocks": [
+        {
+          "id": "p1-form",
+          "type": "form_completion",
+          "title": "Joining Social Club Form",
+          "questionRange": "Questions 1-5",
+          "questionNumbers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "instruction": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "rows": [
+            {
+              "label": "Name",
+              "value": "Jenny F."
+            },
+            {
+              "label": "Nationality",
+              "value": "{{1}}"
+            },
+            {
+              "label": "Address",
+              "value": "{{2}} Rd., Bondi"
+            },
+            {
+              "label": "Mobile phone",
+              "value": "{{3}}"
+            },
+            {
+              "label": "Occupation",
+              "value": "{{4}}"
+            },
+            {
+              "label": "Free-time interests",
+              "value": "Singing and {{5}}"
+            }
+          ]
+        },
+        {
+          "id": "p1-mcq",
+          "type": "multiple_choice",
+          "questionRange": "Questions 6-10",
+          "questionNumbers": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "question": "Questions 6-10",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "questions": [
+            {
+              "questionNumber": 6,
+              "question": "According to Don, what might be a problem for Jenny?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "understanding local people"
+                },
+                {
+                  "letter": "B",
+                  "text": "her accent"
+                },
+                {
+                  "letter": "C",
+                  "text": "talking to her colleagues"
+                }
+              ]
+            },
+            {
+              "questionNumber": 7,
+              "question": "How many members does the club have now?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "eighty"
+                },
+                {
+                  "letter": "B",
+                  "text": "fifty"
+                },
+                {
+                  "letter": "C",
+                  "text": "thirty"
+                }
+              ]
+            },
+            {
+              "questionNumber": 8,
+              "question": "How often does the club meet?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "once a month"
+                },
+                {
+                  "letter": "B",
+                  "text": "once every two weeks"
+                },
+                {
+                  "letter": "C",
+                  "text": "once a week"
+                }
+              ]
+            },
+            {
+              "questionNumber": 9,
+              "question": "What is the club's most frequent type of activity?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "a visit"
+                },
+                {
+                  "letter": "B",
+                  "text": "a meal"
+                },
+                {
+                  "letter": "C",
+                  "text": "a talk"
+                }
+              ]
+            },
+            {
+              "questionNumber": 10,
+              "question": "The main purpose of the club is to help members to",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "learn about life in Australia"
+                },
+                {
+                  "letter": "B",
+                  "text": "enjoy themselves together"
+                },
+                {
+                  "letter": "C",
+                  "text": "meet Australians"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "audioUrls": [],
+      "audioFileName": "Members.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "11|A\n12|C\n13|A\n14|C\n15|B\n16|C\n17|G\n18|C\n19|A\n20|E",
+      "blocks": [
+        {
+          "id": "p2-tasks",
+          "type": "matching",
+          "questionRange": "Questions 11-16",
+          "title": "",
+          "optionsTitle": "Members",
+          "optionLetterPunctuation": "dot",
+          "instruction": "What does the organiser tell the members about who should do each task?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "all the members must do it"
+            },
+            {
+              "letter": "B",
+              "text": "members have the option of doing it"
+            },
+            {
+              "letter": "C",
+              "text": "the organiser is responsible for doing it"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 11,
+              "text": "Taking tents"
+            },
+            {
+              "questionNumber": 12,
+              "text": "Booking campsites"
+            },
+            {
+              "questionNumber": 13,
+              "text": "Taking bicycles"
+            },
+            {
+              "questionNumber": 14,
+              "text": "Buying train tickets"
+            },
+            {
+              "questionNumber": 15,
+              "text": "Buying tickets for a football match"
+            },
+            {
+              "questionNumber": 16,
+              "text": "Collecting information about the area of the tour"
+            }
+          ]
+        },
+        {
+          "id": "p2-attractions",
+          "type": "matching",
+          "questionRange": "Questions 17-20",
+          "title": "",
+          "optionsTitle": "Attractions",
+          "optionLetterPunctuation": "dot",
+          "instruction": "Which location has the following attractions?",
+          "options": [
+            {
+              "letter": "A",
+              "text": "locally produced food"
+            },
+            {
+              "letter": "B",
+              "text": "steam railway"
+            },
+            {
+              "letter": "C",
+              "text": "farming museum"
+            },
+            {
+              "letter": "D",
+              "text": "water sports"
+            },
+            {
+              "letter": "E",
+              "text": "transport museum"
+            },
+            {
+              "letter": "F",
+              "text": "horse riding"
+            },
+            {
+              "letter": "G",
+              "text": "old ruins"
+            },
+            {
+              "letter": "H",
+              "text": "market selling clothes"
+            }
+          ],
+          "questions": [
+            {
+              "questionNumber": 17,
+              "text": "Westbury"
+            },
+            {
+              "questionNumber": 18,
+              "text": "Cluny"
+            },
+            {
+              "questionNumber": 19,
+              "text": "Pennerley"
+            },
+            {
+              "questionNumber": 20,
+              "text": "Farlow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "audioUrls": [],
+      "audioFileName": "Assignment Notes.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "21|references\n22|examples\n23|next seminar\n24|the experiment | experiment\n25|26 November | 26th November | November 26 | November 26th\n26|Chemistry Lab | Chemistry Laboratory\n27|professor\n28|A | C | F\n29|A | C | F\n30|A | C | F",
+      "blocks": [
+        {
+          "id": "p3-notes",
+          "type": "note_completion",
+          "title": "Assignment Notes",
+          "questionRange": "Questions 21-27",
+          "questionNumbers": [
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27
+          ],
+          "instruction": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+          "content": [
+            "<strong>Things to do:</strong>",
+            "• check accuracy of the {{21}} in the last section",
+            "• try to give more {{22}}",
+            "<strong>Karen's tasks:</strong>",
+            "• she will give her presentation at {{23}}",
+            "• she must provide explanation of {{24}} during the presentation",
+            "• the abstract due date is on {{25}}",
+            "• the presentation will take place in {{26}}",
+            "• her presentation will be graded by {{27}}"
+          ]
+        },
+        {
+          "id": "p3-modules",
+          "type": "multiple_select",
+          "questionRange": "Questions 28-30",
+          "instruction": "Choose THREE letters, A-F.",
+          "question": "Which THREE modules will Karen study next year?",
+          "questionNumber": 28,
+          "questionNumbers": [
+            28,
+            29,
+            30
+          ],
+          "answerQuestions": [
+            {
+              "questionNumber": 29
+            },
+            {
+              "questionNumber": 30
+            }
+          ],
+          "maxSelections": 3,
+          "options": [
+            {
+              "letter": "A",
+              "text": "Psycholinguistics"
+            },
+            {
+              "letter": "B",
+              "text": "Phonology"
+            },
+            {
+              "letter": "C",
+              "text": "Communication skills"
+            },
+            {
+              "letter": "D",
+              "text": "Data collection"
+            },
+            {
+              "letter": "E",
+              "text": "Social interaction"
+            },
+            {
+              "letter": "F",
+              "text": "Discourse analysis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "audioUrls": [],
+      "audioFileName": "Extinction of Australian species.mp3",
+      "audioDuration": null,
+      "html": "",
+      "instruction": "",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "answerText": "31|frog\n32|birds\n33|corn\n34|media\n35|insects\n36|fear\n37|rivals\n38|complex\n39|plants\n40|blood",
+      "blocks": [
+        {
+          "id": "p4-notes",
+          "type": "note_completion",
+          "title": "Extinction of Australian species",
+          "questionRange": "Questions 31-40",
+          "questionNumbers": [
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40
+          ],
+          "instruction": "Write ONE WORD ONLY in each gap.",
+          "content": [
+            "<strong>Recent problems:</strong>",
+            "• several species of {{31}} are at risk because of increased housing",
+            "• many animals, especially {{32}}, are affected by pesticides",
+            "• production of single crops like {{33}} is harming wildlife",
+            "<strong>Endangered animals:</strong>",
+            "• can be influenced by the {{34}} (e.g. the panda)",
+            "• people are less concerned about smaller animals, e.g. {{35}}",
+            "• some animals are ignored because they are viewed with {{36}} as our {{37}}, in terms of food, with disgust",
+            "<strong>Reasons for preventing extinction:</strong>",
+            "• the ecosystem needs to be {{38}} to be stable",
+            "• some types of {{39}} can help to signal environmental issues",
+            "• cobwebs help with medical disorders related to {{40}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "_____",
+      "options": [],
+      "answer": "Malaysian",
+      "correctAnswer": "Malaysian",
+      "acceptedAnswers": [
+        "Malaysian"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-form",
+      "instructions": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "_____ Rd., Bondi",
+      "options": [],
+      "answer": "13 Anglesea | 13 Anglesea Rd | 13 Anglesea Road",
+      "correctAnswer": "13 Anglesea",
+      "acceptedAnswers": [
+        "13 Anglesea",
+        "13 Anglesea Rd",
+        "13 Anglesea Road"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-form",
+      "instructions": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "_____",
+      "options": [],
+      "answer": "040 4229160 | 0404229160",
+      "correctAnswer": "040 4229160",
+      "acceptedAnswers": [
+        "040 4229160",
+        "0404229160"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-form",
+      "instructions": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "_____",
+      "options": [],
+      "answer": "economist",
+      "correctAnswer": "economist",
+      "acceptedAnswers": [
+        "economist"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-form",
+      "instructions": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Singing and _____",
+      "options": [],
+      "answer": "dancing",
+      "correctAnswer": "dancing",
+      "acceptedAnswers": [
+        "dancing"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-form",
+      "instructions": "Complete the notes below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 6,
+      "type": "multiple_choice",
+      "question": "According to Don, what might be a problem for Jenny?",
+      "options": [
+        "understanding local people",
+        "her accent",
+        "talking to her colleagues"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 7,
+      "type": "multiple_choice",
+      "question": "How many members does the club have now?",
+      "options": [
+        "eighty",
+        "fifty",
+        "thirty"
+      ],
+      "answer": "B",
+      "correctAnswer": "B",
+      "acceptedAnswers": [
+        "B"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 8,
+      "type": "multiple_choice",
+      "question": "How often does the club meet?",
+      "options": [
+        "once a month",
+        "once every two weeks",
+        "once a week"
+      ],
+      "answer": "B",
+      "correctAnswer": "B",
+      "acceptedAnswers": [
+        "B"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 9,
+      "type": "multiple_choice",
+      "question": "What is the club's most frequent type of activity?",
+      "options": [
+        "a visit",
+        "a meal",
+        "a talk"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 10,
+      "type": "multiple_choice",
+      "question": "The main purpose of the club is to help members to",
+      "options": [
+        "learn about life in Australia",
+        "enjoy themselves together",
+        "meet Australians"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 1,
+      "questionGroupId": "p1-mcq",
+      "instructions": "Choose the correct letter, A, B or C.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290052-Joining_Social_Club_Form.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "Listening question 11",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Listening question 12",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "Listening question 13",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "Listening question 14",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "Listening question 15",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "B",
+      "correctAnswer": "B",
+      "acceptedAnswers": [
+        "B"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 16,
+      "type": "multiple_choice",
+      "question": "Listening question 16",
+      "options": [
+        "all the members must do it",
+        "members have the option of doing it",
+        "the organiser is responsible for doing it"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-tasks",
+      "instructions": "What does the organiser tell the members about who should do each task?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 17,
+      "type": "multiple_choice",
+      "question": "Listening question 17",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "G",
+      "correctAnswer": "G",
+      "acceptedAnswers": [
+        "G"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 18,
+      "type": "multiple_choice",
+      "question": "Listening question 18",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "C",
+      "correctAnswer": "C",
+      "acceptedAnswers": [
+        "C"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 19,
+      "type": "multiple_choice",
+      "question": "Listening question 19",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "A",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 20,
+      "type": "multiple_choice",
+      "question": "Listening question 20",
+      "options": [
+        "locally produced food",
+        "steam railway",
+        "farming museum",
+        "water sports",
+        "transport museum",
+        "horse riding",
+        "old ruins",
+        "market selling clothes"
+      ],
+      "answer": "E",
+      "correctAnswer": "E",
+      "acceptedAnswers": [
+        "E"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 2,
+      "questionGroupId": "p2-attractions",
+      "instructions": "Which location has the following attractions?",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290546-Members.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 21,
+      "type": "sentence_completion",
+      "question": "• check accuracy of the _____ in the last section",
+      "options": [],
+      "answer": "references",
+      "correctAnswer": "references",
+      "acceptedAnswers": [
+        "references"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 22,
+      "type": "sentence_completion",
+      "question": "• try to give more _____",
+      "options": [],
+      "answer": "examples",
+      "correctAnswer": "examples",
+      "acceptedAnswers": [
+        "examples"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 23,
+      "type": "sentence_completion",
+      "question": "• she will give her presentation at _____",
+      "options": [],
+      "answer": "next seminar",
+      "correctAnswer": "next seminar",
+      "acceptedAnswers": [
+        "next seminar"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 24,
+      "type": "sentence_completion",
+      "question": "• she must provide explanation of _____ during the presentation",
+      "options": [],
+      "answer": "the experiment | experiment",
+      "correctAnswer": "the experiment",
+      "acceptedAnswers": [
+        "the experiment",
+        "experiment"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 25,
+      "type": "sentence_completion",
+      "question": "• the abstract due date is on _____",
+      "options": [],
+      "answer": "26 November | 26th November | November 26 | November 26th",
+      "correctAnswer": "26 November",
+      "acceptedAnswers": [
+        "26 November",
+        "26th November",
+        "November 26",
+        "November 26th"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 26,
+      "type": "sentence_completion",
+      "question": "• the presentation will take place in _____",
+      "options": [],
+      "answer": "Chemistry Lab | Chemistry Laboratory",
+      "correctAnswer": "Chemistry Lab",
+      "acceptedAnswers": [
+        "Chemistry Lab",
+        "Chemistry Laboratory"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 27,
+      "type": "sentence_completion",
+      "question": "• her presentation will be graded by _____",
+      "options": [],
+      "answer": "professor",
+      "correctAnswer": "professor",
+      "acceptedAnswers": [
+        "professor"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-notes",
+      "instructions": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 28,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 29,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 30,
+      "type": "multiple_choice",
+      "question": "Which THREE modules will Karen study next year?",
+      "options": [
+        "Psycholinguistics",
+        "Phonology",
+        "Communication skills",
+        "Data collection",
+        "Social interaction",
+        "Discourse analysis"
+      ],
+      "answer": "A | C | F",
+      "correctAnswer": "A",
+      "acceptedAnswers": [
+        "A",
+        "C",
+        "F"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 3,
+      "questionGroupId": "p3-modules",
+      "instructions": "Choose THREE letters, A-F.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028290960-Assignment_Notes.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "• several species of _____ are at risk because of increased housing",
+      "options": [],
+      "answer": "frog",
+      "correctAnswer": "frog",
+      "acceptedAnswers": [
+        "frog"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "• many animals, especially _____, are affected by pesticides",
+      "options": [],
+      "answer": "birds",
+      "correctAnswer": "birds",
+      "acceptedAnswers": [
+        "birds"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "• production of single crops like _____ is harming wildlife",
+      "options": [],
+      "answer": "corn",
+      "correctAnswer": "corn",
+      "acceptedAnswers": [
+        "corn"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "• can be influenced by the _____ (e.g. the panda)",
+      "options": [],
+      "answer": "media",
+      "correctAnswer": "media",
+      "acceptedAnswers": [
+        "media"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "• people are less concerned about smaller animals, e.g. _____",
+      "options": [],
+      "answer": "insects",
+      "correctAnswer": "insects",
+      "acceptedAnswers": [
+        "insects"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "• some animals are ignored because they are viewed with _____ as our {{37}}, in terms of food, with disgust",
+      "options": [],
+      "answer": "fear",
+      "correctAnswer": "fear",
+      "acceptedAnswers": [
+        "fear"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "• some animals are ignored because they are viewed with {{36}} as our _____, in terms of food, with disgust",
+      "options": [],
+      "answer": "rivals",
+      "correctAnswer": "rivals",
+      "acceptedAnswers": [
+        "rivals"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "• the ecosystem needs to be _____ to be stable",
+      "options": [],
+      "answer": "complex",
+      "correctAnswer": "complex",
+      "acceptedAnswers": [
+        "complex"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "• some types of _____ can help to signal environmental issues",
+      "options": [],
+      "answer": "plants",
+      "correctAnswer": "plants",
+      "acceptedAnswers": [
+        "plants"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "• cobwebs help with medical disorders related to _____",
+      "options": [],
+      "answer": "blood",
+      "correctAnswer": "blood",
+      "acceptedAnswers": [
+        "blood"
+      ],
+      "relevantText": "",
+      "explanation": "",
+      "partNumber": 4,
+      "questionGroupId": "p4-notes",
+      "instructions": "Write ONE WORD ONLY in each gap.",
+      "imageUrl": "",
+      "audioUrl": "/uploads/audio/1786028291381-Extinction_of_Australian_species.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
+      "transcriptSegmentIds": [],
+      "evidenceStartTime": null,
+      "evidenceEndTime": null,
+      "transcriptStartTime": null,
+      "transcriptEndTime": null
+    }
+  ],
+  "sections": [
+    {
+      "title": "Questions 1-10",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11-20",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21-30",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31-40",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "createdAt": "2026-08-06T13:19:42.253Z",
+  "updatedAt": "2026-08-06T14:58:11.776Z"
+}

@@ -155,6 +155,7 @@ function makeCard({ href, title, description, questionCount, config, test }) {
     const card = document.createElement("a");
     card.className = "reading-test-card";
     card.href = href;
+    card.dataset.createdAt = String(test?.createdAt || "");
     card.innerHTML = renderCardContent({ title, description, questionCount, config, test });
     return card;
 }
@@ -265,6 +266,18 @@ function renumberFullTestCards(grid, config) {
     });
 }
 
+function sortFullTestCardsByNewest(grid, config) {
+    if (config.part !== "full") return;
+
+    [...grid.querySelectorAll(".reading-test-card")]
+        .sort((left, right) => {
+            const leftTime = Date.parse(left.dataset.createdAt || "") || 0;
+            const rightTime = Date.parse(right.dataset.createdAt || "") || 0;
+            return rightTime - leftTime;
+        })
+        .forEach((card) => grid.appendChild(card));
+}
+
 function showEmptyState(grid, config) {
     if (grid.querySelector(".reading-test-card")) {
         return;
@@ -322,6 +335,7 @@ async function loadDynamicTests() {
         });
     }
 
+    sortFullTestCardsByNewest(grid, config);
     renumberFullTestCards(grid, config);
     showEmptyState(grid, config);
     updatePageCount(grid);

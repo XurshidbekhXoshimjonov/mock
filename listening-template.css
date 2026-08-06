@@ -12,6 +12,59 @@
     --lc-shadow: 0 2px 12px rgba(7, 20, 55, 0.06);
 }
 
+/* Larger Part 4 copy for the uploaded Jasurbek full-listening test. */
+.lc-question-card[data-block-id="p4-notes"] .lc-form-title {
+    font-size: 19px;
+}
+
+.lc-question-card[data-block-id="p3-notes"] .lc-form-title {
+    font-size: 19px;
+}
+
+.lc-question-card[data-block-id="p4-notes"] .lc-instruction {
+    font-size: 15px;
+}
+
+.lc-question-card[data-block-id="p3-notes"] .lc-instruction {
+    font-size: 15px;
+}
+
+.lc-question-card[data-block-id="p4-notes"] .lc-note-section-title,
+.lc-question-card[data-block-id="p4-notes"] .lc-note-line,
+.lc-question-card[data-block-id="p4-notes"] .lc-note-list-item {
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.lc-question-card[data-block-id="p3-notes"] .lc-note-section-title,
+.lc-question-card[data-block-id="p3-notes"] .lc-note-line,
+.lc-question-card[data-block-id="p3-notes"] .lc-note-list-item {
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+@media (max-width: 720px) {
+    .lc-question-card[data-block-id="p4-notes"] .lc-form-title {
+        font-size: 18px;
+    }
+
+    .lc-question-card[data-block-id="p3-notes"] .lc-form-title {
+        font-size: 18px;
+    }
+
+    .lc-question-card[data-block-id="p4-notes"] .lc-note-section-title,
+    .lc-question-card[data-block-id="p4-notes"] .lc-note-line,
+    .lc-question-card[data-block-id="p4-notes"] .lc-note-list-item {
+        font-size: 16px;
+    }
+
+    .lc-question-card[data-block-id="p3-notes"] .lc-note-section-title,
+    .lc-question-card[data-block-id="p3-notes"] .lc-note-line,
+    .lc-question-card[data-block-id="p3-notes"] .lc-note-list-item {
+        font-size: 16px;
+    }
+}
+
 html.dark-theme {
     --lc-red: #f43f5e;
     --lc-navy: #f8fafc;

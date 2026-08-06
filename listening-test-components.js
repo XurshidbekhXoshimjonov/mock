@@ -1964,6 +1964,15 @@ const ListeningComponents = (() => {
         const activePartNumber = Number(parts[0]?.partNumber) || 1;
         const params = new URLSearchParams(window.location.search);
         const isMockMode = params.get("mockMode") === "1" || params.has("mockTestId") || String(params.get("id") || "").includes("mock");
+        const fullAudioUrl = String(test.fullAudioUrl || "").trim();
+        const sharedAudioPart = fullAudioUrl && !isMockMode
+            ? {
+                ...(parts[0] || {}),
+                partNumber: activePartNumber,
+                audioUrl: fullAudioUrl,
+                audioUrls: []
+            }
+            : null;
 
         const preStartMarkup = isMockMode
             ? ""
@@ -1977,11 +1986,12 @@ const ListeningComponents = (() => {
                 <div data-listening-prestart ${isMockMode ? "hidden" : ""}>${preStartMarkup}</div>
                 <div class="lc-test-content" data-listening-test-content ${isMockMode ? "" : "hidden"}>
                     ${ListeningTestTitle(test)}
+                    ${sharedAudioPart ? AudioPlayerCard(sharedAudioPart) : ""}
                     <div class="lc-listening-stage" data-active-part="${activePartNumber}">
                         ${parts.map((part, index) => {
                             const partNumber = Number(part.partNumber) || index + 1;
                             return `<div class="lc-listening-section ${index === 0 ? "" : "hidden"}" data-listening-part="${partNumber}">
-                                ${AudioPlayerCard(part)}
+                                ${sharedAudioPart ? "" : AudioPlayerCard(part)}
                                 ${ListeningPart(part)}
                             </div>`;
                         }).join("")}
