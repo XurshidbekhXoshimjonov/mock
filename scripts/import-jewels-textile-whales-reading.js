@@ -169,7 +169,6 @@ function passageTwo() {
         question(26, "summary_completion", "Spinning causes a ______ that turns the liquid protein into solid silk.", "transformation")
     ];
     const summaryHtml = [
-        "<h4>Producing spider silk in the lab</h4>",
         `<p>Both scientists and manufacturers are interested in producing silk for many different purposes. Some researchers have tried to grow silk by introducing genetic material into <span class="ielts-blank" data-blank="24"></span> and some animals. But these experiments have been somewhat disappointing.</p>`,
         `<p>It is difficult to make spider silk in a lab setting because the silk comes from a liquid protein made in a <span class="ielts-blank" data-blank="25"></span> inside the spider's body. When a spider spins silk, it causes a <span class="ielts-blank" data-blank="26"></span> that turns this liquid into solid silk. Scientists cannot replicate this yet.</p>`
     ].join("\n");
@@ -201,7 +200,8 @@ function passageTwo() {
             instructionText: "Complete the summary below.",
             rule: "Choose ONE WORD ONLY from the passage for each answer.",
             questions: summaryQuestions,
-            contentHtml: summaryHtml
+            contentHtml: summaryHtml,
+            contentTitle: "Producing spider silk in the lab"
         })
     ];
 
