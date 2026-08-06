@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reading Passage 2 – A Unique Golden Textile</title>
+<style>
+  :root{--brand:#2563eb;--ink:#111827;--bg:#f7f7fb;--ok:#16a34a;--bad:#dc2626;--muted:#6b7280}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111}
+  .container{display:flex;gap:20px;max-width:1280px;margin:0 auto;padding:20px 20px 96px}
+  .card{background:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);padding:22px;}
+  .passage{flex:1.1;overflow:auto;max-height:90vh;}
+  .questions{flex:1;overflow:auto;max-height:90vh;}
+  h1{color:var(--ink);border-bottom:2px solid var(--brand);padding-bottom:10px;margin:0 0 14px;font-size:18px}
+  h2{color:var(--brand);margin:22px 0 10px;font-size:16px}
+  h3{margin:8px 0 4px;font-size:15px}
+  p{margin:0 0 10px;line-height:1.7;font-size:15px}
+  .muted{color:var(--muted);font-size:13px;margin:2px 0}
+
+  /* Timer */
+  .timerWrap{position:fixed;top:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:100}
+  .timer{background:var(--brand);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;font-size:15px}
+  .tbtn{border:1px solid #e5e7eb;background:#fff;color:#111;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px}
+
+  /* Passage paragraphs */
+  .para-block{margin-bottom:18px}
+  .para-label{font-weight:700;font-size:15px;color:var(--brand);margin-bottom:4px}
+
+  /* Drop zone inside passage */
+  .drop-zone{
+    display:flex;align-items:center;gap:8px;
+    min-height:38px;border:2px dashed #c7d2fe;border-radius:8px;
+    background:#eef2ff;padding:6px 10px;margin-bottom:8px;
+    font-size:13px;color:#4f46e5;font-weight:500;
+    transition:background .2s,border-color .2s;
+  }
+  .drop-zone.drag-over{background:#c7d2fe;border-color:#4f46e5;}
+  .drop-zone.filled{background:#f0fdf4;border-color:#86efac;color:#166534;}
+  .drop-zone .dz-label{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+  .drop-zone .dz-content{flex:1}
+  .drop-zone .dz-remove{background:none;border:none;color:#dc2626;cursor:pointer;font-size:16px;padding:0 4px;line-height:1;flex-shrink:0;display:none}
+  .drop-zone.filled .dz-remove{display:inline}
+  .drop-zone.correct-ans{background:#dcfce7;border-color:#22c55e;color:#15803d;}
+  .drop-zone.wrong-ans{background:#fef2f2;border-color:#f87171;color:#991b1b;}
+
+  /* Draggable heading chips */
+  .headings-bank{
+    position:sticky;top:0;
+    border:2px solid #c7d2fe;border-radius:12px;padding:14px;background:#f8faff;margin-bottom:18px;
+    z-index:10;
+  }
+  .headings-bank h3{color:var(--brand);font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;font-weight:700}
+  .chips-wrap{display:flex;flex-direction:column;gap:6px;min-height:40px;}
+  .hchip{
+    background:#fff;border:1px solid #c7d2fe;color:#3730a3;
+    padding:7px 12px;border-radius:8px;font-size:13px;font-weight:500;
+    cursor:grab;user-select:none;transition:box-shadow .15s,opacity .15s,border-color .15s;
+    box-shadow:0 1px 4px rgba(0,0,0,.07);
+    display:flex;align-items:center;gap:6px;
+  }
+  .hchip::before{content:'⠿';font-size:14px;color:#a5b4fc;flex-shrink:0}
+  .hchip:hover{border-color:#818cf8;box-shadow:0 2px 8px rgba(99,102,241,.18);}
+  .hchip:active{cursor:grabbing;}
+  .hchip.dragging{opacity:.4;}
+  .hchip.used{opacity:.3;cursor:default;pointer-events:none;background:#f3f4f6;color:#9ca3af;border-color:#e5e7eb;}
+
+  /* Q sections */
+  .qsection{margin:14px 0 6px;font-size:16px}
+  .qblock{padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin:12px 0}
+  .qhead{font-weight:600;margin-bottom:8px;font-size:14px}
+  .options label{display:block;margin:6px 0;font-size:14px}
+  input[type="text"]{padding:8px;border-radius:8px;border:1px solid #e5e7eb;width:100%;max-width:440px;font-size:14px}
+  .submit{background:var(--brand);color:#fff;border:0;padding:12px 18px;border-radius:8px;cursor:pointer;font-size:16px;margin-top:16px}
+  .submit:hover{filter:brightness(.95)}
+
+  /* Results */
+  .results{display:none;margin-top:18px;background:#f8f9fa;border-radius:10px;padding:16px}
+  .results ul{list-style:none;padding:0;margin:8px 0 0}
+  .results li{margin:6px 0;padding:8px;border-radius:8px;font-size:13px}
+  .results li.ok{background:#ecfdf5;color:#065f46}
+  .results li.bad{background:#fef2f2;color:#991b1b}
+  .results .meta{font-size:13px;color:var(--muted)}
+
+  /* Footer chips */
+  .footerNav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e7eb;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:9}
+  .chip{border:1px solid #d1d5db;background:#fff;color:#111;padding:6px 10px;border-radius:999px;cursor:pointer;font-size:13px}
+  .chip.answered{border-color:#9ca3af;background:#f3f4f6}
+
+  /* Highlights */
+  .palette{position:fixed;background:#fff;padding:8px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);display:none;z-index:999}
+  .hbtn{background:var(--brand);color:#fff;border:0;padding:6px 10px;border-radius:6px;margin:4px 4px 0 0;cursor:pointer;font-size:13px}
+  .highlight{background:yellow}
+
+  /* Telegram link */
+  .tg{position:fixed;bottom:96px;right:16px;background:#0088cc;color:#fff;border:0;padding:10px 16px;border-radius:9999px;display:flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;font-size:14px;box-shadow:0 8px 20px rgba(0,136,204,.35);z-index:99}
+  .tg:hover{background:#006faa}
+
+  /* Matching table */
+  .match-table{width:100%;border-collapse:collapse;margin-top:8px}
+  .match-table td{padding:7px 8px;border:1px solid #e5e7eb;font-size:14px;vertical-align:middle}
+  .match-table td:first-child{font-weight:600;width:32px;text-align:center}
+  .match-table input[type="text"]{max-width:80px;min-width:60px;text-align:center;padding:5px 8px}
+</style>
+</head>
+<body>
+
+<!-- Timer -->
+<div class="timerWrap">
+  <div class="timer" id="timer">20:00</div>
+  <button class="tbtn" id="pauseBtn">⏸️ Pause</button>
+  <button class="tbtn" id="resumeBtn" disabled>▶️ Resume</button>
+</div>
+
+<!-- Highlight palettes -->
+<div class="palette" id="pPalette">
+  <button class="hbtn" data-color="yellow">Yellow</button>
+  <button class="hbtn" data-color="lightgreen">Green</button>
+  <button class="hbtn" data-color="lightblue">Blue</button>
+  <button class="hbtn" data-color="pink">Pink</button>
+  <button class="hbtn" data-color="orange">Orange</button>
+  <button class="hbtn" id="clearPMarks">Clear</button>
+</div>
+<div class="palette" id="qPalette">
+  <button class="hbtn" data-color="yellow">Yellow</button>
+  <button class="hbtn" data-color="lightgreen">Green</button>
+  <button class="hbtn" data-color="lightblue">Blue</button>
+  <button class="hbtn" data-color="pink">Pink</button>
+  <button class="hbtn" data-color="orange">Orange</button>
+  <button class="hbtn" id="clearQMarks">Clear</button>
+</div>
+
+<div class="container">
+
+  <!-- LEFT: PASSAGE -->
+  <div class="card passage" id="passageCard">
+    <h1>Reading Passage 2 — A Unique Golden Textile</h1>
+    <p class="muted">A two-man project to use spider silk is achieved after 4 years</p>
+
+    <!-- Paragraphs with drop zones -->
+    <div class="para-block">
+      <div class="para-label">A</div>
+      <div class="drop-zone" id="dz-A" data-para="A" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q14 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-A')">✕</button>
+      </div>
+      <p>A rare textile made from the silk of more than a million wild spiders has been on display at the American Museum of Natural History in New York City. To produce this golden cloth, 70 people spent four years collecting golden orb spiders from telephone poles in Madagascar, while another dozen workers carefully extracted about 80 feet of silk filament from each of the arachnids. The resulting 11-foot by 4-foot textile is the only large piece of cloth made from natural spider silk existing in the world today.</p>
+    </div>
+
+    <div class="para-block">
+      <div class="para-label">B</div>
+      <div class="drop-zone" id="dz-B" data-para="B" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q15 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-B')">✕</button>
+      </div>
+      <p>Spider silk is very elastic and strong compared with steel or Kevlar, said textile expert Simon Peers, who co-led the project. Kevlar is a lightweight synthetic fabric which is chemically related to nylon. It is very tough and durable and used in bullet-proof vests. Kevlar is also resistant to wear, tear, and heat and has absolutely no melting point. But the tensile strength of spider silk is even greater than Kevlar's amid filaments, and greater than that of high-grade steel. Most importantly, spider silk is extremely lightweight: a strand of spider silk long enough to circle the Earth would weigh less than 500 grams (18 oz). Spider silk is also especially ductile, able to stretch up to 140 per cent of its length without breaking. It can hold its strength below -40°C. This gives it a very high toughness, which equals that of commercial fibers.</p>
+    </div>
+
+    <div class="para-block">
+      <div class="para-label">C</div>
+      <div class="drop-zone" id="dz-C" data-para="C" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q16 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-C')">✕</button>
+      </div>
+      <p>Researchers have long been intrigued by the unique properties of spider silk. Unfortunately, spider silk is extremely hard to mass produce. Unlike silk worms, which are easy to raise in captivity, spiders have a habit of chopping off each other's heads when housed together. According to Peers, there's scientific research going on all over the world right now trying to replicate the tensile properties of spider silk and apply it to all sorts of areas in medicine and industry, but no one up until now has succeeded in replicating 100 per cent of the properties of natural spider silk.</p>
+    </div>
+
+    <div class="para-block">
+      <div class="para-label">D</div>
+      <div class="drop-zone" id="dz-D" data-para="D" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q17 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-D')">✕</button>
+      </div>
+      <p>Peers came up with the idea of weaving spider silk after learning about the French missionary Jacob Paul Camboue, who worked with spiders in Madagascar during the 1880s and 1890s. Camboue built a small, hand-driven machine to extract silk from up to 24 spiders at once, without harming them. The spiders were temporarily restrained, their silk extracted, and then let go. Peers managed to build a replica of this 24-spider silking machine that was used at the turn of the century, said Nicholas Godley, who co-led the project with Peers. As an experiment, the pair collected an initial batch of about 20 spiders. "When we stuck them in the machine and started turning it, lo and behold, this beautiful gold-colored silk started coming out," Godley said.</p>
+    </div>
+
+    <div class="para-block">
+      <div class="para-label">E</div>
+      <div class="drop-zone" id="dz-E" data-para="E" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q18 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-E')">✕</button>
+      </div>
+      <p>But to make a textile of any significant size, the silk experts had to drastically scale up their plan. Fourteen thousand spiders yield about an ounce of silk, Godley said, and the textile weighs about 2.6 pounds. The numbers are overwhelming. To get as much silk as they needed, Godley and Peers began hiring dozens of spider handlers to collect wild arachnids and carefully harvest them to the silk-extraction machine. "We had to find people who were willing to work with spiders," Godley said, "because they bite." By the end of the project, Godley and Peers extracted silk from more than 1 million female golden orb spiders, which are abundant throughout Madagascar and known for the rich golden color of their silk. Because the spiders only produce silk during the rainy season, workers collected all the spiders between October and June. Then an additional 12 people used hand-powered machines to extract the silk and weave it into 96-filament thread. Once the spiders had been silked, they were released back into the wild, where Godley said it takes them about a week to regenerate their silk. "We can go back and re-silk the same spiders," he said. "It's like the gift that never stops giving."</p>
+    </div>
+
+    <div class="para-block">
+      <div class="para-label">F</div>
+      <div class="drop-zone" id="dz-F" data-para="F" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+        <span class="dz-label">Q19 ↓</span>
+        <span class="dz-content">Drop heading here…</span>
+        <button class="dz-remove" onclick="removeChip('dz-F')">✕</button>
+      </div>
+      <p>Of course, spending four years to produce a single textile of spider silk isn't very practical for scientists trying to study the properties of spider silk, or companies that want to manufacture the fabric for use as a biomedical product, or an alternative to Kevlar armor. Several groups have tried inserting spider genes into bacteria or even cows and goats to produce silk, but so far, the attempts have been only moderately successful. Part of the reason it's so hard to generate spider silk in the lab is that it starts out as a liquid protein that's produced by a special gland in the spider's abdomen. Using their spinneret, spiders apply force to rearrange the protein's molecular structure and transform it into solid silk. "When we talk about a spider spinning silk, we're talking about how the spider applies forces to produce a transformation from liquid to solid," said spider silk expert Todd Blackledge of the University of Akron, Ohio, US, who was not involved in creating the textile. Scientists simply can't replicate the efficiency with which a spider produces silk. "Every year we're getting closer and closer to being able to mass-produce it, but we're not there yet." For now, it seems we'll have to be content with one incredibly beautiful cloth, graciously provided by more than a million spiders.</p>
+    </div>
+
+  </div><!-- end passage -->
+
+  <!-- RIGHT: QUESTIONS -->
+  <div class="card questions" id="qCard">
+    <h1>Questions 14–26</h1>
+
+    <!-- Q14-19: Heading Match -->
+    <h2 class="qsection">Questions 14–19</h2>
+    <p class="muted">Choose the correct heading for each paragraph from the list below. Drag a heading chip onto the drop zone at the top of each paragraph in the passage.</p>
+
+    <!-- Headings bank — sticky on right panel -->
+    <div class="headings-bank" id="headingsBank">
+      <h3>📋 List of Headings — drag to each paragraph</h3>
+      <div class="chips-wrap" id="chipsWrap"></div>
+    </div>
+
+    <div id="dnd-status" style="margin:12px 0;font-size:13px;color:var(--muted)">
+      <strong>Status:</strong> <span id="dnd-filled">0</span> / 6 headings placed
+    </div>
+
+    <!-- Visual summary of drop zones for Q panel -->
+    <table class="match-table" id="heading-summary">
+      <tbody>
+        <tr><td>14</td><td>Paragraph A</td><td><span class="dz-summary" id="sum-A" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+        <tr><td>15</td><td>Paragraph B</td><td><span class="dz-summary" id="sum-B" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+        <tr><td>16</td><td>Paragraph C</td><td><span class="dz-summary" id="sum-C" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+        <tr><td>17</td><td>Paragraph D</td><td><span class="dz-summary" id="sum-D" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+        <tr><td>18</td><td>Paragraph E</td><td><span class="dz-summary" id="sum-E" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+        <tr><td>19</td><td>Paragraph F</td><td><span class="dz-summary" id="sum-F" style="font-size:13px;color:#6b7280;font-style:italic">Not placed</span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Q20-23: Matching researchers -->
+    <h2 class="qsection">Questions 20–23</h2>
+    <p class="muted">Match each statement with the correct researcher, A, B or C. Write the correct letter. <em>You may use any letter more than once.</em></p>
+    <div style="border:1px solid #e5e7eb;border-radius:8px;padding:10px;background:#f9fafb;margin:10px 0;font-size:13px">
+      <p><strong>A</strong> Simon Peers</p>
+      <p><strong>B</strong> Nicholas Godley</p>
+      <p style="margin:0"><strong>C</strong> Todd Blackledge</p>
+    </div>
+
+    <div class="qblock" id="anchor-20">
+      <div class="qhead"><strong>20.</strong> It takes a tremendous number of spiders to make a small amount of silk.</div>
+      <input type="text" id="q20" name="q20" placeholder="A, B or C" maxlength="1">
+    </div>
+    <div class="qblock" id="anchor-21">
+      <div class="qhead"><strong>21.</strong> Scientists want to use the qualities of spider silk for medical purposes.</div>
+      <input type="text" id="q21" name="q21" placeholder="A, B or C" maxlength="1">
+    </div>
+    <div class="qblock" id="anchor-22">
+      <div class="qhead"><strong>22.</strong> Scientists are making some progress in their efforts to manufacture spider silk.</div>
+      <input type="text" id="q22" name="q22" placeholder="A, B or C" maxlength="1">
+    </div>
+    <div class="qblock" id="anchor-23">
+      <div class="qhead"><strong>23.</strong> Spider silk compares favourably to materials known for their strength.</div>
+      <input type="text" id="q23" name="q23" placeholder="A, B or C" maxlength="1">
+    </div>
+
+    <!-- Q24-26: Gap Fill -->
+    <h2 class="qsection">Questions 24–26</h2>
+    <p class="muted">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+    <div class="qblock" style="background:#fafafa">
+      <h3 style="margin-bottom:10px;color:#111">Producing spider silk in the lab</h3>
+      <p style="font-size:14px;line-height:1.8">
+        Both scientists and manufacturers are interested in producing silk for many different purposes. Some researchers have tried to grow silk by introducing genetic material into 
+        <strong>24.</strong> <input type="text" id="q24" name="q24" placeholder="one word" style="max-width:110px;display:inline-block;margin:0 4px"> and some animals. But these experiments have been somewhat disappointing.
+      </p>
+      <p style="font-size:14px;line-height:1.8">
+        It is difficult to make spider silk in a lab setting because the silk comes from a liquid protein made in a 
+        <strong>25.</strong> <input type="text" id="q25" name="q25" placeholder="one word" style="max-width:110px;display:inline-block;margin:0 4px"> inside the spider's body. When a spider spins silk, it causes a 
+        <strong>26.</strong> <input type="text" id="q26" name="q26" placeholder="one word" style="max-width:130px;display:inline-block;margin:0 4px"> that turns this liquid into solid silk. Scientists cannot replicate this yet.
+      </p>
+    </div>
+
+    <button class="submit" id="submitBtn">Submit Answers</button>
+
+    <div class="results" id="results">
+      <h2>Your Results</h2>
+      <div id="score" class="meta" style="font-weight:700;font-size:15px;margin-bottom:10px"></div>
+      <ul id="answers"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Footer navigation -->
+<div class="footerNav" id="footerNav">
+  <strong class="muted" style="font-size:13px">Questions:</strong>
+</div>
+
+<!-- Telegram -->
+<a class="tg" href="https://t.me/jonibeksielts9" target="_blank">@jonibeksielts9</a>
+
+<script>
+/* =====================
+   HEADINGS DATA
+   ===================== */
+const headingsList = [
+  { id:'i',   text:'i. Experimenting with an old idea' },
+  { id:'ii',  text:'ii. Life cycle of Madagascar spiders' },
+  { id:'iii', text:'iii. Advances in the textile industry' },
+  { id:'iv',  text:'iv. Resources needed to meet the project\'s demands' },
+  { id:'v',   text:'v. The physical properties of spider silk' },
+  { id:'vi',  text:'vi. A scientific analysis of spider silk' },
+  { id:'vii', text:'vii. A unique work of art' },
+  { id:'viii',text:'viii. Importance of the silk textile market' },
+  { id:'ix',  text:'ix. Difficulties of raising spiders in captivity' },
+];
+
+const correctHeadings = {
+  'A': 'vii',
+  'B': 'v',
+  'C': 'ix',
+  'D': 'i',
+  'E': 'iv',
+  'F': 'vi',
+};
+
+const answersMap = {
+  20: 'B', 21: 'A', 22: 'C', 23: 'A',
+  24: 'bacteria', 25: 'gland', 26: 'transformation'
+};
+
+/* Drop zone → placed heading map */
+const dzState = { A:null, B:null, C:null, D:null, E:null, F:null };
+
+/* =====================
+   BUILD CHIPS
+   ===================== */
+const chipsWrap = document.getElementById('chipsWrap');
+
+headingsList.forEach(h => {
+  const chip = document.createElement('div');
+  chip.className = 'hchip';
+  chip.id = 'chip-' + h.id;
+  chip.textContent = h.text;
+  chip.draggable = true;
+  chip.dataset.hid = h.id;
+  chip.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text/plain', h.id);
+    chip.classList.add('dragging');
+  });
+  chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+  chipsWrap.appendChild(chip);
+});
+
+/* =====================
+   DROP ZONE HANDLERS
+   ===================== */
+function dzOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+function dzLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+function dzDrop(e) {
+  e.preventDefault();
+  const dz = e.currentTarget;
+  dz.classList.remove('drag-over');
+  const hid = e.dataTransfer.getData('text/plain');
+  if (!hid) return;
+
+  // If this dz already has a chip, return it
+  const existingHid = dzState[dz.dataset.para];
+  if (existingHid) returnChipToBank(existingHid);
+
+  // If chip is already used elsewhere, remove from that dz
+  Object.entries(dzState).forEach(([para, val]) => {
+    if (val === hid) {
+      dzState[para] = null;
+      renderDz(para, null);
+    }
+  });
+
+  dzState[dz.dataset.para] = hid;
+  renderDz(dz.dataset.para, hid);
+  markChipUsed(hid);
+  updateStatus();
+}
+
+function renderDz(para, hid) {
+  const dz = document.getElementById('dz-' + para);
+  const content = dz.querySelector('.dz-content');
+  const qNum = { A:14, B:15, C:16, D:17, E:18, F:19 }[para];
+  const sumEl = document.getElementById('sum-' + para);
+
+  if (hid) {
+    const hObj = headingsList.find(x => x.id === hid);
+    content.textContent = hObj.text;
+    dz.classList.add('filled');
+    if (sumEl) { sumEl.textContent = hObj.text; sumEl.style.color = '#166534'; sumEl.style.fontStyle = 'normal'; }
+    markChipAnswered(qNum, true);
+  } else {
+    content.textContent = 'Drop heading here…';
+    dz.classList.remove('filled','correct-ans','wrong-ans');
+    if (sumEl) { sumEl.textContent = 'Not placed'; sumEl.style.color = '#6b7280'; sumEl.style.fontStyle = 'italic'; }
+    markChipAnswered(qNum, false);
+  }
+}
+
+function removeChip(dzId) {
+  const dz = document.getElementById(dzId);
+  const para = dz.dataset.para;
+  const hid = dzState[para];
+  if (!hid) return;
+  returnChipToBank(hid);
+  dzState[para] = null;
+  renderDz(para, null);
+  updateStatus();
+}
+
+function returnChipToBank(hid) {
+  const chip = document.getElementById('chip-' + hid);
+  if (chip) { chip.classList.remove('used'); chip.draggable = true; }
+}
+function markChipUsed(hid) {
+  const chip = document.getElementById('chip-' + hid);
+  if (chip) { chip.classList.add('used'); chip.draggable = false; }
+}
+
+function updateStatus() {
+  const filled = Object.values(dzState).filter(v => v !== null).length;
+  document.getElementById('dnd-filled').textContent = filled;
+}
+
+/* =====================
+   FOOTER CHIPS
+   ===================== */
+const footerNav = document.getElementById('footerNav');
+const navIds = [14,15,16,17,18,19,20,21,22,23,24,25,26];
+navIds.forEach(id => {
+  const chip = document.createElement('button');
+  chip.className = 'chip'; chip.id = `chip-nav-${id}`; chip.textContent = id;
+  chip.addEventListener('click', () => {
+    if (id >= 14 && id <= 19) {
+      const para = ['A','B','C','D','E','F'][id-14];
+      document.getElementById('dz-'+para).scrollIntoView({behavior:'smooth', block:'center'});
+    } else {
+      const el = document.getElementById(`anchor-${id}`) || document.getElementById(`q${id}`);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  });
+  footerNav.appendChild(chip);
+});
+
+function markChipAnswered(id, answered) {
+  const chip = document.getElementById(`chip-nav-${id}`);
+  if (chip) chip.classList.toggle('answered', !!answered);
+}
+
+/* =====================
+   TIMER
+   ===================== */
+let timeLeft = 20 * 60;
+const timerEl = document.getElementById('timer');
+const pauseBtn = document.getElementById('pauseBtn');
+const resumeBtn = document.getElementById('resumeBtn');
+let paused = false, iv;
+const fmt = s => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+function startTick(){
+  if(iv) clearInterval(iv);
+  iv = setInterval(() => {
+    if(paused) return;
+    timerEl.textContent = fmt(timeLeft);
+    if(timeLeft <= 0){ clearInterval(iv); alert("Time's up! Submitting."); submit(); }
+    timeLeft--;
+  }, 1000);
+}
+timerEl.textContent = fmt(timeLeft); startTick();
+pauseBtn.addEventListener('click', () => { paused=true; pauseBtn.disabled=true; resumeBtn.disabled=false; });
+resumeBtn.addEventListener('click', () => { paused=false; pauseBtn.disabled=false; resumeBtn.disabled=true; });
+
+/* =====================
+   INPUT TRACKING
+   ===================== */
+document.addEventListener('change', e => {
+  const m = String(e.target.name||e.target.id||'').match(/q(\d+)/);
+  const id = m ? +m[1] : null; if(!id) return;
+  const answered = e.target.value.trim().length > 0;
+  markChipAnswered(id, answered);
+});
+
+/* =====================
+   SUBMIT & GRADING
+   ===================== */
+document.getElementById('submitBtn').addEventListener('click', submit);
+
+function submit() {
+  paused = true; pauseBtn.disabled = true; resumeBtn.disabled = false;
+  let total = 0, graded = 0, correctCount = 0;
+  const itemsOut = [];
+
+  // Grade Q14-19 from drag-drop
+  const paraMap = { A:14, B:15, C:16, D:17, E:18, F:19 };
+  Object.entries(paraMap).forEach(([para, qNum]) => {
+    const placed = dzState[para];
+    const correct = correctHeadings[para];
+    const hObj = headingsList.find(x => x.id === placed);
+    const userText = hObj ? hObj.text : 'Not placed';
+    const correctObj = headingsList.find(x => x.id === correct);
+    const ok = placed === correct;
+    if(ok) correctCount++;
+    total++; graded++;
+    itemsOut.push({ label: qNum, status: ok?'✓ Correct':'✗ Incorrect', user: userText, correct: correctObj.text });
+    // Visual feedback on drop zone
+    const dz = document.getElementById('dz-'+para);
+    dz.classList.remove('filled','correct-ans','wrong-ans');
+    dz.classList.add(ok ? 'correct-ans' : 'wrong-ans');
+  });
+
+  // Grade Q20-26
+  Object.keys(answersMap).forEach(key => {
+    const id = +key;
+    const input = document.getElementById('q'+id);
+    let user = input ? input.value.trim() : '';
+    const correct = String(answersMap[key]);
+    const ok = user.toUpperCase() === correct.toUpperCase();
+    if(ok) correctCount++;
+    total++; graded++;
+    itemsOut.push({ label: id, status: ok?'✓ Correct':'✗ Incorrect', user: user||'No answer', correct });
+  });
+
+  document.getElementById('score').innerHTML = `Graded ${graded} of ${total} &nbsp;•&nbsp; Score: <span style="color:var(--ok)">${correctCount}</span> / ${graded}`;
+  document.getElementById('answers').innerHTML = itemsOut.map(it =>
+    `<li class="${/Correct/.test(it.status)?'ok':'bad'}">Q${it.label}: ${it.status} — Your: <b>${it.user}</b> | Correct: <b>${it.correct}</b></li>`
+  ).join('');
+  const r = document.getElementById('results');
+  r.style.display = 'block';
+  r.scrollIntoView({behavior:'smooth'});
+}
+
+/* =====================
+   HIGHLIGHTS – PASSAGE
+   ===================== */
+const passageCard = document.getElementById('passageCard');
+const pPalette = document.getElementById('pPalette');
+passageCard.addEventListener('mouseup', e => {
+  const sel = window.getSelection();
+  if(!sel || sel.toString().trim().length === 0) return;
+  if(!passageCard.contains(sel.getRangeAt(0).commonAncestorContainer)) return;
+  const r = passageCard.getBoundingClientRect();
+  pPalette.style.left = Math.min(e.clientX, r.right - 160) + 'px';
+  pPalette.style.top = (e.clientY - 50) + 'px';
+  pPalette.style.display = 'block';
+});
+document.addEventListener('mousedown', e => { if(!pPalette.contains(e.target)) pPalette.style.display='none'; });
+pPalette.querySelectorAll('.hbtn[data-color]').forEach(btn => {
+  btn.addEventListener('click', () => { markSelection(btn.dataset.color, passageCard); pPalette.style.display='none'; });
+});
+document.getElementById('clearPMarks').addEventListener('click', () => {
+  passageCard.querySelectorAll('span.highlight').forEach(n => {
+    const p = n.parentNode; while(n.firstChild) p.insertBefore(n.firstChild,n); p.removeChild(n); p.normalize();
+  });
+  pPalette.style.display='none';
+});
+
+/* HIGHLIGHTS – QUESTIONS */
+const qCard = document.getElementById('qCard');
+const qPalette = document.getElementById('qPalette');
+qCard.addEventListener('mouseup', e => {
+  const sel = window.getSelection();
+  if(!sel || sel.toString().trim().length === 0) return;
+  if(!qCard.contains(sel.getRangeAt(0).commonAncestorContainer)) return;
+  const node = sel.getRangeAt(0).commonAncestorContainer.nodeType===1 ? sel.getRangeAt(0).commonAncestorContainer : sel.getRangeAt(0).commonAncestorContainer.parentNode;
+  if(node.closest && node.closest('input,textarea,select')) return;
+  const r = qCard.getBoundingClientRect();
+  qPalette.style.left = Math.min(e.clientX, r.right - 160) + 'px';
+  qPalette.style.top = (e.clientY - 50) + 'px';
+  qPalette.style.display = 'block';
+});
+document.addEventListener('mousedown', e => { if(!qPalette.contains(e.target)) qPalette.style.display='none'; });
+qPalette.querySelectorAll('.hbtn[data-color]').forEach(btn => {
+  btn.addEventListener('click', () => { markSelection(btn.dataset.color, qCard); qPalette.style.display='none'; });
+});
+document.getElementById('clearQMarks').addEventListener('click', () => {
+  qCard.querySelectorAll('span.highlight').forEach(n => {
+    const p = n.parentNode; while(n.firstChild) p.insertBefore(n.firstChild,n); p.removeChild(n); p.normalize();
+  });
+  qPalette.style.display='none';
+});
+
+function markSelection(color, scope) {
+  const sel = window.getSelection(); if(!sel||!sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  if(!scope.contains(range.commonAncestorContainer)) return;
+  const container = range.commonAncestorContainer.nodeType===1 ? range.commonAncestorContainer : range.commonAncestorContainer.parentNode;
+  if(container.closest && container.closest('input,textarea,select')) return;
+  const frag = range.extractContents();
+  const span = document.createElement('span'); span.className='highlight'; span.style.backgroundColor=color; span.appendChild(frag);
+  range.insertNode(span); sel.removeAllRanges();
+}
+</script>
+</body>
+</html>

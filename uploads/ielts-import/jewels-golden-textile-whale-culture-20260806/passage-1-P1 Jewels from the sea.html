@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reading Passage 1 – Jewels from the sea</title>
+<style>
+  :root{--brand:#2563eb;--ink:#111827;--bg:#f7f7fb;--ok:#16a34a;--bad:#dc2626;--muted:#6b7280}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#111}
+  .container{display:flex;gap:20px;max-width:1200px;margin:0 auto;padding:20px 20px 96px}
+  .card{background:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);padding:20px;overflow:auto;max-height:90vh}
+  .passage{flex:1}
+  .questions{flex:1}
+  h1{color:var(--ink);border-bottom:2px solid var(--brand);padding-bottom:10px;margin:0 0 14px}
+  h2{color:var(--brand);margin:22px 0 10px}
+  h3{margin:8px 0 0}
+  .muted{color:var(--muted)}
+
+  /* Timer */
+  .timerWrap{position:fixed;top:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:10}
+  .timer{background:var(--brand);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700}
+  .tbtn{border:1px solid #e5e7eb;background:#fff;color:#111;padding:8px 10px;border-radius:8px;cursor:pointer}
+
+  /* Questions */
+  .qsection{margin:14px 0 6px}
+  .qblock{padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin:12px 0}
+  .qhead{font-weight:600;margin-bottom:8px}
+  .options{margin-top:8px}
+  .options label{display:block;margin:6px 0}
+  select,input[type="text"]{padding:8px;border-radius:8px;border:1px solid #e5e7eb;width:100%;max-width:520px}
+  .submit{background:var(--brand);color:#fff;border:0;padding:12px 18px;border-radius:8px;cursor:pointer;font-size:16px;margin-top:16px}
+  .submit:hover{filter:brightness(.95)}
+
+  /* Results */
+  .results{display:none;margin-top:18px;background:#f8f9fa;border-radius:10px;padding:16px}
+  .results ul{list-style:none;padding:0;margin:8px 0 0}
+  .results li{margin:6px 0;padding:8px;border-radius:8px}
+  .results li.ok{background:#ecfdf5;color:#065f46}
+  .results li.bad{background:#fef2f2;color:#991b1b}
+  .results .meta{font-size:13px;color:var(--muted)}
+
+  /* Footer chips */
+  .footerNav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e7eb;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:9}
+  .chip{border:1px solid #d1d5db;background:#fff;color:#111;padding:6px 10px;border-radius:999px;cursor:pointer;font-size:14px}
+  .chip.answered{border-color:#9ca3af;background:#f3f4f6}
+
+  /* Highlights */
+  .palette{position:fixed;background:#fff;padding:8px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);display:none;z-index:9}
+  .hbtn{background:var(--brand);color:#fff;border:0;padding:6px 10px;border-radius:6px;margin:4px 4px 0 0;cursor:pointer}
+  .highlight{background:yellow}
+
+  .tg{position:fixed;bottom:96px;right:16px;background:#0088cc;color:#fff;border:0;padding:12px 16px;border-radius:9999px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 8px 20px rgba(0,136,204,.35)}
+</style>
+</head>
+<body>
+  <div class="timerWrap">
+    <div class="timer" id="timer">20:00</div>
+    <button class="tbtn" id="pauseBtn">⏸️ Pause</button>
+    <button class="tbtn" id="resumeBtn" disabled>▶️ Resume</button>
+  </div>
+
+  <!-- Highlight palettes -->
+  <div class="palette" id="pPalette">
+    <button class="hbtn" data-color="yellow">Yellow</button>
+    <button class="hbtn" data-color="lightgreen">Green</button>
+    <button class="hbtn" data-color="lightblue">Blue</button>
+    <button class="hbtn" data-color="pink">Pink</button>
+    <button class="hbtn" data-color="orange">Orange</button>
+    <button class="hbtn" id="clearPMarks">Clear</button>
+  </div>
+  <div class="palette" id="qPalette">
+    <button class="hbtn" data-color="yellow">Yellow</button>
+    <button class="hbtn" data-color="lightgreen">Green</button>
+    <button class="hbtn" data-color="lightblue">Blue</button>
+    <button class="hbtn" data-color="pink">Pink</button>
+    <button class="hbtn" data-color="orange">Orange</button>
+    <button class="hbtn" id="clearQMarks">Clear</button>
+  </div>
+
+  <div class="container">
+    <div class="card passage" id="passageCard">
+      <h1 id="title"></h1>
+      <div id="subtitle" class="muted"></div>
+
+      <div id="passage">
+        <h2>Reading Passage 1</h2>
+        <h3>Jewels from the sea</h3>
+        <p><em>Indigenous necklaces in Tasmania</em></p>
+
+        <p>Necklace-making is the most significant cultural tradition of Tasmanian Aboriginal women. It is also one of the few traditions that have continued without interruption since before the Europeans settled in Tasmania, the island to the south of the mainland of Australia, in 1803. Whereas colonisation disrupted or destroyed so much of Tasmanian Aboriginal life and heritage, necklace-making has not only continued but also evolved in various ways.</p>
+
+        <p>The knowledge and skills of shell processing and stringing have been passed down through generations of women, particularly the women of the Furneaux Islands, off Tasmania's north-east coast. Necklace-making is an opportunity for women of all ages to get together and share stories, pass knowledge to younger generations and continue to affirm their culture. Aunty Dulcie Greeno, an elder of the Tasmanian Aboriginal community, has been making necklaces for more than 40 years, but first began practising as a child. 'My grandmother used to do shell necklaces and a couple of my aunties did too,' she said in an interview for Australian Museums and Galleries Online. 'We'd go round with them on the beach and collect shells with them.' Now her sister (Corrie Fullard), daughter (Betty Grace), daughter-in-law (Lola Greeno) and niece (Jeanette James) – all celebrated artists in their own right – make necklaces.</p>
+
+        <p>Shell necklaces were originally made as an adornment, as gifts and tokens of honour, and as objects to be exchanged with other groups for tools or for ochre, which could be used in important ceremonies. Archaeologist Rhys Jones found shells that had been pierced for a necklace dating back at least 2,000 years. After European colonisation, necklaces were also sold or exchanged for food, clothing and other essential supplies. Now, the artists are often commissioned to create necklaces for museums, galleries and private collectors.</p>
+
+        <p>Early European explorers remarked on the beauty of these treasures, and held them in high esteem. The French naturalist Jacques Labillardière, travelling with the d'Entrecasteaux expedition of 1791-94, observed women wearing 'strings of brilliant pearly blue spiral shells upon their bare heads'. 18th- and 19th-century images show Tasmanian Aboriginal people wearing necklaces, including a photograph taken around 1866 of the leader and spokeswoman Truganini.</p>
+
+        <p>Shell-stringing was, and remains, a painstaking process, requiring knowledge of coastal resources and a great deal of patience. Aunty Dulcie's daughter Patsy Cameron has explained how the women pierced each shell with a tool consisting of a jawbone and sharpened <strong>tooth</strong> of a kangaroo or wallaby. The shells were then threaded on string made from natural fibres, smoked over a fire, and rubbed in <strong>grass</strong> to remove their outer coating and reveal the pearly surface. The shells were later treated with penguin or muttonbird <strong>oil</strong>.</p>
+
+        <p>European colonisation introduced new tools and materials, including acidic liquids such as <strong>vinegar</strong> to clean the shells and steel punches to make holes in them. Needles and cotton or synthetic thread enabled the women to incorporate smaller shells into increasingly intricate designs.</p>
+
+        <p>Necklace-making is dependent on the availability of shells, and shell collection has its <strong>season</strong>. Aunty Dulcie regularly returns to the Furneaux Islands to replenish her supplies. 'We still walk for miles on the beach,' she said. 'We take our lunch and <strong>crawl</strong> along on our hands and knees to get the shells.' Men often help women collect the shells, especially the maireeners (rainbow shells), which are found on kelp, a type of seaweed. These shells are best when picked directly from the sea. 'We don't use the ones we pick up on the beach because they are too brittle and they lose their <strong>colour</strong>,' said Aunty Dulcie.</p>
+
+        <p>After colonisation, women started making longer necklaces. In 1835, Benjamin Duterrau sketched Tanleboneyer, 'a native of the district of Oyster Bay', and Bruny Island man Woorraddy, Truganini's husband, with long strands looped around their necks. Wortabowigee, a woman from Port Dalrymple, who is featured in an 1837 portrait by Thomas Bock, wears five loops of what must have been a necklace of astonishing beauty. It is possible that the new European tools adopted by the women enabled them to make longer necklaces, but it also indicates the changing circumstances of Tasmanian Aboriginal people. Historian Brian Plomley points out that long necklaces would have been impractical for women accustomed to a traditional lifestyle of diving for crabs, crayfish and abalone, digging for root vegetables, hunting seals or climbing trees to catch possums. Men tracking kangaroo, wallaby and emu through the bush would not have risked getting snagged by long necklaces – or risked damaging the valuable necklaces themselves.</p>
+
+        <p>The change in necklaces after colonisation also points to the Tasmanians' courageous assertion of their identity, and a continuation of their culture at a time when their world was being taken apart.</p>
+
+        <p>The connection of shell necklaces with the distinct culture and story of the Tasmanian Aboriginal people and with the Tasmanian natural environment means they have iconic status in the wider Tasmanian community. In 2009, they were listed as a Tasmanian Heritage Icon by the National Trust of Australia. The cultural and aesthetic value of the necklaces is also demonstrated by their inclusion in many national and international museum, gallery and private collections.</p>
+      </div>
+    </div>
+
+    <div class="card questions">
+      <h1>Questions</h1>
+      <div id="qroot"></div>
+      <button class="submit" id="submitBtn">Submit Answers</button>
+      <div class="results" id="results">
+        <h2>Your Results</h2>
+        <div id="score" class="meta"></div>
+        <ul id="answers"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footerNav" id="footerNav"></div>
+  <button class="tg" id="tgBtn">📢 Join my Telegram</button>
+
+<script>
+/* =======================
+   CONFIG
+   ======================= */
+const CONFIG = {
+  title: "READING PASSAGE 1 – Jewels from the sea",
+  subtitle: "You should spend about 20 minutes on Questions 1–13.",
+  durationMinutes: 20,
+  telegramLink: "https://t.me/yourchannel",
+  showFooterNavigator: true,
+
+  sections: [
+    /* 1–6 True/False/Not Given */
+    {
+      type: "true_false",
+      heading: "Questions 1–6",
+      instructions: [
+        "Do the following statements agree with the information given in Reading Passage 1?",
+        "In boxes 1–6 on your answer sheet, write",
+        "TRUE if the statement agrees with the information",
+        "FALSE if the statement contradicts the information",
+        "NOT GIVEN if there is no information on this"
+      ],
+      items: [
+        { id: 1, text: "After European settlement, Tasmanian Aboriginals stopped making necklaces for a short time.", correct: "FALSE" },
+        { id: 2, text: "Aboriginal women on the Furneaux Islands made the most beautiful necklaces.", correct: "NOT GIVEN" },
+        { id: 3, text: "An 1866 photograph of the leader Truganini shows her wearing a necklace she had made herself.", correct: "NOT GIVEN" },
+        { id: 4, text: "Men assist in gathering shells growing on sea plants.", correct: "TRUE" },
+        { id: 5, text: "Tasmanian Aboriginal men wore long necklaces when hunting.", correct: "FALSE" },
+        { id: 6, text: "Tasmanian Aboriginal necklaces are appreciated outside Australia.", correct: "TRUE" }
+      ]
+    },
+
+    /* 7–13 Gap Fill */
+    {
+      type: "gap_fill",
+      heading: "Questions 7–13",
+      instructions: [
+        "Complete the notes below.",
+        "Choose ONE WORD ONLY from the passage for each answer.",
+        "Write your answers in boxes 7–13 on your answer sheet."
+      ],
+      title: "The process of shell-stringing",
+      intro: "Shell-stringers must have patience and an understanding of resources available near the sea.",
+      items: [
+        { id: 7, prompt: "The traditional procedure: hole put in shell with an instrument made of animal's bone and ................ .", correct: "tooth" },
+        { id: 8, prompt: "shells wiped with ................ to achieve a pearly surface", correct: "grass" },
+        { id: 9, prompt: "animal ................ applied", correct: "oil" },
+        { id: 10, prompt: "Changes after Europeans arrived: cleaning substances like ................ were used", correct: "vinegar" },
+        { id: 11, prompt: "Furneaux Islands: shells need to be gathered in the right ................ .", correct: "season" },
+        { id: 12, prompt: "shell collectors walk along the beach then ................ in order to pick up shells", correct: "crawl" },
+        { id: 13, prompt: "shells from beach not suitable as do not keep ................ and break easily", correct: "colour" }
+      ]
+    }
+  ]
+};
+
+/* =======================
+   RENDER
+   ======================= */
+document.getElementById('title').textContent = CONFIG.title;
+document.getElementById('subtitle').textContent = CONFIG.subtitle || '';
+
+const qroot = document.getElementById('qroot');
+const navIds = [];
+const answersMap = {};
+
+function sectionHeader(t){ const h=document.createElement('h2'); h.className='qsection'; h.textContent=t; return h; }
+
+/* True/False/Not Given renderer */
+function renderTrueFalse(sec){
+  qroot.appendChild(sectionHeader(sec.heading));
+  (sec.instructions||[]).forEach(tx=>{ const p=document.createElement('p'); p.className='muted'; p.textContent=tx; qroot.appendChild(p); });
+  
+  sec.items.forEach(it=>{
+    const b=document.createElement('div'); b.className='qblock'; b.id=`anchor-${it.id}`;
+    const opts = ['TRUE', 'FALSE', 'NOT GIVEN'].map(option => 
+      `<label><input type="radio" name="q${it.id}" value="${option}"> ${option}</label>`
+    ).join('');
+    b.innerHTML=`<div class="qhead"><strong>${it.id}.</strong> ${it.text}</div><div class="options">${opts}</div>`;
+    qroot.appendChild(b); navIds.push(it.id); answersMap[it.id]=it.correct||'';
+  });
+}
+
+/* Gap fill renderer */
+function renderGapFill(sec){
+  qroot.appendChild(sectionHeader(sec.heading));
+  (sec.instructions||[]).forEach(tx=>{ const p=document.createElement('p'); p.className='muted'; p.textContent=tx; qroot.appendChild(p); });
+  
+  if(sec.title) {
+    const titleDiv = document.createElement('div');
+    titleDiv.innerHTML = `<h3>${sec.title}</h3>`;
+    qroot.appendChild(titleDiv);
+  }
+
+  if(sec.intro) {
+    const introDiv = document.createElement('div');
+    introDiv.className = 'qblock';
+    introDiv.innerHTML = `<div class="qhead">${sec.intro}</div>`;
+    qroot.appendChild(introDiv);
+  }
+
+  sec.items.forEach(it=>{
+    const b=document.createElement('div'); b.className='qblock'; b.id=`anchor-${it.id}`;
+    const input = `<input type="text" id="q${it.id}" name="q${it.id}" placeholder="Enter your answer">`;
+    b.innerHTML=`<div class="qhead"><strong>${it.id}.</strong> ${it.prompt}</div><div class="options">${input}</div>`;
+    qroot.appendChild(b); navIds.push(it.id); answersMap[it.id]=it.correct||'';
+  });
+}
+
+/* Build UI */
+CONFIG.sections.forEach(sec=>{
+  if (sec.type==='true_false') renderTrueFalse(sec);
+  if (sec.type==='gap_fill') renderGapFill(sec);
+});
+
+/* Footer chips */
+const footerNav=document.getElementById('footerNav');
+(function(){
+  if(!CONFIG.showFooterNavigator){ footerNav.style.display='none'; return; }
+  footerNav.innerHTML='<strong class="muted">Questions:</strong>';
+  [...new Set(navIds)].sort((a,b)=>a-b).forEach(id=>{
+    const chip=document.createElement('button'); chip.className='chip'; chip.id=`chip-${id}`; chip.textContent=id;
+    chip.addEventListener('click',()=>{ 
+      const anchor = document.getElementById(`anchor-${id}`);
+      if(anchor) anchor.scrollIntoView({behavior:'smooth',block:'center'}); 
+    });
+    footerNav.appendChild(chip);
+  });
+})();
+
+function markChipAnswered(id, answered){
+  const chip=document.getElementById(`chip-${id}`); if(chip) chip.classList.toggle('answered', !!answered);
+}
+
+document.addEventListener('change',(e)=>{
+  const m=String(e.target.name||e.target.id||'').match(/q(\d+)/);
+  const id=m?+m[1]:null; if(!id) return;
+  const answered=(e.target.type==='radio') ? (!!document.querySelector(`input[name='q${id}']:checked`))
+                 : (e.target.value.trim().length>0);
+  markChipAnswered(id, answered);
+});
+
+/* Timer */
+let timeLeft=Math.max(1,+CONFIG.durationMinutes||20)*60;
+const timer=document.getElementById('timer');
+const pauseBtn=document.getElementById('pauseBtn');
+const resumeBtn=document.getElementById('resumeBtn');
+let paused=false, iv;
+const fmt=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+function startTick(){ if(iv) clearInterval(iv);
+  iv=setInterval(()=>{ if(paused) return; timer.textContent=fmt(timeLeft); if(timeLeft<=0){ clearInterval(iv); alert("Time's up! Submitting."); submit(); } timeLeft--; },1000);
+}
+timer.textContent=fmt(timeLeft); startTick();
+pauseBtn.addEventListener('click',()=>{ paused=true; pauseBtn.disabled=true; resumeBtn.disabled=false; });
+resumeBtn.addEventListener('click',()=>{ paused=false; pauseBtn.disabled=false; resumeBtn.disabled=true; });
+
+/* Submit & grading */
+document.getElementById('submitBtn').addEventListener('click', submit);
+function submit(){
+  paused=true; pauseBtn.disabled=true; resumeBtn.disabled=false;
+  let total=0, graded=0, correctCount=0;
+  const itemsOut=[];
+  const ids=Object.keys(answersMap);
+
+  ids.forEach(key=>{
+    const ans=answersMap[key];
+    const label=key;
+    let user='';
+    const picked=document.querySelector(`input[name="q${key}"]:checked`);
+    if(picked){ user=picked.value; }
+    else if(document.getElementById('q'+key)){ user=document.getElementById('q'+key).value; }
+    const shown=user||'No answer';
+
+    if(String(ans).trim()===''){ total++; itemsOut.push({label, status:'— not graded —', user:shown, correct:'(no key)'}); return; }
+
+    total++; graded++;
+    const ok = shown.trim().toUpperCase() === String(ans).trim().toUpperCase();
+    if(ok) correctCount++;
+    itemsOut.push({label, status: ok? '✓ Correct' : '✗ Incorrect', user:shown, correct:String(ans)});
+  });
+
+  document.getElementById('score').innerHTML = `Graded ${graded} of ${total} • Score: ${correctCount}/${graded}`;
+  document.getElementById('answers').innerHTML = itemsOut.map(it=>`<li class="${/Correct/.test(it.status)?'ok':'bad'}">Q${it.label}: ${it.status} — Your: <b>${it.user}</b> | Correct: <b>${it.correct}</b></li>`).join('');
+  const r=document.getElementById('results'); r.style.display='block'; r.scrollIntoView({behavior:'smooth'});
+}
+
+/* Highlights */
+const passageCard=document.getElementById('passageCard');
+const pPalette=document.getElementById('pPalette');
+passageCard.addEventListener('mouseup',(e)=>{
+  const sel=window.getSelection(); if(!sel||sel.toString().trim().length===0) return;
+  if(!passageCard.contains(sel.getRangeAt(0).commonAncestorContainer)) return;
+  const r=passageCard.getBoundingClientRect(), x=Math.min(e.clientX-r.left,r.width-10), y=Math.max(0,e.clientY-r.top-40);
+  pPalette.style.left=(r.left+x)+'px'; pPalette.style.top=(r.top+y)+'px'; pPalette.style.display='block';
+});
+document.addEventListener('mousedown',(e)=>{ if(!pPalette.contains(e.target)) pPalette.style.display='none'; });
+pPalette.querySelectorAll('.hbtn[data-color]').forEach(btn=>{
+  btn.addEventListener('click',()=>{ markSelection(btn.dataset.color, passageCard); pPalette.style.display='none'; });
+});
+document.getElementById('clearPMarks').addEventListener('click',()=>{
+  passageCard.querySelectorAll('span.highlight').forEach(n=>{ const p=n.parentNode; while(n.firstChild) p.insertBefore(n.firstChild,n); p.removeChild(n); p.normalize(); });
+  pPalette.style.display='none';
+});
+
+/* Questions highlight */
+const qCard=document.querySelector('.card.questions');
+const qPalette=document.getElementById('qPalette');
+qCard.addEventListener('mouseup',(e)=>{
+  const sel=window.getSelection(); if(!sel||sel.toString().trim().length===0) return;
+  if(!qCard.contains(sel.getRangeAt(0).commonAncestorContainer)) return;
+  const node = sel.getRangeAt(0).commonAncestorContainer.nodeType===1 ? sel.getRangeAt(0).commonAncestorContainer : sel.getRangeAt(0).commonAncestorContainer.parentNode;
+  if (node.closest && node.closest('input,textarea,select')) return;
+  const r=qCard.getBoundingClientRect(), x=Math.min(e.clientX-r.left,r.width-10), y=Math.max(0,e.clientY-r.top-40);
+  qPalette.style.left=(r.left+x)+'px'; qPalette.style.top=(r.top+y)+'px'; qPalette.style.display='block';
+});
+document.addEventListener('mousedown',(e)=>{ if(!qPalette.contains(e.target)) qPalette.style.display='none'; });
+qPalette.querySelectorAll('.hbtn[data-color]').forEach(btn=>{
+  btn.addEventListener('click',()=>{ markSelection(btn.dataset.color, qCard); qPalette.style.display='none'; });
+});
+document.getElementById('clearQMarks').addEventListener('click',()=>{
+  qCard.querySelectorAll('span.highlight').forEach(n=>{ const p=n.parentNode; while(n.firstChild) p.insertBefore(n.firstChild,n); p.removeChild(n); p.normalize(); });
+  qPalette.style.display='none';
+});
+
+/* Helper */
+function markSelection(color, scope){
+  const sel=window.getSelection(); if(!sel||!sel.rangeCount) return;
+  const range=sel.getRangeAt(0);
+  if(!scope.contains(range.commonAncestorContainer)) return;
+  const container=range.commonAncestorContainer.nodeType===1? range.commonAncestorContainer : range.commonAncestorContainer.parentNode;
+  if (container.closest && container.closest('input, textarea, select')) return;
+  const frag=range.extractContents();
+  const span=document.createElement('span'); span.className='highlight'; span.style.backgroundColor=color; span.appendChild(frag);
+  range.insertNode(span); sel.removeAllRanges();
+}
+
+/* TG button */
+document.querySelector('.tg').addEventListener('click',()=>window.open(CONFIG.telegramLink,'_blank'));
+</script>
+</body>
+</html>

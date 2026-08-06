@@ -8415,6 +8415,7 @@ function staticCacheHeaders(res, filePath) {
         "study-plan.css",
         "reading-cbt-app.js",
         "reading-cbt.css",
+        "ielts-test-components.js",
         "listening-template.css",
         "listening-test-components.js",
         "listening-template.js"

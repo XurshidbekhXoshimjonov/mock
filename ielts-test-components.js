@@ -337,6 +337,10 @@ function MultiSelectGroupRenderer({ group, answers, onAnswer, reviewByNumber, re
             options.map((option) => {
                 const checked = selectedSet.has(option.value);
                 const disabled = Boolean(readOnly) || (!checked && selected.length >= questions.length);
+                const optionText = String(option.label || "").replace(
+                    new RegExp(`^${String(option.value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[.):-]?\\s*`, "i"),
+                    ""
+                );
                 return h("label", {
                     key: option.value,
                     className: `cbt-option-card cbt-option-card--checkbox${checked ? " selected" : ""}${disabled ? " disabled" : ""}`
@@ -351,7 +355,7 @@ function MultiSelectGroupRenderer({ group, answers, onAnswer, reviewByNumber, re
                     h("strong", { className: "cbt-multi-select-letter" }, option.value),
                     option.html
                         ? h(SafeHtml, { html: option.html, tag: "span" })
-                        : h("span", null, option.label)
+                        : h("span", null, optionText)
                 );
             })
         ),

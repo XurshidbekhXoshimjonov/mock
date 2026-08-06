@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Practice - Whale Culture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+        }
+        .passage-container {
+            width: 60%;
+            padding: 20px;
+            box-sizing: border-box;
+            border-right: 1px solid #ddd;
+        }
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .timer {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .question select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .check-answers {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .check-answers:hover {
+            background-color: #2980b9;
+        }
+        .telegram-btn {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .telegram-btn:hover {
+            background-color: #006699;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            display: none;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .answer-input {
+            border-bottom: 1px solid #333;
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="passage-container">
+        <h1>READING PASSAGE 3</h1>
+        <p><em>You should spend about 20 minutes on Questions 27 - 40, which are based on reading passage 3.</em></p>
+
+        <h3>Whale Culture</h3>
+        
+        <p><strong>A</strong> Most social scientists stubbornly resist the idea that animals have culture. Even such advanced cetacean mammals as whales and dolphins clearly don't have art, literature, or architecture. But patient observation over many years has begun to reveal behaviours that can only been learnt from other whales. And that, say whale biologists, constitutes culture.</p>
+
+        <p><strong>B</strong> So far, humpback and killer whales provide the best evidence of culture in cetaceans, and the song of male humpback is among the most striking examples. Humpback populations in different oceans sing different songs, but within the same ocean they all stick to the same one. However, during the breeding season the sounds change, as it appears that females are drawn to novel songs. One male might add an extra set groans; another might drop a series of grunts. Soon all the other males have altered their own rendition to incorporate the changes until they are once again singing the same song. Since this occurs among thousands of whales spread across a vast part of the planet, the change cannot be in response to any factor in the animals' environment. The latest version of the song can be learnt only from other whales – almost certainly by imitation.</p>
+
+        <p><strong>C</strong> Culture plays an even bigger part in the life of killer whales. Nowhere is this more obvious than along the north-west coast of America, where killer whales are split into two distinct populations – 'residents' and 'transients'. They live in the same stretch of water, but they don't mingle. In effect, they belong to two quite separate cultures. Residents live in stable groups, or 'pods', made up of two or three mothers and their offspring – perhaps 20 whales in all. Calves stay with their mothers throughout adulthood, and in many years of observation no one has ever seen a whale switch pods. Transients travel in smaller, more changeable groups of between three and six.</p>
+
+        <p><strong>D</strong> One of the most obvious distinctions between the transient and resident societies is the way they impart information. Killer whales detect prey with a range of echo-locating clicks, but converse with a vocabulary of squeaks, whistles and whines. Transients have only a few such calls, and all transient societies share the same ones. Residents have a much more extensive repertoire, and each family group has its own unique and distinctive set of calls. Despite regular interaction between them, each resident pod sticks firmly to its own dialect. Research shows these dialects are maintained for at least 40 years.</p>
+
+        <p><strong>E</strong> To qualify as part of killer whale culture, dialects must be learnt from other members of the pod. Animals with different dialects share the same waters, so the variation can't be a product of physical environment. 'And we can throw out the notion that dialects are inherited,' says Lance Barret Lennard of the University of British Columbia. He has spent the past seven years analysing DNA from 270 whales. His paternity tests reveal the female killer whales invariably attract mates from outside their own pod – males with a very different dialect. If dialects were programmed by genetics, call patterns from both father and mother would be passed on to the calf. 'A calf uses the calls of its maternal pod very precisely. There's no input from the father,' says Barrett Lennard.</p>
+
+        <p><strong>F</strong> The question still remains – is this culture? It is, according to Frans de Waal of Emory University in Atlanta, who argues that culture is just another biological adaptation that has evolved in many creatures. One benefit of viewing culture in this way is that you can start to understand how and why it might have arisen in these creatures. Whales have several biological attributes that give them an advantage in social learning. Apart from their advanced mental abilities, they are adept at recognising sounds: ideal for communicating in the marine environment. Many species spend years rearing their offspring, and live in small, stable, multi-generational societies, a social system that provides ample opportunity for teaching and learning.</p>
+
+        <p><strong>G</strong> But why have cetaceans evolved the ability to learn from other group members? Experts in whale biology believe that ecological factors and the need to adapt to sudden changes in the environment played a large part in the emergence of culture. Although the ocean is a relatively stable habitat in many ways, it is highly changeable in one crucial respect – the availability of food. One moment there might be a plentiful supply of fish, the next they've disappeared. When that happens, the past experience of senior members of the group – and the ability to share this knowledge – is a huge asset. The dialects of killer whales allow members of the group to identify each other, enabling them to share information about food hot spots. Among resident killer whales, it also allows females to avoid inbreeding by picking out a mate with a strange dialect from outside their pod, says Barrett-Lennard.</p>
+
+        <p><strong>H</strong> The importance of sharing information seems to have led to biological changes in at least some species of whale. Female killer whales, like humans, are very unusual in that they live up to quarter of century after they have had their descendants. And what whale matriarchs offer is the most important thing of all – cultural knowledge, vital for the group's survival, passed directly from one generation to the next.</p>
+    </div>
+
+    <div class="questions-container">
+        <div class="timer" id="timer">20:00</div>
+
+        <h3>Questions 27-31</h3>
+        <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+        <p>In boxes 27-31 on your answer sheet, write</p>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li><strong>YES</strong> if the statement agrees with the claims of the writer</li>
+            <li><strong>NO</strong> if the statement contradicts the claims of the writer</li>
+            <li><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</li>
+        </ul>
+
+        <div class="question">
+            <p>27 Resident killer whales appear to remain with their maternal group for life.</p>
+            <select id="q27">
+                <option value="">Select answer</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="NOT GIVEN">NOT GIVEN</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>28 Resident killer whales have a more restricted range of calls than transients.</p>
+            <select id="q28">
+                <option value="">Select answer</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="NOT GIVEN">NOT GIVEN</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>29 There is a vocabulary of sounds which is common to all transient killer whales.</p>
+            <select id="q29">
+                <option value="">Select answer</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="NOT GIVEN">NOT GIVEN</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>30 Resident killer whales share the dialects of other resident communities living in the same waters.</p>
+            <select id="q30">
+                <option value="">Select answer</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="NOT GIVEN">NOT GIVEN</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>31 The dialects of transient killer whales remain constant over time.</p>
+            <select id="q31">
+                <option value="">Select answer</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="NOT GIVEN">NOT GIVEN</option>
+            </select>
+        </div>
+
+        <h3>Questions 32-34</h3>
+        <p>Complete the summary below.</p>
+        <p>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+        <p>Write your answers in boxes 32-34 on your answer sheet.</p>
+
+        <div class="question">
+            <p>It has been observed that resident killer whales invariably live in fixed family groups, known as <input type="text" id="q32">. Each of these has its own unique set of calls, despite close contact with other family groups. As the same areas of ocean contain many different groups with widely varying dialects, it is clear that these differences could not have emerged as a result of the whales' <input type="text" id="q33">.</p>
+            <p>According to tests conducted by Lance Barrett-Lennard, a calf communicates exclusively with the dialect of the group to which its <input type="text" id="q34"> belongs. Barret-Lennard also rejects the idea that the call patterns are inherited.</p>
+        </div>
+
+        <h3>Questions 35-37</h3>
+        <p>Which THREE of the following features of whales are mentioned in the passage?</p>
+        <p>Write the correct letters in boxes 35-37 on your answer sheet.</p>
+
+        <div class="question">
+            <p><input type="checkbox" id="q35a"> A intelligence</p>
+            <p><input type="checkbox" id="q35b"> B physical strength</p>
+            <p><input type="checkbox" id="q35c"> C sensitivity to sound</p>
+            <p><input type="checkbox" id="q35d"> D prolonged life span</p>
+            <p><input type="checkbox" id="q35e"> E lengthy period of fertility</p>
+            <p><input type="checkbox" id="q35f"> F adaptability to variety of foods</p>
+        </div>
+
+        <h3>Questions 38-40</h3>
+        <p>Reading passage 3 has eight paragraphs, A-H</p>
+        <p>Which paragraph contains the following information?</p>
+        <p>Write the correct letter, A-H, in boxes 38-40 on your answer sheet.</p>
+
+        <div class="question">
+            <p>38 an example of the kind of information passed by whales to each other</p>
+            <input type="text" id="q38" maxlength="1" style="width: 30px;">
+        </div>
+
+        <div class="question">
+            <p>39 a reference to variations in communication styles between different cultures within one species.</p>
+            <input type="text" id="q39" maxlength="1" style="width: 30px;">
+        </div>
+
+        <div class="question">
+            <p>40 ways in which the skills of whales are favourable for development of culture</p>
+            <input type="text" id="q40" maxlength="1" style="width: 30px;">
+        </div>
+
+        <button class="check-answers" onclick="checkAnswers()">Check Answers</button>
+        <a href="https://t.me/yourtelegramchannel" class="telegram-btn" target="_blank">Join My Telegram Channel</a>
+
+        <div class="results" id="results">
+            <h3>Results</h3>
+            <div id="score"></div>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        const timer = document.getElementById('timer');
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            timer.textContent = `${minutes}:${seconds}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timer.textContent = "Time's up!";
+                checkAnswers();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        // Answer checking
+        const correctAnswers = {
+            q27: "YES",
+            q28: "NO",
+            q29: "YES",
+            q30: "NO",
+            q31: "NOT GIVEN",
+            q32: "pods",
+            q33: "physical environment",
+            q34: "mother",
+            q35a: true,
+            q35c: true,
+            q35d: true,
+            q38: "G",
+            q39: "D",
+            q40: "F"
+        };
+
+        function checkAnswers() {
+            clearInterval(timerInterval);
+            let score = 0;
+            let totalQuestions = 0;
+            let resultsHTML = "";
+
+            // Check YES/NO/NOT GIVEN questions (27-31)
+            for (let i = 27; i <= 31; i++) {
+                const questionId = "q" + i;
+                const selectedAnswer = document.getElementById(questionId).value;
+                const correctAnswer = correctAnswers[questionId];
+                
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                    resultsHTML += `<p class="correct">Question ${i}: Correct! (${correctAnswer})</p>`;
+                } else if (selectedAnswer === "") {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Not answered. The correct answer is "${correctAnswer}"</p>`;
+                } else {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Incorrect. The correct answer is "${correctAnswer}"</p>`;
+                }
+                totalQuestions++;
+            }
+
+            // Check gap fill questions (32-34)
+            for (let i = 32; i <= 34; i++) {
+                const questionId = "q" + i;
+                const userAnswer = document.getElementById(questionId).value.trim().toLowerCase();
+                const correctAnswer = correctAnswers[questionId].toLowerCase();
+                
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    resultsHTML += `<p class="correct">Question ${i}: Correct! (${correctAnswer})</p>`;
+                } else if (userAnswer === "") {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Not answered. The correct answer is "${correctAnswer}"</p>`;
+                } else {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Incorrect. The correct answer is "${correctAnswer}"</p>`;
+                }
+                totalQuestions++;
+            }
+
+            // Check multiple choice questions (35-37)
+            const checkboxes = {
+                a: document.getElementById("q35a").checked,
+                b: document.getElementById("q35b").checked,
+                c: document.getElementById("q35c").checked,
+                d: document.getElementById("q35d").checked,
+                e: document.getElementById("q35e").checked,
+                f: document.getElementById("q35f").checked
+            };
+
+            const correctCheckboxes = {
+                a: correctAnswers["q35a"],
+                c: correctAnswers["q35c"],
+                d: correctAnswers["q35d"]
+            };
+
+            let correctSelected = 0;
+            let incorrectSelected = 0;
+            let correctOptions = [];
+
+            for (const option in correctCheckboxes) {
+                if (correctCheckboxes[option] && checkboxes[option]) {
+                    correctSelected++;
+                }
+                if (correctCheckboxes[option]) {
+                    correctOptions.push(option.toUpperCase());
+                }
+            }
+
+            for (const option in checkboxes) {
+                if (checkboxes[option] && !correctCheckboxes[option]) {
+                    incorrectSelected++;
+                }
+            }
+
+            // Award 1 point for each correct selection (max 3)
+            score += correctSelected;
+            totalQuestions += 3; // There are 3 correct options to select
+
+            resultsHTML += `<p>Questions 35-37: You selected ${correctSelected} correct and ${incorrectSelected} incorrect options. Correct answers are ${correctOptions.join(", ")}</p>`;
+
+            // Check paragraph matching questions (38-40)
+            for (let i = 38; i <= 40; i++) {
+                const questionId = "q" + i;
+                const userAnswer = document.getElementById(questionId).value.trim().toUpperCase();
+                const correctAnswer = correctAnswers[questionId];
+                
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    resultsHTML += `<p class="correct">Question ${i}: Correct! (${correctAnswer})</p>`;
+                } else if (userAnswer === "") {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Not answered. The correct answer is "${correctAnswer}"</p>`;
+                } else {
+                    resultsHTML += `<p class="incorrect">Question ${i}: Incorrect. The correct answer is "${correctAnswer}"</p>`;
+                }
+                totalQuestions++;
+            }
+
+            document.getElementById('score').innerHTML = `<p>You scored ${score} out of ${totalQuestions}</p>`;
+            document.getElementById('answers').innerHTML = resultsHTML;
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
