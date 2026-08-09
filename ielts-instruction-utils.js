@@ -23,7 +23,7 @@
         "ONE\\s+WORD",
         "FIVE",
         "TWO",
-        "SIX",
+        "SIX(?=\\s+(?:WORDS?|LETTERS?|ANSWERS?|OPTIONS?))",
         "A\\s+NUMBER",
         "[A-Z]\\s*[\\u2013\\u2014-]\\s*[A-Z]"
     ].join("|");
