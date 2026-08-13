@@ -7,7 +7,12 @@ const ROOT = path.resolve(__dirname, "..");
 const source = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "full-tests", "jasurbek-full-listening-test-10.json"), "utf8"));
 const output = path.join(ROOT, "August 13 Listening.html");
 
-const audio = source.listening.sections.map((section) => section.audio);
+const audio = [
+    "https://uploads.strikinglycdn.com/files/50ac366b-c9f1-4713-8cc0-c61e0abf2a73/pharmacy.mp3?t=1740311156&amp;id=4244540",
+    "https://audio.jukehost.co.uk/019e9813-bf7d-70e3-a99b-295d58b8430f",
+    "https://audio.jukehost.co.uk/019fdcf7-f339-72a5-88eb-cc3645ce5ad1",
+    "https://uploads.strikinglycdn.com/files/29a444c4-1d79-480e-8a79-a80626da3c7a/h4.mp3?t=1752892796&amp;id=4299866"
+];
 const answers = source.answers;
 
 function input(number) {
