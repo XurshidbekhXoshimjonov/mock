@@ -1035,6 +1035,15 @@ html.dark-theme .cbt-question-group.imported-reading-limit-group .cbt-group-inst
     margin: 0;
 }
 
+/* Academic Reading 1–40: keep Questions 22–26 badges level with the first text line. */
+.academic-reading-law-summary .cbt-question-line {
+    align-items: flex-start;
+}
+
+.academic-reading-law-summary .cbt-question-badge {
+    margin-top: 4px;
+}
+
 .cbt-options {
     gap: 10px;
     margin: 10px 0 0 41px;
