@@ -3765,14 +3765,25 @@ function readManualListeningTestSummaries() {
                 const prefix = readFilePrefix(filePath);
                 const stat = fs.statSync(filePath);
                 const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
+                const title = jsonStringField(prefix, "title") || "Untitled Listening Test";
                 const rawPart = jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "full";
                 const part = rawPart === "full" ? "full" : normalizeListeningPart(rawPart);
+                const slug = routeBaseSlug({
+                    id,
+                    slug: jsonStringField(prefix, "slug"),
+                    publicSlug: jsonStringField(prefix, "publicSlug"),
+                    routeSlug: jsonStringField(prefix, "routeSlug"),
+                    title
+                });
+                const openUrl = part === "full"
+                    ? `/listening/${slug}`
+                    : `/listening/${slug}/part-${part}`;
                 if (jsonBooleanField(prefix, "mockOnly") || jsonBooleanField(prefix, "mockTestOnly")) {
                     return null;
                 }
                 return publicListMetadata({
                     id,
-                    title: jsonStringField(prefix, "title") || "Untitled Listening Test",
+                    title,
                     testNumber: jsonNumberField(prefix, "testNumber"),
                     type: part === "full" ? "listening-full" : "listening",
                     status: jsonStringField(prefix, "status") || "published",
@@ -3781,8 +3792,8 @@ function readManualListeningTestSummaries() {
                         part,
                         sourceFullTestId: jsonStringField(prefix, "sourceFullTestId") || "",
                         duration: listeningDurationForPart(part),
-                        openUrl: publicIdUrl("listening", id, { part: part === "full" ? 0 : part }),
-                        slug: id,
+                        openUrl,
+                        slug,
                         readOnly: false
                     }
                 });
