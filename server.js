@@ -4003,6 +4003,14 @@ function resolveFullTest(locator, preferredSkill = "") {
 
 function publicFullTestUrl(test, skill = "") {
     const routeSkill = skill === "listening" ? "listening" : "reading";
+
+    if (routeSkill === "listening" && test.manualListeningTestId) {
+        const manualEntry = publicEntryForTest("listening", "listening", test.manualListeningTestId);
+        if (manualEntry) {
+            return publicTestUrl("listening", "listening", manualEntry.test);
+        }
+    }
+
     return publicTestUrl(routeSkill, "full", test);
 }
 
@@ -5161,6 +5169,14 @@ app.get("/listening/:slug", requirePageAuth, (req, res) => {
     if (!entry) {
         res.status(404).send("Listening test not found");
         return;
+    }
+
+    if (entry.source === "full" && entry.test.manualListeningTestId) {
+        const manualEntry = publicEntryForTest("listening", "listening", entry.test.manualListeningTestId);
+        if (manualEntry) {
+            res.redirect(302, publicTestUrl("listening", "listening", manualEntry.test));
+            return;
+        }
     }
 
     if (req.params.slug !== entry.publicSlug) {
