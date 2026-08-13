@@ -313,6 +313,7 @@ function buildTest(sourcePaths, audioUrls) {
     return {
         id: TEST_ID,
         slug: TEST_ID,
+        publishedListeningSlug: "august-13",
         title: TITLE,
         subtitle: "Listening full test",
         sourceFile: sourcePaths.map((item) => path.basename(item)).join(", "),
