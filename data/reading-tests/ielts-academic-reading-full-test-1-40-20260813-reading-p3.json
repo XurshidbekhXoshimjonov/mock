@@ -1,6 +1,6 @@
 {
   "id": "ielts-academic-reading-full-test-1-40-20260813-reading-p3",
-  "slug": "ielts-academic-reading-full-test-1-40-20260813-reading-p3",
+  "slug": "how-to-clean-a-beach",
   "title": "How to clean a beach",
   "subtitle": "As oil-spill specialists continue to tackle the Prestige slick, they are drawing on knowledge from decades of clean-up operations. John Whitfield reports from Spain’s Galician coast.",
   "part": 3,
@@ -752,5 +752,7 @@
     }
   ],
   "sourceFullTestId": "ielts-academic-reading-full-test-1-40-20260813",
-  "createdAt": "2026-08-13T12:58:42.358Z"
+  "createdAt": "2026-08-13T13:03:59.567Z",
+  "publicSlug": "how-to-clean-a-beach",
+  "openUrl": "/reading/how-to-clean-a-beach"
 }

@@ -1,6 +1,6 @@
 {
   "id": "ielts-academic-reading-full-test-1-40-20260813-reading-p1",
-  "slug": "ielts-academic-reading-full-test-1-40-20260813-reading-p1",
+  "slug": "australia-s-airborne-dentists",
   "title": "Australia's Airborne Dentists",
   "subtitle": "",
   "part": 1,
@@ -500,5 +500,7 @@
     }
   ],
   "sourceFullTestId": "ielts-academic-reading-full-test-1-40-20260813",
-  "createdAt": "2026-08-13T12:58:42.358Z"
+  "createdAt": "2026-08-13T13:03:59.567Z",
+  "publicSlug": "australia-s-airborne-dentists",
+  "openUrl": "/reading/australia-s-airborne-dentists"
 }

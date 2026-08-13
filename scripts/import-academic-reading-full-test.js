@@ -305,6 +305,17 @@ fs.mkdirSync(readingTestsDir, { recursive: true });
 fs.mkdirSync(sourceDir, { recursive: true });
 
 const published = buildPublishedTests(fullTest);
+published.readingTests.forEach((test) => {
+    if (Number(test.part) >= 1 && Number(test.part) <= 3) {
+        const titleSlug = String(test.title || "reading-passage")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        test.slug = titleSlug;
+        test.publicSlug = titleSlug;
+        test.openUrl = `/reading/${titleSlug}`;
+    }
+});
 const fullReading = published.readingTests.find((test) => test.id.endsWith("-reading-full"));
 if (fullReading) {
     fullReading.richPassages = passages;

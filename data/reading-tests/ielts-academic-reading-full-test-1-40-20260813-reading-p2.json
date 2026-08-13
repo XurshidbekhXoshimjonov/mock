@@ -1,6 +1,6 @@
 {
   "id": "ielts-academic-reading-full-test-1-40-20260813-reading-p2",
-  "slug": "ielts-academic-reading-full-test-1-40-20260813-reading-p2",
+  "slug": "the-importance-of-law",
   "title": "The importance of law",
   "subtitle": "",
   "part": 2,
@@ -847,5 +847,7 @@
     }
   ],
   "sourceFullTestId": "ielts-academic-reading-full-test-1-40-20260813",
-  "createdAt": "2026-08-13T12:58:42.358Z"
+  "createdAt": "2026-08-13T13:03:59.567Z",
+  "publicSlug": "the-importance-of-law",
+  "openUrl": "/reading/the-importance-of-law"
 }
