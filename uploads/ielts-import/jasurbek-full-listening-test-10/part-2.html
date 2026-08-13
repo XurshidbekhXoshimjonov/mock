@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Listening – Part 2</title>
+<style>
+body{--bg:#f5f5f5;--sur:#fff;--txt:#1a1a1a;--brd:#ddd;--nbg:#fff;--pbg:#f0f0f0;--pbd:#ccc;}
+body.wob{--bg:#111;--sur:#1e1e1e;--txt:#fff;--brd:#444;--nbg:#1e1e1e;--pbg:#2a2a2a;--pbd:#555;}
+body.yob{--bg:#111;--sur:#1e1e1e;--txt:#ffe600;--brd:#555;--nbg:#1e1e1e;--pbg:#252500;--pbd:#665500;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);font-size:15px;transition:background .2s,color .2s;}
+body.tsz-L{font-size:18px;}
+body.tsz-XL{font-size:21px;}
+
+.tgbar{background:#229ED9;padding:0 14px;height:36px;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:301;text-decoration:none;gap:8px;transition:background .15s;}
+.tgbar:hover{background:#1a8bbf;}
+.tgbar-txt{color:#fff;font-size:13px;font-weight:600;letter-spacing:.2px;}
+.nav{background:var(--nbg);border-bottom:1px solid var(--brd);padding:0 14px;height:48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:36px;z-index:300;}
+.logo{color:#e31837;font-size:22px;font-weight:900;letter-spacing:1px;}
+.nav-mid{font-size:12px;color:var(--txt);opacity:.7;}
+.nav-r{display:flex;align-items:center;gap:10px;}
+.nico{background:none;border:none;font-size:18px;color:var(--txt);opacity:.65;cursor:pointer;padding:4px 5px;border-radius:3px;}
+.nico:hover{opacity:1;background:rgba(128,128,128,.1);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.adot{display:inline-block;width:7px;height:7px;background:#4CAF50;border-radius:50%;animation:blink 1.2s infinite;}
+
+.tbar{background:var(--sur);border-bottom:1px solid var(--brd);padding:6px 14px;display:flex;align-items:center;gap:8px;position:sticky;top:84px;z-index:299;min-height:40px;}
+.tbtn{display:none;align-items:center;gap:5px;padding:4px 11px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;}
+.tbtn.hl{border:1px solid #c8a800;background:#fff9c4;color:#7a5e00;}
+.tbtn.hl:hover{background:#ffe87a;}
+.tbtn.cl{border:1px solid #d48080;background:#fff0f0;color:#8b1a1a;}
+.tbtn.cl:hover{background:#ffd0d0;}
+.tbtn.show{display:flex;}
+.tsep{width:1px;height:20px;background:var(--brd);}
+.thint{font-size:12px;color:var(--txt);opacity:.4;}
+
+.phdr{background:var(--pbg);border-bottom:1px solid var(--pbd);padding:9px 18px;font-size:14px;color:var(--txt);}
+.phdr b{display:block;margin-bottom:2px;}
+
+.main{max-width:900px;margin:0 auto;padding:18px 18px 100px;}
+.stitle{font-weight:700;margin:18px 0 5px;}
+.instr{font-size:.93em;margin-bottom:4px;line-height:1.5;}
+
+.aplayer{background:var(--sur);border:1px solid var(--brd);border-radius:6px;padding:11px 14px;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.pbtn{width:38px;height:38px;border-radius:50%;background:#1a1a1a;border:none;color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pbtn:hover{background:#444;}
+.aprg{flex:1;}
+.abg{height:4px;background:#e0e0e0;border-radius:2px;cursor:pointer;}
+.afill{height:100%;background:#1a1a1a;border-radius:2px;transition:width .3s;}
+.atime{font-size:11px;color:var(--txt);opacity:.6;margin-top:4px;}
+.anote{font-size:11px;color:var(--txt);opacity:.4;font-style:italic;}
+
+.section-title{text-align:center;margin:15px 0;font-size:18px;}
+.option-box{background:var(--sur);border:1px solid var(--brd);border-radius:6px;padding:14px 18px;margin:12px 0 18px;line-height:1.9;}
+.qcard{background:var(--sur);border:1px solid var(--brd);border-radius:6px;margin-bottom:10px;overflow:hidden;}
+.qhead{display:grid;grid-template-columns:38px 1fr;gap:10px;padding:12px 14px;border-bottom:1px solid var(--brd);}
+.qnum{font-weight:800;color:#e31837;}
+.qtext{line-height:1.5;}
+.opts{display:flex;}
+.optbtn{flex:1;border:none;background:var(--sur);border-right:1px solid var(--brd);padding:10px 8px;color:var(--txt);font-weight:700;cursor:pointer;}
+.optbtn:last-child{border-right:none;}
+.optbtn:hover{background:rgba(128,128,128,.08);}
+.optbtn.selected{background:#1a1a1a;color:#fff;}
+.optbtn.rhl{background:#4CAF50!important;color:#fff!important;}
+.optbtn.whl{background:#e53935!important;color:#fff!important;}
+.optbtn.showans{background:#dff6e5!important;color:#155a22!important;}
+
+.match-box{background:var(--sur);border:1px solid var(--brd);border-radius:6px;overflow:hidden;margin-top:14px;}
+.match-row{display:grid;grid-template-columns:46px 1fr 120px;gap:10px;align-items:center;border-bottom:1px solid var(--brd);padding:12px 14px;}
+.match-row:last-child{border-bottom:none;}
+.qsel{width:100%;padding:7px 8px;border:1px solid var(--brd);border-radius:4px;background:var(--bg);color:var(--txt);font-size:15px;outline:none;}
+.qsel.rhl{border-color:#4CAF50;background:#f0fff4;}
+.qsel.whl{border-color:#e53935;background:#fff0f0;}
+body.wob .qsel{background:var(--bg);}
+body.wob .qsel.rhl{background:#002200;}
+body.wob .qsel.whl{background:#2a0000;}
+body.yob .qsel.rhl{background:#002200;}
+body.yob .qsel.whl{background:#1a0000;}
+
+.subbtn-wrap{text-align:center;margin-top:28px;}
+.subbtn{padding:12px 42px;background:#e31837;color:#fff;border:none;border-radius:5px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 10px rgba(227,24,55,.25);transition:background .15s,transform .1s;}
+.subbtn:hover{background:#c01530;transform:translateY(-1px);}
+
+.rspanel{display:none;background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:20px;margin-top:24px;}
+.rspanel.show{display:block;}
+.rstitle{font-size:16px;font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--brd);}
+.rrow{display:flex;align-items:center;gap:9px;margin-bottom:7px;padding:8px 11px;border-radius:5px;font-size:.9em;flex-wrap:wrap;}
+.rrow.rc{background:#f0fff4;border:1px solid #aadcaa;}
+.rrow.rw{background:#fff4f4;border:1px solid #e0aaaa;}
+body.wob .rrow.rc{background:#002200;border-color:#336633;}
+body.wob .rrow.rw{background:#220000;border-color:#663333;}
+body.yob .rrow.rc{background:#002200;border-color:#335533;}
+body.yob .rrow.rw{background:#1a0000;border-color:#553300;}
+.rnum{font-weight:700;width:32px;flex-shrink:0;}
+.rq{flex:1;min-width:100px;}
+.rbdg{padding:2px 8px;border-radius:3px;font-size:.84em;font-weight:700;white-space:nowrap;}
+.rbdg.ok{background:#c6f0ce;color:#155a22;}
+.rbdg.no{background:#ffd0d0;color:#8b1010;}
+body.wob .rbdg.ok{background:#004400;color:#88ee88;}
+body.wob .rbdg.no{background:#440000;color:#ff8888;}
+body.yob .rbdg.ok{background:#003300;color:#aaff00;}
+body.yob .rbdg.no{background:#1a0000;color:#ffaa00;}
+.scwrap{margin-top:16px;padding-top:13px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:13px;flex-wrap:wrap;}
+.scbig{font-size:24px;font-weight:900;color:#e31837;flex-shrink:0;}
+.scbarbg{flex:1;height:11px;background:#eee;border-radius:6px;min-width:70px;overflow:hidden;}
+body.wob .scbarbg{background:#333;}
+.scbarfill{height:100%;background:#e31837;border-radius:6px;transition:width .7s ease;width:0%;}
+.sclbl{font-size:13px;font-weight:600;opacity:.7;}
+
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--sur);border-top:1px solid var(--brd);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;z-index:200;}
+.bpart{font-size:13px;font-weight:700;margin-right:8px;}
+.ptabs{display:inline-flex;gap:3px;}
+.ptab{min-width:26px;height:26px;padding:0 5px;border:1px solid var(--brd);border-radius:3px;background:var(--bg);color:var(--txt);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;}
+.ptab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
+body.wob .ptab.active{background:#eee;color:#111;}
+body.yob .ptab.active{background:#ffe600;color:#111;}
+.narws{display:flex;gap:7px;}
+.narw{width:36px;height:36px;border:none;background:#1a1a1a;color:#fff;border-radius:3px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+body.wob .narw{background:#ddd;color:#111;}
+body.yob .narw{background:#ffe600;color:#111;}
+.narw:disabled{background:#ccc!important;color:#888!important;cursor:default;}
+.narw:not(:disabled):hover{background:#333;}
+
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;}
+.ov.open{display:block;}
+.mpnl{position:fixed;top:0;right:0;bottom:0;width:min(100vw,390px);background:var(--sur);z-index:501;display:flex;flex-direction:column;box-shadow:-3px 0 24px rgba(0,0,0,.18);transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);}
+.mpnl.open{transform:translateX(0);}
+.mhd{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--brd);flex-shrink:0;}
+.mhtitle{font-size:15px;font-weight:700;}
+.mclose{background:none;border:none;font-size:22px;cursor:pointer;color:var(--txt);line-height:1;padding:2px 5px;}
+.mback{background:none;border:none;font-size:14px;cursor:pointer;color:var(--txt);display:flex;align-items:center;gap:5px;font-weight:600;padding:3px 0;}
+.mbdy{flex:1;overflow-y:auto;padding:16px;}
+.opri{display:flex;align-items:center;gap:11px;width:100%;padding:14px 15px;background:#e31837;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:9px;transition:background .15s;}
+.opri:hover{background:#c01530;}
+.opri .oa{margin-left:auto;font-size:16px;}
+.osgrp{border:1px solid var(--brd);border-radius:6px;overflow:hidden;}
+.osec{display:flex;align-items:center;gap:11px;width:100%;padding:13px 15px;background:var(--sur);color:var(--txt);border:none;border-bottom:1px solid var(--brd);font-size:14px;cursor:pointer;text-align:left;transition:background .1s;}
+.osec:last-child{border-bottom:none;}
+.osec:hover{background:rgba(128,128,128,.08);}
+.osec .oa{margin-left:auto;font-size:15px;opacity:.45;}
+.slist{border:1px solid var(--brd);border-radius:6px;overflow:hidden;}
+.sitem{display:flex;align-items:center;gap:11px;padding:13px 15px;background:var(--sur);border:none;border-bottom:1px solid var(--brd);font-size:14px;cursor:pointer;color:var(--txt);text-align:left;width:100%;transition:background .1s;}
+.sitem:last-child{border-bottom:none;}
+.sitem:hover{background:rgba(128,128,128,.08);}
+.sitem .chk{width:17px;font-size:14px;}
+.sitem.active .chk::after{content:'✓';}
+.cfpg{text-align:center;padding:28px 8px;}
+.cficon{font-size:50px;margin-bottom:13px;}
+.cfh{font-size:16px;font-weight:700;margin-bottom:8px;}
+.cfsub{font-size:13px;opacity:.65;margin-bottom:20px;line-height:1.6;}
+.cfbtn{padding:11px 34px;background:#e31837;color:#fff;border:none;border-radius:5px;font-size:14px;font-weight:700;cursor:pointer;}
+.cfbtn:hover{background:#c01530;}
+
+.uhl{background:#fff176;border-radius:2px;}
+@media(max-width:640px){.match-row{grid-template-columns:40px 1fr}.qsel{grid-column:2}.main{padding-left:12px;padding-right:12px}.tgbar-txt{font-size:12px}}
+</style>
+</head>
+<body>
+
+<a class="tgbar" href="https://t.me/jasurbekisaev" target="_blank" rel="noopener">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.02l-1.68 7.93c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.6 4.74-4.28c.21-.18-.04-.28-.32-.1L7.9 14.26l-2.52-.79c-.55-.17-.56-.55.11-.81l9.82-3.79c.46-.17.86.11.72.81z" fill="white"/>
+  </svg>
+  <span class="tgbar-txt">Jasurbek's blog</span>
+</a>
+<div class="nav">
+  <span class="logo">IELTS</span>
+  <span class="nav-mid" id="auStatus"></span>
+  <div class="nav-r">
+    <button class="nico">&#x1F4F6;</button>
+    <button class="nico">&#x1F514;</button>
+    <button class="nico" onclick="openModal('main')">&#9776;</button>
+  </div>
+</div>
+
+<div class="tbar">
+  <button class="tbtn hl" id="hlBtn" onclick="doHL()">✏️ Highlight</button>
+  <div class="tsep" id="tsep" style="display:none"></div>
+  <button class="tbtn cl" id="clBtn" onclick="clearLastHL()">🗑 Clear Highlight</button>
+  <span class="thint" id="thint">Select text, then click Highlight</span>
+</div>
+
+<div class="phdr"><b>Part 2</b>Listen and answer questions 11–20.</div>
+
+<div class="main">
+  <div class="aplayer">
+    <button class="pbtn" id="playBtn" onclick="togglePlay()">▶</button>
+    <div class="aprg">
+      <div class="abg" onclick="seekAU(event)"><div class="afill" id="afill" style="width:0%"></div></div>
+      <div class="atime" id="atime">0:00 / 0:00</div>
+    </div>
+    <span class="anote">Cannot pause or rewind</span>
+  </div>
+
+  <h3 class="section-title">An Electronic Toy Company</h3>
+
+  <div class="stitle">Questions 11–15</div>
+  <p class="instr">Choose the correct answer, <strong>A, B</strong> or <strong>C</strong>.</p>
+
+  <div class="qcard" id="card-q11">
+    <div class="qhead"><span class="qnum">11</span><span class="qtext">What point is made about the history of the company?</span></div>
+    <div class="option-box" style="margin:0;border:none;border-bottom:1px solid var(--brd);border-radius:0">
+      <strong>A.</strong> It was quickly established.<br>
+      <strong>B.</strong> It took a long time to establish.<br>
+      <strong>C.</strong> It was set up by a relative.
+    </div>
+    <div class="opts">
+      <button class="optbtn" data-q="11" data-val="A">A</button>
+      <button class="optbtn" data-q="11" data-val="B">B</button>
+      <button class="optbtn" data-q="11" data-val="C">C</button>
+    </div>
+  </div>
+
+  <div class="qcard" id="card-q12">
+    <div class="qhead"><span class="qnum">12</span><span class="qtext">Why should the company recruit more temporary staff?</span></div>
+    <div class="option-box" style="margin:0;border:none;border-bottom:1px solid var(--brd);border-radius:0">
+      <strong>A.</strong> It plans to develop new products.<br>
+      <strong>B.</strong> The old staff are having an illness.<br>
+      <strong>C.</strong> It aims to meet the new demands of customers.
+    </div>
+    <div class="opts">
+      <button class="optbtn" data-q="12" data-val="A">A</button>
+      <button class="optbtn" data-q="12" data-val="B">B</button>
+      <button class="optbtn" data-q="12" data-val="C">C</button>
+    </div>
+  </div>
+
+  <div class="qcard" id="card-q13">
+    <div class="qhead"><span class="qnum">13</span><span class="qtext">How long will the employees work in the company?</span></div>
+    <div class="option-box" style="margin:0;border:none;border-bottom:1px solid var(--brd);border-radius:0">
+      <strong>A.</strong> a few weeks<br>
+      <strong>B.</strong> half a year<br>
+      <strong>C.</strong> indefinitely
+    </div>
+    <div class="opts">
+      <button class="optbtn" data-q="13" data-val="A">A</button>
+      <button class="optbtn" data-q="13" data-val="B">B</button>
+      <button class="optbtn" data-q="13" data-val="C">C</button>
+    </div>
+  </div>
+
+  <div class="qcard" id="card-q14">
+    <div class="qhead"><span class="qnum">14</span><span class="qtext">The largest number of positions are in the department of</span></div>
+    <div class="option-box" style="margin:0;border:none;border-bottom:1px solid var(--brd);border-radius:0">
+      <strong>A.</strong> administration.<br>
+      <strong>B.</strong> production.<br>
+      <strong>C.</strong> package delivery.
+    </div>
+    <div class="opts">
+      <button class="optbtn" data-q="14" data-val="A">A</button>
+      <button class="optbtn" data-q="14" data-val="B">B</button>
+      <button class="optbtn" data-q="14" data-val="C">C</button>
+    </div>
+  </div>
+
+  <div class="qcard" id="card-q15">
+    <div class="qhead"><span class="qnum">15</span><span class="qtext">What's the current problem with the company?</span></div>
+    <div class="option-box" style="margin:0;border:none;border-bottom:1px solid var(--brd);border-radius:0">
+      <strong>A.</strong> outdated machines<br>
+      <strong>B.</strong> inadequate skills<br>
+      <strong>C.</strong> late payment
+    </div>
+    <div class="opts">
+      <button class="optbtn" data-q="15" data-val="A">A</button>
+      <button class="optbtn" data-q="15" data-val="B">B</button>
+      <button class="optbtn" data-q="15" data-val="C">C</button>
+    </div>
+  </div>
+
+  <div class="stitle">Questions 16–20</div>
+  <p class="instr">What is the responsibility of each temporary staff member?</p>
+  <p class="instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A–F</strong>, next to Questions 16–20.</p>
+
+  <div class="option-box">
+    <strong>A.</strong> computer<br>
+    <strong>B.</strong> wage<br>
+    <strong>C.</strong> production<br>
+    <strong>D.</strong> maintenance<br>
+    <strong>E.</strong> research and development<br>
+    <strong>F.</strong> maintaining customer relationship
+  </div>
+
+  <div class="match-box">
+    <div class="match-row">
+      <span class="qnum">16</span><span>1st person</span>
+      <select class="qsel" data-q="16" id="q16"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="match-row">
+      <span class="qnum">17</span><span>2nd person</span>
+      <select class="qsel" data-q="17" id="q17"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="match-row">
+      <span class="qnum">18</span><span>3rd person</span>
+      <select class="qsel" data-q="18" id="q18"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="match-row">
+      <span class="qnum">19</span><span>4th person</span>
+      <select class="qsel" data-q="19" id="q19"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="match-row">
+      <span class="qnum">20</span><span>5th person</span>
+      <select class="qsel" data-q="20" id="q20"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+  </div>
+
+  <div class="subbtn-wrap">
+    <button class="subbtn" onclick="submitTest()">✔ Submit Answers</button>
+  </div>
+
+  <div class="rspanel" id="rspanel">
+    <div class="rstitle">📋 Your Results</div>
+    <div id="rsContent"></div>
+    <div class="scwrap">
+      <span class="scbig" id="scBig"></span>
+      <div class="scbarbg"><div class="scbarfill" id="scBarFill"></div></div>
+      <span class="sclbl" id="scLbl"></span>
+    </div>
+  </div>
+</div>
+
+<div class="bnav">
+  <div style="display:flex;align-items:center;">
+    <span class="bpart">Part 2</span>
+    <div class="ptabs" id="ptabs"></div>
+  </div>
+  <div class="narws">
+    <button class="narw" id="btnPrev" onclick="navQ(-1)" disabled>&#9664;</button>
+    <button class="narw" id="btnNext" onclick="navQ(1)">&#9654;</button>
+  </div>
+</div>
+
+<div class="ov" id="ov"></div>
+<div class="mpnl" id="mpnl">
+  <div id="mpg-main" style="display:flex;flex-direction:column;height:100%">
+    <div class="mhd"><span class="mhtitle">Options</span><button class="mclose" onclick="closeModal()">&#x2715;</button></div>
+    <div class="mbdy">
+      <button class="opri" onclick="openModal('submit')"><span style="font-size:16px">&#9993;</span> Go to submission page <span class="oa">&#8250;</span></button>
+      <div class="osgrp">
+        <button class="osec" onclick="openModal('contrast')"><span style="font-size:16px">◑</span> Contrast <span class="oa">&#8250;</span></button>
+        <button class="osec" onclick="openModal('textsize')"><span style="font-size:16px">🔍</span> Text size <span class="oa">&#8250;</span></button>
+      </div>
+    </div>
+  </div>
+  <div id="mpg-contrast" style="display:none;flex-direction:column;height:100%">
+    <div class="mhd"><button class="mback" onclick="openModal('main')">&#8249; Options</button><span class="mhtitle">Contrast</span><button class="mclose" onclick="closeModal()">&#x2715;</button></div>
+    <div class="mbdy"><div class="slist">
+      <button class="sitem active" id="c-bow" onclick="setContrast('bow')"><span class="chk"></span> Black on white</button>
+      <button class="sitem" id="c-wob" onclick="setContrast('wob')"><span class="chk"></span> White on black</button>
+      <button class="sitem" id="c-yob" onclick="setContrast('yob')"><span class="chk"></span> Yellow on black</button>
+    </div></div>
+  </div>
+  <div id="mpg-textsize" style="display:none;flex-direction:column;height:100%">
+    <div class="mhd"><button class="mback" onclick="openModal('main')">&#8249; Options</button><span class="mhtitle">Text size</span><button class="mclose" onclick="closeModal()">&#x2715;</button></div>
+    <div class="mbdy"><div class="slist">
+      <button class="sitem active" id="ts-regular" onclick="setTsz('regular')"><span class="chk"></span> Regular</button>
+      <button class="sitem" id="ts-large" onclick="setTsz('large')"><span class="chk"></span> Large</button>
+      <button class="sitem" id="ts-xlarge" onclick="setTsz('xlarge')"><span class="chk"></span> Extra large</button>
+    </div></div>
+  </div>
+  <div id="mpg-submit" style="display:none;flex-direction:column;height:100%">
+    <div class="mhd"><button class="mback" onclick="openModal('main')">&#8249; Options</button><span class="mhtitle">Submission</span><button class="mclose" onclick="closeModal()">&#x2715;</button></div>
+    <div class="mbdy"><div class="cfpg">
+      <div class="cficon">📤</div>
+      <div class="cfh">Ready to submit?</div>
+      <div class="cfsub">Once submitted you will see your results.<br>Make sure all questions are answered.</div>
+      <button class="cfbtn" onclick="confirmSubmit()">✔ Confirm &amp; Submit</button>
+    </div></div>
+  </div>
+</div>
+
+<audio id="audioEl" src="https://audio.jukehost.co.uk/019e9813-bf7d-70e3-a99b-295d58b8430f"></audio>
+
+<script>
+const ANS={
+  q11:'A', q12:'A', q13:'B', q14:'C', q15:'C',
+  q16:'B', q17:'C', q18:'D', q19:'A', q20:'F'
+};
+const LBL={
+  q11:'company history',
+  q12:'temporary staff reason',
+  q13:'employment period',
+  q14:'largest number of positions',
+  q15:'current problem',
+  q16:'1st person',
+  q17:'2nd person',
+  q18:'3rd person',
+  q19:'4th person',
+  q20:'5th person'
+};
+const chosenAnswers={};
+
+document.querySelectorAll('.optbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const q=btn.dataset.q;
+    chosenAnswers['q'+q]=btn.dataset.val;
+    document.querySelectorAll(`.optbtn[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+const AU=document.getElementById('audioEl');
+let playing=false;
+AU.addEventListener('timeupdate',()=>{
+  if(!AU.duration)return;
+  document.getElementById('afill').style.width=(AU.currentTime/AU.duration*100)+'%';
+  document.getElementById('atime').textContent=fmt(AU.currentTime)+' / '+fmt(AU.duration);
+});
+AU.addEventListener('loadedmetadata',()=>{document.getElementById('atime').textContent='0:00 / '+fmt(AU.duration);});
+AU.addEventListener('ended',()=>{playing=false;document.getElementById('playBtn').textContent='▶';document.getElementById('auStatus').innerHTML='';});
+document.addEventListener('DOMContentLoaded',()=>{
+  AU.play().then(()=>{playing=true;document.getElementById('playBtn').textContent='⏸';setAuSt(true);}).catch(()=>{});
+});
+function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function setAuSt(on){document.getElementById('auStatus').innerHTML=on?'<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="adot"></span>Audio is playing</span>':'';}
+function togglePlay(){if(!playing){AU.play();playing=true;document.getElementById('playBtn').textContent='⏸';setAuSt(true);}else{AU.pause();playing=false;document.getElementById('playBtn').textContent='▶';setAuSt(false);}}
+function seekAU(e){if(!AU.duration)return;const r=e.currentTarget.getBoundingClientRect();AU.currentTime=((e.clientX-r.left)/r.width)*AU.duration;}
+
+const Q_IDS=['q11','q12','q13','q14','q15','q16','q17','q18','q19','q20'];
+let curQ=0;
+(function(){
+  const tabs=document.getElementById('ptabs');
+  Q_IDS.forEach((id,i)=>{
+    const btn=document.createElement('div');
+    btn.className='ptab'+(i===0?' active':'');
+    btn.id='ptab'+i;
+    btn.textContent=id.replace('q','');
+    btn.onclick=()=>goToQ(i);
+    tabs.appendChild(btn);
+  });
+})();
+
+function goToQ(idx){
+  curQ=idx;
+  Q_IDS.forEach((_,i)=>document.getElementById('ptab'+i).classList.toggle('active',i===idx));
+  const card=document.getElementById('card-'+Q_IDS[idx]);
+  const el=card||document.getElementById(Q_IDS[idx]);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  document.getElementById('btnPrev').disabled=idx===0;
+  document.getElementById('btnNext').disabled=idx===Q_IDS.length-1;
+}
+function navQ(dir){
+  const next=Math.max(0,Math.min(Q_IDS.length-1,curQ+dir));
+  goToQ(next);
+}
+
+const hlStack=[];
+document.addEventListener('selectionchange',refreshTbar);
+function refreshTbar(){
+  const sel=window.getSelection();
+  const hasTxt=sel&&!sel.isCollapsed&&sel.toString().trim().length>0;
+  document.getElementById('hlBtn').classList.toggle('show',hasTxt);
+  const hasSt=hlStack.length>0;
+  document.getElementById('tsep').style.display=(hasTxt&&hasSt)?'block':'none';
+  document.getElementById('clBtn').classList.toggle('show',hasSt);
+  document.getElementById('thint').style.display=(!hasTxt&&!hasSt)?'':'none';
+}
+function doHL(){
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount)return;
+  try{
+    const range=sel.getRangeAt(0);
+    if(range.cloneContents().querySelector('input,select,button')){sel.removeAllRanges();return;}
+    const span=document.createElement('span');
+    span.className='uhl';
+    range.surroundContents(span);
+    hlStack.push(span);
+    sel.removeAllRanges();
+    refreshTbar();
+  }catch(e){sel.removeAllRanges();}
+}
+function clearLastHL(){
+  if(!hlStack.length)return;
+  const span=hlStack.pop();
+  if(span&&span.parentNode){
+    const p=span.parentNode;
+    while(span.firstChild)p.insertBefore(span.firstChild,span);
+    p.removeChild(span);
+    p.normalize();
+  }
+  refreshTbar();
+}
+
+function openModal(pg){
+  ['main','contrast','textsize','submit'].forEach(p=>{
+    const el=document.getElementById('mpg-'+p);
+    if(el)el.style.display=p===pg?'flex':'none';
+  });
+  document.getElementById('ov').classList.add('open');
+  document.getElementById('mpnl').classList.add('open');
+}
+function closeModal(){document.getElementById('ov').classList.remove('open');document.getElementById('mpnl').classList.remove('open');}
+document.getElementById('ov').addEventListener('click',closeModal);
+
+function setContrast(m){
+  document.body.classList.remove('wob','yob');
+  if(m==='wob')document.body.classList.add('wob');
+  if(m==='yob')document.body.classList.add('yob');
+  ['bow','wob','yob'].forEach(x=>document.getElementById('c-'+x).classList.toggle('active',x===m));
+}
+function setTsz(s){
+  document.body.classList.remove('tsz-L','tsz-XL');
+  if(s==='large')document.body.classList.add('tsz-L');
+  if(s==='xlarge')document.body.classList.add('tsz-XL');
+  ['regular','large','xlarge'].forEach(x=>document.getElementById('ts-'+x).classList.toggle('active',x===s));
+}
+function confirmSubmit(){closeModal();submitTest();}
+function normalize(v){return (v||'').trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,' ');}
+
+function submitTest(){
+  let score=0, html='';
+  for(let i=11;i<=20;i++){
+    const key='q'+i;
+    let chosen='';
+    if(i<=15){
+      chosen=chosenAnswers[key]||'';
+      document.querySelectorAll(`.optbtn[data-q="${i}"]`).forEach(b=>{
+        b.classList.remove('rhl','whl','showans');
+        if(b.dataset.val===chosen && normalize(chosen)===normalize(ANS[key])) b.classList.add('rhl');
+        else if(b.dataset.val===chosen) b.classList.add('whl');
+        else if(b.dataset.val===ANS[key]) b.classList.add('showans');
+      });
+    }else{
+      const input=document.querySelector(`[data-q="${i}"]`);
+      chosen=input?input.value.trim():'';
+      if(input){input.classList.remove('whl','rhl');input.classList.add(normalize(chosen)===normalize(ANS[key])?'rhl':'whl');}
+    }
+
+    const ok=normalize(chosen)===normalize(ANS[key]);
+    if(ok) score++;
+
+    html+=`<div class="rrow ${ok?'rc':'rw'}">
+      <span class="rnum">${i}.</span>
+      <span class="rq">${LBL[key]}</span>
+      ${ok
+        ?'<span class="rbdg ok">✓ Correct</span>'
+        :`<span class="rbdg no">✗ Yours: <b>${chosen||'–'}</b> &nbsp; Answer: <b>${ANS[key]}</b></span>`}
+    </div>`;
+  }
+
+  document.getElementById('rsContent').innerHTML=html;
+  document.getElementById('scBig').textContent=score+' / 10';
+  const pct=score/10*100;
+  setTimeout(()=>document.getElementById('scBarFill').style.width=pct+'%',80);
+  document.getElementById('scLbl').textContent=pct>=90?'🏆 Excellent!':pct>=70?'👍 Good job!':pct>=50?'📚 Keep practising':'💪 Try again';
+  const p=document.getElementById('rspanel');p.classList.add('show');
+  setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),150);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+{
+  "id": "jasurbek-full-listening-test-10-listening-s2",
+  "slug": "jasurbek-full-listening-test-10-listening-s2",
+  "title": "August 13 — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–15",
+      "instruction": "Choose the correct answer, A, B or C.",
+      "questionNumbers": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Questions 16–20",
+      "instruction": "What is the responsibility of each temporary staff member?\nChoose FIVE answers from the box and write the correct letter, A–F, next to Questions 16–20.",
+      "questionNumbers": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_choice",
+      "question": "What point is made about the history of the company?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It was quickly established."
+        },
+        {
+          "letter": "B",
+          "text": "It took a long time to establish."
+        },
+        {
+          "letter": "C",
+          "text": "It was set up by a relative."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 12,
+      "type": "multiple_choice",
+      "question": "Why should the company recruit more temporary staff?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It plans to develop new products."
+        },
+        {
+          "letter": "B",
+          "text": "The old staff are having an illness."
+        },
+        {
+          "letter": "C",
+          "text": "It aims to meet the new demands of customers."
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 13,
+      "type": "multiple_choice",
+      "question": "How long will the employees work in the company?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a few weeks"
+        },
+        {
+          "letter": "B",
+          "text": "half a year"
+        },
+        {
+          "letter": "C",
+          "text": "indefinitely"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_choice",
+      "question": "The largest number of positions are in the department of",
+      "options": [
+        {
+          "letter": "A",
+          "text": "administration."
+        },
+        {
+          "letter": "B",
+          "text": "production."
+        },
+        {
+          "letter": "C",
+          "text": "package delivery."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 15,
+      "type": "multiple_choice",
+      "question": "What's the current problem with the company?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "outdated machines"
+        },
+        {
+          "letter": "B",
+          "text": "inadequate skills"
+        },
+        {
+          "letter": "C",
+          "text": "late payment"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "1st person",
+      "options": [
+        {
+          "letter": "A",
+          "text": "computer"
+        },
+        {
+          "letter": "B",
+          "text": "wage"
+        },
+        {
+          "letter": "C",
+          "text": "production"
+        },
+        {
+          "letter": "D",
+          "text": "maintenance"
+        },
+        {
+          "letter": "E",
+          "text": "research and development"
+        },
+        {
+          "letter": "F",
+          "text": "maintaining customer relationship"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "2nd person",
+      "options": [
+        {
+          "letter": "A",
+          "text": "computer"
+        },
+        {
+          "letter": "B",
+          "text": "wage"
+        },
+        {
+          "letter": "C",
+          "text": "production"
+        },
+        {
+          "letter": "D",
+          "text": "maintenance"
+        },
+        {
+          "letter": "E",
+          "text": "research and development"
+        },
+        {
+          "letter": "F",
+          "text": "maintaining customer relationship"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "3rd person",
+      "options": [
+        {
+          "letter": "A",
+          "text": "computer"
+        },
+        {
+          "letter": "B",
+          "text": "wage"
+        },
+        {
+          "letter": "C",
+          "text": "production"
+        },
+        {
+          "letter": "D",
+          "text": "maintenance"
+        },
+        {
+          "letter": "E",
+          "text": "research and development"
+        },
+        {
+          "letter": "F",
+          "text": "maintaining customer relationship"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "4th person",
+      "options": [
+        {
+          "letter": "A",
+          "text": "computer"
+        },
+        {
+          "letter": "B",
+          "text": "wage"
+        },
+        {
+          "letter": "C",
+          "text": "production"
+        },
+        {
+          "letter": "D",
+          "text": "maintenance"
+        },
+        {
+          "letter": "E",
+          "text": "research and development"
+        },
+        {
+          "letter": "F",
+          "text": "maintaining customer relationship"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "5th person",
+      "options": [
+        {
+          "letter": "A",
+          "text": "computer"
+        },
+        {
+          "letter": "B",
+          "text": "wage"
+        },
+        {
+          "letter": "C",
+          "text": "production"
+        },
+        {
+          "letter": "D",
+          "text": "maintenance"
+        },
+        {
+          "letter": "E",
+          "text": "research and development"
+        },
+        {
+          "letter": "F",
+          "text": "maintaining customer relationship"
+        }
+      ],
+      "answer": "F"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-10",
+  "createdAt": "2026-08-13T03:26:37.289Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Part 2",
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/jasurbek-full-listening-test-10-part-2.mp3",
+      "instruction": "",
+      "answerText": "11: A\n12: A\n13: B\n14: C\n15: C\n16: B\n17: C\n18: D\n19: A\n20: F",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-10-p2-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 11–15",
+          "title": "An Electronic Toy Company",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct answer, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "What point is made about the history of the company?",
+              "text": "What point is made about the history of the company?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It was quickly established."
+                },
+                {
+                  "letter": "B",
+                  "text": "It took a long time to establish."
+                },
+                {
+                  "letter": "C",
+                  "text": "It was set up by a relative."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "Why should the company recruit more temporary staff?",
+              "text": "Why should the company recruit more temporary staff?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "It plans to develop new products."
+                },
+                {
+                  "letter": "B",
+                  "text": "The old staff are having an illness."
+                },
+                {
+                  "letter": "C",
+                  "text": "It aims to meet the new demands of customers."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "A"
+            },
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "How long will the employees work in the company?",
+              "text": "How long will the employees work in the company?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "a few weeks"
+                },
+                {
+                  "letter": "B",
+                  "text": "half a year"
+                },
+                {
+                  "letter": "C",
+                  "text": "indefinitely"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "The largest number of positions are in the department of",
+              "text": "The largest number of positions are in the department of",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "administration."
+                },
+                {
+                  "letter": "B",
+                  "text": "production."
+                },
+                {
+                  "letter": "C",
+                  "text": "package delivery."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "What's the current problem with the company?",
+              "text": "What's the current problem with the company?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "outdated machines"
+                },
+                {
+                  "letter": "B",
+                  "text": "inadequate skills"
+                },
+                {
+                  "letter": "C",
+                  "text": "late payment"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "jasurbek-full-listening-test-10-p2-g2",
+          "type": "matching",
+          "questionRange": "Questions 16–20",
+          "title": "",
+          "optionsTitle": "Responsibilities",
+          "optionLetterPunctuation": "dot",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "What is the responsibility of each temporary staff member?\nChoose FIVE answers from the box and write the correct letter, A–F, next to Questions 16–20.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "computer"
+            },
+            {
+              "letter": "B",
+              "text": "wage"
+            },
+            {
+              "letter": "C",
+              "text": "production"
+            },
+            {
+              "letter": "D",
+              "text": "maintenance"
+            },
+            {
+              "letter": "E",
+              "text": "research and development"
+            },
+            {
+              "letter": "F",
+              "text": "maintaining customer relationship"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "1st person",
+              "text": "1st person",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "2nd person",
+              "text": "2nd person",
+              "answer": "C"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "3rd person",
+              "text": "3rd person",
+              "answer": "D"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "4th person",
+              "text": "4th person",
+              "answer": "A"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "5th person",
+              "text": "5th person",
+              "answer": "F"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

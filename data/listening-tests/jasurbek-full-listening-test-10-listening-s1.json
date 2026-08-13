@@ -1,0 +1,241 @@
+{
+  "id": "jasurbek-full-listening-test-10-listening-s1",
+  "slug": "jasurbek-full-listening-test-10-listening-s1",
+  "title": "August 13 — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Complete the form below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "sentence_completion",
+      "question": "John’s phone number: ...",
+      "options": [],
+      "answer": "0491570159"
+    },
+    {
+      "number": 2,
+      "type": "sentence_completion",
+      "question": "Shift starts at ... a.m.",
+      "options": [],
+      "answer": "7:45 | 7.45"
+    },
+    {
+      "number": 3,
+      "type": "sentence_completion",
+      "question": "Late night opening is on ...",
+      "options": [],
+      "answer": "Friday"
+    },
+    {
+      "number": 4,
+      "type": "sentence_completion",
+      "question": "Start date: ...",
+      "options": [],
+      "answer": "22 January | 22nd January | January 22"
+    },
+    {
+      "number": 5,
+      "type": "sentence_completion",
+      "question": "Speak to Barbara about the ...",
+      "options": [],
+      "answer": "uniform"
+    },
+    {
+      "number": 6,
+      "type": "sentence_completion",
+      "question": "John will email more information about ...",
+      "options": [],
+      "answer": "parking"
+    },
+    {
+      "number": 7,
+      "type": "sentence_completion",
+      "question": "When using the ... machine, customers should be aware of the weight limit.",
+      "options": [],
+      "answer": "weight"
+    },
+    {
+      "number": 8,
+      "type": "sentence_completion",
+      "question": "If there are any health concerns, speak to the ... on duty.",
+      "options": [],
+      "answer": "nurse"
+    },
+    {
+      "number": 9,
+      "type": "sentence_completion",
+      "question": "Be careful when lifting heavy boxes to avoid hurting your ...",
+      "options": [],
+      "answer": "back"
+    },
+    {
+      "number": 10,
+      "type": "sentence_completion",
+      "question": "The new pharmacy bags are now available in ...",
+      "options": [],
+      "answer": "purple"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-10",
+  "createdAt": "2026-08-13T03:26:37.289Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Part 1",
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/jasurbek-full-listening-test-10-part-1.mp3",
+      "instruction": "",
+      "answerText": "1: 0491570159\n2: 7:45 | 7.45\n3: Friday\n4: 22 January | 22nd January | January 22\n5: uniform\n6: parking\n7: weight\n8: nurse\n9: back\n10: purple",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-10-p1-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Greenfield Pharmacy - New Employee Details",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the form below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "- Name of manager: John Field",
+            "- John’s phone number: {{1}}",
+            "<strong>Working hours</strong>",
+            "- Shift starts at {{2}} a.m.",
+            "- Late night opening is on {{3}}",
+            "- Start date: {{4}}",
+            "<strong>Things to do</strong>",
+            "- Speak to Barbara about the {{5}}",
+            "- John will email more information about {{6}}",
+            "<strong>Services</strong>",
+            "- When using the {{7}} machine, customers should be aware of the weight limit.",
+            "- If there are any health concerns, speak to the {{8}} on duty.",
+            "- Be careful when lifting heavy boxes to avoid hurting your {{9}}.",
+            "- The new pharmacy bags are now available in {{10}}."
+          ],
+          "noteStyle": "structured-outline",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "John’s phone number: ...",
+              "text": "John’s phone number: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "0491570159"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "Shift starts at ... a.m.",
+              "text": "Shift starts at ... a.m.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "7:45 | 7.45"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "Late night opening is on ...",
+              "text": "Late night opening is on ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "Friday"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "Start date: ...",
+              "text": "Start date: ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "22 January | 22nd January | January 22"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "Speak to Barbara about the ...",
+              "text": "Speak to Barbara about the ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "uniform"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "John will email more information about ...",
+              "text": "John will email more information about ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "parking"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "When using the ... machine, customers should be aware of the weight limit.",
+              "text": "When using the ... machine, customers should be aware of the weight limit.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "weight"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "If there are any health concerns, speak to the ... on duty.",
+              "text": "If there are any health concerns, speak to the ... on duty.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "nurse"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "Be careful when lifting heavy boxes to avoid hurting your ...",
+              "text": "Be careful when lifting heavy boxes to avoid hurting your ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "back"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "The new pharmacy bags are now available in ...",
+              "text": "The new pharmacy bags are now available in ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "purple"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

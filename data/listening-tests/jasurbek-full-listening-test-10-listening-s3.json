@@ -1,0 +1,356 @@
+{
+  "id": "jasurbek-full-listening-test-10-listening-s3",
+  "slug": "jasurbek-full-listening-test-10-listening-s3",
+  "title": "August 13 — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–23",
+      "instruction": "Choose the correct answer, A, B or C.",
+      "questionNumbers": [
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "title": "Questions 24–30",
+      "instruction": "Complete the tables below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "multiple_choice",
+      "question": "Aya chose interviewing as her main research method because",
+      "options": [
+        {
+          "letter": "A",
+          "text": "it was easier to use than other methods."
+        },
+        {
+          "letter": "B",
+          "text": "it enabled her to explore points of interest in detail."
+        },
+        {
+          "letter": "C",
+          "text": "it was different from methods used by other research groups."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 22,
+      "type": "multiple_choice",
+      "question": "On what basis did Aya choose her research participants?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "They were available in large numbers."
+        },
+        {
+          "letter": "B",
+          "text": "They had asked to be involved in the project."
+        },
+        {
+          "letter": "C",
+          "text": "They all had very similar attitudes to maths."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "type": "multiple_choice",
+      "question": "What surprised Aya most about her findings?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "that so few people had thought about their maths ability before"
+        },
+        {
+          "letter": "B",
+          "text": "that there were such distinct differences between the genders"
+        },
+        {
+          "letter": "C",
+          "text": "that people had such strong feelings about the subject"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 24,
+      "type": "table_completion",
+      "question": "Females' first-level reason: poor ...",
+      "options": [],
+      "answer": "teaching"
+    },
+    {
+      "number": 25,
+      "type": "table_completion",
+      "question": "Males' first-level reason: fear of ...",
+      "options": [],
+      "answer": "numbers"
+    },
+    {
+      "number": 26,
+      "type": "table_completion",
+      "question": "Females' second-level reason: no obvious ...",
+      "options": [],
+      "answer": "applications"
+    },
+    {
+      "number": 27,
+      "type": "table_completion",
+      "question": "Males' second-level reason: belief that you need a ... for maths",
+      "options": [],
+      "answer": "talent"
+    },
+    {
+      "number": 28,
+      "type": "table_completion",
+      "question": "Research method: ... of people's strategies",
+      "options": [],
+      "answer": "observation"
+    },
+    {
+      "number": 29,
+      "type": "table_completion",
+      "question": "Understanding the question as a ...",
+      "options": [],
+      "answer": "whole"
+    },
+    {
+      "number": 30,
+      "type": "table_completion",
+      "question": "Giving up after the first ... of the problem",
+      "options": [],
+      "answer": "reading"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-10",
+  "createdAt": "2026-08-13T03:26:37.289Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Part 3",
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/jasurbek-full-listening-test-10-part-3.mp3",
+      "instruction": "",
+      "answerText": "21: B\n22: C\n23: C\n24: teaching\n25: numbers\n26: applications\n27: talent\n28: observation\n29: whole\n30: reading",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-10-p3-g1",
+          "type": "multiple_choice",
+          "questionRange": "Questions 21–23",
+          "title": "Maths Ability Research",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose the correct answer, A, B or C.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "Aya chose interviewing as her main research method because",
+              "text": "Aya chose interviewing as her main research method because",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "it was easier to use than other methods."
+                },
+                {
+                  "letter": "B",
+                  "text": "it enabled her to explore points of interest in detail."
+                },
+                {
+                  "letter": "C",
+                  "text": "it was different from methods used by other research groups."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "B"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "On what basis did Aya choose her research participants?",
+              "text": "On what basis did Aya choose her research participants?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They were available in large numbers."
+                },
+                {
+                  "letter": "B",
+                  "text": "They had asked to be involved in the project."
+                },
+                {
+                  "letter": "C",
+                  "text": "They all had very similar attitudes to maths."
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "What surprised Aya most about her findings?",
+              "text": "What surprised Aya most about her findings?",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "that so few people had thought about their maths ability before"
+                },
+                {
+                  "letter": "B",
+                  "text": "that there were such distinct differences between the genders"
+                },
+                {
+                  "letter": "C",
+                  "text": "that people had such strong feelings about the subject"
+                }
+              ],
+              "type": "multiple_choice",
+              "answer": "C"
+            }
+          ]
+        },
+        {
+          "id": "jasurbek-full-listening-test-10-p3-g2",
+          "type": "table_completion",
+          "questionRange": "Questions 24–30",
+          "title": "Why do people have a negative attitude to maths?",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the tables below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [
+            [
+              "First-level importance",
+              "Poor {{24}}",
+              "Fear of {{25}}"
+            ],
+            [
+              "Second-level importance",
+              "No obvious {{26}}",
+              "Belief that you need a {{27}} for maths"
+            ],
+            [
+              "Third-level importance",
+              "Low awareness of alternative strategies to solve maths problems",
+              "Low awareness of alternative strategies to solve maths problems"
+            ]
+          ],
+          "columns": [
+            "Level",
+            "Females",
+            "Males"
+          ],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>How do people solve maths questions?</strong>",
+            "Research method: {{28}} of people's strategies",
+            "Successful people most commonly understand the question as a {{29}}.",
+            "Unsuccessful people give up after the first {{30}} of the problem."
+          ],
+          "noteStyle": "maths-research-tables",
+          "questions": [
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "Females' first-level reason: poor ...",
+              "text": "Females' first-level reason: poor ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "teaching"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "Males' first-level reason: fear of ...",
+              "text": "Males' first-level reason: fear of ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "numbers"
+            },
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "Females' second-level reason: no obvious ...",
+              "text": "Females' second-level reason: no obvious ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "applications"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Males' second-level reason: belief that you need a ... for maths",
+              "text": "Males' second-level reason: belief that you need a ... for maths",
+              "options": [],
+              "type": "table_completion",
+              "answer": "talent"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Research method: ... of people's strategies",
+              "text": "Research method: ... of people's strategies",
+              "options": [],
+              "type": "table_completion",
+              "answer": "observation"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Understanding the question as a ...",
+              "text": "Understanding the question as a ...",
+              "options": [],
+              "type": "table_completion",
+              "answer": "whole"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Giving up after the first ... of the problem",
+              "text": "Giving up after the first ... of the problem",
+              "options": [],
+              "type": "table_completion",
+              "answer": "reading"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}

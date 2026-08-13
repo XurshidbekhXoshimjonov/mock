@@ -12,6 +12,194 @@
     --lc-shadow: 0 2px 12px rgba(7, 20, 55, 0.06);
 }
 
+/* Greenfield Pharmacy Part 1: larger copy with clear bullets. */
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-form-title {
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-section-title {
+    margin: 22px 0 9px;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-list {
+    list-style: disc outside;
+    padding-left: 30px;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-list-item {
+    display: list-item;
+    margin: 10px 0;
+    padding-left: 5px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-list-item::marker {
+    color: var(--lc-navy);
+    font-size: 1.2em;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-answer-input {
+    width: min(230px, 30vw);
+    height: 38px;
+    font-size: 17px;
+}
+
+@media (max-width: 720px) {
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-form-title {
+        font-size: 19px;
+    }
+
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-section-title,
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-note-list-item {
+        font-size: 17px;
+    }
+
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p1-g1"] .lc-answer-input {
+        width: min(190px, 48vw);
+        height: 36px;
+    }
+}
+
+/* Chembe Bird Sanctuary Part 4: larger nested notes. */
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-form-title {
+    font-size: 21px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-section-title {
+    margin: 24px 0 10px;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-list {
+    list-style: disc outside;
+    padding-left: 30px;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-nested-list {
+    margin: 8px 0 4px;
+    padding-left: 30px;
+    list-style: circle outside;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-list-item {
+    display: list-item;
+    margin: 10px 0;
+    padding-left: 5px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-list-item::marker {
+    color: var(--lc-navy);
+    font-size: 1.15em;
+}
+
+.lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-answer-input {
+    width: min(220px, 30vw);
+    height: 38px;
+    font-size: 17px;
+}
+
+@media (max-width: 720px) {
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-form-title {
+        font-size: 19px;
+    }
+
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-section-title,
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-note-list-item {
+        font-size: 17px;
+    }
+
+    .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-answer-input {
+        width: min(185px, 46vw);
+        height: 36px;
+    }
+}
+
+/* Maths research, Questions 24-30: two related completion tables. */
+.lc-table-completion--maths-research .lc-block-content {
+    max-width: 920px;
+}
+
+.lc-maths-research-section h4 {
+    margin: 4px 0 8px;
+    color: var(--lc-navy);
+    font-size: 18px;
+    line-height: 1.45;
+}
+
+.lc-maths-research-section--second {
+    margin-top: 30px;
+}
+
+.lc-maths-research-method {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.lc-maths-research-table {
+    min-width: 760px;
+    font-size: 16px;
+}
+
+.lc-maths-research-table th,
+.lc-maths-research-table td {
+    padding: 14px 13px;
+    vertical-align: middle;
+    line-height: 1.55;
+}
+
+.lc-maths-research-table th:first-child {
+    width: 26%;
+}
+
+.lc-maths-research-table td {
+    width: 37%;
+}
+
+.lc-maths-research-answer {
+    display: inline-flex;
+    margin: 3px 5px;
+    vertical-align: middle;
+}
+
+.lc-maths-research-input {
+    width: 150px;
+    height: 36px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.lc-maths-research-input::placeholder {
+    color: #7a8495;
+    font-weight: 700;
+    opacity: 1;
+}
+
+@media (max-width: 720px) {
+    .lc-maths-research-section h4 {
+        font-size: 17px;
+    }
+
+    .lc-maths-research-method,
+    .lc-maths-research-table {
+        font-size: 15px;
+    }
+
+    .lc-maths-research-input {
+        width: 130px;
+        height: 34px;
+    }
+}
+
 /* Larger Part 4 copy for the uploaded Jasurbek full-listening test. */
 .lc-question-card[data-block-id="p4-notes"] .lc-form-title {
     font-size: 19px;

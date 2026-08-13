@@ -1,0 +1,763 @@
+{
+  "id": "jasurbek-full-listening-test-10",
+  "slug": "jasurbek-full-listening-test-10",
+  "title": "August 13",
+  "subtitle": "Listening full test",
+  "sourceFile": "part 1 (3).html, PART 2 (3).html, part 3 (3).html, part 4 (3).html",
+  "status": "published",
+  "skill": "listening",
+  "layout": "generic",
+  "manualListeningTestId": "jasurbek-full-listening-test-10-listening-full",
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-1.mp3",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Part 1",
+        "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-1.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-10-p1-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 1–10",
+            "instructionText": "Complete the form below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "Greenfield Pharmacy - New Employee Details",
+            "noteStyle": "structured-outline",
+            "content": [
+              "- Name of manager: John Field",
+              "- John’s phone number: {{1}}",
+              "<strong>Working hours</strong>",
+              "- Shift starts at {{2}} a.m.",
+              "- Late night opening is on {{3}}",
+              "- Start date: {{4}}",
+              "<strong>Things to do</strong>",
+              "- Speak to Barbara about the {{5}}",
+              "- John will email more information about {{6}}",
+              "<strong>Services</strong>",
+              "- When using the {{7}} machine, customers should be aware of the weight limit.",
+              "- If there are any health concerns, speak to the {{8}} on duty.",
+              "- Be careful when lifting heavy boxes to avoid hurting your {{9}}.",
+              "- The new pharmacy bags are now available in {{10}}."
+            ],
+            "questions": [
+              {
+                "number": 1,
+                "type": "sentence_completion",
+                "question": "John’s phone number: ...",
+                "options": [],
+                "answer": "0491570159"
+              },
+              {
+                "number": 2,
+                "type": "sentence_completion",
+                "question": "Shift starts at ... a.m.",
+                "options": [],
+                "answer": "7:45 | 7.45"
+              },
+              {
+                "number": 3,
+                "type": "sentence_completion",
+                "question": "Late night opening is on ...",
+                "options": [],
+                "answer": "Friday"
+              },
+              {
+                "number": 4,
+                "type": "sentence_completion",
+                "question": "Start date: ...",
+                "options": [],
+                "answer": "22 January | 22nd January | January 22"
+              },
+              {
+                "number": 5,
+                "type": "sentence_completion",
+                "question": "Speak to Barbara about the ...",
+                "options": [],
+                "answer": "uniform"
+              },
+              {
+                "number": 6,
+                "type": "sentence_completion",
+                "question": "John will email more information about ...",
+                "options": [],
+                "answer": "parking"
+              },
+              {
+                "number": 7,
+                "type": "sentence_completion",
+                "question": "When using the ... machine, customers should be aware of the weight limit.",
+                "options": [],
+                "answer": "weight"
+              },
+              {
+                "number": 8,
+                "type": "sentence_completion",
+                "question": "If there are any health concerns, speak to the ... on duty.",
+                "options": [],
+                "answer": "nurse"
+              },
+              {
+                "number": 9,
+                "type": "sentence_completion",
+                "question": "Be careful when lifting heavy boxes to avoid hurting your ...",
+                "options": [],
+                "answer": "back"
+              },
+              {
+                "number": 10,
+                "type": "sentence_completion",
+                "question": "The new pharmacy bags are now available in ...",
+                "options": [],
+                "answer": "purple"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Part 2",
+        "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-2.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-10-p2-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 11–15",
+            "instructionText": "Choose the correct answer, A, B or C.",
+            "title": "An Electronic Toy Company",
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_choice",
+                "question": "What point is made about the history of the company?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It was quickly established."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "It took a long time to establish."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It was set up by a relative."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 12,
+                "type": "multiple_choice",
+                "question": "Why should the company recruit more temporary staff?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "It plans to develop new products."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "The old staff are having an illness."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "It aims to meet the new demands of customers."
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 13,
+                "type": "multiple_choice",
+                "question": "How long will the employees work in the company?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "a few weeks"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "half a year"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "indefinitely"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 14,
+                "type": "multiple_choice",
+                "question": "The largest number of positions are in the department of",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "administration."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "production."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "package delivery."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 15,
+                "type": "multiple_choice",
+                "question": "What's the current problem with the company?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "outdated machines"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "inadequate skills"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "late payment"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "jasurbek-full-listening-test-10-p2-g2",
+            "type": "matching",
+            "instructionTitle": "Questions 16–20",
+            "instructionText": "What is the responsibility of each temporary staff member?\nChoose FIVE answers from the box and write the correct letter, A–F, next to Questions 16–20.",
+            "optionsTitle": "Responsibilities",
+            "optionLetterPunctuation": "dot",
+            "options": [
+              {
+                "letter": "A",
+                "text": "computer"
+              },
+              {
+                "letter": "B",
+                "text": "wage"
+              },
+              {
+                "letter": "C",
+                "text": "production"
+              },
+              {
+                "letter": "D",
+                "text": "maintenance"
+              },
+              {
+                "letter": "E",
+                "text": "research and development"
+              },
+              {
+                "letter": "F",
+                "text": "maintaining customer relationship"
+              }
+            ],
+            "questions": [
+              {
+                "number": 16,
+                "type": "matching",
+                "question": "1st person",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "computer"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "production"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "maintenance"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "research and development"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "maintaining customer relationship"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 17,
+                "type": "matching",
+                "question": "2nd person",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "computer"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "production"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "maintenance"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "research and development"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "maintaining customer relationship"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "question": "3rd person",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "computer"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "production"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "maintenance"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "research and development"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "maintaining customer relationship"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "question": "4th person",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "computer"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "production"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "maintenance"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "research and development"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "maintaining customer relationship"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "question": "5th person",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "computer"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "wage"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "production"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "maintenance"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "research and development"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "maintaining customer relationship"
+                  }
+                ],
+                "answer": "F"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Part 3",
+        "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-3.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-10-p3-g1",
+            "type": "multiple_choice",
+            "instructionTitle": "Questions 21–23",
+            "instructionText": "Choose the correct answer, A, B or C.",
+            "title": "Maths Ability Research",
+            "questions": [
+              {
+                "number": 21,
+                "type": "multiple_choice",
+                "question": "Aya chose interviewing as her main research method because",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "it was easier to use than other methods."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "it enabled her to explore points of interest in detail."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "it was different from methods used by other research groups."
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 22,
+                "type": "multiple_choice",
+                "question": "On what basis did Aya choose her research participants?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "They were available in large numbers."
+                  },
+                  {
+                    "letter": "B",
+                    "text": "They had asked to be involved in the project."
+                  },
+                  {
+                    "letter": "C",
+                    "text": "They all had very similar attitudes to maths."
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 23,
+                "type": "multiple_choice",
+                "question": "What surprised Aya most about her findings?",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "that so few people had thought about their maths ability before"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "that there were such distinct differences between the genders"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "that people had such strong feelings about the subject"
+                  }
+                ],
+                "answer": "C"
+              }
+            ]
+          },
+          {
+            "id": "jasurbek-full-listening-test-10-p3-g2",
+            "type": "table_completion",
+            "instructionTitle": "Questions 24–30",
+            "instructionText": "Complete the tables below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "Why do people have a negative attitude to maths?",
+            "noteStyle": "maths-research-tables",
+            "columns": [
+              "Level",
+              "Females",
+              "Males"
+            ],
+            "rows": [
+              [
+                "First-level importance",
+                "Poor {{24}}",
+                "Fear of {{25}}"
+              ],
+              [
+                "Second-level importance",
+                "No obvious {{26}}",
+                "Belief that you need a {{27}} for maths"
+              ],
+              [
+                "Third-level importance",
+                "Low awareness of alternative strategies to solve maths problems",
+                "Low awareness of alternative strategies to solve maths problems"
+              ]
+            ],
+            "content": [
+              "<strong>How do people solve maths questions?</strong>",
+              "Research method: {{28}} of people's strategies",
+              "Successful people most commonly understand the question as a {{29}}.",
+              "Unsuccessful people give up after the first {{30}} of the problem."
+            ],
+            "questions": [
+              {
+                "number": 24,
+                "type": "table_completion",
+                "question": "Females' first-level reason: poor ...",
+                "options": [],
+                "answer": "teaching"
+              },
+              {
+                "number": 25,
+                "type": "table_completion",
+                "question": "Males' first-level reason: fear of ...",
+                "options": [],
+                "answer": "numbers"
+              },
+              {
+                "number": 26,
+                "type": "table_completion",
+                "question": "Females' second-level reason: no obvious ...",
+                "options": [],
+                "answer": "applications"
+              },
+              {
+                "number": 27,
+                "type": "table_completion",
+                "question": "Males' second-level reason: belief that you need a ... for maths",
+                "options": [],
+                "answer": "talent"
+              },
+              {
+                "number": 28,
+                "type": "table_completion",
+                "question": "Research method: ... of people's strategies",
+                "options": [],
+                "answer": "observation"
+              },
+              {
+                "number": 29,
+                "type": "table_completion",
+                "question": "Understanding the question as a ...",
+                "options": [],
+                "answer": "whole"
+              },
+              {
+                "number": 30,
+                "type": "table_completion",
+                "question": "Giving up after the first ... of the problem",
+                "options": [],
+                "answer": "reading"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Part 4",
+        "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-4.mp3",
+        "instruction": "",
+        "questionGroups": [
+          {
+            "id": "jasurbek-full-listening-test-10-p4-g1",
+            "type": "note_completion",
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+            "title": "Research in the area around the Chembe Bird Sanctuary",
+            "noteStyle": "structured-outline",
+            "content": [
+              "<strong>The importance of birds of prey to local communities</strong>",
+              "- They destroy {{31}} and other rodents.",
+              "- They help to prevent farmers from being bitten by {{32}}.",
+              "- They have been an important part of the local culture for many years.",
+              "- They now support the economy by encouraging {{33}} in the area.",
+              "<strong>Falling numbers of birds of prey</strong>",
+              "- The birds may be accidentally killed:",
+              "  - by {{34}} when they are hunting or sleeping",
+              "  - by electrocution from contact with power lines, especially at times when there is a lot of {{35}}.",
+              "- Local farmers may illegally shoot them or {{36}} them.",
+              "<strong>Ways of protecting chickens from birds of prey</strong>",
+              "- clearly separate vegetation from the areas in which:",
+              "  - {{37}} are kept",
+              "  - chickens (separately)",
+              "- frightening birds of prey by:",
+              "  - keeping a {{38}}",
+              "  - making a {{39}} (e.g. with metal objects)",
+              "- a {{40}} method is usually most effective"
+            ],
+            "questions": [
+              {
+                "number": 31,
+                "type": "sentence_completion",
+                "question": "They destroy ... and other rodents.",
+                "options": [],
+                "answer": "rats"
+              },
+              {
+                "number": 32,
+                "type": "sentence_completion",
+                "question": "They help prevent farmers from being bitten by ...",
+                "options": [],
+                "answer": "snakes"
+              },
+              {
+                "number": 33,
+                "type": "sentence_completion",
+                "question": "They support the economy by encouraging ...",
+                "options": [],
+                "answer": "tourism"
+              },
+              {
+                "number": 34,
+                "type": "sentence_completion",
+                "question": "They may be killed by ... when hunting or sleeping.",
+                "options": [],
+                "answer": "traffic"
+              },
+              {
+                "number": 35,
+                "type": "sentence_completion",
+                "question": "Electrocution is especially dangerous when there is a lot of ...",
+                "options": [],
+                "answer": "rain"
+              },
+              {
+                "number": 36,
+                "type": "sentence_completion",
+                "question": "Local farmers may shoot or ... them.",
+                "options": [],
+                "answer": "poison"
+              },
+              {
+                "number": 37,
+                "type": "sentence_completion",
+                "question": "Keep chickens inside a ...",
+                "options": [],
+                "answer": "building"
+              },
+              {
+                "number": 38,
+                "type": "sentence_completion",
+                "question": "Frighten birds of prey by keeping a ...",
+                "options": [],
+                "answer": "dog"
+              },
+              {
+                "number": 39,
+                "type": "sentence_completion",
+                "question": "Make a ..., for example with metal objects.",
+                "options": [],
+                "answer": "noise"
+              },
+              {
+                "number": 40,
+                "type": "sentence_completion",
+                "question": "A ... method is usually most effective.",
+                "options": [],
+                "answer": "combination"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "answers": {
+    "1": "0491570159",
+    "2": "7:45 | 7.45",
+    "3": "Friday",
+    "4": "22 January | 22nd January | January 22",
+    "5": "uniform",
+    "6": "parking",
+    "7": "weight",
+    "8": "nurse",
+    "9": "back",
+    "10": "purple",
+    "11": "A",
+    "12": "A",
+    "13": "B",
+    "14": "C",
+    "15": "C",
+    "16": "B",
+    "17": "C",
+    "18": "D",
+    "19": "A",
+    "20": "F",
+    "21": "B",
+    "22": "C",
+    "23": "C",
+    "24": "teaching",
+    "25": "numbers",
+    "26": "applications",
+    "27": "talent",
+    "28": "observation",
+    "29": "whole",
+    "30": "reading",
+    "31": "rats",
+    "32": "snakes",
+    "33": "tourism",
+    "34": "traffic",
+    "35": "rain",
+    "36": "poison",
+    "37": "building",
+    "38": "dog",
+    "39": "noise",
+    "40": "combination"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-08-13T03:26:37.289Z",
+  "publishedAt": "2026-08-13T03:26:37.289Z",
+  "openUrl": "/full-test-player?id=jasurbek-full-listening-test-10&skill=listening"
+}

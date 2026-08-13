@@ -1271,6 +1271,65 @@ const ListeningComponents = (() => {
     }
 
     function TableCompletionBlock(block) {
+        if (block.noteStyle === "maths-research-tables") {
+            const answer = (number) => `<span class="lc-maths-research-answer" id="question-${number}" data-question="${number}">
+                <input class="lc-answer-input lc-maths-research-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}" placeholder="${number}">
+            </span>`;
+
+            return blockCard(block, `
+                <section class="lc-maths-research-section">
+                    <h4>Why do people have a negative attitude to maths?</h4>
+                    <p class="lc-maths-research-method">Research method: interview</p>
+                    <div class="lc-table-scroll">
+                        <table class="lc-data-table lc-maths-research-table">
+                            <thead>
+                                <tr><th scope="col"></th><th scope="col">Females</th><th scope="col">Males</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">First-level importance</th>
+                                    <td>Poor ${answer(24)}</td>
+                                    <td>Fear of ${answer(25)}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Second-level importance</th>
+                                    <td>No obvious ${answer(26)}</td>
+                                    <td>Belief that you need a ${answer(27)} for maths</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Third-level importance</th>
+                                    <td colspan="2">Low awareness of alternative strategies to solve maths problems</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="lc-maths-research-section lc-maths-research-section--second">
+                    <h4>How do people solve maths questions?</h4>
+                    <p class="lc-maths-research-method">Research method: ${answer(28)} of people's strategies</p>
+                    <div class="lc-table-scroll">
+                        <table class="lc-data-table lc-maths-research-table">
+                            <thead>
+                                <tr><th scope="col"></th><th scope="col">successful</th><th scope="col">unsuccessful</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Most common strategy</th>
+                                    <td>Understanding the question as a ${answer(29)}</td>
+                                    <td>Applying a solution learned previously</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Second most common strategy</th>
+                                    <td>Using visualisation</td>
+                                    <td>Giving up after first ${answer(30)} of the problem</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            `, "lc-table-completion lc-table-completion--maths-research");
+        }
+
         if (block.noteStyle === "ohope-cabins-table") {
             const rawColumns = block.columns || [];
             const bodyRows = (block.rows || []).filter((row, index) => index !== 0 || !isRepeatedTableHeaderRow(row, rawColumns));

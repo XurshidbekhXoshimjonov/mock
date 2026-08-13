@@ -1,0 +1,245 @@
+{
+  "id": "jasurbek-full-listening-test-10-listening-s4",
+  "slug": "jasurbek-full-listening-test-10-listening-s4",
+  "title": "August 13 — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/jasurbek-full-listening-test-10-part-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "sentence_completion",
+      "question": "They destroy ... and other rodents.",
+      "options": [],
+      "answer": "rats"
+    },
+    {
+      "number": 32,
+      "type": "sentence_completion",
+      "question": "They help prevent farmers from being bitten by ...",
+      "options": [],
+      "answer": "snakes"
+    },
+    {
+      "number": 33,
+      "type": "sentence_completion",
+      "question": "They support the economy by encouraging ...",
+      "options": [],
+      "answer": "tourism"
+    },
+    {
+      "number": 34,
+      "type": "sentence_completion",
+      "question": "They may be killed by ... when hunting or sleeping.",
+      "options": [],
+      "answer": "traffic"
+    },
+    {
+      "number": 35,
+      "type": "sentence_completion",
+      "question": "Electrocution is especially dangerous when there is a lot of ...",
+      "options": [],
+      "answer": "rain"
+    },
+    {
+      "number": 36,
+      "type": "sentence_completion",
+      "question": "Local farmers may shoot or ... them.",
+      "options": [],
+      "answer": "poison"
+    },
+    {
+      "number": 37,
+      "type": "sentence_completion",
+      "question": "Keep chickens inside a ...",
+      "options": [],
+      "answer": "building"
+    },
+    {
+      "number": 38,
+      "type": "sentence_completion",
+      "question": "Frighten birds of prey by keeping a ...",
+      "options": [],
+      "answer": "dog"
+    },
+    {
+      "number": 39,
+      "type": "sentence_completion",
+      "question": "Make a ..., for example with metal objects.",
+      "options": [],
+      "answer": "noise"
+    },
+    {
+      "number": 40,
+      "type": "sentence_completion",
+      "question": "A ... method is usually most effective.",
+      "options": [],
+      "answer": "combination"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "jasurbek-full-listening-test-10",
+  "createdAt": "2026-08-13T03:26:37.289Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Part 4",
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/jasurbek-full-listening-test-10-part-4.mp3",
+      "instruction": "",
+      "answerText": "31: rats\n32: snakes\n33: tourism\n34: traffic\n35: rain\n36: poison\n37: building\n38: dog\n39: noise\n40: combination",
+      "blocks": [
+        {
+          "id": "jasurbek-full-listening-test-10-p4-g1",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "Research in the area around the Chembe Bird Sanctuary",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>The importance of birds of prey to local communities</strong>",
+            "- They destroy {{31}} and other rodents.",
+            "- They help to prevent farmers from being bitten by {{32}}.",
+            "- They have been an important part of the local culture for many years.",
+            "- They now support the economy by encouraging {{33}} in the area.",
+            "<strong>Falling numbers of birds of prey</strong>",
+            "- The birds may be accidentally killed:",
+            "  - by {{34}} when they are hunting or sleeping",
+            "  - by electrocution from contact with power lines, especially at times when there is a lot of {{35}}.",
+            "- Local farmers may illegally shoot them or {{36}} them.",
+            "<strong>Ways of protecting chickens from birds of prey</strong>",
+            "- clearly separate vegetation from the areas in which:",
+            "  - {{37}} are kept",
+            "  - chickens (separately)",
+            "- frightening birds of prey by:",
+            "  - keeping a {{38}}",
+            "  - making a {{39}} (e.g. with metal objects)",
+            "- a {{40}} method is usually most effective"
+          ],
+          "noteStyle": "structured-outline",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "They destroy ... and other rodents.",
+              "text": "They destroy ... and other rodents.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rats"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "They help prevent farmers from being bitten by ...",
+              "text": "They help prevent farmers from being bitten by ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "snakes"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "They support the economy by encouraging ...",
+              "text": "They support the economy by encouraging ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "tourism"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "They may be killed by ... when hunting or sleeping.",
+              "text": "They may be killed by ... when hunting or sleeping.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "traffic"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "Electrocution is especially dangerous when there is a lot of ...",
+              "text": "Electrocution is especially dangerous when there is a lot of ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "rain"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "Local farmers may shoot or ... them.",
+              "text": "Local farmers may shoot or ... them.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "poison"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "Keep chickens inside a ...",
+              "text": "Keep chickens inside a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "building"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "Frighten birds of prey by keeping a ...",
+              "text": "Frighten birds of prey by keeping a ...",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "dog"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "Make a ..., for example with metal objects.",
+              "text": "Make a ..., for example with metal objects.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "noise"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "A ... method is usually most effective.",
+              "text": "A ... method is usually most effective.",
+              "options": [],
+              "type": "sentence_completion",
+              "answer": "combination"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "published",
+  "duration": 10
+}
