@@ -3,6 +3,8 @@
   "title": "August 08",
   "sourceFile": "07-08.html",
   "status": "published",
+  "skill": "reading",
+  "subtitle": "Reading full test",
   "layout": "scripted-reading",
   "metadata": {
     "book": "",
@@ -1640,7 +1642,5 @@
     "answerKeyCount": 40
   },
   "createdAt": "2026-08-09T06:10:48.260Z",
-  "publishedAt": "2026-08-09T06:52:35.178Z",
-  "skill": "reading",
-  "subtitle": "Reading full test"
+  "publishedAt": "2026-08-09T06:52:35.178Z"
 }
