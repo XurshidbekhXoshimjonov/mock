@@ -2221,6 +2221,13 @@ function readManualReadingTestSummaries() {
                 const stat = fs.statSync(filePath);
                 const id = jsonStringField(prefix, "id") || path.basename(file, ".json");
                 const part = String(jsonStringField(prefix, "part") || jsonNumberField(prefix, "part") || "1");
+                const explicitSlug = slugify(
+                    jsonStringField(prefix, "slug")
+                    || jsonStringField(prefix, "publicSlug")
+                    || jsonStringField(prefix, "routeSlug"),
+                    ""
+                );
+                const publicLocator = explicitSlug || id;
                 if (jsonBooleanField(prefix, "mockOnly") || jsonBooleanField(prefix, "mockTestOnly")) {
                     return null;
                 }
@@ -2233,8 +2240,8 @@ function readManualReadingTestSummaries() {
                     createdAt: jsonStringField(prefix, "createdAt") || stat.mtime.toISOString(),
                     extra: {
                         part,
-                        openUrl: publicIdUrl("reading", id),
-                        slug: id
+                        openUrl: publicIdUrl("reading", publicLocator),
+                        slug: publicLocator
                     }
                 });
             } catch (error) {
