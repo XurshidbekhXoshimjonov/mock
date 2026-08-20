@@ -1,6 +1,6 @@
 {
   "id": "august-19-reading-20260820-reading-p3",
-  "slug": "august-19-reading-20260820-reading-p3",
+  "slug": "science-and-filmmaking",
   "title": "Science and filmmaking",
   "subtitle": "",
   "part": 3,
@@ -1002,5 +1002,7 @@
     }
   ],
   "sourceFullTestId": "august-19-reading-20260820",
-  "createdAt": "2026-08-20T01:52:32.027Z"
+  "createdAt": "2026-08-20T02:01:55.415Z",
+  "publicSlug": "science-and-filmmaking",
+  "openUrl": "/reading/science-and-filmmaking"
 }
