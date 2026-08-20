@@ -620,6 +620,10 @@ function slugify(value, fallback = "test") {
 
 const PUBLIC_ROUTE_SLUG_ALIASES = {
     listening: {
+        "listening-august-20-section-1": "watertown-community-centre-programmes",
+        "listening-august-20-section-2": "royal-nature-park-visitor-information",
+        "listening-august-20-section-3": "the-varroa-mite-and-bee-problems",
+        "listening-august-20-section-4": "after-action-review-process",
         "c10-listening-test-1-1783826761800-listening-full": "c10-listening-test-1-1783831879508",
         "c10-listening-test-1-1783826848064": "c10-listening-test-1-1783831879508",
         "c10-listening-test-1-1783826848064-listening-full": "c10-listening-test-1-1783831879508",

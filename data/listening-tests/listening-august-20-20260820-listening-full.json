@@ -986,6 +986,8 @@
       "hideTitle": false,
       "questionRange": "Questions 1-10",
       "audioUrl": "/uploads/audio/listening-august-20-section-1.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
       "instruction": "",
       "answerText": "1: weight\n2: back\n3: beginners\n4: mat\n5: jumps\n6: competition\n7: snack\n8: work\n9: heart\n10: reception",
       "blocks": [
@@ -1128,6 +1130,8 @@
       "hideTitle": true,
       "questionRange": "Questions 11-20",
       "audioUrl": "/uploads/audio/listening-august-20-section-2.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
       "instruction": "",
       "answerText": "11: E\n12: C\n13: B\n14: D\n15: G\n16: B\n17: H\n18: D\n19: F\n20: E",
       "blocks": [
@@ -1459,6 +1463,8 @@
       "hideTitle": false,
       "questionRange": "Questions 21-30",
       "audioUrl": "/uploads/audio/listening-august-20-section-3.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
       "instruction": "",
       "answerText": "21: B\n22: C\n23: D\n24: A\n25: G\n26: E\n27: C\n28: F\n29: B\n30: D",
       "blocks": [
@@ -1640,6 +1646,8 @@
       "hideTitle": false,
       "questionRange": "Questions 31-40",
       "audioUrl": "/uploads/audio/listening-august-20-section-4.mp3",
+      "transcriptText": "",
+      "transcriptSegments": [],
       "instruction": "",
       "answerText": "31: army\n32: safety\n33: learning\n34: reasons\n35: trust\n36: writing\n37: open\n38: leaders\n39: training\n40: time",
       "blocks": [

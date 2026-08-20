@@ -493,6 +493,18 @@ function transcriptSegmentsHtml(transcript, questionResults) {
         const paragraphText = lines.join(" ");
         const sentences = paragraphText.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [paragraphText];
         const sentenceHtml = sentences.map((sentence) => {
+            const inlineHighlights = [...String(sentence).matchAll(/\[\[Q(\d{1,2})\|([\s\S]*?)\]\]/g)];
+            if (inlineHighlights.length) {
+                let cursor = 0;
+                let html = "";
+                inlineHighlights.forEach((match) => {
+                    const number = Number(match[1]);
+                    html += escapeReviewHtml(String(sentence).slice(cursor, match.index));
+                    html += `<mark class="lc-transcript-evidence" data-transcript-questions="${number}"><span class="lc-transcript-question-marker">Q${number}</span> ${escapeReviewHtml(match[2])}</mark>`;
+                    cursor = Number(match.index) + match[0].length;
+                });
+                return html + escapeReviewHtml(String(sentence).slice(cursor));
+            }
             const markerNumbers = [...String(sentence).matchAll(/Q(\d{1,2})(?=[A-Za-z\s])/g)]
                 .map((match) => Number(match[1]));
             const normalizedSentence = normalizeAnswer(sentence);
