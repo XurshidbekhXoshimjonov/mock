@@ -1,0 +1,765 @@
+{
+  "id": "listening-august-20-20260820-listening-s2",
+  "slug": "listening-august-20-section-2",
+  "title": "August 20 — Listening Section 2",
+  "part": 2,
+  "audio": "/uploads/audio/listening-august-20-section-2.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 11–12",
+      "instruction": "Choose TWO letters, A–E.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13–14",
+      "instruction": "Choose TWO letters, A–E.",
+      "rule": "",
+      "questionNumbers": [
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15–20",
+      "instruction": "Which activity is available at each event? Choose the correct letter, A–I.",
+      "rule": "",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 11,
+      "type": "multiple_select",
+      "stemHtml": "",
+      "question": "The Lake",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aquatic life feeds on plants floating on the lake"
+        },
+        {
+          "letter": "B",
+          "text": "Visitors can swim in any part of the lake"
+        },
+        {
+          "letter": "C",
+          "text": "There is little life in the deepest parts of the lake"
+        },
+        {
+          "letter": "D",
+          "text": "The lake has very low water levels"
+        },
+        {
+          "letter": "E",
+          "text": "There is evidence that corn was grown nearby"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 12,
+      "type": "multiple_select",
+      "stemHtml": "",
+      "question": "The Lake",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aquatic life feeds on plants floating on the lake"
+        },
+        {
+          "letter": "B",
+          "text": "Visitors can swim in any part of the lake"
+        },
+        {
+          "letter": "C",
+          "text": "There is little life in the deepest parts of the lake"
+        },
+        {
+          "letter": "D",
+          "text": "The lake has very low water levels"
+        },
+        {
+          "letter": "E",
+          "text": "There is evidence that corn was grown nearby"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 13,
+      "type": "multiple_select",
+      "stemHtml": "",
+      "question": "First Nations Longhouses",
+      "options": [
+        {
+          "letter": "A",
+          "text": "They are built on two levels"
+        },
+        {
+          "letter": "B",
+          "text": "Several families might live in one house"
+        },
+        {
+          "letter": "C",
+          "text": "Animals were kept inside"
+        },
+        {
+          "letter": "D",
+          "text": "Children helped to build them"
+        },
+        {
+          "letter": "E",
+          "text": "They were later destroyed by fire"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_select",
+      "stemHtml": "",
+      "question": "First Nations Longhouses",
+      "options": [
+        {
+          "letter": "A",
+          "text": "They are built on two levels"
+        },
+        {
+          "letter": "B",
+          "text": "Several families might live in one house"
+        },
+        {
+          "letter": "C",
+          "text": "Animals were kept inside"
+        },
+        {
+          "letter": "D",
+          "text": "Children helped to build them"
+        },
+        {
+          "letter": "E",
+          "text": "They were later destroyed by fire"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Sweet Water Season",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Season of the Harvest",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Fall into Nature",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Moccasin Time",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Hide and Seek Trail",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Pine Ridge Way",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "E"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-august-20-20260820",
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "parts": [
+    {
+      "partNumber": 2,
+      "title": "Royal Nature Park — Visitor Information",
+      "hideTitle": true,
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/listening-august-20-section-2.mp3",
+      "instruction": "",
+      "answerText": "11: E\n12: C\n13: B\n14: D\n15: G\n16: B\n17: H\n18: D\n19: F\n20: E",
+      "blocks": [
+        {
+          "id": "august20-royal-nature-park-lake",
+          "type": "multiple_select",
+          "questionRange": "Questions 11–12",
+          "title": "Royal Nature Park — Visitor Information",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Aquatic life feeds on plants floating on the lake"
+            },
+            {
+              "letter": "B",
+              "text": "Visitors can swim in any part of the lake"
+            },
+            {
+              "letter": "C",
+              "text": "There is little life in the deepest parts of the lake"
+            },
+            {
+              "letter": "D",
+              "text": "The lake has very low water levels"
+            },
+            {
+              "letter": "E",
+              "text": "There is evidence that corn was grown nearby"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "royal-nature-park",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "The Lake",
+              "text": "The Lake",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Aquatic life feeds on plants floating on the lake"
+                },
+                {
+                  "letter": "B",
+                  "text": "Visitors can swim in any part of the lake"
+                },
+                {
+                  "letter": "C",
+                  "text": "There is little life in the deepest parts of the lake"
+                },
+                {
+                  "letter": "D",
+                  "text": "The lake has very low water levels"
+                },
+                {
+                  "letter": "E",
+                  "text": "There is evidence that corn was grown nearby"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "The Lake",
+              "text": "The Lake",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Aquatic life feeds on plants floating on the lake"
+                },
+                {
+                  "letter": "B",
+                  "text": "Visitors can swim in any part of the lake"
+                },
+                {
+                  "letter": "C",
+                  "text": "There is little life in the deepest parts of the lake"
+                },
+                {
+                  "letter": "D",
+                  "text": "The lake has very low water levels"
+                },
+                {
+                  "letter": "E",
+                  "text": "There is evidence that corn was grown nearby"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "C"
+            }
+          ],
+          "questionNumber": 11,
+          "answerQuestions": [
+            {
+              "questionNumber": 12
+            }
+          ],
+          "maxSelections": 2,
+          "question": "THE LAKE"
+        },
+        {
+          "id": "august20-royal-nature-park-longhouses",
+          "type": "multiple_select",
+          "questionRange": "Questions 13–14",
+          "title": "",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "They are built on two levels"
+            },
+            {
+              "letter": "B",
+              "text": "Several families might live in one house"
+            },
+            {
+              "letter": "C",
+              "text": "Animals were kept inside"
+            },
+            {
+              "letter": "D",
+              "text": "Children helped to build them"
+            },
+            {
+              "letter": "E",
+              "text": "They were later destroyed by fire"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "First Nations Longhouses",
+              "text": "First Nations Longhouses",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They are built on two levels"
+                },
+                {
+                  "letter": "B",
+                  "text": "Several families might live in one house"
+                },
+                {
+                  "letter": "C",
+                  "text": "Animals were kept inside"
+                },
+                {
+                  "letter": "D",
+                  "text": "Children helped to build them"
+                },
+                {
+                  "letter": "E",
+                  "text": "They were later destroyed by fire"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "First Nations Longhouses",
+              "text": "First Nations Longhouses",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They are built on two levels"
+                },
+                {
+                  "letter": "B",
+                  "text": "Several families might live in one house"
+                },
+                {
+                  "letter": "C",
+                  "text": "Animals were kept inside"
+                },
+                {
+                  "letter": "D",
+                  "text": "Children helped to build them"
+                },
+                {
+                  "letter": "E",
+                  "text": "They were later destroyed by fire"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "D"
+            }
+          ],
+          "questionNumber": 13,
+          "answerQuestions": [
+            {
+              "questionNumber": 14
+            }
+          ],
+          "maxSelections": 2,
+          "question": "FIRST NATIONS LONGHOUSES"
+        },
+        {
+          "id": "august20-royal-nature-park-events",
+          "type": "matching",
+          "questionRange": "Questions 15–20",
+          "title": "",
+          "optionsTitle": "Activities",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "Events",
+          "example": "",
+          "instruction": "Which activity is available at each event? Choose the correct letter, A–I.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "enter a competition"
+            },
+            {
+              "letter": "B",
+              "text": "pick produce"
+            },
+            {
+              "letter": "C",
+              "text": "paint pictures of leaves"
+            },
+            {
+              "letter": "D",
+              "text": "take a walk at night"
+            },
+            {
+              "letter": "E",
+              "text": "follow winter trails"
+            },
+            {
+              "letter": "F",
+              "text": "find carvings of endangered species"
+            },
+            {
+              "letter": "G",
+              "text": "learn about production of a traditional food"
+            },
+            {
+              "letter": "H",
+              "text": "participate in an animal show"
+            },
+            {
+              "letter": "I",
+              "text": "feed the animals"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Sweet Water Season",
+              "text": "Sweet Water Season",
+              "answer": "G"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Season of the Harvest",
+              "text": "Season of the Harvest",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Fall into Nature",
+              "text": "Fall into Nature",
+              "answer": "H"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Moccasin Time",
+              "text": "Moccasin Time",
+              "answer": "D"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Hide and Seek Trail",
+              "text": "Hide and Seek Trail",
+              "answer": "F"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Pine Ridge Way",
+              "text": "Pine Ridge Way",
+              "answer": "E"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

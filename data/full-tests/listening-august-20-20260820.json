@@ -1,0 +1,1339 @@
+{
+  "id": "listening-august-20-20260820",
+  "title": "August 20",
+  "sourceFile": "FULL LISTENING TEST 2.html",
+  "status": "published",
+  "layout": "generic",
+  "metadata": {
+    "book": "",
+    "testNumber": 2,
+    "label": "FULL LISTENING TEST 2"
+  },
+  "reading": {
+    "passages": []
+  },
+  "listening": {
+    "audio": "",
+    "transcript": "",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Section 1",
+        "sectionHtml": "\n<div class=\"part-hdr\">\n<h2>Section 1</h2>\n<p>Questions 1–10 — Complete the notes</p>\n</div>\n<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">Watertown Community Centre Programmes</div>\n\n<div>\n<strong>Example:</strong> Name of staff member → <em>Maria</em>\n</div>\n\n<div class=\"sec-label\">Yoga</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Modern Yoga' is good for losing <span class=\"qnum\" id=\"qn1\">1</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Yoga and More' is beneficial for those with aches in their <span class=\"qnum\" id=\"qn2\">2</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Original Yoga' is great for <span class=\"qnum\" id=\"qn3\">3</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Classes last for 55 minutes</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Participants should bring a <span class=\"qnum\" id=\"qn4\">4</span> </div>\n\n<div class=\"sec-label\">Ballet</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> The Wednesday class focuses on difficult routines and <span class=\"qnum\" id=\"qn5\">5</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> The Thursday class is preparing for a <span class=\"qnum\" id=\"qn6\">6</span> </div>\n\n<div class=\"sec-label\">Soccer</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> In the Rookies team, the children learn the main skills of soccer</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Parents bring a <span class=\"qnum\" id=\"qn7\">7</span>  to be shared</div>\n\n<div class=\"sec-label\">Aerobics</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Classes are held 16 times a week</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> It's best to go before <span class=\"qnum\" id=\"qn8\">8</span>  instead of later</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> High-impact aerobics helps maintain a strong <span class=\"qnum\" id=\"qn9\">9</span> </div>\n\n<div class=\"sec-label\">Registration Procedures</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Can pay online or at <span class=\"qnum\" id=\"qn10\">10</span>  in the centre</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> $360 for 12 weeks</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instruction": {
+              "title": "Questions 1–10",
+              "titleHtml": "",
+              "bodyHtml": "<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>",
+              "rulesHtml": "",
+              "questionRange": [
+                1,
+                10
+              ]
+            },
+            "instructionTitle": "Questions 1–10",
+            "instructionText": "Write ONE WORD ONLY for each answer.",
+            "instructionHtml": {
+              "titleHtml": "",
+              "bodyHtml": "<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "questionRange": [
+              1,
+              10
+            ],
+            "contentHtml": "",
+            "layoutHtml": "<div class=\"part-hdr\">\n<h2>Section 1</h2>\n<p>Questions 1–10 — Complete the notes</p>\n</div>\n<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">Watertown Community Centre Programmes</div>\n\n<div>\n<strong>Example:</strong> Name of staff member → <em>Maria</em>\n</div>\n\n<div class=\"sec-label\">Yoga</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Modern Yoga' is good for losing <span class=\"qnum\" id=\"qn1\">1</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Yoga and More' is beneficial for those with aches in their <span class=\"qnum\" id=\"qn2\">2</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> 'Original Yoga' is great for <span class=\"qnum\" id=\"qn3\">3</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Classes last for 55 minutes</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Participants should bring a <span class=\"qnum\" id=\"qn4\">4</span> </div>\n\n<div class=\"sec-label\">Ballet</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> The Wednesday class focuses on difficult routines and <span class=\"qnum\" id=\"qn5\">5</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> The Thursday class is preparing for a <span class=\"qnum\" id=\"qn6\">6</span> </div>\n\n<div class=\"sec-label\">Soccer</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> In the Rookies team, the children learn the main skills of soccer</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Parents bring a <span class=\"qnum\" id=\"qn7\">7</span>  to be shared</div>\n\n<div class=\"sec-label\">Aerobics</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Classes are held 16 times a week</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> It's best to go before <span class=\"qnum\" id=\"qn8\">8</span>  instead of later</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> High-impact aerobics helps maintain a strong <span class=\"qnum\" id=\"qn9\">9</span> </div>\n\n<div class=\"sec-label\">Registration Procedures</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Can pay online or at <span class=\"qnum\" id=\"qn10\">10</span>  in the centre</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> $360 for 12 weeks</div>\n</div>\n",
+            "questions": [
+              {
+                "number": 1,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "weight"
+              },
+              {
+                "number": 2,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "back"
+              },
+              {
+                "number": 3,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "beginners"
+              },
+              {
+                "number": 4,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "mat"
+              },
+              {
+                "number": 5,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "jumps"
+              },
+              {
+                "number": 6,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "competition"
+              },
+              {
+                "number": 7,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "snack"
+              },
+              {
+                "number": 8,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "work"
+              },
+              {
+                "number": 9,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "heart"
+              },
+              {
+                "number": 10,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "reception"
+              }
+            ],
+            "imageIds": [],
+            "id": "august20-watertown-programmes",
+            "title": "Watertown Community Centre Programmes",
+            "example": "Name of staff member → Maria",
+            "noteStyle": "watertown-programmes",
+            "content": [
+              "<strong>YOGA</strong>",
+              "• 'Modern Yoga' is good for losing {{1}}",
+              "• 'Yoga and More' is beneficial for those with aches in their {{2}}",
+              "• 'Original Yoga' is great for {{3}}",
+              "• Classes last for 55 minutes",
+              "• Participants should bring a {{4}}",
+              "<strong>BALLET</strong>",
+              "• The Wednesday class focuses on difficult routines and {{5}}",
+              "• The Thursday class is preparing for a {{6}}",
+              "<strong>SOCCER</strong>",
+              "• In the Rookies team, the children learn the main skills of soccer",
+              "• Parents bring a {{7}} to be shared",
+              "<strong>AEROBICS</strong>",
+              "• Classes are held 16 times a week",
+              "• It's best to go before {{8}} instead of later",
+              "• High-impact aerobics helps maintain a strong {{9}}",
+              "<strong>REGISTRATION PROCEDURES</strong>",
+              "• Can pay online or at {{10}} in the centre",
+              "• $360 for 12 weeks"
+            ]
+          }
+        ],
+        "audio": "/uploads/audio/listening-august-20-section-1.mp3"
+      },
+      {
+        "number": 2,
+        "title": "Royal Nature Park — Visitor Information",
+        "hideTitle": true,
+        "sectionHtml": "\n<div class=\"part-hdr\">\n<h2>Section 2</h2>\n<p>Questions 11–20</p>\n</div>\n<div class=\"instructions\">\n<strong>Q 11–12:</strong> Choose TWO letters A–E about the lake.<br>\n<strong>Q 13–14:</strong> Choose TWO letters A–E about the longhouses.<br>\n<strong>Q 15–20:</strong> Match each event to an activity (A–I).\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">Royal Nature Park — Visitor Information</div>\n\n<div class=\"sec-label\">Questions 11–12: The Lake (Choose TWO letters A–E)</div>\n<div>\nA — Aquatic life feeds on plants floating on the lake | B — Visitors can swim in any part of the lake<br>\nC — There is little life in the deepest parts of the lake | D — The lake has very low water levels<br>\nE — There is evidence that corn was grown nearby\n</div>\n<div class=\"frow\">\n<span>Q11:</span>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>\n\n<span>Q12:</span>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>\n\n<span>(choose two different letters)</span>\n</div>\n\n<div class=\"sec-label\">Questions 13–14: First Nations Longhouses (Choose TWO letters A–E)</div>\n<div>\nA — They are built on two levels | B — Several families might live in one house<br>\nC — Animals were kept inside | D — Children helped to build them<br>\nE — They were later destroyed by fire\n</div>\n<div class=\"frow\">\n<span>Q13:</span>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>\n\n<span>Q14:</span>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>\n\n<span>(choose two different letters)</span>\n</div>\n\n<div class=\"sec-label\">Questions 15–20: Match Events to Activities (A–I)</div>\n<div>\n<strong>Activities:</strong><br>\nA — enter a competition | B — pick produce | C — paint pictures of leaves<br>\nD — take a walk at night | E — follow winter trails | F — find carvings of endangered species<br>\nG — learn about production of a traditional food | H — participate in an animal show | I — feed the animals\n</div>\n<table class=\"match-table\">\n<thead><tr><th>Q#</th><th>Event</th><th>Activity (A–I)</th></tr></thead>\n<tbody>\n<tr><td><span class=\"qnum\" id=\"qn15\">15</span></td><td>Sweet Water Season</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn16\">16</span></td><td>Season of the Harvest</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn17\">17</span></td><td>Fall into Nature</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn18\">18</span></td><td>Moccasin Time</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn19\">19</span></td><td>Hide and Seek Trail</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn20\">20</span></td><td>Pine Ridge Way</td><td>\n\n<option value=\"\">-- select --</option>\n<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option>\n\n</td></tr>\n</tbody>\n</table>\n</div>\n",
+        "questionGroups": [
+          {
+            "id": "august20-royal-nature-park-lake",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 11–12",
+            "instructionText": "Choose TWO letters, A–E.",
+            "rule": "",
+            "questionRange": [
+              11,
+              12
+            ],
+            "question": "THE LAKE",
+            "title": "Royal Nature Park — Visitor Information",
+            "noteStyle": "royal-nature-park",
+            "options": [
+              {
+                "letter": "A",
+                "text": "Aquatic life feeds on plants floating on the lake"
+              },
+              {
+                "letter": "B",
+                "text": "Visitors can swim in any part of the lake"
+              },
+              {
+                "letter": "C",
+                "text": "There is little life in the deepest parts of the lake"
+              },
+              {
+                "letter": "D",
+                "text": "The lake has very low water levels"
+              },
+              {
+                "letter": "E",
+                "text": "There is evidence that corn was grown nearby"
+              }
+            ],
+            "questions": [
+              {
+                "number": 11,
+                "type": "multiple_select",
+                "stemHtml": "",
+                "question": "The Lake",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Aquatic life feeds on plants floating on the lake"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Visitors can swim in any part of the lake"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "There is little life in the deepest parts of the lake"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "The lake has very low water levels"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "There is evidence that corn was grown nearby"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 12,
+                "type": "multiple_select",
+                "stemHtml": "",
+                "question": "The Lake",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "Aquatic life feeds on plants floating on the lake"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Visitors can swim in any part of the lake"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "There is little life in the deepest parts of the lake"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "The lake has very low water levels"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "There is evidence that corn was grown nearby"
+                  }
+                ],
+                "answer": "C"
+              }
+            ],
+            "imageIds": []
+          },
+          {
+            "id": "august20-royal-nature-park-longhouses",
+            "type": "multiple_select",
+            "instructionTitle": "Questions 13–14",
+            "instructionText": "Choose TWO letters, A–E.",
+            "rule": "",
+            "questionRange": [
+              13,
+              14
+            ],
+            "question": "FIRST NATIONS LONGHOUSES",
+            "options": [
+              {
+                "letter": "A",
+                "text": "They are built on two levels"
+              },
+              {
+                "letter": "B",
+                "text": "Several families might live in one house"
+              },
+              {
+                "letter": "C",
+                "text": "Animals were kept inside"
+              },
+              {
+                "letter": "D",
+                "text": "Children helped to build them"
+              },
+              {
+                "letter": "E",
+                "text": "They were later destroyed by fire"
+              }
+            ],
+            "questions": [
+              {
+                "number": 13,
+                "type": "multiple_select",
+                "stemHtml": "",
+                "question": "First Nations Longhouses",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "They are built on two levels"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Several families might live in one house"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Animals were kept inside"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Children helped to build them"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "They were later destroyed by fire"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 14,
+                "type": "multiple_select",
+                "stemHtml": "",
+                "question": "First Nations Longhouses",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "They are built on two levels"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "Several families might live in one house"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "Animals were kept inside"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "Children helped to build them"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "They were later destroyed by fire"
+                  }
+                ],
+                "answer": "D"
+              }
+            ],
+            "imageIds": []
+          },
+          {
+            "id": "august20-royal-nature-park-events",
+            "type": "matching",
+            "instructionTitle": "Questions 15–20",
+            "instructionText": "Which activity is available at each event? Choose the correct letter, A–I.",
+            "rule": "",
+            "questionRange": [
+              15,
+              20
+            ],
+            "title": "",
+            "optionsTitle": "Activities",
+            "optionLetterPunctuation": "",
+            "questionsTitle": "Events",
+            "options": [
+              {
+                "letter": "A",
+                "text": "enter a competition"
+              },
+              {
+                "letter": "B",
+                "text": "pick produce"
+              },
+              {
+                "letter": "C",
+                "text": "paint pictures of leaves"
+              },
+              {
+                "letter": "D",
+                "text": "take a walk at night"
+              },
+              {
+                "letter": "E",
+                "text": "follow winter trails"
+              },
+              {
+                "letter": "F",
+                "text": "find carvings of endangered species"
+              },
+              {
+                "letter": "G",
+                "text": "learn about production of a traditional food"
+              },
+              {
+                "letter": "H",
+                "text": "participate in an animal show"
+              },
+              {
+                "letter": "I",
+                "text": "feed the animals"
+              }
+            ],
+            "questions": [
+              {
+                "number": 15,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Sweet Water Season",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "G"
+              },
+              {
+                "number": 16,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Season of the Harvest",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 17,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Fall into Nature",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "H"
+              },
+              {
+                "number": 18,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Moccasin Time",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 19,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Hide and Seek Trail",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 20,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Pine Ridge Way",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "enter a competition"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "pick produce"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "paint pictures of leaves"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "take a walk at night"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "follow winter trails"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "find carvings of endangered species"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "learn about production of a traditional food"
+                  },
+                  {
+                    "letter": "H",
+                    "text": "participate in an animal show"
+                  },
+                  {
+                    "letter": "I",
+                    "text": "feed the animals"
+                  }
+                ],
+                "answer": "E"
+              }
+            ],
+            "imageIds": []
+          }
+        ],
+        "audio": "/uploads/audio/listening-august-20-section-2.mp3"
+      },
+      {
+        "number": 3,
+        "title": "Section 3",
+        "sectionHtml": "\n<div class=\"part-hdr\">\n<h2>Section 3</h2>\n<p>Questions 21–30</p>\n</div>\n<div class=\"instructions\">\n<strong>Q 21–25:</strong> Varroa mite flow-chart — choose FIVE answers from A–G.<br>\n<strong>Q 26–30:</strong> Bee problems — match each bee to a problem (A–G).\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">The Varroa Mite &amp; Bee Problems</div>\n\n<div class=\"sec-label\">Questions 21–25: Flow-chart (Choose A–G)</div>\n<div>\nA — the blood | B — a flower | C — the hive | D — the honey<br>\nE — a honeycomb cell | F — the queen bee | G — a virus\n</div>\n<div>\n<div class=\"frow\">The mite moves from the bee to <span class=\"qnum\" id=\"qn21\">21</span>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</div>\n<div>↓</div>\n<div class=\"frow\">The mite travels to <span class=\"qnum\" id=\"qn22\">22</span>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n on a new host.\n</div>\n<div>↓</div>\n<div class=\"frow\">Inside, the mite enters the honeycomb cell</div>\n<div>↓</div>\n<div class=\"frow\">The mite uses <span class=\"qnum\" id=\"qn23\">23</span>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n to hide its smell\n</div>\n<div>↓</div>\n<div class=\"frow\">The mite feeds on <span class=\"qnum\" id=\"qn24\">24</span>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n of the bee larva\n</div>\n<div>↓</div>\n<div class=\"frow\">The mite reproduces and moves on.</div>\n<div>↓</div>\n<div class=\"frow\">The bee is left weakened and with <span class=\"qnum\" id=\"qn25\">25</span>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</div>\n</div>\n\n<div class=\"sec-label\">Questions 26–30: Bee Problems (Choose A–G)</div>\n<div>\nA — could introduce pests | B — needs a warm climate | C — not much is known about it<br>\nD — numbers are too few to help farmers | E — spreads weeds | F — too aggressive | G — unable to produce honey\n</div>\n<table class=\"match-table\">\n<thead><tr><th>Q#</th><th>Type of Bee</th><th>Problem (A–G)</th></tr></thead>\n<tbody>\n<tr><td><span class=\"qnum\" id=\"qn26\">26</span></td><td>European Bumblebee</td><td>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn27\">27</span></td><td>Blue Banded Bee</td><td>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn28\">28</span></td><td>Africanised Bee</td><td>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn29\">29</span></td><td>Australian Stingless Bee</td><td>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</td></tr>\n<tr><td><span class=\"qnum\" id=\"qn30\">30</span></td><td>Canadian Leafcutter Bee</td><td>\n\n<option value=\"\">-- select --</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>\n\n</td></tr>\n</tbody>\n</table>\n</div>\n",
+        "questionGroups": [
+          {
+            "id": "august20-varroa-mite-flowchart",
+            "type": "matching",
+            "instructionTitle": "Questions 21–25: Varroa mite flow-chart — choose FIVE answers from A–G.",
+            "instructionText": "",
+            "rule": "",
+            "questionRange": [
+              21,
+              25
+            ],
+            "title": "The Varroa Mite & Bee Problems",
+            "noteStyle": "varroa-mite-flowchart",
+            "options": [
+              {
+                "letter": "A",
+                "text": "the blood"
+              },
+              {
+                "letter": "B",
+                "text": "a flower"
+              },
+              {
+                "letter": "C",
+                "text": "the hive"
+              },
+              {
+                "letter": "D",
+                "text": "the honey"
+              },
+              {
+                "letter": "E",
+                "text": "a honeycomb cell"
+              },
+              {
+                "letter": "F",
+                "text": "the queen bee"
+              },
+              {
+                "letter": "G",
+                "text": "a virus"
+              }
+            ],
+            "questions": [
+              {
+                "number": 21,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the blood"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a flower"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the hive"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the honey"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a honeycomb cell"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "the queen bee"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "a virus"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 22,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the blood"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a flower"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the hive"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the honey"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a honeycomb cell"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "the queen bee"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "a virus"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 23,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the blood"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a flower"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the hive"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the honey"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a honeycomb cell"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "the queen bee"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "a virus"
+                  }
+                ],
+                "answer": "D"
+              },
+              {
+                "number": 24,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the blood"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a flower"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the hive"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the honey"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a honeycomb cell"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "the queen bee"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "a virus"
+                  }
+                ],
+                "answer": "A"
+              },
+              {
+                "number": 25,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "the blood"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "a flower"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "the hive"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "the honey"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "a honeycomb cell"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "the queen bee"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "a virus"
+                  }
+                ],
+                "answer": "G"
+              }
+            ],
+            "imageIds": []
+          },
+          {
+            "id": "august20-bee-problems",
+            "type": "matching",
+            "instructionTitle": "Questions 26–30",
+            "instructionText": "Which problem is associated with each type of bee? Choose the correct letter, A–G.",
+            "rule": "",
+            "questionRange": [
+              26,
+              30
+            ],
+            "optionsTitle": "Problems",
+            "questionsTitle": "Types of bee",
+            "options": [
+              {
+                "letter": "A",
+                "text": "could introduce pests"
+              },
+              {
+                "letter": "B",
+                "text": "needs a warm climate"
+              },
+              {
+                "letter": "C",
+                "text": "not much is known about it"
+              },
+              {
+                "letter": "D",
+                "text": "numbers are too few to help farmers"
+              },
+              {
+                "letter": "E",
+                "text": "spreads weeds"
+              },
+              {
+                "letter": "F",
+                "text": "too aggressive"
+              },
+              {
+                "letter": "G",
+                "text": "unable to produce honey"
+              }
+            ],
+            "questions": [
+              {
+                "number": 26,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "European Bumblebee",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "could introduce pests"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "needs a warm climate"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "not much is known about it"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "numbers are too few to help farmers"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "spreads weeds"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "too aggressive"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "unable to produce honey"
+                  }
+                ],
+                "answer": "E"
+              },
+              {
+                "number": 27,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Blue Banded Bee",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "could introduce pests"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "needs a warm climate"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "not much is known about it"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "numbers are too few to help farmers"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "spreads weeds"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "too aggressive"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "unable to produce honey"
+                  }
+                ],
+                "answer": "C"
+              },
+              {
+                "number": 28,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Africanised Bee",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "could introduce pests"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "needs a warm climate"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "not much is known about it"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "numbers are too few to help farmers"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "spreads weeds"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "too aggressive"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "unable to produce honey"
+                  }
+                ],
+                "answer": "F"
+              },
+              {
+                "number": 29,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Australian Stingless Bee",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "could introduce pests"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "needs a warm climate"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "not much is known about it"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "numbers are too few to help farmers"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "spreads weeds"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "too aggressive"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "unable to produce honey"
+                  }
+                ],
+                "answer": "B"
+              },
+              {
+                "number": 30,
+                "type": "matching",
+                "stemHtml": "",
+                "question": "Canadian Leafcutter Bee",
+                "options": [
+                  {
+                    "letter": "A",
+                    "text": "could introduce pests"
+                  },
+                  {
+                    "letter": "B",
+                    "text": "needs a warm climate"
+                  },
+                  {
+                    "letter": "C",
+                    "text": "not much is known about it"
+                  },
+                  {
+                    "letter": "D",
+                    "text": "numbers are too few to help farmers"
+                  },
+                  {
+                    "letter": "E",
+                    "text": "spreads weeds"
+                  },
+                  {
+                    "letter": "F",
+                    "text": "too aggressive"
+                  },
+                  {
+                    "letter": "G",
+                    "text": "unable to produce honey"
+                  }
+                ],
+                "answer": "D"
+              }
+            ],
+            "imageIds": []
+          }
+        ],
+        "audio": "/uploads/audio/listening-august-20-section-3.mp3"
+      },
+      {
+        "number": 4,
+        "title": "Section 4",
+        "sectionHtml": "\n<div class=\"part-hdr\">\n<h2>Section 4</h2>\n<p>Questions 31–40 — Complete the notes</p>\n</div>\n<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">After Action Review Process</div>\n\n<div class=\"sec-label\">Background</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> A way of evaluating during a project in order to make improvements</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Developed by the <span class=\"qnum\" id=\"qn31\">31</span> </div>\n\n<div class=\"sec-label\">Benefits</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Not just for large projects — can also be used after:</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> a staff meeting</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> a <span class=\"qnum\" id=\"qn32\">32</span>  incident</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Develops better team communication because of the emphasis on <span class=\"qnum\" id=\"qn33\">33</span> </div>\n\n<div class=\"sec-label\">What is an After Action Review?</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> It's a meeting that:</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> concentrates on results and the <span class=\"qnum\" id=\"qn34\">34</span> </div>\n<div class=\"brow\"><span class=\"bdot\">–</span> encourages participation</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> stresses the need to <span class=\"qnum\" id=\"qn35\">35</span>  each other</div>\n\n<div class=\"sec-label\">Things to Remember</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Use an external facilitator (so stronger team members cannot dominate)</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> To encourage participation, get the group's thoughts in <span class=\"qnum\" id=\"qn36\">36</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Remember to use <span class=\"qnum\" id=\"qn37\">37</span>  questions</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Give any recommendations to other team <span class=\"qnum\" id=\"qn38\">38</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Make sure you follow up on ideas and avoid <span class=\"qnum\" id=\"qn39\">39</span>  for employees</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Remember to check the <span class=\"qnum\" id=\"qn40\">40</span>  often</div>\n</div>\n",
+        "questionGroups": [
+          {
+            "type": "note_completion",
+            "instruction": {
+              "title": "Questions 31–40",
+              "titleHtml": "",
+              "bodyHtml": "<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>",
+              "rulesHtml": "",
+              "questionRange": [
+                31,
+                40
+              ]
+            },
+            "instructionTitle": "Questions 31–40",
+            "instructionText": "Write ONE WORD ONLY for each answer.",
+            "instructionHtml": {
+              "titleHtml": "",
+              "bodyHtml": "<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>",
+              "rulesHtml": ""
+            },
+            "rule": "",
+            "questionRange": [
+              31,
+              40
+            ],
+            "contentHtml": "",
+            "layoutHtml": "<div class=\"part-hdr\">\n<h2>Section 4</h2>\n<p>Questions 31–40 — Complete the notes</p>\n</div>\n<div class=\"instructions\">\nWrite <strong>ONE WORD ONLY</strong> for each answer.\n</div>\n<div class=\"form-card\">\n<div class=\"form-title\">After Action Review Process</div>\n\n<div class=\"sec-label\">Background</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> A way of evaluating during a project in order to make improvements</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Developed by the <span class=\"qnum\" id=\"qn31\">31</span> </div>\n\n<div class=\"sec-label\">Benefits</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Not just for large projects — can also be used after:</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> a staff meeting</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> a <span class=\"qnum\" id=\"qn32\">32</span>  incident</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Develops better team communication because of the emphasis on <span class=\"qnum\" id=\"qn33\">33</span> </div>\n\n<div class=\"sec-label\">What is an After Action Review?</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> It's a meeting that:</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> concentrates on results and the <span class=\"qnum\" id=\"qn34\">34</span> </div>\n<div class=\"brow\"><span class=\"bdot\">–</span> encourages participation</div>\n<div class=\"brow\"><span class=\"bdot\">–</span> stresses the need to <span class=\"qnum\" id=\"qn35\">35</span>  each other</div>\n\n<div class=\"sec-label\">Things to Remember</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Use an external facilitator (so stronger team members cannot dominate)</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> To encourage participation, get the group's thoughts in <span class=\"qnum\" id=\"qn36\">36</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Remember to use <span class=\"qnum\" id=\"qn37\">37</span>  questions</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Give any recommendations to other team <span class=\"qnum\" id=\"qn38\">38</span> </div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Make sure you follow up on ideas and avoid <span class=\"qnum\" id=\"qn39\">39</span>  for employees</div>\n<div class=\"brow\"><span class=\"bdot\">▪</span> Remember to check the <span class=\"qnum\" id=\"qn40\">40</span>  often</div>\n</div>\n",
+            "questions": [
+              {
+                "number": 31,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "army"
+              },
+              {
+                "number": 32,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "safety"
+              },
+              {
+                "number": 33,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "learning"
+              },
+              {
+                "number": 34,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "reasons"
+              },
+              {
+                "number": 35,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "trust"
+              },
+              {
+                "number": 36,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "writing"
+              },
+              {
+                "number": 37,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "open"
+              },
+              {
+                "number": 38,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "leaders"
+              },
+              {
+                "number": 39,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "training"
+              },
+              {
+                "number": 40,
+                "type": "note_completion",
+                "stemHtml": "",
+                "question": "",
+                "options": [],
+                "answer": "time"
+              }
+            ],
+            "imageIds": [],
+            "id": "august20-after-action-review",
+            "title": "After Action Review Process",
+            "noteStyle": "after-action-review"
+          }
+        ],
+        "audio": "/uploads/audio/listening-august-20-section-4.mp3"
+      }
+    ]
+  },
+  "answers": {
+    "1": "weight",
+    "2": "back",
+    "3": "beginners",
+    "4": "mat",
+    "5": "jumps",
+    "6": "competition",
+    "7": "snack",
+    "8": "work",
+    "9": "heart",
+    "10": "reception",
+    "11": "E",
+    "12": "C",
+    "13": "B",
+    "14": "D",
+    "15": "G",
+    "16": "B",
+    "17": "H",
+    "18": "D",
+    "19": "F",
+    "20": "E",
+    "21": "B",
+    "22": "C",
+    "23": "D",
+    "24": "A",
+    "25": "G",
+    "26": "E",
+    "27": "C",
+    "28": "F",
+    "29": "B",
+    "30": "D",
+    "31": "army",
+    "32": "safety",
+    "33": "learning",
+    "34": "reasons",
+    "35": "trust",
+    "36": "writing",
+    "37": "open",
+    "38": "leaders",
+    "39": "training",
+    "40": "time"
+  },
+  "images": [],
+  "parseReport": {
+    "hasReading": false,
+    "hasListening": true,
+    "passageCount": 0,
+    "listeningSectionCount": 4,
+    "imageCount": 0,
+    "answerKeyCount": 40
+  },
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "publishedAt": "2026-08-20T10:14:25.831Z",
+  "subtitle": "Listening full test",
+  "skill": "listening",
+  "publishedListeningSlug": "listening-august-20",
+  "manualListeningTestId": "listening-august-20-20260820-listening-full"
+}

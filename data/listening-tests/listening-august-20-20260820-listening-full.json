@@ -1,0 +1,1760 @@
+{
+  "id": "listening-august-20-20260820-listening-full",
+  "slug": "listening-august-20",
+  "title": "August 20",
+  "subtitle": "Listening full test",
+  "part": "full",
+  "audio": "",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "title": "Questions 11–12",
+      "instruction": "Choose TWO letters, A–E.",
+      "rule": "",
+      "questionNumbers": [
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Questions 13–14",
+      "instruction": "Choose TWO letters, A–E.",
+      "rule": "",
+      "questionNumbers": [
+        13,
+        14
+      ]
+    },
+    {
+      "title": "Questions 15–20",
+      "instruction": "Which activity is available at each event? Choose the correct letter, A–I.",
+      "rule": "",
+      "questionNumbers": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "title": "Questions 21–25: Varroa mite flow-chart — choose FIVE answers from A–G.",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Which problem is associated with each type of bee? Choose the correct letter, A–G.",
+      "rule": "",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "title": "Questions 31–40",
+      "instruction": "Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "weight"
+    },
+    {
+      "number": 2,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "back"
+    },
+    {
+      "number": 3,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "beginners"
+    },
+    {
+      "number": 4,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "mat"
+    },
+    {
+      "number": 5,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "jumps"
+    },
+    {
+      "number": 6,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "competition"
+    },
+    {
+      "number": 7,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "snack"
+    },
+    {
+      "number": 8,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "work"
+    },
+    {
+      "number": 9,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "heart"
+    },
+    {
+      "number": 10,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "reception"
+    },
+    {
+      "number": 11,
+      "type": "multiple_select",
+      "question": "The Lake",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aquatic life feeds on plants floating on the lake"
+        },
+        {
+          "letter": "B",
+          "text": "Visitors can swim in any part of the lake"
+        },
+        {
+          "letter": "C",
+          "text": "There is little life in the deepest parts of the lake"
+        },
+        {
+          "letter": "D",
+          "text": "The lake has very low water levels"
+        },
+        {
+          "letter": "E",
+          "text": "There is evidence that corn was grown nearby"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 12,
+      "type": "multiple_select",
+      "question": "The Lake",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aquatic life feeds on plants floating on the lake"
+        },
+        {
+          "letter": "B",
+          "text": "Visitors can swim in any part of the lake"
+        },
+        {
+          "letter": "C",
+          "text": "There is little life in the deepest parts of the lake"
+        },
+        {
+          "letter": "D",
+          "text": "The lake has very low water levels"
+        },
+        {
+          "letter": "E",
+          "text": "There is evidence that corn was grown nearby"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 13,
+      "type": "multiple_select",
+      "question": "First Nations Longhouses",
+      "options": [
+        {
+          "letter": "A",
+          "text": "They are built on two levels"
+        },
+        {
+          "letter": "B",
+          "text": "Several families might live in one house"
+        },
+        {
+          "letter": "C",
+          "text": "Animals were kept inside"
+        },
+        {
+          "letter": "D",
+          "text": "Children helped to build them"
+        },
+        {
+          "letter": "E",
+          "text": "They were later destroyed by fire"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "type": "multiple_select",
+      "question": "First Nations Longhouses",
+      "options": [
+        {
+          "letter": "A",
+          "text": "They are built on two levels"
+        },
+        {
+          "letter": "B",
+          "text": "Several families might live in one house"
+        },
+        {
+          "letter": "C",
+          "text": "Animals were kept inside"
+        },
+        {
+          "letter": "D",
+          "text": "Children helped to build them"
+        },
+        {
+          "letter": "E",
+          "text": "They were later destroyed by fire"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 15,
+      "type": "matching",
+      "question": "Sweet Water Season",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 16,
+      "type": "matching",
+      "question": "Season of the Harvest",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "type": "matching",
+      "question": "Fall into Nature",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "H"
+    },
+    {
+      "number": 18,
+      "type": "matching",
+      "question": "Moccasin Time",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "type": "matching",
+      "question": "Hide and Seek Trail",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 20,
+      "type": "matching",
+      "question": "Pine Ridge Way",
+      "options": [
+        {
+          "letter": "A",
+          "text": "enter a competition"
+        },
+        {
+          "letter": "B",
+          "text": "pick produce"
+        },
+        {
+          "letter": "C",
+          "text": "paint pictures of leaves"
+        },
+        {
+          "letter": "D",
+          "text": "take a walk at night"
+        },
+        {
+          "letter": "E",
+          "text": "follow winter trails"
+        },
+        {
+          "letter": "F",
+          "text": "find carvings of endangered species"
+        },
+        {
+          "letter": "G",
+          "text": "learn about production of a traditional food"
+        },
+        {
+          "letter": "H",
+          "text": "participate in an animal show"
+        },
+        {
+          "letter": "I",
+          "text": "feed the animals"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 21,
+      "type": "matching",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 22,
+      "type": "matching",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "type": "matching",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 24,
+      "type": "matching",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "question": "European Bumblebee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "question": "Blue Banded Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "question": "Africanised Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "question": "Australian Stingless Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "question": "Canadian Leafcutter Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 31,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "army"
+    },
+    {
+      "number": 32,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 33,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "learning"
+    },
+    {
+      "number": 34,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "reasons"
+    },
+    {
+      "number": 35,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "trust"
+    },
+    {
+      "number": 36,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "writing"
+    },
+    {
+      "number": 37,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "open"
+    },
+    {
+      "number": 38,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "leaders"
+    },
+    {
+      "number": 39,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "training"
+    },
+    {
+      "number": 40,
+      "type": "note_completion",
+      "question": "",
+      "options": [],
+      "answer": "time"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-august-20-20260820",
+  "openUrl": "/full-test-player?id=listening-august-20-20260820&skill=listening",
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Section 1",
+      "hideTitle": false,
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/listening-august-20-section-1.mp3",
+      "instruction": "",
+      "answerText": "1: weight\n2: back\n3: beginners\n4: mat\n5: jumps\n6: competition\n7: snack\n8: work\n9: heart\n10: reception",
+      "blocks": [
+        {
+          "id": "august20-watertown-programmes",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Watertown Community Centre Programmes",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "Name of staff member → Maria",
+          "instruction": "Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>YOGA</strong>",
+            "• 'Modern Yoga' is good for losing {{1}}",
+            "• 'Yoga and More' is beneficial for those with aches in their {{2}}",
+            "• 'Original Yoga' is great for {{3}}",
+            "• Classes last for 55 minutes",
+            "• Participants should bring a {{4}}",
+            "<strong>BALLET</strong>",
+            "• The Wednesday class focuses on difficult routines and {{5}}",
+            "• The Thursday class is preparing for a {{6}}",
+            "<strong>SOCCER</strong>",
+            "• In the Rookies team, the children learn the main skills of soccer",
+            "• Parents bring a {{7}} to be shared",
+            "<strong>AEROBICS</strong>",
+            "• Classes are held 16 times a week",
+            "• It's best to go before {{8}} instead of later",
+            "• High-impact aerobics helps maintain a strong {{9}}",
+            "<strong>REGISTRATION PROCEDURES</strong>",
+            "• Can pay online or at {{10}} in the centre",
+            "• $360 for 12 weeks"
+          ],
+          "noteStyle": "watertown-programmes",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "weight"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "back"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "beginners"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "mat"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "jumps"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "competition"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "snack"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "work"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "heart"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "reception"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 2,
+      "title": "Royal Nature Park — Visitor Information",
+      "hideTitle": true,
+      "questionRange": "Questions 11-20",
+      "audioUrl": "/uploads/audio/listening-august-20-section-2.mp3",
+      "instruction": "",
+      "answerText": "11: E\n12: C\n13: B\n14: D\n15: G\n16: B\n17: H\n18: D\n19: F\n20: E",
+      "blocks": [
+        {
+          "id": "august20-royal-nature-park-lake",
+          "type": "multiple_select",
+          "questionRange": "Questions 11–12",
+          "title": "Royal Nature Park — Visitor Information",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "Aquatic life feeds on plants floating on the lake"
+            },
+            {
+              "letter": "B",
+              "text": "Visitors can swim in any part of the lake"
+            },
+            {
+              "letter": "C",
+              "text": "There is little life in the deepest parts of the lake"
+            },
+            {
+              "letter": "D",
+              "text": "The lake has very low water levels"
+            },
+            {
+              "letter": "E",
+              "text": "There is evidence that corn was grown nearby"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "royal-nature-park",
+          "questions": [
+            {
+              "number": 11,
+              "questionNumber": 11,
+              "question": "The Lake",
+              "text": "The Lake",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Aquatic life feeds on plants floating on the lake"
+                },
+                {
+                  "letter": "B",
+                  "text": "Visitors can swim in any part of the lake"
+                },
+                {
+                  "letter": "C",
+                  "text": "There is little life in the deepest parts of the lake"
+                },
+                {
+                  "letter": "D",
+                  "text": "The lake has very low water levels"
+                },
+                {
+                  "letter": "E",
+                  "text": "There is evidence that corn was grown nearby"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "E"
+            },
+            {
+              "number": 12,
+              "questionNumber": 12,
+              "question": "The Lake",
+              "text": "The Lake",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Aquatic life feeds on plants floating on the lake"
+                },
+                {
+                  "letter": "B",
+                  "text": "Visitors can swim in any part of the lake"
+                },
+                {
+                  "letter": "C",
+                  "text": "There is little life in the deepest parts of the lake"
+                },
+                {
+                  "letter": "D",
+                  "text": "The lake has very low water levels"
+                },
+                {
+                  "letter": "E",
+                  "text": "There is evidence that corn was grown nearby"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "C"
+            }
+          ],
+          "questionNumber": 11,
+          "answerQuestions": [
+            {
+              "questionNumber": 12
+            }
+          ],
+          "maxSelections": 2,
+          "question": "THE LAKE"
+        },
+        {
+          "id": "august20-royal-nature-park-longhouses",
+          "type": "multiple_select",
+          "questionRange": "Questions 13–14",
+          "title": "",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Choose TWO letters, A–E.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "They are built on two levels"
+            },
+            {
+              "letter": "B",
+              "text": "Several families might live in one house"
+            },
+            {
+              "letter": "C",
+              "text": "Animals were kept inside"
+            },
+            {
+              "letter": "D",
+              "text": "Children helped to build them"
+            },
+            {
+              "letter": "E",
+              "text": "They were later destroyed by fire"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 13,
+              "questionNumber": 13,
+              "question": "First Nations Longhouses",
+              "text": "First Nations Longhouses",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They are built on two levels"
+                },
+                {
+                  "letter": "B",
+                  "text": "Several families might live in one house"
+                },
+                {
+                  "letter": "C",
+                  "text": "Animals were kept inside"
+                },
+                {
+                  "letter": "D",
+                  "text": "Children helped to build them"
+                },
+                {
+                  "letter": "E",
+                  "text": "They were later destroyed by fire"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "B"
+            },
+            {
+              "number": 14,
+              "questionNumber": 14,
+              "question": "First Nations Longhouses",
+              "text": "First Nations Longhouses",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "They are built on two levels"
+                },
+                {
+                  "letter": "B",
+                  "text": "Several families might live in one house"
+                },
+                {
+                  "letter": "C",
+                  "text": "Animals were kept inside"
+                },
+                {
+                  "letter": "D",
+                  "text": "Children helped to build them"
+                },
+                {
+                  "letter": "E",
+                  "text": "They were later destroyed by fire"
+                }
+              ],
+              "type": "multiple_select",
+              "answer": "D"
+            }
+          ],
+          "questionNumber": 13,
+          "answerQuestions": [
+            {
+              "questionNumber": 14
+            }
+          ],
+          "maxSelections": 2,
+          "question": "FIRST NATIONS LONGHOUSES"
+        },
+        {
+          "id": "august20-royal-nature-park-events",
+          "type": "matching",
+          "questionRange": "Questions 15–20",
+          "title": "",
+          "optionsTitle": "Activities",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "Events",
+          "example": "",
+          "instruction": "Which activity is available at each event? Choose the correct letter, A–I.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "enter a competition"
+            },
+            {
+              "letter": "B",
+              "text": "pick produce"
+            },
+            {
+              "letter": "C",
+              "text": "paint pictures of leaves"
+            },
+            {
+              "letter": "D",
+              "text": "take a walk at night"
+            },
+            {
+              "letter": "E",
+              "text": "follow winter trails"
+            },
+            {
+              "letter": "F",
+              "text": "find carvings of endangered species"
+            },
+            {
+              "letter": "G",
+              "text": "learn about production of a traditional food"
+            },
+            {
+              "letter": "H",
+              "text": "participate in an animal show"
+            },
+            {
+              "letter": "I",
+              "text": "feed the animals"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 15,
+              "questionNumber": 15,
+              "question": "Sweet Water Season",
+              "text": "Sweet Water Season",
+              "answer": "G"
+            },
+            {
+              "number": 16,
+              "questionNumber": 16,
+              "question": "Season of the Harvest",
+              "text": "Season of the Harvest",
+              "answer": "B"
+            },
+            {
+              "number": 17,
+              "questionNumber": 17,
+              "question": "Fall into Nature",
+              "text": "Fall into Nature",
+              "answer": "H"
+            },
+            {
+              "number": 18,
+              "questionNumber": 18,
+              "question": "Moccasin Time",
+              "text": "Moccasin Time",
+              "answer": "D"
+            },
+            {
+              "number": 19,
+              "questionNumber": 19,
+              "question": "Hide and Seek Trail",
+              "text": "Hide and Seek Trail",
+              "answer": "F"
+            },
+            {
+              "number": 20,
+              "questionNumber": 20,
+              "question": "Pine Ridge Way",
+              "text": "Pine Ridge Way",
+              "answer": "E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 3,
+      "title": "Section 3",
+      "hideTitle": false,
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/listening-august-20-section-3.mp3",
+      "instruction": "",
+      "answerText": "21: B\n22: C\n23: D\n24: A\n25: G\n26: E\n27: C\n28: F\n29: B\n30: D",
+      "blocks": [
+        {
+          "id": "august20-varroa-mite-flowchart",
+          "type": "matching",
+          "questionRange": "Questions 21–25: Varroa mite flow-chart — choose FIVE answers from A–G.",
+          "title": "The Varroa Mite & Bee Problems",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the blood"
+            },
+            {
+              "letter": "B",
+              "text": "a flower"
+            },
+            {
+              "letter": "C",
+              "text": "the hive"
+            },
+            {
+              "letter": "D",
+              "text": "the honey"
+            },
+            {
+              "letter": "E",
+              "text": "a honeycomb cell"
+            },
+            {
+              "letter": "F",
+              "text": "the queen bee"
+            },
+            {
+              "letter": "G",
+              "text": "a virus"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "varroa-mite-flowchart",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "",
+              "text": "",
+              "answer": "B"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "",
+              "text": "",
+              "answer": "C"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "",
+              "text": "",
+              "answer": "D"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "",
+              "text": "",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "",
+              "text": "",
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "august20-bee-problems",
+          "type": "matching",
+          "questionRange": "Questions 26–30",
+          "title": "",
+          "optionsTitle": "Problems",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "Types of bee",
+          "example": "",
+          "instruction": "Which problem is associated with each type of bee? Choose the correct letter, A–G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "could introduce pests"
+            },
+            {
+              "letter": "B",
+              "text": "needs a warm climate"
+            },
+            {
+              "letter": "C",
+              "text": "not much is known about it"
+            },
+            {
+              "letter": "D",
+              "text": "numbers are too few to help farmers"
+            },
+            {
+              "letter": "E",
+              "text": "spreads weeds"
+            },
+            {
+              "letter": "F",
+              "text": "too aggressive"
+            },
+            {
+              "letter": "G",
+              "text": "unable to produce honey"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "European Bumblebee",
+              "text": "European Bumblebee",
+              "answer": "E"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Blue Banded Bee",
+              "text": "Blue Banded Bee",
+              "answer": "C"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Africanised Bee",
+              "text": "Africanised Bee",
+              "answer": "F"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Australian Stingless Bee",
+              "text": "Australian Stingless Bee",
+              "answer": "B"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Canadian Leafcutter Bee",
+              "text": "Canadian Leafcutter Bee",
+              "answer": "D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNumber": 4,
+      "title": "Section 4",
+      "hideTitle": false,
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/listening-august-20-section-4.mp3",
+      "instruction": "",
+      "answerText": "31: army\n32: safety\n33: learning\n34: reasons\n35: trust\n36: writing\n37: open\n38: leaders\n39: training\n40: time",
+      "blocks": [
+        {
+          "id": "august20-after-action-review",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "After Action Review Process",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "after-action-review",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "army"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "safety"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "learning"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "reasons"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "trust"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "writing"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "open"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "leaders"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "training"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "time"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

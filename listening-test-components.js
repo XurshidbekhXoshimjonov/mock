@@ -48,9 +48,12 @@ const ListeningComponents = (() => {
             </span>`;
         }
 
-        const placeholder = String(className).split(/\s+/).includes("lc-mangrove-answer")
+        const inputClasses = String(className).split(/\s+/);
+        const placeholder = inputClasses.includes("lc-mangrove-answer")
             ? ` placeholder="${number}"`
-            : "";
+            : inputClasses.includes("lc-watertown-answer")
+                ? ` placeholder="one word"`
+                : "";
         return `<span class="lc-answer-inline ${className}" id="question-${number}" data-question="${number}"><span class="lc-question-badge">${number}</span><input class="lc-answer-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}"${placeholder}></span>`;
     }
 
@@ -418,13 +421,27 @@ const ListeningComponents = (() => {
             instruction: instruction
         };
 
-        return blockCard(blockClone, `
+        const contentTitle = block.noteStyle === "royal-nature-park" && block.title
+            ? `<h4 class="lc-royal-nature-park-title">${escapeHtml(block.title)}</h4>`
+            : "";
+
+        const content = `
             ${formattedQuestion}
             <div class="lc-choice-list lc-multiple-select" data-max-selections="${Number(block.maxSelections) || 2}" data-question-numbers="${questionNumbers.join(",")}">
                 ${options}
             </div>
             <p class="lc-selection-message" aria-live="polite"></p>
-        `, "lc-multiple-select-block");
+        `;
+
+        if (block.noteStyle === "royal-nature-park") {
+            return `<section class="lc-question-card lc-multiple-select-block" data-block-id="${escapeHtml(block.id || "")}">
+                ${contentTitle}
+                ${blockHeading(blockClone)}
+                ${content}
+            </section>`;
+        }
+
+        return blockCard(blockClone, content, "lc-multiple-select-block");
     }
 
     function SentenceCompletionInlineBlock(block) {
@@ -612,7 +629,12 @@ const ListeningComponents = (() => {
         let displayTitle = looksLikeInstructionTitle(blockTitle) ? "" : blockTitle;
         const isBoxedFlow = block.noteStyle === "boxed-flow";
         const isMangroveProject = block.noteStyle === "mangrove-project";
-        const noteInputClass = isMangroveProject ? "lc-mangrove-answer" : "";
+        const isWatertownProgrammes = block.noteStyle === "watertown-programmes";
+        const noteInputClass = isMangroveProject
+            ? "lc-mangrove-answer"
+            : isWatertownProgrammes
+                ? "lc-watertown-answer"
+                : "";
 
         if (!displayTitle && canUseAsNoteTitle(noteLines[0])) {
             displayTitle = String(noteLines.shift()).trim();
@@ -1175,6 +1197,112 @@ const ListeningComponents = (() => {
             `;
         }
 
+        function renderWatertownInput(questionNumber, width = 140) {
+            const number = Number(questionNumber);
+            return `<span class="lc-watertown-answer" id="question-${number}" data-question="${number}" style="--watertown-width:${Number(width) || 140}px">
+                <input class="lc-answer-input lc-watertown-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderWatertownProgrammes() {
+            return `
+                <div class="lc-watertown-programmes">
+                    <h4>Watertown Community Centre Programmes</h4>
+                    <p class="lc-watertown-example"><strong>Example</strong><span>Name of staff member: <em>Maria</em></span></p>
+
+                    <section>
+                        <h5>Yoga</h5>
+                        <p class="lc-watertown-question"><strong>1</strong><span>‘Modern Yoga’ is good for losing ${renderWatertownInput(1)}</span></p>
+                        <p class="lc-watertown-question"><strong>2</strong><span>‘Yoga and More’ is beneficial for those with aches in their ${renderWatertownInput(2)}</span></p>
+                        <p class="lc-watertown-question"><strong>3</strong><span>‘Original Yoga’ is great for ${renderWatertownInput(3)}</span></p>
+                        <p class="lc-watertown-bullet">Classes last for 55 minutes.</p>
+                        <p class="lc-watertown-question"><strong>4</strong><span>Participants should bring a ${renderWatertownInput(4)}</span></p>
+                    </section>
+
+                    <section>
+                        <h5>Ballet</h5>
+                        <p class="lc-watertown-question"><strong>5</strong><span>The Wednesday class focuses on difficult routines and ${renderWatertownInput(5)}</span></p>
+                        <p class="lc-watertown-question"><strong>6</strong><span>The Thursday class is preparing for a ${renderWatertownInput(6)}</span></p>
+                    </section>
+
+                    <section>
+                        <h5>Soccer</h5>
+                        <p class="lc-watertown-bullet">In the Rookies team, the children learn the main skills of soccer.</p>
+                        <p class="lc-watertown-question lc-watertown-question--continued"><strong>7</strong><span>Parents bring a ${renderWatertownInput(7)}<small>to be shared.</small></span></p>
+                    </section>
+
+                    <section>
+                        <h5>Aerobics</h5>
+                        <p class="lc-watertown-bullet">Classes are held 16 times a week.</p>
+                        <p class="lc-watertown-question lc-watertown-question--continued"><strong>8</strong><span>It is best to go before ${renderWatertownInput(8)}<small>instead of later.</small></span></p>
+                        <p class="lc-watertown-question"><strong>9</strong><span>High-impact aerobics helps maintain a strong ${renderWatertownInput(9)}</span></p>
+                    </section>
+
+                    <section>
+                        <h5>Registration procedures</h5>
+                        <p class="lc-watertown-question lc-watertown-question--continued"><strong>10</strong><span>Can pay online or at ${renderWatertownInput(10)}<small>in the centre.</small></span></p>
+                        <p class="lc-watertown-bullet">$360 for 12 weeks.</p>
+                    </section>
+                </div>
+            `;
+        }
+
+        function renderAfterActionInput(questionNumber) {
+            const number = Number(questionNumber);
+            return `<span class="lc-after-action-answer" id="question-${number}" data-question="${number}">
+                <span class="lc-question-badge">${number}</span>
+                <input class="lc-answer-input lc-after-action-input" id="q${number}" name="q${number}" type="text" autocomplete="off" aria-label="Answer ${number}">
+            </span>`;
+        }
+
+        function renderAfterActionReview() {
+            return `
+                <div class="lc-after-action-review">
+                    <h4>After Action Review Process</h4>
+
+                    <section>
+                        <h5>BACKGROUND</h5>
+                        <p class="lc-after-action-bullet">A way of evaluating during a project in order to make improvements</p>
+                        <p class="lc-after-action-bullet">Developed by the ${renderAfterActionInput(31)}</p>
+                    </section>
+
+                    <section>
+                        <h5>BENEFITS</h5>
+                        <p class="lc-after-action-bullet">Not just for large projects — can also be used after:</p>
+                        <p class="lc-after-action-subitem">a staff meeting</p>
+                        <p class="lc-after-action-subitem">a ${renderAfterActionInput(32)} incident</p>
+                        <p class="lc-after-action-bullet">Develops better team communication because of the emphasis on ${renderAfterActionInput(33)}</p>
+                    </section>
+
+                    <section>
+                        <h5>WHAT IS AN AFTER ACTION REVIEW?</h5>
+                        <p class="lc-after-action-bullet">It's a meeting that:</p>
+                        <p class="lc-after-action-subitem">concentrates on results and the ${renderAfterActionInput(34)}</p>
+                        <p class="lc-after-action-subitem">encourages participation</p>
+                        <p class="lc-after-action-subitem">stresses the need to ${renderAfterActionInput(35)} each other</p>
+                    </section>
+
+                    <section>
+                        <h5>THINGS TO REMEMBER</h5>
+                        <p class="lc-after-action-bullet">Use an external facilitator (so stronger team members cannot dominate)</p>
+                        <p class="lc-after-action-bullet">To encourage participation, get the group's thoughts in ${renderAfterActionInput(36)}</p>
+                        <p class="lc-after-action-bullet">Remember to use ${renderAfterActionInput(37)} questions</p>
+                        <p class="lc-after-action-bullet">Give any recommendations to other team ${renderAfterActionInput(38)}</p>
+                        <p class="lc-after-action-bullet">Make sure you follow up on ideas and avoid ${renderAfterActionInput(39)} for employees</p>
+                        <p class="lc-after-action-bullet">Remember to check the ${renderAfterActionInput(40)} often</p>
+                    </section>
+                </div>
+            `;
+        }
+
+        if (block.noteStyle === "after-action-review") {
+            return blockCard(block, renderAfterActionReview(), "lc-note-completion lc-note-completion--after-action-review");
+        }
+
+        if (block.noteStyle === "watertown-programmes") {
+            return blockCard(block, renderWatertownProgrammes(), "lc-note-completion lc-note-completion--watertown-programmes");
+        }
+
         if (block.noteStyle === "capital-one-bank") {
             return blockCard(block, renderCapitalOneBank(), "lc-note-completion lc-note-completion--capital-one");
         }
@@ -1223,11 +1351,13 @@ const ListeningComponents = (() => {
         const noteStyleClass = [
             isBoxedFlow ? "lc-note-completion--boxed-flow" : "",
             isSpiritBear ? "lc-note-completion--spirit-bear" : "",
-            isMangroveProject ? "lc-note-completion--mangrove-project" : ""
+            isMangroveProject ? "lc-note-completion--mangrove-project" : "",
+            isWatertownProgrammes ? "lc-note-completion--watertown-programmes" : ""
         ].filter(Boolean).join(" ");
         const items = renderNoteFlow(noteLines);
         const tableItems = block.noteStyle !== "structured-outline"
             && block.noteStyle !== "mangrove-project"
+            && block.noteStyle !== "watertown-programmes"
             && shouldRenderNoteTable(noteLines)
             ? renderNoteTable(noteLines)
             : "";
@@ -1409,6 +1539,48 @@ const ListeningComponents = (() => {
     }
 
     function MatchingBlock(block) {
+        if (block.noteStyle === "varroa-mite-flowchart") {
+            const optionTags = (block.options || []).map((option) =>
+                `<option value="${escapeHtml(option.letter || "")}">${escapeHtml(option.letter || "")}</option>`
+            ).join("");
+            const answer = (number) => `<span class="lc-varroa-answer" id="question-${number}" data-question="${number}">
+                <span class="lc-question-badge">${number}</span>
+                <select id="q${number}" name="q${number}" aria-label="Answer ${number}">
+                    <option value="">-- select --</option>
+                    ${optionTags}
+                </select>
+            </span>`;
+            const options = (block.options || []).map((option) =>
+                `<span><strong>${escapeHtml(option.letter || "")}.</strong> ${escapeHtml(cleanOptionText(option.text || ""))}</span>`
+            ).join("");
+            const arrow = '<div class="lc-varroa-arrow" aria-hidden="true">↓</div>';
+            const blockClone = { ...block, title: "", instruction: "" };
+
+            return `<section class="lc-question-card lc-matching-block lc-varroa-block" data-block-id="${escapeHtml(block.id || "")}">
+                <h4 class="lc-varroa-title">${escapeHtml(block.title || "The Varroa Mite & Bee Problems")}</h4>
+                ${blockHeading(blockClone)}
+                <div class="lc-varroa-options">
+                    <h4>List of words</h4>
+                    <div class="lc-varroa-options-list">${options}</div>
+                </div>
+                <div class="lc-varroa-flow">
+                    <p>The mite moves from the bee to ${answer(21)}</p>
+                    ${arrow}
+                    <p>The mite travels to ${answer(22)} on a new host.</p>
+                    ${arrow}
+                    <p class="lc-varroa-muted">Inside, the mite enters the honeycomb cell</p>
+                    ${arrow}
+                    <p>The mite uses ${answer(23)} to hide its smell</p>
+                    ${arrow}
+                    <p>The mite feeds on ${answer(24)} of the bee larva</p>
+                    ${arrow}
+                    <p class="lc-varroa-muted">The mite reproduces and moves on.</p>
+                    ${arrow}
+                    <p>The bee is left weakened and with ${answer(25)}</p>
+                </div>
+            </section>`;
+        }
+
         if (block.noteStyle === "work-placement-sources") {
             const optionItems = (block.options || []).map((option) => `
                 <div class="lc-work-source-option">
@@ -1923,7 +2095,7 @@ const ListeningComponents = (() => {
 
         return `<section class="lc-part" data-part-number="${Number(part.partNumber) || 1}">
             <div class="lc-part-heading">
-                <h2>${escapeHtml(part.title || `Part ${part.partNumber}`)}</h2>
+                ${part.hideTitle ? "" : `<h2>${escapeHtml(part.title || `Part ${part.partNumber}`)}</h2>`}
                 <p>${escapeHtml(part.questionRange || "")}</p>
                 ${part.instruction ? `<p class="lc-part-instruction">${highlightInstruction(part.instruction)}</p>` : ""}
             </div>

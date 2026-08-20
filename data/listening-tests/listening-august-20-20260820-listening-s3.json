@@ -1,0 +1,592 @@
+{
+  "id": "listening-august-20-20260820-listening-s3",
+  "slug": "listening-august-20-section-3",
+  "title": "August 20 — Listening Section 3",
+  "part": 3,
+  "audio": "/uploads/audio/listening-august-20-section-3.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 21–25: Varroa mite flow-chart — choose FIVE answers from A–G.",
+      "instruction": "",
+      "rule": "",
+      "questionNumbers": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "title": "Questions 26–30",
+      "instruction": "Which problem is associated with each type of bee? Choose the correct letter, A–G.",
+      "rule": "",
+      "questionNumbers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 21,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 22,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 24,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 25,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "",
+      "options": [
+        {
+          "letter": "A",
+          "text": "the blood"
+        },
+        {
+          "letter": "B",
+          "text": "a flower"
+        },
+        {
+          "letter": "C",
+          "text": "the hive"
+        },
+        {
+          "letter": "D",
+          "text": "the honey"
+        },
+        {
+          "letter": "E",
+          "text": "a honeycomb cell"
+        },
+        {
+          "letter": "F",
+          "text": "the queen bee"
+        },
+        {
+          "letter": "G",
+          "text": "a virus"
+        }
+      ],
+      "answer": "G"
+    },
+    {
+      "number": 26,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "European Bumblebee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 27,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Blue Banded Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Africanised Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "F"
+    },
+    {
+      "number": 29,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Australian Stingless Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 30,
+      "type": "matching",
+      "stemHtml": "",
+      "question": "Canadian Leafcutter Bee",
+      "options": [
+        {
+          "letter": "A",
+          "text": "could introduce pests"
+        },
+        {
+          "letter": "B",
+          "text": "needs a warm climate"
+        },
+        {
+          "letter": "C",
+          "text": "not much is known about it"
+        },
+        {
+          "letter": "D",
+          "text": "numbers are too few to help farmers"
+        },
+        {
+          "letter": "E",
+          "text": "spreads weeds"
+        },
+        {
+          "letter": "F",
+          "text": "too aggressive"
+        },
+        {
+          "letter": "G",
+          "text": "unable to produce honey"
+        }
+      ],
+      "answer": "D"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-august-20-20260820",
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "parts": [
+    {
+      "partNumber": 3,
+      "title": "Section 3",
+      "hideTitle": false,
+      "questionRange": "Questions 21-30",
+      "audioUrl": "/uploads/audio/listening-august-20-section-3.mp3",
+      "instruction": "",
+      "answerText": "21: B\n22: C\n23: D\n24: A\n25: G\n26: E\n27: C\n28: F\n29: B\n30: D",
+      "blocks": [
+        {
+          "id": "august20-varroa-mite-flowchart",
+          "type": "matching",
+          "questionRange": "Questions 21–25: Varroa mite flow-chart — choose FIVE answers from A–G.",
+          "title": "The Varroa Mite & Bee Problems",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "",
+          "options": [
+            {
+              "letter": "A",
+              "text": "the blood"
+            },
+            {
+              "letter": "B",
+              "text": "a flower"
+            },
+            {
+              "letter": "C",
+              "text": "the hive"
+            },
+            {
+              "letter": "D",
+              "text": "the honey"
+            },
+            {
+              "letter": "E",
+              "text": "a honeycomb cell"
+            },
+            {
+              "letter": "F",
+              "text": "the queen bee"
+            },
+            {
+              "letter": "G",
+              "text": "a virus"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "varroa-mite-flowchart",
+          "questions": [
+            {
+              "number": 21,
+              "questionNumber": 21,
+              "question": "",
+              "text": "",
+              "answer": "B"
+            },
+            {
+              "number": 22,
+              "questionNumber": 22,
+              "question": "",
+              "text": "",
+              "answer": "C"
+            },
+            {
+              "number": 23,
+              "questionNumber": 23,
+              "question": "",
+              "text": "",
+              "answer": "D"
+            },
+            {
+              "number": 24,
+              "questionNumber": 24,
+              "question": "",
+              "text": "",
+              "answer": "A"
+            },
+            {
+              "number": 25,
+              "questionNumber": 25,
+              "question": "",
+              "text": "",
+              "answer": "G"
+            }
+          ]
+        },
+        {
+          "id": "august20-bee-problems",
+          "type": "matching",
+          "questionRange": "Questions 26–30",
+          "title": "",
+          "optionsTitle": "Problems",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "Types of bee",
+          "example": "",
+          "instruction": "Which problem is associated with each type of bee? Choose the correct letter, A–G.",
+          "options": [
+            {
+              "letter": "A",
+              "text": "could introduce pests"
+            },
+            {
+              "letter": "B",
+              "text": "needs a warm climate"
+            },
+            {
+              "letter": "C",
+              "text": "not much is known about it"
+            },
+            {
+              "letter": "D",
+              "text": "numbers are too few to help farmers"
+            },
+            {
+              "letter": "E",
+              "text": "spreads weeds"
+            },
+            {
+              "letter": "F",
+              "text": "too aggressive"
+            },
+            {
+              "letter": "G",
+              "text": "unable to produce honey"
+            }
+          ],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "",
+          "questions": [
+            {
+              "number": 26,
+              "questionNumber": 26,
+              "question": "European Bumblebee",
+              "text": "European Bumblebee",
+              "answer": "E"
+            },
+            {
+              "number": 27,
+              "questionNumber": 27,
+              "question": "Blue Banded Bee",
+              "text": "Blue Banded Bee",
+              "answer": "C"
+            },
+            {
+              "number": 28,
+              "questionNumber": 28,
+              "question": "Africanised Bee",
+              "text": "Africanised Bee",
+              "answer": "F"
+            },
+            {
+              "number": 29,
+              "questionNumber": 29,
+              "question": "Australian Stingless Bee",
+              "text": "Australian Stingless Bee",
+              "answer": "B"
+            },
+            {
+              "number": 30,
+              "questionNumber": 30,
+              "question": "Canadian Leafcutter Bee",
+              "text": "Canadian Leafcutter Bee",
+              "answer": "D"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

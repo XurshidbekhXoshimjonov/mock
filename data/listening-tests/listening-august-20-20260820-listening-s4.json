@@ -1,0 +1,236 @@
+{
+  "id": "listening-august-20-20260820-listening-s4",
+  "slug": "listening-august-20-section-4",
+  "title": "August 20 — Listening Section 4",
+  "part": 4,
+  "audio": "/uploads/audio/listening-august-20-section-4.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 31–40",
+      "instruction": "Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 31,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "army"
+    },
+    {
+      "number": 32,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "safety"
+    },
+    {
+      "number": 33,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "learning"
+    },
+    {
+      "number": 34,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "reasons"
+    },
+    {
+      "number": 35,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "trust"
+    },
+    {
+      "number": 36,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "writing"
+    },
+    {
+      "number": 37,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "open"
+    },
+    {
+      "number": 38,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "leaders"
+    },
+    {
+      "number": 39,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "training"
+    },
+    {
+      "number": 40,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "time"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-august-20-20260820",
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "parts": [
+    {
+      "partNumber": 4,
+      "title": "Section 4",
+      "hideTitle": false,
+      "questionRange": "Questions 31-40",
+      "audioUrl": "/uploads/audio/listening-august-20-section-4.mp3",
+      "instruction": "",
+      "answerText": "31: army\n32: safety\n33: learning\n34: reasons\n35: trust\n36: writing\n37: open\n38: leaders\n39: training\n40: time",
+      "blocks": [
+        {
+          "id": "august20-after-action-review",
+          "type": "note_completion",
+          "questionRange": "Questions 31–40",
+          "title": "After Action Review Process",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "",
+          "instruction": "Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [],
+          "noteStyle": "after-action-review",
+          "questions": [
+            {
+              "number": 31,
+              "questionNumber": 31,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "army"
+            },
+            {
+              "number": 32,
+              "questionNumber": 32,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "safety"
+            },
+            {
+              "number": 33,
+              "questionNumber": 33,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "learning"
+            },
+            {
+              "number": 34,
+              "questionNumber": 34,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "reasons"
+            },
+            {
+              "number": 35,
+              "questionNumber": 35,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "trust"
+            },
+            {
+              "number": 36,
+              "questionNumber": 36,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "writing"
+            },
+            {
+              "number": 37,
+              "questionNumber": 37,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "open"
+            },
+            {
+              "number": 38,
+              "questionNumber": 38,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "leaders"
+            },
+            {
+              "number": 39,
+              "questionNumber": 39,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "training"
+            },
+            {
+              "number": 40,
+              "questionNumber": 40,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "time"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

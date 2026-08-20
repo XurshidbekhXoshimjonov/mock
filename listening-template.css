@@ -64,6 +64,119 @@
     }
 }
 
+/* August 20, Part 4: After Action Review notes. */
+.lc-after-action-review {
+    color: #111827;
+    font-size: 14px;
+}
+
+.lc-after-action-review > h4 {
+    margin: 0 0 18px;
+    border-bottom: 2px solid #202020;
+    padding-bottom: 10px;
+    color: #111;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lc-after-action-review section {
+    margin: 0 0 17px;
+}
+
+.lc-after-action-review h5 {
+    margin: 0 0 8px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 6px;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.lc-after-action-review p {
+    margin: 6px 0;
+    line-height: 2.05;
+}
+
+.lc-after-action-bullet,
+.lc-after-action-subitem {
+    position: relative;
+}
+
+.lc-after-action-bullet {
+    padding-left: 12px;
+}
+
+.lc-after-action-bullet::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+}
+
+.lc-after-action-subitem {
+    margin-left: 16px !important;
+    padding-left: 14px;
+}
+
+.lc-after-action-subitem::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+}
+
+.lc-after-action-answer {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+.lc-after-action-answer .lc-question-badge {
+    align-items: baseline;
+    justify-content: flex-start;
+    width: auto;
+    min-width: 0;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    color: #3f3f46;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.lc-after-action-review .lc-after-action-input {
+    width: 132px;
+    min-width: 88px;
+    height: 22px;
+    border: 0;
+    border-bottom: 1px dotted #555;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 4px 1px;
+    text-align: center;
+}
+
+.lc-after-action-review .lc-after-action-input:focus {
+    border-bottom-color: #1f2937;
+    outline: 2px solid rgba(31, 41, 55, 0.14);
+    outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+    .lc-after-action-review > h4 {
+        font-size: 18px;
+    }
+
+    .lc-after-action-review .lc-after-action-input {
+        width: min(128px, 36vw);
+        min-width: 92px;
+    }
+}
+
 /* Chembe Bird Sanctuary Part 4: larger nested notes. */
 .lc-question-card[data-block-id="jasurbek-full-listening-test-10-p4-g1"] .lc-form-title {
     font-size: 21px;
@@ -763,6 +876,55 @@ body.fullscreen-fallback .lc-fullscreen-button {
     font-style: normal;
 }
 
+.lc-royal-nature-park-title {
+    margin: 0 0 22px;
+    border-bottom: 2px solid #202020;
+    padding-bottom: 10px;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lc-question-card[data-block-id="august20-royal-nature-park-lake"] .lc-choice-row,
+.lc-question-card[data-block-id="august20-royal-nature-park-longhouses"] .lc-choice-row {
+    display: grid;
+    grid-template-columns: 20px 20px minmax(0, 1fr);
+    column-gap: 9px;
+    align-items: center;
+    width: 100%;
+}
+
+.lc-question-card[data-block-id="august20-royal-nature-park-lake"] .lc-letter-badge,
+.lc-question-card[data-block-id="august20-royal-nature-park-longhouses"] .lc-letter-badge {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+}
+
+.lc-question-card[data-block-id="august20-royal-nature-park-lake"] .lc-choice-row input,
+.lc-question-card[data-block-id="august20-royal-nature-park-longhouses"] .lc-choice-row input {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+    margin: 0;
+}
+
+.lc-question-card[data-block-id="august20-royal-nature-park-lake"] .lc-choice-row > span:last-child,
+.lc-question-card[data-block-id="august20-royal-nature-park-longhouses"] .lc-choice-row > span:last-child {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.lc-question-card[data-block-id="august20-royal-nature-park-events"] .lc-matching-option .lc-letter-badge::after {
+    content: ".";
+}
+
+.lc-question-card[data-block-id="august20-bee-problems"] .lc-matching-option .lc-letter-badge::after {
+    content: ".";
+}
+
 .lc-important {
     color: #f20d18;
     font-weight: 700;
@@ -972,6 +1134,110 @@ body.fullscreen-fallback .lc-fullscreen-button {
 .lc-note-line strong,
 .lc-note-list-item strong {
     font-weight: 400 !important;
+}
+
+/* August 20, Part 1: Watertown Community Centre notes. */
+.lc-watertown-programmes {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #050505;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.lc-watertown-programmes h4 {
+    margin: 0 0 17px;
+    color: #050505;
+    font-size: 17px;
+    text-align: center;
+}
+
+.lc-watertown-example {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 10px;
+    margin: 0 0 11px;
+}
+
+.lc-watertown-example strong {
+    font-weight: 700;
+}
+
+.lc-watertown-programmes section {
+    margin: 0 0 7px;
+}
+
+.lc-watertown-programmes h5 {
+    margin: 0 0 5px;
+    color: #050505;
+    font-size: 14px;
+}
+
+.lc-watertown-question {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    column-gap: 7px;
+    align-items: baseline;
+    margin: 0 0 7px;
+    line-height: 1.45;
+}
+
+.lc-watertown-question > strong {
+    font-weight: 700;
+    text-align: right;
+}
+
+.lc-watertown-answer {
+    display: inline-block;
+    width: min(var(--watertown-width), 36vw);
+    margin: 0 5px;
+    vertical-align: baseline;
+}
+
+.lc-watertown-programmes .lc-watertown-input {
+    width: 100%;
+    min-width: 0;
+    height: 19px;
+    border: 0;
+    border-bottom: 1px solid #1f2937;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 3px;
+    text-align: left;
+}
+
+.lc-watertown-bullet {
+    position: relative;
+    margin: 0 0 7px;
+    padding-left: 14px;
+    line-height: 1.45;
+}
+
+.lc-watertown-bullet::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+}
+
+.lc-watertown-question small {
+    display: block;
+    margin: 7px 0 0 25px;
+    font-size: inherit;
+}
+
+@media (max-width: 720px) {
+    .lc-watertown-programmes {
+        font-size: 13px;
+    }
+
+    .lc-watertown-programmes h4 {
+        font-size: 16px;
+    }
+
+    .lc-watertown-programmes h5 {
+        font-size: 13px;
+    }
 }
 
 .lc-note-completion--boxed-flow .lc-form-title {
@@ -1657,6 +1923,139 @@ html.dark-theme .lc-focus-form {
 .lc-flowchart-select:focus {
     border-color: var(--lc-blue);
     outline: 2px solid rgba(11, 95, 255, 0.14);
+}
+
+/* August 20, Part 3: Varroa mite flow chart. */
+.lc-varroa-title {
+    margin: 0 0 18px;
+    border-bottom: 2px solid #202020;
+    padding-bottom: 10px;
+    color: #111;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lc-varroa-block .lc-block-heading {
+    margin: 0 0 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.lc-varroa-block .lc-block-heading h3 {
+    margin: 0 0 8px;
+    color: #454545;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.lc-varroa-options {
+    margin: 0 0 14px;
+    border: 1px solid #8b8b8b;
+    border-radius: 0;
+    background: #fff;
+    padding: 14px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.lc-varroa-options h4 {
+    margin: 0 0 10px;
+    color: #111;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lc-varroa-options-list {
+    display: grid;
+    gap: 7px;
+}
+
+.lc-varroa-options-list span {
+    display: block;
+}
+
+.lc-varroa-flow {
+    border: 1px solid #8b8b8b;
+    border-radius: 0;
+    background: #fff;
+    padding: 18px;
+    color: #333;
+    font-size: 14px;
+}
+
+.lc-varroa-flow p {
+    margin: 0;
+    line-height: 2.3;
+}
+
+.lc-varroa-muted {
+    color: #4b5563;
+}
+
+.lc-varroa-arrow {
+    margin: 6px 0;
+    color: #9ca3af;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+}
+
+.lc-varroa-answer {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+.lc-varroa-answer .lc-question-badge {
+    align-items: baseline;
+    justify-content: flex-start;
+    width: auto;
+    min-width: 0;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    color: #3f3f46;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.lc-varroa-answer select {
+    width: 108px;
+    height: 30px;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    background: #fff;
+    padding: 3px 7px;
+    color: #111827;
+}
+
+.lc-varroa-answer select:focus {
+    border-color: #1f2937;
+    outline: 2px solid rgba(31, 41, 55, 0.14);
+}
+
+@media (max-width: 720px) {
+    .lc-varroa-title {
+        font-size: 18px;
+    }
+
+    .lc-varroa-flow {
+        padding: 14px 12px;
+    }
+
+    .lc-varroa-answer select {
+        width: 96px;
+    }
 }
 
 .lc-matching-map-layout {

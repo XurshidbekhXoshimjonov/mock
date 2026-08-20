@@ -1,0 +1,256 @@
+{
+  "id": "listening-august-20-20260820-listening-s1",
+  "slug": "listening-august-20-section-1",
+  "title": "August 20 — Listening Section 1",
+  "part": 1,
+  "audio": "/uploads/audio/listening-august-20-section-1.mp3",
+  "transcript": "",
+  "sections": [
+    {
+      "title": "Questions 1–10",
+      "instruction": "Write ONE WORD ONLY for each answer.",
+      "rule": "",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "weight"
+    },
+    {
+      "number": 2,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "back"
+    },
+    {
+      "number": 3,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "beginners"
+    },
+    {
+      "number": 4,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "mat"
+    },
+    {
+      "number": 5,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "jumps"
+    },
+    {
+      "number": 6,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "competition"
+    },
+    {
+      "number": 7,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "snack"
+    },
+    {
+      "number": 8,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "work"
+    },
+    {
+      "number": 9,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "heart"
+    },
+    {
+      "number": 10,
+      "type": "note_completion",
+      "stemHtml": "",
+      "question": "",
+      "options": [],
+      "answer": "reception"
+    }
+  ],
+  "images": [],
+  "sourceFullTestId": "listening-august-20-20260820",
+  "createdAt": "2026-08-20T10:14:25.795Z",
+  "parts": [
+    {
+      "partNumber": 1,
+      "title": "Section 1",
+      "hideTitle": false,
+      "questionRange": "Questions 1-10",
+      "audioUrl": "/uploads/audio/listening-august-20-section-1.mp3",
+      "instruction": "",
+      "answerText": "1: weight\n2: back\n3: beginners\n4: mat\n5: jumps\n6: competition\n7: snack\n8: work\n9: heart\n10: reception",
+      "blocks": [
+        {
+          "id": "august20-watertown-programmes",
+          "type": "note_completion",
+          "questionRange": "Questions 1–10",
+          "title": "Watertown Community Centre Programmes",
+          "optionsTitle": "",
+          "optionLetterPunctuation": "",
+          "questionsTitle": "",
+          "example": "Name of staff member → Maria",
+          "instruction": "Write ONE WORD ONLY for each answer.",
+          "options": [],
+          "rows": [],
+          "columns": [],
+          "labels": [],
+          "imageUrl": "",
+          "imageLayout": "",
+          "content": [
+            "<strong>YOGA</strong>",
+            "• 'Modern Yoga' is good for losing {{1}}",
+            "• 'Yoga and More' is beneficial for those with aches in their {{2}}",
+            "• 'Original Yoga' is great for {{3}}",
+            "• Classes last for 55 minutes",
+            "• Participants should bring a {{4}}",
+            "<strong>BALLET</strong>",
+            "• The Wednesday class focuses on difficult routines and {{5}}",
+            "• The Thursday class is preparing for a {{6}}",
+            "<strong>SOCCER</strong>",
+            "• In the Rookies team, the children learn the main skills of soccer",
+            "• Parents bring a {{7}} to be shared",
+            "<strong>AEROBICS</strong>",
+            "• Classes are held 16 times a week",
+            "• It's best to go before {{8}} instead of later",
+            "• High-impact aerobics helps maintain a strong {{9}}",
+            "<strong>REGISTRATION PROCEDURES</strong>",
+            "• Can pay online or at {{10}} in the centre",
+            "• $360 for 12 weeks"
+          ],
+          "noteStyle": "watertown-programmes",
+          "questions": [
+            {
+              "number": 1,
+              "questionNumber": 1,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "weight"
+            },
+            {
+              "number": 2,
+              "questionNumber": 2,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "back"
+            },
+            {
+              "number": 3,
+              "questionNumber": 3,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "beginners"
+            },
+            {
+              "number": 4,
+              "questionNumber": 4,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "mat"
+            },
+            {
+              "number": 5,
+              "questionNumber": 5,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "jumps"
+            },
+            {
+              "number": 6,
+              "questionNumber": 6,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "competition"
+            },
+            {
+              "number": 7,
+              "questionNumber": 7,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "snack"
+            },
+            {
+              "number": 8,
+              "questionNumber": 8,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "work"
+            },
+            {
+              "number": 9,
+              "questionNumber": 9,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "heart"
+            },
+            {
+              "number": 10,
+              "questionNumber": 10,
+              "question": "",
+              "text": "",
+              "options": [],
+              "type": "note_completion",
+              "answer": "reception"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
