@@ -1035,6 +1035,82 @@ html.dark-theme .cbt-question-group.imported-reading-limit-group .cbt-group-inst
     margin: 0;
 }
 
+/* August 20, Questions 6–13: align the number badge with the first text line. */
+.august20-potato-completion .cbt-question-badge {
+    margin-top: 5px;
+}
+
+/* August 20, Questions 23–26: keep the four answers inside one summary block. */
+.august20-asteroid-summary-group .cbt-rich-completion {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.august20-asteroid-summary-group .cbt-rich-completion-title {
+    margin: 0 0 10px;
+    text-align: left;
+}
+
+.august20-asteroid-summary-group .cbt-rich-completion-body {
+    border: 1px solid #d9dee6;
+    background: #fff;
+    padding: 16px 18px;
+    line-height: 1.9;
+}
+
+.august20-asteroid-summary-group .august20-asteroid-summary p {
+    margin: 0 0 22px;
+}
+
+.august20-asteroid-summary-group .august20-asteroid-summary p:last-child {
+    margin-bottom: 0;
+}
+
+/* August 20, Questions 19–22: show the statement bank in two columns. */
+.august20-expert-statements-group .cbt-group-options-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.august20-expert-statements-group .cbt-group-options-title {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 620px) {
+    .august20-expert-statements-group .cbt-group-options-box {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* August 20, Questions 34–39: render Nature and Art as one inline summary. */
+.august20-nature-art-summary-group .cbt-rich-completion {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.august20-nature-art-summary-group .cbt-rich-completion-title {
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.august20-nature-art-summary-group .cbt-rich-completion-body {
+    border: 1px solid #d9dee6;
+    background: #fff;
+    padding: 16px 18px;
+    line-height: 1.9;
+}
+
+.august20-nature-art-summary-group .august20-nature-art-summary p {
+    margin: 0 0 24px;
+}
+
+.august20-nature-art-summary-group .august20-nature-art-summary p:last-child {
+    margin-bottom: 0;
+}
+
 /* Academic Reading 1–40: keep Questions 22–26 badges level with the first text line. */
 .academic-reading-law-summary .cbt-question-line {
     align-items: flex-start;

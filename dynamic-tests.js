@@ -187,6 +187,7 @@ function addManualCard(grid, test, config) {
     const card = document.createElement("a");
     const number = nextCardNumber(grid);
     card.className = "reading-test-card";
+    card.dataset.createdAt = String(test?.createdAt || "");
     grid.appendChild(card);
     setManualCardContent(card, test, config, number);
 }
@@ -200,7 +201,9 @@ async function loadFullTestCards(config, grid) {
         return new Set();
     }
 
-    const response = await fetch(`/api/full-tests?status=published&skill=${encodeURIComponent(config.type)}`);
+    const response = await fetch(`/api/full-tests?status=published&skill=${encodeURIComponent(config.type)}&_=${Date.now()}`, {
+        cache: "no-store"
+    });
     if (!response.ok) {
         return new Set();
     }
@@ -233,14 +236,15 @@ async function loadFullTestCards(config, grid) {
 
 async function loadManualTests(config, grid, skipIds = new Set()) {
     const endpoint = config.type === "listening" ? "/api/listening-tests" : "/api/reading-tests";
-    const response = await fetch(`${endpoint}?part=${encodeURIComponent(config.part)}`);
+    const response = await fetch(`${endpoint}?part=${encodeURIComponent(config.part)}&_=${Date.now()}`, {
+        cache: "no-store"
+    });
 
     if (!response.ok) {
         return;
     }
 
     const tests = await response.json();
-
     tests
         .slice()
         .filter((test) => !skipIds.has(test.id))
@@ -320,7 +324,9 @@ async function loadDynamicTests() {
         }
     }
 
-    const response = await fetch(`/api/tests?type=${config.type}&part=${config.part}`);
+    const response = await fetch(`/api/tests?type=${config.type}&part=${config.part}&_=${Date.now()}`, {
+        cache: "no-store"
+    });
 
     if (response.ok) {
         const tests = await response.json();
