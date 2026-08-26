@@ -16,6 +16,88 @@ let isSubmitted = false;
 const ListeningResultUtils = window.IeltsResultUtils || {};
 const AUTO_SUBMIT_MESSAGE = ListeningResultUtils.AUTO_SUBMIT_MESSAGE || "Time is over. Your test has been submitted automatically.";
 
+function isListeningFullScreenActive() {
+    return Boolean(
+        document.fullscreenElement
+        || document.webkitFullscreenElement
+        || document.msFullscreenElement
+    ) || document.body.classList.contains("fullscreen-fallback");
+}
+
+function updateListeningFullScreenUI() {
+    const active = isListeningFullScreenActive();
+    document.body.classList.toggle("exam-fullscreen-active", active);
+
+    listeningRoot.querySelectorAll("[data-fullscreen-toggle]").forEach((button) => {
+        button.textContent = active ? "Exit Full Screen" : "Full Screen";
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+        button.setAttribute("title", active ? "Exit Full Screen" : "Full Screen");
+    });
+}
+
+async function enterListeningFullScreen() {
+    const page = document.documentElement;
+    const requestFullScreen = page.requestFullscreen
+        || page.webkitRequestFullscreen
+        || page.msRequestFullscreen;
+
+    try {
+        if (!requestFullScreen) throw new Error("Fullscreen API is not available.");
+        await Promise.resolve(requestFullScreen.call(page));
+        document.body.classList.remove("fullscreen-fallback");
+    } catch (error) {
+        // Keep the exam layout usable when fullscreen is blocked or unavailable.
+        document.body.classList.add("fullscreen-fallback");
+    }
+
+    updateListeningFullScreenUI();
+}
+
+async function exitListeningFullScreen() {
+    const exitFullScreen = document.exitFullscreen
+        || document.webkitExitFullscreen
+        || document.msExitFullscreen;
+
+    try {
+        if ((document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) && exitFullScreen) {
+            await Promise.resolve(exitFullScreen.call(document));
+        }
+    } catch (error) {
+        // The visual state still needs to be restored if the browser rejects exit.
+    }
+
+    document.body.classList.remove("exam-fullscreen-active", "fullscreen-fallback");
+    updateListeningFullScreenUI();
+}
+
+function bindListeningFullScreenEvents() {
+    listeningRoot.querySelectorAll("[data-fullscreen-toggle]").forEach((button) => {
+        if (button.dataset.fullscreenBound === "true") return;
+        button.dataset.fullscreenBound = "true";
+        button.addEventListener("click", () => {
+            if (isListeningFullScreenActive()) {
+                exitListeningFullScreen();
+            } else {
+                enterListeningFullScreen();
+            }
+        });
+    });
+
+    if (document.documentElement.dataset.listeningFullscreenEventsBound !== "true") {
+        document.documentElement.dataset.listeningFullscreenEventsBound = "true";
+        ["fullscreenchange", "webkitfullscreenchange", "MSFullscreenChange"].forEach((eventName) => {
+            document.addEventListener(eventName, updateListeningFullScreenUI);
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && document.body.classList.contains("fullscreen-fallback")) {
+                exitListeningFullScreen();
+            }
+        });
+    }
+
+    updateListeningFullScreenUI();
+}
+
 function cleanListeningId(value) {
     const resolved = decodeURIComponent(String(value || "")).trim();
     return resolved === "undefined" || resolved === "null" ? "" : resolved;
@@ -1012,6 +1094,7 @@ loadListeningTest()
         document.title = `${test.title || "IELTS"} - Listening`;
         listeningRoot.innerHTML = window.ListeningComponents.ListeningTestPage(test);
         window.ListeningComponents.bindListeningTest(listeningRoot, test);
+        bindListeningFullScreenEvents();
         notifyMockListeningReady();
     })
     .catch((error) => {
